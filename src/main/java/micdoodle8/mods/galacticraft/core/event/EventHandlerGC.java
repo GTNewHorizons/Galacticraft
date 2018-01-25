@@ -33,6 +33,7 @@ import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.DamageSourceGC;
+import micdoodle8.mods.galacticraft.core.util.EnchUtil;
 import micdoodle8.mods.galacticraft.core.util.OxygenUtil;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
@@ -663,7 +664,7 @@ public class EventHandlerGC
                 {
                     ItemStack stack = stats.extendedInventory.getStackInSlot(i);
 
-                    if (stack != null)
+                    if (stack != null && !EnchUtil.isSoulBounded(stack))
                     {
                         ((EntityPlayerMP) event.entityLiving).func_146097_a(stack, true, false);
                         stats.extendedInventory.setInventorySlotContents(i, null);
