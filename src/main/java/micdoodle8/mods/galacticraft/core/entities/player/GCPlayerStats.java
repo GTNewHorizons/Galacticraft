@@ -7,6 +7,7 @@ import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.core.command.CommandGCInv;
 import micdoodle8.mods.galacticraft.core.inventory.InventoryExtended;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.EnchUtil;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
@@ -381,6 +382,15 @@ public class GCPlayerStats implements IExtendedEntityProperties
         if (keepInv)
         {
             this.extendedInventory.copyInventory(oldData.extendedInventory);
+        }
+
+        for (int i = 0; i < oldData.extendedInventory.getSizeInventory(); i++)
+        {
+            ItemStack oldStack = oldData.extendedInventory.getStackInSlot(i);
+            if (oldStack != null && EnchUtil.isSoulBounded(oldStack))
+            {
+                this.extendedInventory.setInventorySlotContents(i, oldStack);
+            }
         }
 
         this.spaceStationDimensionData = oldData.spaceStationDimensionData;
