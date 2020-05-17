@@ -87,7 +87,7 @@ public class GalacticraftPlanets
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        // Nothing here
+        GalacticraftPlanets.proxy.postInit(event);
     }
 
     @EventHandler
@@ -124,7 +124,7 @@ public class GalacticraftPlanets
         List<IConfigElement> list = new ArrayList<IConfigElement>();
         
         //Get the last planet to be configured only, as all will reference and re-use the same planets.conf config file
-        IPlanetsModule module = GalacticraftPlanets.commonModules.get(GalacticraftPlanets.commonModules.size() - 1);
+        IPlanetsModule module = GalacticraftPlanets.commonModules.get(MODULE_KEY_ASTEROIDS);
         list.addAll(new ConfigElement(module.getConfiguration().getCategory(Constants.CONFIG_CATEGORY_DIMENSIONS)).getChildElements());
         list.addAll(new ConfigElement(module.getConfiguration().getCategory(Constants.CONFIG_CATEGORY_ENTITIES)).getChildElements());
         list.addAll(new ConfigElement(module.getConfiguration().getCategory(Constants.CONFIG_CATEGORY_ACHIEVEMENTS)).getChildElements());

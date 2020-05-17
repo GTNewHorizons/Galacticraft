@@ -15,5 +15,22 @@
   "screenshots": [
   ],
   "parent":""
+},
+{
+  "modid": "GalacticraftMars",
+  "name": "Galacticraft Planets",
+  "description": "Planets addon for Galacticraft; Maintained by the GTNH team.",
+  "version": "3.0.13-GTNH",
+  "mcversion": "1.7.10",
+  "url": "https://github.com/GTNewHorizons/Galacticraft",
+  "updateUrl": "https://github.com/GTNewHorizons/Galacticraft",
+  "authorList": [
+    "micdoodle8, radfast, fishtaco, GTNH-Team"
+  ],
+  "credits": "",
+  "logoFile": "galacticraft_logo.png",
+  "screenshots": [
+  ],
+  "parent":""
 }
 ]
