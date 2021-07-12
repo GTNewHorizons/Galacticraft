@@ -503,6 +503,7 @@ gui.flag.alreadyPlaced=Vlag is hier al geplaatst!
 gui.receiver.cannotAttach=Kan hier niet de ontvanger vast maken!
 gui.warning.invalidThermal=Onvoeldoende Thermische Bescherming!
 gui.tank.oxygenRemaining=Zuurstof Over
+gui.tank.infinite=ONEINDIG
 gui.buggy.storageSpace=Opslag Capaciteit
 gui.frequencyModule.desc.0=Kan een zwak Signaal ontvangen
 gui.frequencyModule.desc.1=Golven en verre signalen

@@ -446,6 +446,7 @@ gui.receiver.cannotAttach=ไม่สามารถวางเครื่อ
 gui.warning.invalidThermal=อันตราย ไม่พบเกราะป้องกันอุณหภูมิ!
 
 gui.tank.oxygenRemaining=ออกซิเจนที่เหลือ
+gui.tank.infinite=อนันต์
 gui.buggy.storageSpace=พื้นที่เก็บของ
 gui.frequencyModule.desc.0=สามารถรับเสียง คลื่น
 gui.frequencyModule.desc.1=และสัญญาณทางไกลได้

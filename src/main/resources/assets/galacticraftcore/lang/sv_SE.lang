@@ -445,6 +445,7 @@ gui.receiver.cannotAttach=Motagare kan inte sättas här!
 gui.warning.invalidThermal=Undermåligt temperaturskydd!
 
 gui.tank.oxygenRemaining=Mängd
+gui.tank.infinite=OÄNDLIG
 gui.buggy.storageSpace=Lastutrymme
 gui.frequencyModule.desc.0=Känner av svaga ljudvågor
 gui.frequencyModule.desc.1=samt fjärrläser signaler.

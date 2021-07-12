@@ -446,6 +446,7 @@ gui.receiver.cannotAttach=Нельзя поставить приёмник зд�
 gui.warning.invalidThermal=Неправильная тепловая защита!
 
 gui.tank.oxygenRemaining=Осталось кислорода
+gui.tank.infinite=БЕСКОНЕЧНЫЙ
 gui.buggy.storageSpace=Размер хранилища
 gui.frequencyModule.desc.0=Может принимать слабые звуковые
 gui.frequencyModule.desc.1=волны и отдалённые сигналы

@@ -478,6 +478,7 @@ gui.receiver.cannotAttach=Cannot attach receiver here!
 gui.warning.invalidThermal=Invalid Thermal Protection!
 
 gui.tank.oxygenRemaining=Oxygen Remaining
+gui.tank.infinite=INFINITE
 gui.buggy.storageSpace=Storage Space
 gui.frequencyModule.desc.0=Can receive weak sound
 gui.frequencyModule.desc.1=waves and distant signals

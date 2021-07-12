@@ -443,6 +443,7 @@ gui.receiver.cannotAttach=Ide nem lehet vevőt csatolni.
 gui.warning.invalidThermal=Invalid Thermal Protection! ##NEEDS TRANSLATE##
 
 gui.tank.oxygenRemaining=Levegő Mennyisége
+gui.tank.infinite=VÉGTELEN
 gui.buggy.storageSpace=Teherkapacitás
 gui.frequencyModule.desc.0=Képes észlelni halk hanghullámokat
 gui.frequencyModule.desc.1=és távoli jeleket

@@ -488,6 +488,7 @@ gui.flag.alreadyPlaced=Flaga jest już postawiona!
 gui.receiver.cannotAttach=Nie można tutaj podłączyć odbiornika!
 gui.warning.invalidThermal=Niewłaściwa Ochrona Termalna!
 gui.tank.oxygenRemaining=Pozostały Tlen
+gui.tank.infinite=NIESKOŃCZONOŚĆ
 gui.buggy.storageSpace=Magazyn
 gui.frequencyModule.desc.0=Odbiera słabe dźwięki
 gui.frequencyModule.desc.1=fale i odległe sygnały

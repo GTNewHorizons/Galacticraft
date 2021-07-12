@@ -443,6 +443,7 @@ gui.receiver.cannotAttach=這里無法放置接收器!
 gui.warning.invalidThermal=Invalid Thermal Protection! ##NEEDS TRANSLATE##
 
 gui.tank.oxygenRemaining=氧氣剩餘
+gui.tank.infinite=無窮
 gui.buggy.storageSpace=存儲空間
 gui.frequencyModule.desc.0=可以收到微弱的聲波
 gui.frequencyModule.desc.1=與遠距離信號

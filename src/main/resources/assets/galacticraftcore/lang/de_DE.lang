@@ -449,6 +449,7 @@ gui.receiver.cannotAttach=Hier kann kein Empfänger angebracht werden!
 gui.warning.invalidThermal=Unzureichendes Wärmeschutzschild!
 
 gui.tank.oxygenRemaining=Sauerstoff verbleibend
+gui.tank.infinite=UNENDLICH
 gui.buggy.storageSpace=Lagerraum
 gui.frequencyModule.desc.0=Kann schwache Geräuschwellen
 gui.frequencyModule.desc.1=und entfernte Signale empfangen

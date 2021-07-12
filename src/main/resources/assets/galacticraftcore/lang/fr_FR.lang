@@ -471,6 +471,7 @@ gui.flag.alreadyPlaced=Le drapeau est déjà placé ici
 gui.receiver.cannotAttach=Impossible d'attacher le récepteur ici !
 gui.warning.invalidThermal=Protection thermique invalides !
 gui.tank.oxygenRemaining=Oxygène restant
+gui.tank.infinite=INFINI
 gui.buggy.storageSpace=Espace de stockage
 gui.frequencyModule.desc.0=Peut recevoir de faibles ondes
 gui.frequencyModule.desc.1=sonores et d'autres signaux distants

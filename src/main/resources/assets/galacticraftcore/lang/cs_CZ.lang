@@ -472,6 +472,7 @@ gui.receiver.cannotAttach=Nemohu sem umístit přijímač!
 gui.warning.invalidThermal=Nefunkční tepelná ochrana!
 
 gui.tank.oxygenRemaining=Zásoba kyslíku
+gui.tank.infinite=NEKONEČNÉ
 gui.buggy.storageSpace=Nákladový prostor
 gui.frequencyModule.desc.0=Umožńuje slyšet vzdálené
 gui.frequencyModule.desc.1=zvuky a signály

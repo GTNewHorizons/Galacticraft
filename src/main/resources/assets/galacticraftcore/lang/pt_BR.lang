@@ -446,6 +446,7 @@ gui.receiver.cannotAttach=Não dá para instalar um Receptor aqui!
 gui.warning.invalidThermal=Proteção Térmica Inválida
 
 gui.tank.oxygenRemaining=Oxigênio restante
+gui.tank.infinite=INFINITO
 gui.buggy.storageSpace=Espaço de Armazenagem
 gui.frequencyModule.desc.0=Capaz de receber ondas sonoras
 gui.frequencyModule.desc.1=fracas e sinais distantes

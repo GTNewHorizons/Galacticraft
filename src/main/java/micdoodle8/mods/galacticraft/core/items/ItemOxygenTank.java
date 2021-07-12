@@ -19,8 +19,8 @@ public class ItemOxygenTank extends Item
     {
         super();
         this.setMaxStackSize(1);
-	double factor = 2.0;
-	// Config modifier goes here if anyone wants it.
+        double factor = 2.0;
+        // Config modifier goes here if anyone wants it.
         this.setMaxDamage((int) (Math.round(Math.pow(factor, tier - 1) * 10) * 100));
         this.setUnlocalizedName(assetName);
         this.setTextureName(GalacticraftCore.TEXTURE_PREFIX + assetName);
@@ -30,10 +30,10 @@ public class ItemOxygenTank extends Item
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List)
+    public void getSubItems(Item item, CreativeTabs tabs, List list)
     {
-        par3List.add(new ItemStack(par1, 1, 0));
-        par3List.add(new ItemStack(par1, 1, this.getMaxDamage()));
+        list.add(new ItemStack(item, 1, 0));
+        list.add(new ItemStack(item, 1, this.getMaxDamage()));
     }
 
     @Override
@@ -44,15 +44,15 @@ public class ItemOxygenTank extends Item
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
+    public EnumRarity getRarity(ItemStack stack)
     {
         return ClientProxyCore.galacticraftItem;
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer player, List par2List, boolean b)
+    public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean advancedItemTooltips)
     {
-        par2List.add(GCCoreUtil.translate("gui.tank.oxygenRemaining") + ": " + (par1ItemStack.getMaxDamage() - par1ItemStack.getItemDamage()));
+        tooltip.add(GCCoreUtil.translate("gui.tank.oxygenRemaining") + ": " + (stack.getMaxDamage() - stack.getItemDamage()));
     }
 }

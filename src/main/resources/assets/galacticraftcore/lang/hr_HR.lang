@@ -443,6 +443,7 @@ gui.receiver.cannotAttach=Nemožeš staviti stroj ovdje!
 gui.warning.invalidThermal=Nepoznata Termalna Zaštita!
 
 gui.tank.oxygenRemaining=Zraka Ostalo
+gui.tank.infinite=BESKONAČAN
 gui.buggy.storageSpace=Mjesto
 gui.frequencyModule.desc.0=Čitanje jako tihih zvukova
 gui.frequencyModule.desc.1=valova i dalekih signala

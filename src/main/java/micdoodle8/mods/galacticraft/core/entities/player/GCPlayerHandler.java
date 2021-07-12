@@ -646,21 +646,32 @@ public class GCPlayerHandler
             final ItemStack tankInSlot2 = playerStats.extendedInventory.getStackInSlot(3);
 
             final int drainSpacing = OxygenUtil.getDrainSpacing(tankInSlot, tankInSlot2);
+            
+            boolean hasInfinityTank = false;
 
         	if (tankInSlot == null)
             {
                 playerStats.airRemaining = 0;
             }
         	else
+        	{
                 playerStats.airRemaining = tankInSlot.getMaxDamage() - tankInSlot.getItemDamage();
-
+                hasInfinityTank = tankInSlot.getMaxDamage() == Integer.MAX_VALUE;
+        	}
             if (tankInSlot2 == null)
             {
                 playerStats.airRemaining2 = 0;
             }
             else
+            {
                 playerStats.airRemaining2 = tankInSlot2.getMaxDamage() - tankInSlot2.getItemDamage();
-
+                hasInfinityTank |= tankInSlot2.getMaxDamage() == Integer.MAX_VALUE;
+            }
+            // Exit early if at least one Infinite Oxygen Supply is present (-> Oxygen Tank modification and damage application are skipped)
+            if(hasInfinityTank) {
+            	playerStats.oxygenSetupValid = true;
+            	return;
+            }
             if (drainSpacing > 0)
             {
                 if ((player.ticksExisted - 1) % drainSpacing == 0 && !OxygenUtil.isAABBInBreathableAirBlock(player) && !playerStats.usingPlanetSelectionGui)

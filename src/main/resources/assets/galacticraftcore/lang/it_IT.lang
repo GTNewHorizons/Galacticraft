@@ -446,6 +446,7 @@ gui.receiver.cannotAttach=Cannot attach receiver here!
 gui.warning.invalidThermal=Protezione alle alte temperature invalida!
 
 gui.tank.oxygenRemaining=Ossigeno rimanente
+gui.tank.infinite=INFINITO
 gui.buggy.storageSpace=Spazio dell'inventario
 gui.frequencyModule.desc.0=Può ricevere basse frequenze
 gui.frequencyModule.desc.1=onde e segnali distanti

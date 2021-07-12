@@ -446,6 +446,7 @@ gui.receiver.cannotAttach=Buraya alıcı takamazsınız!
 gui.warning.invalidThermal=Termal korumanız geçersizdir!
 
 gui.tank.oxygenRemaining=Kalan Oksijen
+gui.tank.infinite=SONSUZ
 gui.buggy.storageSpace=Depolama Alanı
 gui.frequencyModule.desc.0=Zayıf sesleri alabilirsiniz
 gui.frequencyModule.desc.1=dalgaları ve uzak sinyalleride
