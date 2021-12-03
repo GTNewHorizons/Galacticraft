@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 import static java.nio.file.Files.walk;
 import static micdoodle8.mods.galacticraft.core.mixinplugin.TargetedMod.*;
 
-public class MixinPlugin implements IMixinConfigPlugin {
+public abstract class MixinPlugin implements IMixinConfigPlugin {
 
     private static final Logger LOG = LogManager.getLogger("MicdoodleCore mixins");
     private static final Path MODS_DIRECTORY_PATH = new File(Launch.minecraftHome, "mods/").toPath();
