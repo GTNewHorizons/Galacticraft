@@ -7,6 +7,10 @@ item.oxygenTankMedFull.name=中型氧气罐
 item.oxygenTankMedEmpty.name=中型氧气罐(空)
 item.oxygenTankHeavyFull.name=重型氧气罐
 item.oxygenTankHeavyEmpty.name=重型氧气罐(空)
+item.oxygenTankSuperHeavyFull.name=超大型氧气罐
+item.oxygenTankSuperHeavyEmpty.name=超大型氧气罐(空)
+item.oxygenTankUltraHeavyFull.name=极大型氧气罐
+item.oxygenTankUltraHeavyEmpty.name=极大型氧气罐(空)
 item.oxygenMask.name=氧气面罩
 item.spaceship.name=1阶火箭
 item.sensorGlasses.name=探测眼镜
@@ -204,11 +208,11 @@ tile.crudeOil.name=原油
 tile.fuelBlock.name=燃料
 
 # ENTITIES
-entity.EvolvedSpider.name=蜘蛛(进化体)
-entity.EvolvedZombie.name=僵尸(进化体)
-entity.EvolvedCreeper.name=爬行者(进化体)
-entity.EvolvedSkeleton.name=骷髅(进化体)
-entity.EvolvedSkeletonBoss.name=骷髅王(进化体)
+entity.EvolvedSpider.name=进化蜘蛛
+entity.EvolvedZombie.name=进化僵尸
+entity.EvolvedCreeper.name=进化爬行者
+entity.EvolvedSkeleton.name=进化骷髅
+entity.EvolvedSkeletonBoss.name=进化骷髅之王
 entity.AlienVillager.name=外星村民
 entity.Spaceship.name=火箭(1阶)
 entity.GravityArrow.name=箭
@@ -321,6 +325,7 @@ gui.status.sealed.name=密封的
 gui.status.unknown.name=未知
 gui.status.disabled.name=禁用的
 gui.status.nofuel.name=无燃料可用!
+gui.status.lowtier.name=燃料质量太低!
 gui.status.noitems.name=无物品可加载!
 gui.status.notargetload.name=无效加载目标!
 gui.status.notargetunload.name=无效卸载目标!
@@ -722,5 +727,7 @@ gc.configgui.keyOverrideToggleAdvGoggles=Set key: Advanced Goggles(设置键位:
 gc.configgui.meteorSpawnMod=Meteor Spawn Modifier(流星生成调节)
 gc.configgui.meteorBlockDamage=Meteor Block Damage Enabled(流星伤害开启)
 gc.configgui.disableUpdateCheck=Disable Update Check(禁用更新检查)
+gc.configgui.alwaysDisplayOxygenHUD=Always show Oxygen HUD(总是显示氧气HUD)
 
 gc.configgui.title=Galacticraft Core Config(星系核心配置文件)
+
