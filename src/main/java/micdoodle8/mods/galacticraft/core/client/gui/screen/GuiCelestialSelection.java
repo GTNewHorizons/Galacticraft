@@ -456,7 +456,7 @@ public class GuiCelestialSelection extends GuiScreen
             return false;
         }
 
-        if (!atBody.getReachable() || (this.possibleBodies != null && !this.possibleBodies.contains(atBody)))
+        if (!(atBody.getReachable() || ConfigManagerCore.allowSSatUnreachable) || (this.possibleBodies != null && !this.possibleBodies.contains(atBody)))
         {
             // If parent body is unreachable, the satellite is also unreachable
             return false;

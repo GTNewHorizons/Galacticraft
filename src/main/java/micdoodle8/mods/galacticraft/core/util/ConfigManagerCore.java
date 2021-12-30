@@ -56,6 +56,7 @@ public class ConfigManagerCore
     public static boolean disableLander;
     public static boolean recipesRequireGCAdvancedMetals = true;
     public static boolean alwaysDisplayOxygenHUD = false;
+    public static boolean allowSSatUnreachable;
 //    public static int mapfactor;
 //    public static int mapsize;
     
@@ -530,6 +531,12 @@ public class ConfigManagerCore
             prop.setLanguageKey("gc.configgui.alwaysDisplayOxygenHUD").setRequiresMcRestart(false);
             alwaysDisplayOxygenHUD = prop.getBoolean(false);
             propOrder.add(prop.getName());            
+            
+            prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Allow Stations at Unreachables", true);
+            prop.comment = "Allow the creation of Space Station at unreachable Celestial Bodies";
+            prop.setRequiresMcRestart(false);
+            allowSSatUnreachable = prop.getBoolean();
+            propOrder.add(prop.getName());
             
             prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Open Galaxy Map", "KEY_M");
             prop.comment = "Leave 'KEY_' value, adding the intended keyboard character to replace the letter. Values 0-9 and A-Z are accepted";
