@@ -2,6 +2,7 @@ package micdoodle8.mods.galacticraft.core.recipe;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.ironchest.IronChest;
+import gregtech.api.GregTech_API;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_ModHandler;
@@ -245,10 +246,10 @@ public class RecipeManagerGC
         }
 
         final HashMap<Object, Integer> inputMap = new HashMap<Object, Integer>();
-        inputMap.put("ingotTin", 32);
-        inputMap.put(aluminumIngots, 16);
-        inputMap.put("waferAdvanced", 1);
-        inputMap.put(Items.iron_ingot, 24);
+        inputMap.put(new ItemStack(GCBlocks.basicBlock, 1, 4), 230);
+        inputMap.put(new ItemStack(Blocks.glass_pane), 6);
+        inputMap.put("circuitAdvanced", 4);
+        inputMap.put(new ItemStack(GregTech_API.sBlockMachines, 1, 13), 1); //HV Machine Hull
         GalacticraftRegistry.registerSpaceStation(new SpaceStationType(ConfigManagerCore.idDimensionOverworldOrbit, 0, new SpaceStationRecipe(inputMap)));
 
         RecipeUtil.addRecipe(new ItemStack(GCBlocks.aluminumWire, 6), new Object[] { "WWW", "CCC", "WWW", 'W', Blocks.wool, 'C', "ingotAluminum" });
