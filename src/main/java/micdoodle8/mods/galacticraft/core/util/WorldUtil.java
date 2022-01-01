@@ -468,12 +468,15 @@ public class WorldUtil
 
             	//Testing dimension is a satellite, but with a different homeworld - test its tier
             	WorldProvider homeWorld = WorldUtil.getProviderForDimensionServer(data.getHomePlanet());
+            	WorldProvider provider = WorldUtil.getProviderForDimensionServer(element);
 	
 	            if (homeWorld != null)
 	            {
 	                if (homeWorld instanceof IGalacticraftWorldProvider)
 	                {
-	                    if (((IGalacticraftWorldProvider) homeWorld).canSpaceshipTierPass(tier))
+	                    if (((IGalacticraftWorldProvider) homeWorld).canSpaceshipTierPass(tier)
+	                    		// if space stations at unreachable planets are allowed, we have to ask the satellite's WorldProvider instead
+	                    		|| (ConfigManagerCore.allowSSatUnreachable && ((IGalacticraftWorldProvider) provider).canSpaceshipTierPass(tier)))
 	                    {
 	                        temp.add(element);
 	                    }
