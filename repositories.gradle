@@ -12,6 +12,10 @@ repositories {
         url "http://jenkins.usrv.eu:8081/nexus/content/repositories/public/"
     }
     maven {
+        name "Jitpack"
+        url "https://jitpack.io"
+    }
+    maven {
         name "Cursemaven"
         url "https://cursemaven.com"
     }
