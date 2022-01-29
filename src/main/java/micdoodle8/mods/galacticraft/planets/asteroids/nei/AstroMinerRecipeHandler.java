@@ -13,6 +13,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -55,6 +56,7 @@ public class AstroMinerRecipeHandler extends TemplateRecipeHandler
     @Override
     public void loadTransferRects()
     {
+        this.transferRects.add(new RecipeTransferRect(new Rectangle(282, 36, 38, 69), this.getRecipeId()));
     }
 
     @Override

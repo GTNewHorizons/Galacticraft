@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -65,6 +66,7 @@ public class RefineryRecipeHandler extends TemplateRecipeHandler
     @Override
     public void loadTransferRects()
     {
+        this.transferRects.add(new RecipeTransferRect(new Rectangle(63, 26, 24, 55), this.getRecipeId()));
     }
 
     @Override

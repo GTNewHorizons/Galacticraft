@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -71,6 +72,7 @@ public class CircuitFabricatorRecipeHandler extends TemplateRecipeHandler
     @Override
     public void loadTransferRects()
     {
+        this.transferRects.add(new RecipeTransferRect(new Rectangle(152, 57, 17, 28), this.getRecipeId()));
     }
 
     @Override
