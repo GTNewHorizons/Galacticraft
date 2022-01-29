@@ -154,7 +154,7 @@ public class NEIGalacticraftAsteroidsConfig implements IConfigureNEI
         input.add(new PositionedStack(new ItemStack(GCItems.heavyPlatingTier1), 116 - x, 73 - y));
         input.add(new PositionedStack(RecipeUtil.getChestItemStack(1, 1), 80 - x, 55 - y));
         input.add(new PositionedStack(RecipeUtil.getChestItemStack(1, 1), 98 - x, 55 - y));
-        input.add(new PositionedStack(RecipeUtil.getChestItemStack(1, 8), 44 - x, 73 - y));
+        input.add(new PositionedStack(new ItemStack(AsteroidsItems.basicItem, 1, 8), 44 - x, 73 - y));
         input.add(new PositionedStack(new ItemStack(AsteroidBlocks.beamReceiver), 62 - x, 73 - y));
         input.add(new PositionedStack(GT_ModHandler.getModItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01", 1, 32603), 80 - x, 73 - y));
         input.add(new PositionedStack(GT_ModHandler.getModItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01", 1, 32603), 98 - x, 73 - y));
