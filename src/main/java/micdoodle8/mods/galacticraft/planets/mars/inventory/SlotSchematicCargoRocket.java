@@ -1,12 +1,12 @@
 package micdoodle8.mods.galacticraft.planets.mars.inventory;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.ironchest.IronChest;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
+import micdoodle8.mods.galacticraft.core.util.RecipeUtil;
 import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -75,7 +75,7 @@ public class SlotSchematicCargoRocket extends Slot
         } else if(index >= 17 && index <= 20) {
             return itemStack.getItem() == GCItems.partFins;
         } else if(index == 21) {
-            return itemStack.getItem() == Item.getItemFromBlock(IronChest.ironChestBlock) && (itemStack.getItemDamage() == 0 || itemStack.getItemDamage() == 1 || itemStack.getItemDamage() == 3);
+            return itemStack.getItem() == Item.getItemFromBlock(RecipeUtil.getChestBlock()) && (itemStack.getItemDamage() == 0 || itemStack.getItemDamage() == 1 || itemStack.getItemDamage() == 3);
         } else {
             return false;
         }

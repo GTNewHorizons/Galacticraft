@@ -1,12 +1,12 @@
 package micdoodle8.mods.galacticraft.core.inventory;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.ironchest.IronChest;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
+import micdoodle8.mods.galacticraft.core.util.RecipeUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
@@ -75,7 +75,7 @@ public class SlotBuggyBench extends Slot
         } else if(index >= 25 && index <= 34) {
             return itemStack.getItem() == GCItems.heavyPlatingTier1;
         } else if(index == 35) {
-            return itemStack.getItem() == Item.getItemFromBlock(IronChest.ironChestBlock) && (itemStack.getItemDamage() == 0 || itemStack.getItemDamage() == 1 || itemStack.getItemDamage() == 3);
+            return itemStack.getItem() == Item.getItemFromBlock(RecipeUtil.getChestBlock()) && (itemStack.getItemDamage() == 0 || itemStack.getItemDamage() == 1 || itemStack.getItemDamage() == 3);
         } else {
             return false;
         }

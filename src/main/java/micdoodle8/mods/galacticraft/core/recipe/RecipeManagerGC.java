@@ -1,7 +1,6 @@
 package micdoodle8.mods.galacticraft.core.recipe;
 
 import cpw.mods.fml.common.Loader;
-import cpw.mods.ironchest.IronChest;
 import gregtech.api.GregTech_API;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
@@ -31,7 +30,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
@@ -197,15 +195,15 @@ public class RecipeManagerGC
         RecipeUtil.addBuggyBenchRecipe(new ItemStack(GCItems.buggy, 1, 0), input2);
 
         input2 = new HashMap<Integer, ItemStack>(input);
-        input2.put(35, new ItemStack(IronChest.ironChestBlock, 1, 3));
+        input2.put(35, RecipeUtil.getChestItemStack(1, 3));
         RecipeUtil.addBuggyBenchRecipe(new ItemStack(GCItems.buggy, 1, 1), input2);
 
         input2 = new HashMap<Integer, ItemStack>(input);
-        input2.put(35, new ItemStack(IronChest.ironChestBlock));
+        input2.put(35, RecipeUtil.getChestItemStack(1, 0));
         RecipeUtil.addBuggyBenchRecipe(new ItemStack(GCItems.buggy, 1, 2), input2);
 
         input2 = new HashMap<Integer, ItemStack>(input);
-        input2.put(35, new ItemStack(IronChest.ironChestBlock, 1, 1));
+        input2.put(35, RecipeUtil.getChestItemStack(1, 1));
         RecipeUtil.addBuggyBenchRecipe(new ItemStack(GCItems.buggy, 1, 3), input2);
 
         aluminumIngots.addAll(OreDictionary.getOres("ingotAluminum"));

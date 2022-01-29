@@ -3,23 +3,19 @@ package micdoodle8.mods.galacticraft.planets.asteroids.nei;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
-import cpw.mods.ironchest.IronChest;
 import gregtech.api.util.GT_ModHandler;
-import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
+import micdoodle8.mods.galacticraft.core.util.RecipeUtil;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
 import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
 import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 import micdoodle8.mods.galacticraft.planets.mars.nei.NEIGalacticraftMarsConfig;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -156,9 +152,9 @@ public class NEIGalacticraftAsteroidsConfig implements IConfigureNEI
         input.add(new PositionedStack(new ItemStack(GCItems.heavyPlatingTier1), 116 - x, 37 - y));
         input.add(new PositionedStack(new ItemStack(GCItems.heavyPlatingTier1), 116 - x, 55 - y));
         input.add(new PositionedStack(new ItemStack(GCItems.heavyPlatingTier1), 116 - x, 73 - y));
-        input.add(new PositionedStack(new ItemStack(IronChest.ironChestBlock, 1, 1), 80 - x, 55 - y));
-        input.add(new PositionedStack(new ItemStack(IronChest.ironChestBlock, 1, 1), 98 - x, 55 - y));
-        input.add(new PositionedStack(new ItemStack(AsteroidsItems.basicItem, 1, 8), 44 - x, 73 - y));
+        input.add(new PositionedStack(RecipeUtil.getChestItemStack(1, 1), 80 - x, 55 - y));
+        input.add(new PositionedStack(RecipeUtil.getChestItemStack(1, 1), 98 - x, 55 - y));
+        input.add(new PositionedStack(RecipeUtil.getChestItemStack(1, 8), 44 - x, 73 - y));
         input.add(new PositionedStack(new ItemStack(AsteroidBlocks.beamReceiver), 62 - x, 73 - y));
         input.add(new PositionedStack(GT_ModHandler.getModItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01", 1, 32603), 80 - x, 73 - y));
         input.add(new PositionedStack(GT_ModHandler.getModItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01", 1, 32603), 98 - x, 73 - y));

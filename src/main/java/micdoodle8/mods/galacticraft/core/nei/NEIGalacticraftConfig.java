@@ -3,7 +3,6 @@ package micdoodle8.mods.galacticraft.core.nei;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
-import cpw.mods.ironchest.IronChest;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_ModHandler;
@@ -14,6 +13,7 @@ import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.RecipeUtil;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -193,13 +193,13 @@ public class NEIGalacticraftConfig implements IConfigureNEI
         input.put(34, new PositionedStack(new ItemStack(GCItems.heavyPlatingTier1), 80 - x, 91 - y));
         registerBuggyBenchRecipe(input, new PositionedStack(new ItemStack(GCItems.buggy), 143 - x, 64 - y));
         HashMap<Integer, PositionedStack> input2 = new HashMap<>(input);
-        input2.put(35, new PositionedStack(new ItemStack(IronChest.ironChestBlock, 1, 3), 107 - x, 64 - y));
+        input2.put(35, new PositionedStack(RecipeUtil.getChestItemStack(1, 3), 107 - x, 64 - y));
         registerBuggyBenchRecipe(input2, new PositionedStack(new ItemStack(GCItems.buggy, 1, 1), 143 - x, 64 - y));
         input2 = new HashMap<>(input);
-        input2.put(35, new PositionedStack(new ItemStack(IronChest.ironChestBlock), 107 - x, 64 - y));
+        input2.put(35, new PositionedStack(RecipeUtil.getChestItemStack(1, 0), 107 - x, 64 - y));
         registerBuggyBenchRecipe(input2, new PositionedStack(new ItemStack(GCItems.buggy, 1, 2), 143 - x, 64 - y));
         input2 = new HashMap<>(input);
-        input2.put(35, new PositionedStack(new ItemStack(IronChest.ironChestBlock, 1, 1), 107 - x, 64 - y));
+        input2.put(35, new PositionedStack(RecipeUtil.getChestItemStack(1, 1), 107 - x, 64 - y));
         registerBuggyBenchRecipe(input2, new PositionedStack(new ItemStack(GCItems.buggy, 1, 3), 143 - x, 64 - y));
     }
 

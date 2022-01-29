@@ -1,12 +1,12 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.inventory;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.ironchest.IronChest;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
+import micdoodle8.mods.galacticraft.core.util.RecipeUtil;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
 import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
 import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
@@ -75,7 +75,7 @@ public class SlotSchematicAstroMiner extends Slot
         } else if(index >= 21 && index <= 23) {
             return itemStack.getItem() == GCItems.heavyPlatingTier1;
         } else if(index == 24 || index == 25) {
-            return itemStack.getItem() == Item.getItemFromBlock(IronChest.ironChestBlock) && itemStack.getItemDamage() == 1;
+            return itemStack.getItem() == Item.getItemFromBlock(RecipeUtil.getChestBlock()) && itemStack.getItemDamage() == 1;
         } else if(index == 26) {
             return itemStack.getItem() == AsteroidsItems.basicItem && itemStack.getItemDamage() == 8;
         } else if(index == 27) {
