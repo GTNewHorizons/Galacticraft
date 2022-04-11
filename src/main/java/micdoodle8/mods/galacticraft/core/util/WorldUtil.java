@@ -809,8 +809,12 @@ public class WorldUtil
         {
             for (Integer var1 : WorldUtil.registeredPlanets)
             {
-                DimensionManager.unregisterDimension(var1);
-                GCLog.info("Unregistered Dimension: " + var1);
+                try {
+                    DimensionManager.unregisterDimension(var1);
+                    GCLog.info("Unregistered Dimension: " + var1);
+                } catch (IllegalArgumentException e) {
+                    GCLog.info("Unregistered Dimension: " + var1 + " - already unregistered");
+                }
             }
 
             WorldUtil.registeredPlanets = null;
