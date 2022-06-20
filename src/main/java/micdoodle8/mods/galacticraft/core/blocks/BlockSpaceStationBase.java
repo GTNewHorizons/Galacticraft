@@ -33,12 +33,6 @@ public class BlockSpaceStationBase extends BlockContainer implements ITileEntity
     }
 
     @Override
-    public boolean canDropFromExplosion(Explosion par1Explosion)
-    {
-        return false;
-    }
-
-    @Override
     public float getBlockHardness(World par1World, int par2, int par3, int par4)
     {
         return -1.0F;
