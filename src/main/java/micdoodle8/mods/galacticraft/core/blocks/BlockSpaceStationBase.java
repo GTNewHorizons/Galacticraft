@@ -29,6 +29,13 @@ public class BlockSpaceStationBase extends BlockContainer implements ITileEntity
         this.setStepSound(Block.soundTypeMetal);
         this.setBlockTextureName(GalacticraftCore.TEXTURE_PREFIX + assetName);
         this.setBlockName(assetName);
+        this.setResistance(1000000000000000.0F);
+    }
+
+    @Override
+    public boolean canDropFromExplosion(Explosion par1Explosion)
+    {
+        return false;
     }
 
     @Override
