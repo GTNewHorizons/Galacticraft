@@ -420,7 +420,7 @@ public class FreefallHandler {
         }
         boolean doCentrifugal = spinManager != null;
 
-        if (freefall)
+        /*f (freefall)
         {
             stats.pjumpticks = 0;
 
@@ -480,10 +480,8 @@ public class FreefallHandler {
             //Could auto-kill + respawn the player if floats too far away (config option whether to lose items or not)
             //But we want players to be able to enjoy the view of the spinning space station from the outside
             //Arm and leg movements could start tumbling the player?
-        }
-        else
+        }*/
         //Not freefall - within arm's length of something or jumping
-        {
             double dy = p.motionY - this.pPrevMotionY;
             //if (p.motionY < 0 && this.pPrevMotionY >= 0) p.posY -= p.motionY;
             //if (p.motionY != 0) p.motionY = this.pPrevMotionY;
@@ -519,7 +517,6 @@ public class FreefallHandler {
                 }
                 stats.pjumpticks = 0;
             }
-        }
 
         //Artificial gravity of a sort...
         if (doCentrifugal && !p.onGround)
