@@ -71,6 +71,10 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer
 	        }
     	}
 
+        if (itemStack.getItem() == this.getContainerItem() && itemStack.getItemDamage() == ItemCanisterGeneric.EMPTY) {
+            return null;
+        }
+
         return new ItemStack(this.getContainerItem(), 1, ItemCanisterGeneric.EMPTY);
     }
 
