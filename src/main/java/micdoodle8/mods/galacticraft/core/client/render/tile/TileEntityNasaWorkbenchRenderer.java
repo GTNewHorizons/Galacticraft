@@ -8,14 +8,13 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class TileEntityNasaWorkbenchRenderer extends TileEntitySpecialRenderer
-{
-    private static final ResourceLocation assemblyTableTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/assembly.png");
+public class TileEntityNasaWorkbenchRenderer extends TileEntitySpecialRenderer {
+    private static final ResourceLocation assemblyTableTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/assembly.png");
     public ModelNasaWorkbench model = new ModelNasaWorkbench();
 
     @Override
-    public void renderTileEntityAt(TileEntity var1, double par2, double par4, double par6, float var8)
-    {
+    public void renderTileEntityAt(TileEntity var1, double par2, double par4, double par6, float var8) {
         GL11.glPushMatrix();
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

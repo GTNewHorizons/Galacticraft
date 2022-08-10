@@ -4,8 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelTier2Rocket extends ModelBase
-{
+public class ModelTier2Rocket extends ModelBase {
     // Roof, Floor, Bottom
     ModelRenderer[] inside = new ModelRenderer[3];
     // 4 sets of 5 fin parts
@@ -19,18 +18,16 @@ public class ModelTier2Rocket extends ModelBase
     // 7 side pars, first four are the front, then right, and so on
     ModelRenderer[] sides = new ModelRenderer[7];
 
-    public ModelTier2Rocket()
-    {
+    public ModelTier2Rocket() {
         this(0.0F);
     }
 
-    public ModelTier2Rocket(float var1)
-    {
+    public ModelTier2Rocket(float var1) {
         this.textureWidth = 256;
         this.textureHeight = 256;
 
-        float halfPI = (float)(Math.PI / 2.0);
-        float fullPI = (float)(Math.PI);
+        float halfPI = (float) (Math.PI / 2.0);
+        float fullPI = (float) (Math.PI);
 
         this.inside[0] = new ModelRenderer(this, 0, 59);
         this.inside[0].addBox(-9F, -57F, -9F, 18, 1, 18, var1);
@@ -366,58 +363,48 @@ public class ModelTier2Rocket extends ModelBase
     }
 
     @Override
-    public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
-        for (final ModelRenderer model : this.inside)
-        {
+    public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
+        for (final ModelRenderer model : this.inside) {
             model.render(par7);
         }
 
-        for (final ModelRenderer model : this.top)
-        {
+        for (final ModelRenderer model : this.top) {
             model.render(par7);
         }
 
-        for (final ModelRenderer model : this.base)
-        {
+        for (final ModelRenderer model : this.base) {
             model.render(par7);
         }
 
-        for (final ModelRenderer model : this.sides)
-        {
+        for (final ModelRenderer model : this.sides) {
             model.render(par7);
         }
 
         int var1 = 0;
         int var2 = 0;
 
-        for (var1 = 0; var1 < this.fins.length; var1++)
-        {
-            for (var2 = 0; var2 < this.fins[var1].length; var2++)
-            {
+        for (var1 = 0; var1 < this.fins.length; var1++) {
+            for (var2 = 0; var2 < this.fins[var1].length; var2++) {
                 this.fins[var1][var2].render(par7);
             }
         }
 
-        for (var1 = 0; var1 < this.boosters.length; var1++)
-        {
-            for (var2 = 0; var2 < this.boosters[var1].length; var2++)
-            {
+        for (var1 = 0; var1 < this.boosters.length; var1++) {
+            for (var2 = 0; var2 < this.boosters[var1].length; var2++) {
                 this.boosters[var1][var2].render(par7);
             }
         }
     }
 
-    private void setStartingAngles(ModelRenderer model, float x, float y, float z)
-    {
+    private void setStartingAngles(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
 
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity)
-    {
+    public void setRotationAngles(
+            float par1, float par2, float par3, float par4, float par5, float par6, Entity entity) {
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, entity);
     }
 }

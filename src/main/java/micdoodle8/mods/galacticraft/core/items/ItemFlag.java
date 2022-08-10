@@ -21,12 +21,10 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 
-public class ItemFlag extends Item implements IHoldableItem
-{
+public class ItemFlag extends Item implements IHoldableItem {
     public int placeProgress;
 
-    public ItemFlag(String assetName)
-    {
+    public ItemFlag(String assetName) {
         super();
         this.setMaxDamage(0);
         this.setMaxStackSize(1);
@@ -35,14 +33,13 @@ public class ItemFlag extends Item implements IHoldableItem
     }
 
     @Override
-    public CreativeTabs getCreativeTab()
-    {
+    public CreativeTabs getCreativeTab() {
         return GalacticraftCore.galacticraftItemsTab;
     }
 
     @Override
-    public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, int par4)
-    {
+    public void onPlayerStoppedUsing(
+            ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, int par4) {
         final int useTime = this.getMaxItemUseDuration(par1ItemStack) - par4;
 
         boolean placed = false;
@@ -52,43 +49,45 @@ public class ItemFlag extends Item implements IHoldableItem
         float var7 = useTime / 20.0F;
         var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
 
-        if (var7 > 1.0F)
-        {
+        if (var7 > 1.0F) {
             var7 = 1.0F;
         }
 
-        if (var7 == 1.0F && var12 != null && var12.typeOfHit == MovingObjectType.BLOCK)
-        {
+        if (var7 == 1.0F && var12 != null && var12.typeOfHit == MovingObjectType.BLOCK) {
             final int x = var12.blockX;
             final int y = var12.blockY;
             final int z = var12.blockZ;
 
-            if (!par2World.isRemote)
-            {
-                final EntityFlag flag = new EntityFlag(par2World, x + 0.5F, y + 1.0F, z + 0.5F, (int) (par3EntityPlayer.rotationYaw - 90));
+            if (!par2World.isRemote) {
+                final EntityFlag flag = new EntityFlag(
+                        par2World, x + 0.5F, y + 1.0F, z + 0.5F, (int) (par3EntityPlayer.rotationYaw - 90));
 
-                if (par2World.getEntitiesWithinAABB(EntityFlag.class, AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 3, z + 1)).isEmpty())
-                {
+                if (par2World
+                        .getEntitiesWithinAABB(
+                                EntityFlag.class, AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 3, z + 1))
+                        .isEmpty()) {
                     par2World.spawnEntityInWorld(flag);
                     flag.setType(par1ItemStack.getItemDamage());
                     flag.setOwner(par3EntityPlayer.getGameProfile().getName());
-                    par2World.playSoundEffect(x, y, z, Block.soundTypeMetal.getBreakSound(), Block.soundTypeMetal.getVolume(), Block.soundTypeMetal.getPitch() + 2.0F);
+                    par2World.playSoundEffect(
+                            x,
+                            y,
+                            z,
+                            Block.soundTypeMetal.getBreakSound(),
+                            Block.soundTypeMetal.getVolume(),
+                            Block.soundTypeMetal.getPitch() + 2.0F);
                     placed = true;
-                }
-                else
-                {
-                    par3EntityPlayer.addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.flag.alreadyPlaced")));
+                } else {
+                    par3EntityPlayer.addChatMessage(
+                            new ChatComponentText(GCCoreUtil.translate("gui.flag.alreadyPlaced")));
                 }
             }
 
-            if (placed)
-            {
+            if (placed) {
                 final int var2 = this.getInventorySlotContainItem(par3EntityPlayer, par1ItemStack);
 
-                if (var2 >= 0 && !par3EntityPlayer.capabilities.isCreativeMode)
-                {
-                    if (--par3EntityPlayer.inventory.mainInventory[var2].stackSize <= 0)
-                    {
+                if (var2 >= 0 && !par3EntityPlayer.capabilities.isCreativeMode) {
+                    if (--par3EntityPlayer.inventory.mainInventory[var2].stackSize <= 0) {
                         par3EntityPlayer.inventory.mainInventory[var2] = null;
                     }
                 }
@@ -96,12 +95,10 @@ public class ItemFlag extends Item implements IHoldableItem
         }
     }
 
-    private int getInventorySlotContainItem(EntityPlayer player, ItemStack stack)
-    {
-        for (int var2 = 0; var2 < player.inventory.mainInventory.length; ++var2)
-        {
-            if (player.inventory.mainInventory[var2] != null && player.inventory.mainInventory[var2].isItemEqual(stack))
-            {
+    private int getInventorySlotContainItem(EntityPlayer player, ItemStack stack) {
+        for (int var2 = 0; var2 < player.inventory.mainInventory.length; ++var2) {
+            if (player.inventory.mainInventory[var2] != null
+                    && player.inventory.mainInventory[var2].isItemEqual(stack)) {
                 return var2;
             }
         }
@@ -110,26 +107,22 @@ public class ItemFlag extends Item implements IHoldableItem
     }
 
     @Override
-    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-    {
+    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         return par1ItemStack;
     }
 
     @Override
-    public int getMaxItemUseDuration(ItemStack par1ItemStack)
-    {
+    public int getMaxItemUseDuration(ItemStack par1ItemStack) {
         return 72000;
     }
 
     @Override
-    public EnumAction getItemUseAction(ItemStack par1ItemStack)
-    {
+    public EnumAction getItemUseAction(ItemStack par1ItemStack) {
         return EnumAction.none;
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-    {
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
 
         return par1ItemStack;
@@ -137,38 +130,32 @@ public class ItemFlag extends Item implements IHoldableItem
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack itemStack)
-    {
+    public String getUnlocalizedName(ItemStack itemStack) {
         return "item.flag";
     }
 
     @Override
-    public IIcon getIconFromDamage(int damage)
-    {
+    public IIcon getIconFromDamage(int damage) {
         return super.getIconFromDamage(damage);
     }
 
     @Override
-    public boolean shouldHoldLeftHandUp(EntityPlayer player)
-    {
+    public boolean shouldHoldLeftHandUp(EntityPlayer player) {
         return false;
     }
 
     @Override
-    public boolean shouldHoldRightHandUp(EntityPlayer player)
-    {
+    public boolean shouldHoldRightHandUp(EntityPlayer player) {
         return true;
     }
 
     @Override
-    public boolean shouldCrouch(EntityPlayer player)
-    {
+    public boolean shouldCrouch(EntityPlayer player) {
         return false;
     }
 }

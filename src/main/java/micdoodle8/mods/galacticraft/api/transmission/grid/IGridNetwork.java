@@ -13,8 +13,7 @@ import java.util.Set;
  *            Set
  * @author aidancbrady
  */
-public interface IGridNetwork<N, C, A>
-{
+public interface IGridNetwork<N, C, A> {
     /**
      * Refreshes and cleans up conductor references of this network, as well as
      * updating the acceptor set.

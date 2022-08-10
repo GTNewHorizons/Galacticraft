@@ -4,6 +4,11 @@ import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
@@ -11,99 +16,73 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-public class RefineryRecipeHandler extends TemplateRecipeHandler
-{
-    private static final ResourceLocation refineryGuiTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/refinery.png");
+public class RefineryRecipeHandler extends TemplateRecipeHandler {
+    private static final ResourceLocation refineryGuiTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/refinery.png");
     int ticksPassed;
 
-    public String getRecipeId()
-    {
+    public String getRecipeId() {
         return "galacticraft.refinery";
     }
 
     @Override
-    public int recipiesPerPage()
-    {
+    public int recipiesPerPage() {
         return 2;
     }
 
-    public Set<Entry<PositionedStack, PositionedStack>> getRecipes()
-    {
+    public Set<Entry<PositionedStack, PositionedStack>> getRecipes() {
         return NEIGalacticraftConfig.getRefineryRecipes();
     }
 
     @Override
-    public void drawBackground(int recipe)
-    {
+    public void drawBackground(int recipe) {
         int progress = this.ticksPassed % 144;
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GuiDraw.changeTexture(RefineryRecipeHandler.refineryGuiTexture);
         GuiDraw.drawTexturedModalRect(-2, 0, 3, 4, 168, 64);
-        if (progress < 104 && progress > 40)
-        {
+        if (progress < 104 && progress > 40) {
             GuiDraw.drawTexturedModalRect(2, 42, 176, 6, 16, 20);
-        }
-        else if (progress < 124)
-        {
+        } else if (progress < 124) {
             GuiDraw.drawTexturedModalRect(148, 42, 176 + 16, 6, 16, 20);
         }
         GuiDraw.drawTexturedModalRect(21, 21, 0, 186, progress, 20);
     }
 
     @Override
-    public void onUpdate()
-    {
+    public void onUpdate() {
         this.ticksPassed += 2;
         super.onUpdate();
     }
 
     @Override
-    public void loadTransferRects()
-    {
+    public void loadTransferRects() {
         this.transferRects.add(new RecipeTransferRect(new Rectangle(63, 26, 24, 55), this.getRecipeId()));
     }
 
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results)
-    {
-        if (outputId.equals(this.getRecipeId()))
-        {
-            for (final Map.Entry<PositionedStack, PositionedStack> irecipe : this.getRecipes())
-            {
+    public void loadCraftingRecipes(String outputId, Object... results) {
+        if (outputId.equals(this.getRecipeId())) {
+            for (final Map.Entry<PositionedStack, PositionedStack> irecipe : this.getRecipes()) {
                 this.arecipes.add(new CachedRefineryRecipe(irecipe));
             }
-        }
-        else
-        {
+        } else {
             super.loadCraftingRecipes(outputId, results);
         }
     }
 
     @Override
-    public void loadCraftingRecipes(ItemStack result)
-    {
-        for (final Map.Entry<PositionedStack, PositionedStack> irecipe : this.getRecipes())
-        {
-            if (NEIServerUtils.areStacksSameTypeCrafting(irecipe.getValue().item, result))
-            {
+    public void loadCraftingRecipes(ItemStack result) {
+        for (final Map.Entry<PositionedStack, PositionedStack> irecipe : this.getRecipes()) {
+            if (NEIServerUtils.areStacksSameTypeCrafting(irecipe.getValue().item, result)) {
                 this.arecipes.add(new CachedRefineryRecipe(irecipe));
             }
         }
     }
 
     @Override
-    public void loadUsageRecipes(ItemStack ingredient)
-    {
-        for (final Map.Entry<PositionedStack, PositionedStack> irecipe : this.getRecipes())
-        {
-            if (NEIServerUtils.areStacksSameTypeCrafting(ingredient, irecipe.getKey().item))
-            {
+    public void loadUsageRecipes(ItemStack ingredient) {
+        for (final Map.Entry<PositionedStack, PositionedStack> irecipe : this.getRecipes()) {
+            if (NEIServerUtils.areStacksSameTypeCrafting(ingredient, irecipe.getKey().item)) {
                 this.arecipes.add(new CachedRefineryRecipe(irecipe));
                 break;
             }
@@ -111,77 +90,66 @@ public class RefineryRecipeHandler extends TemplateRecipeHandler
     }
 
     @Override
-    public ArrayList<PositionedStack> getIngredientStacks(int recipe)
-    {
-        if (this.ticksPassed % 144 > 20)
-        {
+    public ArrayList<PositionedStack> getIngredientStacks(int recipe) {
+        if (this.ticksPassed % 144 > 20) {
             ArrayList<PositionedStack> stacks = new ArrayList<PositionedStack>();
-            stacks.add(new PositionedStack(new ItemStack(GCItems.oilCanister, 1, GCItems.oilCanister.getMaxDamage()), this.arecipes.get(recipe).getIngredients().get(0).relx, this.arecipes.get(recipe).getIngredients().get(0).rely));
+            stacks.add(new PositionedStack(
+                    new ItemStack(GCItems.oilCanister, 1, GCItems.oilCanister.getMaxDamage()),
+                    this.arecipes.get(recipe).getIngredients().get(0).relx,
+                    this.arecipes.get(recipe).getIngredients().get(0).rely));
             return stacks;
-        }
-        else
-        {
+        } else {
             return (ArrayList<PositionedStack>) this.arecipes.get(recipe).getIngredients();
         }
     }
 
     @Override
-    public PositionedStack getResultStack(int recipe)
-    {
-        if (this.ticksPassed % 144 < 124)
-        {
-            return new PositionedStack(new ItemStack(GCItems.oilCanister, 1, GCItems.oilCanister.getMaxDamage()), this.arecipes.get(recipe).getResult().relx, this.arecipes.get(recipe).getResult().rely);
-        }
-        else
-        {
+    public PositionedStack getResultStack(int recipe) {
+        if (this.ticksPassed % 144 < 124) {
+            return new PositionedStack(
+                    new ItemStack(GCItems.oilCanister, 1, GCItems.oilCanister.getMaxDamage()),
+                    this.arecipes.get(recipe).getResult().relx,
+                    this.arecipes.get(recipe).getResult().rely);
+        } else {
             return this.arecipes.get(recipe).getResult();
         }
     }
 
-    public class CachedRefineryRecipe extends TemplateRecipeHandler.CachedRecipe
-    {
+    public class CachedRefineryRecipe extends TemplateRecipeHandler.CachedRecipe {
         public PositionedStack input;
         public PositionedStack output;
 
         @Override
-        public PositionedStack getIngredient()
-        {
+        public PositionedStack getIngredient() {
             return this.input;
         }
 
         @Override
-        public PositionedStack getResult()
-        {
+        public PositionedStack getResult() {
             return this.output;
         }
 
-        public CachedRefineryRecipe(PositionedStack pstack1, PositionedStack pstack2)
-        {
+        public CachedRefineryRecipe(PositionedStack pstack1, PositionedStack pstack2) {
             super();
             this.input = pstack1;
             this.output = pstack2;
         }
 
-        public CachedRefineryRecipe(Map.Entry<PositionedStack, PositionedStack> recipe)
-        {
+        public CachedRefineryRecipe(Map.Entry<PositionedStack, PositionedStack> recipe) {
             this(recipe.getKey(), recipe.getValue());
         }
     }
 
     @Override
-    public String getRecipeName()
-    {
+    public String getRecipeName() {
         return GCCoreUtil.translate("tile.refinery.name");
     }
 
     @Override
-    public String getGuiTexture()
-    {
+    public String getGuiTexture() {
         return GalacticraftCore.TEXTURE_PREFIX + "textures/gui/refinery.png";
     }
 
     @Override
-    public void drawForeground(int recipe)
-    {
-    }
+    public void drawForeground(int recipe) {}
 }

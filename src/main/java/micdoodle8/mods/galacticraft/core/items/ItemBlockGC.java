@@ -8,17 +8,14 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockGC extends ItemBlock
-{
-    public ItemBlockGC(Block block)
-    {
+public class ItemBlockGC extends ItemBlock {
+    public ItemBlockGC(Block block) {
         super(block);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 }

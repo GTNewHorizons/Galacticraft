@@ -2,6 +2,7 @@ package micdoodle8.mods.galacticraft.core.items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -11,31 +12,29 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-import java.util.List;
-
-public class ItemParaChute extends Item
-{
-    public static final String[] names = { "plain", // 0
-            "black", // 1
-            "blue", // 2
-            "lime", // 3
-            "brown", // 4
-            "darkblue", // 5
-            "darkgray", // 6
-            "darkgreen", // 7
-            "gray", // 8
-            "magenta", // 9
-            "orange", // 10
-            "pink", // 11
-            "purple", // 12
-            "red", // 13
-            "teal", // 14
-            "yellow" }; // 15
+public class ItemParaChute extends Item {
+    public static final String[] names = {
+        "plain", // 0
+        "black", // 1
+        "blue", // 2
+        "lime", // 3
+        "brown", // 4
+        "darkblue", // 5
+        "darkgray", // 6
+        "darkgreen", // 7
+        "gray", // 8
+        "magenta", // 9
+        "orange", // 10
+        "pink", // 11
+        "purple", // 12
+        "red", // 13
+        "teal", // 14
+        "yellow"
+    }; // 15
 
     protected IIcon[] icons;
 
-    public ItemParaChute(String assetName)
-    {
+    public ItemParaChute(String assetName) {
         super();
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
@@ -45,51 +44,42 @@ public class ItemParaChute extends Item
     }
 
     @Override
-    public CreativeTabs getCreativeTab()
-    {
+    public CreativeTabs getCreativeTab() {
         return GalacticraftCore.galacticraftItemsTab;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
-    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List)
-    {
-        for (int i = 0; i < ItemParaChute.names.length; i++)
-        {
+    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+        for (int i = 0; i < ItemParaChute.names.length; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }
     }
 
     @Override
-    public int getMetadata(int par1)
-    {
+    public int getMetadata(int par1) {
         return par1;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegister)
-    {
+    public void registerIcons(IIconRegister iconRegister) {
         int i = 0;
         this.icons = new IIcon[ItemParaChute.names.length];
 
-        for (String name : ItemParaChute.names)
-        {
+        for (String name : ItemParaChute.names) {
             this.icons[i++] = iconRegister.registerIcon(this.getIconString() + "_" + name);
         }
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack itemStack)
-    {
+    public String getUnlocalizedName(ItemStack itemStack) {
         return this.getUnlocalizedName() + "_" + ItemParaChute.names[itemStack.getItemDamage()];
     }
 
     @Override
-    public IIcon getIconFromDamage(int damage)
-    {
-        if (this.icons.length > damage)
-        {
+    public IIcon getIconFromDamage(int damage) {
+        if (this.icons.length > damage) {
             return this.icons[damage];
         }
 
@@ -139,42 +129,40 @@ public class ItemParaChute extends Item
     // return 0;
     // }
 
-    public static int getParachuteDamageValueFromDye(int meta)
-    {
-        switch (meta)
-        {
-        case 0:
-            return 1;
-        case 1:
-            return 13;
-        case 2:
-            return 7;
-        case 3:
-            return 4;
-        case 4:
-            return 5;
-        case 5:
-            return 12;
-        case 6:
-            return 14;
-        case 7:
-            return 8;
-        case 8:
-            return 6;
-        case 9:
-            return 11;
-        case 10:
-            return 3;
-        case 11:
-            return 15;
-        case 12:
-            return 2;
-        case 13:
-            return 9;
-        case 14:
-            return 10;
-        case 15:
-            return 0;
+    public static int getParachuteDamageValueFromDye(int meta) {
+        switch (meta) {
+            case 0:
+                return 1;
+            case 1:
+                return 13;
+            case 2:
+                return 7;
+            case 3:
+                return 4;
+            case 4:
+                return 5;
+            case 5:
+                return 12;
+            case 6:
+                return 14;
+            case 7:
+                return 8;
+            case 8:
+                return 6;
+            case 9:
+                return 11;
+            case 10:
+                return 3;
+            case 11:
+                return 15;
+            case 12:
+                return 2;
+            case 13:
+                return 9;
+            case 14:
+                return 10;
+            case 15:
+                return 0;
         }
 
         return -1;
@@ -182,8 +170,7 @@ public class ItemParaChute extends Item
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 }

@@ -2,6 +2,8 @@ package micdoodle8.mods.galacticraft.planets.asteroids.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+import java.util.Random;
 import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.blocks.BlockAdvancedTile;
@@ -23,13 +25,8 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.List;
-import java.util.Random;
-
-public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityProvider
-{
-    public BlockTelepadFake(String assetName)
-    {
+public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityProvider {
+    public BlockTelepadFake(String assetName) {
         super(GCBlocks.machine);
         this.setStepSound(Block.soundTypeMetal);
         this.setBlockTextureName(GalacticraftCore.TEXTURE_PREFIX + assetName);
@@ -39,89 +36,70 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
     }
 
     @Override
-    public boolean isOpaqueCube()
-    {
+    public boolean isOpaqueCube() {
         return false;
     }
 
     @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
-    {
+    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
         int meta = world.getBlockMetadata(x, y, z);
 
-        if (meta == 0)
-        {
+        if (meta == 0) {
             this.setBlockBounds(0.0F, 0.55F, 0.0F, 1.0F, 1.0F, 1.0F);
-        }
-        else if (meta == 1)
-        {
+        } else if (meta == 1) {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.38F, 1.0F);
-        }
-        else
-        {
+        } else {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         }
     }
 
     @SuppressWarnings("rawtypes")
     @Override
-    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List list, Entity entity)
-    {
+    public void addCollisionBoxesToList(
+            World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List list, Entity entity) {
         int meta = world.getBlockMetadata(x, y, z);
 
-        if (meta == 0)
-        {
+        if (meta == 0) {
             this.setBlockBounds(0.0F, 0.55F, 0.0F, 1.0F, 1.0F, 1.0F);
             super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
-        }
-        else if (meta == 1)
-        {
+        } else if (meta == 1) {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.38F, 1.0F);
             super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
-        }
-        else
-        {
+        } else {
             super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
         }
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
-    {
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
         this.setBlockBoundsBasedOnState(world, x, y, z);
         return super.getCollisionBoundingBoxFromPool(world, x, y, z);
     }
 
     @Override
-    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
-    {
+    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
         this.setBlockBoundsBasedOnState(world, x, y, z);
         return super.getSelectedBoundingBoxFromPool(world, x, y, z);
     }
 
     @Override
-    public boolean canDropFromExplosion(Explosion par1Explosion)
-    {
+    public boolean canDropFromExplosion(Explosion par1Explosion) {
         return false;
     }
 
-    public void makeFakeBlock(World worldObj, BlockVec3 position, BlockVec3 mainBlock, int meta)
-    {
+    public void makeFakeBlock(World worldObj, BlockVec3 position, BlockVec3 mainBlock, int meta) {
         worldObj.setBlock(position.x, position.y, position.z, this, meta, 3);
         ((TileEntityTelepadFake) worldObj.getTileEntity(position.x, position.y, position.z)).setMainBlock(mainBlock);
     }
 
     @Override
-    public float getBlockHardness(World par1World, int par2, int par3, int par4)
-    {
+    public float getBlockHardness(World par1World, int par2, int par3, int par4) {
         TileEntity tileEntity = par1World.getTileEntity(par2, par3, par4);
 
-        if (tileEntity instanceof TileEntityTelepadFake)
-        {
+        if (tileEntity instanceof TileEntityTelepadFake) {
             BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
 
-            if (mainBlockPosition != null)
-            {
+            if (mainBlockPosition != null) {
                 return mainBlockPosition.getBlock(par1World).getBlockHardness(par1World, par2, par3, par4);
             }
         }
@@ -130,19 +108,16 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
     }
 
     @Override
-    public Block setBlockTextureName(String name)
-    {
+    public Block setBlockTextureName(String name) {
         this.textureName = name;
         return this;
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block par5, int par6)
-    {
+    public void breakBlock(World world, int x, int y, int z, Block par5, int par6) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
 
-        if (tileEntity instanceof TileEntityTelepadFake)
-        {
+        if (tileEntity instanceof TileEntityTelepadFake) {
             ((TileEntityTelepadFake) tileEntity).onBlockRemoval();
         }
 
@@ -150,49 +125,51 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
     }
 
     @Override
-    public boolean onBlockActivated(World par1World, int x, int y, int z, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
-    {
+    public boolean onBlockActivated(
+            World par1World,
+            int x,
+            int y,
+            int z,
+            EntityPlayer par5EntityPlayer,
+            int par6,
+            float par7,
+            float par8,
+            float par9) {
         TileEntityTelepadFake tileEntity = (TileEntityTelepadFake) par1World.getTileEntity(x, y, z);
         return tileEntity.onActivated(par5EntityPlayer);
     }
 
     @Override
-    public int quantityDropped(Random par1Random)
-    {
+    public int quantityDropped(Random par1Random) {
         return 0;
     }
 
     @Override
-    public int getRenderType()
-    {
+    public int getRenderType() {
         return -1;
     }
 
     @Override
-    public boolean renderAsNormalBlock()
-    {
+    public boolean renderAsNormalBlock() {
         return false;
     }
 
     @Override
-    public TileEntity createNewTileEntity(World var1, int meta)
-    {
+    public TileEntity createNewTileEntity(World var1, int meta) {
         return new TileEntityTelepadFake();
     }
 
     @Override
-    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
-    {
+    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
 
-        if (mainBlockPosition != null)
-        {
+        if (mainBlockPosition != null) {
             Block mainBlockID = world.getBlock(mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z);
 
-            if (Blocks.air != mainBlockID)
-            {
-                return mainBlockID.getPickBlock(target, world, mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z);
+            if (Blocks.air != mainBlockID) {
+                return mainBlockID.getPickBlock(
+                        target, world, mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z);
             }
         }
 
@@ -200,67 +177,63 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
     }
 
     @Override
-    public int getBedDirection(IBlockAccess world, int x, int y, int z)
-    {
+    public int getBedDirection(IBlockAccess world, int x, int y, int z) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
 
-        if (mainBlockPosition != null)
-        {
-            return mainBlockPosition.getBlock(world).getBedDirection(world, mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z);
+        if (mainBlockPosition != null) {
+            return mainBlockPosition
+                    .getBlock(world)
+                    .getBedDirection(world, mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z);
         }
 
         return BlockDirectional.getDirection(world.getBlockMetadata(x, y, z));
     }
 
     @Override
-    public boolean isBed(IBlockAccess world, int x, int y, int z, EntityLivingBase player)
-    {
+    public boolean isBed(IBlockAccess world, int x, int y, int z, EntityLivingBase player) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
 
-        if (mainBlockPosition != null)
-        {
-            return mainBlockPosition.getBlock(world).isBed(world, mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z, player);
+        if (mainBlockPosition != null) {
+            return mainBlockPosition
+                    .getBlock(world)
+                    .isBed(world, mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z, player);
         }
 
         return super.isBed(world, x, y, z, player);
     }
 
     @Override
-    public void setBedOccupied(IBlockAccess world, int x, int y, int z, EntityPlayer player, boolean occupied)
-    {
+    public void setBedOccupied(IBlockAccess world, int x, int y, int z, EntityPlayer player, boolean occupied) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
 
-        if (mainBlockPosition != null)
-        {
-            mainBlockPosition.getBlock(world).setBedOccupied(world, mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z, player, occupied);
-        }
-        else
-        {
+        if (mainBlockPosition != null) {
+            mainBlockPosition
+                    .getBlock(world)
+                    .setBedOccupied(
+                            world, mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z, player, occupied);
+        } else {
             super.setBedOccupied(world, x, y, z, player, occupied);
         }
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
-    {
-        if (worldObj.getBlockMetadata(target.blockX, target.blockY, target.blockZ) == 6)
-        {
+    public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer) {
+        if (worldObj.getBlockMetadata(target.blockX, target.blockY, target.blockZ) == 6) {
             return true;
         }
 
         TileEntity tileEntity = worldObj.getTileEntity(target.blockX, target.blockY, target.blockZ);
 
-        if (tileEntity instanceof TileEntityTelepadFake)
-        {
+        if (tileEntity instanceof TileEntityTelepadFake) {
             BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
 
-            if (mainBlockPosition != null)
-            {
-                effectRenderer.addBlockHitEffects(mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z, target);
+            if (mainBlockPosition != null) {
+                effectRenderer.addBlockHitEffects(
+                        mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z, target);
             }
         }
 
@@ -269,10 +242,8 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean addDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
-    {
-        if (world.getBlockMetadata(x, y, z) == 6)
-        {
+    public boolean addDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer) {
+        if (world.getBlockMetadata(x, y, z) == 6) {
             return true;
         }
 

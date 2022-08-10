@@ -12,13 +12,18 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(ChunkProviderServer.class)
 public class ChunkProviderServerMixin {
 
-    @Redirect(method = "populate(Lnet/minecraft/world/chunk/IChunkProvider;II)V",
-            at = @At(value = "INVOKE",
-                    target = "Lcpw/mods/fml/common/registry/GameRegistry;generateWorld(IILnet/minecraft/world/World;Lnet/minecraft/world/chunk/IChunkProvider;Lnet/minecraft/world/chunk/IChunkProvider;)V",
-                    remap = false),
+    @Redirect(
+            method = "populate(Lnet/minecraft/world/chunk/IChunkProvider;II)V",
+            at =
+                    @At(
+                            value = "INVOKE",
+                            target =
+                                    "Lcpw/mods/fml/common/registry/GameRegistry;generateWorld(IILnet/minecraft/world/World;Lnet/minecraft/world/chunk/IChunkProvider;Lnet/minecraft/world/chunk/IChunkProvider;)V",
+                            remap = false),
             require = 1)
-    private void onRegistry(int chunkX, int chunkZ, World world, IChunkProvider currentChunkProvider, IChunkProvider chunkGenerator) {
-        if(!WorldUtil.otherModPreventGenerate(chunkX, chunkZ, world, currentChunkProvider, chunkGenerator)) {
+    private void onRegistry(
+            int chunkX, int chunkZ, World world, IChunkProvider currentChunkProvider, IChunkProvider chunkGenerator) {
+        if (!WorldUtil.otherModPreventGenerate(chunkX, chunkZ, world, currentChunkProvider, chunkGenerator)) {
             GameRegistry.generateWorld(chunkX, chunkZ, world, currentChunkProvider, chunkGenerator);
         }
     }

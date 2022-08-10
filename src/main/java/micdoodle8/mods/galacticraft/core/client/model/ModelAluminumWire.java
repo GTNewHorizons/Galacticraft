@@ -7,8 +7,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 @SideOnly(Side.CLIENT)
-public class ModelAluminumWire extends ModelBase
-{
+public class ModelAluminumWire extends ModelBase {
     // fields
     ModelRenderer middle;
     ModelRenderer right;
@@ -18,8 +17,7 @@ public class ModelAluminumWire extends ModelBase
     ModelRenderer top;
     ModelRenderer bottom;
 
-    public ModelAluminumWire()
-    {
+    public ModelAluminumWire() {
         this.textureWidth = 64;
         this.textureHeight = 32;
         this.middle = new ModelRenderer(this, 0, 0);
@@ -67,8 +65,7 @@ public class ModelAluminumWire extends ModelBase
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         super.render(entity, f, f1, f2, f3, f4, f5);
         this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         this.renderMiddle();
@@ -80,51 +77,42 @@ public class ModelAluminumWire extends ModelBase
         this.renderFront();
     }
 
-    public void renderMiddle()
-    {
+    public void renderMiddle() {
         this.middle.render(0.0625F);
     }
 
-    public void renderBottom()
-    {
+    public void renderBottom() {
         this.bottom.render(0.0625F);
     }
 
-    public void renderTop()
-    {
+    public void renderTop() {
         this.top.render(0.0625F);
     }
 
-    public void renderLeft()
-    {
+    public void renderLeft() {
         this.left.render(0.0625F);
     }
 
-    public void renderRight()
-    {
+    public void renderRight() {
         this.right.render(0.0625F);
     }
 
-    public void renderBack()
-    {
+    public void renderBack() {
         this.back.render(0.0625F);
     }
 
-    public void renderFront()
-    {
+    public void renderFront() {
         // this.Front.render(0.0625F);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
 
     @Override
-    public void setRotationAngles(float x, float y, float z, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAngles(float x, float y, float z, float f3, float f4, float f5, Entity entity) {
         super.setRotationAngles(x, y, z, f3, f4, f5, entity);
     }
 }

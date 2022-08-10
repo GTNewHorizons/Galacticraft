@@ -12,11 +12,11 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiSlimelingFeed extends GuiScreen
-{
+public class GuiSlimelingFeed extends GuiScreen {
     private final int xSize;
     private final int ySize;
-    private static final ResourceLocation slimelingPanelGui = new ResourceLocation(MarsModule.ASSET_PREFIX, "textures/gui/slimelingPanel1.png");
+    private static final ResourceLocation slimelingPanelGui =
+            new ResourceLocation(MarsModule.ASSET_PREFIX, "textures/gui/slimelingPanel1.png");
     private final EntitySlimeling slimeling;
 
     public static RenderItem drawItems = new RenderItem();
@@ -31,8 +31,7 @@ public class GuiSlimelingFeed extends GuiScreen
     public GuiButton buttonStrengthenSlimeling;
     public GuiButton buttonHealSlimeling;
 
-    public GuiSlimelingFeed(EntitySlimeling slimeling)
-    {
+    public GuiSlimelingFeed(EntitySlimeling slimeling) {
         this.slimeling = slimeling;
         this.xSize = 138;
         this.ySize = 51;
@@ -40,61 +39,70 @@ public class GuiSlimelingFeed extends GuiScreen
 
     @SuppressWarnings("unchecked")
     @Override
-    public void initGui()
-    {
+    public void initGui() {
         super.initGui();
         this.buttonList.clear();
         final int var6 = (this.height - this.ySize) / 2;
-        this.buttonGrowSlimeling = new GuiButton(0, this.width / 2 - 65, var6 - 15, 64, 20, GCCoreUtil.translate("gui.message.grow.name"));
+        this.buttonGrowSlimeling =
+                new GuiButton(0, this.width / 2 - 65, var6 - 15, 64, 20, GCCoreUtil.translate("gui.message.grow.name"));
         this.buttonList.add(this.buttonGrowSlimeling);
-        this.buttonBreedSlimeling = new GuiButton(1, this.width / 2 + 1, var6 - 15, 64, 20, GCCoreUtil.translate("gui.message.breed.name"));
+        this.buttonBreedSlimeling =
+                new GuiButton(1, this.width / 2 + 1, var6 - 15, 64, 20, GCCoreUtil.translate("gui.message.breed.name"));
         this.buttonList.add(this.buttonBreedSlimeling);
-        this.buttonStrengthenSlimeling = new GuiButton(2, this.width / 2 - 65, var6 + 7, 64, 20, GCCoreUtil.translate("gui.message.strengthen.name"));
+        this.buttonStrengthenSlimeling = new GuiButton(
+                2, this.width / 2 - 65, var6 + 7, 64, 20, GCCoreUtil.translate("gui.message.strengthen.name"));
         this.buttonList.add(this.buttonStrengthenSlimeling);
-        this.buttonHealSlimeling = new GuiButton(3, this.width / 2 + 1, var6 + 7, 64, 20, GCCoreUtil.translate("gui.message.heal.name"));
+        this.buttonHealSlimeling =
+                new GuiButton(3, this.width / 2 + 1, var6 + 7, 64, 20, GCCoreUtil.translate("gui.message.heal.name"));
         this.buttonList.add(this.buttonHealSlimeling);
     }
 
     @Override
-    public boolean doesGuiPauseGame()
-    {
+    public boolean doesGuiPauseGame() {
         return false;
     }
 
     @Override
-    protected void keyTyped(char keyChar, int keyID)
-    {
-        if (!this.buttonGrowSlimeling.enabled && !this.buttonBreedSlimeling.enabled && !this.buttonStrengthenSlimeling.enabled && !this.buttonHealSlimeling.enabled)
-        {
+    protected void keyTyped(char keyChar, int keyID) {
+        if (!this.buttonGrowSlimeling.enabled
+                && !this.buttonBreedSlimeling.enabled
+                && !this.buttonStrengthenSlimeling.enabled
+                && !this.buttonHealSlimeling.enabled) {
             super.keyTyped(keyChar, keyID);
         }
         return;
     }
 
     @Override
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-        if (par1GuiButton.enabled)
-        {
-            switch (par1GuiButton.id)
-            {
-            case 0:
-                GalacticraftCore.packetPipeline.sendToServer(new PacketSimpleMars(EnumSimplePacketMars.S_UPDATE_SLIMELING_DATA, new Object[] { this.slimeling.getEntityId(), 2, "" }));
-                break;
-            case 1:
-                if (!this.slimeling.isInLove() && this.slimeling.isOwner(this.mc.thePlayer) && this.slimeling.worldObj.isRemote)
-                {
-                    this.slimeling.func_146082_f(this.mc.thePlayer);
-                }
+    protected void actionPerformed(GuiButton par1GuiButton) {
+        if (par1GuiButton.enabled) {
+            switch (par1GuiButton.id) {
+                case 0:
+                    GalacticraftCore.packetPipeline.sendToServer(new PacketSimpleMars(
+                            EnumSimplePacketMars.S_UPDATE_SLIMELING_DATA,
+                            new Object[] {this.slimeling.getEntityId(), 2, ""}));
+                    break;
+                case 1:
+                    if (!this.slimeling.isInLove()
+                            && this.slimeling.isOwner(this.mc.thePlayer)
+                            && this.slimeling.worldObj.isRemote) {
+                        this.slimeling.func_146082_f(this.mc.thePlayer);
+                    }
 
-                GalacticraftCore.packetPipeline.sendToServer(new PacketSimpleMars(EnumSimplePacketMars.S_UPDATE_SLIMELING_DATA, new Object[] { this.slimeling.getEntityId(), 3, "" }));
-                break;
-            case 2:
-                GalacticraftCore.packetPipeline.sendToServer(new PacketSimpleMars(EnumSimplePacketMars.S_UPDATE_SLIMELING_DATA, new Object[] { this.slimeling.getEntityId(), 4, "" }));
-                break;
-            case 3:
-                GalacticraftCore.packetPipeline.sendToServer(new PacketSimpleMars(EnumSimplePacketMars.S_UPDATE_SLIMELING_DATA, new Object[] { this.slimeling.getEntityId(), 5, "" }));
-                break;
+                    GalacticraftCore.packetPipeline.sendToServer(new PacketSimpleMars(
+                            EnumSimplePacketMars.S_UPDATE_SLIMELING_DATA,
+                            new Object[] {this.slimeling.getEntityId(), 3, ""}));
+                    break;
+                case 2:
+                    GalacticraftCore.packetPipeline.sendToServer(new PacketSimpleMars(
+                            EnumSimplePacketMars.S_UPDATE_SLIMELING_DATA,
+                            new Object[] {this.slimeling.getEntityId(), 4, ""}));
+                    break;
+                case 3:
+                    GalacticraftCore.packetPipeline.sendToServer(new PacketSimpleMars(
+                            EnumSimplePacketMars.S_UPDATE_SLIMELING_DATA,
+                            new Object[] {this.slimeling.getEntityId(), 5, ""}));
+                    break;
             }
 
             FMLClientHandler.instance().getClient().displayGuiScreen(null);
@@ -102,8 +110,7 @@ public class GuiSlimelingFeed extends GuiScreen
     }
 
     @Override
-    public void drawScreen(int par1, int par2, float par3)
-    {
+    public void drawScreen(int par1, int par2, float par3) {
         this.mc.renderEngine.bindTexture(GuiSlimelingFeed.slimelingPanelGui);
         final int var5 = (this.width - this.xSize) / 2;
         final int var6 = (this.height - this.ySize) / 2;

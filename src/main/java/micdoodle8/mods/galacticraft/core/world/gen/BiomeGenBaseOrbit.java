@@ -5,13 +5,12 @@ import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedZombie;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import net.minecraft.world.biome.BiomeGenBase;
 
-public class BiomeGenBaseOrbit extends BiomeGenBase
-{
-    public static final BiomeGenBase space = new BiomeGenBaseOrbit(ConfigManagerCore.biomeIDbase + 3).setBiomeName("space");
+public class BiomeGenBaseOrbit extends BiomeGenBase {
+    public static final BiomeGenBase space =
+            new BiomeGenBaseOrbit(ConfigManagerCore.biomeIDbase + 3).setBiomeName("space");
 
     @SuppressWarnings("unchecked")
-    private BiomeGenBaseOrbit(int var1)
-    {
+    private BiomeGenBaseOrbit(int var1) {
         super(var1);
         this.spawnableMonsterList.clear();
         this.spawnableWaterCreatureList.clear();
@@ -22,14 +21,12 @@ public class BiomeGenBaseOrbit extends BiomeGenBase
     }
 
     @Override
-    public BiomeGenBaseOrbit setColor(int var1)
-    {
+    public BiomeGenBaseOrbit setColor(int var1) {
         return (BiomeGenBaseOrbit) super.setColor(var1);
     }
 
     @Override
-    public float getSpawningChance()
-    {
+    public float getSpawningChance() {
         return 0.01F;
     }
 }

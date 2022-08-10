@@ -5,6 +5,11 @@ import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.network.PacketEntityUpdate;
@@ -20,14 +25,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
-
-public abstract class EntityAdvancedMotion extends InventoryEntity implements IControllableEntity, IEntityFullSync
-{
+public abstract class EntityAdvancedMotion extends InventoryEntity implements IControllableEntity, IEntityFullSync {
     protected long ticks = 0;
 
     public float currentDamage;
@@ -43,8 +41,7 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
 
     protected boolean lastOnGround;
 
-    public EntityAdvancedMotion(World world, float yOffset)
-    {
+    public EntityAdvancedMotion(World world, float yOffset) {
         super(world);
         this.preventEntitySpawning = true;
         this.ignoreFrustumCheck = true;
@@ -52,64 +49,64 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
         this.yOffset = yOffset;
     }
 
-    public EntityAdvancedMotion(World world, float yOffset, double var2, double var4, double var6)
-    {
+    public EntityAdvancedMotion(World world, float yOffset, double var2, double var4, double var6) {
         this(world, yOffset);
         this.yOffset = yOffset;
         this.setPosition(var2, var4 + this.yOffset, var6);
     }
 
     @Override
-    protected void entityInit()
-    {
-    }
+    protected void entityInit() {}
 
     @Override
-    protected boolean canTriggerWalking()
-    {
+    protected boolean canTriggerWalking() {
         return false;
     }
 
     @Override
-    public AxisAlignedBB getBoundingBox()
-    {
+    public AxisAlignedBB getBoundingBox() {
         return this.boundingBox;
     }
 
     @Override
-    public boolean canBePushed()
-    {
+    public boolean canBePushed() {
         return false;
     }
 
     @Override
-    public double getMountedYOffset()
-    {
+    public double getMountedYOffset() {
         return this.height - 1.0D;
     }
 
     @Override
-    public boolean canBeCollidedWith()
-    {
+    public boolean canBeCollidedWith() {
         return !this.isDead;
     }
 
     @Override
-    public void updateRiderPosition()
-    {
-        if (this.riddenByEntity != null)
-        {
+    public void updateRiderPosition() {
+        if (this.riddenByEntity != null) {
             final double var1 = Math.cos(this.rotationYaw * Math.PI / 180.0D + 114.8) * -0.5D;
             final double var3 = Math.sin(this.rotationYaw * Math.PI / 180.0D + 114.8) * -0.5D;
-            this.riddenByEntity.setPosition(this.posX + var1, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(), this.posZ + var3);
+            this.riddenByEntity.setPosition(
+                    this.posX + var1,
+                    this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(),
+                    this.posZ + var3);
         }
     }
 
     @Override
-    public void setPositionRotationAndMotion(double x, double y, double z, float yaw, float pitch, double motX, double motY, double motZ, boolean onGround)
-    {
-        if (this.worldObj.isRemote)
-        {
+    public void setPositionRotationAndMotion(
+            double x,
+            double y,
+            double z,
+            float yaw,
+            float pitch,
+            double motX,
+            double motY,
+            double motZ,
+            boolean onGround) {
+        if (this.worldObj.isRemote) {
             this.advancedPositionX = x;
             this.advancedPositionY = y;
             this.advancedPositionZ = z;
@@ -119,78 +116,64 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
             this.motionY = motY;
             this.motionZ = motZ;
             this.posRotIncrements = 5;
-        }
-        else
-        {
+        } else {
             this.setPosition(x, y, z);
             this.setRotation(yaw, pitch);
             this.motionX = motX;
             this.motionY = motY;
             this.motionZ = motZ;
-            if (onGround || this.forceGroundUpdate())
-            {
+            if (onGround || this.forceGroundUpdate()) {
                 this.onGround = onGround;
             }
         }
     }
 
-    protected boolean forceGroundUpdate()
-    {
+    protected boolean forceGroundUpdate() {
         return true;
     }
 
     @Override
-    public void performHurtAnimation()
-    {
+    public void performHurtAnimation() {
         this.rockDirection = -this.rockDirection;
         this.timeSinceHit = 10;
         this.currentDamage *= 5;
     }
 
     @Override
-    public boolean attackEntityFrom(DamageSource var1, float var2)
-    {
-        if (this.isDead || var1.equals(DamageSource.cactus) || !this.allowDamageSource(var1))
-        {
+    public boolean attackEntityFrom(DamageSource var1, float var2) {
+        if (this.isDead || var1.equals(DamageSource.cactus) || !this.allowDamageSource(var1)) {
             return true;
-        }
-        else
-        {
-        	Entity e = var1.getEntity(); 
-            if (this.isEntityInvulnerable() || this.posY > 300 || (e instanceof EntityLivingBase && !(e instanceof EntityPlayer)))
-            {
+        } else {
+            Entity e = var1.getEntity();
+            if (this.isEntityInvulnerable()
+                    || this.posY > 300
+                    || (e instanceof EntityLivingBase && !(e instanceof EntityPlayer))) {
                 return false;
-            }
-            else
-            {
-	        	this.rockDirection = -this.rockDirection;
-	            this.timeSinceHit = 10;
-	            this.currentDamage = this.currentDamage + var2 * 10;
-	            this.setBeenAttacked();
-	
-	            if (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode)
-	            {
-	                this.currentDamage = 100;
-	            }
-	
-	            if (this.currentDamage > 70)
-	            {
-	                if (this.riddenByEntity != null)
-	                {
-	                    this.riddenByEntity.mountEntity(this);
-	
-	                    return false;
-	                }
-	
-	                if (!this.worldObj.isRemote)
-	                {
-	                    this.dropItems();
-	
-	                    this.setDead();
-	                }
-	            }
-	
-	            return true;
+            } else {
+                this.rockDirection = -this.rockDirection;
+                this.timeSinceHit = 10;
+                this.currentDamage = this.currentDamage + var2 * 10;
+                this.setBeenAttacked();
+
+                if (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode) {
+                    this.currentDamage = 100;
+                }
+
+                if (this.currentDamage > 70) {
+                    if (this.riddenByEntity != null) {
+                        this.riddenByEntity.mountEntity(this);
+
+                        return false;
+                    }
+
+                    if (!this.worldObj.isRemote) {
+                        this.dropItems();
+
+                        this.setDead();
+                    }
+                }
+
+                return true;
             }
         }
     }
@@ -209,7 +192,8 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
     public abstract Map<Vector3, Vector3> getParticleMap();
 
     @SideOnly(Side.CLIENT)
-    public abstract EntityFX getParticle(Random rand, double x, double y, double z, double motX, double motY, double motZ);
+    public abstract EntityFX getParticle(
+            Random rand, double x, double y, double z, double motX, double motY, double motZ);
 
     public abstract void tickInAir();
 
@@ -241,32 +225,24 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
 
     public abstract boolean allowDamageSource(DamageSource damageSource);
 
-    public void dropItems()
-    {
-        if (this.getItemsDropped() == null)
-        {
+    public void dropItems() {
+        if (this.getItemsDropped() == null) {
             return;
         }
 
-        for (final ItemStack item : this.getItemsDropped())
-        {
-            if (item != null)
-            {
+        for (final ItemStack item : this.getItemsDropped()) {
+            if (item != null) {
                 this.entityDropItem(item, 0);
             }
         }
     }
 
     @Override
-    public void setPositionAndRotation2(double d, double d1, double d2, float f, float f1, int i)
-    {
-        if (this.riddenByEntity != null)
-        {
-            if (this.riddenByEntity instanceof EntityPlayer && FMLClientHandler.instance().getClient().thePlayer.equals(this.riddenByEntity))
-            {
-            }
-            else
-            {
+    public void setPositionAndRotation2(double d, double d1, double d2, float f, float f1, int i) {
+        if (this.riddenByEntity != null) {
+            if (this.riddenByEntity instanceof EntityPlayer
+                    && FMLClientHandler.instance().getClient().thePlayer.equals(this.riddenByEntity)) {
+            } else {
                 this.posRotIncrements = i + 5;
                 this.advancedPositionX = d;
                 this.advancedPositionY = d1 + (this.riddenByEntity == null ? 1 : 0);
@@ -278,10 +254,8 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
     }
 
     @Override
-    public void moveEntity(double par1, double par3, double par5)
-    {
-        if (this.shouldMove())
-        {
+    public void moveEntity(double par1, double par3, double par5) {
+        if (this.shouldMove()) {
             super.moveEntity(par1, par3, par5);
         }
     }
@@ -291,10 +265,8 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
     public abstract boolean shouldSendAdvancedMotionPacket();
 
     @Override
-    public void onUpdate()
-    {
-        if (this.ticks >= Long.MAX_VALUE)
-        {
+    public void onUpdate() {
+        if (this.ticks >= Long.MAX_VALUE) {
             this.ticks = 1;
         }
 
@@ -302,82 +274,74 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
 
         super.onUpdate();
 
-        if (this.canSetPositionClient() && this.worldObj.isRemote && (this.riddenByEntity == null || !(this.riddenByEntity instanceof EntityPlayer) || !FMLClientHandler.instance().getClient().thePlayer.equals(this.riddenByEntity)))
-        {
+        if (this.canSetPositionClient()
+                && this.worldObj.isRemote
+                && (this.riddenByEntity == null
+                        || !(this.riddenByEntity instanceof EntityPlayer)
+                        || !FMLClientHandler.instance().getClient().thePlayer.equals(this.riddenByEntity))) {
             double x;
             double y;
             double var12;
             double z;
-            if (this.posRotIncrements > 0)
-            {
+            if (this.posRotIncrements > 0) {
                 x = this.posX + (this.advancedPositionX - this.posX) / this.posRotIncrements;
                 y = this.posY + (this.advancedPositionY - this.posY) / this.posRotIncrements;
                 z = this.posZ + (this.advancedPositionZ - this.posZ) / this.posRotIncrements;
                 var12 = MathHelper.wrapAngleTo180_double(this.advancedYaw - this.rotationYaw);
                 this.rotationYaw = (float) (this.rotationYaw + var12 / this.posRotIncrements);
-                this.rotationPitch = (float) (this.rotationPitch + (this.advancedPitch - this.rotationPitch) / this.posRotIncrements);
+                this.rotationPitch = (float)
+                        (this.rotationPitch + (this.advancedPitch - this.rotationPitch) / this.posRotIncrements);
                 --this.posRotIncrements;
                 this.setPosition(x, y, z);
                 this.setRotation(this.rotationYaw, this.rotationPitch);
-            }
-            else
-            {
-//                x = this.posX + this.motionX;
-//                y = this.posY + this.motionY;
-//                z = this.posZ + this.motionZ;
-//                this.setPosition(x, y, z);
+            } else {
+                //                x = this.posX + this.motionX;
+                //                y = this.posY + this.motionY;
+                //                z = this.posZ + this.motionZ;
+                //                this.setPosition(x, y, z);
             }
         }
 
-        if (this.timeSinceHit > 0)
-        {
+        if (this.timeSinceHit > 0) {
             this.timeSinceHit--;
         }
 
-        if (this.currentDamage > 0)
-        {
+        if (this.currentDamage > 0) {
             this.currentDamage--;
         }
 
-        if (this.shouldSpawnParticles() && this.worldObj.isRemote)
-        {
+        if (this.shouldSpawnParticles() && this.worldObj.isRemote) {
             this.spawnParticles(this.getParticleMap());
         }
 
-        if (this.onGround)
-        {
+        if (this.onGround) {
             this.tickOnGround();
-        }
-        else
-        {
+        } else {
             this.tickInAir();
         }
 
-        if (this.worldObj.isRemote)
-        {
+        if (this.worldObj.isRemote) {
             Vector3 mot = this.getMotionVec();
             this.motionX = mot.x;
             this.motionY = mot.y;
             this.motionZ = mot.z;
         }
-        //Necessary on both server and client to achieve a correct this.onGround setting
+        // Necessary on both server and client to achieve a correct this.onGround setting
         this.moveEntity(this.motionX, this.motionY, this.motionZ);
 
-        if (this.onGround && !this.lastOnGround)
-        {
+        if (this.onGround && !this.lastOnGround) {
             this.onGroundHit();
         }
 
-        if (shouldSendAdvancedMotionPacket())
-        {
-            if (this.worldObj.isRemote)
-            {
+        if (shouldSendAdvancedMotionPacket()) {
+            if (this.worldObj.isRemote) {
                 GalacticraftCore.packetPipeline.sendToServer(new PacketEntityUpdate(this));
             }
 
-            if (!this.worldObj.isRemote && this.ticks % 5 == 0)
-            {
-                GalacticraftCore.packetPipeline.sendToAllAround(new PacketEntityUpdate(this), new TargetPoint(this.worldObj.provider.dimensionId, this.posX, this.posY, this.posZ, 50.0D));
+            if (!this.worldObj.isRemote && this.ticks % 5 == 0) {
+                GalacticraftCore.packetPipeline.sendToAllAround(
+                        new PacketEntityUpdate(this),
+                        new TargetPoint(this.worldObj.provider.dimensionId, this.posX, this.posY, this.posZ, 50.0D));
             }
         }
 
@@ -388,43 +352,35 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
     }
 
     @Override
-    public void getNetworkedData(ArrayList<Object> sendData)
-    {
+    public void getNetworkedData(ArrayList<Object> sendData) {
         sendData.addAll(this.getNetworkedData());
     }
 
     @Override
-    public void decodePacketdata(ByteBuf buffer)
-    {
+    public void decodePacketdata(ByteBuf buffer) {
         this.readNetworkedData(buffer);
     }
 
     @Override
-    public void handlePacketData(Side side, EntityPlayer player)
-    {
-    }
+    public void handlePacketData(Side side, EntityPlayer player) {}
 
     @SideOnly(Side.CLIENT)
-    public void spawnParticles(Map<Vector3, Vector3> points)
-    {
-        for (final Entry<Vector3, Vector3> vec : points.entrySet())
-        {
+    public void spawnParticles(Map<Vector3, Vector3> points) {
+        for (final Entry<Vector3, Vector3> vec : points.entrySet()) {
             final Vector3 posVec = vec.getKey();
             final Vector3 motionVec = vec.getValue();
 
-            this.spawnParticle(this.getParticle(this.rand, posVec.x, posVec.y, posVec.z, motionVec.x, motionVec.y, motionVec.z));
+            this.spawnParticle(
+                    this.getParticle(this.rand, posVec.x, posVec.y, posVec.z, motionVec.x, motionVec.y, motionVec.z));
         }
     }
 
     @SideOnly(Side.CLIENT)
-    public void spawnParticle(EntityFX fx)
-    {
+    public void spawnParticle(EntityFX fx) {
         final Minecraft mc = FMLClientHandler.instance().getClient();
 
-        if (mc != null && mc.renderViewEntity != null && mc.effectRenderer != null)
-        {
-            if (fx != null)
-            {
+        if (mc != null && mc.renderViewEntity != null && mc.effectRenderer != null) {
+            if (fx != null) {
                 mc.effectRenderer.addEffect(fx);
             }
         }

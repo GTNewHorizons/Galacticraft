@@ -1,5 +1,6 @@
 package micdoodle8.mods.galacticraft.core.blocks;
 
+import java.util.Random;
 import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.oxygen.OxygenPressureProtocol;
@@ -11,12 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
-public class BlockBrightBreathableAir extends BlockAir
-{
-    public BlockBrightBreathableAir(String assetName)
-    {
+public class BlockBrightBreathableAir extends BlockAir {
+    public BlockBrightBreathableAir(String assetName) {
         this.setResistance(1000.0F);
         this.setHardness(0.0F);
         this.setBlockTextureName(GalacticraftCore.TEXTURE_PREFIX + assetName);
@@ -26,55 +23,45 @@ public class BlockBrightBreathableAir extends BlockAir
     }
 
     @Override
-    public boolean canReplace(World world, int x, int y, int z, int side, ItemStack stack)
-    {
+    public boolean canReplace(World world, int x, int y, int z, int side, ItemStack stack) {
         return true;
     }
 
     @Override
-    public boolean canPlaceBlockAt(World var1, int var2, int var3, int var4)
-    {
+    public boolean canPlaceBlockAt(World var1, int var2, int var3, int var4) {
         return true;
     }
 
     @Override
-    public int getRenderBlockPass()
-    {
+    public int getRenderBlockPass() {
         return 1;
     }
 
     @Override
-    public int getMobilityFlag()
-    {
+    public int getMobilityFlag() {
         return 1;
     }
 
     @Override
-    public Item getItemDropped(int var1, Random var2, int var3)
-    {
+    public Item getItemDropped(int var1, Random var2, int var3) {
         return Item.getItemFromBlock(Blocks.air);
     }
 
     @Override
-    public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-    {
+    public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         final Block block = par1IBlockAccess.getBlock(par2, par3, par4);
-        if (block == this || block == GCBlocks.breatheableAir)
-        {
+        if (block == this || block == GCBlocks.breatheableAir) {
             return false;
-        }
-        else
-        {
-            return (block==null || block.isAir(par1IBlockAccess, par2, par3, par4)) && par5 >= 0 && par5 <= 5;
+        } else {
+            return (block == null || block.isAir(par1IBlockAccess, par2, par3, par4)) && par5 >= 0 && par5 <= 5;
         }
     }
 
     @Override
-    public void onNeighborBlockChange(World world, int x, int y, int z, Block idBroken)
-    {
+    public void onNeighborBlockChange(World world, int x, int y, int z, Block idBroken) {
         if (Blocks.air != idBroken && idBroken != GCBlocks.brightAir)
-        //Do nothing if an air neighbour was replaced (probably because replacing with breatheableAir)
-        //but do a check if replacing breatheableAir as that could be dividing a sealed space
+        // Do nothing if an air neighbour was replaced (probably because replacing with breatheableAir)
+        // but do a check if replacing breatheableAir as that could be dividing a sealed space
         {
             OxygenPressureProtocol.onEdgeBlockUpdated(world, new BlockVec3(x, y, z));
         }

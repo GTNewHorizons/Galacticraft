@@ -11,10 +11,8 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemAtmosphericValve extends Item
-{
-    public ItemAtmosphericValve(String assetName)
-    {
+public class ItemAtmosphericValve extends Item {
+    public ItemAtmosphericValve(String assetName) {
         super();
         this.setMaxDamage(0);
         this.setUnlocalizedName(assetName);
@@ -24,21 +22,18 @@ public class ItemAtmosphericValve extends Item
 
     @SideOnly(Side.CLIENT)
     @Override
-    public CreativeTabs getCreativeTab()
-    {
+    public CreativeTabs getCreativeTab() {
         return GalacticraftCore.galacticraftItemsTab;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegister)
-    {
+    public void registerIcons(IIconRegister iconRegister) {
         this.itemIcon = iconRegister.registerIcon(this.getIconString());
     }
 }

@@ -21,76 +21,72 @@ import micdoodle8.mods.galacticraft.core.world.ChunkLoadingCallback;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.EnumConnectionState;
 
-public class ConnectionEvents
-{
+public class ConnectionEvents {
     private static boolean clientConnected = false;
 
-    static
-    {
+    static {
         EnumConnectionState.field_150761_f.put(PacketSimple.class, EnumConnectionState.PLAY);
         EnumConnectionState.PLAY.field_150770_i.put(2515, PacketSimple.class);
     }
 
     @SubscribeEvent
-    public void onPlayerLogout(PlayerLoggedOutEvent event)
-    {
+    public void onPlayerLogout(PlayerLoggedOutEvent event) {
         ChunkLoadingCallback.onPlayerLogout(event.player);
     }
 
     @SubscribeEvent
-    public void onPlayerLogin(PlayerLoggedInEvent event)
-    {
+    public void onPlayerLogin(PlayerLoggedInEvent event) {
         ChunkLoadingCallback.onPlayerLogin(event.player);
 
-        if (event.player instanceof EntityPlayerMP)
-        {
-        	EntityPlayerMP thePlayer = (EntityPlayerMP) event.player;
-        	GCPlayerStats stats = GCPlayerStats.get(thePlayer);
-        	SpaceStationWorldData.checkAllStations(thePlayer, stats);
-            GalacticraftCore.packetPipeline.sendTo(new PacketSimple(EnumSimplePacket.C_UPDATE_SPACESTATION_CLIENT_ID, new Object[] { WorldUtil.spaceStationDataToString(stats.spaceStationDimensionData) }), thePlayer);
-            SpaceRace raceForPlayer = SpaceRaceManager.getSpaceRaceFromPlayer(thePlayer.getGameProfile().getName());
+        if (event.player instanceof EntityPlayerMP) {
+            EntityPlayerMP thePlayer = (EntityPlayerMP) event.player;
+            GCPlayerStats stats = GCPlayerStats.get(thePlayer);
+            SpaceStationWorldData.checkAllStations(thePlayer, stats);
+            GalacticraftCore.packetPipeline.sendTo(
+                    new PacketSimple(
+                            EnumSimplePacket.C_UPDATE_SPACESTATION_CLIENT_ID,
+                            new Object[] {WorldUtil.spaceStationDataToString(stats.spaceStationDimensionData)}),
+                    thePlayer);
+            SpaceRace raceForPlayer = SpaceRaceManager.getSpaceRaceFromPlayer(
+                    thePlayer.getGameProfile().getName());
             if (raceForPlayer != null) SpaceRaceManager.sendSpaceRaceData(thePlayer, raceForPlayer);
         }
 
-        if (event.player.worldObj.provider instanceof WorldProviderSpaceStation && event.player instanceof EntityPlayerMP)
-        {
-            ((WorldProviderSpaceStation) event.player.worldObj.provider).getSpinManager().sendPacketsToClient((EntityPlayerMP) event.player);
+        if (event.player.worldObj.provider instanceof WorldProviderSpaceStation
+                && event.player instanceof EntityPlayerMP) {
+            ((WorldProviderSpaceStation) event.player.worldObj.provider)
+                    .getSpinManager()
+                    .sendPacketsToClient((EntityPlayerMP) event.player);
         }
     }
 
     @SubscribeEvent
-    public void onConnectionReceived(ServerConnectionFromClientEvent event)
-    {
-        if (ConfigManagerCore.enableDebug)
-        {
-        	Integer[] idList = (Integer[]) WorldUtil.getPlanetList().get(0);
-        	String ids = "";
-        	for (int j = 0; j < idList.length; j++)
-        	{
-       			ids+=idList[j].toString()+" ";
-        	}
-        	GCLog.info("Galacticraft server sending dimension IDs to connecting client: "+ ids);
+    public void onConnectionReceived(ServerConnectionFromClientEvent event) {
+        if (ConfigManagerCore.enableDebug) {
+            Integer[] idList = (Integer[]) WorldUtil.getPlanetList().get(0);
+            String ids = "";
+            for (int j = 0; j < idList.length; j++) {
+                ids += idList[j].toString() + " ";
+            }
+            GCLog.info("Galacticraft server sending dimension IDs to connecting client: " + ids);
         }
         event.manager.scheduleOutboundPacket(ConnectionPacket.createDimPacket(WorldUtil.getPlanetListInts()));
         event.manager.scheduleOutboundPacket(ConnectionPacket.createSSPacket(WorldUtil.getSpaceStationListInts()));
-        event.manager.scheduleOutboundPacket(ConnectionPacket.createConfigPacket(ConfigManagerCore.getServerConfigOverride()));
+        event.manager.scheduleOutboundPacket(
+                ConnectionPacket.createConfigPacket(ConfigManagerCore.getServerConfigOverride()));
     }
 
     @SubscribeEvent
-    public void onConnectionOpened(ClientConnectedToServerEvent event)
-    {
-        if (!event.isLocal)
-        {
+    public void onConnectionOpened(ClientConnectedToServerEvent event) {
+        if (!event.isLocal) {
             ConnectionEvents.clientConnected = true;
         }
         MapUtil.resetClient();
     }
 
     @SubscribeEvent
-    public void onConnectionClosed(ClientDisconnectionFromServerEvent event)
-    {
-        if (ConnectionEvents.clientConnected)
-        {
+    public void onConnectionClosed(ClientDisconnectionFromServerEvent event) {
+        if (ConnectionEvents.clientConnected) {
             ConnectionEvents.clientConnected = false;
             WorldUtil.unregisterPlanets();
             WorldUtil.unregisterSpaceStations();

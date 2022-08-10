@@ -13,6 +13,6 @@ public class GuiSleepMPMxin {
 
     @Inject(method = "func_146418_g", at = @At("RETURN"), require = 1)
     private void onFunc_146418_g(CallbackInfo callbackInfo) {
-            MinecraftForge.EVENT_BUS.post(new EventHandlerGC.SleepCancelledEvent());
+        MinecraftForge.EVENT_BUS.post(new EventHandlerGC.SleepCancelledEvent());
     }
 }

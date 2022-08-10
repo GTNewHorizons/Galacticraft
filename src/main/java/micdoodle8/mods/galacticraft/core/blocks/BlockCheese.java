@@ -2,6 +2,7 @@ package micdoodle8.mods.galacticraft.core.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
@@ -16,14 +17,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
-public class BlockCheese extends Block implements ItemBlockDesc.IBlockShiftDesc
-{
+public class BlockCheese extends Block implements ItemBlockDesc.IBlockShiftDesc {
     IIcon[] cheeseIcons;
 
-    public BlockCheese()
-    {
+    public BlockCheese() {
         super(Material.cake);
         this.setTickRandomly(true);
         this.disableStats();
@@ -33,8 +30,7 @@ public class BlockCheese extends Block implements ItemBlockDesc.IBlockShiftDesc
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister par1IconRegister)
-    {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.cheeseIcons = new IIcon[3];
         this.cheeseIcons[0] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX_MOON + "cheese_1");
         this.cheeseIcons[1] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX_MOON + "cheese_2");
@@ -46,8 +42,7 @@ public class BlockCheese extends Block implements ItemBlockDesc.IBlockShiftDesc
      * z
      */
     @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-    {
+    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         final int var5 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
         final float var6 = 0.0625F;
         final float var7 = (1 + var5 * 2) / 16.0F;
@@ -59,8 +54,7 @@ public class BlockCheese extends Block implements ItemBlockDesc.IBlockShiftDesc
      * Sets the block's bounds for rendering it as an item
      */
     @Override
-    public void setBlockBoundsForItemRender()
-    {
+    public void setBlockBoundsForItemRender() {
         final float var1 = 0.0625F;
         final float var2 = 0.5F;
         this.setBlockBounds(var1, 0.0F, var1, 1.0F - var1, var2, 1.0F - var1);
@@ -71,13 +65,13 @@ public class BlockCheese extends Block implements ItemBlockDesc.IBlockShiftDesc
      * box can change after the pool has been cleared to be reused)
      */
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
-    {
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         final int var5 = par1World.getBlockMetadata(par2, par3, par4);
         final float var6 = 0.0625F;
         final float var7 = (1 + var5 * 2) / 16.0F;
         final float var8 = 0.5F;
-        return AxisAlignedBB.getBoundingBox(par2 + var7, par3, par4 + var6, par2 + 1 - var6, par3 + var8 - var6, par4 + 1 - var6);
+        return AxisAlignedBB.getBoundingBox(
+                par2 + var7, par3, par4 + var6, par2 + 1 - var6, par3 + var8 - var6, par4 + 1 - var6);
     }
 
     @Override
@@ -85,13 +79,13 @@ public class BlockCheese extends Block implements ItemBlockDesc.IBlockShiftDesc
     /**
      * Returns the bounding box of the wired rectangular prism to render.
      */
-    public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
-    {
+    public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         final int var5 = par1World.getBlockMetadata(par2, par3, par4);
         final float var6 = 0.0625F;
         final float var7 = (1 + var5 * 2) / 16.0F;
         final float var8 = 0.5F;
-        return AxisAlignedBB.getBoundingBox(par2 + var7, par3, par4 + var6, par2 + 1 - var6, par3 + var8, par4 + 1 - var6);
+        return AxisAlignedBB.getBoundingBox(
+                par2 + var7, par3, par4 + var6, par2 + 1 - var6, par3 + var8, par4 + 1 - var6);
     }
 
     /**
@@ -99,9 +93,10 @@ public class BlockCheese extends Block implements ItemBlockDesc.IBlockShiftDesc
      * Args: side, metadata
      */
     @Override
-    public IIcon getIcon(int par1, int par2)
-    {
-        return par1 == 1 ? this.cheeseIcons[0] : par1 == 0 ? this.cheeseIcons[0] : par2 > 0 && par1 == 4 ? this.cheeseIcons[2] : this.cheeseIcons[1];
+    public IIcon getIcon(int par1, int par2) {
+        return par1 == 1
+                ? this.cheeseIcons[0]
+                : par1 == 0 ? this.cheeseIcons[0] : par2 > 0 && par1 == 4 ? this.cheeseIcons[2] : this.cheeseIcons[1];
     }
 
     /**
@@ -109,8 +104,7 @@ public class BlockCheese extends Block implements ItemBlockDesc.IBlockShiftDesc
      * (examples: signs, buttons, stairs, etc)
      */
     @Override
-    public boolean renderAsNormalBlock()
-    {
+    public boolean renderAsNormalBlock() {
         return false;
     }
 
@@ -120,8 +114,7 @@ public class BlockCheese extends Block implements ItemBlockDesc.IBlockShiftDesc
      * the player can attach torches, redstone wire, etc to this block.
      */
     @Override
-    public boolean isOpaqueCube()
-    {
+    public boolean isOpaqueCube() {
         return false;
     }
 
@@ -129,8 +122,16 @@ public class BlockCheese extends Block implements ItemBlockDesc.IBlockShiftDesc
      * Called upon block activation (right click on the block.)
      */
     @Override
-    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
-    {
+    public boolean onBlockActivated(
+            World par1World,
+            int par2,
+            int par3,
+            int par4,
+            EntityPlayer par5EntityPlayer,
+            int par6,
+            float par7,
+            float par8,
+            float par9) {
         this.eatCakeSlice(par1World, par2, par3, par4, par5EntityPlayer);
         return true;
     }
@@ -139,27 +140,21 @@ public class BlockCheese extends Block implements ItemBlockDesc.IBlockShiftDesc
      * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
      */
     @Override
-    public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer)
-    {
+    public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
         this.eatCakeSlice(par1World, par2, par3, par4, par5EntityPlayer);
     }
 
     /**
      * Heals the player and removes a slice from the cake.
      */
-    private void eatCakeSlice(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer)
-    {
-        if (par5EntityPlayer.canEat(false))
-        {
+    private void eatCakeSlice(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
+        if (par5EntityPlayer.canEat(false)) {
             par5EntityPlayer.getFoodStats().addStats(2, 0.1F);
             final int l = par1World.getBlockMetadata(par2, par3, par4) + 1;
 
-            if (l >= 6)
-            {
+            if (l >= 6) {
                 par1World.setBlockToAir(par2, par3, par4);
-            }
-            else
-            {
+            } else {
                 par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
             }
         }
@@ -170,8 +165,7 @@ public class BlockCheese extends Block implements ItemBlockDesc.IBlockShiftDesc
      * coordinates. Args: world, x, y, z
      */
     @Override
-    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
-    {
+    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         return super.canPlaceBlockAt(par1World, par2, par3, par4) && this.canBlockStay(par1World, par2, par3, par4);
     }
 
@@ -181,10 +175,8 @@ public class BlockCheese extends Block implements ItemBlockDesc.IBlockShiftDesc
      * neighbor blockID
      */
     @Override
-    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block par5)
-    {
-        if (!this.canBlockStay(par1World, par2, par3, par4))
-        {
+    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block par5) {
+        if (!this.canBlockStay(par1World, par2, par3, par4)) {
             par1World.setBlockToAir(par2, par3, par4);
         }
     }
@@ -194,8 +186,7 @@ public class BlockCheese extends Block implements ItemBlockDesc.IBlockShiftDesc
      * gets checked often with plants.
      */
     @Override
-    public boolean canBlockStay(World par1World, int par2, int par3, int par4)
-    {
+    public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
         return par1World.getBlock(par2, par3 - 1, par4).getMaterial().isSolid();
     }
 
@@ -203,8 +194,7 @@ public class BlockCheese extends Block implements ItemBlockDesc.IBlockShiftDesc
      * Returns the quantity of items to drop on block destruction.
      */
     @Override
-    public int quantityDropped(Random par1Random)
-    {
+    public int quantityDropped(Random par1Random) {
         return 0;
     }
 
@@ -212,27 +202,24 @@ public class BlockCheese extends Block implements ItemBlockDesc.IBlockShiftDesc
      * Returns the ID of the items to drop on destruction.
      */
     @Override
-    public Item getItemDropped(int par1, Random par2Random, int par3)
-    {
+    public Item getItemDropped(int par1, Random par2Random, int par3) {
         return Item.getItemFromBlock(Blocks.air);
     }
 
-//	@Override
-//	@SideOnly(Side.CLIENT)
-//	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
-//	{
-//		return new ItemStack(GCItems.cheeseBlock);
-//	}
+    //	@Override
+    //	@SideOnly(Side.CLIENT)
+    //	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+    //	{
+    //		return new ItemStack(GCItems.cheeseBlock);
+    //	}
 
     @Override
-    public String getShiftDescription(int meta)
-    {
+    public String getShiftDescription(int meta) {
         return GCCoreUtil.translate(this.getUnlocalizedName() + ".description");
     }
 
     @Override
-    public boolean showDescription(int meta)
-    {
+    public boolean showDescription(int meta) {
         return true;
     }
 }

@@ -16,73 +16,63 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderEvolvedSpider extends RenderLiving
-{
-    private static final ResourceLocation spiderEyesTextures = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/spider_eyes.png");
-    private static final ResourceLocation spiderTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/spider.png");
-    private static final ResourceLocation powerTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/power.png");
+public class RenderEvolvedSpider extends RenderLiving {
+    private static final ResourceLocation spiderEyesTextures =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/spider_eyes.png");
+    private static final ResourceLocation spiderTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/spider.png");
+    private static final ResourceLocation powerTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/power.png");
 
     private final ModelBase model = new ModelEvolvedSpider(0.2F);
 
-    public RenderEvolvedSpider()
-    {
+    public RenderEvolvedSpider() {
         super(new ModelEvolvedSpider(), 1.0F);
         this.setRenderPassModel(new ModelEvolvedSpider());
     }
 
-    protected ResourceLocation func_110779_a(EntitySpider par1EntityArrow)
-    {
+    protected ResourceLocation func_110779_a(EntitySpider par1EntityArrow) {
         return RenderEvolvedSpider.spiderTexture;
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
-    {
+    protected ResourceLocation getEntityTexture(Entity par1Entity) {
         return this.func_110779_a((EntitySpider) par1Entity);
     }
 
-    protected float setSpiderDeathMaxRotation(EntitySpider par1EntitySpider)
-    {
+    protected float setSpiderDeathMaxRotation(EntitySpider par1EntitySpider) {
         return 180.0F;
     }
 
     @Override
-    protected void preRenderCallback(EntityLivingBase par1EntityLiving, float par2)
-    {
+    protected void preRenderCallback(EntityLivingBase par1EntityLiving, float par2) {
         GL11.glScalef(1.2F, 1.2F, 1.2F);
     }
 
     @Override
-    protected int shouldRenderPass(EntityLivingBase par1EntityLiving, int par2, float par3)
-    {
+    protected int shouldRenderPass(EntityLivingBase par1EntityLiving, int par2, float par3) {
         final Minecraft minecraft = FMLClientHandler.instance().getClient();
 
         final EntityPlayerSP player = minecraft.thePlayer;
 
         ItemStack helmetSlot = null;
 
-        if (player != null && player.inventory.armorItemInSlot(3) != null)
-        {
+        if (player != null && player.inventory.armorItemInSlot(3) != null) {
             helmetSlot = player.inventory.armorItemInSlot(3);
         }
-        
-        if (par2 == 3)
-        {
+
+        if (par2 == 3) {
             this.bindTexture(spiderEyesTextures);
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glDisable(GL11.GL_ALPHA_TEST);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-            if (par1EntityLiving.isInvisible())
-            {
+            if (par1EntityLiving.isInvisible()) {
                 GL11.glDepthMask(false);
-            }
-            else
-            {
+            } else {
                 GL11.glDepthMask(true);
             }
 
@@ -94,10 +84,10 @@ public class RenderEvolvedSpider extends RenderLiving
             return 1;
         }
 
-        if (helmetSlot != null && helmetSlot.getItem() instanceof ItemSensorGlasses && minecraft.currentScreen == null)
-        {
-            if (par2 == 1)
-            {
+        if (helmetSlot != null
+                && helmetSlot.getItem() instanceof ItemSensorGlasses
+                && minecraft.currentScreen == null) {
+            if (par2 == 1) {
                 final float var4 = par1EntityLiving.ticksExisted * 2 + par3;
                 this.bindTexture(RenderEvolvedSpider.powerTexture);
                 GL11.glMatrixMode(GL11.GL_TEXTURE);
@@ -115,8 +105,7 @@ public class RenderEvolvedSpider extends RenderLiving
                 return 1;
             }
 
-            if (par2 == 2)
-            {
+            if (par2 == 2) {
                 GL11.glMatrixMode(GL11.GL_TEXTURE);
                 GL11.glLoadIdentity();
                 GL11.glMatrixMode(GL11.GL_MODELVIEW);
@@ -129,8 +118,7 @@ public class RenderEvolvedSpider extends RenderLiving
     }
 
     @Override
-    protected float getDeathMaxRotation(EntityLivingBase par1EntityLiving)
-    {
+    protected float getDeathMaxRotation(EntityLivingBase par1EntityLiving) {
         return this.setSpiderDeathMaxRotation((EntitySpider) par1EntityLiving);
     }
 }

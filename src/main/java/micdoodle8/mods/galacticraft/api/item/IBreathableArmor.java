@@ -6,10 +6,8 @@ import net.minecraft.item.ItemStack;
 /**
  * Implement into Armor items
  */
-public interface IBreathableArmor
-{
-    public enum EnumGearType
-    {
+public interface IBreathableArmor {
+    public enum EnumGearType {
         HELMET,
         GEAR,
         TANK1,

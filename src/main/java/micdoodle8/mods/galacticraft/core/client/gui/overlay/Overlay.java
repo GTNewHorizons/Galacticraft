@@ -4,18 +4,15 @@ import micdoodle8.mods.galacticraft.core.entities.EntityTier1Rocket;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class Overlay
-{
+public class Overlay {
     /**
      * Get the player's spaceship height off ground
      *
      * @param player thePlayer
      * @return position of player's spaceship
      */
-    protected static int getPlayerPositionY(EntityPlayer player)
-    {
-        if (player.ridingEntity != null && player.ridingEntity instanceof EntityTier1Rocket)
-        {
+    protected static int getPlayerPositionY(EntityPlayer player) {
+        if (player.ridingEntity != null && player.ridingEntity instanceof EntityTier1Rocket) {
             return (int) Math.floor(((EntityTier1Rocket) player.ridingEntity).posY);
         }
 
@@ -32,8 +29,7 @@ public class Overlay
      * @param par5 width
      * @param par6 height
      */
-    protected static void drawTexturedModalRect(int par1, int par2, int par3, int par4, int par5, int par6)
-    {
+    protected static void drawTexturedModalRect(int par1, int par2, int par3, int par4, int par5, int par6) {
         final float var7 = 0.00390625F;
         final float var8 = 0.00390625F;
         final Tessellator var9 = Tessellator.instance;
@@ -54,8 +50,7 @@ public class Overlay
      * @param var7 width
      * @param var9 height
      */
-    protected static void drawCenteringRectangle(double var1, double var3, double var5, double var7, double var9)
-    {
+    protected static void drawCenteringRectangle(double var1, double var3, double var5, double var7, double var9) {
         var7 *= 0.5D;
         var9 *= 0.5D;
         final Tessellator t = Tessellator.instance;

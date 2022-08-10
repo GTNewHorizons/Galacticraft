@@ -1,12 +1,12 @@
-//package micdoodle8.mods.galacticraft.planets.asteroids.entities;
+// package micdoodle8.mods.galacticraft.planets.asteroids.entities;
 //
-//import net.minecraft.entity.monster.EntityZombie;
-//import net.minecraft.world.World;
+// import net.minecraft.entity.monster.EntityZombie;
+// import net.minecraft.world.World;
 //
-//public class EntityUndeadAstronaut extends EntityZombie
-//{
+// public class EntityUndeadAstronaut extends EntityZombie
+// {
 //    public EntityUndeadAstronaut(World world)
 //    {
 //        super(world);
 //    }
-//}
+// }

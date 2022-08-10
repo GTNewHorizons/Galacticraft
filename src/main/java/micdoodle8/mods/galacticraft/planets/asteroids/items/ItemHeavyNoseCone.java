@@ -12,12 +12,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-public class ItemHeavyNoseCone extends Item
-{
+public class ItemHeavyNoseCone extends Item {
     public IIcon[] icons;
 
-    public ItemHeavyNoseCone(String assetName)
-    {
+    public ItemHeavyNoseCone(String assetName) {
         super();
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
@@ -27,44 +25,37 @@ public class ItemHeavyNoseCone extends Item
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean requiresMultipleRenderPasses()
-    {
+    public boolean requiresMultipleRenderPasses() {
         return true;
     }
 
     @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamageForRenderPass(int par1, int par2)
-    {
+    public IIcon getIconFromDamageForRenderPass(int par1, int par2) {
         return par2 == 0 ? this.icons[0] : this.icons[1];
     }
 
     @Override
-    public CreativeTabs getCreativeTab()
-    {
+    public CreativeTabs getCreativeTab() {
         return GalacticraftCore.galacticraftItemsTab;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegister)
-    {
+    public void registerIcons(IIconRegister iconRegister) {
         this.icons = new IIcon[2];
         this.icons[0] = iconRegister.registerIcon(AsteroidsModule.TEXTURE_PREFIX + "heavyNoseCone");
         this.icons[1] = iconRegister.registerIcon(AsteroidsModule.TEXTURE_PREFIX + "heavyNoseCone.0");
     }
 
     @Override
-    public IIcon getIconFromDamage(int damage)
-    {
-        if (this.icons.length > damage)
-        {
+    public IIcon getIconFromDamage(int damage) {
+        if (this.icons.length > damage) {
             return this.icons[damage];
         }
 
@@ -72,8 +63,7 @@ public class ItemHeavyNoseCone extends Item
     }
 
     @Override
-    public int getMetadata(int par1)
-    {
+    public int getMetadata(int par1) {
         return par1;
     }
 }

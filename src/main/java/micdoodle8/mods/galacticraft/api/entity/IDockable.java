@@ -6,8 +6,7 @@ import micdoodle8.mods.galacticraft.api.tile.IFuelDock;
  * Implement into entities that are placed on fuel docks to load with cargo and
  * fuel
  */
-public interface IDockable extends IFuelable, ICargoEntity
-{
+public interface IDockable extends IFuelable, ICargoEntity {
     /**
      * Sets the current fuel dock for this entity
      */

@@ -14,49 +14,40 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidRegistry;
 
-public class EntityParachest extends Entity
-{
+public class EntityParachest extends Entity {
     public ItemStack[] cargo;
 
     public int fuelLevel;
 
     private boolean placedChest;
 
-    public EntityParachest(World world, ItemStack[] cargo, int fuelLevel)
-    {
+    public EntityParachest(World world, ItemStack[] cargo, int fuelLevel) {
         this(world);
         this.cargo = cargo.clone();
         this.placedChest = false;
         this.fuelLevel = fuelLevel;
     }
 
-    public EntityParachest(World world)
-    {
+    public EntityParachest(World world) {
         super(world);
         this.setSize(1.0F, 1.0F);
     }
 
     @Override
-    protected void entityInit()
-    {
-    }
+    protected void entityInit() {}
 
     @Override
-    protected void readEntityFromNBT(NBTTagCompound nbt)
-    {
+    protected void readEntityFromNBT(NBTTagCompound nbt) {
         final NBTTagList var2 = nbt.getTagList("Items", 10);
         int size = 56;
-        if (nbt.hasKey("CargoLength"))
-        	size = nbt.getInteger("CargoLength");
+        if (nbt.hasKey("CargoLength")) size = nbt.getInteger("CargoLength");
         this.cargo = new ItemStack[size];
 
-        for (int var3 = 0; var3 < var2.tagCount(); ++var3)
-        {
+        for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
             final NBTTagCompound var4 = var2.getCompoundTagAt(var3);
             final int var5 = var4.getByte("Slot") & 255;
 
-            if (var5 < this.cargo.length)
-            {
+            if (var5 < this.cargo.length) {
                 this.cargo[var5] = ItemStack.loadItemStackFromNBT(var4);
             }
         }
@@ -66,15 +57,12 @@ public class EntityParachest extends Entity
     }
 
     @Override
-    protected void writeEntityToNBT(NBTTagCompound nbt)
-    {
+    protected void writeEntityToNBT(NBTTagCompound nbt) {
         nbt.setInteger("CargoLength", this.cargo.length);
 
         final NBTTagList var2 = new NBTTagList();
-        for (int var3 = 0; var3 < this.cargo.length; ++var3)
-        {
-            if (this.cargo[var3] != null)
-            {
+        for (int var3 = 0; var3 < this.cargo.length; ++var3) {
+            if (this.cargo[var3] != null) {
                 final NBTTagCompound var4 = new NBTTagCompound();
                 var4.setByte("Slot", (byte) var3);
                 this.cargo[var3].writeToNBT(var4);
@@ -88,32 +76,24 @@ public class EntityParachest extends Entity
     }
 
     @Override
-    public void onUpdate()
-    {
-        if (!this.placedChest)
-        {
-            if (this.onGround && !this.worldObj.isRemote)
-            {
-                for (int i = 0; i < 100; i++)
-                {
+    public void onUpdate() {
+        if (!this.placedChest) {
+            if (this.onGround && !this.worldObj.isRemote) {
+                for (int i = 0; i < 100; i++) {
                     final int x = MathHelper.floor_double(this.posX);
                     final int y = MathHelper.floor_double(this.posY);
                     final int z = MathHelper.floor_double(this.posZ);
 
                     Block block = this.worldObj.getBlock(x, y + i, z);
 
-                    if (block.getMaterial().isReplaceable())
-                    {
-                        if (this.placeChest(x, y + i, z))
-                        {
+                    if (block.getMaterial().isReplaceable()) {
+                        if (this.placeChest(x, y + i, z)) {
                             this.setDead();
                             return;
-                        }
-                        else if (this.cargo != null)
-                        {
-                            for (final ItemStack stack : this.cargo)
-                            {
-                                final EntityItem e = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, stack);
+                        } else if (this.cargo != null) {
+                            for (final ItemStack stack : this.cargo) {
+                                final EntityItem e =
+                                        new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, stack);
                                 this.worldObj.spawnEntityInWorld(e);
                             }
 
@@ -122,17 +102,13 @@ public class EntityParachest extends Entity
                     }
                 }
 
-                if (this.cargo != null)
-                {
-                    for (final ItemStack stack : this.cargo)
-                    {
+                if (this.cargo != null) {
+                    for (final ItemStack stack : this.cargo) {
                         final EntityItem e = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, stack);
                         this.worldObj.spawnEntityInWorld(e);
                     }
                 }
-            }
-            else
-            {
+            } else {
                 this.motionY = -0.25;
             }
 
@@ -140,23 +116,23 @@ public class EntityParachest extends Entity
         }
     }
 
-    private boolean placeChest(int x, int y, int z)
-    {
+    private boolean placeChest(int x, int y, int z) {
         this.worldObj.setBlock(x, y, z, GCBlocks.parachest, 0, 3);
         final TileEntity te = this.worldObj.getTileEntity(x, y, z);
 
-        if (te instanceof TileEntityParaChest && this.cargo != null)
-        {
+        if (te instanceof TileEntityParaChest && this.cargo != null) {
             final TileEntityParaChest chest = (TileEntityParaChest) te;
 
             chest.chestContents = new ItemStack[this.cargo.length + 1];
 
-            for (int i = 0; i < this.cargo.length; i++)
-            {
+            for (int i = 0; i < this.cargo.length; i++) {
                 chest.chestContents[i] = this.cargo[i];
             }
 
-            chest.fuelTank.fill(FluidRegistry.getFluidStack(GalacticraftCore.fluidFuel.getName().toLowerCase(), this.fuelLevel), true);
+            chest.fuelTank.fill(
+                    FluidRegistry.getFluidStack(
+                            GalacticraftCore.fluidFuel.getName().toLowerCase(), this.fuelLevel),
+                    true);
 
             return true;
         }

@@ -9,12 +9,10 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class EntityFXLaunchSmoke extends EntityFX
-{
+public class EntityFXLaunchSmoke extends EntityFX {
     float smokeParticleScale;
 
-    public EntityFXLaunchSmoke(World par1World, Vector3 position, Vector3 motion, float size, boolean launched)
-    {
+    public EntityFXLaunchSmoke(World par1World, Vector3 position, Vector3 motion, float size, boolean launched) {
         super(par1World, position.x, position.y, position.z, 0.0D, 0.0D, 0.0D);
         this.motionX *= 0.10000000149011612D;
         this.motionY *= 0.10000000149011612D;
@@ -24,17 +22,15 @@ public class EntityFXLaunchSmoke extends EntityFX
         this.motionY += motion.y;
         this.motionZ += motion.z;
         this.particleAlpha = 1.0F;
-        this.particleRed = this.particleGreen = this.particleBlue = (float) (Math.random() * 0.30000001192092896D) + 0.6F;
+        this.particleRed =
+                this.particleGreen = this.particleBlue = (float) (Math.random() * 0.30000001192092896D) + 0.6F;
         this.particleScale *= 0.75F;
         this.particleScale *= size * 3;
         this.smokeParticleScale = this.particleScale;
 
-        if (launched)
-        {
+        if (launched) {
             this.particleMaxAge = (int) (this.particleMaxAge * size) + 10;
-        }
-        else
-        {
+        } else {
             this.motionX += par1World.rand.nextDouble() / 2 - 0.25;
             this.motionY += par1World.rand.nextDouble() / 20;
             this.motionZ += par1World.rand.nextDouble() / 2 - 0.25;
@@ -45,20 +41,18 @@ public class EntityFXLaunchSmoke extends EntityFX
     }
 
     @Override
-    public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void renderParticle(
+            Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7) {
         GL11.glPushMatrix();
         GL11.glDepthMask(false);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         float var8 = (this.particleAge + par2) / this.particleMaxAge * 32.0F;
 
-        if (var8 < 0.0F)
-        {
+        if (var8 < 0.0F) {
             var8 = 0.0F;
         }
 
-        if (var8 > 1.0F)
-        {
+        if (var8 > 1.0F) {
             var8 = 1.0F;
         }
 
@@ -69,8 +63,7 @@ public class EntityFXLaunchSmoke extends EntityFX
         float f9 = f8 + 0.0624375F;
         final float f10 = 0.1F * this.particleScale;
 
-        if (this.particleIcon != null)
-        {
+        if (this.particleIcon != null) {
             f6 = this.particleIcon.getMinU();
             f7 = this.particleIcon.getMaxU();
             f8 = this.particleIcon.getMinV();
@@ -81,11 +74,16 @@ public class EntityFXLaunchSmoke extends EntityFX
         final float f12 = (float) (this.prevPosY + (this.posY - this.prevPosY) * par2 - EntityFX.interpPosY);
         final float f13 = (float) (this.prevPosZ + (this.posZ - this.prevPosZ) * par2 - EntityFX.interpPosZ);
         final float f14 = 1.0F;
-        par1Tessellator.setColorRGBA_F(this.particleRed * f14, this.particleGreen * f14, this.particleBlue * f14, this.particleAlpha);
-        par1Tessellator.addVertexWithUV(f11 - par3 * f10 - par6 * f10, f12 - par4 * f10, f13 - par5 * f10 - par7 * f10, f7, f9);
-        par1Tessellator.addVertexWithUV(f11 - par3 * f10 + par6 * f10, f12 + par4 * f10, f13 - par5 * f10 + par7 * f10, f7, f8);
-        par1Tessellator.addVertexWithUV(f11 + par3 * f10 + par6 * f10, f12 + par4 * f10, f13 + par5 * f10 + par7 * f10, f6, f8);
-        par1Tessellator.addVertexWithUV(f11 + par3 * f10 - par6 * f10, f12 - par4 * f10, f13 + par5 * f10 - par7 * f10, f6, f9);
+        par1Tessellator.setColorRGBA_F(
+                this.particleRed * f14, this.particleGreen * f14, this.particleBlue * f14, this.particleAlpha);
+        par1Tessellator.addVertexWithUV(
+                f11 - par3 * f10 - par6 * f10, f12 - par4 * f10, f13 - par5 * f10 - par7 * f10, f7, f9);
+        par1Tessellator.addVertexWithUV(
+                f11 - par3 * f10 + par6 * f10, f12 + par4 * f10, f13 - par5 * f10 + par7 * f10, f7, f8);
+        par1Tessellator.addVertexWithUV(
+                f11 + par3 * f10 + par6 * f10, f12 + par4 * f10, f13 + par5 * f10 + par7 * f10, f6, f8);
+        par1Tessellator.addVertexWithUV(
+                f11 + par3 * f10 - par6 * f10, f12 - par4 * f10, f13 + par5 * f10 - par7 * f10, f6, f9);
 
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glDepthMask(true);
@@ -93,14 +91,12 @@ public class EntityFXLaunchSmoke extends EntityFX
     }
 
     @Override
-    public void onUpdate()
-    {
+    public void onUpdate() {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
 
-        if (this.particleAge++ >= this.particleMaxAge)
-        {
+        if (this.particleAge++ >= this.particleMaxAge) {
             this.setDead();
         }
 
@@ -108,8 +104,7 @@ public class EntityFXLaunchSmoke extends EntityFX
         this.motionY -= 0.002D;
         this.moveEntity(this.motionX, this.motionY, this.motionZ);
 
-        if (this.posY == this.prevPosY)
-        {
+        if (this.posY == this.prevPosY) {
             this.motionX *= 1.1D;
             this.motionZ *= 1.1D;
         }

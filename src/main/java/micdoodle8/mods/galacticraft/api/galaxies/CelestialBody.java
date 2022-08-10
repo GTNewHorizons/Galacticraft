@@ -1,16 +1,14 @@
 package micdoodle8.mods.galacticraft.api.galaxies;
 
+import java.util.ArrayList;
+import java.util.Locale;
 import micdoodle8.mods.galacticraft.api.world.IAtmosphericGas;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.WorldProvider;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
-import java.util.ArrayList;
-import java.util.Locale;
-
-public abstract class CelestialBody implements Comparable<CelestialBody>
-{
+public abstract class CelestialBody implements Comparable<CelestialBody> {
     protected final String bodyName;
     protected String unlocalizedName;
 
@@ -34,8 +32,7 @@ public abstract class CelestialBody implements Comparable<CelestialBody>
     protected float ringColorG = 1.0F;
     protected float ringColorB = 1.0F;
 
-    public CelestialBody(String bodyName)
-    {
+    public CelestialBody(String bodyName) {
         this.bodyName = bodyName.toLowerCase(Locale.ENGLISH);
         this.unlocalizedName = bodyName;
     }
@@ -44,18 +41,15 @@ public abstract class CelestialBody implements Comparable<CelestialBody>
 
     public abstract String getUnlocalizedNamePrefix();
 
-    public String getName()
-    {
+    public String getName() {
         return this.bodyName;
     }
 
-    public String getUnlocalizedName()
-    {
+    public String getUnlocalizedName() {
         return this.getUnlocalizedNamePrefix() + "." + this.unlocalizedName;
     }
 
-    public String getLocalizedName()
-    {
+    public String getLocalizedName() {
         String s = this.getUnlocalizedName();
         s = s == null ? "" : StatCollector.translateToLocal(s);
         int comment = s.indexOf('#');
@@ -70,8 +64,7 @@ public abstract class CelestialBody implements Comparable<CelestialBody>
      *
      * @return Size of the planet/moon relative to earth.
      */
-    public float getRelativeSize()
-    {
+    public float getRelativeSize() {
         return this.relativeSize;
     }
 
@@ -83,8 +76,7 @@ public abstract class CelestialBody implements Comparable<CelestialBody>
      *
      * @return Distance from the center of the map relative to earth.
      */
-    public ScalableDistance getRelativeDistanceFromCenter()
-    {
+    public ScalableDistance getRelativeDistanceFromCenter() {
         return this.relativeDistanceFromCenter;
     }
 
@@ -99,8 +91,7 @@ public abstract class CelestialBody implements Comparable<CelestialBody>
      *
      * @return Phase shift of planet for planet's revolution around the sun.
      */
-    public float getPhaseShift()
-    {
+    public float getPhaseShift() {
         return this.phaseShift;
     }
 
@@ -114,53 +105,45 @@ public abstract class CelestialBody implements Comparable<CelestialBody>
      *
      * @return Multiple value for planet's revolution around the sun.
      */
-    public float getRelativeOrbitTime()
-    {
+    public float getRelativeOrbitTime() {
         return this.relativeOrbitTime;
     }
 
-    public int getTierRequirement()
-    {
+    public int getTierRequirement() {
         return this.tierRequired;
     }
 
-    public CelestialBody setTierRequired(int tierRequired)
-    {
+    public CelestialBody setTierRequired(int tierRequired) {
         this.tierRequired = tierRequired;
         return this;
     }
 
-    public CelestialBody setRelativeSize(float relativeSize)
-    {
+    public CelestialBody setRelativeSize(float relativeSize) {
         this.relativeSize = relativeSize;
         return this;
     }
 
-    public CelestialBody setRelativeDistanceFromCenter(ScalableDistance relativeDistanceFromCenter)
-    {
+    public CelestialBody setRelativeDistanceFromCenter(ScalableDistance relativeDistanceFromCenter) {
         this.relativeDistanceFromCenter = relativeDistanceFromCenter;
         return this;
     }
 
-    public CelestialBody setPhaseShift(float phaseShift)
-    {
+    public CelestialBody setPhaseShift(float phaseShift) {
         this.phaseShift = phaseShift;
         return this;
     }
 
-    public CelestialBody setRelativeOrbitTime(float relativeOrbitTime)
-    {
+    public CelestialBody setRelativeOrbitTime(float relativeOrbitTime) {
         this.relativeOrbitTime = relativeOrbitTime;
         return this;
     }
 
-    public CelestialBody setDimensionInfo(int dimID, Class<? extends WorldProvider> providerClass)
-    {
+    public CelestialBody setDimensionInfo(int dimID, Class<? extends WorldProvider> providerClass) {
         return this.setDimensionInfo(dimID, providerClass, true);
     }
 
-    public CelestialBody setDimensionInfo(int providerId, Class<? extends WorldProvider> providerClass, boolean autoRegister)
-    {
+    public CelestialBody setDimensionInfo(
+            int providerId, Class<? extends WorldProvider> providerClass, boolean autoRegister) {
         this.dimensionID = providerId;
         this.providerClass = providerClass;
         this.autoRegisterDimension = autoRegister;
@@ -168,33 +151,29 @@ public abstract class CelestialBody implements Comparable<CelestialBody>
         return this;
     }
 
-    public boolean shouldAutoRegister()
-    {
+    public boolean shouldAutoRegister() {
         return this.autoRegisterDimension;
     }
 
-    public int getDimensionID()
-    {
+    public int getDimensionID() {
         return this.dimensionID;
     }
 
-    public Class<? extends WorldProvider> getWorldProvider()
-    {
+    public Class<? extends WorldProvider> getWorldProvider() {
         return this.providerClass;
     }
 
-    public boolean getReachable()
-    {
+    public boolean getReachable() {
         return this.isReachable;
     }
-    
+
     public CelestialBody setAllowSatellite(boolean allowSatellite) {
-    	this.allowSatellite = allowSatellite;
-    	return this;
+        this.allowSatellite = allowSatellite;
+        return this;
     }
-    
+
     public boolean getAllowSatellite() {
-    	return this.allowSatellite;
+        return this.allowSatellite;
     }
 
     /*
@@ -202,96 +181,84 @@ public abstract class CelestialBody implements Comparable<CelestialBody>
      * Do not include trace gases (anything less than 0.25%)
      * (Do not use for stars!)
      */
-    public CelestialBody atmosphereComponent(IAtmosphericGas gas)
-    {
+    public CelestialBody atmosphereComponent(IAtmosphericGas gas) {
         this.atmosphere.add(gas);
         return this;
     }
 
-    public CelestialBody setRingColorRGB(float ringColorR, float ringColorG, float ringColorB)
-    {
+    public CelestialBody setRingColorRGB(float ringColorR, float ringColorG, float ringColorB) {
         this.ringColorR = ringColorR;
         this.ringColorG = ringColorG;
         this.ringColorB = ringColorB;
         return this;
     }
 
-    public float getRingColorR()
-    {
+    public float getRingColorR() {
         return this.ringColorR;
     }
 
-    public float getRingColorG()
-    {
+    public float getRingColorG() {
         return this.ringColorG;
     }
 
-    public float getRingColorB()
-    {
+    public float getRingColorB() {
         return this.ringColorB;
     }
 
-    public ResourceLocation getBodyIcon()
-    {
+    public ResourceLocation getBodyIcon() {
         return this.celestialBodyIcon;
     }
 
-    public CelestialBody setBodyIcon(ResourceLocation planetIcon)
-    {
+    public CelestialBody setBodyIcon(ResourceLocation planetIcon) {
         this.celestialBodyIcon = planetIcon;
         return this;
     }
 
-    public boolean getForceStaticLoad()
-    {
+    public boolean getForceStaticLoad() {
         return this.forceStaticLoad;
     }
 
-    public CelestialBody setForceStaticLoad(boolean force)
-    {
+    public CelestialBody setForceStaticLoad(boolean force) {
         this.forceStaticLoad = force;
         return this;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return this.getUnlocalizedName().hashCode();
     }
 
     @Override
-    public boolean equals(Object other)
-    {
-        if (other instanceof CelestialBody)
-        {
-            return new EqualsBuilder().append(this.getUnlocalizedName(), ((CelestialBody) other).getUnlocalizedName()).isEquals();
+    public boolean equals(Object other) {
+        if (other instanceof CelestialBody) {
+            return new EqualsBuilder()
+                    .append(this.getUnlocalizedName(), ((CelestialBody) other).getUnlocalizedName())
+                    .isEquals();
         }
 
         return false;
     }
 
     @Override
-    public int compareTo(CelestialBody other)
-    {
+    public int compareTo(CelestialBody other) {
         ScalableDistance thisDistance = this.getRelativeDistanceFromCenter();
         ScalableDistance otherDistance = other.getRelativeDistanceFromCenter();
-        return otherDistance.unScaledDistance < thisDistance.unScaledDistance ? 1 : (otherDistance.unScaledDistance > thisDistance.unScaledDistance ? -1 : 0);
+        return otherDistance.unScaledDistance < thisDistance.unScaledDistance
+                ? 1
+                : (otherDistance.unScaledDistance > thisDistance.unScaledDistance ? -1 : 0);
     }
 
-    public static class ScalableDistance
-    {
+    public static class ScalableDistance {
         public final float unScaledDistance;
         public final float scaledDistance;
 
-        public ScalableDistance(float unScaledDistance, float scaledDistance)
-        {
+        public ScalableDistance(float unScaledDistance, float scaledDistance) {
             this.unScaledDistance = unScaledDistance;
             this.scaledDistance = scaledDistance;
         }
     }
 
-	public void setUnreachable()
-	{
-		this.isReachable = false;
-	}
+    public void setUnreachable() {
+        this.isReachable = false;
+    }
 }

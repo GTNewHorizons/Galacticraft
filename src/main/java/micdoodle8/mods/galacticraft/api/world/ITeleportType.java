@@ -1,12 +1,11 @@
 package micdoodle8.mods.galacticraft.api.world;
 
+import java.util.Random;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-
-import java.util.Random;
 
 /**
  * Implement into WorldProvider for customizing spawning players and other
@@ -14,8 +13,7 @@ import java.util.Random;
  * <p/>
  * You can also create a separate class, implement it there, then register it in @GalacticraftRegistry
  */
-public interface ITeleportType
-{
+public interface ITeleportType {
     /**
      * This method is used to determine if a player will open parachute upon
      * entering the dimension
@@ -65,11 +63,10 @@ public interface ITeleportType
      *                         landers if so.
      */
     public void onSpaceDimensionChanged(World newWorld, EntityPlayerMP player, boolean ridingAutoRocket);
-    
-    
+
     /**
      * Used by Asteroids Survival game mode to set up the initial lander inventory
-     * 
+     *
      * @param player
      */
     public void setupAdventureSpawn(EntityPlayerMP player);

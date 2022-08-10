@@ -9,31 +9,26 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 
-public class ItemBattery extends ItemElectricBase
-{
-    public ItemBattery(String assetName)
-    {
+public class ItemBattery extends ItemElectricBase {
+    public ItemBattery(String assetName) {
         super();
         this.setUnlocalizedName(assetName);
         this.setTextureName(GalacticraftCore.TEXTURE_PREFIX + assetName);
     }
 
     @Override
-    public CreativeTabs getCreativeTab()
-    {
+    public CreativeTabs getCreativeTab() {
         return GalacticraftCore.galacticraftItemsTab;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 
     @Override
-    public float getMaxElectricityStored(ItemStack itemStack)
-    {
+    public float getMaxElectricityStored(ItemStack itemStack) {
         return 15000;
     }
 }

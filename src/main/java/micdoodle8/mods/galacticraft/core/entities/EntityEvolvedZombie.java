@@ -18,12 +18,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-public class EntityEvolvedZombie extends EntityZombie implements IEntityBreathable
-{
+public class EntityEvolvedZombie extends EntityZombie implements IEntityBreathable {
     private int conversionTime = 0;
 
-    public EntityEvolvedZombie(World par1World)
-    {
+    public EntityEvolvedZombie(World par1World) {
         super(par1World);
         this.tasks.taskEntries.clear();
         this.getNavigator().setBreakDoors(true);
@@ -42,39 +40,36 @@ public class EntityEvolvedZombie extends EntityZombie implements IEntityBreathab
     }
 
     @Override
-    protected void applyEntityAttributes()
-    {
+    protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(ConfigManagerCore.hardMode ? 1.06F : 0.96F);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigManagerCore.hardMode ? 5.0D : 3.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(ConfigManagerCore.hardMode ? 20.0D : 16.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
+                .setBaseValue(ConfigManagerCore.hardMode ? 1.06F : 0.96F);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage)
+                .setBaseValue(ConfigManagerCore.hardMode ? 5.0D : 3.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.followRange)
+                .setBaseValue(ConfigManagerCore.hardMode ? 20.0D : 16.0D);
     }
 
     @Override
-    public boolean canBreath()
-    {
+    public boolean canBreath() {
         return true;
     }
 
-    public IAttribute getReinforcementsAttribute()
-    {
+    public IAttribute getReinforcementsAttribute() {
         return EntityZombie.field_110186_bp;
     }
-    
+
     @Override
-    protected void jump()
-    {
+    protected void jump() {
         this.motionY = 0.48D / WorldUtil.getGravityFactor(this);
         if (this.motionY < 0.24D) this.motionY = 0.24D;
 
-        if (this.isPotionActive(Potion.jump))
-        {
+        if (this.isPotionActive(Potion.jump)) {
             this.motionY += (this.getActivePotionEffect(Potion.jump).getAmplifier() + 1) * 0.1F;
         }
 
-        if (this.isSprinting())
-        {
+        if (this.isSprinting()) {
             float f = this.rotationYaw * 0.017453292F;
             this.motionX -= MathHelper.sin(f) * 0.2F;
             this.motionZ += MathHelper.cos(f) * 0.2F;
@@ -85,28 +80,26 @@ public class EntityEvolvedZombie extends EntityZombie implements IEntityBreathab
     }
 
     @Override
-    protected void dropRareDrop(int p_70600_1_)
-    {
-        switch (this.rand.nextInt(16))
-        {
+    protected void dropRareDrop(int p_70600_1_) {
+        switch (this.rand.nextInt(16)) {
             case 0:
             case 1:
             case 2:
-            	//Dehydrated carrot
+                // Dehydrated carrot
                 this.entityDropItem(new ItemStack(GCItems.basicItem, 1, 16), 0.0F);
                 break;
             case 3:
             case 4:
-            	this.dropItem(GCItems.meteoricIronRaw, 1);
+                this.dropItem(GCItems.meteoricIronRaw, 1);
                 break;
             case 5:
             case 6:
-            	//Dehydrated potato
+                // Dehydrated potato
                 this.entityDropItem(new ItemStack(GCItems.basicItem, 1, 18), 0.0F);
                 break;
             case 7:
             case 8:
-            	//Oxygen tank half empty or less
+                // Oxygen tank half empty or less
                 this.entityDropItem(new ItemStack(GCItems.oxTankMedium, 1, 901 + this.rand.nextInt(900)), 0.0F);
                 break;
             case 9:
@@ -117,39 +110,35 @@ public class EntityEvolvedZombie extends EntityZombie implements IEntityBreathab
                 break;
             case 11:
             case 12:
-            	this.dropItem(Items.carrot, 1);
-            	break;
+                this.dropItem(Items.carrot, 1);
+                break;
             case 13:
             case 14:
             case 15:
-            	if (ConfigManagerCore.challengeMobDropsAndSpawning) this.dropItem(Items.melon_seeds, 1);
-            	break;
+                if (ConfigManagerCore.challengeMobDropsAndSpawning) this.dropItem(Items.melon_seeds, 1);
+                break;
         }
     }
-    
-    protected void dropFewItems(boolean p_70628_1_, int p_70628_2_)
-    {
-        super.dropFewItems(p_70628_1_, p_70628_2_);
-    	Item item = this.getDropItem();
 
-    	//Less rotten flesh than vanilla
+    protected void dropFewItems(boolean p_70628_1_, int p_70628_2_) {
+        super.dropFewItems(p_70628_1_, p_70628_2_);
+        Item item = this.getDropItem();
+
+        // Less rotten flesh than vanilla
         int j = this.rand.nextInt(2);
 
-        if (item != null)
-        {
-            if (p_70628_2_ > 0)
-            {
+        if (item != null) {
+            if (p_70628_2_ > 0) {
                 j += this.rand.nextInt(p_70628_2_ + 1);
             }
 
-            for (int k = 0; k < j; ++k)
-            {
+            for (int k = 0; k < j; ++k) {
                 this.dropItem(item, 1);
             }
         }
-        
-        //Drop copper ingot as semi-rare drop if player hit and if dropping rotten flesh (50% chance)
+
+        // Drop copper ingot as semi-rare drop if player hit and if dropping rotten flesh (50% chance)
         if (p_70628_1_ && (ConfigManagerCore.challengeMobDropsAndSpawning) && j > 0 && this.rand.nextInt(6) == 0)
-        	this.entityDropItem(new ItemStack(GCItems.basicItem, 1, 3), 0.0F);
+            this.entityDropItem(new ItemStack(GCItems.basicItem, 1, 3), 0.0F);
     }
 }

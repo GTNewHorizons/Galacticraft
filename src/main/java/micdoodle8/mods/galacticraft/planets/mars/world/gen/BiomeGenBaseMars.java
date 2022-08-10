@@ -5,13 +5,12 @@ import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedZombie;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import net.minecraft.world.biome.BiomeGenBase;
 
-public class BiomeGenBaseMars extends BiomeGenBase
-{
-    public static final BiomeGenBase marsFlat = new BiomeGenFlatMars(ConfigManagerCore.biomeIDbase + 1).setBiomeName("marsFlat");
+public class BiomeGenBaseMars extends BiomeGenBase {
+    public static final BiomeGenBase marsFlat =
+            new BiomeGenFlatMars(ConfigManagerCore.biomeIDbase + 1).setBiomeName("marsFlat");
 
     @SuppressWarnings("unchecked")
-    BiomeGenBaseMars(int var1)
-    {
+    BiomeGenBaseMars(int var1) {
         super(var1);
         this.spawnableMonsterList.clear();
         this.spawnableWaterCreatureList.clear();
@@ -22,14 +21,12 @@ public class BiomeGenBaseMars extends BiomeGenBase
     }
 
     @Override
-    public BiomeGenBaseMars setColor(int var1)
-    {
+    public BiomeGenBaseMars setColor(int var1) {
         return (BiomeGenBaseMars) super.setColor(var1);
     }
 
     @Override
-    public float getSpawningChance()
-    {
+    public float getSpawningChance() {
         return 0.01F;
     }
 }

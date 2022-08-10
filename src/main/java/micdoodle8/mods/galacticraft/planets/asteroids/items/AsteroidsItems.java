@@ -9,8 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class AsteroidsItems
-{
+public class AsteroidsItems {
     public static Item grapple;
     public static Item tier3Rocket;
     public static Item astroMiner;
@@ -19,7 +18,7 @@ public class AsteroidsItems
     public static Item methaneCanister;
     public static Item canisterLOX;
     public static Item canisterLN2;
-    //public static Item canisterLAr;
+    // public static Item canisterLAr;
     public static Item atmosphericValve;
     public static ItemHeavyNoseCone heavyNoseCone;
     public static Item orionDrive;
@@ -34,10 +33,10 @@ public class AsteroidsItems
     public static Item titaniumSword;
 
     public static Item.ToolMaterial TOOL_TITANIUM = EnumHelper.addToolMaterial("titanium", 3, 520, 8.0F, 3.0F, 10);
-    public static ItemArmor.ArmorMaterial ARMOR_TITANIUM = EnumHelper.addArmorMaterial("titanium", 26, new int[] { 5, 10, 7, 5 }, 10);
+    public static ItemArmor.ArmorMaterial ARMOR_TITANIUM =
+            EnumHelper.addArmorMaterial("titanium", 26, new int[] {5, 10, 7, 5}, 10);
 
-    public static void initItems()
-    {
+    public static void initItems() {
         AsteroidsItems.grapple = new ItemGrappleHook("grapple");
         AsteroidsItems.tier3Rocket = new ItemTier3Rocket("itemTier3Rocket");
         AsteroidsItems.astroMiner = new ItemAstroMiner("itemAstroMiner");
@@ -46,7 +45,7 @@ public class AsteroidsItems
         AsteroidsItems.methaneCanister = new ItemCanisterMethane("methaneCanisterPartial");
         AsteroidsItems.canisterLOX = new ItemCanisterLiquidOxygen("canisterPartialLOX");
         AsteroidsItems.canisterLN2 = new ItemCanisterLiquidNitrogen("canisterPartialLN2");
-        //AsteroidsItems.canisterLAr = new ItemCanisterLiquidArgon("canisterPartialLAr");
+        // AsteroidsItems.canisterLAr = new ItemCanisterLiquidArgon("canisterPartialLAr");
         AsteroidsItems.atmosphericValve = new ItemAtmosphericValve("atmosphericValve");
         AsteroidsItems.heavyNoseCone = new ItemHeavyNoseCone("heavyNoseCone");
         AsteroidsItems.orionDrive = new ItemOrionDrive("orionDrive");
@@ -70,15 +69,13 @@ public class AsteroidsItems
         AsteroidsItems.registerHarvestLevels();
     }
 
-    public static void registerHarvestLevels()
-    {
-    	AsteroidsItems.titaniumPickaxe.setHarvestLevel("pickaxe", 5);
+    public static void registerHarvestLevels() {
+        AsteroidsItems.titaniumPickaxe.setHarvestLevel("pickaxe", 5);
         AsteroidsItems.titaniumAxe.setHarvestLevel("axe", 5);
         AsteroidsItems.titaniumSpade.setHarvestLevel("shovel", 5);
     }
 
-    private static void registerItems()
-    {
+    private static void registerItems() {
         registerItem(AsteroidsItems.grapple);
         registerItem(AsteroidsItems.tier3Rocket);
         registerItem(AsteroidsItems.astroMiner);
@@ -87,7 +84,7 @@ public class AsteroidsItems
         registerItem(AsteroidsItems.methaneCanister);
         registerItem(AsteroidsItems.canisterLOX);
         registerItem(AsteroidsItems.canisterLN2);
-        //registerItem(AsteroidsItems.canisterLAr);
+        // registerItem(AsteroidsItems.canisterLAr);
         registerItem(AsteroidsItems.atmosphericValve);
         registerItem(AsteroidsItems.heavyNoseCone);
         registerItem(AsteroidsItems.orionDrive);
@@ -100,16 +97,14 @@ public class AsteroidsItems
         registerItem(AsteroidsItems.titaniumSpade);
         registerItem(AsteroidsItems.titaniumHoe);
         registerItem(AsteroidsItems.titaniumSword);
-        
-        //These exact names are important, ItemCanisterGeneric searches for "CanisterFull"
+
+        // These exact names are important, ItemCanisterGeneric searches for "CanisterFull"
         GCCoreUtil.registerGalacticraftItem("LOXCanisterFull", AsteroidsItems.canisterLOX, 1);
         GCCoreUtil.registerGalacticraftItem("LN2CanisterFull", AsteroidsItems.canisterLN2, 1);
         GCCoreUtil.registerGalacticraftItem("methaneCanisterFull", AsteroidsItems.methaneCanister, 1);
     }
 
-    private static void registerItem(Item item)
-    {
+    private static void registerItem(Item item) {
         GameRegistry.registerItem(item, item.getUnlocalizedName(), Constants.MOD_ID_PLANETS);
-        
     }
 }

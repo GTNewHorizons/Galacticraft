@@ -1,6 +1,7 @@
 package micdoodle8.mods.galacticraft.planets.mars.client.render.block;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import java.util.Arrays;
 import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityHydrogenPipe;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -9,23 +10,17 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
-import java.util.Arrays;
-
-public class BlockRendererHydrogenPipe implements ISimpleBlockRenderingHandler
-{
+public class BlockRendererHydrogenPipe implements ISimpleBlockRenderingHandler {
     final int renderID;
 
-    public BlockRendererHydrogenPipe(int var1)
-    {
+    public BlockRendererHydrogenPipe(int var1) {
         this.renderID = var1;
     }
 
-    public void renderPipe(RenderBlocks renderblocks, IBlockAccess iblockaccess, Block block, int x, int y, int z)
-    {
+    public void renderPipe(RenderBlocks renderblocks, IBlockAccess iblockaccess, Block block, int x, int y, int z) {
         final TileEntity tileEntity = iblockaccess.getTileEntity(x, y, z);
 
-        if (tileEntity instanceof TileEntityHydrogenPipe)
-        {
+        if (tileEntity instanceof TileEntityHydrogenPipe) {
             final float minX = 0.40F;
             final float minY = 0.40F;
             final float minZ = 0.40F;
@@ -35,38 +30,35 @@ public class BlockRendererHydrogenPipe implements ISimpleBlockRenderingHandler
 
             final TileEntity[] connections = TileEntityHydrogenPipe.getAdjacentHydrogenConnections(tileEntity);
 
-            for (TileEntity connection : connections)
-            {
-                if (connection != null)
-                {
+            for (TileEntity connection : connections) {
+                if (connection != null) {
                     final int side = Arrays.asList(connections).indexOf(connection);
 
-                    switch (side)
-                    {
-                    case 0: // DOWN
-                        renderblocks.setRenderBounds(minX, 0.0F, minZ, maxX, 0.4F, maxZ);
-                        renderblocks.renderStandardBlock(block, x, y, z);
-                        break;
-                    case 1: // UP
-                        renderblocks.setRenderBounds(minX, 0.6F, minZ, maxX, 1.0F, maxZ);
-                        renderblocks.renderStandardBlock(block, x, y, z);
-                        break;
-                    case 2: // NORTH
-                        renderblocks.setRenderBounds(minX, minY, 0.0, maxX, maxY, 0.4F);
-                        renderblocks.renderStandardBlock(block, x, y, z);
-                        break;
-                    case 3: // SOUTH
-                        renderblocks.setRenderBounds(minX, minY, 0.6F, maxX, maxY, 1.0);
-                        renderblocks.renderStandardBlock(block, x, y, z);
-                        break;
-                    case 4: // WEST
-                        renderblocks.setRenderBounds(0.0, minY, minZ, 0.4F, maxY, maxZ);
-                        renderblocks.renderStandardBlock(block, x, y, z);
-                        break;
-                    case 5: // EAST
-                        renderblocks.setRenderBounds(0.6F, minY, minZ, 1.0, maxY, maxZ);
-                        renderblocks.renderStandardBlock(block, x, y, z);
-                        break;
+                    switch (side) {
+                        case 0: // DOWN
+                            renderblocks.setRenderBounds(minX, 0.0F, minZ, maxX, 0.4F, maxZ);
+                            renderblocks.renderStandardBlock(block, x, y, z);
+                            break;
+                        case 1: // UP
+                            renderblocks.setRenderBounds(minX, 0.6F, minZ, maxX, 1.0F, maxZ);
+                            renderblocks.renderStandardBlock(block, x, y, z);
+                            break;
+                        case 2: // NORTH
+                            renderblocks.setRenderBounds(minX, minY, 0.0, maxX, maxY, 0.4F);
+                            renderblocks.renderStandardBlock(block, x, y, z);
+                            break;
+                        case 3: // SOUTH
+                            renderblocks.setRenderBounds(minX, minY, 0.6F, maxX, maxY, 1.0);
+                            renderblocks.renderStandardBlock(block, x, y, z);
+                            break;
+                        case 4: // WEST
+                            renderblocks.setRenderBounds(0.0, minY, minZ, 0.4F, maxY, maxZ);
+                            renderblocks.renderStandardBlock(block, x, y, z);
+                            break;
+                        case 5: // EAST
+                            renderblocks.setRenderBounds(0.6F, minY, minZ, 1.0, maxY, maxZ);
+                            renderblocks.renderStandardBlock(block, x, y, z);
+                            break;
                     }
                 }
             }
@@ -77,8 +69,7 @@ public class BlockRendererHydrogenPipe implements ISimpleBlockRenderingHandler
     }
 
     @Override
-    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
-    {
+    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
         final float minSize = 0.4F;
         final float maxSize = 0.6F;
 
@@ -113,21 +104,19 @@ public class BlockRendererHydrogenPipe implements ISimpleBlockRenderingHandler
     }
 
     @Override
-    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
-    {
+    public boolean renderWorldBlock(
+            IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
         this.renderPipe(renderer, world, block, x, y, z);
         return true;
     }
 
     @Override
-    public boolean shouldRender3DInInventory(int modelId)
-    {
+    public boolean shouldRender3DInInventory(int modelId) {
         return true;
     }
 
     @Override
-    public int getRenderId()
-    {
+    public int getRenderId() {
         return this.renderID;
     }
 }

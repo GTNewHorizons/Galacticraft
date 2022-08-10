@@ -8,42 +8,36 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
-public class BlockRendererUnlitTorch implements ISimpleBlockRenderingHandler
-{
+public class BlockRendererUnlitTorch implements ISimpleBlockRenderingHandler {
     final int renderID;
 
-    public BlockRendererUnlitTorch(int var1)
-    {
+    public BlockRendererUnlitTorch(int var1) {
         this.renderID = var1;
     }
 
     @Override
-    public boolean renderWorldBlock(IBlockAccess var1, int var2, int var3, int var4, Block var5, int var6, RenderBlocks var7)
-    {
+    public boolean renderWorldBlock(
+            IBlockAccess var1, int var2, int var3, int var4, Block var5, int var6, RenderBlocks var7) {
         BlockRendererUnlitTorch.renderGCUnlitTorch(var7, var5, var1, var2, var3, var4);
         return true;
     }
 
     @Override
-    public boolean shouldRender3DInInventory(int modelId)
-    {
+    public boolean shouldRender3DInInventory(int modelId) {
         return false;
     }
 
     @Override
-    public int getRenderId()
-    {
+    public int getRenderId() {
         return this.renderID;
     }
 
     @Override
-    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
-    {
+    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
         BlockRendererUnlitTorch.renderTorchAtAngle(renderer, block, 0, 0, 0, 0.0D, 0.0D);
     }
 
-    public static void renderInvNormalBlock(RenderBlocks var0, Block var1, int var2)
-    {
+    public static void renderInvNormalBlock(RenderBlocks var0, Block var1, int var2) {
         final Tessellator var3 = Tessellator.instance;
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -74,8 +68,8 @@ public class BlockRendererUnlitTorch implements ISimpleBlockRenderingHandler
         var3.draw();
     }
 
-    public static void renderGCUnlitTorch(RenderBlocks renderBlocks, Block par1Block, IBlockAccess var1, int par2, int par3, int par4)
-    {
+    public static void renderGCUnlitTorch(
+            RenderBlocks renderBlocks, Block par1Block, IBlockAccess var1, int par2, int par3, int par4) {
         final int var5 = var1.getBlockMetadata(par2, par3, par4);
         final Tessellator var6 = Tessellator.instance;
         var6.setBrightness(par1Block.getMixedBrightnessForBlock(var1, par2, par3, par4));
@@ -84,30 +78,31 @@ public class BlockRendererUnlitTorch implements ISimpleBlockRenderingHandler
         final double var9 = 0.5D - var7;
         final double var11 = 0.20000000298023224D;
 
-        if (var5 == 1)
-        {
-            BlockRendererUnlitTorch.renderTorchAtAngle(renderBlocks, par1Block, par2 - var9, par3 + var11, par4, -var7, 0.0D);
-        }
-        else if (var5 == 2)
-        {
-            BlockRendererUnlitTorch.renderTorchAtAngle(renderBlocks, par1Block, par2 + var9, par3 + var11, par4, var7, 0.0D);
-        }
-        else if (var5 == 3)
-        {
-            BlockRendererUnlitTorch.renderTorchAtAngle(renderBlocks, par1Block, par2, par3 + var11, par4 - var9, 0.0D, -var7);
-        }
-        else if (var5 == 4)
-        {
-            BlockRendererUnlitTorch.renderTorchAtAngle(renderBlocks, par1Block, par2, par3 + var11, par4 + var9, 0.0D, var7);
-        }
-        else
-        {
+        if (var5 == 1) {
+            BlockRendererUnlitTorch.renderTorchAtAngle(
+                    renderBlocks, par1Block, par2 - var9, par3 + var11, par4, -var7, 0.0D);
+        } else if (var5 == 2) {
+            BlockRendererUnlitTorch.renderTorchAtAngle(
+                    renderBlocks, par1Block, par2 + var9, par3 + var11, par4, var7, 0.0D);
+        } else if (var5 == 3) {
+            BlockRendererUnlitTorch.renderTorchAtAngle(
+                    renderBlocks, par1Block, par2, par3 + var11, par4 - var9, 0.0D, -var7);
+        } else if (var5 == 4) {
+            BlockRendererUnlitTorch.renderTorchAtAngle(
+                    renderBlocks, par1Block, par2, par3 + var11, par4 + var9, 0.0D, var7);
+        } else {
             BlockRendererUnlitTorch.renderTorchAtAngle(renderBlocks, par1Block, par2, par3, par4, 0.0D, 0.0D);
         }
     }
 
-    public static void renderTorchAtAngle(RenderBlocks renderBlocks, Block par1Block, double par2, double par4, double par6, double par8, double par10)
-    {
+    public static void renderTorchAtAngle(
+            RenderBlocks renderBlocks,
+            Block par1Block,
+            double par2,
+            double par4,
+            double par6,
+            double par8,
+            double par10) {
         // if (par1Block instanceof GCCoreBlockUnlitTorch)
         {
             final Tessellator tessellator = Tessellator.instance;
@@ -133,10 +128,14 @@ public class BlockRendererUnlitTorch implements ISimpleBlockRenderingHandler
             final double d20 = par6 + 0.5D;
             final double d21 = 0.0625D;
             final double d22 = 0.625D;
-            tessellator.addVertexWithUV(par2 + par8 * (1.0D - d22) - d21, par4 + d22, par6 + par10 * (1.0D - d22) - d21, d9, d10);
-            tessellator.addVertexWithUV(par2 + par8 * (1.0D - d22) - d21, par4 + d22, par6 + par10 * (1.0D - d22) + d21, d9, d12);
-            tessellator.addVertexWithUV(par2 + par8 * (1.0D - d22) + d21, par4 + d22, par6 + par10 * (1.0D - d22) + d21, d11, d12);
-            tessellator.addVertexWithUV(par2 + par8 * (1.0D - d22) + d21, par4 + d22, par6 + par10 * (1.0D - d22) - d21, d11, d10);
+            tessellator.addVertexWithUV(
+                    par2 + par8 * (1.0D - d22) - d21, par4 + d22, par6 + par10 * (1.0D - d22) - d21, d9, d10);
+            tessellator.addVertexWithUV(
+                    par2 + par8 * (1.0D - d22) - d21, par4 + d22, par6 + par10 * (1.0D - d22) + d21, d9, d12);
+            tessellator.addVertexWithUV(
+                    par2 + par8 * (1.0D - d22) + d21, par4 + d22, par6 + par10 * (1.0D - d22) + d21, d11, d12);
+            tessellator.addVertexWithUV(
+                    par2 + par8 * (1.0D - d22) + d21, par4 + d22, par6 + par10 * (1.0D - d22) - d21, d11, d10);
             tessellator.addVertexWithUV(par2 + d21 + par8, par4, par6 - d21 + par10, d15, d14);
             tessellator.addVertexWithUV(par2 + d21 + par8, par4, par6 + d21 + par10, d15, d16);
             tessellator.addVertexWithUV(par2 - d21 + par8, par4, par6 + d21 + par10, d13, d16);
@@ -158,6 +157,5 @@ public class BlockRendererUnlitTorch implements ISimpleBlockRenderingHandler
             tessellator.addVertexWithUV(d17 + par8, par4 + 0.0D, par6 - d21 + par10, d7, d8);
             tessellator.addVertexWithUV(d17, par4 + 1.0D, par6 - d21, d7, d6);
         }
-
     }
 }

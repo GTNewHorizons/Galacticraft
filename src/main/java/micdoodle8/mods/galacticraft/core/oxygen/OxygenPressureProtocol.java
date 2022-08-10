@@ -1,5 +1,8 @@
 package micdoodle8.mods.galacticraft.core.oxygen;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import micdoodle8.mods.galacticraft.api.block.IPartialSealableBlock;
 import micdoodle8.mods.galacticraft.api.vector.BlockTuple;
 import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
@@ -12,135 +15,105 @@ import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+public class OxygenPressureProtocol {
+    public static final Map<Block, ArrayList<Integer>> nonPermeableBlocks = new HashMap<Block, ArrayList<Integer>>();
 
-public class OxygenPressureProtocol
-{
-    public final static Map<Block, ArrayList<Integer>> nonPermeableBlocks = new HashMap<Block, ArrayList<Integer>>();
+    static {
+        for (final String s : ConfigManagerCore.sealableIDs) {
+            try {
+                BlockTuple bt = ConfigManagerCore.stringToBlock(s, "External Sealable IDs", true);
+                if (bt == null) continue;
 
-    static
-    {
-        for (final String s : ConfigManagerCore.sealableIDs)
-        {
-            try
-            {
-            	BlockTuple bt = ConfigManagerCore.stringToBlock(s, "External Sealable IDs", true); 
-            	if (bt == null) continue;
+                int meta = bt.meta;
 
-    			int meta = bt.meta;
-
-                if (OxygenPressureProtocol.nonPermeableBlocks.containsKey(bt.block))
-                {
+                if (OxygenPressureProtocol.nonPermeableBlocks.containsKey(bt.block)) {
                     final ArrayList<Integer> list = OxygenPressureProtocol.nonPermeableBlocks.get(bt.block);
-                    if (!list.contains(meta))
-                    {
+                    if (!list.contains(meta)) {
                         list.add(meta);
-                    }
-                    else
-                    {
+                    } else {
                         GCLog.info("[config] External Sealable IDs: skipping duplicate entry '" + s + "'.");
                     }
-                }
-                else
-                {
+                } else {
                     final ArrayList<Integer> list = new ArrayList<Integer>();
                     list.add(meta);
                     OxygenPressureProtocol.nonPermeableBlocks.put(bt.block, list);
                 }
-            }
-            catch (final Exception e)
-            {
-                GCLog.severe("[config] External Sealable IDs: error parsing '" + s + "'. Must be in the form Blockname or BlockName:metadata");
+            } catch (final Exception e) {
+                GCLog.severe("[config] External Sealable IDs: error parsing '" + s
+                        + "'. Must be in the form Blockname or BlockName:metadata");
             }
         }
     }
 
-    public static void updateSealerStatus(TileEntityOxygenSealer head)
-    {
-        try
-        {
+    public static void updateSealerStatus(TileEntityOxygenSealer head) {
+        try {
             head.threadSeal = new ThreadFindSeal(head);
-        }
-        catch (IllegalThreadStateException e)
-        {
+        } catch (IllegalThreadStateException e) {
 
         }
     }
 
-    public static void onEdgeBlockUpdated(World world, BlockVec3 vec)
-    {
-        if (ConfigManagerCore.enableSealerEdgeChecks)
-        {
+    public static void onEdgeBlockUpdated(World world, BlockVec3 vec) {
+        if (ConfigManagerCore.enableSealerEdgeChecks) {
             TickHandlerServer.scheduleNewEdgeCheck(world.provider.dimensionId, vec);
         }
     }
 
-    public static boolean canBlockPassAir(World world, Block block, BlockVec3 vec, int side)
-    {
-        if (block == null)
-        	return true;
+    public static boolean canBlockPassAir(World world, Block block, BlockVec3 vec, int side) {
+        if (block == null) return true;
 
-        if (block instanceof IPartialSealableBlock)
-        {
-            return !((IPartialSealableBlock) block).isSealed(world, vec.x, vec.y, vec.z, ForgeDirection.getOrientation(side));
+        if (block instanceof IPartialSealableBlock) {
+            return !((IPartialSealableBlock) block)
+                    .isSealed(world, vec.x, vec.y, vec.z, ForgeDirection.getOrientation(side));
         }
 
-    	//Check leaves first, because their isOpaqueCube() test depends on graphics settings
-        //(See net.minecraft.block.BlockLeaves.isOpaqueCube()!)
-        if (block instanceof BlockLeavesBase)
-        {
+        // Check leaves first, because their isOpaqueCube() test depends on graphics settings
+        // (See net.minecraft.block.BlockLeaves.isOpaqueCube()!)
+        if (block instanceof BlockLeavesBase) {
             return true;
         }
 
-        if (block.isOpaqueCube())
-        {
-            return block instanceof BlockGravel || block.getMaterial() == Material.cloth || block instanceof BlockSponge;
-
+        if (block.isOpaqueCube()) {
+            return block instanceof BlockGravel
+                    || block.getMaterial() == Material.cloth
+                    || block instanceof BlockSponge;
         }
 
-        if (block instanceof BlockGlass || block instanceof BlockStainedGlass)
-        {
+        if (block instanceof BlockGlass || block instanceof BlockStainedGlass) {
             return false;
         }
 
-        //Solid but non-opaque blocks, for example special glass
-        if (OxygenPressureProtocol.nonPermeableBlocks.containsKey(block))
-        {
+        // Solid but non-opaque blocks, for example special glass
+        if (OxygenPressureProtocol.nonPermeableBlocks.containsKey(block)) {
             ArrayList<Integer> metaList = OxygenPressureProtocol.nonPermeableBlocks.get(block);
-            if (metaList.contains(Integer.valueOf(-1)) || metaList.contains(vec.getBlockMetadata(world)))
-            {
+            if (metaList.contains(Integer.valueOf(-1)) || metaList.contains(vec.getBlockMetadata(world))) {
                 return false;
             }
         }
 
-        //Half slab seals on the top side or the bottom side according to its metadata
-        if (block instanceof BlockSlab)
-        {
-            return !(side == 0 && (vec.getBlockMetadata(world) & 8) == 8 || side == 1 && (vec.getBlockMetadata(world) & 8) == 0);
+        // Half slab seals on the top side or the bottom side according to its metadata
+        if (block instanceof BlockSlab) {
+            return !(side == 0 && (vec.getBlockMetadata(world) & 8) == 8
+                    || side == 1 && (vec.getBlockMetadata(world) & 8) == 0);
         }
 
-        //Farmland etc only seals on the solid underside
-        if (block instanceof BlockFarmland || block instanceof BlockEnchantmentTable || block instanceof BlockLiquid)
-        {
+        // Farmland etc only seals on the solid underside
+        if (block instanceof BlockFarmland || block instanceof BlockEnchantmentTable || block instanceof BlockLiquid) {
             return side != 1;
         }
 
-        if (block instanceof BlockPistonBase)
-        {
+        if (block instanceof BlockPistonBase) {
             BlockPistonBase piston = (BlockPistonBase) block;
             int meta = vec.getBlockMetadata(world);
-            if (BlockPistonBase.isExtended(meta))
-            {
+            if (BlockPistonBase.isExtended(meta)) {
                 int facing = BlockPistonBase.getPistonOrientation(meta);
                 return side != facing;
             }
             return false;
         }
 
-        //General case - this should cover any block which correctly implements isBlockSolidOnSide
-        //including most modded blocks - Forge microblocks in particular is covered by this.
+        // General case - this should cover any block which correctly implements isBlockSolidOnSide
+        // including most modded blocks - Forge microblocks in particular is covered by this.
         // ### Any exceptions in mods should implement the IPartialSealableBlock interface ###
         return !block.isSideSolid(world, vec.x, vec.y, vec.z, ForgeDirection.getOrientation(side ^ 1));
     }

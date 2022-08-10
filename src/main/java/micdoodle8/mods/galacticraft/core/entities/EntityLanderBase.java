@@ -2,6 +2,10 @@ package micdoodle8.mods.galacticraft.core.entities;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import io.netty.buffer.ByteBuf;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
 import micdoodle8.mods.galacticraft.core.inventory.IInventorySettable;
@@ -22,13 +26,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-
-public abstract class EntityLanderBase extends EntityAdvancedMotion implements IInventorySettable, IScaleableFuelLevel
-{
+public abstract class EntityLanderBase extends EntityAdvancedMotion implements IInventorySettable, IScaleableFuelLevel {
     private final int FUEL_TANK_CAPACITY = 5000;
     public FluidTank fuelTank = new FluidTank(this.FUEL_TANK_CAPACITY);
     protected boolean hasReceivedPacket;
@@ -39,73 +37,61 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
     private ArrayList prevData;
     private boolean networkDataChanged;
 
-    public EntityLanderBase(World var1, float yOffset)
-    {
+    public EntityLanderBase(World var1, float yOffset) {
         super(var1, yOffset);
         this.setSize(3.0F, 3.0F);
     }
 
     @Override
-    public void updateRiderPosition()
-    {
-        if (this.riddenByEntity != null)
-        {
-            this.riddenByEntity.setPosition(this.posX, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(), this.posZ);
+    public void updateRiderPosition() {
+        if (this.riddenByEntity != null) {
+            this.riddenByEntity.setPosition(
+                    this.posX, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(), this.posZ);
         }
     }
 
     @Override
-    public boolean shouldSendAdvancedMotionPacket()
-    {
+    public boolean shouldSendAdvancedMotionPacket() {
         return this.shouldMoveClient != null && this.shouldMoveServer != null;
     }
 
     @Override
-    public boolean canSetPositionClient()
-    {
+    public boolean canSetPositionClient() {
         return this.shouldSendAdvancedMotionPacket();
     }
 
     @Override
-    public int getScaledFuelLevel(int i)
-    {
+    public int getScaledFuelLevel(int i) {
         final double fuelLevel = this.fuelTank.getFluid() == null ? 0 : this.fuelTank.getFluid().amount;
 
         return (int) (fuelLevel * i / this.FUEL_TANK_CAPACITY);
     }
 
-    public EntityLanderBase(World var1, double var2, double var4, double var6, float yOffset)
-    {
+    public EntityLanderBase(World var1, double var2, double var4, double var6, float yOffset) {
         this(var1, yOffset);
         this.setPosition(var2, var4 + this.yOffset, var6);
     }
 
-    public EntityLanderBase(EntityPlayerMP player, float yOffset)
-    {
+    public EntityLanderBase(EntityPlayerMP player, float yOffset) {
         this(player.worldObj, player.posX, player.posY, player.posZ, yOffset);
 
         GCPlayerStats stats = GCPlayerStats.get(player);
         this.containedItems = new ItemStack[stats.rocketStacks.length + 1];
-//        this.fuelTank.setFluid(new FluidStack(GalacticraftCore.fluidFuel, stats.fuelLevel));
-//        ItemStack rocket = new ItemStack(stats.rocketItem, 1, stats.rocketType);
-        for (int i = 0; i < stats.rocketStacks.length; i++)
-        {
-            if (stats.rocketStacks[i] != null)
-            {
+        //        this.fuelTank.setFluid(new FluidStack(GalacticraftCore.fluidFuel, stats.fuelLevel));
+        //        ItemStack rocket = new ItemStack(stats.rocketItem, 1, stats.rocketType);
+        for (int i = 0; i < stats.rocketStacks.length; i++) {
+            if (stats.rocketStacks[i] != null) {
                 ItemStack item = stats.rocketStacks[i].copy();
-//                if (item.isItemEqual(rocket))
-//                {
-//                    NBTTagCompound nbt = new NBTTagCompound();
-//                    nbt.setInteger("RocketFuel",stats.fuelLevel);
-//                    rocket.setTagCompound(nbt);
-//                    item = rocket;
-//                }
+                //                if (item.isItemEqual(rocket))
+                //                {
+                //                    NBTTagCompound nbt = new NBTTagCompound();
+                //                    nbt.setInteger("RocketFuel",stats.fuelLevel);
+                //                    rocket.setTagCompound(nbt);
+                //                    item = rocket;
+                //                }
                 this.containedItems[i] = item;
 
-
-            }
-            else
-            {
+            } else {
                 this.containedItems[i] = null;
             }
         }
@@ -116,67 +102,53 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
     }
 
     @Override
-    public void onUpdate()
-    {
+    public void onUpdate() {
         super.onUpdate();
 
-        if (this.ticks < 40 && this.posY > 150)
-        {
-            if (this.riddenByEntity == null)
-            {
+        if (this.ticks < 40 && this.posY > 150) {
+            if (this.riddenByEntity == null) {
                 final EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 5);
 
-                if (player != null && player.ridingEntity == null)
-                {
+                if (player != null && player.ridingEntity == null) {
                     player.mountEntity(this);
                 }
             }
         }
 
-        if (!this.worldObj.isRemote)
-        {
-   			this.checkFluidTankTransfer(this.containedItems.length - 1, this.fuelTank);
+        if (!this.worldObj.isRemote) {
+            this.checkFluidTankTransfer(this.containedItems.length - 1, this.fuelTank);
         }
 
         AxisAlignedBB box = this.boundingBox.expand(0.2D, 0.4D, 0.2D);
 
         final List<Entity> var15 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, box);
 
-        if (var15 != null && !var15.isEmpty())
-        {
-            for (Entity entity : var15)
-            {
-                if (entity != this.riddenByEntity)
-                {
+        if (var15 != null && !var15.isEmpty()) {
+            for (Entity entity : var15) {
+                if (entity != this.riddenByEntity) {
                     this.pushEntityAway(entity);
                 }
             }
         }
     }
-   
-    
-    private void checkFluidTankTransfer(int slot, FluidTank tank)
-	{
-		FluidUtil.tryFillContainerFuel(tank, this.containedItems, slot);
-	}
 
-    private void pushEntityAway(Entity entityToPush)
-    {
-        if (this.riddenByEntity != entityToPush && this.ridingEntity != entityToPush)
-        {
+    private void checkFluidTankTransfer(int slot, FluidTank tank) {
+        FluidUtil.tryFillContainerFuel(tank, this.containedItems, slot);
+    }
+
+    private void pushEntityAway(Entity entityToPush) {
+        if (this.riddenByEntity != entityToPush && this.ridingEntity != entityToPush) {
             double d0 = this.posX - entityToPush.posX;
             double d1 = this.posZ - entityToPush.posZ;
             double d2 = MathHelper.abs_max(d0, d1);
 
-            if (d2 >= 0.009999999776482582D)
-            {
+            if (d2 >= 0.009999999776482582D) {
                 d2 = MathHelper.sqrt_double(d2);
                 d0 /= d2;
                 d1 /= d2;
                 double d3 = 1.0D / d2;
 
-                if (d3 > 1.0D)
-                {
+                if (d3 > 1.0D) {
                     d3 = 1.0D;
                 }
 
@@ -192,47 +164,39 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
     }
 
     @Override
-    protected void readEntityFromNBT(NBTTagCompound nbt)
-    {
+    protected void readEntityFromNBT(NBTTagCompound nbt) {
         final NBTTagList var2 = nbt.getTagList("Items", 10);
 
         int invSize = nbt.getInteger("rocketStacksLength");
         if (invSize < 3) invSize = 3;
         this.containedItems = new ItemStack[invSize];
 
-        for (int var3 = 0; var3 < var2.tagCount(); ++var3)
-        {
+        for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
             final NBTTagCompound var4 = var2.getCompoundTagAt(var3);
             final int var5 = var4.getByte("Slot") & 255;
 
-            if (var5 < this.containedItems.length)
-            {
+            if (var5 < this.containedItems.length) {
                 this.containedItems[var5] = ItemStack.loadItemStackFromNBT(var4);
             }
         }
 
-        if (nbt.hasKey("fuelTank"))
-        {
+        if (nbt.hasKey("fuelTank")) {
             this.fuelTank.readFromNBT(nbt.getCompoundTag("fuelTank"));
         }
 
-        if (nbt.hasKey("RiderUUID_LSB"))
-        {
+        if (nbt.hasKey("RiderUUID_LSB")) {
             this.persistantRiderUUID = new UUID(nbt.getLong("RiderUUID_LSB"), nbt.getLong("RiderUUID_MSB"));
         }
     }
 
     @Override
-    protected void writeEntityToNBT(NBTTagCompound nbt)
-    {
+    protected void writeEntityToNBT(NBTTagCompound nbt) {
         final NBTTagList nbttaglist = new NBTTagList();
 
         nbt.setInteger("rocketStacksLength", this.containedItems.length);
 
-        for (int i = 0; i < this.containedItems.length; ++i)
-        {
-            if (this.containedItems[i] != null)
-            {
+        for (int i = 0; i < this.containedItems.length; ++i) {
+            if (this.containedItems[i] != null) {
                 final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
                 nbttagcompound1.setByte("Slot", (byte) i);
                 this.containedItems[i].writeToNBT(nbttagcompound1);
@@ -242,30 +206,25 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
 
         nbt.setTag("Items", nbttaglist);
 
-        if (this.fuelTank.getFluid() != null)
-        {
+        if (this.fuelTank.getFluid() != null) {
             nbt.setTag("fuelTank", this.fuelTank.writeToNBT(new NBTTagCompound()));
         }
 
         UUID id = this.getOwnerUUID();
 
-        if (id != null)
-        {
+        if (id != null) {
             nbt.setLong("RiderUUID_LSB", id.getLeastSignificantBits());
             nbt.setLong("RiderUUID_MSB", id.getMostSignificantBits());
         }
     }
 
     @Override
-    public boolean shouldMove()
-    {
-        if (this.shouldMoveClient == null || this.shouldMoveServer == null)
-        {
+    public boolean shouldMove() {
+        if (this.shouldMoveClient == null || this.shouldMoveServer == null) {
             return false;
         }
 
-        if (this.ticks < 40)
-        {
+        if (this.ticks < 40) {
             return false;
         }
 
@@ -275,17 +234,13 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
     public abstract double getInitialMotionY();
 
     @Override
-    public void tickInAir()
-    {
-        if (this.worldObj.isRemote)
-        {
-            if (!this.shouldMove())
-            {
+    public void tickInAir() {
+        if (this.worldObj.isRemote) {
+            if (!this.shouldMove()) {
                 this.motionY = this.motionX = this.motionZ = 0.0F;
             }
 
-            if (this.shouldMove() && !this.lastShouldMove)
-            {
+            if (this.shouldMove() && !this.lastShouldMove) {
                 this.motionY = this.getInitialMotionY();
             }
 
@@ -294,27 +249,22 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
     }
 
     @Override
-    public ArrayList<Object> getNetworkedData()
-    {
+    public ArrayList<Object> getNetworkedData() {
         final ArrayList<Object> objList = new ArrayList<Object>();
 
-        if (!this.worldObj.isRemote)
-        {
+        if (!this.worldObj.isRemote) {
             Integer cargoLength = this.containedItems != null ? this.containedItems.length : 0;
             objList.add(cargoLength);
             objList.add(this.fuelTank.getFluid() == null ? 0 : this.fuelTank.getFluid().amount);
         }
 
-        if (this.worldObj.isRemote)
-        {
+        if (this.worldObj.isRemote) {
             this.shouldMoveClient = this.shouldMove();
             objList.add(this.shouldMoveClient);
-        }
-        else
-        {
+        } else {
             this.shouldMoveServer = this.shouldMove();
             objList.add(this.shouldMoveServer);
-            //Server send rider information for client to check
+            // Server send rider information for client to check
             objList.add(this.riddenByEntity == null ? -1 : this.riddenByEntity.getEntityId());
         }
 
@@ -322,47 +272,38 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
         this.prevData = objList;
         return objList;
     }
-    
+
     @Override
-    public boolean networkedDataChanged()
-    {
+    public boolean networkedDataChanged() {
         return this.networkDataChanged || this.shouldMoveClient == null || this.shouldMoveServer == null;
     }
 
     @Override
-    public boolean canRiderInteract()
-    {
+    public boolean canRiderInteract() {
         return true;
     }
 
     @Override
-    public int getPacketTickSpacing()
-    {
+    public int getPacketTickSpacing() {
         return 2;
     }
 
     @Override
-    public double getPacketSendDistance()
-    {
+    public double getPacketSendDistance() {
         return 250.0D;
     }
 
     @Override
-    public void readNetworkedData(ByteBuf buffer)
-    {
-        try
-        {
-            if (this.worldObj.isRemote)
-            {
-                if (!this.hasReceivedPacket)
-                {
+    public void readNetworkedData(ByteBuf buffer) {
+        try {
+            if (this.worldObj.isRemote) {
+                if (!this.hasReceivedPacket) {
                     GalacticraftCore.packetPipeline.sendToServer(new PacketDynamic(this));
                     this.hasReceivedPacket = true;
                 }
 
                 int cargoLength = buffer.readInt();
-                if (this.containedItems == null || this.containedItems.length == 0)
-                {
+                if (this.containedItems == null || this.containedItems.length == 0) {
                     this.containedItems = new ItemStack[cargoLength];
                     GalacticraftCore.packetPipeline.sendToServer(new PacketDynamicInventory(this));
                 }
@@ -371,121 +312,108 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
 
                 this.shouldMoveServer = buffer.readBoolean();
 
-                //Check has correct rider on client
+                // Check has correct rider on client
                 int shouldBeMountedId = buffer.readInt();
-                if (this.riddenByEntity == null)
-                {
-                	 if (shouldBeMountedId > -1)
-                	 {
-                		 Entity e = FMLClientHandler.instance().getWorldClient().getEntityByID(shouldBeMountedId);
-                		 if (e != null)
-                		 {
-                			 if (e.dimension != this.dimension)
-                			 {
-    	        				 if (e instanceof EntityPlayer)
-    	        				 {
-    	        					 e = WorldUtil.forceRespawnClient(this.dimension, e.worldObj.difficultySetting.getDifficultyId(), e.worldObj.getWorldInfo().getTerrainType().getWorldTypeName(), ((EntityPlayerMP)e).theItemInWorldManager.getGameType().getID());
-                					 e.mountEntity(this);
-                				 }
-                			 }
-                			 else
-                				 e.mountEntity(this);
-                		 }
-                	 }
+                if (this.riddenByEntity == null) {
+                    if (shouldBeMountedId > -1) {
+                        Entity e = FMLClientHandler.instance().getWorldClient().getEntityByID(shouldBeMountedId);
+                        if (e != null) {
+                            if (e.dimension != this.dimension) {
+                                if (e instanceof EntityPlayer) {
+                                    e = WorldUtil.forceRespawnClient(
+                                            this.dimension,
+                                            e.worldObj.difficultySetting.getDifficultyId(),
+                                            e.worldObj
+                                                    .getWorldInfo()
+                                                    .getTerrainType()
+                                                    .getWorldTypeName(),
+                                            ((EntityPlayerMP) e)
+                                                    .theItemInWorldManager
+                                                    .getGameType()
+                                                    .getID());
+                                    e.mountEntity(this);
+                                }
+                            } else e.mountEntity(this);
+                        }
+                    }
+                } else if (this.riddenByEntity.getEntityId() != shouldBeMountedId) {
+                    if (shouldBeMountedId == -1) {
+                        this.riddenByEntity.mountEntity(null);
+                    } else {
+                        Entity e = FMLClientHandler.instance().getWorldClient().getEntityByID(shouldBeMountedId);
+                        if (e != null) {
+                            if (e.dimension != this.dimension) {
+                                if (e instanceof EntityPlayer) {
+                                    e = WorldUtil.forceRespawnClient(
+                                            this.dimension,
+                                            e.worldObj.difficultySetting.getDifficultyId(),
+                                            e.worldObj
+                                                    .getWorldInfo()
+                                                    .getTerrainType()
+                                                    .getWorldTypeName(),
+                                            ((EntityPlayerMP) e)
+                                                    .theItemInWorldManager
+                                                    .getGameType()
+                                                    .getID());
+                                    e.mountEntity(this);
+                                }
+                            } else e.mountEntity(this);
+                        }
+                    }
                 }
-                else if (this.riddenByEntity.getEntityId() != shouldBeMountedId)
-                {
-                	if (shouldBeMountedId == -1)
-                	{
-                		this.riddenByEntity.mountEntity(null);
-                	}
-                	else
-                	{
-                		Entity e = FMLClientHandler.instance().getWorldClient().getEntityByID(shouldBeMountedId);
-               		 	if (e != null)
-               		 	{
-               			 if (e.dimension != this.dimension)
-               			 {
-	        				 if (e instanceof EntityPlayer)
-	        				 {
-	        					 e = WorldUtil.forceRespawnClient(this.dimension, e.worldObj.difficultySetting.getDifficultyId(), e.worldObj.getWorldInfo().getTerrainType().getWorldTypeName(), ((EntityPlayerMP)e).theItemInWorldManager.getGameType().getID());
-               					 e.mountEntity(this);
-               				 }
-               			 }
-               			 else
-               				 e.mountEntity(this);
-               		 	}
-                	}
-                }
-            }
-            else
-            {
+            } else {
                 this.shouldMoveClient = buffer.readBoolean();
             }
-        }
-        catch (final Exception e)
-        {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public boolean allowDamageSource(DamageSource damageSource)
-    {
+    public boolean allowDamageSource(DamageSource damageSource) {
         return !damageSource.isExplosion();
     }
 
     @Override
-    public List<ItemStack> getItemsDropped()
-    {
+    public List<ItemStack> getItemsDropped() {
         return new ArrayList<ItemStack>(Arrays.asList(this.containedItems));
     }
 
     @Override
-    public int getSizeInventory()
-    {
+    public int getSizeInventory() {
         return this.containedItems.length;
     }
 
     @Override
-    public void setSizeInventory(int size)
-    {
+    public void setSizeInventory(int size) {
         this.containedItems = new ItemStack[size];
     }
 
     @Override
-    public boolean isItemValidForSlot(int var1, ItemStack var2)
-    {
+    public boolean isItemValidForSlot(int var1, ItemStack var2) {
         return false;
     }
 
     @Override
-    public double getPacketRange()
-    {
+    public double getPacketRange() {
         return 50.0D;
     }
 
     @Override
-    public UUID getOwnerUUID()
-    {
-        if (this.riddenByEntity != null && !(this.riddenByEntity instanceof EntityPlayer))
-        {
+    public UUID getOwnerUUID() {
+        if (this.riddenByEntity != null && !(this.riddenByEntity instanceof EntityPlayer)) {
             return null;
         }
 
         UUID id;
 
-        if (riddenByEntity != null)
-        {
+        if (riddenByEntity != null) {
             id = ((EntityPlayer) this.riddenByEntity).getPersistentID();
 
-            if (id != null)
-            {
+            if (id != null) {
                 this.persistantRiderUUID = id;
             }
-        }
-        else
-        {
+        } else {
             id = this.persistantRiderUUID;
         }
 

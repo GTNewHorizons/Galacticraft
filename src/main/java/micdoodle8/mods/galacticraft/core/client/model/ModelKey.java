@@ -3,12 +3,10 @@ package micdoodle8.mods.galacticraft.core.client.model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelKey extends ModelBase
-{
+public class ModelKey extends ModelBase {
     public ModelRenderer keyParts[] = new ModelRenderer[5];
 
-    public ModelKey()
-    {
+    public ModelKey() {
         this.textureWidth = 64;
         this.textureHeight = 64;
         this.keyParts[4] = new ModelRenderer(this, 50, 43);
@@ -38,10 +36,8 @@ public class ModelKey extends ModelBase
         this.keyParts[0].mirror = true;
     }
 
-    public void renderAll()
-    {
-        for (final ModelRenderer nmtmr : this.keyParts)
-        {
+    public void renderAll() {
+        for (final ModelRenderer nmtmr : this.keyParts) {
             nmtmr.rotationPointX = -4.0F;
             nmtmr.rotationPointY = 0.0F;
             nmtmr.rotationPointZ = -2.0F;

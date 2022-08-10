@@ -8,21 +8,26 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.GL11;
 
-public class ItemRendererBeamReflector implements IItemRenderer
-{
-    private void renderBeamReflector(ItemRenderType type, RenderBlocks render, ItemStack item, float translateX, float translateY, float translateZ)
-    {
+public class ItemRendererBeamReflector implements IItemRenderer {
+    private void renderBeamReflector(
+            ItemRenderType type,
+            RenderBlocks render,
+            ItemStack item,
+            float translateX,
+            float translateY,
+            float translateZ) {
         GL11.glPushMatrix();
         this.transform(type);
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TileEntityBeamReflectorRenderer.reflectorTexture);
+        FMLClientHandler.instance()
+                .getClient()
+                .renderEngine
+                .bindTexture(TileEntityBeamReflectorRenderer.reflectorTexture);
         TileEntityBeamReflectorRenderer.reflectorModel.renderAll();
         GL11.glPopMatrix();
     }
 
-    public void transform(ItemRenderType type)
-    {
-        if (type == ItemRenderType.EQUIPPED)
-        {
+    public void transform(ItemRenderType type) {
+        if (type == ItemRenderType.EQUIPPED) {
             GL11.glTranslatef(0.6F, 0.45F, 0.6F);
             GL11.glRotatef(185, 1, 0, 0);
             GL11.glRotatef(40, 0, 1, 0);
@@ -30,8 +35,7 @@ public class ItemRendererBeamReflector implements IItemRenderer
             GL11.glScalef(2.0F, 2.0F, 2.0F);
         }
 
-        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON)
-        {
+        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
             GL11.glScalef(2.2F, 2.2F, 2.2F);
             GL11.glTranslatef(0.291F, 0.2F, 0.3F);
             GL11.glRotatef(180.0F, 0.0F, 0F, 1F);
@@ -39,17 +43,13 @@ public class ItemRendererBeamReflector implements IItemRenderer
 
         GL11.glScalef(-0.4F, -0.4F, 0.4F);
 
-        if (type == ItemRenderType.INVENTORY || type == ItemRenderType.ENTITY)
-        {
-            if (type == ItemRenderType.INVENTORY)
-            {
+        if (type == ItemRenderType.INVENTORY || type == ItemRenderType.ENTITY) {
+            if (type == ItemRenderType.INVENTORY) {
                 GL11.glTranslatef(0.0F, 1.45F, 0.0F);
                 GL11.glScalef(2.0F, 2.0F, 2.0F);
                 GL11.glRotatef(180, 0, 0, 1);
                 GL11.glRotatef(180, 0, 1, 0);
-            }
-            else
-            {
+            } else {
                 GL11.glRotatef(Sys.getTime() / 90F % 360F, 0F, 1F, 0F);
                 GL11.glScalef(2F, -2F, 2F);
             }
@@ -61,51 +61,44 @@ public class ItemRendererBeamReflector implements IItemRenderer
     /**
      * IItemRenderer implementation *
      */
-
     @Override
-    public boolean handleRenderType(ItemStack item, ItemRenderType type)
-    {
-        switch (type)
-        {
-        case ENTITY:
-            return true;
-        case EQUIPPED:
-            return true;
-        case EQUIPPED_FIRST_PERSON:
-            return true;
-        case INVENTORY:
-            return true;
-        default:
-            return false;
+    public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+        switch (type) {
+            case ENTITY:
+                return true;
+            case EQUIPPED:
+                return true;
+            case EQUIPPED_FIRST_PERSON:
+                return true;
+            case INVENTORY:
+                return true;
+            default:
+                return false;
         }
     }
 
     @Override
-    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
-    {
+    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
         return true;
     }
 
     @Override
-    public void renderItem(ItemRenderType type, ItemStack item, Object... data)
-    {
-        switch (type)
-        {
-        case EQUIPPED:
-            this.renderBeamReflector(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
-            break;
-        case EQUIPPED_FIRST_PERSON:
-            this.renderBeamReflector(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
-            break;
-        case INVENTORY:
-            this.renderBeamReflector(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
-            break;
-        case ENTITY:
-            this.renderBeamReflector(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
-            break;
-        default:
-            break;
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+        switch (type) {
+            case EQUIPPED:
+                this.renderBeamReflector(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                break;
+            case EQUIPPED_FIRST_PERSON:
+                this.renderBeamReflector(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                break;
+            case INVENTORY:
+                this.renderBeamReflector(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                break;
+            case ENTITY:
+                this.renderBeamReflector(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                break;
+            default:
+                break;
         }
     }
-
 }

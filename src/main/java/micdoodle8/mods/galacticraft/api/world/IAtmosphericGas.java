@@ -1,7 +1,6 @@
 package micdoodle8.mods.galacticraft.api.world;
 
-public enum IAtmosphericGas
-{
+public enum IAtmosphericGas {
     NITROGEN,
     OXYGEN,
     CO2,
@@ -11,4 +10,3 @@ public enum IAtmosphericGas
     HELIUM,
     ARGON
 }
-

@@ -1,7 +1,6 @@
 package micdoodle8.mods.galacticraft.core.tile;
 
-public enum ReceiverMode
-{
+public enum ReceiverMode {
     EXTRACT,
     RECEIVE,
     UNDEFINED

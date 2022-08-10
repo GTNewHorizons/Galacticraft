@@ -13,27 +13,23 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityParachestRenderer extends TileEntitySpecialRenderer
-{
-    private static final ResourceLocation parachestTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/parachest.png");
+public class TileEntityParachestRenderer extends TileEntitySpecialRenderer {
+    private static final ResourceLocation parachestTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/parachest.png");
 
     private final ModelParaChestTile chestModel = new ModelParaChestTile();
 
-    public void renderGCTileEntityTreasureChestAt(TileEntityParaChest tile, double par2, double par4, double par6, float par8)
-    {
+    public void renderGCTileEntityTreasureChestAt(
+            TileEntityParaChest tile, double par2, double par4, double par6, float par8) {
         int var9;
 
-        if (!tile.hasWorldObj())
-        {
+        if (!tile.hasWorldObj()) {
             var9 = 0;
-        }
-        else
-        {
+        } else {
             final Block var10 = tile.getBlockType();
             var9 = tile.getBlockMetadata();
 
-            if (var10 != null && var9 == 0)
-            {
+            if (var10 != null && var9 == 0) {
                 var9 = tile.getBlockMetadata();
             }
         }
@@ -48,23 +44,19 @@ public class TileEntityParachestRenderer extends TileEntitySpecialRenderer
         GL11.glTranslatef(0.5F, 0.5F, 0.5F);
         short var11 = 0;
 
-        if (var9 == 2)
-        {
+        if (var9 == 2) {
             var11 = 180;
         }
 
-        if (var9 == 3)
-        {
+        if (var9 == 3) {
             var11 = 0;
         }
 
-        if (var9 == 4)
-        {
+        if (var9 == 4) {
             var11 = 90;
         }
 
-        if (var9 == 5)
-        {
+        if (var9 == 5) {
             var11 = -90;
         }
 
@@ -84,8 +76,7 @@ public class TileEntityParachestRenderer extends TileEntitySpecialRenderer
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8)
-    {
+    public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8) {
         this.renderGCTileEntityTreasureChestAt((TileEntityParaChest) par1TileEntity, par2, par4, par6, par8);
     }
 }

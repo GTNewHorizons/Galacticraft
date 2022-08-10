@@ -21,48 +21,43 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderEvolvedSkeletonBoss extends RenderLiving
-{
-    private static final ResourceLocation skeletonBossTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/skeletonboss.png");
-    private static final ResourceLocation powerTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/power.png");
+public class RenderEvolvedSkeletonBoss extends RenderLiving {
+    private static final ResourceLocation skeletonBossTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/skeletonboss.png");
+    private static final ResourceLocation powerTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/power.png");
 
     private final ModelEvolvedSkeletonBoss model = new ModelEvolvedSkeletonBoss();
 
-    public RenderEvolvedSkeletonBoss()
-    {
+    public RenderEvolvedSkeletonBoss() {
         super(new ModelEvolvedSkeletonBoss(), 1.0F);
     }
 
-    protected ResourceLocation func_110779_a(EntitySkeletonBoss par1EntityArrow)
-    {
+    protected ResourceLocation func_110779_a(EntitySkeletonBoss par1EntityArrow) {
         return RenderEvolvedSkeletonBoss.skeletonBossTexture;
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
-    {
+    protected ResourceLocation getEntityTexture(Entity par1Entity) {
         return this.func_110779_a((EntitySkeletonBoss) par1Entity);
     }
 
     @Override
-    protected void preRenderCallback(EntityLivingBase par1EntityLiving, float par2)
-    {
+    protected void preRenderCallback(EntityLivingBase par1EntityLiving, float par2) {
         GL11.glScalef(1.2F, 1.2F, 1.2F);
     }
 
     @Override
-    public void doRender(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
-    {
+    public void doRender(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
         BossStatus.setBossStatus((IBossDisplayData) par1EntityLiving, false);
 
         super.doRender(par1EntityLiving, par2, par4, par6, par8, par9);
     }
 
     @Override
-    protected void renderEquippedItems(EntityLivingBase par1EntityLiving, float par2)
-    {
-        if (((EntitySkeletonBoss) par1EntityLiving).throwTimer + ((EntitySkeletonBoss) par1EntityLiving).postThrowDelay == 0)
-        {
+    protected void renderEquippedItems(EntityLivingBase par1EntityLiving, float par2) {
+        if (((EntitySkeletonBoss) par1EntityLiving).throwTimer + ((EntitySkeletonBoss) par1EntityLiving).postThrowDelay
+                == 0) {
             GL11.glPushMatrix();
             GL11.glTranslatef(-0.3F, -1.6F, -1.2F);
             GL11.glTranslatef(0.1F, 0.0F, 0.0F);
@@ -86,23 +81,21 @@ public class RenderEvolvedSkeletonBoss extends RenderLiving
     }
 
     @Override
-    protected int shouldRenderPass(EntityLivingBase par1EntityLiving, int par2, float par3)
-    {
+    protected int shouldRenderPass(EntityLivingBase par1EntityLiving, int par2, float par3) {
         final Minecraft minecraft = FMLClientHandler.instance().getClient();
 
         final EntityPlayerSP player = minecraft.thePlayer;
 
         ItemStack helmetSlot = null;
 
-        if (player != null && player.inventory.armorItemInSlot(3) != null)
-        {
+        if (player != null && player.inventory.armorItemInSlot(3) != null) {
             helmetSlot = player.inventory.armorItemInSlot(3);
         }
 
-        if (helmetSlot != null && helmetSlot.getItem() instanceof ItemSensorGlasses && minecraft.currentScreen == null)
-        {
-            if (par2 == 1)
-            {
+        if (helmetSlot != null
+                && helmetSlot.getItem() instanceof ItemSensorGlasses
+                && minecraft.currentScreen == null) {
+            if (par2 == 1) {
                 final float var4 = par1EntityLiving.ticksExisted * 2 + par3;
                 this.bindTexture(RenderEvolvedSkeletonBoss.powerTexture);
                 GL11.glMatrixMode(GL11.GL_TEXTURE);
@@ -121,8 +114,7 @@ public class RenderEvolvedSkeletonBoss extends RenderLiving
                 return 1;
             }
 
-            if (par2 == 2)
-            {
+            if (par2 == 2) {
                 GL11.glMatrixMode(GL11.GL_TEXTURE);
                 GL11.glLoadIdentity();
                 GL11.glMatrixMode(GL11.GL_MODELVIEW);

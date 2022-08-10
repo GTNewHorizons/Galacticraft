@@ -1,6 +1,8 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.client.render;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import java.util.ArrayList;
+import java.util.List;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityBeamOutput;
 import net.minecraft.client.entity.EntityClientPlayerMP;
@@ -10,16 +12,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class NetworkRenderer
-{
+public class NetworkRenderer {
     static long t = -1;
     static List<TileEntityBeamOutput> nodes = new ArrayList<TileEntityBeamOutput>();
 
-    public static void renderNetworks(World world, float partialTicks)
-    {
+    public static void renderNetworks(World world, float partialTicks) {
         if (System.currentTimeMillis() > t + 1000) {
             t = System.currentTimeMillis();
             nodes.clear();
@@ -30,8 +27,7 @@ public class NetworkRenderer
             }
         }
 
-        if (nodes.isEmpty())
-        {
+        if (nodes.isEmpty()) {
             return;
         }
 
@@ -45,10 +41,8 @@ public class NetworkRenderer
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_CULL_FACE);
 
-        for (TileEntityBeamOutput tileEntity : nodes)
-        {
-            if (tileEntity.getTarget() == null)
-            {
+        for (TileEntityBeamOutput tileEntity : nodes) {
+            if (tileEntity.getTarget() == null) {
                 continue;
             }
 
@@ -65,16 +59,22 @@ public class NetworkRenderer
             float posZ = (float) (tileEntity.zCoord - interpPosZ);
             GL11.glTranslatef(posX, posY, posZ);
 
-            GL11.glTranslatef(outputPoint.floatX() - tileEntity.xCoord, outputPoint.floatY() - tileEntity.yCoord, outputPoint.floatZ() - tileEntity.zCoord);
+            GL11.glTranslatef(
+                    outputPoint.floatX() - tileEntity.xCoord,
+                    outputPoint.floatY() - tileEntity.yCoord,
+                    outputPoint.floatZ() - tileEntity.zCoord);
             GL11.glRotatef(tileEntity.yaw + 180, 0, 1, 0);
             GL11.glRotatef(-tileEntity.pitch, 1, 0, 0);
             GL11.glRotatef(tileEntity.ticks * 10, 0, 0, 1);
 
-            GL11.glColor4f(tileEntity.getColor().floatX(), tileEntity.getColor().floatY(), tileEntity.getColor().floatZ(), 1.0F);
+            GL11.glColor4f(
+                    tileEntity.getColor().floatX(),
+                    tileEntity.getColor().floatY(),
+                    tileEntity.getColor().floatZ(),
+                    1.0F);
             tess.startDrawing(GL11.GL_LINES);
 
-            for (ForgeDirection dir : ForgeDirection.values())
-            {
+            for (ForgeDirection dir : ForgeDirection.values()) {
                 tess.addVertex(dir.offsetX / 40.0F, dir.offsetY / 40.0F, dir.offsetZ / 40.0F);
                 tess.addVertex(dir.offsetX / 40.0F, dir.offsetY / 40.0F, directionLength + dir.offsetZ / 40.0F);
             }

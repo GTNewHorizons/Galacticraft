@@ -7,8 +7,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  *
  * @author Calclavia, King_Lemming
  */
-public interface IElectrical extends IConnector
-{
+public interface IElectrical extends IConnector {
     /**
      * Adds electricity to an block. Returns the quantity of electricity that
      * was accepted. This should always return 0 if the block cannot be
@@ -50,5 +49,4 @@ public interface IElectrical extends IConnector
      * @return The tier, should be 1 or 2
      */
     public int getTierGC();
-
 }

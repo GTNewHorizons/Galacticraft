@@ -12,7 +12,6 @@ package micdoodle8.mods.galacticraft.api.world;
  * if (worldObj.provider instanceof ISolarLevel) solarStrength *= ((ISolarLevel)
  * worldObj.provider).getSolarEnergyMultiplier();
  */
-public interface ISolarLevel
-{
+public interface ISolarLevel {
     public double getSolarEnergyMultiplier();
 }

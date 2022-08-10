@@ -1,6 +1,7 @@
 package micdoodle8.mods.galacticraft.planets.mars.client;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import java.util.Random;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
@@ -17,19 +18,17 @@ import net.minecraftforge.client.IRenderHandler;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import java.util.Random;
-
 /**
  * SkyProviderMars.java
- * 
+ *
  * This file is part of the Galacticraft project
  *
  * @author micdoodle8
- * 
+ *
  */
-public class SkyProviderMars extends IRenderHandler
-{
-    private static final ResourceLocation overworldTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/celestialbodies/earth.png");
+public class SkyProviderMars extends IRenderHandler {
+    private static final ResourceLocation overworldTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/celestialbodies/earth.png");
     private static final ResourceLocation sunTexture = new ResourceLocation("textures/environment/sun.png");
 
     public int starList;
@@ -37,11 +36,10 @@ public class SkyProviderMars extends IRenderHandler
     public int glSkyList2;
     private float sunSize;
 
-    public SkyProviderMars(IGalacticraftWorldProvider marsProvider)
-    {
+    public SkyProviderMars(IGalacticraftWorldProvider marsProvider) {
         this.sunSize = 17.5F * marsProvider.getSolarSize();
-        
-    	int displayLists = GLAllocation.generateDisplayLists(3);
+
+        int displayLists = GLAllocation.generateDisplayLists(3);
         this.starList = displayLists;
         this.glSkyList = displayLists + 1;
         this.glSkyList2 = displayLists + 2;
@@ -59,10 +57,8 @@ public class SkyProviderMars extends IRenderHandler
         final int i = 256 / byte2 + 2;
         float f = 16F;
 
-        for (int j = -byte2 * i; j <= byte2 * i; j += byte2)
-        {
-            for (int l = -byte2 * i; l <= byte2 * i; l += byte2)
-            {
+        for (int j = -byte2 * i; j <= byte2 * i; j += byte2) {
+            for (int l = -byte2 * i; l <= byte2 * i; l += byte2) {
                 tessellator.startDrawingQuads();
                 tessellator.addVertex(j + 0, f, l + 0);
                 tessellator.addVertex(j + byte2, f, l + 0);
@@ -77,10 +73,8 @@ public class SkyProviderMars extends IRenderHandler
         f = -16F;
         tessellator.startDrawingQuads();
 
-        for (int k = -byte2 * i; k <= byte2 * i; k += byte2)
-        {
-            for (int i1 = -byte2 * i; i1 <= byte2 * i; i1 += byte2)
-            {
+        for (int k = -byte2 * i; k <= byte2 * i; k += byte2) {
+            for (int i1 = -byte2 * i; i1 <= byte2 * i; i1 += byte2) {
                 tessellator.addVertex(k + byte2, f, i1 + 0);
                 tessellator.addVertex(k + 0, f, i1 + 0);
                 tessellator.addVertex(k + 0, f, i1 + byte2);
@@ -93,8 +87,7 @@ public class SkyProviderMars extends IRenderHandler
     }
 
     @Override
-    public void render(float partialTicks, WorldClient world, Minecraft mc)
-    {
+    public void render(float partialTicks, WorldClient world, Minecraft mc) {
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         Vec3 vec3 = world.getSkyColor(mc.renderViewEntity, partialTicks);
@@ -103,8 +96,7 @@ public class SkyProviderMars extends IRenderHandler
         float f3 = (float) vec3.zCoord;
         float f6;
 
-        if (mc.gameSettings.anaglyph)
-        {
+        if (mc.gameSettings.anaglyph) {
             float f4 = (f1 * 30.0F + f2 * 59.0F + f3 * 11.0F) / 100.0F;
             float f5 = (f1 * 30.0F + f2 * 70.0F) / 100.0F;
             f6 = (f1 * 30.0F + f3 * 70.0F) / 100.0F;
@@ -131,8 +123,7 @@ public class SkyProviderMars extends IRenderHandler
 
         float f18 = world.getStarBrightness(partialTicks);
 
-        if (f18 > 0.0F)
-        {
+        if (f18 > 0.0F) {
             GL11.glColor4f(f18, f18, f18, f18);
             GL11.glCallList(this.starList);
         }
@@ -152,8 +143,7 @@ public class SkyProviderMars extends IRenderHandler
         f8 = afloat[2];
         float f11;
 
-        if (mc.gameSettings.anaglyph)
-        {
+        if (mc.gameSettings.anaglyph) {
             f9 = (f6 * 30.0F + f7 * 59.0F + f8 * 11.0F) / 100.0F;
             f10 = (f6 * 30.0F + f7 * 70.0F) / 100.0F;
             f11 = (f6 * 30.0F + f8 * 70.0F) / 100.0F;
@@ -215,8 +205,8 @@ public class SkyProviderMars extends IRenderHandler
         GL11.glRotatef(world.getCelestialAngle(partialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
         // Render sun
         GL11.glDisable(GL11.GL_TEXTURE_2D);
-        GL11.glColor4f(0.0F, 0.0F, 0.0F, 1.0F);        
-        //Some blanking to conceal the stars
+        GL11.glColor4f(0.0F, 0.0F, 0.0F, 1.0F);
+        // Some blanking to conceal the stars
         f10 = this.sunSize / 3.5F;
         tessellator1.startDrawingQuads();
         tessellator1.addVertex(-f10, 99.9D, -f10);
@@ -260,8 +250,7 @@ public class SkyProviderMars extends IRenderHandler
         GL11.glColor3f(0.0F, 0.0F, 0.0F);
         double d0 = mc.thePlayer.getPosition(partialTicks).yCoord - world.getHorizon();
 
-        if (d0 < 0.0D)
-        {
+        if (d0 < 0.0D) {
             GL11.glPushMatrix();
             GL11.glTranslatef(0.0F, 12.0F, 0.0F);
             GL11.glCallList(this.glSkyList2);
@@ -294,12 +283,9 @@ public class SkyProviderMars extends IRenderHandler
             tessellator1.draw();
         }
 
-        if (world.provider.isSkyColored())
-        {
+        if (world.provider.isSkyColored()) {
             GL11.glColor3f(f1 * 0.2F + 0.04F, f2 * 0.2F + 0.04F, f3 * 0.6F + 0.1F);
-        }
-        else
-        {
+        } else {
             GL11.glColor3f(f1, f2, f3);
         }
 
@@ -315,22 +301,19 @@ public class SkyProviderMars extends IRenderHandler
         GL11.glDepthMask(true);
     }
 
-    private void renderStars()
-    {
+    private void renderStars() {
         final Random rand = new Random(10842L);
         final Tessellator var2 = Tessellator.instance;
         var2.startDrawingQuads();
 
-        for (int starIndex = 0; starIndex < (ConfigManagerCore.moreStars ? 35000 : 6000); ++starIndex)
-        {
+        for (int starIndex = 0; starIndex < (ConfigManagerCore.moreStars ? 35000 : 6000); ++starIndex) {
             double var4 = rand.nextFloat() * 2.0F - 1.0F;
             double var6 = rand.nextFloat() * 2.0F - 1.0F;
             double var8 = rand.nextFloat() * 2.0F - 1.0F;
             final double var10 = 0.15F + rand.nextFloat() * 0.1F;
             double var12 = var4 * var4 + var6 * var6 + var8 * var8;
 
-            if (var12 < 1.0D && var12 > 0.01D)
-            {
+            if (var12 < 1.0D && var12 > 0.01D) {
                 var12 = 1.0D / Math.sqrt(var12);
                 var4 *= var12;
                 var6 *= var12;
@@ -348,8 +331,7 @@ public class SkyProviderMars extends IRenderHandler
                 final double var34 = Math.sin(var32);
                 final double var36 = Math.cos(var32);
 
-                for (int var38 = 0; var38 < 4; ++var38)
-                {
+                for (int var38 = 0; var38 < 4; ++var38) {
                     final double var39 = 0.0D;
                     final double var41 = ((var38 & 2) - 1) * var10;
                     final double var43 = ((var38 + 1 & 2) - 1) * var10;
@@ -367,23 +349,19 @@ public class SkyProviderMars extends IRenderHandler
         var2.draw();
     }
 
-    private Vec3 getCustomSkyColor()
-    {
+    private Vec3 getCustomSkyColor() {
         return Vec3.createVectorHelper(0.26796875D, 0.1796875D, 0.0D);
     }
 
-    public float getSkyBrightness(float par1)
-    {
+    public float getSkyBrightness(float par1) {
         final float var2 = FMLClientHandler.instance().getClient().theWorld.getCelestialAngle(par1);
         float var3 = 1.0F - (MathHelper.sin(var2 * (float) Math.PI * 2.0F) * 2.0F + 0.25F);
 
-        if (var3 < 0.0F)
-        {
+        if (var3 < 0.0F) {
             var3 = 0.0F;
         }
 
-        if (var3 > 1.0F)
-        {
+        if (var3 > 1.0F) {
             var3 = 1.0F;
         }
 

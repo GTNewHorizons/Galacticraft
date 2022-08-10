@@ -3,8 +3,7 @@ package micdoodle8.mods.galacticraft.api.transmission.tile;
 /**
  * This interface is to be applied to all TileEntities which have Oxygen stores
  */
-public interface IOxygenStorage
-{
+public interface IOxygenStorage {
     /**
      * Sets the amount of oxygen this unit has stored.
      */

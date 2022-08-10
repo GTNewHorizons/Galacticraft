@@ -3,8 +3,7 @@ package micdoodle8.mods.galacticraft.core.client.model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 
-public class ModelLander extends ModelBase
-{
+public class ModelLander extends ModelBase {
     ModelRendererGC bodyMain1;
     ModelRendererGC bodyMain2;
     ModelRendererGC bodyAux1;
@@ -69,8 +68,7 @@ public class ModelLander extends ModelBase
     ModelRendererGC moduleThrusterConeFront2;
     ModelRendererGC moduleThrusterConeFront3;
 
-    public ModelLander()
-    {
+    public ModelLander() {
         this.textureWidth = 512;
         this.textureHeight = 512;
 
@@ -459,8 +457,7 @@ public class ModelLander extends ModelBase
     }
 
     @Override
-    public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         super.render(entity, par2, par3, par4, par5, par6, par7);
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
         this.bodyMain1.render(par7);
@@ -528,8 +525,7 @@ public class ModelLander extends ModelBase
         this.moduleThrusterConeFront3.render(par7);
     }
 
-    private void setRotation(ModelRendererGC model, float x, float y, float z)
-    {
+    private void setRotation(ModelRendererGC model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

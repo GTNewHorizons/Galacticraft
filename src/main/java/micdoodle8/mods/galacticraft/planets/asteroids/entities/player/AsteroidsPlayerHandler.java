@@ -11,72 +11,52 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.entity.EntityEvent;
 
-public class AsteroidsPlayerHandler
-{
+public class AsteroidsPlayerHandler {
     @SubscribeEvent
-    public void onPlayerLogin(PlayerLoggedInEvent event)
-    {
-        if (event.player instanceof EntityPlayerMP)
-        {
+    public void onPlayerLogin(PlayerLoggedInEvent event) {
+        if (event.player instanceof EntityPlayerMP) {
             this.onPlayerLogin((EntityPlayerMP) event.player);
         }
     }
 
     @SubscribeEvent
-    public void onPlayerLogout(PlayerLoggedOutEvent event)
-    {
-        if (event.player instanceof EntityPlayerMP)
-        {
+    public void onPlayerLogout(PlayerLoggedOutEvent event) {
+        if (event.player instanceof EntityPlayerMP) {
             this.onPlayerLogout((EntityPlayerMP) event.player);
         }
     }
 
     @SubscribeEvent
-    public void onPlayerRespawn(PlayerRespawnEvent event)
-    {
-        if (event.player instanceof EntityPlayerMP)
-        {
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
+        if (event.player instanceof EntityPlayerMP) {
             this.onPlayerRespawn((EntityPlayerMP) event.player);
         }
     }
 
     @SubscribeEvent
-    public void onEntityConstructing(EntityEvent.EntityConstructing event)
-    {
-        if (event.entity instanceof EntityPlayerMP && GCPlayerStats.get((EntityPlayerMP) event.entity) == null)
-        {
+    public void onEntityConstructing(EntityEvent.EntityConstructing event) {
+        if (event.entity instanceof EntityPlayerMP && GCPlayerStats.get((EntityPlayerMP) event.entity) == null) {
             GCPlayerStats.register((EntityPlayerMP) event.entity);
         }
     }
 
-    private void onPlayerLogin(EntityPlayerMP player)
-    {
-    }
+    private void onPlayerLogin(EntityPlayerMP player) {}
 
-    private void onPlayerLogout(EntityPlayerMP player)
-    {
+    private void onPlayerLogout(EntityPlayerMP player) {}
 
-    }
+    private void onPlayerRespawn(EntityPlayerMP player) {}
 
-    private void onPlayerRespawn(EntityPlayerMP player)
-    {
-    }
-
-    public void onPlayerUpdate(EntityPlayerMP player)
-    {
-        if (!player.worldObj.isRemote && player.worldObj.provider instanceof WorldProviderAsteroids)
-        {
+    public void onPlayerUpdate(EntityPlayerMP player) {
+        if (!player.worldObj.isRemote && player.worldObj.provider instanceof WorldProviderAsteroids) {
             final int f = 50;
 
-            if (player.worldObj.rand.nextInt(f) == 0 && player.posY < 260D)
-            {
+            if (player.worldObj.rand.nextInt(f) == 0 && player.posY < 260D) {
                 final EntityPlayer closestPlayer = player.worldObj.getClosestPlayerToEntity(player, 100);
 
-                if (closestPlayer == null || closestPlayer.getEntityId() <= player.getEntityId())
-                {
+                if (closestPlayer == null || closestPlayer.getEntityId() <= player.getEntityId()) {
                     double x, y, z;
                     double motX, motY, motZ;
-                    double r = player.worldObj.rand.nextInt(60)+30D;
+                    double r = player.worldObj.rand.nextInt(60) + 30D;
                     double theta = Math.PI * 2.0 * player.worldObj.rand.nextDouble();
                     x = player.posX + Math.cos(theta) * r;
                     y = player.posY + player.worldObj.rand.nextInt(5);

@@ -8,8 +8,7 @@ import net.minecraft.tileentity.TileEntity;
  *
  * @author Calclavia
  */
-public interface IHydrogenNetwork extends IGridNetwork<IHydrogenNetwork, ITransmitter, TileEntity>
-{
+public interface IHydrogenNetwork extends IGridNetwork<IHydrogenNetwork, ITransmitter, TileEntity> {
     /**
      * Produces hydrogen in this hydrogen network.
      *

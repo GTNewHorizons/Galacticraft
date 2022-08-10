@@ -6,8 +6,7 @@ package micdoodle8.mods.galacticraft.api.transmission.tile;
  *
  * @author Calclavia
  */
-public interface IElectricalStorage
-{
+public interface IElectricalStorage {
     /**
      * Sets the amount of joules this unit has stored.
      */

@@ -3,12 +3,10 @@ package micdoodle8.mods.galacticraft.core.client.model.block;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelParaChestTile extends ModelChest
-{
+public class ModelParaChestTile extends ModelChest {
     public ModelRenderer keyParts[] = new ModelRenderer[3];
 
-    public ModelParaChestTile()
-    {
+    public ModelParaChestTile() {
         super();
         this.keyParts[0] = new ModelRenderer(this, 60, 61);
         this.keyParts[0].setTextureSize(64, 64);
@@ -36,12 +34,9 @@ public class ModelParaChestTile extends ModelChest
         this.keyParts[2].rotationPointZ = 7.5F;
     }
 
-    public void renderAll(boolean lidUp)
-    {
-        if (lidUp)
-        {
-            for (ModelRenderer m : this.keyParts)
-            {
+    public void renderAll(boolean lidUp) {
+        if (lidUp) {
+            for (ModelRenderer m : this.keyParts) {
                 m.render(0.0625F);
             }
         }

@@ -20,14 +20,12 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlockShiftDesc
-{
+public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlockShiftDesc {
     public static IIcon icon;
 
-    //Metadata: bits 0-2 are the side of the base plate using standard side convention (0-5)
+    // Metadata: bits 0-2 are the side of the base plate using standard side convention (0-5)
 
-    protected BlockBrightLamp(String assetName)
-    {
+    protected BlockBrightLamp(String assetName) {
         super(Material.glass);
         this.setHardness(0.1F);
         this.setStepSound(Block.soundTypeMetal);
@@ -36,11 +34,9 @@ public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlo
         this.setLightLevel(1.0F);
     }
 
-    public int getLightValue(IBlockAccess world, int x, int y, int z)
-    {
+    public int getLightValue(IBlockAccess world, int x, int y, int z) {
         Block block = world.getBlock(x, y, z);
-        if (block != this)
-        {
+        if (block != this) {
             return block.getLightValue(world, x, y, z);
         }
         /**
@@ -52,39 +48,33 @@ public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlo
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int x, int y, int z)
-    {
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int x, int y, int z) {
         double boundsMin = 0.2D;
         double boundsMax = 0.8D;
-        return AxisAlignedBB.getBoundingBox(x + boundsMin, y + boundsMin, z + boundsMin, x + boundsMax, y + boundsMax, z + boundsMax);
+        return AxisAlignedBB.getBoundingBox(
+                x + boundsMin, y + boundsMin, z + boundsMin, x + boundsMax, y + boundsMax, z + boundsMax);
     }
 
     @Override
-    public boolean isOpaqueCube()
-    {
+    public boolean isOpaqueCube() {
         return false;
     }
 
     @Override
-    public boolean renderAsNormalBlock()
-    {
+    public boolean renderAsNormalBlock() {
         return false;
     }
 
     @Override
-    public int getRenderType()
-    {
+    public int getRenderType() {
         return GalacticraftCore.proxy.getBlockRender(this);
     }
 
     @Override
-    public boolean canPlaceBlockAt(World par1World, int x, int y, int z)
-    {
+    public boolean canPlaceBlockAt(World par1World, int x, int y, int z) {
         BlockVec3 thisvec = new BlockVec3(x, y, z);
-        for (int i = 0; i < 6; i++)
-        {
-            if (thisvec.blockOnSideHasSolidFace(par1World, i))
-            {
+        for (int i = 0; i < 6; i++) {
+            if (thisvec.blockOnSideHasSolidFace(par1World, i)) {
                 return true;
             }
         }
@@ -92,12 +82,11 @@ public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlo
     }
 
     @Override
-    public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metaOld)
-    {
+    public int onBlockPlaced(
+            World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metaOld) {
         BlockVec3 thisvec = new BlockVec3(x, y, z);
 
-        if (thisvec.blockOnSideHasSolidFace(world, side ^ 1))
-        {
+        if (thisvec.blockOnSideHasSolidFace(world, side ^ 1)) {
             return side ^ 1;
         }
 
@@ -110,14 +99,12 @@ public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlo
      * neighbor blockID
      */
     @Override
-    public void onNeighborBlockChange(World par1World, int x, int y, int z, Block par5)
-    {
+    public void onNeighborBlockChange(World par1World, int x, int y, int z, Block par5) {
         final int side = par1World.getBlockMetadata(x, y, z);
 
         BlockVec3 thisvec = new BlockVec3(x, y, z);
 
-        if (thisvec.blockOnSideHasSolidFace(par1World, side))
-        {
+        if (thisvec.blockOnSideHasSolidFace(par1World, side)) {
             return;
         }
 
@@ -130,33 +117,21 @@ public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlo
      * returning a ray trace hit. Args: world, x, y, z, startVec, endVec
      */
     @Override
-    public MovingObjectPosition collisionRayTrace(World par1World, int x, int y, int z, Vec3 par5Vec3, Vec3 par6Vec3)
-    {
+    public MovingObjectPosition collisionRayTrace(World par1World, int x, int y, int z, Vec3 par5Vec3, Vec3 par6Vec3) {
         final int var7 = par1World.getBlockMetadata(x, y, z);
         float var8 = 0.3F;
 
-        if (var7 == 4)
-        {
+        if (var7 == 4) {
             this.setBlockBounds(0.0F, 0.2F, 0.5F - var8, var8 * 2.0F, 0.8F, 0.5F + var8);
-        }
-        else if (var7 == 5)
-        {
+        } else if (var7 == 5) {
             this.setBlockBounds(1.0F - var8 * 2.0F, 0.2F, 0.5F - var8, 1.0F, 0.8F, 0.5F + var8);
-        }
-        else if (var7 == 2)
-        {
+        } else if (var7 == 2) {
             this.setBlockBounds(0.5F - var8, 0.2F, 0.0F, 0.5F + var8, 0.8F, var8 * 2.0F);
-        }
-        else if (var7 == 3)
-        {
+        } else if (var7 == 3) {
             this.setBlockBounds(0.5F - var8, 0.2F, 1.0F - var8 * 2.0F, 0.5F + var8, 0.8F, 1.0F);
-        }
-        else if (var7 == 0)
-        {
+        } else if (var7 == 0) {
             this.setBlockBounds(0.5F - var8, 0.0F, 0.5F - var8, 0.5F + var8, 0.6F, 0.5F + var8);
-        }
-        else
-        {
+        } else {
             this.setBlockBounds(0.5F - var8, 0.4F, 0.5F - var8, 0.5F + var8, 1.0F, 0.5F + var8);
         }
 
@@ -164,40 +139,34 @@ public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlo
     }
 
     @Override
-    public boolean onUseWrench(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float hitX, float hitY, float hitZ)
-    {
-        if (!world.isRemote)
-        {
-	    	TileEntity tile = world.getTileEntity(x, y, z);
-	        if (tile instanceof TileEntityArclamp)
-	        {
-	            ((TileEntityArclamp) tile).facingChanged();
-	        }
+    public boolean onUseWrench(
+            World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float hitX, float hitY, float hitZ) {
+        if (!world.isRemote) {
+            TileEntity tile = world.getTileEntity(x, y, z);
+            if (tile instanceof TileEntityArclamp) {
+                ((TileEntityArclamp) tile).facingChanged();
+            }
         }
         return true;
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world, int meta)
-    {
+    public TileEntity createNewTileEntity(World world, int meta) {
         return new TileEntityArclamp();
     }
 
     @Override
-    public CreativeTabs getCreativeTabToDisplayOn()
-    {
+    public CreativeTabs getCreativeTabToDisplayOn() {
         return GalacticraftCore.galacticraftBlocksTab;
     }
 
     @Override
-    public String getShiftDescription(int meta)
-    {
+    public String getShiftDescription(int meta) {
         return GCCoreUtil.translate(this.getUnlocalizedName() + ".description");
     }
 
     @Override
-    public boolean showDescription(int meta)
-    {
+    public boolean showDescription(int meta) {
         return true;
     }
 }

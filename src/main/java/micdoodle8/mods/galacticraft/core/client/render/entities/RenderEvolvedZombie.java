@@ -17,55 +17,50 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderEvolvedZombie extends RenderBiped
-{
-    private static final ResourceLocation zombieTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/zombie.png");
-    private static final ResourceLocation powerTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/power.png");
+public class RenderEvolvedZombie extends RenderBiped {
+    private static final ResourceLocation zombieTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/zombie.png");
+    private static final ResourceLocation powerTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/power.png");
 
     private final ModelBase model = new ModelEvolvedZombie(0.2F, false, true);
 
-    public RenderEvolvedZombie()
-    {
+    public RenderEvolvedZombie() {
         super(new ModelEvolvedZombie(true), 0.5F);
     }
 
     @Override
-    protected void func_82421_b()
-    {
+    protected void func_82421_b() {
         this.field_82423_g = new ModelEvolvedZombie(1.0F, true, false);
         this.field_82425_h = new ModelEvolvedZombie(0.5F, true, false);
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
-    {
+    protected ResourceLocation getEntityTexture(Entity par1Entity) {
         return RenderEvolvedZombie.zombieTexture;
     }
 
     @Override
-    protected void preRenderCallback(EntityLivingBase par1EntityLiving, float par2)
-    {
+    protected void preRenderCallback(EntityLivingBase par1EntityLiving, float par2) {
         GL11.glScalef(1.2F, 1.2F, 1.2F);
     }
 
     @Override
-    protected int shouldRenderPass(EntityLivingBase par1EntityLiving, int par2, float par3)
-    {
+    protected int shouldRenderPass(EntityLivingBase par1EntityLiving, int par2, float par3) {
         final Minecraft minecraft = FMLClientHandler.instance().getClient();
 
         final EntityPlayerSP player = minecraft.thePlayer;
 
         ItemStack helmetSlot = null;
 
-        if (player != null && player.inventory.armorItemInSlot(3) != null)
-        {
+        if (player != null && player.inventory.armorItemInSlot(3) != null) {
             helmetSlot = player.inventory.armorItemInSlot(3);
         }
 
-        if (helmetSlot != null && helmetSlot.getItem() instanceof ItemSensorGlasses && minecraft.currentScreen == null)
-        {
-            if (par2 == 1)
-            {
+        if (helmetSlot != null
+                && helmetSlot.getItem() instanceof ItemSensorGlasses
+                && minecraft.currentScreen == null) {
+            if (par2 == 1) {
                 final float var4 = par1EntityLiving.ticksExisted * 2 + par3;
                 this.bindTexture(RenderEvolvedZombie.powerTexture);
                 GL11.glMatrixMode(GL11.GL_TEXTURE);
@@ -83,8 +78,7 @@ public class RenderEvolvedZombie extends RenderBiped
                 return 1;
             }
 
-            if (par2 == 2)
-            {
+            if (par2 == 2) {
                 GL11.glMatrixMode(GL11.GL_TEXTURE);
                 GL11.glLoadIdentity();
                 GL11.glMatrixMode(GL11.GL_MODELVIEW);

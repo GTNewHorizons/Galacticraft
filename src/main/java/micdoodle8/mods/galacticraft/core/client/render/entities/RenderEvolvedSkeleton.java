@@ -19,55 +19,47 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderEvolvedSkeleton extends RenderBiped
-{
-    private static final ResourceLocation skeletonTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/skeleton.png");
-    private static final ResourceLocation powerTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/power.png");
+public class RenderEvolvedSkeleton extends RenderBiped {
+    private static final ResourceLocation skeletonTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/skeleton.png");
+    private static final ResourceLocation powerTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/power.png");
 
     private final ModelEvolvedSkeleton model = new ModelEvolvedSkeleton(0.2F);
     private static int isBG2Loaded = 0;
 
-    public RenderEvolvedSkeleton()
-    {
+    public RenderEvolvedSkeleton() {
         super(new ModelEvolvedSkeleton(), 1.0F);
 
-        //Compatibility with BattleGear2
-        try
-        {
+        // Compatibility with BattleGear2
+        try {
             Class<?> clazz = Class.forName("mods.battlegear2.MobHookContainerClass");
 
-            //accessing this: public static final int Skell_Arrow_Datawatcher = 25;
-            RenderEvolvedSkeleton.isBG2Loaded = clazz.getField("Skell_Arrow_Datawatcher").getInt(null);
-        }
-        catch (Exception e)
-        {
+            // accessing this: public static final int Skell_Arrow_Datawatcher = 25;
+            RenderEvolvedSkeleton.isBG2Loaded =
+                    clazz.getField("Skell_Arrow_Datawatcher").getInt(null);
+        } catch (Exception e) {
         }
     }
 
-    protected ResourceLocation func_110779_a(EntitySkeleton par1EntityArrow)
-    {
+    protected ResourceLocation func_110779_a(EntitySkeleton par1EntityArrow) {
         return RenderEvolvedSkeleton.skeletonTexture;
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
-    {
+    protected ResourceLocation getEntityTexture(Entity par1Entity) {
         return this.func_110779_a((EntitySkeleton) par1Entity);
     }
 
     @Override
-    protected void preRenderCallback(EntityLivingBase par1EntityLiving, float par2)
-    {
+    protected void preRenderCallback(EntityLivingBase par1EntityLiving, float par2) {
         GL11.glScalef(1.2F, 1.2F, 1.2F);
     }
 
     @Override
-    protected void renderEquippedItems(EntityLivingBase par1EntityLiving, float par2)
-    {
-        if (RenderEvolvedSkeleton.isBG2Loaded > 0)
-        {
-            if (par1EntityLiving.getDataWatcher().getWatchedObject(RenderEvolvedSkeleton.isBG2Loaded) == null)
-            {
+    protected void renderEquippedItems(EntityLivingBase par1EntityLiving, float par2) {
+        if (RenderEvolvedSkeleton.isBG2Loaded > 0) {
+            if (par1EntityLiving.getDataWatcher().getWatchedObject(RenderEvolvedSkeleton.isBG2Loaded) == null) {
                 par1EntityLiving.getDataWatcher().addObject(RenderEvolvedSkeleton.isBG2Loaded, (byte) -1);
             }
         }
@@ -96,30 +88,27 @@ public class RenderEvolvedSkeleton extends RenderBiped
     }
 
     @Override
-    public void doRender(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
-    {
+    public void doRender(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
         super.doRender(par1EntityLiving, par2, par4, par6, par8, par9);
         this.field_82423_g.aimedBow = this.field_82425_h.aimedBow = this.modelBipedMain.aimedBow = true;
     }
 
     @Override
-    protected int shouldRenderPass(EntityLivingBase par1EntityLiving, int par2, float par3)
-    {
+    protected int shouldRenderPass(EntityLivingBase par1EntityLiving, int par2, float par3) {
         final Minecraft minecraft = FMLClientHandler.instance().getClient();
 
         final EntityPlayerSP player = minecraft.thePlayer;
 
         ItemStack helmetSlot = null;
 
-        if (player != null && player.inventory.armorItemInSlot(3) != null)
-        {
+        if (player != null && player.inventory.armorItemInSlot(3) != null) {
             helmetSlot = player.inventory.armorItemInSlot(3);
         }
 
-        if (helmetSlot != null && helmetSlot.getItem() instanceof ItemSensorGlasses && minecraft.currentScreen == null)
-        {
-            if (par2 == 1)
-            {
+        if (helmetSlot != null
+                && helmetSlot.getItem() instanceof ItemSensorGlasses
+                && minecraft.currentScreen == null) {
+            if (par2 == 1) {
                 final float var4 = par1EntityLiving.ticksExisted * 2 + par3;
                 this.bindTexture(RenderEvolvedSkeleton.powerTexture);
                 GL11.glMatrixMode(GL11.GL_TEXTURE);
@@ -138,8 +127,7 @@ public class RenderEvolvedSkeleton extends RenderBiped
                 return 1;
             }
 
-            if (par2 == 2)
-            {
+            if (par2 == 2) {
                 GL11.glMatrixMode(GL11.GL_TEXTURE);
                 GL11.glLoadIdentity();
                 GL11.glMatrixMode(GL11.GL_MODELVIEW);
@@ -151,8 +139,7 @@ public class RenderEvolvedSkeleton extends RenderBiped
         return super.shouldRenderPass(par1EntityLiving, par2, par3);
     }
 
-    protected void renderEquippedItems(EntityLiving par1EntityLiving, float par2)
-    {
+    protected void renderEquippedItems(EntityLiving par1EntityLiving, float par2) {
         ItemStack stack = par1EntityLiving.getLastActiveItems()[0];
         par1EntityLiving.getLastActiveItems()[0] = null;
         super.renderEquippedItems(par1EntityLiving, par2);

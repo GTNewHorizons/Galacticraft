@@ -2,6 +2,7 @@ package micdoodle8.mods.galacticraft.core.items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
@@ -11,12 +12,8 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import java.util.List;
-
-public class ItemOxygenTank extends Item
-{
-    public ItemOxygenTank(int tier, String assetName)
-    {
+public class ItemOxygenTank extends Item {
+    public ItemOxygenTank(int tier, String assetName) {
         super();
         this.setMaxStackSize(1);
         double factor = 2.0;
@@ -27,32 +24,29 @@ public class ItemOxygenTank extends Item
         this.setNoRepair();
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item item, CreativeTabs tabs, List list)
-    {
+    public void getSubItems(Item item, CreativeTabs tabs, List list) {
         list.add(new ItemStack(item, 1, 0));
         list.add(new ItemStack(item, 1, this.getMaxDamage()));
     }
 
     @Override
-    public CreativeTabs getCreativeTab()
-    {
+    public CreativeTabs getCreativeTab() {
         return GalacticraftCore.galacticraftItemsTab;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack stack)
-    {
+    public EnumRarity getRarity(ItemStack stack) {
         return ClientProxyCore.galacticraftItem;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean advancedItemTooltips)
-    {
-        tooltip.add(GCCoreUtil.translate("gui.tank.oxygenRemaining") + ": " + (stack.getMaxDamage() - stack.getItemDamage()));
+    public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean advancedItemTooltips) {
+        tooltip.add(GCCoreUtil.translate("gui.tank.oxygenRemaining") + ": "
+                + (stack.getMaxDamage() - stack.getItemDamage()));
     }
 }

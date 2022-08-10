@@ -13,7 +13,23 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 public abstract class RendererLivingEntityMixin {
 
     @Inject(method = "renderModel", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILEXCEPTION, require = 1)
-    private void onRenderModel(EntityLivingBase visibleEntity, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float p_77036_7_, CallbackInfo ci) {
-        RenderPlayerGC.renderModelS((RendererLivingEntity) (Object) this, visibleEntity, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_);
+    private void onRenderModel(
+            EntityLivingBase visibleEntity,
+            float p_77036_2_,
+            float p_77036_3_,
+            float p_77036_4_,
+            float p_77036_5_,
+            float p_77036_6_,
+            float p_77036_7_,
+            CallbackInfo ci) {
+        RenderPlayerGC.renderModelS(
+                (RendererLivingEntity) (Object) this,
+                visibleEntity,
+                p_77036_2_,
+                p_77036_3_,
+                p_77036_4_,
+                p_77036_5_,
+                p_77036_6_,
+                p_77036_7_);
     }
 }

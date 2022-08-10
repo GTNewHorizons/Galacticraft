@@ -1,6 +1,8 @@
 package micdoodle8.mods.galacticraft.core.tile;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import java.util.HashSet;
+import java.util.List;
 import micdoodle8.mods.galacticraft.api.entity.ICargoEntity;
 import micdoodle8.mods.galacticraft.api.entity.IDockable;
 import micdoodle8.mods.galacticraft.api.entity.IFuelable;
@@ -17,32 +19,31 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.HashSet;
-import java.util.List;
-
-public class TileEntityBuggyFueler extends TileEntityMulti implements IMultiBlock, IFuelable, IFuelDock, ICargoEntity
-{
+public class TileEntityBuggyFueler extends TileEntityMulti implements IMultiBlock, IFuelable, IFuelDock, ICargoEntity {
     private IDockable dockedEntity;
 
     @Override
-    public void updateEntity()
-    {
+    public void updateEntity() {
         super.updateEntity();
 
-        if (!this.worldObj.isRemote)
-        {
-            final List<?> list = this.worldObj.getEntitiesWithinAABB(IFuelable.class, AxisAlignedBB.getBoundingBox(this.xCoord - 1.5D, this.yCoord - 2.0, this.zCoord - 1.5D, this.xCoord + 1.5D, this.yCoord + 4.0, this.zCoord + 1.5D));
+        if (!this.worldObj.isRemote) {
+            final List<?> list = this.worldObj.getEntitiesWithinAABB(
+                    IFuelable.class,
+                    AxisAlignedBB.getBoundingBox(
+                            this.xCoord - 1.5D,
+                            this.yCoord - 2.0,
+                            this.zCoord - 1.5D,
+                            this.xCoord + 1.5D,
+                            this.yCoord + 4.0,
+                            this.zCoord + 1.5D));
 
             boolean changed = false;
 
-            for (final Object o : list)
-            {
-                if (o != null && o instanceof IDockable && !this.worldObj.isRemote)
-                {
+            for (final Object o : list) {
+                if (o != null && o instanceof IDockable && !this.worldObj.isRemote) {
                     final IDockable fuelable = (IDockable) o;
 
-                    if (fuelable.isDockValid(this))
-                    {
+                    if (fuelable.isDockValid(this)) {
                         this.dockedEntity = fuelable;
 
                         this.dockedEntity.setPad(this);
@@ -52,10 +53,8 @@ public class TileEntityBuggyFueler extends TileEntityMulti implements IMultiBloc
                 }
             }
 
-            if (!changed)
-            {
-                if (this.dockedEntity != null)
-                {
+            if (!changed) {
+                if (this.dockedEntity != null) {
                     this.dockedEntity.setPad(null);
                 }
 
@@ -65,31 +64,25 @@ public class TileEntityBuggyFueler extends TileEntityMulti implements IMultiBloc
     }
 
     @Override
-    public boolean canUpdate()
-    {
+    public boolean canUpdate() {
         return true;
     }
 
     @Override
-    public boolean onActivated(EntityPlayer entityPlayer)
-    {
+    public boolean onActivated(EntityPlayer entityPlayer) {
         return false;
     }
 
     @Override
-    public void onCreate(BlockVec3 placedPosition)
-    {
+    public void onCreate(BlockVec3 placedPosition) {
         this.mainBlockPosition = placedPosition;
         this.markDirty();
 
-        for (int x = -1; x < 2; x++)
-        {
-            for (int z = -1; z < 2; z++)
-            {
+        for (int x = -1; x < 2; x++) {
+            for (int z = -1; z < 2; z++) {
                 final BlockVec3 vecToAdd = new BlockVec3(placedPosition.x + x, placedPosition.y, placedPosition.z + z);
 
-                if (!vecToAdd.equals(placedPosition))
-                {
+                if (!vecToAdd.equals(placedPosition)) {
                     ((BlockMulti) GCBlocks.fakeBlock).makeFakeBlock(this.worldObj, vecToAdd, placedPosition, 6);
                 }
             }
@@ -97,37 +90,38 @@ public class TileEntityBuggyFueler extends TileEntityMulti implements IMultiBloc
     }
 
     @Override
-    public void onDestroy(TileEntity callingBlock)
-    {
+    public void onDestroy(TileEntity callingBlock) {
         final BlockVec3 thisBlock = new BlockVec3(this);
 
         this.worldObj.func_147480_a(thisBlock.x, thisBlock.y, thisBlock.z, true);
 
-        for (int x = -1; x < 2; x++)
-        {
-            for (int z = -1; z < 2; z++)
-            {
-                if (this.worldObj.isRemote && this.worldObj.rand.nextDouble() < 0.1D)
-                {
-                    FMLClientHandler.instance().getClient().effectRenderer.addBlockDestroyEffects(thisBlock.x + x, thisBlock.y, thisBlock.z + z, GCBlocks.landingPad, Block.getIdFromBlock(GCBlocks.landingPad) >> 12 & 255);
+        for (int x = -1; x < 2; x++) {
+            for (int z = -1; z < 2; z++) {
+                if (this.worldObj.isRemote && this.worldObj.rand.nextDouble() < 0.1D) {
+                    FMLClientHandler.instance()
+                            .getClient()
+                            .effectRenderer
+                            .addBlockDestroyEffects(
+                                    thisBlock.x + x,
+                                    thisBlock.y,
+                                    thisBlock.z + z,
+                                    GCBlocks.landingPad,
+                                    Block.getIdFromBlock(GCBlocks.landingPad) >> 12 & 255);
                 }
 
                 this.worldObj.func_147480_a(thisBlock.x + x, thisBlock.y, thisBlock.z + z, false);
             }
         }
 
-        if (this.dockedEntity != null)
-        {
+        if (this.dockedEntity != null) {
             this.dockedEntity.onPadDestroyed();
             this.dockedEntity = null;
         }
     }
 
     @Override
-    public int addFuel(FluidStack liquid, boolean doFill)
-    {
-        if (this.dockedEntity != null)
-        {
+    public int addFuel(FluidStack liquid, boolean doFill) {
+        if (this.dockedEntity != null) {
             return this.dockedEntity.addFuel(liquid, doFill);
         }
 
@@ -135,10 +129,8 @@ public class TileEntityBuggyFueler extends TileEntityMulti implements IMultiBloc
     }
 
     @Override
-    public FluidStack removeFuel(int amount)
-    {
-        if (this.dockedEntity != null)
-        {
+    public FluidStack removeFuel(int amount) {
+        if (this.dockedEntity != null) {
             return this.dockedEntity.removeFuel(amount);
         }
 
@@ -146,10 +138,8 @@ public class TileEntityBuggyFueler extends TileEntityMulti implements IMultiBloc
     }
 
     @Override
-    public EnumCargoLoadingState addCargo(ItemStack stack, boolean doAdd)
-    {
-        if (this.dockedEntity != null)
-        {
+    public EnumCargoLoadingState addCargo(ItemStack stack, boolean doAdd) {
+        if (this.dockedEntity != null) {
             return this.dockedEntity.addCargo(stack, doAdd);
         }
 
@@ -157,10 +147,8 @@ public class TileEntityBuggyFueler extends TileEntityMulti implements IMultiBloc
     }
 
     @Override
-    public RemovalResult removeCargo(boolean doRemove)
-    {
-        if (this.dockedEntity != null)
-        {
+    public RemovalResult removeCargo(boolean doRemove) {
+        if (this.dockedEntity != null) {
             return this.dockedEntity.removeCargo(doRemove);
         }
 
@@ -168,22 +156,20 @@ public class TileEntityBuggyFueler extends TileEntityMulti implements IMultiBloc
     }
 
     @Override
-    public HashSet<ILandingPadAttachable> getConnectedTiles()
-    {
+    public HashSet<ILandingPadAttachable> getConnectedTiles() {
         HashSet<ILandingPadAttachable> connectedTiles = new HashSet<ILandingPadAttachable>();
 
-        for (int x = -2; x < 3; x++)
-        {
-            for (int z = -2; z < 3; z++)
-            {
-                if (x == -2 || x == 2 || z == -2 || z == 2)
-                {
-                    if (Math.abs(x) != Math.abs(z))
-                    {
-                        final TileEntity tile = this.worldObj.getTileEntity(this.xCoord + x, this.yCoord, this.zCoord + z);
+        for (int x = -2; x < 3; x++) {
+            for (int z = -2; z < 3; z++) {
+                if (x == -2 || x == 2 || z == -2 || z == 2) {
+                    if (Math.abs(x) != Math.abs(z)) {
+                        final TileEntity tile =
+                                this.worldObj.getTileEntity(this.xCoord + x, this.yCoord, this.zCoord + z);
 
-                        if (tile != null && tile instanceof ILandingPadAttachable && ((ILandingPadAttachable) tile).canAttachToLandingPad(this.worldObj, this.xCoord, this.yCoord, this.zCoord))
-                        {
+                        if (tile != null
+                                && tile instanceof ILandingPadAttachable
+                                && ((ILandingPadAttachable) tile)
+                                        .canAttachToLandingPad(this.worldObj, this.xCoord, this.yCoord, this.zCoord)) {
                             connectedTiles.add((ILandingPadAttachable) tile);
                         }
                     }
@@ -195,12 +181,10 @@ public class TileEntityBuggyFueler extends TileEntityMulti implements IMultiBloc
     }
 
     @Override
-    public boolean isBlockAttachable(IBlockAccess world, int x, int y, int z)
-    {
+    public boolean isBlockAttachable(IBlockAccess world, int x, int y, int z) {
         TileEntity tile = world.getTileEntity(x, y, z);
 
-        if (tile != null && tile instanceof ILandingPadAttachable)
-        {
+        if (tile != null && tile instanceof ILandingPadAttachable) {
             return ((ILandingPadAttachable) tile).canAttachToLandingPad(world, this.xCoord, this.yCoord, this.zCoord);
         }
 
@@ -208,14 +192,12 @@ public class TileEntityBuggyFueler extends TileEntityMulti implements IMultiBloc
     }
 
     @Override
-    public IDockable getDockedEntity()
-    {
+    public IDockable getDockedEntity() {
         return this.dockedEntity;
     }
 
     @Override
-    public void dockEntity(IDockable entity)
-    {
+    public void dockEntity(IDockable entity) {
         this.dockedEntity = entity;
     }
 }

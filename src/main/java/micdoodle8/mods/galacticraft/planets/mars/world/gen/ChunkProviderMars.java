@@ -1,6 +1,8 @@
 package micdoodle8.mods.galacticraft.planets.mars.world.gen;
 
 import com.google.common.collect.Lists;
+import java.util.ArrayList;
+import java.util.List;
 import micdoodle8.mods.galacticraft.api.prefab.core.BlockMetaPair;
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.BiomeDecoratorSpace;
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.ChunkProviderSpace;
@@ -18,19 +20,14 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ChunkProviderMars extends ChunkProviderSpace
-{
+public class ChunkProviderMars extends ChunkProviderSpace {
     private final BiomeDecoratorMars marsBiomeDecorator = new BiomeDecoratorMars();
     private final MapGenCavernMars caveGenerator = new MapGenCavernMars();
     private final MapGenCaveMars cavernGenerator = new MapGenCaveMars();
 
     private final MapGenDungeon dungeonGenerator = new MapGenDungeon(MarsBlocks.marsBlock, 7, 8, 16, 6);
 
-    public ChunkProviderMars(World par1World, long seed, boolean mapFeaturesEnabled)
-    {
+    public ChunkProviderMars(World par1World, long seed, boolean mapFeaturesEnabled) {
         super(par1World, seed, mapFeaturesEnabled);
         this.dungeonGenerator.otherRooms.add(new RoomEmptyMars(null, 0, 0, 0, ForgeDirection.UNKNOWN));
         this.dungeonGenerator.otherRooms.add(new RoomSpawnerMars(null, 0, 0, 0, ForgeDirection.UNKNOWN));
@@ -48,26 +45,22 @@ public class ChunkProviderMars extends ChunkProviderSpace
     }
 
     @Override
-    protected BiomeDecoratorSpace getBiomeGenerator()
-    {
+    protected BiomeDecoratorSpace getBiomeGenerator() {
         return this.marsBiomeDecorator;
     }
 
     @Override
-    protected BiomeGenBase[] getBiomesForGeneration()
-    {
-        return new BiomeGenBase[] { BiomeGenBaseMars.marsFlat };
+    protected BiomeGenBase[] getBiomesForGeneration() {
+        return new BiomeGenBase[] {BiomeGenBaseMars.marsFlat};
     }
 
     @Override
-    protected int getSeaLevel()
-    {
+    protected int getSeaLevel() {
         return 93;
     }
 
     @Override
-    protected List<MapGenBaseMeta> getWorldGenerators()
-    {
+    protected List<MapGenBaseMeta> getWorldGenerators() {
         List<MapGenBaseMeta> generators = Lists.newArrayList();
         generators.add(this.caveGenerator);
         generators.add(this.cavernGenerator);
@@ -75,8 +68,7 @@ public class ChunkProviderMars extends ChunkProviderSpace
     }
 
     @Override
-    protected BiomeGenBase.SpawnListEntry[] getMonsters()
-    {
+    protected BiomeGenBase.SpawnListEntry[] getMonsters() {
         List<BiomeGenBase.SpawnListEntry> monsters = new ArrayList<BiomeGenBase.SpawnListEntry>();
         monsters.add(new BiomeGenBase.SpawnListEntry(EntityEvolvedZombie.class, 8, 2, 3));
         monsters.add(new BiomeGenBase.SpawnListEntry(EntityEvolvedSpider.class, 8, 2, 3));
@@ -86,68 +78,58 @@ public class ChunkProviderMars extends ChunkProviderSpace
     }
 
     @Override
-    protected BiomeGenBase.SpawnListEntry[] getCreatures()
-    {
+    protected BiomeGenBase.SpawnListEntry[] getCreatures() {
         return new BiomeGenBase.SpawnListEntry[0];
     }
 
     @Override
-    protected BlockMetaPair getGrassBlock()
-    {
+    protected BlockMetaPair getGrassBlock() {
         return new BlockMetaPair(MarsBlocks.marsBlock, (byte) 5);
     }
 
     @Override
-    protected BlockMetaPair getDirtBlock()
-    {
+    protected BlockMetaPair getDirtBlock() {
         return new BlockMetaPair(MarsBlocks.marsBlock, (byte) 6);
     }
 
     @Override
-    protected BlockMetaPair getStoneBlock()
-    {
+    protected BlockMetaPair getStoneBlock() {
         return new BlockMetaPair(MarsBlocks.marsBlock, (byte) 9);
     }
 
     @Override
-    public double getHeightModifier()
-    {
+    public double getHeightModifier() {
         return 12;
     }
 
     @Override
-    public double getSmallFeatureHeightModifier()
-    {
+    public double getSmallFeatureHeightModifier() {
         return 26;
     }
 
     @Override
-    public double getMountainHeightModifier()
-    {
+    public double getMountainHeightModifier() {
         return 95;
     }
 
     @Override
-    public double getValleyHeightModifier()
-    {
+    public double getValleyHeightModifier() {
         return 50;
     }
 
     @Override
-    public int getCraterProbability()
-    {
+    public int getCraterProbability() {
         return 2000;
     }
 
     @Override
-    public void onChunkProvide(int cX, int cZ, Block[] blocks, byte[] metadata)
-    {
-        this.dungeonGenerator.generateUsingArrays(this.worldObj, this.worldObj.getSeed(), cX * 16, 30, cZ * 16, cX, cZ, blocks, metadata);
+    public void onChunkProvide(int cX, int cZ, Block[] blocks, byte[] metadata) {
+        this.dungeonGenerator.generateUsingArrays(
+                this.worldObj, this.worldObj.getSeed(), cX * 16, 30, cZ * 16, cX, cZ, blocks, metadata);
     }
 
     @Override
-    public void onPopulate(IChunkProvider provider, int cX, int cZ)
-    {
+    public void onPopulate(IChunkProvider provider, int cX, int cZ) {
         this.dungeonGenerator.handleTileEntities(this.rand);
     }
 }

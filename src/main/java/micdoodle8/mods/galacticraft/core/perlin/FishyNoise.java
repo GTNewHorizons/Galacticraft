@@ -2,20 +2,51 @@ package micdoodle8.mods.galacticraft.core.perlin;
 
 import java.util.Random;
 
-public class FishyNoise
-{
+public class FishyNoise {
 
     int[] perm = new int[512];
 
-    public float[][] grad2d = new float[][] { { 1, 0 }, { .9239F, .3827F }, { .707107F, 0.707107F }, { .3827F, .9239F }, { 0, 1 }, { -.3827F, .9239F }, { -.707107F, 0.707107F }, { -.9239F, .3827F }, { -1, 0 }, { -.9239F, -.3827F }, { -.707107F, -0.707107F }, { -.3827F, -.9239F }, { 0, -1 }, { .3827F, -.9239F }, { .707107F, -0.707107F }, { .9239F, -.3827F } };
+    public float[][] grad2d = new float[][] {
+        {1, 0},
+        {.9239F, .3827F},
+        {.707107F, 0.707107F},
+        {.3827F, .9239F},
+        {0, 1},
+        {-.3827F, .9239F},
+        {-.707107F, 0.707107F},
+        {-.9239F, .3827F},
+        {-1, 0},
+        {-.9239F, -.3827F},
+        {-.707107F, -0.707107F},
+        {-.3827F, -.9239F},
+        {0, -1},
+        {.3827F, -.9239F},
+        {.707107F, -0.707107F},
+        {.9239F, -.3827F}
+    };
 
-    public int[][] grad3d = new int[][] { { 1, 1, 0 }, { -1, 1, 0 }, { 1, -1, 0 }, { -1, -1, 0 }, { 1, 0, 1 }, { -1, 0, 1 }, { 1, 0, -1 }, { -1, 0, -1 }, { 0, 1, 1 }, { 0, -1, 1 }, { 0, 1, -1 }, { 0, -1, -1 }, { 1, 1, 0 }, { -1, 1, 0 }, { 0, -1, 1 }, { 0, -1, -1 } };
+    public int[][] grad3d = new int[][] {
+        {1, 1, 0},
+        {-1, 1, 0},
+        {1, -1, 0},
+        {-1, -1, 0},
+        {1, 0, 1},
+        {-1, 0, 1},
+        {1, 0, -1},
+        {-1, 0, -1},
+        {0, 1, 1},
+        {0, -1, 1},
+        {0, 1, -1},
+        {0, -1, -1},
+        {1, 1, 0},
+        {-1, 1, 0},
+        {0, -1, 1},
+        {0, -1, -1}
+    };
 
-    public FishyNoise(long seed)
-    {
+    public FishyNoise(long seed) {
         final Random rand = new Random(seed);
-        for (int i = 0; i < 256; i++)
-        {
+        for (int i = 0; i < 256; i++) {
             this.perm[i] = i; // Fill up the random array with numbers 0-256
         }
 
@@ -31,33 +62,27 @@ public class FishyNoise
         System.arraycopy(this.perm, 0, this.perm, 256, 256);
     }
 
-    private static float lerp(float x, float y, float n)
-    {
+    private static float lerp(float x, float y, float n) {
         return x + n * (y - x);
     }
 
-    private static int fastFloor(float x)
-    {
+    private static int fastFloor(float x) {
         return x > 0 ? (int) x : (int) x - 1;
     }
 
-    private static float fade(float n)
-    {
+    private static float fade(float n) {
         return n * n * n * (n * (n * 6 - 15) + 10);
     }
 
-    private static float dot2(float[] grad2, float x, float y)
-    {
+    private static float dot2(float[] grad2, float x, float y) {
         return grad2[0] * x + grad2[1] * y;
     }
 
-    private static float dot3(int[] grad3, float x, float y, float z)
-    {
+    private static float dot3(int[] grad3, float x, float y, float z) {
         return grad3[0] * x + grad3[1] * y + grad3[2] * z;
     }
 
-    public float noise2d(float x, float y)
-    {
+    public float noise2d(float x, float y) {
         int largeX = x > 0 ? (int) x : (int) x - 1;
         int largeY = y > 0 ? (int) y : (int) y - 1;
         x -= largeX;
@@ -83,8 +108,7 @@ public class FishyNoise
         return lerpX0 + v * (grad01 + u * (grad11 - grad01) - lerpX0);
     }
 
-    public float noise3d(float x, float y, float z)
-    {
+    public float noise3d(float x, float y, float z) {
         int unitX = x > 0 ? (int) x : (int) x - 1;
         int unitY = y > 0 ? (int) y : (int) y - 1;
         int unitZ = z > 0 ? (int) z : (int) z - 1;
@@ -132,5 +156,4 @@ public class FishyNoise
         float lerp1 = f1 + v * (f2 - f1);
         return lerp1 + w * (f3 + v * (f4 - f3) - lerp1);
     }
-
 }

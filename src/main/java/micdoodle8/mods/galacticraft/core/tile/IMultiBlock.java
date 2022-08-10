@@ -4,8 +4,7 @@ import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
-public interface IMultiBlock
-{
+public interface IMultiBlock {
     /**
      * Called when activated
      */

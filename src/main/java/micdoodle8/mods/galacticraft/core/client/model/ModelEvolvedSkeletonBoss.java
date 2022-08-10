@@ -6,8 +6,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelEvolvedSkeletonBoss extends ModelBase
-{
+public class ModelEvolvedSkeletonBoss extends ModelBase {
     ModelRenderer upperHead;
     ModelRenderer pelvis;
     ModelRenderer sternum;
@@ -41,13 +40,12 @@ public class ModelEvolvedSkeletonBoss extends ModelBase
     ModelRenderer rightBack2ndRib;
     ModelRenderer rightBackTopRib;
 
-    public ModelEvolvedSkeletonBoss()
-    {
+    public ModelEvolvedSkeletonBoss() {
         this.textureWidth = 128;
         this.textureHeight = 128;
 
-        float halfPI = (float)(Math.PI / 2.0);
-        
+        float halfPI = (float) (Math.PI / 2.0);
+
         this.upperHead = new ModelRenderer(this, 0, 16);
         this.upperHead.addBox(-4F, -8F, -6F, 8, 8, 8);
         this.upperHead.setRotationPoint(0F, -24F, 6F);
@@ -245,8 +243,7 @@ public class ModelEvolvedSkeletonBoss extends ModelBase
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         super.render(entity, f, f1, f2, f3, f4, f5);
         this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         this.upperHead.render(f5);
@@ -283,16 +280,14 @@ public class ModelEvolvedSkeletonBoss extends ModelBase
         this.rightBackTopRib.render(f5);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
 
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity e)
-    {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity e) {
         final EntitySkeletonBoss boss = (EntitySkeletonBoss) e;
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, e);
         this.upperHead.rotateAngleY = 0;
@@ -306,8 +301,7 @@ public class ModelEvolvedSkeletonBoss extends ModelBase
         this.rightLeg.rotateAngleY = 0.0F;
         this.leftLeg.rotateAngleY = 0.0F;
 
-        if (this.isRiding)
-        {
+        if (this.isRiding) {
             this.rightArm.rotateAngleX += -((float) Math.PI / 5F);
             this.leftArm.rotateAngleX += -((float) Math.PI / 5F);
             this.rightLeg.rotateAngleX = -((float) Math.PI * 2F / 5F);
@@ -321,8 +315,7 @@ public class ModelEvolvedSkeletonBoss extends ModelBase
         float var7;
         float var8;
 
-        if (this.onGround > -9990.0F)
-        {
+        if (this.onGround > -9990.0F) {
             var7 = this.onGround;
             this.spine.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(var7) * (float) Math.PI * 2.0F) * 0.2F;
 
@@ -338,7 +331,8 @@ public class ModelEvolvedSkeletonBoss extends ModelBase
             var7 *= var7;
             var7 = 1.0F - var7;
             var8 = MathHelper.sin(var7 * (float) Math.PI);
-            final float var9 = MathHelper.sin(this.onGround * (float) Math.PI) * -(this.upperHead.rotateAngleX - 0.7F) * 0.75F;
+            final float var9 =
+                    MathHelper.sin(this.onGround * (float) Math.PI) * -(this.upperHead.rotateAngleX - 0.7F) * 0.75F;
             this.rightArm.rotateAngleX = (float) (this.rightArm.rotateAngleX - (var8 * 1.2D + var9));
             this.rightArm.rotateAngleY += this.spine.rotateAngleY * 2.0F;
             this.rightArm.rotateAngleZ = MathHelper.sin(this.onGround * (float) Math.PI) * -0.4F;
@@ -382,9 +376,9 @@ public class ModelEvolvedSkeletonBoss extends ModelBase
         this.rightArm.rotateAngleX += MathHelper.sin(par3 * 0.067F) * 0.05F;
         this.leftArm.rotateAngleX -= MathHelper.sin(par3 * 0.067F) * 0.05F;
 
-        if (boss.throwTimer + boss.postThrowDelay > 0)
-        {
-            this.rightArm.rotateAngleX -= MathHelper.cos((boss.throwTimer + boss.postThrowDelay) * 0.05F) * 1.2F + 0.05F;
+        if (boss.throwTimer + boss.postThrowDelay > 0) {
+            this.rightArm.rotateAngleX -=
+                    MathHelper.cos((boss.throwTimer + boss.postThrowDelay) * 0.05F) * 1.2F + 0.05F;
             this.leftArm.rotateAngleX -= MathHelper.cos((boss.throwTimer + boss.postThrowDelay) * 0.05F) * 1.2F + 0.05F;
         }
     }

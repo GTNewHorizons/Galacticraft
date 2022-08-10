@@ -7,43 +7,36 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntitySlimelingEgg extends TileEntity
-{
+public class TileEntitySlimelingEgg extends TileEntity {
     public int timeToHatch = -1;
     public String lastTouchedPlayerUUID = "";
     public String lastTouchedPlayerName = "";
 
     @Override
-    public void updateEntity()
-    {
+    public void updateEntity() {
         super.updateEntity();
 
-        if (!this.worldObj.isRemote)
-        {
-            if (this.timeToHatch > 0)
-            {
+        if (!this.worldObj.isRemote) {
+            if (this.timeToHatch > 0) {
                 this.timeToHatch--;
-            }
-            else if (this.timeToHatch == 0 && lastTouchedPlayerUUID != null && lastTouchedPlayerUUID.length() > 0)
-            {
+            } else if (this.timeToHatch == 0 && lastTouchedPlayerUUID != null && lastTouchedPlayerUUID.length() > 0) {
                 int metadata = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord) % 3;
 
                 float colorRed = 0.0F;
                 float colorGreen = 0.0F;
                 float colorBlue = 0.0F;
 
-                switch (metadata)
-                {
-                case 0:
-                    colorRed = 1.0F;
-                    break;
-                case 1:
-                    colorBlue = 1.0F;
-                    break;
-                case 2:
-                    colorRed = 1.0F;
-                    colorGreen = 1.0F;
-                    break;
+                switch (metadata) {
+                    case 0:
+                        colorRed = 1.0F;
+                        break;
+                    case 1:
+                        colorBlue = 1.0F;
+                        break;
+                    case 2:
+                        colorRed = 1.0F;
+                        colorGreen = 1.0F;
+                        break;
                 }
 
                 EntitySlimeling slimeling = new EntitySlimeling(this.worldObj, colorRed, colorGreen, colorBlue);
@@ -52,8 +45,7 @@ public class TileEntitySlimelingEgg extends TileEntity
                 VersionUtil.setSlimelingOwner(slimeling, this.lastTouchedPlayerUUID);
                 slimeling.setOwnerUsername(this.lastTouchedPlayerName);
 
-                if (!this.worldObj.isRemote)
-                {
+                if (!this.worldObj.isRemote) {
                     this.worldObj.spawnEntityInWorld(slimeling);
                 }
 
@@ -68,8 +60,7 @@ public class TileEntitySlimelingEgg extends TileEntity
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbt)
-    {
+    public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
         this.timeToHatch = nbt.getInteger("TimeToHatch");
         VersionUtil.readSlimelingEggFromNBT(this, nbt);
@@ -77,8 +68,7 @@ public class TileEntitySlimelingEgg extends TileEntity
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt)
-    {
+    public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         nbt.setInteger("TimeToHatch", this.timeToHatch);
         nbt.setString("OwnerUUID", this.lastTouchedPlayerUUID);

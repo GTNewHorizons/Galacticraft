@@ -9,11 +9,10 @@ import net.minecraft.server.gui.IUpdatePlayerListBox;
 /**
  * Implement into entities that make a sound all the time, like rockets
  */
-public interface IEntityNoisy
-{
-	@SideOnly(Side.CLIENT)
-	public IUpdatePlayerListBox getSoundUpdater();
+public interface IEntityNoisy {
+    @SideOnly(Side.CLIENT)
+    public IUpdatePlayerListBox getSoundUpdater();
 
-	@SideOnly(Side.CLIENT)
-	public ISound setSoundUpdater(EntityPlayerSP player);
+    @SideOnly(Side.CLIENT)
+    public ISound setSoundUpdater(EntityPlayerSP player);
 }

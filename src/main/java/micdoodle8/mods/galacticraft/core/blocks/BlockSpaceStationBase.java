@@ -18,12 +18,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class BlockSpaceStationBase extends BlockContainer implements ITileEntityProvider
-{
+public class BlockSpaceStationBase extends BlockContainer implements ITileEntityProvider {
     private IIcon[] spaceStationIcons;
 
-    public BlockSpaceStationBase(String assetName)
-    {
+    public BlockSpaceStationBase(String assetName) {
         super(Material.rock);
         this.setHardness(-1);
         this.setStepSound(Block.soundTypeMetal);
@@ -33,40 +31,36 @@ public class BlockSpaceStationBase extends BlockContainer implements ITileEntity
     }
 
     @Override
-    public float getBlockHardness(World par1World, int par2, int par3, int par4)
-    {
+    public float getBlockHardness(World par1World, int par2, int par3, int par4) {
         return -1.0F;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1IconRegister)
-    {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.spaceStationIcons = new IIcon[2];
-        this.spaceStationIcons[0] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "space_station_top");
-        this.spaceStationIcons[1] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "space_station_side");
+        this.spaceStationIcons[0] =
+                par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "space_station_top");
+        this.spaceStationIcons[1] =
+                par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "space_station_side");
         this.blockIcon = this.spaceStationIcons[0];
     }
 
     @Override
-    public IIcon getIcon(int par1, int par2)
-    {
-        switch (par1)
-        {
-        case 1:
-            return this.spaceStationIcons[0];
-        default:
-            return this.spaceStationIcons[1];
+    public IIcon getIcon(int par1, int par2) {
+        switch (par1) {
+            case 1:
+                return this.spaceStationIcons[0];
+            default:
+                return this.spaceStationIcons[1];
         }
     }
 
     @Override
-    public void breakBlock(World var1, int var2, int var3, int var4, Block var5, int var6)
-    {
+    public void breakBlock(World var1, int var2, int var3, int var4, Block var5, int var6) {
         final TileEntity tileAt = var1.getTileEntity(var2, var3, var4);
 
-        if (tileAt instanceof IMultiBlock)
-        {
+        if (tileAt instanceof IMultiBlock) {
             ((IMultiBlock) tileAt).onDestroy(tileAt);
         }
 
@@ -74,27 +68,23 @@ public class BlockSpaceStationBase extends BlockContainer implements ITileEntity
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world, int meta)
-    {
+    public TileEntity createNewTileEntity(World world, int meta) {
         return new TileEntitySpaceStationBase();
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
-    {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
         super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
 
         TileEntity tile = world.getTileEntity(x, y, z);
 
-        if (tile instanceof IMultiBlock)
-        {
+        if (tile instanceof IMultiBlock) {
             ((IMultiBlock) tile).onCreate(new BlockVec3(x, y, z));
         }
     }
 
     @Override
-    public ItemStack getPickBlock(MovingObjectPosition moving, World world, int x, int y, int z)
-    {
-    	return null;
+    public ItemStack getPickBlock(MovingObjectPosition moving, World world, int x, int y, int z) {
+        return null;
     }
 }

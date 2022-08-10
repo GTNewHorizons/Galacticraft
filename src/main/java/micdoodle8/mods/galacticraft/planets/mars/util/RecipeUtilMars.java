@@ -8,14 +8,10 @@ import micdoodle8.mods.galacticraft.planets.mars.inventory.InventorySchematicCar
 import micdoodle8.mods.galacticraft.planets.mars.inventory.InventorySchematicTier2Rocket;
 import net.minecraft.item.ItemStack;
 
-public class RecipeUtilMars
-{
-    public static ItemStack findMatchingSpaceshipT2Recipe(InventorySchematicTier2Rocket inventoryRocketBench)
-    {
-        for (INasaWorkbenchRecipe recipe : GalacticraftRegistry.getRocketT2Recipes())
-        {
-            if (recipe.matches(inventoryRocketBench))
-            {
+public class RecipeUtilMars {
+    public static ItemStack findMatchingSpaceshipT2Recipe(InventorySchematicTier2Rocket inventoryRocketBench) {
+        for (INasaWorkbenchRecipe recipe : GalacticraftRegistry.getRocketT2Recipes()) {
+            if (recipe.matches(inventoryRocketBench)) {
                 return recipe.getRecipeOutput();
             }
         }
@@ -23,12 +19,9 @@ public class RecipeUtilMars
         return null;
     }
 
-    public static ItemStack findMatchingCargoRocketRecipe(InventorySchematicCargoRocket inventoryRocketBench)
-    {
-        for (INasaWorkbenchRecipe recipe : GalacticraftRegistry.getCargoRocketRecipes())
-        {
-            if (recipe.matches(inventoryRocketBench))
-            {
+    public static ItemStack findMatchingCargoRocketRecipe(InventorySchematicCargoRocket inventoryRocketBench) {
+        for (INasaWorkbenchRecipe recipe : GalacticraftRegistry.getCargoRocketRecipes()) {
+            if (recipe.matches(inventoryRocketBench)) {
                 return recipe.getRecipeOutput();
             }
         }
@@ -36,12 +29,9 @@ public class RecipeUtilMars
         return null;
     }
 
-    public static ItemStack findMatchingSpaceshipT3Recipe(InventorySchematicTier3Rocket inventoryRocketBench)
-    {
-        for (INasaWorkbenchRecipe recipe : GalacticraftRegistry.getRocketT3Recipes())
-        {
-            if (recipe.matches(inventoryRocketBench))
-            {
+    public static ItemStack findMatchingSpaceshipT3Recipe(InventorySchematicTier3Rocket inventoryRocketBench) {
+        for (INasaWorkbenchRecipe recipe : GalacticraftRegistry.getRocketT3Recipes()) {
+            if (recipe.matches(inventoryRocketBench)) {
                 return recipe.getRecipeOutput();
             }
         }
@@ -49,16 +39,13 @@ public class RecipeUtilMars
         return null;
     }
 
-	public static ItemStack findMatchingAstroMinerRecipe (InventorySchematicAstroMiner craftMatrix)
-	{
-        for (INasaWorkbenchRecipe recipe : GalacticraftRegistry.getAstroMinerRecipes())
-        {
-            if (recipe.matches(craftMatrix))
-            {
+    public static ItemStack findMatchingAstroMinerRecipe(InventorySchematicAstroMiner craftMatrix) {
+        for (INasaWorkbenchRecipe recipe : GalacticraftRegistry.getAstroMinerRecipes()) {
+            if (recipe.matches(craftMatrix)) {
                 return recipe.getRecipeOutput();
             }
         }
 
         return null;
-	}
+    }
 }

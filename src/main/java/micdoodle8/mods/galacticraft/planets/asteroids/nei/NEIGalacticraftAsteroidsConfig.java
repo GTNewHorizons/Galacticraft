@@ -4,6 +4,10 @@ import codechicken.nei.PositionedStack;
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 import gregtech.api.util.GT_ModHandler;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
@@ -14,62 +18,50 @@ import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 import micdoodle8.mods.galacticraft.planets.mars.nei.NEIGalacticraftMarsConfig;
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
-public class NEIGalacticraftAsteroidsConfig implements IConfigureNEI
-{
-    private static HashMap<ArrayList<PositionedStack>, PositionedStack> rocketBenchRecipes = new HashMap<ArrayList<PositionedStack>, PositionedStack>();
-    private static HashMap<ArrayList<PositionedStack>, PositionedStack> astroMinerRecipes = new HashMap<ArrayList<PositionedStack>, PositionedStack>();
+public class NEIGalacticraftAsteroidsConfig implements IConfigureNEI {
+    private static HashMap<ArrayList<PositionedStack>, PositionedStack> rocketBenchRecipes =
+            new HashMap<ArrayList<PositionedStack>, PositionedStack>();
+    private static HashMap<ArrayList<PositionedStack>, PositionedStack> astroMinerRecipes =
+            new HashMap<ArrayList<PositionedStack>, PositionedStack>();
 
     @Override
-    public void loadConfig()
-    {
-        //Handled by GalaxySpace
+    public void loadConfig() {
+        // Handled by GalaxySpace
         this.registerRecipes();
-        //API.registerRecipeHandler(new RocketT3RecipeHandler());
-        //API.registerUsageHandler(new RocketT3RecipeHandler());
+        // API.registerRecipeHandler(new RocketT3RecipeHandler());
+        // API.registerUsageHandler(new RocketT3RecipeHandler());
         API.registerRecipeHandler(new AstroMinerRecipeHandler());
         API.registerUsageHandler(new AstroMinerRecipeHandler());
         API.registerHighlightIdentifier(AsteroidBlocks.blockBasic, NEIGalacticraftMarsConfig.planetsHighlightHandler);
     }
 
     @Override
-    public String getName()
-    {
+    public String getName() {
         return "Galacticraft Asteroids NEI Plugin";
     }
 
     @Override
-    public String getVersion()
-    {
+    public String getVersion() {
         return Constants.VERSION;
     }
 
-    public void registerRocketBenchRecipe(ArrayList<PositionedStack> input, PositionedStack output)
-    {
+    public void registerRocketBenchRecipe(ArrayList<PositionedStack> input, PositionedStack output) {
         NEIGalacticraftAsteroidsConfig.rocketBenchRecipes.put(input, output);
     }
 
-    public static Set<Map.Entry<ArrayList<PositionedStack>, PositionedStack>> getRocketBenchRecipes()
-    {
+    public static Set<Map.Entry<ArrayList<PositionedStack>, PositionedStack>> getRocketBenchRecipes() {
         return NEIGalacticraftAsteroidsConfig.rocketBenchRecipes.entrySet();
     }
 
-    public void registerAstroMinerRecipe(ArrayList<PositionedStack> input, PositionedStack output)
-    {
+    public void registerAstroMinerRecipe(ArrayList<PositionedStack> input, PositionedStack output) {
         NEIGalacticraftAsteroidsConfig.astroMinerRecipes.put(input, output);
     }
 
-    public static Set<Map.Entry<ArrayList<PositionedStack>, PositionedStack>> getAstroMinerRecipes()
-    {
+    public static Set<Map.Entry<ArrayList<PositionedStack>, PositionedStack>> getAstroMinerRecipes() {
         return NEIGalacticraftAsteroidsConfig.astroMinerRecipes.entrySet();
     }
 
-    public void registerRecipes()
-    {
+    public void registerRecipes() {
         final int changeY = 15;
 
         ArrayList<PositionedStack> input = new ArrayList<PositionedStack>();
@@ -130,9 +122,10 @@ public class NEIGalacticraftAsteroidsConfig implements IConfigureNEI
         int x = AstroMinerRecipeHandler.tX - AstroMinerRecipeHandler.x;
         int y = AstroMinerRecipeHandler.tY - AstroMinerRecipeHandler.y;
         input = new ArrayList<>();
-        for(int i = 0; i < 2; i++) {
-            for(int j = 0; j < 4; j++) {
-                input.add(new PositionedStack(new ItemStack(MarsItems.marsItemBasic, 1, 3), 44 + j * 18 - x, 19 + i * 72 - y));
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 4; j++) {
+                input.add(new PositionedStack(
+                        new ItemStack(MarsItems.marsItemBasic, 1, 3), 44 + j * 18 - x, 19 + i * 72 - y));
             }
         }
         input.add(new PositionedStack(new ItemStack(GCItems.flagPole), 116 - x, 19 - y));
@@ -144,8 +137,11 @@ public class NEIGalacticraftAsteroidsConfig implements IConfigureNEI
         input.add(new PositionedStack(new ItemStack(AsteroidsItems.orionDrive), 26 - x, 55 - y));
         input.add(new PositionedStack(new ItemStack(AsteroidsItems.orionDrive), 44 - x, 55 - y));
         input.add(new PositionedStack(new ItemStack(AsteroidsItems.orionDrive), 62 - x, 55 - y));
-        if(GalacticraftCore.isGalaxySpaceLoaded) {
-            input.add(new PositionedStack(GT_ModHandler.getModItem(Constants.MOD_ID_GALAXYSPACE, "item.RocketControlComputer", 1, 102), 62 - x, 37 - y));
+        if (GalacticraftCore.isGalaxySpaceLoaded) {
+            input.add(new PositionedStack(
+                    GT_ModHandler.getModItem(Constants.MOD_ID_GALAXYSPACE, "item.RocketControlComputer", 1, 102),
+                    62 - x,
+                    37 - y));
         }
         input.add(new PositionedStack(new ItemStack(GCItems.basicItem, 1, 14), 80 - x, 37 - y));
         input.add(new PositionedStack(new ItemStack(GCItems.basicItem, 1, 14), 98 - x, 37 - y));
@@ -156,8 +152,10 @@ public class NEIGalacticraftAsteroidsConfig implements IConfigureNEI
         input.add(new PositionedStack(RecipeUtil.getChestItemStack(1, 1), 98 - x, 55 - y));
         input.add(new PositionedStack(new ItemStack(AsteroidsItems.basicItem, 1, 8), 44 - x, 73 - y));
         input.add(new PositionedStack(new ItemStack(AsteroidBlocks.beamReceiver), 62 - x, 73 - y));
-        input.add(new PositionedStack(GT_ModHandler.getModItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01", 1, 32603), 80 - x, 73 - y));
-        input.add(new PositionedStack(GT_ModHandler.getModItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01", 1, 32603), 98 - x, 73 - y));
+        input.add(new PositionedStack(
+                GT_ModHandler.getModItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01", 1, 32603), 80 - x, 73 - y));
+        input.add(new PositionedStack(
+                GT_ModHandler.getModItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01", 1, 32603), 98 - x, 73 - y));
         registerAstroMinerRecipe(input, new PositionedStack(new ItemStack(AsteroidsItems.astroMiner), 143 - x, 55 - y));
     }
 }

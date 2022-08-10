@@ -2,6 +2,8 @@ package micdoodle8.mods.galacticraft.planets.mars.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+import java.util.Random;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.planets.GalacticraftPlanets;
@@ -17,31 +19,27 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
-import java.util.List;
-import java.util.Random;
-
-public class BlockSludge extends BlockFluidClassic
-{
+public class BlockSludge extends BlockFluidClassic {
     @SideOnly(Side.CLIENT)
     IIcon stillIcon;
+
     @SideOnly(Side.CLIENT)
     IIcon flowingIcon;
 
     @Override
-    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
-    {
-        if (!world.isRemote)
-        {
-            if (entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isFlying || entity instanceof EntitySludgeling)
-            {
+    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+        if (!world.isRemote) {
+            if (entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isFlying
+                    || entity instanceof EntitySludgeling) {
                 return;
             }
 
             int range = 5;
-            List<?> l = world.getEntitiesWithinAABB(EntitySludgeling.class, AxisAlignedBB.getBoundingBox(x - range, y - range, z - range, x + range, y + range, z + range));
+            List<?> l = world.getEntitiesWithinAABB(
+                    EntitySludgeling.class,
+                    AxisAlignedBB.getBoundingBox(x - range, y - range, z - range, x + range, y + range, z + range));
 
-            if (l.size() < 3)
-            {
+            if (l.size() < 3) {
                 EntitySludgeling sludgeling = new EntitySludgeling(world);
                 sludgeling.setPosition(x + world.rand.nextInt(5) - 2, y, z + world.rand.nextInt(5) - 2);
                 world.spawnEntityInWorld(sludgeling);
@@ -51,8 +49,7 @@ public class BlockSludge extends BlockFluidClassic
         super.onEntityCollidedWithBlock(world, x, y, z, entity);
     }
 
-    public BlockSludge()
-    {
+    public BlockSludge() {
         super(MarsModule.sludge, MarsModule.sludgeMaterial);
         this.setQuantaPerBlock(9);
         this.setRenderPass(1);
@@ -62,22 +59,19 @@ public class BlockSludge extends BlockFluidClassic
 
     @SideOnly(Side.CLIENT)
     @Override
-    public CreativeTabs getCreativeTabToDisplayOn()
-    {
+    public CreativeTabs getCreativeTabToDisplayOn() {
         return GalacticraftCore.galacticraftBlocksTab;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int par1, int par2)
-    {
+    public IIcon getIcon(int par1, int par2) {
         return par1 != 0 && par1 != 1 ? this.flowingIcon : this.stillIcon;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1IconRegister)
-    {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.stillIcon = par1IconRegister.registerIcon(MarsModule.TEXTURE_PREFIX + "sludge_still");
         this.flowingIcon = par1IconRegister.registerIcon(MarsModule.TEXTURE_PREFIX + "sludge_flow");
         MarsModule.sludge.setStillIcon(this.stillIcon);
@@ -85,41 +79,44 @@ public class BlockSludge extends BlockFluidClassic
     }
 
     @Override
-	public boolean canDisplace(IBlockAccess world, int x, int y, int z)
-	{
-		if (world.getBlock(x, y, z).getMaterial().isLiquid())
-		{
-			return false;
-		}
-		return super.canDisplace(world, x, y, z);
-	}
+    public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
+        if (world.getBlock(x, y, z).getMaterial().isLiquid()) {
+            return false;
+        }
+        return super.canDisplace(world, x, y, z);
+    }
 
-	@Override
-	public boolean displaceIfPossible(World world, int x, int y, int z)
-	{
-		if (world.getBlock(x, y, z).getMaterial().isLiquid())
-		{
-			return false;
-		}
-		return super.displaceIfPossible(world, x, y, z);
-	}
+    @Override
+    public boolean displaceIfPossible(World world, int x, int y, int z) {
+        if (world.getBlock(x, y, z).getMaterial().isLiquid()) {
+            return false;
+        }
+        return super.displaceIfPossible(world, x, y, z);
+    }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World world, int x, int y, int z, Random rand)
-    {
+    public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
         super.randomDisplayTick(world, x, y, z, rand);
 
-        if (rand.nextInt(1200) == 0)
-        {
-            world.playSound(x + 0.5F, y + 0.5F, z + 0.5F, "liquid.lava", rand.nextFloat() * 0.25F + 0.75F, 0.00001F + rand.nextFloat() * 0.5F, false);
+        if (rand.nextInt(1200) == 0) {
+            world.playSound(
+                    x + 0.5F,
+                    y + 0.5F,
+                    z + 0.5F,
+                    "liquid.lava",
+                    rand.nextFloat() * 0.25F + 0.75F,
+                    0.00001F + rand.nextFloat() * 0.5F,
+                    false);
         }
-		if (rand.nextInt(10) == 0)
-		{
-			if (World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) && !world.getBlock(x, y - 2, z).getMaterial().blocksMovement())
-			{
-				GalacticraftPlanets.spawnParticle("bacterialDrip", new Vector3(x + rand.nextFloat(), y - 1.05D, z + rand.nextFloat()), new Vector3(0, 0, 0));
-			}
-		}
+        if (rand.nextInt(10) == 0) {
+            if (World.doesBlockHaveSolidTopSurface(world, x, y - 1, z)
+                    && !world.getBlock(x, y - 2, z).getMaterial().blocksMovement()) {
+                GalacticraftPlanets.spawnParticle(
+                        "bacterialDrip",
+                        new Vector3(x + rand.nextFloat(), y - 1.05D, z + rand.nextFloat()),
+                        new Vector3(0, 0, 0));
+            }
+        }
     }
 }

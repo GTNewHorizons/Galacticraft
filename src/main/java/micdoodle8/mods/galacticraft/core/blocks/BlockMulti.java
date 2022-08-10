@@ -2,6 +2,8 @@ package micdoodle8.mods.galacticraft.core.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+import java.util.Random;
 import micdoodle8.mods.galacticraft.api.block.IPartialSealableBlock;
 import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
@@ -26,14 +28,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.List;
-import java.util.Random;
-
-public class BlockMulti extends BlockContainer implements IPartialSealableBlock, ITileEntityProvider
-{
+public class BlockMulti extends BlockContainer implements IPartialSealableBlock, ITileEntityProvider {
     private IIcon[] fakeIcons;
 
-    //Meta values:
+    // Meta values:
     //  0 : Solar panel strut and variable angle parts
     //  1 : Space station base
     //  2 : Rocket fueling pad
@@ -43,8 +41,7 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
     //  6 : Buggy fueling pad
     //  7 unused
 
-    public BlockMulti(String assetName)
-    {
+    public BlockMulti(String assetName) {
         super(GCBlocks.machine);
         this.setHardness(1.0F);
         this.setStepSound(Block.soundTypeMetal);
@@ -55,90 +52,76 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1IconRegister)
-    {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.fakeIcons = new IIcon[5];
         this.fakeIcons[0] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "launch_pad");
         this.fakeIcons[1] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "workbench_nasa_top");
         this.fakeIcons[2] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "solar_basic_0");
         this.fakeIcons[4] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "buggy_fueler_blank");
 
-        if (GalacticraftCore.isPlanetsLoaded)
-        {
-            try
-            {
+        if (GalacticraftCore.isPlanetsLoaded) {
+            try {
                 Class<?> c = Class.forName("micdoodle8.mods.galacticraft.planets.mars.MarsModule");
                 String texturePrefix = (String) c.getField("TEXTURE_PREFIX").get(null);
                 this.fakeIcons[3] = par1IconRegister.registerIcon(texturePrefix + "cryoDummy");
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 this.fakeIcons[3] = this.fakeIcons[2];
                 e.printStackTrace();
             }
-        }
-        else
-        {
+        } else {
             this.fakeIcons[3] = this.fakeIcons[2];
         }
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int par1, int par2)
-    {
-        switch (par2)
-        {
-        case 0:
-            return this.fakeIcons[2];
-        case 2:
-            return this.fakeIcons[0];
-        case 3:
-            return this.fakeIcons[1];
-        case 4:
-            return this.fakeIcons[2];
-        case 5:
-            return this.fakeIcons[3];
-        case 6:
-            return this.fakeIcons[4];
-        default:
-            return this.fakeIcons[0];
+    public IIcon getIcon(int par1, int par2) {
+        switch (par2) {
+            case 0:
+                return this.fakeIcons[2];
+            case 2:
+                return this.fakeIcons[0];
+            case 3:
+                return this.fakeIcons[1];
+            case 4:
+                return this.fakeIcons[2];
+            case 5:
+                return this.fakeIcons[3];
+            case 6:
+                return this.fakeIcons[4];
+            default:
+                return this.fakeIcons[0];
         }
     }
 
     @Override
-    public boolean isOpaqueCube()
-    {
+    public boolean isOpaqueCube() {
         return false;
     }
 
     @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
-    {
+    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
         int meta = world.getBlockMetadata(x, y, z);
 
-        if (meta == 2 || meta == 6)
-        {
+        if (meta == 2 || meta == 6) {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.2F, 1.0F);
         }
         /*else if (meta == 7)
         {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.38F, 1.0F);
         }*/
-        else
-        {
+        else {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         }
     }
 
     @SuppressWarnings("rawtypes")
     @Override
-    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List list, Entity entity)
-    {
+    public void addCollisionBoxesToList(
+            World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List list, Entity entity) {
         int meta = world.getBlockMetadata(x, y, z);
 
-        if (meta == 2 || meta == 6)
-        {
+        if (meta == 2 || meta == 6) {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.2F, 1.0F);
             super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
         }
@@ -147,49 +130,41 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.38F, 1.0F);
             super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
         }*/
-        else
-        {
+        else {
             super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
         }
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
-    {
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
         this.setBlockBoundsBasedOnState(world, x, y, z);
         return super.getCollisionBoundingBoxFromPool(world, x, y, z);
     }
 
     @Override
-    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
-    {
+    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
         this.setBlockBoundsBasedOnState(world, x, y, z);
         return super.getSelectedBoundingBoxFromPool(world, x, y, z);
     }
 
     @Override
-    public boolean canDropFromExplosion(Explosion par1Explosion)
-    {
+    public boolean canDropFromExplosion(Explosion par1Explosion) {
         return false;
     }
 
-    public void makeFakeBlock(World worldObj, BlockVec3 position, BlockVec3 mainBlock, int meta)
-    {
+    public void makeFakeBlock(World worldObj, BlockVec3 position, BlockVec3 mainBlock, int meta) {
         worldObj.setBlock(position.x, position.y, position.z, this, meta, 3);
         ((TileEntityMulti) worldObj.getTileEntity(position.x, position.y, position.z)).setMainBlock(mainBlock);
     }
 
     @Override
-    public float getBlockHardness(World par1World, int par2, int par3, int par4)
-    {
+    public float getBlockHardness(World par1World, int par2, int par3, int par4) {
         TileEntity tileEntity = par1World.getTileEntity(par2, par3, par4);
 
-        if (tileEntity instanceof TileEntityMulti)
-        {
+        if (tileEntity instanceof TileEntityMulti) {
             BlockVec3 mainBlockPosition = ((TileEntityMulti) tileEntity).mainBlockPosition;
 
-            if (mainBlockPosition != null && !mainBlockPosition.equals(new BlockVec3(par2, par3, par4)))
-            {
+            if (mainBlockPosition != null && !mainBlockPosition.equals(new BlockVec3(par2, par3, par4))) {
                 return mainBlockPosition.getBlock(par1World).getBlockHardness(par1World, par2, par3, par4);
             }
         }
@@ -198,19 +173,16 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
     }
 
     @Override
-    public boolean isSealed(World world, int x, int y, int z, ForgeDirection direction)
-    {
+    public boolean isSealed(World world, int x, int y, int z, ForgeDirection direction) {
         int metadata = world.getBlockMetadata(x, y, z);
 
-        //Landing pad and refueling pad
-        if (metadata == 2 || metadata == 6)
-        {
+        // Landing pad and refueling pad
+        if (metadata == 2 || metadata == 6) {
             return direction == ForgeDirection.DOWN;
         }
 
-        //Basic solar panel fixed top
-        if (metadata == 4)
-        {
+        // Basic solar panel fixed top
+        if (metadata == 4) {
             return direction == ForgeDirection.UP;
         }
 
@@ -218,19 +190,16 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
     }
 
     @Override
-    public Block setBlockTextureName(String name)
-    {
+    public Block setBlockTextureName(String name) {
         this.textureName = name;
         return this;
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block par5, int par6)
-    {
+    public void breakBlock(World world, int x, int y, int z, Block par5, int par6) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
 
-        if (tileEntity instanceof TileEntityMulti)
-        {
+        if (tileEntity instanceof TileEntityMulti) {
             ((TileEntityMulti) tileEntity).onBlockRemoval();
         }
 
@@ -244,8 +213,16 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
      * same thing)
      */
     @Override
-    public boolean onBlockActivated(World par1World, int x, int y, int z, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
-    {
+    public boolean onBlockActivated(
+            World par1World,
+            int x,
+            int y,
+            int z,
+            EntityPlayer par5EntityPlayer,
+            int par6,
+            float par7,
+            float par8,
+            float par9) {
         TileEntityMulti tileEntity = (TileEntityMulti) par1World.getTileEntity(x, y, z);
         return tileEntity.onBlockActivated(par1World, x, y, z, par5EntityPlayer);
     }
@@ -254,114 +231,103 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
      * Returns the quantity of items to drop on block destruction.
      */
     @Override
-    public int quantityDropped(Random par1Random)
-    {
+    public int quantityDropped(Random par1Random) {
         return 0;
     }
 
     @Override
-    public int getRenderType()
-    {
+    public int getRenderType() {
         return -1;
     }
 
     @Override
-    public boolean renderAsNormalBlock()
-    {
+    public boolean renderAsNormalBlock() {
         return false;
     }
 
     @Override
-    public TileEntity createNewTileEntity(World var1, int meta)
-    {
+    public TileEntity createNewTileEntity(World var1, int meta) {
         return new TileEntityMulti();
     }
 
     @Override
-    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
-    {
+    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
-        if (tileEntity instanceof TileEntityMulti)
-        {
+        if (tileEntity instanceof TileEntityMulti) {
             BlockVec3 mainBlockPosition = ((TileEntityMulti) tileEntity).mainBlockPosition;
 
-            if (mainBlockPosition != null && !mainBlockPosition.equals(new BlockVec3(x, y, z)))
-	        {
-	            Block mainBlockID = world.getBlock(mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z);
-	
-	            if (Blocks.air != mainBlockID)
-	            {
-	                return mainBlockID.getPickBlock(target, world, mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z);
-	            }
-	        }
+            if (mainBlockPosition != null && !mainBlockPosition.equals(new BlockVec3(x, y, z))) {
+                Block mainBlockID = world.getBlock(mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z);
+
+                if (Blocks.air != mainBlockID) {
+                    return mainBlockID.getPickBlock(
+                            target, world, mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z);
+                }
+            }
         }
 
         return null;
     }
 
     @Override
-    public int getBedDirection(IBlockAccess world, int x, int y, int z)
-    {
+    public int getBedDirection(IBlockAccess world, int x, int y, int z) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
-        if (tileEntity instanceof TileEntityMulti)
-        {
+        if (tileEntity instanceof TileEntityMulti) {
             BlockVec3 mainBlockPosition = ((TileEntityMulti) tileEntity).mainBlockPosition;
 
-	        if (mainBlockPosition != null && !mainBlockPosition.equals(new BlockVec3(x, y, z)))
-	        {
-	            return mainBlockPosition.getBlock(world).getBedDirection(world, mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z);
-	        }
+            if (mainBlockPosition != null && !mainBlockPosition.equals(new BlockVec3(x, y, z))) {
+                return mainBlockPosition
+                        .getBlock(world)
+                        .getBedDirection(world, mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z);
+            }
         }
 
         return BlockDirectional.getDirection(world.getBlockMetadata(x, y, z));
     }
 
     @Override
-    public boolean isBed(IBlockAccess world, int x, int y, int z, EntityLivingBase player)
-    {
+    public boolean isBed(IBlockAccess world, int x, int y, int z, EntityLivingBase player) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
-        if (tileEntity instanceof TileEntityMulti)
-        {
+        if (tileEntity instanceof TileEntityMulti) {
             BlockVec3 mainBlockPosition = ((TileEntityMulti) tileEntity).mainBlockPosition;
 
-            if (mainBlockPosition != null && !mainBlockPosition.equals(new BlockVec3(x, y, z)))
-	        {
-	            return mainBlockPosition.getBlock(world).isBed(world, mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z, player);
-	        }
+            if (mainBlockPosition != null && !mainBlockPosition.equals(new BlockVec3(x, y, z))) {
+                return mainBlockPosition
+                        .getBlock(world)
+                        .isBed(world, mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z, player);
+            }
         }
 
         return super.isBed(world, x, y, z, player);
     }
 
     @Override
-    public void setBedOccupied(IBlockAccess world, int x, int y, int z, EntityPlayer player, boolean occupied)
-    {
+    public void setBedOccupied(IBlockAccess world, int x, int y, int z, EntityPlayer player, boolean occupied) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         BlockVec3 mainBlockPosition = ((TileEntityMulti) tileEntity).mainBlockPosition;
 
-        if (mainBlockPosition != null && !mainBlockPosition.equals(new BlockVec3(x, y, z)))
-        {
-            mainBlockPosition.getBlock(world).setBedOccupied(world, mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z, player, occupied);
-        }
-        else
-        {
+        if (mainBlockPosition != null && !mainBlockPosition.equals(new BlockVec3(x, y, z))) {
+            mainBlockPosition
+                    .getBlock(world)
+                    .setBedOccupied(
+                            world, mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z, player, occupied);
+        } else {
             super.setBedOccupied(world, x, y, z, player, occupied);
         }
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
-    {
+    public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer) {
         TileEntity tileEntity = worldObj.getTileEntity(target.blockX, target.blockY, target.blockZ);
 
-        if (tileEntity instanceof TileEntityMulti)
-        {
+        if (tileEntity instanceof TileEntityMulti) {
             BlockVec3 mainBlockPosition = ((TileEntityMulti) tileEntity).mainBlockPosition;
 
-            if (mainBlockPosition != null && !mainBlockPosition.equals(new BlockVec3(target.blockX, target.blockY, target.blockZ)))
-            {
-                effectRenderer.addBlockHitEffects(mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z, target);
+            if (mainBlockPosition != null
+                    && !mainBlockPosition.equals(new BlockVec3(target.blockX, target.blockY, target.blockZ))) {
+                effectRenderer.addBlockHitEffects(
+                        mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z, target);
             }
         }
 
@@ -370,8 +336,7 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean addDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
-    {
+    public boolean addDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer) {
         return super.addDestroyEffects(world, x, y, z, meta, effectRenderer);
     }
 }

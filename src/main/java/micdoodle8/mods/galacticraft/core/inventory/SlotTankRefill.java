@@ -6,18 +6,14 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class SlotTankRefill extends Slot
-{
-    public SlotTankRefill(IInventory par3IInventory, int par4, int par5, int par6)
-    {
+public class SlotTankRefill extends Slot {
+    public SlotTankRefill(IInventory par3IInventory, int par4, int par5, int par6) {
         super(par3IInventory, par4, par5, par6);
     }
 
     @Override
-    public boolean isItemValid(ItemStack par1ItemStack)
-    {
-        if (this.slotNumber == 49)
-        {
+    public boolean isItemValid(ItemStack par1ItemStack) {
+        if (this.slotNumber == 49) {
             return par1ItemStack.getItem() instanceof ItemParaChute;
         }
 
@@ -25,8 +21,7 @@ public class SlotTankRefill extends Slot
     }
 
     @Override
-    public int getSlotStackLimit()
-    {
+    public int getSlotStackLimit() {
         return 1;
     }
 }

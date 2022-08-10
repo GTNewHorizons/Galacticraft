@@ -1,7 +1,6 @@
 package micdoodle8.mods.galacticraft.api.power;
 
-public interface IEnergyStorageGC
-{
+public interface IEnergyStorageGC {
     /**
      * Add energy to the storage.
      *

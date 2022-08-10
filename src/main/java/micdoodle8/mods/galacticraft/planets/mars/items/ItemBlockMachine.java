@@ -13,50 +13,35 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockMachine extends ItemBlockDesc implements IHoldableItem
-{
-    public ItemBlockMachine(Block block)
-    {
+public class ItemBlockMachine extends ItemBlockDesc implements IHoldableItem {
+    public ItemBlockMachine(Block block) {
         super(block);
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
     }
 
     @Override
-    public int getMetadata(int damage)
-    {
+    public int getMetadata(int damage) {
         return damage;
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack itemstack)
-    {
+    public String getUnlocalizedName(ItemStack itemstack) {
         int index = 0;
         int typenum = itemstack.getItemDamage() & 12;
 
-        if (this.field_150939_a == MarsBlocks.machine)
-        {
-            if (typenum == BlockMachineMars.LAUNCH_CONTROLLER_METADATA)
-            {
+        if (this.field_150939_a == MarsBlocks.machine) {
+            if (typenum == BlockMachineMars.LAUNCH_CONTROLLER_METADATA) {
                 index = 2;
-            }
-            else if (typenum == BlockMachineMars.CRYOGENIC_CHAMBER_METADATA)
-            {
+            } else if (typenum == BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) {
                 index = 1;
             }
-        }
-        else if (this.field_150939_a == MarsBlocks.machineT2)
-        {
-            if (typenum == BlockMachineMarsT2.GAS_LIQUEFIER)
-            {
+        } else if (this.field_150939_a == MarsBlocks.machineT2) {
+            if (typenum == BlockMachineMarsT2.GAS_LIQUEFIER) {
                 return "tile.marsMachine.4";
-            }
-            else if (typenum == BlockMachineMarsT2.METHANE_SYNTHESIZER)
-            {
+            } else if (typenum == BlockMachineMarsT2.METHANE_SYNTHESIZER) {
                 return "tile.marsMachine.5";
-            }
-            else if (typenum == BlockMachineMarsT2.ELECTROLYZER)
-            {
+            } else if (typenum == BlockMachineMarsT2.ELECTROLYZER) {
                 return "tile.marsMachine.6";
             }
         }
@@ -66,38 +51,37 @@ public class ItemBlockMachine extends ItemBlockDesc implements IHoldableItem
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 
     @Override
-    public String getUnlocalizedName()
-    {
+    public String getUnlocalizedName() {
         return this.field_150939_a.getUnlocalizedName() + ".0";
     }
 
     @Override
-    public boolean shouldHoldLeftHandUp(EntityPlayer player)
-    {
+    public boolean shouldHoldLeftHandUp(EntityPlayer player) {
         ItemStack currentStack = player.getCurrentEquippedItem();
 
-        return currentStack != null && this.field_150939_a == MarsBlocks.machine && currentStack.getItemDamage() >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA && currentStack.getItemDamage() < BlockMachineMars.LAUNCH_CONTROLLER_METADATA;
-
+        return currentStack != null
+                && this.field_150939_a == MarsBlocks.machine
+                && currentStack.getItemDamage() >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA
+                && currentStack.getItemDamage() < BlockMachineMars.LAUNCH_CONTROLLER_METADATA;
     }
 
     @Override
-    public boolean shouldHoldRightHandUp(EntityPlayer player)
-    {
+    public boolean shouldHoldRightHandUp(EntityPlayer player) {
         ItemStack currentStack = player.getCurrentEquippedItem();
 
-        return currentStack != null && this.field_150939_a == MarsBlocks.machine && currentStack.getItemDamage() >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA && currentStack.getItemDamage() < BlockMachineMars.LAUNCH_CONTROLLER_METADATA;
-
+        return currentStack != null
+                && this.field_150939_a == MarsBlocks.machine
+                && currentStack.getItemDamage() >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA
+                && currentStack.getItemDamage() < BlockMachineMars.LAUNCH_CONTROLLER_METADATA;
     }
 
     @Override
-    public boolean shouldCrouch(EntityPlayer player)
-    {
+    public boolean shouldCrouch(EntityPlayer player) {
         return false;
     }
 }

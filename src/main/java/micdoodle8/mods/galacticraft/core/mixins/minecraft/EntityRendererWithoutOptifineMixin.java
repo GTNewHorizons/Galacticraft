@@ -11,9 +11,13 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(EntityRenderer.class)
 public class EntityRendererWithoutOptifineMixin {
 
-    @Redirect(method = "updateFogColor",
-            at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/client/multiplayer/WorldClient;getFogColor(F)Lnet/minecraft/util/Vec3;"),
+    @Redirect(
+            method = "updateFogColor",
+            at =
+                    @At(
+                            value = "INVOKE",
+                            target =
+                                    "Lnet/minecraft/client/multiplayer/WorldClient;getFogColor(F)Lnet/minecraft/util/Vec3;"),
             require = 1)
     private Vec3 onUpdateFogColor(WorldClient worldClient, float v) {
         return WorldUtil.getFogColorHook(worldClient);

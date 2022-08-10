@@ -8,8 +8,7 @@ import net.minecraft.item.ItemStack;
  * <p/>
  * Nothing here (yet)
  */
-public interface IKeyItem
-{
+public interface IKeyItem {
     /**
      * Gets the tier of this object
      *

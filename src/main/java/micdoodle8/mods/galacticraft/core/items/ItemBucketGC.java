@@ -12,35 +12,30 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 
-public class ItemBucketGC extends ItemBucket
-{
-	private String texture_prefix;
+public class ItemBucketGC extends ItemBucket {
+    private String texture_prefix;
 
-	public ItemBucketGC(Block block, String texture_prefix)
-	{
-		super(block);
-		this.texture_prefix = texture_prefix;
-		this.setContainerItem(Items.bucket);
-	}
+    public ItemBucketGC(Block block, String texture_prefix) {
+        super(block);
+        this.texture_prefix = texture_prefix;
+        this.setContainerItem(Items.bucket);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public EnumRarity getRarity(ItemStack par1ItemStack)
-	{
-		return ClientProxyCore.galacticraftItem;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
+        return ClientProxyCore.galacticraftItem;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public CreativeTabs getCreativeTab()
-	{
-		return GalacticraftCore.galacticraftItemsTab;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public CreativeTabs getCreativeTab() {
+        return GalacticraftCore.galacticraftItemsTab;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister par1IconRegister)
-	{
-		this.itemIcon = par1IconRegister.registerIcon(this.getUnlocalizedName().replace("item.", texture_prefix));
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister par1IconRegister) {
+        this.itemIcon = par1IconRegister.registerIcon(this.getUnlocalizedName().replace("item.", texture_prefix));
+    }
 }

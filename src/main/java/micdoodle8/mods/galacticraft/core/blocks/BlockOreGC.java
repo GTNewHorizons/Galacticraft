@@ -7,10 +7,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 
-public class BlockOreGC extends Block
-{
-    public BlockOreGC(String name)
-    {
+public class BlockOreGC extends Block {
+    public BlockOreGC(String name) {
         super(Material.rock);
         this.setBlockName(name);
         this.setBlockTextureName(GalacticraftCore.TEXTURE_PREFIX + name);
@@ -19,8 +17,7 @@ public class BlockOreGC extends Block
 
     @Override
     @SideOnly(Side.CLIENT)
-    public CreativeTabs getCreativeTabToDisplayOn()
-    {
+    public CreativeTabs getCreativeTabToDisplayOn() {
         return GalacticraftCore.galacticraftBlocksTab;
     }
 }

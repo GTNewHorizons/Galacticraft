@@ -2,7 +2,6 @@ package micdoodle8.mods.galacticraft.core.asm;
 
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.SortingIndex;
-
 import java.io.File;
 import java.util.Map;
 
@@ -16,11 +15,10 @@ import java.util.Map;
 public class GCLoadingPlugin implements IFMLLoadingPlugin {
     static boolean dev;
     static File debugOutputDir;
+
     @Override
     public String[] getASMTransformerClass() {
-        return new String[] {
-                "micdoodle8.mods.galacticraft.core.asm.GCTransformer"
-        };
+        return new String[] {"micdoodle8.mods.galacticraft.core.asm.GCTransformer"};
     }
 
     @Override

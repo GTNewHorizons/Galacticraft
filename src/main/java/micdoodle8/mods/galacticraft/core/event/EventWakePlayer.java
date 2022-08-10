@@ -6,8 +6,7 @@ import net.minecraft.entity.player.EntityPlayer.EnumStatus;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
 @Cancelable
-public class EventWakePlayer extends PlayerEvent
-{
+public class EventWakePlayer extends PlayerEvent {
     public EnumStatus result = null;
     public final int x;
     public final int y;
@@ -17,8 +16,8 @@ public class EventWakePlayer extends PlayerEvent
     public final boolean flag3;
     public final boolean bypassed;
 
-    public EventWakePlayer(EntityPlayer player, int x, int y, int z, boolean flag1, boolean flag2, boolean flag3, boolean bypassed)
-    {
+    public EventWakePlayer(
+            EntityPlayer player, int x, int y, int z, boolean flag1, boolean flag2, boolean flag3, boolean bypassed) {
         super(player);
         this.x = x;
         this.y = y;

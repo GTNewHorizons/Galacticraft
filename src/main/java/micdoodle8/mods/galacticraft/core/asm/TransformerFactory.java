@@ -2,9 +2,8 @@ package micdoodle8.mods.galacticraft.core.asm;
 
 import cpw.mods.fml.relauncher.FMLLaunchHandler;
 import cpw.mods.fml.relauncher.Side;
-import org.objectweb.asm.ClassVisitor;
-
 import java.util.function.BiFunction;
+import org.objectweb.asm.ClassVisitor;
 
 class TransformerFactory {
     private final BiFunction<Integer, ClassVisitor, ClassVisitor> factory;
@@ -28,7 +27,8 @@ class TransformerFactory {
      * @param activeSide   the side this transformer will be active on. null for both side.
      * @param expandFrames whether the frames need to be recalculated
      */
-    public TransformerFactory(BiFunction<Integer, ClassVisitor, ClassVisitor> factory, Side activeSide, boolean expandFrames) {
+    public TransformerFactory(
+            BiFunction<Integer, ClassVisitor, ClassVisitor> factory, Side activeSide, boolean expandFrames) {
         this.factory = factory;
         this.activeSide = activeSide;
         this.expandFrames = expandFrames;

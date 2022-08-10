@@ -1,6 +1,7 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.client;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import java.util.Random;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
@@ -17,25 +18,23 @@ import net.minecraftforge.client.IRenderHandler;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import java.util.Random;
-
-public class SkyProviderAsteroids extends IRenderHandler
-{
-    private static final ResourceLocation overworldTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/celestialbodies/earth.png");
-    private static final ResourceLocation galaxyTexture = new ResourceLocation(MarsModule.ASSET_PREFIX, "textures/gui/planets/galaxy.png");
+public class SkyProviderAsteroids extends IRenderHandler {
+    private static final ResourceLocation overworldTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/celestialbodies/earth.png");
+    private static final ResourceLocation galaxyTexture =
+            new ResourceLocation(MarsModule.ASSET_PREFIX, "textures/gui/planets/galaxy.png");
     private static final ResourceLocation sunTexture = new ResourceLocation("textures/environment/sun.png");
 
     public int starGLCallList = GLAllocation.generateDisplayLists(3);
     public int glSkyList;
     public int glSkyList2;
-    
+
     private float sunSize;
 
-    public SkyProviderAsteroids(IGalacticraftWorldProvider asteroidsProvider)
-    {
+    public SkyProviderAsteroids(IGalacticraftWorldProvider asteroidsProvider) {
         this.sunSize = 17.5F * asteroidsProvider.getSolarSize();
 
-    	GL11.glPushMatrix();
+        GL11.glPushMatrix();
         GL11.glNewList(this.starGLCallList, GL11.GL_COMPILE);
         this.renderStars();
         GL11.glEndList();
@@ -47,10 +46,8 @@ public class SkyProviderAsteroids extends IRenderHandler
         final int i = 256 / byte2 + 2;
         float f = 16F;
 
-        for (int j = -byte2 * i; j <= byte2 * i; j += byte2)
-        {
-            for (int l = -byte2 * i; l <= byte2 * i; l += byte2)
-            {
+        for (int j = -byte2 * i; j <= byte2 * i; j += byte2) {
+            for (int l = -byte2 * i; l <= byte2 * i; l += byte2) {
                 tessellator.startDrawingQuads();
                 tessellator.addVertex(j + 0, f, l + 0);
                 tessellator.addVertex(j + byte2, f, l + 0);
@@ -66,10 +63,8 @@ public class SkyProviderAsteroids extends IRenderHandler
         f = -16F;
         tessellator.startDrawingQuads();
 
-        for (int k = -byte2 * i; k <= byte2 * i; k += byte2)
-        {
-            for (int i1 = -byte2 * i; i1 <= byte2 * i; i1 += byte2)
-            {
+        for (int k = -byte2 * i; k <= byte2 * i; k += byte2) {
+            for (int i1 = -byte2 * i; i1 <= byte2 * i; i1 += byte2) {
                 tessellator.addVertex(k + byte2, f, i1 + 0);
                 tessellator.addVertex(k + 0, f, i1 + 0);
                 tessellator.addVertex(k + 0, f, i1 + byte2);
@@ -82,8 +77,7 @@ public class SkyProviderAsteroids extends IRenderHandler
     }
 
     @Override
-    public void render(float partialTicks, WorldClient world, Minecraft mc)
-    {
+    public void render(float partialTicks, WorldClient world, Minecraft mc) {
         float var10;
         float var11;
         float var12;
@@ -114,7 +108,7 @@ public class SkyProviderAsteroids extends IRenderHandler
         GL11.glRotatef(world.getCelestialAngle(partialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glDisable(GL11.GL_TEXTURE_2D);
-        GL11.glColor4f(0.0F, 0.0F, 0.0F, 1.0F);        
+        GL11.glColor4f(0.0F, 0.0F, 0.0F, 1.0F);
         var12 = this.sunSize / 4.2F;
         var23.startDrawingQuads();
         var23.addVertex(-var12, 90.0D, -var12);
@@ -126,7 +120,7 @@ public class SkyProviderAsteroids extends IRenderHandler
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         var12 = this.sunSize / 1.2F;
-        //110 distance instead of the normal 100, because there is no atmosphere to make the disk seem larger
+        // 110 distance instead of the normal 100, because there is no atmosphere to make the disk seem larger
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(SkyProviderAsteroids.sunTexture);
         var23.startDrawingQuads();
         var23.addVertexWithUV(-var12, 90.0D, -var12, 0.0D, 0.0D);
@@ -210,22 +204,19 @@ public class SkyProviderAsteroids extends IRenderHandler
         GL11.glDisable(GL11.GL_FOG);
     }
 
-    private void renderStars()
-    {
+    private void renderStars() {
         final Random var1 = new Random(10842L);
         final Tessellator var2 = Tessellator.instance;
         var2.startDrawingQuads();
 
-        for (int var3 = 0; var3 < (ConfigManagerCore.moreStars ? 35000 : 6000); ++var3)
-        {
+        for (int var3 = 0; var3 < (ConfigManagerCore.moreStars ? 35000 : 6000); ++var3) {
             double var4 = var1.nextFloat() * 2.0F - 1.0F;
             double var6 = var1.nextFloat() * 2.0F - 1.0F;
             double var8 = var1.nextFloat() * 2.0F - 1.0F;
             final double var10 = 0.08F + var1.nextFloat() * 0.07F;
             double var12 = var4 * var4 + var6 * var6 + var8 * var8;
 
-            if (var12 < 1.0D && var12 > 0.01D)
-            {
+            if (var12 < 1.0D && var12 > 0.01D) {
                 var12 = 1.0D / Math.sqrt(var12);
                 var4 *= var12;
                 var6 *= var12;
@@ -243,8 +234,7 @@ public class SkyProviderAsteroids extends IRenderHandler
                 final double var34 = Math.sin(var32);
                 final double var36 = Math.cos(var32);
 
-                for (int i = 0; i < 4; ++i)
-                {
+                for (int i = 0; i < 4; ++i) {
                     final double i1 = ((i & 2) - 1) * var10;
                     final double i2 = ((i + 1 & 2) - 1) * var10;
                     final double var47 = i1 * var36 - i2 * var34;
@@ -261,23 +251,19 @@ public class SkyProviderAsteroids extends IRenderHandler
         var2.draw();
     }
 
-    private Vec3 getCustomSkyColor()
-    {
+    private Vec3 getCustomSkyColor() {
         return Vec3.createVectorHelper(0.26796875D, 0.1796875D, 0.0D);
     }
 
-    public float getSkyBrightness(float par1)
-    {
+    public float getSkyBrightness(float par1) {
         final float var2 = FMLClientHandler.instance().getClient().theWorld.getCelestialAngle(par1);
         float var3 = 1.0F - (MathHelper.sin(var2 * (float) Math.PI * 2.0F) * 2.0F + 0.25F);
 
-        if (var3 < 0.0F)
-        {
+        if (var3 < 0.0F) {
             var3 = 0.0F;
         }
 
-        if (var3 > 1.0F)
-        {
+        if (var3 > 1.0F) {
             var3 = 1.0F;
         }
 

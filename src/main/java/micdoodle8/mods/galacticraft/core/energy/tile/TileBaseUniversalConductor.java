@@ -7,6 +7,7 @@ import cpw.mods.fml.common.eventhandler.Event;
 import ic2.api.energy.tile.IEnergyEmitter;
 import ic2.api.energy.tile.IEnergySink;
 import ic2.api.energy.tile.IEnergySource;
+import java.lang.reflect.Constructor;
 import mekanism.api.energy.IStrictEnergyAcceptor;
 import micdoodle8.mods.galacticraft.api.transmission.tile.IConductor;
 import micdoodle8.mods.galacticraft.api.transmission.tile.IElectrical;
@@ -18,58 +19,46 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.lang.reflect.Constructor;
-
 @InterfaceList({
-        @Interface(modid = "IC2API", iface = "ic2.api.energy.tile.IEnergySink"),
-        @Interface(modid = "IC2API", iface = "ic2.api.energy.tile.IEnergyEmitter"),
-        @Interface(modid = "CoFHAPI|energy", iface = "cofh.api.energy.IEnergyHandler"),
-        @Interface(modid = "MekanismAPI|energy", iface = "mekanism.api.energy.IStrictEnergyAcceptor"),
+    @Interface(modid = "IC2API", iface = "ic2.api.energy.tile.IEnergySink"),
+    @Interface(modid = "IC2API", iface = "ic2.api.energy.tile.IEnergyEmitter"),
+    @Interface(modid = "CoFHAPI|energy", iface = "cofh.api.energy.IEnergyHandler"),
+    @Interface(modid = "MekanismAPI|energy", iface = "mekanism.api.energy.IStrictEnergyAcceptor"),
 })
-public abstract class TileBaseUniversalConductor extends TileBaseConductor implements IEnergySink, IEnergyEmitter, IEnergyHandler, IStrictEnergyAcceptor
-{
+public abstract class TileBaseUniversalConductor extends TileBaseConductor
+        implements IEnergySink, IEnergyEmitter, IEnergyHandler, IStrictEnergyAcceptor {
     protected boolean isAddedToEnergyNet;
     protected Object powerHandlerBC;
 
     //	public float buildcraftBuffer = EnergyConfigHandler.BC3_RATIO * 50;
     private float IC2surplusJoules = 0F;
 
-    public TileBaseUniversalConductor()
-    {
+    public TileBaseUniversalConductor() {
         this.initBC();
     }
 
     @Override
-    public void onNetworkChanged()
-    {
-    }
+    public void onNetworkChanged() {}
 
-    private void initBC()
-    {
-    }
+    private void initBC() {}
 
     @Override
-    public TileEntity[] getAdjacentConnections()
-    {
+    public TileEntity[] getAdjacentConnections() {
         return EnergyUtil.getAdjacentPowerConnections(this);
     }
 
     @Override
-    public boolean canUpdate()
-    {
+    public boolean canUpdate() {
         return EnergyConfigHandler.isIndustrialCraft2Loaded();
     }
 
     @Override
-    public void updateEntity()
-    {
+    public void updateEntity() {
         super.updateEntity();
 
-        if (!this.isAddedToEnergyNet)
-        {
-            if (!this.worldObj.isRemote)
-            {
-            	this.initIC();
+        if (!this.isAddedToEnergyNet) {
+            if (!this.worldObj.isRemote) {
+                this.initIC();
             }
 
             this.isAddedToEnergyNet = true;
@@ -77,63 +66,48 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor imple
     }
 
     @Override
-    public void invalidate()
-    {
+    public void invalidate() {
         this.IC2surplusJoules = 0F;
         this.unloadTileIC2();
         super.invalidate();
     }
 
     @Override
-    public void onChunkUnload()
-    {
+    public void onChunkUnload() {
         this.unloadTileIC2();
         super.onChunkUnload();
     }
 
-    protected void initIC()
-    {
-        if (EnergyConfigHandler.isIndustrialCraft2Loaded() && !this.worldObj.isRemote)
-        {
-            try
-            {
+    protected void initIC() {
+        if (EnergyConfigHandler.isIndustrialCraft2Loaded() && !this.worldObj.isRemote) {
+            try {
                 Class<?> tileLoadEvent = Class.forName("ic2.api.energy.event.EnergyTileLoadEvent");
                 Class<?> energyTile = Class.forName("ic2.api.energy.tile.IEnergyTile");
                 Constructor<?> constr = tileLoadEvent.getConstructor(energyTile);
                 Object o = constr.newInstance(this);
 
-                if (o != null && o instanceof Event)
-                {
+                if (o != null && o instanceof Event) {
                     MinecraftForge.EVENT_BUS.post((Event) o);
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private void unloadTileIC2()
-    {
-        if (this.isAddedToEnergyNet && this.worldObj != null)
-        {
-            if (!this.worldObj.isRemote && EnergyConfigHandler.isIndustrialCraft2Loaded())
-            {
-                try
-                {
+    private void unloadTileIC2() {
+        if (this.isAddedToEnergyNet && this.worldObj != null) {
+            if (!this.worldObj.isRemote && EnergyConfigHandler.isIndustrialCraft2Loaded()) {
+                try {
                     Class<?> tileLoadEvent = Class.forName("ic2.api.energy.event.EnergyTileUnloadEvent");
                     Class<?> energyTile = Class.forName("ic2.api.energy.tile.IEnergyTile");
                     Constructor<?> constr = tileLoadEvent.getConstructor(energyTile);
                     Object o = constr.newInstance(this);
 
-                    if (o != null && o instanceof Event)
-                    {
+                    if (o != null && o instanceof Event) {
                         MinecraftForge.EVENT_BUS.post((Event) o);
                     }
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -143,22 +117,18 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor imple
     }
 
     @Override
-    public double getDemandedEnergy()
-    {
-        if (this.getNetwork() == null)
-        {
+    public double getDemandedEnergy() {
+        if (this.getNetwork() == null) {
             return 0.0;
         }
 
-        if (this.IC2surplusJoules < 0.001F)
-        {
+        if (this.IC2surplusJoules < 0.001F) {
             this.IC2surplusJoules = 0F;
             return this.getNetwork().getRequest(this) / EnergyConfigHandler.IC2_RATIO;
         }
 
         this.IC2surplusJoules = this.getNetwork().produce(this.IC2surplusJoules, true, 1, this);
-        if (this.IC2surplusJoules < 0.001F)
-        {
+        if (this.IC2surplusJoules < 0.001F) {
             this.IC2surplusJoules = 0F;
             return this.getNetwork().getRequest(this) / EnergyConfigHandler.IC2_RATIO;
         }
@@ -166,23 +136,18 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor imple
     }
 
     @Override
-    public double injectEnergy(ForgeDirection directionFrom, double amount, double voltage)
-    {
+    public double injectEnergy(ForgeDirection directionFrom, double amount, double voltage) {
         TileEntity tile = new BlockVec3(this).getTileEntityOnSide(this.worldObj, directionFrom);
         int tier = ((int) voltage > 120) ? 2 : 1;
-        if (tile instanceof IEnergySource && ((IEnergySource) tile).getOfferedEnergy() >= 128)
-        {
+        if (tile instanceof IEnergySource && ((IEnergySource) tile).getOfferedEnergy() >= 128) {
             tier = 2;
         }
         float convertedEnergy = (float) amount * EnergyConfigHandler.IC2_RATIO;
         float surplus = this.getNetwork().produce(convertedEnergy, true, tier, this, tile);
 
-        if (surplus >= 0.001F)
-        {
+        if (surplus >= 0.001F) {
             this.IC2surplusJoules = surplus;
-        }
-        else
-        {
+        } else {
             this.IC2surplusJoules = 0F;
         }
 
@@ -190,164 +155,136 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor imple
     }
 
     @Override
-    public int getSinkTier()
-    {
+    public int getSinkTier() {
         return 3;
     }
 
     @Override
-    public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction)
-    {
-        //Don't add connection to IC2 grid if it's a Galacticraft tile
-        if (emitter instanceof IElectrical || emitter instanceof IConductor)
-        {
+    public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction) {
+        // Don't add connection to IC2 grid if it's a Galacticraft tile
+        if (emitter instanceof IElectrical || emitter instanceof IConductor) {
             return false;
         }
 
-        //Don't make connection with IC2 wires [don't want risk of multiple connections + there is a graphical glitch in IC2]
-        try
-        {
-            Class<?> conductorIC2 = Class.forName("ic2.api.energy.tile.IEnergyConductor");
-            if (conductorIC2.isInstance(emitter))
-            {
-                return false;
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        return true;
-    }
-
-    @Override
-    public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction)
-    {
-        //Don't add connection to IC2 grid if it's a Galacticraft tile
-        if (receiver instanceof IElectrical || receiver instanceof IConductor)
-        {
-            return false;
-        }
-
-        //Don't make connection with IC2 wires [don't want risk of multiple connections + there is a graphical glitch in IC2]
-        try
-        {
-            Class<?> conductorIC2 = Class.forName("ic2.api.energy.tile.IEnergyConductor");
-            if (conductorIC2.isInstance(receiver))
-            {
-                return false;
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        return true;
-    }
-
-    @Override
-    public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate)
-    {
-    	if (this.getNetwork() == null)
-    	{
-    		return 0;
-    	}
-        float receiveGC = maxReceive * EnergyConfigHandler.RF_RATIO;
-        float sentGC = receiveGC - this.getNetwork().produce(receiveGC, !simulate, 1);
-    	return MathHelper.floor_float(sentGC / EnergyConfigHandler.RF_RATIO);
-    }
-
-    @Override
-    public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate)
-    {
-    	return 0;
-    }
-
-    @Override
-    public boolean canConnectEnergy(ForgeDirection from)
-    {
-    	//Do not form wire-to-wire connections with EnderIO conduits
-    	TileEntity tile = new BlockVec3(this).getTileEntityOnSide(this.worldObj, from);
+        // Don't make connection with IC2 wires [don't want risk of multiple connections + there is a graphical glitch
+        // in IC2]
         try {
-            if (EnergyUtil.clazzEnderIOCable != null && EnergyUtil.clazzEnderIOCable.isInstance(tile))
-            {
+            Class<?> conductorIC2 = Class.forName("ic2.api.energy.tile.IEnergyConductor");
+            if (conductorIC2.isInstance(emitter)) {
                 return false;
             }
-        } catch (Exception e) { }
-    	return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 
     @Override
-    public int getEnergyStored(ForgeDirection from)
-    {
-    	return 0;
+    public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction) {
+        // Don't add connection to IC2 grid if it's a Galacticraft tile
+        if (receiver instanceof IElectrical || receiver instanceof IConductor) {
+            return false;
+        }
+
+        // Don't make connection with IC2 wires [don't want risk of multiple connections + there is a graphical glitch
+        // in IC2]
+        try {
+            Class<?> conductorIC2 = Class.forName("ic2.api.energy.tile.IEnergyConductor");
+            if (conductorIC2.isInstance(receiver)) {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 
     @Override
-    public int getMaxEnergyStored(ForgeDirection from)
-    {
-    	if (this.getNetwork() == null)
-    	{
-    		return 0;
-    	}
-
-    	return MathHelper.floor_float(this.getNetwork().getRequest(this) / EnergyConfigHandler.RF_RATIO);
-    }
-
-    @Override
-    public double transferEnergyToAcceptor(ForgeDirection side, double amount)
-    {
-        if (!this.canReceiveEnergy(side))
-        {
+    public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
+        if (this.getNetwork() == null) {
             return 0;
         }
-
-        return amount - this.getNetwork().produce((float) amount * EnergyConfigHandler.MEKANISM_RATIO, true, 1, this) / EnergyConfigHandler.MEKANISM_RATIO;
+        float receiveGC = maxReceive * EnergyConfigHandler.RF_RATIO;
+        float sentGC = receiveGC - this.getNetwork().produce(receiveGC, !simulate, 1);
+        return MathHelper.floor_float(sentGC / EnergyConfigHandler.RF_RATIO);
     }
 
     @Override
-    public boolean canReceiveEnergy(ForgeDirection side)
-    {
-        if (this.getNetwork() == null)
-        {
-            return false;
-        }
-
-        TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, side);
-        try
-        {
-            if (Class.forName("codechicken.multipart.TileMultipart").isInstance(te))
-            {
-                return false;
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        return true;
-    }
-
-    @Override
-    public double getEnergy()
-    {
+    public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
         return 0;
     }
 
     @Override
-    public void setEnergy(double energy)
-    {
+    public boolean canConnectEnergy(ForgeDirection from) {
+        // Do not form wire-to-wire connections with EnderIO conduits
+        TileEntity tile = new BlockVec3(this).getTileEntityOnSide(this.worldObj, from);
+        try {
+            if (EnergyUtil.clazzEnderIOCable != null && EnergyUtil.clazzEnderIOCable.isInstance(tile)) {
+                return false;
+            }
+        } catch (Exception e) {
+        }
+        return true;
+    }
+
+    @Override
+    public int getEnergyStored(ForgeDirection from) {
+        return 0;
+    }
+
+    @Override
+    public int getMaxEnergyStored(ForgeDirection from) {
+        if (this.getNetwork() == null) {
+            return 0;
+        }
+
+        return MathHelper.floor_float(this.getNetwork().getRequest(this) / EnergyConfigHandler.RF_RATIO);
+    }
+
+    @Override
+    public double transferEnergyToAcceptor(ForgeDirection side, double amount) {
+        if (!this.canReceiveEnergy(side)) {
+            return 0;
+        }
+
+        return amount
+                - this.getNetwork().produce((float) amount * EnergyConfigHandler.MEKANISM_RATIO, true, 1, this)
+                        / EnergyConfigHandler.MEKANISM_RATIO;
+    }
+
+    @Override
+    public boolean canReceiveEnergy(ForgeDirection side) {
+        if (this.getNetwork() == null) {
+            return false;
+        }
+
+        TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, side);
+        try {
+            if (Class.forName("codechicken.multipart.TileMultipart").isInstance(te)) {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
+    @Override
+    public double getEnergy() {
+        return 0;
+    }
+
+    @Override
+    public void setEnergy(double energy) {
         ;
     }
 
     @Override
-    public double getMaxEnergy()
-    {
-        if (this.getNetwork() == null)
-        {
+    public double getMaxEnergy() {
+        if (this.getNetwork() == null) {
             return 0;
         }
         return this.getNetwork().getRequest(this) / EnergyConfigHandler.MEKANISM_RATIO;

@@ -1,7 +1,6 @@
 package micdoodle8.mods.galacticraft.api.power;
 
-public interface IEnergyHandlerGC
-{
+public interface IEnergyHandlerGC {
     /**
      * Add energy from an external source
      *

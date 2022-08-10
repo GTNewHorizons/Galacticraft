@@ -5,8 +5,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 /**
  * Applied to all TileEntities that can interact with oxygen.
  */
-public interface IOxygenReceiver extends IConnector
-{
+public interface IOxygenReceiver extends IConnector {
     public abstract boolean shouldPullOxygen();
 
     /**
@@ -42,5 +41,4 @@ public interface IOxygenReceiver extends IConnector
      * @return How much oxygen does this TileEntity want to provide?
      */
     public float getOxygenProvide(ForgeDirection direction);
-
 }

@@ -5,126 +5,98 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
-public class InventorySchematicCargoRocket implements IInventory
-{
+public class InventorySchematicCargoRocket implements IInventory {
     private final ItemStack[] stackList;
     private final Container eventHandler;
 
-    public InventorySchematicCargoRocket(Container par1Container)
-    {
+    public InventorySchematicCargoRocket(Container par1Container) {
         this.stackList = new ItemStack[22];
         this.eventHandler = par1Container;
     }
 
     @Override
-    public int getSizeInventory()
-    {
+    public int getSizeInventory() {
         return this.stackList.length;
     }
 
     @Override
-    public ItemStack getStackInSlot(int par1)
-    {
+    public ItemStack getStackInSlot(int par1) {
         return par1 >= this.getSizeInventory() ? null : this.stackList[par1];
     }
 
     @Override
-    public String getInventoryName()
-    {
+    public String getInventoryName() {
         return "container.crafting";
     }
 
     @Override
-    public ItemStack getStackInSlotOnClosing(int par1)
-    {
-        if (this.stackList[par1] != null)
-        {
+    public ItemStack getStackInSlotOnClosing(int par1) {
+        if (this.stackList[par1] != null) {
             final ItemStack var2 = this.stackList[par1];
             this.stackList[par1] = null;
             return var2;
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
 
     @Override
-    public ItemStack decrStackSize(int par1, int par2)
-    {
-        if (this.stackList[par1] != null)
-        {
+    public ItemStack decrStackSize(int par1, int par2) {
+        if (this.stackList[par1] != null) {
             ItemStack var3;
 
-            if (this.stackList[par1].stackSize <= par2)
-            {
+            if (this.stackList[par1].stackSize <= par2) {
                 var3 = this.stackList[par1];
                 this.stackList[par1] = null;
                 this.eventHandler.onCraftMatrixChanged(this);
                 return var3;
-            }
-            else
-            {
+            } else {
                 var3 = this.stackList[par1].splitStack(par2);
 
-                if (this.stackList[par1].stackSize == 0)
-                {
+                if (this.stackList[par1].stackSize == 0) {
                     this.stackList[par1] = null;
                 }
 
                 this.eventHandler.onCraftMatrixChanged(this);
                 return var3;
             }
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
 
     @Override
-    public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
-    {
+    public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
         this.stackList[par1] = par2ItemStack;
         this.eventHandler.onCraftMatrixChanged(this);
     }
 
     @Override
-    public int getInventoryStackLimit()
-    {
+    public int getInventoryStackLimit() {
         return 64;
     }
 
     @Override
-    public void markDirty()
-    {
-    }
+    public void markDirty() {}
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
-    {
+    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
         return true;
     }
 
     @Override
-    public void openInventory()
-    {
-    }
+    public void openInventory() {}
 
     @Override
-    public void closeInventory()
-    {
-    }
+    public void closeInventory() {}
 
     @Override
-    public boolean hasCustomInventoryName()
-    {
+    public boolean hasCustomInventoryName() {
         return false;
     }
 
     @Override
-    public boolean isItemValidForSlot(int i, ItemStack itemstack)
-    {
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         return false;
     }
 }

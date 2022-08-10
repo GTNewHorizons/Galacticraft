@@ -8,8 +8,7 @@ import net.minecraft.tileentity.TileEntity;
  *
  * @author Calclavia
  */
-public interface IOxygenNetwork extends IGridNetwork<IOxygenNetwork, ITransmitter, TileEntity>
-{
+public interface IOxygenNetwork extends IGridNetwork<IOxygenNetwork, ITransmitter, TileEntity> {
     /**
      * Produces oxygen in this oxygen network.
      *

@@ -5,16 +5,14 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelSludgeling extends ModelBase
-{
+public class ModelSludgeling extends ModelBase {
     ModelRenderer tail4;
     ModelRenderer body;
     ModelRenderer tail1;
     ModelRenderer tail2;
     ModelRenderer tail3;
 
-    public ModelSludgeling()
-    {
+    public ModelSludgeling() {
         this.textureWidth = 64;
         this.textureHeight = 32;
 
@@ -51,8 +49,7 @@ public class ModelSludgeling extends ModelBase
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         super.render(entity, f, f1, f2, f3, f4, f5);
         this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         this.body.render(f5);
@@ -62,20 +59,30 @@ public class ModelSludgeling extends ModelBase
         this.tail4.render(f5);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
 
     @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-        this.tail1.rotateAngleY = MathHelper.cos(f2 * 0.3F + 0 * 0.15F * (float) Math.PI) * (float) Math.PI * 0.025F * (1 + Math.abs(0 - 2));
-        this.tail2.rotateAngleY = MathHelper.cos(f2 * 0.3F + 1 * 0.15F * (float) Math.PI) * (float) Math.PI * 0.025F * (1 + Math.abs(1 - 2));
-        this.tail3.rotateAngleY = MathHelper.cos(f2 * 0.3F + 2 * 0.15F * (float) Math.PI) * (float) Math.PI * 0.025F * (1 + Math.abs(1 - 2));
-        this.tail4.rotateAngleY = MathHelper.cos(f2 * 0.3F + 3 * 0.15F * (float) Math.PI) * (float) Math.PI * 0.025F * (1 + Math.abs(1 - 2));
+        this.tail1.rotateAngleY = MathHelper.cos(f2 * 0.3F + 0 * 0.15F * (float) Math.PI)
+                * (float) Math.PI
+                * 0.025F
+                * (1 + Math.abs(0 - 2));
+        this.tail2.rotateAngleY = MathHelper.cos(f2 * 0.3F + 1 * 0.15F * (float) Math.PI)
+                * (float) Math.PI
+                * 0.025F
+                * (1 + Math.abs(1 - 2));
+        this.tail3.rotateAngleY = MathHelper.cos(f2 * 0.3F + 2 * 0.15F * (float) Math.PI)
+                * (float) Math.PI
+                * 0.025F
+                * (1 + Math.abs(1 - 2));
+        this.tail4.rotateAngleY = MathHelper.cos(f2 * 0.3F + 3 * 0.15F * (float) Math.PI)
+                * (float) Math.PI
+                * 0.025F
+                * (1 + Math.abs(1 - 2));
     }
 }

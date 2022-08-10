@@ -8,8 +8,7 @@ import net.minecraft.tileentity.TileEntity;
  *
  * @author Calclavia
  */
-public interface IElectricityNetwork extends IGridNetwork<IElectricityNetwork, IConductor, TileEntity>
-{
+public interface IElectricityNetwork extends IGridNetwork<IElectricityNetwork, IConductor, TileEntity> {
     /**
      * Produce energy into the network
      *

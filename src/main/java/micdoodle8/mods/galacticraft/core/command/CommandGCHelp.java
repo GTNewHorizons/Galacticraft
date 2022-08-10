@@ -9,41 +9,41 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.IChatComponent;
 
-public class CommandGCHelp extends CommandBase
-{
+public class CommandGCHelp extends CommandBase {
 
     @Override
-    public String getCommandUsage(ICommandSender var1)
-    {
+    public String getCommandUsage(ICommandSender var1) {
         return "/" + this.getCommandName();
     }
 
     @Override
-    public int getRequiredPermissionLevel()
-    {
+    public int getRequiredPermissionLevel() {
         return 0;
     }
 
     @Override
-    public boolean canCommandSenderUseCommand(ICommandSender par1ICommandSender)
-    {
+    public boolean canCommandSenderUseCommand(ICommandSender par1ICommandSender) {
         return true;
     }
 
     @Override
-    public String getCommandName()
-    {
+    public String getCommandName() {
         return "gchelp";
     }
 
     @Override
-    public void processCommand(ICommandSender icommandsender, String[] astring)
-    {
-        EntityPlayerMP playerBase = PlayerUtil.getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
-		if (playerBase == null)
-        {
+    public void processCommand(ICommandSender icommandsender, String[] astring) {
+        EntityPlayerMP playerBase =
+                PlayerUtil.getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
+        if (playerBase == null) {
             return;
         }
-		playerBase.addChatMessage(IChatComponent.Serializer.func_150699_a("[{\"text\":\"" + GCCoreUtil.translate("gui.message.help1") + ": \",\"color\":\"white\"}," + "{\"text\":\" " + EnumColor.BRIGHT_GREEN + "wiki."+GalacticraftCore.PREFIX+"com/wiki" + "\"," + "\"color\":\"green\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":" + "{\"text\":\""+ GCCoreUtil.translate("gui.message.clicklink") +"\",\"color\":\"yellow\"}}," + "\"clickEvent\":{\"action\":\"open_url\",\"value\":\"" + "http://wiki."+GalacticraftCore.PREFIX+"com/wiki" + "\"}}]"));
+        playerBase.addChatMessage(IChatComponent.Serializer.func_150699_a(
+                "[{\"text\":\"" + GCCoreUtil.translate("gui.message.help1") + ": \",\"color\":\"white\"},"
+                        + "{\"text\":\" " + EnumColor.BRIGHT_GREEN + "wiki." + GalacticraftCore.PREFIX + "com/wiki"
+                        + "\"," + "\"color\":\"green\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":"
+                        + "{\"text\":\"" + GCCoreUtil.translate("gui.message.clicklink") + "\",\"color\":\"yellow\"}},"
+                        + "\"clickEvent\":{\"action\":\"open_url\",\"value\":\"" + "http://wiki."
+                        + GalacticraftCore.PREFIX + "com/wiki" + "\"}}]"));
     }
 }

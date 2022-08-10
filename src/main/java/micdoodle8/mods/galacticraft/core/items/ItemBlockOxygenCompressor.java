@@ -4,32 +4,25 @@ import micdoodle8.mods.galacticraft.core.blocks.BlockOxygenCompressor;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockOxygenCompressor extends ItemBlockDesc
-{
-    public ItemBlockOxygenCompressor(Block block)
-    {
+public class ItemBlockOxygenCompressor extends ItemBlockDesc {
+    public ItemBlockOxygenCompressor(Block block) {
         super(block);
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
     }
 
     @Override
-    public int getMetadata(int damage)
-    {
+    public int getMetadata(int damage) {
         return damage;
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack itemstack)
-    {
+    public String getUnlocalizedName(ItemStack itemstack) {
         int metadata = 0;
 
-        if (itemstack.getItemDamage() >= BlockOxygenCompressor.OXYGEN_DECOMPRESSOR_METADATA)
-        {
+        if (itemstack.getItemDamage() >= BlockOxygenCompressor.OXYGEN_DECOMPRESSOR_METADATA) {
             metadata = 1;
-        }
-        else if (itemstack.getItemDamage() >= BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA)
-        {
+        } else if (itemstack.getItemDamage() >= BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA) {
             metadata = 0;
         }
 
@@ -37,8 +30,7 @@ public class ItemBlockOxygenCompressor extends ItemBlockDesc
     }
 
     @Override
-    public String getUnlocalizedName()
-    {
+    public String getUnlocalizedName() {
         return this.field_150939_a.getUnlocalizedName() + ".0";
     }
 }

@@ -13,12 +13,10 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerMethaneSynthesizer extends Container
-{
+public class ContainerMethaneSynthesizer extends Container {
     private final TileEntityMethaneSynthesizer tileEntity;
 
-    public ContainerMethaneSynthesizer(InventoryPlayer par1InventoryPlayer, TileEntityMethaneSynthesizer tileEntity)
-    {
+    public ContainerMethaneSynthesizer(InventoryPlayer par1InventoryPlayer, TileEntityMethaneSynthesizer tileEntity) {
         this.tileEntity = tileEntity;
 
         // Electric Input Slot
@@ -31,22 +29,21 @@ public class ContainerMethaneSynthesizer extends Container
         this.addSlotToContainer(new Slot(tileEntity, 2, 28, 7));
 
         // Carbon slot
-        this.addSlotToContainer(new SlotSpecific(tileEntity, 3, 28, 53, new ItemStack(MarsItems.carbonFragments, 1, 0)));
+        this.addSlotToContainer(
+                new SlotSpecific(tileEntity, 3, 28, 53, new ItemStack(MarsItems.carbonFragments, 1, 0)));
 
         // Output slot
         this.addSlotToContainer(new Slot(tileEntity, 4, 153, 7));
         int var3;
 
-        for (var3 = 0; var3 < 3; ++var3)
-        {
-            for (int var4 = 0; var4 < 9; ++var4)
-            {
-                this.addSlotToContainer(new Slot(par1InventoryPlayer, var4 + var3 * 9 + 9, 8 + var4 * 18, 104 + var3 * 18 - 18));
+        for (var3 = 0; var3 < 3; ++var3) {
+            for (int var4 = 0; var4 < 9; ++var4) {
+                this.addSlotToContainer(
+                        new Slot(par1InventoryPlayer, var4 + var3 * 9 + 9, 8 + var4 * 18, 104 + var3 * 18 - 18));
             }
         }
 
-        for (var3 = 0; var3 < 9; ++var3)
-        {
+        for (var3 = 0; var3 < 9; ++var3) {
             this.addSlotToContainer(new Slot(par1InventoryPlayer, var3, 8 + var3 * 18, 144));
         }
 
@@ -54,15 +51,13 @@ public class ContainerMethaneSynthesizer extends Container
     }
 
     @Override
-    public void onContainerClosed(EntityPlayer entityplayer)
-    {
+    public void onContainerClosed(EntityPlayer entityplayer) {
         super.onContainerClosed(entityplayer);
         this.tileEntity.closeInventory();
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer)
-    {
+    public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
         return this.tileEntity.isUseableByPlayer(par1EntityPlayer);
     }
 
@@ -71,85 +66,57 @@ public class ContainerMethaneSynthesizer extends Container
      * clicking.
      */
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par1)
-    {
+    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par1) {
         ItemStack var2 = null;
         final Slot slot = (Slot) this.inventorySlots.get(par1);
 
-        if (slot != null && slot.getHasStack())
-        {
+        if (slot != null && slot.getHasStack()) {
             final ItemStack var4 = slot.getStack();
             var2 = var4.copy();
 
-            if (par1 < 5)
-            {
-                if (!this.mergeItemStack(var4, 5, 41, true))
-                {
+            if (par1 < 5) {
+                if (!this.mergeItemStack(var4, 5, 41, true)) {
                     return null;
                 }
 
-                if (par1 == 2)
-                {
+                if (par1 == 2) {
                     slot.onSlotChange(var4, var2);
                 }
-            }
-            else
-            {
-                if (var4.getItem() instanceof IItemElectric)
-                {
-                    if (!this.mergeItemStack(var4, 0, 1, false))
-                    {
+            } else {
+                if (var4.getItem() instanceof IItemElectric) {
+                    if (!this.mergeItemStack(var4, 0, 1, false)) {
                         return null;
                     }
-                }
-                else
-                {
-                    if (var4.getItem() instanceof ItemAtmosphericValve)
-                    {
-                        if (!this.mergeItemStack(var4, 2, 3, false))
-                        {
+                } else {
+                    if (var4.getItem() instanceof ItemAtmosphericValve) {
+                        if (!this.mergeItemStack(var4, 2, 3, false)) {
                             return null;
                         }
-                    }
-                    else if (var4.getItem() == MarsItems.carbonFragments)
-                    {
-                        if (!this.mergeItemStack(var4, 3, 4, false))
-                        {
+                    } else if (var4.getItem() == MarsItems.carbonFragments) {
+                        if (!this.mergeItemStack(var4, 3, 4, false)) {
                             return null;
                         }
-                    }
-                    else if (FluidUtil.isEmptyContainer(var4, AsteroidsItems.methaneCanister))
-                    {
-                        if (!this.mergeItemStack(var4, 4, 5, false))
-                        {
+                    } else if (FluidUtil.isEmptyContainer(var4, AsteroidsItems.methaneCanister)) {
+                        if (!this.mergeItemStack(var4, 4, 5, false)) {
                             return null;
                         }
-                    }
-                    else if (par1 < 32)
-                    {
-                        if (!this.mergeItemStack(var4, 32, 41, false))
-                        {
+                    } else if (par1 < 32) {
+                        if (!this.mergeItemStack(var4, 32, 41, false)) {
                             return null;
                         }
-                    }
-                    else if (!this.mergeItemStack(var4, 5, 32, false))
-                    {
+                    } else if (!this.mergeItemStack(var4, 5, 32, false)) {
                         return null;
                     }
                 }
             }
 
-            if (var4.stackSize == 0)
-            {
+            if (var4.stackSize == 0) {
                 slot.putStack((ItemStack) null);
-            }
-            else
-            {
+            } else {
                 slot.onSlotChanged();
             }
 
-            if (var4.stackSize == var2.stackSize)
-            {
+            if (var4.stackSize == var2.stackSize) {
                 return null;
             }
 

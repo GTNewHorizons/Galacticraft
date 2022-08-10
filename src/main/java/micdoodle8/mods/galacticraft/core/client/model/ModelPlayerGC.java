@@ -2,6 +2,7 @@ package micdoodle8.mods.galacticraft.core.client.model;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Loader;
+import java.util.List;
 import micdoodle8.mods.galacticraft.api.item.IHoldableItem;
 import micdoodle8.mods.galacticraft.api.prefab.entity.EntityTieredRocket;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
@@ -24,10 +25,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
-
 import org.lwjgl.opengl.GL11;
-
-import java.util.List;
 
 /**
  * This renders the Galacticraft equipment, if RenderPlayerAPI / Smart Moving are not installed.
@@ -36,11 +34,13 @@ import java.util.List;
  * for example holding both hands overhead when holding a rocket.
  *
  */
-public class ModelPlayerGC extends ModelBiped
-{
-    public static final ResourceLocation oxygenMaskTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/oxygen.png");
-    public static final ResourceLocation playerTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/player.png");
-    public static final ResourceLocation frequencyModuleTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/frequencyModule.png");
+public class ModelPlayerGC extends ModelBiped {
+    public static final ResourceLocation oxygenMaskTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/oxygen.png");
+    public static final ResourceLocation playerTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/player.png");
+    public static final ResourceLocation frequencyModuleTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/frequencyModule.png");
 
     public ModelRenderer[] parachute = new ModelRenderer[3];
     public ModelRenderer[] parachuteStrings = new ModelRenderer[4];
@@ -59,13 +59,11 @@ public class ModelPlayerGC extends ModelBiped
 
     private static boolean crossbowModLoaded = false;
 
-    static
-    {
+    static {
         ModelPlayerGC.crossbowModLoaded = Loader.isModLoaded("CrossbowMod2");
     }
 
-    public ModelPlayerGC(float var1)
-    {
+    public ModelPlayerGC(float var1) {
         super(var1);
 
         this.oxygenMask = new ModelRenderer(this, 0, 0);
@@ -221,12 +219,12 @@ public class ModelPlayerGC extends ModelBiped
         this.grayOxygenTanks[1].setRotationPoint(-2F, 2F, 3.8F);
         this.grayOxygenTanks[1].mirror = true;
 
-        this.frequencyModule = AdvancedModelLoader.loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/frequencyModule.obj"));
+        this.frequencyModule = AdvancedModelLoader.loadModel(
+                new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/frequencyModule.obj"));
     }
 
     @Override
-    public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7)
-    {
+    public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7) {
         final Class<?> entityClass = EntityClientPlayerMP.class;
         final Render render = RenderManager.instance.getEntityClassRenderObject(entityClass);
         final ModelBiped modelBipedMain = ((RenderPlayer) render).modelBipedMain;
@@ -251,8 +249,7 @@ public class ModelPlayerGC extends ModelBiped
         final EntityPlayer player = (EntityPlayer) var1;
         PlayerGearData gearData = ClientProxyCore.playerItemData.get(player.getCommandSenderName());
 
-        if (gearData != null)
-        {
+        if (gearData != null) {
             usingParachute = gearData.getParachute() != null;
             wearingMask = gearData.getMask() > -1;
             wearingGear = gearData.getGear() > -1;
@@ -269,27 +266,21 @@ public class ModelPlayerGC extends ModelBiped
             wearingRightTankViolet = gearData.getRightTank() == 4;
             wearingRightTankGray = gearData.getRightTank() == Integer.MAX_VALUE;
             wearingFrequencyModule = gearData.getFrequencyModule() > -1;
-        }
-        else
-        {
+        } else {
             String id = player.getGameProfile().getName();
 
-            if (!ClientProxyCore.gearDataRequests.contains(id))
-            {
-                GalacticraftCore.packetPipeline.sendToServer(new PacketSimple(PacketSimple.EnumSimplePacket.S_REQUEST_GEAR_DATA, new Object[] { id }));
+            if (!ClientProxyCore.gearDataRequests.contains(id)) {
+                GalacticraftCore.packetPipeline.sendToServer(
+                        new PacketSimple(PacketSimple.EnumSimplePacket.S_REQUEST_GEAR_DATA, new Object[] {id}));
                 ClientProxyCore.gearDataRequests.add(id);
             }
         }
 
-
         this.setRotationAngles(var2, var3, var4, var5, var6, var7, var1);
 
-        if (var1 instanceof AbstractClientPlayer && this.equals(modelBipedMain))
-        {
-            if (gearData != null)
-            {
-                if (wearingMask)
-                {
+        if (var1 instanceof AbstractClientPlayer && this.equals(modelBipedMain)) {
+            if (gearData != null) {
+                if (wearingMask) {
                     FMLClientHandler.instance().getClient().renderEngine.bindTexture(ModelPlayerGC.oxygenMaskTexture);
                     GL11.glPushMatrix();
                     GL11.glScalef(1.05F, 1.05F, 1.05F);
@@ -302,9 +293,11 @@ public class ModelPlayerGC extends ModelBiped
 
                 //
 
-                if (wearingFrequencyModule)
-                {
-                    FMLClientHandler.instance().getClient().renderEngine.bindTexture(ModelPlayerGC.frequencyModuleTexture);
+                if (wearingFrequencyModule) {
+                    FMLClientHandler.instance()
+                            .getClient()
+                            .renderEngine
+                            .bindTexture(ModelPlayerGC.frequencyModuleTexture);
                     GL11.glPushMatrix();
                     GL11.glRotatef(180, 1, 0, 0);
 
@@ -325,12 +318,9 @@ public class ModelPlayerGC extends ModelBiped
 
                 FMLClientHandler.instance().getClient().renderEngine.bindTexture(ModelPlayerGC.playerTexture);
 
-                if (wearingGear)
-                {
-                    for (int i = 0; i < 7; i++)
-                    {
-                        for (int k = 0; k < 2; k++)
-                        {
+                if (wearingGear) {
+                    for (int i = 0; i < 7; i++) {
+                        for (int k = 0; k < 2; k++) {
                             this.tubes[k][i].render(var7);
                         }
                     }
@@ -338,92 +328,79 @@ public class ModelPlayerGC extends ModelBiped
 
                 //
 
-                if (wearingLeftTankGray)
-                {
+                if (wearingLeftTankGray) {
                     this.grayOxygenTanks[0].render(var7);
                 }
 
                 //
 
-                if (wearingLeftTankViolet)
-                {
+                if (wearingLeftTankViolet) {
                     this.violetOxygenTanks[0].render(var7);
                 }
 
                 //
 
-                if (wearingLeftTankBlue)
-                {
+                if (wearingLeftTankBlue) {
                     this.blueOxygenTanks[0].render(var7);
                 }
 
                 //
 
-                if (wearingLeftTankRed)
-                {
+                if (wearingLeftTankRed) {
                     this.redOxygenTanks[0].render(var7);
                 }
 
                 //
 
-                if (wearingLeftTankOrange)
-                {
+                if (wearingLeftTankOrange) {
                     this.orangeOxygenTanks[0].render(var7);
                 }
 
                 //
 
-                if (wearingLeftTankGreen)
-                {
+                if (wearingLeftTankGreen) {
                     this.greenOxygenTanks[0].render(var7);
                 }
 
                 //
 
-                if (wearingRightTankGray)
-                {
+                if (wearingRightTankGray) {
                     this.grayOxygenTanks[1].render(var7);
                 }
 
                 //
 
-                if (wearingRightTankViolet)
-                {
+                if (wearingRightTankViolet) {
                     this.violetOxygenTanks[1].render(var7);
                 }
 
                 //
 
-                if (wearingRightTankBlue)
-                {
+                if (wearingRightTankBlue) {
                     this.blueOxygenTanks[1].render(var7);
                 }
 
                 //
 
-                if (wearingRightTankRed)
-                {
+                if (wearingRightTankRed) {
                     this.redOxygenTanks[1].render(var7);
                 }
 
                 //
 
-                if (wearingRightTankOrange)
-                {
+                if (wearingRightTankOrange) {
                     this.orangeOxygenTanks[1].render(var7);
                 }
 
                 //
 
-                if (wearingRightTankGreen)
-                {
+                if (wearingRightTankGreen) {
                     this.greenOxygenTanks[1].render(var7);
                 }
 
                 //
 
-                if (usingParachute)
-                {
+                if (usingParachute) {
                     FMLClientHandler.instance().getClient().renderEngine.bindTexture(gearData.getParachute());
 
                     this.parachute[0].render(var7);
@@ -437,37 +414,42 @@ public class ModelPlayerGC extends ModelBiped
                 }
             }
 
-            FMLClientHandler.instance().getClient().renderEngine.bindTexture(((AbstractClientPlayer) player).getLocationSkin());
+            FMLClientHandler.instance()
+                    .getClient()
+                    .renderEngine
+                    .bindTexture(((AbstractClientPlayer) player).getLocationSkin());
         }
 
         super.render(var1, var2, var3, var4, var5, var6, var7);
     }
 
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
-    {
+    public void setRotationAngles(
+            float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
         final EntityPlayer player = (EntityPlayer) par7Entity;
         final ItemStack currentItemStack = player.inventory.getCurrentItem();
 
-        if (!par7Entity.onGround && par7Entity.worldObj.provider instanceof IGalacticraftWorldProvider && par7Entity.ridingEntity == null && !(currentItemStack != null && currentItemStack.getItem() instanceof IHoldableItem))
-        {
+        if (!par7Entity.onGround
+                && par7Entity.worldObj.provider instanceof IGalacticraftWorldProvider
+                && par7Entity.ridingEntity == null
+                && !(currentItemStack != null && currentItemStack.getItem() instanceof IHoldableItem)) {
             float speedModifier = 0.1162F * 2;
 
             float angularSwingArm = MathHelper.cos(par1 * (speedModifier / 2));
             float rightMod = this.heldItemRight != 0 ? 1 : 2;
-            this.bipedRightArm.rotateAngleX -= MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * rightMod * par2 * 0.5F;
+            this.bipedRightArm.rotateAngleX -=
+                    MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * rightMod * par2 * 0.5F;
             this.bipedLeftArm.rotateAngleX -= MathHelper.cos(par1 * 0.6662F) * 2.0F * par2 * 0.5F;
             this.bipedRightArm.rotateAngleX += -angularSwingArm * 4.0F * par2 * 0.5F;
             this.bipedLeftArm.rotateAngleX += angularSwingArm * 4.0F * par2 * 0.5F;
-            this.bipedLeftLeg.rotateAngleX -= MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
-            this.bipedLeftLeg.rotateAngleX += MathHelper.cos(par1 * 0.1162F * 2 + (float)Math.PI) * 1.4F * par2;
+            this.bipedLeftLeg.rotateAngleX -= MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2;
+            this.bipedLeftLeg.rotateAngleX += MathHelper.cos(par1 * 0.1162F * 2 + (float) Math.PI) * 1.4F * par2;
             this.bipedRightLeg.rotateAngleX -= MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
             this.bipedRightLeg.rotateAngleX += MathHelper.cos(par1 * 0.1162F * 2) * 1.4F * par2;
         }
 
-        if (usingParachute)
-        {
+        if (usingParachute) {
             this.parachute[0].rotateAngleZ = (float) (30F * (Math.PI / 180F));
             this.parachute[2].rotateAngleZ = (float) -(30F * (Math.PI / 180F));
             this.parachuteStrings[0].rotateAngleZ = (float) (155F * (Math.PI / 180F));
@@ -488,12 +470,12 @@ public class ModelPlayerGC extends ModelBiped
             this.bipedRightArm.rotateAngleZ -= (float) Math.PI / 10;
         }
 
-        if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof IHoldableItem)
-        {
-            IHoldableItem holdableItem = (IHoldableItem) player.inventory.getCurrentItem().getItem();
+        if (player.inventory.getCurrentItem() != null
+                && player.inventory.getCurrentItem().getItem() instanceof IHoldableItem) {
+            IHoldableItem holdableItem =
+                    (IHoldableItem) player.inventory.getCurrentItem().getItem();
 
-            if (holdableItem.shouldHoldLeftHandUp(player))
-            {
+            if (holdableItem.shouldHoldLeftHandUp(player)) {
                 this.bipedLeftArm.rotateAngleX = 0;
                 this.bipedLeftArm.rotateAngleZ = 0;
 
@@ -501,8 +483,7 @@ public class ModelPlayerGC extends ModelBiped
                 this.bipedLeftArm.rotateAngleZ += (float) Math.PI / 10;
             }
 
-            if (holdableItem.shouldHoldRightHandUp(player))
-            {
+            if (holdableItem.shouldHoldRightHandUp(player)) {
                 this.bipedRightArm.rotateAngleX = 0;
                 this.bipedRightArm.rotateAngleZ = 0;
 
@@ -510,8 +491,7 @@ public class ModelPlayerGC extends ModelBiped
                 this.bipedRightArm.rotateAngleZ -= (float) Math.PI / 10;
             }
 
-            if (player.onGround && holdableItem.shouldCrouch(player))
-            {
+            if (player.onGround && holdableItem.shouldCrouch(player)) {
                 this.bipedBody.rotateAngleX = 0.5F;
                 this.bipedRightLeg.rotationPointZ = 4.0F;
                 this.bipedLeftLeg.rotationPointZ = 4.0F;
@@ -559,18 +539,20 @@ public class ModelPlayerGC extends ModelBiped
         this.grayOxygenTanks[1].rotateAngleY = this.bipedBody.rotateAngleY;
         this.grayOxygenTanks[1].rotateAngleZ = this.bipedBody.rotateAngleZ;
 
-        final List<?> l = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, AxisAlignedBB.getBoundingBox(player.posX - 20, 0, player.posZ - 20, player.posX + 20, 200, player.posZ + 20));
+        final List<?> l = player.worldObj.getEntitiesWithinAABBExcludingEntity(
+                player,
+                AxisAlignedBB.getBoundingBox(
+                        player.posX - 20, 0, player.posZ - 20, player.posX + 20, 200, player.posZ + 20));
 
-        for (int i = 0; i < l.size(); i++)
-        {
+        for (int i = 0; i < l.size(); i++) {
             final Entity e = (Entity) l.get(i);
 
-            if (e instanceof EntityTieredRocket)
-            {
+            if (e instanceof EntityTieredRocket) {
                 final EntityTieredRocket ship = (EntityTieredRocket) e;
 
-                if (ship.riddenByEntity != null && !(ship.riddenByEntity).equals(player) && (ship.getLaunched() || ship.timeUntilLaunch < 390))
-                {
+                if (ship.riddenByEntity != null
+                        && !(ship.riddenByEntity).equals(player)
+                        && (ship.getLaunched() || ship.timeUntilLaunch < 390)) {
                     this.bipedRightArm.rotateAngleZ -= (float) (Math.PI / 8) + MathHelper.sin(par3 * 0.9F) * 0.2F;
                     this.bipedRightArm.rotateAngleX = (float) Math.PI;
                     break;

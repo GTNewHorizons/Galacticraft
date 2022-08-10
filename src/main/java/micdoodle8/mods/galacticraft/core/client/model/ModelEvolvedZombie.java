@@ -5,11 +5,9 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
-
 import org.lwjgl.opengl.GL11;
 
-public class ModelEvolvedZombie extends ModelBiped
-{
+public class ModelEvolvedZombie extends ModelBiped {
     ModelRenderer leftOxygenTank;
     ModelRenderer rightOxygenTank;
     ModelRenderer tubeRight2;
@@ -28,16 +26,14 @@ public class ModelEvolvedZombie extends ModelBiped
     ModelRenderer tubeRight6;
     ModelRenderer tubeLeft8;
     ModelRenderer oxygenMask;
-	private float saveGravity;
-	private boolean renderGear;
+    private float saveGravity;
+    private boolean renderGear;
 
-    public ModelEvolvedZombie(boolean renderGear)
-    {
+    public ModelEvolvedZombie(boolean renderGear) {
         this(0.0F, false, renderGear);
     }
 
-    public ModelEvolvedZombie(float par1, boolean halfSizeTexture, boolean renderGear)
-    {
+    public ModelEvolvedZombie(float par1, boolean halfSizeTexture, boolean renderGear) {
         this.textureWidth = halfSizeTexture ? 64 : 128;
         this.textureHeight = halfSizeTexture ? 32 : 64;
         this.renderGear = renderGear;
@@ -162,14 +158,12 @@ public class ModelEvolvedZombie extends ModelBiped
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         //		super.render(entity, f, f1, f2, f3, f4, f5);
-    	this.saveGravity = WorldUtil.getGravityFactor(entity);
+        this.saveGravity = WorldUtil.getGravityFactor(entity);
         this.setRotationAngles(f, f1, f2, f3, f4, f5);
-        
-        if (this.isChild)
-        {
+
+        if (this.isChild) {
             float f6 = 2.0F;
             GL11.glPushMatrix();
             GL11.glScalef(1.5F / f6, 1.5F / f6, 1.5F / f6);
@@ -180,8 +174,7 @@ public class ModelEvolvedZombie extends ModelBiped
             GL11.glPushMatrix();
             GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
             GL11.glTranslatef(0.0F, 24.0F * f5, 0.0F);
-            if (this.renderGear) 
-            {
+            if (this.renderGear) {
                 this.leftOxygenTank.render(f5);
                 this.rightOxygenTank.render(f5);
                 this.tubeRight2.render(f5);
@@ -207,29 +200,26 @@ public class ModelEvolvedZombie extends ModelBiped
             this.bipedLeftLeg.render(f5);
             this.bipedHeadwear.render(f5);
             GL11.glPopMatrix();
-        }
-        else
-        {
-            if (this.renderGear) 
-            {
-	            this.leftOxygenTank.render(f5);
-	            this.rightOxygenTank.render(f5);
-	            this.tubeRight2.render(f5);
-	            this.tubeLeft1.render(f5);
-	            this.tubeRight3.render(f5);
-	            this.tubeRight4.render(f5);
-	            this.tubeRight5.render(f5);
-	            this.tubeLeft6.render(f5);
-	            this.tubeRight7.render(f5);
-	            this.tubeRight1.render(f5);
-	            this.tubeLeft2.render(f5);
-	            this.tubeLeft3.render(f5);
-	            this.tubeLeft4.render(f5);
-	            this.tubeLeft5.render(f5);
-	            this.tubeLeft7.render(f5);
-	            this.tubeRight6.render(f5);
-	            this.tubeLeft8.render(f5);
-	            this.oxygenMask.render(f5);
+        } else {
+            if (this.renderGear) {
+                this.leftOxygenTank.render(f5);
+                this.rightOxygenTank.render(f5);
+                this.tubeRight2.render(f5);
+                this.tubeLeft1.render(f5);
+                this.tubeRight3.render(f5);
+                this.tubeRight4.render(f5);
+                this.tubeRight5.render(f5);
+                this.tubeLeft6.render(f5);
+                this.tubeRight7.render(f5);
+                this.tubeRight1.render(f5);
+                this.tubeLeft2.render(f5);
+                this.tubeLeft3.render(f5);
+                this.tubeLeft4.render(f5);
+                this.tubeLeft5.render(f5);
+                this.tubeLeft7.render(f5);
+                this.tubeRight6.render(f5);
+                this.tubeLeft8.render(f5);
+                this.oxygenMask.render(f5);
             }
             this.bipedHead.render(f5);
             this.bipedBody.render(f5);
@@ -241,15 +231,13 @@ public class ModelEvolvedZombie extends ModelBiped
         }
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
 
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6)
-    {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6) {
         this.bipedHead.rotateAngleY = par4 / (180F / (float) Math.PI);
         this.bipedHead.rotateAngleX = par5 / (180F / (float) Math.PI);
         this.oxygenMask.rotateAngleY = par4 / (180F / (float) Math.PI);
@@ -260,13 +248,14 @@ public class ModelEvolvedZombie extends ModelBiped
         this.bipedLeftArm.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 2.0F * par2 * 0.5F;
         this.bipedRightArm.rotateAngleZ = 0.0F;
         this.bipedLeftArm.rotateAngleZ = 0.0F;
-        this.bipedRightLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F / this.saveGravity) * (1.5F - this.saveGravity) * par2;
-        this.bipedLeftLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F / this.saveGravity + (float) Math.PI) * (1.5F - this.saveGravity) * par2;
+        this.bipedRightLeg.rotateAngleX =
+                MathHelper.cos(par1 * 0.6662F / this.saveGravity) * (1.5F - this.saveGravity) * par2;
+        this.bipedLeftLeg.rotateAngleX =
+                MathHelper.cos(par1 * 0.6662F / this.saveGravity + (float) Math.PI) * (1.5F - this.saveGravity) * par2;
         this.bipedRightLeg.rotateAngleY = 0.0F;
         this.bipedLeftLeg.rotateAngleY = 0.0F;
 
-        if (this.isRiding)
-        {
+        if (this.isRiding) {
             this.bipedRightArm.rotateAngleX += -((float) Math.PI / 5F);
             this.bipedLeftArm.rotateAngleX += -((float) Math.PI / 5F);
             this.bipedRightLeg.rotateAngleX = -((float) Math.PI * 2F / 5F);
@@ -280,8 +269,7 @@ public class ModelEvolvedZombie extends ModelBiped
         float var7;
         float var8;
 
-        if (this.onGround > -9990.0F)
-        {
+        if (this.onGround > -9990.0F) {
             var7 = this.onGround;
             this.bipedBody.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(var7) * (float) Math.PI * 2.0F) * 0.2F;
             this.bipedRightArm.rotationPointZ = MathHelper.sin(this.bipedBody.rotateAngleY) * 5.0F;
@@ -296,7 +284,8 @@ public class ModelEvolvedZombie extends ModelBiped
             var7 *= var7;
             var7 = 1.0F - var7;
             var8 = MathHelper.sin(var7 * (float) Math.PI);
-            final float var9 = MathHelper.sin(this.onGround * (float) Math.PI) * -(this.bipedHead.rotateAngleX - 0.7F) * 0.75F;
+            final float var9 =
+                    MathHelper.sin(this.onGround * (float) Math.PI) * -(this.bipedHead.rotateAngleX - 0.7F) * 0.75F;
             this.bipedRightArm.rotateAngleX = (float) (this.bipedRightArm.rotateAngleX - (var8 * 1.2D + var9));
             this.bipedRightArm.rotateAngleY += this.bipedBody.rotateAngleY * 2.0F;
             this.bipedRightArm.rotateAngleZ = MathHelper.sin(this.onGround * (float) Math.PI) * -0.4F;

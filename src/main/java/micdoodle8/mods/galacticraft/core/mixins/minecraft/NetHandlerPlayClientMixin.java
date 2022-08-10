@@ -12,9 +12,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(NetHandlerPlayClient.class)
 public class NetHandlerPlayClientMixin {
 
-    @Redirect(method = "handleSpawnPlayer",
-            at = @At(value = "NEW",
-                    target = "net/minecraft/client/entity/EntityOtherPlayerMP"),
+    @Redirect(
+            method = "handleSpawnPlayer",
+            at = @At(value = "NEW", target = "net/minecraft/client/entity/EntityOtherPlayerMP"),
             require = 1)
     private EntityOtherPlayerMP onNewEntityOtherPlayerMP(World world, GameProfile gameProfile) {
         return new GCEntityOtherPlayerMP(world, gameProfile);

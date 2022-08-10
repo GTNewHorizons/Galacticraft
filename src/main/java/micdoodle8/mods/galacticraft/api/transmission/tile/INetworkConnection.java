@@ -7,8 +7,7 @@ import net.minecraft.tileentity.TileEntity;
  *
  * @author Calclavia
  */
-public interface INetworkConnection extends IConnector
-{
+public interface INetworkConnection extends IConnector {
 
     /**
      * Gets a list of all the connected TileEntities that this conductor is

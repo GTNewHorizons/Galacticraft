@@ -11,9 +11,9 @@ import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class TileEntityBubbleProviderRenderer extends TileEntitySpecialRenderer
-{
-    private static final ResourceLocation oxygenBubbleTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/bubble.png");
+public class TileEntityBubbleProviderRenderer extends TileEntitySpecialRenderer {
+    private static final ResourceLocation oxygenBubbleTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/bubble.png");
 
     private static IModelCustom sphere;
 
@@ -21,21 +21,19 @@ public class TileEntityBubbleProviderRenderer extends TileEntitySpecialRenderer
     private final float colorGreen;
     private final float colorBlue;
 
-    public TileEntityBubbleProviderRenderer(float colorRed, float colorGreen, float colorBlue)
-    {
-        sphere = AdvancedModelLoader.loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/sphere.obj"));
+    public TileEntityBubbleProviderRenderer(float colorRed, float colorGreen, float colorBlue) {
+        sphere =
+                AdvancedModelLoader.loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/sphere.obj"));
         this.colorRed = colorRed;
         this.colorGreen = colorGreen;
         this.colorBlue = colorBlue;
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float var8)
-    {
+    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float var8) {
         IBubbleProvider provider = (IBubbleProvider) tileEntity;
 
-        if (!provider.getBubbleVisible())
-        {
+        if (!provider.getBubbleVisible()) {
             return;
         }
 

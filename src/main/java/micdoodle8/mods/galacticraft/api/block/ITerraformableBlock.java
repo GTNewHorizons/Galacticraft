@@ -2,8 +2,7 @@ package micdoodle8.mods.galacticraft.api.block;
 
 import net.minecraft.world.World;
 
-public interface ITerraformableBlock
-{
+public interface ITerraformableBlock {
     /**
      * Determines if the block as this position is terraformable. This will only
      * be called for blocks inside the terraformer bubble. It is recommended

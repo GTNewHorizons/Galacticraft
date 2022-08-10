@@ -1,6 +1,7 @@
 package micdoodle8.mods.galacticraft.core.client;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import java.util.Random;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import net.minecraft.client.Minecraft;
@@ -15,12 +16,10 @@ import net.minecraftforge.client.IRenderHandler;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import java.util.Random;
-
-public class SkyProviderOrbit extends IRenderHandler
-{
+public class SkyProviderOrbit extends IRenderHandler {
     private static final ResourceLocation moonTexture = new ResourceLocation("textures/environment/moon_phases.png");
-    private static final ResourceLocation sunTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/planets/orbitalsun.png");
+    private static final ResourceLocation sunTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/planets/orbitalsun.png");
 
     public int starGLCallList = GLAllocation.generateDisplayLists(3);
     public int glSkyList;
@@ -33,8 +32,7 @@ public class SkyProviderOrbit extends IRenderHandler
     private float prevPartialTicks = 0;
     private long prevTick;
 
-    public SkyProviderOrbit(ResourceLocation planet, boolean renderMoon, boolean renderSun)
-    {
+    public SkyProviderOrbit(ResourceLocation planet, boolean renderMoon, boolean renderSun) {
         this.planetToRender = planet;
         this.renderMoon = renderMoon;
         this.renderSun = renderSun;
@@ -50,10 +48,8 @@ public class SkyProviderOrbit extends IRenderHandler
         final int i = 256 / byte2 + 2;
         float f = 16F;
 
-        for (int j = -byte2 * i; j <= byte2 * i; j += byte2)
-        {
-            for (int l = -byte2 * i; l <= byte2 * i; l += byte2)
-            {
+        for (int j = -byte2 * i; j <= byte2 * i; j += byte2) {
+            for (int l = -byte2 * i; l <= byte2 * i; l += byte2) {
                 tessellator.startDrawingQuads();
                 tessellator.addVertex(j + 0, f, l + 0);
                 tessellator.addVertex(j + byte2, f, l + 0);
@@ -69,10 +65,8 @@ public class SkyProviderOrbit extends IRenderHandler
         f = -16F;
         tessellator.startDrawingQuads();
 
-        for (int k = -byte2 * i; k <= byte2 * i; k += byte2)
-        {
-            for (int i1 = -byte2 * i; i1 <= byte2 * i; i1 += byte2)
-            {
+        for (int k = -byte2 * i; k <= byte2 * i; k += byte2) {
+            for (int i1 = -byte2 * i; i1 <= byte2 * i; i1 += byte2) {
                 tessellator.addVertex(k + byte2, f, i1 + 0);
                 tessellator.addVertex(k + 0, f, i1 + 0);
                 tessellator.addVertex(k + 0, f, i1 + byte2);
@@ -87,8 +81,7 @@ public class SkyProviderOrbit extends IRenderHandler
     private final Minecraft minecraft = FMLClientHandler.instance().getClient();
 
     @Override
-    public void render(float partialTicks, WorldClient world, Minecraft mc)
-    {
+    public void render(float partialTicks, WorldClient world, Minecraft mc) {
         final float var20 = 400.0F + (float) this.minecraft.thePlayer.posY / 2F;
 
         // if (this.minecraft.thePlayer.ridingEntity != null)
@@ -104,8 +97,7 @@ public class SkyProviderOrbit extends IRenderHandler
         float var5 = (float) var2.zCoord;
         float var8;
 
-        if (this.minecraft.gameSettings.anaglyph)
-        {
+        if (this.minecraft.gameSettings.anaglyph) {
             final float var6 = (var3 * 30.0F + var4 * 59.0F + var5 * 11.0F) / 100.0F;
             final float var7 = (var3 * 30.0F + var4 * 70.0F) / 100.0F;
             var8 = (var3 * 30.0F + var5 * 70.0F) / 100.0F;
@@ -125,27 +117,32 @@ public class SkyProviderOrbit extends IRenderHandler
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         RenderHelper.disableStandardItemLighting();
-        final float[] var24 = this.minecraft.theWorld.provider.calcSunriseSunsetColors(this.minecraft.theWorld.getCelestialAngle(partialTicks), partialTicks);
+        final float[] var24 = this.minecraft.theWorld.provider.calcSunriseSunsetColors(
+                this.minecraft.theWorld.getCelestialAngle(partialTicks), partialTicks);
         float var9;
         float var10;
         float var11;
         float var12;
 
-        if (var24 != null)
-        {
+        if (var24 != null) {
             GL11.glDisable(GL11.GL_TEXTURE_2D);
             GL11.glShadeModel(GL11.GL_SMOOTH);
             GL11.glPushMatrix();
             GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
-            GL11.glRotatef(MathHelper.sin(this.minecraft.theWorld.getCelestialAngleRadians(partialTicks)) < 0.0F ? 180.0F : 0.0F, 0.0F, 0.0F, 1.0F);
+            GL11.glRotatef(
+                    MathHelper.sin(this.minecraft.theWorld.getCelestialAngleRadians(partialTicks)) < 0.0F
+                            ? 180.0F
+                            : 0.0F,
+                    0.0F,
+                    0.0F,
+                    1.0F);
             GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
             var8 = var24[0];
             var9 = var24[1];
             var10 = var24[2];
             float var13;
 
-            if (this.minecraft.gameSettings.anaglyph)
-            {
+            if (this.minecraft.gameSettings.anaglyph) {
                 var11 = (var8 * 30.0F + var9 * 59.0F + var10 * 11.0F) / 100.0F;
                 var12 = (var8 * 30.0F + var9 * 70.0F) / 100.0F;
                 var13 = (var8 * 30.0F + var10 * 70.0F) / 100.0F;
@@ -160,8 +157,7 @@ public class SkyProviderOrbit extends IRenderHandler
             final byte var26 = 16;
             var23.setColorRGBA_F(var24[0], var24[1], var24[2], 0.0F);
 
-            for (int var27 = 0; var27 <= var26; ++var27)
-            {
+            for (int var27 = 0; var27 <= var26; ++var27) {
                 var13 = var27 * (float) Math.PI * 2.0F / var26;
                 final float var14 = MathHelper.sin(var13);
                 final float var15 = MathHelper.cos(var13);
@@ -183,39 +179,36 @@ public class SkyProviderOrbit extends IRenderHandler
         GL11.glTranslatef(var9, var10, var11);
         GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
 
-        //Code for rendering spinning spacestations
+        // Code for rendering spinning spacestations
         float deltaTick = partialTicks - this.prevPartialTicks;
-        //while (deltaTick < 0F) deltaTick += 1.0F;
+        // while (deltaTick < 0F) deltaTick += 1.0F;
         this.prevPartialTicks = partialTicks;
         long curTick = this.minecraft.theWorld.getTotalWorldTime();
         int tickDiff = (int) (curTick - this.prevTick);
         this.prevTick = curTick;
-        if (tickDiff > 0 && tickDiff < 20)
-        {
+        if (tickDiff > 0 && tickDiff < 20) {
             deltaTick += tickDiff;
         }
         this.spinAngle = this.spinAngle - this.spinDeltaPerTick * deltaTick;
-        while (this.spinAngle < -180F)
-        {
+        while (this.spinAngle < -180F) {
             this.spinAngle += 360F;
         }
         GL11.glRotatef(this.spinAngle, 0.0F, 1.0F, 0.0F);
 
-        //At 0.8, these will look bright against a black sky - allows some headroom for them to
-        //look even brighter in outer dimensions (further from the sun)
+        // At 0.8, these will look bright against a black sky - allows some headroom for them to
+        // look even brighter in outer dimensions (further from the sun)
         GL11.glColor4f(0.8F, 0.8F, 0.8F, 0.8F);
         GL11.glCallList(this.starGLCallList);
-        
+
         GL11.glEnable(GL11.GL_TEXTURE_2D);
 
         GL11.glPushMatrix();
         float celestialAngle = this.minecraft.theWorld.getCelestialAngle(partialTicks);
         GL11.glRotatef(celestialAngle * 360.0F, 1.0F, 0.0F, 0.0F);
-        if (this.renderSun)
-        {
+        if (this.renderSun) {
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glDisable(GL11.GL_TEXTURE_2D);
-            GL11.glColor4f(0.0F, 0.0F, 0.0F, 1.0F);        
+            GL11.glColor4f(0.0F, 0.0F, 0.0F, 1.0F);
             var12 = 8.0F;
             var23.startDrawingQuads();
             var23.addVertex(-var12, 99.9D, -var12);
@@ -236,11 +229,10 @@ public class SkyProviderOrbit extends IRenderHandler
             var23.draw();
         }
 
-        if (this.renderMoon)
-        {
+        if (this.renderMoon) {
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glDisable(GL11.GL_TEXTURE_2D);
-            GL11.glColor4f(0.0F, 0.0F, 0.0F, 1.0F);        
+            GL11.glColor4f(0.0F, 0.0F, 0.0F, 1.0F);
             var12 = 11.3F;
             var23.startDrawingQuads();
             var23.addVertex(-var12, -99.9D, var12);
@@ -271,8 +263,7 @@ public class SkyProviderOrbit extends IRenderHandler
         GL11.glPopMatrix();
         GL11.glDisable(GL11.GL_BLEND);
 
-        if (this.planetToRender != null)
-        {
+        if (this.planetToRender != null) {
             GL11.glPushMatrix();
             GL11.glTranslatef(0.0F, -var20 / 10, 0.0F);
             float scale = 100 * (0.3F - var20 / 10000.0F);
@@ -302,83 +293,80 @@ public class SkyProviderOrbit extends IRenderHandler
 
         GL11.glColor3f(0.0F, 0.0F, 0.0F);
 
-		/* This all does nothing!
-        double var25 = 0.0D;
+        /* This all does nothing!
+              double var25 = 0.0D;
 
-		// if (this.minecraft.thePlayer.ridingEntity != null)
-		{
-			var25 = this.minecraft.thePlayer.posY - 64;
+        // if (this.minecraft.thePlayer.ridingEntity != null)
+        {
+        	var25 = this.minecraft.thePlayer.posY - 64;
 
-			if (var25 < 0.0D)
-			{
-				// GL11.glPushMatrix();
-				// GL11.glTranslatef(0.0F, 12.0F, 0.0F);
-				// GL11.glCallList(this.glSkyList2);
-				// GL11.glPopMatrix();
-				// var10 = 1.0F;
-				// var11 = -((float)(var25 + 65.0D));
-				// var12 = -var10;
-				// var23.startDrawingQuads();
-				// var23.setColorRGBA_I(0, 255);
-				// var23.addVertex(-var10, var11, var10);
-				// var23.addVertex(var10, var11, var10);
-				// var23.addVertex(var10, var12, var10);
-				// var23.addVertex(-var10, var12, var10);
-				// var23.addVertex(-var10, var12, -var10);
-				// var23.addVertex(var10, var12, -var10);
-				// var23.addVertex(var10, var11, -var10);
-				// var23.addVertex(-var10, var11, -var10);
-				// var23.addVertex(var10, var12, -var10);
-				// var23.addVertex(var10, var12, var10);
-				// var23.addVertex(var10, var11, var10);
-				// var23.addVertex(var10, var11, -var10);
-				// var23.addVertex(-var10, var11, -var10);
-				// var23.addVertex(-var10, var11, var10);
-				// var23.addVertex(-var10, var12, var10);
-				// var23.addVertex(-var10, var12, -var10);
-				// var23.addVertex(-var10, var12, -var10);
-				// var23.addVertex(-var10, var12, var10);
-				// var23.addVertex(var10, var12, var10);
-				// var23.addVertex(var10, var12, -var10);
-				// var23.draw();
-			}
-		}
+        	if (var25 < 0.0D)
+        	{
+        		// GL11.glPushMatrix();
+        		// GL11.glTranslatef(0.0F, 12.0F, 0.0F);
+        		// GL11.glCallList(this.glSkyList2);
+        		// GL11.glPopMatrix();
+        		// var10 = 1.0F;
+        		// var11 = -((float)(var25 + 65.0D));
+        		// var12 = -var10;
+        		// var23.startDrawingQuads();
+        		// var23.setColorRGBA_I(0, 255);
+        		// var23.addVertex(-var10, var11, var10);
+        		// var23.addVertex(var10, var11, var10);
+        		// var23.addVertex(var10, var12, var10);
+        		// var23.addVertex(-var10, var12, var10);
+        		// var23.addVertex(-var10, var12, -var10);
+        		// var23.addVertex(var10, var12, -var10);
+        		// var23.addVertex(var10, var11, -var10);
+        		// var23.addVertex(-var10, var11, -var10);
+        		// var23.addVertex(var10, var12, -var10);
+        		// var23.addVertex(var10, var12, var10);
+        		// var23.addVertex(var10, var11, var10);
+        		// var23.addVertex(var10, var11, -var10);
+        		// var23.addVertex(-var10, var11, -var10);
+        		// var23.addVertex(-var10, var11, var10);
+        		// var23.addVertex(-var10, var12, var10);
+        		// var23.addVertex(-var10, var12, -var10);
+        		// var23.addVertex(-var10, var12, -var10);
+        		// var23.addVertex(-var10, var12, var10);
+        		// var23.addVertex(var10, var12, var10);
+        		// var23.addVertex(var10, var12, -var10);
+        		// var23.draw();
+        	}
+        }
 
-		if (this.minecraft.theWorld.provider.isSkyColored())
-		{
-			GL11.glColor3f(0.0f, 0.0f, 0.0f);
-		}
-		else
-		{
-			GL11.glColor3f(var3, var4, var5);
-		}
-		GL11.glColor3f(0.0f, 0.0f, 0.0f);
+        if (this.minecraft.theWorld.provider.isSkyColored())
+        {
+        	GL11.glColor3f(0.0f, 0.0f, 0.0f);
+        }
+        else
+        {
+        	GL11.glColor3f(var3, var4, var5);
+        }
+        GL11.glColor3f(0.0f, 0.0f, 0.0f);
 
-		GL11.glPushMatrix();
-		GL11.glTranslatef(0.0F, -((float) (var25 - 16.0D)), 0.0F);
-		GL11.glPopMatrix();
-		*/
+        GL11.glPushMatrix();
+        GL11.glTranslatef(0.0F, -((float) (var25 - 16.0D)), 0.0F);
+        GL11.glPopMatrix();
+        */
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_COLOR_MATERIAL);
         GL11.glDepthMask(true);
     }
 
-    private void renderStars()
-    {
+    private void renderStars() {
         final Random var1 = new Random(10842L);
         final Tessellator var2 = Tessellator.instance;
         var2.startDrawingQuads();
 
-        for (int var3 = 0; var3 < (ConfigManagerCore.moreStars ? 20000 : 6000); ++var3)
-        {
+        for (int var3 = 0; var3 < (ConfigManagerCore.moreStars ? 20000 : 6000); ++var3) {
             double var4 = var1.nextFloat() * 2.0F - 1.0F;
             double var6 = var1.nextFloat() * 2.0F - 1.0F;
             double var8 = var1.nextFloat() * 2.0F - 1.0F;
             final double var10 = 0.07F + var1.nextFloat() * 0.06F;
             double var12 = var4 * var4 + var6 * var6 + var8 * var8;
 
-            if (var12 < 1.0D && var12 > 0.01D)
-            {
+            if (var12 < 1.0D && var12 > 0.01D) {
                 var12 = 1.0D / Math.sqrt(var12);
                 var4 *= var12;
                 var6 *= var12;
@@ -396,8 +384,7 @@ public class SkyProviderOrbit extends IRenderHandler
                 final double var34 = Math.sin(var32);
                 final double var36 = Math.cos(var32);
 
-                for (int var38 = 0; var38 < 4; ++var38)
-                {
+                for (int var38 = 0; var38 < 4; ++var38) {
                     final double var39 = 0.0D;
                     final double var41 = ((var38 & 2) - 1) * var10;
                     final double var43 = ((var38 + 1 & 2) - 1) * var10;

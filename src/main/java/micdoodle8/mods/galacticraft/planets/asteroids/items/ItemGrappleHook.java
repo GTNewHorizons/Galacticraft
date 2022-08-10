@@ -16,10 +16,8 @@ import net.minecraft.item.*;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
-public class ItemGrappleHook extends ItemBow
-{
-    public ItemGrappleHook(String assetName)
-    {
+public class ItemGrappleHook extends ItemBow {
+    public ItemGrappleHook(String assetName) {
         super();
         this.setUnlocalizedName(assetName);
         this.setMaxStackSize(1);
@@ -28,74 +26,65 @@ public class ItemGrappleHook extends ItemBow
 
     @SideOnly(Side.CLIENT)
     @Override
-    public CreativeTabs getCreativeTab()
-    {
+    public CreativeTabs getCreativeTab() {
         return GalacticraftCore.galacticraftItemsTab;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 
     @Override
-    public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, int par4)
-    {
-        boolean flag = par3EntityPlayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, par1ItemStack) > 0;
+    public void onPlayerStoppedUsing(
+            ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, int par4) {
+        boolean flag = par3EntityPlayer.capabilities.isCreativeMode
+                || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, par1ItemStack) > 0;
 
-        if (flag || par3EntityPlayer.inventory.hasItem(Items.string))
-        {
+        if (flag || par3EntityPlayer.inventory.hasItem(Items.string)) {
             EntityGrapple grapple = new EntityGrapple(par2World, par3EntityPlayer, 2.0F);
 
-            par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F, 1.0F / (Item.itemRand.nextFloat() * 0.4F + 1.2F) + 0.5F);
+            par2World.playSoundAtEntity(
+                    par3EntityPlayer, "random.bow", 1.0F, 1.0F / (Item.itemRand.nextFloat() * 0.4F + 1.2F) + 0.5F);
 
-            if (!par2World.isRemote)
-            {
+            if (!par2World.isRemote) {
                 par2World.spawnEntityInWorld(grapple);
             }
 
             par1ItemStack.damageItem(1, par3EntityPlayer);
             grapple.canBePickedUp = par3EntityPlayer.capabilities.isCreativeMode ? 2 : 1;
 
-            if (!par3EntityPlayer.capabilities.isCreativeMode)
-            {
+            if (!par3EntityPlayer.capabilities.isCreativeMode) {
                 par3EntityPlayer.inventory.consumeInventoryItem(Items.string);
             }
-        }
-        else if (par2World.isRemote)
-           	par3EntityPlayer.addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.message.grapple.fail")));
+        } else if (par2World.isRemote)
+            par3EntityPlayer.addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.message.grapple.fail")));
     }
 
     @Override
-    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-    {
+    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         return par1ItemStack;
     }
 
     @Override
-    public int getMaxItemUseDuration(ItemStack par1ItemStack)
-    {
+    public int getMaxItemUseDuration(ItemStack par1ItemStack) {
         return 72000;
     }
 
     @Override
-    public EnumAction getItemUseAction(ItemStack par1ItemStack)
-    {
+    public EnumAction getItemUseAction(ItemStack par1ItemStack) {
         return EnumAction.bow;
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-    {
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
         return par1ItemStack;
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegister)
-    {
+    public void registerIcons(IIconRegister iconRegister) {
         this.itemIcon = iconRegister.registerIcon("arrow");
     }
 }

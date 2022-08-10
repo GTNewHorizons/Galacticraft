@@ -3,8 +3,7 @@ package micdoodle8.mods.galacticraft.api.world;
 import micdoodle8.mods.galacticraft.api.entity.IRocketType;
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 
-public interface IGalacticraftWorldProvider
-{
+public interface IGalacticraftWorldProvider {
     /**
      * gets additional gravity to add to players in this dimension. Typical
      * values range from 0.040 to 0.065
@@ -66,12 +65,12 @@ public interface IGalacticraftWorldProvider
      * @return True if players can breathe here, False if not.
      */
     public boolean hasBreathableAtmosphere();
-   
+
     /**
      * If false (the default) then Nether Portals will have no function on this world.
      * Nether Portals can still be constructed, if the player can make fire, they just
      * won't do anything.
-     * 
+     *
      * @return True if Nether Portals should work like on the Overworld.
      */
     public boolean netherPortalsOperational();
@@ -100,11 +99,11 @@ public interface IGalacticraftWorldProvider
      * @return Flag movement magnitude. Relative to earth's value of 1.0F
      */
     public float getWindLevel();
-    
+
     /**
      * Factor by which the sun is to be drawn smaller (<1.0) or larger (>1.0) than
      * the sun on the Overworld
-     * 
+     *
      * @return  factor
      */
     public float getSolarSize();

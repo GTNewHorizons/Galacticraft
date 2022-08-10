@@ -3,25 +3,21 @@ package micdoodle8.mods.galacticraft.api.recipe;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.ArrayList;
 import micdoodle8.mods.galacticraft.api.recipe.SchematicEvent.FlipPage;
 import micdoodle8.mods.galacticraft.api.recipe.SchematicEvent.Unlock;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
-import java.util.ArrayList;
-
-public class SchematicRegistry
-{
+public class SchematicRegistry {
     public static ArrayList<ISchematicPage> schematicRecipes = new ArrayList<ISchematicPage>();
 
     /**
      * Register a new schematic page
      */
-    public static void registerSchematicRecipe(ISchematicPage page)
-    {
-        if (!SchematicRegistry.schematicRecipes.contains(page))
-        {
+    public static void registerSchematicRecipe(ISchematicPage page) {
+        if (!SchematicRegistry.schematicRecipes.contains(page)) {
             SchematicRegistry.schematicRecipes.add(page);
         }
     }
@@ -32,14 +28,11 @@ public class SchematicRegistry
      * @param stack the itemstack to be searched with
      * @return the recipe that requires the provided itemstack
      */
-    public static ISchematicPage getMatchingRecipeForItemStack(ItemStack stack)
-    {
-        for (final ISchematicPage schematic : SchematicRegistry.schematicRecipes)
-        {
+    public static ISchematicPage getMatchingRecipeForItemStack(ItemStack stack) {
+        for (final ISchematicPage schematic : SchematicRegistry.schematicRecipes) {
             final ItemStack requiredItem = schematic.getRequiredItem();
 
-            if (requiredItem != null && stack != null && requiredItem.isItemEqual(stack))
-            {
+            if (requiredItem != null && stack != null && requiredItem.isItemEqual(stack)) {
                 return schematic;
             }
         }
@@ -53,12 +46,9 @@ public class SchematicRegistry
      * @param id the ID to be searched with
      * @return the recipe that has and ID equal to the one provided
      */
-    public static ISchematicPage getMatchingRecipeForID(int id)
-    {
-        for (final ISchematicPage schematic : SchematicRegistry.schematicRecipes)
-        {
-            if (schematic.getPageID() == id)
-            {
+    public static ISchematicPage getMatchingRecipeForID(int id) {
+        for (final ISchematicPage schematic : SchematicRegistry.schematicRecipes) {
+            if (schematic.getPageID() == id) {
                 return schematic;
             }
         }
@@ -72,8 +62,7 @@ public class SchematicRegistry
      * @param player the player that unlocked the schematic
      * @param page   the schematic page to be unlocked
      */
-    public static void addUnlockedPage(EntityPlayerMP player, ISchematicPage page)
-    {
+    public static void addUnlockedPage(EntityPlayerMP player, ISchematicPage page) {
         // Used internally to add page to player's list of unlocked schematics.
         // No need to subscribe to this event
         if (page != null) MinecraftForge.EVENT_BUS.post(new Unlock(player, page));
@@ -86,14 +75,11 @@ public class SchematicRegistry
      * @param stack  the itemstack the player has provided
      * @return the schematic page that was unlocked
      */
-    public static ISchematicPage unlockNewPage(EntityPlayerMP player, ItemStack stack)
-    {
-        if (stack != null)
-        {
+    public static ISchematicPage unlockNewPage(EntityPlayerMP player, ItemStack stack) {
+        if (stack != null) {
             final ISchematicPage schematic = SchematicRegistry.getMatchingRecipeForItemStack(stack);
 
-            if (schematic != null)
-            {
+            if (schematic != null) {
                 SchematicRegistry.addUnlockedPage(player, schematic);
 
                 return schematic;
@@ -110,8 +96,7 @@ public class SchematicRegistry
      * @return the schematic page that will be shown when the player clicks NEXT
      */
     @SideOnly(Side.CLIENT)
-    public static void flipToNextPage(int currentIndex)
-    {
+    public static void flipToNextPage(int currentIndex) {
         FMLClientHandler.instance().getClient().currentScreen = null;
 
         // Used internally inside Galacticraft to flip to the next page. No need
@@ -126,8 +111,7 @@ public class SchematicRegistry
      * @return the schematic page that will be shown when the player clicks BACK
      */
     @SideOnly(Side.CLIENT)
-    public static void flipToLastPage(int currentIndex)
-    {
+    public static void flipToLastPage(int currentIndex) {
         FMLClientHandler.instance().getClient().currentScreen = null;
 
         // Used internally inside Galacticraft to flip to the last page. No need

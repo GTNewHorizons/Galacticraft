@@ -5,8 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.DamageSource;
 
-public interface IPlayerServer
-{
+public interface IPlayerServer {
     public void clonePlayer(EntityPlayerMP player, EntityPlayer oldPlayer, boolean keepInv);
 
     public void updateRiddenPre(EntityPlayerMP player);

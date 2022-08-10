@@ -14,41 +14,33 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 
 @SideOnly(Side.CLIENT)
-public class ClientUtil
-{
-    public static ScaledResolution getScaledRes(Minecraft minecraft, int width, int height)
-    {
+public class ClientUtil {
+    public static ScaledResolution getScaledRes(Minecraft minecraft, int width, int height) {
         return VersionUtil.getScaledRes(minecraft, width, height);
     }
 
-    public static FlagData updateFlagData(String playerName, boolean sendPacket)
-    {
+    public static FlagData updateFlagData(String playerName, boolean sendPacket) {
         SpaceRace race = SpaceRaceManager.getSpaceRaceFromPlayer(playerName);
 
-        if (race != null)
-        {
+        if (race != null) {
             return race.getFlagData();
-        }
-        else if (!ClientProxyCore.flagRequestsSent.contains(playerName) && sendPacket)
-        {
-            GalacticraftCore.packetPipeline.sendToServer(new PacketSimple(EnumSimplePacket.S_REQUEST_FLAG_DATA, new Object[] { playerName }));
+        } else if (!ClientProxyCore.flagRequestsSent.contains(playerName) && sendPacket) {
+            GalacticraftCore.packetPipeline.sendToServer(
+                    new PacketSimple(EnumSimplePacket.S_REQUEST_FLAG_DATA, new Object[] {playerName}));
             ClientProxyCore.flagRequestsSent.add(playerName);
         }
 
         return null;
     }
 
-    public static Vector3 updateTeamColor(String playerName, boolean sendPacket)
-    {
+    public static Vector3 updateTeamColor(String playerName, boolean sendPacket) {
         SpaceRace race = SpaceRaceManager.getSpaceRaceFromPlayer(playerName);
 
-        if (race != null)
-        {
+        if (race != null) {
             return race.getTeamColor();
-        }
-        else if (!ClientProxyCore.flagRequestsSent.contains(playerName) && sendPacket)
-        {
-            GalacticraftCore.packetPipeline.sendToServer(new PacketSimple(EnumSimplePacket.S_REQUEST_FLAG_DATA, new Object[] { playerName }));
+        } else if (!ClientProxyCore.flagRequestsSent.contains(playerName) && sendPacket) {
+            GalacticraftCore.packetPipeline.sendToServer(
+                    new PacketSimple(EnumSimplePacket.S_REQUEST_FLAG_DATA, new Object[] {playerName}));
             ClientProxyCore.flagRequestsSent.add(playerName);
         }
 

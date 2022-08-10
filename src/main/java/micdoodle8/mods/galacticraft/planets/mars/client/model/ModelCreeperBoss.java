@@ -6,8 +6,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelCreeperBoss extends ModelBase
-{
+public class ModelCreeperBoss extends ModelBase {
     ModelRenderer headMain;
     ModelRenderer bodyMain;
     ModelRenderer rightLegFront;
@@ -20,13 +19,11 @@ public class ModelCreeperBoss extends ModelBase
     ModelRenderer neckRight;
     ModelRenderer neckLeft;
 
-    public ModelCreeperBoss()
-    {
+    public ModelCreeperBoss() {
         this(0.0F);
     }
 
-    public ModelCreeperBoss(float scale)
-    {
+    public ModelCreeperBoss(float scale) {
         this.textureWidth = 128;
         this.textureHeight = 64;
         this.neckRight = new ModelRenderer(this, 16, 20);
@@ -97,35 +94,28 @@ public class ModelCreeperBoss extends ModelBase
         this.headRight.setTextureSize(128, 64);
         this.headRight.mirror = true;
         this.setRotation(this.headRight, 0F, 0F, -0.7853982F);
-
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         super.render(entity, f, f1, f2, f3, f4, f5);
         this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
         final EntityCreeperBoss creeper = (EntityCreeperBoss) entity;
 
-        if (creeper.headsRemaining > 2)
-        {
+        if (creeper.headsRemaining > 2) {
             this.headLeft.render(f5);
             this.neckLeft.render(f5);
             this.headRight.render(f5);
             this.neckRight.render(f5);
             this.headMain.render(f5);
             this.oxygenTank.render(f5);
-        }
-        else if (creeper.headsRemaining > 1)
-        {
+        } else if (creeper.headsRemaining > 1) {
             this.headRight.render(f5);
             this.neckRight.render(f5);
             this.headMain.render(f5);
             this.oxygenTank.render(f5);
-        }
-        else if (creeper.headsRemaining > 0)
-        {
+        } else if (creeper.headsRemaining > 0) {
             this.headMain.render(f5);
             this.oxygenTank.render(f5);
         }
@@ -137,16 +127,14 @@ public class ModelCreeperBoss extends ModelBase
         this.leftLeg.render(f5);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
 
     @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         this.headMain.rotateAngleY = f3 / (180F / (float) Math.PI);
         this.headMain.rotateAngleX = f4 / (180F / (float) Math.PI);

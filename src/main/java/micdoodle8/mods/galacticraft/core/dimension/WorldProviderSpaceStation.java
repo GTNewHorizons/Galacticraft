@@ -2,11 +2,11 @@ package micdoodle8.mods.galacticraft.core.dimension;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.world.biome.WorldChunkManager;
-import net.minecraft.world.chunk.IChunkProvider;
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
 import micdoodle8.mods.galacticraft.core.world.gen.ChunkProviderOrbit;
 import micdoodle8.mods.galacticraft.core.world.gen.WorldChunkManagerOrbit;
+import net.minecraft.world.biome.WorldChunkManager;
+import net.minecraft.world.chunk.IChunkProvider;
 
 /***
  * Properties of a WorldProviderSpaceStation
@@ -17,57 +17,50 @@ import micdoodle8.mods.galacticraft.core.world.gen.WorldChunkManagerOrbit;
  *     4.  The player on arrival into this dimension (after rocket flight) will be in 1st person view
  *
  */
-public abstract class WorldProviderSpaceStation extends WorldProviderSpace
-{
-	private SpinManager spinManager = new SpinManager(this);
+public abstract class WorldProviderSpaceStation extends WorldProviderSpace {
+    private SpinManager spinManager = new SpinManager(this);
 
-	/**
-	 * Do not return null here, the calling code does not perform a null check! 
-	 */
-	public SpinManager getSpinManager()
-	{
-		return spinManager;
-	}
+    /**
+     * Do not return null here, the calling code does not perform a null check!
+     */
+    public SpinManager getSpinManager() {
+        return spinManager;
+    }
 
-	@Override
-	public void setDimension(int var1)
-	{
-		super.setDimension(var1);
-	}
+    @Override
+    public void setDimension(int var1) {
+        super.setDimension(var1);
+    }
 
-	/**
-	 * Called only once from WorldProvider.registerWorld()
-	 * so this provides a handy initialisation method
-	 */
-	@Override
-	public void registerWorldChunkManager()
-	{
-		super.registerWorldChunkManager();
-		this.getSpinManager().registerServerSide();
-	}
+    /**
+     * Called only once from WorldProvider.registerWorld()
+     * so this provides a handy initialisation method
+     */
+    @Override
+    public void registerWorldChunkManager() {
+        super.registerWorldChunkManager();
+        this.getSpinManager().registerServerSide();
+    }
 
-	@Override
-    public Class<? extends IChunkProvider> getChunkProviderClass()
-    {
+    @Override
+    public Class<? extends IChunkProvider> getChunkProviderClass() {
         return ChunkProviderOrbit.class;
     }
 
     @Override
-    public Class<? extends WorldChunkManager> getWorldChunkManagerClass()
-    {
+    public Class<? extends WorldChunkManager> getWorldChunkManagerClass() {
         return WorldChunkManagerOrbit.class;
     }
 
-	@Override
-	public void updateWeather()
-	{
-		super.updateWeather();
-		spinManager.updateSpin();
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public abstract void setSpinDeltaPerTick(float angle);
-	
-	@SideOnly(Side.CLIENT)
-	public abstract void createSkyProvider();
+    @Override
+    public void updateWeather() {
+        super.updateWeather();
+        spinManager.updateSpin();
+    }
+
+    @SideOnly(Side.CLIENT)
+    public abstract void setSpinDeltaPerTick(float angle);
+
+    @SideOnly(Side.CLIENT)
+    public abstract void createSkyProvider();
 }

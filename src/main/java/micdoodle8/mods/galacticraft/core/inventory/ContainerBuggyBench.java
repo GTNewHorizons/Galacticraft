@@ -10,41 +10,39 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ContainerBuggyBench extends Container
-{
+public class ContainerBuggyBench extends Container {
     public InventoryBuggyBench craftMatrix = new InventoryBuggyBench(this);
     public IInventory craftResult = new InventoryCraftResult();
     private final World worldObj;
 
-    public ContainerBuggyBench(InventoryPlayer inventory, int x, int y, int z)
-    {
+    public ContainerBuggyBench(InventoryPlayer inventory, int x, int y, int z) {
         this.worldObj = inventory.player.worldObj;
 
-        //OUTPUT
+        // OUTPUT
         addSlotToContainer(new SlotRocketBenchResult(inventory.player, craftMatrix, craftResult, 0, 143, 64));
 
-        //BUGGY
-        //gear
+        // BUGGY
+        // gear
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 1, 62, 19, x, y, z, inventory.player));
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 2, 62, 55, x, y, z, inventory.player));
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 3, 62, 73, x, y, z, inventory.player));
-        //wheels
+        // wheels
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 4, 8, 19, x, y, z, inventory.player));
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 5, 116, 19, x, y, z, inventory.player));
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 6, 8, 109, x, y, z, inventory.player));
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 7, 116, 109, x, y, z, inventory.player));
-        //rods
+        // rods
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 8, 26, 19, x, y, z, inventory.player));
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 9, 98, 19, x, y, z, inventory.player));
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 10, 26, 109, x, y, z, inventory.player));
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 11, 98, 109, x, y, z, inventory.player));
-        //plates
+        // plates
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 12, 44, 19, x, y, z, inventory.player));
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 13, 80, 19, x, y, z, inventory.player));
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             addSlotToContainer(new SlotBuggyBench(craftMatrix, 14 + i, 44 + i * 18, 109, x, y, z, inventory.player));
         }
-        //screws
+        // screws
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 17, 8, 37, x, y, z, inventory.player));
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 18, 26, 37, x, y, z, inventory.player));
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 19, 98, 37, x, y, z, inventory.player));
@@ -53,27 +51,27 @@ public class ContainerBuggyBench extends Container
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 22, 26, 91, x, y, z, inventory.player));
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 23, 98, 91, x, y, z, inventory.player));
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 24, 116, 91, x, y, z, inventory.player));
-        //body
-        for(int i = 0; i < 3; i++) {
+        // body
+        for (int i = 0; i < 3; i++) {
             addSlotToContainer(new SlotBuggyBench(craftMatrix, 25 + i, 44 + i * 18, 37, x, y, z, inventory.player));
         }
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 28, 44, 55, x, y, z, inventory.player));
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 29, 80, 55, x, y, z, inventory.player));
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 30, 44, 73, x, y, z, inventory.player));
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 31, 80, 73, x, y, z, inventory.player));
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             addSlotToContainer(new SlotBuggyBench(craftMatrix, 32 + i, 44 + i * 18, 91, x, y, z, inventory.player));
         }
 
-        //CHEST
+        // CHEST
         addSlotToContainer(new SlotBuggyBench(craftMatrix, 35, 107, 64, x, y, z, inventory.player));
 
-        //PLAYER INV
-        for(int i = 0; i < 9; i++) {
+        // PLAYER INV
+        for (int i = 0; i < 9; i++) {
             this.addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 196));
         }
-        for(int i = 0; i < 3; i++) {
-            for(int j = 0; j < 9; j++) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 9; j++) {
                 this.addSlotToContainer(new Slot(inventory, 9 + j + i * 9, 8 + j * 18, 138 + i * 18));
             }
         }
@@ -82,18 +80,14 @@ public class ContainerBuggyBench extends Container
     }
 
     @Override
-    public void onContainerClosed(EntityPlayer par1EntityPlayer)
-    {
+    public void onContainerClosed(EntityPlayer par1EntityPlayer) {
         super.onContainerClosed(par1EntityPlayer);
 
-        if (!this.worldObj.isRemote)
-        {
-            for (int var2 = 1; var2 < this.craftMatrix.getSizeInventory(); ++var2)
-            {
+        if (!this.worldObj.isRemote) {
+            for (int var2 = 1; var2 < this.craftMatrix.getSizeInventory(); ++var2) {
                 final ItemStack slot = this.craftMatrix.getStackInSlotOnClosing(var2);
 
-                if (slot != null)
-                {
+                if (slot != null) {
                     par1EntityPlayer.entityDropItem(slot, 0.0F);
                 }
             }
@@ -101,14 +95,12 @@ public class ContainerBuggyBench extends Container
     }
 
     @Override
-    public void onCraftMatrixChanged(IInventory par1IInventory)
-    {
+    public void onCraftMatrixChanged(IInventory par1IInventory) {
         this.craftResult.setInventorySlotContents(0, RecipeUtil.findMatchingBuggy(this.craftMatrix));
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer)
-    {
+    public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
         return true;
     }
 
@@ -125,7 +117,7 @@ public class ContainerBuggyBench extends Container
             ItemStack currentStack = currentSlot.getStack();
             stack = currentStack.copy();
 
-            if(!this.mergeOneItem(currentStack)) {
+            if (!this.mergeOneItem(currentStack)) {
                 return null;
             }
 

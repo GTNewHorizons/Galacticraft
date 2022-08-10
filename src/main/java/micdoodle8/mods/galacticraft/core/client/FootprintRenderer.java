@@ -1,6 +1,11 @@
 package micdoodle8.mods.galacticraft.core.client;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.wrappers.Footprint;
@@ -8,22 +13,14 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-public class FootprintRenderer
-{
+public class FootprintRenderer {
     public Map<Long, List<Footprint>> footprints = new HashMap<Long, List<Footprint>>();
-    private static final ResourceLocation footprintTexture = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/misc/footprint.png");
+    private static final ResourceLocation footprintTexture =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/misc/footprint.png");
 
-    public void renderFootprints(EntityPlayer player, float partialTicks)
-    {
+    public void renderFootprints(EntityPlayer player, float partialTicks) {
         GL11.glPushMatrix();
         double interpPosX = player.lastTickPosX + (player.posX - player.lastTickPosX) * partialTicks;
         double interpPosY = player.lastTickPosY + (player.posY - player.lastTickPosY) * partialTicks;
@@ -47,12 +44,9 @@ public class FootprintRenderer
         float f10 = 0.4F;
         GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 
-        for (List<Footprint> footprintList : this.footprints.values())
-        {
-            for (Footprint footprint : footprintList)
-            {
-                if (footprint.dimension == player.worldObj.provider.dimensionId)
-                {
+        for (List<Footprint> footprintList : this.footprints.values()) {
+            for (Footprint footprint : footprintList) {
+                if (footprint.dimension == player.worldObj.provider.dimensionId) {
                     GL11.glPushMatrix();
                     float ageScale = footprint.age / (float) Footprint.MAX_AGE;
                     tessellator.startDrawingQuads();
@@ -66,10 +60,30 @@ public class FootprintRenderer
                     tessellator.setBrightness((int) (100 + ageScale * 155));
                     GL11.glColor4f(1 - ageScale, 1 - ageScale, 1 - ageScale, 1 - ageScale);
                     double footprintScale = 0.5F;
-                    tessellator.addVertexWithUV(0 + Math.sin((45 - footprint.rotation) * Math.PI / 180.0D) * footprintScale, 0, 0 + Math.cos((45 - footprint.rotation) * Math.PI / 180.0D) * footprintScale, f7, f9);
-                    tessellator.addVertexWithUV(0 + Math.sin((135 - footprint.rotation) * Math.PI / 180.0D) * footprintScale, 0, 0 + Math.cos((135 - footprint.rotation) * Math.PI / 180.0D) * footprintScale, f7, f8);
-                    tessellator.addVertexWithUV(0 + Math.sin((225 - footprint.rotation) * Math.PI / 180.0D) * footprintScale, 0, 0 + Math.cos((225 - footprint.rotation) * Math.PI / 180.0D) * footprintScale, f6, f8);
-                    tessellator.addVertexWithUV(0 + Math.sin((315 - footprint.rotation) * Math.PI / 180.0D) * footprintScale, 0, 0 + Math.cos((315 - footprint.rotation) * Math.PI / 180.0D) * footprintScale, f6, f9);
+                    tessellator.addVertexWithUV(
+                            0 + Math.sin((45 - footprint.rotation) * Math.PI / 180.0D) * footprintScale,
+                            0,
+                            0 + Math.cos((45 - footprint.rotation) * Math.PI / 180.0D) * footprintScale,
+                            f7,
+                            f9);
+                    tessellator.addVertexWithUV(
+                            0 + Math.sin((135 - footprint.rotation) * Math.PI / 180.0D) * footprintScale,
+                            0,
+                            0 + Math.cos((135 - footprint.rotation) * Math.PI / 180.0D) * footprintScale,
+                            f7,
+                            f8);
+                    tessellator.addVertexWithUV(
+                            0 + Math.sin((225 - footprint.rotation) * Math.PI / 180.0D) * footprintScale,
+                            0,
+                            0 + Math.cos((225 - footprint.rotation) * Math.PI / 180.0D) * footprintScale,
+                            f6,
+                            f8);
+                    tessellator.addVertexWithUV(
+                            0 + Math.sin((315 - footprint.rotation) * Math.PI / 180.0D) * footprintScale,
+                            0,
+                            0 + Math.cos((315 - footprint.rotation) * Math.PI / 180.0D) * footprintScale,
+                            f6,
+                            f9);
 
                     tessellator.draw();
                     GL11.glPopMatrix();
@@ -82,12 +96,10 @@ public class FootprintRenderer
         GL11.glPopMatrix();
     }
 
-    public void addFootprint(long chunkKey, Footprint footprint)
-    {
+    public void addFootprint(long chunkKey, Footprint footprint) {
         List<Footprint> footprintList = this.footprints.get(chunkKey);
 
-        if (footprintList == null)
-        {
+        if (footprintList == null) {
             footprintList = new ArrayList<Footprint>();
         }
 
@@ -95,28 +107,24 @@ public class FootprintRenderer
         this.footprints.put(chunkKey, footprintList);
     }
 
-    public void addFootprint(long chunkKey, int dimension, Vector3 position, float rotation, String owner)
-    {
+    public void addFootprint(long chunkKey, int dimension, Vector3 position, float rotation, String owner) {
         this.addFootprint(chunkKey, new Footprint(dimension, position, rotation, owner));
     }
 
-    public void setFootprints(long chunkKey, List<Footprint> prints)
-    {
+    public void setFootprints(long chunkKey, List<Footprint> prints) {
         List<Footprint> footprintList = this.footprints.get(chunkKey);
 
-        if (footprintList == null)
-        {
+        if (footprintList == null) {
             footprintList = new ArrayList<Footprint>();
         }
-        
+
         Iterator<Footprint> i = footprintList.iterator();
-        while (i.hasNext())
-        {
-        	Footprint print = i.next();
-        	if (!print.owner.equals(FMLClientHandler.instance().getClient().thePlayer.getCommandSenderName()))
-        	{
-        		i.remove();
-        	}
+        while (i.hasNext()) {
+            Footprint print = i.next();
+            if (!print.owner.equals(
+                    FMLClientHandler.instance().getClient().thePlayer.getCommandSenderName())) {
+                i.remove();
+            }
         }
 
         footprintList.addAll(prints);

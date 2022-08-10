@@ -21,15 +21,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockOxygenDistributor extends BlockAdvancedTile implements ItemBlockDesc.IBlockShiftDesc
-{
+public class BlockOxygenDistributor extends BlockAdvancedTile implements ItemBlockDesc.IBlockShiftDesc {
     private IIcon iconMachineSide;
     private IIcon iconDistributor;
     private IIcon iconInput;
     private IIcon iconOutput;
 
-    public BlockOxygenDistributor(String assetName)
-    {
+    public BlockOxygenDistributor(String assetName) {
         super(Material.rock);
         this.setHardness(1.0F);
         this.setStepSound(Block.soundTypeMetal);
@@ -38,71 +36,72 @@ public class BlockOxygenDistributor extends BlockAdvancedTile implements ItemBlo
     }
 
     @Override
-    public boolean renderAsNormalBlock()
-    {
+    public boolean renderAsNormalBlock() {
         return false;
     }
 
     @Override
-    public boolean isOpaqueCube()
-    {
+    public boolean isOpaqueCube() {
         return false;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-    {
+    public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         return true;
     }
 
     @Override
-    public int getRenderType()
-    {
+    public int getRenderType() {
         return GalacticraftCore.proxy.getBlockRender(this);
     }
 
     @Override
-    public CreativeTabs getCreativeTabToDisplayOn()
-    {
+    public CreativeTabs getCreativeTabToDisplayOn() {
         return GalacticraftCore.galacticraftBlocksTab;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1IconRegister)
-    {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.iconMachineSide = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "machine_blank");
-        this.iconDistributor = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "machine_distributor_fan");
+        this.iconDistributor =
+                par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "machine_distributor_fan");
         this.iconInput = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "machine_oxygen_input");
         this.iconOutput = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "machine_input");
     }
 
     @Override
-    public boolean onUseWrench(World par1World, int x, int y, int z, EntityPlayer par5EntityPlayer, int side, float hitX, float hitY, float hitZ)
-    {
+    public boolean onUseWrench(
+            World par1World,
+            int x,
+            int y,
+            int z,
+            EntityPlayer par5EntityPlayer,
+            int side,
+            float hitX,
+            float hitY,
+            float hitZ) {
         int change = 0;
 
         // Re-orient the block
-        switch (par1World.getBlockMetadata(x, y, z))
-        {
-        case 0:
-            change = 3;
-            break;
-        case 3:
-            change = 1;
-            break;
-        case 1:
-            change = 2;
-            break;
-        case 2:
-            change = 0;
-            break;
+        switch (par1World.getBlockMetadata(x, y, z)) {
+            case 0:
+                change = 3;
+                break;
+            case 3:
+                change = 1;
+                break;
+            case 1:
+                change = 2;
+                break;
+            case 2:
+                change = 0;
+                break;
         }
 
         TileEntity te = par1World.getTileEntity(x, y, z);
-        if (te instanceof TileBaseUniversalElectrical)
-        {
+        if (te instanceof TileBaseUniversalElectrical) {
             ((TileBaseUniversalElectrical) te).updateFacing();
         }
 
@@ -111,73 +110,61 @@ public class BlockOxygenDistributor extends BlockAdvancedTile implements ItemBlo
     }
 
     @Override
-    public boolean onMachineActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float hitX, float hitY, float hitZ)
-    {
+    public boolean onMachineActivated(
+            World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float hitX, float hitY, float hitZ) {
         entityPlayer.openGui(GalacticraftCore.instance, -1, world, x, y, z);
         return true;
     }
 
     @Override
-    public IIcon getIcon(int side, int metadata)
-    {
-        if (side == 0 || side == 1)
-        {
+    public IIcon getIcon(int side, int metadata) {
+        if (side == 0 || side == 1) {
             return this.iconMachineSide;
-        }
-        else if (side == metadata + 2)
-        {
+        } else if (side == metadata + 2) {
             return this.iconOutput;
-        }
-        else if (side == ForgeDirection.getOrientation(metadata + 2).getOpposite().ordinal())
-        {
+        } else if (side
+                == ForgeDirection.getOrientation(metadata + 2).getOpposite().ordinal()) {
             return this.iconInput;
-        }
-        else
-        {
+        } else {
             return this.iconDistributor;
         }
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
-    {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
         final int angle = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         int change = 0;
 
-        switch (angle)
-        {
-        case 0:
-            change = 3;
-            break;
-        case 1:
-            change = 1;
-            break;
-        case 2:
-            change = 2;
-            break;
-        case 3:
-            change = 0;
-            break;
+        switch (angle) {
+            case 0:
+                change = 3;
+                break;
+            case 1:
+                change = 1;
+                break;
+            case 2:
+                change = 2;
+                break;
+            case 3:
+                change = 0;
+                break;
         }
 
         world.setBlockMetadataWithNotify(x, y, z, change, 3);
     }
 
     @Override
-    public TileEntity createTileEntity(World world, int metadata)
-    {
+    public TileEntity createTileEntity(World world, int metadata) {
         return new TileEntityOxygenDistributor();
     }
 
     @Override
-    public String getShiftDescription(int meta)
-    {
+    public String getShiftDescription(int meta) {
         return GCCoreUtil.translate(this.getUnlocalizedName() + ".description");
     }
 
     @Override
-    public boolean showDescription(int meta)
-    {
+    public boolean showDescription(int meta) {
         return true;
     }
 }

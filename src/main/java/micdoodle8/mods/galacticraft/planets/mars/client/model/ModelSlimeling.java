@@ -5,8 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelSlimeling extends ModelBase
-{
+public class ModelSlimeling extends ModelBase {
     ModelRenderer tail3;
     ModelRenderer tail2;
     ModelRenderer tail1;
@@ -14,8 +13,7 @@ public class ModelSlimeling extends ModelBase
     ModelRenderer neck;
     ModelRenderer head;
 
-    public ModelSlimeling(float scale)
-    {
+    public ModelSlimeling(float scale) {
         this.textureWidth = 256;
         this.textureHeight = 128;
 
@@ -56,8 +54,7 @@ public class ModelSlimeling extends ModelBase
         this.neck.mirror = true;
         this.setRotation(this.neck, 0F, 0F, 0F);
 
-        if (scale > 0)
-        {
+        if (scale > 0) {
             this.head = new ModelRenderer(this, 156, 0);
             this.head.addBox(-3.5F, -14.7F, 1.5F, 7, 7, 7);
             this.head.setRotationPoint(0F, 0F, 0F);
@@ -104,23 +101,21 @@ public class ModelSlimeling extends ModelBase
     }
 
     @Override
-    public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         super.render(entity, par2, par3, par4, par5, par6, par7);
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
         this.bodyMain.render(par7);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
 
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
-    {
+    public void setRotationAngles(
+            float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
         this.tail1.rotateAngleY = MathHelper.cos(par1 * 0.6662F) * 0.2F * par2;
         this.tail2.rotateAngleY = MathHelper.cos(par1 * 0.6662F) * 0.2F * par2;
         this.tail3.rotateAngleY = MathHelper.cos(par1 * 0.6662F) * 0.2F * par2;

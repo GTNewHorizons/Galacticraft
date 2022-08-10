@@ -5,8 +5,7 @@ import net.minecraftforge.fluids.FluidStack;
 /**
  * Implement into entities that can be fueled when placed on fuel docks
  */
-public interface IFuelable
-{
+public interface IFuelable {
     /**
      * Add fuel to the entity
      *

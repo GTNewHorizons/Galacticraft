@@ -2,6 +2,7 @@ package micdoodle8.mods.galacticraft.planets.asteroids.items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 import micdoodle8.mods.galacticraft.api.item.IItemThermal;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
@@ -13,15 +14,20 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-import java.util.List;
-
-public class ItemThermalPadding extends Item implements IItemThermal
-{
-    public static String[] names = { "thermalHelm", "thermalChestplate", "thermalLeggings", "thermalBoots", "thermalHelm0", "thermalChestplate0", "thermalLeggings0", "thermalBoots0" };
+public class ItemThermalPadding extends Item implements IItemThermal {
+    public static String[] names = {
+        "thermalHelm",
+        "thermalChestplate",
+        "thermalLeggings",
+        "thermalBoots",
+        "thermalHelm0",
+        "thermalChestplate0",
+        "thermalLeggings0",
+        "thermalBoots0"
+    };
     protected IIcon[] icons = new IIcon[ItemThermalPadding.names.length];
 
-    public ItemThermalPadding(String assetName)
-    {
+    public ItemThermalPadding(String assetName) {
         super();
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
@@ -31,12 +37,9 @@ public class ItemThermalPadding extends Item implements IItemThermal
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamageForRenderPass(int damage, int pass)
-    {
-        if (pass == 1)
-        {
-            if (this.icons.length > damage + 4)
-            {
+    public IIcon getIconFromDamageForRenderPass(int damage, int pass) {
+        if (pass == 1) {
+            if (this.icons.length > damage + 4) {
                 return this.icons[damage + 4];
             }
         }
@@ -46,63 +49,52 @@ public class ItemThermalPadding extends Item implements IItemThermal
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean requiresMultipleRenderPasses()
-    {
+    public boolean requiresMultipleRenderPasses() {
         return true;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public CreativeTabs getCreativeTab()
-    {
+    public CreativeTabs getCreativeTab() {
         return GalacticraftCore.galacticraftItemsTab;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegister)
-    {
+    public void registerIcons(IIconRegister iconRegister) {
         int i = 0;
 
-        for (String name : ItemThermalPadding.names)
-        {
+        for (String name : ItemThermalPadding.names) {
             this.icons[i++] = iconRegister.registerIcon(AsteroidsModule.TEXTURE_PREFIX + name);
         }
     }
 
     @Override
-    public IIcon getIconFromDamage(int damage)
-    {
-        if (this.icons.length > damage)
-        {
+    public IIcon getIconFromDamage(int damage) {
+        if (this.icons.length > damage) {
             return this.icons[damage];
         }
 
         return super.getIconFromDamage(damage);
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
-    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List)
-    {
-        for (int i = 0; i < ItemThermalPadding.names.length / 2; i++)
-        {
+    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+        for (int i = 0; i < ItemThermalPadding.names.length / 2; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack par1ItemStack)
-    {
-        if (this.icons.length > par1ItemStack.getItemDamage())
-        {
+    public String getUnlocalizedName(ItemStack par1ItemStack) {
+        if (this.icons.length > par1ItemStack.getItemDamage()) {
             return "item." + ItemThermalPadding.names[par1ItemStack.getItemDamage()];
         }
 
@@ -110,20 +102,17 @@ public class ItemThermalPadding extends Item implements IItemThermal
     }
 
     @Override
-    public int getMetadata(int par1)
-    {
+    public int getMetadata(int par1) {
         return par1;
     }
 
     @Override
-    public int getThermalStrength()
-    {
+    public int getThermalStrength() {
         return 1;
     }
 
     @Override
-    public boolean isValidForSlot(ItemStack stack, int armorSlot)
-    {
+    public boolean isValidForSlot(ItemStack stack, int armorSlot) {
         return stack.getItemDamage() == armorSlot;
     }
 }

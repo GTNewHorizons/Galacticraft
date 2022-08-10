@@ -1,14 +1,16 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.tile;
 
 import cpw.mods.fml.relauncher.Side;
+import java.util.Iterator;
+import java.util.List;
 import micdoodle8.mods.galacticraft.api.item.IKeyable;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityAdvanced;
+import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.BlockTier3TreasureChest;
-import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerChest;
@@ -19,11 +21,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 
-import java.util.Iterator;
-import java.util.List;
-
-public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced implements IInventory, IKeyable
-{
+public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced implements IInventory, IKeyable {
     private ItemStack[] chestContents = new ItemStack[36];
 
     /**
@@ -76,13 +74,11 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
 
     public int tier = 3;
 
-    public TileEntityTreasureChestAsteroids()
-    {
+    public TileEntityTreasureChestAsteroids() {
         this(3);
     }
 
-    public TileEntityTreasureChestAsteroids(int tier)
-    {
+    public TileEntityTreasureChestAsteroids(int tier) {
         this.tier = tier;
     }
 
@@ -90,8 +86,7 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
      * Returns the number of slots in the inventory.
      */
     @Override
-    public int getSizeInventory()
-    {
+    public int getSizeInventory() {
         return 27;
     }
 
@@ -99,8 +94,7 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
      * Returns the stack in slot i
      */
     @Override
-    public ItemStack getStackInSlot(int par1)
-    {
+    public ItemStack getStackInSlot(int par1) {
         return this.chestContents[par1];
     }
 
@@ -109,34 +103,26 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
      * (second arg) of items and returns them in a new stack.
      */
     @Override
-    public ItemStack decrStackSize(int par1, int par2)
-    {
-        if (this.chestContents[par1] != null)
-        {
+    public ItemStack decrStackSize(int par1, int par2) {
+        if (this.chestContents[par1] != null) {
             ItemStack itemstack;
 
-            if (this.chestContents[par1].stackSize <= par2)
-            {
+            if (this.chestContents[par1].stackSize <= par2) {
                 itemstack = this.chestContents[par1];
                 this.chestContents[par1] = null;
                 this.markDirty();
                 return itemstack;
-            }
-            else
-            {
+            } else {
                 itemstack = this.chestContents[par1].splitStack(par2);
 
-                if (this.chestContents[par1].stackSize == 0)
-                {
+                if (this.chestContents[par1].stackSize == 0) {
                     this.chestContents[par1] = null;
                 }
 
                 this.markDirty();
                 return itemstack;
             }
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
@@ -147,16 +133,12 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
      * GUI.
      */
     @Override
-    public ItemStack getStackInSlotOnClosing(int par1)
-    {
-        if (this.chestContents[par1] != null)
-        {
+    public ItemStack getStackInSlotOnClosing(int par1) {
+        if (this.chestContents[par1] != null) {
             final ItemStack itemstack = this.chestContents[par1];
             this.chestContents[par1] = null;
             return itemstack;
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
@@ -166,12 +148,10 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
      * crafting or armor sections).
      */
     @Override
-    public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
-    {
+    public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
         this.chestContents[par1] = par2ItemStack;
 
-        if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
-        {
+        if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit()) {
             par2ItemStack.stackSize = this.getInventoryStackLimit();
         }
 
@@ -182,21 +162,18 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
      * Reads a tile entity from NBT.
      */
     @Override
-    public void readFromNBT(NBTTagCompound nbt)
-    {
+    public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
         this.locked = nbt.getBoolean("isLocked");
         this.tier = nbt.getInteger("tier");
         final NBTTagList nbttaglist = nbt.getTagList("Items", 10);
         this.chestContents = new ItemStack[this.getSizeInventory()];
 
-        for (int i = 0; i < nbttaglist.tagCount(); ++i)
-        {
+        for (int i = 0; i < nbttaglist.tagCount(); ++i) {
             final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
             final int j = nbttagcompound1.getByte("Slot") & 255;
 
-            if (j < this.chestContents.length)
-            {
+            if (j < this.chestContents.length) {
                 this.chestContents[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
             }
         }
@@ -206,17 +183,14 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
      * Writes a tile entity to NBT.
      */
     @Override
-    public void writeToNBT(NBTTagCompound nbt)
-    {
+    public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         nbt.setBoolean("isLocked", this.locked);
         nbt.setInteger("tier", this.tier);
         final NBTTagList nbttaglist = new NBTTagList();
 
-        for (int i = 0; i < this.chestContents.length; ++i)
-        {
-            if (this.chestContents[i] != null)
-            {
+        for (int i = 0; i < this.chestContents.length; ++i) {
+            if (this.chestContents[i] != null) {
                 final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
                 nbttagcompound1.setByte("Slot", (byte) i);
                 this.chestContents[i].writeToNBT(nbttagcompound1);
@@ -232,8 +206,7 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
      * 64, possibly will be extended. *Isn't this more of a set than a get?*
      */
     @Override
-    public int getInventoryStackLimit()
-    {
+    public int getInventoryStackLimit() {
         return 64;
     }
 
@@ -242,9 +215,9 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
      * with Container
      */
     @Override
-    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
-    {
-        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) == this && par1EntityPlayer.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
+    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
+        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) == this
+                && par1EntityPlayer.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
     }
 
     /**
@@ -253,48 +226,38 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
      * check
      */
     @Override
-    public void updateContainingBlockInfo()
-    {
+    public void updateContainingBlockInfo() {
         super.updateContainingBlockInfo();
         this.adjacentChestChecked = false;
     }
 
-    private void func_90009_a(TileEntityTreasureChestAsteroids par1TileEntityChest, int par2)
-    {
-        if (par1TileEntityChest.isInvalid())
-        {
+    private void func_90009_a(TileEntityTreasureChestAsteroids par1TileEntityChest, int par2) {
+        if (par1TileEntityChest.isInvalid()) {
             this.adjacentChestChecked = false;
-        }
-        else if (this.adjacentChestChecked)
-        {
-            switch (par2)
-            {
-            case 0:
-                if (this.adjacentChestZPos != par1TileEntityChest)
-                {
-                    this.adjacentChestChecked = false;
-                }
+        } else if (this.adjacentChestChecked) {
+            switch (par2) {
+                case 0:
+                    if (this.adjacentChestZPos != par1TileEntityChest) {
+                        this.adjacentChestChecked = false;
+                    }
 
-                break;
-            case 1:
-                if (this.adjacentChestXNeg != par1TileEntityChest)
-                {
-                    this.adjacentChestChecked = false;
-                }
+                    break;
+                case 1:
+                    if (this.adjacentChestXNeg != par1TileEntityChest) {
+                        this.adjacentChestChecked = false;
+                    }
 
-                break;
-            case 2:
-                if (this.adjacentChestZNeg != par1TileEntityChest)
-                {
-                    this.adjacentChestChecked = false;
-                }
+                    break;
+                case 2:
+                    if (this.adjacentChestZNeg != par1TileEntityChest) {
+                        this.adjacentChestChecked = false;
+                    }
 
-                break;
-            case 3:
-                if (this.adjacentChestXPos != par1TileEntityChest)
-                {
-                    this.adjacentChestChecked = false;
-                }
+                    break;
+                case 3:
+                    if (this.adjacentChestXPos != par1TileEntityChest) {
+                        this.adjacentChestChecked = false;
+                    }
             }
         }
     }
@@ -303,60 +266,53 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
      * Performs the check for adjacent chests to determine if this chest is
      * double or not.
      */
-    public void checkForAdjacentChests()
-    {
-        if (!this.adjacentChestChecked)
-        {
+    public void checkForAdjacentChests() {
+        if (!this.adjacentChestChecked) {
             this.adjacentChestChecked = true;
             this.adjacentChestZNeg = null;
             this.adjacentChestXPos = null;
             this.adjacentChestXNeg = null;
             this.adjacentChestZPos = null;
 
-            if (this.func_94044_a(this.xCoord - 1, this.yCoord, this.zCoord))
-            {
-                this.adjacentChestXNeg = (TileEntityTreasureChestAsteroids) this.worldObj.getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
+            if (this.func_94044_a(this.xCoord - 1, this.yCoord, this.zCoord)) {
+                this.adjacentChestXNeg = (TileEntityTreasureChestAsteroids)
+                        this.worldObj.getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
             }
 
-            if (this.func_94044_a(this.xCoord + 1, this.yCoord, this.zCoord))
-            {
-                this.adjacentChestXPos = (TileEntityTreasureChestAsteroids) this.worldObj.getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
+            if (this.func_94044_a(this.xCoord + 1, this.yCoord, this.zCoord)) {
+                this.adjacentChestXPos = (TileEntityTreasureChestAsteroids)
+                        this.worldObj.getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
             }
 
-            if (this.func_94044_a(this.xCoord, this.yCoord, this.zCoord - 1))
-            {
-                this.adjacentChestZNeg = (TileEntityTreasureChestAsteroids) this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
+            if (this.func_94044_a(this.xCoord, this.yCoord, this.zCoord - 1)) {
+                this.adjacentChestZNeg = (TileEntityTreasureChestAsteroids)
+                        this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
             }
 
-            if (this.func_94044_a(this.xCoord, this.yCoord, this.zCoord + 1))
-            {
-                this.adjacentChestZPos = (TileEntityTreasureChestAsteroids) this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
+            if (this.func_94044_a(this.xCoord, this.yCoord, this.zCoord + 1)) {
+                this.adjacentChestZPos = (TileEntityTreasureChestAsteroids)
+                        this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
             }
 
-            if (this.adjacentChestZNeg != null)
-            {
+            if (this.adjacentChestZNeg != null) {
                 this.adjacentChestZNeg.func_90009_a(this, 0);
             }
 
-            if (this.adjacentChestZPos != null)
-            {
+            if (this.adjacentChestZPos != null) {
                 this.adjacentChestZPos.func_90009_a(this, 2);
             }
 
-            if (this.adjacentChestXPos != null)
-            {
+            if (this.adjacentChestXPos != null) {
                 this.adjacentChestXPos.func_90009_a(this, 1);
             }
 
-            if (this.adjacentChestXNeg != null)
-            {
+            if (this.adjacentChestXNeg != null) {
                 this.adjacentChestXNeg.func_90009_a(this, 3);
             }
         }
     }
 
-    private boolean func_94044_a(int par1, int par2, int par3)
-    {
+    private boolean func_94044_a(int par1, int par2, int par3) {
         final Block block = this.worldObj.getBlock(par1, par2, par3);
         return block != null && block instanceof BlockTier3TreasureChest;
     }
@@ -367,30 +323,38 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
      * inside its implementation.
      */
     @Override
-    public void updateEntity()
-    {
+    public void updateEntity() {
         super.updateEntity();
         this.checkForAdjacentChests();
         ++this.ticksSinceSync;
         float f;
 
-        if (!this.worldObj.isRemote && this.numUsingPlayers != 0 && (this.ticksSinceSync + this.xCoord + this.yCoord + this.zCoord) % 200 == 0)
-        {
+        if (!this.worldObj.isRemote
+                && this.numUsingPlayers != 0
+                && (this.ticksSinceSync + this.xCoord + this.yCoord + this.zCoord) % 200 == 0) {
             this.numUsingPlayers = 0;
             f = 5.0F;
-            final List<?> list = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(this.xCoord - f, this.yCoord - f, this.zCoord - f, this.xCoord + 1 + f, this.yCoord + 1 + f, this.zCoord + 1 + f));
+            final List<?> list = this.worldObj.getEntitiesWithinAABB(
+                    EntityPlayer.class,
+                    AxisAlignedBB.getBoundingBox(
+                            this.xCoord - f,
+                            this.yCoord - f,
+                            this.zCoord - f,
+                            this.xCoord + 1 + f,
+                            this.yCoord + 1 + f,
+                            this.zCoord + 1 + f));
             final Iterator<?> iterator = list.iterator();
 
-            while (iterator.hasNext())
-            {
+            while (iterator.hasNext()) {
                 final EntityPlayer entityplayer = (EntityPlayer) iterator.next();
 
-                if (entityplayer.openContainer instanceof ContainerChest)
-                {
-                    final IInventory iinventory = ((ContainerChest) entityplayer.openContainer).getLowerChestInventory();
+                if (entityplayer.openContainer instanceof ContainerChest) {
+                    final IInventory iinventory =
+                            ((ContainerChest) entityplayer.openContainer).getLowerChestInventory();
 
-                    if (iinventory == this || iinventory instanceof InventoryLargeChest && ((InventoryLargeChest) iinventory).isPartOfLargeChest(this))
-                    {
+                    if (iinventory == this
+                            || iinventory instanceof InventoryLargeChest
+                                    && ((InventoryLargeChest) iinventory).isPartOfLargeChest(this)) {
                         ++this.numUsingPlayers;
                     }
                 }
@@ -401,64 +365,62 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
         f = 0.05F;
         double d0;
 
-        if (this.numUsingPlayers > 0 && this.lidAngle == 0.0F && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null)
-        {
+        if (this.numUsingPlayers > 0
+                && this.lidAngle == 0.0F
+                && this.adjacentChestZNeg == null
+                && this.adjacentChestXNeg == null) {
             double d1 = this.xCoord + 0.5D;
             d0 = this.zCoord + 0.5D;
 
-            if (this.adjacentChestZPos != null)
-            {
+            if (this.adjacentChestZPos != null) {
                 d0 += 0.5D;
             }
 
-            if (this.adjacentChestXPos != null)
-            {
+            if (this.adjacentChestXPos != null) {
                 d1 += 0.5D;
             }
 
-            this.worldObj.playSoundEffect(d1, this.yCoord + 0.5D, d0, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.6F);
+            this.worldObj.playSoundEffect(
+                    d1, this.yCoord + 0.5D, d0, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.6F);
         }
 
-        if (this.numUsingPlayers == 0 && this.lidAngle > 0.0F || this.numUsingPlayers > 0 && this.lidAngle < 1.0F)
-        {
+        if (this.numUsingPlayers == 0 && this.lidAngle > 0.0F || this.numUsingPlayers > 0 && this.lidAngle < 1.0F) {
             final float f1 = this.lidAngle;
 
-            if (this.numUsingPlayers > 0)
-            {
+            if (this.numUsingPlayers > 0) {
                 this.lidAngle += f;
-            }
-            else
-            {
+            } else {
                 this.lidAngle -= f;
             }
 
-            if (this.lidAngle > 1.0F)
-            {
+            if (this.lidAngle > 1.0F) {
                 this.lidAngle = 1.0F;
             }
 
             final float f2 = 0.5F;
 
-            if (this.lidAngle < f2 && f1 >= f2 && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null)
-            {
+            if (this.lidAngle < f2 && f1 >= f2 && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null) {
                 d0 = this.xCoord + 0.5D;
                 double d2 = this.zCoord + 0.5D;
 
-                if (this.adjacentChestZPos != null)
-                {
+                if (this.adjacentChestZPos != null) {
                     d2 += 0.5D;
                 }
 
-                if (this.adjacentChestXPos != null)
-                {
+                if (this.adjacentChestXPos != null) {
                     d0 += 0.5D;
                 }
 
-                this.worldObj.playSoundEffect(d0, this.yCoord + 0.5D, d2, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.6F);
+                this.worldObj.playSoundEffect(
+                        d0,
+                        this.yCoord + 0.5D,
+                        d2,
+                        "random.chestclosed",
+                        0.5F,
+                        this.worldObj.rand.nextFloat() * 0.1F + 0.6F);
             }
 
-            if (this.lidAngle < 0.0F)
-            {
+            if (this.lidAngle < 0.0F) {
                 this.lidAngle = 0.0F;
             }
         }
@@ -469,48 +431,41 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
      * argument, see World.sendClientEvent
      */
     @Override
-    public boolean receiveClientEvent(int par1, int par2)
-    {
-        if (par1 == 1)
-        {
+    public boolean receiveClientEvent(int par1, int par2) {
+        if (par1 == 1) {
             this.numUsingPlayers = par2;
             return true;
-        }
-        else
-        {
+        } else {
             return super.receiveClientEvent(par1, par2);
         }
     }
 
     @Override
-    public void openInventory()
-    {
-        if (this.numUsingPlayers < 0)
-        {
+    public void openInventory() {
+        if (this.numUsingPlayers < 0) {
             this.numUsingPlayers = 0;
         }
 
         ++this.numUsingPlayers;
-        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.numUsingPlayers);
+        this.worldObj.addBlockEvent(
+                this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.numUsingPlayers);
         this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
         this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord - 1, this.zCoord, this.getBlockType());
     }
 
     @Override
-    public void closeInventory()
-    {
-        if (this.getBlockType() != null && this.getBlockType() instanceof BlockTier3TreasureChest)
-        {
+    public void closeInventory() {
+        if (this.getBlockType() != null && this.getBlockType() instanceof BlockTier3TreasureChest) {
             --this.numUsingPlayers;
-            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.numUsingPlayers);
+            this.worldObj.addBlockEvent(
+                    this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.numUsingPlayers);
             this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
             this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord - 1, this.zCoord, this.getBlockType());
         }
     }
 
     @Override
-    public boolean hasCustomInventoryName()
-    {
+    public boolean hasCustomInventoryName() {
         return true;
     }
 
@@ -518,64 +473,50 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
      * invalidates a tile entity
      */
     @Override
-    public void invalidate()
-    {
+    public void invalidate() {
         super.invalidate();
         this.updateContainingBlockInfo();
         this.checkForAdjacentChests();
     }
 
     @Override
-    public String getInventoryName()
-    {
+    public String getInventoryName() {
         return GCCoreUtil.translate("container.treasurechest.name");
     }
 
     @Override
-    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
-    {
+    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack) {
         return true;
     }
 
     @Override
-    public int getTierOfKeyRequired()
-    {
+    public int getTierOfKeyRequired() {
         return this.tier;
     }
 
     @Override
-    public boolean onValidKeyActivated(EntityPlayer player, ItemStack key, int face)
-    {
-        if (this.locked)
-        {
+    public boolean onValidKeyActivated(EntityPlayer player, ItemStack key, int face) {
+        if (this.locked) {
             this.locked = false;
 
-            if (this.worldObj.isRemote)
-            {
+            if (this.worldObj.isRemote) {
                 // player.playSound("galacticraft.player.unlockchest", 1.0F,
                 // 1.0F);
-            }
-            else
-            {
-                if (this.adjacentChestXNeg != null)
-                {
+            } else {
+                if (this.adjacentChestXNeg != null) {
                     this.adjacentChestXNeg.locked = false;
                 }
-                if (this.adjacentChestXPos != null)
-                {
+                if (this.adjacentChestXPos != null) {
                     this.adjacentChestXPos.locked = false;
                 }
-                if (this.adjacentChestZNeg != null)
-                {
+                if (this.adjacentChestZNeg != null) {
                     this.adjacentChestZNeg.locked = false;
                 }
-                if (this.adjacentChestZPos != null)
-                {
+                if (this.adjacentChestZPos != null) {
                     this.adjacentChestZPos.locked = false;
                 }
 
-                if (!player.capabilities.isCreativeMode && --player.inventory.getCurrentItem().stackSize == 0)
-                {
+                if (!player.capabilities.isCreativeMode && --player.inventory.getCurrentItem().stackSize == 0) {
                     player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
                 }
 
@@ -587,13 +528,11 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
     }
 
     @Override
-    public boolean onActivatedWithoutKey(EntityPlayer player, int face)
-    {
-        if (this.locked)
-        {
-            if (player.worldObj.isRemote)
-            {
-                GalacticraftCore.packetPipeline.sendToServer(new PacketSimple(EnumSimplePacket.S_ON_FAILED_CHEST_UNLOCK, new Object[] { this.getTierOfKeyRequired() }));
+    public boolean onActivatedWithoutKey(EntityPlayer player, int face) {
+        if (this.locked) {
+            if (player.worldObj.isRemote) {
+                GalacticraftCore.packetPipeline.sendToServer(new PacketSimple(
+                        EnumSimplePacket.S_ON_FAILED_CHEST_UNLOCK, new Object[] {this.getTierOfKeyRequired()}));
             }
             return true;
         }
@@ -602,26 +541,22 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
     }
 
     @Override
-    public boolean canBreak()
-    {
+    public boolean canBreak() {
         return false;
     }
 
     @Override
-    public double getPacketRange()
-    {
+    public double getPacketRange() {
         return 20.0D;
     }
 
     @Override
-    public int getPacketCooldown()
-    {
+    public int getPacketCooldown() {
         return 3;
     }
 
     @Override
-    public boolean isNetworkedTile()
-    {
+    public boolean isNetworkedTile() {
         return true;
     }
 }

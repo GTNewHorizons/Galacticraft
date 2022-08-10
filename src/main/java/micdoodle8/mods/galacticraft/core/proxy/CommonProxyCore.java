@@ -14,61 +14,43 @@ import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
-public class CommonProxyCore
-{
+public class CommonProxyCore {
     public IPlayerServer player = new PlayerServer();
 
-    public void preInit(FMLPreInitializationEvent event)
-    {
-    }
+    public void preInit(FMLPreInitializationEvent event) {}
 
-    public void init(FMLInitializationEvent event)
-    {
-    }
+    public void init(FMLInitializationEvent event) {}
 
-    public void postInit(FMLPostInitializationEvent event)
-    {
-    }
+    public void postInit(FMLPostInitializationEvent event) {}
 
-    public int getBlockRender(Block blockID)
-    {
+    public int getBlockRender(Block blockID) {
         return -1;
     }
 
-    public int getTitaniumArmorRenderIndex()
-    {
+    public int getTitaniumArmorRenderIndex() {
         return 0;
     }
 
-    public int getSensorArmorRenderIndex()
-    {
+    public int getSensorArmorRenderIndex() {
         return 0;
     }
 
-    public World getClientWorld()
-    {
+    public World getClientWorld() {
         return null;
     }
 
-    public void spawnParticle(String particleID, Vector3 position, Vector3 motion, Object[] otherInfo)
-    {
+    public void spawnParticle(String particleID, Vector3 position, Vector3 motion, Object[] otherInfo) {}
+
+    public World getWorldForID(int dimensionID) {
+        MinecraftServer theServer = FMLCommonHandler.instance().getMinecraftServerInstance();
+        if (theServer == null) return null;
+        return theServer.worldServerForDimension(dimensionID);
     }
 
-    public World getWorldForID(int dimensionID)
-    {
-        MinecraftServer theServer = FMLCommonHandler.instance().getMinecraftServerInstance(); 
-    	if (theServer == null) return null;
-    	return theServer.worldServerForDimension(dimensionID);
-    }
-
-    public EntityPlayer getPlayerFromNetHandler(INetHandler handler)
-    {
-        if (handler instanceof NetHandlerPlayServer)
-        {
+    public EntityPlayer getPlayerFromNetHandler(INetHandler handler) {
+        if (handler instanceof NetHandlerPlayServer) {
             return ((NetHandlerPlayServer) handler).playerEntity;
-        }
-        else
-        {
+        } else {
             return null;
         }
     }

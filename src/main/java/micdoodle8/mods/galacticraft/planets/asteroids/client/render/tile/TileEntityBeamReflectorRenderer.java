@@ -10,24 +10,25 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
-
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityBeamReflectorRenderer extends TileEntitySpecialRenderer
-{
-    public static final ResourceLocation reflectorTexture = new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/model/beamReflector.png");
+public class TileEntityBeamReflectorRenderer extends TileEntitySpecialRenderer {
+    public static final ResourceLocation reflectorTexture =
+            new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/model/beamReflector.png");
     public static IModelCustom reflectorModel;
 
-    public TileEntityBeamReflectorRenderer()
-    {
-        TileEntityBeamReflectorRenderer.reflectorModel = AdvancedModelLoader.loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/reflector.obj"));
+    public TileEntityBeamReflectorRenderer() {
+        TileEntityBeamReflectorRenderer.reflectorModel = AdvancedModelLoader.loadModel(
+                new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/reflector.obj"));
     }
 
-    public void renderModelAt(TileEntityBeamReflector tileEntity, double d, double d1, double d2, float f)
-    {
+    public void renderModelAt(TileEntityBeamReflector tileEntity, double d, double d1, double d2, float f) {
         // Texture file
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TileEntityBeamReflectorRenderer.reflectorTexture);
+        FMLClientHandler.instance()
+                .getClient()
+                .renderEngine
+                .bindTexture(TileEntityBeamReflectorRenderer.reflectorTexture);
 
         GL11.glPushMatrix();
 
@@ -53,8 +54,7 @@ public class TileEntityBeamReflectorRenderer extends TileEntitySpecialRenderer
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double var2, double var4, double var6, float var8)
-    {
+    public void renderTileEntityAt(TileEntity tileEntity, double var2, double var4, double var6, float var8) {
         this.renderModelAt((TileEntityBeamReflector) tileEntity, var2, var4, var6, var8);
     }
 }

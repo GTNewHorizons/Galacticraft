@@ -37,35 +37,30 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import org.lwjgl.opengl.GL11;
 
-public class EventHandlerMars
-{
+public class EventHandlerMars {
     @SubscribeEvent
-    public void onLivingDeath(LivingDeathEvent event)
-    {
-        if (event.source.damageType.equals("slimeling") && event.source instanceof EntityDamageSource)
-        {
+    public void onLivingDeath(LivingDeathEvent event) {
+        if (event.source.damageType.equals("slimeling") && event.source instanceof EntityDamageSource) {
             EntityDamageSource source = (EntityDamageSource) event.source;
 
-            if (source.getEntity() instanceof EntitySlimeling && !source.getEntity().worldObj.isRemote)
-            {
+            if (source.getEntity() instanceof EntitySlimeling && !source.getEntity().worldObj.isRemote) {
                 ((EntitySlimeling) source.getEntity()).kills++;
             }
         }
     }
 
     @SubscribeEvent
-    public void onLivingAttacked(LivingAttackEvent event)
-    {
-        if (!event.entity.isEntityInvulnerable() && !event.entity.worldObj.isRemote && event.entityLiving.getHealth() <= 0.0F && !(event.source.isFireDamage() && event.entityLiving.isPotionActive(Potion.fireResistance)))
-        {
+    public void onLivingAttacked(LivingAttackEvent event) {
+        if (!event.entity.isEntityInvulnerable()
+                && !event.entity.worldObj.isRemote
+                && event.entityLiving.getHealth() <= 0.0F
+                && !(event.source.isFireDamage() && event.entityLiving.isPotionActive(Potion.fireResistance))) {
             Entity entity = event.source.getEntity();
 
-            if (entity instanceof EntitySlimeling)
-            {
+            if (entity instanceof EntitySlimeling) {
                 EntitySlimeling entitywolf = (EntitySlimeling) entity;
 
-                if (entitywolf.isTamed())
-                {
+                if (entitywolf.isTamed()) {
                     event.entityLiving.recentlyHit = 100;
                     event.entityLiving.attackingPlayer = null;
                 }
@@ -74,29 +69,22 @@ public class EventHandlerMars
     }
 
     @SubscribeEvent
-    public void onPlayerWakeUp(EventWakePlayer event)
-    {
+    public void onPlayerWakeUp(EventWakePlayer event) {
         ChunkCoordinates c = event.entityPlayer.playerLocation;
         Block blockID = event.entityPlayer.worldObj.getBlock(c.posX, c.posY, c.posZ);
         int metadata = event.entityPlayer.worldObj.getBlockMetadata(c.posX, c.posY, c.posZ);
 
-        if (blockID == MarsBlocks.machine && metadata >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA)
-        {
-            if (!event.flag1 && event.flag2 && event.flag3)
-            {
+        if (blockID == MarsBlocks.machine && metadata >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) {
+            if (!event.flag1 && event.flag2 && event.flag3) {
                 event.result = EnumStatus.NOT_POSSIBLE_HERE;
-            }
-            else if (!event.flag1 && !event.flag2 && event.flag3)
-            {
-                if (!event.entityPlayer.worldObj.isRemote)
-                {
+            } else if (!event.flag1 && !event.flag2 && event.flag3) {
+                if (!event.entityPlayer.worldObj.isRemote) {
                     event.entityPlayer.heal(5.0F);
                     GCPlayerStats.get((EntityPlayerMP) event.entityPlayer).cryogenicChamberCooldown = 6000;
 
-                    WorldServer ws = (WorldServer)event.entityPlayer.worldObj;
+                    WorldServer ws = (WorldServer) event.entityPlayer.worldObj;
                     ws.updateAllPlayersSleepingFlag();
-                    if (ws.areAllPlayersAsleep() && ws.getGameRules().getGameRuleBooleanValue("doDaylightCycle"))
-                    {
+                    if (ws.areAllPlayersAsleep() && ws.getGameRules().getGameRuleBooleanValue("doDaylightCycle")) {
                         WorldUtil.setNextMorning(ws);
                     }
                 }
@@ -106,19 +94,15 @@ public class EventHandlerMars
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public void onPlayerRotate(RotatePlayerEvent event)
-    {
+    public void onPlayerRotate(RotatePlayerEvent event) {
         ChunkCoordinates c = event.entityPlayer.playerLocation;
         for (int x = -1; x < 2; x++)
-            for (int z = -1; z < 2; z++)
-            {
+            for (int z = -1; z < 2; z++) {
                 if (x * z != 0) continue;
                 Block block = event.entityPlayer.worldObj.getBlock(c.posX + x, c.posY, c.posZ + z);
-                if (block == MarsBlocks.machine)
-                {
+                if (block == MarsBlocks.machine) {
                     int metadata = event.entityPlayer.worldObj.getBlockMetadata(c.posX + x, c.posY, c.posZ + z);
-                    if (metadata >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA)
-                    {
+                    if (metadata >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) {
                         event.shouldRotate = true;
                         event.vanillaOverride = true;
                         return;
@@ -130,22 +114,18 @@ public class EventHandlerMars
     private WorldGenerator eggGenerator;
 
     @SubscribeEvent
-    public void onPlanetDecorated(GCCoreEventPopulate.Post event)
-    {
-        if (this.eggGenerator == null)
-        {
+    public void onPlanetDecorated(GCCoreEventPopulate.Post event) {
+        if (this.eggGenerator == null) {
             this.eggGenerator = new WorldGenEggs(MarsBlocks.rock);
         }
 
-        if (event.worldObj.provider instanceof WorldProviderMars)
-        {
+        if (event.worldObj.provider instanceof WorldProviderMars) {
             int eggsPerChunk = 2;
             int x;
             int y;
             int z;
 
-            for (int eggCount = 0; eggCount < eggsPerChunk; ++eggCount)
-            {
+            for (int eggCount = 0; eggCount < eggsPerChunk; ++eggCount) {
                 x = event.chunkX + event.rand.nextInt(16) + 8;
                 y = event.rand.nextInt(128);
                 z = event.chunkZ + event.rand.nextInt(16) + 8;
@@ -156,78 +136,74 @@ public class EventHandlerMars
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public void orientCamera(OrientCameraEvent event)
-    {
+    public void orientCamera(OrientCameraEvent event) {
         EntityPlayer entity = Minecraft.getMinecraft().thePlayer;
 
-        if (entity != null)
-        {
+        if (entity != null) {
             int x = MathHelper.floor_double(entity.posX);
             int y = MathHelper.floor_double(entity.posY);
             int z = MathHelper.floor_double(entity.posZ);
             TileEntity tile = Minecraft.getMinecraft().theWorld.getTileEntity(x, y - 1, z);
 
-            if (tile instanceof TileEntityMulti)
-            {
-               	tile = ((TileEntityMulti)tile).getMainBlockTile();
+            if (tile instanceof TileEntityMulti) {
+                tile = ((TileEntityMulti) tile).getMainBlockTile();
             }
 
-            if (tile instanceof TileEntityCryogenicChamber)
-            {
+            if (tile instanceof TileEntityCryogenicChamber) {
                 entity.rotationPitch = 0;
 
-                switch (tile.getBlockMetadata() & 3)
-                {
-                case 0:
-                    GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
-                    GL11.glTranslatef(-0.4F, -0.5F, 4.1F);
-                    GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
-                    entity.rotationYaw = 0;
-                    entity.rotationYawHead = 320;
-                    break;
-                case 1:
-                    GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
-                    GL11.glTranslatef(0, -0.5F, 4.1F);
-                    GL11.glRotatef(90, 0.0F, 1.0F, 0.0F);
-                    entity.rotationYaw = 0;
-                    entity.rotationYawHead = 45;
-                    break;
-                case 2:
-                    GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
-                    GL11.glTranslatef(0, -0.5F, 4.1F);
-                    GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
-                    entity.rotationYaw = 0;
-                    entity.rotationYawHead = 45;
-                    break;
-                case 3:
-                    GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
-                    GL11.glTranslatef(0.0F, -0.5F, 4.1F);
-                    entity.rotationYaw = 0;
-                    entity.rotationYawHead = 335;
-                    break;
+                switch (tile.getBlockMetadata() & 3) {
+                    case 0:
+                        GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
+                        GL11.glTranslatef(-0.4F, -0.5F, 4.1F);
+                        GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
+                        entity.rotationYaw = 0;
+                        entity.rotationYawHead = 320;
+                        break;
+                    case 1:
+                        GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
+                        GL11.glTranslatef(0, -0.5F, 4.1F);
+                        GL11.glRotatef(90, 0.0F, 1.0F, 0.0F);
+                        entity.rotationYaw = 0;
+                        entity.rotationYawHead = 45;
+                        break;
+                    case 2:
+                        GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
+                        GL11.glTranslatef(0, -0.5F, 4.1F);
+                        GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
+                        entity.rotationYaw = 0;
+                        entity.rotationYawHead = 45;
+                        break;
+                    case 3:
+                        GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
+                        GL11.glTranslatef(0.0F, -0.5F, 4.1F);
+                        entity.rotationYaw = 0;
+                        entity.rotationYawHead = 335;
+                        break;
                 }
             }
         }
     }
 
     @SubscribeEvent
-    public void onLandingPadRemoved(EventLandingPadRemoval event)
-    {
+    public void onLandingPadRemoved(EventLandingPadRemoval event) {
         TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
 
-        if (tile instanceof IFuelDock)
-        {
+        if (tile instanceof IFuelDock) {
             IFuelDock dock = (IFuelDock) tile;
 
-            for (ILandingPadAttachable connectedTile : dock.getConnectedTiles())
-            {
-                if (connectedTile instanceof TileEntityLaunchController)
-                {
-                    final TileEntityLaunchController launchController = (TileEntityLaunchController) event.world.getTileEntity(((TileEntityLaunchController) connectedTile).xCoord, ((TileEntityLaunchController) connectedTile).yCoord, ((TileEntityLaunchController) connectedTile).zCoord);
-                    if (launchController.getEnergyStoredGC() > 0.0F && launchController.launchPadRemovalDisabled && !launchController.getDisabled(0))
-                    {
-                    	event.allow = false;
-                    	return;
+            for (ILandingPadAttachable connectedTile : dock.getConnectedTiles()) {
+                if (connectedTile instanceof TileEntityLaunchController) {
+                    final TileEntityLaunchController launchController =
+                            (TileEntityLaunchController) event.world.getTileEntity(
+                                    ((TileEntityLaunchController) connectedTile).xCoord,
+                                    ((TileEntityLaunchController) connectedTile).yCoord,
+                                    ((TileEntityLaunchController) connectedTile).zCoord);
+                    if (launchController.getEnergyStoredGC() > 0.0F
+                            && launchController.launchPadRemovalDisabled
+                            && !launchController.getDisabled(0)) {
+                        event.allow = false;
+                        return;
                     }
                     break;
                 }

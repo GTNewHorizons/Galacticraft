@@ -1,12 +1,7 @@
 package micdoodle8.mods.galacticraft.core.mixinplugin;
 
-import net.minecraft.launchwrapper.Launch;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.spongepowered.asm.lib.tree.ClassNode;
-import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
-import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
-import ru.timeconqueror.spongemixins.MinecraftURLClassPath;
+import static java.nio.file.Files.walk;
+import static micdoodle8.mods.galacticraft.core.mixinplugin.TargetedMod.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,9 +12,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static java.nio.file.Files.walk;
-import static micdoodle8.mods.galacticraft.core.mixinplugin.TargetedMod.*;
+import net.minecraft.launchwrapper.Launch;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.spongepowered.asm.lib.tree.ClassNode;
+import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
+import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
+import ru.timeconqueror.spongemixins.MinecraftURLClassPath;
 
 public class MixinPlugin implements IMixinConfigPlugin {
 
@@ -27,9 +26,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
     private static final Path MODS_DIRECTORY_PATH = new File(Launch.minecraftHome, "mods/").toPath();
 
     @Override
-    public void onLoad(String mixinPackage) {
-
-    }
+    public void onLoad(String mixinPackage) {}
 
     @Override
     public String getRefMapperConfig() {
@@ -42,9 +39,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
     }
 
     @Override
-    public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {
-
-    }
+    public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {}
 
     // This method return a List<String> of mixins. Every mixins in this list will be loaded.
     @Override
@@ -52,21 +47,18 @@ public class MixinPlugin implements IMixinConfigPlugin {
         final boolean isDevelopmentEnvironment = (boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 
         List<TargetedMod> loadedMods = Arrays.stream(TargetedMod.values())
-                .filter(mod -> mod == VANILLA
-                        || (mod.loadInDevelopment && isDevelopmentEnvironment)
-                        || loadJarOf(mod))
+                .filter(mod -> mod == VANILLA || (mod.loadInDevelopment && isDevelopmentEnvironment) || loadJarOf(mod))
                 .collect(Collectors.toList());
 
-        if(loadedMods.contains(SYNCMOD)) {
+        if (loadedMods.contains(SYNCMOD)) {
             throw new IllegalStateException("Sync Mod is not supported in this custom version of Galacticraft!");
         }
         LOG.info("Hint: Bukkit is not supported in this custom version of Galacticraft!");
 
         for (TargetedMod mod : TargetedMod.values()) {
-            if(loadedMods.contains(mod)) {
+            if (loadedMods.contains(mod)) {
                 LOG.info("Found " + mod.modName + "! Integrating now...");
-            }
-            else {
+            } else {
                 LOG.info("Could not find " + mod.modName + "! Skipping integration....");
             }
         }
@@ -84,19 +76,18 @@ public class MixinPlugin implements IMixinConfigPlugin {
     private boolean loadJarOf(final TargetedMod mod) {
         try {
             File jar = findJarOf(mod);
-            if(jar == null) {
+            if (jar == null) {
                 LOG.info("Jar not found for " + mod);
                 return false;
             }
 
             LOG.info("Attempting to add " + jar + " to the URL Class Path");
-            if(!jar.exists()) {
+            if (!jar.exists()) {
                 throw new FileNotFoundException(jar.toString());
             }
             MinecraftURLClassPath.addJar(jar);
             return true;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -109,20 +100,15 @@ public class MixinPlugin implements IMixinConfigPlugin {
                     .map(Path::toFile)
                     .findFirst()
                     .orElse(null);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
 
     @Override
-    public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
-
-    }
+    public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {}
 
     @Override
-    public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
-
-    }
+    public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {}
 }

@@ -11,12 +11,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-public class ItemOrionDrive extends Item
-{
+public class ItemOrionDrive extends Item {
     public IIcon[] icons;
 
-    public ItemOrionDrive(String assetName)
-    {
+    public ItemOrionDrive(String assetName) {
         super();
         this.setMaxDamage(0);
         this.setUnlocalizedName(assetName);
@@ -24,15 +22,13 @@ public class ItemOrionDrive extends Item
     }
 
     @Override
-    public CreativeTabs getCreativeTab()
-    {
+    public CreativeTabs getCreativeTab() {
         return GalacticraftCore.galacticraftItemsTab;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 }

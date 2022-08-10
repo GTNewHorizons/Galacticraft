@@ -7,8 +7,7 @@ import net.minecraft.world.IBlockAccess;
  * recommended that you check if the landing pad at the provided coordinates is
  * valid for connection.
  */
-public interface ILandingPadAttachable
-{
+public interface ILandingPadAttachable {
     /**
      * Determines if this tile can connect to the landing pad at the provided
      * coordinates.

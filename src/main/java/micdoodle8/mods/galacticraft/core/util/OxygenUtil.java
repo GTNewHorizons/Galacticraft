@@ -3,6 +3,8 @@ package micdoodle8.mods.galacticraft.core.util;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.ArrayList;
+import java.util.HashSet;
 import micdoodle8.mods.galacticraft.api.block.IPartialSealableBlock;
 import micdoodle8.mods.galacticraft.api.item.IBreathableArmor;
 import micdoodle8.mods.galacticraft.api.item.IBreathableArmor.EnumGearType;
@@ -35,42 +37,31 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
-public class OxygenUtil
-{
+public class OxygenUtil {
     private static HashSet<BlockVec3> checked;
 
     @SideOnly(Side.CLIENT)
-    public static boolean shouldDisplayTankGui(GuiScreen gui)
-    {
-        if (FMLClientHandler.instance().getClient().gameSettings.hideGUI)
-        {
+    public static boolean shouldDisplayTankGui(GuiScreen gui) {
+        if (FMLClientHandler.instance().getClient().gameSettings.hideGUI) {
             return false;
         }
 
-        if (gui == null)
-        {
+        if (gui == null) {
             return true;
         }
 
-        if (gui instanceof GuiInventory)
-        {
+        if (gui instanceof GuiInventory) {
             return false;
         }
 
         return gui instanceof GuiChat;
-
     }
 
-    public static boolean isAABBInBreathableAirBlock(EntityLivingBase entity)
-    {
+    public static boolean isAABBInBreathableAirBlock(EntityLivingBase entity) {
         return isAABBInBreathableAirBlock(entity, false);
     }
 
-    public static boolean isAABBInBreathableAirBlock(EntityLivingBase entity, boolean testThermal)
-    {
+    public static boolean isAABBInBreathableAirBlock(EntityLivingBase entity, boolean testThermal) {
         double y = entity.posY + entity.getEyeHeight();
         double x = entity.posX;
         double z = entity.posZ;
@@ -79,39 +70,38 @@ public class OxygenUtil
         double sy = entity.boundingBox.maxY - entity.boundingBox.minY;
         double sz = entity.boundingBox.maxZ - entity.boundingBox.minZ;
 
-        //A good first estimate of head size is that it's the smallest of the entity's 3 dimensions (e.g. front to back, for Steve)
+        // A good first estimate of head size is that it's the smallest of the entity's 3 dimensions (e.g. front to
+        // back, for Steve)
         double smin = Math.min(sx, Math.min(sy, sz)) / 2;
 
-        return OxygenUtil.isAABBInBreathableAirBlock(entity.worldObj, AxisAlignedBB.getBoundingBox(x - smin, y - smin, z - smin, x + smin, y + smin, z + smin), testThermal);
+        return OxygenUtil.isAABBInBreathableAirBlock(
+                entity.worldObj,
+                AxisAlignedBB.getBoundingBox(x - smin, y - smin, z - smin, x + smin, y + smin, z + smin),
+                testThermal);
     }
 
-    public static boolean isAABBInBreathableAirBlock(World world, AxisAlignedBB bb)
-    {
+    public static boolean isAABBInBreathableAirBlock(World world, AxisAlignedBB bb) {
         return isAABBInBreathableAirBlock(world, bb, false);
     }
 
     @SuppressWarnings("rawtypes")
-    public static boolean isAABBInBreathableAirBlock(World world, AxisAlignedBB bb, boolean testThermal)
-    {
+    public static boolean isAABBInBreathableAirBlock(World world, AxisAlignedBB bb, boolean testThermal) {
         final double avgX = (bb.minX + bb.maxX) / 2.0D;
         final double avgY = (bb.minY + bb.maxY) / 2.0D;
         final double avgZ = (bb.minZ + bb.maxZ) / 2.0D;
 
-        if (testThermal)
-        {
+        if (testThermal) {
             return OxygenUtil.isInOxygenAndThermalBlock(world, bb.copy().contract(0.001D, 0.001D, 0.001D));
         }
 
-        if (OxygenUtil.inOxygenBubble(world, avgX, avgY, avgZ))
-        {
+        if (OxygenUtil.inOxygenBubble(world, avgX, avgY, avgZ)) {
             return true;
         }
 
         return OxygenUtil.isInOxygenBlock(world, bb.copy().contract(0.001D, 0.001D, 0.001D));
     }
 
-    public static boolean isInOxygenBlock(World world, AxisAlignedBB bb)
-    {
+    public static boolean isInOxygenBlock(World world, AxisAlignedBB bb) {
         int i = MathHelper.floor_double(bb.minX);
         int j = MathHelper.floor_double(bb.maxX);
         int k = MathHelper.floor_double(bb.minY);
@@ -120,17 +110,12 @@ public class OxygenUtil
         int j1 = MathHelper.floor_double(bb.maxZ);
 
         OxygenUtil.checked = new HashSet();
-        if (world.checkChunksExist(i, k, i1, j, l, j1))
-        {
-            for (int x = i; x <= j; ++x)
-            {
-                for (int y = k; y <= l; ++y)
-                {
-                    for (int z = i1; z <= j1; ++z)
-                    {
+        if (world.checkChunksExist(i, k, i1, j, l, j1)) {
+            for (int x = i; x <= j; ++x) {
+                for (int y = k; y <= l; ++y) {
+                    for (int z = i1; z <= j1; ++z) {
                         Block block = world.getBlock(x, y, z);
-                        if (OxygenUtil.testContactWithBreathableAir(world, block, x, y, z, 0) >= 0)
-                        {
+                        if (OxygenUtil.testContactWithBreathableAir(world, block, x, y, z, 0) >= 0) {
                             return true;
                         }
                     }
@@ -141,8 +126,7 @@ public class OxygenUtil
         return false;
     }
 
-    public static boolean isInOxygenAndThermalBlock(World world, AxisAlignedBB bb)
-    {
+    public static boolean isInOxygenAndThermalBlock(World world, AxisAlignedBB bb) {
         int i = MathHelper.floor_double(bb.minX);
         int j = MathHelper.floor_double(bb.maxX);
         int k = MathHelper.floor_double(bb.minY);
@@ -151,16 +135,13 @@ public class OxygenUtil
         int j1 = MathHelper.floor_double(bb.maxZ);
 
         OxygenUtil.checked = new HashSet();
-        if (world.checkChunksExist(i, k, i1, j, l, j1))
-        {
-            for (int x = i; x <= j; ++x)
-            {
-                for (int y = k; y <= l; ++y)
-                {
-                    for (int z = i1; z <= j1; ++z)
-                    {
+        if (world.checkChunksExist(i, k, i1, j, l, j1)) {
+            for (int x = i; x <= j; ++x) {
+                for (int y = k; y <= l; ++y) {
+                    for (int z = i1; z <= j1; ++z) {
                         Block block = world.getBlock(x, y, z);
-                        if (OxygenUtil.testContactWithBreathableAir(world, block, x, y, z, 0) == 1) // Thermal air has metadata 1
+                        if (OxygenUtil.testContactWithBreathableAir(world, block, x, y, z, 0)
+                                == 1) // Thermal air has metadata 1
                         {
                             return true;
                         }
@@ -177,17 +158,14 @@ public class OxygenUtil
      * all 6 sides of the given block (because a torch can pass air on all sides)
      * Used in BlockUnlitTorch.
      */
-    public static boolean checkTorchHasOxygen(World world, Block block, int x, int y, int z)
-    {
-    	if (OxygenUtil.inOxygenBubble(world, x + 0.5D, y + 0.6D, z + 0.5D)) return true;
-    	OxygenUtil.checked = new HashSet();
+    public static boolean checkTorchHasOxygen(World world, Block block, int x, int y, int z) {
+        if (OxygenUtil.inOxygenBubble(world, x + 0.5D, y + 0.6D, z + 0.5D)) return true;
+        OxygenUtil.checked = new HashSet();
         BlockVec3 vec = new BlockVec3(x, y, z);
-        for (int side = 0; side < 6; side++)
-        {
+        for (int side = 0; side < 6; side++) {
             BlockVec3 sidevec = vec.newVecSide(side);
             Block newblock = sidevec.getBlockID_noChunkLoad(world);
-            if (OxygenUtil.testContactWithBreathableAir(world, newblock, sidevec.x, sidevec.y, sidevec.z, 1) >= 0)
-            {
+            if (OxygenUtil.testContactWithBreathableAir(world, newblock, sidevec.x, sidevec.y, sidevec.z, 1) >= 0) {
                 return true;
             }
         }
@@ -202,71 +180,52 @@ public class OxygenUtil
      * air-reachable blocks (up to 5 blocks away) and return true if breathable air is found
      * in one of them, or false if not.
      */
-    private static int testContactWithBreathableAir(World world, Block block, int x, int y, int z, int limitCount)
-    {
+    private static int testContactWithBreathableAir(World world, Block block, int x, int y, int z, int limitCount) {
         BlockVec3 vec = new BlockVec3(x, y, z);
         checked.add(vec);
-        if (block == GCBlocks.breatheableAir || block == GCBlocks.brightBreatheableAir)
-        {
+        if (block == GCBlocks.breatheableAir || block == GCBlocks.brightBreatheableAir) {
             return world.getBlockMetadata(x, y, z);
         }
 
-        if (block == null || block.getMaterial() == Material.air)
-        {
+        if (block == null || block.getMaterial() == Material.air) {
             return -1;
         }
 
-        //Test for non-sided permeable or solid blocks first
+        // Test for non-sided permeable or solid blocks first
         boolean permeableFlag = false;
-        if (!(block instanceof BlockLeavesBase))
-        {
-            if (block.isOpaqueCube())
-            {
-                if (block instanceof BlockGravel || block.getMaterial() == Material.cloth || block instanceof BlockSponge)
-                {
+        if (!(block instanceof BlockLeavesBase)) {
+            if (block.isOpaqueCube()) {
+                if (block instanceof BlockGravel
+                        || block.getMaterial() == Material.cloth
+                        || block instanceof BlockSponge) {
                     permeableFlag = true;
-                }
-                else
-                {
+                } else {
                     return -1;
                 }
-            }
-            else if (block instanceof BlockGlass || block instanceof BlockStainedGlass)
-            {
+            } else if (block instanceof BlockGlass || block instanceof BlockStainedGlass) {
                 return -1;
-            }
-            else if (block instanceof BlockLiquid)
-            {
+            } else if (block instanceof BlockLiquid) {
                 return -1;
-            }
-            else if (OxygenPressureProtocol.nonPermeableBlocks.containsKey(block))
-            {
+            } else if (OxygenPressureProtocol.nonPermeableBlocks.containsKey(block)) {
                 ArrayList<Integer> metaList = OxygenPressureProtocol.nonPermeableBlocks.get(block);
-                if (metaList.contains(Integer.valueOf(-1)) || metaList.contains(world.getBlockMetadata(x, y, z)))
-                {
+                if (metaList.contains(Integer.valueOf(-1)) || metaList.contains(world.getBlockMetadata(x, y, z))) {
                     return -1;
                 }
             }
-        }
-        else
-        {
+        } else {
             permeableFlag = true;
         }
 
-        //Testing a non-air, permeable block (for example a torch or a ladder)
-        if (limitCount < 5)
-        {
-            for (int side = 0; side < 6; side++)
-            {
-                if (permeableFlag || OxygenUtil.canBlockPassAirOnSide(world, block, vec, side))
-                {
+        // Testing a non-air, permeable block (for example a torch or a ladder)
+        if (limitCount < 5) {
+            for (int side = 0; side < 6; side++) {
+                if (permeableFlag || OxygenUtil.canBlockPassAirOnSide(world, block, vec, side)) {
                     BlockVec3 sidevec = vec.newVecSide(side);
-                    if (!checked.contains(sidevec))
-                    {
+                    if (!checked.contains(sidevec)) {
                         Block newblock = sidevec.getBlockID_noChunkLoad(world);
-                        int adjResult = OxygenUtil.testContactWithBreathableAir(world, newblock, sidevec.x, sidevec.y, sidevec.z, limitCount + 1);
-                        if (adjResult >= 0)
-                        {
+                        int adjResult = OxygenUtil.testContactWithBreathableAir(
+                                world, newblock, sidevec.x, sidevec.y, sidevec.z, limitCount + 1);
+                        if (adjResult >= 0) {
                             return adjResult;
                         }
                     }
@@ -276,34 +235,30 @@ public class OxygenUtil
 
         return -1;
     }
-    //TODO - performance, could add a 'safe' version of this code (inside world borders)
+    // TODO - performance, could add a 'safe' version of this code (inside world borders)
 
-    //TODO - add more performance increase, these sided checks could be done once only
-    private static boolean canBlockPassAirOnSide(World world, Block block, BlockVec3 vec, int side)
-    {
-        if (block instanceof IPartialSealableBlock)
-        {
-            return !((IPartialSealableBlock) block).isSealed(world, vec.x, vec.y, vec.z, ForgeDirection.getOrientation(side));
+    // TODO - add more performance increase, these sided checks could be done once only
+    private static boolean canBlockPassAirOnSide(World world, Block block, BlockVec3 vec, int side) {
+        if (block instanceof IPartialSealableBlock) {
+            return !((IPartialSealableBlock) block)
+                    .isSealed(world, vec.x, vec.y, vec.z, ForgeDirection.getOrientation(side));
         }
 
-        //Half slab seals on the top side or the bottom side according to its metadata
-        if (block instanceof BlockSlab)
-        {
-            return !(side == 0 && (vec.getBlockMetadata(world) & 8) == 8 || side == 1 && (vec.getBlockMetadata(world) & 8) == 0);
+        // Half slab seals on the top side or the bottom side according to its metadata
+        if (block instanceof BlockSlab) {
+            return !(side == 0 && (vec.getBlockMetadata(world) & 8) == 8
+                    || side == 1 && (vec.getBlockMetadata(world) & 8) == 0);
         }
 
-        //Farmland etc only seals on the solid underside
-        if (block instanceof BlockFarmland || block instanceof BlockEnchantmentTable || block instanceof BlockLiquid)
-        {
+        // Farmland etc only seals on the solid underside
+        if (block instanceof BlockFarmland || block instanceof BlockEnchantmentTable || block instanceof BlockLiquid) {
             return side != 1;
         }
 
-        if (block instanceof BlockPistonBase)
-        {
+        if (block instanceof BlockPistonBase) {
             BlockPistonBase piston = (BlockPistonBase) block;
             int meta = vec.getBlockMetadata(world);
-            if (BlockPistonBase.isExtended(meta))
-            {
+            if (BlockPistonBase.isExtended(meta)) {
                 int facing = BlockPistonBase.getPistonOrientation(meta);
                 return side != facing;
             }
@@ -313,107 +268,93 @@ public class OxygenUtil
         return !block.isSideSolid(world, vec.x, vec.y, vec.z, ForgeDirection.getOrientation(side ^ 1));
     }
 
-    public static int getDrainSpacing(ItemStack tank, ItemStack tank2)
-    {
-        boolean tank1Valid = tank != null && tank.getItem() instanceof ItemOxygenTank && tank.getMaxDamage() - tank.getItemDamage() > 0;
-        boolean tank2Valid = tank2 != null && tank2.getItem() instanceof ItemOxygenTank && tank2.getMaxDamage() - tank2.getItemDamage() > 0;
+    public static int getDrainSpacing(ItemStack tank, ItemStack tank2) {
+        boolean tank1Valid = tank != null
+                && tank.getItem() instanceof ItemOxygenTank
+                && tank.getMaxDamage() - tank.getItemDamage() > 0;
+        boolean tank2Valid = tank2 != null
+                && tank2.getItem() instanceof ItemOxygenTank
+                && tank2.getMaxDamage() - tank2.getItemDamage() > 0;
 
-        if (!tank1Valid && !tank2Valid)
-        {
+        if (!tank1Valid && !tank2Valid) {
             return 0;
         }
 
         return 9;
     }
 
-    public static boolean hasValidOxygenSetup(EntityPlayerMP player)
-    {
+    public static boolean hasValidOxygenSetup(EntityPlayerMP player) {
         boolean missingComponent = false;
 
         GCPlayerStats stats = GCPlayerStats.get(player);
 
-        if (stats.extendedInventory.getStackInSlot(0) == null || !OxygenUtil.isItemValidForPlayerTankInv(0, stats.extendedInventory.getStackInSlot(0)))
-        {
+        if (stats.extendedInventory.getStackInSlot(0) == null
+                || !OxygenUtil.isItemValidForPlayerTankInv(0, stats.extendedInventory.getStackInSlot(0))) {
             boolean handled = false;
 
-            for (final ItemStack armorStack : player.inventory.armorInventory)
-            {
-                if (armorStack != null && armorStack.getItem() instanceof IBreathableArmor)
-                {
+            for (final ItemStack armorStack : player.inventory.armorInventory) {
+                if (armorStack != null && armorStack.getItem() instanceof IBreathableArmor) {
                     final IBreathableArmor breathableArmor = (IBreathableArmor) armorStack.getItem();
 
-                    if (breathableArmor.handleGearType(EnumGearType.HELMET))
-                    {
-                        if (breathableArmor.canBreathe(armorStack, player, EnumGearType.HELMET))
-                        {
+                    if (breathableArmor.handleGearType(EnumGearType.HELMET)) {
+                        if (breathableArmor.canBreathe(armorStack, player, EnumGearType.HELMET)) {
                             handled = true;
                         }
                     }
                 }
             }
 
-            if (!handled)
-            {
+            if (!handled) {
                 missingComponent = true;
             }
         }
 
-        if (stats.extendedInventory.getStackInSlot(1) == null || !OxygenUtil.isItemValidForPlayerTankInv(1, stats.extendedInventory.getStackInSlot(1)))
-        {
+        if (stats.extendedInventory.getStackInSlot(1) == null
+                || !OxygenUtil.isItemValidForPlayerTankInv(1, stats.extendedInventory.getStackInSlot(1))) {
             boolean handled = false;
 
-            for (final ItemStack armorStack : player.inventory.armorInventory)
-            {
-                if (armorStack != null && armorStack.getItem() instanceof IBreathableArmor)
-                {
+            for (final ItemStack armorStack : player.inventory.armorInventory) {
+                if (armorStack != null && armorStack.getItem() instanceof IBreathableArmor) {
                     final IBreathableArmor breathableArmor = (IBreathableArmor) armorStack.getItem();
 
-                    if (breathableArmor.handleGearType(EnumGearType.GEAR))
-                    {
-                        if (breathableArmor.canBreathe(armorStack, player, EnumGearType.GEAR))
-                        {
+                    if (breathableArmor.handleGearType(EnumGearType.GEAR)) {
+                        if (breathableArmor.canBreathe(armorStack, player, EnumGearType.GEAR)) {
                             handled = true;
                         }
                     }
                 }
             }
 
-            if (!handled)
-            {
+            if (!handled) {
                 missingComponent = true;
             }
         }
 
-        if ((stats.extendedInventory.getStackInSlot(2) == null || !OxygenUtil.isItemValidForPlayerTankInv(2, stats.extendedInventory.getStackInSlot(2))) && (stats.extendedInventory.getStackInSlot(3) == null || !OxygenUtil.isItemValidForPlayerTankInv(3, stats.extendedInventory.getStackInSlot(3))))
-        {
+        if ((stats.extendedInventory.getStackInSlot(2) == null
+                        || !OxygenUtil.isItemValidForPlayerTankInv(2, stats.extendedInventory.getStackInSlot(2)))
+                && (stats.extendedInventory.getStackInSlot(3) == null
+                        || !OxygenUtil.isItemValidForPlayerTankInv(3, stats.extendedInventory.getStackInSlot(3)))) {
             boolean handled = false;
 
-            for (final ItemStack armorStack : player.inventory.armorInventory)
-            {
-                if (armorStack != null && armorStack.getItem() instanceof IBreathableArmor)
-                {
+            for (final ItemStack armorStack : player.inventory.armorInventory) {
+                if (armorStack != null && armorStack.getItem() instanceof IBreathableArmor) {
                     final IBreathableArmor breathableArmor = (IBreathableArmor) armorStack.getItem();
 
-                    if (breathableArmor.handleGearType(EnumGearType.TANK1))
-                    {
-                        if (breathableArmor.canBreathe(armorStack, player, EnumGearType.TANK1))
-                        {
+                    if (breathableArmor.handleGearType(EnumGearType.TANK1)) {
+                        if (breathableArmor.canBreathe(armorStack, player, EnumGearType.TANK1)) {
                             handled = true;
                         }
                     }
 
-                    if (breathableArmor.handleGearType(EnumGearType.TANK2))
-                    {
-                        if (breathableArmor.canBreathe(armorStack, player, EnumGearType.TANK2))
-                        {
+                    if (breathableArmor.handleGearType(EnumGearType.TANK2)) {
+                        if (breathableArmor.canBreathe(armorStack, player, EnumGearType.TANK2)) {
                             handled = true;
                         }
                     }
                 }
             }
 
-            if (!handled)
-            {
+            if (!handled) {
                 missingComponent = true;
             }
         }
@@ -421,39 +362,33 @@ public class OxygenUtil
         return !missingComponent;
     }
 
-    public static boolean isItemValidForPlayerTankInv(int slotIndex, ItemStack stack)
-    {
-        switch (slotIndex)
-        {
-        case 0:
-            return stack.getItem() instanceof ItemOxygenMask;
-        case 1:
-            return stack.getItem() instanceof ItemOxygenGear;
-        case 2:
-            return stack.getItem() instanceof ItemOxygenTank;
-        case 3:
-            return stack.getItem() instanceof ItemOxygenTank;
+    public static boolean isItemValidForPlayerTankInv(int slotIndex, ItemStack stack) {
+        switch (slotIndex) {
+            case 0:
+                return stack.getItem() instanceof ItemOxygenMask;
+            case 1:
+                return stack.getItem() instanceof ItemOxygenGear;
+            case 2:
+                return stack.getItem() instanceof ItemOxygenTank;
+            case 3:
+                return stack.getItem() instanceof ItemOxygenTank;
         }
 
         return false;
     }
 
-    public static TileEntity[] getAdjacentOxygenConnections(TileEntity tile)
-    {
+    public static TileEntity[] getAdjacentOxygenConnections(TileEntity tile) {
         TileEntity[] adjacentConnections = new TileEntity[ForgeDirection.VALID_DIRECTIONS.length];
 
         boolean isMekLoaded = EnergyConfigHandler.isMekanismLoaded();
 
         BlockVec3 thisVec = new BlockVec3(tile);
         World world = tile.getWorldObj();
-        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
-        {
+        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
             TileEntity tileEntity = thisVec.getTileEntityOnSide(world, direction);
 
-            if (tileEntity instanceof IConnector)
-            {
-                if (((IConnector) tileEntity).canConnect(direction.getOpposite(), NetworkType.OXYGEN))
-                {
+            if (tileEntity instanceof IConnector) {
+                if (((IConnector) tileEntity).canConnect(direction.getOpposite(), NetworkType.OXYGEN)) {
                     adjacentConnections[direction.ordinal()] = tileEntity;
                 }
             }
@@ -461,31 +396,26 @@ public class OxygenUtil
 
         return adjacentConnections;
     }
-    
-    public static boolean noAtmosphericCombustion(WorldProvider provider)
-    {
-    	if (provider instanceof IGalacticraftWorldProvider)
-    	{
-    		return (!((IGalacticraftWorldProvider) provider).isGasPresent(IAtmosphericGas.OXYGEN) && !((IGalacticraftWorldProvider) provider).hasBreathableAtmosphere());
-    	}
-    	
-    	return false;
+
+    public static boolean noAtmosphericCombustion(WorldProvider provider) {
+        if (provider instanceof IGalacticraftWorldProvider) {
+            return (!((IGalacticraftWorldProvider) provider).isGasPresent(IAtmosphericGas.OXYGEN)
+                    && !((IGalacticraftWorldProvider) provider).hasBreathableAtmosphere());
+        }
+
+        return false;
     }
 
-	public static boolean inOxygenBubble(World worldObj, double avgX, double avgY, double avgZ)
-	{
-        for (final BlockVec3Dim blockVec : TileEntityOxygenDistributor.loadedTiles)
-        {
-            if (blockVec != null && blockVec.dim == worldObj.provider.dimensionId)
-            {
-            	TileEntity tile = worldObj.getTileEntity(blockVec.x, blockVec.y, blockVec.z);
-            	if (tile instanceof TileEntityOxygenDistributor)
-            	{
-	            	if (((TileEntityOxygenDistributor) tile).inBubble(avgX, avgY, avgZ)) return true;
-            	}
+    public static boolean inOxygenBubble(World worldObj, double avgX, double avgY, double avgZ) {
+        for (final BlockVec3Dim blockVec : TileEntityOxygenDistributor.loadedTiles) {
+            if (blockVec != null && blockVec.dim == worldObj.provider.dimensionId) {
+                TileEntity tile = worldObj.getTileEntity(blockVec.x, blockVec.y, blockVec.z);
+                if (tile instanceof TileEntityOxygenDistributor) {
+                    if (((TileEntityOxygenDistributor) tile).inBubble(avgX, avgY, avgZ)) return true;
+                }
             }
         }
 
-		return false;
-	}
+        return false;
+    }
 }

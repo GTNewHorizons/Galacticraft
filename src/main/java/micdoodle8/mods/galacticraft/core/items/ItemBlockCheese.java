@@ -10,31 +10,26 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockCheese extends ItemBlockDesc
-{
-    public ItemBlockCheese(Block par2Block)
-    {
+public class ItemBlockCheese extends ItemBlockDesc {
+    public ItemBlockCheese(Block par2Block) {
         super(par2Block);
         this.setMaxStackSize(1);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegister)
-    {
+    public void registerIcons(IIconRegister iconRegister) {
         this.itemIcon = iconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX_MOON + "cheese_block");
     }
 
     @Override
-    public CreativeTabs getCreativeTab()
-    {
+    public CreativeTabs getCreativeTab() {
         return GalacticraftCore.galacticraftBlocksTab;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 }

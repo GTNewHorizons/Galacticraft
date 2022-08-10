@@ -1,6 +1,7 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.client.render.block;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import java.util.Arrays;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.core.util.OxygenUtil;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
@@ -11,38 +12,31 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
-import java.util.Arrays;
-
-public class BlockRendererWalkway implements ISimpleBlockRenderingHandler
-{
+public class BlockRendererWalkway implements ISimpleBlockRenderingHandler {
     final int renderID;
 
-    public BlockRendererWalkway(int var1)
-    {
+    public BlockRendererWalkway(int var1) {
         this.renderID = var1;
     }
 
     @Override
-    public boolean renderWorldBlock(IBlockAccess var1, int var2, int var3, int var4, Block var5, int var6, RenderBlocks var7)
-    {
+    public boolean renderWorldBlock(
+            IBlockAccess var1, int var2, int var3, int var4, Block var5, int var6, RenderBlocks var7) {
         this.renderWalkway(var7, var5, var1, var2, var3, var4);
         return true;
     }
 
     @Override
-    public boolean shouldRender3DInInventory(int modelId)
-    {
+    public boolean shouldRender3DInInventory(int modelId) {
         return true;
     }
 
     @Override
-    public int getRenderId()
-    {
+    public int getRenderId() {
         return this.renderID;
     }
 
-    public static void renderInvNormalBlock(RenderBlocks var0, Block var1, int var2)
-    {
+    public static void renderInvNormalBlock(RenderBlocks var0, Block var1, int var2) {
         var0.setOverrideBlockTexture(AsteroidBlocks.blockWalkway.getBlockTextureFromSide(0));
         GL11.glPushMatrix();
 
@@ -68,8 +62,7 @@ public class BlockRendererWalkway implements ISimpleBlockRenderingHandler
         var0.setRenderBounds(0.45F, 0.5F, 0.45F, 0.55F, 0.9F, 0.55F);
         BlockRendererWalkway.renderStandardBlock(var0, var1, var2);
 
-        if (var1 == AsteroidBlocks.blockWalkwayOxygenPipe)
-        {
+        if (var1 == AsteroidBlocks.blockWalkwayOxygenPipe) {
             var0.setOverrideBlockTexture(GCBlocks.oxygenPipe.getBlockTextureFromSide(0));
             final float minX = 0.4F;
             final float minY = 0.4F;
@@ -85,9 +78,7 @@ public class BlockRendererWalkway implements ISimpleBlockRenderingHandler
             BlockRendererWalkway.renderStandardBlock(var0, var1, var2);
             var0.setRenderBounds(0.6F, minY, minZ, 1.0, maxY, maxZ);
             BlockRendererWalkway.renderStandardBlock(var0, var1, var2);
-        }
-        else if (var1 == AsteroidBlocks.blockWalkwayWire)
-        {
+        } else if (var1 == AsteroidBlocks.blockWalkwayWire) {
             var0.setOverrideBlockTexture(GCBlocks.aluminumWire.getBlockTextureFromSide(0));
 
             GL11.glPushMatrix();
@@ -158,9 +149,7 @@ public class BlockRendererWalkway implements ISimpleBlockRenderingHandler
             var0.setRenderBounds(0.0F, 0.0F, 0.0F, 0.185F, 1.0F, 0.0F);
             BlockRendererWalkway.renderStandardBlock(var0, var1, var2);
             GL11.glPopMatrix();
-        }
-        else
-        {
+        } else {
             // Top Runway
             var0.setRenderBounds(0.4F, 0.9F, 0.0F, 0.6F, 1.0F, 0.4F);
             BlockRendererWalkway.renderStandardBlock(var0, var1, var2);
@@ -192,8 +181,7 @@ public class BlockRendererWalkway implements ISimpleBlockRenderingHandler
         var0.clearOverrideBlockTexture();
     }
 
-    private static void renderStandardBlock(RenderBlocks var0, Block var1, int var2)
-    {
+    private static void renderStandardBlock(RenderBlocks var0, Block var1, int var2) {
         GL11.glPushMatrix();
         final Tessellator var3 = Tessellator.instance;
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
@@ -226,13 +214,11 @@ public class BlockRendererWalkway implements ISimpleBlockRenderingHandler
     }
 
     @Override
-    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
-    {
+    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
         BlockRendererWalkway.renderInvNormalBlock(renderer, block, metadata);
     }
 
-    public void renderWalkway(RenderBlocks renderBlocks, Block block, IBlockAccess var1, int x, int y, int z)
-    {
+    public void renderWalkway(RenderBlocks renderBlocks, Block block, IBlockAccess var1, int x, int y, int z) {
         // Top Plate
         renderBlocks.setRenderBounds(0.0F, 0.9F, 0.0F, 0.1F, 1.0F, 1.0F);
         renderBlocks.renderStandardBlock(block, x, y, z);
@@ -265,8 +251,7 @@ public class BlockRendererWalkway implements ISimpleBlockRenderingHandler
         boolean connectedSouth2 = connectedSouth;
         boolean connectedWest2 = connectedWest;
 
-        if (block == AsteroidBlocks.blockWalkwayOxygenPipe)
-        {
+        if (block == AsteroidBlocks.blockWalkwayOxygenPipe) {
             renderBlocks.setOverrideBlockTexture(GCBlocks.oxygenPipe.getBlockTextureFromSide(0));
 
             final TileEntity tileEntity = var1.getTileEntity(x, y, z);
@@ -278,46 +263,42 @@ public class BlockRendererWalkway implements ISimpleBlockRenderingHandler
             final float maxY = 0.6F;
             final float maxZ = 0.6F;
 
-            if (tileEntity != null)
-            {
+            if (tileEntity != null) {
                 final TileEntity[] connections = OxygenUtil.getAdjacentOxygenConnections(tileEntity);
 
-                for (TileEntity connection : connections)
-                {
-                    if (connection != null)
-                    {
+                for (TileEntity connection : connections) {
+                    if (connection != null) {
                         final int side = Arrays.asList(connections).indexOf(connection);
 
-                        switch (side)
-                        {
-                        case 0: // DOWN
-                            renderBlocks.setRenderBounds(minX, 0.0F, minZ, maxX, 0.4F, maxZ);
-                            renderBlocks.renderStandardBlock(block, x, y, z);
-                            break;
-                        case 1: // UP
-                            renderBlocks.setRenderBounds(minX, 0.6F, minZ, maxX, 1.0F, maxZ);
-                            renderBlocks.renderStandardBlock(block, x, y, z);
-                            break;
-                        case 2: // NORTH
-                            connectedNorth = false;
-                            renderBlocks.setRenderBounds(minX, minY, 0.0, maxX, maxY, 0.4F);
-                            renderBlocks.renderStandardBlock(block, x, y, z);
-                            break;
-                        case 3: // SOUTH
-                            connectedSouth = false;
-                            renderBlocks.setRenderBounds(minX, minY, 0.6F, maxX, maxY, 1.0);
-                            renderBlocks.renderStandardBlock(block, x, y, z);
-                            break;
-                        case 4: // WEST
-                            connectedWest = false;
-                            renderBlocks.setRenderBounds(0.0, minY, minZ, 0.4F, maxY, maxZ);
-                            renderBlocks.renderStandardBlock(block, x, y, z);
-                            break;
-                        case 5: // EAST
-                            connectedEast = false;
-                            renderBlocks.setRenderBounds(0.6F, minY, minZ, 1.0, maxY, maxZ);
-                            renderBlocks.renderStandardBlock(block, x, y, z);
-                            break;
+                        switch (side) {
+                            case 0: // DOWN
+                                renderBlocks.setRenderBounds(minX, 0.0F, minZ, maxX, 0.4F, maxZ);
+                                renderBlocks.renderStandardBlock(block, x, y, z);
+                                break;
+                            case 1: // UP
+                                renderBlocks.setRenderBounds(minX, 0.6F, minZ, maxX, 1.0F, maxZ);
+                                renderBlocks.renderStandardBlock(block, x, y, z);
+                                break;
+                            case 2: // NORTH
+                                connectedNorth = false;
+                                renderBlocks.setRenderBounds(minX, minY, 0.0, maxX, maxY, 0.4F);
+                                renderBlocks.renderStandardBlock(block, x, y, z);
+                                break;
+                            case 3: // SOUTH
+                                connectedSouth = false;
+                                renderBlocks.setRenderBounds(minX, minY, 0.6F, maxX, maxY, 1.0);
+                                renderBlocks.renderStandardBlock(block, x, y, z);
+                                break;
+                            case 4: // WEST
+                                connectedWest = false;
+                                renderBlocks.setRenderBounds(0.0, minY, minZ, 0.4F, maxY, maxZ);
+                                renderBlocks.renderStandardBlock(block, x, y, z);
+                                break;
+                            case 5: // EAST
+                                connectedEast = false;
+                                renderBlocks.setRenderBounds(0.6F, minY, minZ, 1.0, maxY, maxZ);
+                                renderBlocks.renderStandardBlock(block, x, y, z);
+                                break;
                         }
                     }
                 }
@@ -329,52 +310,44 @@ public class BlockRendererWalkway implements ISimpleBlockRenderingHandler
 
         renderBlocks.setOverrideBlockTexture(block.getIcon(var1, x, y, z, 0));
 
-        if (connectedNorth2)
-        {
+        if (connectedNorth2) {
             // Top Runway
             renderBlocks.setRenderBounds(0.4F, 0.9F, 0.0F, 0.6F, 1.0F, 0.4F);
             renderBlocks.renderStandardBlock(block, x, y, z);
         }
 
-        if (connectedEast2)
-        {
+        if (connectedEast2) {
             renderBlocks.setRenderBounds(0.6F, 0.9F, 0.4F, 1.0F, 1.0F, 0.6F);
             renderBlocks.renderStandardBlock(block, x, y, z);
         }
 
-        if (connectedWest2)
-        {
+        if (connectedWest2) {
             renderBlocks.setRenderBounds(0.0F, 0.9F, 0.4F, 0.4F, 1.0F, 0.6F);
             renderBlocks.renderStandardBlock(block, x, y, z);
         }
 
-        if (connectedSouth2)
-        {
+        if (connectedSouth2) {
             renderBlocks.setRenderBounds(0.4F, 0.9F, 0.6F, 0.6F, 1.0F, 1.0F);
             renderBlocks.renderStandardBlock(block, x, y, z);
         }
 
-        if (connectedNorth)
-        {
+        if (connectedNorth) {
             // Inner Steel Bar
             renderBlocks.setRenderBounds(0.4F, 0.4F, 0.0F, 0.6F, 0.6F, 0.4F);
             renderBlocks.renderStandardBlock(block, x, y, z);
         }
 
-        if (connectedEast)
-        {
+        if (connectedEast) {
             renderBlocks.setRenderBounds(0.6F, 0.4F, 0.4F, 1.0F, 0.6F, 0.6F);
             renderBlocks.renderStandardBlock(block, x, y, z);
         }
 
-        if (connectedWest)
-        {
+        if (connectedWest) {
             renderBlocks.setRenderBounds(0.0F, 0.4F, 0.4F, 0.4F, 0.6F, 0.6F);
             renderBlocks.renderStandardBlock(block, x, y, z);
         }
 
-        if (connectedSouth)
-        {
+        if (connectedSouth) {
             renderBlocks.setRenderBounds(0.4F, 0.4F, 0.6F, 0.6F, 0.6F, 1.0F);
             renderBlocks.renderStandardBlock(block, x, y, z);
         }

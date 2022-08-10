@@ -13,55 +13,64 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class GuiSchematicTier2Rocket extends GuiContainer implements ISchematicResultPage
-{
-    private static final ResourceLocation tier2SchematicTexture = new ResourceLocation(MarsModule.ASSET_PREFIX, "textures/gui/schematic_rocket_T2.png");
+public class GuiSchematicTier2Rocket extends GuiContainer implements ISchematicResultPage {
+    private static final ResourceLocation tier2SchematicTexture =
+            new ResourceLocation(MarsModule.ASSET_PREFIX, "textures/gui/schematic_rocket_T2.png");
 
     private int pageIndex;
 
-    public GuiSchematicTier2Rocket(InventoryPlayer par1InventoryPlayer, int x, int y, int z)
-    {
+    public GuiSchematicTier2Rocket(InventoryPlayer par1InventoryPlayer, int x, int y, int z) {
         super(new ContainerSchematicTier2Rocket(par1InventoryPlayer, x, y, z));
         this.ySize = 238;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public void initGui()
-    {
+    public void initGui() {
         super.initGui();
         this.buttonList.clear();
-        this.buttonList.add(new GuiButton(0, this.width / 2 - 130, this.height / 2 - 30 + 27 - 12, 40, 20, GCCoreUtil.translate("gui.button.back.name")));
-        this.buttonList.add(new GuiButton(1, this.width / 2 - 130, this.height / 2 - 30 + 27 + 12, 40, 20, GCCoreUtil.translate("gui.button.next.name")));
+        this.buttonList.add(new GuiButton(
+                0,
+                this.width / 2 - 130,
+                this.height / 2 - 30 + 27 - 12,
+                40,
+                20,
+                GCCoreUtil.translate("gui.button.back.name")));
+        this.buttonList.add(new GuiButton(
+                1,
+                this.width / 2 - 130,
+                this.height / 2 - 30 + 27 + 12,
+                40,
+                20,
+                GCCoreUtil.translate("gui.button.next.name")));
     }
 
     @Override
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-        if (par1GuiButton.enabled)
-        {
-            switch (par1GuiButton.id)
-            {
-            case 0:
-                SchematicRegistry.flipToLastPage(this.pageIndex);
-                break;
-            case 1:
-                SchematicRegistry.flipToNextPage(this.pageIndex);
-                break;
+    protected void actionPerformed(GuiButton par1GuiButton) {
+        if (par1GuiButton.enabled) {
+            switch (par1GuiButton.id) {
+                case 0:
+                    SchematicRegistry.flipToLastPage(this.pageIndex);
+                    break;
+                case 1:
+                    SchematicRegistry.flipToNextPage(this.pageIndex);
+                    break;
             }
         }
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int par1, int par2)
-    {
-        this.fontRendererObj.drawString(MarsItems.spaceship.getItemStackDisplayName(new ItemStack(MarsItems.spaceship, 1, 0)), 7, -20 + 27, 4210752);
+    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+        this.fontRendererObj.drawString(
+                MarsItems.spaceship.getItemStackDisplayName(new ItemStack(MarsItems.spaceship, 1, 0)),
+                7,
+                -20 + 27,
+                4210752);
         this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, 220 - 104 + 2 + 27, 4210752);
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
-    {
+    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(GuiSchematicTier2Rocket.tier2SchematicTexture);
         final int var5 = (this.width - this.xSize) / 2;
@@ -70,8 +79,7 @@ public class GuiSchematicTier2Rocket extends GuiContainer implements ISchematicR
     }
 
     @Override
-    public void setPageIndex(int index)
-    {
+    public void setPageIndex(int index) {
         this.pageIndex = index;
     }
 }

@@ -2,88 +2,75 @@ package micdoodle8.mods.galacticraft.core.tile;
 
 import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
+import java.util.List;
 import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
 import net.minecraft.nbt.NBTTagCompound;
 
-import java.util.List;
-
-public class TileEntityFallenMeteor extends TileEntityAdvanced
-{
+public class TileEntityFallenMeteor extends TileEntityAdvanced {
     public static final int MAX_HEAT_LEVEL = 5000;
+
     @NetworkedField(targetSide = Side.CLIENT)
     public int heatLevel = TileEntityFallenMeteor.MAX_HEAT_LEVEL;
+
     private boolean sentOnePacket = false;
 
     @Override
-    public void updateEntity()
-    {
+    public void updateEntity() {
         super.updateEntity();
 
-        if (!this.worldObj.isRemote && this.heatLevel > 0)
-        {
+        if (!this.worldObj.isRemote && this.heatLevel > 0) {
             this.heatLevel--;
         }
     }
 
-    public int getHeatLevel()
-    {
+    public int getHeatLevel() {
         return this.heatLevel;
     }
 
-    public void setHeatLevel(int heatLevel)
-    {
+    public void setHeatLevel(int heatLevel) {
         this.heatLevel = heatLevel;
     }
 
-    public float getScaledHeatLevel()
-    {
+    public float getScaledHeatLevel() {
         return (float) this.heatLevel / TileEntityFallenMeteor.MAX_HEAT_LEVEL;
     }
 
     @Override
-    public void readExtraNetworkedData(ByteBuf dataStream)
-    {
-        if (this.worldObj.isRemote)
-        {
+    public void readExtraNetworkedData(ByteBuf dataStream) {
+        if (this.worldObj.isRemote) {
             this.worldObj.func_147479_m(this.xCoord, this.yCoord, this.zCoord);
         }
     }
 
     @Override
-    public void addExtraNetworkedData(List<Object> networkedList)
-    {
+    public void addExtraNetworkedData(List<Object> networkedList) {
         this.sentOnePacket = true;
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbt)
-    {
+    public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
         this.heatLevel = nbt.getInteger("MeteorHeatLevel");
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt)
-    {
+    public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         nbt.setInteger("MeteorHeatLevel", this.heatLevel);
     }
 
     @Override
-    public double getPacketRange()
-    {
+    public double getPacketRange() {
         return 50;
     }
 
     @Override
-    public int getPacketCooldown()
-    {
+    public int getPacketCooldown() {
         return this.sentOnePacket ? 100 : 1;
     }
 
     @Override
-    public boolean isNetworkedTile()
-    {
+    public boolean isNetworkedTile() {
         return true;
     }
 }

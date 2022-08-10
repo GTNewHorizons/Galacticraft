@@ -10,8 +10,7 @@ import net.minecraft.item.ItemStack;
 /**
  * Schematic page to be added to NASA Workbench
  */
-public interface ISchematicPage extends Comparable<ISchematicPage>
-{
+public interface ISchematicPage extends Comparable<ISchematicPage> {
     /**
      * Get the page ID. Make it configurable since it has to be unique between
      * other Galacticraft addons. Determines order of schematics.

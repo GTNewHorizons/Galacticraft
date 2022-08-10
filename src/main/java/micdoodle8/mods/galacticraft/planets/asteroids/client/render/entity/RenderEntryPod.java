@@ -5,23 +5,20 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModelCustom;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class RenderEntryPod extends Render
-{
-    public static final ResourceLocation textureEntryPod = new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/model/spacePod.png");
+public class RenderEntryPod extends Render {
+    public static final ResourceLocation textureEntryPod =
+            new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/model/spacePod.png");
     public static IModelCustom modelEntryPod;
 
-    public RenderEntryPod(IModelCustom model)
-    {
+    public RenderEntryPod(IModelCustom model) {
         modelEntryPod = model;
     }
 
     @Override
-    public void doRender(Entity entity, double par2, double par4, double par6, float par8, float par9)
-    {
+    public void doRender(Entity entity, double par2, double par4, double par6, float par8, float par9) {
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPushMatrix();
         final float var24 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * par9;
@@ -41,8 +38,7 @@ public class RenderEntryPod extends Render
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(Entity entity)
-    {
+    protected ResourceLocation getEntityTexture(Entity entity) {
         return textureEntryPod;
     }
 }

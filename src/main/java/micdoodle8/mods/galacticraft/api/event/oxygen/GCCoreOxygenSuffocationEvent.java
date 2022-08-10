@@ -11,12 +11,10 @@ import net.minecraftforge.event.entity.living.LivingEvent;
  * Be sure to make the proper checks before cancelling oxygen events... world
  * providers, armor equipped, etc.
  */
-public abstract class GCCoreOxygenSuffocationEvent extends LivingEvent
-{
+public abstract class GCCoreOxygenSuffocationEvent extends LivingEvent {
     public final WorldProvider provider;
 
-    public GCCoreOxygenSuffocationEvent(EntityLivingBase entity)
-    {
+    public GCCoreOxygenSuffocationEvent(EntityLivingBase entity) {
         super(entity);
         this.provider = entity.worldObj.provider;
     }
@@ -28,10 +26,8 @@ public abstract class GCCoreOxygenSuffocationEvent extends LivingEvent
      * IF THE PRE EVENT IS CANCELED, THE "WARNING: OXYGEN SETUP INVALID!" HUD MESSAGE WILL NOT BE SHOWN
      */
     @Cancelable
-    public static class Pre extends GCCoreOxygenSuffocationEvent
-    {
-        public Pre(EntityLivingBase entity)
-        {
+    public static class Pre extends GCCoreOxygenSuffocationEvent {
+        public Pre(EntityLivingBase entity) {
             super(entity);
         }
     }
@@ -42,10 +38,8 @@ public abstract class GCCoreOxygenSuffocationEvent extends LivingEvent
      * <p/>
      * The event is not called if the pre event was canceled
      */
-    public static class Post extends GCCoreOxygenSuffocationEvent
-    {
-        public Post(EntityLivingBase entity)
-        {
+    public static class Post extends GCCoreOxygenSuffocationEvent {
+        public Post(EntityLivingBase entity) {
             super(entity);
         }
     }

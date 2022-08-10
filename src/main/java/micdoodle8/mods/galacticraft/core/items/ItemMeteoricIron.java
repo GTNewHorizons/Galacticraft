@@ -10,12 +10,10 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemMeteoricIron extends Item
-{
+public class ItemMeteoricIron extends Item {
     private final String iconName;
 
-    public ItemMeteoricIron(String assetName)
-    {
+    public ItemMeteoricIron(String assetName) {
         super();
         this.iconName = assetName;
         this.setUnlocalizedName(assetName);
@@ -23,21 +21,18 @@ public class ItemMeteoricIron extends Item
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegister)
-    {
+    public void registerIcons(IIconRegister iconRegister) {
         this.itemIcon = iconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX_MOON + "" + this.iconName);
     }
 
     @Override
-    public CreativeTabs getCreativeTab()
-    {
+    public CreativeTabs getCreativeTab() {
         return GalacticraftCore.galacticraftItemsTab;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 }

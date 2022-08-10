@@ -3,12 +3,10 @@ package micdoodle8.mods.galacticraft.core.client.model.block;
 import net.minecraft.client.model.ModelLargeChest;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelTreasureChestLarge extends ModelLargeChest
-{
+public class ModelTreasureChestLarge extends ModelLargeChest {
     public ModelRenderer keyParts[] = new ModelRenderer[6];
 
-    public ModelTreasureChestLarge()
-    {
+    public ModelTreasureChestLarge() {
         super();
         this.textureWidth = 128;
         this.textureHeight = 64;
@@ -44,14 +42,10 @@ public class ModelTreasureChestLarge extends ModelLargeChest
         this.keyParts[5].rotationPointZ = 15.0F;
     }
 
-    public void renderAll(boolean withKey)
-    {
-        if (withKey)
-        {
-            for (final ModelRenderer nmtmr : this.keyParts)
-            {
-                if (!nmtmr.equals(this.keyParts[5]))
-                {
+    public void renderAll(boolean withKey) {
+        if (withKey) {
+            for (final ModelRenderer nmtmr : this.keyParts) {
+                if (!nmtmr.equals(this.keyParts[5])) {
                     nmtmr.rotationPointX = 16.0F;
                     nmtmr.rotationPointY = 7.0F;
                     nmtmr.rotationPointZ = -2.0F;

@@ -1,17 +1,17 @@
 package micdoodle8.mods.galacticraft.core.mixinplugin;
 
-import cpw.mods.fml.relauncher.FMLLaunchHandler;
+import static micdoodle8.mods.galacticraft.core.mixinplugin.TargetedMod.*;
 
+import cpw.mods.fml.relauncher.FMLLaunchHandler;
 import java.util.Arrays;
 import java.util.List;
-
-import static micdoodle8.mods.galacticraft.core.mixinplugin.TargetedMod.*;
 
 public enum Mixin {
 
     //
     // IMPORTANT: Do not make any references to any mod from this file. This file is loaded quite early on and if
-    // you refer to other mods you load them as well. The consequence is: You can't inject any previously loaded classes!
+    // you refer to other mods you load them as well. The consequence is: You can't inject any previously loaded
+    // classes!
     // Exception: Tags.java, as long as it is used for Strings only!
     //
 
@@ -25,7 +25,8 @@ public enum Mixin {
     EntityLivingBaseMixin("minecraft.EntityLivingBaseMixin", VANILLA),
     EntityMixin("minecraft.EntityMixin", Side.CLIENT, VANILLA),
     EntityRendererMixin("minecraft.EntityRendererMixin", Side.CLIENT, VANILLA),
-    EntityRendererWithoutOptifineMixin("minecraft.EntityRendererWithoutOptifineMixin", Side.CLIENT, true, false, VANILLA),
+    EntityRendererWithoutOptifineMixin(
+            "minecraft.EntityRendererWithoutOptifineMixin", Side.CLIENT, true, false, VANILLA),
     GuiSleepMPMxin("minecraft.GuiSleepMPMxin", Side.CLIENT, VANILLA),
     ItemRendererMixin("minecraft.ItemRendererMixin", Side.CLIENT, VANILLA),
     NetHandlerPlayClientMixin("minecraft.NetHandlerPlayClientMixin", Side.CLIENT, VANILLA),
@@ -39,7 +40,12 @@ public enum Mixin {
     private final boolean injectAlongPlayerAPI;
     private final boolean isInjectAlongOptifine;
 
-    Mixin(String mixinClass, Side side, boolean injectAlongPlayerAPI, boolean isInjectAlongOptifine, TargetedMod... targetedMods) {
+    Mixin(
+            String mixinClass,
+            Side side,
+            boolean injectAlongPlayerAPI,
+            boolean isInjectAlongOptifine,
+            TargetedMod... targetedMods) {
         this.mixinClass = mixinClass;
         this.targetedMods = Arrays.asList(targetedMods);
         this.side = side;
@@ -73,8 +79,8 @@ public enum Mixin {
 
     public boolean shouldLoad(List<TargetedMod> loadedMods) {
         return (side == Side.BOTH
-                || side == Side.SERVER && FMLLaunchHandler.side().isServer()
-                || side == Side.CLIENT && FMLLaunchHandler.side().isClient())
+                        || side == Side.SERVER && FMLLaunchHandler.side().isServer()
+                        || side == Side.CLIENT && FMLLaunchHandler.side().isClient())
                 && loadedMods.containsAll(targetedMods)
                 && (loadedMods.contains(PLAYER_API) == false || injectAlongPlayerAPI)
                 && (loadedMods.contains(OPTIFINE) == false || isInjectAlongOptifine);

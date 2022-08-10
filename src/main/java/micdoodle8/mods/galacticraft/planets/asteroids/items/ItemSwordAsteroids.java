@@ -10,25 +10,21 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 
-public class ItemSwordAsteroids extends ItemSword
-{
-    public ItemSwordAsteroids(String assetName)
-    {
+public class ItemSwordAsteroids extends ItemSword {
+    public ItemSwordAsteroids(String assetName) {
         super(AsteroidsItems.TOOL_TITANIUM);
         this.setUnlocalizedName(assetName);
         this.setTextureName(AsteroidsModule.TEXTURE_PREFIX + assetName);
     }
 
     @Override
-    public CreativeTabs getCreativeTab()
-    {
+    public CreativeTabs getCreativeTab() {
         return GalacticraftCore.galacticraftItemsTab;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 }

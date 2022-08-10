@@ -13,39 +13,29 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
-public class ItemArmorMars extends ItemArmor
-{
+public class ItemArmorMars extends ItemArmor {
     private final ArmorMaterial material;
 
-    public ItemArmorMars(ArmorMaterial par2EnumArmorMaterial, int par3, int par4)
-    {
+    public ItemArmorMars(ArmorMaterial par2EnumArmorMaterial, int par3, int par4) {
         super(par2EnumArmorMaterial, par3, par4);
         this.material = par2EnumArmorMaterial;
     }
 
     @Override
-    public Item setUnlocalizedName(String par1Str)
-    {
+    public Item setUnlocalizedName(String par1Str) {
         super.setTextureName(par1Str);
         super.setUnlocalizedName(par1Str);
         return this;
     }
 
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
-    {
-        if (this.material == MarsItems.ARMORDESH)
-        {
-            if (stack.getItem() == MarsItems.deshHelmet)
-            {
+    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
+        if (this.material == MarsItems.ARMORDESH) {
+            if (stack.getItem() == MarsItems.deshHelmet) {
                 return MarsModule.TEXTURE_PREFIX + "textures/model/armor/desh_1.png";
-            }
-            else if (stack.getItem() == MarsItems.deshChestplate || stack.getItem() == MarsItems.deshBoots)
-            {
+            } else if (stack.getItem() == MarsItems.deshChestplate || stack.getItem() == MarsItems.deshBoots) {
                 return MarsModule.TEXTURE_PREFIX + "textures/model/armor/desh_2.png";
-            }
-            else if (stack.getItem() == MarsItems.deshLeggings)
-            {
+            } else if (stack.getItem() == MarsItems.deshLeggings) {
                 return MarsModule.TEXTURE_PREFIX + "textures/model/armor/desh_3.png";
             }
         }
@@ -55,22 +45,20 @@ public class ItemArmorMars extends ItemArmor
 
     @SideOnly(Side.CLIENT)
     @Override
-    public CreativeTabs getCreativeTab()
-    {
+    public CreativeTabs getCreativeTab() {
         return GalacticraftCore.galacticraftItemsTab;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister par1IconRegister)
-    {
-        this.itemIcon = par1IconRegister.registerIcon(this.getUnlocalizedName().replace("item.", MarsModule.TEXTURE_PREFIX));
+    public void registerIcons(IIconRegister par1IconRegister) {
+        this.itemIcon =
+                par1IconRegister.registerIcon(this.getUnlocalizedName().replace("item.", MarsModule.TEXTURE_PREFIX));
     }
 }

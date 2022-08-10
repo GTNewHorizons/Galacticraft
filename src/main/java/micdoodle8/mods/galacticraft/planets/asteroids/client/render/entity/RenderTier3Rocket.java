@@ -11,32 +11,28 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModelCustom;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
-public class RenderTier3Rocket extends Render
-{
+public class RenderTier3Rocket extends Render {
     private ResourceLocation rocketTexture;
 
     protected IModelCustom rocketModelObj;
 
-    public RenderTier3Rocket(IModelCustom spaceshipModel, String textureDomain, String texture)
-    {
+    public RenderTier3Rocket(IModelCustom spaceshipModel, String textureDomain, String texture) {
         this.rocketModelObj = spaceshipModel;
         this.rocketTexture = new ResourceLocation(textureDomain, "textures/model/" + texture + ".png");
         this.shadowSize = 2F;
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
-    {
+    protected ResourceLocation getEntityTexture(Entity par1Entity) {
         return this.rocketTexture;
     }
 
-    public void renderSpaceship(EntitySpaceshipBase entity, double par2, double par4, double par6, float par8, float par9)
-    {
+    public void renderSpaceship(
+            EntitySpaceshipBase entity, double par2, double par4, double par6, float par8, float par9) {
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPushMatrix();
         final float var24 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * par9 + 180;
@@ -48,14 +44,13 @@ public class RenderTier3Rocket extends Render
         final float var28 = entity.rollAmplitude / 3 - par9;
         float var30 = entity.shipDamage - par9;
 
-        if (var30 < 0.0F)
-        {
+        if (var30 < 0.0F) {
             var30 = 0.0F;
         }
 
-        if (var28 > 0.0F)
-        {
-            final float i = entity.getLaunched() ? (5 - MathHelper.floor_double(entity.timeUntilLaunch / 85)) / 10F : 0.3F;
+        if (var28 > 0.0F) {
+            final float i =
+                    entity.getLaunched() ? (5 - MathHelper.floor_double(entity.timeUntilLaunch / 85)) / 10F : 0.3F;
             GL11.glRotatef(MathHelper.sin(var28) * var28 * i * par9, 1.0F, 0.0F, 0.0F);
             GL11.glRotatef(MathHelper.sin(var28) * var28 * i * par9, 1.0F, 0.0F, 1.0F);
         }
@@ -65,19 +60,16 @@ public class RenderTier3Rocket extends Render
         GL11.glScalef(0.9F, 0.9F, 0.9F);
 
         this.rocketModelObj.renderOnly("Boosters", "Rocket");
-        Vector3 teamColor = ClientUtil.updateTeamColor(FMLClientHandler.instance().getClient().thePlayer.getCommandSenderName(), true);
-        if (teamColor != null)
-        {
+        Vector3 teamColor = ClientUtil.updateTeamColor(
+                FMLClientHandler.instance().getClient().thePlayer.getCommandSenderName(), true);
+        if (teamColor != null) {
             GL11.glColor3f(teamColor.floatX(), teamColor.floatY(), teamColor.floatZ());
         }
         this.rocketModelObj.renderPart("NoseCone");
 
-        if (FMLClientHandler.instance().getClient().thePlayer.ticksExisted / 10 % 2 < 1)
-        {
+        if (FMLClientHandler.instance().getClient().thePlayer.ticksExisted / 10 % 2 < 1) {
             GL11.glColor3f(1, 0, 0);
-        }
-        else
-        {
+        } else {
             GL11.glColor3f(0, 1, 0);
         }
 
@@ -93,8 +85,7 @@ public class RenderTier3Rocket extends Render
     }
 
     @Override
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
-    {
+    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
         this.renderSpaceship((EntitySpaceshipBase) par1Entity, par2, par4, par6, par8, par9);
     }
 }

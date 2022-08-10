@@ -24,24 +24,32 @@ public class EntityRendererMixin {
         ClientProxyCore.orientCamera(partialTicks);
     }
 
-    @Redirect(method = "updateLightmap",
-            at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/client/multiplayer/WorldClient;getSunBrightness(F)F",
-                    ordinal = 0),
+    @Redirect(
+            method = "updateLightmap",
+            at =
+                    @At(
+                            value = "INVOKE",
+                            target = "Lnet/minecraft/client/multiplayer/WorldClient;getSunBrightness(F)F",
+                            ordinal = 0),
             require = 1)
     private float onUpdateLightmap(WorldClient world, float constOne) {
         return WorldUtil.getWorldBrightness(world);
     }
 
-    @Redirect(method = "updateFogColor",
-            at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/client/multiplayer/WorldClient;getSkyColor(Lnet/minecraft/entity/Entity;F)Lnet/minecraft/util/Vec3;"),
+    @Redirect(
+            method = "updateFogColor",
+            at =
+                    @At(
+                            value = "INVOKE",
+                            target =
+                                    "Lnet/minecraft/client/multiplayer/WorldClient;getSkyColor(Lnet/minecraft/entity/Entity;F)Lnet/minecraft/util/Vec3;"),
             require = 1)
     private Vec3 onUpdateSkyColor(WorldClient world, Entity entity, float v) {
         return WorldUtil.getSkyColorHook(world);
     }
 
-    @ModifyVariable(method = "updateLightmap",
+    @ModifyVariable(
+            method = "updateLightmap",
             at = @At(value = "CONSTANT", args = "intValue=255", shift = At.Shift.BEFORE),
             ordinal = 8,
             require = 1)
@@ -49,7 +57,8 @@ public class EntityRendererMixin {
         return WorldUtil.getColorRed(mc.theWorld) * value;
     }
 
-    @ModifyVariable(method = "updateLightmap",
+    @ModifyVariable(
+            method = "updateLightmap",
             at = @At(value = "CONSTANT", args = "intValue=255", shift = At.Shift.BEFORE),
             ordinal = 9,
             require = 1)
@@ -57,7 +66,8 @@ public class EntityRendererMixin {
         return WorldUtil.getColorGreen(mc.theWorld) * value;
     }
 
-    @ModifyVariable(method = "updateLightmap",
+    @ModifyVariable(
+            method = "updateLightmap",
             at = @At(value = "CONSTANT", args = "intValue=255", shift = At.Shift.BEFORE),
             ordinal = 10,
             require = 1)

@@ -12,34 +12,35 @@ import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderBuggy extends Render
-{
-    private static final ResourceLocation buggyTextureBody = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/buggyMain.png");
-    private static final ResourceLocation buggyTextureWheel = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/buggyWheels.png");
-    private static final ResourceLocation buggyTextureStorage = new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/buggyStorage.png");
+public class RenderBuggy extends Render {
+    private static final ResourceLocation buggyTextureBody =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/buggyMain.png");
+    private static final ResourceLocation buggyTextureWheel =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/buggyWheels.png");
+    private static final ResourceLocation buggyTextureStorage =
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/buggyStorage.png");
 
-    private final IModelCustom modelBuggy = AdvancedModelLoader.loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/buggy.obj"));
-    private final IModelCustom modelBuggyWheelRight = AdvancedModelLoader.loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/buggyWheelRight.obj"));
-    private final IModelCustom modelBuggyWheelLeft = AdvancedModelLoader.loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/buggyWheelLeft.obj"));
+    private final IModelCustom modelBuggy =
+            AdvancedModelLoader.loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/buggy.obj"));
+    private final IModelCustom modelBuggyWheelRight = AdvancedModelLoader.loadModel(
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/buggyWheelRight.obj"));
+    private final IModelCustom modelBuggyWheelLeft = AdvancedModelLoader.loadModel(
+            new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/buggyWheelLeft.obj"));
 
-    public RenderBuggy()
-    {
+    public RenderBuggy() {
         this.shadowSize = 2.0F;
     }
 
-    protected ResourceLocation func_110779_a(EntityBuggy par1EntityArrow)
-    {
+    protected ResourceLocation func_110779_a(EntityBuggy par1EntityArrow) {
         return RenderBuggy.buggyTextureBody;
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
-    {
+    protected ResourceLocation getEntityTexture(Entity par1Entity) {
         return this.func_110779_a((EntityBuggy) par1Entity);
     }
 
-    public void renderBuggy(EntityBuggy entity, double par2, double par4, double par6, float par8, float par9)
-    {
+    public void renderBuggy(EntityBuggy entity, double par2, double par4, double par6, float par8, float par9) {
         GL11.glPushMatrix();
         final float var24 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * par9;
         GL11.glTranslatef((float) par2, (float) par4 - 2.5F, (float) par6);
@@ -99,23 +100,20 @@ public class RenderBuggy extends Render
         // Radar Dish
         GL11.glPushMatrix();
         GL11.glTranslatef(-1.178F, 4.1F, -2.397F);
-        GL11.glRotatef((float)Math.sin(entity.ticksExisted * 0.05) * 50.0F, 1, 0, 0);
-        GL11.glRotatef((float)Math.cos(entity.ticksExisted * 0.1) * 50.0F, 0, 0, 1);
+        GL11.glRotatef((float) Math.sin(entity.ticksExisted * 0.05) * 50.0F, 1, 0, 0);
+        GL11.glRotatef((float) Math.cos(entity.ticksExisted * 0.1) * 50.0F, 0, 0, 1);
         this.modelBuggy.renderPart("RadarDish_Dish");
         GL11.glPopMatrix();
 
         this.bindTexture(RenderBuggy.buggyTextureStorage);
 
-        if (entity.buggyType > 0)
-        {
+        if (entity.buggyType > 0) {
             this.modelBuggy.renderPart("CargoLeft");
 
-            if (entity.buggyType > 1)
-            {
+            if (entity.buggyType > 1) {
                 this.modelBuggy.renderPart("CargoMid");
 
-                if (entity.buggyType > 2)
-                {
+                if (entity.buggyType > 2) {
                     this.modelBuggy.renderPart("CargoRight");
                 }
             }
@@ -125,8 +123,7 @@ public class RenderBuggy extends Render
     }
 
     @Override
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
-    {
+    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
         this.renderBuggy((EntityBuggy) par1Entity, par2, par4, par6, par8, par9);
     }
 }

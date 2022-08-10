@@ -2,6 +2,7 @@ package micdoodle8.mods.galacticraft.core.client.fx;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple;
@@ -13,17 +14,14 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
-import java.util.List;
-
 @SideOnly(Side.CLIENT)
-public class EntityFXLaunchFlame extends EntityFX
-{
+public class EntityFXLaunchFlame extends EntityFX {
     private float smokeParticleScale;
     private boolean spawnSmokeShort;
     private EntityLivingBase ridingEntity;
 
-    public EntityFXLaunchFlame(World par1World, Vector3 position, Vector3 motion, boolean launched, EntityLivingBase ridingEntity)
-    {
+    public EntityFXLaunchFlame(
+            World par1World, Vector3 position, Vector3 motion, boolean launched, EntityLivingBase ridingEntity) {
         super(par1World, position.x, position.y, position.z, 0.0D, 0.0D, 0.0D);
         this.motionX *= 0.10000000149011612D;
         this.motionY *= 0.10000000149011612D;
@@ -44,19 +42,17 @@ public class EntityFXLaunchFlame extends EntityFX
     }
 
     @Override
-    public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void renderParticle(
+            Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7) {
         GL11.glDepthMask(false);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         float var8 = (this.particleAge + par2) / this.particleMaxAge * 32.0F;
 
-        if (var8 < 0.0F)
-        {
+        if (var8 < 0.0F) {
             var8 = 0.0F;
         }
 
-        if (var8 > 1.0F)
-        {
+        if (var8 > 1.0F) {
             var8 = 1.0F;
         }
 
@@ -67,20 +63,33 @@ public class EntityFXLaunchFlame extends EntityFX
     }
 
     @Override
-    public void onUpdate()
-    {
+    public void onUpdate() {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
 
-        if (this.particleAge++ >= this.particleMaxAge)
-        {
-            GalacticraftCore.proxy.spawnParticle(this.spawnSmokeShort ? "whiteSmokeLaunched" : "whiteSmokeIdle", new Vector3(this.posX, this.posY + this.rand.nextDouble() * 2, this.posZ), new Vector3(this.motionX, this.motionY, this.motionZ), new Object[] {});
-            GalacticraftCore.proxy.spawnParticle(this.spawnSmokeShort ? "whiteSmokeLargeLaunched" : "whiteSmokeLargeIdle", new Vector3(this.posX, this.posY + this.rand.nextDouble() * 2, this.posZ), new Vector3(this.motionX, this.motionY, this.motionZ), new Object[] {});
-            if (!this.spawnSmokeShort)
-            {
-                GalacticraftCore.proxy.spawnParticle("whiteSmokeIdle", new Vector3(this.posX, this.posY + this.rand.nextDouble() * 2, this.posZ), new Vector3(this.motionX, this.motionY, this.motionZ), new Object[] {});
-                GalacticraftCore.proxy.spawnParticle("whiteSmokeLargeIdle", new Vector3(this.posX, this.posY + this.rand.nextDouble() * 2, this.posZ), new Vector3(this.motionX, this.motionY, this.motionZ), new Object[] {});
+        if (this.particleAge++ >= this.particleMaxAge) {
+            GalacticraftCore.proxy.spawnParticle(
+                    this.spawnSmokeShort ? "whiteSmokeLaunched" : "whiteSmokeIdle",
+                    new Vector3(this.posX, this.posY + this.rand.nextDouble() * 2, this.posZ),
+                    new Vector3(this.motionX, this.motionY, this.motionZ),
+                    new Object[] {});
+            GalacticraftCore.proxy.spawnParticle(
+                    this.spawnSmokeShort ? "whiteSmokeLargeLaunched" : "whiteSmokeLargeIdle",
+                    new Vector3(this.posX, this.posY + this.rand.nextDouble() * 2, this.posZ),
+                    new Vector3(this.motionX, this.motionY, this.motionZ),
+                    new Object[] {});
+            if (!this.spawnSmokeShort) {
+                GalacticraftCore.proxy.spawnParticle(
+                        "whiteSmokeIdle",
+                        new Vector3(this.posX, this.posY + this.rand.nextDouble() * 2, this.posZ),
+                        new Vector3(this.motionX, this.motionY, this.motionZ),
+                        new Object[] {});
+                GalacticraftCore.proxy.spawnParticle(
+                        "whiteSmokeLargeIdle",
+                        new Vector3(this.posX, this.posY + this.rand.nextDouble() * 2, this.posZ),
+                        new Vector3(this.motionX, this.motionY, this.motionZ),
+                        new Object[] {});
             }
             this.setDead();
         }
@@ -91,8 +100,7 @@ public class EntityFXLaunchFlame extends EntityFX
 
         this.particleGreen += 0.01F;
 
-        if (this.posY == this.prevPosY)
-        {
+        if (this.posY == this.prevPosY) {
             this.motionX *= 1.1D;
             this.motionZ *= 1.1D;
         }
@@ -101,20 +109,18 @@ public class EntityFXLaunchFlame extends EntityFX
         this.motionY *= 0.9599999785423279D;
         this.motionZ *= 0.9599999785423279D;
 
-        final List<?> var3 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(1.0D, 0.5D, 1.0D));
+        final List<?> var3 =
+                this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(1.0D, 0.5D, 1.0D));
 
-        if (var3 != null)
-        {
-            for (int var4 = 0; var4 < var3.size(); ++var4)
-            {
+        if (var3 != null) {
+            for (int var4 = 0; var4 < var3.size(); ++var4) {
                 final Entity var5 = (Entity) var3.get(var4);
 
-                if (var5 instanceof EntityLivingBase)
-                {
-                    if (!var5.isDead && !var5.isBurning() && !var5.equals(this.ridingEntity))
-                    {
+                if (var5 instanceof EntityLivingBase) {
+                    if (!var5.isDead && !var5.isBurning() && !var5.equals(this.ridingEntity)) {
                         var5.setFire(3);
-                        GalacticraftCore.packetPipeline.sendToServer(new PacketSimple(EnumSimplePacket.S_SET_ENTITY_FIRE, new Object[] { var5.getEntityId() }));
+                        GalacticraftCore.packetPipeline.sendToServer(new PacketSimple(
+                                EnumSimplePacket.S_SET_ENTITY_FIRE, new Object[] {var5.getEntityId()}));
                     }
                 }
             }
@@ -122,14 +128,12 @@ public class EntityFXLaunchFlame extends EntityFX
     }
 
     @Override
-    public int getBrightnessForRender(float par1)
-    {
+    public int getBrightnessForRender(float par1) {
         return 15728880;
     }
 
     @Override
-    public float getBrightness(float par1)
-    {
+    public float getBrightness(float par1) {
         return 1.0F;
     }
 }

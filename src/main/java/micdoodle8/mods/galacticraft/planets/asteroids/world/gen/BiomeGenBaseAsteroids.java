@@ -9,26 +9,28 @@ import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 
-public class BiomeGenBaseAsteroids extends BiomeGenBase
-{
-    public static final BiomeGenBase asteroid = new BiomeGenBaseAsteroids(ConfigManagerCore.biomeIDbase + 2).setBiomeName("asteroids");
+public class BiomeGenBaseAsteroids extends BiomeGenBase {
+    public static final BiomeGenBase asteroid =
+            new BiomeGenBaseAsteroids(ConfigManagerCore.biomeIDbase + 2).setBiomeName("asteroids");
 
     @SuppressWarnings("unchecked")
-    private BiomeGenBaseAsteroids(int var1)
-    {
+    private BiomeGenBaseAsteroids(int var1) {
         super(var1);
         this.spawnableWaterCreatureList.clear();
         this.spawnableCreatureList.clear();
         this.resetMonsterListByMode(ConfigManagerCore.challengeMobDropsAndSpawning);
         this.rainfall = 0F;
-        if (!ConfigManagerCore.disableBiomeTypeRegistrations)
-        {
-            BiomeDictionary.registerBiomeType(this, BiomeDictionary.Type.COLD, BiomeDictionary.Type.DRY, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.SPOOKY);
+        if (!ConfigManagerCore.disableBiomeTypeRegistrations) {
+            BiomeDictionary.registerBiomeType(
+                    this,
+                    BiomeDictionary.Type.COLD,
+                    BiomeDictionary.Type.DRY,
+                    BiomeDictionary.Type.DEAD,
+                    BiomeDictionary.Type.SPOOKY);
         }
     }
-    
-    public void resetMonsterListByMode(boolean challengeMode)
-    {
+
+    public void resetMonsterListByMode(boolean challengeMode) {
         this.spawnableMonsterList.clear();
         this.spawnableMonsterList.add(new SpawnListEntry(EntityEvolvedZombie.class, 3000, 1, 3));
         this.spawnableMonsterList.add(new SpawnListEntry(EntityEvolvedSpider.class, 2000, 1, 2));
@@ -38,14 +40,12 @@ public class BiomeGenBaseAsteroids extends BiomeGenBase
     }
 
     @Override
-    public BiomeGenBaseAsteroids setColor(int var1)
-    {
+    public BiomeGenBaseAsteroids setColor(int var1) {
         return (BiomeGenBaseAsteroids) super.setColor(var1);
     }
 
     @Override
-    public float getSpawningChance()
-    {
+    public float getSpawningChance() {
         return 0.01F;
     }
 }

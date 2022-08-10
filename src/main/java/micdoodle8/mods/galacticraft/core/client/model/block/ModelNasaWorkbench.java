@@ -4,8 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelNasaWorkbench extends ModelBase
-{
+public class ModelNasaWorkbench extends ModelBase {
     ModelRenderer base1a;
     ModelRenderer baseAux1;
     ModelRenderer base1b;
@@ -41,18 +40,16 @@ public class ModelNasaWorkbench extends ModelBase
     ModelRenderer sensorDish;
     ModelRenderer sensor;
 
-    public ModelNasaWorkbench()
-    {
+    public ModelNasaWorkbench() {
         this(0.0F);
     }
 
-    public ModelNasaWorkbench(float var1)
-    {
+    public ModelNasaWorkbench(float var1) {
         this.textureWidth = 256;
         this.textureHeight = 128;
 
-        float halfPI = (float)(Math.PI / 2.0);
-        
+        float halfPI = (float) (Math.PI / 2.0);
+
         this.base1a = new ModelRenderer(this, 113, 24);
         this.base1a.addBox(-2.5F, -2F, -7.5F, 5, 2, 15);
         this.base1a.setRotationPoint(0F, 24F, 0F);
@@ -259,15 +256,13 @@ public class ModelNasaWorkbench extends ModelBase
         this.setRotation(this.sensor, 0F, 0F, -0.3005353F);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
 
-    public void renderAll()
-    {
+    public void renderAll() {
         this.base1a.render(0.0625F);
         this.baseAux1.render(0.0625F);
         this.base1b.render(0.0625F);
@@ -305,13 +300,11 @@ public class ModelNasaWorkbench extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity e)
-    {
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity e) {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, e);
     }
 
-    private float toRadians(float f)
-    {
+    private float toRadians(float f) {
         return (float) (f * (Math.PI / 180.0F));
     }
 }

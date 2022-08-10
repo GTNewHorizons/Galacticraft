@@ -1,35 +1,29 @@
 package micdoodle8.mods.galacticraft.api.galaxies;
 
-public class Moon extends CelestialBody implements IChildBody
-{
+public class Moon extends CelestialBody implements IChildBody {
     protected Planet parentPlanet = null;
 
-    public Moon(String moonName)
-    {
+    public Moon(String moonName) {
         super(moonName);
     }
 
-    public Moon setParentPlanet(Planet planet)
-    {
+    public Moon setParentPlanet(Planet planet) {
         this.parentPlanet = planet;
         return this;
     }
 
     @Override
-    public int getID()
-    {
+    public int getID() {
         return GalaxyRegistry.getMoonID(this.bodyName);
     }
 
     @Override
-    public String getUnlocalizedNamePrefix()
-    {
+    public String getUnlocalizedNamePrefix() {
         return "moon";
     }
 
     @Override
-    public Planet getParentPlanet()
-    {
+    public Planet getParentPlanet() {
         return this.parentPlanet;
     }
 }

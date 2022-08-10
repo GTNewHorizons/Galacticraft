@@ -6,6 +6,15 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import gregtech.api.util.GT_ModHandler;
+import java.io.File;
+import java.lang.reflect.Method;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
@@ -54,23 +63,12 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.oredict.RecipeSorter;
 
-import java.io.File;
-import java.lang.reflect.Method;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-
-public class AsteroidsModule implements IPlanetsModule
-{
+public class AsteroidsModule implements IPlanetsModule {
     public static Planet planetAsteroids;
     private File GCPlanetsSource;
 
@@ -86,22 +84,23 @@ public class AsteroidsModule implements IPlanetsModule
     public static Fluid fluidLiquidNitrogen;
     public static Fluid fluidLiquidArgon;
     public static Fluid fluidAtmosphericGases;
-    //public static Fluid fluidCO2Gas;
+    // public static Fluid fluidCO2Gas;
 
-    private Fluid registerFluid(String fluidName, int density, int viscosity, int temperature, boolean gaseous)
-    {
+    private Fluid registerFluid(String fluidName, int density, int viscosity, int temperature, boolean gaseous) {
         Fluid returnFluid = FluidRegistry.getFluid(fluidName);
-    	if (returnFluid == null)
-        {
-    		FluidRegistry.registerFluid(new Fluid(fluidName).setDensity(density).setViscosity(viscosity).setTemperature(temperature).setGaseous(gaseous));
-    		returnFluid = FluidRegistry.getFluid(fluidName);
+        if (returnFluid == null) {
+            FluidRegistry.registerFluid(new Fluid(fluidName)
+                    .setDensity(density)
+                    .setViscosity(viscosity)
+                    .setTemperature(temperature)
+                    .setGaseous(gaseous));
+            returnFluid = FluidRegistry.getFluid(fluidName);
         }
-    	return returnFluid;
+        return returnFluid;
     }
 
     @Override
-    public void preInit(FMLPreInitializationEvent event)
-    {
+    public void preInit(FMLPreInitializationEvent event) {
         GCPlanetsSource = event.getSourceFile();
         playerHandler = new AsteroidsPlayerHandler();
         MinecraftForge.EVENT_BUS.register(playerHandler);
@@ -109,12 +108,16 @@ public class AsteroidsModule implements IPlanetsModule
         AsteroidsEventHandler eventHandler = new AsteroidsEventHandler();
         MinecraftForge.EVENT_BUS.register(eventHandler);
         FMLCommonHandler.instance().bus().register(eventHandler);
-        RecipeSorter.register("galacticraftmars:canisterRecipe", CanisterRecipes.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+        RecipeSorter.register(
+                "galacticraftmars:canisterRecipe",
+                CanisterRecipes.class,
+                RecipeSorter.Category.SHAPELESS,
+                "after:minecraft:shapeless");
 
         AsteroidsModule.fluidMethaneGas = registerFluid("methane", 1, 11, 295, true);
         AsteroidsModule.fluidAtmosphericGases = registerFluid("atmosphericgases", 1, 13, 295, true);
         AsteroidsModule.fluidLiquidMethane = registerFluid("liquidmethane", 450, 120, 109, false);
-        //Data source for liquid methane: http://science.nasa.gov/science-news/science-at-nasa/2005/25feb_titan2/
+        // Data source for liquid methane: http://science.nasa.gov/science-news/science-at-nasa/2005/25feb_titan2/
         AsteroidsModule.fluidLiquidOxygen = registerFluid("liquidoxygen", 1141, 140, 90, false);
         AsteroidsModule.fluidOxygenGas = registerFluid("oxygen", 1, 13, 295, true);
         AsteroidsModule.fluidLiquidNitrogen = registerFluid("liquidnitrogen", 808, 130, 90, false);
@@ -125,26 +128,34 @@ public class AsteroidsModule implements IPlanetsModule
         AsteroidsModule.fluidLiquidArgon = registerFluid("liquidargon", 900, 100, 87, false);
         registerFluid("helium", 1, 1, 295, true);
 
-        //AsteroidsModule.fluidCO2Gas = FluidRegistry.getFluid("carbondioxide");
+        // AsteroidsModule.fluidCO2Gas = FluidRegistry.getFluid("carbondioxide");
 
         AsteroidBlocks.initBlocks();
         AsteroidBlocks.registerBlocks();
         AsteroidBlocks.setHarvestLevels();
         AsteroidBlocks.oreDictRegistration();
-        
+
         AsteroidsItems.initItems();
-        
-        FluidContainerRegistry.registerFluidContainer(new FluidContainerData(new FluidStack(AsteroidsModule.fluidMethaneGas, 1000), new ItemStack(AsteroidsItems.methaneCanister, 1, 1), new ItemStack(GCItems.oilCanister, 1, ItemCanisterGeneric.EMPTY)));
-        FluidContainerRegistry.registerFluidContainer(new FluidContainerData(new FluidStack(AsteroidsModule.fluidLiquidOxygen, 1000), new ItemStack(AsteroidsItems.canisterLOX, 1, 1), new ItemStack(GCItems.oilCanister, 1, ItemCanisterGeneric.EMPTY)));
-        FluidContainerRegistry.registerFluidContainer(new FluidContainerData(new FluidStack(AsteroidsModule.fluidLiquidNitrogen, 1000), new ItemStack(AsteroidsItems.canisterLN2, 1, 1), new ItemStack(GCItems.oilCanister, 1, ItemCanisterGeneric.EMPTY)));
+
+        FluidContainerRegistry.registerFluidContainer(new FluidContainerData(
+                new FluidStack(AsteroidsModule.fluidMethaneGas, 1000),
+                new ItemStack(AsteroidsItems.methaneCanister, 1, 1),
+                new ItemStack(GCItems.oilCanister, 1, ItemCanisterGeneric.EMPTY)));
+        FluidContainerRegistry.registerFluidContainer(new FluidContainerData(
+                new FluidStack(AsteroidsModule.fluidLiquidOxygen, 1000),
+                new ItemStack(AsteroidsItems.canisterLOX, 1, 1),
+                new ItemStack(GCItems.oilCanister, 1, ItemCanisterGeneric.EMPTY)));
+        FluidContainerRegistry.registerFluidContainer(new FluidContainerData(
+                new FluidStack(AsteroidsModule.fluidLiquidNitrogen, 1000),
+                new ItemStack(AsteroidsItems.canisterLN2, 1, 1),
+                new ItemStack(GCItems.oilCanister, 1, ItemCanisterGeneric.EMPTY)));
     }
 
     @Override
-    public void init(FMLInitializationEvent event)
-    {
+    public void init(FMLInitializationEvent event) {
         this.registerMicroBlocks();
-    	SchematicRegistry.registerSchematicRecipe(new SchematicTier3Rocket());
-    	SchematicRegistry.registerSchematicRecipe(new SchematicAstroMiner());
+        SchematicRegistry.registerSchematicRecipe(new SchematicTier3Rocket());
+        SchematicRegistry.registerSchematicRecipe(new SchematicAstroMiner());
 
         GalacticraftCore.packetPipeline.addDiscriminator(7, PacketSimpleAsteroids.class);
 
@@ -157,14 +168,20 @@ public class AsteroidsModule implements IPlanetsModule
         RecipeManagerAsteroids.loadRecipes();
 
         AsteroidsModule.planetAsteroids = new Planet("asteroids").setParentSolarSystem(GalacticraftCore.solarSystemSol);
-        AsteroidsModule.planetAsteroids.setDimensionInfo(ConfigManagerAsteroids.dimensionIDAsteroids, WorldProviderAsteroids.class).setTierRequired(3);
-        AsteroidsModule.planetAsteroids.setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(1.375F, 1.375F)).setRelativeOrbitTime(45.0F).setPhaseShift((float) (Math.random() * (2 * Math.PI)));
-        AsteroidsModule.planetAsteroids.setBodyIcon(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/celestialbodies/asteroid.png"));
+        AsteroidsModule.planetAsteroids
+                .setDimensionInfo(ConfigManagerAsteroids.dimensionIDAsteroids, WorldProviderAsteroids.class)
+                .setTierRequired(3);
+        AsteroidsModule.planetAsteroids
+                .setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(1.375F, 1.375F))
+                .setRelativeOrbitTime(45.0F)
+                .setPhaseShift((float) (Math.random() * (2 * Math.PI)));
+        AsteroidsModule.planetAsteroids.setBodyIcon(
+                new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/celestialbodies/asteroid.png"));
 
         GalaxyRegistry.registerPlanet(AsteroidsModule.planetAsteroids);
         GalacticraftRegistry.registerTeleportType(WorldProviderAsteroids.class, new TeleportTypeAsteroids());
 
-        //Handled by Galaxy Space
+        // Handled by Galaxy Space
         HashMap<Integer, ItemStack> input = new HashMap<Integer, ItemStack>();
         /*input.put(1, new ItemStack(AsteroidsItems.heavyNoseCone));
         input.put(2, new ItemStack(AsteroidsItems.basicItem, 1, 0));
@@ -231,23 +248,23 @@ public class AsteroidsModule implements IPlanetsModule
         input2.put(21, new ItemStack(Blocks.chest));
         GalacticraftRegistry.addT3RocketRecipe(new NasaWorkbenchRecipe(new ItemStack(AsteroidsItems.tier3Rocket, 1, 3), input2));*/
 
-        for(int i = 1; i <= 8; i++) {
+        for (int i = 1; i <= 8; i++) {
             input.put(i, new ItemStack(MarsItems.marsItemBasic, 1, 3));
         }
         input.put(9, new ItemStack(GCItems.flagPole));
         input.put(10, new ItemStack(GCItems.flagPole));
-        for(int i = 11; i <= 13; i++) {
+        for (int i = 11; i <= 13; i++) {
             input.put(i, new ItemStack(AsteroidsItems.basicItem));
         }
-        for(int i = 14; i <= 17; i++) {
+        for (int i = 14; i <= 17; i++) {
             input.put(i, new ItemStack(AsteroidsItems.orionDrive));
         }
-        if(GalacticraftCore.isGalaxySpaceLoaded) {
+        if (GalacticraftCore.isGalaxySpaceLoaded) {
             input.put(18, GT_ModHandler.getModItem(Constants.MOD_ID_GALAXYSPACE, "item.RocketControlComputer", 1, 102));
         }
         input.put(19, new ItemStack(GCItems.basicItem, 1, 14));
         input.put(20, new ItemStack(GCItems.basicItem, 1, 14));
-        for(int i = 21; i <= 23; i++) {
+        for (int i = 21; i <= 23; i++) {
             input.put(i, new ItemStack(GCItems.heavyPlatingTier1));
         }
         input.put(24, RecipeUtil.getChestItemStack(1, 1));
@@ -256,93 +273,78 @@ public class AsteroidsModule implements IPlanetsModule
         input.put(27, new ItemStack(AsteroidBlocks.beamReceiver));
         input.put(28, GT_ModHandler.getModItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01", 1, 32603));
         input.put(29, GT_ModHandler.getModItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01", 1, 32603));
-        GalacticraftRegistry.addAstroMinerRecipe(new NasaWorkbenchRecipe(new ItemStack(AsteroidsItems.astroMiner, 1, 0), input));
+        GalacticraftRegistry.addAstroMinerRecipe(
+                new NasaWorkbenchRecipe(new ItemStack(AsteroidsItems.astroMiner, 1, 0), input));
     }
 
     @Override
-    public void postInit(FMLPostInitializationEvent event)
-    {
+    public void postInit(FMLPostInitializationEvent event) {
         try {
             ZipFile zf = new ZipFile(GCPlanetsSource);
             final Pattern assetENUSLang = Pattern.compile("assets/(.*)/lang/(?:.+/|)([\\w_-]+).lang");
-            for (ZipEntry ze : Collections.list(zf.entries()))
-            {
+            for (ZipEntry ze : Collections.list(zf.entries())) {
                 if (!ze.getName().contains("galacticraftasteroids/lang")) continue;
                 Matcher matcher = assetENUSLang.matcher(ze.getName());
-                if (matcher.matches())
-                {
+                if (matcher.matches()) {
                     String lang = matcher.group(2);
-                    LanguageRegistry.instance().injectLanguage(lang, StringTranslate.parseLangFile(zf.getInputStream(ze)));
-                    if ("en_US".equals(lang) && event.getSide() == Side.SERVER)
-                    {
+                    LanguageRegistry.instance()
+                            .injectLanguage(lang, StringTranslate.parseLangFile(zf.getInputStream(ze)));
+                    if ("en_US".equals(lang) && event.getSide() == Side.SERVER) {
                         StringTranslate.inject(zf.getInputStream(ze));
                     }
                 }
             }
             zf.close();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     @Override
-    public void serverStarting(FMLServerStartingEvent event)
-    {
+    public void serverStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new CommandGCAstroMiner());
         ChunkProviderAsteroids.reset();
     }
 
     @Override
-    public void serverInit(FMLServerStartedEvent event)
-    {
+    public void serverInit(FMLServerStartedEvent event) {
         AsteroidsTickHandlerServer.restart();
     }
 
     @Override
-    public void getGuiIDs(List<Integer> idList)
-    {
+    public void getGuiIDs(List<Integer> idList) {
         idList.add(GuiIdsPlanets.MACHINE_ASTEROIDS);
     }
 
     @Override
-    public Object getGuiElement(Side side, int ID, EntityPlayer player, World world, int x, int y, int z)
-    {
-        if (side == Side.SERVER)
-        {
-	        TileEntity tile = world.getTileEntity(x, y, z);
-	
-	        switch (ID)
-	        {
-	        case GuiIdsPlanets.MACHINE_ASTEROIDS:
-	
-	            if (tile instanceof TileEntityShortRangeTelepad)
-	            {
-	                return new ContainerShortRangeTelepad(player.inventory, ((TileEntityShortRangeTelepad) tile));
-	            }
-	            if (tile instanceof TileEntityMinerBase)
-	            {
-	            	return new ContainerAstroMinerDock(player.inventory, (TileEntityMinerBase) tile);
-	            }
-	
-	            break;
-	        }
+    public Object getGuiElement(Side side, int ID, EntityPlayer player, World world, int x, int y, int z) {
+        if (side == Side.SERVER) {
+            TileEntity tile = world.getTileEntity(x, y, z);
+
+            switch (ID) {
+                case GuiIdsPlanets.MACHINE_ASTEROIDS:
+                    if (tile instanceof TileEntityShortRangeTelepad) {
+                        return new ContainerShortRangeTelepad(player.inventory, ((TileEntityShortRangeTelepad) tile));
+                    }
+                    if (tile instanceof TileEntityMinerBase) {
+                        return new ContainerAstroMinerDock(player.inventory, (TileEntityMinerBase) tile);
+                    }
+
+                    break;
+            }
         }
 
         return null;
     }
 
-    private void registerEntities()
-    {
+    private void registerEntities() {
         this.registerCreatures();
         this.registerNonMobEntities();
         this.registerTileEntities();
     }
 
-    private void registerCreatures()
-    {
+    private void registerCreatures() {}
 
-    }
-
-    private void registerNonMobEntities()
-    {
+    private void registerNonMobEntities() {
         MarsModule.registerGalacticraftNonMobEntity(EntitySmallAsteroid.class, "SmallAsteroidGC", 150, 3, true);
         MarsModule.registerGalacticraftNonMobEntity(EntityGrapple.class, "GrappleHookGC", 150, 1, true);
         MarsModule.registerGalacticraftNonMobEntity(EntityTier3Rocket.class, "Tier3RocketGC", 150, 1, false);
@@ -350,33 +352,41 @@ public class AsteroidsModule implements IPlanetsModule
         MarsModule.registerGalacticraftNonMobEntity(EntityAstroMiner.class, "AstroMiner", 80, 1, true);
     }
 
-    private void registerMicroBlocks()
-    {
-		try {
-			Class clazz = Class.forName("codechicken.microblock.MicroMaterialRegistry");
-			if (clazz != null)
-			{
-				Method registerMethod = null;
-				Method[] methodz = clazz.getMethods();
-				for (Method m : methodz)
-				{
-					if (m.getName().equals("registerMaterial"))
-					{
-						registerMethod = m;
-						break;
-					}
-				}
-				Class clazzbm = Class.forName("codechicken.microblock.BlockMicroMaterial");
-				registerMethod.invoke(null, clazzbm.getConstructor(Block.class, int.class).newInstance(AsteroidBlocks.blockBasic, 0), "tile.asteroidsBlock.asteroid0");
-				registerMethod.invoke(null, clazzbm.getConstructor(Block.class, int.class).newInstance(AsteroidBlocks.blockBasic, 1), "tile.asteroidsBlock.asteroid1");
-				registerMethod.invoke(null, clazzbm.getConstructor(Block.class, int.class).newInstance(AsteroidBlocks.blockBasic, 2), "tile.asteroidsBlock.asteroid2");
-				registerMethod.invoke(null, clazzbm.getConstructor(Block.class, int.class).newInstance(AsteroidBlocks.blockDenseIce, 0), "tile.denseIce");
-			}
-		} catch (Exception e) {}
-	}
+    private void registerMicroBlocks() {
+        try {
+            Class clazz = Class.forName("codechicken.microblock.MicroMaterialRegistry");
+            if (clazz != null) {
+                Method registerMethod = null;
+                Method[] methodz = clazz.getMethods();
+                for (Method m : methodz) {
+                    if (m.getName().equals("registerMaterial")) {
+                        registerMethod = m;
+                        break;
+                    }
+                }
+                Class clazzbm = Class.forName("codechicken.microblock.BlockMicroMaterial");
+                registerMethod.invoke(
+                        null,
+                        clazzbm.getConstructor(Block.class, int.class).newInstance(AsteroidBlocks.blockBasic, 0),
+                        "tile.asteroidsBlock.asteroid0");
+                registerMethod.invoke(
+                        null,
+                        clazzbm.getConstructor(Block.class, int.class).newInstance(AsteroidBlocks.blockBasic, 1),
+                        "tile.asteroidsBlock.asteroid1");
+                registerMethod.invoke(
+                        null,
+                        clazzbm.getConstructor(Block.class, int.class).newInstance(AsteroidBlocks.blockBasic, 2),
+                        "tile.asteroidsBlock.asteroid2");
+                registerMethod.invoke(
+                        null,
+                        clazzbm.getConstructor(Block.class, int.class).newInstance(AsteroidBlocks.blockDenseIce, 0),
+                        "tile.denseIce");
+            }
+        } catch (Exception e) {
+        }
+    }
 
-    private void registerTileEntities()
-    {
+    private void registerTileEntities() {
         GameRegistry.registerTileEntity(TileEntityBeamReflector.class, "Beam Reflector");
         GameRegistry.registerTileEntity(TileEntityBeamReceiver.class, "Beam Receiver");
         GameRegistry.registerTileEntity(TileEntityShortRangeTelepad.class, "Short Range Telepad");
@@ -387,14 +397,12 @@ public class AsteroidsModule implements IPlanetsModule
     }
 
     @Override
-    public Configuration getConfiguration()
-    {
+    public Configuration getConfiguration() {
         return ConfigManagerAsteroids.config;
     }
 
     @Override
-    public void syncConfig()
-    {
+    public void syncConfig() {
         ConfigManagerAsteroids.syncConfig(false, false);
     }
 }

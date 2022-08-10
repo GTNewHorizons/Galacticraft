@@ -5,8 +5,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 /**
  * Used for colored pipes to set/get colors
  */
-public interface IColorable
-{
+public interface IColorable {
     /**
      * Sets the color of the tile
      *

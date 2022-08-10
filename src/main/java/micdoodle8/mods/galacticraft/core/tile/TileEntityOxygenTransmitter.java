@@ -14,28 +14,23 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 
-@SuppressWarnings({ "unchecked", "rawtypes" })
-public abstract class TileEntityOxygenTransmitter extends TileEntityAdvanced implements ITransmitter
-{
+@SuppressWarnings({"unchecked", "rawtypes"})
+public abstract class TileEntityOxygenTransmitter extends TileEntityAdvanced implements ITransmitter {
     private IGridNetwork network;
 
     public TileEntity[] adjacentConnections = null;
 
     @Override
-    public void validate()
-    {
-    	super.validate();
-    	if (!this.worldObj.isRemote)
-    	{
-    		TickHandlerServer.oxygenTransmitterUpdates.add(this);
-    	}
+    public void validate() {
+        super.validate();
+        if (!this.worldObj.isRemote) {
+            TickHandlerServer.oxygenTransmitterUpdates.add(this);
+        }
     }
 
     @Override
-    public void invalidate()
-    {
-        if (!this.worldObj.isRemote)
-        {
+    public void invalidate() {
+        if (!this.worldObj.isRemote) {
             this.getNetwork().split(this);
         }
 
@@ -43,23 +38,19 @@ public abstract class TileEntityOxygenTransmitter extends TileEntityAdvanced imp
     }
 
     @Override
-    public void onChunkUnload()
-    {
+    public void onChunkUnload() {
         super.invalidate();
-    	super.onChunkUnload();
+        super.onChunkUnload();
     }
 
     @Override
-    public boolean canUpdate()
-    {
+    public boolean canUpdate() {
         return false;
     }
 
     @Override
-    public IGridNetwork getNetwork()
-    {
-        if (this.network == null)
-        {
+    public IGridNetwork getNetwork() {
+        if (this.network == null) {
             this.resetNetwork();
         }
 
@@ -67,40 +58,33 @@ public abstract class TileEntityOxygenTransmitter extends TileEntityAdvanced imp
     }
 
     @Override
-    public void onNetworkChanged()
-    {
+    public void onNetworkChanged() {}
 
-    }
-
-    protected void resetNetwork()
-    {
+    protected void resetNetwork() {
         OxygenNetwork network = new OxygenNetwork();
         network.getTransmitters().add(this);
         this.setNetwork(network);
     }
 
     @Override
-    public void setNetwork(IGridNetwork network)
-    {
+    public void setNetwork(IGridNetwork network) {
         this.network = network;
     }
 
     @Override
-    public void refresh()
-    {
-        if (!this.worldObj.isRemote)
-        {
+    public void refresh() {
+        if (!this.worldObj.isRemote) {
             this.adjacentConnections = null;
 
-            for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS)
-            {
+            for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
                 TileEntity tileEntity = new BlockVec3(this).getTileEntityOnSide(this.worldObj, side);
 
-                if (tileEntity != null)
-                {
-                    if (tileEntity.getClass() == this.getClass() && tileEntity instanceof INetworkProvider && !this.getNetwork().equals(((INetworkProvider) tileEntity).getNetwork()))
-                    {
-                        this.setNetwork((IGridNetwork) this.getNetwork().merge(((INetworkProvider) tileEntity).getNetwork()));
+                if (tileEntity != null) {
+                    if (tileEntity.getClass() == this.getClass()
+                            && tileEntity instanceof INetworkProvider
+                            && !this.getNetwork().equals(((INetworkProvider) tileEntity).getNetwork())) {
+                        this.setNetwork(
+                                (IGridNetwork) this.getNetwork().merge(((INetworkProvider) tileEntity).getNetwork()));
                     }
                 }
             }
@@ -110,13 +94,11 @@ public abstract class TileEntityOxygenTransmitter extends TileEntityAdvanced imp
     }
 
     @Override
-    public TileEntity[] getAdjacentConnections()
-    {
+    public TileEntity[] getAdjacentConnections() {
         /**
          * Cache the adjacentConnections.
          */
-        if (this.adjacentConnections == null)
-        {
+        if (this.adjacentConnections == null) {
             this.adjacentConnections = OxygenUtil.getAdjacentOxygenConnections(this);
             // this.adjacentConnections = new TileEntity[6];
             //
@@ -141,22 +123,19 @@ public abstract class TileEntityOxygenTransmitter extends TileEntityAdvanced imp
     }
 
     @Override
-    public boolean canConnect(ForgeDirection direction, NetworkType type)
-    {
+    public boolean canConnect(ForgeDirection direction, NetworkType type) {
         return type == NetworkType.OXYGEN;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public AxisAlignedBB getRenderBoundingBox()
-    {
-        return AxisAlignedBB.getBoundingBox(this.xCoord, this.yCoord, this.zCoord, this.xCoord + 1, this.yCoord + 1, this.zCoord + 1);
+    public AxisAlignedBB getRenderBoundingBox() {
+        return AxisAlignedBB.getBoundingBox(
+                this.xCoord, this.yCoord, this.zCoord, this.xCoord + 1, this.yCoord + 1, this.zCoord + 1);
     }
 
     @Override
-    public NetworkType getNetworkType()
-    {
+    public NetworkType getNetworkType() {
         return NetworkType.OXYGEN;
     }
-
 }

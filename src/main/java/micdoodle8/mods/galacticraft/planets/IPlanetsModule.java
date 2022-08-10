@@ -2,14 +2,12 @@ package micdoodle8.mods.galacticraft.planets;
 
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.relauncher.Side;
+import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Configuration;
 
-import java.util.List;
-
-public interface IPlanetsModule
-{
+public interface IPlanetsModule {
     public void preInit(FMLPreInitializationEvent event);
 
     public void init(FMLInitializationEvent event);

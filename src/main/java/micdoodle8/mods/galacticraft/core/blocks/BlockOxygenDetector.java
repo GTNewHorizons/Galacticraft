@@ -18,13 +18,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockOxygenDetector extends BlockContainer implements ITileEntityProvider, ItemBlockDesc.IBlockShiftDesc
-{
+public class BlockOxygenDetector extends BlockContainer implements ITileEntityProvider, ItemBlockDesc.IBlockShiftDesc {
     private IIcon iconSide;
     private IIcon iconTop;
 
-    protected BlockOxygenDetector(String assetName)
-    {
+    protected BlockOxygenDetector(String assetName) {
         super(Material.iron);
         this.setHardness(1.0F);
         this.setStepSound(Block.soundTypeMetal);
@@ -33,84 +31,67 @@ public class BlockOxygenDetector extends BlockContainer implements ITileEntityPr
     }
 
     @Override
-    public int getRenderType()
-    {
+    public int getRenderType() {
         return GalacticraftCore.proxy.getBlockRender(this);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1IconRegister)
-    {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.iconTop = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "machine_blank");
         this.iconSide = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "detector_side");
     }
 
     @Override
-    public IIcon getIcon(int side, int metadata)
-    {
-        if (side == 0 || side == 1)
-        {
+    public IIcon getIcon(int side, int metadata) {
+        if (side == 0 || side == 1) {
             return this.iconTop;
-        }
-        else
-        {
+        } else {
             return this.iconSide;
         }
     }
 
     @Override
-    public CreativeTabs getCreativeTabToDisplayOn()
-    {
+    public CreativeTabs getCreativeTabToDisplayOn() {
         return GalacticraftCore.galacticraftBlocksTab;
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world, int meta)
-    {
+    public TileEntity createNewTileEntity(World world, int meta) {
         return new TileEntityOxygenDetector();
     }
 
-    public void updateOxygenState(World par1World, int x, int y, int z, boolean valid)
-    {
-        if (valid)
-        {
+    public void updateOxygenState(World par1World, int x, int y, int z, boolean valid) {
+        if (valid) {
             par1World.setBlockMetadataWithNotify(x, y, z, 1, 3);
-        }
-        else
-        {
+        } else {
             par1World.setBlockMetadataWithNotify(x, y, z, 0, 3);
         }
     }
 
     @Override
-    public boolean canProvidePower()
-    {
+    public boolean canProvidePower() {
         return true;
     }
 
     @Override
-    public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-    {
+    public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         return par1IBlockAccess.getBlockMetadata(par2, par3, par4) == 1 ? 15 : 0;
     }
 
     @Override
-    public String getShiftDescription(int meta)
-    {
+    public String getShiftDescription(int meta) {
         return GCCoreUtil.translate(this.getUnlocalizedName() + ".description");
     }
 
     @Override
-    public boolean showDescription(int meta)
-    {
+    public boolean showDescription(int meta) {
         return true;
     }
-    
-    //Solid block: can places torches on it (like a Redstone Block)
+
+    // Solid block: can places torches on it (like a Redstone Block)
     @Override
-    public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
-    {
-    	return true;
+    public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+        return true;
     }
 }

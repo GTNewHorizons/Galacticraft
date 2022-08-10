@@ -8,8 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class BiomeDecoratorMars extends BiomeDecoratorSpace
-{
+public class BiomeDecoratorMars extends BiomeDecoratorSpace {
     private WorldGenerator dirtGen;
     private WorldGenerator deshGen;
     private WorldGenerator tinGen;
@@ -18,8 +17,7 @@ public class BiomeDecoratorMars extends BiomeDecoratorSpace
     private WorldGenerator iceGen;
     private World currentWorld;
 
-    public BiomeDecoratorMars()
-    {
+    public BiomeDecoratorMars() {
         this.copperGen = new WorldGenMinableMeta(MarsBlocks.marsBlock, 4, 0, true, MarsBlocks.marsBlock, 9);
         this.tinGen = new WorldGenMinableMeta(MarsBlocks.marsBlock, 4, 1, true, MarsBlocks.marsBlock, 9);
         this.deshGen = new WorldGenMinableMeta(MarsBlocks.marsBlock, 6, 2, true, MarsBlocks.marsBlock, 9);
@@ -29,8 +27,7 @@ public class BiomeDecoratorMars extends BiomeDecoratorSpace
     }
 
     @Override
-    protected void decorate()
-    {
+    protected void decorate() {
         this.generateOre(4, this.iceGen, 60, 120);
         this.generateOre(20, this.dirtGen, 0, 200);
         if (!ConfigManagerMars.disableDeshGen) this.generateOre(15, this.deshGen, 20, 64);
@@ -38,14 +35,12 @@ public class BiomeDecoratorMars extends BiomeDecoratorSpace
         if (!ConfigManagerMars.disableTinGen) this.generateOre(23, this.tinGen, 0, 60);
         if (!ConfigManagerMars.disableIronGen) this.generateOre(20, this.ironGen, 0, 64);
     }
-    
-    protected void setCurrentWorld(World world)
-    {
-    	this.currentWorld = world;
+
+    protected void setCurrentWorld(World world) {
+        this.currentWorld = world;
     }
 
-	protected World getCurrentWorld()
-	{
-		return this.currentWorld;
-	}
+    protected World getCurrentWorld() {
+        return this.currentWorld;
+    }
 }

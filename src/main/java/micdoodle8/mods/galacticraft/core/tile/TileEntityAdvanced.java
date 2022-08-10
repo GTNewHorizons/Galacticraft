@@ -3,6 +3,13 @@ package micdoodle8.mods.galacticraft.core.tile;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.network.IPacketReceiver;
 import micdoodle8.mods.galacticraft.core.network.NetworkUtil;
@@ -11,16 +18,7 @@ import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-public abstract class TileEntityAdvanced extends TileEntity implements IPacketReceiver
-{
+public abstract class TileEntityAdvanced extends TileEntity implements IPacketReceiver {
     public int ticks = 0;
     private LinkedHashSet<Field> fieldCacheClient;
     private LinkedHashSet<Field> fieldCacheServer;
@@ -28,22 +26,18 @@ public abstract class TileEntityAdvanced extends TileEntity implements IPacketRe
     private boolean networkDataChanged = false;
 
     @Override
-    public void updateEntity()
-    {
-        if (this.ticks == 0)
-        {
+    public void updateEntity() {
+        if (this.ticks == 0) {
             this.initiate();
 
-            if (this.isNetworkedTile())
-            {
-                if (this.fieldCacheClient == null || this.fieldCacheServer == null)
-                {
+            if (this.isNetworkedTile()) {
+                if (this.fieldCacheClient == null || this.fieldCacheServer == null) {
                     this.initFieldCache();
                 }
 
-                if (this.worldObj != null && this.worldObj.isRemote && this.fieldCacheClient.size() > 0)
-                {
-                    //Request any networked information from server on first client update (maybe client just logged on, but server networkdata didn't change recently)
+                if (this.worldObj != null && this.worldObj.isRemote && this.fieldCacheClient.size() > 0) {
+                    // Request any networked information from server on first client update (maybe client just logged
+                    // on, but server networkdata didn't change recently)
                     GalacticraftCore.packetPipeline.sendToServer(new PacketDynamic(this));
                 }
             }
@@ -51,53 +45,45 @@ public abstract class TileEntityAdvanced extends TileEntity implements IPacketRe
 
         this.ticks++;
 
-        if (this.isNetworkedTile() && this.ticks % this.getPacketCooldown() == 0)
-        {
-            if (this.worldObj.isRemote && this.fieldCacheServer.size() > 0)
-            {
+        if (this.isNetworkedTile() && this.ticks % this.getPacketCooldown() == 0) {
+            if (this.worldObj.isRemote && this.fieldCacheServer.size() > 0) {
                 PacketDynamic packet = new PacketDynamic(this);
-                if (networkDataChanged)
-                {
+                if (networkDataChanged) {
                     GalacticraftCore.packetPipeline.sendToServer(packet);
                 }
-            }
-            else if (!this.worldObj.isRemote && this.fieldCacheClient.size() > 0)
-            {
+            } else if (!this.worldObj.isRemote && this.fieldCacheClient.size() > 0) {
                 PacketDynamic packet = new PacketDynamic(this);
-                if (networkDataChanged)
-                {
-                    GalacticraftCore.packetPipeline.sendToAllAround(packet, new TargetPoint(this.worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, this.getPacketRange()));
+                if (networkDataChanged) {
+                    GalacticraftCore.packetPipeline.sendToAllAround(
+                            packet,
+                            new TargetPoint(
+                                    this.worldObj.provider.dimensionId,
+                                    this.xCoord,
+                                    this.yCoord,
+                                    this.zCoord,
+                                    this.getPacketRange()));
                 }
             }
         }
     }
 
-    private void initFieldCache()
-    {
-        try
-        {
+    private void initFieldCache() {
+        try {
             this.fieldCacheClient = new LinkedHashSet<Field>();
             this.fieldCacheServer = new LinkedHashSet<Field>();
 
-            for (Field field : this.getClass().getFields())
-            {
-                if (field.isAnnotationPresent(NetworkedField.class))
-                {
+            for (Field field : this.getClass().getFields()) {
+                if (field.isAnnotationPresent(NetworkedField.class)) {
                     NetworkedField f = field.getAnnotation(NetworkedField.class);
 
-                    if (f.targetSide() == Side.CLIENT)
-                    {
+                    if (f.targetSide() == Side.CLIENT) {
                         this.fieldCacheClient.add(field);
-                    }
-                    else
-                    {
+                    } else {
                         this.fieldCacheServer.add(field);
                     }
                 }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -108,80 +94,57 @@ public abstract class TileEntityAdvanced extends TileEntity implements IPacketRe
 
     public abstract boolean isNetworkedTile();
 
-    public void addExtraNetworkedData(List<Object> networkedList)
-    {
+    public void addExtraNetworkedData(List<Object> networkedList) {}
 
-    }
+    public void readExtraNetworkedData(ByteBuf dataStream) {}
 
-    public void readExtraNetworkedData(ByteBuf dataStream)
-    {
-
-    }
-
-    public void initiate()
-    {
-    }
+    public void initiate() {}
 
     @Override
-    public void getNetworkedData(ArrayList<Object> sendData)
-    {
+    public void getNetworkedData(ArrayList<Object> sendData) {
         Set<Field> fieldList = null;
         boolean changed = false;
 
-        if (this.fieldCacheClient == null || this.fieldCacheServer == null)
-        {
+        if (this.fieldCacheClient == null || this.fieldCacheServer == null) {
             this.initFieldCache();
         }
 
-        if (this.worldObj.isRemote)
-        {
+        if (this.worldObj.isRemote) {
             fieldList = this.fieldCacheServer;
-        }
-        else
-        {
+        } else {
             fieldList = this.fieldCacheClient;
         }
 
-        for (Field f : fieldList)
-        {
+        for (Field f : fieldList) {
             boolean fieldChanged = false;
-            try
-            {
+            try {
                 Object data = f.get(this);
                 Object lastData = lastSentData.get(f);
 
-                if (!NetworkUtil.fuzzyEquals(lastData, data))
-                {
+                if (!NetworkUtil.fuzzyEquals(lastData, data)) {
                     fieldChanged = true;
                 }
 
                 sendData.add(data);
 
-                if (fieldChanged)
-                {
+                if (fieldChanged) {
                     lastSentData.put(f, NetworkUtil.cloneNetworkedObject(data));
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
             changed |= fieldChanged;
         }
 
-        if (changed)
-        {
+        if (changed) {
             this.addExtraNetworkedData(sendData);
-        }
-        else
-        {
+        } else {
             ArrayList<Object> prevSendData = new ArrayList<Object>(sendData);
 
             this.addExtraNetworkedData(sendData);
 
-            if (!prevSendData.equals(sendData))
-            {
+            if (!prevSendData.equals(sendData)) {
                 changed = true;
             }
         }
@@ -190,42 +153,30 @@ public abstract class TileEntityAdvanced extends TileEntity implements IPacketRe
     }
 
     @Override
-    public void decodePacketdata(ByteBuf buffer)
-    {
-        if (this.fieldCacheClient == null || this.fieldCacheServer == null)
-        {
+    public void decodePacketdata(ByteBuf buffer) {
+        if (this.fieldCacheClient == null || this.fieldCacheServer == null) {
             this.initFieldCache();
         }
 
-        if (this.worldObj.isRemote && this.fieldCacheClient.size() == 0)
-        {
+        if (this.worldObj.isRemote && this.fieldCacheClient.size() == 0) {
             return;
-        }
-        else if (!this.worldObj.isRemote && this.fieldCacheServer.size() == 0)
-        {
+        } else if (!this.worldObj.isRemote && this.fieldCacheServer.size() == 0) {
             return;
         }
 
         Set<Field> fieldSet = null;
 
-        if (this.worldObj.isRemote)
-        {
+        if (this.worldObj.isRemote) {
             fieldSet = this.fieldCacheClient;
-        }
-        else
-        {
+        } else {
             fieldSet = this.fieldCacheServer;
         }
 
-        for (Field field : fieldSet)
-        {
-            try
-            {
+        for (Field field : fieldSet) {
+            try {
                 Object obj = NetworkUtil.getFieldValueFromStream(field, buffer, this.worldObj);
                 field.set(this, obj);
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -234,8 +185,5 @@ public abstract class TileEntityAdvanced extends TileEntity implements IPacketRe
     }
 
     @Override
-    public void handlePacketData(Side side, EntityPlayer player)
-    {
-
-    }
+    public void handlePacketData(Side side, EntityPlayer player) {}
 }

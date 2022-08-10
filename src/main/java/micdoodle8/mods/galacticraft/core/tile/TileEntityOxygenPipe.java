@@ -13,21 +13,18 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityOxygenPipe extends TileEntityOxygenTransmitter implements IColorable
-{
+public class TileEntityOxygenPipe extends TileEntityOxygenTransmitter implements IColorable {
     @NetworkedField(targetSide = Side.CLIENT)
     public byte pipeColor = 15;
+
     private byte lastPipeColor = -1;
 
     @Override
-    public boolean canConnect(ForgeDirection direction, NetworkType type)
-    {
+    public boolean canConnect(ForgeDirection direction, NetworkType type) {
         TileEntity adjacentTile = new BlockVec3(this).getTileEntityOnSide(this.worldObj, direction);
 
-        if (type == NetworkType.OXYGEN)
-        {
-            if (adjacentTile instanceof IColorable)
-            {
+        if (type == NetworkType.OXYGEN) {
+            if (adjacentTile instanceof IColorable) {
                 return this.getColor() == ((IColorable) adjacentTile).getColor();
             }
 
@@ -38,67 +35,54 @@ public class TileEntityOxygenPipe extends TileEntityOxygenTransmitter implements
     }
 
     @Override
-    public boolean canUpdate()
-    {
+    public boolean canUpdate() {
         return this.worldObj == null || !this.worldObj.isRemote;
-
     }
 
     @Override
-    public void updateEntity()
-    {
+    public void updateEntity() {
         super.updateEntity();
 
-        if (this.ticks % 60 == 0 && this.lastPipeColor != this.getColor() && !this.worldObj.isRemote)
-        {
-            GalacticraftCore.packetPipeline.sendToDimension(new PacketDynamic(this), this.worldObj.provider.dimensionId);
+        if (this.ticks % 60 == 0 && this.lastPipeColor != this.getColor() && !this.worldObj.isRemote) {
+            GalacticraftCore.packetPipeline.sendToDimension(
+                    new PacketDynamic(this), this.worldObj.provider.dimensionId);
             this.lastPipeColor = this.getColor();
         }
     }
 
     @Override
-    public double getPacketRange()
-    {
+    public double getPacketRange() {
         return 12.0D;
     }
 
     @Override
-    public int getPacketCooldown()
-    {
+    public int getPacketCooldown() {
         return 5;
     }
 
     @Override
-    public boolean isNetworkedTile()
-    {
+    public boolean isNetworkedTile() {
         return true;
     }
 
     @Override
-    public void validate()
-    {
+    public void validate() {
         super.validate();
 
-        if (this.worldObj != null && this.worldObj.isRemote)
-        {
+        if (this.worldObj != null && this.worldObj.isRemote) {
             this.worldObj.func_147479_m(this.xCoord, this.yCoord, this.zCoord);
         }
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public void setColor(byte col)
-    {
+    public void setColor(byte col) {
         this.pipeColor = col;
 
-        if (this.worldObj != null)
-        {
-            if (this.worldObj.isRemote)
-            {
+        if (this.worldObj != null) {
+            if (this.worldObj.isRemote) {
                 this.worldObj.func_147479_m(this.xCoord, this.yCoord, this.zCoord);
-            }
-            else
-            {
+            } else {
                 this.getNetwork().split(this);
                 this.resetNetwork();
             }
@@ -106,46 +90,39 @@ public class TileEntityOxygenPipe extends TileEntityOxygenTransmitter implements
     }
 
     @Override
-    public byte getColor()
-    {
+    public byte getColor() {
         return this.pipeColor;
     }
 
     @Override
-    public void onAdjacentColorChanged(ForgeDirection direction)
-    {
+    public void onAdjacentColorChanged(ForgeDirection direction) {
         this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
 
-        if (!this.worldObj.isRemote)
-        {
+        if (!this.worldObj.isRemote) {
             this.refresh();
         }
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound)
-    {
+    public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readFromNBT(par1NBTTagCompound);
 
         this.setColor(par1NBTTagCompound.getByte("pipeColor"));
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound par1NBTTagCompound)
-    {
+    public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
 
         par1NBTTagCompound.setByte("pipeColor", this.getColor());
     }
 
     @Override
-    public void decodePacketdata(ByteBuf buffer)
-    {
+    public void decodePacketdata(ByteBuf buffer) {
         byte colorBefore = this.pipeColor;
         super.decodePacketdata(buffer);
 
-        if (this.pipeColor != colorBefore && this.worldObj instanceof WorldClient)
-        {
+        if (this.pipeColor != colorBefore && this.worldObj instanceof WorldClient) {
             this.worldObj.func_147479_m(this.xCoord, this.yCoord, this.zCoord);
         }
     }

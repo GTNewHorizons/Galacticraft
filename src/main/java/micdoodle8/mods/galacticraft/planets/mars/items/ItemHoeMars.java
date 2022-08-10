@@ -11,31 +11,27 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 
-public class ItemHoeMars extends ItemHoe
-{
-    public ItemHoeMars(ToolMaterial par2EnumToolMaterial)
-    {
+public class ItemHoeMars extends ItemHoe {
+    public ItemHoeMars(ToolMaterial par2EnumToolMaterial) {
         super(par2EnumToolMaterial);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public CreativeTabs getCreativeTab()
-    {
+    public CreativeTabs getCreativeTab() {
         return GalacticraftCore.galacticraftItemsTab;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister par1IconRegister)
-    {
-        this.itemIcon = par1IconRegister.registerIcon(this.getUnlocalizedName().replace("item.", MarsModule.TEXTURE_PREFIX));
+    public void registerIcons(IIconRegister par1IconRegister) {
+        this.itemIcon =
+                par1IconRegister.registerIcon(this.getUnlocalizedName().replace("item.", MarsModule.TEXTURE_PREFIX));
     }
 }
