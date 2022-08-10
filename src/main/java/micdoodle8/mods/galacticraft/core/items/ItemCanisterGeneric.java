@@ -20,7 +20,7 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer
 {
     private String allowedFluid = null;
     public final static int EMPTY = FluidContainerRegistry.BUCKET_VOLUME + 1;
-    private static boolean isTELoaded = Loader.isModLoaded("ThermalExpansion"); 
+    private static final boolean isTELoaded = Loader.isModLoaded("ThermalExpansion");
 	
 	public ItemCanisterGeneric(String assetName)
     {
@@ -45,7 +45,7 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer
         return GalacticraftCore.galacticraftItemsTab;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({ "unchecked" })
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List)
@@ -94,7 +94,7 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer
 
     public void setAllowedFluid(String name)
     {
-    	this.allowedFluid = new String(name);
+    	this.allowedFluid = name;
     }
     
     public String getAllowedFluid()
