@@ -9,9 +9,7 @@ import java.io.PrintWriter;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import net.minecraft.crash.CrashReport;
 import net.minecraft.launchwrapper.IClassTransformer;
-import net.minecraft.util.ReportedException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.ClassReader;
@@ -30,14 +28,7 @@ public class GCTransformer implements IClassTransformer {
 
     static void catching(Exception e) {
         log.fatal("Something went very wrong with class transforming! Aborting!!!", e);
-        RuntimeException exception;
-        try {
-            exception = new ReportedException(CrashReport.makeCrashReport(e, "Transforming class"));
-        } catch (Throwable e2) {
-            // presumably because this happened too early
-            exception = new RuntimeException("Transforming class", e);
-        }
-        throw exception;
+        throw new RuntimeException("Transforming class", e);
     }
 
     @Override
