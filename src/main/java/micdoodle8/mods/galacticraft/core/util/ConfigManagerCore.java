@@ -91,6 +91,7 @@ public class ConfigManagerCore {
     public static int suffocationDamage;
     public static int rocketFuelFactor;
     public static double meteorSpawnMod;
+    public static boolean handfillOxygen;
     public static boolean meteorBlockDamageEnabled;
     public static boolean disableSpaceshipGrief;
     public static double spaceStationEnergyScalar;
@@ -647,6 +648,14 @@ public class ConfigManagerCore {
             prop.comment = "Set to false to stop meteors from breaking blocks on contact.";
             prop.setLanguageKey("gc.configgui.meteorBlockDamage");
             meteorBlockDamageEnabled = prop.getBoolean(true);
+            propOrder.add(prop.getName());
+
+            prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Enable Hand fill", false);
+            prop.comment =
+                    "You will be able to refill oxygen tank by crafting it with LOX cells if this is set to true.";
+            prop.setLanguageKey("gc.configgui.handfill");
+            prop.setRequiresMcRestart(true);
+            handfillOxygen = prop.getBoolean(false);
             propOrder.add(prop.getName());
 
             prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Disable Update Check", false);

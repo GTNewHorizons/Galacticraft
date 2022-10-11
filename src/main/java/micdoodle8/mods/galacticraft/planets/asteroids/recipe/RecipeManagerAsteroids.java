@@ -1,5 +1,7 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.recipe;
 
+import java.util.ArrayList;
+import java.util.List;
 import micdoodle8.mods.galacticraft.api.recipe.CompressorRecipes;
 import micdoodle8.mods.galacticraft.core.blocks.BlockMachineTiered;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
@@ -365,28 +367,38 @@ public class RecipeManagerAsteroids {
                 new ItemStack(MarsItems.marsItemBasic, 1, 3),
                 new ItemStack(MarsItems.marsItemBasic, 1, 5));
 
-        /*
-        All this is for NEI's benefit
-        List<ItemStack> list1 = new ArrayList();
-        List<ItemStack> list2 = new ArrayList();
-        List<ItemStack> list3 = new ArrayList();
-        List<ItemStack> list4 = new ArrayList();
-        List<ItemStack> list5 = new ArrayList();
-        list1.add(new ItemStack(AsteroidsItems.canisterLOX, 1, 700));
-        list2.add(new ItemStack(AsteroidsItems.canisterLOX, 1, 800));
-        list3.add(new ItemStack(AsteroidsItems.canisterLOX, 1, 900));
-        list4.add(new ItemStack(AsteroidsItems.canisterLOX, 1, 600));
-        list5.add(new ItemStack(AsteroidsItems.canisterLOX, 1, 500));
-        list1.add(new ItemStack(GCItems.oxTankHeavy, 1, 3000));
-        list2.add(new ItemStack(GCItems.oxTankMedium, 1, 2000));
-        list3.add(new ItemStack(GCItems.oxTankLight, 1, 1000));
-        list4.add(new ItemStack(GCItems.oxTankSuperHeavy, 1, 4000));
-        list5.add(new ItemStack(GCItems.oxTankUltraHeavy, 1, 5000));
-        CraftingManager.getInstance().getRecipeList().add(new CanisterRecipes(new ItemStack(GCItems.oxTankHeavy, 1, 0), list1));
-        CraftingManager.getInstance().getRecipeList().add(new CanisterRecipes(new ItemStack(GCItems.oxTankMedium, 1, 0), list2));
-        CraftingManager.getInstance().getRecipeList().add(new CanisterRecipes(new ItemStack(GCItems.oxTankLight, 1, 0), list3));
-        CraftingManager.getInstance().getRecipeList().add(new CanisterRecipes(new ItemStack(GCItems.oxTankSuperHeavy, 1, 0), list4));
-        CraftingManager.getInstance().getRecipeList().add(new CanisterRecipes(new ItemStack(GCItems.oxTankUltraHeavy, 1, 0), list5));
-        */
+        // All this is for NEI's benefit
+        if (ConfigManagerCore.handfillOxygen) {
+            List<ItemStack> list1 = new ArrayList<>();
+            List<ItemStack> list2 = new ArrayList<>();
+            List<ItemStack> list3 = new ArrayList<>();
+            List<ItemStack> list4 = new ArrayList<>();
+            List<ItemStack> list5 = new ArrayList<>();
+            list1.add(new ItemStack(AsteroidsItems.canisterLOX, 1, 700));
+            list2.add(new ItemStack(AsteroidsItems.canisterLOX, 1, 800));
+            list3.add(new ItemStack(AsteroidsItems.canisterLOX, 1, 900));
+            list4.add(new ItemStack(AsteroidsItems.canisterLOX, 1, 600));
+            list5.add(new ItemStack(AsteroidsItems.canisterLOX, 1, 500));
+            list1.add(new ItemStack(GCItems.oxTankHeavy, 1, 3000));
+            list2.add(new ItemStack(GCItems.oxTankMedium, 1, 2000));
+            list3.add(new ItemStack(GCItems.oxTankLight, 1, 1000));
+            list4.add(new ItemStack(GCItems.oxTankSuperHeavy, 1, 4000));
+            list5.add(new ItemStack(GCItems.oxTankUltraHeavy, 1, 5000));
+            CraftingManager.getInstance()
+                    .getRecipeList()
+                    .add(new CanisterRecipes(new ItemStack(GCItems.oxTankHeavy, 1, 0), list1));
+            CraftingManager.getInstance()
+                    .getRecipeList()
+                    .add(new CanisterRecipes(new ItemStack(GCItems.oxTankMedium, 1, 0), list2));
+            CraftingManager.getInstance()
+                    .getRecipeList()
+                    .add(new CanisterRecipes(new ItemStack(GCItems.oxTankLight, 1, 0), list3));
+            CraftingManager.getInstance()
+                    .getRecipeList()
+                    .add(new CanisterRecipes(new ItemStack(GCItems.oxTankSuperHeavy, 1, 0), list4));
+            CraftingManager.getInstance()
+                    .getRecipeList()
+                    .add(new CanisterRecipes(new ItemStack(GCItems.oxTankUltraHeavy, 1, 0), list5));
+        }
     }
 }
