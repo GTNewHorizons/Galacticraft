@@ -99,9 +99,7 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
             }
 
             return true;
-        } else if (this.riddenByEntity == null
-                && (this.groundHitCount >= 14 || var1.isSneaking())
-                && var1 instanceof EntityPlayerMP) {
+        } else if (this.riddenByEntity == null && this.onGround && var1 instanceof EntityPlayerMP) {
             MarsUtil.openParachestInventory((EntityPlayerMP) var1, this);
             return true;
         } else if (var1 instanceof EntityPlayerMP) {
