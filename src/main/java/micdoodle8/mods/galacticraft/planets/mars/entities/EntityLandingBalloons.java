@@ -99,7 +99,9 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
             }
 
             return true;
-        } else if (this.riddenByEntity == null && this.groundHitCount >= 14 && var1 instanceof EntityPlayerMP) {
+        } else if (this.riddenByEntity == null
+                && (this.groundHitCount >= 14 || var1.isSneaking())
+                && var1 instanceof EntityPlayerMP) {
             MarsUtil.openParachestInventory((EntityPlayerMP) var1, this);
             return true;
         } else if (var1 instanceof EntityPlayerMP) {
@@ -116,30 +118,6 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
 
     @Override
     public boolean pressKey(int key) {
-        if (this.onGround) {
-            return false;
-        }
-
-        //        switch (key)
-        //        {
-        //            case 0: // Accelerate
-        //            {
-        //                this.rotationPitchSpeed -= 0.5F * TURN_FACTOR;
-        //                return true;
-        //            }
-        //            case 1: // Deccelerate
-        //            {
-        //                this.rotationPitchSpeed += 0.5F * TURN_FACTOR;
-        //                return true;
-        //            }
-        //            case 2: // Left
-        //                this.rotationYawSpeed -= 0.5F * TURN_FACTOR;
-        //                return true;
-        //            case 3: // Right
-        //                this.rotationYawSpeed += 0.5F * TURN_FACTOR;
-        //                return true;
-        //        }
-
         return false;
     }
 
