@@ -323,9 +323,9 @@ public class TickHandlerClient {
                 // Remove "Press shift to dismount" message when shift-exiting is disabled (not
                 // ideal, but the only
                 // option)
-                final String str = I18n.format("mount.onboard", new Object[] {
-                    GameSettings.getKeyDisplayString(minecraft.gameSettings.keyBindSneak.getKeyCode())
-                });
+                final String str = I18n.format(
+                        "mount.onboard",
+                        GameSettings.getKeyDisplayString(minecraft.gameSettings.keyBindSneak.getKeyCode()));
                 if (minecraft.ingameGUI.recordPlaying.equals(str)) {
                     minecraft.ingameGUI.recordPlaying = "";
                 }

@@ -274,8 +274,8 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
 
     private ResourceLocation func_111271_a(int par1) {
         if (SmallFontRenderer.field_111274_c[par1] == null) {
-            SmallFontRenderer.field_111274_c[par1] = new ResourceLocation(
-                    String.format("textures/font/unicode_page_%02x.png", new Object[] {Integer.valueOf(par1)}));
+            SmallFontRenderer.field_111274_c[par1] =
+                    new ResourceLocation(String.format("textures/font/unicode_page_%02x.png", Integer.valueOf(par1)));
         }
 
         return SmallFontRenderer.field_111274_c[par1];

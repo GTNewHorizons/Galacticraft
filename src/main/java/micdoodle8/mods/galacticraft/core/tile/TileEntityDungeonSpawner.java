@@ -85,8 +85,8 @@ public class TileEntityDungeonSpawner extends TileEntityAdvanced {
 
             if (this.boss == null && !this.isBossDefeated) {
                 try {
-                    final Constructor<?> c = this.bossClass.getConstructor(new Class[] {World.class});
-                    this.boss = (IBoss) c.newInstance(new Object[] {this.worldObj});
+                    final Constructor<?> c = this.bossClass.getConstructor(World.class);
+                    this.boss = (IBoss) c.newInstance(this.worldObj);
                     ((Entity) this.boss).setPosition(this.xCoord + 0.5, this.yCoord + 1.0, this.zCoord + 0.5);
                     this.boss.setRoom(this.roomCoords, this.roomSize);
                 } catch (final Exception e) {

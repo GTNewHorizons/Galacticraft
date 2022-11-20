@@ -202,9 +202,7 @@ public class VersionUtil {
             Method m = (Method) reflectionCache.get(0);
 
             if (m == null) {
-                m = slimeling.getClass().getSuperclass().getMethod(getNameDynamic(KEY_METHOD_SET_OWNER), new Class[] {
-                    String.class
-                });
+                m = slimeling.getClass().getSuperclass().getMethod(getNameDynamic(KEY_METHOD_SET_OWNER), String.class);
                 reflectionCache.put(0, m);
             }
 
@@ -243,7 +241,7 @@ public class VersionUtil {
                     if (m == null) {
                         final Class<?> c = Class.forName(
                                 getNameDynamic(KEY_CLASS_YGG_CONVERTER).replace('/', '.'));
-                        m = c.getMethod(getNameDynamic(KEY_METHOD_CONVERT_UUID), new Class[] {String.class});
+                        m = c.getMethod(getNameDynamic(KEY_METHOD_CONVERT_UUID), String.class);
                         reflectionCache.put(2, m);
                     }
 
@@ -308,9 +306,7 @@ public class VersionUtil {
                 if (m == null) {
                     final Class<?> c =
                             Class.forName(getNameDynamic(KEY_CLASS_TEXTURE_UTIL).replace('/', '.'));
-                    m = c.getMethod(
-                            getNameDynamic(KEY_METHOD_SET_MIPMAP),
-                            new Class[] {boolean.class, boolean.class, float.class});
+                    m = c.getMethod(getNameDynamic(KEY_METHOD_SET_MIPMAP), boolean.class, boolean.class, float.class);
                     reflectionCache.put(8, m);
                 }
 
@@ -321,7 +317,7 @@ public class VersionUtil {
                 if (m == null) {
                     final Class<?> c =
                             Class.forName(getNameDynamic(KEY_CLASS_TEXTURE_UTIL).replace('/', '.'));
-                    m = c.getMethod(getNameDynamic(KEY_METHOD_SET_MIPMAP), new Class[] {boolean.class, boolean.class});
+                    m = c.getMethod(getNameDynamic(KEY_METHOD_SET_MIPMAP), boolean.class, boolean.class);
                     reflectionCache.put(8, m);
                 }
 
@@ -342,7 +338,10 @@ public class VersionUtil {
                             Class.forName(getNameDynamic(KEY_CLASS_COMMAND_BASE).replace('/', '.'));
                     m = c.getMethod(
                             getNameDynamic(KEY_METHOD_NOTIFY_ADMINS),
-                            new Class[] {ICommandSender.class, ICommand.class, String.class, Object[].class});
+                            ICommandSender.class,
+                            ICommand.class,
+                            String.class,
+                            Object[].class);
                     reflectionCache.put(10, m);
                 }
 
@@ -355,7 +354,9 @@ public class VersionUtil {
                             Class.forName(getNameDynamic(KEY_CLASS_COMMAND_BASE).replace('/', '.'));
                     m = c.getMethod(
                             getNameDynamic(KEY_METHOD_NOTIFY_ADMINS),
-                            new Class[] {ICommandSender.class, String.class, Object[].class});
+                            ICommandSender.class,
+                            String.class,
+                            Object[].class);
                     reflectionCache.put(10, m);
                 }
 
@@ -372,7 +373,7 @@ public class VersionUtil {
 
             if (m == null) {
                 final Class<?> c = server.getConfigurationManager().getClass();
-                m = c.getMethod(getNameDynamic(KEY_METHOD_PLAYER_FOR_NAME), new Class[] {String.class});
+                m = c.getMethod(getNameDynamic(KEY_METHOD_PLAYER_FOR_NAME), String.class);
                 reflectionCache.put(12, m);
             }
 
@@ -391,7 +392,7 @@ public class VersionUtil {
 
                 if (m == null) {
                     final Class<?> c = player.mcServer.getConfigurationManager().getClass();
-                    m = c.getMethod(getNameDynamic(KEY_METHOD_PLAYER_IS_OPPED), new Class[] {GameProfile.class});
+                    m = c.getMethod(getNameDynamic(KEY_METHOD_PLAYER_IS_OPPED), GameProfile.class);
                     reflectionCache.put(14, m);
                 }
 
@@ -401,7 +402,7 @@ public class VersionUtil {
 
                 if (m == null) {
                     final Class<?> c = player.mcServer.getConfigurationManager().getClass();
-                    m = c.getMethod(getNameDynamic(KEY_METHOD_PLAYER_IS_OPPED), new Class[] {String.class});
+                    m = c.getMethod(getNameDynamic(KEY_METHOD_PLAYER_IS_OPPED), String.class);
                     reflectionCache.put(14, m);
                 }
 
@@ -425,7 +426,7 @@ public class VersionUtil {
                 if (m == null) {
                     final Class<?> c =
                             Class.forName(getNameDynamic(KEY_CLASS_SCALED_RES).replace('/', '.'));
-                    m = c.getConstructor(new Class[] {Minecraft.class, int.class, int.class});
+                    m = c.getConstructor(Minecraft.class, int.class, int.class);
                     reflectionCache.put(16, m);
                 }
 
@@ -436,7 +437,7 @@ public class VersionUtil {
                 if (m == null) {
                     final Class<?> c =
                             Class.forName(getNameDynamic(KEY_CLASS_SCALED_RES).replace('/', '.'));
-                    m = c.getConstructor(new Class[] {GameSettings.class, int.class, int.class});
+                    m = c.getConstructor(GameSettings.class, int.class, int.class);
                     reflectionCache.put(16, m);
                 }
 
@@ -456,7 +457,7 @@ public class VersionUtil {
             if (m == null) {
                 final Class<?> c =
                         Class.forName(getNameDynamic(KEY_CLASS_RENDER_PLAYER).replace('/', '.'));
-                m = c.getMethod(getNameDynamic(KEY_METHOD_PLAYER_TEXTURE), new Class[] {AbstractClientPlayer.class});
+                m = c.getMethod(getNameDynamic(KEY_METHOD_PLAYER_TEXTURE), AbstractClientPlayer.class);
                 m.setAccessible(true);
                 reflectionCache.put(18, m);
             }

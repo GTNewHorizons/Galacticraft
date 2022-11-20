@@ -521,7 +521,8 @@ public class RecipeManagerGC {
             CraftingManager.getInstance()
                     .addShapelessRecipe(
                             new ItemStack(GCItems.parachute, 1, ItemParaChute.getParachuteDamageValueFromDye(var2)),
-                            new Object[] {new ItemStack(Items.dye, 1, var2), new ItemStack(GCItems.parachute, 1, 0)});
+                            new ItemStack(Items.dye, 1, var2),
+                            new ItemStack(GCItems.parachute, 1, 0));
         }
 
         RecipeUtil.addRecipe(

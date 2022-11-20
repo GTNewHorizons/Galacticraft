@@ -67,9 +67,12 @@ public class CommandPlanetTeleport extends CommandBase {
                         throw e;
                     }
 
-                    VersionUtil.notifyAdmins(icommandsender, this, "commands.dimensionteleport", new Object[] {
-                        String.valueOf(EnumColor.GREY + "[" + playerBase.getCommandSenderName()), "]"
-                    });
+                    VersionUtil.notifyAdmins(
+                            icommandsender,
+                            this,
+                            "commands.dimensionteleport",
+                            String.valueOf(EnumColor.GREY + "[" + playerBase.getCommandSenderName()),
+                            "]");
                 } else {
                     throw new Exception("Could not find player with name: " + astring[0]);
                 }
