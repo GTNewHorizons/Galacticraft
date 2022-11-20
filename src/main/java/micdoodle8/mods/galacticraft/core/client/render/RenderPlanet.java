@@ -27,14 +27,14 @@ public class RenderPlanet {
     public static void renderPlanet(int textureId, float scale, float ticks, float relSize) {
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
         final float size = relSize / 70 * scale;
-        ticks = (float) System.nanoTime() / 50000000F;
+        ticks = System.nanoTime() / 50000000F;
         RenderPlanet.drawTexturedRectUV(-size / 2, -size / 2, size, size, ticks);
     }
 
     public static void renderPlanet(ResourceLocation texture, float scale, float ticks, float relSize) {
         RenderPlanet.renderEngine.bindTexture(texture);
         final float size = relSize / 70 * scale;
-        ticks = (float) System.nanoTime() / 50000000F;
+        ticks = System.nanoTime() / 50000000F;
         RenderPlanet.drawTexturedRectUV(-size / 2, -size / 2, size, size, ticks);
     }
 

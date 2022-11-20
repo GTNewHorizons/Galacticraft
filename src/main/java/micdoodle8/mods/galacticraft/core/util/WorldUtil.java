@@ -300,9 +300,9 @@ public class WorldUtil {
             final int j = MathHelper.floor_double(player.posY);
             final int k = MathHelper.floor_double(player.posZ);
             final int l = ForgeHooksClient.getSkyBlendColour(world, i, j, k);
-            float f4 = (float) (l >> 16 & 255) / 255.0F;
-            float f5 = (float) (l >> 8 & 255) / 255.0F;
-            float f6 = (float) (l & 255) / 255.0F;
+            float f4 = (l >> 16 & 255) / 255.0F;
+            float f5 = (l >> 8 & 255) / 255.0F;
+            float f6 = (l & 255) / 255.0F;
             f4 *= f2;
             f5 *= f2;
             f6 *= f2;

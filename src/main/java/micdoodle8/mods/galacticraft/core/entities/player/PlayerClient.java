@@ -188,7 +188,7 @@ public class PlayerClient implements IPlayerClient {
                 } else {
                     player.height = 1.8F;
                 }
-                player.boundingBox.maxY = player.boundingBox.minY + (double) player.height;
+                player.boundingBox.maxY = player.boundingBox.minY + player.height;
             }
         }
 

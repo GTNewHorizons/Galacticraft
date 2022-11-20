@@ -65,7 +65,7 @@ public class MapUtil {
 
         for (int j = -2; j <= 2; ++j) {
             for (int k = -2; k <= 2; ++k) {
-                final float f = 10.0F / MathHelper.sqrt_float((float) (j * j + k * k) + 0.2F);
+                final float f = 10.0F / MathHelper.sqrt_float(j * j + k * k + 0.2F);
                 parabolicField[j + 2 + (k + 2) * 5] = f;
             }
         }
@@ -460,8 +460,8 @@ public class MapUtil {
             for (int x = 0; x < 1536; x++) {
                 for (int z = 0; z < 384; z++) {
                     final int arrayIndex = (x * 384 + z) * 2;
-                    int biome = (int) raw[arrayIndex] & 255;
-                    final int height = (int) raw[arrayIndex + 1] & 255;
+                    int biome = raw[arrayIndex] & 255;
+                    final int height = raw[arrayIndex + 1] & 255;
 
                     if (height < 63 && biome != 10) {
                         biome = 0;
@@ -495,8 +495,8 @@ public class MapUtil {
             for (int x = 0; x < 192; x++) {
                 for (int z = 0; z < 48; z++) {
                     final int arrayIndex = (x * 48 + z) * 2;
-                    int biome = (int) raw[arrayIndex] & 255;
-                    final int height = (int) raw[arrayIndex + 1] & 255;
+                    int biome = raw[arrayIndex] & 255;
+                    final int height = raw[arrayIndex + 1] & 255;
 
                     if (height < 63 && biome != 10) {
                         biome = 0;
@@ -648,8 +648,8 @@ public class MapUtil {
                 }
 
                 final int arrayIndex = (x * SIZE_STD + z) * 2;
-                int biome = (int) raw[arrayIndex] & 255;
-                final int height = (int) raw[arrayIndex + 1] & 255;
+                int biome = raw[arrayIndex] & 255;
+                final int height = raw[arrayIndex + 1] & 255;
 
                 if (height < 63 && biome != 10) {
                     biome = 0;

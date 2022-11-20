@@ -231,7 +231,7 @@ public class MapGen {
     }
 
     public void getHeightMap(int cx, int cz) {
-        this.rand.setSeed((long) cx * 341873128712L + (long) cz * 132897987541L);
+        this.rand.setSeed(cx * 341873128712L + cz * 132897987541L);
         this.biomesGridHeights =
                 this.biomeMapWCM.getBiomesForGeneration(this.biomesGridHeights, cx * 4 - 2, cz * 4 - 2, 10, 10);
         this.func_147423_a(cx * 4, 0, cz * 4);
@@ -381,14 +381,14 @@ public class MapGen {
                 }
 
                 ++i1;
-                double d13 = (double) f1;
-                final double d14 = (double) f / 6.0D;
+                double d13 = f1;
+                final double d14 = f / 6.0D;
                 d13 += d12 * 0.2D;
                 d13 = d13 * 8.5D / 8.0D;
                 final double d5 = 8.5D + d13 * 4.0D;
 
                 for (int j2 = 2; j2 < 19; ++j2) {
-                    double d6 = ((double) j2 - d5) / d14;
+                    double d6 = (j2 - d5) / d14;
                     if (d6 < 0.0D) {
                         d6 *= 4.0D;
                     }

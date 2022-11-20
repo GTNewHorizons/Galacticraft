@@ -220,7 +220,7 @@ public class RenderPlayerBaseGC extends RenderPlayerBase {
         } else {
             if (par1AbstractClientPlayer instanceof EntityPlayer
                     && Minecraft.getMinecraft().gameSettings.thirdPersonView != 0) {
-                final EntityPlayer player = (EntityPlayer) par1AbstractClientPlayer;
+                final EntityPlayer player = par1AbstractClientPlayer;
 
                 if (player.ridingEntity instanceof ICameraZoomEntity) {
                     final Entity rocket = player.ridingEntity;

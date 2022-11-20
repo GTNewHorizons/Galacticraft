@@ -497,7 +497,7 @@ public class GCPlayerHandler {
 
                 if ((player.ticksExisted - 1) % thermalLevelTickCooldownSingle == 0) {
                     final int last = playerStats.thermalLevel;
-                    playerStats.thermalLevel = (int)
+                    playerStats.thermalLevel =
                             Math.min(Math.max(playerStats.thermalLevel + (thermalLevelMod < 0 ? -1 : 1), -22), 22);
 
                     if (playerStats.thermalLevel != last) {

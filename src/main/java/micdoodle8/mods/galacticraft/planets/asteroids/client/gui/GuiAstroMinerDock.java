@@ -227,10 +227,10 @@ public class GuiAstroMinerDock extends GuiContainerGC {
         OpenGlHelper.glBlendFunc(770, 771, 1, 0);
         tessellator.startDrawingQuads();
         tessellator.setColorOpaque_I(color);
-        tessellator.addVertex((double) (x + 0), (double) (y + height), (double) this.zLevel);
-        tessellator.addVertex((double) (x + width), (double) (y + height), (double) this.zLevel);
-        tessellator.addVertex((double) (x + width), (double) (y + 0), (double) this.zLevel);
-        tessellator.addVertex((double) (x + 0), (double) (y + 0), (double) this.zLevel);
+        tessellator.addVertex(x + 0, y + height, this.zLevel);
+        tessellator.addVertex(x + width, y + height, this.zLevel);
+        tessellator.addVertex(x + width, y + 0, this.zLevel);
+        tessellator.addVertex(x + 0, y + 0, this.zLevel);
         tessellator.draw();
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_BLEND);

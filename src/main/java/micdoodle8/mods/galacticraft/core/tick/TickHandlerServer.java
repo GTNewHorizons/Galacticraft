@@ -277,8 +277,7 @@ public class TickHandlerServer {
 
                     for (final WorldServer world : worlds) {
                         if (world.provider.dimensionId == targetPoint.dim) {
-                            final long chunkKey =
-                                    ChunkCoordIntPair.chunkXZ2Int((int) targetPoint.x >> 4, (int) targetPoint.z >> 4);
+                            final long chunkKey = ChunkCoordIntPair.chunkXZ2Int(targetPoint.x >> 4, targetPoint.z >> 4);
                             GalacticraftCore.packetPipeline.sendToAllAround(
                                     new PacketSimple(EnumSimplePacket.C_FOOTPRINTS_REMOVED, new Object[] {
                                         chunkKey, new BlockVec3(targetPoint.x, targetPoint.y, targetPoint.z)

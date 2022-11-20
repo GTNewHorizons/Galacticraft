@@ -176,7 +176,7 @@ public class EnergyUtil {
                 if (tileEntity instanceof IEnergyConductor) {
                     continue;
                 }
-                if (((IEnergyAcceptor) tileEntity).acceptsEnergyFrom((TileEntity) conductor, sideFrom)) {
+                if (((IEnergyAcceptor) tileEntity).acceptsEnergyFrom(conductor, sideFrom)) {
                     acceptors.add(tileEntity);
                     directions.add(sideFrom);
                 }
