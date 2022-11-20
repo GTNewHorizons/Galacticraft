@@ -130,13 +130,13 @@ public class GuiElementCheckbox extends GuiButton {
         return false;
     }
 
-    public static interface ICheckBoxCallback {
-        public void onSelectionChanged(GuiElementCheckbox checkbox, boolean newSelected);
+    public interface ICheckBoxCallback {
+        void onSelectionChanged(GuiElementCheckbox checkbox, boolean newSelected);
 
-        public boolean canPlayerEdit(GuiElementCheckbox checkbox, EntityPlayer player);
+        boolean canPlayerEdit(GuiElementCheckbox checkbox, EntityPlayer player);
 
-        public boolean getInitiallySelected(GuiElementCheckbox checkbox);
+        boolean getInitiallySelected(GuiElementCheckbox checkbox);
 
-        public void onIntruderInteraction();
+        void onIntruderInteraction();
     }
 }

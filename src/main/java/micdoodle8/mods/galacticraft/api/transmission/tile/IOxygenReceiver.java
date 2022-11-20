@@ -6,7 +6,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  * Applied to all TileEntities that can interact with oxygen.
  */
 public interface IOxygenReceiver extends IConnector {
-    public abstract boolean shouldPullOxygen();
+    boolean shouldPullOxygen();
 
     /**
      * Adds oxygen reception to a tile entity. Returns the quantity of oxygen that
@@ -17,7 +17,7 @@ public interface IOxygenReceiver extends IConnector {
      * @param doReceive If false, the transfer will only be simulated.
      * @return Amount of oxygen that was accepted by the block.
      */
-    public float receiveOxygen(ForgeDirection from, float receive, boolean doReceive);
+    float receiveOxygen(ForgeDirection from, float receive, boolean doReceive);
 
     /**
      * Adds oxygen provision to a block. Returns the quantity of oxygen provided.
@@ -28,15 +28,15 @@ public interface IOxygenReceiver extends IConnector {
      * @param doProvide If false, the transfer will only be simulated.
      * @return Amount of oxygen that was given out by the block.
      */
-    public float provideOxygen(ForgeDirection from, float request, boolean doProvide);
+    float provideOxygen(ForgeDirection from, float request, boolean doProvide);
 
     /**
      * @return How much oxygen does this TileEntity want?
      */
-    public float getOxygenRequest(ForgeDirection direction);
+    float getOxygenRequest(ForgeDirection direction);
 
     /**
      * @return How much oxygen does this TileEntity want to provide?
      */
-    public float getOxygenProvide(ForgeDirection direction);
+    float getOxygenProvide(ForgeDirection direction);
 }

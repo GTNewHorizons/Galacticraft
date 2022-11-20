@@ -18,5 +18,5 @@ public interface ILandingPadAttachable {
      * @param z     Coordinate the landing pad is located at, on the z-axis
      * @return True if the block can attach to the landing pad, false if not
      */
-    public boolean canAttachToLandingPad(IBlockAccess world, int x, int y, int z);
+    boolean canAttachToLandingPad(IBlockAccess world, int x, int y, int z);
 }

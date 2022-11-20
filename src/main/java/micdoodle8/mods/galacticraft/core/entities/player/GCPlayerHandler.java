@@ -957,7 +957,7 @@ public class GCPlayerHandler {
         }
     }
 
-    public static enum EnumModelPacket {
+    public enum EnumModelPacket {
         ADDMASK,
         REMOVEMASK,
         ADDGEAR,

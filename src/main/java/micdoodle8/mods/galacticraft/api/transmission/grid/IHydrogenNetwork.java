@@ -14,7 +14,7 @@ public interface IHydrogenNetwork extends IGridNetwork<IHydrogenNetwork, ITransm
      *
      * @return Rejected energy in Joules.
      */
-    public float produce(float sendAmount, TileEntity... ignoreTiles);
+    float produce(float sendAmount, TileEntity... ignoreTiles);
 
     /**
      * Gets the total amount of hydrogen requested/needed in the network.
@@ -22,5 +22,5 @@ public interface IHydrogenNetwork extends IGridNetwork<IHydrogenNetwork, ITransm
      * @param ignoreTiles The TileEntities to ignore during this calculation
      *                    (optional).
      */
-    public float getRequest(TileEntity... ignoreTiles);
+    float getRequest(TileEntity... ignoreTiles);
 }

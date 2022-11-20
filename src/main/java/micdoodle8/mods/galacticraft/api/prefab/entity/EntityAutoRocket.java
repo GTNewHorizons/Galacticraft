@@ -1175,7 +1175,7 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
         this.waitForPlayer = waitForPlayer;
     }
 
-    public static enum EnumAutoLaunch {
+    public enum EnumAutoLaunch {
         CARGO_IS_UNLOADED(0, "cargoUnloaded"),
         CARGO_IS_FULL(1, "cargoFull"),
         ROCKET_IS_FUELED(2, "fullyFueled"),

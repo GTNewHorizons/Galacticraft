@@ -5,11 +5,11 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
 public interface INasaWorkbenchRecipe {
-    public boolean matches(IInventory inventory);
+    boolean matches(IInventory inventory);
 
-    public int getRecipeSize();
+    int getRecipeSize();
 
-    public ItemStack getRecipeOutput();
+    ItemStack getRecipeOutput();
 
-    public HashMap<Integer, ItemStack> getRecipeInput();
+    HashMap<Integer, ItemStack> getRecipeInput();
 }

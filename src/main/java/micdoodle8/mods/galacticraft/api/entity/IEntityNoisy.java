@@ -11,8 +11,8 @@ import net.minecraft.server.gui.IUpdatePlayerListBox;
  */
 public interface IEntityNoisy {
     @SideOnly(Side.CLIENT)
-    public IUpdatePlayerListBox getSoundUpdater();
+    IUpdatePlayerListBox getSoundUpdater();
 
     @SideOnly(Side.CLIENT)
-    public ISound setSoundUpdater(EntityPlayerSP player);
+    ISound setSoundUpdater(EntityPlayerSP player);
 }

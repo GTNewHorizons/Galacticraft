@@ -45,7 +45,7 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
     protected static final ResourceLocation texture =
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/gui.png");
 
-    public static enum EnumSpaceRaceGui {
+    public enum EnumSpaceRaceGui {
         MAIN,
         ADD_PLAYER,
         REMOVE_PLAYER,

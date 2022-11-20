@@ -19,7 +19,7 @@ public interface IElectricityNetwork extends IGridNetwork<IElectricityNetwork, I
      * @param ignoreTiles TileEntities to ignore for energy transfers.
      * @return Amount of energy REMAINING from the passed energy parameter
      */
-    public float produce(float energy, boolean doReceive, int tierGC, TileEntity... ignoreTiles);
+    float produce(float energy, boolean doReceive, int tierGC, TileEntity... ignoreTiles);
 
     /**
      * Get the total energy request in this network
@@ -28,5 +28,5 @@ public interface IElectricityNetwork extends IGridNetwork<IElectricityNetwork, I
      *                    used in initial (internal) check.
      * @return Amount of energy requested in this network
      */
-    public float getRequest(TileEntity... ignoreTiles);
+    float getRequest(TileEntity... ignoreTiles);
 }

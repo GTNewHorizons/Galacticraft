@@ -22,7 +22,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 public class ItemBlockDesc extends ItemBlockGC {
-    public static interface IBlockShiftDesc {
+    public interface IBlockShiftDesc {
         String getShiftDescription(int meta);
 
         boolean showDescription(int meta);

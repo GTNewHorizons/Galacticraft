@@ -13,5 +13,5 @@ public interface IConnector {
     /**
      * @return If the connection is possible.
      */
-    public boolean canConnect(ForgeDirection direction, NetworkType type);
+    boolean canConnect(ForgeDirection direction, NetworkType type);
 }

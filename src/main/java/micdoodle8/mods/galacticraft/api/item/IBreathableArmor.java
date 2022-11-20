@@ -18,7 +18,7 @@ public interface IBreathableArmor {
      * @param gearType The gear type to be handled
      * @return true if the passed gear type should be handled by this armor item
      */
-    public boolean handleGearType(EnumGearType gearType);
+    boolean handleGearType(EnumGearType gearType);
 
     /**
      * Determines if armor item is currently valid for breathing
@@ -28,5 +28,5 @@ public interface IBreathableArmor {
      * @param type          The oxygen gear type @see EnumGearType
      * @return true if this armor item is valid for the provided oxygen gear type
      */
-    public boolean canBreathe(ItemStack helmetInSlot, EntityPlayer playerWearing, EnumGearType type);
+    boolean canBreathe(ItemStack helmetInSlot, EntityPlayer playerWearing, EnumGearType type);
 }

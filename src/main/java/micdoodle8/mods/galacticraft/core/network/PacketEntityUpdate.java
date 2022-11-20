@@ -93,7 +93,7 @@ public class PacketEntityUpdate implements IPacket {
     }
 
     public interface IEntityFullSync {
-        public void setPositionRotationAndMotion(
+        void setPositionRotationAndMotion(
                 double x,
                 double y,
                 double z,
@@ -104,6 +104,6 @@ public class PacketEntityUpdate implements IPacket {
                 double motZ,
                 boolean onGround);
 
-        public UUID getOwnerUUID();
+        UUID getOwnerUUID();
     }
 }

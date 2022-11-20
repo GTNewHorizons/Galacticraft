@@ -97,7 +97,7 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
 
 public class PacketSimple extends Packet implements IPacket {
-    public static enum EnumSimplePacket {
+    public enum EnumSimplePacket {
         // SERVER
         S_RESPAWN_PLAYER(Side.SERVER, String.class),
         S_TELEPORT_ENTITY(Side.SERVER, String.class),

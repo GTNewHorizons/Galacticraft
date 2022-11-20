@@ -15,7 +15,7 @@ public interface IArmorGravity {
      *         The total effect will be cumulative for all pieces of IArmorGravity
      *         armor worn.
      */
-    public int gravityOverrideIfLow(EntityPlayer p);
+    int gravityOverrideIfLow(EntityPlayer p);
 
     /**
      * Effective on worlds where the Galacticraft gravity is higher than Overworld
@@ -29,5 +29,5 @@ public interface IArmorGravity {
      *         The total effect will be cumulative for all pieces of IArmorGravity
      *         armor worn.
      */
-    public int gravityOverrideIfHigh(EntityPlayer p);
+    int gravityOverrideIfHigh(EntityPlayer p);
 }

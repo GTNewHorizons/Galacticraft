@@ -20,7 +20,7 @@ public interface IElectrical extends IConnector {
      * @param doReceive    If false, the charge will only be simulated.
      * @return Amount of energy that was accepted by the block.
      */
-    public float receiveElectricity(ForgeDirection from, float receive, int tierProduced, boolean doReceive);
+    float receiveElectricity(ForgeDirection from, float receive, int tierProduced, boolean doReceive);
 
     /**
      * Adds electricity to an block. Returns the ElectricityPack, the electricity
@@ -32,22 +32,22 @@ public interface IElectrical extends IConnector {
      * @param doReceive If false, the charge will only be simulated.
      * @return Amount of energy that was given out by the block.
      */
-    public float provideElectricity(ForgeDirection from, float request, boolean doProvide);
+    float provideElectricity(ForgeDirection from, float request, boolean doProvide);
 
     /**
      * @return How much energy does this TileEntity want?
      */
-    public float getRequest(ForgeDirection direction);
+    float getRequest(ForgeDirection direction);
 
     /**
      * @return How much energy does this TileEntity want to provide?
      */
-    public float getProvide(ForgeDirection direction);
+    float getProvide(ForgeDirection direction);
 
     /**
      * Gets the tier of this TileEntity.
      *
      * @return The tier, should be 1 or 2
      */
-    public int getTierGC();
+    int getTierGC();
 }

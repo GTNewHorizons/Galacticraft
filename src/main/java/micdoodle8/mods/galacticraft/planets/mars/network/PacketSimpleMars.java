@@ -29,7 +29,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraftforge.common.MinecraftForge;
 
 public class PacketSimpleMars implements IPacket {
-    public static enum EnumSimplePacketMars {
+    public enum EnumSimplePacketMars {
         // SERVER
         S_UPDATE_SLIMELING_DATA(Side.SERVER, Integer.class, Integer.class, String.class),
         S_WAKE_PLAYER(Side.SERVER),

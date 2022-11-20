@@ -14,5 +14,5 @@ public interface ITerraformableBlock {
      * @param z     Position of the block on the z-axis
      * @return True if the block can be terraformed, false if not.
      */
-    public boolean isTerraformable(World world, int x, int y, int z);
+    boolean isTerraformable(World world, int x, int y, int z);
 }

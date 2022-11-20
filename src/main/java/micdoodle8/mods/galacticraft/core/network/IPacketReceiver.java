@@ -12,9 +12,9 @@ public interface IPacketReceiver {
      * any fields referenced in getNetworkedData() are either in the superclass, or
      * add some null checks!!
      */
-    public void getNetworkedData(ArrayList<Object> sendData);
+    void getNetworkedData(ArrayList<Object> sendData);
 
-    public void decodePacketdata(ByteBuf buffer);
+    void decodePacketdata(ByteBuf buffer);
 
-    public void handlePacketData(Side side, EntityPlayer player);
+    void handlePacketData(Side side, EntityPlayer player);
 }

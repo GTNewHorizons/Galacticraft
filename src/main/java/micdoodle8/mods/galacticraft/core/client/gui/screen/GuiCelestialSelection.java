@@ -57,7 +57,7 @@ import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
 public class GuiCelestialSelection extends GuiScreen {
-    protected static enum EnumSelectionState {
+    protected enum EnumSelectionState {
         PREVIEW,
         PROFILE
     }

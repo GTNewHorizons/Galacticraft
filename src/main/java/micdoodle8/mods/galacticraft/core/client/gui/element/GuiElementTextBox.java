@@ -221,15 +221,15 @@ public class GuiElementTextBox extends GuiButton {
         return this.maxLength;
     }
 
-    public static interface ITextBoxCallback {
-        public boolean canPlayerEdit(GuiElementTextBox textBox, EntityPlayer player);
+    public interface ITextBoxCallback {
+        boolean canPlayerEdit(GuiElementTextBox textBox, EntityPlayer player);
 
-        public void onTextChanged(GuiElementTextBox textBox, String newText);
+        void onTextChanged(GuiElementTextBox textBox, String newText);
 
-        public String getInitialText(GuiElementTextBox textBox);
+        String getInitialText(GuiElementTextBox textBox);
 
-        public int getTextColor(GuiElementTextBox textBox);
+        int getTextColor(GuiElementTextBox textBox);
 
-        public void onIntruderInteraction(GuiElementTextBox textBox);
+        void onIntruderInteraction(GuiElementTextBox textBox);
     }
 }

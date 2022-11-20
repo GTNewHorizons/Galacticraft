@@ -21,7 +21,7 @@ public interface ITeleportType {
      *
      * @return whether player will set parachute open upon entering this dimension
      */
-    public boolean useParachute();
+    boolean useParachute();
 
     /**
      * Gets the player spawn location when entering this dimension
@@ -31,7 +31,7 @@ public interface ITeleportType {
      * @return a vector3 object containing the coordinates to be spawned into the
      *         world with
      */
-    public Vector3 getPlayerSpawnLocation(WorldServer world, EntityPlayerMP player);
+    Vector3 getPlayerSpawnLocation(WorldServer world, EntityPlayerMP player);
 
     /**
      * Gets the entity (non-player) spawn location when entering this dimension
@@ -41,7 +41,7 @@ public interface ITeleportType {
      * @return a vector3 object containing the coordinates to be spawned into the
      *         world with
      */
-    public Vector3 getEntitySpawnLocation(WorldServer world, Entity entity);
+    Vector3 getEntitySpawnLocation(WorldServer world, Entity entity);
 
     /**
      * Gets the parachest spawn location when entering this dimension. Return null
@@ -52,7 +52,7 @@ public interface ITeleportType {
      * @return a vector3 object containing the coordinates to be spawned into the
      *         world with. Return null for no spawn
      */
-    public Vector3 getParaChestSpawnLocation(WorldServer world, EntityPlayerMP player, Random rand);
+    Vector3 getParaChestSpawnLocation(WorldServer world, EntityPlayerMP player, Random rand);
 
     /**
      * Called when player is transferred to a space dimension
@@ -62,12 +62,12 @@ public interface ITeleportType {
      * @param ridingAutoRocket If the player is riding an auto rocket. Do not spawn
      *                         in landers if so.
      */
-    public void onSpaceDimensionChanged(World newWorld, EntityPlayerMP player, boolean ridingAutoRocket);
+    void onSpaceDimensionChanged(World newWorld, EntityPlayerMP player, boolean ridingAutoRocket);
 
     /**
      * Used by Asteroids Survival game mode to set up the initial lander inventory
      *
      * @param player
      */
-    public void setupAdventureSpawn(EntityPlayerMP player);
+    void setupAdventureSpawn(EntityPlayerMP player);
 }

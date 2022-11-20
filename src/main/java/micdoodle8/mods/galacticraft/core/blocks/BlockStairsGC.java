@@ -12,7 +12,7 @@ import net.minecraft.util.IIcon;
 public class BlockStairsGC extends BlockStairs {
     private IIcon[] tinSideIcon;
 
-    public static enum StairsCategoryGC {
+    public enum StairsCategoryGC {
         TIN1("stone"),
         TIN2("stone"),
         MOON_STONE("stone"),

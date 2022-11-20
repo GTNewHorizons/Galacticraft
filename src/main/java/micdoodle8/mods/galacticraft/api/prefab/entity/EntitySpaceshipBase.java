@@ -41,7 +41,7 @@ import org.lwjgl.opengl.GL11;
  * Do not include this prefab class in your released mod download.
  */
 public abstract class EntitySpaceshipBase extends Entity implements IPacketReceiver, IIgnoreShift, ITelemetry {
-    public static enum EnumLaunchPhase {
+    public enum EnumLaunchPhase {
         UNIGNITED,
         IGNITED,
         LAUNCHED

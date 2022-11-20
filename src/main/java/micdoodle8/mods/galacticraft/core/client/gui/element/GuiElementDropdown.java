@@ -154,13 +154,13 @@ public class GuiElementDropdown extends GuiButton {
         return false;
     }
 
-    public static interface IDropboxCallback {
-        public boolean canBeClickedBy(GuiElementDropdown dropdown, EntityPlayer player);
+    public interface IDropboxCallback {
+        boolean canBeClickedBy(GuiElementDropdown dropdown, EntityPlayer player);
 
-        public void onSelectionChanged(GuiElementDropdown dropdown, int selection);
+        void onSelectionChanged(GuiElementDropdown dropdown, int selection);
 
-        public int getInitialSelection(GuiElementDropdown dropdown);
+        int getInitialSelection(GuiElementDropdown dropdown);
 
-        public void onIntruderInteraction();
+        void onIntruderInteraction();
     }
 }

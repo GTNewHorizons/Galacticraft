@@ -11,7 +11,7 @@ public interface IGameScreen {
      *
      * @param frameSize
      */
-    public void setFrameSize(float frameSize);
+    void setFrameSize(float frameSize);
 
     /**
      * Draw a screen in the XY plane with z == 0. Must fit in the coordinate range
@@ -37,5 +37,5 @@ public interface IGameScreen {
      * @param driver
      *
      */
-    public void render(int type, float ticks, float scaleX, float scaleY, IScreenManager screen);
+    void render(int type, float ticks, float scaleX, float scaleY, IScreenManager screen);
 }

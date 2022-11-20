@@ -10,5 +10,5 @@ public interface IExitHeight {
     /**
      * @return y-coordinate that spacecraft leaves the dimension
      */
-    public double getYCoordinateToTeleport();
+    double getYCoordinateToTeleport();
 }

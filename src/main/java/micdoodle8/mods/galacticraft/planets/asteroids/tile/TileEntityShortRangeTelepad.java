@@ -37,7 +37,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityShortRangeTelepad extends TileBaseElectricBlock
         implements IMultiBlock, IInventory, ISidedInventory {
-    public static enum EnumTelepadSearchResult {
+    public enum EnumTelepadSearchResult {
         VALID,
         NOT_FOUND,
         TOO_FAR,

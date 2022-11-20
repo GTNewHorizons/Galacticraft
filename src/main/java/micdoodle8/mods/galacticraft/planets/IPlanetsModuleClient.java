@@ -11,17 +11,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public interface IPlanetsModuleClient {
-    public void preInit(FMLPreInitializationEvent event);
+    void preInit(FMLPreInitializationEvent event);
 
-    public void init(FMLInitializationEvent event);
+    void init(FMLInitializationEvent event);
 
-    public void postInit(FMLPostInitializationEvent event);
+    void postInit(FMLPostInitializationEvent event);
 
-    public void getGuiIDs(List<Integer> idList);
+    void getGuiIDs(List<Integer> idList);
 
-    public Object getGuiElement(Side side, int ID, EntityPlayer player, World world, int x, int y, int z);
+    Object getGuiElement(Side side, int ID, EntityPlayer player, World world, int x, int y, int z);
 
-    public int getBlockRenderID(Block block);
+    int getBlockRenderID(Block block);
 
-    public void spawnParticle(String particleID, Vector3 position, Vector3 motion, Object... extraData);
+    void spawnParticle(String particleID, Vector3 position, Vector3 motion, Object... extraData);
 }
