@@ -144,7 +144,7 @@ public class EntityFlag extends Entity {
     @Override
     protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         par1NBTTagCompound.setString("Owner", String.valueOf(this.getOwner()));
-        par1NBTTagCompound.setInteger("Type", Integer.valueOf(this.getType()));
+        par1NBTTagCompound.setInteger("Type", this.getType());
         par1NBTTagCompound.setBoolean("Indestructable", this.indestructable);
         par1NBTTagCompound.setInteger("AngleI", this.getFacingAngle());
         par1NBTTagCompound.setDouble("TileX", this.xPosition);

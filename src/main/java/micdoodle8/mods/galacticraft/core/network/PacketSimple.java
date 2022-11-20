@@ -570,9 +570,9 @@ public class PacketSimple extends Packet implements IPacket {
                         Collections.sort(stats.unlockedSchematics);
 
                         if (!stats.unlockedSchematics.contains(
-                                SchematicRegistry.getMatchingRecipeForID(Integer.valueOf(schematicID)))) {
+                                SchematicRegistry.getMatchingRecipeForID(schematicID))) {
                             stats.unlockedSchematics.add(
-                                    SchematicRegistry.getMatchingRecipeForID(Integer.valueOf(schematicID)));
+                                    SchematicRegistry.getMatchingRecipeForID(schematicID));
                         }
                     }
                 }

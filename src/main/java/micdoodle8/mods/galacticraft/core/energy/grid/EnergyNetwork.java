@@ -273,7 +273,7 @@ public class EnergyNetwork implements IElectricityNetwork {
                     if (e > 0.0F) {
                         this.availableAcceptors.add(acceptor);
                         this.availableconnectedDirections.put(acceptor, sideFrom);
-                        this.energyRequests.put(acceptor, Float.valueOf(e));
+                        this.energyRequests.put(acceptor, e);
                         this.totalRequested += e;
                         if (e > EnergyNetwork.ENERGY_STORAGE_LEVEL) {
                             this.totalStorageExcess += e - EnergyNetwork.ENERGY_STORAGE_LEVEL;
