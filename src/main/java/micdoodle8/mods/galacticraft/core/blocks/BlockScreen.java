@@ -146,15 +146,7 @@ public class BlockScreen extends BlockAdvanced implements ItemBlockDesc.IBlockSh
 
     @Override
     public boolean onMachineActivated(
-            World world,
-            int x,
-            int y,
-            int z,
-            EntityPlayer player,
-            int side,
-            float subX,
-            float subY,
-            float subZ) {
+            World world, int x, int y, int z, EntityPlayer player, int side, float subX, float subY, float subZ) {
         TileEntity tile = world.getTileEntity(x, y, z);
         if (tile instanceof TileEntityScreen) {
             ((TileEntityScreen) tile).changeChannel();

@@ -101,8 +101,7 @@ public class BlockCreeperEgg extends BlockDragonEgg implements ItemBlockDesc.IBl
         return stack.getItem() == MarsItems.deshPickSlime;
     }
 
-    public float getPlayerRelativeBlockHardness(
-            EntityPlayer player, World worldIn, int x, int y, int z) {
+    public float getPlayerRelativeBlockHardness(EntityPlayer player, World worldIn, int x, int y, int z) {
         ItemStack stack = player.inventory.getCurrentItem();
         if (stack != null && stack.getItem() == MarsItems.deshPickSlime) {
             return 0.2F;

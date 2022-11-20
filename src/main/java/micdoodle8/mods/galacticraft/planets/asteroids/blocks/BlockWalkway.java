@@ -39,8 +39,7 @@ public class BlockWalkway extends BlockTransmitter implements ITileEntityProvide
 
     @SideOnly(Side.CLIENT)
     @Override
-    public boolean shouldSideBeRendered(
-            IBlockAccess worldIn, int x, int y, int z, int side) {
+    public boolean shouldSideBeRendered(IBlockAccess worldIn, int x, int y, int z, int side) {
         return true;
     }
 

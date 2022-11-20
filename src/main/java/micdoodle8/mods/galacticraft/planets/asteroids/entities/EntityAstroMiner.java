@@ -1587,13 +1587,7 @@ public class EntityAstroMiner extends Entity
     }
 
     @SideOnly(Side.CLIENT)
-    public void setPositionAndRotation2(
-            double x,
-            double y,
-            double z,
-            float yaw,
-            float pitch,
-            int rotationIncrements) {
+    public void setPositionAndRotation2(double x, double y, double z, float yaw, float pitch, int rotationIncrements) {
         this.minecartX = x;
         this.minecartY = y;
         this.minecartZ = z;

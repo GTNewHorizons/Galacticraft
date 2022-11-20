@@ -158,13 +158,7 @@ public class EntityMeteor extends Entity {
 
     @Override
     public boolean func_145774_a(
-            Explosion explosionIn,
-            World worldIn,
-            int x,
-            int y,
-            int z,
-            Block blockIn,
-            float unused) {
+            Explosion explosionIn, World worldIn, int x, int y, int z, Block blockIn, float unused) {
         return ConfigManagerCore.meteorBlockDamageEnabled;
     }
 

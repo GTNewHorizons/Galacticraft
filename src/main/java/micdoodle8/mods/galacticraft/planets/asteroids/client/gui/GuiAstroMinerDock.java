@@ -216,8 +216,7 @@ public class GuiAstroMinerDock extends GuiContainerGC {
         tessellator.startDrawingQuads();
         tessellator.setColorOpaque_I(color);
         tessellator.addVertex((double) (x + 0), (double) (y + height), (double) this.zLevel);
-        tessellator.addVertex(
-                (double) (x + width), (double) (y + height), (double) this.zLevel);
+        tessellator.addVertex((double) (x + width), (double) (y + height), (double) this.zLevel);
         tessellator.addVertex((double) (x + width), (double) (y + 0), (double) this.zLevel);
         tessellator.addVertex((double) (x + 0), (double) (y + 0), (double) this.zLevel);
         tessellator.draw();
