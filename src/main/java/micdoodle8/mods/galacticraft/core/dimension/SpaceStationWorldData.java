@@ -297,7 +297,7 @@ public class SpaceStationWorldData extends WorldSavedData {
 
         if (stationData.owner.equals(playerName)) {
             // This player is the owner of the station - ensure stats data matches
-            if (!stats.spaceStationDimensionData.values().contains(stationID)) {
+            if (!stats.spaceStationDimensionData.containsValue(stationID)) {
                 GCLog.debug("Player owns station: " + stationData.getSpaceStationName() + " with home planet "
                         + stationData.getHomePlanet());
                 stats.spaceStationDimensionData.put(stationData.getHomePlanet(), stationID);
