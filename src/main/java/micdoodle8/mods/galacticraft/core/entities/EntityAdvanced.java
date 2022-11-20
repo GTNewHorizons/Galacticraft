@@ -228,7 +228,8 @@ public abstract class EntityAdvanced extends Entity implements IPacketReceiver {
             }
         }
 
-        if ((this.worldObj.isRemote && this.fieldCacheClient.size() == 0) || (!this.worldObj.isRemote && this.fieldCacheServer.size() == 0)) {
+        if ((this.worldObj.isRemote && this.fieldCacheClient.size() == 0)
+                || (!this.worldObj.isRemote && this.fieldCacheServer.size() == 0)) {
             return;
         }
 

@@ -299,7 +299,8 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
             float hitZ) {
         final int metadata = world.getBlockMetadata(x, y, z);
 
-        if ((metadata >= BlockMachineMars.LAUNCH_CONTROLLER_METADATA) || !(metadata >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA)) {
+        if ((metadata >= BlockMachineMars.LAUNCH_CONTROLLER_METADATA)
+                || !(metadata >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA)) {
             par5EntityPlayer.openGui(GalacticraftPlanets.instance, GuiIdsPlanets.MACHINE_MARS, world, x, y, z);
             return true;
         } else {

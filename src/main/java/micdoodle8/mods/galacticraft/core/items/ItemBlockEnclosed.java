@@ -121,7 +121,9 @@ public class ItemBlockEnclosed extends ItemBlockDesc {
                 return false;
             }
 
-            if (!entityplayer.canPlayerEdit(i, j, k, side, itemstack) || (j == 255 && this.field_150939_a.getMaterial().isSolid()) || !world.canPlaceEntityOnSide(block, i, j, k, false, side, entityplayer, itemstack)) {
+            if (!entityplayer.canPlayerEdit(i, j, k, side, itemstack)
+                    || (j == 255 && this.field_150939_a.getMaterial().isSolid())
+                    || !world.canPlaceEntityOnSide(block, i, j, k, false, side, entityplayer, itemstack)) {
                 return false;
             } else {
                 final int j1 = this.field_150939_a.onBlockPlaced(world, i, j, k, side, par8, par9, par10, metadata);

@@ -88,7 +88,8 @@ public class BlockSlimelingEgg extends Block implements ITileEntityProvider, Ite
     @Override
     public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest) {
         final ItemStack currentStack = player.getCurrentEquippedItem();
-        if ((currentStack != null && currentStack.getItem() instanceof ItemPickaxe) || player.capabilities.isCreativeMode) {
+        if ((currentStack != null && currentStack.getItem() instanceof ItemPickaxe)
+                || player.capabilities.isCreativeMode) {
             return world.setBlockToAir(x, y, z);
         } else {
             this.beginHatch(world, x, y, z, player);
