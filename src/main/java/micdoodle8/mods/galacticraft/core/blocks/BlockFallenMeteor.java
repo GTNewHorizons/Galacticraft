@@ -156,9 +156,7 @@ public class BlockFallenMeteor extends Block implements ITileEntityProvider, Ite
     public static boolean canFallBelow(World par0World, int par1, int par2, int par3) {
         final Block var4 = par0World.getBlock(par1, par2, par3);
 
-        if (var4.getMaterial() == Material.air) {
-            return true;
-        } else if (var4 == Blocks.fire) {
+        if ((var4.getMaterial() == Material.air) || (var4 == Blocks.fire)) {
             return true;
         } else {
             final Material var5 = var4.getMaterial();

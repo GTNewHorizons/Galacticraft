@@ -164,11 +164,7 @@ public class BlockParaChest extends BlockContainer implements ITileEntityProvide
     public IInventory getInventory(World par1World, int par2, int par3, int par4) {
         final Object object = par1World.getTileEntity(par2, par3, par4);
 
-        if (object == null) {
-            return null;
-        } else if (par1World.isSideSolid(par2, par3 + 1, par4, ForgeDirection.DOWN)) {
-            return null;
-        } else if (BlockParaChest.isOcelotBlockingChest(par1World, par2, par3, par4)) {
+        if ((object == null) || par1World.isSideSolid(par2, par3 + 1, par4, ForgeDirection.DOWN) || BlockParaChest.isOcelotBlockingChest(par1World, par2, par3, par4)) {
             return null;
         } else {
             return (IInventory) object;

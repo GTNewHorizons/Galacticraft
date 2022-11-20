@@ -353,11 +353,7 @@ public class BlockT1TreasureChest extends BlockContainer implements ITileEntityP
             float par9) {
         Object var10 = par1World.getTileEntity(par2, par3, par4);
 
-        if (var10 == null) {
-            return true;
-        } else if (par1World.isSideSolid(par2, par3 + 1, par4, ForgeDirection.DOWN)) {
-            return true;
-        } else if (BlockT1TreasureChest.isOcelotBlockingChest(par1World, par2, par3, par4)) {
+        if ((var10 == null) || par1World.isSideSolid(par2, par3 + 1, par4, ForgeDirection.DOWN) || BlockT1TreasureChest.isOcelotBlockingChest(par1World, par2, par3, par4)) {
             return true;
         } else if (par1World.getBlock(par2 - 1, par3, par4) == this
                 && (par1World.isSideSolid(par2 - 1, par3 + 1, par4, ForgeDirection.DOWN)

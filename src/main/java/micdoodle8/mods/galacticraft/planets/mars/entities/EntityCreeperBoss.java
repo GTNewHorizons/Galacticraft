@@ -81,9 +81,9 @@ public class EntityCreeperBoss extends EntityMob
     @Override
     public boolean attackEntityFrom(DamageSource damageSource, float damage) {
         if (damageSource.getDamageType().equals("fireball")) {
-            if (this.isEntityInvulnerable()) {
+            if (this.isEntityInvulnerable() || !super.attackEntityFrom(damageSource, damage)) {
                 return false;
-            } else if (super.attackEntityFrom(damageSource, damage)) {
+            } else {
                 final Entity entity = damageSource.getEntity();
 
                 if (this.riddenByEntity != entity && this.ridingEntity != entity) {
@@ -95,8 +95,6 @@ public class EntityCreeperBoss extends EntityMob
                 } else {
                     return true;
                 }
-            } else {
-                return false;
             }
         }
 

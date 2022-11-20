@@ -213,9 +213,7 @@ public class OxygenUtil {
                 } else {
                     return -1;
                 }
-            } else if (block instanceof BlockGlass || block instanceof BlockStainedGlass) {
-                return -1;
-            } else if (block instanceof BlockLiquid) {
+            } else if ((block instanceof BlockGlass || block instanceof BlockStainedGlass) || (block instanceof BlockLiquid)) {
                 return -1;
             } else if (OxygenPressureProtocol.nonPermeableBlocks.containsKey(block)) {
                 final ArrayList<Integer> metaList = OxygenPressureProtocol.nonPermeableBlocks.get(block);

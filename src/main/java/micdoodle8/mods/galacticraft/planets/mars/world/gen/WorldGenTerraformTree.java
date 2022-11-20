@@ -75,117 +75,113 @@ public class WorldGenTerraformTree extends WorldGenerator {
                 }
             }
 
-            if (!flag) {
+            if (!flag || !(y < 256 - l - 1)) {
                 return false;
             } else {
-                if (y < 256 - l - 1) {
-                    b0 = 3;
-                    final byte b1 = 0;
-                    int i2;
-                    int j2;
+                b0 = 3;
+                final byte b1 = 0;
+                int i2;
+                int j2;
 
-                    for (j1 = y - b0 + l; j1 <= y + l; ++j1) {
+                for (j1 = y - b0 + l; j1 <= y + l; ++j1) {
+                    k1 = j1 - (y + l);
+                    i2 = b1 + 1 - k1 / 2;
+
+                    for (j2 = x - i2; j2 <= x + i2; ++j2) {
+                        k2 = j2 - x;
+
+                        for (int l2 = z - i2; l2 <= z + i2; ++l2) {
+                            final int i3 = l2 - z;
+
+                            if (Math.abs(k2) != i2 || Math.abs(i3) != i2 || par2Random.nextInt(2) != 0 && k1 != 0) {
+                                final Block block = par1World.getBlock(j2, j1, l2);
+
+                                if (block == null || block.canBeReplacedByLeaves(par1World, j2, j1, l2)) {
+                                    this.setBlockAndNotifyAdequately(
+                                            par1World, j2, j1, l2, Blocks.leaves, this.metaLeaves);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                for (j1 = 0; j1 < l; ++j1) {
+                    final Block block = par1World.getBlock(x, y + j1, z);
+                    if (block == null) {
+                        continue;
+                    }
+
+                    if (block.isAir(par1World, x, y + j1, z) || block.isLeaves(par1World, x, y + j1, z)) {
+                        this.setBlockAndNotifyAdequately(par1World, x, y + j1, z, Blocks.log, this.metaWood);
+
+                        if (this.vinesGrow && j1 > 0) {
+                            if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(x - 1, y + j1, z)) {
+                                this.setBlockAndNotifyAdequately(par1World, x - 1, y + j1, z, Blocks.vine, 8);
+                            }
+
+                            if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(x + 1, y + j1, z)) {
+                                this.setBlockAndNotifyAdequately(par1World, x + 1, y + j1, z, Blocks.vine, 2);
+                            }
+
+                            if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(x, y + j1, z - 1)) {
+                                this.setBlockAndNotifyAdequately(par1World, x, y + j1, z - 1, Blocks.vine, 1);
+                            }
+
+                            if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(x, y + j1, z + 1)) {
+                                this.setBlockAndNotifyAdequately(par1World, x, y + j1, z + 1, Blocks.vine, 4);
+                            }
+                        }
+                    }
+                }
+
+                if (this.vinesGrow) {
+                    for (j1 = y - 3 + l; j1 <= y + l; ++j1) {
                         k1 = j1 - (y + l);
-                        i2 = b1 + 1 - k1 / 2;
+                        i2 = 2 - k1 / 2;
 
                         for (j2 = x - i2; j2 <= x + i2; ++j2) {
-                            k2 = j2 - x;
+                            for (k2 = z - i2; k2 <= z + i2; ++k2) {
+                                final Block block = par1World.getBlock(j2, j1, k2);
+                                if (block != null && block.isLeaves(par1World, j2, j1, k2)) {
+                                    if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2 - 1, j1, k2)) {
+                                        this.growVines(par1World, j2 - 1, j1, k2, 8);
+                                    }
 
-                            for (int l2 = z - i2; l2 <= z + i2; ++l2) {
-                                final int i3 = l2 - z;
+                                    if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2 + 1, j1, k2)) {
+                                        this.growVines(par1World, j2 + 1, j1, k2, 2);
+                                    }
 
-                                if (Math.abs(k2) != i2 || Math.abs(i3) != i2 || par2Random.nextInt(2) != 0 && k1 != 0) {
-                                    final Block block = par1World.getBlock(j2, j1, l2);
+                                    if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2, j1, k2 - 1)) {
+                                        this.growVines(par1World, j2, j1, k2 - 1, 1);
+                                    }
 
-                                    if (block == null || block.canBeReplacedByLeaves(par1World, j2, j1, l2)) {
-                                        this.setBlockAndNotifyAdequately(
-                                                par1World, j2, j1, l2, Blocks.leaves, this.metaLeaves);
+                                    if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2, j1, k2 + 1)) {
+                                        this.growVines(par1World, j2, j1, k2 + 1, 4);
                                     }
                                 }
                             }
                         }
                     }
 
-                    for (j1 = 0; j1 < l; ++j1) {
-                        final Block block = par1World.getBlock(x, y + j1, z);
-                        if (block == null) {
-                            continue;
-                        }
-
-                        if (block.isAir(par1World, x, y + j1, z) || block.isLeaves(par1World, x, y + j1, z)) {
-                            this.setBlockAndNotifyAdequately(par1World, x, y + j1, z, Blocks.log, this.metaWood);
-
-                            if (this.vinesGrow && j1 > 0) {
-                                if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(x - 1, y + j1, z)) {
-                                    this.setBlockAndNotifyAdequately(par1World, x - 1, y + j1, z, Blocks.vine, 8);
-                                }
-
-                                if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(x + 1, y + j1, z)) {
-                                    this.setBlockAndNotifyAdequately(par1World, x + 1, y + j1, z, Blocks.vine, 2);
-                                }
-
-                                if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(x, y + j1, z - 1)) {
-                                    this.setBlockAndNotifyAdequately(par1World, x, y + j1, z - 1, Blocks.vine, 1);
-                                }
-
-                                if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(x, y + j1, z + 1)) {
-                                    this.setBlockAndNotifyAdequately(par1World, x, y + j1, z + 1, Blocks.vine, 4);
+                    if (par2Random.nextInt(5) == 0 && l > 5) {
+                        for (j1 = 0; j1 < 2; ++j1) {
+                            for (k1 = 0; k1 < 4; ++k1) {
+                                if (par2Random.nextInt(4 - j1) == 0) {
+                                    i2 = par2Random.nextInt(3);
+                                    this.setBlockAndNotifyAdequately(
+                                            par1World,
+                                            x + Direction.offsetX[Direction.rotateOpposite[k1]],
+                                            y + l - 5 + j1,
+                                            z + Direction.offsetZ[Direction.rotateOpposite[k1]],
+                                            Blocks.cocoa,
+                                            i2 << 2 | k1);
                                 }
                             }
                         }
                     }
-
-                    if (this.vinesGrow) {
-                        for (j1 = y - 3 + l; j1 <= y + l; ++j1) {
-                            k1 = j1 - (y + l);
-                            i2 = 2 - k1 / 2;
-
-                            for (j2 = x - i2; j2 <= x + i2; ++j2) {
-                                for (k2 = z - i2; k2 <= z + i2; ++k2) {
-                                    final Block block = par1World.getBlock(j2, j1, k2);
-                                    if (block != null && block.isLeaves(par1World, j2, j1, k2)) {
-                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2 - 1, j1, k2)) {
-                                            this.growVines(par1World, j2 - 1, j1, k2, 8);
-                                        }
-
-                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2 + 1, j1, k2)) {
-                                            this.growVines(par1World, j2 + 1, j1, k2, 2);
-                                        }
-
-                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2, j1, k2 - 1)) {
-                                            this.growVines(par1World, j2, j1, k2 - 1, 1);
-                                        }
-
-                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2, j1, k2 + 1)) {
-                                            this.growVines(par1World, j2, j1, k2 + 1, 4);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        if (par2Random.nextInt(5) == 0 && l > 5) {
-                            for (j1 = 0; j1 < 2; ++j1) {
-                                for (k1 = 0; k1 < 4; ++k1) {
-                                    if (par2Random.nextInt(4 - j1) == 0) {
-                                        i2 = par2Random.nextInt(3);
-                                        this.setBlockAndNotifyAdequately(
-                                                par1World,
-                                                x + Direction.offsetX[Direction.rotateOpposite[k1]],
-                                                y + l - 5 + j1,
-                                                z + Direction.offsetZ[Direction.rotateOpposite[k1]],
-                                                Blocks.cocoa,
-                                                i2 << 2 | k1);
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    return true;
-                } else {
-                    return false;
                 }
+
+                return true;
             }
         } else {
             return false;

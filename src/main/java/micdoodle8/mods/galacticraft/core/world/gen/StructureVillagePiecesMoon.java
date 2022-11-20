@@ -173,23 +173,21 @@ public class StructureVillagePiecesMoon {
             int par5,
             int par6,
             int par7) {
-        if (par7 > 50) {
-            return null;
-        } else if (Math.abs(par3 - par0ComponentVillageStartPiece.getBoundingBox().minX) <= 112
-                && Math.abs(par5 - par0ComponentVillageStartPiece.getBoundingBox().minZ) <= 112) {
-            final StructureComponentVillage var8 = StructureVillagePiecesMoon.getNextVillageComponent(
-                    par0ComponentVillageStartPiece, par1List, par2Random, par3, par4, par5, par6, par7 + 1);
-
-            if (var8 != null) {
-                par1List.add(var8);
-                par0ComponentVillageStartPiece.field_74932_i.add(var8);
-                return var8;
-            }
-
+        if ((par7 > 50) || !(Math.abs(par3 - par0ComponentVillageStartPiece.getBoundingBox().minX) <= 112
+                && Math.abs(par5 - par0ComponentVillageStartPiece.getBoundingBox().minZ) <= 112)) {
             return null;
         } else {
-            return null;
-        }
+         final StructureComponentVillage var8 = StructureVillagePiecesMoon.getNextVillageComponent(
+            par0ComponentVillageStartPiece, par1List, par2Random, par3, par4, par5, par6, par7 + 1);
+
+         if (var8 != null) {
+        par1List.add(var8);
+        par0ComponentVillageStartPiece.field_74932_i.add(var8);
+        return var8;
+         }
+
+         return null;
+      }
     }
 
     private static StructureComponent getNextComponentVillagePath(
@@ -201,26 +199,24 @@ public class StructureVillagePiecesMoon {
             int par5,
             int par6,
             int par7) {
-        if (par7 > 3 + par0ComponentVillageStartPiece.terrainType) {
-            return null;
-        } else if (Math.abs(par3 - par0ComponentVillageStartPiece.getBoundingBox().minX) <= 112
-                && Math.abs(par5 - par0ComponentVillageStartPiece.getBoundingBox().minZ) <= 112) {
-            final StructureBoundingBox var8 = StructureComponentVillagePathGen.func_74933_a(
-                    par0ComponentVillageStartPiece, par1List, par2Random, par3, par4, par5, par6);
-
-            if (var8 != null && var8.minY > 10) {
-                final StructureComponentVillagePathGen var9 = new StructureComponentVillagePathGen(
-                        par0ComponentVillageStartPiece, par7, par2Random, var8, par6);
-
-                par1List.add(var9);
-                par0ComponentVillageStartPiece.field_74930_j.add(var9);
-                return var9;
-            }
-
+        if ((par7 > 3 + par0ComponentVillageStartPiece.terrainType) || !(Math.abs(par3 - par0ComponentVillageStartPiece.getBoundingBox().minX) <= 112
+                && Math.abs(par5 - par0ComponentVillageStartPiece.getBoundingBox().minZ) <= 112)) {
             return null;
         } else {
-            return null;
-        }
+         final StructureBoundingBox var8 = StructureComponentVillagePathGen.func_74933_a(
+            par0ComponentVillageStartPiece, par1List, par2Random, par3, par4, par5, par6);
+
+         if (var8 != null && var8.minY > 10) {
+        final StructureComponentVillagePathGen var9 = new StructureComponentVillagePathGen(
+                par0ComponentVillageStartPiece, par7, par2Random, var8, par6);
+
+        par1List.add(var9);
+        par0ComponentVillageStartPiece.field_74930_j.add(var9);
+        return var9;
+         }
+
+         return null;
+      }
     }
 
     /**

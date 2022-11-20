@@ -166,11 +166,9 @@ public class CompressorRecipes {
             for (j = 0; j < theRecipes.size(); ++j) {
                 final IRecipe irecipe = theRecipes.get(j);
 
-                if (irecipe instanceof ShapedRecipes
-                        && CompressorRecipes.matches((ShapedRecipes) irecipe, inventory, par2World)) {
-                    return irecipe.getRecipeOutput().copy();
-                } else if (irecipe instanceof ShapelessOreRecipe
-                        && CompressorRecipes.matchesShapeless((ShapelessOreRecipe) irecipe, inventory, par2World)) {
+                if ((irecipe instanceof ShapedRecipes
+                        && CompressorRecipes.matches((ShapedRecipes) irecipe, inventory, par2World)) || (irecipe instanceof ShapelessOreRecipe
+                        && CompressorRecipes.matchesShapeless((ShapelessOreRecipe) irecipe, inventory, par2World))) {
                     return irecipe.getRecipeOutput().copy();
                 }
             }

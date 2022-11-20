@@ -20,9 +20,7 @@ public class EntitySmallAsteroid extends Entity {
     public void onEntityUpdate() {
         if (!this.firstUpdate) {
             // Kill non-moving entities
-            if (Math.abs(this.posX - this.prevPosX) + Math.abs(this.posZ - this.prevPosZ) <= 0) {
-                this.setDead();
-            } else if (this.posY > 288D || this.posY < -32D || this.ticksExisted > 3000) {
+            if ((Math.abs(this.posX - this.prevPosX) + Math.abs(this.posZ - this.prevPosZ) <= 0) || (this.posY > 288D || this.posY < -32D || this.ticksExisted > 3000)) {
                 this.setDead();
             }
         }

@@ -159,9 +159,7 @@ public abstract class TileEntityAdvanced extends TileEntity implements IPacketRe
             this.initFieldCache();
         }
 
-        if (this.worldObj.isRemote && this.fieldCacheClient.size() == 0) {
-            return;
-        } else if (!this.worldObj.isRemote && this.fieldCacheServer.size() == 0) {
+        if ((this.worldObj.isRemote && this.fieldCacheClient.size() == 0) || (!this.worldObj.isRemote && this.fieldCacheServer.size() == 0)) {
             return;
         }
 

@@ -225,27 +225,7 @@ public class GCPlayerHandler {
                 GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.REMOVE_LEFT_TANK);
                 GCPlayer.airRemaining = 0;
                 GCPlayerHandler.sendAirRemainingPacket(player, GCPlayer);
-            } else if (GCPlayer.lastTankInSlot1 == null || forceSend) {
-                if (GCPlayer.tankInSlot1.getItem() == GCItems.oxTankLight) {
-                    GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDLEFTGREENTANK);
-                } else if (GCPlayer.tankInSlot1.getItem() == GCItems.oxTankMedium) {
-                    GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDLEFTORANGETANK);
-                } else if (GCPlayer.tankInSlot1.getItem() == GCItems.oxTankHeavy) {
-                    GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDLEFTREDTANK);
-                } else if (GCPlayer.tankInSlot1.getItem() == GCItems.oxTankSuperHeavy) {
-                    GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDLEFTBLUETANK);
-                } else if (GCPlayer.tankInSlot1.getItem() == GCItems.oxTankUltraHeavy) {
-                    GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDLEFTVIOLETTANK);
-                } else if (GCPlayer.tankInSlot1.getItem() == GCItems.oxygenCanisterInfinite) {
-                    GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDLEFTGRAYTANK);
-                }
-                if (GCPlayer.maskInSlot != null && GCPlayer.gearInSlot != null) {
-                    GCPlayer.airRemaining = GCPlayer.tankInSlot1.getMaxDamage() - GCPlayer.tankInSlot1.getItemDamage();
-                    GCPlayerHandler.sendAirRemainingPacket(player, GCPlayer);
-                }
-            }
-            // if the else is reached then both tankInSlot and lastTankInSlot are non-null
-            else if (GCPlayer.tankInSlot1.getItem() != GCPlayer.lastTankInSlot1.getItem()) {
+            } else if ((GCPlayer.lastTankInSlot1 == null || forceSend) || (GCPlayer.tankInSlot1.getItem() != GCPlayer.lastTankInSlot1.getItem())) {
                 if (GCPlayer.tankInSlot1.getItem() == GCItems.oxTankLight) {
                     GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDLEFTGREENTANK);
                 } else if (GCPlayer.tankInSlot1.getItem() == GCItems.oxTankMedium) {
@@ -275,27 +255,7 @@ public class GCPlayerHandler {
                 GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.REMOVE_RIGHT_TANK);
                 GCPlayer.airRemaining2 = 0;
                 GCPlayerHandler.sendAirRemainingPacket(player, GCPlayer);
-            } else if (GCPlayer.lastTankInSlot2 == null || forceSend) {
-                if (GCPlayer.tankInSlot2.getItem() == GCItems.oxTankLight) {
-                    GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDRIGHTGREENTANK);
-                } else if (GCPlayer.tankInSlot2.getItem() == GCItems.oxTankMedium) {
-                    GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDRIGHTORANGETANK);
-                } else if (GCPlayer.tankInSlot2.getItem() == GCItems.oxTankHeavy) {
-                    GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDRIGHTREDTANK);
-                } else if (GCPlayer.tankInSlot2.getItem() == GCItems.oxTankSuperHeavy) {
-                    GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDRIGHTBLUETANK);
-                } else if (GCPlayer.tankInSlot2.getItem() == GCItems.oxTankUltraHeavy) {
-                    GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDRIGHTVIOLETTANK);
-                } else if (GCPlayer.tankInSlot2.getItem() == GCItems.oxygenCanisterInfinite) {
-                    GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDRIGHTGRAYTANK);
-                }
-                if (GCPlayer.maskInSlot != null && GCPlayer.gearInSlot != null) {
-                    GCPlayer.airRemaining2 = GCPlayer.tankInSlot2.getMaxDamage() - GCPlayer.tankInSlot2.getItemDamage();
-                    GCPlayerHandler.sendAirRemainingPacket(player, GCPlayer);
-                }
-            }
-            // if the else is reached then both tankInSlot and lastTankInSlot are non-null
-            else if (GCPlayer.tankInSlot2.getItem() != GCPlayer.lastTankInSlot2.getItem()) {
+            } else if ((GCPlayer.lastTankInSlot2 == null || forceSend) || (GCPlayer.tankInSlot2.getItem() != GCPlayer.lastTankInSlot2.getItem())) {
                 if (GCPlayer.tankInSlot2.getItem() == GCItems.oxTankLight) {
                     GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDRIGHTGREENTANK);
                 } else if (GCPlayer.tankInSlot2.getItem() == GCItems.oxTankMedium) {
@@ -324,10 +284,7 @@ public class GCPlayerHandler {
             if (GCPlayer.usingParachute) {
                 if (GCPlayer.parachuteInSlot == null) {
                     GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.REMOVE_PARACHUTE);
-                } else if (GCPlayer.lastParachuteInSlot == null || forceSend) {
-                    GCPlayerHandler.sendGearUpdatePacket(
-                            player, EnumModelPacket.ADD_PARACHUTE, GCPlayer.parachuteInSlot.getItemDamage());
-                } else if (GCPlayer.parachuteInSlot.getItemDamage() != GCPlayer.lastParachuteInSlot.getItemDamage()) {
+                } else if ((GCPlayer.lastParachuteInSlot == null || forceSend) || (GCPlayer.parachuteInSlot.getItemDamage() != GCPlayer.lastParachuteInSlot.getItemDamage())) {
                     GCPlayerHandler.sendGearUpdatePacket(
                             player, EnumModelPacket.ADD_PARACHUTE, GCPlayer.parachuteInSlot.getItemDamage());
                 }

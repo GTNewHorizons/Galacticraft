@@ -231,12 +231,7 @@ public class BlockEnclosed extends BlockContainer
             if (CompatibilityManager.isAppEngLoaded()) {
                 world.markBlockForUpdate(x, y, z);
             }
-        } else if (metadata <= EnumEnclosedBlock.ALUMINUM_WIRE.getMetadata()) {
-            super.onNeighborBlockChange(world, x, y, z, block);
-            if (tileEntity instanceof IConductor) {
-                ((IConductor) tileEntity).refresh();
-            }
-        } else if (metadata <= EnumEnclosedBlock.ALUMINUM_WIRE_HEAVY.getMetadata()) {
+        } else if ((metadata <= EnumEnclosedBlock.ALUMINUM_WIRE.getMetadata()) || (metadata <= EnumEnclosedBlock.ALUMINUM_WIRE_HEAVY.getMetadata())) {
             super.onNeighborBlockChange(world, x, y, z, block);
             if (tileEntity instanceof IConductor) {
                 ((IConductor) tileEntity).refresh();
