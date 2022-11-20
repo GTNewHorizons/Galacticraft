@@ -546,9 +546,5 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
         GL11.glTranslatef(0, this.height / 4, 0);
     }
 
-    public static IEntitySelector rocketSelector = new IEntitySelector() {
-        public boolean isEntityApplicable(Entity e) {
-            return e instanceof EntitySpaceshipBase;
-        }
-    };
+    public static IEntitySelector rocketSelector = e -> e instanceof EntitySpaceshipBase;
 }
