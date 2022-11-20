@@ -45,9 +45,9 @@ public class SoundUpdaterRocket extends MovingSound {
     public void update() {
         if (!this.theRocket.isDead) {
             if (this.theRocket.launchPhase == EnumLaunchPhase.IGNITED.ordinal()) {
-                if (!ignition) {
+                if (!this.ignition) {
                     this.field_147663_c = 0.0F;
-                    ignition = true;
+                    this.ignition = true;
                 }
                 if (this.theRocket.timeUntilLaunch < this.theRocket.getPreLaunchWait()) {
                     if (this.field_147663_c < 1.0F) {

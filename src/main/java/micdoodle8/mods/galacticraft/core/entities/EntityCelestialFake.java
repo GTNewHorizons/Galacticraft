@@ -261,7 +261,7 @@ public class EntityCelestialFake extends EntityAdvancedMotion implements IIgnore
 
         UUID id;
 
-        if (riddenByEntity != null) {
+        if (this.riddenByEntity != null) {
             id = ((EntityPlayer) this.riddenByEntity).getPersistentID();
 
             if (id != null) {

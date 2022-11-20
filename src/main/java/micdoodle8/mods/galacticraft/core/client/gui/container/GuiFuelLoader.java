@@ -56,16 +56,16 @@ public class GuiFuelLoader extends GuiContainerGC {
     @Override
     public void initGui() {
         super.initGui();
-        fuelTankDesc.clear();
-        fuelTankDesc.add(GCCoreUtil.translate("gui.fuelTank.desc.2"));
-        fuelTankDesc.add(GCCoreUtil.translate("gui.fuelTank.desc.3"));
-        fuelTankDesc.add("0.0/0.0 B");
+        this.fuelTankDesc.clear();
+        this.fuelTankDesc.add(GCCoreUtil.translate("gui.fuelTank.desc.2"));
+        this.fuelTankDesc.add(GCCoreUtil.translate("gui.fuelTank.desc.3"));
+        this.fuelTankDesc.add("0.0/0.0 B");
         this.infoRegions.add(new GuiElementInfoRegion(
                 (this.width - this.xSize) / 2 + 7,
                 (this.height - this.ySize) / 2 + 33,
                 16,
                 38,
-                fuelTankDesc,
+                this.fuelTankDesc,
                 this.width,
                 this.height,
                 this));
@@ -161,7 +161,7 @@ public class GuiFuelLoader extends GuiContainerGC {
         final String fuelStr = String.format(
                 "%.1f/%.1f B",
                 this.fuelLoader.fuelTank.getFluidAmount() / 1000.0f, this.fuelLoader.fuelTank.getCapacity() / 1000.0f);
-        fuelTankDesc.set(2, fuelStr);
+        this.fuelTankDesc.set(2, fuelStr);
 
         if (this.fuelLoader.getEnergyStoredGC() > 0) {
             this.drawTexturedModalRect(var5 + 99, var6 + 65, 192, 7, 11, 10);

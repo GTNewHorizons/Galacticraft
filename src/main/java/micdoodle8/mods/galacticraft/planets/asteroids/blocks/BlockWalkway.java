@@ -79,22 +79,22 @@ public class BlockWalkway extends BlockTransmitter implements ITileEntityProvide
     }
 
     public int getWalkwayOrientation(World world, int x, int y, int z) {
-        final int connectedNorth =
-                isBlockNormalCube(world.getBlock(x, y, z - 1)) || world.getBlock(x, y, z - 1) instanceof BlockWalkway
-                        ? 1
-                        : 0;
-        final int connectedEast =
-                isBlockNormalCube(world.getBlock(x + 1, y, z)) || world.getBlock(x + 1, y, z) instanceof BlockWalkway
-                        ? 2
-                        : 0;
-        final int connectedSouth =
-                isBlockNormalCube(world.getBlock(x, y, z + 1)) || world.getBlock(x, y, z + 1) instanceof BlockWalkway
-                        ? 4
-                        : 0;
-        final int connectedWest =
-                isBlockNormalCube(world.getBlock(x - 1, y, z)) || world.getBlock(x - 1, y, z) instanceof BlockWalkway
-                        ? 8
-                        : 0;
+        final int connectedNorth = this.isBlockNormalCube(world.getBlock(x, y, z - 1))
+                        || world.getBlock(x, y, z - 1) instanceof BlockWalkway
+                ? 1
+                : 0;
+        final int connectedEast = this.isBlockNormalCube(world.getBlock(x + 1, y, z))
+                        || world.getBlock(x + 1, y, z) instanceof BlockWalkway
+                ? 2
+                : 0;
+        final int connectedSouth = this.isBlockNormalCube(world.getBlock(x, y, z + 1))
+                        || world.getBlock(x, y, z + 1) instanceof BlockWalkway
+                ? 4
+                : 0;
+        final int connectedWest = this.isBlockNormalCube(world.getBlock(x - 1, y, z))
+                        || world.getBlock(x - 1, y, z) instanceof BlockWalkway
+                ? 8
+                : 0;
 
         return connectedNorth | connectedEast | connectedSouth | connectedWest;
     }

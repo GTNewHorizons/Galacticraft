@@ -21,7 +21,7 @@ public class ServerConfigurationManagerVisitor extends ClassVisitor {
 
     @Override
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
-        return new EntityPlayerMPReplacer(api, super.visitMethod(access, name, desc, signature, exceptions), name);
+        return new EntityPlayerMPReplacer(this.api, super.visitMethod(access, name, desc, signature, exceptions), name);
     }
 
     private static class EntityPlayerMPReplacer extends MethodVisitor {
@@ -41,7 +41,7 @@ public class ServerConfigurationManagerVisitor extends ClassVisitor {
                 GCLoadingPlugin.LOGGER.debug(
                         "Replacing NEW {} with NEW micdoodle8/mods/galacticraft/core/entities/player/GCEntityPlayerMP in {}",
                         type,
-                        methodName);
+                        this.methodName);
                 super.visitTypeInsn(NEW, REPLACEMENT_CLASS_INTERNAL_NAME);
             } else {
                 super.visitTypeInsn(opcode, type);
@@ -60,7 +60,7 @@ public class ServerConfigurationManagerVisitor extends ClassVisitor {
                         desc,
                         name,
                         desc,
-                        methodName);
+                        this.methodName);
                 super.visitMethodInsn(opcode, REPLACEMENT_CLASS_INTERNAL_NAME, name, desc, itf);
             } else {
                 super.visitMethodInsn(opcode, owner, name, desc, itf);

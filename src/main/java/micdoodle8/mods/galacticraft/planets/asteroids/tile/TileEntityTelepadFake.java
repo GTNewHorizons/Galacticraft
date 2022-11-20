@@ -59,18 +59,18 @@ public class TileEntityTelepadFake extends TileBaseElectricBlock {
             return null;
         }
 
-        if (mainTelepad == null) {
+        if (this.mainTelepad == null) {
             final TileEntity tileEntity = this.mainBlockPosition.getTileEntity(this.worldObj);
 
             if (tileEntity != null) {
                 if (tileEntity instanceof TileEntityShortRangeTelepad) {
-                    mainTelepad =
+                    this.mainTelepad =
                             new WeakReference<TileEntityShortRangeTelepad>((TileEntityShortRangeTelepad) tileEntity);
                 }
             }
         }
 
-        if (mainTelepad == null) {
+        if (this.mainTelepad == null) {
             this.worldObj.setBlockToAir(this.mainBlockPosition.x, this.mainBlockPosition.y, this.mainBlockPosition.z);
         } else {
             final TileEntityShortRangeTelepad telepad = this.mainTelepad.get();

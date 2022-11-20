@@ -31,7 +31,7 @@ public class GCTransformer implements IClassTransformer {
 
     @Override
     public byte[] transform(String name, String transformedName, byte[] basicClass) {
-        final TransformerFactory factory = transformers.get(name);
+        final TransformerFactory factory = this.transformers.get(name);
         if (factory == null || factory.isInactive()) {
             return basicClass;
         }

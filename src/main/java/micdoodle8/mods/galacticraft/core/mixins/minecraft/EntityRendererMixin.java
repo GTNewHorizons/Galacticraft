@@ -57,7 +57,7 @@ public class EntityRendererMixin {
             ordinal = 8,
             require = 1)
     private float onUpdateLightmapRed(float value) {
-        return WorldUtil.getColorRed(mc.theWorld) * value;
+        return WorldUtil.getColorRed(this.mc.theWorld) * value;
     }
 
     @ModifyVariable(
@@ -66,7 +66,7 @@ public class EntityRendererMixin {
             ordinal = 9,
             require = 1)
     private float onUpdateLightmapGreen(float value) {
-        return WorldUtil.getColorGreen(mc.theWorld) * value;
+        return WorldUtil.getColorGreen(this.mc.theWorld) * value;
     }
 
     @ModifyVariable(
@@ -75,6 +75,6 @@ public class EntityRendererMixin {
             ordinal = 10,
             require = 1)
     private float onUpdateLightmapBlue(float value) {
-        return WorldUtil.getColorBlue(mc.theWorld) * value;
+        return WorldUtil.getColorBlue(this.mc.theWorld) * value;
     }
 }

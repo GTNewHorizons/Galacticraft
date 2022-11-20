@@ -327,7 +327,7 @@ public class GCPlayerStats implements IExtendedEntityProperties {
         this.sentFlags = false;
         if (ConfigManagerCore.enableDebug) {
             GCLog.info("Loading GC player data for "
-                    + player.get().getGameProfile().getName() + " : " + this.buildFlags);
+                    + this.player.get().getGameProfile().getName() + " : " + this.buildFlags);
         }
     }
 

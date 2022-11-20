@@ -56,59 +56,59 @@ public enum EnumGravity {
     }
 
     public int getIntValue() {
-        return intValue;
+        return this.intValue;
     }
 
     public float getPitchGravityX() {
-        return pitchGravityX;
+        return this.pitchGravityX;
     }
 
     public float getPitchGravityY() {
-        return pitchGravityY;
+        return this.pitchGravityY;
     }
 
     public float getYawGravityX() {
-        return yawGravityX;
+        return this.yawGravityX;
     }
 
     public float getYawGravityY() {
-        return yawGravityY;
+        return this.yawGravityY;
     }
 
     public float getYawGravityZ() {
-        return yawGravityZ;
+        return this.yawGravityZ;
     }
 
     public float getThetaX() {
-        return thetaX;
+        return this.thetaX;
     }
 
     public float getThetaZ() {
-        return thetaZ;
+        return this.thetaZ;
     }
 
     public float getSneakVecX() {
-        return sneakVecX;
+        return this.sneakVecX;
     }
 
     public float getSneakVecY() {
-        return sneakVecY;
+        return this.sneakVecY;
     }
 
     public float getSneakVecZ() {
-        return sneakVecZ;
+        return this.sneakVecZ;
     }
 
     public float getEyeVecX() {
-        return eyeVecX;
+        return this.eyeVecX;
     }
 
     public float getEyeVecY() {
-        return eyeVecY;
+        return this.eyeVecY;
     }
 
     public float getEyeVecZ() {
-        return eyeVecZ;
+        return this.eyeVecZ;
     }
 
     public static EnumGravity[] getGDirections() {

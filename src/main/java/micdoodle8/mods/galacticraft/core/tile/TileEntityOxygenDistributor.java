@@ -62,8 +62,8 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
     @Override
     public void invalidate() {
         if (!this.worldObj.isRemote /* && this.oxygenBubble != null */) {
-            final int bubbleR = MathHelper.ceiling_double_int(bubbleSize);
-            final int bubbleR2 = (int) (bubbleSize * bubbleSize);
+            final int bubbleR = MathHelper.ceiling_double_int(this.bubbleSize);
+            final int bubbleR2 = (int) (this.bubbleSize * this.bubbleSize);
             for (int x = this.xCoord - bubbleR; x < this.xCoord + bubbleR; x++) {
                 for (int y = this.yCoord - bubbleR; y < this.yCoord + bubbleR; y++) {
                     for (int z = this.zCoord - bubbleR; z < this.zCoord + bubbleR; z++) {
@@ -207,10 +207,10 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
         // }
 
         if (!this.worldObj.isRemote /* && this.oxygenBubble != null */) {
-            this.active = bubbleSize >= 1 && this.hasEnoughEnergyToRun && this.storedOxygen > this.oxygenPerTick;
+            this.active = this.bubbleSize >= 1 && this.hasEnoughEnergyToRun && this.storedOxygen > this.oxygenPerTick;
 
             if (this.ticks % (this.active ? 20 : 4) == 0) {
-                final double size = bubbleSize;
+                final double size = this.bubbleSize;
                 final int bubbleR = MathHelper.floor_double(size) + 4;
                 final int bubbleR2 = (int) (size * size);
                 for (int x = this.xCoord - bubbleR; x <= this.xCoord + bubbleR; x++) {
@@ -448,7 +448,7 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
     // }
 
     public boolean inBubble(double pX, double pY, double pZ) {
-        double r = bubbleSize;
+        double r = this.bubbleSize;
         r *= r;
         double d3 = this.xCoord + 0.5D - pX;
         d3 *= d3;

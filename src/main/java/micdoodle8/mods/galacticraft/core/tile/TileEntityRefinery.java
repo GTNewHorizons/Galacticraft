@@ -95,7 +95,7 @@ public class TileEntityRefinery extends TileBaseElectricBlockWithInventory imple
                 }
             }
 
-            checkFluidTankTransfer(2, this.fuelTank);
+            this.checkFluidTankTransfer(2, this.fuelTank);
 
             if (this.canProcess() && this.hasEnoughEnergyToRun) {
                 if (this.processTicks == 0) {

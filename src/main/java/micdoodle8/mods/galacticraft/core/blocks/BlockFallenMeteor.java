@@ -202,7 +202,7 @@ public class BlockFallenMeteor extends Block implements ITileEntityProvider, Ite
             return 0.0F;
         }
 
-        final int power = canHarvestBlock(this, player, metadata);
+        final int power = this.canHarvestBlock(this, player, metadata);
         if (power > 0) {
             return power * player.getBreakSpeed(this, true, metadata, x, y, z) / hardness / 30F;
         } else {

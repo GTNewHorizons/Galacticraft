@@ -85,7 +85,7 @@ public class FreefallHandler {
             return false;
         }
 
-        if (stats.pjumpticks > 0 || stats.pWasOnGround && p.movementInput.jump) {
+        if (this.stats.pjumpticks > 0 || this.stats.pWasOnGround && p.movementInput.jump) {
             return false;
         }
 
@@ -319,7 +319,7 @@ public class FreefallHandler {
     @SideOnly(Side.CLIENT)
     public void preVanillaMotion(EntityPlayerSP p) {
         FreefallHandler.setupFreefallPre(p);
-        stats.pWasOnGround = p.onGround;
+        this.stats.pWasOnGround = p.onGround;
     }
 
     @SideOnly(Side.CLIENT)
@@ -335,13 +335,13 @@ public class FreefallHandler {
             return;
         }
 
-        boolean freefall = stats.inFreefall;
+        boolean freefall = this.stats.inFreefall;
         if (freefall) {
             p.ySize = 0F; // Undo the sneak height adjust
         }
-        freefall = testFreefall(p, freefall);
-        stats.inFreefall = freefall;
-        stats.inFreefallFirstCheck = true;
+        freefall = this.testFreefall(p, freefall);
+        this.stats.inFreefall = freefall;
+        this.stats.inFreefallFirstCheck = true;
 
         SpinManager spinManager = null;
         if (worldProvider instanceof WorldProviderSpaceStation) {
@@ -350,7 +350,7 @@ public class FreefallHandler {
         boolean doCentrifugal = spinManager != null;
 
         if (freefall) {
-            stats.pjumpticks = 0;
+            this.stats.pjumpticks = 0;
 
             // Reverse effects of deceleration
             p.motionX /= 0.91F;
@@ -408,9 +408,9 @@ public class FreefallHandler {
             // if (p.motionY < 0 && this.pPrevMotionY >= 0) p.posY -= p.motionY;
             // if (p.motionY != 0) p.motionY = this.pPrevMotionY;
             if (p.movementInput.jump) {
-                if ((p.onGround || stats.pWasOnGround) && !p.capabilities.isCreativeMode) {
-                    if (stats.pjumpticks < 25) {
-                        stats.pjumpticks++;
+                if ((p.onGround || this.stats.pWasOnGround) && !p.capabilities.isCreativeMode) {
+                    if (this.stats.pjumpticks < 25) {
+                        this.stats.pjumpticks++;
                     }
                     p.motionY -= dy;
                     // p.onGround = false;
@@ -418,18 +418,18 @@ public class FreefallHandler {
                     // p.boundingBox.offset(0, -0.1D, 0);
                 } else {
                     p.motionY += 0.015D;
-                    if (stats.pjumpticks == 0) {
+                    if (this.stats.pjumpticks == 0) {
                         p.motionY -= dy;
                     }
                 }
-            } else if (stats.pjumpticks > 0) {
-                p.motionY += 0.0145D * stats.pjumpticks;
-                stats.pjumpticks = 0;
+            } else if (this.stats.pjumpticks > 0) {
+                p.motionY += 0.0145D * this.stats.pjumpticks;
+                this.stats.pjumpticks = 0;
             } else if (p.movementInput.sneak) {
                 if (!p.onGround) {
                     p.motionY -= 0.015D;
                 }
-                stats.pjumpticks = 0;
+                this.stats.pjumpticks = 0;
             }
         }
 

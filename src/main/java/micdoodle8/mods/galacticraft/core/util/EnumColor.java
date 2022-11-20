@@ -42,7 +42,7 @@ public enum EnumColor {
     }
 
     public String getCode() {
-        return code;
+        return this.code;
     }
 
     public String getLocalizedName() {

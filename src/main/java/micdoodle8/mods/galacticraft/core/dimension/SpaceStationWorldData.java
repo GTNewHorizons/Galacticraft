@@ -74,7 +74,7 @@ public class SpaceStationWorldData extends WorldSavedData {
     }
 
     public int getHomePlanet() {
-        return homePlanet;
+        return this.homePlanet;
     }
 
     public void setSpaceStationName(String string) {
@@ -82,7 +82,7 @@ public class SpaceStationWorldData extends WorldSavedData {
     }
 
     public int getDimensionIdStatic() {
-        return dimensionIdStatic;
+        return this.dimensionIdStatic;
     }
 
     public void setDimensionIdStatic(int dimensionIdStatic) {
@@ -90,7 +90,7 @@ public class SpaceStationWorldData extends WorldSavedData {
     }
 
     public int getDimensionIdDynamic() {
-        return dimensionIdDynamic;
+        return this.dimensionIdDynamic;
     }
 
     public void setDimensionIdDynamic(int dimensionIdDynamic) {

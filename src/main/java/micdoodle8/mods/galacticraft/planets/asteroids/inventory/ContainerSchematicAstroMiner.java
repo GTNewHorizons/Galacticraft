@@ -20,59 +20,60 @@ public class ContainerSchematicAstroMiner extends Container {
         this.worldObj = inventory.player.worldObj;
 
         // OUT
-        addSlotToContainer(new SlotRocketBenchResult(inventory.player, craftMatrix, craftResult, 0, 143, 55));
+        this.addSlotToContainer(
+                new SlotRocketBenchResult(inventory.player, this.craftMatrix, this.craftResult, 0, 143, 55));
 
         // MINER
         // top & bottom
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 4; j++) {
-                addSlotToContainer(new SlotSchematicAstroMiner(
-                        craftMatrix, 1 + i * 4 + j, 44 + j * 18, 19 + i * 72, x, y, z, inventory.player));
+                this.addSlotToContainer(new SlotSchematicAstroMiner(
+                        this.craftMatrix, 1 + i * 4 + j, 44 + j * 18, 19 + i * 72, x, y, z, inventory.player));
             }
         }
         // poles
-        addSlotToContainer(new SlotSchematicAstroMiner(craftMatrix, 9, 116, 19, x, y, z, inventory.player));
-        addSlotToContainer(new SlotSchematicAstroMiner(craftMatrix, 10, 116, 91, x, y, z, inventory.player));
+        this.addSlotToContainer(new SlotSchematicAstroMiner(this.craftMatrix, 9, 116, 19, x, y, z, inventory.player));
+        this.addSlotToContainer(new SlotSchematicAstroMiner(this.craftMatrix, 10, 116, 91, x, y, z, inventory.player));
         // bore
-        addSlotToContainer(new SlotSchematicAstroMiner(craftMatrix, 11, 26, 37, x, y, z, inventory.player));
-        addSlotToContainer(new SlotSchematicAstroMiner(craftMatrix, 12, 8, 55, x, y, z, inventory.player));
-        addSlotToContainer(new SlotSchematicAstroMiner(craftMatrix, 13, 26, 73, x, y, z, inventory.player));
+        this.addSlotToContainer(new SlotSchematicAstroMiner(this.craftMatrix, 11, 26, 37, x, y, z, inventory.player));
+        this.addSlotToContainer(new SlotSchematicAstroMiner(this.craftMatrix, 12, 8, 55, x, y, z, inventory.player));
+        this.addSlotToContainer(new SlotSchematicAstroMiner(this.craftMatrix, 13, 26, 73, x, y, z, inventory.player));
         // orion drives
-        addSlotToContainer(new SlotSchematicAstroMiner(craftMatrix, 14, 44, 37, x, y, z, inventory.player));
+        this.addSlotToContainer(new SlotSchematicAstroMiner(this.craftMatrix, 14, 44, 37, x, y, z, inventory.player));
         for (int i = 0; i < 3; i++) {
-            addSlotToContainer(
-                    new SlotSchematicAstroMiner(craftMatrix, 15 + i, 26 + i * 18, 55, x, y, z, inventory.player));
+            this.addSlotToContainer(
+                    new SlotSchematicAstroMiner(this.craftMatrix, 15 + i, 26 + i * 18, 55, x, y, z, inventory.player));
         }
         // control
         for (int i = 0; i < 3; i++) {
-            addSlotToContainer(
-                    new SlotSchematicAstroMiner(craftMatrix, 18 + i, 62 + i * 18, 37, x, y, z, inventory.player));
+            this.addSlotToContainer(
+                    new SlotSchematicAstroMiner(this.craftMatrix, 18 + i, 62 + i * 18, 37, x, y, z, inventory.player));
         }
         // back
         for (int i = 0; i < 3; i++) {
-            addSlotToContainer(
-                    new SlotSchematicAstroMiner(craftMatrix, 21 + i, 116, 37 + i * 18, x, y, z, inventory.player));
+            this.addSlotToContainer(
+                    new SlotSchematicAstroMiner(this.craftMatrix, 21 + i, 116, 37 + i * 18, x, y, z, inventory.player));
         }
         // storage
-        addSlotToContainer(new SlotSchematicAstroMiner(craftMatrix, 24, 80, 55, x, y, z, inventory.player));
-        addSlotToContainer(new SlotSchematicAstroMiner(craftMatrix, 25, 98, 55, x, y, z, inventory.player));
+        this.addSlotToContainer(new SlotSchematicAstroMiner(this.craftMatrix, 24, 80, 55, x, y, z, inventory.player));
+        this.addSlotToContainer(new SlotSchematicAstroMiner(this.craftMatrix, 25, 98, 55, x, y, z, inventory.player));
         // propulsion
         for (int i = 0; i < 4; i++) {
-            addSlotToContainer(
-                    new SlotSchematicAstroMiner(craftMatrix, 26 + i, 44 + i * 18, 73, x, y, z, inventory.player));
+            this.addSlotToContainer(
+                    new SlotSchematicAstroMiner(this.craftMatrix, 26 + i, 44 + i * 18, 73, x, y, z, inventory.player));
         }
 
         // PLAYER INV
         for (int i = 0; i < 9; i++) {
-            addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 178));
+            this.addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 178));
         }
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
-                addSlotToContainer(new Slot(inventory, 9 + j + i * 9, 8 + j * 18, 120 + i * 18));
+                this.addSlotToContainer(new Slot(inventory, 9 + j + i * 9, 8 + j * 18, 120 + i * 18));
             }
         }
 
-        onCraftMatrixChanged(craftMatrix);
+        this.onCraftMatrixChanged(this.craftMatrix);
     }
 
     @Override
@@ -109,7 +110,7 @@ public class ContainerSchematicAstroMiner extends Container {
             final ItemStack currentStack = currentSlot.getStack();
             stack = currentStack.copy();
 
-            if (!mergeOneItem(currentStack)) {
+            if (!this.mergeOneItem(currentStack)) {
                 return null;
             }
 
@@ -135,7 +136,7 @@ public class ContainerSchematicAstroMiner extends Container {
         boolean nothingLeft = false;
         if (itemStack.stackSize > 0) {
             for (int i = 1; i <= 29; ++i) {
-                final Slot slot = (Slot) inventorySlots.get(i);
+                final Slot slot = (Slot) this.inventorySlots.get(i);
                 final ItemStack slotStack = slot.getStack();
                 if (slotStack == null && slot.isItemValid(itemStack)) {
                     final ItemStack stackOneItem = itemStack.copy();

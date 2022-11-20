@@ -49,12 +49,12 @@ public abstract class TileEntityAdvanced extends TileEntity implements IPacketRe
         if (this.isNetworkedTile() && this.ticks % this.getPacketCooldown() == 0) {
             if (this.worldObj.isRemote && this.fieldCacheServer.size() > 0) {
                 final PacketDynamic packet = new PacketDynamic(this);
-                if (networkDataChanged) {
+                if (this.networkDataChanged) {
                     GalacticraftCore.packetPipeline.sendToServer(packet);
                 }
             } else if (!this.worldObj.isRemote && this.fieldCacheClient.size() > 0) {
                 final PacketDynamic packet = new PacketDynamic(this);
-                if (networkDataChanged) {
+                if (this.networkDataChanged) {
                     GalacticraftCore.packetPipeline.sendToAllAround(
                             packet,
                             new TargetPoint(
@@ -120,7 +120,7 @@ public abstract class TileEntityAdvanced extends TileEntity implements IPacketRe
             boolean fieldChanged = false;
             try {
                 final Object data = f.get(this);
-                final Object lastData = lastSentData.get(f);
+                final Object lastData = this.lastSentData.get(f);
 
                 if (!NetworkUtil.fuzzyEquals(lastData, data)) {
                     fieldChanged = true;
@@ -129,7 +129,7 @@ public abstract class TileEntityAdvanced extends TileEntity implements IPacketRe
                 sendData.add(data);
 
                 if (fieldChanged) {
-                    lastSentData.put(f, NetworkUtil.cloneNetworkedObject(data));
+                    this.lastSentData.put(f, NetworkUtil.cloneNetworkedObject(data));
                 }
             } catch (final Exception e) {
                 e.printStackTrace();
@@ -150,7 +150,7 @@ public abstract class TileEntityAdvanced extends TileEntity implements IPacketRe
             }
         }
 
-        networkDataChanged = changed;
+        this.networkDataChanged = changed;
     }
 
     @Override

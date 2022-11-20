@@ -37,14 +37,14 @@ class TransformerFactory {
     }
 
     public boolean isInactive() {
-        return activeSide != null && activeSide != FMLLaunchHandler.side();
+        return this.activeSide != null && this.activeSide != FMLLaunchHandler.side();
     }
 
     public final ClassVisitor apply(int api, ClassVisitor downstream) {
-        return factory.apply(api, downstream);
+        return this.factory.apply(api, downstream);
     }
 
     public boolean isExpandFrames() {
-        return expandFrames;
+        return this.expandFrames;
     }
 }

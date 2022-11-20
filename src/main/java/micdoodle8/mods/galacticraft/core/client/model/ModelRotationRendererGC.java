@@ -44,7 +44,7 @@ public class ModelRotationRendererGC extends ModelRotationRenderer {
         }
 
         if (b) {
-            switch (type) {
+            switch (this.type) {
                 case 0:
                     return ModelPlayerBaseGC.currentGearData.getMask() > -1;
                 case 1:
@@ -91,7 +91,7 @@ public class ModelRotationRendererGC extends ModelRotationRenderer {
         if (this.preRender(f)) {
             final int saveTex = GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D);
 
-            switch (type) {
+            switch (this.type) {
                 case 0:
                     FMLClientHandler.instance().getClient().renderEngine.bindTexture(ModelPlayerGC.oxygenMaskTexture);
                     break;
@@ -112,7 +112,7 @@ public class ModelRotationRendererGC extends ModelRotationRenderer {
                     break;
             }
 
-            if (type != 15) {
+            if (this.type != 15) {
                 super.doRender(f, useParentTransformations);
             } else {
                 FMLClientHandler.instance().getClient().renderEngine.bindTexture(ModelPlayerGC.frequencyModuleTexture);

@@ -4,11 +4,11 @@ public class JavaUtil extends SecurityManager {
     public static JavaUtil instance = new JavaUtil();
 
     public Class<?> getCaller() {
-        return getClassContext()[2];
+        return this.getClassContext()[2];
     }
 
     public boolean isCalledBy(Class<?> clazz) {
-        final Class<?>[] context = getClassContext();
+        final Class<?>[] context = this.getClassContext();
 
         final int imax = Math.min(context.length, 6);
         for (int i = 2; i < imax; i++) {
@@ -20,7 +20,7 @@ public class JavaUtil extends SecurityManager {
     }
 
     public boolean isCalledBy(Class<?> clazz1, Class<?> clazz2, Class<?> clazz3) {
-        final Class<?>[] context = getClassContext();
+        final Class<?>[] context = this.getClassContext();
 
         final int imax = Math.min(context.length, 6);
         for (int i = 2; i < imax; i++) {
@@ -33,7 +33,7 @@ public class JavaUtil extends SecurityManager {
     }
 
     public boolean isCalledBy(String name) {
-        final Class<?>[] context = getClassContext();
+        final Class<?>[] context = this.getClassContext();
 
         final int imax = Math.min(context.length, 6);
         for (int i = 2; i < imax; i++) {

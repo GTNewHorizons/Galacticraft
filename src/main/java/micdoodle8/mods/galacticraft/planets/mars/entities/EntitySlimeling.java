@@ -105,7 +105,7 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
     public EntityLivingBase getOwner() {
         final EntityLivingBase owner = super.getOwner();
         if (owner == null) {
-            final String ownerName = getOwnerUsername();
+            final String ownerName = this.getOwnerUsername();
             if (ownerName != null) {
                 return this.worldObj.getPlayerEntityByName(ownerName);
             }

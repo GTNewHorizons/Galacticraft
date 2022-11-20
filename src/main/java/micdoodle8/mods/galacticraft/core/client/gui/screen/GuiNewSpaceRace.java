@@ -121,11 +121,12 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
         }
 
         this.mc = FMLClientHandler.instance().getClient();
-        this.canEdit = canPlayerEdit();
+        this.canEdit = this.canPlayerEdit();
     }
 
     private boolean canPlayerEdit() {
-        return mc.thePlayer
+        return this.mc
+                .thePlayer
                 .getGameProfile()
                 .getName()
                 .equals(this.spaceRaceData.getPlayerNames().get(0));
@@ -787,7 +788,7 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
 
         if (race != null && !this.isDirty) {
             this.spaceRaceData = race;
-            this.canEdit = canPlayerEdit();
+            this.canEdit = this.canPlayerEdit();
 
             if (!this.textBoxRename.text.equals(race.getTeamName())) {
                 this.textBoxRename.text = race.getTeamName();
@@ -1156,7 +1157,7 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
         GL11.glPushMatrix();
         GL11.glTranslatef(0.0F, 0.0F, 500.0F);
         final int color = this.buttonTeamColor_hover ? 170 : 100;
-        if (canEdit) {
+        if (this.canEdit) {
             this.fontRendererObj.drawString(
                     GCCoreUtil.translate("gui.spaceRace.create.changeColor.name.0"),
                     this.buttonTeamColor_xPosition
@@ -1175,7 +1176,7 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
                         - this.fontRendererObj.getStringWidth(
                                         GCCoreUtil.translate("gui.spaceRace.create.changeColor.name.1"))
                                 / 2,
-                this.buttonTeamColor_yPosition + this.buttonTeamColor_height / 2 - (canEdit ? 3 : 9),
+                this.buttonTeamColor_yPosition + this.buttonTeamColor_height / 2 - (this.canEdit ? 3 : 9),
                 ColorUtil.to32BitColor(255, color, color, color),
                 this.buttonTeamColor_hover);
         this.fontRendererObj.drawString(
@@ -1185,7 +1186,7 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
                         - this.fontRendererObj.getStringWidth(
                                         GCCoreUtil.translate("gui.spaceRace.create.changeColor.name.2"))
                                 / 2,
-                this.buttonTeamColor_yPosition + this.buttonTeamColor_height / 2 + (canEdit ? 7 : 1),
+                this.buttonTeamColor_yPosition + this.buttonTeamColor_height / 2 + (this.canEdit ? 7 : 1),
                 ColorUtil.to32BitColor(255, color, color, color),
                 this.buttonTeamColor_hover);
         GL11.glPopMatrix();

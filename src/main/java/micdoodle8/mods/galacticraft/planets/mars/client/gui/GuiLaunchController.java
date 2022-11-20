@@ -123,7 +123,7 @@ public class GuiLaunchController extends GuiContainerGC
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         RenderHelper.enableStandardItemLighting();
 
-        if (Math.random() < 0.025 && !destinationFrequency.isTextFocused) {
+        if (Math.random() < 0.025 && !this.destinationFrequency.isTextFocused) {
             if (!Minecraft.getMinecraft()
                             .thePlayer
                             .getGameProfile()
@@ -138,9 +138,9 @@ public class GuiLaunchController extends GuiContainerGC
                 for (int i = 0; i < this.destinationFrequency.getMaxLength(); i++) {
                     fakefrequency += (char) (r.nextInt(126 - 33) + 33);
                 }
-                destinationFrequency.text = fakefrequency;
+                this.destinationFrequency.text = fakefrequency;
             } else {
-                destinationFrequency.text = String.valueOf(this.launchController.destFrequency);
+                this.destinationFrequency.text = String.valueOf(this.launchController.destFrequency);
             }
         }
     }

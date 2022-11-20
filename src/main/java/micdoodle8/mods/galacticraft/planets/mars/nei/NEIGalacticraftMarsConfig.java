@@ -247,15 +247,15 @@ public class NEIGalacticraftMarsConfig implements IConfigureNEI {
         input.add(new PositionedStack(new ItemStack(GCItems.partFins), 80 - x, 109 - y));
         input2 = new ArrayList<>(input);
         input2.add(new PositionedStack(RecipeUtil.getChestItemStack(1, 3), 134 - x, 46 - y));
-        registerCargoBenchRecipe(
+        this.registerCargoBenchRecipe(
                 input2, new PositionedStack(new ItemStack(MarsItems.spaceship, 1, 11), 134 - x, 73 - y));
         input2 = new ArrayList<>(input);
         input2.add(new PositionedStack(RecipeUtil.getChestItemStack(1, 0), 134 - x, 46 - y));
-        registerCargoBenchRecipe(
+        this.registerCargoBenchRecipe(
                 input2, new PositionedStack(new ItemStack(MarsItems.spaceship, 1, 12), 134 - x, 73 - y));
         input2 = new ArrayList<>(input);
         input2.add(new PositionedStack(RecipeUtil.getChestItemStack(1, 1), 134 - x, 46 - y));
-        registerCargoBenchRecipe(
+        this.registerCargoBenchRecipe(
                 input2, new PositionedStack(new ItemStack(MarsItems.spaceship, 1, 13), 134 - x, 73 - y));
 
         this.registerLiquefierRecipe(

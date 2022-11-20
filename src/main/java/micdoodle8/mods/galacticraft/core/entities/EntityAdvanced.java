@@ -116,7 +116,7 @@ public abstract class EntityAdvanced extends Entity implements IPacketReceiver {
                 }
 
                 final PacketDynamic packet = new PacketDynamic(this);
-                if (networkDataChanged) {
+                if (this.networkDataChanged) {
                     GalacticraftCore.packetPipeline.sendToAllAround(
                             packet,
                             new TargetPoint(
@@ -139,7 +139,7 @@ public abstract class EntityAdvanced extends Entity implements IPacketReceiver {
                 }
 
                 final PacketDynamic packet = new PacketDynamic(this);
-                if (networkDataChanged) {
+                if (this.networkDataChanged) {
                     GalacticraftCore.packetPipeline.sendToServer(packet);
                 }
             }
@@ -178,7 +178,7 @@ public abstract class EntityAdvanced extends Entity implements IPacketReceiver {
             boolean fieldChanged = false;
             try {
                 final Object data = f.get(this);
-                final Object lastData = lastSentData.get(f);
+                final Object lastData = this.lastSentData.get(f);
 
                 if (!NetworkUtil.fuzzyEquals(lastData, data)) {
                     fieldChanged = true;
@@ -187,7 +187,7 @@ public abstract class EntityAdvanced extends Entity implements IPacketReceiver {
                 sendData.add(data);
 
                 if (fieldChanged) {
-                    lastSentData.put(f, NetworkUtil.cloneNetworkedObject(data));
+                    this.lastSentData.put(f, NetworkUtil.cloneNetworkedObject(data));
                 }
             } catch (final Exception e) {
                 e.printStackTrace();
@@ -215,7 +215,7 @@ public abstract class EntityAdvanced extends Entity implements IPacketReceiver {
         // }
         // }
 
-        networkDataChanged = changed;
+        this.networkDataChanged = changed;
     }
 
     @Override

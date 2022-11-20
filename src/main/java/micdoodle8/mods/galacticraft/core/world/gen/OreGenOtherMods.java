@@ -178,7 +178,7 @@ public class OreGenOtherMods {
 
         int dimDetected = 0;
 
-        final WorldProvider prov = worldObj.provider;
+        final WorldProvider prov = this.worldObj.provider;
         if (!(prov instanceof IGalacticraftWorldProvider) || prov instanceof WorldProviderSpaceStation) {
             return;
         }

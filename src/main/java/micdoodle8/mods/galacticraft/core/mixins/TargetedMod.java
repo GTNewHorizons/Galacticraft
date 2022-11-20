@@ -22,6 +22,7 @@ public enum TargetedMod {
 
     @Override
     public String toString() {
-        return "TargetedMod{modName='" + modName + "', coreModClass='" + coreModClass + "', modId='" + modId + "'}";
+        return "TargetedMod{modName='" + this.modName + "', coreModClass='" + this.coreModClass + "', modId='"
+                + this.modId + "'}";
     }
 }

@@ -229,8 +229,8 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
 
             // Now see if any liquids from the output tanks need to be put into the output
             // slot
-            checkFluidTankTransfer(2, this.liquidTank);
-            checkFluidTankTransfer(3, this.liquidTank2);
+            this.checkFluidTankTransfer(2, this.liquidTank);
+            this.checkFluidTankTransfer(3, this.liquidTank2);
 
             if (this.hasEnoughEnergyToRun && this.canProcess()) {
                 // 50% extra speed boost for Tier 2 machine if powered by Tier 2 power

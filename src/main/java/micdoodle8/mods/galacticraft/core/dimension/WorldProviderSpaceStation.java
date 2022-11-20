@@ -25,7 +25,7 @@ public abstract class WorldProviderSpaceStation extends WorldProviderSpace {
      * Do not return null here, the calling code does not perform a null check!
      */
     public SpinManager getSpinManager() {
-        return spinManager;
+        return this.spinManager;
     }
 
     @Override
@@ -56,7 +56,7 @@ public abstract class WorldProviderSpaceStation extends WorldProviderSpace {
     @Override
     public void updateWeather() {
         super.updateWeather();
-        spinManager.updateSpin();
+        this.spinManager.updateSpin();
     }
 
     @SideOnly(Side.CLIENT)

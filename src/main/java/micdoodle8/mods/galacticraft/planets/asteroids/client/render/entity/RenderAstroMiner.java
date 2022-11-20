@@ -105,8 +105,8 @@ public class RenderAstroMiner extends Render {
         final float wy = active ? this.wobbleY.getNoise(time) + this.wobbleYY.getNoise(time) : 0F;
         final float wz = active ? this.wobbleZ.getNoise(time) + this.wobbleZZ.getNoise(time) : 0F;
 
-        float partTime = partialTickTime - lastPartTime;
-        lastPartTime = partialTickTime;
+        float partTime = partialTickTime - this.lastPartTime;
+        this.lastPartTime = partialTickTime;
         while (partTime < 0) {
             partTime += 1F;
         }
@@ -183,7 +183,7 @@ public class RenderAstroMiner extends Render {
                     "Hoverpad_Heavy___Glow001",
                     "Hoverpad_Heavy___Glow003");
 
-            renderLaserModel(astroMiner.retraction);
+            this.renderLaserModel(astroMiner.retraction);
 
             final float lightMapSaveX = OpenGlHelper.lastBrightnessX;
             final float lightMapSaveY = OpenGlHelper.lastBrightnessY;
@@ -261,9 +261,9 @@ public class RenderAstroMiner extends Render {
                         if (fade < 0) {
                             fade = 0;
                         }
-                        doAfterGlow(blockLaser, fade);
+                        this.doAfterGlow(blockLaser, fade);
                     } else {
-                        doLaser(astroMiner, blockLaser);
+                        this.doLaser(astroMiner, blockLaser);
                     }
                     count++;
                 }
@@ -305,7 +305,7 @@ public class RenderAstroMiner extends Render {
                     "Hoverpad_Heavy___Glow002",
                     "Hoverpad_Heavy___Glow001",
                     "Hoverpad_Heavy___Glow003");
-            renderLaserModel(astroMiner.retraction);
+            this.renderLaserModel(astroMiner.retraction);
             if (astroMiner.retraction < 1F) {
                 astroMiner.retraction += RETRACTIONSPEED * partTime;
                 if (astroMiner.retraction > 1F) {
@@ -431,13 +431,13 @@ public class RenderAstroMiner extends Render {
 
         if (entity.facing > 3) {
             xx = xD < 0 ? cA : cB;
-            drawLaserX(mainLaserX, mainLaserY, mainLaserZ, xx, 0.5F, 0.5F);
+            this.drawLaserX(mainLaserX, mainLaserY, mainLaserZ, xx, 0.5F, 0.5F);
         } else if (entity.facing < 2) {
             yy = yD < 0 ? cA : cB;
-            drawLaserY(mainLaserX, mainLaserY, mainLaserZ, 0.5F, yy, 0.5F);
+            this.drawLaserY(mainLaserX, mainLaserY, mainLaserZ, 0.5F, yy, 0.5F);
         } else {
             zz = zD < 0 ? cA : cB;
-            drawLaserZ(mainLaserX, mainLaserY, mainLaserZ, 0.5F, 0.5F, zz);
+            this.drawLaserZ(mainLaserX, mainLaserY, mainLaserZ, 0.5F, 0.5F, zz);
         }
 
         GL11.glPopMatrix();

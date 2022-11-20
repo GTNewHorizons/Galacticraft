@@ -206,7 +206,7 @@ public class TileEntityTerraformer extends TileBaseElectricBlockWithInventory
 
         if (!this.worldObj.isRemote && !this.treesDisabled && this.grassBlockList.size() > 0 && this.ticks % 50 == 0) {
             final int randomIndex = this.worldObj.rand.nextInt(this.grassBlockList.size());
-            final BlockVec3 vecGrass = grassBlockList.get(randomIndex);
+            final BlockVec3 vecGrass = this.grassBlockList.get(randomIndex);
 
             if (vecGrass.getBlock(this.worldObj) == Blocks.grass) {
                 final BlockVec3 vecSapling = vecGrass.translate(0, 1, 0);

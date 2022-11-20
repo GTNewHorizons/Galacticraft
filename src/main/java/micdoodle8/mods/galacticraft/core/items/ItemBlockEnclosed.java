@@ -128,7 +128,7 @@ public class ItemBlockEnclosed extends ItemBlockDesc {
             } else if (world.canPlaceEntityOnSide(block, i, j, k, false, side, entityplayer, itemstack)) {
                 final int j1 = this.field_150939_a.onBlockPlaced(world, i, j, k, side, par8, par9, par10, metadata);
 
-                if (placeBlockAt(itemstack, entityplayer, world, i, j, k, side, par8, par9, par10, j1)) {
+                if (this.placeBlockAt(itemstack, entityplayer, world, i, j, k, side, par8, par9, par10, j1)) {
                     world.playSoundEffect(
                             i + 0.5F,
                             j + 0.5F,

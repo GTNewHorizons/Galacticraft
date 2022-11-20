@@ -19,10 +19,10 @@ public class NetworkFinder {
     public List<IConductor> found = new LinkedList<IConductor>();
 
     public NetworkFinder(World world, BlockVec3 location, BlockVec3 ignore) {
-        worldObj = world;
-        start = location;
+        this.worldObj = world;
+        this.start = location;
 
-        toIgnore = ignore;
+        this.toIgnore = ignore;
     }
 
     private void loopAll(int x, int y, int z, int dirIn) {
@@ -52,27 +52,27 @@ public class NetworkFinder {
                     break;
             }
 
-            if (!iterated.contains(obj)) {
-                iterated.add(obj);
+            if (!this.iterated.contains(obj)) {
+                this.iterated.add(obj);
 
-                final TileEntity tileEntity = worldObj.getTileEntity(obj.x, obj.y, obj.z);
+                final TileEntity tileEntity = this.worldObj.getTileEntity(obj.x, obj.y, obj.z);
 
                 if (tileEntity instanceof IConductor) {
-                    found.add((IConductor) tileEntity);
-                    loopAll(obj.x, obj.y, obj.z, dir ^ 1);
+                    this.found.add((IConductor) tileEntity);
+                    this.loopAll(obj.x, obj.y, obj.z, dir ^ 1);
                 }
             }
         }
     }
 
     public List<IConductor> exploreNetwork() {
-        if (start.getTileEntity(worldObj) instanceof IConductor) {
-            iterated.add(start);
-            iterated.add(toIgnore);
-            found.add((IConductor) start.getTileEntity(worldObj));
-            loopAll(start.x, start.y, start.z, 6);
+        if (this.start.getTileEntity(this.worldObj) instanceof IConductor) {
+            this.iterated.add(this.start);
+            this.iterated.add(this.toIgnore);
+            this.found.add((IConductor) this.start.getTileEntity(this.worldObj));
+            this.loopAll(this.start.x, this.start.y, this.start.z, 6);
         }
 
-        return found;
+        return this.found;
     }
 }

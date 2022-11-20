@@ -45,7 +45,7 @@ public class ScheduledBlockChange {
     }
 
     public int getChangeUpdateFlag() {
-        return changeUpdateFlag;
+        return this.changeUpdateFlag;
     }
 
     public void setChangeUpdateFlag(int changeUpdateFlag) {

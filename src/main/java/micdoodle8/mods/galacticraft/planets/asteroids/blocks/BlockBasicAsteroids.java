@@ -77,11 +77,11 @@ public class BlockBasicAsteroids extends Block implements IDetectableResource, I
             case 4:
                 final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 
-                int count = quantityDropped(metadata, fortune, world.rand);
+                int count = this.quantityDropped(metadata, fortune, world.rand);
                 for (int i = 0; i < count; i++) {
                     ret.add(new ItemStack(AsteroidsItems.basicItem, 1, 3));
                 }
-                count = quantityDropped(metadata, fortune, world.rand);
+                count = this.quantityDropped(metadata, fortune, world.rand);
                 for (int i = 0; i < count; i++) {
                     ret.add(new ItemStack(AsteroidsItems.basicItem, 1, 4));
                 }

@@ -51,6 +51,6 @@ public class Satellite extends CelestialBody implements IChildBody {
     }
 
     public int getDimensionIdStatic() {
-        return dimensionIdStatic;
+        return this.dimensionIdStatic;
     }
 }

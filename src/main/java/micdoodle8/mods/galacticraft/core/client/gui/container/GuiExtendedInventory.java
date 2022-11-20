@@ -46,7 +46,7 @@ public class GuiExtendedInventory extends InventoryEffectRenderer {
 
         this.guiLeft = (this.width - this.xSize) / 2;
         this.guiLeft += this.getPotionOffset();
-        this.potionOffsetLast = getPotionOffsetNEI();
+        this.potionOffsetLast = this.getPotionOffsetNEI();
 
         final int cornerX = this.guiLeft;
         final int cornerY = this.guiTop;
@@ -137,7 +137,7 @@ public class GuiExtendedInventory extends InventoryEffectRenderer {
         // If at least one potion is active...
         if (!Minecraft.getMinecraft().thePlayer.getActivePotionEffects().isEmpty()) {
             this.initWithPotion = true;
-            return 60 + getPotionOffsetNEI();
+            return 60 + this.getPotionOffsetNEI();
         }
 
         // No potions, no offset needed

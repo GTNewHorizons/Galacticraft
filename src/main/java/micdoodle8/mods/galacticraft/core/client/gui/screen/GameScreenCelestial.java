@@ -35,15 +35,15 @@ public class GameScreenCelestial implements IGameScreen {
     private float scale;
 
     private final int lineSegments = 90;
-    private final float cos = (float) Math.cos(2 * Math.PI / lineSegments);
-    private final float sin = (float) Math.sin(2 * Math.PI / lineSegments);
+    private final float cos = (float) Math.cos(2 * Math.PI / this.lineSegments);
+    private final float sin = (float) Math.sin(2 * Math.PI / this.lineSegments);
 
     private DoubleBuffer planes;
 
     public GameScreenCelestial() {
         if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
-            renderEngine = FMLClientHandler.instance().getClient().renderEngine;
-            planes = BufferUtils.createDoubleBuffer(4 * Double.SIZE);
+            this.renderEngine = FMLClientHandler.instance().getClient().renderEngine;
+            this.planes = BufferUtils.createDoubleBuffer(4 * Double.SIZE);
         }
     }
 
@@ -52,25 +52,25 @@ public class GameScreenCelestial implements IGameScreen {
     }
 
     public void render(int type, float ticks, float scaleX, float scaleY, IScreenManager scr) {
-        centreX = scaleX / 2;
-        centreY = scaleY / 2;
-        frameBx = scaleX - frameA;
-        frameBy = scaleY - frameA;
+        this.centreX = scaleX / 2;
+        this.centreY = scaleY / 2;
+        this.frameBx = scaleX - this.frameA;
+        this.frameBy = scaleY - this.frameA;
         this.scale = Math.max(scaleX, scaleY) - 0.2F;
 
-        drawBlackBackground(0.0F);
+        this.drawBlackBackground(0.0F);
 
-        planeEquation(frameA, frameA, 0, frameA, frameBy, 0, frameA, frameBy, 1);
-        GL11.glClipPlane(GL11.GL_CLIP_PLANE0, planes);
+        this.planeEquation(this.frameA, this.frameA, 0, this.frameA, this.frameBy, 0, this.frameA, this.frameBy, 1);
+        GL11.glClipPlane(GL11.GL_CLIP_PLANE0, this.planes);
         GL11.glEnable(GL11.GL_CLIP_PLANE0);
-        planeEquation(frameBx, frameBy, 0, frameBx, frameA, 0, frameBx, frameA, 1);
-        GL11.glClipPlane(GL11.GL_CLIP_PLANE1, planes);
+        this.planeEquation(this.frameBx, this.frameBy, 0, this.frameBx, this.frameA, 0, this.frameBx, this.frameA, 1);
+        GL11.glClipPlane(GL11.GL_CLIP_PLANE1, this.planes);
         GL11.glEnable(GL11.GL_CLIP_PLANE1);
-        planeEquation(frameA, frameBy, 0, frameBx, frameBy, 0, frameBx, frameBy, 1);
-        GL11.glClipPlane(GL11.GL_CLIP_PLANE2, planes);
+        this.planeEquation(this.frameA, this.frameBy, 0, this.frameBx, this.frameBy, 0, this.frameBx, this.frameBy, 1);
+        GL11.glClipPlane(GL11.GL_CLIP_PLANE2, this.planes);
         GL11.glEnable(GL11.GL_CLIP_PLANE2);
-        planeEquation(frameBx, frameA, 0, frameA, frameA, 0, frameA, frameA, 1);
-        GL11.glClipPlane(GL11.GL_CLIP_PLANE3, planes);
+        this.planeEquation(this.frameBx, this.frameA, 0, this.frameA, this.frameA, 0, this.frameA, this.frameA, 1);
+        GL11.glClipPlane(GL11.GL_CLIP_PLANE3, this.planes);
         GL11.glEnable(GL11.GL_CLIP_PLANE3);
 
         switch (type) {
@@ -83,13 +83,13 @@ public class GameScreenCelestial implements IGameScreen {
                 if (body == null) {
                     body = GalacticraftCore.planetOverworld;
                 }
-                drawCelestialBodies(body, ticks);
+                this.drawCelestialBodies(body, ticks);
                 break;
             case 3:
-                drawCelestialBodiesZ(GalacticraftCore.planetOverworld, ticks);
+                this.drawCelestialBodiesZ(GalacticraftCore.planetOverworld, ticks);
                 break;
             case 4:
-                drawPlanetsTest(ticks);
+                this.drawPlanetsTest(ticks);
                 break;
         }
 
@@ -106,10 +106,10 @@ public class GameScreenCelestial implements IGameScreen {
         GL11.glColor4f(greyLevel, greyLevel, greyLevel, 1.0F);
         tess.startDrawingQuads();
 
-        tess.addVertex(frameA, frameBy, 0.005F);
-        tess.addVertex(frameBx, frameBy, 0.005F);
-        tess.addVertex(frameBx, frameA, 0.005F);
-        tess.addVertex(frameA, frameA, 0.005F);
+        tess.addVertex(this.frameA, this.frameBy, 0.005F);
+        tess.addVertex(this.frameBx, this.frameBy, 0.005F);
+        tess.addVertex(this.frameBx, this.frameA, 0.005F);
+        tess.addVertex(this.frameA, this.frameA, 0.005F);
         tess.draw();
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -185,15 +185,15 @@ public class GameScreenCelestial implements IGameScreen {
     }
 
     private void drawCelestialBody(CelestialBody planet, float xPos, float yPos, float ticks, float relSize) {
-        if (xPos + centreX > frameBx || xPos + centreX < frameA) {
+        if (xPos + this.centreX > this.frameBx || xPos + this.centreX < this.frameA) {
             return;
         }
-        if (yPos + centreY > frameBy || yPos + centreY < frameA) {
+        if (yPos + this.centreY > this.frameBy || yPos + this.centreY < this.frameA) {
             return;
         }
 
         GL11.glPushMatrix();
-        GL11.glTranslatef(xPos + centreX, yPos + centreY, 0F);
+        GL11.glTranslatef(xPos + this.centreX, yPos + this.centreY, 0F);
 
         final float alpha = 1.0F;
 
@@ -207,7 +207,7 @@ public class GameScreenCelestial implements IGameScreen {
         }
 
         if (!preEvent.isCanceled()) {
-            final float size = relSize / 70 * scale;
+            final float size = relSize / 70 * this.scale;
             this.drawTexturedRect(-size / 2, -size / 2, size, size);
         }
 
@@ -219,14 +219,14 @@ public class GameScreenCelestial implements IGameScreen {
 
     private void drawCircle(CelestialBody cBody) {
         GL11.glPushMatrix();
-        GL11.glTranslatef(centreX, centreY, 0.002F);
+        GL11.glTranslatef(this.centreX, this.centreY, 0.002F);
         GL11.glDisable(GL11.GL_TEXTURE_2D);
 
-        final float sd = 0.002514F * scale;
+        final float sd = 0.002514F * this.scale;
         float x = this.getScale(cBody);
         float y = 0;
         final float grey = 0.1F + 0.65F * Math.max(0F, 0.5F - x);
-        x = x * scale / sd;
+        x = x * this.scale / sd;
 
         GL11.glColor4f(grey, grey, grey, 1.0F);
         GL11.glLineWidth(0.002F);
@@ -240,12 +240,12 @@ public class GameScreenCelestial implements IGameScreen {
             GL11.glBegin(GL11.GL_LINE_LOOP);
 
             float temp;
-            for (int i = 0; i < lineSegments; i++) {
+            for (int i = 0; i < this.lineSegments; i++) {
                 GL11.glVertex2f(x, y);
 
                 temp = x;
-                x = cos * x - sin * y;
-                y = sin * temp + cos * y;
+                x = this.cos * x - this.sin * y;
+                y = this.sin * temp + this.cos * y;
             }
 
             GL11.glEnd();
@@ -261,7 +261,7 @@ public class GameScreenCelestial implements IGameScreen {
 
     private Vector3f getCelestialBodyPosition(CelestialBody cBody, float ticks) {
         final float timeScale = cBody instanceof Planet ? 200.0F : 2.0F;
-        final float distanceFromCenter = this.getScale(cBody) * scale;
+        final float distanceFromCenter = this.getScale(cBody) * this.scale;
         return new Vector3f(
                 (float) Math.sin(ticks / (timeScale * cBody.getRelativeOrbitTime()) + cBody.getPhaseShift())
                         * distanceFromCenter,
@@ -289,16 +289,16 @@ public class GameScreenCelestial implements IGameScreen {
         result[1] = z1 * (x2 - x3) + z2 * (x3 - x1) + z3 * (x1 - x2);
         result[2] = x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2);
         result[3] = -(x1 * (y2 * z3 - y3 * z2) + x2 * (y3 * z1 - y1 * z3) + x3 * (y1 * z2 - y2 * z1));
-        planes.put(result, 0, 4);
-        planes.position(0);
+        this.planes.put(result, 0, 4);
+        this.planes.position(0);
     }
 
     private void drawPlanetsTest(float ticks) {
         GL11.glPushMatrix();
-        GL11.glTranslatef(centreX, centreY, 0F);
+        GL11.glTranslatef(this.centreX, this.centreY, 0F);
 
         final int id = (int) (ticks / 600F) % 5;
-        RenderPlanet.renderID(id, scale, ticks);
+        RenderPlanet.renderID(id, this.scale, ticks);
         GL11.glPopMatrix();
     }
 }

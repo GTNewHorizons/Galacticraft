@@ -128,7 +128,7 @@ public class GuiAstroMinerDock extends GuiContainerGC {
         if (this.extraLines) {
             this.fontRendererObj.drawString(
                     "\u0394x: "
-                            + getDeltaString(
+                            + this.getDeltaString(
                                     MathHelper.floor_double(this.tile.linkedMiner.posX) - this.tile.xCoord - 1),
                     186,
                     152,
@@ -137,7 +137,8 @@ public class GuiAstroMinerDock extends GuiContainerGC {
         if (this.extraLines) {
             this.fontRendererObj.drawString(
                     "\u0394y: "
-                            + getDeltaString(MathHelper.floor_double(this.tile.linkedMiner.posY) - this.tile.yCoord),
+                            + this.getDeltaString(
+                                    MathHelper.floor_double(this.tile.linkedMiner.posY) - this.tile.yCoord),
                     186,
                     162,
                     2536735);
@@ -145,7 +146,7 @@ public class GuiAstroMinerDock extends GuiContainerGC {
         if (this.extraLines) {
             this.fontRendererObj.drawString(
                     "\u0394z: "
-                            + getDeltaString(
+                            + this.getDeltaString(
                                     MathHelper.floor_double(this.tile.linkedMiner.posZ) - this.tile.zCoord - 1),
                     186,
                     172,

@@ -414,7 +414,7 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
 
         UUID id;
 
-        if (riddenByEntity != null) {
+        if (this.riddenByEntity != null) {
             id = ((EntityPlayer) this.riddenByEntity).getPersistentID();
 
             if (id != null) {

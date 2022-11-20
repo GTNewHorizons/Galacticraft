@@ -274,9 +274,9 @@ public class PacketSimple extends Packet implements IPacket {
             playerBaseClient = (EntityClientPlayerMP) player;
             stats = GCPlayerStatsClient.get(playerBaseClient);
         } else {
-            if (type != EnumSimplePacket.C_UPDATE_SPACESTATION_LIST
-                    && type != EnumSimplePacket.C_UPDATE_PLANETS_LIST
-                    && type != EnumSimplePacket.C_UPDATE_CONFIGS) {
+            if (this.type != EnumSimplePacket.C_UPDATE_SPACESTATION_LIST
+                    && this.type != EnumSimplePacket.C_UPDATE_PLANETS_LIST
+                    && this.type != EnumSimplePacket.C_UPDATE_CONFIGS) {
                 return;
             }
         }
@@ -539,7 +539,7 @@ public class PacketSimple extends Packet implements IPacket {
                 FMLClientHandler.instance().getClient().gameSettings.thirdPersonView = stats.thirdPersonView;
                 break;
             case C_UPDATE_SPACESTATION_LIST:
-                WorldUtil.decodeSpaceStationListClient(data);
+                WorldUtil.decodeSpaceStationListClient(this.data);
                 break;
             case C_UPDATE_SPACESTATION_DATA:
                 final SpaceStationWorldData var4 = SpaceStationWorldData.getMPSpaceStationData(
@@ -550,11 +550,11 @@ public class PacketSimple extends Packet implements IPacket {
                 ClientProxyCore.clientSpaceStationID = WorldUtil.stringToSpaceStationData((String) this.data.get(0));
                 break;
             case C_UPDATE_PLANETS_LIST:
-                WorldUtil.decodePlanetsListClient(data);
+                WorldUtil.decodePlanetsListClient(this.data);
                 break;
             case C_UPDATE_CONFIGS:
                 ConfigManagerCore.saveClientConfigOverrideable();
-                ConfigManagerCore.setConfigOverride(data);
+                ConfigManagerCore.setConfigOverride(this.data);
                 break;
             case C_ADD_NEW_SCHEMATIC:
                 final ISchematicPage page = SchematicRegistry.getMatchingRecipeForID((Integer) this.data.get(0));

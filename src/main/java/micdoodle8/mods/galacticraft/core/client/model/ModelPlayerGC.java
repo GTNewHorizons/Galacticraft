@@ -252,7 +252,7 @@ public class ModelPlayerGC extends ModelBiped {
         final PlayerGearData gearData = ClientProxyCore.playerItemData.get(player.getCommandSenderName());
 
         if (gearData != null) {
-            usingParachute = gearData.getParachute() != null;
+            this.usingParachute = gearData.getParachute() != null;
             wearingMask = gearData.getMask() > -1;
             wearingGear = gearData.getGear() > -1;
             wearingLeftTankGreen = gearData.getLeftTank() == 0;
@@ -402,7 +402,7 @@ public class ModelPlayerGC extends ModelBiped {
 
                 //
 
-                if (usingParachute) {
+                if (this.usingParachute) {
                     FMLClientHandler.instance().getClient().renderEngine.bindTexture(gearData.getParachute());
 
                     this.parachute[0].render(var7);
@@ -451,7 +451,7 @@ public class ModelPlayerGC extends ModelBiped {
             this.bipedRightLeg.rotateAngleX += MathHelper.cos(par1 * 0.1162F * 2) * 1.4F * par2;
         }
 
-        if (usingParachute) {
+        if (this.usingParachute) {
             this.parachute[0].rotateAngleZ = (float) (30F * (Math.PI / 180F));
             this.parachute[2].rotateAngleZ = (float) -(30F * (Math.PI / 180F));
             this.parachuteStrings[0].rotateAngleZ = (float) (155F * (Math.PI / 180F));

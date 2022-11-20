@@ -31,8 +31,8 @@ public class ShortRangeTelepadHandler extends WorldSavedData {
         @Override
         public int hashCode() {
             return new HashCodeBuilder()
-                    .append(dimensionID)
-                    .append(position.hashCode())
+                    .append(this.dimensionID)
+                    .append(this.position.hashCode())
                     .toHashCode();
         }
 

@@ -72,7 +72,7 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
                         } else {
                             this.containingItems[1] = new ItemStack(GCItems.fuelCanister, 1, originalDamage + used);
                         }
-                        markDirty();
+                        this.markDirty();
                     }
                 } else if (FluidContainerRegistry.isFilledContainer(this.containingItems[1])) {
                     final FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(this.containingItems[1]);
@@ -88,7 +88,7 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
                                 this.fuelTank.fill(liquid, true);
                                 this.containingItems[1] =
                                         FluidContainerRegistry.drainFluidContainer(this.containingItems[1]);
-                                markDirty();
+                                this.markDirty();
                             }
                         }
                     }
@@ -106,7 +106,7 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
                         if (toDrain > 0) {
                             final FluidStack drained = fluidContainer.drain(this.containingItems[1], toDrain, true);
                             this.fuelTank.fill(drained, true);
-                            markDirty();
+                            this.markDirty();
                         }
                     }
                 }
@@ -135,7 +135,7 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
             if (this.fuelTank != null
                     && this.fuelTank.getFluid() != null
                     && this.fuelTank.getFluid().amount > 0
-                    && isCorrectFuelTier(this.attachedFuelable)) {
+                    && this.isCorrectFuelTier(this.attachedFuelable)) {
                 final FluidStack liquid =
                         new FluidStack(GalacticraftCore.fluidFuel, 2 * ConfigManagerCore.rocketFuelFactor);
 
@@ -143,7 +143,7 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
                     final int filled = this.attachedFuelable.addFuel(liquid, true);
                     this.loadedFuelLastTick = filled > 0;
                     this.fuelTank.drain(filled, true);
-                    markDirty();
+                    this.markDirty();
                 }
             }
         }
@@ -152,19 +152,19 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
     public boolean isCorrectFuelTier(IFuelable fuelable) {
 
         if (this.attachedFuelable == null) {
-            coorectTier = false;
+            this.coorectTier = false;
             return false;
         }
         if (fuelable instanceof IFuelableTiered) {
             final int tier = ((IFuelableTiered) fuelable).getRocketTier();
             if (tier > 0) {
                 if (tier > RocketFuelRecipe.getfuelMaxTier(this.fuelTank.getFluid())) {
-                    coorectTier = false;
+                    this.coorectTier = false;
                     return false;
                 }
             }
         }
-        coorectTier = true;
+        this.coorectTier = true;
         return true;
     }
 
@@ -278,7 +278,7 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
         return this.fuelTank.getFluid() != null
                 && this.fuelTank.getFluid().amount > 0
                 && !this.getDisabled(0)
-                && loadedFuelLastTick;
+                && this.loadedFuelLastTick;
     }
 
     @Override

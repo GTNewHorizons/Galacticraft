@@ -42,7 +42,7 @@ public class GameScreenText implements IGameScreen {
 
     public GameScreenText() {
         if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
-            planes = BufferUtils.createDoubleBuffer(4 * Double.SIZE);
+            this.planes = BufferUtils.createDoubleBuffer(4 * Double.SIZE);
         }
     }
 
@@ -54,22 +54,22 @@ public class GameScreenText implements IGameScreen {
     public void render(int type, float ticks, float sizeX, float sizeY, IScreenManager scr) {
         final DrawGameScreen screen = (DrawGameScreen) scr;
 
-        frameBx = sizeX - frameA;
-        frameBy = sizeY - frameA;
-        drawBlackBackground(0.0F);
-        planeEquation(frameA, frameA, 0, frameA, frameBy, 0, frameA, frameBy, 1);
-        GL11.glClipPlane(GL11.GL_CLIP_PLANE0, planes);
+        this.frameBx = sizeX - this.frameA;
+        this.frameBy = sizeY - this.frameA;
+        this.drawBlackBackground(0.0F);
+        this.planeEquation(this.frameA, this.frameA, 0, this.frameA, this.frameBy, 0, this.frameA, this.frameBy, 1);
+        GL11.glClipPlane(GL11.GL_CLIP_PLANE0, this.planes);
         GL11.glEnable(GL11.GL_CLIP_PLANE0);
-        planeEquation(frameBx, frameBy, 0, frameBx, frameA, 0, frameBx, frameA, 1);
-        GL11.glClipPlane(GL11.GL_CLIP_PLANE1, planes);
+        this.planeEquation(this.frameBx, this.frameBy, 0, this.frameBx, this.frameA, 0, this.frameBx, this.frameA, 1);
+        GL11.glClipPlane(GL11.GL_CLIP_PLANE1, this.planes);
         GL11.glEnable(GL11.GL_CLIP_PLANE1);
-        planeEquation(frameA, frameBy, 0, frameBx, frameBy, 0, frameBx, frameBy, 1);
-        GL11.glClipPlane(GL11.GL_CLIP_PLANE2, planes);
+        this.planeEquation(this.frameA, this.frameBy, 0, this.frameBx, this.frameBy, 0, this.frameBx, this.frameBy, 1);
+        GL11.glClipPlane(GL11.GL_CLIP_PLANE2, this.planes);
         GL11.glEnable(GL11.GL_CLIP_PLANE2);
-        planeEquation(frameBx, frameA, 0, frameA, frameA, 0, frameA, frameA, 1);
-        GL11.glClipPlane(GL11.GL_CLIP_PLANE3, planes);
+        this.planeEquation(this.frameBx, this.frameA, 0, this.frameA, this.frameA, 0, this.frameA, this.frameA, 1);
+        GL11.glClipPlane(GL11.GL_CLIP_PLANE3, this.planes);
         GL11.glEnable(GL11.GL_CLIP_PLANE3);
-        yPos = 0;
+        this.yPos = 0;
 
         final TileEntityTelemetry telemeter = TileEntityTelemetry.getNearest(screen.driver);
         // Make the text to draw. To look good it's important the width and height
@@ -176,7 +176,7 @@ public class GameScreenText implements IGameScreen {
             // working
             final World w1 = screen.driver.getWorldObj();
             final int time1 = w1 != null ? (int) ((w1.getWorldTime() + 6000L) % 24000L) : 0;
-            str[2] = makeTimeString(time1 * 360);
+            str[2] = this.makeTimeString(time1 * 360);
         }
 
         final int textWidthPixels = 155;
@@ -189,7 +189,7 @@ public class GameScreenText implements IGameScreen {
         }
 
         // First pass - approximate border size
-        float borders = frameA * 2 + 0.05F * Math.min(sizeX, sizeY);
+        float borders = this.frameA * 2 + 0.05F * Math.min(sizeX, sizeY);
         float scaleXTest = (sizeX - borders) / textWidthPixels;
         float scaleYTest = (sizeY - borders) / textHeightPixels;
         float scale = sizeX;
@@ -197,7 +197,7 @@ public class GameScreenText implements IGameScreen {
             scale = sizeY;
         }
         // Second pass - the border size may be more accurate now
-        borders = frameA * 2 + 0.05F * scale;
+        borders = this.frameA * 2 + 0.05F * scale;
         scaleXTest = (sizeX - borders) / textWidthPixels;
         scaleYTest = (sizeY - borders) / textHeightPixels;
         scale = sizeX;
@@ -208,7 +208,7 @@ public class GameScreenText implements IGameScreen {
         }
 
         // Centre the text in the display
-        final float border = frameA + 0.025F * scale;
+        final float border = this.frameA + 0.025F * scale;
         if (entity != null && renderEntity != null) {
             Xmargin = (sizeX - borders) / 2;
         }
@@ -219,12 +219,12 @@ public class GameScreenText implements IGameScreen {
 
         // Actually draw the text
         final int whiteColour = ColorUtil.to32BitColor(255, 240, 216, 255);
-        drawText(strName, whiteColour);
-        drawText(str[0], whiteColour);
-        drawText(str[1], whiteColour);
-        drawText(str[2], whiteColour);
-        drawText(str[3], whiteColour);
-        drawText(str[4], whiteColour);
+        this.drawText(strName, whiteColour);
+        this.drawText(str[0], whiteColour);
+        this.drawText(str[1], whiteColour);
+        this.drawText(str[2], whiteColour);
+        this.drawText(str[3], whiteColour);
+        this.drawText(str[4], whiteColour);
 
         // If there is an entity to render, draw it on the left of the text
         if (renderEntity != null && entity != null) {
@@ -298,8 +298,8 @@ public class GameScreenText implements IGameScreen {
     }
 
     private void drawText(String str, int colour) {
-        Minecraft.getMinecraft().fontRenderer.drawString(str, 0, yPos, colour, false);
-        yPos += 10;
+        Minecraft.getMinecraft().fontRenderer.drawString(str, 0, this.yPos, colour, false);
+        this.yPos += 10;
     }
 
     private void drawBlackBackground(float greyLevel) {
@@ -309,10 +309,10 @@ public class GameScreenText implements IGameScreen {
         GL11.glColor4f(greyLevel, greyLevel, greyLevel, 1.0F);
         tess.startDrawingQuads();
 
-        tess.addVertex(frameA, frameBy, 0.005F);
-        tess.addVertex(frameBx, frameBy, 0.005F);
-        tess.addVertex(frameBx, frameA, 0.005F);
-        tess.addVertex(frameA, frameA, 0.005F);
+        tess.addVertex(this.frameA, this.frameBy, 0.005F);
+        tess.addVertex(this.frameBx, this.frameBy, 0.005F);
+        tess.addVertex(this.frameBx, this.frameA, 0.005F);
+        tess.addVertex(this.frameA, this.frameA, 0.005F);
         tess.draw();
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -326,7 +326,7 @@ public class GameScreenText implements IGameScreen {
         result[1] = z1 * (x2 - x3) + z2 * (x3 - x1) + z3 * (x1 - x2);
         result[2] = x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2);
         result[3] = -(x1 * (y2 * z3 - y3 * z2) + x2 * (y3 * z1 - y1 * z3) + x3 * (y1 * z2 - y2 * z1));
-        planes.put(result, 0, 4);
-        planes.position(0);
+        this.planes.put(result, 0, 4);
+        this.planes.position(0);
     }
 }

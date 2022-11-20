@@ -127,7 +127,8 @@ public class CircuitFabricatorRecipeHandler extends TemplateRecipeHandler {
 
         @Override
         public ArrayList<PositionedStack> getIngredients() {
-            return (ArrayList<PositionedStack>) getCycledIngredients(cycleticks / 20, this.input);
+            return (ArrayList<PositionedStack>)
+                    this.getCycledIngredients(CircuitFabricatorRecipeHandler.this.cycleticks / 20, this.input);
         }
 
         @Override

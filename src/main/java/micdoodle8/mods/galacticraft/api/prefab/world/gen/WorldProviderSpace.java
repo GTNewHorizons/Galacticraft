@@ -91,7 +91,7 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
     @Override
     public void updateWeather() {
         if (!this.worldObj.isRemote) {
-            final long newTime = worldObj.getWorldInfo().getWorldTime();
+            final long newTime = this.worldObj.getWorldInfo().getWorldTime();
             if (this.preTickTime == Long.MIN_VALUE) {
                 // First tick: get the timeCurrentOffset from saved ticks in villages.dat :)
                 int savedTick = 0;
@@ -166,7 +166,7 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
 
     @Override
     public float calculateCelestialAngle(long par1, float par3) {
-        par1 = worldObj.getWorldInfo().getWorldTime() + this.timeCurrentOffset;
+        par1 = this.worldObj.getWorldInfo().getWorldTime() + this.timeCurrentOffset;
         final int j = (int) (par1 % this.getDayLength());
         float f1 = (j + par3) / this.getDayLength() - 0.25F;
 
@@ -330,9 +330,9 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
     // Therefore each Galacticraft dimension maintains its own timeCurrentOffset
     @Override
     public void setWorldTime(long time) {
-        worldObj.getWorldInfo().setWorldTime(time);
+        this.worldObj.getWorldInfo().setWorldTime(time);
         long diff = -this.timeCurrentOffset;
-        this.timeCurrentOffset = time - worldObj.getWorldInfo().getWorldTime();
+        this.timeCurrentOffset = time - this.worldObj.getWorldInfo().getWorldTime();
         diff += this.timeCurrentOffset;
         if (diff != 0L) {
             this.saveTime();
@@ -343,11 +343,11 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
 
     @Override
     public long getWorldTime() {
-        return worldObj.getWorldInfo().getWorldTime() + this.timeCurrentOffset;
+        return this.worldObj.getWorldInfo().getWorldTime() + this.timeCurrentOffset;
     }
 
     public void setWorldTimeCommand(long time) {
-        worldObj.getWorldInfo().setWorldTime(time);
+        this.worldObj.getWorldInfo().setWorldTime(time);
         this.timeCurrentOffset = this.saveTCO;
         this.saveTime();
         this.preTickTime = time;
@@ -356,7 +356,7 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
 
     public long getWorldTimeCommand() {
         this.saveTCO = this.timeCurrentOffset;
-        return worldObj.getWorldInfo().getWorldTime() + this.timeCurrentOffset;
+        return this.worldObj.getWorldInfo().getWorldTime() + this.timeCurrentOffset;
     }
 
     /**

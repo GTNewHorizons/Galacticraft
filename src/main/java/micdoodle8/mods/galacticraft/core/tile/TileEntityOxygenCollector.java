@@ -48,7 +48,7 @@ public class TileEntityOxygenCollector extends TileEntityOxygen implements IInve
         super.updateEntity();
 
         if (!this.worldObj.isRemote) {
-            producedLastTick = this.storedOxygen < this.maxOxygen;
+            this.producedLastTick = this.storedOxygen < this.maxOxygen;
 
             this.produceOxygen();
 
@@ -315,7 +315,7 @@ public class TileEntityOxygenCollector extends TileEntityOxygen implements IInve
 
     @Override
     public boolean shouldUseEnergy() {
-        return this.storedOxygen > 0F && producedLastTick;
+        return this.storedOxygen > 0F && this.producedLastTick;
     }
 
     @Override

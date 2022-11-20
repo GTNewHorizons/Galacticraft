@@ -28,7 +28,7 @@ public class GameScreenBasic implements IGameScreen {
         // This can be called from either server or client, so don't include
         // client-side only code on the server.
         if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
-            renderEngine = FMLClientHandler.instance().getClient().renderEngine;
+            this.renderEngine = FMLClientHandler.instance().getClient().renderEngine;
         }
     }
 
@@ -37,35 +37,35 @@ public class GameScreenBasic implements IGameScreen {
     }
 
     public void render(int type, float ticks, float scaleX, float scaleY, IScreenManager scr) {
-        frameBx = scaleX - frameA;
-        frameBy = scaleY - frameA;
+        this.frameBx = scaleX - this.frameA;
+        this.frameBy = scaleY - this.frameA;
 
         if (scaleX == scaleY) {
-            textureAx = 0F;
-            textureAy = 0F;
-            textureBx = 1.0F;
-            textureBy = 1.0F;
+            this.textureAx = 0F;
+            this.textureAy = 0F;
+            this.textureBx = 1.0F;
+            this.textureBy = 1.0F;
         } else if (scaleX < scaleY) {
-            textureAx = (1.0F - scaleX / scaleY) / 2;
-            textureAy = 0F;
-            textureBx = 1.0F - textureAx;
-            textureBy = 1.0F;
+            this.textureAx = (1.0F - scaleX / scaleY) / 2;
+            this.textureAy = 0F;
+            this.textureBx = 1.0F - this.textureAx;
+            this.textureBy = 1.0F;
         } else if (scaleY < scaleX) {
-            textureAx = 0F;
-            textureAy = (1.0F - scaleY / scaleX) / 2;
-            textureBx = 1.0F;
-            textureBy = 1.0F - textureAy;
+            this.textureAx = 0F;
+            this.textureAy = (1.0F - scaleY / scaleX) / 2;
+            this.textureBx = 1.0F;
+            this.textureBy = 1.0F - this.textureAy;
         }
 
         switch (type) {
             case 0:
-                drawBlackBackground(0.09F);
+                this.drawBlackBackground(0.09F);
                 // ClientProxyCore.overworldTextureLocal = null;
                 break;
             case 1:
                 if (scr instanceof DrawGameScreen && ((DrawGameScreen) scr).mapDone) {
                     GL11.glBindTexture(GL11.GL_TEXTURE_2D, DrawGameScreen.reusableMap.getGlTextureId());
-                    draw2DTexture();
+                    this.draw2DTexture();
                 } else if (ClientProxyCore.overworldTexturesValid) {
                     GL11.glPushMatrix();
                     final float centreX = scaleX / 2;
@@ -85,7 +85,7 @@ public class GameScreenBasic implements IGameScreen {
                                 PacketSimple.EnumSimplePacket.S_REQUEST_OVERWORLD_IMAGE, new Object[] {}));
                         ClientProxyCore.overworldTextureRequestSent = true;
                     }
-                    draw2DTexture();
+                    this.draw2DTexture();
                 }
                 break;
         }
@@ -97,10 +97,10 @@ public class GameScreenBasic implements IGameScreen {
         tess.setColorRGBA(255, 255, 255, 255);
         tess.startDrawingQuads();
 
-        tess.addVertexWithUV(frameA, frameBy, 0F, textureAx, textureBy);
-        tess.addVertexWithUV(frameBx, frameBy, 0F, textureBx, textureBy);
-        tess.addVertexWithUV(frameBx, frameA, 0F, textureBx, textureAy);
-        tess.addVertexWithUV(frameA, frameA, 0F, textureAx, textureAy);
+        tess.addVertexWithUV(this.frameA, this.frameBy, 0F, this.textureAx, this.textureBy);
+        tess.addVertexWithUV(this.frameBx, this.frameBy, 0F, this.textureBx, this.textureBy);
+        tess.addVertexWithUV(this.frameBx, this.frameA, 0F, this.textureBx, this.textureAy);
+        tess.addVertexWithUV(this.frameA, this.frameA, 0F, this.textureAx, this.textureAy);
         tess.draw();
     }
 
@@ -111,10 +111,10 @@ public class GameScreenBasic implements IGameScreen {
         GL11.glColor4f(greyLevel, greyLevel, greyLevel, 1.0F);
         tess.startDrawingQuads();
 
-        tess.addVertex(frameA, frameBy, 0.005F);
-        tess.addVertex(frameBx, frameBy, 0.005F);
-        tess.addVertex(frameBx, frameA, 0.005F);
-        tess.addVertex(frameA, frameA, 0.005F);
+        tess.addVertex(this.frameA, this.frameBy, 0.005F);
+        tess.addVertex(this.frameBx, this.frameBy, 0.005F);
+        tess.addVertex(this.frameBx, this.frameA, 0.005F);
+        tess.addVertex(this.frameA, this.frameA, 0.005F);
         tess.draw();
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

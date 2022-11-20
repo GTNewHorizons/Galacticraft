@@ -57,30 +57,30 @@ public class SlotSchematicAstroMiner extends Slot {
 
     @Override
     public boolean isItemValid(ItemStack itemStack) {
-        if (index >= 1 && index <= 8) {
+        if (this.index >= 1 && this.index <= 8) {
             return itemStack.getItem() == MarsItems.marsItemBasic && itemStack.getItemDamage() == 3;
-        } else if (index == 9 || index == 10) {
+        } else if (this.index == 9 || this.index == 10) {
             return itemStack.getItem() == GCItems.flagPole;
-        } else if (index >= 11 && index <= 13) {
+        } else if (this.index >= 11 && this.index <= 13) {
             return itemStack.getItem() == AsteroidsItems.basicItem && itemStack.getItemDamage() == 0;
-        } else if (index >= 14 && index <= 17) {
+        } else if (this.index >= 14 && this.index <= 17) {
             return itemStack.getItem() == AsteroidsItems.orionDrive;
-        } else if (index == 18 && GalacticraftCore.isGalaxySpaceLoaded) {
+        } else if (this.index == 18 && GalacticraftCore.isGalaxySpaceLoaded) {
             return itemStack.getItem()
                             == GameRegistry.findItem(Constants.MOD_ID_GALAXYSPACE, "item.RocketControlComputer")
                     && itemStack.getItemDamage() == 102;
-        } else if (index == 19 || index == 20) {
+        } else if (this.index == 19 || this.index == 20) {
             return itemStack.getItem() == GCItems.basicItem && itemStack.getItemDamage() == 14;
-        } else if (index >= 21 && index <= 23) {
+        } else if (this.index >= 21 && this.index <= 23) {
             return itemStack.getItem() == GCItems.heavyPlatingTier1;
-        } else if (index == 24 || index == 25) {
+        } else if (this.index == 24 || this.index == 25) {
             return itemStack.getItem() == Item.getItemFromBlock(RecipeUtil.getChestBlock())
                     && itemStack.getItemDamage() == 1;
-        } else if (index == 26) {
+        } else if (this.index == 26) {
             return itemStack.getItem() == AsteroidsItems.basicItem && itemStack.getItemDamage() == 8;
-        } else if (index == 27) {
+        } else if (this.index == 27) {
             return itemStack.getItem() == Item.getItemFromBlock(AsteroidBlocks.beamReceiver);
-        } else if (index == 28 || index == 29) {
+        } else if (this.index == 28 || this.index == 29) {
             return itemStack.getItem() == GameRegistry.findItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01")
                     && itemStack.getItemDamage() == 32603;
         } else {

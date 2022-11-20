@@ -86,7 +86,7 @@ public class BlockVec3Dim implements Cloneable {
             return null;
         }
 
-        final World world = getWorldForId(this.dim);
+        final World world = this.getWorldForId(this.dim);
         if (world == null) {
             return null;
         }
@@ -138,7 +138,7 @@ public class BlockVec3Dim implements Cloneable {
             return null;
         }
 
-        final World world = getWorldForId(this.dim);
+        final World world = this.getWorldForId(this.dim);
         if (world == null) {
             return null;
         }
@@ -177,7 +177,7 @@ public class BlockVec3Dim implements Cloneable {
     }
 
     public Block getBlock() {
-        final World world = getWorldForId(this.dim);
+        final World world = this.getWorldForId(this.dim);
         if (world == null) {
             return null;
         }
@@ -262,7 +262,7 @@ public class BlockVec3Dim implements Cloneable {
      * if present.
      */
     public TileEntity getTileEntity() {
-        final World world = getWorldForId(this.dim);
+        final World world = this.getWorldForId(this.dim);
         if (world == null) {
             return null;
         }
@@ -270,7 +270,7 @@ public class BlockVec3Dim implements Cloneable {
     }
 
     public TileEntity getTileEntityNoLoad() {
-        final World world = getWorldForId(this.dim);
+        final World world = this.getWorldForId(this.dim);
         if (world == null) {
             return null;
         }
@@ -281,7 +281,7 @@ public class BlockVec3Dim implements Cloneable {
     }
 
     public int getBlockMetadata() {
-        final World world = getWorldForId(this.dim);
+        final World world = this.getWorldForId(this.dim);
         if (world == null) {
             return 0;
         }
@@ -321,7 +321,7 @@ public class BlockVec3Dim implements Cloneable {
     }
 
     public void setBlock(Block block) {
-        final World world = getWorldForId(this.dim);
+        final World world = this.getWorldForId(this.dim);
         if (world == null) {
             return;
         }
@@ -329,7 +329,7 @@ public class BlockVec3Dim implements Cloneable {
     }
 
     public boolean blockExists() {
-        final World world = getWorldForId(this.dim);
+        final World world = this.getWorldForId(this.dim);
         if (world == null) {
             return false;
         }
@@ -357,7 +357,7 @@ public class BlockVec3Dim implements Cloneable {
             }
             return theServer.worldServerForDimension(dimensionID);
         } else {
-            return getWorldForIdClient(dimensionID);
+            return this.getWorldForIdClient(dimensionID);
         }
     }
 

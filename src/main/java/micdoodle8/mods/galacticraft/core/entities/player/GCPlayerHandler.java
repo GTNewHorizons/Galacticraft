@@ -116,7 +116,7 @@ public class GCPlayerHandler {
             GCPlayerStats.register((EntityPlayerMP) event.entity);
         }
 
-        if (isClient) {
+        if (this.isClient) {
             this.onEntityConstructingClient(event);
         }
     }
@@ -758,11 +758,11 @@ public class GCPlayerHandler {
         if (theCurrentItem != null) {
             if (OxygenUtil.noAtmosphericCombustion(player.worldObj.provider)) {
                 // Is it a type of overworld torch?
-                if (torchItems.containsValue(theCurrentItem.getItem())) {
+                if (this.torchItems.containsValue(theCurrentItem.getItem())) {
                     Item torchItem = null;
                     // Get space torch for this overworld torch
-                    for (final Item i : torchItems.keySet()) {
-                        if (torchItems.get(i) == theCurrentItem.getItem()) {
+                    for (final Item i : this.torchItems.keySet()) {
+                        if (this.torchItems.get(i) == theCurrentItem.getItem()) {
                             torchItem = i;
                             break;
                         }
@@ -776,9 +776,9 @@ public class GCPlayerHandler {
                 }
             } else {
                 // Is it a type of space torch?
-                if (torchItems.containsKey(theCurrentItem.getItem())) {
+                if (this.torchItems.containsKey(theCurrentItem.getItem())) {
                     // Get overworld torch for this space torch
-                    final Item torchItem = torchItems.get(theCurrentItem.getItem());
+                    final Item torchItem = this.torchItems.get(theCurrentItem.getItem());
                     if (torchItem != null
                             && player.inventory.currentItem >= 0
                             && player.inventory.currentItem < player.inventory.mainInventory.length) {
@@ -795,7 +795,7 @@ public class GCPlayerHandler {
         // vanillaTorch
         final Item itemSpaceTorch = Item.getItemFromBlock(spaceTorch);
         final Item itemVanillaTorch = Item.getItemFromBlock(vanillaTorch);
-        torchItems.put(itemSpaceTorch, itemVanillaTorch);
+        this.torchItems.put(itemSpaceTorch, itemVanillaTorch);
     }
 
     public static void setUsingParachute(EntityPlayerMP player, GCPlayerStats playerStats, boolean tf) {
@@ -1302,13 +1302,13 @@ public class GCPlayerHandler {
     public void preventFlyingKicks(EntityPlayerMP player) {
         player.fallDistance = 0.0F;
         try {
-            if (ftc == null) {
-                ftc = player.playerNetServerHandler
+            if (this.ftc == null) {
+                this.ftc = player.playerNetServerHandler
                         .getClass()
                         .getDeclaredField(VersionUtil.getNameDynamic(VersionUtil.KEY_FIELD_FLOATINGTICKCOUNT));
-                ftc.setAccessible(true);
+                this.ftc.setAccessible(true);
             }
-            ftc.setInt(player.playerNetServerHandler, 0);
+            this.ftc.setInt(player.playerNetServerHandler, 0);
         } catch (final Exception e) {
         }
     }

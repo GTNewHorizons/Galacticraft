@@ -36,6 +36,6 @@ public class ItemBucketGC extends ItemBucket {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister par1IconRegister) {
-        this.itemIcon = par1IconRegister.registerIcon(this.getUnlocalizedName().replace("item.", texture_prefix));
+        this.itemIcon = par1IconRegister.registerIcon(this.getUnlocalizedName().replace("item.", this.texture_prefix));
     }
 }

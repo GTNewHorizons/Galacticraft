@@ -127,10 +127,10 @@ public class EntityAstroMiner extends Entity
     };
 
     private final int baseSafeRadius = 32;
-    private final double speedbase = TEMPFAST ? 0.16D : 0.022D;
-    private double speed = speedbase;
-    private final float rotSpeedBase = TEMPFAST ? 8F : 1.5F;
-    private float rotSpeed = rotSpeedBase;
+    private final double speedbase = this.TEMPFAST ? 0.16D : 0.022D;
+    private double speed = this.speedbase;
+    private final float rotSpeedBase = this.TEMPFAST ? 8F : 1.5F;
+    private float rotSpeed = this.rotSpeedBase;
     private double speedup = SPEEDUP;
     private boolean noSpeedup = false; // This stops the miner getting stuck at turning points
     public float shipDamage;
@@ -355,7 +355,7 @@ public class EntityAstroMiner extends Entity
             this.setDamage(this.getDamage() - 1.0F);
         }
 
-        stopForTurn = !this.checkRotation();
+        this.stopForTurn = !this.checkRotation();
         this.facing = this.getFacingFromRotation();
         this.setBoundingBoxForFacing();
 
@@ -402,7 +402,7 @@ public class EntityAstroMiner extends Entity
             this.boundingBox.maxZ += this.motionZ;
             this.setRotation(this.rotationYaw, this.rotationPitch);
             if (this.AIstate == AISTATE_MINING && this.ticksExisted % 2 == 0) {
-                this.prepareMoveClient(TEMPFAST ? 8 : 1, 2);
+                this.prepareMoveClient(this.TEMPFAST ? 8 : 1, 2);
             }
 
             // Sound updates on client
@@ -416,7 +416,7 @@ public class EntityAstroMiner extends Entity
         if (this.ticksExisted % 10 == 0 || this.flagLink) {
             this.flagLink = false;
             this.checkPlayer();
-            final TileEntity tileEntity = posBase.getTileEntity(this.worldObj);
+            final TileEntity tileEntity = this.posBase.getTileEntity(this.worldObj);
             if (tileEntity instanceof TileEntityMinerBase
                     && ((TileEntityMinerBase) tileEntity).isMaster
                     && !tileEntity.isInvalid()) {
@@ -507,30 +507,30 @@ public class EntityAstroMiner extends Entity
                 break;
             case AISTATE_TRAVELLING:
                 if (!this.moveToTarget()) {
-                    this.prepareMove(TEMPFAST ? 8 : 2, 2);
+                    this.prepareMove(this.TEMPFAST ? 8 : 2, 2);
                 }
                 break;
             case AISTATE_MINING:
                 if (!this.doMining() && this.ticksExisted % 2 == 0) {
                     this.energyLevel--;
-                    this.prepareMove(TEMPFAST ? 8 : 1, 2);
+                    this.prepareMove(this.TEMPFAST ? 8 : 1, 2);
                 }
                 break;
             case AISTATE_RETURNING:
                 this.moveToBase();
-                this.prepareMove(TEMPFAST ? 8 : 4, 1);
+                this.prepareMove(this.TEMPFAST ? 8 : 4, 1);
                 break;
             case AISTATE_DOCKING:
                 if (this.waypointBase != null) {
-                    this.speed = speedbase / 1.6;
-                    this.rotSpeed = rotSpeedBase / 1.6F;
+                    this.speed = this.speedbase / 1.6;
+                    this.rotSpeed = this.rotSpeedBase / 1.6F;
                     if (this.moveToPos(this.waypointBase, true)) {
                         this.AIstate = AISTATE_ATBASE;
                         this.motionX = 0;
                         this.motionY = 0;
                         this.motionZ = 0;
-                        this.speed = speedbase;
-                        this.rotSpeed = rotSpeedBase;
+                        this.speed = this.speedbase;
+                        this.rotSpeed = this.rotSpeedBase;
                     }
                 } else {
                     GCLog.severe("AstroMiner missing base position: this is a bug.");
@@ -627,7 +627,7 @@ public class EntityAstroMiner extends Entity
 
     public void recall() {
         if (this.AIstate > this.AISTATE_ATBASE && this.AIstate < this.AISTATE_RETURNING) {
-            AIstate = AISTATE_RETURNING;
+            this.AIstate = AISTATE_RETURNING;
             this.pathBlockedCount = 0;
         }
     }
@@ -654,7 +654,7 @@ public class EntityAstroMiner extends Entity
     }
 
     private void atBase() {
-        final TileEntity tileEntity = posBase.getTileEntity(this.worldObj);
+        final TileEntity tileEntity = this.posBase.getTileEntity(this.worldObj);
 
         if (!(tileEntity instanceof TileEntityMinerBase)
                 || tileEntity.isInvalid()
@@ -717,7 +717,8 @@ public class EntityAstroMiner extends Entity
         // mining elsewhere
         if (!this.minePoints.isEmpty() && this.pathBlockedCount < 2) {
             this.posTarget = this.minePoints.getFirst().clone();
-            GCLog.debug("Still mining at: " + posTarget.toString() + " Remaining shafts: " + this.minePoints.size());
+            GCLog.debug(
+                    "Still mining at: " + this.posTarget.toString() + " Remaining shafts: " + this.minePoints.size());
             return true;
         }
 
@@ -730,7 +731,7 @@ public class EntityAstroMiner extends Entity
             return false;
         }
 
-        GCLog.debug("Miner target: " + posTarget.toString());
+        GCLog.debug("Miner target: " + this.posTarget.toString());
 
         return true;
     }
@@ -741,20 +742,20 @@ public class EntityAstroMiner extends Entity
      */
     private boolean moveToTarget() {
         if (this.energyLevel < this.RETURNENERGY || this.inventoryDrops > this.RETURNDROPS) {
-            AIstate = AISTATE_RETURNING;
+            this.AIstate = AISTATE_RETURNING;
             this.pathBlockedCount = 0;
             return true;
         }
 
         if (this.posTarget == null) {
             GCLog.severe("AstroMiner missing target: this is a bug.");
-            AIstate = AISTATE_STUCK;
+            this.AIstate = AISTATE_STUCK;
             return true;
         }
 
         if (this.moveToPos(this.posTarget, false)) {
-            AIstate = AISTATE_MINING;
-            wayPoints.add(this.posTarget.clone());
+            this.AIstate = AISTATE_MINING;
+            this.wayPoints.add(this.posTarget.clone());
             this.setMinePoints();
             return true;
         }
@@ -765,7 +766,7 @@ public class EntityAstroMiner extends Entity
     private void moveToBase() {
         if (this.wayPoints.size() == 0) {
             // When it gets there: stop and reverse in!
-            AIstate = AISTATE_DOCKING;
+            this.AIstate = AISTATE_DOCKING;
             if (this.waypointBase != null) {
                 // Teleport back to base in case of any serious problem
                 this.setPosition(this.waypointBase.x, this.waypointBase.y, this.waypointBase.z);
@@ -844,7 +845,7 @@ public class EntityAstroMiner extends Entity
             if (this.minePoints.size() > 0 && this.minePointCurrent != null) {
                 this.minePoints.addFirst(this.minePointCurrent);
             }
-            AIstate = AISTATE_RETURNING;
+            this.AIstate = AISTATE_RETURNING;
             this.pathBlockedCount = 0;
             GCLog.debug("Miner going home: " + this.posBase.toString() + " " + this.minePoints.size()
                     + " shafts still to be mined");
@@ -937,116 +938,116 @@ public class EntityAstroMiner extends Entity
         // traveling)
         switch (this.facingAI & 6) {
             case 0:
-                if (tryMineBlock(x, y, z)) {
+                if (this.tryMineBlock(x, y, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x + 1, y, z)) {
+                if (this.tryMineBlock(x + 1, y, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x + 1, y, z - 1)) {
+                if (this.tryMineBlock(x + 1, y, z - 1)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x, y, z - 1)) {
+                if (this.tryMineBlock(x, y, z - 1)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x, y, z - 2)) {
+                if (this.tryMineBlock(x, y, z - 2)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x - 1, y, z - 2)) {
+                if (this.tryMineBlock(x - 1, y, z - 2)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x - 1, y, z - 1)) {
+                if (this.tryMineBlock(x - 1, y, z - 1)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x - 2, y, z - 1)) {
+                if (this.tryMineBlock(x - 2, y, z - 1)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x - 2, y, z)) {
+                if (this.tryMineBlock(x - 2, y, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x - 1, y, z)) {
+                if (this.tryMineBlock(x - 1, y, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x - 1, y, z + 1)) {
+                if (this.tryMineBlock(x - 1, y, z + 1)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x, y, z + 1)) {
+                if (this.tryMineBlock(x, y, z + 1)) {
                     wayBarred = true;
                 }
                 break;
             case 2:
-                if (tryMineBlock(x, y - 2, z)) {
+                if (this.tryMineBlock(x, y - 2, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x - 1, y - 2, z)) {
+                if (this.tryMineBlock(x - 1, y - 2, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x, y - 1, z)) {
+                if (this.tryMineBlock(x, y - 1, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x - 1, y - 1, z)) {
+                if (this.tryMineBlock(x - 1, y - 1, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x + 1, y - 1, z)) {
+                if (this.tryMineBlock(x + 1, y - 1, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x - 2, y - 1, z)) {
+                if (this.tryMineBlock(x - 2, y - 1, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x + 1, y, z)) {
+                if (this.tryMineBlock(x + 1, y, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x - 2, y, z)) {
+                if (this.tryMineBlock(x - 2, y, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x, y, z)) {
+                if (this.tryMineBlock(x, y, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x - 1, y, z)) {
+                if (this.tryMineBlock(x - 1, y, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x, y + 1, z)) {
+                if (this.tryMineBlock(x, y + 1, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x - 1, y + 1, z)) {
+                if (this.tryMineBlock(x - 1, y + 1, z)) {
                     wayBarred = true;
                 }
                 break;
             case 4:
-                if (tryMineBlock(x, y - 2, z - 1)) {
+                if (this.tryMineBlock(x, y - 2, z - 1)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x, y - 1, z)) {
+                if (this.tryMineBlock(x, y - 1, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x, y - 1, z - 1)) {
+                if (this.tryMineBlock(x, y - 1, z - 1)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x, y - 1, z + 1)) {
+                if (this.tryMineBlock(x, y - 1, z + 1)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x, y - 1, z - 2)) {
+                if (this.tryMineBlock(x, y - 1, z - 2)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x, y, z + 1)) {
+                if (this.tryMineBlock(x, y, z + 1)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x, y, z - 2)) {
+                if (this.tryMineBlock(x, y, z - 2)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x, y, z - 1)) {
+                if (this.tryMineBlock(x, y, z - 1)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x, y - 2, z)) {
+                if (this.tryMineBlock(x, y - 2, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x, y + 1, z - 1)) {
+                if (this.tryMineBlock(x, y + 1, z - 1)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x, y, z)) {
+                if (this.tryMineBlock(x, y, z)) {
                     wayBarred = true;
                 }
-                if (tryMineBlock(x, y + 1, z)) {
+                if (this.tryMineBlock(x, y + 1, z)) {
                     wayBarred = true;
                 }
                 break;
@@ -1064,7 +1065,7 @@ public class EntityAstroMiner extends Entity
             this.tryBlockLimit = 0;
             if (this.AIstate == AISTATE_TRAVELLING) {
                 this.AIstate = AISTATE_RETURNING;
-            } else if (AIstate == AISTATE_MINING) {
+            } else if (this.AIstate == AISTATE_MINING) {
                 this.pathBlockedCount++;
                 this.AIstate = AISTATE_RETURNING;
             } else if (this.AIstate == AISTATE_RETURNING) {
@@ -1117,116 +1118,116 @@ public class EntityAstroMiner extends Entity
         // traveling)
         switch (this.facing & 6) {
             case 0:
-                if (tryBlockClient(x, y, z)) {
+                if (this.tryBlockClient(x, y, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x + 1, y, z)) {
+                if (this.tryBlockClient(x + 1, y, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x + 1, y, z - 1)) {
+                if (this.tryBlockClient(x + 1, y, z - 1)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x, y, z - 1)) {
+                if (this.tryBlockClient(x, y, z - 1)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x, y, z - 2)) {
+                if (this.tryBlockClient(x, y, z - 2)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x - 1, y, z - 2)) {
+                if (this.tryBlockClient(x - 1, y, z - 2)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x - 1, y, z - 1)) {
+                if (this.tryBlockClient(x - 1, y, z - 1)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x - 2, y, z - 1)) {
+                if (this.tryBlockClient(x - 2, y, z - 1)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x - 2, y, z)) {
+                if (this.tryBlockClient(x - 2, y, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x - 1, y, z)) {
+                if (this.tryBlockClient(x - 1, y, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x - 1, y, z + 1)) {
+                if (this.tryBlockClient(x - 1, y, z + 1)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x, y, z + 1)) {
+                if (this.tryBlockClient(x, y, z + 1)) {
                     wayBarred = true;
                 }
                 break;
             case 2:
-                if (tryBlockClient(x, y - 2, z)) {
+                if (this.tryBlockClient(x, y - 2, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x - 1, y - 2, z)) {
+                if (this.tryBlockClient(x - 1, y - 2, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x, y - 1, z)) {
+                if (this.tryBlockClient(x, y - 1, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x - 1, y - 1, z)) {
+                if (this.tryBlockClient(x - 1, y - 1, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x + 1, y - 1, z)) {
+                if (this.tryBlockClient(x + 1, y - 1, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x - 2, y - 1, z)) {
+                if (this.tryBlockClient(x - 2, y - 1, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x + 1, y, z)) {
+                if (this.tryBlockClient(x + 1, y, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x - 2, y, z)) {
+                if (this.tryBlockClient(x - 2, y, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x, y, z)) {
+                if (this.tryBlockClient(x, y, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x - 1, y, z)) {
+                if (this.tryBlockClient(x - 1, y, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x, y + 1, z)) {
+                if (this.tryBlockClient(x, y + 1, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x - 1, y + 1, z)) {
+                if (this.tryBlockClient(x - 1, y + 1, z)) {
                     wayBarred = true;
                 }
                 break;
             case 4:
-                if (tryBlockClient(x, y - 2, z - 1)) {
+                if (this.tryBlockClient(x, y - 2, z - 1)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x, y - 1, z)) {
+                if (this.tryBlockClient(x, y - 1, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x, y - 1, z - 1)) {
+                if (this.tryBlockClient(x, y - 1, z - 1)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x, y - 1, z + 1)) {
+                if (this.tryBlockClient(x, y - 1, z + 1)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x, y - 1, z - 2)) {
+                if (this.tryBlockClient(x, y - 1, z - 2)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x, y, z + 1)) {
+                if (this.tryBlockClient(x, y, z + 1)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x, y, z - 2)) {
+                if (this.tryBlockClient(x, y, z - 2)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x, y, z - 1)) {
+                if (this.tryBlockClient(x, y, z - 1)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x, y - 2, z)) {
+                if (this.tryBlockClient(x, y - 2, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x, y + 1, z - 1)) {
+                if (this.tryBlockClient(x, y + 1, z - 1)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x, y, z)) {
+                if (this.tryBlockClient(x, y, z)) {
                     wayBarred = true;
                 }
-                if (tryBlockClient(x, y + 1, z)) {
+                if (this.tryBlockClient(x, y + 1, z)) {
                     wayBarred = true;
                 }
                 break;
@@ -1283,7 +1284,7 @@ public class EntityAstroMiner extends Entity
                 return true;
             }
             if (b.hasTileEntity(meta)) {
-                if (CompatibilityManager.isGTLoaded() && gregTechCheck(b)) {
+                if (CompatibilityManager.isGTLoaded() && this.gregTechCheck(b)) {
                     gtFlag = true;
                 } else {
                     blockingBlock.block = b;
@@ -1305,10 +1306,10 @@ public class EntityAstroMiner extends Entity
         this.tryBlockLimit--;
 
         final ItemStack drops =
-                gtFlag ? getGTDrops(this.worldObj, x, y, z, b) : getPickBlock(this.worldObj, x, y, z, b);
+                gtFlag ? this.getGTDrops(this.worldObj, x, y, z, b) : this.getPickBlock(this.worldObj, x, y, z, b);
         if (drops != null && !this.addToInventory(drops)) {
             // drop itemstack if AstroMiner can't hold it
-            dropStack(x, y, z, drops);
+            this.dropStack(x, y, z, drops);
         }
 
         this.worldObj.setBlock(x, y, z, Blocks.air, 0, 3);
@@ -1460,28 +1461,28 @@ public class EntityAstroMiner extends Entity
 
         if (reverse != this.baseFacing < 4) {
             if (this.posZ > pos.z + 0.0001D || this.posZ < pos.z - 0.0001D) {
-                this.moveToPosZ(pos.z, stopForTurn);
-                if (TEMPDEBUG) {
-                    GCLog.debug("At " + posX + "," + posY + "," + posZ + "Moving Z to " + pos.toString()
-                            + (stopForTurn
+                this.moveToPosZ(pos.z, this.stopForTurn);
+                if (this.TEMPDEBUG) {
+                    GCLog.debug("At " + this.posX + "," + this.posY + "," + this.posZ + "Moving Z to " + pos.toString()
+                            + (this.stopForTurn
                                     ? " : Stop for turn " + this.rotationPitch + "," + this.rotationYaw + " | "
                                             + this.targetPitch + "," + this.targetYaw
                                     : ""));
                 }
             } else if (this.posY > pos.y - 0.9999D || this.posY < pos.y - 1.0001D) {
-                this.moveToPosY(pos.y - 1, stopForTurn);
-                if (TEMPDEBUG) {
-                    GCLog.debug("At " + posX + "," + posY + "," + posZ + "Moving Y to " + pos.toString()
-                            + (stopForTurn
+                this.moveToPosY(pos.y - 1, this.stopForTurn);
+                if (this.TEMPDEBUG) {
+                    GCLog.debug("At " + this.posX + "," + this.posY + "," + this.posZ + "Moving Y to " + pos.toString()
+                            + (this.stopForTurn
                                     ? " : Stop for turn " + this.rotationPitch + "," + this.rotationYaw + " | "
                                             + this.targetPitch + "," + this.targetYaw
                                     : ""));
                 }
             } else if (this.posX > pos.x + 0.0001D || this.posX < pos.x - 0.0001D) {
-                this.moveToPosX(pos.x, stopForTurn);
-                if (TEMPDEBUG) {
-                    GCLog.debug("At " + posX + "," + posY + "," + posZ + "Moving X to " + pos.toString()
-                            + (stopForTurn
+                this.moveToPosX(pos.x, this.stopForTurn);
+                if (this.TEMPDEBUG) {
+                    GCLog.debug("At " + this.posX + "," + this.posY + "," + this.posZ + "Moving X to " + pos.toString()
+                            + (this.stopForTurn
                                     ? " : Stop for turn " + this.rotationPitch + "," + this.rotationYaw + " | "
                                             + this.targetPitch + "," + this.targetYaw
                                     : ""));
@@ -1492,28 +1493,28 @@ public class EntityAstroMiner extends Entity
             }
         } else {
             if (this.posX > pos.x + 0.0001D || this.posX < pos.x - 0.0001D) {
-                this.moveToPosX(pos.x, stopForTurn);
-                if (TEMPDEBUG) {
-                    GCLog.debug("At " + posX + "," + posY + "," + posZ + "Moving X to " + pos.toString()
-                            + (stopForTurn
+                this.moveToPosX(pos.x, this.stopForTurn);
+                if (this.TEMPDEBUG) {
+                    GCLog.debug("At " + this.posX + "," + this.posY + "," + this.posZ + "Moving X to " + pos.toString()
+                            + (this.stopForTurn
                                     ? " : Stop for turn " + this.rotationPitch + "," + this.rotationYaw + " | "
                                             + this.targetPitch + "," + this.targetYaw
                                     : ""));
                 }
             } else if (this.posY > pos.y - 0.9999D || this.posY < pos.y - 1.0001D) {
-                this.moveToPosY(pos.y - 1, stopForTurn);
-                if (TEMPDEBUG) {
-                    GCLog.debug("At " + posX + "," + posY + "," + posZ + "Moving Y to " + pos.toString()
-                            + (stopForTurn
+                this.moveToPosY(pos.y - 1, this.stopForTurn);
+                if (this.TEMPDEBUG) {
+                    GCLog.debug("At " + this.posX + "," + this.posY + "," + this.posZ + "Moving Y to " + pos.toString()
+                            + (this.stopForTurn
                                     ? " : Stop for turn " + this.rotationPitch + "," + this.rotationYaw + " | "
                                             + this.targetPitch + "," + this.targetYaw
                                     : ""));
                 }
             } else if (this.posZ > pos.z + 0.0001D || this.posZ < pos.z - 0.0001D) {
-                this.moveToPosZ(pos.z, stopForTurn);
-                if (TEMPDEBUG) {
-                    GCLog.debug("At " + posX + "," + posY + "," + posZ + "Moving Z to " + pos.toString()
-                            + (stopForTurn
+                this.moveToPosZ(pos.z, this.stopForTurn);
+                if (this.TEMPDEBUG) {
+                    GCLog.debug("At " + this.posX + "," + this.posY + "," + this.posZ + "Moving Z to " + pos.toString()
+                            + (this.stopForTurn
                                     ? " : Stop for turn " + this.rotationPitch + "," + this.rotationYaw + " | "
                                             + this.targetPitch + "," + this.targetYaw
                                     : ""));
@@ -1536,7 +1537,7 @@ public class EntityAstroMiner extends Entity
             }
             this.motionX = -this.speed;
             // TODO some acceleration and deceleration
-            if (this.motionX * speedup <= x - this.posX) {
+            if (this.motionX * this.speedup <= x - this.posX) {
                 this.motionX = x - this.posX;
                 this.noSpeedup = true;
             }
@@ -1546,7 +1547,7 @@ public class EntityAstroMiner extends Entity
                 this.targetYaw = 90;
             }
             this.motionX = this.speed;
-            if (this.motionX * speedup >= x - this.posX) {
+            if (this.motionX * this.speedup >= x - this.posX) {
                 this.motionX = x - this.posX;
                 this.noSpeedup = true;
             }
@@ -1565,7 +1566,7 @@ public class EntityAstroMiner extends Entity
         if (this.posY > y) {
             this.targetPitch = -90;
             this.motionY = -this.speed;
-            if (this.motionY * speedup <= y - this.posY) {
+            if (this.motionY * this.speedup <= y - this.posY) {
                 this.motionY = y - this.posY;
                 this.noSpeedup = true;
             }
@@ -1573,7 +1574,7 @@ public class EntityAstroMiner extends Entity
         } else {
             this.targetPitch = 90;
             this.motionY = this.speed;
-            if (this.motionY * speedup >= y - this.posY) {
+            if (this.motionY * this.speedup >= y - this.posY) {
                 this.motionY = y - this.posY;
                 this.noSpeedup = true;
             }
@@ -1597,7 +1598,7 @@ public class EntityAstroMiner extends Entity
             }
             this.motionZ = -this.speed;
             // TODO some acceleration and deceleration
-            if (this.motionZ * speedup <= z - this.posZ) {
+            if (this.motionZ * this.speedup <= z - this.posZ) {
                 this.motionZ = z - this.posZ;
                 this.noSpeedup = true;
             }
@@ -1607,7 +1608,7 @@ public class EntityAstroMiner extends Entity
                 this.targetYaw = 0;
             }
             this.motionZ = this.speed;
-            if (this.motionZ * speedup >= z - this.posZ) {
+            if (this.motionZ * this.speedup >= z - this.posZ) {
                 this.motionZ = z - this.posZ;
                 this.noSpeedup = true;
             }
@@ -1915,8 +1916,8 @@ public class EntityAstroMiner extends Entity
         }
 
         super.setDead();
-        if (posBase != null) {
-            final TileEntity tileEntity = posBase.getTileEntity(this.worldObj);
+        if (this.posBase != null) {
+            final TileEntity tileEntity = this.posBase.getTileEntity(this.worldObj);
             if (tileEntity instanceof TileEntityMinerBase) {
                 ((TileEntityMinerBase) tileEntity).unlinkMiner();
             }

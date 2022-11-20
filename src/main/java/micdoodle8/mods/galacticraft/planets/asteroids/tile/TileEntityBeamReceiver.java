@@ -30,7 +30,7 @@ public class TileEntityBeamReceiver extends TileEntityBeamOutput implements IEne
     private int preLoadFacing = -1;
     private final float maxRate = 1500;
     private final EnergyStorage storage =
-            new EnergyStorage(10 * maxRate, maxRate); // In broken circuits, Beam Receiver will
+            new EnergyStorage(10 * this.maxRate, this.maxRate); // In broken circuits, Beam Receiver will
     // accept energy for 0.5s (15000gJ max)
     // then stop
 
@@ -87,7 +87,7 @@ public class TileEntityBeamReceiver extends TileEntityBeamOutput implements IEne
             } else if (this.modeReceive == ReceiverMode.RECEIVE.ordinal() && this.storage.getEnergyStoredGC() > 0) {
                 // One Beam Receiver might be powered by multiple transmitters - allow for 5 at
                 // maximum transfer rate
-                final float maxTransfer = Math.min(this.storage.getEnergyStoredGC(), maxRate * 5);
+                final float maxTransfer = Math.min(this.storage.getEnergyStoredGC(), this.maxRate * 5);
 
                 if (maxTransfer < 0.01F)
                 // Stop updating this when de minimis energy remains

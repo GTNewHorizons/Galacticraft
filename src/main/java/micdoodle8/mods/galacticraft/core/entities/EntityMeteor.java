@@ -139,7 +139,8 @@ public class EntityMeteor extends Entity {
             if (movingObjPos != null) {
                 final Block b =
                         this.worldObj.getBlock(movingObjPos.blockX, movingObjPos.blockY + 1, movingObjPos.blockZ);
-                if (b != null && b.isAir(worldObj, movingObjPos.blockX, movingObjPos.blockY + 1, movingObjPos.blockZ)) {
+                if (b != null
+                        && b.isAir(this.worldObj, movingObjPos.blockX, movingObjPos.blockY + 1, movingObjPos.blockZ)) {
                     this.worldObj.setBlock(
                             movingObjPos.blockX,
                             movingObjPos.blockY + 1,

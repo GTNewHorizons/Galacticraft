@@ -374,7 +374,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
     protected void writeEntityToNBT(NBTTagCompound nbt) {
         nbt.setInteger("launchPhase", this.launchPhase + 1);
         nbt.setInteger("timeUntilLaunch", this.timeUntilLaunch);
-        if (telemetryList.size() > 0) {
+        if (this.telemetryList.size() > 0) {
             final NBTTagList teleNBTList = new NBTTagList();
             for (final BlockVec3Dim vec : new ArrayList<BlockVec3Dim>(this.telemetryList)) {
                 final NBTTagCompound tag = new NBTTagCompound();
@@ -493,7 +493,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
 
         public RocketLaunchEvent(EntitySpaceshipBase entity) {
             super(entity);
-            rocket = entity;
+            this.rocket = entity;
         }
     }
 

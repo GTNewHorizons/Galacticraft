@@ -76,9 +76,9 @@ public class BlockIceAsteroids extends BlockBreakable {
             }
 
             final int i1 = EnchantmentHelper.getFortuneModifier(player);
-            harvesters.set(player);
+            this.harvesters.set(player);
             this.dropBlockAsItem(world, x, y, z, meta, i1);
-            harvesters.set(null);
+            this.harvesters.set(null);
             final Material material = world.getBlock(x, y - 1, z).getMaterial();
 
             if (material.blocksMovement() || material.isLiquid()) {

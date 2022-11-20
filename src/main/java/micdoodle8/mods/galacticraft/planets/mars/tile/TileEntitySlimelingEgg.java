@@ -19,7 +19,9 @@ public class TileEntitySlimelingEgg extends TileEntity {
         if (!this.worldObj.isRemote) {
             if (this.timeToHatch > 0) {
                 this.timeToHatch--;
-            } else if (this.timeToHatch == 0 && lastTouchedPlayerUUID != null && lastTouchedPlayerUUID.length() > 0) {
+            } else if (this.timeToHatch == 0
+                    && this.lastTouchedPlayerUUID != null
+                    && this.lastTouchedPlayerUUID.length() > 0) {
                 final int metadata = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord) % 3;
 
                 float colorRed = 0.0F;

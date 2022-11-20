@@ -139,7 +139,7 @@ public class GuiTerraformer extends GuiContainerGC implements ICheckBoxCallback 
 
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-        final String displayString = terraformer.getInventoryName();
+        final String displayString = this.terraformer.getInventoryName();
         this.fontRendererObj.drawString(
                 displayString, this.xSize / 2 - this.fontRendererObj.getStringWidth(displayString) / 2, 5, 4210752);
         this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, 144, 4210752);

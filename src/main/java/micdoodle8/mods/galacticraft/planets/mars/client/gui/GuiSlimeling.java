@@ -61,7 +61,7 @@ public class GuiSlimeling extends GuiScreen {
         final int var5 = (this.width - this.xSize) / 2;
         final int var6 = (this.height - this.ySize) / 2;
         this.stayButton = new GuiButton(0, var5 + 120, var6 + 122, 50, 20, "");
-        this.stayButton.enabled = slimeling.isOwner(this.mc.thePlayer);
+        this.stayButton.enabled = this.slimeling.isOwner(this.mc.thePlayer);
         this.buttonList.add(this.stayButton);
         this.invX = var5 + 151;
         this.invY = var6 + 76;

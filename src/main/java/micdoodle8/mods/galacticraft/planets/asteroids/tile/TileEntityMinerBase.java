@@ -142,17 +142,17 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
             return null;
         }
 
-        if (masterTile == null) {
+        if (this.masterTile == null) {
             final TileEntity tileEntity = this.mainBlockPosition.getTileEntity(this.worldObj);
 
             if (tileEntity != null) {
                 if (tileEntity instanceof TileEntityMinerBase) {
-                    masterTile = new WeakReference<TileEntityMinerBase>((TileEntityMinerBase) tileEntity);
+                    this.masterTile = new WeakReference<TileEntityMinerBase>((TileEntityMinerBase) tileEntity);
                 }
             }
         }
 
-        if (masterTile == null) {
+        if (this.masterTile == null) {
             this.worldObj.setBlockToAir(this.mainBlockPosition.x, this.mainBlockPosition.y, this.mainBlockPosition.z);
         } else {
             final TileEntityMinerBase master = this.masterTile.get();
@@ -413,7 +413,8 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
     @Override
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getRenderBoundingBox() {
-        return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 2, yCoord + 2, zCoord + 2);
+        return AxisAlignedBB.getBoundingBox(
+                this.xCoord, this.yCoord, this.zCoord, this.xCoord + 2, this.yCoord + 2, this.zCoord + 2);
     }
 
     public void updateFacing() {
@@ -506,7 +507,7 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
     @Override
     public int[] getAccessibleSlotsFromSide(int side) {
         if (this.isMaster) {
-            return side != this.facing + 2 ? slotArray : new int[] {};
+            return side != this.facing + 2 ? this.slotArray : new int[] {};
         }
 
         final TileEntityMinerBase master = this.getMaster();

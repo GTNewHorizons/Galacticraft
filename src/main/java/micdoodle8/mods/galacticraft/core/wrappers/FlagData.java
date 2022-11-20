@@ -141,18 +141,18 @@ public class FlagData {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || this.getClass() != o.getClass()) {
             return false;
         }
 
         final FlagData flagData = (FlagData) o;
 
-        if (height != flagData.height) {
+        if (this.height != flagData.height) {
             return false;
         }
-        if (width != flagData.width) {
+        if (this.width != flagData.width) {
             return false;
         }
-        return Arrays.deepEquals(color, flagData.color);
+        return Arrays.deepEquals(this.color, flagData.color);
     }
 }

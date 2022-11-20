@@ -20,50 +20,51 @@ public class ContainerSchematicCargoRocket extends Container {
         this.worldObj = inventory.player.worldObj;
 
         // OUT
-        addSlotToContainer(new SlotRocketBenchResult(inventory.player, craftMatrix, craftResult, 0, 134, 73));
+        this.addSlotToContainer(
+                new SlotRocketBenchResult(inventory.player, this.craftMatrix, this.craftResult, 0, 134, 73));
 
         // GEAR
-        addSlotToContainer(new SlotSchematicCargoRocket(craftMatrix, 1, 134, 10, x, y, z, inventory.player));
-        addSlotToContainer(new SlotSchematicCargoRocket(craftMatrix, 2, 134, 28, x, y, z, inventory.player));
+        this.addSlotToContainer(new SlotSchematicCargoRocket(this.craftMatrix, 1, 134, 10, x, y, z, inventory.player));
+        this.addSlotToContainer(new SlotSchematicCargoRocket(this.craftMatrix, 2, 134, 28, x, y, z, inventory.player));
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
-                addSlotToContainer(new SlotSchematicCargoRocket(
-                        craftMatrix, 3 + i * 2 + j, 116 + j * 36, 19 + i * 18, x, y, z, inventory.player));
+                this.addSlotToContainer(new SlotSchematicCargoRocket(
+                        this.craftMatrix, 3 + i * 2 + j, 116 + j * 36, 19 + i * 18, x, y, z, inventory.player));
             }
         }
-        addSlotToContainer(new SlotSchematicCargoRocket(craftMatrix, 21, 134, 46, x, y, z, inventory.player));
+        this.addSlotToContainer(new SlotSchematicCargoRocket(this.craftMatrix, 21, 134, 46, x, y, z, inventory.player));
 
         // ROCKET
         // nose cone
-        addSlotToContainer(new SlotSchematicCargoRocket(craftMatrix, 7, 53, 19, x, y, z, inventory.player));
+        this.addSlotToContainer(new SlotSchematicCargoRocket(this.craftMatrix, 7, 53, 19, x, y, z, inventory.player));
         // body
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 2; j++) {
-                addSlotToContainer(new SlotSchematicCargoRocket(
-                        craftMatrix, 8 + i * 2 + j, 44 + j * 18, 37 + i * 18, x, y, z, inventory.player));
+                this.addSlotToContainer(new SlotSchematicCargoRocket(
+                        this.craftMatrix, 8 + i * 2 + j, 44 + j * 18, 37 + i * 18, x, y, z, inventory.player));
             }
         }
         // engine
-        addSlotToContainer(new SlotSchematicCargoRocket(craftMatrix, 16, 53, 109, x, y, z, inventory.player));
+        this.addSlotToContainer(new SlotSchematicCargoRocket(this.craftMatrix, 16, 53, 109, x, y, z, inventory.player));
         // fins
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
-                addSlotToContainer(new SlotSchematicCargoRocket(
-                        craftMatrix, 17 + i * 2 + j, 26 + j * 54, 91 + i * 18, x, y, z, inventory.player));
+                this.addSlotToContainer(new SlotSchematicCargoRocket(
+                        this.craftMatrix, 17 + i * 2 + j, 26 + j * 54, 91 + i * 18, x, y, z, inventory.player));
             }
         }
 
         // PLAYER INV
         for (int i = 0; i < 9; i++) {
-            addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 196));
+            this.addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 196));
         }
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
-                addSlotToContainer(new Slot(inventory, 9 + j + i * 9, 8 + j * 18, 138 + i * 18));
+                this.addSlotToContainer(new Slot(inventory, 9 + j + i * 9, 8 + j * 18, 138 + i * 18));
             }
         }
 
-        onCraftMatrixChanged(craftMatrix);
+        this.onCraftMatrixChanged(this.craftMatrix);
     }
 
     @Override
@@ -100,7 +101,7 @@ public class ContainerSchematicCargoRocket extends Container {
             final ItemStack currentStack = currentSlot.getStack();
             stack = currentStack.copy();
 
-            if (!mergeOneItem(currentStack)) {
+            if (!this.mergeOneItem(currentStack)) {
                 return null;
             }
 
@@ -126,7 +127,7 @@ public class ContainerSchematicCargoRocket extends Container {
         boolean nothingLeft = false;
         if (itemStack.stackSize > 0) {
             for (int i = 1; i <= 21; ++i) {
-                final Slot slot = (Slot) inventorySlots.get(i);
+                final Slot slot = (Slot) this.inventorySlots.get(i);
                 final ItemStack slotStack = slot.getStack();
                 if (slotStack == null && slot.isItemValid(itemStack)) {
                     final ItemStack stackOneItem = itemStack.copy();

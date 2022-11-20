@@ -434,7 +434,7 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
     public boolean igniteWithResult() {
         if (this.destinationFrequency != -1) {
             this.timeUntilLaunch = 100;
-            this.fuelTank.drain(fuelToDrain(), true);
+            this.fuelTank.drain(this.fuelToDrain(), true);
             super.ignite();
             this.activeLaunchController = null;
             return true;

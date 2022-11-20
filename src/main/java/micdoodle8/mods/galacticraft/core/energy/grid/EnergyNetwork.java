@@ -250,7 +250,7 @@ public class EnergyNetwork implements IElectricityNetwork {
 
                     if (acceptor instanceof IElectrical) {
                         e = ((IElectrical) acceptor).getRequest(sideFrom);
-                    } else if (isIC2Loaded && acceptor instanceof IEnergySink) {
+                    } else if (this.isIC2Loaded && acceptor instanceof IEnergySink) {
                         double result = 0;
                         try {
                             result = (Double) EnergyUtil.demandedEnergyIC2.invoke(acceptor);
@@ -263,10 +263,10 @@ public class EnergyNetwork implements IElectricityNetwork {
                         // Alu wire
                         result = Math.min(result, this.networkTierGC == 2 ? 256D : 128D);
                         e = (float) result / EnergyConfigHandler.TO_IC2_RATIO;
-                    } else if (isRF2Loaded && acceptor instanceof IEnergyReceiver) {
+                    } else if (this.isRF2Loaded && acceptor instanceof IEnergyReceiver) {
                         e = ((IEnergyReceiver) acceptor).receiveEnergy(sideFrom, Integer.MAX_VALUE, true)
                                 / EnergyConfigHandler.TO_RF_RATIO;
-                    } else if (isRF1Loaded && acceptor instanceof IEnergyHandler) {
+                    } else if (this.isRF1Loaded && acceptor instanceof IEnergyHandler) {
                         e = ((IEnergyHandler) acceptor).receiveEnergy(sideFrom, Integer.MAX_VALUE, true)
                                 / EnergyConfigHandler.TO_RF_RATIO;
                     }
@@ -355,7 +355,7 @@ public class EnergyNetwork implements IElectricityNetwork {
                     if (tileEntity instanceof IElectrical) {
                         sentToAcceptor = ((IElectrical) tileEntity)
                                 .receiveElectricity(sideFrom, currentSending, tierProduced, true);
-                    } else if (isIC2Loaded && tileEntity instanceof IEnergySink) {
+                    } else if (this.isIC2Loaded && tileEntity instanceof IEnergySink) {
                         final double energySendingIC2 = currentSending * EnergyConfigHandler.TO_IC2_RATIO;
                         if (energySendingIC2 >= 1D) {
                             double result = 0;
@@ -379,7 +379,7 @@ public class EnergyNetwork implements IElectricityNetwork {
                         } else {
                             sentToAcceptor = 0F;
                         }
-                    } else if (isRF2Loaded && tileEntity instanceof IEnergyReceiver) {
+                    } else if (this.isRF2Loaded && tileEntity instanceof IEnergyReceiver) {
                         final int currentSendinginRF =
                                 currentSending >= Integer.MAX_VALUE / EnergyConfigHandler.TO_RF_RATIO
                                         ? Integer.MAX_VALUE
@@ -387,7 +387,7 @@ public class EnergyNetwork implements IElectricityNetwork {
                         sentToAcceptor =
                                 ((IEnergyReceiver) tileEntity).receiveEnergy(sideFrom, currentSendinginRF, false)
                                         / EnergyConfigHandler.TO_RF_RATIO;
-                    } else if (isRF1Loaded && tileEntity instanceof IEnergyHandler) {
+                    } else if (this.isRF1Loaded && tileEntity instanceof IEnergyHandler) {
                         final int currentSendinginRF =
                                 currentSending >= Integer.MAX_VALUE / EnergyConfigHandler.TO_RF_RATIO
                                         ? Integer.MAX_VALUE

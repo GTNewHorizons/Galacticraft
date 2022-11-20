@@ -332,7 +332,7 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
             this.onGroundHit();
         }
 
-        if (shouldSendAdvancedMotionPacket()) {
+        if (this.shouldSendAdvancedMotionPacket()) {
             if (this.worldObj.isRemote) {
                 GalacticraftCore.packetPipeline.sendToServer(new PacketEntityUpdate(this));
             }

@@ -68,7 +68,7 @@ public class DrawGameScreen extends IScreenManager {
         if (result) {
             TextureUtil.uploadTexture(
                     reusableMap.getGlTextureId(), this.localMap, MapUtil.SIZE_STD2, MapUtil.SIZE_STD2);
-            mapDone = true;
+            this.mapDone = true;
             GCLog.debug("Created texture no:" + texCount++);
         }
     }
@@ -80,7 +80,7 @@ public class DrawGameScreen extends IScreenManager {
         }
 
         if (cornerBlock) {
-            if ((this.mapFirstTick || (int) ticks % 400 == 0) && !mapDone) {
+            if ((this.mapFirstTick || (int) ticks % 400 == 0) && !this.mapDone) {
                 if (this.tickMapDone != (int) ticks) {
                     this.tickMapDone = (int) ticks;
                     this.makeMap();
@@ -97,58 +97,58 @@ public class DrawGameScreen extends IScreenManager {
         // to draw the screen once per tick, for multi-screens
 
         // Spend the first tick just initialising the counter
-        if (initialise) {
-            if (!initialiseLast) {
-                tickDrawn = ticks;
-                readyToInitialise = false;
-                initialiseLast = true;
+        if (this.initialise) {
+            if (!this.initialiseLast) {
+                this.tickDrawn = ticks;
+                this.readyToInitialise = false;
+                this.initialiseLast = true;
                 return;
             }
 
-            if (!readyToInitialise) {
-                if (ticks == tickDrawn) {
+            if (!this.readyToInitialise) {
+                if (ticks == this.tickDrawn) {
                     return;
                 }
             }
 
-            if (!readyToInitialise) {
-                readyToInitialise = true;
-                tickDrawn = ticks;
-                tileCount = 1;
+            if (!this.readyToInitialise) {
+                this.readyToInitialise = true;
+                this.tickDrawn = ticks;
+                this.tileCount = 1;
                 return;
-            } else if (ticks == tickDrawn) {
-                tileCount++;
+            } else if (ticks == this.tickDrawn) {
+                this.tileCount++;
                 return;
             } else {
                 // Start normal operations
-                initialise = false;
-                initialiseLast = false;
-                readyToInitialise = false;
+                this.initialise = false;
+                this.initialiseLast = false;
+                this.readyToInitialise = false;
             }
         }
 
-        if (++callCount < tileCount) {
+        if (++this.callCount < this.tileCount) {
             // Normal situation, everything OK
-            if (callCount == 1 || tickDrawn == ticks) {
-                tickDrawn = ticks;
+            if (this.callCount == 1 || this.tickDrawn == ticks) {
+                this.tickDrawn = ticks;
                 return;
             } else
             // The callCount last tick was less than the tileCount, reinitialise
             {
-                initialise = true;
+                this.initialise = true;
                 // but draw this tick [probably a tileEntity moved out of the frustum]
             }
         }
 
-        if (callCount == tileCount) {
-            callCount = 0;
+        if (this.callCount == this.tileCount) {
+            this.callCount = 0;
             // Again if this is not the tickDrawn then something is wrong, reinitialise
-            if (tileCount > 1 && ticks != tickDrawn) {
-                initialise = true;
+            if (this.tileCount > 1 && ticks != this.tickDrawn) {
+                this.initialise = true;
             }
         }
 
-        tickDrawn = ticks;
+        this.tickDrawn = ticks;
 
         this.doDraw(type, ticks);
     }
@@ -162,7 +162,7 @@ public class DrawGameScreen extends IScreenManager {
             GL11.glDisable(GL11.GL_LIGHTING);
         }
 
-        GalacticraftRegistry.getGameScreen(type).render(type, ticks, scaleX, scaleZ, this);
+        GalacticraftRegistry.getGameScreen(type).render(type, ticks, this.scaleX, this.scaleZ, this);
 
         if (type > 0) {
             GL11.glEnable(GL11.GL_LIGHTING);
@@ -174,7 +174,7 @@ public class DrawGameScreen extends IScreenManager {
     @Override
     public WorldProvider getWorldProvider() {
         if (this.driver != null) {
-            return driver.getWorldObj().provider;
+            return this.driver.getWorldObj().provider;
         }
 
         return null;

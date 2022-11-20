@@ -218,7 +218,7 @@ public class GuiElementTextBox extends GuiButton {
     }
 
     public int getMaxLength() {
-        return maxLength;
+        return this.maxLength;
     }
 
     public static interface ITextBoxCallback {

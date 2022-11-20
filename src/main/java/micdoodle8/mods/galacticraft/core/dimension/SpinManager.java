@@ -110,13 +110,13 @@ public class SpinManager {
 
     @SideOnly(Side.CLIENT)
     private void updateSkyProviderSpinRate() {
-        worldProvider.setSpinDeltaPerTick(this.skyAngularVelocity);
+        this.worldProvider.setSpinDeltaPerTick(this.skyAngularVelocity);
     }
 
     public void setSpinRate(float angle, boolean firing) {
         this.angularVelocityRadians = angle;
         this.skyAngularVelocity = angle * 180F / 3.1415927F;
-        worldProvider.setSpinDeltaPerTick(this.skyAngularVelocity);
+        this.worldProvider.setSpinDeltaPerTick(this.skyAngularVelocity);
         this.thrustersFiring = firing;
     }
 

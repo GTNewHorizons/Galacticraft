@@ -520,7 +520,7 @@ public class GalacticraftCore {
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        planetMercury = makeUnreachablePlanet("mercury", solarSystemSol);
+        planetMercury = this.makeUnreachablePlanet("mercury", solarSystemSol);
         if (planetMercury != null) {
             planetMercury
                     .setRingColorRGB(0.1F, 0.9F, 0.6F)
@@ -528,7 +528,7 @@ public class GalacticraftCore {
                     .setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(0.5F, 0.5F))
                     .setRelativeOrbitTime(0.24096385542168674698795180722892F);
         }
-        planetVenus = makeUnreachablePlanet("venus", solarSystemSol);
+        planetVenus = this.makeUnreachablePlanet("venus", solarSystemSol);
         if (planetVenus != null) {
             planetVenus
                     .setRingColorRGB(0.1F, 0.9F, 0.6F)
@@ -536,7 +536,7 @@ public class GalacticraftCore {
                     .setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(0.75F, 0.75F))
                     .setRelativeOrbitTime(0.61527929901423877327491785323111F);
         }
-        planetMars = makeUnreachablePlanet("mars", solarSystemSol);
+        planetMars = this.makeUnreachablePlanet("mars", solarSystemSol);
         if (planetMars != null) {
             planetMars
                     .setRingColorRGB(0.67F, 0.1F, 0.1F)
@@ -545,7 +545,7 @@ public class GalacticraftCore {
                     .setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(1.25F, 1.25F))
                     .setRelativeOrbitTime(1.8811610076670317634173055859803F);
         }
-        planetJupiter = makeUnreachablePlanet("jupiter", solarSystemSol);
+        planetJupiter = this.makeUnreachablePlanet("jupiter", solarSystemSol);
         if (planetJupiter != null) {
             planetJupiter
                     .setRingColorRGB(0.1F, 0.9F, 0.6F)
@@ -553,7 +553,7 @@ public class GalacticraftCore {
                     .setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(1.5F, 1.5F))
                     .setRelativeOrbitTime(11.861993428258488499452354874042F);
         }
-        planetSaturn = makeUnreachablePlanet("saturn", solarSystemSol);
+        planetSaturn = this.makeUnreachablePlanet("saturn", solarSystemSol);
         if (planetSaturn != null) {
             planetSaturn
                     .setRingColorRGB(0.1F, 0.9F, 0.6F)
@@ -561,7 +561,7 @@ public class GalacticraftCore {
                     .setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(1.75F, 1.75F))
                     .setRelativeOrbitTime(29.463307776560788608981380065717F);
         }
-        planetUranus = makeUnreachablePlanet("uranus", solarSystemSol);
+        planetUranus = this.makeUnreachablePlanet("uranus", solarSystemSol);
         if (planetUranus != null) {
             planetUranus
                     .setRingColorRGB(0.1F, 0.9F, 0.6F)
@@ -569,7 +569,7 @@ public class GalacticraftCore {
                     .setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(2.0F, 2.0F))
                     .setRelativeOrbitTime(84.063526834611171960569550930997F);
         }
-        planetNeptune = makeUnreachablePlanet("neptune", solarSystemSol);
+        planetNeptune = this.makeUnreachablePlanet("neptune", solarSystemSol);
         if (planetNeptune != null) {
             planetNeptune
                     .setRingColorRGB(0.1F, 0.9F, 0.6F)

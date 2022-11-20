@@ -85,19 +85,19 @@ public class TeleportTypeAsteroids implements ITeleportType {
                     this.loadChunksAround(bv3.x, bv3.z, 2, world.theChunkProviderServer);
                     this.loadChunksAround(bv3.x, bv3.z, -3, world.theChunkProviderServer);
 
-                    if (goodAsteroidEntry(world, bv3.x, bv3.y, bv3.z)) {
+                    if (this.goodAsteroidEntry(world, bv3.x, bv3.y, bv3.z)) {
                         return new Vector3(bv3.x, 310, bv3.z);
                     }
-                    if (goodAsteroidEntry(world, bv3.x + 2, bv3.y, bv3.z + 2)) {
+                    if (this.goodAsteroidEntry(world, bv3.x + 2, bv3.y, bv3.z + 2)) {
                         return new Vector3(bv3.x + 2, 310, bv3.z + 2);
                     }
-                    if (goodAsteroidEntry(world, bv3.x + 2, bv3.y, bv3.z - 2)) {
+                    if (this.goodAsteroidEntry(world, bv3.x + 2, bv3.y, bv3.z - 2)) {
                         return new Vector3(bv3.x + 2, 310, bv3.z - 2);
                     }
-                    if (goodAsteroidEntry(world, bv3.x - 2, bv3.y, bv3.z - 2)) {
+                    if (this.goodAsteroidEntry(world, bv3.x - 2, bv3.y, bv3.z - 2)) {
                         return new Vector3(bv3.x - 2, 310, bv3.z - 2);
                     }
-                    if (goodAsteroidEntry(world, bv3.x - 2, bv3.y, bv3.z + 2)) {
+                    if (this.goodAsteroidEntry(world, bv3.x - 2, bv3.y, bv3.z + 2)) {
                         return new Vector3(bv3.x - 2, 310, bv3.z + 2);
                     }
 
@@ -198,18 +198,18 @@ public class TeleportTypeAsteroids implements ITeleportType {
                 if (xx == 2 && (zz == -3 || zz == 2)) {
                     continue;
                 }
-                doBlock(world, x + xx, y, z + zz);
+                this.doBlock(world, x + xx, y, z + zz);
             }
         }
         for (int xx = -2; xx < 2; xx++) {
             for (int zz = -2; zz < 2; zz++) {
-                doBlock(world, x + xx, y - 1, z + zz);
+                this.doBlock(world, x + xx, y - 1, z + zz);
             }
         }
-        doBlock(world, x - 1, y - 2, z - 1);
-        doBlock(world, x - 1, y - 2, z);
-        doBlock(world, x, y - 2, z);
-        doBlock(world, x, y - 2, z - 1);
+        this.doBlock(world, x - 1, y - 2, z - 1);
+        this.doBlock(world, x - 1, y - 2, z);
+        this.doBlock(world, x, y - 2, z);
+        this.doBlock(world, x, y - 2, z - 1);
     }
 
     private void doBlock(World world, int x, int y, int z) {

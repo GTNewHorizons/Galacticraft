@@ -176,6 +176,7 @@ public class NEIGalacticraftAsteroidsConfig implements IConfigureNEI {
                 GT_ModHandler.getModItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01", 1, 32603), 80 - x, 73 - y));
         input.add(new PositionedStack(
                 GT_ModHandler.getModItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01", 1, 32603), 98 - x, 73 - y));
-        registerAstroMinerRecipe(input, new PositionedStack(new ItemStack(AsteroidsItems.astroMiner), 143 - x, 55 - y));
+        this.registerAstroMinerRecipe(
+                input, new PositionedStack(new ItemStack(AsteroidsItems.astroMiner), 143 - x, 55 - y));
     }
 }

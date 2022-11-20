@@ -46,7 +46,7 @@ public class PlayerServer implements IPlayerServer {
 
     @Override
     public boolean mountEntity(EntityPlayerMP player, Entity par1Entity) {
-        if (updatingRidden
+        if (this.updatingRidden
                 && player.ridingEntity instanceof IIgnoreShift
                 && ((IIgnoreShift) player.ridingEntity).shouldIgnoreShiftExit()) {
             return true;

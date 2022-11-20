@@ -107,7 +107,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
     @Override
     public boolean hasValidFuel() {
         if (this.destinationFrequency != -1) {
-            if (this.fuelTank.getFluidAmount() < fuelToDrain()) {
+            if (this.fuelTank.getFluidAmount() < this.fuelToDrain()) {
                 return false;
             }
             return true;
@@ -252,7 +252,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
             this.rumble = (float) this.rand.nextInt(3) - 3;
 
             if (this.destinationFrequency != -1 && this.landing == false && isLaunched) {
-                onReachAtmosphere();
+                this.onReachAtmosphere();
             }
         }
 

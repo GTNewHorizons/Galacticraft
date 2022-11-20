@@ -77,8 +77,8 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
             }
 
             // Only drain with atmospheric valve
-            checkFluidTankTransfer(2, this.liquidTank);
-            checkFluidTankTransfer(3, this.liquidTank2);
+            this.checkFluidTankTransfer(2, this.liquidTank);
+            this.checkFluidTankTransfer(3, this.liquidTank2);
 
             if (this.hasEnoughEnergyToRun && this.canProcess()) {
                 // 50% extra speed boost for Tier 2 machine if powered by Tier 2 power

@@ -367,7 +367,7 @@ public class EventHandlerGC {
     public void onBucketFill(FillBucketEvent event) {
         final MovingObjectPosition pos = event.target;
 
-        final ItemStack ret = fillBucket(event.world, pos);
+        final ItemStack ret = this.fillBucket(event.world, pos);
 
         if (ret == null) {
             return;

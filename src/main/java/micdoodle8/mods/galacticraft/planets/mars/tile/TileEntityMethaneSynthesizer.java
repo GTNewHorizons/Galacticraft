@@ -100,7 +100,7 @@ public class TileEntityMethaneSynthesizer extends TileBaseElectricBlockWithInven
 
             // Now see if any methane from the methane tank needs to be put into the output
             // slot
-            checkFluidTankTransfer(4, this.liquidTank);
+            this.checkFluidTankTransfer(4, this.liquidTank);
 
             if (this.hasEnoughEnergyToRun && this.canProcess()) {
                 // 50% extra speed boost for Tier 2 machine if powered by Tier 2 power
