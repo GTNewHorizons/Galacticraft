@@ -28,7 +28,7 @@ public class GuiOxygenStorageModule extends GuiContainerGC {
     @Override
     public void initGui() {
         super.initGui();
-        final List<String> oxygenSlotDesc = new ArrayList<String>();
+        final List<String> oxygenSlotDesc = new ArrayList<>();
         oxygenSlotDesc.add(GCCoreUtil.translate("gui.oxygenSlot.desc.0"));
         oxygenSlotDesc.add(GCCoreUtil.translate("gui.oxygenSlot.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(

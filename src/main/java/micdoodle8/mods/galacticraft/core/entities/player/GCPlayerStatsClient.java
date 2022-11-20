@@ -53,12 +53,12 @@ public class GCPlayerStatsClient implements IExtendedEntityProperties {
     public boolean lastZoomed;
     public int buildFlags = -1;
 
-    public ArrayList<ISchematicPage> unlockedSchematics = new ArrayList<ISchematicPage>();
+    public ArrayList<ISchematicPage> unlockedSchematics = new ArrayList<>();
 
     public FreefallHandler freefallHandler = new FreefallHandler(this);
 
     public GCPlayerStatsClient(EntityPlayerSP player) {
-        this.player = new WeakReference<EntityPlayerSP>(player);
+        this.player = new WeakReference<>(player);
     }
 
     public void setGravity(EnumGravity newGravity) {

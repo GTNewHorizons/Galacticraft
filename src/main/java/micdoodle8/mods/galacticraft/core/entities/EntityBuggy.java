@@ -264,7 +264,7 @@ public class EntityBuggy extends Entity
     }
 
     public List<ItemStack> getItemsDropped() {
-        final List<ItemStack> items = new ArrayList<ItemStack>();
+        final List<ItemStack> items = new ArrayList<>();
 
         final ItemStack buggy = new ItemStack(GCItems.buggy, 1, this.buggyType);
         buggy.setTagCompound(new NBTTagCompound());

@@ -27,7 +27,7 @@ public class ConnectionPacket {
 
     public void handle(ByteBuf payload, EntityPlayer player) {
         final int packetId = payload.readByte();
-        List<Object> data = new ArrayList<Object>();
+        List<Object> data = new ArrayList<>();
         switch (packetId) {
             case 101:
                 final int length = payload.readInt();

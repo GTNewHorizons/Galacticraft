@@ -29,7 +29,7 @@ public class GuiSchematicInput extends GuiContainerGC implements ISchematicResul
     @Override
     public void initGui() {
         super.initGui();
-        final List<String> schematicSlotDesc = new ArrayList<String>();
+        final List<String> schematicSlotDesc = new ArrayList<>();
         GuiButton nextButton;
         schematicSlotDesc.add(GCCoreUtil.translate("gui.newSchematic.slot.desc.0"));
         schematicSlotDesc.add(GCCoreUtil.translate("gui.newSchematic.slot.desc.1"));

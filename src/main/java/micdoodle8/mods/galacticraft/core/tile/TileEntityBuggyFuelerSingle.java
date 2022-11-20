@@ -10,7 +10,7 @@ public class TileEntityBuggyFuelerSingle extends TileEntity {
     @Override
     public void updateEntity() {
         if (!this.worldObj.isRemote) {
-            final ArrayList<TileEntity> attachedLaunchPads = new ArrayList<TileEntity>();
+            final ArrayList<TileEntity> attachedLaunchPads = new ArrayList<>();
 
             for (int x = this.xCoord - 1; x < this.xCoord + 2; x++) {
                 for (int z = this.zCoord - 1; z < this.zCoord + 2; z++) {

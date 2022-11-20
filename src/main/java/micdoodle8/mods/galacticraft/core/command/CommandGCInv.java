@@ -19,8 +19,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
 public class CommandGCInv extends CommandBase {
-    protected static final Map<String, ItemStack[]> savedata = new HashMap<String, ItemStack[]>();
-    private static final Set<String> dontload = new HashSet<String>();
+    protected static final Map<String, ItemStack[]> savedata = new HashMap<>();
+    private static final Set<String> dontload = new HashSet<>();
     private static boolean firstuse = true;
     private static GCInvSaveData savefile;
 

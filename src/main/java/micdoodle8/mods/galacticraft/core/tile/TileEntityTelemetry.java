@@ -38,7 +38,7 @@ public class TileEntityTelemetry extends TileEntity {
     public String clientName;
     public GameProfile clientGameProfile = null;
 
-    public static HashSet<BlockVec3Dim> loadedList = new HashSet<BlockVec3Dim>();
+    public static HashSet<BlockVec3Dim> loadedList = new HashSet<>();
     public Entity linkedEntity;
     private UUID toUpdate = null;
     private int pulseRate = 400;

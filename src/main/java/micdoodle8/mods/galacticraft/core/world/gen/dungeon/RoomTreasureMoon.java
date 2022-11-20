@@ -14,7 +14,7 @@ public class RoomTreasureMoon extends DungeonRoom {
     int sizeY;
     int sizeZ;
 
-    private final HashSet<ChunkCoordinates> chests = new HashSet<ChunkCoordinates>();
+    private final HashSet<ChunkCoordinates> chests = new HashSet<>();
 
     public RoomTreasureMoon(MapGenDungeon dungeon, int posX, int posY, int posZ, ForgeDirection entranceDir) {
         super(dungeon, posX, posY, posZ, entranceDir);
@@ -79,7 +79,7 @@ public class RoomTreasureMoon extends DungeonRoom {
     @Override
     protected void handleTileEntities(Random rand) {
         if (!this.chests.isEmpty()) {
-            final HashSet<ChunkCoordinates> removeList = new HashSet<ChunkCoordinates>();
+            final HashSet<ChunkCoordinates> removeList = new HashSet<>();
 
             for (final ChunkCoordinates coords : this.chests) {
                 this.worldObj.setBlock(coords.posX, coords.posY, coords.posZ, GCBlocks.treasureChestTier1, 0, 3);

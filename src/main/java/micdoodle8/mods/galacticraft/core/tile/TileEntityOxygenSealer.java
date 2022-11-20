@@ -389,10 +389,9 @@ public class TileEntityOxygenSealer extends TileEntityOxygen implements IInvento
 
     public static HashMap<BlockVec3, TileEntityOxygenSealer> getSealersAround(
             World world, int x, int y, int z, int rSquared) {
-        final HashMap<BlockVec3, TileEntityOxygenSealer> ret = new HashMap<BlockVec3, TileEntityOxygenSealer>();
+        final HashMap<BlockVec3, TileEntityOxygenSealer> ret = new HashMap<>();
 
-        for (final TileEntityOxygenSealer tile :
-                new ArrayList<TileEntityOxygenSealer>(TileEntityOxygenSealer.loadedTiles)) {
+        for (final TileEntityOxygenSealer tile : new ArrayList<>(TileEntityOxygenSealer.loadedTiles)) {
             if (tile != null && tile.getWorldObj() == world && tile.getDistanceFrom(x, y, z) < rSquared) {
                 ret.put(new BlockVec3(tile.xCoord, tile.yCoord, tile.zCoord), tile);
             }

@@ -91,7 +91,7 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
         this.gasTankRegion.parentHeight = this.height;
         this.infoRegions.add(this.gasTankRegion);
 
-        final List<String> batterySlotDesc = new ArrayList<String>();
+        final List<String> batterySlotDesc = new ArrayList<>();
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.0"));
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(
@@ -123,7 +123,7 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
         // 131, (this.height - this.ySize)
         // / 2 + 6, 18, 18, fuelSlotDesc, this.width, this.height, this));
 
-        final List<String> fuelSlotDesc = new ArrayList<String>();
+        final List<String> fuelSlotDesc = new ArrayList<>();
         fuelSlotDesc.addAll(GCCoreUtil.translateWithSplit("gui.waterBucketSlot.desc"));
         this.infoRegions.add(new GuiElementInfoRegion(
                 (this.width - this.xSize) / 2 + 6,
@@ -243,11 +243,11 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
     }
 
     private void addToolTips() {
-        final List<String> gasTankDesc = new ArrayList<String>();
+        final List<String> gasTankDesc = new ArrayList<>();
         gasTankDesc.add(GCCoreUtil.translate("gui.terraformer.desc.0"));
         this.gasTankRegion.tooltipStrings = gasTankDesc;
 
-        List<String> fuelTankDesc = new ArrayList<String>();
+        List<String> fuelTankDesc = new ArrayList<>();
         fuelTankDesc.add(GCCoreUtil.translate("gui.gasTank.desc.0"));
         FluidStack gasTankContents = this.tileEntity.liquidTank != null ? this.tileEntity.liquidTank.getFluid() : null;
         if (gasTankContents != null) {
@@ -262,7 +262,7 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
         fuelTankDesc.add(EnumColor.YELLOW + " " + fuelLevel + " / " + fuelCapacity);
         this.fuelTankRegion.tooltipStrings = fuelTankDesc;
 
-        fuelTankDesc = new ArrayList<String>();
+        fuelTankDesc = new ArrayList<>();
         fuelTankDesc.add(GCCoreUtil.translate("gui.gasTank.desc.0"));
         gasTankContents = this.tileEntity.liquidTank2 != null ? this.tileEntity.liquidTank2.getFluid() : null;
         if (gasTankContents != null) {
@@ -277,7 +277,7 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
         fuelTankDesc.add(EnumColor.YELLOW + " " + fuelLevel + " / " + fuelCapacity);
         this.fuelTank2Region.tooltipStrings = fuelTankDesc;
 
-        final List<String> electricityDesc = new ArrayList<String>();
+        final List<String> electricityDesc = new ArrayList<>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         // electricityDesc.add(EnumColor.YELLOW +
         // GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)

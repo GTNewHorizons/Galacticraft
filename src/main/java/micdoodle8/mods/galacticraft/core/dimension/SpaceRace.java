@@ -25,7 +25,7 @@ public class SpaceRace {
     private FlagData flagData;
     private Vector3 teamColor;
     private int ticksSpent;
-    private final Map<CelestialBody, Integer> celestialBodyStatusList = new HashMap<CelestialBody, Integer>();
+    private final Map<CelestialBody, Integer> celestialBodyStatusList = new HashMap<>();
 
     public SpaceRace() {}
 

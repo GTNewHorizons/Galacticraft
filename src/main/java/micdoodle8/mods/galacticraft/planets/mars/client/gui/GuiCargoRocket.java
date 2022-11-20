@@ -71,7 +71,7 @@ public class GuiCargoRocket extends GuiContainerGC {
         this.launchButton =
                 new GuiButton(0, var7 + 116, var6 + 26, 50, 20, GCCoreUtil.translate("gui.message.launch.name"));
         this.buttonList.add(this.launchButton);
-        final List<String> fuelTankDesc = new ArrayList<String>();
+        final List<String> fuelTankDesc = new ArrayList<>();
         fuelTankDesc.add(GCCoreUtil.translate("gui.fuelTank.desc.0"));
         fuelTankDesc.add(GCCoreUtil.translate("gui.fuelTank.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(

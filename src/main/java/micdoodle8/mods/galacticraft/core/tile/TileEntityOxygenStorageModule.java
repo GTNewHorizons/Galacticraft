@@ -22,7 +22,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
 public class TileEntityOxygenStorageModule extends TileEntityOxygen implements ISidedInventory, IFluidHandler {
-    public final Set<EntityPlayer> playersUsing = new HashSet<EntityPlayer>();
+    public final Set<EntityPlayer> playersUsing = new HashSet<>();
     public int scaledOxygenLevel;
     private int lastScaledOxygenLevel;
 

@@ -125,7 +125,7 @@ public class NetworkUtil {
     }
 
     public static ArrayList<Object> decodeData(Class<?>[] types, ByteBuf buffer) {
-        final ArrayList<Object> objList = new ArrayList<Object>();
+        final ArrayList<Object> objList = new ArrayList<>();
 
         for (final Class clazz : types) {
             if (clazz.equals(Integer.class)) {

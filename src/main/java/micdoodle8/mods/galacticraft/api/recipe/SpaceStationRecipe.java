@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class SpaceStationRecipe {
-    private final HashMap<Object, Integer> input = new HashMap<Object, Integer>();
+    private final HashMap<Object, Integer> input = new HashMap<>();
 
     /**
      * @param objMap a map of the items required. Each entry should be an object of
@@ -46,7 +46,7 @@ public class SpaceStationRecipe {
 
     @SuppressWarnings("unchecked")
     public boolean matches(EntityPlayer player, boolean remove) {
-        final HashMap<Object, Integer> required = new HashMap<Object, Integer>();
+        final HashMap<Object, Integer> required = new HashMap<>();
         required.putAll(this.input);
 
         final Iterator<Object> req = this.input.keySet().iterator();
@@ -89,7 +89,7 @@ public class SpaceStationRecipe {
 
     @SuppressWarnings("unchecked")
     public void removeItems(EntityPlayer player) {
-        final HashMap<Object, Integer> required = new HashMap<Object, Integer>(this.input);
+        final HashMap<Object, Integer> required = new HashMap<>(this.input);
 
         final Iterator<Object> req = required.keySet().iterator();
 

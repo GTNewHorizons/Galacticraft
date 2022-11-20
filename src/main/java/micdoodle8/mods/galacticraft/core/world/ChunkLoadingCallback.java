@@ -28,8 +28,7 @@ import net.minecraftforge.common.config.Configuration;
 
 public class ChunkLoadingCallback implements LoadingCallback {
     private static boolean loaded;
-    private static HashMap<String, HashMap<Integer, HashSet<ChunkCoordinates>>> chunkLoaderList =
-            new HashMap<String, HashMap<Integer, HashSet<ChunkCoordinates>>>();
+    private static HashMap<String, HashMap<Integer, HashSet<ChunkCoordinates>>> chunkLoaderList = new HashMap<>();
     // private static HashMap<Integer, HashSet<IChunkLoader>> loadedChunks = new
     // HashMap<Integer, HashSet<IChunkLoader>>();
 
@@ -88,14 +87,14 @@ public class ChunkLoadingCallback implements LoadingCallback {
         HashMap<Integer, HashSet<ChunkCoordinates>> dimensionMap = ChunkLoadingCallback.chunkLoaderList.get(playerName);
 
         if (dimensionMap == null) {
-            dimensionMap = new HashMap<Integer, HashSet<ChunkCoordinates>>();
+            dimensionMap = new HashMap<>();
             ChunkLoadingCallback.chunkLoaderList.put(playerName, dimensionMap);
         }
 
         HashSet<ChunkCoordinates> chunkLoaders = dimensionMap.get(world.provider.dimensionId);
 
         if (chunkLoaders == null) {
-            chunkLoaders = new HashSet<ChunkCoordinates>();
+            chunkLoaders = new HashSet<>();
         }
 
         chunkLoaders.add(new ChunkCoordinates(x, y, z));
@@ -230,12 +229,11 @@ public class ChunkLoadingCallback implements LoadingCallback {
                         final String ownerName = dataStream.readUTF();
 
                         final int mapSize = dataStream.readInt();
-                        final HashMap<Integer, HashSet<ChunkCoordinates>> dimensionMap =
-                                new HashMap<Integer, HashSet<ChunkCoordinates>>();
+                        final HashMap<Integer, HashSet<ChunkCoordinates>> dimensionMap = new HashMap<>();
 
                         for (int i = 0; i < mapSize; i++) {
                             final int dimensionID = dataStream.readInt();
-                            final HashSet<ChunkCoordinates> coords = new HashSet<ChunkCoordinates>();
+                            final HashSet<ChunkCoordinates> coords = new HashSet<>();
                             dimensionMap.put(dimensionID, coords);
                             final int coordSetSize = dataStream.readInt();
 

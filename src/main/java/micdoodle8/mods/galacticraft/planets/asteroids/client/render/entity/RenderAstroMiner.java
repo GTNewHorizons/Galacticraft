@@ -243,7 +243,7 @@ public class RenderAstroMiner extends Render {
                 GL11.glPushMatrix();
                 GL11.glTranslatef(
                         (float) (x - astroMiner.posX), (float) (y - astroMiner.posY), (float) (z - astroMiner.posZ));
-                for (final Integer blockTime : new ArrayList<Integer>(astroMiner.laserTimes)) {
+                for (final Integer blockTime : new ArrayList<>(astroMiner.laserTimes)) {
                     if (blockTime < astroMiner.ticksExisted - 19) {
                         removeCount++;
                     } else if (blockTime < astroMiner.ticksExisted - 3) {
@@ -254,7 +254,7 @@ public class RenderAstroMiner extends Render {
                     astroMiner.removeLaserBlocks(removeCount);
                 }
                 int count = 0;
-                for (final BlockVec3 blockLaser : new ArrayList<BlockVec3>(astroMiner.laserBlocks)) {
+                for (final BlockVec3 blockLaser : new ArrayList<>(astroMiner.laserBlocks)) {
                     if (count < afterglowCount) {
                         int fade = astroMiner.ticksExisted - astroMiner.laserTimes.get(count) - 8;
                         if (fade < 0) {

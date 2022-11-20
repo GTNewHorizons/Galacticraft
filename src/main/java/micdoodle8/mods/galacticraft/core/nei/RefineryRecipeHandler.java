@@ -92,7 +92,7 @@ public class RefineryRecipeHandler extends TemplateRecipeHandler {
     @Override
     public ArrayList<PositionedStack> getIngredientStacks(int recipe) {
         if (this.ticksPassed % 144 > 20) {
-            final ArrayList<PositionedStack> stacks = new ArrayList<PositionedStack>();
+            final ArrayList<PositionedStack> stacks = new ArrayList<>();
             stacks.add(new PositionedStack(
                     new ItemStack(GCItems.oilCanister, 1, GCItems.oilCanister.getMaxDamage()),
                     this.arecipes.get(recipe).getIngredients().get(0).relx,

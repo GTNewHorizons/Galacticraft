@@ -211,13 +211,13 @@ public class GuiLaunchController extends GuiContainerGC
         this.buttonList.add(this.frequency);
         this.buttonList.add(this.destinationFrequency);
         this.buttonList.add(this.hideDestinationFrequency);
-        this.electricInfoRegion.tooltipStrings = new ArrayList<String>();
+        this.electricInfoRegion.tooltipStrings = new ArrayList<>();
         this.electricInfoRegion.xPosition = (this.width - this.xSize) / 2 + 98;
         this.electricInfoRegion.yPosition = (this.height - this.ySize) / 2 + 113;
         this.electricInfoRegion.parentWidth = this.width;
         this.electricInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.electricInfoRegion);
-        List<String> batterySlotDesc = new ArrayList<String>();
+        List<String> batterySlotDesc = new ArrayList<>();
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.0"));
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(
@@ -229,7 +229,7 @@ public class GuiLaunchController extends GuiContainerGC
                 this.width,
                 this.height,
                 this));
-        batterySlotDesc = new ArrayList<String>();
+        batterySlotDesc = new ArrayList<>();
         batterySlotDesc.addAll(GCCoreUtil.translateWithSplit("gui.launchController.desc.0"));
         this.infoRegions.add(new GuiElementInfoRegion(
                 (this.width - this.xSize) / 2 + 5,
@@ -240,7 +240,7 @@ public class GuiLaunchController extends GuiContainerGC
                 this.width,
                 this.height,
                 this));
-        batterySlotDesc = new ArrayList<String>();
+        batterySlotDesc = new ArrayList<>();
         batterySlotDesc.addAll(GCCoreUtil.translateWithSplit("gui.launchController.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(
                 (this.width - this.xSize) / 2 + 5,
@@ -251,7 +251,7 @@ public class GuiLaunchController extends GuiContainerGC
                 this.width,
                 this.height,
                 this));
-        batterySlotDesc = new ArrayList<String>();
+        batterySlotDesc = new ArrayList<>();
         batterySlotDesc.addAll(GCCoreUtil.translateWithSplit("gui.launchController.desc.2"));
         this.infoRegions.add(new GuiElementInfoRegion(
                 (this.width - this.xSize) / 2 + 10,
@@ -262,7 +262,7 @@ public class GuiLaunchController extends GuiContainerGC
                 this.width,
                 this.height,
                 this));
-        batterySlotDesc = new ArrayList<String>();
+        batterySlotDesc = new ArrayList<>();
         batterySlotDesc.addAll(GCCoreUtil.translateWithSplit("gui.launchController.desc.3"));
         this.infoRegions.add(new GuiElementInfoRegion(
                 (this.width - this.xSize) / 2 + 10,
@@ -273,7 +273,7 @@ public class GuiLaunchController extends GuiContainerGC
                 this.width,
                 this.height,
                 this));
-        batterySlotDesc = new ArrayList<String>();
+        batterySlotDesc = new ArrayList<>();
         batterySlotDesc.addAll(GCCoreUtil.translateWithSplit("gui.launchController.desc.4"));
         this.infoRegions.add(new GuiElementInfoRegion(
                 (this.width - this.xSize) / 2 + 95,
@@ -387,7 +387,7 @@ public class GuiLaunchController extends GuiContainerGC
         final int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
 
-        final List<String> electricityDesc = new ArrayList<String>();
+        final List<String> electricityDesc = new ArrayList<>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         EnergyDisplayHelper.getEnergyDisplayTooltip(
                 this.launchController.getEnergyStoredGC(),

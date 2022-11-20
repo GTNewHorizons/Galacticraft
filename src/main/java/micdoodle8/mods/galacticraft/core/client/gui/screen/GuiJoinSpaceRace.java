@@ -54,7 +54,7 @@ public class GuiJoinSpaceRace extends GuiScreen implements ICheckBoxCallback, IT
         if (race != null) {
             this.spaceRaceData = race;
         } else {
-            final List<String> playerList = new ArrayList<String>();
+            final List<String> playerList = new ArrayList<>();
             playerList.add(player.getGameProfile().getName());
             this.spaceRaceData =
                     new SpaceRace(playerList, SpaceRace.DEFAULT_NAME, new FlagData(48, 32), new Vector3(1, 1, 1));

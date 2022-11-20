@@ -37,12 +37,11 @@ public class BuggyRecipeHandler extends TemplateRecipeHandler {
     }
 
     public Set<Entry<ArrayList<PositionedStack>, PositionedStack>> getRecipes() {
-        final HashMap<ArrayList<PositionedStack>, PositionedStack> recipes =
-                new HashMap<ArrayList<PositionedStack>, PositionedStack>();
+        final HashMap<ArrayList<PositionedStack>, PositionedStack> recipes = new HashMap<>();
 
         for (final Entry<HashMap<Integer, PositionedStack>, PositionedStack> stack :
                 NEIGalacticraftConfig.getBuggyBenchRecipes()) {
-            final ArrayList<PositionedStack> inputStacks = new ArrayList<PositionedStack>();
+            final ArrayList<PositionedStack> inputStacks = new ArrayList<>();
 
             for (final Map.Entry<Integer, PositionedStack> input :
                     stack.getKey().entrySet()) {

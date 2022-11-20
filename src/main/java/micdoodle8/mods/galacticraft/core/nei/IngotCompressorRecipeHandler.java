@@ -32,12 +32,11 @@ public class IngotCompressorRecipeHandler extends TemplateRecipeHandler {
     }
 
     public Set<Entry<ArrayList<PositionedStack>, PositionedStack>> getRecipes() {
-        final HashMap<ArrayList<PositionedStack>, PositionedStack> recipes =
-                new HashMap<ArrayList<PositionedStack>, PositionedStack>();
+        final HashMap<ArrayList<PositionedStack>, PositionedStack> recipes = new HashMap<>();
 
         for (final Entry<HashMap<Integer, PositionedStack>, PositionedStack> stack :
                 NEIGalacticraftConfig.getIngotCompressorRecipes()) {
-            final ArrayList<PositionedStack> inputStacks = new ArrayList<PositionedStack>();
+            final ArrayList<PositionedStack> inputStacks = new ArrayList<>();
 
             for (final Map.Entry<Integer, PositionedStack> input :
                     stack.getKey().entrySet()) {
@@ -150,14 +149,12 @@ public class IngotCompressorRecipeHandler extends TemplateRecipeHandler {
         }
 
         public CompressorRecipe(Map.Entry<ArrayList<PositionedStack>, PositionedStack> recipe) {
-            this(
-                    new ArrayList<PositionedStack>(recipe.getKey()),
-                    recipe.getValue().copy());
+            this(new ArrayList<>(recipe.getKey()), recipe.getValue().copy());
         }
 
         @Override
         public List<PositionedStack> getOtherStacks() {
-            final ArrayList<PositionedStack> stacks = new ArrayList<PositionedStack>();
+            final ArrayList<PositionedStack> stacks = new ArrayList<>();
             final PositionedStack stack = this.getOtherStack();
             if (stack != null) {
                 stacks.add(stack);

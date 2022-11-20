@@ -125,7 +125,7 @@ public class CommandSpaceStationRemoveOwner extends CommandBase {
                 }
 
                 final Iterator<String> itName = allowedNames.iterator();
-                final ArrayList<String> replaceNames = new ArrayList<String>();
+                final ArrayList<String> replaceNames = new ArrayList<>();
                 while (itName.hasNext()) {
                     final String name = itName.next();
                     for (final String allEntry : allNames) {

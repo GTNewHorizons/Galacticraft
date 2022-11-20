@@ -31,7 +31,7 @@ public class EntityFXTeleport extends EntityFX {
         this.particleMaxAge = (int) (Math.random() * 10.0D) + 40;
         this.noClip = true;
         this.setParticleTextureIndex((int) (Math.random() * 8.0D));
-        this.telepad = new WeakReference<TileEntityShortRangeTelepad>(telepad);
+        this.telepad = new WeakReference<>(telepad);
         this.direction = direction;
     }
 

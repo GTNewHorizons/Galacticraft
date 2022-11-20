@@ -99,7 +99,7 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
     private final ModelFlag dummyModel = new ModelFlag();
 
     private SpaceRace spaceRaceData;
-    public Map<String, Integer> recentlyInvited = new HashMap<String, Integer>();
+    public Map<String, Integer> recentlyInvited = new HashMap<>();
 
     private boolean lastMousePressed = false;
     private boolean isDirty = true;
@@ -114,7 +114,7 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
         if (race != null) {
             this.spaceRaceData = race;
         } else {
-            final List<String> playerList = new ArrayList<String>();
+            final List<String> playerList = new ArrayList<>();
             playerList.add(player.getGameProfile().getName());
             this.spaceRaceData =
                     new SpaceRace(playerList, SpaceRace.DEFAULT_NAME, new FlagData(48, 32), new Vector3(1, 1, 1));
@@ -566,7 +566,7 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
 
         ++this.ticksPassed;
 
-        for (final Entry<String, Integer> e : new HashSet<Entry<String, Integer>>(this.recentlyInvited.entrySet())) {
+        for (final Entry<String, Integer> e : new HashSet<>(this.recentlyInvited.entrySet())) {
             int timeLeft = e.getValue();
             if (--timeLeft < 0) {
                 this.recentlyInvited.remove(e.getKey());
@@ -578,7 +578,7 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
         if (this.currentState == EnumSpaceRaceGui.ADD_PLAYER
                 && this.gradientListAddPlayers != null
                 && this.ticksPassed % 20 == 0) {
-            final List<ListElement> playerNames = new ArrayList<ListElement>();
+            final List<ListElement> playerNames = new ArrayList<>();
             for (final Object element : this.thePlayer.worldObj.playerEntities) {
                 final EntityPlayer player = (EntityPlayer) element;
 
@@ -606,7 +606,7 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
         if (this.currentState == EnumSpaceRaceGui.REMOVE_PLAYER
                 && this.gradientListRemovePlayers != null
                 && this.ticksPassed % 20 == 0) {
-            final List<ListElement> playerNames = new ArrayList<ListElement>();
+            final List<ListElement> playerNames = new ArrayList<>();
             for (int i = 1; i < this.spaceRaceData.getPlayerNames().size(); i++) {
                 final String playerName = this.spaceRaceData.getPlayerNames().get(i);
                 playerNames.add(new ListElement(playerName, ColorUtil.to32BitColor(255, 190, 190, 190)));
@@ -798,7 +798,7 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
 
     public void sendSpaceRaceData() {
         if (this.canEdit) {
-            final List<Object> objList = new ArrayList<Object>();
+            final List<Object> objList = new ArrayList<>();
             objList.add(this.spaceRaceData.getSpaceRaceID());
             objList.add(this.spaceRaceData.getTeamName());
             objList.add(this.spaceRaceData.getFlagData());

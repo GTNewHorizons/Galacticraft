@@ -27,7 +27,7 @@ public class OreGenOtherMods {
     private int chunkZ;
 
     private WorldGenerator oreGen;
-    public static ArrayList<OreGenData> data = new ArrayList<OreGenData>();
+    public static ArrayList<OreGenData> data = new ArrayList<>();
 
     static {
         for (final String str : ConfigManagerCore.oregenIDs) {

@@ -54,22 +54,18 @@ import net.minecraft.world.gen.ChunkProviderServer;
 
 public class TickHandlerServer {
     private static Map<Integer, CopyOnWriteArrayList<ScheduledBlockChange>> scheduledBlockChanges =
-            new ConcurrentHashMap<Integer, CopyOnWriteArrayList<ScheduledBlockChange>>();
-    private static Map<Integer, CopyOnWriteArrayList<BlockVec3>> scheduledTorchUpdates =
-            new ConcurrentHashMap<Integer, CopyOnWriteArrayList<BlockVec3>>();
-    private static Map<Integer, List<BlockVec3>> edgeChecks = new HashMap<Integer, List<BlockVec3>>();
-    private static LinkedList<EnergyNetwork> networkTicks = new LinkedList<EnergyNetwork>();
-    public static Map<Integer, Map<Long, List<Footprint>>> serverFootprintMap =
-            new HashMap<Integer, Map<Long, List<Footprint>>>();
+            new ConcurrentHashMap<>();
+    private static Map<Integer, CopyOnWriteArrayList<BlockVec3>> scheduledTorchUpdates = new ConcurrentHashMap<>();
+    private static Map<Integer, List<BlockVec3>> edgeChecks = new HashMap<>();
+    private static LinkedList<EnergyNetwork> networkTicks = new LinkedList<>();
+    public static Map<Integer, Map<Long, List<Footprint>>> serverFootprintMap = new HashMap<>();
     public static List<BlockVec3Dim> footprintBlockChanges = Lists.newArrayList();
     public static WorldDataSpaceRaces spaceRaceData = null;
     public static ArrayList<EntityPlayerMP> playersRequestingMapData = Lists.newArrayList();
     private static long tickCount;
-    public static LinkedList<TileEntityOxygenTransmitter> oxygenTransmitterUpdates =
-            new LinkedList<TileEntityOxygenTransmitter>();
-    public static LinkedList<TileEntityHydrogenPipe> hydrogenTransmitterUpdates =
-            new LinkedList<TileEntityHydrogenPipe>();
-    public static LinkedList<TileBaseConductor> energyTransmitterUpdates = new LinkedList<TileBaseConductor>();
+    public static LinkedList<TileEntityOxygenTransmitter> oxygenTransmitterUpdates = new LinkedList<>();
+    public static LinkedList<TileEntityHydrogenPipe> hydrogenTransmitterUpdates = new LinkedList<>();
+    public static LinkedList<TileBaseConductor> energyTransmitterUpdates = new LinkedList<>();
     private final int MAX_BLOCKS_PER_TICK = 50000;
 
     public static void restart() {
@@ -98,13 +94,13 @@ public class TickHandlerServer {
         List<Footprint> footprints;
 
         if (footprintMap == null) {
-            footprintMap = new HashMap<Long, List<Footprint>>();
-            footprints = new ArrayList<Footprint>();
+            footprintMap = new HashMap<>();
+            footprints = new ArrayList<>();
         } else {
             footprints = footprintMap.get(chunkKey);
 
             if (footprints == null) {
-                footprints = new ArrayList<Footprint>();
+                footprints = new ArrayList<>();
             }
         }
 
@@ -117,7 +113,7 @@ public class TickHandlerServer {
         CopyOnWriteArrayList<ScheduledBlockChange> changeList = TickHandlerServer.scheduledBlockChanges.get(dimID);
 
         if (changeList == null) {
-            changeList = new CopyOnWriteArrayList<ScheduledBlockChange>();
+            changeList = new CopyOnWriteArrayList<>();
         }
 
         changeList.add(change);
@@ -134,7 +130,7 @@ public class TickHandlerServer {
         CopyOnWriteArrayList<ScheduledBlockChange> changeList = TickHandlerServer.scheduledBlockChanges.get(dimID);
 
         if (changeList == null) {
-            changeList = new CopyOnWriteArrayList<ScheduledBlockChange>();
+            changeList = new CopyOnWriteArrayList<>();
         }
 
         changeList.addAll(changeAdd);
@@ -145,7 +141,7 @@ public class TickHandlerServer {
         CopyOnWriteArrayList<BlockVec3> updateList = TickHandlerServer.scheduledTorchUpdates.get(dimID);
 
         if (updateList == null) {
-            updateList = new CopyOnWriteArrayList<BlockVec3>();
+            updateList = new CopyOnWriteArrayList<>();
         }
 
         updateList.addAll(torches);
@@ -156,7 +152,7 @@ public class TickHandlerServer {
         List<BlockVec3> updateList = TickHandlerServer.edgeChecks.get(dimID);
 
         if (updateList == null) {
-            updateList = new ArrayList<BlockVec3>();
+            updateList = new ArrayList<>();
         }
 
         updateList.add(edgeBlock);
@@ -238,7 +234,7 @@ public class TickHandlerServer {
                                 final List<Footprint> footprints = footprintMap.get(chunkKey);
 
                                 if (footprints != null) {
-                                    final List<Footprint> toRemove = new ArrayList<Footprint>();
+                                    final List<Footprint> toRemove = new ArrayList<>();
 
                                     for (int j = 0; j < footprints.size(); j++) {
                                         footprints.get(j).age += 100;
@@ -317,7 +313,7 @@ public class TickHandlerServer {
                     if (!baseFolder.exists() && !baseFolder.mkdirs()) {
                         GCLog.severe("Base folder(s) could not be created: " + baseFolder.getAbsolutePath());
                     } else {
-                        final ArrayList<EntityPlayerMP> copy = new ArrayList<EntityPlayerMP>(playersRequestingMapData);
+                        final ArrayList<EntityPlayerMP> copy = new ArrayList<>(playersRequestingMapData);
                         final BufferedImage reusable = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
                         for (final EntityPlayerMP playerMP : copy) {
                             final GCPlayerStats stats = GCPlayerStats.get(playerMP);
@@ -417,7 +413,7 @@ public class TickHandlerServer {
                 int blockCount = 0;
                 final int blockCountMax = Math.max(this.MAX_BLOCKS_PER_TICK, changeList.size() / 4);
                 final List<ScheduledBlockChange> newList =
-                        new ArrayList<ScheduledBlockChange>(Math.max(0, changeList.size() - blockCountMax));
+                        new ArrayList<>(Math.max(0, changeList.size() - blockCountMax));
 
                 for (final ScheduledBlockChange change : changeList) {
                     if (++blockCount > blockCountMax) {
@@ -446,7 +442,7 @@ public class TickHandlerServer {
                 TickHandlerServer.scheduledBlockChanges.remove(world.provider.dimensionId);
                 if (newList.size() > 0) {
                     TickHandlerServer.scheduledBlockChanges.put(
-                            world.provider.dimensionId, new CopyOnWriteArrayList<ScheduledBlockChange>(newList));
+                            world.provider.dimensionId, new CopyOnWriteArrayList<>(newList));
                 }
             }
 

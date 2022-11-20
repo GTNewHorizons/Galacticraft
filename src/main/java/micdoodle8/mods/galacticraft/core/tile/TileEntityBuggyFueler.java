@@ -157,7 +157,7 @@ public class TileEntityBuggyFueler extends TileEntityMulti implements IMultiBloc
 
     @Override
     public HashSet<ILandingPadAttachable> getConnectedTiles() {
-        final HashSet<ILandingPadAttachable> connectedTiles = new HashSet<ILandingPadAttachable>();
+        final HashSet<ILandingPadAttachable> connectedTiles = new HashSet<>();
 
         for (int x = -2; x < 3; x++) {
             for (int z = -2; z < 3; z++) {

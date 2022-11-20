@@ -14,8 +14,8 @@ public class NetworkFinder {
     public BlockVec3 start;
     private final BlockVec3 toIgnore;
 
-    private final Set<BlockVec3> iterated = new HashSet<BlockVec3>();
-    public List<IConductor> found = new LinkedList<IConductor>();
+    private final Set<BlockVec3> iterated = new HashSet<>();
+    public List<IConductor> found = new LinkedList<>();
 
     public NetworkFinder(World world, BlockVec3 location, BlockVec3 ignore) {
         this.worldObj = world;

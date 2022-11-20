@@ -28,7 +28,7 @@ public class PacketDynamic implements IPacket {
         this.type = 0;
         this.dimID = entity.worldObj.provider.dimensionId;
         this.data = new Object[] {entity.getEntityId()};
-        this.sendData = new ArrayList<Object>();
+        this.sendData = new ArrayList<>();
         ((IPacketReceiver) entity).getNetworkedData(this.sendData);
     }
 
@@ -38,7 +38,7 @@ public class PacketDynamic implements IPacket {
         this.type = 1;
         this.dimID = tile.getWorldObj().provider.dimensionId;
         this.data = new Object[] {tile.xCoord, tile.yCoord, tile.zCoord};
-        this.sendData = new ArrayList<Object>();
+        this.sendData = new ArrayList<>();
         ((IPacketReceiver) tile).getNetworkedData(this.sendData);
     }
 

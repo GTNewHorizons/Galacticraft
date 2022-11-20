@@ -391,7 +391,7 @@ public class WorldUtil {
      * @return a List of integers which are the dimension IDs
      */
     public static List<Integer> getPossibleDimensionsForSpaceshipTier(int tier, EntityPlayerMP playerBase) {
-        final List<Integer> temp = new ArrayList<Integer>();
+        final List<Integer> temp = new ArrayList<>();
 
         if (!ConfigManagerCore.disableRocketsToOverworld) {
             temp.add(ConfigManagerCore.idDimensionOverworld);
@@ -542,7 +542,7 @@ public class WorldUtil {
      */
     public static HashMap<String, Integer> getArrayOfPossibleDimensions(int tier, EntityPlayerMP playerBase) {
         final List<Integer> ids = WorldUtil.getPossibleDimensionsForSpaceshipTier(tier, playerBase);
-        final HashMap<String, Integer> map = new HashMap<String, Integer>();
+        final HashMap<String, Integer> map = new HashMap<>();
 
         for (final Integer id : ids) {
             CelestialBody celestialBody = getReachableCelestialBodiesForDimensionID(id);
@@ -578,7 +578,7 @@ public class WorldUtil {
             }
         }
 
-        final ArrayList<CelestialBody> cBodyList = new ArrayList<CelestialBody>();
+        final ArrayList<CelestialBody> cBodyList = new ArrayList<>();
         cBodyList.addAll(GalaxyRegistry.getRegisteredPlanets().values());
         cBodyList.addAll(GalaxyRegistry.getRegisteredMoons().values());
 
@@ -722,7 +722,7 @@ public class WorldUtil {
      */
     public static boolean registerPlanet(int planetID, boolean initialiseDimensionAtServerInit, int defaultID) {
         if (WorldUtil.registeredPlanets == null) {
-            WorldUtil.registeredPlanets = new ArrayList<Integer>();
+            WorldUtil.registeredPlanets = new ArrayList<>();
         }
 
         if (initialiseDimensionAtServerInit) {
@@ -808,7 +808,7 @@ public class WorldUtil {
      * total list of all space dimensions. It does not load the dimensions.
      */
     public static Integer[] getArrayOfPossibleDimensions() {
-        final ArrayList<Integer> temp = new ArrayList<Integer>();
+        final ArrayList<Integer> temp = new ArrayList<>();
 
         temp.add(ConfigManagerCore.idDimensionOverworld);
 
@@ -1285,7 +1285,7 @@ public class WorldUtil {
      * in GalacticraftRegistry by GalacticraftCore.
      */
     public static List<Object> getPlanetList() {
-        final List<Object> objList = new ArrayList<Object>();
+        final List<Object> objList = new ArrayList<>();
         objList.add(getPlanetListInts());
         return objList;
     }
@@ -1323,7 +1323,7 @@ public class WorldUtil {
                     DimensionManager.unregisterDimension(registeredID);
                 }
             }
-            WorldUtil.registeredPlanets = new ArrayList<Integer>();
+            WorldUtil.registeredPlanets = new ArrayList<>();
 
             String ids = "";
             if (data.size() > 0) {
@@ -1366,7 +1366,7 @@ public class WorldUtil {
     }
 
     public static List<Object> getSpaceStationList() {
-        final List<Object> objList = new ArrayList<Object>();
+        final List<Object> objList = new ArrayList<>();
         objList.add(getSpaceStationListInts());
         return objList;
     }

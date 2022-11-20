@@ -158,7 +158,7 @@ public class TileEntityLandingPad extends TileEntityMulti
 
     @Override
     public HashSet<ILandingPadAttachable> getConnectedTiles() {
-        final HashSet<ILandingPadAttachable> connectedTiles = new HashSet<ILandingPadAttachable>();
+        final HashSet<ILandingPadAttachable> connectedTiles = new HashSet<>();
 
         for (int x = this.xCoord - 1; x < this.xCoord + 2; x++) {
             this.testConnectedTile(x, this.zCoord - 2, connectedTiles);

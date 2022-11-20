@@ -65,7 +65,7 @@ public class GuiRefinery extends GuiContainerGC {
     @Override
     public void initGui() {
         super.initGui();
-        final List<String> oilTankDesc = new ArrayList<String>();
+        final List<String> oilTankDesc = new ArrayList<>();
         oilTankDesc.add(GCCoreUtil.translate("gui.oilTank.desc.0"));
         oilTankDesc.add(GCCoreUtil.translate("gui.oilTank.desc.1"));
         final int oilLevel = this.tileEntity.oilTank != null && this.tileEntity.oilTank.getFluid() != null
@@ -80,7 +80,7 @@ public class GuiRefinery extends GuiContainerGC {
         this.oilTankRegion.parentWidth = this.width;
         this.oilTankRegion.parentHeight = this.height;
         this.infoRegions.add(this.oilTankRegion);
-        final List<String> batterySlotDesc = new ArrayList<String>();
+        final List<String> batterySlotDesc = new ArrayList<>();
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.0"));
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(
@@ -92,7 +92,7 @@ public class GuiRefinery extends GuiContainerGC {
                 this.width,
                 this.height,
                 this));
-        final List<String> fuelTankDesc = new ArrayList<String>();
+        final List<String> fuelTankDesc = new ArrayList<>();
         fuelTankDesc.add(GCCoreUtil.translate("gui.fuelTank.desc.4"));
         final int fuelLevel = this.tileEntity.fuelTank != null && this.tileEntity.fuelTank.getFluid() != null
                 ? this.tileEntity.fuelTank.getFluid().amount
@@ -106,7 +106,7 @@ public class GuiRefinery extends GuiContainerGC {
         this.fuelTankRegion.parentWidth = this.width;
         this.fuelTankRegion.parentHeight = this.height;
         this.infoRegions.add(this.fuelTankRegion);
-        final List<String> fuelSlotDesc = new ArrayList<String>();
+        final List<String> fuelSlotDesc = new ArrayList<>();
         fuelSlotDesc.add(GCCoreUtil.translate("gui.fuelOutput.desc.0"));
         fuelSlotDesc.add(GCCoreUtil.translate("gui.fuelOutput.desc.1"));
         fuelSlotDesc.add(GCCoreUtil.translate("gui.fuelOutput.desc.2"));
@@ -119,7 +119,7 @@ public class GuiRefinery extends GuiContainerGC {
                 this.width,
                 this.height,
                 this));
-        final List<String> electricityDesc = new ArrayList<String>();
+        final List<String> electricityDesc = new ArrayList<>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         electricityDesc.add(EnumColor.YELLOW
                 + GCCoreUtil.translate("gui.energyStorage.desc.1")
@@ -211,7 +211,7 @@ public class GuiRefinery extends GuiContainerGC {
                 16,
                 displayInt);
 
-        final List<String> oilTankDesc = new ArrayList<String>();
+        final List<String> oilTankDesc = new ArrayList<>();
         oilTankDesc.add(GCCoreUtil.translate("gui.oilTank.desc.0"));
         oilTankDesc.add(GCCoreUtil.translate("gui.oilTank.desc.1"));
         final int oilLevel = this.tileEntity.oilTank != null && this.tileEntity.oilTank.getFluid() != null
@@ -222,7 +222,7 @@ public class GuiRefinery extends GuiContainerGC {
                 + oilCapacity);
         this.oilTankRegion.tooltipStrings = oilTankDesc;
 
-        final List<String> fuelTankDesc = new ArrayList<String>();
+        final List<String> fuelTankDesc = new ArrayList<>();
         fuelTankDesc.add(GCCoreUtil.translate("gui.fuelTank.desc.4"));
         final int fuelLevel = this.tileEntity.fuelTank != null && this.tileEntity.fuelTank.getFluid() != null
                 ? this.tileEntity.fuelTank.getFluid().amount
@@ -232,7 +232,7 @@ public class GuiRefinery extends GuiContainerGC {
                 + fuelCapacity);
         this.fuelTankRegion.tooltipStrings = fuelTankDesc;
 
-        final List<String> electricityDesc = new ArrayList<String>();
+        final List<String> electricityDesc = new ArrayList<>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         // electricityDesc.add(EnumColor.YELLOW +
         // GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)

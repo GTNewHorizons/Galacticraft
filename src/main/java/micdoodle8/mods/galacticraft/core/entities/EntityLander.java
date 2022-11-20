@@ -147,7 +147,7 @@ public class EntityLander extends EntityLanderBase implements IIgnoreShift, ICam
 
         new Vector3(this);
 
-        final Map<Vector3, Vector3> particleMap = new HashMap<Vector3, Vector3>();
+        final Map<Vector3, Vector3> particleMap = new HashMap<>();
         particleMap.put(
                 new Vector3(this.posX, this.posY + 1D + this.motionY / 2, this.posZ),
                 new Vector3(x1, y1 + this.motionY / 2, z1));

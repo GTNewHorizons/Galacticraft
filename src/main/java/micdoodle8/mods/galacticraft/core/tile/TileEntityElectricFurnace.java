@@ -34,7 +34,7 @@ public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventor
     public int processTicks = 0;
 
     private ItemStack[] containingItems = new ItemStack[3];
-    public final Set<EntityPlayer> playersUsing = new HashSet<EntityPlayer>();
+    public final Set<EntityPlayer> playersUsing = new HashSet<>();
 
     private boolean initialised = false;
 

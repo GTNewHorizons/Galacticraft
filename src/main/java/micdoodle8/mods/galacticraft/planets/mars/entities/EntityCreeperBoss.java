@@ -382,7 +382,7 @@ public class EntityCreeperBoss extends EntityMob
     }
 
     public ItemStack getGuaranteedLoot(Random rand) {
-        final List<ItemStack> stackList = new LinkedList<ItemStack>();
+        final List<ItemStack> stackList = new LinkedList<>();
         stackList.addAll(GalacticraftRegistry.getDungeonLoot(2));
         boolean hasT3Rocket = false;
         boolean hasAstroMiner = false;

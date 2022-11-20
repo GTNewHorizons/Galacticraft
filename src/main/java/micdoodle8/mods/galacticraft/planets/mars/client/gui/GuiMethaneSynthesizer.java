@@ -99,12 +99,12 @@ public class GuiMethaneSynthesizer extends GuiContainerGC {
         this.gasTank2Region.parentHeight = this.height;
         this.infoRegions.add(this.gasTank2Region);
 
-        final List<String> batterySlotDesc = new ArrayList<String>();
+        final List<String> batterySlotDesc = new ArrayList<>();
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.0"));
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(
                 edgeLeft + 53, edgeTop + 53, 18, 18, batterySlotDesc, this.width, this.height, this));
-        final List<String> carbonSlotDesc = new ArrayList<String>();
+        final List<String> carbonSlotDesc = new ArrayList<>();
         carbonSlotDesc.add(GCCoreUtil.translate("gui.carbonSlot.desc.0"));
         this.infoRegions.add(new GuiElementInfoRegion(
                 edgeLeft + 27, edgeTop + 53, 18, 18, carbonSlotDesc, this.width, this.height, this));
@@ -115,7 +115,7 @@ public class GuiMethaneSynthesizer extends GuiContainerGC {
         this.fuelTankRegion.parentHeight = this.height;
         this.infoRegions.add(this.fuelTankRegion);
 
-        List<String> fuelSlotDesc = new ArrayList<String>();
+        List<String> fuelSlotDesc = new ArrayList<>();
         fuelSlotDesc.add(GCCoreUtil.translate("gui.fuelOutput.desc.0"));
         fuelSlotDesc.add(GCCoreUtil.translate("gui.fuelOutput.desc.1"));
         fuelSlotDesc.add(GCCoreUtil.translate("gui.methaneOutput.desc.2"));
@@ -124,7 +124,7 @@ public class GuiMethaneSynthesizer extends GuiContainerGC {
         this.infoRegions.add(new GuiElementInfoRegion(
                 edgeLeft + 131, edgeTop + 6, 18, 18, fuelSlotDesc, this.width, this.height, this));
 
-        fuelSlotDesc = new ArrayList<String>();
+        fuelSlotDesc = new ArrayList<>();
         fuelSlotDesc.addAll(GCCoreUtil.translateWithSplit("gui.hydrogenInput.desc.0"));
         fuelSlotDesc.addAll(GCCoreUtil.translateWithSplit("gui.hydrogenInput.desc.1"));
         fuelSlotDesc.add("(" + GCCoreUtil.translate("gui.message.withAtmosphere0.name"));
@@ -133,7 +133,7 @@ public class GuiMethaneSynthesizer extends GuiContainerGC {
         this.infoRegions.add(new GuiElementInfoRegion(
                 edgeLeft + 6, edgeTop + 6, 18, 18, fuelSlotDesc, this.width, this.height, this));
 
-        fuelSlotDesc = new ArrayList<String>();
+        fuelSlotDesc = new ArrayList<>();
         fuelSlotDesc.add(GCCoreUtil.translate("item.atmosphericValve.name"));
         fuelSlotDesc.add("(" + GCCoreUtil.translate("gui.message.withAtmosphere0.name"));
         fuelSlotDesc.add(GCCoreUtil.lowerCaseNoun("gas.carbondioxide.name"));
@@ -244,7 +244,7 @@ public class GuiMethaneSynthesizer extends GuiContainerGC {
     }
 
     private void addToolTips() {
-        List<String> gasTankDesc = new ArrayList<String>();
+        List<String> gasTankDesc = new ArrayList<>();
         gasTankDesc.add(GCCoreUtil.translate("gui.gasTank.desc.0"));
         FluidStack gasTankContents = this.tileEntity.gasTank != null ? this.tileEntity.gasTank.getFluid() : null;
         if (gasTankContents != null) {
@@ -261,7 +261,7 @@ public class GuiMethaneSynthesizer extends GuiContainerGC {
         gasTankDesc.add(EnumColor.YELLOW + " " + gasLevel + " / " + gasCapacity);
         this.gasTankRegion.tooltipStrings = gasTankDesc;
 
-        gasTankDesc = new ArrayList<String>();
+        gasTankDesc = new ArrayList<>();
         gasTankDesc.add(GCCoreUtil.translate("gas.carbondioxide.name"));
         gasTankDesc.add(GCCoreUtil.translate("gui.gasTank.desc.0"));
         gasTankContents = this.tileEntity.gasTank2 != null ? this.tileEntity.gasTank2.getFluid() : null;
@@ -279,7 +279,7 @@ public class GuiMethaneSynthesizer extends GuiContainerGC {
         gasTankDesc.add(EnumColor.YELLOW + " " + gasLevel + " / " + gasCapacity);
         this.gasTank2Region.tooltipStrings = gasTankDesc;
 
-        final List<String> fuelTankDesc = new ArrayList<String>();
+        final List<String> fuelTankDesc = new ArrayList<>();
         fuelTankDesc.add(GCCoreUtil.translate("gui.gasTank.desc.0"));
         gasTankContents = this.tileEntity.liquidTank != null ? this.tileEntity.liquidTank.getFluid() : null;
         if (gasTankContents != null) {
@@ -296,7 +296,7 @@ public class GuiMethaneSynthesizer extends GuiContainerGC {
         fuelTankDesc.add(EnumColor.YELLOW + " " + fuelLevel + " / " + fuelCapacity);
         this.fuelTankRegion.tooltipStrings = fuelTankDesc;
 
-        final List<String> electricityDesc = new ArrayList<String>();
+        final List<String> electricityDesc = new ArrayList<>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         // electricityDesc.add(EnumColor.YELLOW +
         // GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)

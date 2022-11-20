@@ -8,7 +8,7 @@ public class SpecialAsteroidBlockHandler {
     ArrayList<SpecialAsteroidBlock> asteroidBlocks;
 
     public SpecialAsteroidBlockHandler(SpecialAsteroidBlock... asteroidBlocks) {
-        this.asteroidBlocks = new ArrayList<SpecialAsteroidBlock>();
+        this.asteroidBlocks = new ArrayList<>();
         for (final SpecialAsteroidBlock asteroidBlock : this.asteroidBlocks) {
             for (int i = 0; i < asteroidBlock.probability; i++) {
                 this.asteroidBlocks.add(asteroidBlock);
@@ -17,7 +17,7 @@ public class SpecialAsteroidBlockHandler {
     }
 
     public SpecialAsteroidBlockHandler() {
-        this.asteroidBlocks = new ArrayList<SpecialAsteroidBlock>();
+        this.asteroidBlocks = new ArrayList<>();
     }
 
     public void addBlock(SpecialAsteroidBlock asteroidBlock) {

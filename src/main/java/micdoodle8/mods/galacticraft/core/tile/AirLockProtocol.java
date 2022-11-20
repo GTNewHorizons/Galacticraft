@@ -24,7 +24,7 @@ class AirLockProtocol {
     public int maxZ = -6000000;
 
     public AirLockProtocol(TileEntity head) {
-        this.adjacentAirLocks = new ArrayList<TileEntityAirLock>();
+        this.adjacentAirLocks = new ArrayList<>();
         this.worldObj = head.getWorldObj();
         this.head = head;
         this.maxLoops = 26;
@@ -82,7 +82,7 @@ class AirLockProtocol {
             return null;
         }
 
-        this.adjacentAirLocks = new ArrayList<TileEntityAirLock>();
+        this.adjacentAirLocks = new ArrayList<>();
 
         this.horizontal = horizontal;
 

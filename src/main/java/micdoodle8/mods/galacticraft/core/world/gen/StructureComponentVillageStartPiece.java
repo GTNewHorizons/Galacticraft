@@ -10,8 +10,8 @@ public class StructureComponentVillageStartPiece extends StructureComponentVilla
     public int terrainType;
     public StructureVillagePieceWeightMoon structVillagePieceWeight;
     public ArrayList<StructureVillagePieceWeightMoon> structureVillageWeightedPieceList;
-    public ArrayList<Object> field_74932_i = new ArrayList<Object>();
-    public ArrayList<Object> field_74930_j = new ArrayList<Object>();
+    public ArrayList<Object> field_74932_i = new ArrayList<>();
+    public ArrayList<Object> field_74930_j = new ArrayList<>();
 
     public StructureComponentVillageStartPiece() {}
 

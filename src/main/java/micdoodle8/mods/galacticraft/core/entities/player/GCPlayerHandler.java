@@ -81,9 +81,9 @@ public class GCPlayerHandler {
     private static final int OXYGENHEIGHTLIMIT = 450;
     private final boolean isClient =
             FMLCommonHandler.instance().getEffectiveSide().isClient();
-    private final ConcurrentHashMap<UUID, GCPlayerStats> playerStatsMap = new ConcurrentHashMap<UUID, GCPlayerStats>();
+    private final ConcurrentHashMap<UUID, GCPlayerStats> playerStatsMap = new ConcurrentHashMap<>();
     private Field ftc;
-    private final HashMap<Item, Item> torchItems = new HashMap<Item, Item>();
+    private final HashMap<Item, Item> torchItems = new HashMap<>();
 
     public ConcurrentHashMap<UUID, GCPlayerStats> getServerStatList() {
         return this.playerStatsMap;
@@ -160,7 +160,7 @@ public class GCPlayerHandler {
             stats.copyFrom(oldData, false);
         }
 
-        stats.player = new WeakReference<EntityPlayerMP>(player);
+        stats.player = new WeakReference<>(player);
     }
 
     public static void checkGear(EntityPlayerMP player, GCPlayerStats GCPlayer, boolean forceSend) {
@@ -886,7 +886,7 @@ public class GCPlayerHandler {
                 iArray[i] = page == null ? -2 : page.getPageID();
             }
 
-            final List<Object> objList = new ArrayList<Object>();
+            final List<Object> objList = new ArrayList<>();
             objList.add(iArray);
 
             GalacticraftCore.packetPipeline.sendTo(

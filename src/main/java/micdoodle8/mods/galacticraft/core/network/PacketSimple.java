@@ -649,7 +649,7 @@ public class PacketSimple extends Packet implements IPacket {
                 final String teamName = (String) this.data.get(1);
                 final FlagData flagData = (FlagData) this.data.get(2);
                 final Vector3 teamColor = (Vector3) this.data.get(3);
-                final List<String> playerList = new ArrayList<String>();
+                final List<String> playerList = new ArrayList<>();
 
                 for (int i = 4; i < this.data.size(); i++) {
                     final String playerName = (String) this.data.get(i);
@@ -672,7 +672,7 @@ public class PacketSimple extends Packet implements IPacket {
                         (int) player.posZ);
                 break;
             case C_UPDATE_FOOTPRINT_LIST:
-                final List<Footprint> printList = new ArrayList<Footprint>();
+                final List<Footprint> printList = new ArrayList<>();
                 final long chunkKey = (Long) this.data.get(0);
                 for (int i = 1; i < this.data.size(); i++) {
                     final Footprint print = (Footprint) this.data.get(i);
@@ -686,7 +686,7 @@ public class PacketSimple extends Packet implements IPacket {
                 final long chunkKey0 = (Long) this.data.get(0);
                 final BlockVec3 position = (BlockVec3) this.data.get(1);
                 final List<Footprint> footprintList = ClientProxyCore.footprintRenderer.footprints.get(chunkKey0);
-                final List<Footprint> toRemove = new ArrayList<Footprint>();
+                final List<Footprint> toRemove = new ArrayList<>();
 
                 if (footprintList != null) {
                     for (final Footprint footprint : footprintList) {
@@ -1158,7 +1158,7 @@ public class PacketSimple extends Packet implements IPacket {
                 final String teamName = (String) this.data.get(1);
                 final FlagData flagData = (FlagData) this.data.get(2);
                 final Vector3 teamColor = (Vector3) this.data.get(3);
-                final List<String> playerList = new ArrayList<String>();
+                final List<String> playerList = new ArrayList<>();
 
                 for (int i = 4; i < this.data.size(); i++) {
                     playerList.add((String) this.data.get(i));

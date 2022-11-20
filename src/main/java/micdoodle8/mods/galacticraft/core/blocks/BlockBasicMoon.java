@@ -371,7 +371,7 @@ public class BlockBasicMoon extends BlockAdvancedTile
                 final List<Footprint> footprintList = footprintChunkMap.get(chunkKey);
 
                 if (footprintList != null && !footprintList.isEmpty()) {
-                    final List<Footprint> toRemove = new ArrayList<Footprint>();
+                    final List<Footprint> toRemove = new ArrayList<>();
 
                     for (final Footprint footprint : footprintList) {
                         if (footprint.position.x > x

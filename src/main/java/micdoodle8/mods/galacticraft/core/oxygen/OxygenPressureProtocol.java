@@ -26,7 +26,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class OxygenPressureProtocol {
-    public static final Map<Block, ArrayList<Integer>> nonPermeableBlocks = new HashMap<Block, ArrayList<Integer>>();
+    public static final Map<Block, ArrayList<Integer>> nonPermeableBlocks = new HashMap<>();
 
     static {
         for (final String s : ConfigManagerCore.sealableIDs) {
@@ -46,7 +46,7 @@ public class OxygenPressureProtocol {
                         GCLog.info("[config] External Sealable IDs: skipping duplicate entry '" + s + "'.");
                     }
                 } else {
-                    final ArrayList<Integer> list = new ArrayList<Integer>();
+                    final ArrayList<Integer> list = new ArrayList<>();
                     list.add(meta);
                     OxygenPressureProtocol.nonPermeableBlocks.put(bt.block, list);
                 }

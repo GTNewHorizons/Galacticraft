@@ -140,7 +140,7 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
 
             if (tileEntity != null) {
                 if (tileEntity instanceof TileEntityMinerBase) {
-                    this.masterTile = new WeakReference<TileEntityMinerBase>((TileEntityMinerBase) tileEntity);
+                    this.masterTile = new WeakReference<>((TileEntityMinerBase) tileEntity);
                 }
             }
         }

@@ -11,7 +11,7 @@ import net.minecraft.world.gen.structure.StructureComponent;
 public class StructureVillagePiecesMoon {
     public static ArrayList<StructureVillagePieceWeightMoon> getStructureVillageWeightedPieceList(
             Random par0Random, int par1) {
-        final ArrayList<StructureVillagePieceWeightMoon> var2 = new ArrayList<StructureVillagePieceWeightMoon>();
+        final ArrayList<StructureVillagePieceWeightMoon> var2 = new ArrayList<>();
         var2.add(new StructureVillagePieceWeightMoon(
                 StructureComponentVillageWoodHut.class,
                 5,

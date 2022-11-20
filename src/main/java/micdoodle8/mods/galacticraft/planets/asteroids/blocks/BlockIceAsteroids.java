@@ -58,7 +58,7 @@ public class BlockIceAsteroids extends BlockBreakable {
         player.addExhaustion(0.025F);
 
         if (this.canSilkHarvest(world, player, x, y, z, meta) && EnchantmentHelper.getSilkTouchModifier(player)) {
-            final ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+            final ArrayList<ItemStack> items = new ArrayList<>();
             final ItemStack itemstack = this.createStackedBlock(meta);
 
             if (itemstack != null) {

@@ -22,7 +22,7 @@ public abstract class TileEntityAdvanced extends TileEntity implements IPacketRe
     public int ticks = 0;
     private LinkedHashSet<Field> fieldCacheClient;
     private LinkedHashSet<Field> fieldCacheServer;
-    private final Map<Field, Object> lastSentData = new HashMap<Field, Object>();
+    private final Map<Field, Object> lastSentData = new HashMap<>();
     private boolean networkDataChanged = false;
 
     @Override
@@ -70,8 +70,8 @@ public abstract class TileEntityAdvanced extends TileEntity implements IPacketRe
 
     private void initFieldCache() {
         try {
-            this.fieldCacheClient = new LinkedHashSet<Field>();
-            this.fieldCacheServer = new LinkedHashSet<Field>();
+            this.fieldCacheClient = new LinkedHashSet<>();
+            this.fieldCacheServer = new LinkedHashSet<>();
 
             for (final Field field : this.getClass().getFields()) {
                 if (field.isAnnotationPresent(NetworkedField.class)) {
@@ -141,7 +141,7 @@ public abstract class TileEntityAdvanced extends TileEntity implements IPacketRe
         if (changed) {
             this.addExtraNetworkedData(sendData);
         } else {
-            final ArrayList<Object> prevSendData = new ArrayList<Object>(sendData);
+            final ArrayList<Object> prevSendData = new ArrayList<>(sendData);
 
             this.addExtraNetworkedData(sendData);
 

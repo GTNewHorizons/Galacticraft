@@ -48,7 +48,7 @@ public class MapUtil {
     public static AtomicBoolean calculatingMap = new AtomicBoolean();
     public static AtomicBoolean resetClientFlag = new AtomicBoolean();
     public static boolean doneOverworldTexture = false;
-    public static ArrayList<BlockVec3> biomeColours = new ArrayList<BlockVec3>(40);
+    public static ArrayList<BlockVec3> biomeColours = new ArrayList<>(40);
     public static final float[] parabolicField = new float[25];
     private static MapGen currentMap = null;
     private static MapGen slowMap = null;

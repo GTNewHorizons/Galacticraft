@@ -24,7 +24,7 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
     private static final float TIER2_CAPACITY = 2500000;
     private ItemStack[] containingItems = new ItemStack[2];
 
-    public final Set<EntityPlayer> playersUsing = new HashSet<EntityPlayer>();
+    public final Set<EntityPlayer> playersUsing = new HashSet<>();
     public int scaledEnergyLevel;
     public int lastScaledEnergyLevel;
     private float lastEnergy = 0;

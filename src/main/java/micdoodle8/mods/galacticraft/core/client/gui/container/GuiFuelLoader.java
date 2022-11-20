@@ -33,7 +33,7 @@ public class GuiFuelLoader extends GuiContainerGC {
             this.height,
             this);
 
-    private final List<String> fuelTankDesc = new ArrayList<String>();
+    private final List<String> fuelTankDesc = new ArrayList<>();
 
     public GuiFuelLoader(InventoryPlayer par1InventoryPlayer, TileEntityFuelLoader par2TileEntityAirDistributor) {
         super(new ContainerFuelLoader(par1InventoryPlayer, par2TileEntityAirDistributor));
@@ -69,7 +69,7 @@ public class GuiFuelLoader extends GuiContainerGC {
                 this.width,
                 this.height,
                 this));
-        final List<String> batterySlotDesc = new ArrayList<String>();
+        final List<String> batterySlotDesc = new ArrayList<>();
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.0"));
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(
@@ -81,7 +81,7 @@ public class GuiFuelLoader extends GuiContainerGC {
                 this.width,
                 this.height,
                 this));
-        final List<String> electricityDesc = new ArrayList<String>();
+        final List<String> electricityDesc = new ArrayList<>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         electricityDesc.add(EnumColor.YELLOW
                 + GCCoreUtil.translate("gui.energyStorage.desc.1")
@@ -148,7 +148,7 @@ public class GuiFuelLoader extends GuiContainerGC {
                 16,
                 fuelLevel);
 
-        final List<String> electricityDesc = new ArrayList<String>();
+        final List<String> electricityDesc = new ArrayList<>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         EnergyDisplayHelper.getEnergyDisplayTooltip(
                 this.fuelLoader.getEnergyStoredGC(), this.fuelLoader.getMaxEnergyStoredGC(), electricityDesc);

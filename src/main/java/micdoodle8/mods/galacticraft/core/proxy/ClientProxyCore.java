@@ -183,7 +183,7 @@ public class ClientProxyCore extends CommonProxyCore {
 
     public static FootprintRenderer footprintRenderer = new FootprintRenderer();
 
-    public static List<String> flagRequestsSent = new ArrayList<String>();
+    public static List<String> flagRequestsSent = new ArrayList<>();
 
     private static int renderIndexHeavyArmor;
     private static int renderIndexSensorGlasses;
@@ -209,7 +209,7 @@ public class ClientProxyCore extends CommonProxyCore {
 
     public static EnumRarity galacticraftItem = EnumHelper.addRarity("GCRarity", EnumChatFormatting.BLUE, "Space");
 
-    public static Map<String, String> capeMap = new HashMap<String, String>();
+    public static Map<String, String> capeMap = new HashMap<>();
 
     public static InventoryExtended dummyInventory = new InventoryExtended();
 

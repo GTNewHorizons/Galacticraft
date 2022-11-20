@@ -12,9 +12,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class MapGenDungeon {
-    public ArrayList<DungeonRoom> bossRooms = new ArrayList<DungeonRoom>();
-    public ArrayList<DungeonRoom> treasureRooms = new ArrayList<DungeonRoom>();
-    public ArrayList<DungeonRoom> otherRooms = new ArrayList<DungeonRoom>();
+    public ArrayList<DungeonRoom> bossRooms = new ArrayList<>();
+    public ArrayList<DungeonRoom> treasureRooms = new ArrayList<>();
+    public ArrayList<DungeonRoom> otherRooms = new ArrayList<>();
 
     public final Block DUNGEON_WALL_ID;
     public final int DUNGEON_WALL_META;
@@ -26,7 +26,7 @@ public class MapGenDungeon {
 
     public World worldObj;
 
-    private final ArrayList<DungeonRoom> rooms = new ArrayList<DungeonRoom>();
+    private final ArrayList<DungeonRoom> rooms = new ArrayList<>();
 
     public MapGenDungeon(Block wallID, int wallMeta, int range, int hallwayLength, int hallwayHeight) {
         this.DUNGEON_WALL_ID = wallID;
@@ -86,7 +86,7 @@ public class MapGenDungeon {
         MapGenDungeon.useArrays = useArrays;
         this.worldObj = world;
 
-        final List<DungeonBoundingBox> boundingBoxes = new ArrayList<DungeonBoundingBox>();
+        final List<DungeonBoundingBox> boundingBoxes = new ArrayList<>();
 
         final int length = rand.nextInt(4) + 5;
 
@@ -477,7 +477,7 @@ public class MapGenDungeon {
     }
 
     public void handleTileEntities(Random rand) {
-        final ArrayList<DungeonRoom> rooms = new ArrayList<DungeonRoom>();
+        final ArrayList<DungeonRoom> rooms = new ArrayList<>();
         rooms.addAll(this.rooms);
         this.rooms.clear();
         for (final DungeonRoom room : rooms) {

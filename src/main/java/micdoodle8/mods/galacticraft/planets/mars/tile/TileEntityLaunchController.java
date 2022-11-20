@@ -43,7 +43,7 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
     public boolean launchPadRemovalDisabled = true;
 
     private Ticket chunkLoadTicket;
-    private final List<ChunkCoordinates> connectedPads = new ArrayList<ChunkCoordinates>();
+    private final List<ChunkCoordinates> connectedPads = new ArrayList<>();
 
     @NetworkedField(targetSide = Side.CLIENT)
     public int frequency = -1;

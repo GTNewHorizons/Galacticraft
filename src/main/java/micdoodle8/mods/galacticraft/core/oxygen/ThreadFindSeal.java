@@ -61,7 +61,7 @@ public class ThreadFindSeal {
                 sealer.getWorldObj(),
                 new BlockVec3(sealer).translate(0, 1, 0),
                 sealer.getFindSealChecks(),
-                new ArrayList<TileEntityOxygenSealer>(Arrays.asList(sealer)));
+                new ArrayList<>(Arrays.asList(sealer)));
     }
 
     @SuppressWarnings("unchecked")
@@ -72,7 +72,7 @@ public class ThreadFindSeal {
         this.sealers = sealers;
         this.foundAmbientThermal = false;
         this.checkedInit();
-        this.torchesToUpdate = new LinkedList<BlockVec3>();
+        this.torchesToUpdate = new LinkedList<>();
 
         this.sealersAround = TileEntityOxygenSealer.getSealersAround(world, head.x, head.y, head.z, 1024 * 1024);
 
@@ -138,10 +138,10 @@ public class ThreadFindSeal {
         this.foundAmbientThermal =
                 tile instanceof TileEntityOxygenSealer && ((TileEntityOxygenSealer) tile).thermalControlEnabled();
         this.checkedAdd(this.head.clone());
-        this.currentLayer = new LinkedList<BlockVec3>();
-        this.airToReplace = new LinkedList<BlockVec3>();
-        this.airToReplaceBright = new LinkedList<BlockVec3>();
-        this.ambientThermalTracked = new LinkedList<BlockVec3>();
+        this.currentLayer = new LinkedList<>();
+        this.airToReplace = new LinkedList<>();
+        this.airToReplaceBright = new LinkedList<>();
+        this.ambientThermalTracked = new LinkedList<>();
 
         if (this.checkCount > 0) {
             this.currentLayer.add(this.head);
@@ -183,9 +183,9 @@ public class ThreadFindSeal {
         } else {
             int checkedSave = this.checkedSize;
             this.checkedClear();
-            this.breatheableToReplace = new LinkedList<BlockVec3>();
-            this.breatheableToReplaceBright = new LinkedList<BlockVec3>();
-            this.otherSealers = new LinkedList<TileEntityOxygenSealer>();
+            this.breatheableToReplace = new LinkedList<>();
+            this.breatheableToReplaceBright = new LinkedList<>();
+            this.otherSealers = new LinkedList<>();
             // unseal() will mark breatheableAir blocks for change as it
             // finds them, also searches for unchecked sealers
             this.currentLayer.clear();
@@ -215,7 +215,7 @@ public class ThreadFindSeal {
                         final BlockVec3 newhead = new BlockVec3(otherSealer).translate(0, 1, 0);
                         this.sealed = true;
                         this.checkCount = otherSealer.getFindSealChecks();
-                        this.sealers = new LinkedList<TileEntityOxygenSealer>();
+                        this.sealers = new LinkedList<>();
                         this.sealers.add(otherSealer);
                         if (otherSealer.thermalControlEnabled()) {
                             this.foundAmbientThermal = true;
@@ -225,7 +225,7 @@ public class ThreadFindSeal {
                         this.currentLayer.clear();
                         this.airToReplace.clear();
                         this.airToReplaceBright.clear();
-                        this.torchesToUpdate = new LinkedList<BlockVec3>();
+                        this.torchesToUpdate = new LinkedList<>();
                         this.currentLayer.add(newhead.clone());
                         if (newhead.x < -29990000
                                 || newhead.z < -29990000
@@ -337,7 +337,7 @@ public class ThreadFindSeal {
         if (!this.airToReplace.isEmpty()
                 || !this.airToReplaceBright.isEmpty()
                 || !this.ambientThermalTracked.isEmpty()) {
-            final List<ScheduledBlockChange> changeList = new LinkedList<ScheduledBlockChange>();
+            final List<ScheduledBlockChange> changeList = new LinkedList<>();
             final Block breatheableAirID = GCBlocks.breatheableAir;
             int metadata = 0;
             if (ambientThermal) {
@@ -365,7 +365,7 @@ public class ThreadFindSeal {
 
     private void makeSealBad() {
         if (!this.breatheableToReplace.isEmpty() || !this.breatheableToReplaceBright.isEmpty()) {
-            final List<ScheduledBlockChange> changeList = new LinkedList<ScheduledBlockChange>();
+            final List<ScheduledBlockChange> changeList = new LinkedList<>();
             for (final BlockVec3 checkedVec : this.breatheableToReplace) {
                 changeList.add(new ScheduledBlockChange(checkedVec.clone(), Blocks.air, 0, 2));
             }
@@ -826,7 +826,7 @@ public class ThreadFindSeal {
     }
 
     public List<BlockVec3> checkedAll() {
-        final List<BlockVec3> list = new LinkedList<BlockVec3>();
+        final List<BlockVec3> list = new LinkedList<>();
         for (int i = 0; i < 256; i++) {
             if (this.buckets[i].size() == 0) {
                 continue;

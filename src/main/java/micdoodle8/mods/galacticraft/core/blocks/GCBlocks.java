@@ -82,8 +82,8 @@ public class GCBlocks {
 
     public static final Material machine = new Material(MapColor.ironColor);
 
-    public static ArrayList<Block> hiddenBlocks = new ArrayList<Block>();
-    public static ArrayList<Block> otherModTorchesLit = new ArrayList<Block>();
+    public static ArrayList<Block> hiddenBlocks = new ArrayList<>();
+    public static ArrayList<Block> otherModTorchesLit = new ArrayList<>();
 
     public static void initBlocks() {
         GCBlocks.breatheableAir = new BlockBreathableAir("breatheableAir");

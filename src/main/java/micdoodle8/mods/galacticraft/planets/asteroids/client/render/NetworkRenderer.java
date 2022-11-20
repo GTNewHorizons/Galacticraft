@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 public class NetworkRenderer {
     static long t = -1;
-    static List<TileEntityBeamOutput> nodes = new ArrayList<TileEntityBeamOutput>();
+    static List<TileEntityBeamOutput> nodes = new ArrayList<>();
 
     public static void renderNetworks(World world, float partialTicks) {
         if (System.currentTimeMillis() > t + 1000) {

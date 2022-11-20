@@ -8,9 +8,9 @@ import java.util.Map.Entry;
 import net.minecraft.item.ItemStack;
 
 public class CircuitFabricatorRecipes {
-    private static HashMap<ItemStack[], ItemStack> recipes = new HashMap<ItemStack[], ItemStack>();
+    private static HashMap<ItemStack[], ItemStack> recipes = new HashMap<>();
 
-    public static ArrayList<ArrayList<ItemStack>> slotValidItems = new ArrayList<ArrayList<ItemStack>>(5);
+    public static ArrayList<ArrayList<ItemStack>> slotValidItems = new ArrayList<>(5);
 
     /**
      * Input list must be ItemStack array with 5 elements, contain null if no item
@@ -35,7 +35,7 @@ public class CircuitFabricatorRecipes {
         // First initialise the ArrayList if this is the first time it's used
         if (CircuitFabricatorRecipes.slotValidItems.size() == 0) {
             for (int i = 0; i < 5; i++) {
-                final ArrayList<ItemStack> entry = new ArrayList<ItemStack>();
+                final ArrayList<ItemStack> entry = new ArrayList<>();
                 CircuitFabricatorRecipes.slotValidItems.add(entry);
             }
         }

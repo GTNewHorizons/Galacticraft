@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
 public abstract class TileEntityBeamOutput extends TileEntityAdvanced implements ILaserNode {
-    public LinkedList<ILaserNode> nodeList = new LinkedList<ILaserNode>();
+    public LinkedList<ILaserNode> nodeList = new LinkedList<>();
 
     @NetworkedField(targetSide = Side.CLIENT)
     public BlockVec3 targetVec = BlockVec3.INVALID_VECTOR;

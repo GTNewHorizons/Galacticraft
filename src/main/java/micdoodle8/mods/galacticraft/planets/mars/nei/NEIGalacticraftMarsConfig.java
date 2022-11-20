@@ -19,14 +19,10 @@ import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 import net.minecraft.item.ItemStack;
 
 public class NEIGalacticraftMarsConfig implements IConfigureNEI {
-    private static HashMap<ArrayList<PositionedStack>, PositionedStack> rocketBenchRecipes =
-            new HashMap<ArrayList<PositionedStack>, PositionedStack>();
-    private static HashMap<ArrayList<PositionedStack>, PositionedStack> cargoBenchRecipes =
-            new HashMap<ArrayList<PositionedStack>, PositionedStack>();
-    private static HashMap<PositionedStack, PositionedStack> liquefierRecipes =
-            new HashMap<PositionedStack, PositionedStack>();
-    private static HashMap<PositionedStack, PositionedStack> synthesizerRecipes =
-            new HashMap<PositionedStack, PositionedStack>();
+    private static HashMap<ArrayList<PositionedStack>, PositionedStack> rocketBenchRecipes = new HashMap<>();
+    private static HashMap<ArrayList<PositionedStack>, PositionedStack> cargoBenchRecipes = new HashMap<>();
+    private static HashMap<PositionedStack, PositionedStack> liquefierRecipes = new HashMap<>();
+    private static HashMap<PositionedStack, PositionedStack> synthesizerRecipes = new HashMap<>();
     public static GCMarsNEIHighlightHandler planetsHighlightHandler = new GCMarsNEIHighlightHandler();
 
     @Override
@@ -94,7 +90,7 @@ public class NEIGalacticraftMarsConfig implements IConfigureNEI {
         // Handled by GalaxySpace
         // final int changeY = 15;
 
-        final ArrayList<PositionedStack> input = new ArrayList<PositionedStack>();
+        final ArrayList<PositionedStack> input = new ArrayList<>();
 
         /*
          * input1.add(new PositionedStack(new ItemStack(GCItems.partNoseCone), 45, -8 +
@@ -127,7 +123,7 @@ public class NEIGalacticraftMarsConfig implements IConfigureNEI {
          * changeY));
          */
 
-        ArrayList<PositionedStack> input2 = new ArrayList<PositionedStack>(); /*
+        ArrayList<PositionedStack> input2 = new ArrayList<>(); /*
          * input2.add(new PositionedStack(new
          * ItemStack(Blocks.chest), 90, -15 +
          * changeY));

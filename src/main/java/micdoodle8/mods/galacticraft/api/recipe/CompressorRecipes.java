@@ -16,8 +16,8 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class CompressorRecipes {
-    private static List<IRecipe> recipes = new ArrayList<IRecipe>();
-    private static List<IRecipe> recipesAdventure = new ArrayList<IRecipe>();
+    private static List<IRecipe> recipes = new ArrayList<>();
+    private static List<IRecipe> recipesAdventure = new ArrayList<>();
     private static boolean adventureOnly = false;
 
     public static ShapedRecipes addRecipe(ItemStack output, Object... inputList) {
@@ -45,7 +45,7 @@ public class CompressorRecipes {
 
         HashMap<Character, ItemStack> hashmap;
 
-        for (hashmap = new HashMap<Character, ItemStack>(); i < inputList.length; i += 2) {
+        for (hashmap = new HashMap<>(); i < inputList.length; i += 2) {
             final Character character = (Character) inputList[i];
             ItemStack itemstack1 = null;
 
@@ -237,7 +237,7 @@ public class CompressorRecipes {
     }
 
     private static boolean matchesShapeless(ShapelessOreRecipe recipe, IInventory var1, World par2World) {
-        final ArrayList<Object> required = new ArrayList<Object>(recipe.getInput());
+        final ArrayList<Object> required = new ArrayList<>(recipe.getInput());
 
         for (int x = 0; x < var1.getSizeInventory(); x++) {
             final ItemStack slot = var1.getStackInSlot(x);

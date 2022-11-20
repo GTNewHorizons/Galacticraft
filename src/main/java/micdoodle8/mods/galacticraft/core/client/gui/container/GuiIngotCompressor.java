@@ -31,7 +31,7 @@ public class GuiIngotCompressor extends GuiContainerGC {
     @Override
     public void initGui() {
         super.initGui();
-        this.processInfoRegion.tooltipStrings = new ArrayList<String>();
+        this.processInfoRegion.tooltipStrings = new ArrayList<>();
         this.processInfoRegion.xPosition = (this.width - this.xSize) / 2 + 77;
         this.processInfoRegion.yPosition = (this.height - this.ySize) / 2 + 30;
         this.processInfoRegion.parentWidth = this.width;
@@ -87,7 +87,7 @@ public class GuiIngotCompressor extends GuiContainerGC {
             process = 0;
         }
 
-        final List<String> processDesc = new ArrayList<String>();
+        final List<String> processDesc = new ArrayList<>();
         processDesc.clear();
         processDesc.add(GCCoreUtil.translate("gui.electricCompressor.desc.0") + ": " + process + "%");
         this.processInfoRegion.tooltipStrings = processDesc;

@@ -18,7 +18,7 @@ public class RoomChestsMars extends DungeonRoom {
     int sizeY;
     int sizeZ;
 
-    private final ArrayList<ChunkCoordinates> chests = new ArrayList<ChunkCoordinates>();
+    private final ArrayList<ChunkCoordinates> chests = new ArrayList<>();
 
     public RoomChestsMars(MapGenDungeon dungeon, int posX, int posY, int posZ, ForgeDirection entranceDir) {
         super(dungeon, posX, posY, posZ, entranceDir);

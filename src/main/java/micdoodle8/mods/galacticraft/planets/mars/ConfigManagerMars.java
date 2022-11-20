@@ -13,7 +13,7 @@ public class ConfigManagerMars {
     public static boolean loaded;
 
     public static Configuration config;
-    public static List<String> propOrder = new ArrayList<String>();
+    public static List<String> propOrder = new ArrayList<>();
 
     public ConfigManagerMars(File file, boolean update) {
         if (!ConfigManagerMars.loaded) {

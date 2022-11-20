@@ -195,7 +195,7 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
 
     @Override
     public ArrayList<Object> getNetworkedData() {
-        final ArrayList<Object> objList = new ArrayList<Object>();
+        final ArrayList<Object> objList = new ArrayList<>();
         objList.addAll(super.getNetworkedData());
         if (this.worldObj.isRemote && this.hasReceivedPacket && this.groundHitCount <= 14
                 || !this.worldObj.isRemote && this.groundHitCount == 14) {

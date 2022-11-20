@@ -45,9 +45,9 @@ public class TileEntityTerraformer extends TileBaseElectricBlockWithInventory
     public boolean lastActive;
     public static final int WATTS_PER_TICK = 1;
     private ItemStack[] containingItems = new ItemStack[14];
-    private final ArrayList<BlockVec3> terraformableBlocksList = new ArrayList<BlockVec3>();
-    private final ArrayList<BlockVec3> grassBlockList = new ArrayList<BlockVec3>();
-    private final ArrayList<BlockVec3> grownTreesList = new ArrayList<BlockVec3>();
+    private final ArrayList<BlockVec3> terraformableBlocksList = new ArrayList<>();
+    private final ArrayList<BlockVec3> grassBlockList = new ArrayList<>();
+    private final ArrayList<BlockVec3> grownTreesList = new ArrayList<>();
 
     @NetworkedField(targetSide = Side.CLIENT)
     public int terraformableBlocksListSize = 0; // used for server->client ease
@@ -166,7 +166,7 @@ public class TileEntityTerraformer extends TileBaseElectricBlockWithInventory
         }
 
         if (!this.worldObj.isRemote && this.terraformableBlocksList.size() > 0 && this.ticks % 15 == 0) {
-            final ArrayList<BlockVec3> terraformableBlocks2 = new ArrayList<BlockVec3>(this.terraformableBlocksList);
+            final ArrayList<BlockVec3> terraformableBlocks2 = new ArrayList<>(this.terraformableBlocksList);
 
             final int randomIndex = this.worldObj.rand.nextInt(this.terraformableBlocksList.size());
             final BlockVec3 vec = terraformableBlocks2.get(randomIndex);

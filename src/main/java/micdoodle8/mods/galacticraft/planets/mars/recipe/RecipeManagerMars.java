@@ -289,7 +289,7 @@ public class RecipeManagerMars {
 
         // Handled by Galaxy Space
         // Schematic
-        final HashMap<Integer, ItemStack> input = new HashMap<Integer, ItemStack>();
+        final HashMap<Integer, ItemStack> input = new HashMap<>();
         /*
          * input.put(1, new ItemStack(GCItems.partNoseCone)); input.put(2, new
          * ItemStack(MarsItems.marsItemBasic, 1, 3)); input.put(3, new
@@ -312,7 +312,7 @@ public class RecipeManagerMars {
          * input);
          */
 
-        HashMap<Integer, ItemStack> input2 = new HashMap<Integer, ItemStack>(input); /*
+        HashMap<Integer, ItemStack> input2 = new HashMap<>(input); /*
                          * input2.put(19, new ItemStack(Blocks.chest)); input2.put(20, null);
                          * input2.put(21, null); MarsUtil.addRocketBenchT2Recipe(new
                          * ItemStack(MarsItems.spaceship, 1, 1), input2);
@@ -367,13 +367,13 @@ public class RecipeManagerMars {
             input.put(i, new ItemStack(GCItems.partFins));
         }
 
-        input2 = new HashMap<Integer, ItemStack>(input);
+        input2 = new HashMap<>(input);
         input2.put(21, RecipeUtil.getChestItemStack(1, 3));
         MarsUtil.adCargoRocketRecipe(new ItemStack(MarsItems.spaceship, 1, 11), input2);
-        input2 = new HashMap<Integer, ItemStack>(input);
+        input2 = new HashMap<>(input);
         input2.put(21, RecipeUtil.getChestItemStack(1, 0));
         MarsUtil.adCargoRocketRecipe(new ItemStack(MarsItems.spaceship, 1, 12), input2);
-        input2 = new HashMap<Integer, ItemStack>(input);
+        input2 = new HashMap<>(input);
         input2.put(21, RecipeUtil.getChestItemStack(1, 1));
         MarsUtil.adCargoRocketRecipe(new ItemStack(MarsItems.spaceship, 1, 13), input2);
 

@@ -42,7 +42,7 @@ public class TileEntityIngotCompressor extends TileEntityAdvanced implements IIn
     private ItemStack producingStack = null;
     private ItemStack[] containingItems = new ItemStack[2];
     public PersistantInventoryCrafting compressingCraftMatrix = new PersistantInventoryCrafting();
-    public final Set<EntityPlayer> playersUsing = new HashSet<EntityPlayer>();
+    public final Set<EntityPlayer> playersUsing = new HashSet<>();
     private static Random randnum = new Random();
 
     @Override
@@ -145,7 +145,7 @@ public class TileEntityIngotCompressor extends TileEntityAdvanced implements IIn
                 }
             } else if (recipe instanceof ShapelessOreRecipe) {
                 @SuppressWarnings("unchecked")
-                final ArrayList<Object> required = new ArrayList<Object>(((ShapelessOreRecipe) recipe).getInput());
+                final ArrayList<Object> required = new ArrayList<>(((ShapelessOreRecipe) recipe).getInput());
 
                 final Iterator<Object> req = required.iterator();
 

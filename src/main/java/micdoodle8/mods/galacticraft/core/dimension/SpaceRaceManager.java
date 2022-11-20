@@ -112,7 +112,7 @@ public class SpaceRaceManager {
 
     public static void sendSpaceRaceData(EntityPlayerMP toPlayer, SpaceRace spaceRace) {
         if (spaceRace != null) {
-            final List<Object> objList = new ArrayList<Object>();
+            final List<Object> objList = new ArrayList<>();
             objList.add(spaceRace.getSpaceRaceID());
             objList.add(spaceRace.getTeamName());
             objList.add(spaceRace.getFlagData());
@@ -132,7 +132,7 @@ public class SpaceRaceManager {
     }
 
     public static ImmutableSet<SpaceRace> getSpaceRaces() {
-        return ImmutableSet.copyOf(new HashSet<SpaceRace>(SpaceRaceManager.spaceRaces));
+        return ImmutableSet.copyOf(new HashSet<>(SpaceRaceManager.spaceRaces));
     }
 
     public static void onPlayerRemoval(String player, SpaceRace race) {
@@ -149,7 +149,7 @@ public class SpaceRaceManager {
             }
         }
 
-        final List<String> playerList = new ArrayList<String>();
+        final List<String> playerList = new ArrayList<>();
         playerList.add(player);
         final SpaceRace newRace = SpaceRaceManager.addSpaceRace(
                 new SpaceRace(playerList, SpaceRace.DEFAULT_NAME, new FlagData(48, 32), new Vector3(1, 1, 1)));

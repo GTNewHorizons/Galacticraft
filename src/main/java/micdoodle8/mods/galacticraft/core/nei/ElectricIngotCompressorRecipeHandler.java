@@ -31,12 +31,11 @@ public class ElectricIngotCompressorRecipeHandler extends TemplateRecipeHandler 
     }
 
     public Set<Entry<ArrayList<PositionedStack>, PositionedStack>> getRecipes() {
-        final HashMap<ArrayList<PositionedStack>, PositionedStack> recipes =
-                new HashMap<ArrayList<PositionedStack>, PositionedStack>();
+        final HashMap<ArrayList<PositionedStack>, PositionedStack> recipes = new HashMap<>();
 
         for (final Entry<HashMap<Integer, PositionedStack>, PositionedStack> stack :
                 NEIGalacticraftConfig.getIngotCompressorRecipes()) {
-            final ArrayList<PositionedStack> inputStacks = new ArrayList<PositionedStack>();
+            final ArrayList<PositionedStack> inputStacks = new ArrayList<>();
 
             for (final Map.Entry<Integer, PositionedStack> input :
                     stack.getKey().entrySet()) {
@@ -141,7 +140,7 @@ public class ElectricIngotCompressorRecipeHandler extends TemplateRecipeHandler 
         public ElectricCompressorRecipe(ArrayList<PositionedStack> pstack1, PositionedStack pstack2) {
             super();
 
-            final ArrayList<PositionedStack> ingred = new ArrayList<PositionedStack>();
+            final ArrayList<PositionedStack> ingred = new ArrayList<>();
 
             for (final PositionedStack stack : pstack1) {
                 final PositionedStack stack2 = stack.copy();
@@ -154,9 +153,7 @@ public class ElectricIngotCompressorRecipeHandler extends TemplateRecipeHandler 
         }
 
         public ElectricCompressorRecipe(Map.Entry<ArrayList<PositionedStack>, PositionedStack> recipe) {
-            this(
-                    new ArrayList<PositionedStack>(recipe.getKey()),
-                    recipe.getValue().copy());
+            this(new ArrayList<>(recipe.getKey()), recipe.getValue().copy());
         }
 
         @Override

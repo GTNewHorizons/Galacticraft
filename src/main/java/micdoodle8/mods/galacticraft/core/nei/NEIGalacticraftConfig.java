@@ -28,16 +28,12 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class NEIGalacticraftConfig implements IConfigureNEI {
-    private static HashMap<HashMap<Integer, PositionedStack>, PositionedStack> rocketBenchRecipes =
-            new HashMap<HashMap<Integer, PositionedStack>, PositionedStack>();
-    private static HashMap<HashMap<Integer, PositionedStack>, PositionedStack> buggyBenchRecipes =
-            new HashMap<HashMap<Integer, PositionedStack>, PositionedStack>();
-    private static HashMap<PositionedStack, PositionedStack> refineryRecipes =
-            new HashMap<PositionedStack, PositionedStack>();
+    private static HashMap<HashMap<Integer, PositionedStack>, PositionedStack> rocketBenchRecipes = new HashMap<>();
+    private static HashMap<HashMap<Integer, PositionedStack>, PositionedStack> buggyBenchRecipes = new HashMap<>();
+    private static HashMap<PositionedStack, PositionedStack> refineryRecipes = new HashMap<>();
     private static HashMap<HashMap<Integer, PositionedStack>, PositionedStack> circuitFabricatorRecipes =
-            new HashMap<HashMap<Integer, PositionedStack>, PositionedStack>();
-    private static HashMap<HashMap<Integer, PositionedStack>, PositionedStack> ingotCompressorRecipes =
-            new HashMap<HashMap<Integer, PositionedStack>, PositionedStack>();
+            new HashMap<>();
+    private static HashMap<HashMap<Integer, PositionedStack>, PositionedStack> ingotCompressorRecipes = new HashMap<>();
 
     @Override
     public void loadConfig() {
@@ -146,7 +142,7 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
     private void addBuggyRecipes() {
         final int x = BuggyRecipeHandler.tX - BuggyRecipeHandler.x;
         final int y = BuggyRecipeHandler.tY - BuggyRecipeHandler.y;
-        final HashMap<Integer, PositionedStack> input = new HashMap<Integer, PositionedStack>();
+        final HashMap<Integer, PositionedStack> input = new HashMap<>();
         input.put(1, new PositionedStack(new ItemStack(GCItems.basicItem, 1, 19), 62 - x, 19 - y));
         input.put(2, new PositionedStack(new ItemStack(GCItems.partBuggy, 1, 1), 62 - x, 55 - y));
         if (GalacticraftCore.isGalaxySpaceLoaded) {
@@ -238,7 +234,7 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
     }
 
     private void addCircuitFabricatorRecipes() {
-        final HashMap<Integer, PositionedStack> input1 = new HashMap<Integer, PositionedStack>();
+        final HashMap<Integer, PositionedStack> input1 = new HashMap<>();
         input1.put(0, new PositionedStack(new ItemStack(Items.diamond), 10, 22));
         final int siliconCount =
                 OreDictionary.getOres(ConfigManagerCore.otherModsSilicon).size();
@@ -258,12 +254,12 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
                 new PositionedStack(
                         new ItemStack(GCItems.basicItem, ConfigManagerCore.quickMode ? 5 : 3, 13), 147, 91));
 
-        HashMap<Integer, PositionedStack> input2 = new HashMap<Integer, PositionedStack>(input1);
+        HashMap<Integer, PositionedStack> input2 = new HashMap<>(input1);
         input2.put(4, new PositionedStack(new ItemStack(Items.dye, 1, 4), 140, 25));
         this.registerCircuitFabricatorRecipe(
                 input2, new PositionedStack(new ItemStack(GCItems.basicItem, 9, 12), 147, 91));
 
-        input2 = new HashMap<Integer, PositionedStack>(input1);
+        input2 = new HashMap<>(input1);
         input2.put(4, new PositionedStack(new ItemStack(Items.repeater), 140, 25));
         this.registerCircuitFabricatorRecipe(
                 input2,
@@ -273,7 +269,7 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
 
     private void addIngotCompressorRecipes() {
         for (final IRecipe rec : CompressorRecipes.getRecipeList()) {
-            final HashMap<Integer, PositionedStack> input1 = new HashMap<Integer, PositionedStack>();
+            final HashMap<Integer, PositionedStack> input1 = new HashMap<>();
             if (rec instanceof ShapedRecipes) {
                 final ShapedRecipes recipe = (ShapedRecipes) rec;
 

@@ -22,7 +22,7 @@ public abstract class EntityAdvanced extends Entity implements IPacketReceiver {
     protected long ticks = 0;
     private LinkedHashSet<Field> fieldCacheClient;
     private LinkedHashSet<Field> fieldCacheServer;
-    private final Map<Field, Object> lastSentData = new HashMap<Field, Object>();
+    private final Map<Field, Object> lastSentData = new HashMap<>();
     private boolean networkDataChanged = false;
 
     public EntityAdvanced(World world) {
@@ -31,7 +31,7 @@ public abstract class EntityAdvanced extends Entity implements IPacketReceiver {
         if (world != null && world.isRemote) {
             // Empty packet client->server just to kickstart the server into sending this
             // client an initial packet
-            this.fieldCacheServer = new LinkedHashSet<Field>();
+            this.fieldCacheServer = new LinkedHashSet<>();
             GalacticraftCore.packetPipeline.sendToServer(new PacketDynamic(this));
         }
     }
@@ -147,8 +147,8 @@ public abstract class EntityAdvanced extends Entity implements IPacketReceiver {
     }
 
     private void initFieldCache() throws IllegalArgumentException, IllegalAccessException {
-        this.fieldCacheClient = new LinkedHashSet<Field>();
-        this.fieldCacheServer = new LinkedHashSet<Field>();
+        this.fieldCacheClient = new LinkedHashSet<>();
+        this.fieldCacheServer = new LinkedHashSet<>();
 
         for (final Field field : this.getClass().getFields()) {
             if (field.isAnnotationPresent(NetworkedField.class)) {

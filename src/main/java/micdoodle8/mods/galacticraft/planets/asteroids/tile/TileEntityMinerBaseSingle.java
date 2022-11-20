@@ -8,7 +8,7 @@ public class TileEntityMinerBaseSingle extends TileEntity {
     @Override
     public void updateEntity() {
         if (!this.worldObj.isRemote) {
-            final ArrayList<TileEntity> attachedBaseBlocks = new ArrayList<TileEntity>();
+            final ArrayList<TileEntity> attachedBaseBlocks = new ArrayList<>();
 
             SEARCH:
             for (int x = this.xCoord; x < this.xCoord + 2; x++) {

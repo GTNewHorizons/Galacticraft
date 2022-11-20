@@ -65,7 +65,7 @@ public class GalaxyRegistry {
             final Planet planet = moon.getParentPlanet();
             List<Moon> listOfMoons = GalaxyRegistry.moonList.get(planet);
             if (listOfMoons == null) {
-                listOfMoons = new ArrayList<Moon>();
+                listOfMoons = new ArrayList<>();
             }
             listOfMoons.add(moon);
             GalaxyRegistry.moonList.put(planet, listOfMoons);
@@ -76,7 +76,7 @@ public class GalaxyRegistry {
             final CelestialBody celestialBody = satellite.getParentPlanet();
             List<Satellite> satelliteList1 = GalaxyRegistry.satelliteList.get(celestialBody);
             if (satelliteList1 == null) {
-                satelliteList1 = new ArrayList<Satellite>();
+                satelliteList1 = new ArrayList<>();
             }
             satelliteList1.add(satellite);
             GalaxyRegistry.satelliteList.put(celestialBody, satelliteList1);
@@ -86,7 +86,7 @@ public class GalaxyRegistry {
             final SolarSystem solarSystem = planet.getParentSolarSystem();
             List<Planet> planetList = GalaxyRegistry.solarSystemList.get(solarSystem);
             if (planetList == null) {
-                planetList = new ArrayList<Planet>();
+                planetList = new ArrayList<>();
             }
             planetList.add(planet);
             GalaxyRegistry.solarSystemList.put(solarSystem, planetList);
@@ -97,7 +97,7 @@ public class GalaxyRegistry {
         final List<Planet> solarSystemListLocal = GalaxyRegistry.solarSystemList.get(solarSystem);
 
         if (solarSystemListLocal == null) {
-            return new ArrayList<Planet>();
+            return new ArrayList<>();
         }
 
         return ImmutableList.copyOf(solarSystemListLocal);
@@ -107,7 +107,7 @@ public class GalaxyRegistry {
         final List<Moon> moonListLocal = GalaxyRegistry.moonList.get(planet);
 
         if (moonListLocal == null) {
-            return new ArrayList<Moon>();
+            return new ArrayList<>();
         }
 
         return ImmutableList.copyOf(moonListLocal);
@@ -117,7 +117,7 @@ public class GalaxyRegistry {
         final List<Satellite> satelliteList1 = GalaxyRegistry.satelliteList.get(celestialBody);
 
         if (satelliteList1 == null) {
-            return new ArrayList<Satellite>();
+            return new ArrayList<>();
         }
 
         return ImmutableList.copyOf(satelliteList1);

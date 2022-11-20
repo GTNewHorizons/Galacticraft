@@ -143,7 +143,7 @@ public class ConfigManagerCore {
     }
 
     public static void syncConfig(boolean load) {
-        final List<String> propOrder = new ArrayList<String>();
+        final List<String> propOrder = new ArrayList<>();
 
         try {
             Property prop;
@@ -744,7 +744,7 @@ public class ConfigManagerCore {
         }
 
         if (foundCount > 0) {
-            final List<Integer> idArray = new ArrayList<Integer>(Ints.asList(ConfigManagerCore.staticLoadDimensions));
+            final List<Integer> idArray = new ArrayList<>(Ints.asList(ConfigManagerCore.staticLoadDimensions));
             idArray.removeAll(Collections.singleton(idToRemove));
 
             ConfigManagerCore.staticLoadDimensions = new int[idArray.size()];
@@ -811,7 +811,7 @@ public class ConfigManagerCore {
     }
 
     public static List<IConfigElement> getConfigElements() {
-        final List<IConfigElement> list = new ArrayList<IConfigElement>();
+        final List<IConfigElement> list = new ArrayList<>();
         list.addAll(new ConfigElement(config.getCategory(Constants.CONFIG_CATEGORY_DIMENSIONS)).getChildElements());
         list.addAll(new ConfigElement(config.getCategory(Constants.CONFIG_CATEGORY_SCHEMATIC)).getChildElements());
         list.addAll(new ConfigElement(config.getCategory(Constants.CONFIG_CATEGORY_ACHIEVEMENTS)).getChildElements());

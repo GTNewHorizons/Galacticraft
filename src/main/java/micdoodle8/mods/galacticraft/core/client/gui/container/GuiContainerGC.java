@@ -11,7 +11,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public abstract class GuiContainerGC extends GuiContainer {
-    public List<GuiElementInfoRegion> infoRegions = new ArrayList<GuiElementInfoRegion>();
+    public List<GuiElementInfoRegion> infoRegions = new ArrayList<>();
 
     public GuiContainerGC(Container container) {
         super(container);

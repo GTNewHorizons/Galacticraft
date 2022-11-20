@@ -22,7 +22,7 @@ public abstract class WorldChunkManagerSpace extends WorldChunkManager {
 
     public WorldChunkManagerSpace() {
         this.biomeCache = new BiomeCache(this);
-        this.biomesToSpawnIn = new ArrayList<BiomeGenBase>();
+        this.biomesToSpawnIn = new ArrayList<>();
         this.biomesToSpawnIn.add(this.getBiome());
     }
 

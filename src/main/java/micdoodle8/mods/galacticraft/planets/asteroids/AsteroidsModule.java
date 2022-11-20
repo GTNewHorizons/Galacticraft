@@ -193,7 +193,7 @@ public class AsteroidsModule implements IPlanetsModule {
         GalacticraftRegistry.registerTeleportType(WorldProviderAsteroids.class, new TeleportTypeAsteroids());
 
         // Handled by Galaxy Space
-        final HashMap<Integer, ItemStack> input = new HashMap<Integer, ItemStack>();
+        final HashMap<Integer, ItemStack> input = new HashMap<>();
         /*
          * input.put(1, new ItemStack(AsteroidsItems.heavyNoseCone)); input.put(2, new
          * ItemStack(AsteroidsItems.basicItem, 1, 0)); input.put(3, new

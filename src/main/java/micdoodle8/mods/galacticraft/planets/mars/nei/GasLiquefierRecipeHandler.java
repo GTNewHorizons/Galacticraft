@@ -160,7 +160,7 @@ public class GasLiquefierRecipeHandler extends TemplateRecipeHandler {
         }
 
         if (this.ticksPassed % 144 > 40) {
-            final ArrayList<PositionedStack> stacks = new ArrayList<PositionedStack>();
+            final ArrayList<PositionedStack> stacks = new ArrayList<>();
             stacks.add(
                     new PositionedStack(new ItemStack(inputItem, 1, inputItem.getMaxDamage()), input.relx, input.rely));
             return stacks;

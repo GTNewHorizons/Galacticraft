@@ -331,7 +331,7 @@ public class BlockUnlitTorch extends Block implements IOxygenReliantBlock {
 
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-        final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+        final ArrayList<ItemStack> ret = new ArrayList<>();
         ret.add(new ItemStack(this.litVersion));
         return ret;
     }

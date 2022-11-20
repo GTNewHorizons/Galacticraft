@@ -134,7 +134,7 @@ public class TileEntityDungeonSpawner extends TileEntityAdvanced {
     public void playSpawnSound(Entity entity) {}
 
     public List<Class<? extends EntityLiving>> getDisabledCreatures() {
-        final List<Class<? extends EntityLiving>> list = new ArrayList<Class<? extends EntityLiving>>();
+        final List<Class<? extends EntityLiving>> list = new ArrayList<>();
         list.add(EntityEvolvedSkeleton.class);
         list.add(EntityEvolvedCreeper.class);
         list.add(EntityEvolvedZombie.class);

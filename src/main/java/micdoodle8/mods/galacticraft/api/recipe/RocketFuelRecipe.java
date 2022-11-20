@@ -6,7 +6,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 public class RocketFuelRecipe {
-    public static ArrayList<RocketFuel> fuelList = new ArrayList<RocketFuel>();
+    public static ArrayList<RocketFuel> fuelList = new ArrayList<>();
 
     public static void addFuel(Fluid fluid, int MaxTier) {
         if (fluid != null) {

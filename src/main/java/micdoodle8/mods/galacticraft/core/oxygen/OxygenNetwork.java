@@ -28,7 +28,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class OxygenNetwork implements IOxygenNetwork {
     public Map<TileEntity, ForgeDirection> oxygenTiles;
 
-    private final Set<ITransmitter> pipes = new HashSet<ITransmitter>();
+    private final Set<ITransmitter> pipes = new HashSet<>();
 
     @Override
     public float produce(float totalOxygen, TileEntity... ignoreTiles) {
@@ -43,7 +43,7 @@ public class OxygenNetwork implements IOxygenNetwork {
 
             if (totalOxygenRequest > 0) {
                 final List<TileEntity> ignoreTilesList = Arrays.asList(ignoreTiles);
-                for (final TileEntity tileEntity : new HashSet<TileEntity>(this.oxygenTiles.keySet())) {
+                for (final TileEntity tileEntity : new HashSet<>(this.oxygenTiles.keySet())) {
                     if (!ignoreTilesList.contains(tileEntity)) {
                         if (tileEntity instanceof IOxygenReceiver) {
                             final IOxygenReceiver oxygenTile = (IOxygenReceiver) tileEntity;
@@ -83,14 +83,14 @@ public class OxygenNetwork implements IOxygenNetwork {
      */
     @Override
     public float getRequest(TileEntity... ignoreTiles) {
-        final List<Float> requests = new ArrayList<Float>();
+        final List<Float> requests = new ArrayList<>();
 
         if (this.oxygenTiles == null || this.oxygenTiles.isEmpty()) {
             this.refreshOxygenTiles();
         }
 
         final List<TileEntity> ignoreTilesList = Arrays.asList(ignoreTiles);
-        for (final TileEntity tileEntity : new HashSet<TileEntity>(this.oxygenTiles.keySet())) {
+        for (final TileEntity tileEntity : new HashSet<>(this.oxygenTiles.keySet())) {
             if (ignoreTilesList.contains(tileEntity)) {
                 continue;
             }
@@ -162,7 +162,7 @@ public class OxygenNetwork implements IOxygenNetwork {
 
     public void refreshOxygenTiles() {
         if (this.oxygenTiles == null) {
-            this.oxygenTiles = new HashMap<TileEntity, ForgeDirection>();
+            this.oxygenTiles = new HashMap<>();
         } else {
             this.oxygenTiles.clear();
         }

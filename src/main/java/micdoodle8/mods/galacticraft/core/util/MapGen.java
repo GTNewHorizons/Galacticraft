@@ -168,7 +168,7 @@ public class MapGen {
         }
         this.getHeightMap(x0, z0);
         final int halfFactor = limit * limit / 2;
-        final ArrayList<Integer> cols = new ArrayList<Integer>();
+        final ArrayList<Integer> cols = new ArrayList<>();
         for (int j = 0; j < this.biomeCount.length; j++) {
             this.biomeCount[j] = 0;
         }

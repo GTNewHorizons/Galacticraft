@@ -153,7 +153,7 @@ public class EntityCelestialFake extends EntityAdvancedMotion implements IIgnore
 
     @Override
     public ArrayList<Object> getNetworkedData() {
-        final ArrayList<Object> objList = new ArrayList<Object>();
+        final ArrayList<Object> objList = new ArrayList<>();
 
         if (this.worldObj.isRemote) {
             this.shouldMoveClient = this.shouldMove();

@@ -16,7 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class FootprintRenderer {
-    public Map<Long, List<Footprint>> footprints = new HashMap<Long, List<Footprint>>();
+    public Map<Long, List<Footprint>> footprints = new HashMap<>();
     private static final ResourceLocation footprintTexture =
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/misc/footprint.png");
 
@@ -99,7 +99,7 @@ public class FootprintRenderer {
         List<Footprint> footprintList = this.footprints.get(chunkKey);
 
         if (footprintList == null) {
-            footprintList = new ArrayList<Footprint>();
+            footprintList = new ArrayList<>();
         }
 
         footprintList.add(new Footprint(footprint.dimension, footprint.position, footprint.rotation, footprint.owner));
@@ -114,7 +114,7 @@ public class FootprintRenderer {
         List<Footprint> footprintList = this.footprints.get(chunkKey);
 
         if (footprintList == null) {
-            footprintList = new ArrayList<Footprint>();
+            footprintList = new ArrayList<>();
         }
 
         final Iterator<Footprint> i = footprintList.iterator();

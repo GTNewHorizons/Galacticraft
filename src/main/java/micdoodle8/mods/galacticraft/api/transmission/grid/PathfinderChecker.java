@@ -25,7 +25,7 @@ public class PathfinderChecker extends Pathfinder {
         super(new IPathCallBack() {
             @Override
             public Set<BlockVec3> getConnectedNodes(Pathfinder finder, BlockVec3 currentNode) {
-                final Set<BlockVec3> neighbors = new HashSet<BlockVec3>();
+                final Set<BlockVec3> neighbors = new HashSet<>();
 
                 for (int i = 0; i < 6; i++) {
                     final ForgeDirection direction = ForgeDirection.getOrientation(i);

@@ -99,7 +99,7 @@ import net.minecraftforge.event.world.ChunkEvent.Load;
 import net.minecraftforge.event.world.WorldEvent.Save;
 
 public class EventHandlerGC {
-    public static Map<Block, Item> bucketList = new HashMap<Block, Item>();
+    public static Map<Block, Item> bucketList = new HashMap<>();
     public static boolean bedActivated;
 
     @SubscribeEvent
@@ -577,7 +577,7 @@ public class EventHandlerGC {
                     iArray[i] = page == null ? -2 : page.getPageID();
                 }
 
-                final List<Object> objList = new ArrayList<Object>();
+                final List<Object> objList = new ArrayList<>();
                 objList.add(iArray);
 
                 GalacticraftCore.packetPipeline.sendTo(
@@ -618,7 +618,7 @@ public class EventHandlerGC {
 
     @SideOnly(Side.CLIENT)
     private static ISchematicPage getNextSchematic(int currentIndex) {
-        final HashMap<Integer, Integer> idList = new HashMap<Integer, Integer>();
+        final HashMap<Integer, Integer> idList = new HashMap<>();
 
         final EntityClientPlayerMP player = PlayerUtil.getPlayerBaseClientFromPlayer(
                 FMLClientHandler.instance().getClient().thePlayer, false);
@@ -628,7 +628,7 @@ public class EventHandlerGC {
             idList.put(i, stats.unlockedSchematics.get(i).getPageID());
         }
 
-        final SortedSet<Integer> keys = new TreeSet<Integer>(idList.keySet());
+        final SortedSet<Integer> keys = new TreeSet<>(idList.keySet());
         final Iterator<Integer> iterator = keys.iterator();
 
         for (int count = 0; count < keys.size(); count++) {
@@ -649,7 +649,7 @@ public class EventHandlerGC {
 
     @SideOnly(Side.CLIENT)
     private static ISchematicPage getLastSchematic(int currentIndex) {
-        final HashMap<Integer, Integer> idList = new HashMap<Integer, Integer>();
+        final HashMap<Integer, Integer> idList = new HashMap<>();
 
         final EntityClientPlayerMP player = PlayerUtil.getPlayerBaseClientFromPlayer(
                 FMLClientHandler.instance().getClient().thePlayer, false);
@@ -659,7 +659,7 @@ public class EventHandlerGC {
             idList.put(i, stats.unlockedSchematics.get(i).getPageID());
         }
 
-        final SortedSet<Integer> keys = new TreeSet<Integer>(idList.keySet());
+        final SortedSet<Integer> keys = new TreeSet<>(idList.keySet());
         final Iterator<Integer> iterator = keys.iterator();
 
         for (int count = 0; count < keys.size(); count++) {
@@ -850,7 +850,7 @@ public class EventHandlerGC {
         }
     }
 
-    private final List<SoundPlayEntry> soundPlayList = new ArrayList<SoundPlayEntry>();
+    private final List<SoundPlayEntry> soundPlayList = new ArrayList<>();
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent

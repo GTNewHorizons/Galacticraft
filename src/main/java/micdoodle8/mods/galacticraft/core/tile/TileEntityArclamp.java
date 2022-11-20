@@ -304,7 +304,7 @@ public class TileEntityArclamp extends TileEntity {
                 }
             }
             currentLayer = nextLayer;
-            nextLayer = new LinkedList<BlockVec3>();
+            nextLayer = new LinkedList<>();
             if (currentLayer.size() == 0) {
                 break;
             }

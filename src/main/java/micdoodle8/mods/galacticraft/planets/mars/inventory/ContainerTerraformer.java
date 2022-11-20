@@ -33,7 +33,7 @@ public class ContainerTerraformer extends Container {
         int var7;
 
         for (var6 = 0; var6 < 3; ++var6) {
-            final List<ItemStack> stacks = new ArrayList<ItemStack>();
+            final List<ItemStack> stacks = new ArrayList<>();
 
             if (var6 == 0) {
                 stacks.add(new ItemStack(Items.dye, 1, 15));

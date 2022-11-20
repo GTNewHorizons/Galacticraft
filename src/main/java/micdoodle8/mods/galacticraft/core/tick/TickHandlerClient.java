@@ -82,7 +82,7 @@ public class TickHandlerClient {
     private static long tickCount;
     public static boolean spaceRaceGuiScheduled = false;
 
-    public static HashSet<TileEntityScreen> screenConnectionsUpdateList = new HashSet<TileEntityScreen>();
+    public static HashSet<TileEntityScreen> screenConnectionsUpdateList = new HashSet<>();
 
     static {
         registerDetectableBlocks(true);

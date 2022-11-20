@@ -43,7 +43,7 @@ public class NetworkHelper {
      */
     public static Set<IElectricityNetwork> getNetworksFromMultipleSides(
             TileEntity tileEntity, EnumSet<ForgeDirection> approachingDirection) {
-        final Set<IElectricityNetwork> connectedNetworks = new HashSet<IElectricityNetwork>();
+        final Set<IElectricityNetwork> connectedNetworks = new HashSet<>();
 
         final BlockVec3 tileVec = new BlockVec3(tileEntity);
         for (final ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {

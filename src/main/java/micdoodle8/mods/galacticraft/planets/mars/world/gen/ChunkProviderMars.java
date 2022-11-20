@@ -73,7 +73,7 @@ public class ChunkProviderMars extends ChunkProviderSpace {
 
     @Override
     protected BiomeGenBase.SpawnListEntry[] getMonsters() {
-        final List<BiomeGenBase.SpawnListEntry> monsters = new ArrayList<BiomeGenBase.SpawnListEntry>();
+        final List<BiomeGenBase.SpawnListEntry> monsters = new ArrayList<>();
         monsters.add(new BiomeGenBase.SpawnListEntry(EntityEvolvedZombie.class, 8, 2, 3));
         monsters.add(new BiomeGenBase.SpawnListEntry(EntityEvolvedSpider.class, 8, 2, 3));
         monsters.add(new BiomeGenBase.SpawnListEntry(EntityEvolvedSkeleton.class, 8, 2, 3));

@@ -63,8 +63,8 @@ public class Pathfinder {
     }
 
     public Pathfinder reset() {
-        this.closedSet = new HashSet<BlockVec3>();
-        this.results = new HashSet<BlockVec3>();
+        this.closedSet = new HashSet<>();
+        this.results = new HashSet<>();
         return this;
     }
 }

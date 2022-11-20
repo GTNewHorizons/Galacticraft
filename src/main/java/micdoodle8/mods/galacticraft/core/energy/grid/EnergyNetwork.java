@@ -73,8 +73,8 @@ public class EnergyNetwork implements IElectricityNetwork {
      * matches so, an acceptor connected on two sides will be in connectedAcceptors
      * twice
      */
-    private final List<TileEntity> connectedAcceptors = new LinkedList<TileEntity>();
-    private final List<ForgeDirection> connectedDirections = new LinkedList<ForgeDirection>();
+    private final List<TileEntity> connectedAcceptors = new LinkedList<>();
+    private final List<ForgeDirection> connectedDirections = new LinkedList<>();
 
     /*
      * availableAcceptors is the acceptors which can receive energy (this tick)
@@ -83,14 +83,13 @@ public class EnergyNetwork implements IElectricityNetwork {
      * each acceptor will only be included once in these collections (there is no
      * point trying to put power into a machine twice from two different sides)
      */
-    private final Set<TileEntity> availableAcceptors = new HashSet<TileEntity>();
-    private final Map<TileEntity, ForgeDirection> availableconnectedDirections =
-            new HashMap<TileEntity, ForgeDirection>();
+    private final Set<TileEntity> availableAcceptors = new HashSet<>();
+    private final Map<TileEntity, ForgeDirection> availableconnectedDirections = new HashMap<>();
 
-    private final Map<TileEntity, Float> energyRequests = new HashMap<TileEntity, Float>();
-    private final List<TileEntity> ignoreAcceptors = new LinkedList<TileEntity>();
+    private final Map<TileEntity, Float> energyRequests = new HashMap<>();
+    private final List<TileEntity> ignoreAcceptors = new LinkedList<>();
 
-    private final Set<IConductor> conductors = new HashSet<IConductor>();
+    private final Set<IConductor> conductors = new HashSet<>();
 
     // This is an energy per tick which exceeds what any normal machine will
     // request, so the requester must be an energy

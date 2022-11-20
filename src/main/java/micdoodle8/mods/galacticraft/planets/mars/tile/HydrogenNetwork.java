@@ -22,9 +22,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class HydrogenNetwork implements IHydrogenNetwork {
-    public Map<TileEntity, ForgeDirection> hydrogenTiles = new HashMap<TileEntity, ForgeDirection>();
+    public Map<TileEntity, ForgeDirection> hydrogenTiles = new HashMap<>();
 
-    private final Set<ITransmitter> pipes = new HashSet<ITransmitter>();
+    private final Set<ITransmitter> pipes = new HashSet<>();
 
     @Override
     public float produce(float totalHydrogen, TileEntity... ignoreTiles) {
@@ -39,7 +39,7 @@ public class HydrogenNetwork implements IHydrogenNetwork {
 
             if (totalHydrogenRequest > 0) {
                 final List<TileEntity> ignoreTilesList = Arrays.asList(ignoreTiles);
-                for (final TileEntity tileEntity : new HashSet<TileEntity>(this.hydrogenTiles.keySet())) {
+                for (final TileEntity tileEntity : new HashSet<>(this.hydrogenTiles.keySet())) {
                     if (!ignoreTilesList.contains(tileEntity)) {
                         if (tileEntity instanceof TileEntityMethaneSynthesizer) {
                             final TileEntityMethaneSynthesizer hydrogenTile = (TileEntityMethaneSynthesizer) tileEntity;
@@ -79,14 +79,14 @@ public class HydrogenNetwork implements IHydrogenNetwork {
      */
     @Override
     public float getRequest(TileEntity... ignoreTiles) {
-        final List<Float> requests = new ArrayList<Float>();
+        final List<Float> requests = new ArrayList<>();
 
         if (this.hydrogenTiles.isEmpty()) {
             this.refreshHydrogenTiles();
         }
 
         final List<TileEntity> ignoreTilesList = Arrays.asList(ignoreTiles);
-        for (final TileEntity tileEntity : new HashSet<TileEntity>(this.hydrogenTiles.keySet())) {
+        for (final TileEntity tileEntity : new HashSet<>(this.hydrogenTiles.keySet())) {
             if (ignoreTilesList.contains(tileEntity)) {
                 continue;
             }

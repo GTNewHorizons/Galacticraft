@@ -212,8 +212,8 @@ public class GalacticraftCore {
     public static Fluid fluidFuel;
     public static Material materialOil = new MaterialOleaginous(MapColor.brownColor);
 
-    public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
-    public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
+    public static HashMap<String, ItemStack> itemList = new HashMap<>();
+    public static HashMap<String, ItemStack> blocksList = new HashMap<>();
 
     public static ImageWriter jpgWriter;
     public static ImageWriteParam writeParam;
@@ -574,7 +574,7 @@ public class GalacticraftCore {
 
         proxy.postInit(event);
 
-        final ArrayList<CelestialBody> cBodyList = new ArrayList<CelestialBody>();
+        final ArrayList<CelestialBody> cBodyList = new ArrayList<>();
         cBodyList.addAll(GalaxyRegistry.getRegisteredPlanets().values());
         cBodyList.addAll(GalaxyRegistry.getRegisteredMoons().values());
 
@@ -642,7 +642,7 @@ public class GalacticraftCore {
                 .getMapFileFromName("dummy")
                 .getParentFile());
 
-        final ArrayList<CelestialBody> cBodyList = new ArrayList<CelestialBody>();
+        final ArrayList<CelestialBody> cBodyList = new ArrayList<>();
         cBodyList.addAll(GalaxyRegistry.getRegisteredPlanets().values());
         cBodyList.addAll(GalaxyRegistry.getRegisteredMoons().values());
 
@@ -788,7 +788,7 @@ public class GalacticraftCore {
     }
 
     public Planet makeUnreachablePlanet(String name, SolarSystem system) {
-        final ArrayList<CelestialBody> cBodyList = new ArrayList<CelestialBody>();
+        final ArrayList<CelestialBody> cBodyList = new ArrayList<>();
         cBodyList.addAll(GalaxyRegistry.getRegisteredPlanets().values());
         for (final CelestialBody body : cBodyList) {
             if (body instanceof Planet && name.equals(body.getName())) {

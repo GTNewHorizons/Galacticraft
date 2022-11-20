@@ -253,7 +253,7 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
 
     @Override
     public ArrayList<Object> getNetworkedData() {
-        final ArrayList<Object> objList = new ArrayList<Object>();
+        final ArrayList<Object> objList = new ArrayList<>();
 
         if (!this.worldObj.isRemote) {
             final Integer cargoLength = this.containedItems != null ? this.containedItems.length : 0;
@@ -383,7 +383,7 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
 
     @Override
     public List<ItemStack> getItemsDropped() {
-        return new ArrayList<ItemStack>(Arrays.asList(this.containedItems));
+        return new ArrayList<>(Arrays.asList(this.containedItems));
     }
 
     @Override

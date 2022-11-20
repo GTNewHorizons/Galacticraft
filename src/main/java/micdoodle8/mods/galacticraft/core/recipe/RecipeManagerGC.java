@@ -39,7 +39,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class RecipeManagerGC {
-    public static ArrayList<ItemStack> aluminumIngots = new ArrayList<ItemStack>();
+    public static ArrayList<ItemStack> aluminumIngots = new ArrayList<>();
 
     public static void loadRecipes() {
         if (CompatibilityManager.isBCraftTransportLoaded()) {
@@ -124,7 +124,7 @@ public class RecipeManagerGC {
         });
 
         // Handled by GalaxySpace
-        HashMap<Integer, ItemStack> input = new HashMap<Integer, ItemStack>();
+        HashMap<Integer, ItemStack> input = new HashMap<>();
         /*
          * input.put(1, new ItemStack(GCItems.partNoseCone)); input.put(2, new
          * ItemStack(GCItems.heavyPlatingTier1)); input.put(3, new
@@ -143,7 +143,7 @@ public class RecipeManagerGC {
          * input);
          */
 
-        HashMap<Integer, ItemStack> input2 = new HashMap<Integer, ItemStack>(input); /*
+        HashMap<Integer, ItemStack> input2 = new HashMap<>(input); /*
                                  * input2.put(15, new ItemStack(Blocks.chest)); input2.put(16, null);
                                  * input2.put(17, null); RecipeUtil.addRocketBenchRecipe(new
                                  * ItemStack(GCItems.rocketTier1, 1, 1), input2);
@@ -182,7 +182,7 @@ public class RecipeManagerGC {
 
         //
 
-        input = new HashMap<Integer, ItemStack>();
+        input = new HashMap<>();
 
         input.put(1, new ItemStack(GCItems.basicItem, 1, 19));
         input.put(2, new ItemStack(GCItems.partBuggy, 1, 1));
@@ -205,24 +205,24 @@ public class RecipeManagerGC {
             input.put(i, new ItemStack(GCItems.heavyPlatingTier1));
         }
 
-        input2 = new HashMap<Integer, ItemStack>(input);
+        input2 = new HashMap<>(input);
         input2.put(35, null);
         RecipeUtil.addBuggyBenchRecipe(new ItemStack(GCItems.buggy, 1, 0), input2);
 
-        input2 = new HashMap<Integer, ItemStack>(input);
+        input2 = new HashMap<>(input);
         input2.put(35, RecipeUtil.getChestItemStack(1, 3));
         RecipeUtil.addBuggyBenchRecipe(new ItemStack(GCItems.buggy, 1, 1), input2);
 
-        input2 = new HashMap<Integer, ItemStack>(input);
+        input2 = new HashMap<>(input);
         input2.put(35, RecipeUtil.getChestItemStack(1, 0));
         RecipeUtil.addBuggyBenchRecipe(new ItemStack(GCItems.buggy, 1, 2), input2);
 
-        input2 = new HashMap<Integer, ItemStack>(input);
+        input2 = new HashMap<>(input);
         input2.put(35, RecipeUtil.getChestItemStack(1, 1));
         RecipeUtil.addBuggyBenchRecipe(new ItemStack(GCItems.buggy, 1, 3), input2);
 
         aluminumIngots.addAll(OreDictionary.getOres("ingotAluminum"));
-        final ArrayList<ItemStack> addedList = new ArrayList<ItemStack>();
+        final ArrayList<ItemStack> addedList = new ArrayList<>();
         for (final ItemStack ingotNew : OreDictionary.getOres("ingotAluminium")) {
             boolean flag = false;
             for (final ItemStack ingotDone : aluminumIngots) {
@@ -251,7 +251,7 @@ public class RecipeManagerGC {
             aluminumIngots.addAll(addedList);
         }
 
-        final HashMap<Object, Integer> inputMap = new HashMap<Object, Integer>();
+        final HashMap<Object, Integer> inputMap = new HashMap<>();
         inputMap.put(new ItemStack(GCBlocks.basicBlock, 1, 4), 231);
         inputMap.put(new ItemStack(Blocks.glass_pane), 6);
         inputMap.put("circuitAdvanced", 4);

@@ -17,7 +17,7 @@ public class RoomSpawnerMars extends DungeonRoom {
     int sizeZ;
     Random rand;
 
-    private final ArrayList<ChunkCoordinates> spawners = new ArrayList<ChunkCoordinates>();
+    private final ArrayList<ChunkCoordinates> spawners = new ArrayList<>();
 
     public RoomSpawnerMars(MapGenDungeon dungeon, int posX, int posY, int posZ, ForgeDirection entranceDir) {
         super(dungeon, posX, posY, posZ, entranceDir);

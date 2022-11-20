@@ -41,8 +41,8 @@ public class GalacticraftPlanets {
     @Instance(Constants.MOD_ID_PLANETS)
     public static GalacticraftPlanets instance;
 
-    public static Map<String, IPlanetsModule> commonModules = new HashMap<String, IPlanetsModule>();
-    public static Map<String, IPlanetsModuleClient> clientModules = new HashMap<String, IPlanetsModuleClient>();
+    public static Map<String, IPlanetsModule> commonModules = new HashMap<>();
+    public static Map<String, IPlanetsModuleClient> clientModules = new HashMap<>();
 
     public static final String MODULE_KEY_MARS = "MarsModule";
     public static final String MODULE_KEY_ASTEROIDS = "AsteroidsModule";
@@ -108,7 +108,7 @@ public class GalacticraftPlanets {
     }
 
     public static List<IConfigElement> getConfigElements() {
-        final List<IConfigElement> list = new ArrayList<IConfigElement>();
+        final List<IConfigElement> list = new ArrayList<>();
 
         // Get the last planet to be configured only, as all will reference and re-use
         // the same planets.conf config file

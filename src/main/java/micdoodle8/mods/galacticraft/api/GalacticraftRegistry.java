@@ -19,20 +19,18 @@ import net.minecraft.world.WorldProviderSurface;
 import net.minecraftforge.common.DimensionManager;
 
 public class GalacticraftRegistry {
-    private static Map<Class<? extends WorldProvider>, ITeleportType> teleportTypeMap =
-            new HashMap<Class<? extends WorldProvider>, ITeleportType>();
-    private static List<SpaceStationType> spaceStations = new ArrayList<SpaceStationType>();
-    private static List<INasaWorkbenchRecipe> rocketBenchT1Recipes = new ArrayList<INasaWorkbenchRecipe>();
-    private static List<INasaWorkbenchRecipe> buggyBenchRecipes = new ArrayList<INasaWorkbenchRecipe>();
-    private static List<INasaWorkbenchRecipe> rocketBenchT2Recipes = new ArrayList<INasaWorkbenchRecipe>();
-    private static List<INasaWorkbenchRecipe> cargoRocketRecipes = new ArrayList<INasaWorkbenchRecipe>();
-    private static List<INasaWorkbenchRecipe> rocketBenchT3Recipes = new ArrayList<INasaWorkbenchRecipe>();
-    private static List<INasaWorkbenchRecipe> astroMinerRecipes = new ArrayList<INasaWorkbenchRecipe>();
-    private static Map<Class<? extends WorldProvider>, ResourceLocation> rocketGuiMap =
-            new HashMap<Class<? extends WorldProvider>, ResourceLocation>();
-    private static Map<Integer, List<ItemStack>> dungeonLootMap = new HashMap<Integer, List<ItemStack>>();
-    private static List<Integer> worldProviderIDs = new ArrayList<Integer>();
-    private static List<IGameScreen> gameScreens = new ArrayList<IGameScreen>();
+    private static Map<Class<? extends WorldProvider>, ITeleportType> teleportTypeMap = new HashMap<>();
+    private static List<SpaceStationType> spaceStations = new ArrayList<>();
+    private static List<INasaWorkbenchRecipe> rocketBenchT1Recipes = new ArrayList<>();
+    private static List<INasaWorkbenchRecipe> buggyBenchRecipes = new ArrayList<>();
+    private static List<INasaWorkbenchRecipe> rocketBenchT2Recipes = new ArrayList<>();
+    private static List<INasaWorkbenchRecipe> cargoRocketRecipes = new ArrayList<>();
+    private static List<INasaWorkbenchRecipe> rocketBenchT3Recipes = new ArrayList<>();
+    private static List<INasaWorkbenchRecipe> astroMinerRecipes = new ArrayList<>();
+    private static Map<Class<? extends WorldProvider>, ResourceLocation> rocketGuiMap = new HashMap<>();
+    private static Map<Integer, List<ItemStack>> dungeonLootMap = new HashMap<>();
+    private static List<Integer> worldProviderIDs = new ArrayList<>();
+    private static List<IGameScreen> gameScreens = new ArrayList<>();
     private static int maxScreenTypes;
 
     /**
@@ -77,7 +75,7 @@ public class GalacticraftRegistry {
             dungeonStacks = GalacticraftRegistry.dungeonLootMap.get(tier);
             dungeonStacks.add(loot);
         } else {
-            dungeonStacks = new ArrayList<ItemStack>();
+            dungeonStacks = new ArrayList<>();
             dungeonStacks.add(loot);
         }
 

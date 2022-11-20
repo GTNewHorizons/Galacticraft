@@ -24,7 +24,7 @@ public class GuiElementGradientList extends Gui {
     public int height;
     public int xPosition;
     public int yPosition;
-    public List<ListElement> listContents = new ArrayList<ListElement>();
+    public List<ListElement> listContents = new ArrayList<>();
     public int sliderPos;
     private int lastMousePosY;
     private boolean sliderGrabbed;

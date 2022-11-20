@@ -507,7 +507,7 @@ public class TileEntityScreen extends TileEntity {
 
         final int meta = this.getBlockMetadata() & 7;
         final BlockVec3 vec = new BlockVec3(this);
-        final ArrayList<TileEntityScreen> screenList = new ArrayList<TileEntityScreen>();
+        final ArrayList<TileEntityScreen> screenList = new ArrayList<>();
 
         final int side = this.getRight(meta);
 

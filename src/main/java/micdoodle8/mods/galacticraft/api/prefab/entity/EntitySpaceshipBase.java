@@ -54,7 +54,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
     public float timeSinceLaunch;
     public float rollAmplitude;
     public float shipDamage;
-    private final ArrayList<BlockVec3Dim> telemetryList = new ArrayList<BlockVec3Dim>();
+    private final ArrayList<BlockVec3Dim> telemetryList = new ArrayList<>();
     private boolean addToTelemetry = false;
     public FluidTank fuelTank = new FluidTank(this.getFuelTankCapacity() * ConfigManagerCore.rocketFuelFactor);
 
@@ -181,7 +181,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
 
         if (this.addToTelemetry) {
             this.addToTelemetry = false;
-            for (final BlockVec3Dim vec : new ArrayList<BlockVec3Dim>(this.telemetryList)) {
+            for (final BlockVec3Dim vec : new ArrayList<>(this.telemetryList)) {
                 final TileEntity t1 = vec.getTileEntityNoLoad();
                 if (t1 instanceof TileEntityTelemetry && !t1.isInvalid()) {
                     if (((TileEntityTelemetry) t1).linkedEntity == this) {
@@ -376,7 +376,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
         nbt.setInteger("timeUntilLaunch", this.timeUntilLaunch);
         if (this.telemetryList.size() > 0) {
             final NBTTagList teleNBTList = new NBTTagList();
-            for (final BlockVec3Dim vec : new ArrayList<BlockVec3Dim>(this.telemetryList)) {
+            for (final BlockVec3Dim vec : new ArrayList<>(this.telemetryList)) {
                 final NBTTagCompound tag = new NBTTagCompound();
                 vec.writeToNBT(tag);
                 teleNBTList.appendTag(tag);
@@ -502,8 +502,8 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
     }
 
     public ArrayList<TileEntityTelemetry> getTelemetry() {
-        final ArrayList<TileEntityTelemetry> returnList = new ArrayList<TileEntityTelemetry>();
-        for (final BlockVec3Dim vec : new ArrayList<BlockVec3Dim>(this.telemetryList)) {
+        final ArrayList<TileEntityTelemetry> returnList = new ArrayList<>();
+        for (final BlockVec3Dim vec : new ArrayList<>(this.telemetryList)) {
             final TileEntity t1 = vec.getTileEntity();
             if (t1 instanceof TileEntityTelemetry && !t1.isInvalid()) {
                 if (((TileEntityTelemetry) t1).linkedEntity == this) {

@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
 public class SchematicRegistry {
-    public static ArrayList<ISchematicPage> schematicRecipes = new ArrayList<ISchematicPage>();
+    public static ArrayList<ISchematicPage> schematicRecipes = new ArrayList<>();
 
     /**
      * Register a new schematic page

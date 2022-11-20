@@ -69,7 +69,7 @@ public class GCItems {
     public static ArmorMaterial ARMOR_STEEL = EnumHelper.addArmorMaterial("steel", 30, new int[] {3, 8, 6, 3}, 12);
     public static ToolMaterial TOOL_STEEL = EnumHelper.addToolMaterial("steel", 3, 768, 5.0F, 2, 8);
 
-    public static ArrayList<Item> hiddenItems = new ArrayList<Item>();
+    public static ArrayList<Item> hiddenItems = new ArrayList<>();
 
     public static void initItems() {
         GCItems.oxTankLight = new ItemOxygenTank(1, "oxygenTankLightFull");

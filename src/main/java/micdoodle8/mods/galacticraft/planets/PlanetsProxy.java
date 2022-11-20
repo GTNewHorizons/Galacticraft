@@ -46,7 +46,7 @@ public class PlanetsProxy implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         for (final IPlanetsModule module : GalacticraftPlanets.commonModules.values()) {
-            final List<Integer> guiIDs = new ArrayList<Integer>();
+            final List<Integer> guiIDs = new ArrayList<>();
             module.getGuiIDs(guiIDs);
             if (guiIDs.contains(ID)) {
                 return module.getGuiElement(Side.SERVER, ID, player, world, x, y, z);
@@ -59,7 +59,7 @@ public class PlanetsProxy implements IGuiHandler {
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         for (final IPlanetsModuleClient module : GalacticraftPlanets.clientModules.values()) {
-            final List<Integer> guiIDs = new ArrayList<Integer>();
+            final List<Integer> guiIDs = new ArrayList<>();
             module.getGuiIDs(guiIDs);
             if (guiIDs.contains(ID)) {
                 return module.getGuiElement(Side.CLIENT, ID, player, world, x, y, z);

@@ -112,8 +112,8 @@ public class GCPlayerStats implements IExtendedEntityProperties {
     public boolean inLander;
     public boolean justLanded;
 
-    public ArrayList<ISchematicPage> unlockedSchematics = new ArrayList<ISchematicPage>();
-    public ArrayList<ISchematicPage> lastUnlockedSchematics = new ArrayList<ISchematicPage>();
+    public ArrayList<ISchematicPage> unlockedSchematics = new ArrayList<>();
+    public ArrayList<ISchematicPage> lastUnlockedSchematics = new ArrayList<>();
 
     public int cryogenicChamberCooldown;
 
@@ -130,7 +130,7 @@ public class GCPlayerStats implements IExtendedEntityProperties {
     public String startDimension = "";
 
     public GCPlayerStats(EntityPlayerMP player) {
-        this.player = new WeakReference<EntityPlayerMP>(player);
+        this.player = new WeakReference<>(player);
     }
 
     @Override
@@ -277,7 +277,7 @@ public class GCPlayerStats implements IExtendedEntityProperties {
             }
         }
 
-        this.unlockedSchematics = new ArrayList<ISchematicPage>();
+        this.unlockedSchematics = new ArrayList<>();
 
         if (p != null) {
             for (int i = 0; i < nbt.getTagList("Schematics", 10).tagCount(); ++i) {

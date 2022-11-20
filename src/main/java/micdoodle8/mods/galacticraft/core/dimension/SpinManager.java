@@ -59,7 +59,7 @@ public class SpinManager {
     private BlockVec3 oneSSBlock;
     // private HashSet<BlockVec3> stationBlocks = new HashSet();
 
-    private final HashSet<BlockVec3> checked = new HashSet<BlockVec3>();
+    private final HashSet<BlockVec3> checked = new HashSet<>();
 
     // Used to make continuous particles + thrust sounds at the spin thrusters in
     // this dimension
@@ -180,9 +180,9 @@ public class SpinManager {
         }
 
         // Find contiguous blocks using an algorithm like the oxygen sealer one
-        List<BlockVec3> currentLayer = new LinkedList<BlockVec3>();
-        List<BlockVec3> nextLayer = new LinkedList<BlockVec3>();
-        final List<BlockVec3> foundThrusters = new LinkedList<BlockVec3>();
+        List<BlockVec3> currentLayer = new LinkedList<>();
+        List<BlockVec3> nextLayer = new LinkedList<>();
+        final List<BlockVec3> foundThrusters = new LinkedList<>();
 
         this.checked.clear();
         currentLayer.add(this.oneSSBlock.clone());
@@ -276,7 +276,7 @@ public class SpinManager {
             }
 
             currentLayer = nextLayer;
-            nextLayer = new LinkedList<BlockVec3>();
+            nextLayer = new LinkedList<>();
         }
 
         if (placingThruster && !this.checked.contains(baseBlock)) {
@@ -349,13 +349,13 @@ public class SpinManager {
         GCLog.debug("MoI = " + this.momentOfInertia + " CoMx = " + this.massCentreX + " CoMz = " + this.massCentreZ);
 
         // Send packets to clients in this dimension
-        List<Object> objList = new ArrayList<Object>();
+        List<Object> objList = new ArrayList<>();
         objList.add(Double.valueOf(this.spinCentreX));
         objList.add(Double.valueOf(this.spinCentreZ));
         GalacticraftCore.packetPipeline.sendToDimension(
                 new PacketSimple(EnumSimplePacket.C_UPDATE_STATION_DATA, objList), this.worldProvider.dimensionId);
 
-        objList = new ArrayList<Object>();
+        objList = new ArrayList<>();
         objList.add(Integer.valueOf(this.ssBoundsMinX));
         objList.add(Integer.valueOf(this.ssBoundsMaxX));
         objList.add(Integer.valueOf(this.ssBoundsMinY));
@@ -479,7 +479,7 @@ public class SpinManager {
                 if (updateNeeded) {
                     this.writeToNBT(this.savefile.datacompound);
                     this.savefile.markDirty();
-                    final List<Object> objList = new ArrayList<Object>();
+                    final List<Object> objList = new ArrayList<>();
                     objList.add(Float.valueOf(this.angularVelocityRadians));
                     objList.add(Boolean.valueOf(this.thrustersFiring));
                     GalacticraftCore.packetPipeline.sendToDimension(
@@ -728,19 +728,19 @@ public class SpinManager {
         this.checkSS(this.oneSSBlock, false);
 
         // Send packets to clients in this dimension
-        List<Object> objList = new ArrayList<Object>();
+        List<Object> objList = new ArrayList<>();
         objList.add(Float.valueOf(this.angularVelocityRadians));
         objList.add(Boolean.valueOf(this.thrustersFiring));
         GalacticraftCore.packetPipeline.sendToDimension(
                 new PacketSimple(EnumSimplePacket.C_UPDATE_STATION_SPIN, objList), this.worldProvider.dimensionId);
 
-        objList = new ArrayList<Object>();
+        objList = new ArrayList<>();
         objList.add(Double.valueOf(this.spinCentreX));
         objList.add(Double.valueOf(this.spinCentreZ));
         GalacticraftCore.packetPipeline.sendToDimension(
                 new PacketSimple(EnumSimplePacket.C_UPDATE_STATION_DATA, objList), this.worldProvider.dimensionId);
 
-        objList = new ArrayList<Object>();
+        objList = new ArrayList<>();
         objList.add(Integer.valueOf(this.ssBoundsMinX));
         objList.add(Integer.valueOf(this.ssBoundsMaxX));
         objList.add(Integer.valueOf(this.ssBoundsMinY));
@@ -773,19 +773,19 @@ public class SpinManager {
      * @param player
      */
     public void sendPacketsToClient(EntityPlayerMP player) {
-        List<Object> objList = new ArrayList<Object>();
+        List<Object> objList = new ArrayList<>();
         objList.add(Float.valueOf(this.angularVelocityRadians));
         objList.add(Boolean.valueOf(this.thrustersFiring));
         GalacticraftCore.packetPipeline.sendTo(
                 new PacketSimple(EnumSimplePacket.C_UPDATE_STATION_SPIN, objList), player);
 
-        objList = new ArrayList<Object>();
+        objList = new ArrayList<>();
         objList.add(Double.valueOf(this.spinCentreX));
         objList.add(Double.valueOf(this.spinCentreZ));
         GalacticraftCore.packetPipeline.sendTo(
                 new PacketSimple(EnumSimplePacket.C_UPDATE_STATION_DATA, objList), player);
 
-        objList = new ArrayList<Object>();
+        objList = new ArrayList<>();
         objList.add(Integer.valueOf(this.ssBoundsMinX));
         objList.add(Integer.valueOf(this.ssBoundsMaxX));
         objList.add(Integer.valueOf(this.ssBoundsMinY));
