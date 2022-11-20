@@ -1,6 +1,6 @@
 package micdoodle8.mods.galacticraft.core.command;
 
-import java.util.*;
+import java.util.List;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
