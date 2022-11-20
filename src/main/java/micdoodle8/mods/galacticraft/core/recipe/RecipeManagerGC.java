@@ -144,41 +144,41 @@ public class RecipeManagerGC {
          */
 
         HashMap<Integer, ItemStack> input2 = new HashMap<Integer, ItemStack>(input); /*
-                         * input2.put(15, new ItemStack(Blocks.chest)); input2.put(16, null);
-                         * input2.put(17, null); RecipeUtil.addRocketBenchRecipe(new
-                         * ItemStack(GCItems.rocketTier1, 1, 1), input2);
-                         *
-                         * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, null);
-                         * input2.put(16, new ItemStack(Blocks.chest)); input2.put(17, null);
-                         * RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 1),
-                         * input2);
-                         *
-                         * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, null);
-                         * input2.put(16, null); input2.put(17, new ItemStack(Blocks.chest));
-                         * RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 1),
-                         * input2);
-                         *
-                         * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, new
-                         * ItemStack(Blocks.chest)); input2.put(16, new ItemStack(Blocks.chest));
-                         * input2.put(17, null); RecipeUtil.addRocketBenchRecipe(new
-                         * ItemStack(GCItems.rocketTier1, 1, 2), input2);
-                         *
-                         * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, new
-                         * ItemStack(Blocks.chest)); input2.put(16, null); input2.put(17, new
-                         * ItemStack(Blocks.chest)); RecipeUtil.addRocketBenchRecipe(new
-                         * ItemStack(GCItems.rocketTier1, 1, 2), input2);
-                         *
-                         * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, null);
-                         * input2.put(16, new ItemStack(Blocks.chest)); input2.put(17, new
-                         * ItemStack(Blocks.chest)); RecipeUtil.addRocketBenchRecipe(new
-                         * ItemStack(GCItems.rocketTier1, 1, 2), input2);
-                         *
-                         * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, new
-                         * ItemStack(Blocks.chest)); input2.put(16, new ItemStack(Blocks.chest));
-                         * input2.put(17, new ItemStack(Blocks.chest));
-                         * RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 3),
-                         * input2);
-                         */
+                                 * input2.put(15, new ItemStack(Blocks.chest)); input2.put(16, null);
+                                 * input2.put(17, null); RecipeUtil.addRocketBenchRecipe(new
+                                 * ItemStack(GCItems.rocketTier1, 1, 1), input2);
+                                 *
+                                 * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, null);
+                                 * input2.put(16, new ItemStack(Blocks.chest)); input2.put(17, null);
+                                 * RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 1),
+                                 * input2);
+                                 *
+                                 * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, null);
+                                 * input2.put(16, null); input2.put(17, new ItemStack(Blocks.chest));
+                                 * RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 1),
+                                 * input2);
+                                 *
+                                 * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, new
+                                 * ItemStack(Blocks.chest)); input2.put(16, new ItemStack(Blocks.chest));
+                                 * input2.put(17, null); RecipeUtil.addRocketBenchRecipe(new
+                                 * ItemStack(GCItems.rocketTier1, 1, 2), input2);
+                                 *
+                                 * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, new
+                                 * ItemStack(Blocks.chest)); input2.put(16, null); input2.put(17, new
+                                 * ItemStack(Blocks.chest)); RecipeUtil.addRocketBenchRecipe(new
+                                 * ItemStack(GCItems.rocketTier1, 1, 2), input2);
+                                 *
+                                 * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, null);
+                                 * input2.put(16, new ItemStack(Blocks.chest)); input2.put(17, new
+                                 * ItemStack(Blocks.chest)); RecipeUtil.addRocketBenchRecipe(new
+                                 * ItemStack(GCItems.rocketTier1, 1, 2), input2);
+                                 *
+                                 * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, new
+                                 * ItemStack(Blocks.chest)); input2.put(16, new ItemStack(Blocks.chest));
+                                 * input2.put(17, new ItemStack(Blocks.chest));
+                                 * RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 3),
+                                 * input2);
+                                 */
 
         //
 
