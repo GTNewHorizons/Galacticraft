@@ -10,14 +10,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import net.minecraft.launchwrapper.IClassTransformer;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.util.TraceClassVisitor;
 
 public class GCTransformer implements IClassTransformer {
-    static final Logger log = LogManager.getLogger("GCTransformer");
+
     private static final boolean DEBUG = Boolean.getBoolean("glease.debugasm");
     private static final ConcurrentMap<String, Integer> transformCounts = new ConcurrentHashMap<>();
     private final Map<String, TransformerFactory> transformers = ImmutableMap.<String, TransformerFactory>builder()
@@ -27,7 +25,7 @@ public class GCTransformer implements IClassTransformer {
             .build();
 
     static void catching(Exception e) {
-        log.fatal("Something went very wrong with class transforming! Aborting!!!", e);
+        GCLoadingPlugin.LOGGER.fatal("Something went very wrong with class transforming! Aborting!!!", e);
         throw new RuntimeException("Transforming class", e);
     }
 
@@ -37,7 +35,7 @@ public class GCTransformer implements IClassTransformer {
         if (factory == null || factory.isInactive()) {
             return basicClass;
         }
-        log.info("Transforming class {}", name);
+        GCLoadingPlugin.LOGGER.info("Transforming class {}", name);
         ClassReader cr = new ClassReader(basicClass);
         ClassWriter cw = new ClassWriter(factory.isExpandFrames() ? ClassWriter.COMPUTE_FRAMES : 0);
         // we are very probably the last one to run.
@@ -53,7 +51,8 @@ public class GCTransformer implements IClassTransformer {
                         factory.isExpandFrames() ? ClassReader.SKIP_FRAMES : 0);
                 transformedBytes = cw.toByteArray();
             } catch (Exception e) {
-                log.warn("Unable to transform with debug output on. Now retrying without debug output.", e);
+                GCLoadingPlugin.LOGGER.warn(
+                        "Unable to transform with debug output on. Now retrying without debug output.", e);
             }
         }
         if (transformedBytes == null || transformedBytes.length == 0) {
@@ -68,7 +67,7 @@ public class GCTransformer implements IClassTransformer {
             if (DEBUG) {
                 catching(new RuntimeException("Null or empty byte array created. This will not work well!"));
             } else {
-                log.fatal(
+                GCLoadingPlugin.LOGGER.fatal(
                         "Null or empty byte array created. Transforming will rollback as a last effort attempt to make things work! However features will not function!");
                 return basicClass;
             }

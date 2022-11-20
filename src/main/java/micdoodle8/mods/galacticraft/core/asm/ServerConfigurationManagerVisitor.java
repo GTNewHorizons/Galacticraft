@@ -1,7 +1,6 @@
 package micdoodle8.mods.galacticraft.core.asm;
 
 import static micdoodle8.mods.galacticraft.core.asm.GCLoadingPlugin.dev;
-import static micdoodle8.mods.galacticraft.core.asm.GCTransformer.log;
 import static org.objectweb.asm.Opcodes.INVOKESPECIAL;
 import static org.objectweb.asm.Opcodes.NEW;
 
@@ -38,7 +37,7 @@ public class ServerConfigurationManagerVisitor extends ClassVisitor {
         public void visitTypeInsn(int opcode, String type) {
             if (opcode == NEW
                     && (dev ? "net/minecraft/entity/player/EntityPlayerMP".equals(type) : "mw".equals(type))) {
-                log.debug(
+                GCLoadingPlugin.LOGGER.debug(
                         "Replacing NEW {} with NEW micdoodle8/mods/galacticraft/core/entities/player/GCEntityPlayerMP in {}",
                         type,
                         methodName);
@@ -51,7 +50,7 @@ public class ServerConfigurationManagerVisitor extends ClassVisitor {
             if (opcode == INVOKESPECIAL
                     && "<init>".equals(name)
                     && (dev ? "net/minecraft/entity/player/EntityPlayerMP".equals(owner) : "mw".equals(owner))) {
-                log.debug(
+                GCLoadingPlugin.LOGGER.debug(
                         "Replacing INVOKESPECIAL {}{}{} with NEW micdoodle8/mods/galacticraft/core/entities/player/GCEntityPlayerMP{}{} in {}",
                         owner,
                         name,
