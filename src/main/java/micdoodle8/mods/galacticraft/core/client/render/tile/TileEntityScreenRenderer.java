@@ -79,10 +79,18 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
         GL11.glPushMatrix();
 
         int count = 0;
-        if (tileEntity.connectedDown) count++;
-        if (tileEntity.connectedUp) count++;
-        if (tileEntity.connectedLeft) count++;
-        if (tileEntity.connectedRight) count++;
+        if (tileEntity.connectedDown) {
+            count++;
+        }
+        if (tileEntity.connectedUp) {
+            count++;
+        }
+        if (tileEntity.connectedLeft) {
+            count++;
+        }
+        if (tileEntity.connectedRight) {
+            count++;
+        }
 
         switch (count) {
             case 0:
@@ -146,14 +154,17 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
         GL11.glTranslatef(-tileEntity.screenOffsetx, this.yPlane, -tileEntity.screenOffsetz);
         GL11.glRotatef(90, 1F, 0F, 0F);
         boolean cornerblock = false;
-        if (tileEntity.connectionsLeft == 0 || tileEntity.connectionsRight == 0)
+        if (tileEntity.connectionsLeft == 0 || tileEntity.connectionsRight == 0) {
             cornerblock = (tileEntity.connectionsUp == 0 || tileEntity.connectionsDown == 0);
+        }
         int totalLR = tileEntity.connectionsLeft + tileEntity.connectionsRight;
         int totalUD = tileEntity.connectionsUp + tileEntity.connectionsDown;
         if (totalLR > 1 && totalUD > 1 && !cornerblock) {
             // centre block
             if (tileEntity.connectionsLeft == tileEntity.connectionsRight - (totalLR | 1)) {
-                if (tileEntity.connectionsUp == tileEntity.connectionsDown - (totalUD | 1)) cornerblock = true;
+                if (tileEntity.connectionsUp == tileEntity.connectionsDown - (totalUD | 1)) {
+                    cornerblock = true;
+                }
             }
         }
         tileEntity.screen.drawScreen(

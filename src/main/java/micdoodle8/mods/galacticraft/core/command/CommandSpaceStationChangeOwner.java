@@ -52,11 +52,12 @@ public class CommandSpaceStationChangeOwner extends CommandBase {
                         new Object[0]);
             }
 
-            if (stationID < 2)
+            if (stationID < 2) {
                 throw new WrongUsageException(
                         GCCoreUtil.translateWithFormat(
                                 "commands.ssnewowner.wrongUsage", this.getCommandUsage(icommandsender)),
                         new Object[0]);
+            }
 
             try {
                 SpaceStationWorldData stationData = SpaceStationWorldData.getMPSpaceStationData(null, stationID, null);
@@ -69,8 +70,9 @@ public class CommandSpaceStationChangeOwner extends CommandBase {
 
                 oldOwner = stationData.getOwner();
                 stationData.getAllowedPlayers().remove(oldOwner);
-                if (stationData.getSpaceStationName().equals("Station: " + oldOwner))
+                if (stationData.getSpaceStationName().equals("Station: " + oldOwner)) {
                     stationData.setSpaceStationName("Station: " + newOwner);
+                }
                 stationData.getAllowedPlayers().add(newOwner);
                 stationData.setOwner(newOwner);
 
@@ -108,9 +110,10 @@ public class CommandSpaceStationChangeOwner extends CommandBase {
         if (playerAdmin != null) {
             playerAdmin.addChatMessage(new ChatComponentText(
                     GCCoreUtil.translateWithFormat("gui.spacestation.changesuccess", oldOwner, newOwner)));
-        } else
+        } else {
             // Console
             System.out.println(GCCoreUtil.translateWithFormat("gui.spacestation.changesuccess", oldOwner, newOwner));
+        }
     }
 
     protected String[] getPlayers() {

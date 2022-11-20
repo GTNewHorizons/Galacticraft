@@ -169,7 +169,9 @@ public class ModelEvolvedZombie extends ModelBiped {
             GL11.glScalef(1.5F / f6, 1.5F / f6, 1.5F / f6);
             GL11.glTranslatef(0.0F, 16.0F * f5, 0.0F);
             this.bipedHead.render(f5);
-            if (this.renderGear) this.oxygenMask.render(f5);
+            if (this.renderGear) {
+                this.oxygenMask.render(f5);
+            }
             GL11.glPopMatrix();
             GL11.glPushMatrix();
             GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);

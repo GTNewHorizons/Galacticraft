@@ -172,8 +172,10 @@ public class EventHandlerGC {
     public void onEntityDamaged(LivingHurtEvent event) {
         if (event.source.damageType.equals(DamageSource.onFire.damageType)) {
             if (OxygenUtil.noAtmosphericCombustion(event.entityLiving.worldObj.provider)) {
-                if (OxygenUtil.isAABBInBreathableAirBlock(event.entityLiving.worldObj, event.entityLiving.boundingBox))
+                if (OxygenUtil.isAABBInBreathableAirBlock(
+                        event.entityLiving.worldObj, event.entityLiving.boundingBox)) {
                     return;
+                }
 
                 if (event.entityLiving.worldObj instanceof WorldServer) {
                     ((WorldServer) event.entityLiving.worldObj)
@@ -216,10 +218,14 @@ public class EventHandlerGC {
     @SubscribeEvent
     public void onPlayerClicked(PlayerInteractEvent event) {
         // Skip events triggered from Thaumcraft Golems and other non-players
-        if (event.entityPlayer == null || event.entityPlayer.inventory == null) return;
+        if (event.entityPlayer == null || event.entityPlayer.inventory == null) {
+            return;
+        }
 
         final World worldObj = event.entityPlayer.worldObj;
-        if (worldObj == null) return;
+        if (worldObj == null) {
+            return;
+        }
 
         final Block idClicked = worldObj.getBlock(event.x, event.y, event.z);
 
@@ -228,7 +234,9 @@ public class EventHandlerGC {
                 && event.action.equals(PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
                 && !worldObj.isRemote
                 && !((IGalacticraftWorldProvider) worldObj.provider).hasBreathableAtmosphere()) {
-            if (GalacticraftCore.isPlanetsLoaded) GCPlayerStats.tryBedWarning((EntityPlayerMP) event.entityPlayer);
+            if (GalacticraftCore.isPlanetsLoaded) {
+                GCPlayerStats.tryBedWarning((EntityPlayerMP) event.entityPlayer);
+            }
 
             if (worldObj.provider instanceof WorldProviderOrbit) {
                 // On space stations simply block the bed activation => no explosion
@@ -245,7 +253,9 @@ public class EventHandlerGC {
 
                 // On planets allow the bed to be used to designate a player spawn point
                 event.entityPlayer.setSpawnChunk(new ChunkCoordinates(event.x, event.y, event.z), false);
-            } else EventHandlerGC.bedActivated = false;
+            } else {
+                EventHandlerGC.bedActivated = false;
+            }
         }
 
         final ItemStack heldStack = event.entityPlayer.inventory.getCurrentItem();
@@ -304,8 +314,9 @@ public class EventHandlerGC {
         final EntityLivingBase entityLiving = event.entityLiving;
         if (entityLiving instanceof EntityPlayerMP) {
             GalacticraftCore.handler.onPlayerUpdate((EntityPlayerMP) entityLiving);
-            if (GalacticraftCore.isPlanetsLoaded)
+            if (GalacticraftCore.isPlanetsLoaded) {
                 AsteroidsModule.playerHandler.onPlayerUpdate((EntityPlayerMP) entityLiving);
+            }
             return;
         }
 
@@ -377,7 +388,9 @@ public class EventHandlerGC {
                 event.hasVillageGenerated,
                 PopulateChunkEvent.Populate.EventType.CUSTOM);
 
-        if (!doGen) return;
+        if (!doGen) {
+            return;
+        }
 
         final int worldX = event.chunkX << 4;
         final int worldZ = event.chunkZ << 4;
@@ -396,7 +409,9 @@ public class EventHandlerGC {
             }
         }
 
-        if (!doGen2) return false;
+        if (!doGen2) {
+            return false;
+        }
 
         final BiomeGenBase biomegenbase = world.getBiomeGenForCoords(x + 8, z + 8);
 
@@ -442,7 +457,9 @@ public class EventHandlerGC {
             int z = pos.z;
             int r = 3 + rand.nextInt(5);
 
-            if (testFirst && checkOilPresent(world, x, cy, z, r)) return;
+            if (testFirst && checkOilPresent(world, x, cy, z, r)) {
+                return;
+            }
 
             final int r2 = r * r;
 
@@ -452,12 +469,24 @@ public class EventHandlerGC {
                         final int d2 = bx * bx + by * by * 3 + bz * bz;
 
                         if (d2 <= r2) {
-                            if (EventHandlerGC.checkBlock(world, bx + x - 1, by + cy, bz + z)) continue;
-                            if (EventHandlerGC.checkBlock(world, bx + x + 1, by + cy, bz + z)) continue;
-                            if (EventHandlerGC.checkBlock(world, bx + x, by + cy - 1, bz + z)) continue;
-                            if (EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z - 1)) continue;
-                            if (EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z + 1)) continue;
-                            if (EventHandlerGC.checkBlockAbove(world, bx + x, by + cy + 1, bz + z)) continue;
+                            if (EventHandlerGC.checkBlock(world, bx + x - 1, by + cy, bz + z)) {
+                                continue;
+                            }
+                            if (EventHandlerGC.checkBlock(world, bx + x + 1, by + cy, bz + z)) {
+                                continue;
+                            }
+                            if (EventHandlerGC.checkBlock(world, bx + x, by + cy - 1, bz + z)) {
+                                continue;
+                            }
+                            if (EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z - 1)) {
+                                continue;
+                            }
+                            if (EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z + 1)) {
+                                continue;
+                            }
+                            if (EventHandlerGC.checkBlockAbove(world, bx + x, by + cy + 1, bz + z)) {
+                                continue;
+                            }
 
                             world.setBlock(bx + x, by + cy, bz + z, GCBlocks.crudeOil, 0, 2);
                         }
@@ -476,14 +505,28 @@ public class EventHandlerGC {
                     final int d2 = bx * bx + by * by * 3 + bz * bz;
 
                     if (d2 <= r2) {
-                        if (EventHandlerGC.checkBlock(world, bx + x - 1, by + cy, bz + z)) continue;
-                        if (EventHandlerGC.checkBlock(world, bx + x + 1, by + cy, bz + z)) continue;
-                        if (EventHandlerGC.checkBlock(world, bx + x, by + cy - 1, bz + z)) continue;
-                        if (EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z - 1)) continue;
-                        if (EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z + 1)) continue;
-                        if (EventHandlerGC.checkBlockAbove(world, bx + x, by + cy + 1, bz + z)) continue;
+                        if (EventHandlerGC.checkBlock(world, bx + x - 1, by + cy, bz + z)) {
+                            continue;
+                        }
+                        if (EventHandlerGC.checkBlock(world, bx + x + 1, by + cy, bz + z)) {
+                            continue;
+                        }
+                        if (EventHandlerGC.checkBlock(world, bx + x, by + cy - 1, bz + z)) {
+                            continue;
+                        }
+                        if (EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z - 1)) {
+                            continue;
+                        }
+                        if (EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z + 1)) {
+                            continue;
+                        }
+                        if (EventHandlerGC.checkBlockAbove(world, bx + x, by + cy + 1, bz + z)) {
+                            continue;
+                        }
 
-                        if (world.getBlock(bx + x, by + cy, bz + z) == GCBlocks.crudeOil) return true;
+                        if (world.getBlock(bx + x, by + cy, bz + z) == GCBlocks.crudeOil) {
+                            return true;
+                        }
                     }
                 }
             }
@@ -814,7 +857,9 @@ public class EventHandlerGC {
     public void onSoundPlayed(PlaySoundEvent17 event) {
         // The event.result starts off equal to event.sound, but could have been altered
         // or set to null by another mod
-        if (event.result == null) return;
+        if (event.result == null) {
+            return;
+        }
 
         EntityPlayerSP player = FMLClientHandler.instance().getClient().thePlayer;
 

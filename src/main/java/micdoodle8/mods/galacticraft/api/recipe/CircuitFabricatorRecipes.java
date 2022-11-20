@@ -107,7 +107,9 @@ public class CircuitFabricatorRecipes {
                         CircuitFabricatorRecipes.recipes.entrySet().iterator();
                 it.hasNext(); ) {
             Map.Entry<ItemStack[], ItemStack> recipe = it.next();
-            if (ItemStack.areItemStacksEqual(match, recipe.getValue())) it.remove();
+            if (ItemStack.areItemStacksEqual(match, recipe.getValue())) {
+                it.remove();
+            }
         }
     }
 }

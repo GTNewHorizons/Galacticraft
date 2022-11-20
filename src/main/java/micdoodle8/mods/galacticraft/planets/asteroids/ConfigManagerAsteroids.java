@@ -142,9 +142,10 @@ public class ConfigManagerAsteroids {
             disableIlmeniteGen = prop.getBoolean(false);
             ConfigManagerMars.propOrder.add(prop.getName());
 
-            if (load)
+            if (load) {
                 ConfigManagerMars.config.setCategoryPropertyOrder(
                         Constants.CONFIG_CATEGORY_WORLDGEN, ConfigManagerMars.propOrder);
+            }
 
             // Always save - this is last to be called both at load time and at mid-game
             if (ConfigManagerMars.config.hasChanged()) {

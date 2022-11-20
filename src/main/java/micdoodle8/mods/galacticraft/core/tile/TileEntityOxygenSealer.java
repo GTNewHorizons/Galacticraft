@@ -67,20 +67,27 @@ public class TileEntityOxygenSealer extends TileEntityOxygen implements IInvento
     @Override
     public void validate() {
         super.validate();
-        if (!this.worldObj.isRemote)
-            if (!TileEntityOxygenSealer.loadedTiles.contains(this)) TileEntityOxygenSealer.loadedTiles.add(this);
+        if (!this.worldObj.isRemote) {
+            if (!TileEntityOxygenSealer.loadedTiles.contains(this)) {
+                TileEntityOxygenSealer.loadedTiles.add(this);
+            }
+        }
         this.stopSealThreadCooldown = 126 + countEntities;
     }
 
     @Override
     public void invalidate() {
-        if (!this.worldObj.isRemote) TileEntityOxygenSealer.loadedTiles.remove(this);
+        if (!this.worldObj.isRemote) {
+            TileEntityOxygenSealer.loadedTiles.remove(this);
+        }
         super.invalidate();
     }
 
     @Override
     public void onChunkUnload() {
-        if (!this.worldObj.isRemote) TileEntityOxygenSealer.loadedTiles.remove(this);
+        if (!this.worldObj.isRemote) {
+            TileEntityOxygenSealer.loadedTiles.remove(this);
+        }
         super.onChunkUnload();
     }
 
@@ -123,7 +130,9 @@ public class TileEntityOxygenSealer extends TileEntityOxygen implements IInvento
                 IItemOxygenSupply oxygenItem = (IItemOxygenSupply) oxygenItemStack.getItem();
                 float oxygenDraw = Math.min(UNSEALED_OXYGENPERTICK * 2.5F, this.maxOxygen - this.storedOxygen);
                 this.storedOxygen += oxygenItem.discharge(oxygenItemStack, oxygenDraw);
-                if (this.storedOxygen > this.maxOxygen) this.storedOxygen = this.maxOxygen;
+                if (this.storedOxygen > this.maxOxygen) {
+                    this.storedOxygen = this.maxOxygen;
+                }
             }
 
             if (this.thermalControlEnabled()) {
@@ -333,10 +342,18 @@ public class TileEntityOxygenSealer extends TileEntityOxygen implements IInvento
 
     @Override
     public boolean isItemValidForSlot(int slotID, ItemStack itemstack) {
-        if (itemstack == null) return false;
-        if (slotID == 0) return ItemElectricBase.isElectricItem(itemstack.getItem());
-        if (slotID == 1) return itemstack.getItem() instanceof IItemOxygenSupply;
-        if (slotID == 2) return itemstack.getItem() == GCItems.basicItem && itemstack.getItemDamage() == 20;
+        if (itemstack == null) {
+            return false;
+        }
+        if (slotID == 0) {
+            return ItemElectricBase.isElectricItem(itemstack.getItem());
+        }
+        if (slotID == 1) {
+            return itemstack.getItem() instanceof IItemOxygenSupply;
+        }
+        if (slotID == 2) {
+            return itemstack.getItem() == GCItems.basicItem && itemstack.getItemDamage() == 20;
+        }
         return false;
     }
 

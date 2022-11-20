@@ -137,7 +137,9 @@ public class EntityEvolvedCreeper extends EntityCreeper implements IEntityBreath
     @Override
     protected void jump() {
         this.motionY = 0.45D / WorldUtil.getGravityFactor(this);
-        if (this.motionY < 0.22D) this.motionY = 0.22D;
+        if (this.motionY < 0.22D) {
+            this.motionY = 0.22D;
+        }
 
         if (this.isPotionActive(Potion.jump)) {
             this.motionY += (this.getActivePotionEffect(Potion.jump).getAmplifier() + 1) * 0.1F;
@@ -155,7 +157,9 @@ public class EntityEvolvedCreeper extends EntityCreeper implements IEntityBreath
 
     @Override
     protected Item getDropItem() {
-        if (this.isBurning()) return Items.blaze_rod;
+        if (this.isBurning()) {
+            return Items.blaze_rod;
+        }
         return Items.redstone;
     }
 
@@ -181,7 +185,9 @@ public class EntityEvolvedCreeper extends EntityCreeper implements IEntityBreath
                 this.entityDropItem(new ItemStack(Blocks.ice), 0.0F);
                 break;
             default:
-                if (ConfigManagerCore.challengeMobDropsAndSpawning) this.dropItem(Items.reeds, 1);
+                if (ConfigManagerCore.challengeMobDropsAndSpawning) {
+                    this.dropItem(Items.reeds, 1);
+                }
                 break;
         }
     }

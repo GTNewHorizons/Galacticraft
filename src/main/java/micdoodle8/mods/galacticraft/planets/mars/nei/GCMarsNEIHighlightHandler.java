@@ -55,11 +55,17 @@ public class GCMarsNEIHighlightHandler implements IHighlightHandler {
         Block b = world.getBlock(x, y, z);
         int meta = world.getBlockMetadata(x, y, z);
         if (b == MarsBlocks.marsBlock) {
-            if (meta == 2) return new ItemStack(MarsBlocks.marsBlock, 1, 2);
+            if (meta == 2) {
+                return new ItemStack(MarsBlocks.marsBlock, 1, 2);
+            }
 
-            if (meta == 9) return new ItemStack(MarsBlocks.marsBlock, 1, 9);
+            if (meta == 9) {
+                return new ItemStack(MarsBlocks.marsBlock, 1, 9);
+            }
         } else if (b == AsteroidBlocks.blockBasic) {
-            if (meta == 4) return new ItemStack(AsteroidBlocks.blockBasic, 1, 4);
+            if (meta == 4) {
+                return new ItemStack(AsteroidBlocks.blockBasic, 1, 4);
+            }
         }
         return null;
     }

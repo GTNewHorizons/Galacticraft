@@ -73,7 +73,9 @@ public class PlayerServer implements IPlayerServer {
     @Override
     public float attackEntityFrom(EntityPlayerMP player, DamageSource par1DamageSource, float par2) {
         // No damage while in Celestial Selection screen
-        if (player.ridingEntity instanceof EntityCelestialFake) return -1;
+        if (player.ridingEntity instanceof EntityCelestialFake) {
+            return -1;
+        }
 
         if (GalacticraftCore.isPlanetsLoaded) {
             if (par1DamageSource == DamageSource.outOfWorld) {

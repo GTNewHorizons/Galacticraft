@@ -114,16 +114,18 @@ public class CanisterRecipes extends ShapelessRecipes {
         if (oxygenAvail >= oxygenToFill) {
             ItemStack result = itemTank.copy();
             result.setItemDamage(0);
-            if (itemCanister.getItem() instanceof ItemCanisterLiquidOxygen)
+            if (itemCanister.getItem() instanceof ItemCanisterLiquidOxygen) {
                 ItemCanisterLiquidOxygen.saveDamage(itemCanister, itemCanister.getItemDamage() + oxygenToFill);
+            }
             return result;
         }
 
         int tankDamageNew = (oxygenToFill - oxygenAvail) * 54 / 5;
         ItemStack result = itemTank.copy();
         result.setItemDamage(tankDamageNew);
-        if (itemCanister.getItem() instanceof ItemCanisterLiquidOxygen)
+        if (itemCanister.getItem() instanceof ItemCanisterLiquidOxygen) {
             ItemCanisterLiquidOxygen.saveDamage(itemCanister, itemCanister.getMaxDamage());
+        }
         return result;
     }
 

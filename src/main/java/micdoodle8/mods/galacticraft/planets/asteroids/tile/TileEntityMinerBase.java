@@ -61,7 +61,9 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
     public TileEntityMinerBase() {
         this.storage.setMaxExtract(ConfigManagerCore.hardMode ? 20 : 12);
         this.slotArray = new int[HOLDSIZE];
-        for (int i = 0; i < HOLDSIZE; i++) this.slotArray[i] = i + 1;
+        for (int i = 0; i < HOLDSIZE; i++) {
+            this.slotArray[i] = i + 1;
+        }
     }
 
     @Override
@@ -74,7 +76,9 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
         }
 
         if (this.findTargetPointsFlag) {
-            if (this.isMaster && this.linkedMiner != null) this.findTargetPoints();
+            if (this.isMaster && this.linkedMiner != null) {
+                this.findTargetPoints();
+            }
             this.findTargetPointsFlag = false;
         }
 
@@ -85,7 +89,9 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
 
             if (master != null) {
                 float energyLimit = master.storage.getCapacityGC() - master.storage.getEnergyStoredGC();
-                if (energyLimit < 0F) energyLimit = 0F;
+                if (energyLimit < 0F) {
+                    energyLimit = 0F;
+                }
                 this.storage.setCapacity(energyLimit);
                 this.storage.setMaxExtract(energyLimit);
                 this.storage.setMaxReceive(energyLimit);
@@ -97,13 +103,17 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
         }
 
         // Used for refreshing client with linked miner position data
-        if (this.linkCountDown > 0) this.linkCountDown--;
+        if (this.linkCountDown > 0) {
+            this.linkCountDown--;
+        }
     }
 
     public boolean spawnMiner(EntityPlayerMP player) {
         if (this.isMaster) {
             if (this.linkedMiner != null) {
-                if (this.linkedMiner.isDead) this.unlinkMiner();
+                if (this.linkedMiner.isDead) {
+                    this.unlinkMiner();
+                }
             }
             if (this.linkedMinerID == null) {
                 if (EntityAstroMiner.spawnMinerAtBase(
@@ -169,7 +179,9 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
         this.updateClientFlag = true;
         if (nbt.hasKey("LinkedUUIDMost", 4) && nbt.hasKey("LinkedUUIDLeast", 4)) {
             this.linkedMinerID = new UUID(nbt.getLong("LinkedUUIDMost"), nbt.getLong("LinkedUUIDLeast"));
-        } else this.linkedMinerID = null;
+        } else {
+            this.linkedMinerID = null;
+        }
         if (nbt.hasKey("TargetPoints")) {
             this.targetPoints.clear();
             final NBTTagList mpList = nbt.getTagList("TargetPoints", 10);
@@ -177,7 +189,9 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
                 NBTTagCompound bvTag = mpList.getCompoundTagAt(j);
                 this.targetPoints.add(BlockVec3.readFromNBT(bvTag));
             }
-        } else this.findTargetPointsFlag = this.isMaster;
+        } else {
+            this.findTargetPointsFlag = this.isMaster;
+        }
     }
 
     @Override
@@ -360,7 +374,9 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
     public boolean onActivated(EntityPlayer entityPlayer) {
         if (this.isMaster) {
             ItemStack holding = entityPlayer.getCurrentEquippedItem();
-            if (holding != null && holding.getItem() == AsteroidsItems.astroMiner) return false;
+            if (holding != null && holding.getItem() == AsteroidsItems.astroMiner) {
+                return false;
+            }
 
             entityPlayer.openGui(
                     GalacticraftPlanets.instance,
@@ -421,10 +437,14 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
             super.updateFacing();
         } else {
             TileEntityMinerBase master = this.getMaster();
-            if (master != null) master.updateFacing();
+            if (master != null) {
+                master.updateFacing();
+            }
         }
 
-        if (!this.worldObj.isRemote) this.updateClient();
+        if (!this.worldObj.isRemote) {
+            this.updateClient();
+        }
 
         this.markDirty();
     }
@@ -521,7 +541,9 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
 
     @Override
     public boolean isItemValidForSlot(int slotID, ItemStack itemstack) {
-        if (this.isMaster) return slotID > 0 || ItemElectricBase.isElectricItem(itemstack.getItem());
+        if (this.isMaster) {
+            return slotID > 0 || ItemElectricBase.isElectricItem(itemstack.getItem());
+        }
         TileEntityMinerBase master = this.getMaster();
         if (master != null) {
             return master.isItemValidForSlot(slotID, itemstack);
@@ -532,7 +554,9 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
 
     @Override
     public ItemStack getStackInSlot(int par1) {
-        if (this.isMaster) return super.getStackInSlot(par1);
+        if (this.isMaster) {
+            return super.getStackInSlot(par1);
+        }
         TileEntityMinerBase master = this.getMaster();
         if (master != null) {
             return master.getStackInSlot(par1);
@@ -543,7 +567,9 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
 
     @Override
     public ItemStack decrStackSize(int par1, int par2) {
-        if (this.isMaster) return super.decrStackSize(par1, par2);
+        if (this.isMaster) {
+            return super.decrStackSize(par1, par2);
+        }
         TileEntityMinerBase master = this.getMaster();
         if (master != null) {
             return master.decrStackSize(par1, par2);
@@ -554,7 +580,9 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
 
     @Override
     public ItemStack getStackInSlotOnClosing(int par1) {
-        if (this.isMaster) return super.getStackInSlotOnClosing(par1);
+        if (this.isMaster) {
+            return super.getStackInSlotOnClosing(par1);
+        }
         TileEntityMinerBase master = this.getMaster();
         if (master != null) {
             return master.getStackInSlotOnClosing(par1);
@@ -600,7 +628,9 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
         if (!this.targetPoints.isEmpty()) {
             BlockVec3 pos = this.targetPoints.removeFirst();
             this.markDirty();
-            if (pos != null) return pos.clone();
+            if (pos != null) {
+                return pos.clone();
+            }
         }
 
         // No more mining targets, the whole area is mined
@@ -624,14 +654,18 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
         posnTarget.modifyPositionFromSide(
                 ForgeDirection.getOrientation(baseFacing), this.worldObj.rand.nextInt(16) + 32);
         int miny = Math.min(this.yCoord * 2 - 90, this.yCoord - 22);
-        if (miny < 5) miny = 5;
+        if (miny < 5) {
+            miny = 5;
+        }
         posnTarget.y = miny + 5 + this.worldObj.rand.nextInt(4);
 
         this.targetPoints.add(posnTarget);
 
         ForgeDirection lateral = ForgeDirection.NORTH;
         ForgeDirection inLine = ForgeDirection.getOrientation(baseFacing);
-        if ((baseFacing & 6) == 2) lateral = ForgeDirection.WEST;
+        if ((baseFacing & 6) == 2) {
+            lateral = ForgeDirection.WEST;
+        }
 
         this.targetPoints.add(posnTarget.clone().modifyPositionFromSide(lateral, 13));
         this.targetPoints.add(posnTarget.clone().modifyPositionFromSide(lateral, -13));
@@ -680,8 +714,14 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
         TileEntityMinerBase master;
         if (!this.isMaster) {
             master = this.getMaster();
-            if (master == null) return;
-        } else master = this;
-        if (master.linkedMiner != null) master.linkedMiner.recall();
+            if (master == null) {
+                return;
+            }
+        } else {
+            master = this;
+        }
+        if (master.linkedMiner != null) {
+            master.linkedMiner.recall();
+        }
     }
 }

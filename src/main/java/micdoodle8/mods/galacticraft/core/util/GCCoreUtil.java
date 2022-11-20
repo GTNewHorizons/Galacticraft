@@ -159,7 +159,9 @@ public class GCCoreUtil {
 
     public static String lowerCaseNoun(String string) {
         Language l = Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage();
-        if (l.getLanguageCode().equals("de_DE")) return string;
+        if (l.getLanguageCode().equals("de_DE")) {
+            return string;
+        }
         return GCCoreUtil.translate(string).toLowerCase();
     }
 }

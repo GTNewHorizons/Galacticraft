@@ -67,7 +67,9 @@ public class EnergyUtil {
         for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
             TileEntity tileEntity = thisVec.getTileEntityOnSide(world, direction);
 
-            if (tileEntity == null) continue;
+            if (tileEntity == null) {
+                continue;
+            }
 
             if (tileEntity instanceof IConnector) {
                 if (((IConnector) tileEntity).canConnect(direction.getOpposite(), NetworkType.POWER)) {
@@ -102,7 +104,9 @@ public class EnergyUtil {
                     }
                 }
 
-                if (doneIC2) continue;
+                if (doneIC2) {
+                    continue;
+                }
             }
 
             if (isRFLoaded && tileEntity instanceof IEnergyConnection) {
@@ -117,8 +121,9 @@ public class EnergyUtil {
                         continue;
                     }
 
-                    if (((IEnergyConnection) tileEntity).canConnectEnergy(direction.getOpposite()))
+                    if (((IEnergyConnection) tileEntity).canConnectEnergy(direction.getOpposite())) {
                         adjacentConnections[direction.ordinal()] = tileEntity;
+                    }
                 }
                 continue;
             }
@@ -209,7 +214,9 @@ public class EnergyUtil {
                 }
             }
 
-            if (simulate) return Math.min(toSend, (float) demanded / EnergyConfigHandler.TO_IC2_RATIO);
+            if (simulate) {
+                return Math.min(toSend, (float) demanded / EnergyConfigHandler.TO_IC2_RATIO);
+            }
 
             double energySendingIC2 = Math.min(toSend * EnergyConfigHandler.TO_IC2_RATIO, demanded);
             if (energySendingIC2 >= 1D) {
@@ -223,7 +230,9 @@ public class EnergyUtil {
                                 - (Double) EnergyUtil.injectEnergyIC2.invoke(tileAdj, inputAdj, energySendingIC2);
                     }
                 } catch (Exception ex) {
-                    if (ConfigManagerCore.enableDebug) ex.printStackTrace();
+                    if (ConfigManagerCore.enableDebug) {
+                        ex.printStackTrace();
+                    }
                 }
                 if (result < 0D) {
                     return 0F;
@@ -261,10 +270,14 @@ public class EnergyUtil {
             try {
                 offered = (Double) EnergyUtil.offeredEnergyIC2.invoke(tileAdj);
             } catch (Exception ex) {
-                if (ConfigManagerCore.enableDebug) ex.printStackTrace();
+                if (ConfigManagerCore.enableDebug) {
+                    ex.printStackTrace();
+                }
             }
 
-            if (simulate) return Math.min(toPull, (float) offered / EnergyConfigHandler.TO_IC2_RATIO);
+            if (simulate) {
+                return Math.min(toPull, (float) offered / EnergyConfigHandler.TO_IC2_RATIO);
+            }
 
             double energySendingIC2 = Math.min(toPull * EnergyConfigHandler.TO_IC2_RATIO, offered);
             if (energySendingIC2 >= 1D) {
@@ -272,7 +285,9 @@ public class EnergyUtil {
                 try {
                     resultIC2 = energySendingIC2 - (Double) EnergyUtil.drawEnergyIC2.invoke(tileAdj, energySendingIC2);
                 } catch (Exception ex) {
-                    if (ConfigManagerCore.enableDebug) ex.printStackTrace();
+                    if (ConfigManagerCore.enableDebug) {
+                        ex.printStackTrace();
+                    }
                 }
                 if (resultIC2 < 0D) {
                     resultIC2 = 0D;
@@ -311,8 +326,9 @@ public class EnergyUtil {
      * @param inputAdj - the energy input side for that tile which is under test
      */
     public static boolean otherModCanReceive(TileEntity tileAdj, ForgeDirection inputAdj) {
-        if (tileAdj instanceof TileBaseConductor || tileAdj instanceof EnergyStorageTile)
+        if (tileAdj instanceof TileBaseConductor || tileAdj instanceof EnergyStorageTile) {
             return false; // Do not try using other mods' methods to connect to GC's own tiles
+        }
 
         if (isIC2Loaded && tileAdj instanceof IEnergyAcceptor) {
             return ((IEnergyAcceptor) tileAdj).acceptsEnergyFrom(null, inputAdj);
@@ -336,8 +352,9 @@ public class EnergyUtil {
      * @param side    - the energy output side for that tile which is under test
      */
     public static boolean otherModCanProduce(TileEntity tileAdj, ForgeDirection side) {
-        if (tileAdj instanceof TileBaseConductor || tileAdj instanceof EnergyStorageTile)
+        if (tileAdj instanceof TileBaseConductor || tileAdj instanceof EnergyStorageTile) {
             return false; // Do not try using other mods' methods to connect to GC's own tiles
+        }
 
         if (isIC2Loaded && tileAdj instanceof IEnergyEmitter) {
             return ((IEnergyEmitter) tileAdj).emitsEnergyTo(null, side);
@@ -423,7 +440,9 @@ public class EnergyUtil {
                 e.printStackTrace();
             }
         }
-        if (clazzPipeTile == null) isBCReallyLoaded = false;
+        if (clazzPipeTile == null) {
+            isBCReallyLoaded = false;
+        }
 
         return true;
     }

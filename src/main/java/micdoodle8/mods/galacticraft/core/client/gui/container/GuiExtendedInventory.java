@@ -88,7 +88,9 @@ public class GuiExtendedInventory extends InventoryEffectRenderer {
             this.guiLeft += diff;
             for (int k = 0; k < this.buttonList.size(); ++k) {
                 GuiButton b = (GuiButton) this.buttonList.get(k);
-                if (!(b instanceof AbstractTab)) b.xPosition += diff;
+                if (!(b instanceof AbstractTab)) {
+                    b.xPosition += diff;
+                }
             }
         }
         super.drawScreen(par1, par2, par3);

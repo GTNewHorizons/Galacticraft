@@ -35,14 +35,18 @@ public class RocketFuelRecipe {
     public static boolean isValidFuel(FluidStack fluid) {
         if (fluid != null) {
             for (RocketFuel fuel : fuelList) {
-                if (fuel.isFluidEqual(fluid)) return true;
+                if (fuel.isFluidEqual(fluid)) {
+                    return true;
+                }
             }
         }
         return false;
     }
 
     public static int getfuelMaxTier(FluidStack fluid) {
-        if (fluid == null) return 0;
+        if (fluid == null) {
+            return 0;
+        }
         for (RocketFuel fuel : fuelList) {
             if (fuel.isFluidEqual(fluid)) {
                 return fuel.getMaxTier();

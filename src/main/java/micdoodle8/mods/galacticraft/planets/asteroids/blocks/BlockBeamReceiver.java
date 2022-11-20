@@ -72,9 +72,10 @@ public class BlockBeamReceiver extends BlockTileGC implements ItemBlockDesc.IBlo
     @Override
     public void onBlockAdded(World world, int x, int y, int z) {
         TileEntity thisTile = world.getTileEntity(x, y, z);
-        if (thisTile instanceof TileEntityBeamReceiver)
+        if (thisTile instanceof TileEntityBeamReceiver) {
             ((TileEntityBeamReceiver) thisTile)
                     .setFacing(ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z)));
+        }
     }
 
     @Override
@@ -130,10 +131,14 @@ public class BlockBeamReceiver extends BlockTileGC implements ItemBlockDesc.IBlo
             }
         }
 
-        if (EnergyUtil.otherModCanReceive(tileAt, direction.getOpposite())) return direction.ordinal();
+        if (EnergyUtil.otherModCanReceive(tileAt, direction.getOpposite())) {
+            return direction.ordinal();
+        }
 
         for (ForgeDirection adjacentDir : ForgeDirection.VALID_DIRECTIONS) {
-            if (adjacentDir == direction) continue;
+            if (adjacentDir == direction) {
+                continue;
+            }
             tileAt = world.getTileEntity(x + adjacentDir.offsetX, y + adjacentDir.offsetY, z + adjacentDir.offsetZ);
 
             if (tileAt instanceof IConductor) {
@@ -145,7 +150,9 @@ public class BlockBeamReceiver extends BlockTileGC implements ItemBlockDesc.IBlo
                 return adjacentDir.ordinal();
             }
 
-            if (EnergyUtil.otherModCanReceive(tileAt, adjacentDir.getOpposite())) return adjacentDir.ordinal();
+            if (EnergyUtil.otherModCanReceive(tileAt, adjacentDir.getOpposite())) {
+                return adjacentDir.ordinal();
+            }
         }
 
         return -1;

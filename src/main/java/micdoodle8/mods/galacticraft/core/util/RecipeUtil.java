@@ -55,7 +55,9 @@ public class RecipeUtil {
                 oreDictIngot,
                 oreDictIngot
             }));
-        } else RecipeUtil.addRecipe(result, new Object[] {"XXX", "XXX", "XXX", 'X', gcIngot});
+        } else {
+            RecipeUtil.addRecipe(result, new Object[] {"XXX", "XXX", "XXX", 'X', gcIngot});
+        }
     }
 
     public static void addRocketBenchRecipe(ItemStack result, HashMap<Integer, ItemStack> input) {
@@ -72,7 +74,9 @@ public class RecipeUtil {
 
     public static Block getChestBlock() {
         Block block = GameRegistry.findBlock("IronChest", "BlockIronChest");
-        if (block == null) block = Blocks.chest;
+        if (block == null) {
+            block = Blocks.chest;
+        }
         return block;
     }
 

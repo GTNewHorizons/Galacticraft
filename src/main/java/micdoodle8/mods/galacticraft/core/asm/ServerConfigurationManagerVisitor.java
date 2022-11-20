@@ -43,7 +43,9 @@ public class ServerConfigurationManagerVisitor extends ClassVisitor {
                         type,
                         methodName);
                 super.visitTypeInsn(NEW, REPLACEMENT_CLASS_INTERNAL_NAME);
-            } else super.visitTypeInsn(opcode, type);
+            } else {
+                super.visitTypeInsn(opcode, type);
+            }
         }
 
         @Override
@@ -60,7 +62,9 @@ public class ServerConfigurationManagerVisitor extends ClassVisitor {
                         desc,
                         methodName);
                 super.visitMethodInsn(opcode, REPLACEMENT_CLASS_INTERNAL_NAME, name, desc, itf);
-            } else super.visitMethodInsn(opcode, owner, name, desc, itf);
+            } else {
+                super.visitMethodInsn(opcode, owner, name, desc, itf);
+            }
         }
     }
 }

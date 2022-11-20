@@ -29,8 +29,9 @@ public class FluidUtil {
      * @return True if it's a container with "fuel"
      */
     public static boolean isFuelContainerAny(ItemStack var4) {
-        if (var4.getItem() instanceof ItemCanisterGeneric)
+        if (var4.getItem() instanceof ItemCanisterGeneric) {
             return var4.getItem() == GCItems.fuelCanister && var4.getItemDamage() < var4.getMaxDamage();
+        }
 
         FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(var4);
         return liquid != null && FluidUtil.testFuel(FluidRegistry.getFluidName(liquid));
@@ -45,11 +46,17 @@ public class FluidUtil {
      * @return true if a type of recognised fuel, false if not
      */
     public static boolean testFuel(String name) {
-        if (name.startsWith("fuel")) return true;
+        if (name.startsWith("fuel")) {
+            return true;
+        }
 
-        if (name.contains("rocket") && name.contains("fuel")) return true;
+        if (name.contains("rocket") && name.contains("fuel")) {
+            return true;
+        }
 
-        if (name.equals("rc jet fuel")) return true;
+        if (name.equals("rc jet fuel")) {
+            return true;
+        }
 
         return false;
     }
@@ -91,8 +98,9 @@ public class FluidUtil {
      * @return True if it's a container with "oil"
      */
     public static boolean isOilContainerAny(ItemStack var4) {
-        if (var4.getItem() instanceof ItemCanisterGeneric)
+        if (var4.getItem() instanceof ItemCanisterGeneric) {
             return var4.getItem() == GCItems.oilCanister && var4.getItemDamage() < var4.getMaxDamage();
+        }
 
         FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(var4);
         return liquid != null && FluidRegistry.getFluidName(liquid).startsWith("oil");
@@ -105,8 +113,9 @@ public class FluidUtil {
      * @return True if it's a container with "methane"
      */
     public static boolean isMethaneContainerAny(ItemStack var4) {
-        if (var4.getItem() instanceof ItemCanisterGeneric)
+        if (var4.getItem() instanceof ItemCanisterGeneric) {
             return var4.getItem() == AsteroidsItems.methaneCanister && var4.getItemDamage() < var4.getMaxDamage();
+        }
 
         FluidStack stack = FluidContainerRegistry.getFluidForFilledItem(var4);
         return stack != null
@@ -122,7 +131,9 @@ public class FluidUtil {
      * @return True if it's a full container
      */
     public static boolean isFullContainer(ItemStack var4) {
-        if (var4.getItem() instanceof ItemCanisterGeneric) return var4.getItemDamage() == 1;
+        if (var4.getItem() instanceof ItemCanisterGeneric) {
+            return var4.getItemDamage() == 1;
+        }
 
         FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(var4);
         return liquid != null;
@@ -155,7 +166,9 @@ public class FluidUtil {
         if (amountToFill <= 0
                 || (isCanister
                         && slotItem.getItem() != canisterType
-                        && slotItem.getItemDamage() != ItemCanisterGeneric.EMPTY)) return;
+                        && slotItem.getItemDamage() != ItemCanisterGeneric.EMPTY)) {
+            return;
+        }
 
         if (isCanister) {
             inventory[slot] = new ItemStack(canisterType, 1, slotItem.getItemDamage() - amountToFill);
@@ -188,8 +201,9 @@ public class FluidUtil {
                 // Test for the GC fuels (though anything similarly named would also pass here)
                 if (liquidname.startsWith("fuel")) {
                     // Make sure it is the current GC fuel
-                    if (!liquidname.equals(GalacticraftCore.fluidFuel.getName()))
+                    if (!liquidname.equals(GalacticraftCore.fluidFuel.getName())) {
                         liquid = new FluidStack(GalacticraftCore.fluidFuel, liquid.amount);
+                    }
 
                     // But match any existing fuel fluid in the container
                     ItemStack stack = inventory[slot];
@@ -199,8 +213,9 @@ public class FluidUtil {
                     if (stack.getItem() instanceof IFluidContainerItem) {
                         FluidStack existingFluid = ((IFluidContainerItem) stack.getItem()).getFluid(stack);
                         if (existingFluid != null
-                                && !existingFluid.getFluid().getName().equals(GalacticraftCore.fluidFuel.getName()))
+                                && !existingFluid.getFluid().getName().equals(GalacticraftCore.fluidFuel.getName())) {
                             liquid = new FluidStack(existingFluid, liquid.amount);
+                        }
                     }
 
                     FluidUtil.tryFillContainer(tank, liquid, inventory, slot, GCItems.fuelCanister);
@@ -220,9 +235,10 @@ public class FluidUtil {
      * @return
      */
     public static boolean isEmptyContainer(ItemStack var4, Item canisterType) {
-        if (var4.getItem() instanceof ItemCanisterGeneric)
+        if (var4.getItem() instanceof ItemCanisterGeneric) {
             return var4.getItemDamage() == ItemCanisterGeneric.EMPTY
                     || (var4.getItem() == canisterType && var4.getItemDamage() > 1);
+        }
 
         return FluidContainerRegistry.isEmptyContainer(var4);
     }
@@ -237,13 +253,19 @@ public class FluidUtil {
      */
     public static boolean isEmptyContainerFor(ItemStack var4, FluidStack targetFluid) {
         if (var4.getItem() instanceof ItemCanisterGeneric) {
-            if (var4.getItemDamage() == ItemCanisterGeneric.EMPTY) return true;
-            if (var4.getItemDamage() == 1) return false;
+            if (var4.getItemDamage() == ItemCanisterGeneric.EMPTY) {
+                return true;
+            }
+            if (var4.getItemDamage() == 1) {
+                return false;
+            }
 
             return fluidsSame(((ItemCanisterGeneric) var4.getItem()).getFluid(var4), targetFluid);
         }
 
-        if (FluidContainerRegistry.isEmptyContainer(var4)) return true;
+        if (FluidContainerRegistry.isEmptyContainer(var4)) {
+            return true;
+        }
 
         return fluidsSame(FluidContainerRegistry.getFluidForFilledItem(var4), targetFluid);
     }
@@ -256,10 +278,14 @@ public class FluidUtil {
      *         False otherwise
      */
     public static boolean fluidsSame(FluidStack fs1, FluidStack fs2) {
-        if (fs1 == null || fs2 == null) return false;
+        if (fs1 == null || fs2 == null) {
+            return false;
+        }
         Fluid f1 = fs1.getFluid();
         Fluid f2 = fs2.getFluid();
-        if (f1 == null || f2 == null || f1.getName() == null) return false;
+        if (f1 == null || f2 == null || f1.getName() == null) {
+            return false;
+        }
         return f1.getName().equals(f2.getName());
     }
 
@@ -271,7 +297,9 @@ public class FluidUtil {
      * @return True if the container is empty
      */
     public static boolean isEmptyContainer(ItemStack var4) {
-        if (var4.getItem() instanceof ItemCanisterGeneric) return var4.getItemDamage() == ItemCanisterGeneric.EMPTY;
+        if (var4.getItem() instanceof ItemCanisterGeneric) {
+            return var4.getItemDamage() == ItemCanisterGeneric.EMPTY;
+        }
 
         return FluidContainerRegistry.isEmptyContainer(var4);
     }
@@ -295,7 +323,9 @@ public class FluidUtil {
      * @return True if the container contains something
      */
     public static boolean isFilledContainer(ItemStack var4) {
-        if (var4.getItem() instanceof ItemCanisterGeneric) return var4.getItemDamage() < ItemCanisterGeneric.EMPTY;
+        if (var4.getItem() instanceof ItemCanisterGeneric) {
+            return var4.getItemDamage() < ItemCanisterGeneric.EMPTY;
+        }
         return FluidContainerRegistry.getFluidForFilledItem(var4) != null;
     }
 

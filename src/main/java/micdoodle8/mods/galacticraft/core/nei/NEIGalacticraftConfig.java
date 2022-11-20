@@ -50,8 +50,9 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
         for (Block block : GCBlocks.hiddenBlocks) {
             API.hideItem(new ItemStack(block, 1, 0));
             if (block == GCBlocks.slabGCDouble) {
-                for (int j = 1; j < (GalacticraftCore.isPlanetsLoaded ? 6 : 4); j++)
+                for (int j = 1; j < (GalacticraftCore.isPlanetsLoaded ? 6 : 4); j++) {
                     API.hideItem(new ItemStack(block, 1, j));
+                }
             }
         }
 
@@ -350,7 +351,9 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
                 if (resultItemStack
                         .getItem()
                         .getUnlocalizedName(resultItemStack)
-                        .contains("compressed")) resultItemStack.stackSize *= 2;
+                        .contains("compressed")) {
+                    resultItemStack.stackSize *= 2;
+                }
             }
 
             this.registerIngotCompressorRecipe(input1, new PositionedStack(resultItemStack, 140, 46));

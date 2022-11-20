@@ -110,7 +110,9 @@ public class ContainerSlimeling extends Container {
                 // With inventory bag, slot 0 is a bag slot
                 // Slots 1-36 are regular inventory (27 inventory, 9 hotbar)
                 // Slots 37-63 are the inventory bag slots
-                if (par1 == 0) return null;
+                if (par1 == 0) {
+                    return null;
+                }
 
                 if (par1 > 36) {
                     if (!this.mergeItemStack(var4, 1, 37, true)) {

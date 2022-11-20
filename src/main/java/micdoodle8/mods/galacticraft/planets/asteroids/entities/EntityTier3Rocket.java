@@ -120,7 +120,9 @@ public class EntityTier3Rocket extends EntityTieredRocket {
 
             if (this.timeSinceLaunch % MathHelper.floor_double(2 * (1 / multiplier)) == 0) {
                 this.removeFuel(1);
-                if (!this.hasValidFuel()) this.stopRocketSound();
+                if (!this.hasValidFuel()) {
+                    this.stopRocketSound();
+                }
             }
         } else if (!this.hasValidFuel() && this.getLaunched() && !this.worldObj.isRemote) {
             if (Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 10 != 0.0) {

@@ -108,7 +108,9 @@ public class WorldGenTerraformTree extends WorldGenerator {
 
                     for (j1 = 0; j1 < l; ++j1) {
                         Block block = par1World.getBlock(x, y + j1, z);
-                        if (block == null) continue;
+                        if (block == null) {
+                            continue;
+                        }
 
                         if (block.isAir(par1World, x, y + j1, z) || block.isLeaves(par1World, x, y + j1, z)) {
                             this.setBlockAndNotifyAdequately(par1World, x, y + j1, z, Blocks.log, this.metaWood);

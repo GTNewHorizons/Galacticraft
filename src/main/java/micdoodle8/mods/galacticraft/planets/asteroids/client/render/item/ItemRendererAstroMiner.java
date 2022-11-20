@@ -50,7 +50,9 @@ public class ItemRendererAstroMiner implements IItemRenderer {
         GL11.glTranslatef(-3.75F, 0F, 0F);
         this.modellasergr.renderAll();
         GL11.glPopMatrix();
-        if (!saveCullState) GL11.glDisable(GL11.GL_CULL_FACE);
+        if (!saveCullState) {
+            GL11.glDisable(GL11.GL_CULL_FACE);
+        }
     }
 
     public void transform(ItemStack itemstack, ItemRenderType type) {

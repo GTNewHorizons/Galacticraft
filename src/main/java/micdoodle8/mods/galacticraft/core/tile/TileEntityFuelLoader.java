@@ -67,9 +67,11 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
                         int used = this.fuelTank.fill(
                                 new FluidStack(GalacticraftCore.fluidFuel, ItemCanisterGeneric.EMPTY - originalDamage),
                                 true);
-                        if (originalDamage + used == ItemCanisterGeneric.EMPTY)
+                        if (originalDamage + used == ItemCanisterGeneric.EMPTY) {
                             this.containingItems[1] = new ItemStack(GCItems.oilCanister, 1, ItemCanisterGeneric.EMPTY);
-                        else this.containingItems[1] = new ItemStack(GCItems.fuelCanister, 1, originalDamage + used);
+                        } else {
+                            this.containingItems[1] = new ItemStack(GCItems.fuelCanister, 1, originalDamage + used);
+                        }
                         markDirty();
                     }
                 } else if (FluidContainerRegistry.isFilledContainer(this.containingItems[1])) {

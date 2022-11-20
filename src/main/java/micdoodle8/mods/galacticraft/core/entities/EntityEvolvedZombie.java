@@ -72,7 +72,9 @@ public class EntityEvolvedZombie extends EntityZombie implements IEntityBreathab
     @Override
     protected void jump() {
         this.motionY = 0.48D / WorldUtil.getGravityFactor(this);
-        if (this.motionY < 0.24D) this.motionY = 0.24D;
+        if (this.motionY < 0.24D) {
+            this.motionY = 0.24D;
+        }
 
         if (this.isPotionActive(Potion.jump)) {
             this.motionY += (this.getActivePotionEffect(Potion.jump).getAmplifier() + 1) * 0.1F;
@@ -124,7 +126,9 @@ public class EntityEvolvedZombie extends EntityZombie implements IEntityBreathab
             case 13:
             case 14:
             case 15:
-                if (ConfigManagerCore.challengeMobDropsAndSpawning) this.dropItem(Items.melon_seeds, 1);
+                if (ConfigManagerCore.challengeMobDropsAndSpawning) {
+                    this.dropItem(Items.melon_seeds, 1);
+                }
                 break;
         }
     }
@@ -148,7 +152,8 @@ public class EntityEvolvedZombie extends EntityZombie implements IEntityBreathab
 
         // Drop copper ingot as semi-rare drop if player hit and if dropping rotten
         // flesh (50% chance)
-        if (p_70628_1_ && (ConfigManagerCore.challengeMobDropsAndSpawning) && j > 0 && this.rand.nextInt(6) == 0)
+        if (p_70628_1_ && (ConfigManagerCore.challengeMobDropsAndSpawning) && j > 0 && this.rand.nextInt(6) == 0) {
             this.entityDropItem(new ItemStack(GCItems.basicItem, 1, 3), 0.0F);
+        }
     }
 }

@@ -98,7 +98,9 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
                 try {
                     tickCounter.setAccessible(true);
                     savedTick = tickCounter.getInt(this.worldObj.villageCollectionObj);
-                    if (savedTick < 0) savedTick = 0;
+                    if (savedTick < 0) {
+                        savedTick = 0;
+                    }
                 } catch (Exception ignore) {
                 }
                 this.timeCurrentOffset = savedTick - newTime;

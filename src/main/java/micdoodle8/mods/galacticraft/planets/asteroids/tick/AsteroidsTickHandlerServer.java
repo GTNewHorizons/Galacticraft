@@ -18,7 +18,9 @@ public class AsteroidsTickHandlerServer {
     public void onServerTick(TickEvent.ServerTickEvent event) {
         MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
         // Prevent issues when clients switch to LAN servers
-        if (server == null) return;
+        if (server == null) {
+            return;
+        }
 
         if (event.phase == TickEvent.Phase.START) {
             if (AsteroidsTickHandlerServer.spaceRaceData == null) {

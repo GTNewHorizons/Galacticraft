@@ -191,7 +191,9 @@ public class ConfigManagerCore {
             prop.comment = "Biome ID for Moon (Mars will be this + 1, Asteroids + 2 etc). Allowed range 40-250.";
             prop.setLanguageKey("gc.configgui.biomeIDBase").setRequiresMcRestart(true);
             biomeIDbase = prop.getInt();
-            if (biomeIDbase < 40 || biomeIDbase > 250) biomeIDbase = 102;
+            if (biomeIDbase < 40 || biomeIDbase > 250) {
+                biomeIDbase = 102;
+            }
             propOrder.add(prop.getName());
 
             prop = config.get(
@@ -530,7 +532,9 @@ public class ConfigManagerCore {
                     "Set this to true for a challenging adventure where the player starts the game stranded in the Asteroids dimension with low resources (only effective if Galacticraft Planets installed).";
             prop.setLanguageKey("gc.configgui.asteroidsStart");
             challengeMode = prop.getBoolean(false);
-            if (!GalacticraftCore.isPlanetsLoaded) challengeMode = false;
+            if (!GalacticraftCore.isPlanetsLoaded) {
+                challengeMode = false;
+            }
             propOrder.add(prop.getName());
 
             prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Adventure Game Mode Flags", 15);
@@ -670,7 +674,9 @@ public class ConfigManagerCore {
                     "Biome Types will not be registered in the BiomeDictionary if this is set to true. Ignored (always true) for MC 1.7.2.";
             prop.setLanguageKey("gc.configgui.disableBiomeTypeRegistrations");
             disableBiomeTypeRegistrations = prop.getBoolean(thisIsMC172);
-            if (thisIsMC172) disableBiomeTypeRegistrations = true;
+            if (thisIsMC172) {
+                disableBiomeTypeRegistrations = true;
+            }
             propOrder.add(prop.getName());
 
             prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Enable Space Race Manager Popup", false);
@@ -782,11 +788,12 @@ public class ConfigManagerCore {
         }
 
         // This enables Endermen on Asteroids in Asteroids Challenge mode
-        if (GalacticraftCore.isPlanetsLoaded)
+        if (GalacticraftCore.isPlanetsLoaded) {
             ((BiomeGenBaseAsteroids) BiomeGenBaseAsteroids.asteroid)
                     .resetMonsterListByMode(challengeMobDropsAndSpawning);
-        // TODO: could also increase mob spawn frequency in Hard Mode on various
-        // dimensions e.g. Moon and Mars?
+            // TODO: could also increase mob spawn frequency in Hard Mode on various
+            // dimensions e.g. Moon and Mars?
+        }
     }
 
     /**
@@ -796,7 +803,9 @@ public class ConfigManagerCore {
      */
     private static boolean searchAsterisk(String[] strings) {
         for (String s : strings) {
-            if (s != null && "*".equals(s.trim())) return true;
+            if (s != null && "*".equals(s.trim())) {
+                return true;
+            }
         }
         return false;
     }
@@ -836,20 +845,25 @@ public class ConfigManagerCore {
                 block = ((ItemBlock) item).field_150939_a;
             }
             if (block == null) {
-                if (logging) GCLog.severe("[config] " + caller + ": unrecognised block name '" + s + "'.");
+                if (logging) {
+                    GCLog.severe("[config] " + caller + ": unrecognised block name '" + s + "'.");
+                }
                 return null;
             }
         }
         try {
             Integer.parseInt(name);
             String bName = GameData.getBlockRegistry().getNameForObject(block);
-            if (logging)
+            if (logging) {
                 GCLog.info("[config] " + caller + ": the use of numeric IDs is discouraged, please use " + bName
                         + " instead of " + name);
+            }
         } catch (NumberFormatException ex) {
         }
         if (Blocks.air == block) {
-            if (logging) GCLog.info("[config] " + caller + ": not a good idea to specify air, skipping that!");
+            if (logging) {
+                GCLog.info("[config] " + caller + ": not a good idea to specify air, skipping that!");
+            }
             return null;
         }
 
@@ -915,8 +929,9 @@ public class ConfigManagerCore {
             Object dataLast = configs.get(dataCount);
             if (dataLast instanceof String) {
                 ConfigManagerCore.detectableIDs = new String[sizeIDs];
-                for (int j = 0; j < sizeIDs; j++)
+                for (int j = 0; j < sizeIDs; j++) {
                     ConfigManagerCore.detectableIDs[j] = new String((String) configs.get(dataCount++));
+                }
             } else if (dataLast instanceof String[]) {
                 ConfigManagerCore.detectableIDs = ((String[]) dataLast);
             }
@@ -934,7 +949,9 @@ public class ConfigManagerCore {
     }
 
     public static void restoreClientConfigOverrideable() {
-        if (ConfigManagerCore.clientSave != null) ConfigManagerCore.setConfigOverride(clientSave);
+        if (ConfigManagerCore.clientSave != null) {
+            ConfigManagerCore.setConfigOverride(clientSave);
+        }
     }
 
     private static int parseKeyValue(String key) {

@@ -293,7 +293,9 @@ public class AsteroidsModule implements IPlanetsModule {
             ZipFile zf = new ZipFile(GCPlanetsSource);
             final Pattern assetENUSLang = Pattern.compile("assets/(.*)/lang/(?:.+/|)([\\w_-]+).lang");
             for (ZipEntry ze : Collections.list(zf.entries())) {
-                if (!ze.getName().contains("galacticraftasteroids/lang")) continue;
+                if (!ze.getName().contains("galacticraftasteroids/lang")) {
+                    continue;
+                }
                 Matcher matcher = assetENUSLang.matcher(ze.getName());
                 if (matcher.matches()) {
                     String lang = matcher.group(2);

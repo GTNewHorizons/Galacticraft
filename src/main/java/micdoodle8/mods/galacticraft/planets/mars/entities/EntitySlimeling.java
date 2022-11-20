@@ -681,7 +681,9 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
     @Override
     protected void jump() {
         this.motionY = 0.48D / WorldUtil.getGravityFactor(this);
-        if (this.motionY < 0.28D) this.motionY = 0.28D;
+        if (this.motionY < 0.28D) {
+            this.motionY = 0.28D;
+        }
 
         if (this.isPotionActive(Potion.jump)) {
             this.motionY += (this.getActivePotionEffect(Potion.jump).getAmplifier() + 1) * 0.1F;

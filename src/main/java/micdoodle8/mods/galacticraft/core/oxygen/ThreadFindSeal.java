@@ -285,7 +285,9 @@ public class ThreadFindSeal {
                     this.breatheableToReplaceBright.add(this.head);
                 }
                 this.makeSealBad();
-            } else this.leakTrace = null;
+            } else {
+                this.leakTrace = null;
+            }
         }
 
         // Set any sealers found which are not the head sealer, not to run their
@@ -431,7 +433,9 @@ public class ThreadFindSeal {
                                         nextLayer.add(sideVec);
                                     }
                                 } else {
-                                    if (id != null) checkedAdd(sideVec);
+                                    if (id != null) {
+                                        checkedAdd(sideVec);
+                                    }
                                 }
                             }
                         }
@@ -502,7 +506,9 @@ public class ThreadFindSeal {
                                     nextLayer.add(sideVec);
                                 }
                             } else {
-                                if (id != null) checkedAdd(sideVec);
+                                if (id != null) {
+                                    checkedAdd(sideVec);
+                                }
                             }
                         }
                     }
@@ -735,8 +741,12 @@ public class ThreadFindSeal {
     private void checkedAdd(BlockVec3 vec) {
         int dx = this.head.x - vec.x;
         int dz = this.head.z - vec.z;
-        if (dx < -8191 || dx > 8192) return;
-        if (dz < -8191 || dz > 8192) return;
+        if (dx < -8191 || dx > 8192) {
+            return;
+        }
+        if (dz < -8191 || dz > 8192) {
+            return;
+        }
         intBucket bucket = buckets[((dx & 15) << 4) + (dz & 15)];
         bucket.add(vec.y + ((dx & 0x3FF0) + ((dz & 0x3FF0) << 10) + ((vec.sideDoneBits & 0x1C0) << 18) << 4));
     }
@@ -747,8 +757,12 @@ public class ThreadFindSeal {
     private boolean checkedContains(BlockVec3 vec) {
         int dx = this.head.x - vec.x;
         int dz = this.head.z - vec.z;
-        if (dx < -8191 || dx > 8192) return true;
-        if (dz < -8191 || dz > 8192) return true;
+        if (dx < -8191 || dx > 8192) {
+            return true;
+        }
+        if (dz < -8191 || dz > 8192) {
+            return true;
+        }
         intBucket bucket = buckets[((dx & 15) << 4) + (dz & 15)];
         return bucket.contains(vec.y + ((dx & 0x3FF0) + ((dz & 0x3FF0) << 10) << 4));
     }
@@ -760,11 +774,15 @@ public class ThreadFindSeal {
         switch (side) {
             case 0:
                 y--;
-                if (y < 0) return false;
+                if (y < 0) {
+                    return false;
+                }
                 break;
             case 1:
                 y++;
-                if (y > 255) return false;
+                if (y > 255) {
+                    return false;
+                }
                 break;
             case 2:
                 dz++;
@@ -778,8 +796,12 @@ public class ThreadFindSeal {
             case 5:
                 dx--;
         }
-        if (dx < -8191 || dx > 8192) return true;
-        if (dz < -8191 || dz > 8192) return true;
+        if (dx < -8191 || dx > 8192) {
+            return true;
+        }
+        if (dz < -8191 || dz > 8192) {
+            return true;
+        }
         intBucket bucket = buckets[((dx & 15) << 4) + (dz & 15)];
         return bucket.contains(y + ((dx & 0x3FF0) + ((dz & 0x3FF0) << 10) << 4));
     }
@@ -787,8 +809,12 @@ public class ThreadFindSeal {
     private BlockVec3 checkedContainsTrace(int x, int y, int z) {
         int dx = this.head.x - x;
         int dz = this.head.z - z;
-        if (dx < -8191 || dx > 8192) return null;
-        if (dz < -8191 || dz > 8192) return null;
+        if (dx < -8191 || dx > 8192) {
+            return null;
+        }
+        if (dz < -8191 || dz > 8192) {
+            return null;
+        }
         intBucket bucket = buckets[((dx & 15) << 4) + (dz & 15)];
         int side = bucket.getMSB4shifted(y + ((dx & 0x3FF0) + ((dz & 0x3FF0) << 10) << 4));
         if (side >= 0) {
@@ -815,7 +841,9 @@ public class ThreadFindSeal {
     public List<BlockVec3> checkedAll() {
         List<BlockVec3> list = new LinkedList<BlockVec3>();
         for (int i = 0; i < 256; i++) {
-            if (this.buckets[i].size() == 0) continue;
+            if (this.buckets[i].size() == 0) {
+                continue;
+            }
             int ddx = i >> 4;
             int ddz = i & 15;
             int[] ints = this.buckets[i].contents();
@@ -825,8 +853,12 @@ public class ThreadFindSeal {
                 k >>= 4;
                 int dx = (k & 0x3FF0) + ddx;
                 int dz = ((k >> 10) & 0x3FF0) + ddz;
-                if (dx > 0x2000) dx -= 0x4000;
-                if (dz > 0x2000) dz -= 0x4000;
+                if (dx > 0x2000) {
+                    dx -= 0x4000;
+                }
+                if (dz > 0x2000) {
+                    dz -= 0x4000;
+                }
                 list.add(new BlockVec3(head.x + dx, y, head.z + dz));
             }
         }
@@ -1039,7 +1071,9 @@ public class ThreadFindSeal {
         private int[] table = new int[maxSize];
 
         public void add(int i) {
-            if (this.contains(i)) return;
+            if (this.contains(i)) {
+                return;
+            }
 
             if (size >= maxSize) {
                 int[] newTable = new int[maxSize + maxSize];
@@ -1054,7 +1088,9 @@ public class ThreadFindSeal {
 
         public boolean contains(int test) {
             for (int i = size - 1; i >= 0; i--) {
-                if ((table[i] & 0xFFFFFFF) == test) return true;
+                if ((table[i] & 0xFFFFFFF) == test) {
+                    return true;
+                }
             }
             return false;
         }

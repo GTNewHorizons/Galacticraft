@@ -421,7 +421,9 @@ public class PacketSimple extends Packet implements IPacket {
                                     PacketSimple.EnumSimplePacket.S_REQUEST_GEAR_DATA, new Object[] {gearName}));
                             ClientProxyCore.gearDataRequests.add(gearName);
                         }
-                    } else ClientProxyCore.gearDataRequests.remove(gearName);
+                    } else {
+                        ClientProxyCore.gearDataRequests.remove(gearName);
+                    }
 
                     EnumModelPacket type = EnumModelPacket.values()[(Integer) this.data.get(1)];
 
@@ -833,12 +835,15 @@ public class PacketSimple extends Packet implements IPacket {
                                 profile = PlayerUtil.makeOtherPlayerProfile(strName, strUUID);
                             }
                             if (VersionUtil.mcVersion1_7_10
-                                    && !profile.getProperties().containsKey("textures"))
+                                    && !profile.getProperties().containsKey("textures")) {
                                 GalacticraftCore.packetPipeline.sendToServer(new PacketSimple(
                                         EnumSimplePacket.S_REQUEST_PLAYERSKIN, new Object[] {strName}));
+                            }
                         }
                         ((TileEntityTelemetry) tile).clientGameProfile = profile;
-                    } else ((TileEntityTelemetry) tile).clientClass = (Class) EntityList.stringToClassMapping.get(name);
+                    } else {
+                        ((TileEntityTelemetry) tile).clientClass = (Class) EntityList.stringToClassMapping.get(name);
+                    }
                     ((TileEntityTelemetry) tile).clientData = new int[5];
                     for (int i = 4; i < 9; i++) {
                         ((TileEntityTelemetry) tile).clientData[i - 4] = (Integer) this.data.get(i);
@@ -1392,10 +1397,14 @@ public class PacketSimple extends Packet implements IPacket {
                         .func_152612_a(strName);
 
                 // Player not online
-                if (playerRequested == null) return;
+                if (playerRequested == null) {
+                    return;
+                }
 
                 GameProfile gp = playerRequested.getGameProfile();
-                if (gp == null) return;
+                if (gp == null) {
+                    return;
+                }
 
                 Property property =
                         (Property) Iterables.getFirst(gp.getProperties().get("textures"), (Object) null);

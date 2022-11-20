@@ -209,14 +209,18 @@ public class EntityCelestialFake extends EntityAdvancedMotion implements IIgnore
                 if (this.riddenByEntity == null) {
                     if (shouldBeMountedId > -1) {
                         Entity e = FMLClientHandler.instance().getWorldClient().getEntityByID(shouldBeMountedId);
-                        if (e != null) e.mountEntity(this);
+                        if (e != null) {
+                            e.mountEntity(this);
+                        }
                     }
                 } else if (this.riddenByEntity.getEntityId() != shouldBeMountedId) {
                     if (shouldBeMountedId == -1) {
                         this.riddenByEntity.mountEntity(null);
                     } else {
                         Entity e = FMLClientHandler.instance().getWorldClient().getEntityByID(shouldBeMountedId);
-                        if (e != null) e.mountEntity(this);
+                        if (e != null) {
+                            e.mountEntity(this);
+                        }
                     }
                 }
             } else {

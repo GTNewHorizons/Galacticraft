@@ -91,11 +91,15 @@ public class FreefallHandler {
 
         if (p.ridingEntity != null) {
             Entity e = p.ridingEntity;
-            if (e instanceof EntitySpaceshipBase) return ((EntitySpaceshipBase) e).getLaunched();
-            if (e instanceof EntityLanderBase) return false;
-            // TODO: should check whether lander has landed (whatever that means)
-            // TODO: could check other ridden entities - every entity should have its own
-            // freefall check :(
+            if (e instanceof EntitySpaceshipBase) {
+                return ((EntitySpaceshipBase) e).getLaunched();
+            }
+            if (e instanceof EntityLanderBase) {
+                return false;
+                // TODO: should check whether lander has landed (whatever that means)
+                // TODO: could check other ridden entities - every entity should have its own
+                // freefall check :(
+            }
         }
 
         // This is an "on the ground" check
@@ -105,10 +109,18 @@ public class FreefallHandler {
             float rY = p.rotationYaw % 360F;
             double zreach = 0D;
             double xreach = 0D;
-            if (rY < 80F || rY > 280F) zreach = 0.2D;
-            if (rY < 170F && rY > 10F) xreach = 0.2D;
-            if (rY < 260F && rY > 100F) zreach = -0.2D;
-            if (rY < 350F && rY > 190F) xreach = -0.2D;
+            if (rY < 80F || rY > 280F) {
+                zreach = 0.2D;
+            }
+            if (rY < 170F && rY > 10F) {
+                xreach = 0.2D;
+            }
+            if (rY < 260F && rY > 100F) {
+                zreach = -0.2D;
+            }
+            if (rY < 350F && rY > 190F) {
+                xreach = -0.2D;
+            }
             AxisAlignedBB playerReach = p.boundingBox.addCoord(xreach, 0, zreach);
 
             boolean checkBlockWithinReach;
@@ -208,7 +220,9 @@ public class FreefallHandler {
 
         double posOffsetX = -p.motionX;
         double posOffsetY = -p.motionY;
-        if (posOffsetY == -WorldUtil.getGravityForEntity(p)) posOffsetY = 0;
+        if (posOffsetY == -WorldUtil.getGravityForEntity(p)) {
+            posOffsetY = 0;
+        }
         double posOffsetZ = -p.motionZ;
         // if (p.capabilities.isFlying)
 
@@ -322,7 +336,9 @@ public class FreefallHandler {
         }
 
         boolean freefall = stats.inFreefall;
-        if (freefall) p.ySize = 0F; // Undo the sneak height adjust
+        if (freefall) {
+            p.ySize = 0F; // Undo the sneak height adjust
+        }
         freefall = testFreefall(p, freefall);
         stats.inFreefall = freefall;
         stats.inFreefallFirstCheck = true;
@@ -393,7 +409,9 @@ public class FreefallHandler {
             // if (p.motionY != 0) p.motionY = this.pPrevMotionY;
             if (p.movementInput.jump) {
                 if ((p.onGround || stats.pWasOnGround) && !p.capabilities.isCreativeMode) {
-                    if (stats.pjumpticks < 25) stats.pjumpticks++;
+                    if (stats.pjumpticks < 25) {
+                        stats.pjumpticks++;
+                    }
                     p.motionY -= dy;
                     // p.onGround = false;
                     // p.posY -= 0.1D;

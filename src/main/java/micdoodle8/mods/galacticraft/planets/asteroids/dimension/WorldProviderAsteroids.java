@@ -269,7 +269,9 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
         int lowestDistance = Integer.MAX_VALUE;
 
         for (AsteroidData test : this.asteroids) {
-            if ((test.sizeAndLandedFlag & 128) > 0) continue;
+            if ((test.sizeAndLandedFlag & 128) > 0) {
+                continue;
+            }
 
             int dx = x - test.centre.x;
             int dz = z - test.centre.z;
@@ -281,7 +283,9 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
             }
         }
 
-        if (result == null) return null;
+        if (result == null) {
+            return null;
+        }
 
         resultRoid.sizeAndLandedFlag |= 128;
         this.writeToNBT(this.datafile.datacompound);
@@ -303,26 +307,38 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
             BlockVec3 test = roid.centre;
             switch (facing) {
                 case 2:
-                    if (z - 16 < test.z) continue;
+                    if (z - 16 < test.z) {
+                        continue;
+                    }
                     break;
                 case 3:
-                    if (z + 16 > test.z) continue;
+                    if (z + 16 > test.z) {
+                        continue;
+                    }
                     break;
                 case 4:
-                    if (x - 16 < test.x) continue;
+                    if (x - 16 < test.x) {
+                        continue;
+                    }
                     break;
                 case 5:
-                    if (x + 16 > test.x) continue;
+                    if (x + 16 > test.x) {
+                        continue;
+                    }
                     break;
             }
             int dx = x - test.x;
             int dz = z - test.z;
             int a = dx * dx + dz * dz;
-            if (a < 262144) targets.put(a, test);
+            if (a < 262144) {
+                targets.put(a, test);
+            }
         }
 
         int max = Math.max(count, targets.size());
-        if (max <= 0) return null;
+        if (max <= 0) {
+            return null;
+        }
 
         ArrayList<BlockVec3> returnValues = new ArrayList();
         int i = 0;
@@ -345,7 +361,9 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
                     break;
             }
             returnValues.add(coords);
-            if (++i >= count) break;
+            if (++i >= count) {
+                break;
+            }
         }
 
         return returnValues;
@@ -397,8 +415,11 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
 
         @Override
         public int hashCode() {
-            if (this.centre != null) return this.centre.hashCode();
-            else return 0;
+            if (this.centre != null) {
+                return this.centre.hashCode();
+            } else {
+                return 0;
+            }
         }
 
         @Override
@@ -432,8 +453,12 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
             tempVector.z = tag.getInteger("z");
 
             AsteroidData roid = new AsteroidData(tempVector);
-            if (tag.hasKey("coreAndFlag")) roid.coreAndSpawnedFlag = tag.getInteger("coreAndFlag");
-            if (tag.hasKey("sizeAndFlag")) roid.sizeAndLandedFlag = tag.getInteger("sizeAndFlag");
+            if (tag.hasKey("coreAndFlag")) {
+                roid.coreAndSpawnedFlag = tag.getInteger("coreAndFlag");
+            }
+            if (tag.hasKey("sizeAndFlag")) {
+                roid.sizeAndLandedFlag = tag.getInteger("sizeAndFlag");
+            }
 
             return roid;
         }

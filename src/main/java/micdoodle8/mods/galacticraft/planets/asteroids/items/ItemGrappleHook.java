@@ -62,8 +62,9 @@ public class ItemGrappleHook extends ItemBow {
             if (!par3EntityPlayer.capabilities.isCreativeMode) {
                 par3EntityPlayer.inventory.consumeInventoryItem(Items.string);
             }
-        } else if (par2World.isRemote)
+        } else if (par2World.isRemote) {
             par3EntityPlayer.addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.message.grapple.fail")));
+        }
     }
 
     @Override

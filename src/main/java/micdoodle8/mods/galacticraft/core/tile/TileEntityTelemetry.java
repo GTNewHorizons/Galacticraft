@@ -80,9 +80,11 @@ public class TileEntityTelemetry extends TileEntity {
                     name = "";
                     // TODO: track players after death and respawn? or not?
                 } else {
-                    if (linkedEntity instanceof EntityPlayerMP)
+                    if (linkedEntity instanceof EntityPlayerMP) {
                         name = "$" + ((EntityPlayerMP) linkedEntity).getCommandSenderName();
-                    else name = (String) EntityList.classToStringMapping.get(linkedEntity.getClass());
+                    } else {
+                        name = (String) EntityList.classToStringMapping.get(linkedEntity.getClass());
+                    }
 
                     if (name == null) {
                         GCLog.info("Telemetry Unit: Error finding name for "
@@ -106,13 +108,22 @@ public class TileEntityTelemetry extends TileEntity {
 
                         // Calculate a "pulse rate" based on motion and taking damage
                         this.pulseRate--;
-                        if (eLiving.hurtTime > this.lastHurttime) this.pulseRate += 100;
+                        if (eLiving.hurtTime > this.lastHurttime) {
+                            this.pulseRate += 100;
+                        }
                         this.lastHurttime = eLiving.hurtTime;
-                        if (eLiving.ridingEntity != null) data[2] /= 4; // reduced pulse effect if riding a vehicle
-                        else if (data[2] > 1) this.pulseRate += 2;
+                        if (eLiving.ridingEntity != null) {
+                            data[2] /= 4; // reduced pulse effect if riding a vehicle
+                        } else if (data[2] > 1) {
+                            this.pulseRate += 2;
+                        }
                         this.pulseRate += Math.max(data[2] - pulseRate, 0) / 4;
-                        if (this.pulseRate > 2000) this.pulseRate = 2000;
-                        if (this.pulseRate < 400) this.pulseRate = 400;
+                        if (this.pulseRate > 2000) {
+                            this.pulseRate = 2000;
+                        }
+                        if (this.pulseRate < 400) {
+                            this.pulseRate = 400;
+                        }
                         data[2] = this.pulseRate / 10;
 
                         data[1] = (int) (eLiving.getHealth() * 100 / eLiving.getMaxHealth());
@@ -121,7 +132,9 @@ public class TileEntityTelemetry extends TileEntity {
                             GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) eLiving);
                             data[4] = stats.airRemaining * 4096 + stats.airRemaining2;
                             UUID uuid = ((EntityPlayerMP) eLiving).getUniqueID();
-                            if (uuid != null) strUUID = uuid.toString();
+                            if (uuid != null) {
+                                strUUID = uuid.toString();
+                            }
                         } else if (eLiving instanceof EntityHorse) {
                             data[3] = ((EntityHorse) eLiving).getHorseType();
                             data[4] = ((EntityHorse) eLiving).getHorseVariant();
@@ -188,7 +201,9 @@ public class TileEntityTelemetry extends TileEntity {
         for (Entity e : eList) {
             if (e.getUniqueID().equals(uuid)) {
                 this.linkedEntity = e;
-                if (e instanceof EntitySpaceshipBase) ((EntitySpaceshipBase) e).addTelemetry(this);
+                if (e instanceof EntitySpaceshipBase) {
+                    ((EntitySpaceshipBase) e).addTelemetry(this);
+                }
                 return;
             }
         }
@@ -200,7 +215,9 @@ public class TileEntityTelemetry extends TileEntity {
         this.pulseRate = 400;
         this.lastHurttime = 0;
         this.linkedEntity = e;
-        if (e instanceof EntitySpaceshipBase) ((EntitySpaceshipBase) e).addTelemetry(this);
+        if (e instanceof EntitySpaceshipBase) {
+            ((EntitySpaceshipBase) e).addTelemetry(this);
+        }
     }
 
     public void removeTrackedEntity() {
@@ -209,14 +226,18 @@ public class TileEntityTelemetry extends TileEntity {
     }
 
     public static TileEntityTelemetry getNearest(TileEntity te) {
-        if (te == null) return null;
+        if (te == null) {
+            return null;
+        }
         BlockVec3 target = new BlockVec3(te);
 
         int distSq = 1025;
         BlockVec3Dim nearest = null;
         int dim = te.getWorldObj().provider.dimensionId;
         for (BlockVec3Dim telemeter : loadedList) {
-            if (telemeter.dim != dim) continue;
+            if (telemeter.dim != dim) {
+                continue;
+            }
             int dist = telemeter.distanceSquared(target);
             if (dist < distSq) {
                 distSq = dist;
@@ -224,9 +245,13 @@ public class TileEntityTelemetry extends TileEntity {
             }
         }
 
-        if (nearest == null) return null;
+        if (nearest == null) {
+            return null;
+        }
         TileEntity result = te.getWorldObj().getTileEntity(nearest.x, nearest.y, nearest.z);
-        if (result instanceof TileEntityTelemetry) return (TileEntityTelemetry) result;
+        if (result instanceof TileEntityTelemetry) {
+            return (TileEntityTelemetry) result;
+        }
         return null;
     }
 
@@ -238,7 +263,9 @@ public class TileEntityTelemetry extends TileEntity {
      * @param player
      */
     public static void frequencyModulePlayer(ItemStack held, EntityPlayerMP player) {
-        if (held == null) return;
+        if (held == null) {
+            return;
+        }
         NBTTagCompound fmData = held.stackTagCompound;
         if (fmData != null && fmData.hasKey("teDim")) {
             int dim = fmData.getInteger("teDim");
@@ -247,13 +274,16 @@ public class TileEntityTelemetry extends TileEntity {
             int z = fmData.getInteger("teCoordZ");
             WorldProvider wp = WorldUtil.getProviderForDimensionServer(dim);
             // TODO
-            if (wp == null || wp.worldObj == null)
+            if (wp == null || wp.worldObj == null) {
                 GCLog.debug("Frequency module worn: world provider is null.  This is a bug. " + dim);
-            else {
+            } else {
                 TileEntity te = wp.worldObj.getTileEntity(x, y, z);
                 if (te instanceof TileEntityTelemetry) {
-                    if (player == null) ((TileEntityTelemetry) te).removeTrackedEntity();
-                    else ((TileEntityTelemetry) te).addTrackedEntity(player.getUniqueID());
+                    if (player == null) {
+                        ((TileEntityTelemetry) te).removeTrackedEntity();
+                    } else {
+                        ((TileEntityTelemetry) te).addTrackedEntity(player.getUniqueID());
+                    }
                 }
             }
         }
@@ -263,8 +293,9 @@ public class TileEntityTelemetry extends TileEntity {
         for (BlockVec3Dim telemeter : loadedList) {
             TileEntity te = telemeter.getTileEntityNoLoad();
             if (te instanceof TileEntityTelemetry) {
-                if (((TileEntityTelemetry) te).linkedEntity == playerOld)
+                if (((TileEntityTelemetry) te).linkedEntity == playerOld) {
                     ((TileEntityTelemetry) te).linkedEntity = playerNew;
+                }
             }
         }
     }

@@ -197,7 +197,9 @@ public class EnergyNetwork implements IElectricityNetwork {
                 } else {
                     this.totalEnergy = 0F;
                 }
-            } else this.totalEnergy = 0F;
+            } else {
+                this.totalEnergy = 0F;
+            }
         } else {
             this.totalEnergy = 0F;
         }
@@ -408,11 +410,12 @@ public class EnergyNetwork implements IElectricityNetwork {
                 }
             } catch (Exception e) {
                 GCLog.severe("DEBUG Energy network loop issue, please report this");
-                if (debugTE != null)
+                if (debugTE != null) {
                     GCLog.severe("Problem was likely caused by tile in dim "
                             + debugTE.getWorldObj().provider.dimensionId + " at " + debugTE.xCoord + ","
                             + debugTE.yCoord + "," + debugTE.zCoord + " Type:"
                             + debugTE.getClass().getSimpleName());
+                }
             }
         }
 
@@ -619,7 +622,9 @@ public class EnergyNetwork implements IElectricityNetwork {
 
                         if (tileEntity instanceof IConductor) {
                             nextToSplit[j] = tileEntity;
-                        } else toDo[j] = false;
+                        } else {
+                            toDo[j] = false;
+                        }
                     }
 
                     for (int i1 = 0; i1 < 6; i1++) {

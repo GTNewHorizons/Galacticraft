@@ -36,7 +36,9 @@ public class BiomeGenBaseAsteroids extends BiomeGenBase {
         this.spawnableMonsterList.add(new SpawnListEntry(EntityEvolvedSpider.class, 2000, 1, 2));
         this.spawnableMonsterList.add(new SpawnListEntry(EntityEvolvedSkeleton.class, 1500, 1, 1));
         this.spawnableMonsterList.add(new SpawnListEntry(EntityEvolvedCreeper.class, 2000, 1, 1));
-        if (challengeMode) this.spawnableMonsterList.add(new SpawnListEntry(EntityEnderman.class, 250, 1, 1));
+        if (challengeMode) {
+            this.spawnableMonsterList.add(new SpawnListEntry(EntityEnderman.class, 250, 1, 1));
+        }
     }
 
     @Override

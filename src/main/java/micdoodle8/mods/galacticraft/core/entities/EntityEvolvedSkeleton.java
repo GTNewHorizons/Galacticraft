@@ -89,7 +89,9 @@ public class EntityEvolvedSkeleton extends EntitySkeleton implements IEntityBrea
     @Override
     protected void jump() {
         this.motionY = 0.45D / WorldUtil.getGravityFactor(this);
-        if (this.motionY < 0.24D) this.motionY = 0.24D;
+        if (this.motionY < 0.24D) {
+            this.motionY = 0.24D;
+        }
 
         if (this.isPotionActive(Potion.jump)) {
             this.motionY += (this.getActivePotionEffect(Potion.jump).getAmplifier() + 1) * 0.1F;
@@ -131,7 +133,9 @@ public class EntityEvolvedSkeleton extends EntitySkeleton implements IEntityBrea
                 this.dropItem(GCItems.canister, 1);
                 break;
             default:
-                if (ConfigManagerCore.challengeMobDropsAndSpawning) this.dropItem(Items.pumpkin_seeds, 1);
+                if (ConfigManagerCore.challengeMobDropsAndSpawning) {
+                    this.dropItem(Items.pumpkin_seeds, 1);
+                }
                 break;
         }
     }
@@ -152,10 +156,13 @@ public class EntityEvolvedSkeleton extends EntitySkeleton implements IEntityBrea
         }
 
         j = this.rand.nextInt(3 + p_70628_2_);
-        if (j > 1) this.dropItem(Items.bone, 1);
+        if (j > 1) {
+            this.dropItem(Items.bone, 1);
+        }
 
         // Drop lapis as semi-rare drop if player hit and if dropping bones
-        if (p_70628_1_ && (ConfigManagerCore.challengeMobDropsAndSpawning) && j > 1 && this.rand.nextInt(12) == 0)
+        if (p_70628_1_ && (ConfigManagerCore.challengeMobDropsAndSpawning) && j > 1 && this.rand.nextInt(12) == 0) {
             this.entityDropItem(new ItemStack(Items.dye, 1, 4), 0.0F);
+        }
     }
 }

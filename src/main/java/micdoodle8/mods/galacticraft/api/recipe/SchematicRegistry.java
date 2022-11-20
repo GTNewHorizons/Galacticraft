@@ -65,7 +65,9 @@ public class SchematicRegistry {
     public static void addUnlockedPage(EntityPlayerMP player, ISchematicPage page) {
         // Used internally to add page to player's list of unlocked schematics.
         // No need to subscribe to this event
-        if (page != null) MinecraftForge.EVENT_BUS.post(new Unlock(player, page));
+        if (page != null) {
+            MinecraftForge.EVENT_BUS.post(new Unlock(player, page));
+        }
     }
 
     /**

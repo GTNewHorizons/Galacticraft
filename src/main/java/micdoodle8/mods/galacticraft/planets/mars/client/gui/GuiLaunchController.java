@@ -135,8 +135,9 @@ public class GuiLaunchController extends GuiContainerGC
                 // fly to it directly
                 Random r = new Random();
                 String fakefrequency = "";
-                for (int i = 0; i < this.destinationFrequency.getMaxLength(); i++)
+                for (int i = 0; i < this.destinationFrequency.getMaxLength(); i++) {
                     fakefrequency += (char) (r.nextInt(126 - 33) + 33);
+                }
                 destinationFrequency.text = fakefrequency;
             } else {
                 destinationFrequency.text = String.valueOf(this.launchController.destFrequency);
@@ -492,8 +493,9 @@ public class GuiLaunchController extends GuiContainerGC
                 // fly to it directly
                 Random r = new Random();
                 String fakefrequency = "";
-                for (int i = 0; i < this.destinationFrequency.getMaxLength(); i++)
+                for (int i = 0; i < this.destinationFrequency.getMaxLength(); i++) {
                     fakefrequency += (char) (r.nextInt(126 - 33) + 33);
+                }
                 return fakefrequency;
             }
         }

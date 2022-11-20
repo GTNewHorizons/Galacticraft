@@ -242,7 +242,9 @@ public class RecipeManagerGC {
         }
         for (ItemStack ingotNew : OreDictionary.getOres("ingotNaturalAluminum")) {
             for (ItemStack ingotDone : aluminumIngots) {
-                if (!ItemStack.areItemStacksEqual(ingotNew, ingotDone)) addedList.add(ingotNew);
+                if (!ItemStack.areItemStacksEqual(ingotNew, ingotDone)) {
+                    addedList.add(ingotNew);
+                }
             }
         }
         if (addedList.size() > 0) {
@@ -1112,10 +1114,13 @@ public class RecipeManagerGC {
         int siliconCount = silicons.size();
         for (int j = 0; j <= siliconCount; j++) {
             ItemStack silicon;
-            if (j == 0) silicon = new ItemStack(GCItems.basicItem, 1, 2);
-            else {
+            if (j == 0) {
+                silicon = new ItemStack(GCItems.basicItem, 1, 2);
+            } else {
                 silicon = silicons.get(j - 1);
-                if (silicon.getItem() == GCItems.basicItem && silicon.getItemDamage() == 2) continue;
+                if (silicon.getItem() == GCItems.basicItem && silicon.getItemDamage() == 2) {
+                    continue;
+                }
             }
             CircuitFabricatorRecipes.addRecipe(solarPanels, new ItemStack[] {
                 new ItemStack(Items.diamond),
@@ -1146,18 +1151,19 @@ public class RecipeManagerGC {
             CompressorRecipes.addShapelessRecipe(new ItemStack(GCItems.basicItem, 1, 9), "ingotSteel", "ingotSteel");
             steelDone = true;
         }
-        if (!ConfigManagerCore.hardMode || !steelDone)
+        if (!ConfigManagerCore.hardMode || !steelDone) {
             CompressorRecipes.addShapelessRecipe(
                     new ItemStack(GCItems.basicItem, 1, 9),
                     Items.coal,
                     new ItemStack(GCItems.basicItem, 1, 11),
                     Items.coal);
-        else
+        } else {
             CompressorRecipes.addShapelessAdventure(
                     new ItemStack(GCItems.basicItem, 1, 9),
                     Items.coal,
                     new ItemStack(GCItems.basicItem, 1, 11),
                     Items.coal);
+        }
     }
 
     private static void addBuildCraftCraftingRecipes() {
@@ -1330,7 +1336,9 @@ public class RecipeManagerGC {
             Class registry = Class.forName("exnihilo.registries.HeatRegistry");
             Method m = registry.getMethod("register", Block.class, float.class);
             m.invoke(null, GCBlocks.unlitTorchLit, 0.1F);
-            for (Block torch : GCBlocks.otherModTorchesLit) m.invoke(null, torch, 0.1F);
+            for (Block torch : GCBlocks.otherModTorchesLit) {
+                m.invoke(null, torch, 0.1F);
+            }
             GCLog.info("Successfully added space torches as heat sources for Ex Nihilo crucibles etc");
         } catch (Throwable e) {
         }

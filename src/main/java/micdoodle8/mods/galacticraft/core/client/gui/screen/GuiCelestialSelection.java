@@ -697,11 +697,12 @@ public class GuiCelestialSelection extends GuiScreen {
                                 .get(getSatelliteParentID(selectedSatellite))
                                 .get(strName)
                                 .getStationDimensionID();
-                        if (spacestationID == null)
+                        if (spacestationID == null) {
                             spacestationID = this.spaceStationMap
                                     .get(getSatelliteParentID(selectedSatellite))
                                     .get(strName.toLowerCase())
                                     .getStationDimensionID();
+                        }
                         if (spacestationID != null) {
                             this.spaceStationMap
                                     .get(getSatelliteParentID(selectedSatellite))
@@ -1125,9 +1126,10 @@ public class GuiCelestialSelection extends GuiScreen {
 
     protected Vector3f getCelestialBodyPosition(CelestialBody cBody) {
         if (cBody instanceof Star) {
-            if (cBody.getUnlocalizedName().equalsIgnoreCase("star.sol"))
+            if (cBody.getUnlocalizedName().equalsIgnoreCase("star.sol")) {
                 // Return zero vector for Sol, different location for other solar systems
                 return new Vector3f();
+            }
             return ((Star) cBody).getParentSolarSystem().getMapPosition().toVector3f();
         }
 
@@ -2680,12 +2682,15 @@ public class GuiCelestialSelection extends GuiScreen {
                                 .get(getSatelliteParentID(selectedSatellite))
                                 .get(playerName)
                                 .getStationName();
-                        if (this.renamingString == null)
+                        if (this.renamingString == null) {
                             this.renamingString = this.spaceStationMap
                                     .get(getSatelliteParentID(selectedSatellite))
                                     .get(playerName.toLowerCase())
                                     .getStationName();
-                        if (this.renamingString == null) this.renamingString = "";
+                        }
+                        if (this.renamingString == null) {
+                            this.renamingString = "";
+                        }
                     }
 
                     str = this.renamingString;

@@ -76,7 +76,9 @@ public class EntityEvolvedSpider extends EntitySpider implements IEntityBreathab
     @Override
     protected void jump() {
         this.motionY = 0.52D / WorldUtil.getGravityFactor(this);
-        if (this.motionY < 0.26D) this.motionY = 0.26D;
+        if (this.motionY < 0.26D) {
+            this.motionY = 0.26D;
+        }
 
         if (this.isPotionActive(Potion.jump)) {
             this.motionY += (this.getActivePotionEffect(Potion.jump).getAmplifier() + 1) * 0.1F;
@@ -117,7 +119,9 @@ public class EntityEvolvedSpider extends EntitySpider implements IEntityBreathab
                 this.dropItem(GCItems.oxygenConcentrator, 1);
                 break;
             default:
-                if (ConfigManagerCore.challengeMobDropsAndSpawning) this.dropItem(Items.nether_wart, 1);
+                if (ConfigManagerCore.challengeMobDropsAndSpawning) {
+                    this.dropItem(Items.nether_wart, 1);
+                }
                 break;
         }
     }

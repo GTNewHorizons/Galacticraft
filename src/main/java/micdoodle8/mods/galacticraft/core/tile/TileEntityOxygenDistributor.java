@@ -46,9 +46,10 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
     @Override
     public void validate() {
         super.validate();
-        if (!this.worldObj.isRemote)
+        if (!this.worldObj.isRemote) {
             TileEntityOxygenDistributor.loadedTiles.add(
                     new BlockVec3Dim(this.xCoord, this.yCoord, this.zCoord, this.worldObj.provider.dimensionId));
+        }
     }
 
     @Override
@@ -110,9 +111,10 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
                         networkedList.add(distributor.dim);
                     }
                 }
-            } else
+            } else {
                 // Signal integrated server, do not clear loadedTiles
                 networkedList.add(-1);
+            }
             networkedList.add(this.bubbleSize);
         }
     }
@@ -145,7 +147,9 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
                     int i2 = dataStream.readInt();
                     int i3 = dataStream.readInt();
                     int i4 = dataStream.readInt();
-                    if (i1 == -1 && i2 == -1 && i3 == -1 && i4 == -1) continue;
+                    if (i1 == -1 && i2 == -1 && i3 == -1 && i4 == -1) {
+                        continue;
+                    }
                     this.loadedTiles.add(new BlockVec3Dim(i1, i2, i3, i4));
                 }
             }
@@ -168,7 +172,9 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
                 IItemOxygenSupply oxygenItem = (IItemOxygenSupply) oxygenItemStack.getItem();
                 float oxygenDraw = Math.min(this.oxygenPerTick * 2.5F, this.maxOxygen - this.storedOxygen);
                 this.storedOxygen += oxygenItem.discharge(oxygenItemStack, oxygenDraw);
-                if (this.storedOxygen > this.maxOxygen) this.storedOxygen = this.maxOxygen;
+                if (this.storedOxygen > this.maxOxygen) {
+                    this.storedOxygen = this.maxOxygen;
+                }
             }
         }
 
@@ -387,9 +393,15 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
 
     @Override
     public boolean isItemValidForSlot(int slotID, ItemStack itemstack) {
-        if (itemstack == null) return false;
-        if (slotID == 0) return ItemElectricBase.isElectricItem(itemstack.getItem());
-        if (slotID == 1) return itemstack.getItem() instanceof IItemOxygenSupply;
+        if (itemstack == null) {
+            return false;
+        }
+        if (slotID == 0) {
+            return ItemElectricBase.isElectricItem(itemstack.getItem());
+        }
+        if (slotID == 1) {
+            return itemstack.getItem() instanceof IItemOxygenSupply;
+        }
         return false;
     }
 
@@ -440,10 +452,14 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
         r *= r;
         double d3 = this.xCoord + 0.5D - pX;
         d3 *= d3;
-        if (d3 > r) return false;
+        if (d3 > r) {
+            return false;
+        }
         double d4 = this.zCoord + 0.5D - pZ;
         d4 *= d4;
-        if (d3 + d4 > r) return false;
+        if (d3 + d4 > r) {
+            return false;
+        }
         double d5 = this.yCoord + 0.5D - pY;
         return d3 + d4 + d5 * d5 < r;
     }

@@ -40,7 +40,9 @@ public class ElectricIngotCompressorRecipeHandler extends TemplateRecipeHandler 
 
             for (Map.Entry<Integer, PositionedStack> input : stack.getKey().entrySet()) {
                 PositionedStack inputStack = input.getValue().copy();
-                for (ItemStack inputItemStack : inputStack.items) inputItemStack.stackSize = 2;
+                for (ItemStack inputItemStack : inputStack.items) {
+                    inputItemStack.stackSize = 2;
+                }
                 inputStacks.add(inputStack);
             }
 

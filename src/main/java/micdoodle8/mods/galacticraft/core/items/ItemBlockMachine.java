@@ -67,7 +67,9 @@ public class ItemBlockMachine extends ItemBlockDesc {
 
     @Override
     public void onCreated(ItemStack stack, World world, EntityPlayer player) {
-        if (!world.isRemote) return;
+        if (!world.isRemote) {
+            return;
+        }
 
         int typenum = stack.getItemDamage() & 12;
 

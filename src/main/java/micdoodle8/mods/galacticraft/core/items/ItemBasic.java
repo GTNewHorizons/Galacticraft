@@ -202,7 +202,9 @@ public class ItemBasic extends Item {
 
     @Override
     public boolean onLeftClickEntity(ItemStack itemStack, EntityPlayer player, Entity entity) {
-        if (itemStack.getItemDamage() != 19) return false;
+        if (itemStack.getItemDamage() != 19) {
+            return false;
+        }
 
         // Frequency module
         if (!player.worldObj.isRemote && entity != null && !(entity instanceof EntityPlayer)) {

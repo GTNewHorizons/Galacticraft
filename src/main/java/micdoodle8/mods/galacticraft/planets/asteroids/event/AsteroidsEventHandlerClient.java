@@ -44,9 +44,11 @@ public class AsteroidsEventHandlerClient {
     @SubscribeEvent
     public void onRingRender(CelestialBodyRenderEvent.CelestialRingRenderEvent.Pre renderEvent) {
         if (renderEvent.celestialBody.equals(AsteroidsModule.planetAsteroids)) {
-            if (FMLClientHandler.instance().getClient().currentScreen instanceof GuiCelestialSelection)
+            if (FMLClientHandler.instance().getClient().currentScreen instanceof GuiCelestialSelection) {
                 GL11.glColor4f(0.7F, 0.0F, 0.0F, 0.5F);
-            else GL11.glColor4f(0.3F, 0.1F, 0.1F, 1.0F);
+            } else {
+                GL11.glColor4f(0.3F, 0.1F, 0.1F, 1.0F);
+            }
             renderEvent.setCanceled(true);
             GL11.glBegin(GL11.GL_LINE_LOOP);
 

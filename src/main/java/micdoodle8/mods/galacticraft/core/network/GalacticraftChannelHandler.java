@@ -144,7 +144,9 @@ public class GalacticraftChannelHandler extends FMLIndexedMessageToMessageCodec<
      * @param message The message to send
      */
     public void sendToServer(IPacket message) {
-        if (FMLCommonHandler.instance().getSide() != Side.CLIENT) return;
+        if (FMLCommonHandler.instance().getSide() != Side.CLIENT) {
+            return;
+        }
         this.channels
                 .get(Side.CLIENT)
                 .attr(FMLOutboundHandler.FML_MESSAGETARGET)

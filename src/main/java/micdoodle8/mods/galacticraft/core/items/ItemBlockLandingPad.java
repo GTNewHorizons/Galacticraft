@@ -38,8 +38,9 @@ public class ItemBlockLandingPad extends ItemBlockDesc {
 
     @Override
     public void onCreated(ItemStack stack, World world, EntityPlayer player) {
-        if (world.isRemote && stack.getItemDamage() == 0 && player instanceof EntityPlayerSP)
+        if (world.isRemote && stack.getItemDamage() == 0 && player instanceof EntityPlayerSP) {
             ClientProxyCore.playerClientHandler.onBuild(5, (EntityPlayerSP) player);
+        }
     }
 
     @Override

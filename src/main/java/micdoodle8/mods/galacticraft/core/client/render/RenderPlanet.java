@@ -89,7 +89,9 @@ public class RenderPlanet {
     public static void drawTexturedRectUVSixth(
             float x, float y, float width, float height, float prog, float y0, float span) {
         y0 /= 2;
-        if (prog < 0F) prog += 1.0F;
+        if (prog < 0F) {
+            prog += 1.0F;
+        }
         prog = 1.0F - prog;
         float y1 = y0 + 1 / 12F;
         float y2 = 1F - y1;

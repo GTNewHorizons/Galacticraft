@@ -12,7 +12,9 @@ public class GalacticraftConfigAccess {
     private static Field adventureAsteroidPopulation;
 
     public static boolean getQuickMode() {
-        if (quickMode == null) setup();
+        if (quickMode == null) {
+            setup();
+        }
 
         try {
             return (boolean) quickMode.getBoolean(null);
@@ -22,7 +24,9 @@ public class GalacticraftConfigAccess {
     }
 
     public static boolean getHardMode() {
-        if (quickMode == null) setup();
+        if (quickMode == null) {
+            setup();
+        }
 
         try {
             return (boolean) hardMode.getBoolean(null);
@@ -32,7 +36,9 @@ public class GalacticraftConfigAccess {
     }
 
     public static boolean getChallengeMode() {
-        if (quickMode == null) setup();
+        if (quickMode == null) {
+            setup();
+        }
 
         try {
             return (boolean) adventureMode.getBoolean(null);
@@ -42,7 +48,9 @@ public class GalacticraftConfigAccess {
     }
 
     public static boolean getChallengeRecipes() {
-        if (quickMode == null) setup();
+        if (quickMode == null) {
+            setup();
+        }
 
         try {
             return (boolean) adventureRecipes.getBoolean(null);
@@ -52,7 +60,9 @@ public class GalacticraftConfigAccess {
     }
 
     public static boolean getChallengeMobDropsAndSpawning() {
-        if (quickMode == null) setup();
+        if (quickMode == null) {
+            setup();
+        }
 
         try {
             return (boolean) adventureMobDropsAndSpawning.getBoolean(null);
@@ -62,7 +72,9 @@ public class GalacticraftConfigAccess {
     }
 
     public static boolean getChallengeSpawnHandling() {
-        if (quickMode == null) setup();
+        if (quickMode == null) {
+            setup();
+        }
 
         try {
             return (boolean) adventureSpawnHandling.getBoolean(null);
@@ -72,7 +84,9 @@ public class GalacticraftConfigAccess {
     }
 
     public static boolean getChallengeAsteroidPopulation() {
-        if (quickMode == null) setup();
+        if (quickMode == null) {
+            setup();
+        }
 
         try {
             return (boolean) adventureAsteroidPopulation.getBoolean(null);

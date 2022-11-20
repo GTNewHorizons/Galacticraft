@@ -49,7 +49,9 @@ public class ConnectionEvents {
                     thePlayer);
             SpaceRace raceForPlayer = SpaceRaceManager.getSpaceRaceFromPlayer(
                     thePlayer.getGameProfile().getName());
-            if (raceForPlayer != null) SpaceRaceManager.sendSpaceRaceData(thePlayer, raceForPlayer);
+            if (raceForPlayer != null) {
+                SpaceRaceManager.sendSpaceRaceData(thePlayer, raceForPlayer);
+            }
         }
 
         if (event.player.worldObj.provider instanceof WorldProviderSpaceStation

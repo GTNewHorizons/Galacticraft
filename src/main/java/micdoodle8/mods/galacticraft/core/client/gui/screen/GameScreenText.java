@@ -105,7 +105,9 @@ public class GameScreenText implements IGameScreen {
                                     .newInstance(screen.driver.getWorldObj());
                         } catch (Exception ex) {
                         }
-                        if (entity != null) strName = entity.getCommandSenderName();
+                        if (entity != null) {
+                            strName = entity.getCommandSenderName();
+                        }
                         renderEntity = (Render) RenderManager.instance.entityRenderMap.get(telemeter.clientClass);
                     }
                 }
@@ -146,7 +148,9 @@ public class GameScreenText implements IGameScreen {
                 str[0] = telemeter.clientData[0] > 0 ? GCCoreUtil.translate("gui.player.ouch") : "";
                 if (telemeter.clientData[1] >= 0) {
                     str[1] = GCCoreUtil.translate("gui.player.health") + ": " + telemeter.clientData[1] + "%";
-                } else str[1] = "";
+                } else {
+                    str[1] = "";
+                }
                 str[2] = "" + telemeter.clientData[2] + " " + GCCoreUtil.translate("gui.player.bpm");
                 if (telemeter.clientData[3] > -1) {
                     str[3] = GCCoreUtil.translate("gui.player.food") + ": " + telemeter.clientData[3] + "%";
@@ -154,11 +158,12 @@ public class GameScreenText implements IGameScreen {
                 if (telemeter.clientData[4] > -1) {
                     int oxygen = telemeter.clientData[4];
                     oxygen = (oxygen % 4096) + (oxygen / 4096);
-                    if (oxygen == 180 || oxygen == 90)
+                    if (oxygen == 180 || oxygen == 90) {
                         str[4] = GCCoreUtil.translate("gui.oxygenStorage.desc.1") + ": OK";
-                    else
+                    } else {
                         str[4] = GCCoreUtil.translate("gui.oxygenStorage.desc.1") + ": " + this.makeOxygenString(oxygen)
                                 + GCCoreUtil.translate("gui.seconds");
+                    }
                 }
             } else
             // Generic - could be boats or minecarts etc - just show the speed
@@ -176,15 +181,21 @@ public class GameScreenText implements IGameScreen {
 
         int textWidthPixels = 155;
         int textHeightPixels = 60; // 1 lines
-        if (str[3].isEmpty()) textHeightPixels -= 10;
-        if (str[4].isEmpty()) textHeightPixels -= 10;
+        if (str[3].isEmpty()) {
+            textHeightPixels -= 10;
+        }
+        if (str[4].isEmpty()) {
+            textHeightPixels -= 10;
+        }
 
         // First pass - approximate border size
         float borders = frameA * 2 + 0.05F * Math.min(sizeX, sizeY);
         float scaleXTest = (sizeX - borders) / textWidthPixels;
         float scaleYTest = (sizeY - borders) / textHeightPixels;
         float scale = sizeX;
-        if (scaleYTest < scaleXTest) scale = sizeY;
+        if (scaleYTest < scaleXTest) {
+            scale = sizeY;
+        }
         // Second pass - the border size may be more accurate now
         borders = frameA * 2 + 0.05F * scale;
         scaleXTest = (sizeX - borders) / textWidthPixels;
@@ -198,7 +209,9 @@ public class GameScreenText implements IGameScreen {
 
         // Centre the text in the display
         float border = frameA + 0.025F * scale;
-        if (entity != null && renderEntity != null) Xmargin = (sizeX - borders) / 2;
+        if (entity != null && renderEntity != null) {
+            Xmargin = (sizeX - borders) / 2;
+        }
         float Xoffset = (sizeX - borders - textWidthPixels * scaleText) / 2 + Xmargin;
         float Yoffset = (sizeY - borders - textHeightPixels * scaleText) / 2 + scaleText;
         GL11.glTranslatef(border + Xoffset, border + Yoffset, 0.0F);

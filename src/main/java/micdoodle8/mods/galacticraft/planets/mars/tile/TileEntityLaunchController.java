@@ -350,7 +350,9 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
                 for (TileEntity tile2 : new ArrayList<TileEntity>(world.loadedTileEntityList)) {
                     if (this != tile2) {
                         tile2 = world.getTileEntity(tile2.xCoord, tile2.yCoord, tile2.zCoord);
-                        if (tile2 == null) continue;
+                        if (tile2 == null) {
+                            continue;
+                        }
 
                         if (tile2 instanceof TileEntityLaunchController) {
                             TileEntityLaunchController launchController2 = (TileEntityLaunchController) tile2;
@@ -387,7 +389,9 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
                     for (TileEntity tile2 : new ArrayList<TileEntity>(world.loadedTileEntityList)) {
                         if (this != tile2) {
                             tile2 = world.getTileEntity(tile2.xCoord, tile2.yCoord, tile2.zCoord);
-                            if (tile2 == null) continue;
+                            if (tile2 == null) {
+                                continue;
+                            }
 
                             if (tile2 instanceof TileEntityLaunchController) {
                                 TileEntityLaunchController launchController2 = (TileEntityLaunchController) tile2;

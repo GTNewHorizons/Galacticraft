@@ -76,7 +76,9 @@ public class CompressorRecipes {
         }
 
         ShapedRecipes shapedrecipes = new ShapedRecipes(j, k, aitemstack, output);
-        if (!adventureOnly) CompressorRecipes.recipes.add(shapedrecipes);
+        if (!adventureOnly) {
+            CompressorRecipes.recipes.add(shapedrecipes);
+        }
         CompressorRecipes.recipesAdventure.add(shapedrecipes);
         return shapedrecipes;
     }
@@ -104,7 +106,9 @@ public class CompressorRecipes {
         }
 
         IRecipe toAdd = new ShapelessOreRecipe(par1ItemStack, arraylist.toArray());
-        if (!adventureOnly) CompressorRecipes.recipes.add(toAdd);
+        if (!adventureOnly) {
+            CompressorRecipes.recipes.add(toAdd);
+        }
         CompressorRecipes.recipesAdventure.add(toAdd);
     }
 
@@ -284,7 +288,9 @@ public class CompressorRecipes {
     public static void removeRecipe(ItemStack match) {
         for (Iterator<IRecipe> it = CompressorRecipes.getRecipeList().iterator(); it.hasNext(); ) {
             IRecipe irecipe = it.next();
-            if (ItemStack.areItemStacksEqual(match, irecipe.getRecipeOutput())) it.remove();
+            if (ItemStack.areItemStacksEqual(match, irecipe.getRecipeOutput())) {
+                it.remove();
+            }
         }
     }
 }

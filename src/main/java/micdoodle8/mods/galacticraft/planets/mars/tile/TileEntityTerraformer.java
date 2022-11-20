@@ -140,7 +140,9 @@ public class TileEntityTerraformer extends TileBaseElectricBlockWithInventory
                     for (int y = this.yCoord - bubbleSize; y < this.yCoord + bubbleSize; y++) {
                         for (int z = this.zCoord - bubbleSize; z < this.zCoord + bubbleSize; z++) {
                             Block blockID = this.worldObj.getBlock(x, y, z);
-                            if (blockID == null) continue;
+                            if (blockID == null) {
+                                continue;
+                            }
 
                             if (!(blockID.isAir(this.worldObj, x, y, z))
                                     && this.getDistanceFromServer(x, y, z) < bubbleSizeSq) {
@@ -234,10 +236,10 @@ public class TileEntityTerraformer extends TileBaseElectricBlockWithInventory
                             this.grownTreesList.add(vecSapling.clone());
                         }
                     } else if (b instanceof BlockBush) {
-                        if (this.worldObj.getBlockLightValue(vecSapling.x, vecSapling.y, vecSapling.z) >= 5)
+                        if (this.worldObj.getBlockLightValue(vecSapling.x, vecSapling.y, vecSapling.z) >= 5) {
                             // Hammer the update tick a few times to try to get it to grow - it won't always
                             for (int j = 0; j < 12; j++) {
-                                if (this.worldObj.getBlock(vecSapling.x, vecSapling.y, vecSapling.z) == b)
+                                if (this.worldObj.getBlock(vecSapling.x, vecSapling.y, vecSapling.z) == b) {
                                     ((BlockBush) b)
                                             .updateTick(
                                                     this.worldObj,
@@ -245,11 +247,12 @@ public class TileEntityTerraformer extends TileBaseElectricBlockWithInventory
                                                     vecSapling.y,
                                                     vecSapling.z,
                                                     this.worldObj.rand);
-                                else {
+                                } else {
                                     this.grownTreesList.add(vecSapling.clone());
                                     break;
                                 }
                             }
+                        }
                     }
 
                     this.useCount[1]++;
@@ -355,12 +358,16 @@ public class TileEntityTerraformer extends TileBaseElectricBlockWithInventory
             }
         }
 
-        if (stackcount == 0) return -1;
+        if (stackcount == 0) {
+            return -1;
+        }
 
         int random = this.worldObj.rand.nextInt(stackcount);
         for (int i = start; i < end; i++) {
             if (this.containingItems[i] != null) {
-                if (random == 0) return i;
+                if (random == 0) {
+                    return i;
+                }
                 random--;
             }
         }

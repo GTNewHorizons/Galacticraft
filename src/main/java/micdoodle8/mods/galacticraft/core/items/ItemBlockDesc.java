@@ -34,14 +34,17 @@ public class ItemBlockDesc extends ItemBlockGC {
 
     @Override
     public void onCreated(ItemStack stack, World world, EntityPlayer player) {
-        if (!world.isRemote) return;
+        if (!world.isRemote) {
+            return;
+        }
 
         // The player could be a FakePlayer made by another mod e.g. LogisticsPipes
         if (player instanceof EntityPlayerSP) {
-            if (this.field_150939_a == GCBlocks.fuelLoader)
+            if (this.field_150939_a == GCBlocks.fuelLoader) {
                 ClientProxyCore.playerClientHandler.onBuild(4, (EntityPlayerSP) player);
-            else if (this.field_150939_a == GCBlocks.fuelLoader)
+            } else if (this.field_150939_a == GCBlocks.fuelLoader) {
                 ClientProxyCore.playerClientHandler.onBuild(6, (EntityPlayerSP) player);
+            }
         }
     }
 

@@ -307,7 +307,9 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
 
     @Override
     public void beforeRender(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7) {
-        if (!(var1 instanceof EntityPlayer)) return; // Deal with RenderPlayerAPIEnhancer calling this for skeletons etc
+        if (!(var1 instanceof EntityPlayer)) {
+            return; // Deal with RenderPlayerAPIEnhancer calling this for skeletons etc
+        }
         usingParachute = false;
 
         final EntityPlayer player = (EntityPlayer) var1;
@@ -340,8 +342,9 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
     public void afterSetRotationAngles(
             float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
         super.afterSetRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
-        if (!(par7Entity instanceof EntityPlayer))
+        if (!(par7Entity instanceof EntityPlayer)) {
             return; // Deal with RenderPlayerAPIEnhancer calling this for skeletons etc
+        }
 
         final EntityPlayer player = (EntityPlayer) par7Entity;
         final ItemStack currentItemStack = player.inventory.getCurrentItem();
@@ -439,14 +442,20 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
         super.afterRender(var1, var2, var3, var4, var5, var6, var7);
 
         // Smart Moving will render through ModelRotationRendererGC instead
-        if (ModelPlayerBaseGC.isSmartMovingLoaded) return;
+        if (ModelPlayerBaseGC.isSmartMovingLoaded) {
+            return;
+        }
 
         // Deal with RenderPlayerAPIEnhancer calling this for skeletons etc
-        if (!(var1 instanceof EntityPlayer)) return;
+        if (!(var1 instanceof EntityPlayer)) {
+            return;
+        }
 
         // Do not render GC equipment on top of armor - only on top of player - see
         // .init() method
-        if (this.oxygenMask == null) return;
+        if (this.oxygenMask == null) {
+            return;
+        }
 
         final EntityPlayer player = (EntityPlayer) var1;
         PlayerGearData gearData = ClientProxyCore.playerItemData.get(player.getCommandSenderName());

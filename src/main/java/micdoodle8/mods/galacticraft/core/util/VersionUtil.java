@@ -550,9 +550,11 @@ public class VersionUtil {
     }
 
     public static World getWorld(IBlockAccess world) {
-        if (world instanceof World) return (World) world;
+        if (world instanceof World) {
+            return (World) world;
+        }
 
-        if (world instanceof ChunkCache)
+        if (world instanceof ChunkCache) {
             try {
                 Field f = (Field) reflectionCache.get(20);
                 if (f == null) {
@@ -566,6 +568,7 @@ public class VersionUtil {
             } catch (Throwable t) {
                 t.printStackTrace();
             }
+        }
 
         return null;
     }

@@ -248,7 +248,9 @@ public class SpaceStationWorldData extends WorldSavedData {
 
     public static SpaceStationWorldData getMPSpaceStationData(World var0, int var1, EntityPlayer player) {
         final String var2 = SpaceStationWorldData.getSpaceStationID(var1);
-        if (var0 == null) var0 = DimensionManager.getProvider(0).worldObj;
+        if (var0 == null) {
+            var0 = DimensionManager.getProvider(0).worldObj;
+        }
         SpaceStationWorldData var3 = (SpaceStationWorldData) var0.loadItemData(SpaceStationWorldData.class, var2);
 
         if (var3 == null) {
@@ -287,7 +289,9 @@ public class SpaceStationWorldData extends WorldSavedData {
             GCPlayerStats stats,
             int stationID,
             SpaceStationWorldData stationData) {
-        if (stationData == null) stationData = SpaceStationWorldData.getMPSpaceStationData(null, stationID, null);
+        if (stationData == null) {
+            stationData = SpaceStationWorldData.getMPSpaceStationData(null, stationID, null);
+        }
 
         if (stationData.owner.equals(playerName)) {
             // This player is the owner of the station - ensure stats data matches
@@ -309,7 +313,8 @@ public class SpaceStationWorldData extends WorldSavedData {
 
     public static void checkAllStations(EntityPlayerMP thePlayer, GCPlayerStats stats) {
         String name = thePlayer.getGameProfile().getName().replace(".", "");
-        for (int id : WorldUtil.registeredSpaceStations.keySet())
+        for (int id : WorldUtil.registeredSpaceStations.keySet()) {
             SpaceStationWorldData.updateSSOwnership(thePlayer, name, stats, id, null);
+        }
     }
 }

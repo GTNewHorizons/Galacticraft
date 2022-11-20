@@ -87,7 +87,9 @@ public class BlockVec3Dim implements Cloneable {
         }
 
         World world = getWorldForId(this.dim);
-        if (world == null) return null;
+        if (world == null) {
+            return null;
+        }
 
         int chunkx = this.x >> 4;
         int chunkz = this.z >> 4;
@@ -137,7 +139,9 @@ public class BlockVec3Dim implements Cloneable {
         }
 
         World world = getWorldForId(this.dim);
-        if (world == null) return null;
+        if (world == null) {
+            return null;
+        }
 
         int chunkx = this.x >> 4;
         int chunkz = this.z >> 4;
@@ -174,7 +178,9 @@ public class BlockVec3Dim implements Cloneable {
 
     public Block getBlock() {
         World world = getWorldForId(this.dim);
-        if (world == null) return null;
+        if (world == null) {
+            return null;
+        }
         return world.getBlock(this.x, this.y, this.z);
     }
 
@@ -257,20 +263,28 @@ public class BlockVec3Dim implements Cloneable {
      */
     public TileEntity getTileEntity() {
         World world = getWorldForId(this.dim);
-        if (world == null) return null;
+        if (world == null) {
+            return null;
+        }
         return world.getTileEntity(this.x, this.y, this.z);
     }
 
     public TileEntity getTileEntityNoLoad() {
         World world = getWorldForId(this.dim);
-        if (world == null) return null;
-        if (world.blockExists(this.x, this.y, this.z)) return world.getTileEntity(this.x, this.y, this.z);
+        if (world == null) {
+            return null;
+        }
+        if (world.blockExists(this.x, this.y, this.z)) {
+            return world.getTileEntity(this.x, this.y, this.z);
+        }
         return null;
     }
 
     public int getBlockMetadata() {
         World world = getWorldForId(this.dim);
-        if (world == null) return 0;
+        if (world == null) {
+            return 0;
+        }
         return world.getBlockMetadata(this.x, this.y, this.z);
     }
 
@@ -308,13 +322,17 @@ public class BlockVec3Dim implements Cloneable {
 
     public void setBlock(Block block) {
         World world = getWorldForId(this.dim);
-        if (world == null) return;
+        if (world == null) {
+            return;
+        }
         world.setBlock(this.x, this.y, this.z, block, 0, 3);
     }
 
     public boolean blockExists() {
         World world = getWorldForId(this.dim);
-        if (world == null) return false;
+        if (world == null) {
+            return false;
+        }
         return world.blockExists(this.x, this.y, this.z);
     }
 
@@ -334,7 +352,9 @@ public class BlockVec3Dim implements Cloneable {
     private World getWorldForId(int dimensionID) {
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
             MinecraftServer theServer = FMLCommonHandler.instance().getMinecraftServerInstance();
-            if (theServer == null) return null;
+            if (theServer == null) {
+                return null;
+            }
             return theServer.worldServerForDimension(dimensionID);
         } else {
             return getWorldForIdClient(dimensionID);

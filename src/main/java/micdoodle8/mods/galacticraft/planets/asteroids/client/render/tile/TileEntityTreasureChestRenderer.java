@@ -30,8 +30,11 @@ public class TileEntityTreasureChestRenderer extends TileEntitySpecialRenderer {
             double par4,
             double par6,
             float par8) {
-        if (par1GCTileEntityTreasureChest.getWorldObj() != null) GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-        else GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+        if (par1GCTileEntityTreasureChest.getWorldObj() != null) {
+            GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+        } else {
+            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+        }
         int var9;
 
         if (!par1GCTileEntityTreasureChest.hasWorldObj()) {

@@ -188,11 +188,16 @@ public class TickHandlerServer {
     public void onServerTick(ServerTickEvent event) {
         MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
         // Prevent issues when clients switch to LAN servers
-        if (server == null) return;
+        if (server == null) {
+            return;
+        }
 
         if (event.phase == Phase.START) {
-            if (MapUtil.calculatingMap.get()) MapUtil.BiomeMapNextTick();
-            else if (!MapUtil.doneOverworldTexture) MapUtil.makeOverworldTexture();
+            if (MapUtil.calculatingMap.get()) {
+                MapUtil.BiomeMapNextTick();
+            } else if (!MapUtil.doneOverworldTexture) {
+                MapUtil.makeOverworldTexture();
+            }
 
             if (TickHandlerServer.spaceRaceData == null) {
                 World world =
@@ -359,7 +364,9 @@ public class TickHandlerServer {
                 pass.addAll(TickHandlerServer.oxygenTransmitterUpdates);
                 TickHandlerServer.oxygenTransmitterUpdates.clear();
                 for (TileEntityOxygenTransmitter newTile : pass) {
-                    if (!newTile.isInvalid()) newTile.refresh();
+                    if (!newTile.isInvalid()) {
+                        newTile.refresh();
+                    }
                 }
 
                 if (--maxPasses <= 0) {
@@ -373,7 +380,9 @@ public class TickHandlerServer {
                 pass.addAll(TickHandlerServer.hydrogenTransmitterUpdates);
                 TickHandlerServer.hydrogenTransmitterUpdates.clear();
                 for (TileEntityHydrogenPipe newTile : pass) {
-                    if (!newTile.isInvalid()) newTile.refresh();
+                    if (!newTile.isInvalid()) {
+                        newTile.refresh();
+                    }
                 }
 
                 if (--maxPasses <= 0) {
@@ -387,7 +396,9 @@ public class TickHandlerServer {
                 pass.addAll(TickHandlerServer.energyTransmitterUpdates);
                 TickHandlerServer.energyTransmitterUpdates.clear();
                 for (TileBaseConductor newTile : pass) {
-                    if (!newTile.isInvalid()) newTile.refresh();
+                    if (!newTile.isInvalid()) {
+                        newTile.refresh();
+                    }
                 }
 
                 if (--maxPasses <= 0) {
@@ -436,9 +447,10 @@ public class TickHandlerServer {
 
                 changeList.clear();
                 TickHandlerServer.scheduledBlockChanges.remove(world.provider.dimensionId);
-                if (newList.size() > 0)
+                if (newList.size() > 0) {
                     TickHandlerServer.scheduledBlockChanges.put(
                             world.provider.dimensionId, new CopyOnWriteArrayList<ScheduledBlockChange>(newList));
+                }
             }
 
             CopyOnWriteArrayList<BlockVec3> torchList =

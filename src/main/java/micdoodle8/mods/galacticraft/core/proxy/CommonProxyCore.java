@@ -43,7 +43,9 @@ public class CommonProxyCore {
 
     public World getWorldForID(int dimensionID) {
         MinecraftServer theServer = FMLCommonHandler.instance().getMinecraftServerInstance();
-        if (theServer == null) return null;
+        if (theServer == null) {
+            return null;
+        }
         return theServer.worldServerForDimension(dimensionID);
     }
 

@@ -52,14 +52,17 @@ public class GuiAstroMinerDock extends GuiContainerGC {
     @Override
     public void drawScreen(int par1, int par2, float par3) {
         this.recallButton.enabled = true;
-        if (this.tile.linkedMinerID == null) this.recallButton.enabled = false;
-        else {
+        if (this.tile.linkedMinerID == null) {
+            this.recallButton.enabled = false;
+        } else {
             EntityAstroMiner miner = this.tile.linkedMiner;
             if (miner == null
                     || miner.isDead
                     || this.tile.linkCountDown == 0
                     || miner.AIstate < EntityAstroMiner.AISTATE_TRAVELLING
-                    || miner.AIstate == EntityAstroMiner.AISTATE_DOCKING) this.recallButton.enabled = false;
+                    || miner.AIstate == EntityAstroMiner.AISTATE_DOCKING) {
+                this.recallButton.enabled = false;
+            }
         }
         this.recallButton.displayString = GCCoreUtil.translate("gui.button.recall.name");
 
@@ -122,7 +125,7 @@ public class GuiAstroMinerDock extends GuiContainerGC {
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         this.fontRendererObj.drawString(this.tile.getInventoryName(), 7, 6, 4210752);
         this.fontRendererObj.drawString(this.getStatus(), 177, 141, 4210752);
-        if (this.extraLines)
+        if (this.extraLines) {
             this.fontRendererObj.drawString(
                     "\u0394x: "
                             + getDeltaString(
@@ -130,14 +133,16 @@ public class GuiAstroMinerDock extends GuiContainerGC {
                     186,
                     152,
                     2536735);
-        if (this.extraLines)
+        }
+        if (this.extraLines) {
             this.fontRendererObj.drawString(
                     "\u0394y: "
                             + getDeltaString((MathHelper.floor_double(this.tile.linkedMiner.posY) - this.tile.yCoord)),
                     186,
                     162,
                     2536735);
-        if (this.extraLines)
+        }
+        if (this.extraLines) {
             this.fontRendererObj.drawString(
                     "\u0394z: "
                             + getDeltaString(
@@ -145,21 +150,29 @@ public class GuiAstroMinerDock extends GuiContainerGC {
                     186,
                     172,
                     2536735);
-        if (this.extraLines)
+        }
+        if (this.extraLines) {
             this.fontRendererObj.drawString(
                     GCCoreUtil.translate("gui.miner.mined") + ": " + this.tile.linkedMiner.mineCount,
                     177,
                     183,
                     2536735);
+        }
         this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 7, this.ySize - 92, 4210752);
     }
 
     private String getStatus() {
         this.extraLines = false;
-        if (this.tile.linkedMinerID == null) return "";
+        if (this.tile.linkedMinerID == null) {
+            return "";
+        }
         EntityAstroMiner miner = this.tile.linkedMiner;
-        if (miner == null || miner.isDead) return "";
-        if (this.tile.linkCountDown == 0) return EnumColor.ORANGE + GCCoreUtil.translate("gui.miner.outOfRange");
+        if (miner == null || miner.isDead) {
+            return "";
+        }
+        if (this.tile.linkCountDown == 0) {
+            return EnumColor.ORANGE + GCCoreUtil.translate("gui.miner.outOfRange");
+        }
 
         switch (miner.AIstate) {
             case EntityAstroMiner.AISTATE_OFFLINE:

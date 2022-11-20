@@ -597,7 +597,9 @@ public class EntityBuggy extends Entity
             return true;
         } else {
             if (this.riddenByEntity != null) {
-                if (this.riddenByEntity == var1) var1.mountEntity(null);
+                if (this.riddenByEntity == var1) {
+                    var1.mountEntity(null);
+                }
                 return true;
             } else {
                 var1.mountEntity(this);
@@ -642,7 +644,9 @@ public class EntityBuggy extends Entity
 
     @Override
     public int addFuel(FluidStack liquid, boolean doDrain) {
-        if (this.landingPad != null) return FluidUtil.fillWithGCFuel(this.buggyFuelTank, liquid, doDrain);
+        if (this.landingPad != null) {
+            return FluidUtil.fillWithGCFuel(this.buggyFuelTank, liquid, doDrain);
+        }
 
         return 0;
     }

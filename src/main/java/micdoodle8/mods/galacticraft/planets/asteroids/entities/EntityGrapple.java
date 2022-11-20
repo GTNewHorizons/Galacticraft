@@ -211,8 +211,9 @@ public class EntityGrapple extends Entity implements IProjectile {
                         this.shootingEntity.motionX = (this.posX - this.shootingEntity.posX) / 16.0F;
                         this.shootingEntity.motionY = (this.posY - this.shootingEntity.posY) / 16.0F;
                         this.shootingEntity.motionZ = (this.posZ - this.shootingEntity.posZ) / 16.0F;
-                        if (this.shootingEntity instanceof EntityPlayerMP)
+                        if (this.shootingEntity instanceof EntityPlayerMP) {
                             GalacticraftCore.handler.preventFlyingKicks((EntityPlayerMP) this.shootingEntity);
+                        }
                     }
 
                     if (!this.worldObj.isRemote && this.ticksInGround < 5) {
@@ -410,11 +411,12 @@ public class EntityGrapple extends Entity implements IProjectile {
 
     @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
-        if (par1NBTTagCompound.hasKey("xTile"))
+        if (par1NBTTagCompound.hasKey("xTile")) {
             this.hitVec = new BlockVec3(
                     par1NBTTagCompound.getShort("xTile"),
                     par1NBTTagCompound.getShort("yTile"),
                     par1NBTTagCompound.getShort("zTile"));
+        }
 
         this.ticksInGround = par1NBTTagCompound.getShort("life");
         this.hitBlock = Block.getBlockById(par1NBTTagCompound.getByte("inTile") & 255);

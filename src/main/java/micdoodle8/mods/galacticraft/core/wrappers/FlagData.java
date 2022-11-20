@@ -139,13 +139,21 @@ public class FlagData {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         FlagData flagData = (FlagData) o;
 
-        if (height != flagData.height) return false;
-        if (width != flagData.width) return false;
+        if (height != flagData.height) {
+            return false;
+        }
+        if (width != flagData.width) {
+            return false;
+        }
         return Arrays.deepEquals(color, flagData.color);
     }
 }

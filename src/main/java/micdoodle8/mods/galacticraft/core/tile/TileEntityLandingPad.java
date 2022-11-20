@@ -174,7 +174,9 @@ public class TileEntityLandingPad extends TileEntityMulti
     }
 
     private void testConnectedTile(int x, int z, HashSet<ILandingPadAttachable> connectedTiles) {
-        if (!this.worldObj.blockExists(x, this.yCoord, z)) return;
+        if (!this.worldObj.blockExists(x, this.yCoord, z)) {
+            return;
+        }
 
         final TileEntity tile = this.worldObj.getTileEntity(x, this.yCoord, z);
 
@@ -182,8 +184,9 @@ public class TileEntityLandingPad extends TileEntityMulti
                 && ((ILandingPadAttachable) tile)
                         .canAttachToLandingPad(this.worldObj, this.xCoord, this.yCoord, this.zCoord)) {
             connectedTiles.add((ILandingPadAttachable) tile);
-            if (GalacticraftCore.isPlanetsLoaded && tile instanceof TileEntityLaunchController)
+            if (GalacticraftCore.isPlanetsLoaded && tile instanceof TileEntityLaunchController) {
                 ((TileEntityLaunchController) tile).setAttachedPad(this);
+            }
         }
     }
 

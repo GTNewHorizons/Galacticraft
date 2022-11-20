@@ -82,8 +82,9 @@ public class ItemUniversalWrench extends Item implements IToolWrench {
 
     @Override
     public void onCreated(ItemStack stack, World world, EntityPlayer player) {
-        if (world.isRemote && player instanceof EntityPlayerSP)
+        if (world.isRemote && player instanceof EntityPlayerSP) {
             ClientProxyCore.playerClientHandler.onBuild(3, (EntityPlayerSP) player);
+        }
     }
 
     @Override
@@ -98,7 +99,9 @@ public class ItemUniversalWrench extends Item implements IToolWrench {
             float hitX,
             float hitY,
             float hitZ) {
-        if (world.isRemote) return false;
+        if (world.isRemote) {
+            return false;
+        }
         Block blockID = world.getBlock(x, y, z);
 
         if (blockID == Blocks.furnace

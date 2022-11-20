@@ -37,9 +37,10 @@ public class Gradient extends NoiseModule {
 
     @Override
     public float getNoise(float i, float j) {
-        if (this.numOctaves == 1)
+        if (this.numOctaves == 1) {
             return this.noiseGen.noise2d(i * this.frequencyX + this.offsetX, j * this.frequencyY + this.offsetY)
                     * this.amplitude;
+        }
 
         i *= this.frequencyX;
         j *= this.frequencyY;
@@ -56,12 +57,13 @@ public class Gradient extends NoiseModule {
 
     @Override
     public float getNoise(float i, float j, float k) {
-        if (this.numOctaves == 1)
+        if (this.numOctaves == 1) {
             return this.noiseGen.noise3d(
                             i * this.frequencyX + this.offsetX,
                             j * this.frequencyY + this.offsetY,
                             k * this.frequencyZ + this.offsetZ)
                     * this.amplitude;
+        }
 
         i *= this.frequencyX;
         j *= this.frequencyY;

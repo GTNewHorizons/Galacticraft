@@ -170,7 +170,9 @@ public class OxygenUtil {
      * BlockUnlitTorch.
      */
     public static boolean checkTorchHasOxygen(World world, Block block, int x, int y, int z) {
-        if (OxygenUtil.inOxygenBubble(world, x + 0.5D, y + 0.6D, z + 0.5D)) return true;
+        if (OxygenUtil.inOxygenBubble(world, x + 0.5D, y + 0.6D, z + 0.5D)) {
+            return true;
+        }
         OxygenUtil.checked = new HashSet();
         BlockVec3 vec = new BlockVec3(x, y, z);
         for (int side = 0; side < 6; side++) {
@@ -423,7 +425,9 @@ public class OxygenUtil {
             if (blockVec != null && blockVec.dim == worldObj.provider.dimensionId) {
                 TileEntity tile = worldObj.getTileEntity(blockVec.x, blockVec.y, blockVec.z);
                 if (tile instanceof TileEntityOxygenDistributor) {
-                    if (((TileEntityOxygenDistributor) tile).inBubble(avgX, avgY, avgZ)) return true;
+                    if (((TileEntityOxygenDistributor) tile).inBubble(avgX, avgY, avgZ)) {
+                        return true;
+                    }
                 }
             }
         }

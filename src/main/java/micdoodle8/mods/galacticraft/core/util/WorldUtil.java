@@ -126,10 +126,18 @@ public class WorldUtil {
                             armorModHighGrav -= ((IArmorGravity) armorPiece.getItem()).gravityOverrideIfHigh(player);
                         }
                     }
-                    if (armorModLowGrav > 100) armorModLowGrav = 100;
-                    if (armorModHighGrav > 100) armorModHighGrav = 100;
-                    if (armorModLowGrav < 0) armorModLowGrav = 0;
-                    if (armorModHighGrav < 0) armorModHighGrav = 0;
+                    if (armorModLowGrav > 100) {
+                        armorModLowGrav = 100;
+                    }
+                    if (armorModHighGrav > 100) {
+                        armorModHighGrav = 100;
+                    }
+                    if (armorModLowGrav < 0) {
+                        armorModLowGrav = 0;
+                    }
+                    if (armorModHighGrav < 0) {
+                        armorModHighGrav = 0;
+                    }
                     if (customProvider.getGravity() > 0) {
                         return 0.08D - (customProvider.getGravity() * armorModLowGrav) / 100;
                     }
@@ -148,8 +156,12 @@ public class WorldUtil {
         if (entity.worldObj.provider instanceof IGalacticraftWorldProvider) {
             final IGalacticraftWorldProvider customProvider = (IGalacticraftWorldProvider) entity.worldObj.provider;
             float returnValue = MathHelper.sqrt_float(0.08F / (0.08F - customProvider.getGravity()));
-            if (returnValue > 2.5F) returnValue = 2.5F;
-            if (returnValue < 0.75F) returnValue = 0.75F;
+            if (returnValue > 2.5F) {
+                returnValue = 2.5F;
+            }
+            if (returnValue < 0.75F) {
+                returnValue = 0.75F;
+            }
             return returnValue;
         } else if (entity instanceof IAntiGrav) {
             return 1F;
@@ -192,8 +204,9 @@ public class WorldUtil {
     }
 
     public static boolean shouldRenderFire(Entity entity) {
-        if (entity.worldObj == null || !(entity.worldObj.provider instanceof IGalacticraftWorldProvider))
+        if (entity.worldObj == null || !(entity.worldObj.provider instanceof IGalacticraftWorldProvider)) {
             return entity.isBurning();
+        }
 
         if (!(entity instanceof EntityLivingBase)
                 && !(entity instanceof EntityArrow)
@@ -202,10 +215,12 @@ public class WorldUtil {
         }
 
         if (entity.isBurning()) {
-            if (OxygenUtil.noAtmosphericCombustion(entity.worldObj.provider))
+            if (OxygenUtil.noAtmosphericCombustion(entity.worldObj.provider)) {
                 return OxygenUtil.isAABBInBreathableAirBlock(entity.worldObj, entity.boundingBox);
-            else return true;
-            // Disable fire on Galacticraft worlds with no oxygen
+            } else {
+                return true;
+                // Disable fire on Galacticraft worlds with no oxygen
+            }
         }
 
         return false;
@@ -385,7 +400,9 @@ public class WorldUtil {
         }
 
         for (Integer element : WorldUtil.registeredPlanets) {
-            if (element == ConfigManagerCore.idDimensionOverworld) continue;
+            if (element == ConfigManagerCore.idDimensionOverworld) {
+                continue;
+            }
             WorldProvider provider = WorldUtil.getProviderForDimensionServer(element);
 
             if (provider != null) {
@@ -499,7 +516,9 @@ public class WorldUtil {
             return null;
         }
         World ws = theServer.worldServerForDimension(id);
-        if (ws != null) return ws.provider;
+        if (ws != null) {
+            return ws.provider;
+        }
         return null;
     }
 
@@ -547,8 +566,9 @@ public class WorldUtil {
             } else
             // It's a planet or moon
             {
-                if (celestialBody == GalacticraftCore.planetOverworld) map.put(celestialBody.getName(), id);
-                else {
+                if (celestialBody == GalacticraftCore.planetOverworld) {
+                    map.put(celestialBody.getName(), id);
+                } else {
                     WorldProvider provider = WorldUtil.getProviderForDimensionServer(id);
                     if (celestialBody != null && provider != null) {
                         if (provider instanceof IGalacticraftWorldProvider && !(provider instanceof IOrbitDimension)
@@ -587,7 +607,9 @@ public class WorldUtil {
      */
     public static HashMap<String, Integer> getArrayOfPossibleDimensionsAgain(int tier, EntityPlayerMP playerBase) {
         HashMap<String, Integer> map = WorldUtil.celestialMapCache.get(playerBase);
-        if (map != null) return map;
+        if (map != null) {
+            return map;
+        }
         return getArrayOfPossibleDimensions(tier, playerBase);
     }
 
@@ -623,7 +645,9 @@ public class WorldUtil {
         // WorldUtil.getExistingSpaceStationList(spaceStationList);
         WorldUtil.registeredSpaceStations = Maps.newHashMap();
         MinecraftServer theServer = FMLCommonHandler.instance().getMinecraftServerInstance();
-        if (theServer == null) return;
+        if (theServer == null) {
+            return;
+        }
 
         final File[] var2 = spaceStationList.listFiles();
 
@@ -810,10 +834,11 @@ public class WorldUtil {
             temp.add(i);
         }
 
-        if (WorldUtil.registeredSpaceStations != null)
+        if (WorldUtil.registeredSpaceStations != null) {
             for (final Integer i : WorldUtil.registeredSpaceStations.keySet()) {
                 temp.add(i);
             }
+        }
 
         final Integer[] finalArray = new Integer[temp.size()];
 
@@ -933,8 +958,9 @@ public class WorldUtil {
             EntityAutoRocket ridingRocket) {
         Entity otherRiddenEntity = null;
         if (entity.ridingEntity != null) {
-            if (entity.ridingEntity instanceof EntitySpaceshipBase) entity.mountEntity(entity.ridingEntity);
-            else if (entity.ridingEntity instanceof EntityCelestialFake) {
+            if (entity.ridingEntity instanceof EntitySpaceshipBase) {
+                entity.mountEntity(entity.ridingEntity);
+            } else if (entity.ridingEntity instanceof EntityCelestialFake) {
                 entity.ridingEntity.setDead();
                 entity.mountEntity(null);
             } else {
@@ -1085,9 +1111,10 @@ public class WorldUtil {
                 GCPlayerStats stats = GCPlayerStats.get(player);
                 stats.usingPlanetSelectionGui = false;
 
-                if (worldNew.provider instanceof WorldProviderSpaceStation)
+                if (worldNew.provider instanceof WorldProviderSpaceStation) {
                     GalacticraftCore.packetPipeline.sendTo(
                             new PacketSimple(EnumSimplePacket.C_RESET_THIRD_PERSON, new Object[] {}), player);
+                }
 
                 if (ridingRocket != null) {
                     spawnPos = new Vector3(ridingRocket);
@@ -1174,8 +1201,9 @@ public class WorldUtil {
         }
 
         if (entity instanceof EntityPlayerMP) {
-            if (dimChange)
+            if (dimChange) {
                 FMLCommonHandler.instance().firePlayerChangedDimensionEvent((EntityPlayerMP) entity, oldDimID, dimID);
+            }
             // Spawn in a lander if appropriate
             if (ridingRocket == null) {
                 type.onSpaceDimensionChanged(worldNew, (EntityPlayerMP) entity, ridingRocket != null);
@@ -1304,8 +1332,9 @@ public class WorldUtil {
      */
     public static void decodePlanetsListClient(List<Object> data) {
         try {
-            if (ConfigManagerCore.enableDebug)
+            if (ConfigManagerCore.enableDebug) {
                 GCLog.info("GC connecting to server: received planets dimension ID list.");
+            }
             if (WorldUtil.registeredPlanets != null) {
                 for (Integer registeredID : WorldUtil.registeredPlanets) {
                     DimensionManager.unregisterDimension(registeredID);
@@ -1336,11 +1365,17 @@ public class WorldUtil {
             if (ConfigManagerCore.enableDebug) {
                 GCLog.debug("GC clientside planet dimensions registered: " + ids);
                 WorldProvider dimMoon = WorldUtil.getProviderForNameClient("moon.moon");
-                if (dimMoon != null) GCLog.debug("Crosscheck: Moon is " + dimMoon.dimensionId);
+                if (dimMoon != null) {
+                    GCLog.debug("Crosscheck: Moon is " + dimMoon.dimensionId);
+                }
                 WorldProvider dimMars = WorldUtil.getProviderForNameClient("planet.mars");
-                if (dimMars != null) GCLog.debug("Crosscheck: Mars is " + dimMars.dimensionId);
+                if (dimMars != null) {
+                    GCLog.debug("Crosscheck: Mars is " + dimMars.dimensionId);
+                }
                 WorldProvider dimAst = WorldUtil.getProviderForNameClient("planet.asteroids");
-                if (dimAst != null) GCLog.debug("Crosscheck: Asteroids is " + dimAst.dimensionId);
+                if (dimAst != null) {
+                    GCLog.debug("Crosscheck: Asteroids is " + dimAst.dimensionId);
+                }
             }
         } catch (final Exception e) {
             e.printStackTrace();
@@ -1419,9 +1454,15 @@ public class WorldUtil {
 
     public static boolean otherModPreventGenerate(
             int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-        if (!(world.provider instanceof IGalacticraftWorldProvider)) return false;
-        if (world.provider instanceof WorldProviderSpaceStation) return true;
-        if (ConfigManagerCore.enableOtherModsFeatures) return false;
+        if (!(world.provider instanceof IGalacticraftWorldProvider)) {
+            return false;
+        }
+        if (world.provider instanceof WorldProviderSpaceStation) {
+            return true;
+        }
+        if (ConfigManagerCore.enableOtherModsFeatures) {
+            return false;
+        }
 
         if (!generatorsInitialised) {
             generatorsInitialised = true;
@@ -1433,11 +1474,12 @@ public class WorldUtil {
                             .getDeclaredField("worldGenerators");
                     regField.setAccessible(true);
                     Set<IWorldGenerator> registeredGenerators = (Set<IWorldGenerator>) regField.get(null);
-                    for (IWorldGenerator gen : registeredGenerators)
+                    for (IWorldGenerator gen : registeredGenerators) {
                         if (GCGreg.isInstance(gen)) {
                             generatorGCGreg = gen;
                             break;
                         }
+                    }
                 }
             } catch (Exception e) {
             }
@@ -1449,11 +1491,12 @@ public class WorldUtil {
                             .getDeclaredField("worldGenerators");
                     regField.setAccessible(true);
                     Set<IWorldGenerator> registeredGenerators = (Set<IWorldGenerator>) regField.get(null);
-                    for (IWorldGenerator gen : registeredGenerators)
+                    for (IWorldGenerator gen : registeredGenerators) {
                         if (cofh.isInstance(gen)) {
                             generatorCoFH = gen;
                             break;
                         }
+                    }
                 }
             } catch (Exception e) {
             }
@@ -1465,11 +1508,12 @@ public class WorldUtil {
                             .getDeclaredField("worldGenerators");
                     regField.setAccessible(true);
                     Set<IWorldGenerator> registeredGenerators = (Set<IWorldGenerator>) regField.get(null);
-                    for (IWorldGenerator gen : registeredGenerators)
+                    for (IWorldGenerator gen : registeredGenerators) {
                         if (denseOres.isInstance(gen)) {
                             generatorDenseOres = gen;
                             break;
                         }
+                    }
                 }
             } catch (Exception e) {
             }
@@ -1493,11 +1537,12 @@ public class WorldUtil {
                             .getDeclaredField("worldGenerators");
                     regField.setAccessible(true);
                     Set<IWorldGenerator> registeredGenerators = (Set<IWorldGenerator>) regField.get(null);
-                    for (IWorldGenerator gen : registeredGenerators)
+                    for (IWorldGenerator gen : registeredGenerators) {
                         if (ae2meteorPlace.isInstance(gen)) {
                             generatorAE2meteors = gen;
                             break;
                         }
+                    }
                 }
             } catch (Exception e) {
             }
@@ -1509,11 +1554,12 @@ public class WorldUtil {
                             .getDeclaredField("worldGenerators");
                     regField.setAccessible(true);
                     Set<IWorldGenerator> registeredGenerators = (Set<IWorldGenerator>) regField.get(null);
-                    for (IWorldGenerator gen : registeredGenerators)
+                    for (IWorldGenerator gen : registeredGenerators) {
                         if (genThaumCraft.isInstance(gen)) {
                             generatorTCAuraNodes = gen;
                             break;
                         }
+                    }
                     if (generatorTCAuraNodes != null && ConfigManagerCore.enableThaumCraftNodes) {
                         generateTCAuraNodes = genThaumCraft.getDeclaredMethod(
                                 "generateWildNodes",
@@ -1530,12 +1576,21 @@ public class WorldUtil {
             } catch (Exception e) {
             }
 
-            if (generatorGCGreg != null) System.out.println("Whitelisting GalacticGreg oregen on planets.");
-            if (generatorCoFH != null) System.out.println("Whitelisting CoFHCore custom oregen on planets.");
-            if (generatorDenseOres != null) System.out.println("Whitelisting Dense Ores oregen on planets.");
-            if (generatorAE2meteors != null) System.out.println("Whitelisting AE2 meteorites worldgen on planets.");
-            if (generatorTCAuraNodes != null && generateTCAuraNodes != null)
+            if (generatorGCGreg != null) {
+                System.out.println("Whitelisting GalacticGreg oregen on planets.");
+            }
+            if (generatorCoFH != null) {
+                System.out.println("Whitelisting CoFHCore custom oregen on planets.");
+            }
+            if (generatorDenseOres != null) {
+                System.out.println("Whitelisting Dense Ores oregen on planets.");
+            }
+            if (generatorAE2meteors != null) {
+                System.out.println("Whitelisting AE2 meteorites worldgen on planets.");
+            }
+            if (generatorTCAuraNodes != null && generateTCAuraNodes != null) {
                 System.out.println("Whitelisting ThaumCraft aura node generation on planets.");
+            }
         }
 
         if (generatorGCGreg != null
@@ -1551,14 +1606,18 @@ public class WorldUtil {
                 long chunkSeed = (xSeed * chunkX + zSeed * chunkZ) ^ worldSeed;
                 fmlRandom.setSeed(chunkSeed);
 
-                if (generatorCoFH != null)
+                if (generatorCoFH != null) {
                     generatorCoFH.generate(fmlRandom, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
-                if (generatorDenseOres != null)
+                }
+                if (generatorDenseOres != null) {
                     generatorDenseOres.generate(fmlRandom, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
-                if (generatorGCGreg != null)
+                }
+                if (generatorGCGreg != null) {
                     generatorGCGreg.generate(fmlRandom, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
-                if (generatorAE2meteors != null)
+                }
+                if (generatorAE2meteors != null) {
                     generatorAE2meteors.generate(fmlRandom, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
+                }
                 if (generateTCAuraNodes != null) {
                     generateTCAuraNodes.invoke(generatorTCAuraNodes, world, fmlRandom, chunkX, chunkZ, false, true);
                 }
@@ -1695,10 +1754,14 @@ public class WorldUtil {
     public static String getDimensionName(WorldProvider wp) {
         if (wp instanceof IGalacticraftWorldProvider) {
             CelestialBody cb = ((IGalacticraftWorldProvider) wp).getCelestialBody();
-            if (cb != null && !(cb instanceof Satellite)) return cb.getUnlocalizedName();
+            if (cb != null && !(cb instanceof Satellite)) {
+                return cb.getUnlocalizedName();
+            }
         }
 
-        if (wp.dimensionId == ConfigManagerCore.idDimensionOverworld) return "Overworld";
+        if (wp.dimensionId == ConfigManagerCore.idDimensionOverworld) {
+            return "Overworld";
+        }
 
         return wp.getDimensionName();
     }
@@ -1709,14 +1772,19 @@ public class WorldUtil {
         long newTime = current - current % dayLength + dayLength;
         if (world.provider instanceof WorldProviderSpace) {
             dayLength = ((WorldProviderSpace) world.provider).getDayLength();
-            if (dayLength <= 0) return;
+            if (dayLength <= 0) {
+                return;
+            }
             newTime = current - current % dayLength + dayLength;
         } else {
             long diff = newTime - current;
             for (WorldServer worldServer : MinecraftServer.getServer().worldServers) {
-                if (worldServer == world) continue;
-                if (worldServer.provider instanceof WorldProviderSpace)
+                if (worldServer == world) {
+                    continue;
+                }
+                if (worldServer.provider instanceof WorldProviderSpace) {
                     ((WorldProviderSpace) worldServer.provider).adjustTimeOffset(diff);
+                }
             }
         }
         world.provider.setWorldTime(newTime);

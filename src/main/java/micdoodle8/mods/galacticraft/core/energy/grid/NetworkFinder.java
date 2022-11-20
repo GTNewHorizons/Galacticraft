@@ -28,7 +28,9 @@ public class NetworkFinder {
     private void loopAll(int x, int y, int z, int dirIn) {
         BlockVec3 obj = null;
         for (int dir = 0; dir < 6; dir++) {
-            if (dir == dirIn) continue;
+            if (dir == dirIn) {
+                continue;
+            }
             switch (dir) {
                 case 0:
                     obj = new BlockVec3(x, y - 1, z);

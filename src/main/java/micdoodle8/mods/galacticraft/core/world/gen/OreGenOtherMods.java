@@ -43,27 +43,47 @@ public class OreGenOtherMods {
                 if (slash >= 0) {
                     s = str.substring(0, slash).trim();
                     String params = str.substring(slash).toUpperCase();
-                    if (params.contains("UNCOMMON")) rarity = 1;
-                    else if (params.contains("RARE")) rarity = 2;
+                    if (params.contains("UNCOMMON")) {
+                        rarity = 1;
+                    } else if (params.contains("RARE")) {
+                        rarity = 2;
+                    }
 
-                    if (params.contains("DEEP")) depth = 1;
-                    else if (params.contains("SHALLOW")) depth = 2;
+                    if (params.contains("DEEP")) {
+                        depth = 1;
+                    } else if (params.contains("SHALLOW")) {
+                        depth = 2;
+                    }
 
-                    if (params.contains("SINGLE")) size = 0;
-                    else if (params.contains("LARGE")) size = 2;
+                    if (params.contains("SINGLE")) {
+                        size = 0;
+                    } else if (params.contains("LARGE")) {
+                        size = 2;
+                    }
 
-                    if (params.contains("XTRARANDOM")) extraRandom = true;
+                    if (params.contains("XTRARANDOM")) {
+                        extraRandom = true;
+                    }
 
-                    if (params.contains("ONLYMOON")) dim = 1;
-                    else if (params.contains("ONLYMARS")) dim = 2;
+                    if (params.contains("ONLYMOON")) {
+                        dim = 1;
+                    } else if (params.contains("ONLYMARS")) {
+                        dim = 2;
+                    }
 
-                } else s = str;
+                } else {
+                    s = str;
+                }
 
                 BlockTuple bt = ConfigManagerCore.stringToBlock(s, "Other mod ore generate IDs", true);
-                if (bt == null) continue;
+                if (bt == null) {
+                    continue;
+                }
 
                 int meta = bt.meta;
-                if (meta == -1) meta = 0;
+                if (meta == -1) {
+                    meta = 0;
+                }
 
                 OreGenOtherMods.addOre(bt.block, meta, rarity, depth, size, extraRandom, dim);
             } catch (final Exception e) {
@@ -140,7 +160,9 @@ public class OreGenOtherMods {
         if (extraRandom) {
             if (depth == 1) {
                 min = -max * 3;
-            } else max *= 4;
+            } else {
+                max *= 4;
+            }
         }
 
         OreGenData ore = new OreGenData(block, meta, clusters, size, min, max, dim);
@@ -157,7 +179,9 @@ public class OreGenOtherMods {
         int dimDetected = 0;
 
         WorldProvider prov = worldObj.provider;
-        if (!(prov instanceof IGalacticraftWorldProvider) || (prov instanceof WorldProviderSpaceStation)) return;
+        if (!(prov instanceof IGalacticraftWorldProvider) || (prov instanceof WorldProviderSpaceStation)) {
+            return;
+        }
 
         Block stoneBlock = null;
         int stoneMeta = 0;
@@ -172,7 +196,9 @@ public class OreGenOtherMods {
             dimDetected = 2;
         }
 
-        if (stoneBlock == null) return;
+        if (stoneBlock == null) {
+            return;
+        }
 
         for (OreGenData ore : OreGenOtherMods.data) {
             if (ore.dimRestrict == 0 || ore.dimRestrict == dimDetected) {
@@ -187,7 +213,9 @@ public class OreGenOtherMods {
         for (int var5 = 0; var5 < amountPerChunk; ++var5) {
             final int var6 = this.chunkX + this.randomGenerator.nextInt(16);
             final int var7 = this.randomGenerator.nextInt(maxY - minY) + minY;
-            if (var7 < 0) continue;
+            if (var7 < 0) {
+                continue;
+            }
             final int var8 = this.chunkZ + this.randomGenerator.nextInt(16);
             worldGenerator.generate(this.worldObj, this.randomGenerator, var6, var7, var8);
         }

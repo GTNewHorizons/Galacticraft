@@ -77,9 +77,12 @@ public class GameScreenCelestial implements IGameScreen {
             case 2:
                 WorldProvider wp = scr.getWorldProvider();
                 CelestialBody body = null;
-                if (wp instanceof IGalacticraftWorldProvider)
+                if (wp instanceof IGalacticraftWorldProvider) {
                     body = ((IGalacticraftWorldProvider) wp).getCelestialBody();
-                if (body == null) body = GalacticraftCore.planetOverworld;
+                }
+                if (body == null) {
+                    body = GalacticraftCore.planetOverworld;
+                }
                 drawCelestialBodies(body, ticks);
                 break;
             case 3:
@@ -116,13 +119,17 @@ public class GameScreenCelestial implements IGameScreen {
     private void drawCelestialBodies(CelestialBody body, float ticks) {
         Star star = null;
         SolarSystem solarSystem = null;
-        if (body instanceof Planet) solarSystem = ((Planet) body).getParentSolarSystem();
-        else if (body instanceof Moon)
+        if (body instanceof Planet) {
+            solarSystem = ((Planet) body).getParentSolarSystem();
+        } else if (body instanceof Moon) {
             solarSystem = ((Moon) body).getParentPlanet().getParentSolarSystem();
-        else if (body instanceof Satellite)
+        } else if (body instanceof Satellite) {
             solarSystem = ((Satellite) body).getParentPlanet().getParentSolarSystem();
+        }
 
-        if (solarSystem == null) solarSystem = GalacticraftCore.solarSystemSol;
+        if (solarSystem == null) {
+            solarSystem = GalacticraftCore.solarSystemSol;
+        }
         star = solarSystem.getMainStar();
 
         if (star != null && star.getBodyIcon() != null) {
@@ -177,8 +184,12 @@ public class GameScreenCelestial implements IGameScreen {
     }
 
     private void drawCelestialBody(CelestialBody planet, float xPos, float yPos, float ticks, float relSize) {
-        if (xPos + centreX > frameBx || xPos + centreX < frameA) return;
-        if (yPos + centreY > frameBy || yPos + centreY < frameA) return;
+        if (xPos + centreX > frameBx || xPos + centreX < frameA) {
+            return;
+        }
+        if (yPos + centreY > frameBy || yPos + centreY < frameA) {
+            return;
+        }
 
         GL11.glPushMatrix();
         GL11.glTranslatef(xPos + centreX, yPos + centreY, 0F);
@@ -259,9 +270,13 @@ public class GameScreenCelestial implements IGameScreen {
 
     private float getScale(CelestialBody celestialBody) {
         float distance = celestialBody.getRelativeDistanceFromCenter().unScaledDistance;
-        if (distance >= 1.375F)
-            if (distance >= 1.5F) distance *= 1.15F;
-            else distance += 0.075F;
+        if (distance >= 1.375F) {
+            if (distance >= 1.5F) {
+                distance *= 1.15F;
+            } else {
+                distance += 0.075F;
+            }
+        }
         return 1 / 140.0F * distance * (celestialBody instanceof Planet ? 25.0F : 3.5F);
     }
 

@@ -75,7 +75,9 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
 
     @Override
     public void setDead() {
-        if (!this.isDead) super.setDead();
+        if (!this.isDead) {
+            super.setDead();
+        }
 
         // TODO reimplement once Resonant Engine comes out of alpha, bug Dark for info
         // if (Loader.isModLoaded("ICBM|Explosion"))
@@ -105,7 +107,9 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
     @Override
     public boolean hasValidFuel() {
         if (this.destinationFrequency != -1) {
-            if (this.fuelTank.getFluidAmount() < fuelToDrain()) return false;
+            if (this.fuelTank.getFluidAmount() < fuelToDrain()) {
+                return false;
+            }
             return true;
         }
         return this.fuelTank.getFluidAmount() > 0;
@@ -181,7 +185,9 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                         Entity e = this.riddenByEntity;
                         e.mountEntity(null);
                         e.mountEntity(this);
-                        if (ConfigManagerCore.enableDebug) GCLog.info("Remounting player in rocket.");
+                        if (ConfigManagerCore.enableDebug) {
+                            GCLog.info("Remounting player in rocket.");
+                        }
                     }
 
                     this.setWaitForPlayer(false);
@@ -306,9 +312,11 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                         boolean dimensionAllowed = this.targetDimension == ConfigManagerCore.idDimensionOverworld;
 
                         if (targetDim instanceof IGalacticraftWorldProvider) {
-                            if (((IGalacticraftWorldProvider) targetDim).canSpaceshipTierPass(this.getRocketTier()))
+                            if (((IGalacticraftWorldProvider) targetDim).canSpaceshipTierPass(this.getRocketTier())) {
                                 dimensionAllowed = true;
-                            else dimensionAllowed = false;
+                            } else {
+                                dimensionAllowed = false;
+                            }
                         } else
                         // No rocket flight to non-Galacticraft dimensions other than the Overworld
                         // allowed unless
@@ -319,7 +327,9 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                                         Class.forName("micdoodle8.mods.galacticraft.planets.mars.ConfigManagerMars");
                                 if (marsConfig
                                         .getField("launchControllerAllDims")
-                                        .getBoolean(null)) dimensionAllowed = true;
+                                        .getBoolean(null)) {
+                                    dimensionAllowed = true;
+                                }
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -380,7 +390,9 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                                 new Vector3(this.targetVec.x + 0.5F, this.targetVec.y + 800, this.targetVec.z + 0.5F),
                                 false);
                         this.setWaitForPlayer(true);
-                        if (ConfigManagerCore.enableDebug) GCLog.info("Rocket repositioned, waiting for player");
+                        if (ConfigManagerCore.enableDebug) {
+                            GCLog.info("Rocket repositioned, waiting for player");
+                        }
                     }
                     this.landing = true;
                     // Do not destroy the rocket, we still need it!
@@ -497,7 +509,9 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
 
     @Override
     public int getSizeInventory() {
-        if (this.rocketType == null) return 2;
+        if (this.rocketType == null) {
+            return 2;
+        }
         return this.rocketType.getInventorySpace();
     }
 

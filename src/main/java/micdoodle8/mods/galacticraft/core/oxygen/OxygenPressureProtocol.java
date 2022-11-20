@@ -32,7 +32,9 @@ public class OxygenPressureProtocol {
         for (final String s : ConfigManagerCore.sealableIDs) {
             try {
                 BlockTuple bt = ConfigManagerCore.stringToBlock(s, "External Sealable IDs", true);
-                if (bt == null) continue;
+                if (bt == null) {
+                    continue;
+                }
 
                 int meta = bt.meta;
 
@@ -70,7 +72,9 @@ public class OxygenPressureProtocol {
     }
 
     public static boolean canBlockPassAir(World world, Block block, BlockVec3 vec, int side) {
-        if (block == null) return true;
+        if (block == null) {
+            return true;
+        }
 
         if (block instanceof IPartialSealableBlock) {
             return !((IPartialSealableBlock) block)

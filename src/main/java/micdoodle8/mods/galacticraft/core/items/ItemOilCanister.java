@@ -79,6 +79,8 @@ public class ItemOilCanister extends ItemCanisterGeneric {
     public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
         if (ItemCanisterGeneric.EMPTY == par1ItemStack.getItemDamage()) {
             par1ItemStack.stackTagCompound = null;
-        } else if (par1ItemStack.getItemDamage() <= 0) par1ItemStack.setItemDamage(1);
+        } else if (par1ItemStack.getItemDamage() <= 0) {
+            par1ItemStack.setItemDamage(1);
+        }
     }
 }

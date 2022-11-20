@@ -48,7 +48,9 @@ public class ConnectionPacket {
                     data = NetworkUtil.decodeData(EnumSimplePacket.C_UPDATE_CONFIGS.getDecodeClasses(), payload);
                     ConfigManagerCore.saveClientConfigOverrideable();
                     ConfigManagerCore.setConfigOverride(data);
-                    if (ConfigManagerCore.enableDebug) GCLog.info("Server-set configs received OK on client.");
+                    if (ConfigManagerCore.enableDebug) {
+                        GCLog.info("Server-set configs received OK on client.");
+                    }
                 } catch (Exception e) {
                     System.err.println(
                             "[Galacticraft] Error handling connection packet - maybe the player's Galacticraft version does not match the server version?");
@@ -65,13 +67,17 @@ public class ConnectionPacket {
 
     public static FMLProxyPacket createDimPacket(Integer[] dims) {
         ArrayList<Integer> data = new ArrayList();
-        for (int i = 0; i < dims.length; i++) data.add(dims[i]);
+        for (int i = 0; i < dims.length; i++) {
+            data.add(dims[i]);
+        }
         return createPacket((byte) 101, data);
     }
 
     public static FMLProxyPacket createSSPacket(Integer[] dims) {
         ArrayList<Integer> data = new ArrayList();
-        for (int i = 0; i < dims.length; i++) data.add(dims[i]);
+        for (int i = 0; i < dims.length; i++) {
+            data.add(dims[i]);
+        }
         return createPacket((byte) 102, data);
     }
 
@@ -116,8 +122,9 @@ public class ConnectionPacket {
 
     public void onFMLProxyPacketData(NetworkManager manager, FMLProxyPacket packet, EntityPlayer player) {
         try {
-            if ((packet == null) || (packet.payload() == null))
+            if ((packet == null) || (packet.payload() == null)) {
                 throw new RuntimeException("Empty packet sent to Galacticraft channel");
+            }
             ByteBuf data = packet.payload();
             this.handle(data, player);
         } catch (Exception e) {

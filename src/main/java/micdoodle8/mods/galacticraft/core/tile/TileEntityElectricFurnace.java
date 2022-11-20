@@ -82,7 +82,9 @@ public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventor
             if (this.canProcess()) {
                 if (this.hasEnoughEnergyToRun) {
                     // 50% extra speed boost for Tier 2 machine if powered by Tier 2 power
-                    if (this.tierGC == 2) this.processTimeRequired = 200 / (1 + this.poweredByTierGC);
+                    if (this.tierGC == 2) {
+                        this.processTimeRequired = 200 / (1 + this.poweredByTierGC);
+                    }
 
                     if (this.processTicks == 0) {
                         this.processTicks = this.processTimeRequired;
@@ -146,8 +148,9 @@ public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventor
                                     || nameSmelted.contains("raw")
                                     || nameSmelted.contains("moon")
                                     || nameSmelted.contains("mars")
-                                    || nameSmelted.contains("shard")))
+                                    || nameSmelted.contains("shard"))) {
                         this.containingItems[2].stackSize += resultItemStack.stackSize;
+                    }
                 }
             } else if (this.containingItems[2].isItemEqual(resultItemStack)) {
                 this.containingItems[2].stackSize += resultItemStack.stackSize;
@@ -159,8 +162,9 @@ public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventor
                                     || nameSmelted.contains("raw")
                                     || nameSmelted.contains("moon")
                                     || nameSmelted.contains("mars")
-                                    || nameSmelted.contains("shard")))
+                                    || nameSmelted.contains("shard"))) {
                         this.containingItems[2].stackSize += resultItemStack.stackSize;
+                    }
                 }
             }
 
@@ -178,15 +182,18 @@ public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventor
         if (this.storage.getEnergyStoredGC() > EnergyStorageTile.STANDARD_CAPACITY) {
             this.setTier2();
             this.initialised = true;
-        } else this.initialised = false;
+        } else {
+            this.initialised = false;
+        }
         this.processTicks = par1NBTTagCompound.getInteger("smeltingTicks");
         this.containingItems = this.readStandardItemsFromNBT(par1NBTTagCompound);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
-        if (this.tierGC == 1 && this.storage.getEnergyStoredGC() > EnergyStorageTile.STANDARD_CAPACITY)
+        if (this.tierGC == 1 && this.storage.getEnergyStoredGC() > EnergyStorageTile.STANDARD_CAPACITY) {
             this.storage.setEnergyStored(EnergyStorageTile.STANDARD_CAPACITY);
+        }
         super.writeToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setInteger("smeltingTicks", this.processTicks);
         this.writeStandardItemsToNBT(par1NBTTagCompound);
@@ -213,7 +220,9 @@ public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventor
      */
     @Override
     public boolean isItemValidForSlot(int slotID, ItemStack itemStack) {
-        if (itemStack == null) return false;
+        if (itemStack == null) {
+            return false;
+        }
         return slotID == 1
                 ? FurnaceRecipes.smelting().getSmeltingResult(itemStack) != null
                 : slotID == 0 && ItemElectricBase.isElectricItem(itemStack.getItem());

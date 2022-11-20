@@ -118,7 +118,9 @@ public class TileEntityCryogenicChamber extends TileEntityMulti implements IMult
         int buildHeight = this.worldObj.getHeight() - 1;
 
         for (int y = 0; y < 3; y++) {
-            if (placedPosition.y + y > buildHeight) return;
+            if (placedPosition.y + y > buildHeight) {
+                return;
+            }
             final BlockVec3 vecToAdd = new BlockVec3(placedPosition.x, placedPosition.y + y, placedPosition.z);
 
             if (!vecToAdd.equals(placedPosition)) {

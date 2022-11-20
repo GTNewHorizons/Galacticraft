@@ -92,7 +92,9 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
 
             if (this.timeSinceLaunch % MathHelper.floor_double(3 * (1 / multiplier)) == 0) {
                 this.removeFuel(1);
-                if (!this.hasValidFuel()) this.stopRocketSound();
+                if (!this.hasValidFuel()) {
+                    this.stopRocketSound();
+                }
             }
         } else if (!this.hasValidFuel() && this.getLaunched()) {
             if (Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 10 != 0.0) {
@@ -317,7 +319,9 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
 
     @Override
     public int getSizeInventory() {
-        if (this.rocketType == null) return 0;
+        if (this.rocketType == null) {
+            return 0;
+        }
         return this.rocketType.getInventorySpace();
     }
 

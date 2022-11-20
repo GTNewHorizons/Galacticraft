@@ -316,7 +316,9 @@ public class WorldProviderOrbit extends WorldProviderSpaceStation
     @SideOnly(Side.CLIENT)
     public void setSpinDeltaPerTick(float angle) {
         SkyProviderOrbit skyProvider = ((SkyProviderOrbit) this.getSkyRenderer());
-        if (skyProvider != null) skyProvider.spinDeltaPerTick = angle;
+        if (skyProvider != null) {
+            skyProvider.spinDeltaPerTick = angle;
+        }
     }
 
     @Override
@@ -328,6 +330,8 @@ public class WorldProviderOrbit extends WorldProviderSpaceStation
                 true));
         this.setSpinDeltaPerTick(this.getSpinManager().getSpinRate());
 
-        if (this.getCloudRenderer() == null) this.setCloudRenderer(new CloudRenderer());
+        if (this.getCloudRenderer() == null) {
+            this.setCloudRenderer(new CloudRenderer());
+        }
     }
 }

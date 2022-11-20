@@ -92,9 +92,11 @@ public class BlockMinerBaseFull extends BlockTileGC {
             float par8,
             float par9) {
         TileEntity tileEntity = par1World.getTileEntity(x, y, z);
-        if (tileEntity instanceof TileEntityMinerBase)
+        if (tileEntity instanceof TileEntityMinerBase) {
             return ((TileEntityMinerBase) tileEntity).onActivated(par5EntityPlayer);
-        else return false;
+        } else {
+            return false;
+        }
     }
 
     @Override

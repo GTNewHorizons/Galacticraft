@@ -96,9 +96,11 @@ public class EventHandlerMars {
     @SubscribeEvent
     public void onPlayerRotate(RotatePlayerEvent event) {
         ChunkCoordinates c = event.entityPlayer.playerLocation;
-        for (int x = -1; x < 2; x++)
+        for (int x = -1; x < 2; x++) {
             for (int z = -1; z < 2; z++) {
-                if (x * z != 0) continue;
+                if (x * z != 0) {
+                    continue;
+                }
                 Block block = event.entityPlayer.worldObj.getBlock(c.posX + x, c.posY, c.posZ + z);
                 if (block == MarsBlocks.machine) {
                     int metadata = event.entityPlayer.worldObj.getBlockMetadata(c.posX + x, c.posY, c.posZ + z);
@@ -109,6 +111,7 @@ public class EventHandlerMars {
                     }
                 }
             }
+        }
     }
 
     private WorldGenerator eggGenerator;

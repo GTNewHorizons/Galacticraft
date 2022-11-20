@@ -117,8 +117,11 @@ public class PlayerClient implements IPlayerClient {
                 player.limbSwing -= player.limbSwingAmount;
                 player.limbSwingAmount = player.prevLimbSwingAmount;
                 float adjust = Math.min(Math.abs(player.limbSwing), Math.abs(player.limbSwingAmount) / 3);
-                if (player.limbSwing < 0) player.limbSwing += adjust;
-                else if (player.limbSwing > 0) player.limbSwing -= adjust;
+                if (player.limbSwing < 0) {
+                    player.limbSwing += adjust;
+                } else if (player.limbSwing > 0) {
+                    player.limbSwing -= adjust;
+                }
                 player.limbSwingAmount *= 0.9F;
             } else {
                 if (stats.inFreefallLast && this.downMot2 < -0.008D) {
@@ -143,14 +146,17 @@ public class PlayerClient implements IPlayerClient {
                 player.limbSwing *= 0.8F;
                 player.limbSwingAmount = 0F;
             }
-        } else stats.inFreefall = false;
+        } else {
+            stats.inFreefall = false;
+        }
 
         boolean ridingThirdPersonEntity = player.ridingEntity instanceof ICameraZoomEntity
                 && ((ICameraZoomEntity) player.ridingEntity).defaultThirdPerson();
 
         if (ridingThirdPersonEntity && !stats.lastRidingCameraZoomEntity) {
-            if (!ConfigManagerCore.disableVehicleCameraChanges)
+            if (!ConfigManagerCore.disableVehicleCameraChanges) {
                 FMLClientHandler.instance().getClient().gameSettings.thirdPersonView = 1;
+            }
         }
 
         if (player.ridingEntity != null && player.ridingEntity instanceof ICameraZoomEntity) {
@@ -326,12 +332,16 @@ public class PlayerClient implements IPlayerClient {
 
         GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
         int flag = stats.buildFlags;
-        if (flag == -1) flag = 0;
+        if (flag == -1) {
+            flag = 0;
+        }
         int repeatCount = flag >> 9;
         if (repeatCount <= 3) {
             repeatCount++;
         }
-        if ((flag & 1 << i) > 0) return;
+        if ((flag & 1 << i) > 0) {
+            return;
+        }
         flag |= 1 << i;
         stats.buildFlags = (flag & 511) + (repeatCount << 9);
         GalacticraftCore.packetPipeline.sendToServer(

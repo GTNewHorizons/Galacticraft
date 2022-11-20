@@ -653,8 +653,10 @@ public class ClientProxyCore extends CommonProxyCore {
             }
         }
 
-        if (player instanceof EntityPlayerSP) sneakRenderOverride = true;
-        // Gravity - freefall - jetpack changes in player model orientation can go here
+        if (player instanceof EntityPlayerSP) {
+            sneakRenderOverride = true;
+            // Gravity - freefall - jetpack changes in player model orientation can go here
+        }
     }
 
     @SubscribeEvent
@@ -662,7 +664,9 @@ public class ClientProxyCore extends CommonProxyCore {
         GL11.glPopMatrix();
 
         final EntityPlayer player = event.entityPlayer;
-        if (player instanceof EntityPlayerSP) sneakRenderOverride = false;
+        if (player instanceof EntityPlayerSP) {
+            sneakRenderOverride = false;
+        }
     }
 
     @SubscribeEvent

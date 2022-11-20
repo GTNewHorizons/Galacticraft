@@ -150,9 +150,15 @@ public class ColorUtil {
         rr *= (1F + factor);
         gg *= (1F + factor);
         bb *= (1F + factor);
-        if (rr > 255) rr = 255;
-        if (gg > 255) gg = 255;
-        if (bb > 255) bb = 255;
+        if (rr > 255) {
+            rr = 255;
+        }
+        if (gg > 255) {
+            gg = 255;
+        }
+        if (bb > 255) {
+            bb = 255;
+        }
         return rr << 16 | gg << 8 | bb;
     }
 

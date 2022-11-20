@@ -51,13 +51,17 @@ public class DrawGameScreen extends IScreenManager {
     }
 
     public boolean check(float scaleXparam, float scaleZparam) {
-        if (this.mapDone) return this.scaleX == scaleXparam && this.scaleZ == scaleZparam;
+        if (this.mapDone) {
+            return this.scaleX == scaleXparam && this.scaleZ == scaleZparam;
+        }
 
         return false;
     }
 
     private void makeMap() {
-        if (this.mapDone || this.reusableMap == null || this.driver.getWorldObj().provider.dimensionId != 0) return;
+        if (this.mapDone || this.reusableMap == null || this.driver.getWorldObj().provider.dimensionId != 0) {
+            return;
+        }
         this.localMap = new int[MapUtil.SIZE_STD2 * MapUtil.SIZE_STD2];
         boolean result =
                 MapUtil.getMap(this.localMap, this.driver.getWorldObj(), this.driver.xCoord, this.driver.zCoord);
@@ -154,18 +158,24 @@ public class DrawGameScreen extends IScreenManager {
         float lightMapSaveY = OpenGlHelper.lastBrightnessY;
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240F, 240F);
 
-        if (type > 0) GL11.glDisable(GL11.GL_LIGHTING);
+        if (type > 0) {
+            GL11.glDisable(GL11.GL_LIGHTING);
+        }
 
         GalacticraftRegistry.getGameScreen(type).render(type, ticks, scaleX, scaleZ, this);
 
-        if (type > 0) GL11.glEnable(GL11.GL_LIGHTING);
+        if (type > 0) {
+            GL11.glEnable(GL11.GL_LIGHTING);
+        }
 
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lightMapSaveX, lightMapSaveY);
     }
 
     @Override
     public WorldProvider getWorldProvider() {
-        if (this.driver != null) return driver.getWorldObj().provider;
+        if (this.driver != null) {
+            return driver.getWorldObj().provider;
+        }
 
         return null;
     }

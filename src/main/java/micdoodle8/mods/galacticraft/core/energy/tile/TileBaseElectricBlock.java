@@ -106,7 +106,9 @@ public abstract class TileBaseElectricBlock extends TileBaseUniversalElectrical
                 this.hasEnoughEnergyToRun = true;
                 if (this.shouldUseEnergy()) {
                     this.storage.extractEnergyGC(this.storage.getMaxExtract(), false);
-                } else this.slowDischarge();
+                } else {
+                    this.slowDischarge();
+                }
             } else {
                 this.hasEnoughEnergyToRun = false;
                 this.slowDischarge();

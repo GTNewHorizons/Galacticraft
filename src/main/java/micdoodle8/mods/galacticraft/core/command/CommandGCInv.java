@@ -173,7 +173,9 @@ public class CommandGCInv extends CommandBase {
 
     private static void initialise() {
         World world0 = GalacticraftCore.proxy.getWorldForID(0);
-        if (world0 == null) return;
+        if (world0 == null) {
+            return;
+        }
         CommandGCInv.savefile = (GCInvSaveData) world0.loadItemData(GCInvSaveData.class, GCInvSaveData.SAVE_ID);
         if (CommandGCInv.savefile == null) {
             CommandGCInv.savefile = new GCInvSaveData();

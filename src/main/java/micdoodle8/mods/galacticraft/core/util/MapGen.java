@@ -123,21 +123,28 @@ public class MapGen {
             this.biomeCount = new int[limit * limit];
         }
         int multifactor = biomeMapFactor >> 4;
-        if (multifactor < 1) multifactor = 1;
+        if (multifactor < 1) {
+            multifactor = 1;
+        }
         int imagefactor = 16 / biomeMapFactor;
-        if (imagefactor < 1) imagefactor = 1;
+        if (imagefactor < 1) {
+            imagefactor = 1;
+        }
         biomeMapOneChunk(biomeMapCx + biomeMapx0, biomeMapCz + biomeMapz0, ix, iz, biomeMapFactor, limit);
         biomeMapz0 += multifactor;
         iz += imagefactor;
         if (iz > biomeMapSizeZ - imagefactor) {
             iz = 0;
-            if (ix % 25 == 8)
+            if (ix % 25 == 8) {
                 GCLog.debug("Finished map column " + ix + " at " + (biomeMapCx + biomeMapx0) + ","
                         + (biomeMapCz + biomeMapz0));
+            }
             ix += imagefactor;
             biomeMapz0 = biomeMapz00;
             biomeMapx0 += multifactor;
-            if (biomeMapx0 > -biomeMapz00 * 4) biomeMapx0 += biomeMapz00 * 8;
+            if (biomeMapx0 > -biomeMapz00 * 4) {
+                biomeMapx0 += biomeMapz00 * 8;
+            }
             return ix > biomeMapSizeX - imagefactor;
         }
         return false;
@@ -150,11 +157,15 @@ public class MapGen {
         // banded result where part of the
         // array is 0
         biomesGrid = biomeMapWCM.getBiomeGenAt(biomesGrid, x0 << 4, z0 << 4, 16, 16, false);
-        if (biomesGrid == null) return;
+        if (biomesGrid == null) {
+            return;
+        }
         getHeightMap(x0, z0);
         int halfFactor = limit * limit / 2;
         ArrayList<Integer> cols = new ArrayList<Integer>();
-        for (int j = 0; j < biomeCount.length; j++) biomeCount[j] = 0;
+        for (int j = 0; j < biomeCount.length; j++) {
+            biomeCount[j] = 0;
+        }
         for (int x = 0; x < 16; x += factor) {
             int izstore = iz;
             for (int z = 0; z < 16; z += factor) {
@@ -175,8 +186,11 @@ public class MapGen {
                         avgHeight += height;
                         divisor++;
                         BiomeGenBase theBiome = biomesGrid[xx + x + ((zz + z) << 4)];
-                        if (theBiome != null) biome = theBiome.biomeID;
-                        else biome = 9;
+                        if (theBiome != null) {
+                            biome = theBiome.biomeID;
+                        } else {
+                            biome = 9;
+                        }
                         if (biome != lastcol) {
                             idx = cols.indexOf(biome);
                             if (idx == -1) {
@@ -189,12 +203,16 @@ public class MapGen {
                         if (biomeCount[idx] > maxcount) {
                             maxcount = biomeCount[idx];
                             maxindex = idx;
-                            if (maxcount > halfFactor) break BIOMEDONE;
+                            if (maxcount > halfFactor) {
+                                break BIOMEDONE;
+                            }
                         }
                     }
                 }
                 // Clear the array for next time
-                for (int j = cols.size() - 1; j >= 0; j--) biomeCount[j] = 0;
+                for (int j = cols.size() - 1; j >= 0; j--) {
+                    biomeCount[j] = 0;
+                }
 
                 int arrayIndex = (ix * biomeMapSizeZ + iz) * 2;
                 this.biomeAndHeightArray[arrayIndex] =

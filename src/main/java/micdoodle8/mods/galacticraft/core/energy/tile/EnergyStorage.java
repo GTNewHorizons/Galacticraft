@@ -132,7 +132,9 @@ public class EnergyStorage implements IEnergyStorageGC {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) return false;
+        if (obj == null) {
+            return false;
+        }
         if (obj instanceof EnergyStorage) {
             EnergyStorage storage = (EnergyStorage) obj;
             return (storage.getEnergyStoredGC() == energy

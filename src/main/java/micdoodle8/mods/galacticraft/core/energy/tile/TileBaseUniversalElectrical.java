@@ -65,8 +65,9 @@ public abstract class TileBaseUniversalElectrical extends EnergyStorageTile
 
     @Override
     public float getRequest(ForgeDirection direction) {
-        if (this.getElectricalInputDirections().contains(direction) || direction == ForgeDirection.UNKNOWN)
+        if (this.getElectricalInputDirections().contains(direction) || direction == ForgeDirection.UNKNOWN) {
             return super.getRequest(direction);
+        }
 
         return 0F;
     }

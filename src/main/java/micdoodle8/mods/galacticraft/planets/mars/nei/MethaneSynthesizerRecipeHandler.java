@@ -223,10 +223,11 @@ public class MethaneSynthesizerRecipeHandler extends TemplateRecipeHandler {
             ee.printStackTrace();
         }
 
-        if (mousePos.x < 23 && mousePos.x > 6 && mousePos.y < 78 && mousePos.y > 39)
+        if (mousePos.x < 23 && mousePos.x > 6 && mousePos.y < 78 && mousePos.y > 39) {
             currenttip.add(GCCoreUtil.translate("fluid.hydrogen"));
-        else if (mousePos.x < 44 && mousePos.x > 27 && mousePos.y < 60 && mousePos.y > 39)
+        } else if (mousePos.x < 44 && mousePos.x > 27 && mousePos.y < 60 && mousePos.y > 39) {
             currenttip.add(GCCoreUtil.translate("gas.carbondioxide.name"));
+        }
 
         return currenttip;
     }

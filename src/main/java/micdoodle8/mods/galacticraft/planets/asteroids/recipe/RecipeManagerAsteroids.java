@@ -351,10 +351,10 @@ public class RecipeManagerAsteroids {
             new ItemStack(Items.sugar)
         });
 
-        if (ConfigManagerCore.recipesRequireGCAdvancedMetals)
+        if (ConfigManagerCore.recipesRequireGCAdvancedMetals) {
             CompressorRecipes.addShapelessRecipe(
                     new ItemStack(AsteroidsItems.basicItem, 1, 6), titaniumIngot, titaniumIngot);
-        else {
+        } else {
             if (OreDictionary.getOres("ingotTitanium").size() > 0) {
                 for (ItemStack stack : OreDictionary.getOres("ingotTitanium")) {
                     CompressorRecipes.addShapelessRecipe(new ItemStack(AsteroidsItems.basicItem, 1, 6), stack, stack);

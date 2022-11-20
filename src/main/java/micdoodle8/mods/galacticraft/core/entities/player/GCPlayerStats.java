@@ -312,16 +312,23 @@ public class GCPlayerStats implements IExtendedEntityProperties {
             this.launchpadStack = new ItemStack(GCBlocks.landingPad, 9, 0);
         }
 
-        if (nbt.hasKey("BuildFlags")) this.buildFlags = nbt.getInteger("BuildFlags");
+        if (nbt.hasKey("BuildFlags")) {
+            this.buildFlags = nbt.getInteger("BuildFlags");
+        }
 
-        if (nbt.hasKey("ShownSpaceRace")) this.openedSpaceRaceManager = nbt.getBoolean("ShownSpaceRace");
+        if (nbt.hasKey("ShownSpaceRace")) {
+            this.openedSpaceRaceManager = nbt.getBoolean("ShownSpaceRace");
+        }
 
-        if (nbt.hasKey("AstroMinerCount")) this.astroMinerCount = nbt.getInteger("AstroMinerCount");
+        if (nbt.hasKey("AstroMinerCount")) {
+            this.astroMinerCount = nbt.getInteger("AstroMinerCount");
+        }
 
         this.sentFlags = false;
-        if (ConfigManagerCore.enableDebug)
+        if (ConfigManagerCore.enableDebug) {
             GCLog.info("Loading GC player data for "
                     + player.get().getGameProfile().getName() + " : " + this.buildFlags);
+        }
     }
 
     @Override

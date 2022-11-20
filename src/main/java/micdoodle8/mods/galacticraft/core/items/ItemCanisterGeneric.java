@@ -79,7 +79,9 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer {
                 this.replaceEmptyCanisterItem(par1ItemStack, GCItems.oilCanister);
             }
             par1ItemStack.stackTagCompound = null;
-        } else if (par1ItemStack.getItemDamage() <= 0) par1ItemStack.setItemDamage(1);
+        } else if (par1ItemStack.getItemDamage() <= 0) {
+            par1ItemStack.setItemDamage(1);
+        }
     }
 
     public void setAllowedFluid(String name) {
@@ -109,7 +111,9 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer {
                     Item i = GalacticraftCore.itemList.get(key).getItem();
                     if (i instanceof ItemCanisterGeneric
                             && fluidName.equalsIgnoreCase(((ItemCanisterGeneric) i).allowedFluid)) {
-                        if (!doFill) return Math.min(resource.amount, this.capacity);
+                        if (!doFill) {
+                            return Math.min(resource.amount, this.capacity);
+                        }
 
                         this.replaceEmptyCanisterItem(container, i);
                         break;
@@ -126,7 +130,9 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer {
 
         if (fluidName.equalsIgnoreCase(((ItemCanisterGeneric) container.getItem()).allowedFluid)) {
             int added = super.fill(container, resource, doFill);
-            if (doFill && added > 0) container.setItemDamage(Math.max(1, container.getItemDamage() - added));
+            if (doFill && added > 0) {
+                container.setItemDamage(Math.max(1, container.getItemDamage() - added));
+            }
             return added;
         }
 
@@ -135,7 +141,9 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer {
 
     @Override
     public FluidStack drain(ItemStack container, int maxDrain, boolean doDrain) {
-        if (this.allowedFluid == null || container.getItemDamage() >= ItemCanisterGeneric.EMPTY) return null;
+        if (this.allowedFluid == null || container.getItemDamage() >= ItemCanisterGeneric.EMPTY) {
+            return null;
+        }
 
         // Refresh the Forge fluid contents
         container.stackTagCompound = null;
@@ -174,10 +182,14 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer {
     @Override
     public FluidStack getFluid(ItemStack container) {
         String fluidName = ((ItemCanisterGeneric) container.getItem()).allowedFluid;
-        if (fluidName == null || ItemCanisterGeneric.EMPTY == container.getItemDamage()) return null;
+        if (fluidName == null || ItemCanisterGeneric.EMPTY == container.getItemDamage()) {
+            return null;
+        }
 
         Fluid fluid = FluidRegistry.getFluid(fluidName);
-        if (fluid == null) return null;
+        if (fluid == null) {
+            return null;
+        }
 
         return new FluidStack(fluid, ItemCanisterGeneric.EMPTY - container.getItemDamage());
     }

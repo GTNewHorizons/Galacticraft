@@ -102,7 +102,9 @@ public class BlockLandingPad extends BlockAdvancedTile implements IPartialSealab
 
     @Override
     public TileEntity createTileEntity(World world, int metadata) {
-        if (world.isRemote) return null;
+        if (world.isRemote) {
+            return null;
+        }
 
         switch (metadata) {
             case 0:

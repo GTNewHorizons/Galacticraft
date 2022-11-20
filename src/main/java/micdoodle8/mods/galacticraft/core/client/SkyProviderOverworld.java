@@ -357,7 +357,9 @@ public class SkyProviderOverworld extends IRenderHandler {
             var23.startDrawingQuads();
 
             float zoomIn = (1F - (float) var25 / 768F) / 5.86F;
-            if (zoomIn < 0F) zoomIn = 0F;
+            if (zoomIn < 0F) {
+                zoomIn = 0F;
+            }
             zoomIn = 0.0F;
             float cornerB = 1.0F - zoomIn;
             var23.addVertexWithUV(-size, 0, size, zoomIn, cornerB);
@@ -418,7 +420,9 @@ public class SkyProviderOverworld extends IRenderHandler {
                 z *= r;
                 final double xx = x * (ConfigManagerCore.moreStars ? rand.nextDouble() * 100D + 150D : 100.0D);
                 final double zz = z * (ConfigManagerCore.moreStars ? rand.nextDouble() * 100D + 150D : 100.0D);
-                if (Math.abs(xx) < 29D && Math.abs(zz) < 29D) continue;
+                if (Math.abs(xx) < 29D && Math.abs(zz) < 29D) {
+                    continue;
+                }
                 final double yy = y * (ConfigManagerCore.moreStars ? rand.nextDouble() * 100D + 150D : 100.0D);
                 final double theta = Math.atan2(x, z);
                 final double sinth = Math.sin(theta);

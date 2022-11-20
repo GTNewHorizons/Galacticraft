@@ -142,7 +142,9 @@ public class GCPlayerHandler {
         GalacticraftCore.packetPipeline.sendTo(
                 new PacketSimple(EnumSimplePacket.C_GET_CELESTIAL_BODY_LIST, new Object[] {}), player);
         int repeatCount = stats.buildFlags >> 9;
-        if (repeatCount < 3) stats.buildFlags &= 1536;
+        if (repeatCount < 3) {
+            stats.buildFlags &= 1536;
+        }
         GalacticraftCore.packetPipeline.sendTo(
                 new PacketSimple(EnumSimplePacket.C_UPDATE_STATS, new Object[] {stats.buildFlags}), player);
     }
@@ -440,7 +442,9 @@ public class GCPlayerHandler {
                 int thermalLevelCooldownBase = Math.abs(MathHelper.floor_double(200 / thermalLevelMod));
                 int normaliseCooldown = Math.abs(MathHelper.floor_double(150 / lowestThermalStrength));
                 int thermalLevelTickCooldown = thermalLevelCooldownBase;
-                if (thermalLevelTickCooldown < 1) thermalLevelTickCooldown = 1; // Prevent divide by zero errors
+                if (thermalLevelTickCooldown < 1) {
+                    thermalLevelTickCooldown = 1; // Prevent divide by zero errors
+                }
 
                 if (thermalPaddingHelm != null
                         && thermalPaddingChestplate != null
@@ -449,7 +453,9 @@ public class GCPlayerHandler {
                     thermalLevelMod /= Math.max(1.0F, lowestThermalStrength / 2.0F);
                     absThermalLevelMod = Math.abs(thermalLevelMod);
                     normaliseCooldown = MathHelper.floor_double(normaliseCooldown / absThermalLevelMod);
-                    if (normaliseCooldown < 1) normaliseCooldown = 1; // Prevent divide by zero errors
+                    if (normaliseCooldown < 1) {
+                        normaliseCooldown = 1; // Prevent divide by zero errors
+                    }
                     // Player is wearing all required thermal padding items
                     if ((player.ticksExisted - 1) % normaliseCooldown == 0) {
                         this.normaliseThermalLevel(player, playerStats, 1);
@@ -484,8 +490,9 @@ public class GCPlayerHandler {
                 // by a small amount each time (still the same average increase/decrease)
                 int thermalLevelTickCooldownSingle =
                         MathHelper.floor_double(thermalLevelTickCooldown / absThermalLevelMod);
-                if (thermalLevelTickCooldownSingle < 1)
+                if (thermalLevelTickCooldownSingle < 1) {
                     thermalLevelTickCooldownSingle = 1; // Prevent divide by zero errors
+                }
 
                 if ((player.ticksExisted - 1) % thermalLevelTickCooldownSingle == 0) {
                     int last = playerStats.thermalLevel;
@@ -649,14 +656,20 @@ public class GCPlayerHandler {
                             player.attackEntityFrom(
                                     DamageSourceGC.oxygenSuffocation,
                                     ConfigManagerCore.suffocationDamage * (2 + playerStats.incrementalDamage) / 2);
-                            if (ConfigManagerCore.hardMode) playerStats.incrementalDamage++;
+                            if (ConfigManagerCore.hardMode) {
+                                playerStats.incrementalDamage++;
+                            }
 
                             GCCoreOxygenSuffocationEvent suffocationEventPost =
                                     new GCCoreOxygenSuffocationEvent.Post(player);
                             MinecraftForge.EVENT_BUS.post(suffocationEventPost);
                         }
-                    } else playerStats.oxygenSetupValid = true;
-                } else playerStats.incrementalDamage = 0;
+                    } else {
+                        playerStats.oxygenSetupValid = true;
+                    }
+                } else {
+                    playerStats.incrementalDamage = 0;
+                }
             }
         } else if ((player.ticksExisted - 1) % 20 == 0
                 && !player.capabilities.isCreativeMode
@@ -755,9 +768,10 @@ public class GCPlayerHandler {
                     }
                     if (torchItem != null
                             && player.inventory.currentItem >= 0
-                            && player.inventory.currentItem < player.inventory.mainInventory.length)
+                            && player.inventory.currentItem < player.inventory.mainInventory.length) {
                         player.inventory.mainInventory[player.inventory.currentItem] =
                                 new ItemStack(torchItem, theCurrentItem.stackSize, 0);
+                    }
                 }
             } else {
                 // Is it a type of space torch?
@@ -766,9 +780,10 @@ public class GCPlayerHandler {
                     Item torchItem = torchItems.get(theCurrentItem.getItem());
                     if (torchItem != null
                             && player.inventory.currentItem >= 0
-                            && player.inventory.currentItem < player.inventory.mainInventory.length)
+                            && player.inventory.currentItem < player.inventory.mainInventory.length) {
                         player.inventory.mainInventory[player.inventory.currentItem] =
                                 new ItemStack(torchItem, theCurrentItem.stackSize, 0);
+                    }
                 }
             }
         }
@@ -901,14 +916,16 @@ public class GCPlayerHandler {
 
     protected void sendPlanetList(EntityPlayerMP player, GCPlayerStats playerStats) {
         HashMap<String, Integer> map;
-        if (player.ticksExisted % 50 == 0)
+        if (player.ticksExisted % 50 == 0) {
             // Check for genuine update - e.g. maybe some other player created a space
             // station or changed permissions
             // CAUTION: possible server load due to dimension loading, if any planets or
             // moons were (contrary to GC
             // default) set to hotload
             map = WorldUtil.getArrayOfPossibleDimensions(playerStats.spaceshipTier, player);
-        else map = WorldUtil.getArrayOfPossibleDimensionsAgain(playerStats.spaceshipTier, player);
+        } else {
+            map = WorldUtil.getArrayOfPossibleDimensionsAgain(playerStats.spaceshipTier, player);
+        }
 
         String temp = "";
         int count = 0;
@@ -1019,8 +1036,9 @@ public class GCPlayerHandler {
         final GCPlayerStats GCPlayer = GCPlayerStats.get(player);
 
         if ((ConfigManagerCore.challengeSpawnHandling) && GCPlayer.unlockedSchematics.size() == 0) {
-            if (GCPlayer.startDimension.length() > 0) GCPlayer.startDimension = "";
-            else {
+            if (GCPlayer.startDimension.length() > 0) {
+                GCPlayer.startDimension = "";
+            } else {
                 // PlayerAPI is installed
                 WorldServer worldOld = (WorldServer) player.worldObj;
                 try {
@@ -1048,9 +1066,10 @@ public class GCPlayerHandler {
                         player.worldObj.getWorldInfo().getTerrainType(),
                         player.theItemInWorldManager.getGameType()));
 
-                if (worldNew.provider instanceof WorldProviderSpaceStation)
+                if (worldNew.provider instanceof WorldProviderSpaceStation) {
                     GalacticraftCore.packetPipeline.sendTo(
                             new PacketSimple(EnumSimplePacket.C_RESET_THIRD_PERSON, new Object[] {}), player);
+                }
                 worldNew.spawnEntityInWorld(player);
                 player.setWorld(worldNew);
             }
@@ -1196,7 +1215,9 @@ public class GCPlayerHandler {
             } else {
                 GCPlayer.newInOrbit = true;
             }
-        } else GCPlayer.newInOrbit = true;
+        } else {
+            GCPlayer.newInOrbit = true;
+        }
 
         checkGear(player, GCPlayer, false);
 
@@ -1214,8 +1235,9 @@ public class GCPlayerHandler {
                     if (!player.worldObj.isRemote) {
                         if (player.worldObj.isAirBlock(
                                 (int) GCPlayer.chestSpawnVector.x, (int) GCPlayer.chestSpawnVector.y, (int)
-                                        GCPlayer.chestSpawnVector.z)) player.worldObj.spawnEntityInWorld(chest);
-                        else
+                                        GCPlayer.chestSpawnVector.z)) {
+                            player.worldObj.spawnEntityInWorld(chest);
+                        } else {
                             for (ItemStack stacks : GCPlayer.rocketStacks) {
                                 EntityItem entityitem = new EntityItem(
                                         player.worldObj,
@@ -1225,6 +1247,7 @@ public class GCPlayerHandler {
                                         stacks);
                                 player.worldObj.spawnEntityInWorld(entityitem);
                             }
+                        }
                     }
                 }
             }

@@ -184,7 +184,9 @@ public abstract class ItemElectricBase extends Item
     }
 
     public static boolean isElectricItemEmpty(ItemStack itemstack) {
-        if (itemstack == null) return false;
+        if (itemstack == null) {
+            return false;
+        }
         Item item = itemstack.getItem();
 
         if (item instanceof IItemElectricBase) {
@@ -201,7 +203,9 @@ public abstract class ItemElectricBase extends Item
     }
 
     public static boolean isElectricItemCharged(ItemStack itemstack) {
-        if (itemstack == null) return false;
+        if (itemstack == null) {
+            return false;
+        }
         Item item = itemstack.getItem();
 
         if (item instanceof IItemElectricBase) {

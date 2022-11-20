@@ -302,7 +302,9 @@ public class TileEntityShortRangeTelepad extends TileBaseElectricBlock
     public void onCreate(BlockVec3 placedPosition) {
         int buildHeight = this.worldObj.getHeight() - 1;
         for (int y = 0; y < 3; y += 2) {
-            if (placedPosition.y + y > buildHeight) return;
+            if (placedPosition.y + y > buildHeight) {
+                return;
+            }
             for (int x = -1; x <= 1; x++) {
                 for (int z = -1; z <= 1; z++) {
                     final BlockVec3 vecToAdd =

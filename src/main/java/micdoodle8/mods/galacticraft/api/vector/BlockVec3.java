@@ -527,11 +527,17 @@ public class BlockVec3 implements Cloneable {
 
     public static BlockVec3 readFromNBT(NBTTagCompound par1NBTTagCompound, String prefix) {
         Integer readX = par1NBTTagCompound.getInteger(prefix + "_x");
-        if (readX == null) return null;
+        if (readX == null) {
+            return null;
+        }
         Integer readY = par1NBTTagCompound.getInteger(prefix + "_y");
-        if (readY == null) return null;
+        if (readY == null) {
+            return null;
+        }
         Integer readZ = par1NBTTagCompound.getInteger(prefix + "_z");
-        if (readZ == null) return null;
+        if (readZ == null) {
+            return null;
+        }
         return new BlockVec3(readX, readY, readZ);
     }
 
@@ -559,7 +565,9 @@ public class BlockVec3 implements Cloneable {
         int chunkx = this.x >> 4;
         int chunkz = this.z >> 4;
 
-        if (world.getChunkProvider().chunkExists(chunkx, chunkz)) return world.getTileEntity(this.x, this.y, this.z);
+        if (world.getChunkProvider().chunkExists(chunkx, chunkz)) {
+            return world.getTileEntity(this.x, this.y, this.z);
+        }
 
         Chunk chunk = ((ChunkProviderServer) world.getChunkProvider()).originalLoadChunk(chunkx, chunkz);
         return chunk.func_150806_e(this.x & 15, this.y, this.z & 15);

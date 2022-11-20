@@ -249,7 +249,9 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
                 this.moveStrafing *= 0.98F;
                 this.moveForward *= 0.98F;
                 this.randomYawVelocity *= 0.9F;
-                if ((this.boundingBox.minY % 1F) == 0.5F) this.boundingBox.minY += 0.00001F;
+                if ((this.boundingBox.minY % 1F) == 0.5F) {
+                    this.boundingBox.minY += 0.00001F;
+                }
                 this.moveEntityWithHeading(this.moveStrafing, this.moveForward);
 
                 // -from: EntityPlayer
@@ -307,7 +309,9 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
                     this.lastIsFlying = this.capabilities.isFlying;
                     this.sendPlayerAbilities();
                 }
-            } else super.onLivingUpdate();
+            } else {
+                super.onLivingUpdate();
+            }
         } catch (RuntimeException e) {
             FMLLog.severe(
                     "A mod has crashed while Minecraft was doing a normal player tick update.  See details below.  GCEntityClientPlayerMP is in this because that is the player class name when Galacticraft is installed.  This is =*NOT*= a bug in Galacticraft, please report it to the mod indicated by the first lines of the crash report.");
@@ -339,14 +343,24 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
 
             GCPlayerStatsClient stats = GCPlayerStatsClient.get(this);
             if (stats.landingTicks > 0) {
-                if (this.lastLandingTicks == 0) this.lastLandingTicks = stats.landingTicks;
+                if (this.lastLandingTicks == 0) {
+                    this.lastLandingTicks = stats.landingTicks;
+                }
 
                 return stats.landingTicks < this.lastLandingTicks;
-            } else this.lastLandingTicks = 0;
-            if (stats.pjumpticks > 0) return true;
+            } else {
+                this.lastLandingTicks = 0;
+            }
+            if (stats.pjumpticks > 0) {
+                return true;
+            }
             if (ClientProxyCore.sneakRenderOverride) {
-                if (FreefallHandler.testFreefall(this)) return false;
-                if (stats.inFreefall) return false;
+                if (FreefallHandler.testFreefall(this)) {
+                    return false;
+                }
+                if (stats.inFreefall) {
+                    return false;
+                }
             }
         }
         return super.isSneaking();

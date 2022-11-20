@@ -107,7 +107,9 @@ public class RenderAstroMiner extends Render {
 
         float partTime = partialTickTime - lastPartTime;
         lastPartTime = partialTickTime;
-        while (partTime < 0) partTime += 1F;
+        while (partTime < 0) {
+            partTime += 1F;
+        }
 
         // RenderHelper.enableStandardItemLighting();
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
@@ -243,28 +245,41 @@ public class RenderAstroMiner extends Render {
                 GL11.glTranslatef(
                         (float) (x - astroMiner.posX), (float) (y - astroMiner.posY), (float) (z - astroMiner.posZ));
                 for (Integer blockTime : new ArrayList<Integer>(astroMiner.laserTimes)) {
-                    if (blockTime < astroMiner.ticksExisted - 19) removeCount++;
-                    else if (blockTime < astroMiner.ticksExisted - 3) afterglowCount++;
+                    if (blockTime < astroMiner.ticksExisted - 19) {
+                        removeCount++;
+                    } else if (blockTime < astroMiner.ticksExisted - 3) {
+                        afterglowCount++;
+                    }
                 }
-                if (removeCount > 0) astroMiner.removeLaserBlocks(removeCount);
+                if (removeCount > 0) {
+                    astroMiner.removeLaserBlocks(removeCount);
+                }
                 int count = 0;
                 for (BlockVec3 blockLaser : new ArrayList<BlockVec3>(astroMiner.laserBlocks)) {
                     if (count < afterglowCount) {
                         int fade = astroMiner.ticksExisted - astroMiner.laserTimes.get(count) - 8;
-                        if (fade < 0) fade = 0;
+                        if (fade < 0) {
+                            fade = 0;
+                        }
                         doAfterGlow(blockLaser, fade);
-                    } else doLaser(astroMiner, blockLaser);
+                    } else {
+                        doLaser(astroMiner, blockLaser);
+                    }
                     count++;
                 }
                 if (astroMiner.retraction > 0F) {
                     astroMiner.retraction -= RETRACTIONSPEED * partTime;
-                    if (astroMiner.retraction < 0F) astroMiner.retraction = 0F;
+                    if (astroMiner.retraction < 0F) {
+                        astroMiner.retraction = 0F;
+                    }
                 }
                 GL11.glPopMatrix();
             } else {
                 if (astroMiner.retraction < 1F) {
                     astroMiner.retraction += RETRACTIONSPEED * partTime;
-                    if (astroMiner.retraction > 1F) astroMiner.retraction = 1F;
+                    if (astroMiner.retraction > 1F) {
+                        astroMiner.retraction = 1F;
+                    }
                 }
                 GL11.glPopMatrix();
             }
@@ -293,7 +308,9 @@ public class RenderAstroMiner extends Render {
             renderLaserModel(astroMiner.retraction);
             if (astroMiner.retraction < 1F) {
                 astroMiner.retraction += RETRACTIONSPEED * partTime;
-                if (astroMiner.retraction > 1F) astroMiner.retraction = 1F;
+                if (astroMiner.retraction > 1F) {
+                    astroMiner.retraction = 1F;
+                }
             }
             GL11.glPopMatrix();
         }
@@ -512,9 +529,13 @@ public class RenderAstroMiner extends Render {
 
     private void renderLaserModel(float retraction) {
         float laserretraction = retraction / 0.8F;
-        if (laserretraction > 1F) laserretraction = 1F;
+        if (laserretraction > 1F) {
+            laserretraction = 1F;
+        }
         float guardmovement = (retraction - 0.6F) / 0.4F * 1.875F;
-        if (guardmovement < 0F) guardmovement = 0F;
+        if (guardmovement < 0F) {
+            guardmovement = 0F;
+        }
         GL11.glPushMatrix();
         float zadjust = laserretraction * 5F;
         float yadjust = zadjust;

@@ -157,12 +157,15 @@ public class BlockTelemetry extends BlockAdvancedTile implements ItemBlockDesc.I
 
                 ItemStack wearing = GCPlayerStats.get((EntityPlayerMP) player).frequencyModuleInSlot;
                 if (wearing != null) {
-                    if (wearing.hasTagCompound() && wearing.getTagCompound().hasKey("teDim")) return false;
+                    if (wearing.hasTagCompound() && wearing.getTagCompound().hasKey("teDim")) {
+                        return false;
+                    }
                     player.addChatMessage(
                             new ChatComponentText(GCCoreUtil.translate("gui.telemetryFailWearingIt.message")));
-                } else
+                } else {
                     player.addChatMessage(
                             new ChatComponentText(GCCoreUtil.translate("gui.telemetryFailNoFrequencyModule.message")));
+                }
             }
         }
         return false;

@@ -148,32 +148,46 @@ public enum Mixins {
     }
 
     private boolean allModsLoaded(List<TargetedMod> targetedMods, Set<String> loadedCoreMods, Set<String> loadedMods) {
-        if (targetedMods.isEmpty()) return false;
+        if (targetedMods.isEmpty()) {
+            return false;
+        }
 
         for (TargetedMod target : targetedMods) {
-            if (target == TargetedMod.VANILLA) continue;
+            if (target == TargetedMod.VANILLA) {
+                continue;
+            }
 
             // Check coremod first
             if (!loadedCoreMods.isEmpty()
                     && target.coreModClass != null
-                    && !loadedCoreMods.contains(target.coreModClass)) return false;
-            else if (!loadedMods.isEmpty() && target.modId != null && !loadedMods.contains(target.modId)) return false;
+                    && !loadedCoreMods.contains(target.coreModClass)) {
+                return false;
+            } else if (!loadedMods.isEmpty() && target.modId != null && !loadedMods.contains(target.modId)) {
+                return false;
+            }
         }
 
         return true;
     }
 
     private boolean noModsLoaded(List<TargetedMod> targetedMods, Set<String> loadedCoreMods, Set<String> loadedMods) {
-        if (targetedMods.isEmpty()) return true;
+        if (targetedMods.isEmpty()) {
+            return true;
+        }
 
         for (TargetedMod target : targetedMods) {
-            if (target == TargetedMod.VANILLA) continue;
+            if (target == TargetedMod.VANILLA) {
+                continue;
+            }
 
             // Check coremod first
             if (!loadedCoreMods.isEmpty()
                     && target.coreModClass != null
-                    && loadedCoreMods.contains(target.coreModClass)) return false;
-            else if (!loadedMods.isEmpty() && target.modId != null && loadedMods.contains(target.modId)) return false;
+                    && loadedCoreMods.contains(target.coreModClass)) {
+                return false;
+            } else if (!loadedMods.isEmpty() && target.modId != null && loadedMods.contains(target.modId)) {
+                return false;
+            }
         }
 
         return true;

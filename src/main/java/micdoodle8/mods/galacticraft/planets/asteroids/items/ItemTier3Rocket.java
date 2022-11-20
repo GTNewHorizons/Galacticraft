@@ -84,13 +84,17 @@ public class ItemTier3Rocket extends Item implements IHoldableItem {
                     }
                 }
 
-                if (padFound) break;
+                if (padFound) {
+                    break;
+                }
             }
 
             if (padFound) {
                 // Check whether there is already a rocket on the pad
                 if (tile instanceof TileEntityLandingPad) {
-                    if (((TileEntityLandingPad) tile).getDockedEntity() != null) return false;
+                    if (((TileEntityLandingPad) tile).getDockedEntity() != null) {
+                        return false;
+                    }
                 } else {
                     return false;
                 }

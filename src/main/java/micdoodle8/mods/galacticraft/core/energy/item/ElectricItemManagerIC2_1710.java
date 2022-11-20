@@ -25,8 +25,9 @@ public class ElectricItemManagerIC2_1710 implements IElectricItemManager {
             float rejectedElectricity = Math.max(
                     item.getElectricityStored(itemStack) + energy - item.getMaxElectricityStored(itemStack), 0);
             float energyToReceive = energy - rejectedElectricity;
-            if (!ignoreTransferLimit && energyToReceive > item.getMaxTransferGC(itemStack))
+            if (!ignoreTransferLimit && energyToReceive > item.getMaxTransferGC(itemStack)) {
                 ;
+            }
             {
                 energyToReceive = item.getMaxTransferGC(itemStack);
             }

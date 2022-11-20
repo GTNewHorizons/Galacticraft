@@ -39,7 +39,9 @@ public class TileEntityArclamp extends TileEntity {
     public void updateEntity() {
         super.updateEntity();
 
-        if (this.worldObj.isRemote) return;
+        if (this.worldObj.isRemote) {
+            return;
+        }
 
         boolean initialLight = false;
         if (this.updateClientFlag) {
@@ -210,7 +212,9 @@ public class TileEntityArclamp extends TileEntity {
         if (this.worldObj.isRemote) {
             GalacticraftCore.packetPipeline.sendToServer(new PacketSimple(
                     EnumSimplePacket.S_REQUEST_ARCLAMP_FACING, new Object[] {this.xCoord, this.yCoord, this.zCoord}));
-        } else this.isActive = true;
+        } else {
+            this.isActive = true;
+        }
     }
 
     @Override

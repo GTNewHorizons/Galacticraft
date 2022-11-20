@@ -40,7 +40,9 @@ public class SpaceRace {
 
     public void loadFromNBT(NBTTagCompound nbt) {
         this.teamName = nbt.getString("TeamName");
-        if (ConfigManagerCore.enableDebug) GCLog.info("Loading spacerace data for team " + this.teamName);
+        if (ConfigManagerCore.enableDebug) {
+            GCLog.info("Loading spacerace data for team " + this.teamName);
+        }
         this.spaceRaceID = nbt.getInteger("SpaceRaceID");
         this.ticksSpent = (int) nbt.getLong("TicksSpent"); // Deal with legacy error
         this.flagData = FlagData.readFlagData(nbt);
@@ -64,11 +66,15 @@ public class SpaceRace {
                 this.celestialBodyStatusList.put(body, tagAt.getInteger("TimeTaken"));
             }
         }
-        if (ConfigManagerCore.enableDebug) GCLog.info("Loaded spacerace team data OK.");
+        if (ConfigManagerCore.enableDebug) {
+            GCLog.info("Loaded spacerace team data OK.");
+        }
     }
 
     public void saveToNBT(NBTTagCompound nbt) {
-        if (ConfigManagerCore.enableDebug) GCLog.info("Saving spacerace data for team " + this.teamName);
+        if (ConfigManagerCore.enableDebug) {
+            GCLog.info("Saving spacerace data for team " + this.teamName);
+        }
         nbt.setString("TeamName", this.teamName);
         nbt.setInteger("SpaceRaceID", this.spaceRaceID);
         nbt.setLong("TicksSpent", this.ticksSpent);
@@ -95,7 +101,9 @@ public class SpaceRace {
         }
 
         nbt.setTag("CelestialBodyList", tagList);
-        if (ConfigManagerCore.enableDebug) GCLog.info("Saved spacerace team data OK.");
+        if (ConfigManagerCore.enableDebug) {
+            GCLog.info("Saved spacerace team data OK.");
+        }
     }
 
     public void tick() {
@@ -104,7 +112,9 @@ public class SpaceRace {
 
     public String getTeamName() {
         String ret = this.teamName;
-        if (SpaceRace.DEFAULT_NAME.equals(ret)) ret = GCCoreUtil.translate(SpaceRace.DEFAULT_NAME);
+        if (SpaceRace.DEFAULT_NAME.equals(ret)) {
+            ret = GCCoreUtil.translate(SpaceRace.DEFAULT_NAME);
+        }
         return ret;
     }
 

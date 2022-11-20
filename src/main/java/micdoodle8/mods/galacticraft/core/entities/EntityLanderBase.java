@@ -169,7 +169,9 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
         final NBTTagList var2 = nbt.getTagList("Items", 10);
 
         int invSize = nbt.getInteger("rocketStacksLength");
-        if (invSize < 3) invSize = 3;
+        if (invSize < 3) {
+            invSize = 3;
+        }
         this.containedItems = new ItemStack[invSize];
 
         for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
@@ -334,7 +336,9 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
                                                     .getID());
                                     e.mountEntity(this);
                                 }
-                            } else e.mountEntity(this);
+                            } else {
+                                e.mountEntity(this);
+                            }
                         }
                     }
                 } else if (this.riddenByEntity.getEntityId() != shouldBeMountedId) {
@@ -358,7 +362,9 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
                                                     .getID());
                                     e.mountEntity(this);
                                 }
-                            } else e.mountEntity(this);
+                            } else {
+                                e.mountEntity(this);
+                            }
                         }
                     }
                 }

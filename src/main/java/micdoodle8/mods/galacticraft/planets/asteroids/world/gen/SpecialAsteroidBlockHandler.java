@@ -28,7 +28,9 @@ public class SpecialAsteroidBlockHandler {
 
     public SpecialAsteroidBlock getBlock(Random rand, int size) {
         int s = this.asteroidBlocks.size();
-        if (s < 10) return this.asteroidBlocks.get(rand.nextInt(s));
+        if (s < 10) {
+            return this.asteroidBlocks.get(rand.nextInt(s));
+        }
 
         Double r = rand.nextDouble();
         int index = (int) (s * Math.pow(r, (size + 5) * 0.05D));

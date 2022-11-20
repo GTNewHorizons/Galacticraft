@@ -157,7 +157,9 @@ public class BlockEnclosed extends BlockContainer
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int par1, int meta) {
-        if (meta == 4) meta = 0; // Deal with item rendering for the HV block
+        if (meta == 4) {
+            meta = 0; // Deal with item rendering for the HV block
+        }
         return meta >= this.enclosedIcons.length ? this.blockIcon : this.enclosedIcons[meta];
     }
 
@@ -166,8 +168,12 @@ public class BlockEnclosed extends BlockContainer
         // TE_CONDUIT and HV_CABLE have had to have swapped metadata in 1.7.10 because
         // IC2's TileCable tile entity
         // doesn't like a block with metadata 4
-        if (meta == 0) return 4;
-        if (meta == 4) return 0;
+        if (meta == 0) {
+            return 4;
+        }
+        if (meta == 4) {
+            return 0;
+        }
         return meta;
     }
 
@@ -357,7 +363,9 @@ public class BlockEnclosed extends BlockContainer
                         m = clazzTilePipe.getMethod("sendUpdateToClient");
                     } catch (Exception e) {
                     }
-                    if (m != null) m.invoke(tilePipe);
+                    if (m != null) {
+                        m.invoke(tilePipe);
+                    }
                 }
             }
         } catch (Exception e) {

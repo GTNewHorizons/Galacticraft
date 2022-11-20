@@ -82,7 +82,9 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
 
             if (this.hasEnoughEnergyToRun && this.canProcess()) {
                 // 50% extra speed boost for Tier 2 machine if powered by Tier 2 power
-                if (this.tierGC == 2) this.processTimeRequired = (this.poweredByTierGC == 2) ? 2 : 3;
+                if (this.tierGC == 2) {
+                    this.processTimeRequired = (this.poweredByTierGC == 2) ? 2 : 3;
+                }
 
                 if (this.processTicks == 0) {
                     this.processTicks = this.processTimeRequired;
@@ -104,7 +106,9 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
     private void doElectrolysis() {
         // Can't be called if the gasTank fluid is null
         final int waterAmount = this.waterTank.getFluid().amount;
-        if (waterAmount == 0) return;
+        if (waterAmount == 0) {
+            return;
+        }
 
         this.placeIntoFluidTanks(2);
         this.waterTank.drain(1, true);
@@ -115,10 +119,14 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
         final int fuelSpace2 = this.liquidTank2.getCapacity() - this.liquidTank2.getFluidAmount();
         int amountToDrain2 = amountToDrain * 2;
 
-        if (amountToDrain > fuelSpace) amountToDrain = fuelSpace;
+        if (amountToDrain > fuelSpace) {
+            amountToDrain = fuelSpace;
+        }
         this.liquidTank.fill(FluidRegistry.getFluidStack("oxygen", amountToDrain), true);
 
-        if (amountToDrain2 > fuelSpace2) amountToDrain2 = fuelSpace2;
+        if (amountToDrain2 > fuelSpace2) {
+            amountToDrain2 = fuelSpace2;
+        }
         this.liquidTank2.fill(FluidRegistry.getFluidStack("hydrogen", amountToDrain2), true);
 
         return amountToDrain;
@@ -280,11 +288,14 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
     public boolean canDrain(ForgeDirection from, Fluid fluid) {
         int metaside = this.getBlockMetadata() + 2;
         int side = from.ordinal();
-        if (side == (metaside ^ 1)) return this.liquidTank2.getFluid() != null && this.liquidTank2.getFluidAmount() > 0;
+        if (side == (metaside ^ 1)) {
+            return this.liquidTank2.getFluid() != null && this.liquidTank2.getFluidAmount() > 0;
+        }
 
         // 2->5 3->4 4->2 5->3
-        if (7 - (metaside ^ (metaside > 3 ? 0 : 1)) == (side ^ 1))
+        if (7 - (metaside ^ (metaside > 3 ? 0 : 1)) == (side ^ 1)) {
             return this.liquidTank.getFluid() != null && this.liquidTank.getFluidAmount() > 0;
+        }
 
         return false;
     }
@@ -294,14 +305,16 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
         int metaside = this.getBlockMetadata() + 2;
         int side = from.ordinal();
         if (side == (metaside ^ 1)) {
-            if (resource != null && resource.isFluidEqual(this.liquidTank2.getFluid()))
+            if (resource != null && resource.isFluidEqual(this.liquidTank2.getFluid())) {
                 return this.liquidTank2.drain(resource.amount, doDrain);
+            }
         }
 
         // 2->5 3->4 4->2 5->3
         if (7 - (metaside ^ (metaside > 3 ? 0 : 1)) == (side ^ 1)) {
-            if (resource != null && resource.isFluidEqual(this.liquidTank.getFluid()))
+            if (resource != null && resource.isFluidEqual(this.liquidTank.getFluid())) {
                 return this.liquidTank.drain(resource.amount, doDrain);
+            }
         }
 
         return null;

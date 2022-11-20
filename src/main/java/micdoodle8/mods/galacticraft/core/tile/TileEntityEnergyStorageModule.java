@@ -115,7 +115,9 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
         if (this.storage.getEnergyStoredGC() > BASE_CAPACITY) {
             this.setTier2();
             this.initialised = true;
-        } else this.initialised = false;
+        } else {
+            this.initialised = false;
+        }
 
         NBTTagList var2 = par1NBTTagCompound.getTagList("Items", 10);
         this.containingItems = new ItemStack[this.getSizeInventory()];
@@ -135,8 +137,9 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
      */
     @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
-        if (this.tierGC == 1 && this.storage.getEnergyStoredGC() > BASE_CAPACITY)
+        if (this.tierGC == 1 && this.storage.getEnergyStoredGC() > BASE_CAPACITY) {
             this.storage.setEnergyStored(BASE_CAPACITY);
+        }
 
         super.writeToNBT(par1NBTTagCompound);
         NBTTagList var2 = new NBTTagList();

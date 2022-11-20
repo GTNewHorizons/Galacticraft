@@ -40,7 +40,9 @@ public class EntityParachest extends Entity {
     protected void readEntityFromNBT(NBTTagCompound nbt) {
         final NBTTagList var2 = nbt.getTagList("Items", 10);
         int size = 56;
-        if (nbt.hasKey("CargoLength")) size = nbt.getInteger("CargoLength");
+        if (nbt.hasKey("CargoLength")) {
+            size = nbt.getInteger("CargoLength");
+        }
         this.cargo = new ItemStack[size];
 
         for (int var3 = 0; var3 < var2.tagCount(); ++var3) {

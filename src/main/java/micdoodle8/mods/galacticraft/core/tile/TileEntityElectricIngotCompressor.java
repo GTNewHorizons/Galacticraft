@@ -137,7 +137,9 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
                 if (resultItemStack
                         .getItem()
                         .getUnlocalizedName(resultItemStack)
-                        .contains("compressed")) resultItemStack.stackSize *= 2;
+                        .contains("compressed")) {
+                    resultItemStack.stackSize *= 2;
+                }
             }
 
             if (this.containingItems[slot] == null) {
@@ -161,14 +163,18 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
                         this.worldObj.spawnEntityInWorld(entityitem);
                     }
                     this.containingItems[slot].stackSize = 64;
-                } else this.containingItems[slot].stackSize += resultItemStack.stackSize;
+                } else {
+                    this.containingItems[slot].stackSize += resultItemStack.stackSize;
+                }
             }
 
             for (int i = 0; i < this.compressingCraftMatrix.getSizeInventory(); i++) {
                 if (this.compressingCraftMatrix.getStackInSlot(i) != null
-                        && this.compressingCraftMatrix.getStackInSlot(i).getItem() == Items.water_bucket)
+                        && this.compressingCraftMatrix.getStackInSlot(i).getItem() == Items.water_bucket) {
                     this.compressingCraftMatrix.setInventorySlotContentsNoUpdate(i, new ItemStack(Items.bucket));
-                else this.compressingCraftMatrix.decrStackSize(i, 1);
+                } else {
+                    this.compressingCraftMatrix.decrStackSize(i, 1);
+                }
             }
 
             this.updateInput();
@@ -338,13 +344,17 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
     public boolean isItemCompressorInput(ItemStack stack, int id) {
         for (IRecipe recipe : CompressorRecipes.getRecipeList()) {
             if (recipe instanceof ShapedRecipes) {
-                if (id >= ((ShapedRecipes) recipe).recipeItems.length) continue;
+                if (id >= ((ShapedRecipes) recipe).recipeItems.length) {
+                    continue;
+                }
                 ItemStack itemstack1 = ((ShapedRecipes) recipe).recipeItems[id];
                 if (stack.getItem() == itemstack1.getItem()
                         && (itemstack1.getItemDamage() == 32767
                                 || stack.getItemDamage() == itemstack1.getItemDamage())) {
                     for (int i = 0; i < ((ShapedRecipes) recipe).recipeItems.length; i++) {
-                        if (i == id) continue;
+                        if (i == id) {
+                            continue;
+                        }
                         ItemStack itemstack2 = ((ShapedRecipes) recipe).recipeItems[i];
                         if (stack.getItem() == itemstack2.getItem()
                                 && (itemstack2.getItemDamage() == 32767
@@ -368,7 +378,9 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
                     Object next = req.next();
 
                     if (next instanceof ItemStack) {
-                        if (OreDictionary.itemMatches((ItemStack) next, stack, false)) match++;
+                        if (OreDictionary.itemMatches((ItemStack) next, stack, false)) {
+                            match++;
+                        }
                     } else if (next instanceof ArrayList) {
                         Iterator<ItemStack> itr = ((ArrayList<ItemStack>) next).iterator();
                         while (itr.hasNext()) {
@@ -380,15 +392,21 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
                     }
                 }
 
-                if (match == 0) continue;
+                if (match == 0) {
+                    continue;
+                }
 
-                if (match == 1) return true;
+                if (match == 1) {
+                    return true;
+                }
 
                 // Shapeless recipe can go into (match) number of slots
                 int slotsFilled = 0;
                 for (int i = 3; i < 12; i++) {
                     ItemStack inMatrix = this.getStackInSlot(i);
-                    if (inMatrix != null && inMatrix.isItemEqual(stack)) slotsFilled++;
+                    if (inMatrix != null && inMatrix.isItemEqual(stack)) {
+                        slotsFilled++;
+                    }
                 }
                 if (slotsFilled < match) {
                     return this.getStackInSlot(id + 3) == null;
@@ -403,23 +421,36 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
 
     @Override
     public int[] getAccessibleSlotsFromSide(int side) {
-        if (side == 0) return new int[] {1, 2};
+        if (side == 0) {
+            return new int[] {1, 2};
+        }
         int[] slots = new int[] {0, 3, 4, 5, 6, 7, 8, 9, 10, 11};
         ArrayList<Integer> removeSlots = new ArrayList();
 
         for (int i = 3; i < 12; i++) {
-            if (removeSlots.contains(i)) continue;
+            if (removeSlots.contains(i)) {
+                continue;
+            }
             ItemStack stack1 = this.getStackInSlot(i);
-            if (stack1 == null || stack1.stackSize <= 0) continue;
+            if (stack1 == null || stack1.stackSize <= 0) {
+                continue;
+            }
 
             for (int j = i + 1; j < 12; j++) {
-                if (removeSlots.contains(j)) continue;
+                if (removeSlots.contains(j)) {
+                    continue;
+                }
                 ItemStack stack2 = this.getStackInSlot(j);
-                if (stack2 == null) continue;
+                if (stack2 == null) {
+                    continue;
+                }
 
                 if (stack1.isItemEqual(stack2)) {
-                    if (stack2.stackSize >= stack1.stackSize) removeSlots.add(j);
-                    else removeSlots.add(i);
+                    if (stack2.stackSize >= stack1.stackSize) {
+                        removeSlots.add(j);
+                    } else {
+                        removeSlots.add(i);
+                    }
                     break;
                 }
             }

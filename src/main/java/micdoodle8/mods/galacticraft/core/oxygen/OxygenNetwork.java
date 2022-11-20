@@ -34,7 +34,9 @@ public class OxygenNetwork implements IOxygenNetwork {
     public float produce(float totalOxygen, TileEntity... ignoreTiles) {
         float remainingUsableOxygen = totalOxygen;
 
-        if (this.oxygenTiles == null || this.oxygenTiles.isEmpty()) this.refreshOxygenTiles();
+        if (this.oxygenTiles == null || this.oxygenTiles.isEmpty()) {
+            this.refreshOxygenTiles();
+        }
 
         if (!this.oxygenTiles.isEmpty()) {
             final float totalOxygenRequest = this.getRequest(ignoreTiles);
@@ -83,7 +85,9 @@ public class OxygenNetwork implements IOxygenNetwork {
     public float getRequest(TileEntity... ignoreTiles) {
         List<Float> requests = new ArrayList<Float>();
 
-        if (this.oxygenTiles == null || this.oxygenTiles.isEmpty()) this.refreshOxygenTiles();
+        if (this.oxygenTiles == null || this.oxygenTiles.isEmpty()) {
+            this.refreshOxygenTiles();
+        }
 
         List<TileEntity> ignoreTilesList = Arrays.asList(ignoreTiles);
         for (TileEntity tileEntity : new HashSet<TileEntity>(this.oxygenTiles.keySet())) {
@@ -126,7 +130,9 @@ public class OxygenNetwork implements IOxygenNetwork {
      */
     @Override
     public void refresh() {
-        if (this.oxygenTiles != null) this.oxygenTiles.clear();
+        if (this.oxygenTiles != null) {
+            this.oxygenTiles.clear();
+        }
 
         try {
             Iterator<ITransmitter> it = this.pipes.iterator();
@@ -155,8 +161,11 @@ public class OxygenNetwork implements IOxygenNetwork {
     }
 
     public void refreshOxygenTiles() {
-        if (this.oxygenTiles == null) this.oxygenTiles = new HashMap<TileEntity, ForgeDirection>();
-        else this.oxygenTiles.clear();
+        if (this.oxygenTiles == null) {
+            this.oxygenTiles = new HashMap<TileEntity, ForgeDirection>();
+        } else {
+            this.oxygenTiles.clear();
+        }
 
         try {
             Iterator<ITransmitter> it = this.pipes.iterator();

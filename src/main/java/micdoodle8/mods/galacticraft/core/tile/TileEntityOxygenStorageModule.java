@@ -44,7 +44,9 @@ public class TileEntityOxygenStorageModule extends TileEntityOxygen implements I
                 IItemOxygenSupply oxygenItem = (IItemOxygenSupply) oxygenItemStack.getItem();
                 float oxygenDraw = Math.min(this.oxygenPerTick * 2.5F, this.maxOxygen - this.storedOxygen);
                 this.storedOxygen += oxygenItem.discharge(oxygenItemStack, oxygenDraw);
-                if (this.storedOxygen > this.maxOxygen) this.storedOxygen = this.maxOxygen;
+                if (this.storedOxygen > this.maxOxygen) {
+                    this.storedOxygen = this.maxOxygen;
+                }
             }
         }
 

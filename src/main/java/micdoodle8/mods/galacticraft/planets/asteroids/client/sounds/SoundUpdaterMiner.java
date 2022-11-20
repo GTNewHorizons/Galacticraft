@@ -50,17 +50,25 @@ public class SoundUpdaterMiner extends MovingSound {
             }
             if (this.volume < this.targetVolume) {
                 this.volume += 0.1F;
-                if (this.volume > this.targetVolume) this.volume = this.targetVolume;
+                if (this.volume > this.targetVolume) {
+                    this.volume = this.targetVolume;
+                }
             } else if (this.volume > this.targetVolume) {
                 this.volume -= 0.1F;
-                if (this.volume < this.targetVolume) this.volume = this.targetVolume;
+                if (this.volume < this.targetVolume) {
+                    this.volume = this.targetVolume;
+                }
             }
             if (this.field_147663_c < this.targetPitch) {
                 this.field_147663_c += 0.05F;
-                if (this.field_147663_c > this.targetPitch) this.field_147663_c = this.targetPitch;
+                if (this.field_147663_c > this.targetPitch) {
+                    this.field_147663_c = this.targetPitch;
+                }
             } else if (this.field_147663_c > this.targetPitch) {
                 this.field_147663_c -= 0.05F;
-                if (this.field_147663_c < this.targetPitch) this.field_147663_c = this.targetPitch;
+                if (this.field_147663_c < this.targetPitch) {
+                    this.field_147663_c = this.targetPitch;
+                }
             }
             this.updateSoundLocation(this.theRocket);
         } else {

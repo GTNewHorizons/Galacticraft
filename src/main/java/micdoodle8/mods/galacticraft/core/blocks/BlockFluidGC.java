@@ -65,8 +65,9 @@ public class BlockFluidGC extends BlockFluidClassic {
     @Override
     public boolean onBlockActivated(
             World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float hitX, float hitY, float hitZ) {
-        if (world.isRemote && this.fluidName.startsWith("oil") && entityPlayer instanceof EntityPlayerSP)
+        if (world.isRemote && this.fluidName.startsWith("oil") && entityPlayer instanceof EntityPlayerSP) {
             ClientProxyCore.playerClientHandler.onBuild(7, (EntityPlayerSP) entityPlayer);
+        }
 
         return super.onBlockActivated(world, x, y, z, entityPlayer, side, hitX, hitY, hitZ);
     }
@@ -112,7 +113,9 @@ public class BlockFluidGC extends BlockFluidClassic {
     public boolean displaceIfPossible(World world, int x, int y, int z) {
         if (world.getBlock(x, y, z) instanceof BlockLiquid) {
             int meta = world.getBlockMetadata(x, y, z);
-            if (meta > 1 || meta == -1) return super.displaceIfPossible(world, x, y, z);
+            if (meta > 1 || meta == -1) {
+                return super.displaceIfPossible(world, x, y, z);
+            }
             return false;
         }
 
@@ -129,10 +132,14 @@ public class BlockFluidGC extends BlockFluidClassic {
 
     @Override
     public boolean isFlammable(IBlockAccess world, int x, int y, int z, ForgeDirection face) {
-        if (!(world instanceof World)) return false;
+        if (!(world instanceof World)) {
+            return false;
+        }
         if (OxygenUtil.noAtmosphericCombustion(((World) world).provider)) {
             if (!OxygenUtil.isAABBInBreathableAirBlock(
-                    (World) world, AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 2, z + 1))) return false;
+                    (World) world, AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 2, z + 1))) {
+                return false;
+            }
         }
 
         if (this.fluidName.startsWith("fuel")) {

@@ -142,8 +142,12 @@ public class EnergyConfigHandler {
                         "Loss factor when converting energy as a percentage (100 = no loss, 90 = 10% loss ...)",
                         100)
                 .getInt(100);
-        if (EnergyConfigHandler.conversionLossFactor > 100) EnergyConfigHandler.conversionLossFactor = 100;
-        if (EnergyConfigHandler.conversionLossFactor < 5) EnergyConfigHandler.conversionLossFactor = 5;
+        if (EnergyConfigHandler.conversionLossFactor > 100) {
+            EnergyConfigHandler.conversionLossFactor = 100;
+        }
+        if (EnergyConfigHandler.conversionLossFactor < 5) {
+            EnergyConfigHandler.conversionLossFactor = 5;
+        }
 
         updateRatios();
 
@@ -247,20 +251,35 @@ public class EnergyConfigHandler {
             cachedBCLoaded = true;
             cachedBCLoadedValue = false;
 
-            if (disableMJinterface) return false;
-            else {
+            if (disableMJinterface) {
+                return false;
+            } else {
                 int count = 0;
                 try {
-                    if (Class.forName("buildcraft.api.mj.MjAPI") != null) count++;
-                    if (Class.forName("buildcraft.api.power.IPowerReceptor") != null) count++;
-                    if (Class.forName("buildcraft.api.power.PowerHandler") != null) count++;
-                    if (Class.forName("buildcraft.api.power.IPowerEmitter") != null) count++;
-                    if (Class.forName("buildcraft.api.mj.IBatteryObject") != null) count++;
-                    if (Class.forName("buildcraft.api.mj.ISidedBatteryProvider") != null) count++;
+                    if (Class.forName("buildcraft.api.mj.MjAPI") != null) {
+                        count++;
+                    }
+                    if (Class.forName("buildcraft.api.power.IPowerReceptor") != null) {
+                        count++;
+                    }
+                    if (Class.forName("buildcraft.api.power.PowerHandler") != null) {
+                        count++;
+                    }
+                    if (Class.forName("buildcraft.api.power.IPowerEmitter") != null) {
+                        count++;
+                    }
+                    if (Class.forName("buildcraft.api.mj.IBatteryObject") != null) {
+                        count++;
+                    }
+                    if (Class.forName("buildcraft.api.mj.ISidedBatteryProvider") != null) {
+                        count++;
+                    }
                 } catch (Exception e) {
                 }
 
-                if (count < 6) return false;
+                if (count < 6) {
+                    return false;
+                }
 
                 try {
                     Class clazz = Class.forName("buildcraft.api.core.JavaTools");
@@ -344,16 +363,24 @@ public class EnergyConfigHandler {
         int count = 0;
         int count2 = 0;
         try {
-            if (Class.forName("cofh.api.energy.IEnergyConnection") != null) count++;
-            if (Class.forName("cofh.api.energy.IEnergyHandler") != null) count += 2;
+            if (Class.forName("cofh.api.energy.IEnergyConnection") != null) {
+                count++;
+            }
+            if (Class.forName("cofh.api.energy.IEnergyHandler") != null) {
+                count += 2;
+            }
         } catch (Exception e) {
         }
         try {
-            if (Class.forName("cofh.api.energy.IEnergyProvider") != null) count2++;
+            if (Class.forName("cofh.api.energy.IEnergyProvider") != null) {
+                count2++;
+            }
         } catch (Exception e) {
         }
         try {
-            if (Class.forName("cofh.api.energy.IEnergyReceiver") != null) count2++;
+            if (Class.forName("cofh.api.energy.IEnergyReceiver") != null) {
+                count2++;
+            }
         } catch (Exception e) {
         }
 
@@ -361,9 +388,10 @@ public class EnergyConfigHandler {
             cachedRFLoadedValue = true;
             cachedRF1LoadedValue = (count == 3);
             cachedRF2LoadedValue = (count2 == 2);
-        } else if (count > 0 || count2 > 0)
+        } else if (count > 0 || count2 > 0) {
             GCLog.severe(
                     "Incomplete Redstone Flux API detected: Galacticraft will not support RF energy connections until this is fixed.");
+        }
     }
 
     public static boolean isMekanismLoaded() {
@@ -377,14 +405,30 @@ public class EnergyConfigHandler {
 
     private static void updateRatios() {
         // Sense checks to avoid crazy large inverse ratios or ratios
-        if (EnergyConfigHandler.IC2_RATIO < 0.01F) EnergyConfigHandler.IC2_RATIO = 0.01F;
-        if (EnergyConfigHandler.RF_RATIO < 0.001F) EnergyConfigHandler.RF_RATIO = 0.001F;
-        if (EnergyConfigHandler.BC3_RATIO < 0.01F) EnergyConfigHandler.BC3_RATIO = 0.01F;
-        if (EnergyConfigHandler.MEKANISM_RATIO < 0.001F) EnergyConfigHandler.MEKANISM_RATIO = 0.001F;
-        if (EnergyConfigHandler.IC2_RATIO > 1000F) EnergyConfigHandler.IC2_RATIO = 1000F;
-        if (EnergyConfigHandler.RF_RATIO > 100F) EnergyConfigHandler.RF_RATIO = 100F;
-        if (EnergyConfigHandler.BC3_RATIO > 1000F) EnergyConfigHandler.BC3_RATIO = 1000F;
-        if (EnergyConfigHandler.MEKANISM_RATIO > 100F) EnergyConfigHandler.MEKANISM_RATIO = 100F;
+        if (EnergyConfigHandler.IC2_RATIO < 0.01F) {
+            EnergyConfigHandler.IC2_RATIO = 0.01F;
+        }
+        if (EnergyConfigHandler.RF_RATIO < 0.001F) {
+            EnergyConfigHandler.RF_RATIO = 0.001F;
+        }
+        if (EnergyConfigHandler.BC3_RATIO < 0.01F) {
+            EnergyConfigHandler.BC3_RATIO = 0.01F;
+        }
+        if (EnergyConfigHandler.MEKANISM_RATIO < 0.001F) {
+            EnergyConfigHandler.MEKANISM_RATIO = 0.001F;
+        }
+        if (EnergyConfigHandler.IC2_RATIO > 1000F) {
+            EnergyConfigHandler.IC2_RATIO = 1000F;
+        }
+        if (EnergyConfigHandler.RF_RATIO > 100F) {
+            EnergyConfigHandler.RF_RATIO = 100F;
+        }
+        if (EnergyConfigHandler.BC3_RATIO > 1000F) {
+            EnergyConfigHandler.BC3_RATIO = 1000F;
+        }
+        if (EnergyConfigHandler.MEKANISM_RATIO > 100F) {
+            EnergyConfigHandler.MEKANISM_RATIO = 100F;
+        }
 
         float factor = conversionLossFactor / 100F;
         TO_BC_RATIO = factor / EnergyConfigHandler.BC3_RATIO;

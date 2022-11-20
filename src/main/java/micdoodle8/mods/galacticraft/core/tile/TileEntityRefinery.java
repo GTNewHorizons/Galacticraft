@@ -74,12 +74,13 @@ public class TileEntityRefinery extends TileBaseElectricBlockWithInventory imple
                                 if (FluidContainerRegistry.isBucket(this.containingItems[1])
                                         && FluidContainerRegistry.isFilledContainer(this.containingItems[1])) {
                                     final int amount = this.containingItems[1].stackSize;
-                                    if (amount > 1)
+                                    if (amount > 1) {
                                         this.oilTank.fill(
                                                 new FluidStack(
                                                         GalacticraftCore.fluidOil,
                                                         (amount - 1) * FluidContainerRegistry.BUCKET_VOLUME),
                                                 true);
+                                    }
                                     this.containingItems[1] = new ItemStack(Items.bucket, amount);
                                 } else {
                                     this.containingItems[1].stackSize--;
@@ -128,7 +129,9 @@ public class TileEntityRefinery extends TileBaseElectricBlockWithInventory imple
             return false;
         }
 
-        if (this.fuelTank.getFluidAmount() >= this.fuelTank.getCapacity()) return false;
+        if (this.fuelTank.getFluidAmount() >= this.fuelTank.getCapacity()) {
+            return false;
+        }
 
         return !this.getDisabled(0);
     }
@@ -156,14 +159,16 @@ public class TileEntityRefinery extends TileBaseElectricBlockWithInventory imple
         if (nbt.hasKey("oilTank")) {
             this.oilTank.readFromNBT(nbt.getCompoundTag("oilTank"));
         }
-        if (this.oilTank.getFluid() != null && this.oilTank.getFluid().getFluid() != GalacticraftCore.fluidOil)
+        if (this.oilTank.getFluid() != null && this.oilTank.getFluid().getFluid() != GalacticraftCore.fluidOil) {
             this.oilTank.setFluid(new FluidStack(GalacticraftCore.fluidOil, this.oilTank.getFluidAmount()));
+        }
 
         if (nbt.hasKey("fuelTank")) {
             this.fuelTank.readFromNBT(nbt.getCompoundTag("fuelTank"));
         }
-        if (this.fuelTank.getFluid() != null && this.fuelTank.getFluid().getFluid() != GalacticraftCore.fluidFuel)
+        if (this.fuelTank.getFluid() != null && this.fuelTank.getFluid().getFluid() != GalacticraftCore.fluidFuel) {
             this.fuelTank.setFluid(new FluidStack(GalacticraftCore.fluidFuel, this.fuelTank.getFluidAmount()));
+        }
     }
 
     @Override
@@ -304,8 +309,11 @@ public class TileEntityRefinery extends TileBaseElectricBlockWithInventory imple
             final String liquidName = FluidRegistry.getFluidName(resource);
 
             if (liquidName != null && liquidName.startsWith("oil")) {
-                if (liquidName.equals(GalacticraftCore.fluidOil.getName())) used = this.oilTank.fill(resource, doFill);
-                else used = this.oilTank.fill(new FluidStack(GalacticraftCore.fluidOil, resource.amount), doFill);
+                if (liquidName.equals(GalacticraftCore.fluidOil.getName())) {
+                    used = this.oilTank.fill(resource, doFill);
+                } else {
+                    used = this.oilTank.fill(new FluidStack(GalacticraftCore.fluidOil, resource.amount), doFill);
+                }
             }
             // else if (liquidName != null && liquidName.equalsIgnoreCase("oilgc"))
             // {

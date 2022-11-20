@@ -27,7 +27,9 @@ public class TileEntityMinerBaseRenderer extends TileEntitySpecialRenderer {
 
     public void renderModelAt(TileEntityMinerBase tileEntity, double d, double d1, double d2, float f) {
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-        if (!tileEntity.isMaster) return;
+        if (!tileEntity.isMaster) {
+            return;
+        }
         // Texture file
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(TileEntityMinerBaseRenderer.telepadTexture);
 

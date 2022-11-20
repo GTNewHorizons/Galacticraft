@@ -94,10 +94,14 @@ public class TickHandlerClient {
 
         for (final String s : ConfigManagerCore.detectableIDs) {
             BlockTuple bt = ConfigManagerCore.stringToBlock(s, "External Detectable IDs", logging);
-            if (bt == null) continue;
+            if (bt == null) {
+                continue;
+            }
 
             int meta = bt.meta;
-            if (meta == -1) meta = 0;
+            if (meta == -1) {
+                meta = 0;
+            }
 
             boolean flag = false;
             for (BlockMetaList blockMetaList : ClientProxyCore.detectableBlocks) {
@@ -407,7 +411,9 @@ public class TickHandlerClient {
                     }
                 }
 
-                if (MapUtil.resetClientFlag.getAndSet(false)) MapUtil.resetClientBody();
+                if (MapUtil.resetClientFlag.getAndSet(false)) {
+                    MapUtil.resetClientBody();
+                }
             }
 
             if (minecraft.currentScreen instanceof GuiMainMenu) {
@@ -430,8 +436,9 @@ public class TickHandlerClient {
 
             if (player != null && player.ridingEntity != null && player.ridingEntity instanceof EntitySpaceshipBase) {
                 EntitySpaceshipBase rocket = (EntitySpaceshipBase) player.ridingEntity;
-                if (rocket.prevRotationPitch != rocket.rotationPitch || rocket.prevRotationYaw != rocket.rotationYaw)
+                if (rocket.prevRotationPitch != rocket.rotationPitch || rocket.prevRotationYaw != rocket.rotationYaw) {
                     GalacticraftCore.packetPipeline.sendToServer(new PacketRotateRocket(player.ridingEntity));
+                }
             }
 
             if (world != null) {
@@ -538,7 +545,9 @@ public class TickHandlerClient {
                         (HashSet<TileEntityScreen>) screenConnectionsUpdateList.clone();
                 screenConnectionsUpdateList.clear();
                 for (TileEntityScreen te : updateListCopy) {
-                    if (te.refreshOnUpdate) te.refreshConnections(true);
+                    if (te.refreshOnUpdate) {
+                        te.refreshConnections(true);
+                    }
                 }
             }
         }

@@ -58,7 +58,9 @@ public class SoundUpdaterRocket extends MovingSound {
                         this.field_147663_c = 1.0F;
                     }
                 }
-            } else this.field_147663_c = 1.0F;
+            } else {
+                this.field_147663_c = 1.0F;
+            }
 
             if (this.theRocket.launchPhase == EnumLaunchPhase.IGNITED.ordinal() || this.theRocket.getLaunched()) {
                 // float var10 = MathHelper.clamp_float((float) this.minecartSpeed, 0.0F, 4.0F)
@@ -69,11 +71,15 @@ public class SoundUpdaterRocket extends MovingSound {
 
                 if (this.theRocket.posY > 1000) {
                     this.volume = 0F;
-                    if (!this.theRocket.landing) this.donePlaying = true;
+                    if (!this.theRocket.landing) {
+                        this.donePlaying = true;
+                    }
                 } else if (this.theRocket.posY > Constants.OVERWORLD_SKYPROVIDER_STARTHEIGHT) {
                     this.volume = (1000F + Constants.OVERWORLD_SKYPROVIDER_STARTHEIGHT - (float) this.theRocket.posY)
                             * 0.001F;
-                } else this.volume = 1.0F;
+                } else {
+                    this.volume = 1.0F;
+                }
             }
 
             this.updateSoundLocation(this.theRocket);

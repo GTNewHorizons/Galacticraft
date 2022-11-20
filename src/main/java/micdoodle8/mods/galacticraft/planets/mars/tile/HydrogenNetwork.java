@@ -30,7 +30,9 @@ public class HydrogenNetwork implements IHydrogenNetwork {
     public float produce(float totalHydrogen, TileEntity... ignoreTiles) {
         float remainingUsableHydrogen = totalHydrogen;
 
-        if (this.hydrogenTiles.isEmpty()) this.refreshHydrogenTiles();
+        if (this.hydrogenTiles.isEmpty()) {
+            this.refreshHydrogenTiles();
+        }
 
         if (!this.hydrogenTiles.isEmpty()) {
             final float totalHydrogenRequest = this.getRequest(ignoreTiles);
@@ -79,7 +81,9 @@ public class HydrogenNetwork implements IHydrogenNetwork {
     public float getRequest(TileEntity... ignoreTiles) {
         List<Float> requests = new ArrayList<Float>();
 
-        if (this.hydrogenTiles.isEmpty()) this.refreshHydrogenTiles();
+        if (this.hydrogenTiles.isEmpty()) {
+            this.refreshHydrogenTiles();
+        }
 
         List<TileEntity> ignoreTilesList = Arrays.asList(ignoreTiles);
         for (TileEntity tileEntity : new HashSet<TileEntity>(this.hydrogenTiles.keySet())) {

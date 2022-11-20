@@ -95,8 +95,11 @@ public class TileEntityCircuitFabricator extends TileBaseElectricBlockWithInvent
             ItemStack resultItemStack = this.producingStack.copy();
             if (ConfigManagerCore.quickMode) {
                 if (resultItemStack.getItem() == GCItems.basicItem) {
-                    if (resultItemStack.getItemDamage() == ItemBasic.WAFER_BASIC) resultItemStack.stackSize = 5;
-                    else if (resultItemStack.getItemDamage() == ItemBasic.WAFER_ADVANCED) resultItemStack.stackSize = 2;
+                    if (resultItemStack.getItemDamage() == ItemBasic.WAFER_BASIC) {
+                        resultItemStack.stackSize = 5;
+                    } else if (resultItemStack.getItemDamage() == ItemBasic.WAFER_ADVANCED) {
+                        resultItemStack.stackSize = 2;
+                    }
                 }
             }
 
@@ -121,7 +124,9 @@ public class TileEntityCircuitFabricator extends TileBaseElectricBlockWithInvent
                         this.worldObj.spawnEntityInWorld(entityitem);
                     }
                     this.containingItems[6].stackSize = 64;
-                } else this.containingItems[6].stackSize += resultItemStack.stackSize;
+                } else {
+                    this.containingItems[6].stackSize += resultItemStack.stackSize;
+                }
             }
         }
 
@@ -161,14 +166,20 @@ public class TileEntityCircuitFabricator extends TileBaseElectricBlockWithInvent
 
     @Override
     public boolean isItemValidForSlot(int slotID, ItemStack itemStack) {
-        if (slotID == 0) return itemStack != null && ItemElectricBase.isElectricItem(itemStack.getItem());
+        if (slotID == 0) {
+            return itemStack != null && ItemElectricBase.isElectricItem(itemStack.getItem());
+        }
 
-        if (slotID > 5) return false;
+        if (slotID > 5) {
+            return false;
+        }
 
         ArrayList<ItemStack> list = CircuitFabricatorRecipes.slotValidItems.get(slotID - 1);
 
         for (ItemStack test : list) {
-            if (test.isItemEqual(itemStack)) return true;
+            if (test.isItemEqual(itemStack)) {
+                return true;
+            }
         }
 
         return false;
@@ -176,7 +187,9 @@ public class TileEntityCircuitFabricator extends TileBaseElectricBlockWithInvent
 
     @Override
     public int[] getAccessibleSlotsFromSide(int side) {
-        if (side == 0) return new int[] {6};
+        if (side == 0) {
+            return new int[] {6};
+        }
 
         // Offer whichever silicon slot has less silicon
         boolean siliconFlag = this.containingItems[2] != null

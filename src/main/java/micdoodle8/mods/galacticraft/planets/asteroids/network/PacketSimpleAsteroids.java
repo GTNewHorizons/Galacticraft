@@ -134,8 +134,11 @@ public class PacketSimpleAsteroids implements IPacket {
                             .setMainBlockPos(
                                     (Integer) this.data.get(4), (Integer) this.data.get(5), (Integer) this.data.get(6));
                     int link = (Integer) this.data.get(7);
-                    if (link > 0) ((TileEntityMinerBase) tile).linkedMinerID = UUID.randomUUID();
-                    else ((TileEntityMinerBase) tile).linkedMinerID = null;
+                    if (link > 0) {
+                        ((TileEntityMinerBase) tile).linkedMinerID = UUID.randomUUID();
+                    } else {
+                        ((TileEntityMinerBase) tile).linkedMinerID = null;
+                    }
                 }
                 break;
             default:
