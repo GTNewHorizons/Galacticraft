@@ -282,14 +282,6 @@ public class GameScreenText implements IGameScreen {
         return spstr1 + "." + spstr2 + " " + GCCoreUtil.translate("gui.lander.velocityu");
     }
 
-    private String makeHealthString(int hearts2) {
-        final int sp1 = hearts2 / 2;
-        final int sp2 = hearts2 % 2 * 5;
-        final String spstr1 = "" + sp1;
-        final String spstr2 = "" + sp2;
-        return spstr1 + "." + spstr2 + " hearts";
-    }
-
     private String makeOxygenString(int oxygen) {
         // Server takes 1 air away every 9 ticks (OxygenUtil.getDrainSpacing)
         final int sp1 = oxygen * 9 / 20;

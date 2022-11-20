@@ -11,14 +11,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 public class BlockMinerBaseFull extends BlockTileGC {
-    // 16 different orientations
-    private IIcon iconInput;
-
     public BlockMinerBaseFull(String assetName) {
         super(Material.rock);
         this.blockHardness = 3.0F;

@@ -1,11 +1,9 @@
 package micdoodle8.mods.galacticraft.core.client.model;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import java.lang.reflect.Method;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.smart.render.ModelRotationRenderer;
@@ -82,9 +80,6 @@ public class ModelRotationRendererGC extends ModelRotationRenderer {
 
         return b;
     }
-
-    private static RenderPlayer playerRenderer;
-    private Method getEntityTextureMethod;
 
     @Override
     public void doRender(float f, boolean useParentTransformations) {

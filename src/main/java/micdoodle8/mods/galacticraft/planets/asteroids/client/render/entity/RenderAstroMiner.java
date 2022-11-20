@@ -24,7 +24,6 @@ public class RenderAstroMiner extends Render {
     private static final float LSIZE = 0.12F;
     private static final float RETRACTIONSPEED = 0.02F;
     private final RenderBlocks blockRenderer = new RenderBlocks();
-    private float spin;
     private float lastPartTime;
 
     public static ResourceLocation scanTexture;

@@ -109,11 +109,6 @@ public enum Mixins {
             return this;
         }
 
-        public Builder setApplyIf(Supplier<Boolean> applyIf) {
-            this.applyIf = applyIf;
-            return this;
-        }
-
         public Builder addTargetedMod(TargetedMod mod) {
             this.targetedMods.add(mod);
             return this;

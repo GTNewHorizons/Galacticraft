@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 public class NetworkFinder {
     public World worldObj;
     public BlockVec3 start;
-    private int theDim;
     private final BlockVec3 toIgnore;
 
     private final Set<BlockVec3> iterated = new HashSet<BlockVec3>();

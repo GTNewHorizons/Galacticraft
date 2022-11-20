@@ -754,22 +754,6 @@ public class ThreadFindSeal {
         bucket.add(vec.y + ((dx & 0x3FF0) + ((dz & 0x3FF0) << 10) + ((vec.sideDoneBits & 0x1C0) << 18) << 4));
     }
 
-    /**
-     * Currently unused - the sided implementation is used instead
-     */
-    private boolean checkedContains(BlockVec3 vec) {
-        final int dx = this.head.x - vec.x;
-        final int dz = this.head.z - vec.z;
-        if (dx < -8191 || dx > 8192) {
-            return true;
-        }
-        if (dz < -8191 || dz > 8192) {
-            return true;
-        }
-        final intBucket bucket = this.buckets[((dx & 15) << 4) + (dz & 15)];
-        return bucket.contains(vec.y + ((dx & 0x3FF0) + ((dz & 0x3FF0) << 10) << 4));
-    }
-
     private boolean checkedContains(BlockVec3 vec, int side) {
         int y = vec.y;
         int dx = this.head.x - vec.x;

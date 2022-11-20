@@ -237,58 +237,6 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
         this.registerBuggyBenchRecipe(input2, new PositionedStack(new ItemStack(GCItems.buggy, 1, 3), 143 - x, 64 - y));
     }
 
-    private void addRocketRecipes() {
-        final HashMap<Integer, PositionedStack> input1 = new HashMap<Integer, PositionedStack>();
-        input1.put(0, new PositionedStack(new ItemStack(GCItems.partNoseCone), 45, 15));
-        input1.put(1, new PositionedStack(new ItemStack(GCItems.heavyPlatingTier1), 36, 33));
-        input1.put(2, new PositionedStack(new ItemStack(GCItems.heavyPlatingTier1), 36, 51));
-        input1.put(3, new PositionedStack(new ItemStack(GCItems.heavyPlatingTier1), 36, 69));
-        input1.put(4, new PositionedStack(new ItemStack(GCItems.heavyPlatingTier1), 36, 87));
-        input1.put(5, new PositionedStack(new ItemStack(GCItems.heavyPlatingTier1), 54, 33));
-        input1.put(6, new PositionedStack(new ItemStack(GCItems.heavyPlatingTier1), 54, 51));
-        input1.put(7, new PositionedStack(new ItemStack(GCItems.heavyPlatingTier1), 54, 69));
-        input1.put(8, new PositionedStack(new ItemStack(GCItems.heavyPlatingTier1), 54, 87));
-        input1.put(9, new PositionedStack(new ItemStack(GCItems.rocketEngine), 45, 105));
-        input1.put(10, new PositionedStack(new ItemStack(GCItems.partFins), 18, 87));
-        input1.put(11, new PositionedStack(new ItemStack(GCItems.partFins), 18, 105));
-        input1.put(12, new PositionedStack(new ItemStack(GCItems.partFins), 72, 87));
-        input1.put(13, new PositionedStack(new ItemStack(GCItems.partFins), 72, 105));
-        this.registerRocketBenchRecipe(input1, new PositionedStack(new ItemStack(GCItems.rocketTier1, 1, 0), 139, 92));
-
-        HashMap<Integer, PositionedStack> input2 = new HashMap<Integer, PositionedStack>(input1);
-        input2.put(14, new PositionedStack(new ItemStack(Blocks.chest), 90, 8));
-        this.registerRocketBenchRecipe(input2, new PositionedStack(new ItemStack(GCItems.rocketTier1, 1, 1), 139, 92));
-
-        input2 = new HashMap<Integer, PositionedStack>(input1);
-        input2.put(15, new PositionedStack(new ItemStack(Blocks.chest), 116, 8));
-        this.registerRocketBenchRecipe(input2, new PositionedStack(new ItemStack(GCItems.rocketTier1, 1, 1), 139, 92));
-
-        input2 = new HashMap<Integer, PositionedStack>(input1);
-        input2.put(16, new PositionedStack(new ItemStack(Blocks.chest), 142, 8));
-        this.registerRocketBenchRecipe(input2, new PositionedStack(new ItemStack(GCItems.rocketTier1, 1, 1), 139, 92));
-
-        input2 = new HashMap<Integer, PositionedStack>(input1);
-        input2.put(14, new PositionedStack(new ItemStack(Blocks.chest), 90, 8));
-        input2.put(15, new PositionedStack(new ItemStack(Blocks.chest), 116, 8));
-        this.registerRocketBenchRecipe(input2, new PositionedStack(new ItemStack(GCItems.rocketTier1, 1, 2), 139, 92));
-
-        input2 = new HashMap<Integer, PositionedStack>(input1);
-        input2.put(15, new PositionedStack(new ItemStack(Blocks.chest), 116, 8));
-        input2.put(16, new PositionedStack(new ItemStack(Blocks.chest), 142, 8));
-        this.registerRocketBenchRecipe(input2, new PositionedStack(new ItemStack(GCItems.rocketTier1, 1, 2), 139, 92));
-
-        input2 = new HashMap<Integer, PositionedStack>(input1);
-        input2.put(14, new PositionedStack(new ItemStack(Blocks.chest), 90, 8));
-        input2.put(16, new PositionedStack(new ItemStack(Blocks.chest), 142, 8));
-        this.registerRocketBenchRecipe(input2, new PositionedStack(new ItemStack(GCItems.rocketTier1, 1, 2), 139, 92));
-
-        input2 = new HashMap<Integer, PositionedStack>(input1);
-        input2.put(14, new PositionedStack(new ItemStack(Blocks.chest), 90, 8));
-        input2.put(15, new PositionedStack(new ItemStack(Blocks.chest), 116, 8));
-        input2.put(16, new PositionedStack(new ItemStack(Blocks.chest), 142, 8));
-        this.registerRocketBenchRecipe(input2, new PositionedStack(new ItemStack(GCItems.rocketTier1, 1, 3), 139, 92));
-    }
-
     private void addCircuitFabricatorRecipes() {
         final HashMap<Integer, PositionedStack> input1 = new HashMap<Integer, PositionedStack>();
         input1.put(0, new PositionedStack(new ItemStack(Items.diamond), 10, 22));

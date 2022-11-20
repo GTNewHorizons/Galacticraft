@@ -126,7 +126,6 @@ public class EntityAstroMiner extends Entity
         new BlockVec3(2, 0, 0)
     };
 
-    private final int baseSafeRadius = 32;
     private final double speedbase = this.TEMPFAST ? 0.16D : 0.022D;
     private double speed = this.speedbase;
     private final float rotSpeedBase = this.TEMPFAST ? 8F : 1.5F;
@@ -146,8 +145,6 @@ public class EntityAstroMiner extends Entity
     private double minecartX;
     private double minecartY;
     private double minecartZ;
-    private double minecartYaw;
-    private double minecartPitch;
 
     @SideOnly(Side.CLIENT)
     private double velocityX;
@@ -172,7 +169,6 @@ public class EntityAstroMiner extends Entity
     public LinkedList<Integer> laserTimes = new LinkedList();
     public float retraction = 1F;
     protected IUpdatePlayerListBox soundUpdater;
-    private boolean soundToStop = false;
     private boolean spawnedInCreative = false;
 
     static {
@@ -1878,8 +1874,6 @@ public class EntityAstroMiner extends Entity
         this.minecartX = x;
         this.minecartY = y;
         this.minecartZ = z;
-        this.minecartYaw = yaw;
-        this.minecartPitch = pitch;
         this.turnProgress = 0;
         this.motionX = this.velocityX;
         this.motionY = this.velocityY;
@@ -1980,7 +1974,6 @@ public class EntityAstroMiner extends Entity
         if (this.soundUpdater != null) {
             ((SoundUpdaterMiner) this.soundUpdater).stopRocketSound();
         }
-        this.soundToStop = false;
     }
 
     @Override

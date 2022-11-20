@@ -15,16 +15,13 @@ import net.minecraft.util.ResourceLocation;
  *
  */
 public class SoundUpdaterMiner extends MovingSound {
-    private final EntityPlayerSP thePlayer;
     private final EntityAstroMiner theRocket;
-    private boolean soundStopped;
     private float targetVolume;
     private float targetPitch;
 
     public SoundUpdaterMiner(EntityPlayerSP par1EntityPlayerSP, EntityAstroMiner par2Entity) {
         super(new ResourceLocation(GalacticraftCore.TEXTURE_PREFIX + "entity.astrominer"));
         this.theRocket = par2Entity;
-        this.thePlayer = par1EntityPlayerSP;
         this.volume = 0.00001F; // If it's zero it won't start playing
         this.targetVolume = 0.6F;
         this.targetPitch = 1.0F;
@@ -78,7 +75,6 @@ public class SoundUpdaterMiner extends MovingSound {
 
     public void stopRocketSound() {
         this.donePlaying = true;
-        this.soundStopped = true;
     }
 
     public void updateSoundLocation(Entity e) {

@@ -14,7 +14,6 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
 import net.minecraftforge.client.IRenderHandler;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -273,10 +272,6 @@ public class SkyProviderMoon extends IRenderHandler {
         }
 
         var2.draw();
-    }
-
-    private Vec3 getCustomSkyColor() {
-        return Vec3.createVectorHelper(0.26796875D, 0.1796875D, 0.0D);
     }
 
     public float getSkyBrightness(float par1) {

@@ -1,6 +1,5 @@
 package micdoodle8.mods.galacticraft.api.recipe;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,8 +19,6 @@ public class CompressorRecipes {
     private static List<IRecipe> recipes = new ArrayList<IRecipe>();
     private static List<IRecipe> recipesAdventure = new ArrayList<IRecipe>();
     private static boolean adventureOnly = false;
-    private static Field adventureFlag;
-    private static boolean flagNotCached = true;
 
     public static ShapedRecipes addRecipe(ItemStack output, Object... inputList) {
         String s = "";

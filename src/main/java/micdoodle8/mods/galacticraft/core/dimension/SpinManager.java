@@ -61,7 +61,6 @@ public class SpinManager {
 
     private final HashSet<BlockVec3> checked = new HashSet<BlockVec3>();
 
-    private float artificialG;
     // Used to make continuous particles + thrust sounds at the spin thrusters in
     // this dimension
     // If false, make particles + sounds occasionally in small bursts, just for fun
@@ -70,10 +69,7 @@ public class SpinManager {
     public boolean thrustersFiring = false;
     private boolean dataNotLoaded = true;
     private final List<Entity> loadedEntities = new LinkedList();
-    private final double pPrevMotionX = 0D;
     public double pPrevMotionY = 0D;
-    private final double pPrevMotionZ = 0D;
-
     private final WorldProviderSpaceStation worldProvider;
     private boolean clientSide = true;
 

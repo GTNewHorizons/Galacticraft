@@ -79,7 +79,6 @@ import org.lwjgl.opengl.GL11;
 public class TickHandlerClient {
     public static int airRemaining;
     public static int airRemaining2;
-    private static boolean lastInvKeyPressed;
     private static long tickCount;
     public static boolean spaceRaceGuiScheduled = false;
 
@@ -551,10 +550,6 @@ public class TickHandlerClient {
                 }
             }
         }
-    }
-
-    private boolean alreadyContainsBlock(int x1, int y1, int z1) {
-        return ClientProxyCore.valueableBlocks.contains(new BlockVec3(x1, y1, z1));
     }
 
     public static void zoom(float value) {

@@ -613,23 +613,6 @@ public class WorldUtil {
         return getArrayOfPossibleDimensions(tier, playerBase);
     }
 
-    private static List<Integer> getExistingSpaceStationList(File var0) {
-        final ArrayList<Integer> var1 = new ArrayList<Integer>();
-        final File[] var2 = var0.listFiles();
-
-        if (var2 != null) {
-            for (final File var5 : var2) {
-                if (var5.getName().contains("spacestation_")) {
-                    String var6 = var5.getName();
-                    var6 = var6.substring(13, var6.length() - 4);
-                    var1.add(Integer.parseInt(var6));
-                }
-            }
-        }
-
-        return var1;
-    }
-
     public static void unregisterSpaceStations() {
         if (WorldUtil.registeredSpaceStations != null) {
             for (final Integer registeredID : WorldUtil.registeredSpaceStations.keySet()) {

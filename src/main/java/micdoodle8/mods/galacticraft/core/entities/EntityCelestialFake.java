@@ -22,11 +22,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityCelestialFake extends EntityAdvancedMotion implements IIgnoreShift {
-    private boolean lastShouldMove;
     private UUID persistantRiderUUID;
     private Boolean shouldMoveClient;
     private Boolean shouldMoveServer;
-    private boolean hasReceivedPacket;
     private ArrayList prevData;
     private boolean networkDataChanged;
 
@@ -153,8 +151,6 @@ public class EntityCelestialFake extends EntityAdvancedMotion implements IIgnore
     public void tickInAir() {
         if (this.worldObj.isRemote) {
             this.motionY = this.motionX = this.motionZ = 0.0F;
-
-            this.lastShouldMove = false;
         }
     }
 
@@ -201,7 +197,6 @@ public class EntityCelestialFake extends EntityAdvancedMotion implements IIgnore
     public void readNetworkedData(ByteBuf buffer) {
         try {
             if (this.worldObj.isRemote) {
-                this.hasReceivedPacket = true;
                 this.shouldMoveServer = buffer.readBoolean();
 
                 // Check has correct rider on client

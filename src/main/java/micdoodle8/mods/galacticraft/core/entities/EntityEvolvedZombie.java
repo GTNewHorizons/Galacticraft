@@ -28,8 +28,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
 public class EntityEvolvedZombie extends EntityZombie implements IEntityBreathable {
-    private final int conversionTime = 0;
-
     public EntityEvolvedZombie(World par1World) {
         super(par1World);
         this.tasks.taskEntries.clear();

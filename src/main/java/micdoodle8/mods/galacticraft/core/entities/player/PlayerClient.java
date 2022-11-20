@@ -33,7 +33,6 @@ import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraftforge.common.MinecraftForge;
 
 public class PlayerClient implements IPlayerClient {
-    private boolean saveSneak;
     private double downMot2;
     public static boolean startup;
 

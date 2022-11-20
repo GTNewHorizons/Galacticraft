@@ -33,7 +33,6 @@ public class TileEntityScreen extends TileEntity {
     public int screenOffsetx = 0;
     public int screenOffsetz = 0;
 
-    private final int requiresUpdate = 0;
     // Used on client side only
     public boolean refreshOnUpdate = false;
 

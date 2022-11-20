@@ -21,15 +21,12 @@ public class SoundUpdaterRocket extends MovingSound {
     // private final SoundHandler soundHandler;
     // private final ISound theSound;
 
-    private final EntityPlayerSP thePlayer;
     private final EntityAutoRocket theRocket;
-    private boolean soundStopped;
     private boolean ignition = false;
 
     public SoundUpdaterRocket(EntityPlayerSP par1EntityPlayerSP, EntityAutoRocket par2Entity) {
         super(new ResourceLocation(GalacticraftCore.TEXTURE_PREFIX + "shuttle.shuttle"));
         this.theRocket = par2Entity;
-        this.thePlayer = par1EntityPlayerSP;
         this.field_147666_i = ISound.AttenuationType.NONE;
         this.volume = 0.00001F; // If it's zero it won't start playing
         this.field_147663_c = 0.0F; // pitch
@@ -90,7 +87,6 @@ public class SoundUpdaterRocket extends MovingSound {
 
     public void stopRocketSound() {
         this.donePlaying = true;
-        this.soundStopped = true;
     }
 
     public void updateSoundLocation(Entity e) {

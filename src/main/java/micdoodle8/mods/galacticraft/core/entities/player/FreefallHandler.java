@@ -30,7 +30,6 @@ public class FreefallHandler {
     public static double pPrevMotionY;
     private static double pPrevMotionZ;
     private static float jetpackBoost;
-    private static double pPrevdY;
     public static boolean sneakLast;
 
     private final GCPlayerStatsClient stats;
@@ -205,7 +204,6 @@ public class FreefallHandler {
     public static void setupFreefallPre(EntityPlayerSP p) {
         final double dY = p.motionY - pPrevMotionY;
         jetpackBoost = 0F;
-        pPrevdY = dY;
         pPrevMotionX = p.motionX;
         pPrevMotionY = p.motionY;
         pPrevMotionZ = p.motionZ;

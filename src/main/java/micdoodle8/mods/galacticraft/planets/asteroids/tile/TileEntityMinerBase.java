@@ -48,13 +48,6 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
      */
     public int numUsingPlayers;
 
-    /**
-     * Server sync counter (once per 20 ticks)
-     */
-    private int ticksSinceSync;
-
-    private final boolean spawnedMiner = false;
-
     public EntityAstroMiner linkedMiner = null;
     public UUID linkedMinerID = null;
 

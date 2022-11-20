@@ -62,26 +62,6 @@ public class FishyNoise {
         System.arraycopy(this.perm, 0, this.perm, 256, 256);
     }
 
-    private static float lerp(float x, float y, float n) {
-        return x + n * (y - x);
-    }
-
-    private static int fastFloor(float x) {
-        return x > 0 ? (int) x : (int) x - 1;
-    }
-
-    private static float fade(float n) {
-        return n * n * n * (n * (n * 6 - 15) + 10);
-    }
-
-    private static float dot2(float[] grad2, float x, float y) {
-        return grad2[0] * x + grad2[1] * y;
-    }
-
-    private static float dot3(int[] grad3, float x, float y, float z) {
-        return grad3[0] * x + grad3[1] * y + grad3[2] * z;
-    }
-
     public float noise2d(float x, float y) {
         int largeX = x > 0 ? (int) x : (int) x - 1;
         int largeY = y > 0 ? (int) y : (int) y - 1;
