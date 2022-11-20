@@ -12,9 +12,9 @@ public class GCEntityOtherPlayerMP extends EntityOtherPlayerMP {
         super(par1World, profile);
     }
     //
-    //    public void func_152121_a(MinecraftProfileTexture.Type p_152121_1_, ResourceLocation p_152121_2_)
+    //    public void func_152121_a(MinecraftProfileTexture.Type skinPart, ResourceLocation skinLoc)
     //    {
-    //        super.func_152121_a(p_152121_1_, p_152121_2_);
+    //        super.func_152121_a(skinPart, skinLoc);
     //        this.setupCustomSkin();
     //    }
     //

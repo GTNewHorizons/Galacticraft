@@ -1588,17 +1588,17 @@ public class EntityAstroMiner extends Entity
 
     @SideOnly(Side.CLIENT)
     public void setPositionAndRotation2(
-            double p_70056_1_,
-            double p_70056_3_,
-            double p_70056_5_,
-            float p_70056_7_,
-            float p_70056_8_,
-            int p_70056_9_) {
-        this.minecartX = p_70056_1_;
-        this.minecartY = p_70056_3_;
-        this.minecartZ = p_70056_5_;
-        this.minecartYaw = p_70056_7_;
-        this.minecartPitch = p_70056_8_;
+            double x,
+            double y,
+            double z,
+            float yaw,
+            float pitch,
+            int rotationIncrements) {
+        this.minecartX = x;
+        this.minecartY = y;
+        this.minecartZ = z;
+        this.minecartYaw = yaw;
+        this.minecartPitch = pitch;
         this.turnProgress = 0;
         this.motionX = this.velocityX;
         this.motionY = this.velocityY;
@@ -1606,24 +1606,24 @@ public class EntityAstroMiner extends Entity
     }
 
     @SideOnly(Side.CLIENT)
-    public void setVelocity(double p_70016_1_, double p_70016_3_, double p_70016_5_) {
-        this.velocityX = this.motionX = p_70016_1_;
-        this.velocityY = this.motionY = p_70016_3_;
-        this.velocityZ = this.motionZ = p_70016_5_;
+    public void setVelocity(double x, double y, double z) {
+        this.velocityX = this.motionX = x;
+        this.velocityY = this.motionY = y;
+        this.velocityZ = this.motionZ = z;
         this.turnProgress = 0;
     }
 
     @Override
-    protected void setSize(float p_70105_1_, float p_70105_2_) {
+    protected void setSize(float width, float height) {
         this.setBoundingBoxForFacing();
     }
 
     @Override
-    public void setPosition(double p_70107_1_, double p_70107_3_, double p_70107_5_) {
-        this.boundingBox.offset(p_70107_1_ - this.posX, p_70107_3_ - this.posY, p_70107_5_ - this.posZ);
-        this.posX = p_70107_1_;
-        this.posY = p_70107_3_;
-        this.posZ = p_70107_5_;
+    public void setPosition(double x, double y, double z) {
+        this.boundingBox.offset(x - this.posX, y - this.posY, z - this.posZ);
+        this.posX = x;
+        this.posY = y;
+        this.posZ = z;
     }
 
     @Override

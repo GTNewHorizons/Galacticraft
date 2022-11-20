@@ -102,12 +102,12 @@ public class BlockCreeperEgg extends BlockDragonEgg implements ItemBlockDesc.IBl
     }
 
     public float getPlayerRelativeBlockHardness(
-            EntityPlayer player, World p_149737_2_, int p_149737_3_, int p_149737_4_, int p_149737_5_) {
+            EntityPlayer player, World worldIn, int x, int y, int z) {
         ItemStack stack = player.inventory.getCurrentItem();
         if (stack != null && stack.getItem() == MarsItems.deshPickSlime) {
             return 0.2F;
         }
-        return ForgeHooks.blockStrength(this, player, p_149737_2_, p_149737_3_, p_149737_4_, p_149737_5_);
+        return ForgeHooks.blockStrength(this, player, worldIn, x, y, z);
     }
 
     @SideOnly(Side.CLIENT)

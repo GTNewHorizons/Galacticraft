@@ -206,7 +206,7 @@ public class GuiAstroMinerDock extends GuiContainerGC {
         this.drawColorModalRect(xPos + 234, yPos + 29 + 66 - level, 8, level, 0xc1aa24);
     }
 
-    public void drawColorModalRect(int p_73729_1_, int p_73729_2_, int p_73729_5_, int p_73729_6_, int color) {
+    public void drawColorModalRect(int x, int y, int width, int height, int color) {
         float f = 0.00390625F;
         float f1 = 0.00390625F;
         Tessellator tessellator = Tessellator.instance;
@@ -215,11 +215,11 @@ public class GuiAstroMinerDock extends GuiContainerGC {
         OpenGlHelper.glBlendFunc(770, 771, 1, 0);
         tessellator.startDrawingQuads();
         tessellator.setColorOpaque_I(color);
-        tessellator.addVertex((double) (p_73729_1_ + 0), (double) (p_73729_2_ + p_73729_6_), (double) this.zLevel);
+        tessellator.addVertex((double) (x + 0), (double) (y + height), (double) this.zLevel);
         tessellator.addVertex(
-                (double) (p_73729_1_ + p_73729_5_), (double) (p_73729_2_ + p_73729_6_), (double) this.zLevel);
-        tessellator.addVertex((double) (p_73729_1_ + p_73729_5_), (double) (p_73729_2_ + 0), (double) this.zLevel);
-        tessellator.addVertex((double) (p_73729_1_ + 0), (double) (p_73729_2_ + 0), (double) this.zLevel);
+                (double) (x + width), (double) (y + height), (double) this.zLevel);
+        tessellator.addVertex((double) (x + width), (double) (y + 0), (double) this.zLevel);
+        tessellator.addVertex((double) (x + 0), (double) (y + 0), (double) this.zLevel);
         tessellator.draw();
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_BLEND);
