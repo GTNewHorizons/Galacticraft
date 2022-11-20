@@ -80,7 +80,7 @@ public class EnergyDisplayHelper {
     }
 
     public static String getEnergyDisplay1DP(float energyVal) {
-        return "" + MathHelper.floor_float(energyVal) + "." + (MathHelper.floor_float(energyVal * 10) % 10)
-                + (MathHelper.floor_float(energyVal * 100) % 10);
+        return "" + MathHelper.floor_float(energyVal) + "." + MathHelper.floor_float(energyVal * 10) % 10
+                + MathHelper.floor_float(energyVal * 100) % 10;
     }
 }

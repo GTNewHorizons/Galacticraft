@@ -125,7 +125,7 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
             return false;
         }
 
-        return ((this.riddenByEntity != null && this.groundHitCount < 14) || !this.onGround);
+        return this.riddenByEntity != null && this.groundHitCount < 14 || !this.onGround;
     }
 
     @Override
@@ -171,7 +171,7 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
         if (this.onGround) {
             if (this.groundHitCount < 14) {
                 this.groundHitCount++;
-                double mag = (1.0D / this.groundHitCount) * 4.0D;
+                double mag = 1.0D / this.groundHitCount * 4.0D;
                 double mX = this.rand.nextDouble() - 0.5;
                 double mY = 1.0D;
                 double mZ = this.rand.nextDouble() - 0.5;
@@ -197,8 +197,8 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
     public ArrayList<Object> getNetworkedData() {
         ArrayList<Object> objList = new ArrayList<Object>();
         objList.addAll(super.getNetworkedData());
-        if ((this.worldObj.isRemote && this.hasReceivedPacket && this.groundHitCount <= 14)
-                || (!this.worldObj.isRemote && this.groundHitCount == 14)) {
+        if (this.worldObj.isRemote && this.hasReceivedPacket && this.groundHitCount <= 14
+                || !this.worldObj.isRemote && this.groundHitCount == 14) {
             objList.add(this.groundHitCount);
         }
         return objList;

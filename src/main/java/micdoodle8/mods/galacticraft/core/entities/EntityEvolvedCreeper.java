@@ -113,7 +113,7 @@ public class EntityEvolvedCreeper extends EntityCreeper implements IEntityBreath
 
     protected int getExperiencePoints(EntityPlayer p_70693_1_) {
         if (this.isChild()) {
-            this.experienceValue = (this.experienceValue * 5) / 2;
+            this.experienceValue = this.experienceValue * 5 / 2;
         }
 
         return super.getExperiencePoints(p_70693_1_);

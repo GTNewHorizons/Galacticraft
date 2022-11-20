@@ -183,8 +183,8 @@ public class BlockShortRangeTelepad extends BlockTileGC implements ItemBlockDesc
                 for (int j = 0; j < 4; j++) {
                     f = rand.nextFloat() * 0.6F + 0.4F;
                     r = f * 0.3F;
-                    g = f * (0.3F + (teleportTimeScaled * 0.7F));
-                    b = f * (1.0F - (teleportTimeScaled * 0.7F));
+                    g = f * (0.3F + teleportTimeScaled * 0.7F);
+                    b = f * (1.0F - teleportTimeScaled * 0.7F);
                     GalacticraftPlanets.spawnParticle(
                             "portalBlue",
                             new Vector3(x + 0.2 + rand.nextDouble() * 0.6, y + 0.1, z + 0.2 + rand.nextDouble() * 0.6),
@@ -195,8 +195,8 @@ public class BlockShortRangeTelepad extends BlockTileGC implements ItemBlockDesc
 
                 f = rand.nextFloat() * 0.6F + 0.4F;
                 r = f * 0.3F;
-                g = f * (0.3F + (teleportTimeScaled * 0.7F));
-                b = f * (1.0F - (teleportTimeScaled * 0.7F));
+                g = f * (0.3F + teleportTimeScaled * 0.7F);
+                b = f * (1.0F - teleportTimeScaled * 0.7F);
                 GalacticraftPlanets.spawnParticle(
                         "portalBlue",
                         new Vector3(x + 0.0 + rand.nextDouble() * 0.2, y + 2.9, z + rand.nextDouble()),

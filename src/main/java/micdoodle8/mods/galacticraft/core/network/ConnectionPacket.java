@@ -122,7 +122,7 @@ public class ConnectionPacket {
 
     public void onFMLProxyPacketData(NetworkManager manager, FMLProxyPacket packet, EntityPlayer player) {
         try {
-            if ((packet == null) || (packet.payload() == null)) {
+            if (packet == null || packet.payload() == null) {
                 throw new RuntimeException("Empty packet sent to Galacticraft channel");
             }
             ByteBuf data = packet.payload();

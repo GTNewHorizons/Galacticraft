@@ -193,7 +193,7 @@ public class GuiGasLiquefier extends GuiContainerGC {
             displayText = EnumColor.RED + GCCoreUtil.translate("gui.status.off.name");
         } else if (!this.tileEntity.hasEnoughEnergyToRun) {
             displayText = EnumColor.RED + GCCoreUtil.translate("gui.message.lowEnergy.name");
-        } else if ((this.tileEntity.processTicks > -10 || this.tileEntity.canProcess())) {
+        } else if (this.tileEntity.processTicks > -10 || this.tileEntity.canProcess()) {
             displayText = EnumColor.BRIGHT_GREEN + GCCoreUtil.translate("gui.status.liquefying.name");
         } else if (this.tileEntity.gasTank.getFluid() == null || this.tileEntity.gasTank.getFluidAmount() <= 0) {
             displayText = EnumColor.RED + GCCoreUtil.translate("gui.status.nogas.name");

@@ -288,8 +288,7 @@ public abstract class TileBaseUniversalElectrical extends EnergyStorageTile
         try {
             if (this.IC2surplusInGJ < 0.001F) {
                 this.IC2surplusInGJ = 0F;
-                return Math.ceil(
-                        (this.storage.receiveEnergyGC(Integer.MAX_VALUE, true)) / EnergyConfigHandler.IC2_RATIO);
+                return Math.ceil(this.storage.receiveEnergyGC(Integer.MAX_VALUE, true) / EnergyConfigHandler.IC2_RATIO);
             }
 
             float received = this.storage.receiveEnergyGC(this.IC2surplusInGJ, true);
@@ -309,7 +308,7 @@ public abstract class TileBaseUniversalElectrical extends EnergyStorageTile
                 && (direction == ForgeDirection.UNKNOWN
                         || this.getElectricalInputDirections().contains(direction))) {
             float convertedEnergy = (float) amount * EnergyConfigHandler.IC2_RATIO;
-            int tierFromIC2 = ((int) voltage > 120) ? 2 : 1;
+            int tierFromIC2 = (int) voltage > 120 ? 2 : 1;
             float receive = this.receiveElectricity(direction, convertedEnergy, tierFromIC2, true);
 
             if (convertedEnergy > receive) {

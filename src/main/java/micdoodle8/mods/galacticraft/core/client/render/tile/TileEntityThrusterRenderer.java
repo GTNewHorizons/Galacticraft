@@ -28,7 +28,7 @@ public class TileEntityThrusterRenderer extends TileEntitySpecialRenderer {
         GL11.glTranslatef((float) d + 0.5F, (float) d1 + 0.5F, (float) d2 + 0.5F);
 
         int meta = tileEntity.getBlockMetadata();
-        boolean reverseThruster = (meta >= 8);
+        boolean reverseThruster = meta >= 8;
         meta &= 7;
 
         if (meta >= 1) {

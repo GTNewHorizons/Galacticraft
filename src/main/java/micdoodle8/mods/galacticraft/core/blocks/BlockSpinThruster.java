@@ -295,7 +295,7 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
             World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float hitX, float hitY, float hitZ) {
         final int metadata = world.getBlockMetadata(x, y, z);
         final int facing = metadata & 8;
-        final int change = (8 + metadata) & 15;
+        final int change = 8 + metadata & 15;
         world.setBlockMetadataWithNotify(x, y, z, change, 2);
 
         if (world.provider instanceof WorldProviderSpaceStation && !world.isRemote) {

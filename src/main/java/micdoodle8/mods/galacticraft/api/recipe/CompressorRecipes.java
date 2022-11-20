@@ -280,7 +280,7 @@ public class CompressorRecipes {
     }
 
     public static List<IRecipe> getRecipeList() {
-        return (GalacticraftConfigAccess.getChallengeRecipes())
+        return GalacticraftConfigAccess.getChallengeRecipes()
                 ? CompressorRecipes.recipesAdventure
                 : CompressorRecipes.recipes;
     }

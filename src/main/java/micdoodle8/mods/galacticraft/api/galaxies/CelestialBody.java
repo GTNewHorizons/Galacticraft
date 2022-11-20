@@ -53,7 +53,7 @@ public abstract class CelestialBody implements Comparable<CelestialBody> {
         String s = this.getUnlocalizedName();
         s = s == null ? "" : StatCollector.translateToLocal(s);
         int comment = s.indexOf('#');
-        return (comment > 0) ? s.substring(0, comment).trim() : s;
+        return comment > 0 ? s.substring(0, comment).trim() : s;
     }
 
     /**
@@ -244,7 +244,7 @@ public abstract class CelestialBody implements Comparable<CelestialBody> {
         ScalableDistance otherDistance = other.getRelativeDistanceFromCenter();
         return otherDistance.unScaledDistance < thisDistance.unScaledDistance
                 ? 1
-                : (otherDistance.unScaledDistance > thisDistance.unScaledDistance ? -1 : 0);
+                : otherDistance.unScaledDistance > thisDistance.unScaledDistance ? -1 : 0;
     }
 
     public static class ScalableDistance {

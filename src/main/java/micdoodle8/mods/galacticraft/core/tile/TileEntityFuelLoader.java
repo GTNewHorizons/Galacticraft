@@ -60,7 +60,7 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
 
         if (!this.worldObj.isRemote) {
             this.loadedFuelLastTick = false;
-            if ((this.ticks % 10 == 0) && this.containingItems[1] != null) {
+            if (this.ticks % 10 == 0 && this.containingItems[1] != null) {
                 if (this.containingItems[1].getItem() instanceof ItemCanisterGeneric) {
                     if (this.containingItems[1].getItem() == GCItems.fuelCanister) {
                         int originalDamage = this.containingItems[1].getItemDamage();
@@ -82,9 +82,9 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
                         boolean isFuel = RocketFuelRecipe.isValidFuel(liquid);
                         if (isFuel) {
                             if (this.fuelTank.getFluid() == null
-                                    || (this.fuelTank.getFluid().isFluidEqual(liquid)
+                                    || this.fuelTank.getFluid().isFluidEqual(liquid)
                                             && this.fuelTank.getFluidAmount() + liquid.amount
-                                                    <= this.fuelTank.getCapacity())) {
+                                                    <= this.fuelTank.getCapacity()) {
                                 this.fuelTank.fill(liquid, true);
                                 this.containingItems[1] =
                                         FluidContainerRegistry.drainFluidContainer(this.containingItems[1]);
@@ -99,8 +99,8 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
                     if (liquid != null
                             && RocketFuelRecipe.isValidFuel(liquid)
                             && (this.fuelTank.getFluid() == null
-                                    || (this.fuelTank.getFluid().isFluidEqual(liquid)
-                                            && this.fuelTank.getFluid().amount < this.fuelTank.getCapacity()))) {
+                                    || this.fuelTank.getFluid().isFluidEqual(liquid)
+                                            && this.fuelTank.getFluid().amount < this.fuelTank.getCapacity())) {
                         final int toDrain = Integer.min(
                                 this.fuelTank.getCapacity() - this.fuelTank.getFluidAmount(), liquid.amount);
                         if (toDrain > 0) {
@@ -230,7 +230,7 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
 
     @Override
     public boolean isItemValidForSlot(int slotID, ItemStack itemstack) {
-        return (slotID == 1 && itemstack != null && itemstack.getItem() == GCItems.fuelCanister)
+        return slotID == 1 && itemstack != null && itemstack.getItem() == GCItems.fuelCanister
                 || (slotID == 0 ? ItemElectricBase.isElectricItem(itemstack.getItem()) : false);
     }
 

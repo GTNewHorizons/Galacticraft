@@ -103,7 +103,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
             boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer
                     && ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode;
             Entity e = par1DamageSource.getEntity();
-            if (this.isEntityInvulnerable() || this.posY > 255 || (!(e instanceof EntityPlayer))) {
+            if (this.isEntityInvulnerable() || this.posY > 255 || !(e instanceof EntityPlayer)) {
                 return false;
             } else {
                 this.rollAmplitude = 10;
@@ -531,11 +531,11 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
         // data4 = pitch angle
         int countdown = data[0];
         str[0] = "";
-        str[1] = (countdown == 400)
+        str[1] = countdown == 400
                 ? GCCoreUtil.translate("gui.rocket.onLaunchpad")
-                : ((countdown > 0)
+                : countdown > 0
                         ? GCCoreUtil.translate("gui.rocket.countdown") + ": " + countdown / 20
-                        : GCCoreUtil.translate("gui.rocket.launched"));
+                        : GCCoreUtil.translate("gui.rocket.launched");
         str[2] = GCCoreUtil.translate("gui.rocket.height") + ": " + data[1];
         str[3] = GameScreenText.makeSpeedString(data[2]);
         str[4] = GCCoreUtil.translate("gui.message.fuel.name") + ": " + data[3] + "%";

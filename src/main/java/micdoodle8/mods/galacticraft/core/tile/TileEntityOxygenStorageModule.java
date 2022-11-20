@@ -61,7 +61,7 @@ public class TileEntityOxygenStorageModule extends TileEntityOxygen implements I
         this.lastScaledOxygenLevel = this.scaledOxygenLevel;
 
         this.produceOxygen(ForgeDirection.getOrientation(
-                (this.getBlockMetadata() - BlockMachine2.OXYGEN_STORAGE_MODULE_METADATA + 2) ^ 1));
+                this.getBlockMetadata() - BlockMachine2.OXYGEN_STORAGE_MODULE_METADATA + 2 ^ 1));
 
         // if (!this.worldObj.isRemote)
         // {
@@ -190,12 +190,12 @@ public class TileEntityOxygenStorageModule extends TileEntityOxygen implements I
     @Override
     public EnumSet<ForgeDirection> getOxygenOutputDirections() {
         return EnumSet.of(ForgeDirection.getOrientation(
-                (this.getBlockMetadata() - BlockMachine2.OXYGEN_STORAGE_MODULE_METADATA + 2) ^ 1));
+                this.getBlockMetadata() - BlockMachine2.OXYGEN_STORAGE_MODULE_METADATA + 2 ^ 1));
     }
 
     public ForgeDirection getOxygenOutputDirection() {
         return ForgeDirection.getOrientation(
-                (this.getBlockMetadata() - BlockMachine2.OXYGEN_STORAGE_MODULE_METADATA + 2) ^ 1);
+                this.getBlockMetadata() - BlockMachine2.OXYGEN_STORAGE_MODULE_METADATA + 2 ^ 1);
     }
 
     @Override

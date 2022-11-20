@@ -407,7 +407,7 @@ public class GuiCelestialSelection extends GuiScreen {
             return false;
         }
 
-        if (!((atBody.getReachable() && (possibleBodies == null || possibleBodies.contains(atBody)))
+        if (!(atBody.getReachable() && (possibleBodies == null || possibleBodies.contains(atBody))
                 || ConfigManagerCore.allowSSatUnreachable)) {
             // If parent body is unreachable, the satellite is also unreachable (will be
             // ignored if allowSSatUnreachable
@@ -754,7 +754,7 @@ public class GuiCelestialSelection extends GuiScreen {
                 int stationListSize = this.spaceStationMap
                         .get(getSatelliteParentID(selectedSatellite))
                         .size();
-                int max = Math.min((this.height / 2) / 14, stationListSize);
+                int max = Math.min(this.height / 2 / 14, stationListSize);
 
                 int xPos;
                 int yPos;
@@ -958,10 +958,10 @@ public class GuiCelestialSelection extends GuiScreen {
 
             if (wheel != 0) {
                 if (this.selectedBody == null
-                        || (this.selectionState == EnumSelectionState.PREVIEW && this.selectionCount < 2)) {
+                        || this.selectionState == EnumSelectionState.PREVIEW && this.selectionCount < 2) {
                     // Minimum zoom increased from 0.55F to 1F to allow zoom out to see other solar
                     // systems
-                    this.zoom = Math.min(Math.max(this.zoom + wheel * ((this.zoom + 2.0F)) / 10.0F, -1.0F), 3);
+                    this.zoom = Math.min(Math.max(this.zoom + wheel * (this.zoom + 2.0F) / 10.0F, -1.0F), 3);
                 } else {
                     this.planetZoom = Math.min(Math.max(this.planetZoom + wheel, -4.9F), 5);
                 }
@@ -1028,7 +1028,8 @@ public class GuiCelestialSelection extends GuiScreen {
             scaleVec.m11 = matrix0.m11;
             scaleVec.m22 = matrix0.m22;
             Vector4f newVec = Matrix4f.transform(scaleVec, new Vector4f(2, -2, 0, 0), null);
-            float iconSize = (newVec.y * (Minecraft.getMinecraft().displayHeight / 2.0F))
+            float iconSize = newVec.y
+                    * (Minecraft.getMinecraft().displayHeight / 2.0F)
                     * (e.getKey() instanceof Star ? 2 : 1)
                     * (e.getKey() == this.selectedBody ? 1.5F : 1.0F);
 
@@ -1106,7 +1107,7 @@ public class GuiCelestialSelection extends GuiScreen {
                     fb.flip();
                     GL11.glMultMatrix(fb);
                     fb.clear();
-                    float div = (this.zoom + 1.0F - this.planetZoom);
+                    float div = this.zoom + 1.0F - this.planetZoom;
                     float scale = Math.max(0.3F, 1.5F / (this.ticksSinceSelection / 5.0F)) * 2.0F / div;
                     div = Math.max(div, 0.0001F);
                     GL11.glScalef(scale, scale, 1);
@@ -1169,16 +1170,16 @@ public class GuiCelestialSelection extends GuiScreen {
                         || ((GuiCelestialSelection) Minecraft.getMinecraft().currentScreen).selectionCount != 1)) {
             return celestialBody instanceof Star
                     ? 8
-                    : (celestialBody instanceof Planet
+                    : celestialBody instanceof Planet
                             ? 4
-                            : (celestialBody instanceof IChildBody ? 4 : (celestialBody instanceof Satellite ? 4 : 2)));
+                            : celestialBody instanceof IChildBody ? 4 : celestialBody instanceof Satellite ? 4 : 2;
         }
 
         return celestialBody instanceof Star
                 ? 12
-                : (celestialBody instanceof Planet
+                : celestialBody instanceof Planet
                         ? 6
-                        : (celestialBody instanceof IChildBody ? 6 : (celestialBody instanceof Satellite ? 6 : 2)));
+                        : celestialBody instanceof IChildBody ? 6 : celestialBody instanceof Satellite ? 6 : 2;
     }
 
     public HashMap<CelestialBody, Matrix4f> drawCelestialBodies(Matrix4f worldMatrix) {
@@ -1282,11 +1283,11 @@ public class GuiCelestialSelection extends GuiScreen {
 
                 float alpha = 1.0F;
 
-                if ((this.selectedBody instanceof IChildBody
-                                && ((IChildBody) this.selectedBody).getParentPlanet() != planet)
-                        || (this.selectedBody instanceof Planet
+                if (this.selectedBody instanceof IChildBody
+                                && ((IChildBody) this.selectedBody).getParentPlanet() != planet
+                        || this.selectedBody instanceof Planet
                                 && this.selectedBody != planet
-                                && this.selectionCount >= 2)) {
+                                && this.selectionCount >= 2) {
                     if (this.lastSelectedBody == null && !(this.selectedBody instanceof IChildBody)) {
                         alpha = 1.0F - Math.min(this.ticksSinceSelection / 25.0F, 1.0F);
                     } else {
@@ -1336,13 +1337,13 @@ public class GuiCelestialSelection extends GuiScreen {
 
             for (Moon moon : GalaxyRegistry.getRegisteredMoons().values()) {
                 if ((moon == this.selectedBody
-                                        || (moon.getParentPlanet() == this.selectedBody && this.selectionCount != 1))
+                                        || moon.getParentPlanet() == this.selectedBody && this.selectionCount != 1)
                                 && (this.ticksSinceSelection > 35
                                         || this.selectedBody == moon
-                                        || (this.lastSelectedBody instanceof Moon
+                                        || this.lastSelectedBody instanceof Moon
                                                 && GalaxyRegistry.getMoonsForPlanet(
                                                                 ((Moon) this.lastSelectedBody).getParentPlanet())
-                                                        .contains(moon)))
+                                                        .contains(moon))
                         || getSiblings(this.selectedBody).contains(moon)) {
                     GL11.glPushMatrix();
                     Matrix4f worldMatrix1 = new Matrix4f(worldMatrix0);
@@ -1400,13 +1401,13 @@ public class GuiCelestialSelection extends GuiScreen {
             for (Satellite satellite : GalaxyRegistry.getRegisteredSatellites().values()) {
                 if (this.possibleBodies != null && this.possibleBodies.contains(satellite)) {
                     if ((satellite == this.selectedBody
-                                    || (satellite.getParentPlanet() == this.selectedBody && this.selectionCount != 1))
+                                    || satellite.getParentPlanet() == this.selectedBody && this.selectionCount != 1)
                             && (this.ticksSinceSelection > 35
                                     || this.selectedBody == satellite
-                                    || (this.lastSelectedBody instanceof Satellite
+                                    || this.lastSelectedBody instanceof Satellite
                                             && GalaxyRegistry.getSatellitesForCelestialBody(
                                                             ((Satellite) this.lastSelectedBody).getParentPlanet())
-                                                    .contains(satellite)))) {
+                                                    .contains(satellite))) {
                         GL11.glPushMatrix();
                         Matrix4f worldMatrix1 = new Matrix4f(worldMatrix0);
                         Matrix4f.translate(this.getCelestialBodyPosition(satellite), worldMatrix1, worldMatrix1);
@@ -1773,7 +1774,7 @@ public class GuiCelestialSelection extends GuiScreen {
                     xOffset += 4;
                 }
 
-                scale = (int) Math.min(95.0F, Math.max(0.0F, (this.ticksSinceMenuOpen * 25.0F) - 95 * i));
+                scale = (int) Math.min(95.0F, Math.max(0.0F, this.ticksSinceMenuOpen * 25.0F - 95 * i));
 
                 this.mc.renderEngine.bindTexture(GuiCelestialSelection.guiMain0);
                 if (child.getReachable()) {
@@ -1854,7 +1855,7 @@ public class GuiCelestialSelection extends GuiScreen {
                             .size();
 
                     this.mc.renderEngine.bindTexture(GuiCelestialSelection.guiMain1);
-                    int max = Math.min((this.height / 2) / 14, stationListSize);
+                    int max = Math.min(this.height / 2 / 14, stationListSize);
                     this.drawTexturedModalRect(
                             width - GuiCelestialSelection.BORDER_WIDTH - GuiCelestialSelection.BORDER_EDGE_WIDTH - 95,
                             GuiCelestialSelection.BORDER_WIDTH + GuiCelestialSelection.BORDER_EDGE_WIDTH,
@@ -2018,7 +2019,7 @@ public class GuiCelestialSelection extends GuiScreen {
                             false);
                 }
 
-                if (this.canCreateSpaceStation(this.selectedBody) && (!(this.selectedBody instanceof Satellite))) {
+                if (this.canCreateSpaceStation(this.selectedBody) && !(this.selectedBody instanceof Satellite)) {
                     GL11.glColor4f(0.0F, 0.6F, 1.0F, 1);
                     this.mc.renderEngine.bindTexture(GuiCelestialSelection.guiMain1);
                     int canCreateLength = Math.max(
@@ -2135,7 +2136,7 @@ public class GuiCelestialSelection extends GuiScreen {
                                     int i1 = 8;
 
                                     if (j2 + k > this.width) {
-                                        j2 -= (j2 - this.width + k);
+                                        j2 -= j2 - this.width + k;
                                     }
 
                                     if (k2 + i1 + 6 > this.height) {
@@ -2190,7 +2191,7 @@ public class GuiCelestialSelection extends GuiScreen {
                                 }
 
                                 RenderHelper.enableGUIStandardItemLighting();
-                                ItemStack stack = items.get((this.ticksSinceMenuOpen / 20) % items.size())
+                                ItemStack stack = items.get(this.ticksSinceMenuOpen / 20 % items.size())
                                         .copy();
                                 GuiCelestialSelection.itemRender.renderItemAndEffectIntoGUI(
                                         this.fontRendererObj, this.mc.renderEngine, stack, xPos, yPos);
@@ -2211,7 +2212,7 @@ public class GuiCelestialSelection extends GuiScreen {
                                     int i1 = 8;
 
                                     if (j2 + k > this.width) {
-                                        j2 -= (j2 - this.width + k);
+                                        j2 -= j2 - this.width + k;
                                     }
 
                                     if (k2 + i1 + 6 > this.height) {
@@ -2429,10 +2430,10 @@ public class GuiCelestialSelection extends GuiScreen {
                             false,
                             false);
                 }
-                if (this.selectedBody.getTierRequirement() >= 0 && (!(this.selectedBody instanceof Satellite))) {
+                if (this.selectedBody.getTierRequirement() >= 0 && !(this.selectedBody instanceof Satellite)) {
                     boolean canReach;
                     if (!this.selectedBody.getReachable()
-                            || (this.possibleBodies != null && !this.possibleBodies.contains(this.selectedBody))) {
+                            || this.possibleBodies != null && !this.possibleBodies.contains(this.selectedBody)) {
                         canReach = false;
                         GL11.glColor4f(1.0F, 0.0F, 0.0F, 1);
                     } else {
@@ -2502,8 +2503,8 @@ public class GuiCelestialSelection extends GuiScreen {
 
                 if (!this.mapMode) {
                     if (!this.selectedBody.getReachable()
-                            || (this.possibleBodies != null && !this.possibleBodies.contains(this.selectedBody))
-                            || (this.selectedBody instanceof Satellite && this.selectedStationOwner.equals(""))) {
+                            || this.possibleBodies != null && !this.possibleBodies.contains(this.selectedBody)
+                            || this.selectedBody instanceof Satellite && this.selectedStationOwner.equals("")) {
                         GL11.glColor4f(1.0F, 0.0F, 0.0F, 1);
                     } else {
                         GL11.glColor4f(0.0F, 1.0F, 0.0F, 1);
@@ -2696,7 +2697,7 @@ public class GuiCelestialSelection extends GuiScreen {
                     str = this.renamingString;
                     String str0 = this.renamingString;
 
-                    if ((this.ticksSinceMenuOpen / 10) % 2 == 0) {
+                    if (this.ticksSinceMenuOpen / 10 % 2 == 0) {
                         str0 += "_";
                     }
 
@@ -2797,7 +2798,7 @@ public class GuiCelestialSelection extends GuiScreen {
 
     protected String bidiReorder(String p_147647_1_) {
         try {
-            Bidi bidi = new Bidi((new ArabicShaping(8)).shape(p_147647_1_), 127);
+            Bidi bidi = new Bidi(new ArabicShaping(8).shape(p_147647_1_), 127);
             bidi.setReorderingMode(0);
             return bidi.writeReordered(2);
         } catch (ArabicShapingException arabicshapingexception) {
@@ -2925,11 +2926,11 @@ public class GuiCelestialSelection extends GuiScreen {
 
                 float alpha = 1.0F;
 
-                if ((this.selectedBody instanceof IChildBody
-                                && ((IChildBody) this.selectedBody).getParentPlanet() != planet)
-                        || (this.selectedBody instanceof Planet
+                if (this.selectedBody instanceof IChildBody
+                                && ((IChildBody) this.selectedBody).getParentPlanet() != planet
+                        || this.selectedBody instanceof Planet
                                 && this.selectedBody != planet
-                                && this.selectionCount >= 2)) {
+                                && this.selectionCount >= 2) {
                     if (this.lastSelectedBody == null
                             && !(this.selectedBody instanceof IChildBody)
                             && !(this.selectedBody instanceof Satellite)) {
@@ -2995,7 +2996,7 @@ public class GuiCelestialSelection extends GuiScreen {
             GL11.glTranslatef(planetPos.x, planetPos.y, 0);
 
             for (Moon moon : GalaxyRegistry.getRegisteredMoons().values()) {
-                if ((moon.getParentPlanet() == this.selectedBody && this.selectionCount != 1)
+                if (moon.getParentPlanet() == this.selectedBody && this.selectionCount != 1
                         || moon == this.selectedBody
                         || getSiblings(this.selectedBody).contains(moon)) {
                     float x = this.getScale(moon);
@@ -3057,7 +3058,8 @@ public class GuiCelestialSelection extends GuiScreen {
 
             for (Satellite satellite : GalaxyRegistry.getRegisteredSatellites().values()) {
                 if (this.possibleBodies != null && this.possibleBodies.contains(satellite)) {
-                    if ((satellite.getParentPlanet() == this.selectedBody && this.selectionCount != 1)
+                    if (satellite.getParentPlanet() == this.selectedBody
+                                    && this.selectionCount != 1
                                     && this.ticksSinceSelection > 24
                             || satellite == this.selectedBody
                             || this.lastSelectedBody instanceof IChildBody) {

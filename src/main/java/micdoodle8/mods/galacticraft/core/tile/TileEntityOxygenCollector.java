@@ -98,9 +98,9 @@ public class TileEntityOxygenCollector extends TileEntityOxygen implements IInve
                     float nearbyLeaves = 0;
 
                     if (!this.isInitialised) {
-                        this.noAtmosphericOxygen = (this.worldObj.provider instanceof IGalacticraftWorldProvider
+                        this.noAtmosphericOxygen = this.worldObj.provider instanceof IGalacticraftWorldProvider
                                 && !((IGalacticraftWorldProvider) this.worldObj.provider)
-                                        .isGasPresent(IAtmosphericGas.OXYGEN));
+                                        .isGasPresent(IAtmosphericGas.OXYGEN);
                         this.isInitialised = true;
                     }
 

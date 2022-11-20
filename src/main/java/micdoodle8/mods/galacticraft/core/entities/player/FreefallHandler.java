@@ -85,7 +85,7 @@ public class FreefallHandler {
             return false;
         }
 
-        if (stats.pjumpticks > 0 || (stats.pWasOnGround && p.movementInput.jump)) {
+        if (stats.pjumpticks > 0 || stats.pWasOnGround && p.movementInput.jump) {
             return false;
         }
 

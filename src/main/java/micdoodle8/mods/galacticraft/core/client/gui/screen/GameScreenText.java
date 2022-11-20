@@ -157,7 +157,7 @@ public class GameScreenText implements IGameScreen {
                 }
                 if (telemeter.clientData[4] > -1) {
                     int oxygen = telemeter.clientData[4];
-                    oxygen = (oxygen % 4096) + (oxygen / 4096);
+                    oxygen = oxygen % 4096 + oxygen / 4096;
                     if (oxygen == 180 || oxygen == 90) {
                         str[4] = GCCoreUtil.translate("gui.oxygenStorage.desc.1") + ": OK";
                     } else {
@@ -252,7 +252,7 @@ public class GameScreenText implements IGameScreen {
         // TODO Deal with text off screen (including where localizations longer than
         // English)
 
-        screen.telemetryLastClass = (telemeter == null) ? null : telemeter.clientClass;
+        screen.telemetryLastClass = telemeter == null ? null : telemeter.clientClass;
         screen.telemetryLastEntity = entity;
         screen.telemetryLastRender = renderEntity;
         screen.telemetryLastName = strName;
@@ -274,7 +274,7 @@ public class GameScreenText implements IGameScreen {
 
     public static String makeSpeedString(int speed100) {
         int sp1 = speed100 / 100;
-        int sp2 = (speed100 % 100);
+        int sp2 = speed100 % 100;
         String spstr1 = GCCoreUtil.translate("gui.rocket.speed") + ": " + sp1;
         String spstr2 = (sp2 > 9 ? "" : "0") + sp2;
         return spstr1 + "." + spstr2 + " " + GCCoreUtil.translate("gui.lander.velocityu");
@@ -282,7 +282,7 @@ public class GameScreenText implements IGameScreen {
 
     private String makeHealthString(int hearts2) {
         int sp1 = hearts2 / 2;
-        int sp2 = (hearts2 % 2) * 5;
+        int sp2 = hearts2 % 2 * 5;
         String spstr1 = "" + sp1;
         String spstr2 = "" + sp2;
         return spstr1 + "." + spstr2 + " hearts";
@@ -291,7 +291,7 @@ public class GameScreenText implements IGameScreen {
     private String makeOxygenString(int oxygen) {
         // Server takes 1 air away every 9 ticks (OxygenUtil.getDrainSpacing)
         int sp1 = oxygen * 9 / 20;
-        int sp2 = ((oxygen * 9) % 20) / 2;
+        int sp2 = oxygen * 9 % 20 / 2;
         String spstr1 = "" + sp1;
         String spstr2 = "" + sp2;
         return spstr1 + "." + spstr2;

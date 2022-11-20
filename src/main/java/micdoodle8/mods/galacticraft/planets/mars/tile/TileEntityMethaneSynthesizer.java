@@ -105,7 +105,7 @@ public class TileEntityMethaneSynthesizer extends TileBaseElectricBlockWithInven
             if (this.hasEnoughEnergyToRun && this.canProcess()) {
                 // 50% extra speed boost for Tier 2 machine if powered by Tier 2 power
                 if (this.tierGC == 2) {
-                    this.processTimeRequired = (this.poweredByTierGC == 2) ? 2 : 3;
+                    this.processTimeRequired = this.poweredByTierGC == 2 ? 2 : 3;
                 }
 
                 if (this.processTicks <= 0) {
@@ -458,7 +458,7 @@ public class TileEntityMethaneSynthesizer extends TileBaseElectricBlockWithInven
 
     public float receiveHydrogen(ForgeDirection from, float receive, boolean doReceive) {
         if (from.ordinal() == this.getBlockMetadata() + 2 && this.shouldPullHydrogen()) {
-            FluidStack fluidToFill = FluidRegistry.getFluidStack("hydrogen", (int) (receive));
+            FluidStack fluidToFill = FluidRegistry.getFluidStack("hydrogen", (int) receive);
             return this.gasTank.fill(fluidToFill, doReceive);
         }
 

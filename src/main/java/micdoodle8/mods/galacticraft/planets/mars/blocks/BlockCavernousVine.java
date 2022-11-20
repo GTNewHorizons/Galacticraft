@@ -64,7 +64,7 @@ public class BlockCavernousVine extends Block implements IShearable, ItemBlockDe
     @Override
     public boolean canBlockStay(World world, int x, int y, int z) {
         Block blockAbove = world.getBlock(x, y + 1, z);
-        return (blockAbove == this || blockAbove.getMaterial().isSolid());
+        return blockAbove == this || blockAbove.getMaterial().isSolid();
     }
 
     @Override

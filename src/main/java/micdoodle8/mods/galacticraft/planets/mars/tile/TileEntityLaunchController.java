@@ -429,7 +429,7 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
 
     public void updateRocketOnDockSettings() {
         if (this.attachedDock instanceof TileEntityLandingPad) {
-            TileEntityLandingPad pad = ((TileEntityLandingPad) this.attachedDock);
+            TileEntityLandingPad pad = (TileEntityLandingPad) this.attachedDock;
             IDockable rocket = pad.getDockedEntity();
             if (rocket instanceof EntityAutoRocket) {
                 ((EntityAutoRocket) rocket).updateControllerSettings(pad);

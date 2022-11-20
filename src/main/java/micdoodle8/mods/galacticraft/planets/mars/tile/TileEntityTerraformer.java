@@ -144,7 +144,7 @@ public class TileEntityTerraformer extends TileBaseElectricBlockWithInventory
                                 continue;
                             }
 
-                            if (!(blockID.isAir(this.worldObj, x, y, z))
+                            if (!blockID.isAir(this.worldObj, x, y, z)
                                     && this.getDistanceFromServer(x, y, z) < bubbleSizeSq) {
                                 if (doGrass
                                         && blockID instanceof ITerraformableBlock

@@ -225,7 +225,7 @@ public class BlockBasicMars extends Block
         if (meta == 10) {
             return 0;
         } else if (meta == 2 && fortune >= 1) {
-            return (random.nextFloat() < fortune * 0.29F - 0.25F) ? 2 : 1;
+            return random.nextFloat() < fortune * 0.29F - 0.25F ? 2 : 1;
         }
 
         return 1;
@@ -334,7 +334,7 @@ public class BlockBasicMars extends Block
             return false;
         }
         int meta = world.getBlockMetadata(x, y, z);
-        return (meta == 6 || meta == 9);
+        return meta == 6 || meta == 9;
     }
 
     @Override

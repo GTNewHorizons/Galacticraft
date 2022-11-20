@@ -553,7 +553,7 @@ public class ModelPlayerGC extends ModelBiped {
                 final EntityTieredRocket ship = (EntityTieredRocket) e;
 
                 if (ship.riddenByEntity != null
-                        && !(ship.riddenByEntity).equals(player)
+                        && !ship.riddenByEntity.equals(player)
                         && (ship.getLaunched() || ship.timeUntilLaunch < 390)) {
                     this.bipedRightArm.rotateAngleZ -= (float) (Math.PI / 8) + MathHelper.sin(par3 * 0.9F) * 0.2F;
                     this.bipedRightArm.rotateAngleX = (float) Math.PI;

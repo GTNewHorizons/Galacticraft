@@ -433,10 +433,10 @@ public class EntityAstroMiner extends Entity
                     ((TileEntityMinerBase) tileEntity).linkMiner(this);
                 }
             } else {
-                if (this.playerMP != null && (this.givenFailMessage & (1 << FAIL_BASEDESTROYED)) == 0) {
+                if (this.playerMP != null && (this.givenFailMessage & 1 << FAIL_BASEDESTROYED) == 0) {
                     this.playerMP.addChatMessage(new ChatComponentText(
                             GCCoreUtil.translate("gui.message.astroMiner" + FAIL_BASEDESTROYED + ".fail")));
-                    this.givenFailMessage += (1 << FAIL_BASEDESTROYED);
+                    this.givenFailMessage += 1 << FAIL_BASEDESTROYED;
                     // Continue mining even though base was destroyed - maybe it will be replaced
                 }
             }
@@ -580,10 +580,10 @@ public class EntityAstroMiner extends Entity
         this.motionX = 0;
         this.motionY = 0;
         this.motionZ = 0;
-        if (this.playerMP != null && (this.givenFailMessage & (1 << i)) == 0) {
+        if (this.playerMP != null && (this.givenFailMessage & 1 << i) == 0) {
             this.playerMP.addChatMessage(
                     new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner" + i + ".fail")));
-            this.givenFailMessage += (1 << i);
+            this.givenFailMessage += 1 << i;
         }
     }
 
@@ -791,7 +791,7 @@ public class EntityAstroMiner extends Entity
                 MathHelper.floor_double(this.posY + 1.5D),
                 MathHelper.floor_double(this.posZ + 0.5D));
         int otherEnd =
-                (this.worldObj.provider instanceof WorldProviderAsteroids) ? this.MINE_LENGTH_AST : this.MINE_LENGTH;
+                this.worldObj.provider instanceof WorldProviderAsteroids ? this.MINE_LENGTH_AST : this.MINE_LENGTH;
         if (this.baseFacing == 2 || this.baseFacing == 4) {
             otherEnd = -otherEnd;
         }
@@ -921,8 +921,8 @@ public class EntityAstroMiner extends Entity
 
         // Test not trying to mine own dock!
         if (y == this.waypointBase.y
-                && x == this.waypointBase.x - ((this.baseFacing == 5) ? 1 : 0)
-                && z == this.waypointBase.z - ((this.baseFacing == 3) ? 1 : 0)) {
+                && x == this.waypointBase.x - (this.baseFacing == 5 ? 1 : 0)
+                && z == this.waypointBase.z - (this.baseFacing == 3 ? 1 : 0)) {
             this.tryBackIn();
             return false;
         }
@@ -1457,7 +1457,7 @@ public class EntityAstroMiner extends Entity
     private boolean moveToPos(BlockVec3 pos, boolean reverse) {
         this.noSpeedup = false;
 
-        if (reverse != (this.baseFacing < 4)) {
+        if (reverse != this.baseFacing < 4) {
             if (this.posZ > pos.z + 0.0001D || this.posZ < pos.z - 0.0001D) {
                 this.moveToPosZ(pos.z, stopForTurn);
                 if (TEMPDEBUG) {
@@ -1719,7 +1719,7 @@ public class EntityAstroMiner extends Entity
         miner.posBase = base;
 
         // Increase motion speed when moving in empty space between asteroids
-        miner.speedup = (world.provider instanceof WorldProviderAsteroids) ? SPEEDUP * 1.6D : SPEEDUP;
+        miner.speedup = world.provider instanceof WorldProviderAsteroids ? SPEEDUP * 1.6D : SPEEDUP;
 
         // Clear blocks, and test to see if its movement area in front of the base is
         // blocked
@@ -1799,7 +1799,7 @@ public class EntityAstroMiner extends Entity
             }
 
             // Invulnerable to mobs
-            if (this.isEntityInvulnerable() || (e instanceof EntityLivingBase && !(e instanceof EntityPlayer))) {
+            if (this.isEntityInvulnerable() || e instanceof EntityLivingBase && !(e instanceof EntityPlayer)) {
                 return false;
             } else {
                 this.setBeenAttacked();
@@ -1977,9 +1977,9 @@ public class EntityAstroMiner extends Entity
     }
 
     public void transmitData(int[] data) {
-        data[0] = (int) (this.posX);
-        data[1] = (int) (this.posY);
-        data[2] = (int) (this.posZ);
+        data[0] = (int) this.posX;
+        data[1] = (int) this.posY;
+        data[2] = (int) this.posZ;
         data[3] = this.energyLevel;
         data[4] = this.AIstate;
     }
@@ -2092,7 +2092,7 @@ public class EntityAstroMiner extends Entity
         if (nbt.hasKey("speedup")) {
             this.speedup = nbt.getDouble("speedup");
         } else {
-            this.speedup = (WorldUtil.getProviderForDimensionServer(this.dimension) instanceof WorldProviderAsteroids)
+            this.speedup = WorldUtil.getProviderForDimensionServer(this.dimension) instanceof WorldProviderAsteroids
                     ? SPEEDUP * 1.6D
                     : SPEEDUP;
         }

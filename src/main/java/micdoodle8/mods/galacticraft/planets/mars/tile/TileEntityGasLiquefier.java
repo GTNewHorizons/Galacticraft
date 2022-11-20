@@ -138,8 +138,8 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
                 if (inputCanister.getItem() instanceof ItemAtmosphericValve && this.airProducts > 0) {
                     // Air -> Air tank
                     if (this.gasTankType == -1
-                            || (this.gasTankType == TankGases.AIR.index
-                                    && this.gasTank.getFluid().amount < this.gasTank.getCapacity())) {
+                            || this.gasTankType == TankGases.AIR.index
+                                    && this.gasTank.getFluid().amount < this.gasTank.getCapacity()) {
                         Block blockAbove = this.worldObj.getBlock(this.xCoord, this.yCoord + 1, this.zCoord);
                         if (blockAbove != null
                                 && blockAbove.getMaterial() == Material.air
@@ -235,7 +235,7 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
             if (this.hasEnoughEnergyToRun && this.canProcess()) {
                 // 50% extra speed boost for Tier 2 machine if powered by Tier 2 power
                 if (this.tierGC == 2) {
-                    this.processTimeRequired = (this.poweredByTierGC == 2) ? 2 : 3;
+                    this.processTimeRequired = this.poweredByTierGC == 2 ? 2 : 3;
                 }
 
                 if (this.processTicks <= 0) {
@@ -328,8 +328,8 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
             int airProducts = this.airProducts;
             do {
                 int thisProduct = (airProducts & 15) - 1;
-                if ((thisProduct == this.fluidTankType && tank1HasSpace)
-                        || (thisProduct == this.fluidTank2Type && tank2HasSpace)) {
+                if (thisProduct == this.fluidTankType && tank1HasSpace
+                        || thisProduct == this.fluidTank2Type && tank2HasSpace) {
                     return true;
                 }
                 airProducts = airProducts >> 4;
@@ -337,8 +337,8 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
             return false;
         }
 
-        if ((this.gasTankType == this.fluidTankType && tank1HasSpace)
-                || (this.gasTankType == this.fluidTank2Type && tank2HasSpace)) {
+        if (this.gasTankType == this.fluidTankType && tank1HasSpace
+                || this.gasTankType == this.fluidTank2Type && tank2HasSpace) {
             return true;
         }
 
@@ -375,7 +375,7 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
 
         if (this.gasTankType == TankGases.AIR.index) {
             int airProducts = this.airProducts;
-            int amountToDrain = Math.min(gasAmount / 2, (airProducts > 15) ? 2 : 3);
+            int amountToDrain = Math.min(gasAmount / 2, airProducts > 15 ? 2 : 3);
             if (amountToDrain == 0) {
                 amountToDrain = 1;
             }
@@ -626,7 +626,7 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
             int type = this.getIdFromName(FluidRegistry.getFluidName(resource));
 
             if (this.gasTankType == -1
-                    || (this.gasTankType == type && this.gasTank.getFluidAmount() < this.gasTank.getCapacity())) {
+                    || this.gasTankType == type && this.gasTank.getFluidAmount() < this.gasTank.getCapacity()) {
                 if (type > 0) {
                     float conversion = 2F * Constants.LOX_GAS_RATIO;
                     FluidStack fluidToFill = new FluidStack(resource.getFluid(), (int) (resource.amount * conversion));
@@ -669,7 +669,7 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
     @Override
     public boolean shouldPullOxygen() {
         return this.gasTankType == -1
-                || (this.gasTankType == 1 && this.gasTank.getFluidAmount() < this.gasTank.getCapacity());
+                || this.gasTankType == 1 && this.gasTank.getFluidAmount() < this.gasTank.getCapacity();
     }
 
     @Override

@@ -205,7 +205,7 @@ public class EntityBuggy extends Entity
             boolean flag = var1.getEntity() instanceof EntityPlayer
                     && ((EntityPlayer) var1.getEntity()).capabilities.isCreativeMode;
 
-            if (this.isEntityInvulnerable() || (e instanceof EntityLivingBase && !(e instanceof EntityPlayer))) {
+            if (this.isEntityInvulnerable() || e instanceof EntityLivingBase && !(e instanceof EntityPlayer)) {
                 return false;
             } else {
                 this.dataWatcher.updateObject(
@@ -388,7 +388,7 @@ public class EntityBuggy extends Entity
 
         if (this.isCollidedHorizontally && this.shouldClimb) {
             this.speed *= 0.9;
-            this.motionY = 0.15D * ((-Math.pow((this.timeClimbing) - 1, 2)) / 250.0F) + 0.15F;
+            this.motionY = 0.15D * (-Math.pow(this.timeClimbing - 1, 2) / 250.0F) + 0.15F;
             this.motionY = Math.max(-0.15, this.motionY);
             this.shouldClimb = false;
         }

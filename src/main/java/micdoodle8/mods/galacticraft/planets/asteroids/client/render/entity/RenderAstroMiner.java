@@ -420,9 +420,9 @@ public class RenderAstroMiner extends Render {
         mainLaserY += entity.posY - blockLaser.y;
         mainLaserZ += entity.posZ - blockLaser.z;
 
-        float xD = (mainLaserX - 0.5F);
-        float yD = (mainLaserY - 0.5F);
-        float zD = (mainLaserZ - 0.5F);
+        float xD = mainLaserX - 0.5F;
+        float yD = mainLaserY - 0.5F;
+        float zD = mainLaserZ - 0.5F;
         float xDa = Math.abs(xD);
         float yDa = Math.abs(yD);
         float zDa = Math.abs(zD);
@@ -430,13 +430,13 @@ public class RenderAstroMiner extends Render {
         float xx, yy, zz;
 
         if (entity.facing > 3) {
-            xx = ((xD < 0) ? cA : cB);
+            xx = xD < 0 ? cA : cB;
             drawLaserX(mainLaserX, mainLaserY, mainLaserZ, xx, 0.5F, 0.5F);
         } else if (entity.facing < 2) {
-            yy = ((yD < 0) ? cA : cB);
+            yy = yD < 0 ? cA : cB;
             drawLaserY(mainLaserX, mainLaserY, mainLaserZ, 0.5F, yy, 0.5F);
         } else {
-            zz = ((zD < 0) ? cA : cB);
+            zz = zD < 0 ? cA : cB;
             drawLaserZ(mainLaserX, mainLaserY, mainLaserZ, 0.5F, 0.5F, zz);
         }
 

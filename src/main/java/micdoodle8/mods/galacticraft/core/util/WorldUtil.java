@@ -139,9 +139,9 @@ public class WorldUtil {
                         armorModHighGrav = 0;
                     }
                     if (customProvider.getGravity() > 0) {
-                        return 0.08D - (customProvider.getGravity() * armorModLowGrav) / 100;
+                        return 0.08D - customProvider.getGravity() * armorModLowGrav / 100;
                     }
-                    return 0.08D - (customProvider.getGravity() * armorModHighGrav) / 100;
+                    return 0.08D - customProvider.getGravity() * armorModHighGrav / 100;
                 }
             }
             return 0.08D - customProvider.getGravity();
@@ -266,7 +266,7 @@ public class WorldUtil {
     public static Vec3 getFogColorHook(World world) {
         EntityClientPlayerMP player = FMLClientHandler.instance().getClient().thePlayer;
         if (world.provider.getSkyRenderer() instanceof SkyProviderOverworld) {
-            float var20 = ((float) (player.posY) - Constants.OVERWORLD_SKYPROVIDER_STARTHEIGHT) / 1000.0F;
+            float var20 = ((float) player.posY - Constants.OVERWORLD_SKYPROVIDER_STARTHEIGHT) / 1000.0F;
             var20 = MathHelper.sqrt_float(var20);
             final float var21 = Math.max(1.0F - var20 * 40.0F, 0.0F);
 
@@ -284,9 +284,9 @@ public class WorldUtil {
     public static Vec3 getSkyColorHook(World world) {
         EntityClientPlayerMP player = FMLClientHandler.instance().getClient().thePlayer;
         if (world.provider.getSkyRenderer() instanceof SkyProviderOverworld
-                || (player != null
+                || player != null
                         && player.posY > Constants.OVERWORLD_CLOUD_HEIGHT
-                        && player.ridingEntity instanceof EntitySpaceshipBase)) {
+                        && player.ridingEntity instanceof EntitySpaceshipBase) {
             float f1 = world.getCelestialAngle(1.0F);
             float f2 = MathHelper.cos(f1 * (float) Math.PI * 2.0F) * 2.0F + 0.5F;
 
@@ -454,8 +454,8 @@ public class WorldUtil {
                                 // if space stations at unreachable planets are allowed, we have to ask the
                                 // satellite's
                                 // WorldProvider instead
-                                || (ConfigManagerCore.allowSSatUnreachable
-                                        && ((IGalacticraftWorldProvider) provider).canSpaceshipTierPass(tier))) {
+                                || ConfigManagerCore.allowSSatUnreachable
+                                        && ((IGalacticraftWorldProvider) provider).canSpaceshipTierPass(tier)) {
                             temp.add(element);
                         }
                     } else {
@@ -1243,7 +1243,7 @@ public class WorldUtil {
     public static WorldServer getStartWorld(WorldServer worldOld) {
         if (ConfigManagerCore.challengeSpawnHandling) {
             WorldProvider wp = WorldUtil.getProviderForNameServer("planet.asteroids");
-            WorldServer worldNew = (wp == null) ? null : (WorldServer) wp.worldObj;
+            WorldServer worldNew = wp == null ? null : (WorldServer) wp.worldObj;
             if (worldNew != null) {
                 return worldNew;
             }
@@ -1425,7 +1425,7 @@ public class WorldUtil {
                     // registerSSdim((Integer) dimID);
                     // }
                 } else if (data.get(0) instanceof Integer[]) {
-                    Integer[] array = ((Integer[]) data.get(0));
+                    Integer[] array = (Integer[]) data.get(0);
                     for (int i = 0; i < array.length; i += 2) {
                         registerSSdim(array[i], array[i + 1]);
                     }
@@ -1603,7 +1603,7 @@ public class WorldUtil {
                 Random fmlRandom = new Random(worldSeed);
                 long xSeed = fmlRandom.nextLong() >> 2 + 1L;
                 long zSeed = fmlRandom.nextLong() >> 2 + 1L;
-                long chunkSeed = (xSeed * chunkX + zSeed * chunkZ) ^ worldSeed;
+                long chunkSeed = xSeed * chunkX + zSeed * chunkZ ^ worldSeed;
                 fmlRandom.setSeed(chunkSeed);
 
                 if (generatorCoFH != null) {
@@ -1667,8 +1667,8 @@ public class WorldUtil {
         // If the footprint is hovering over air...
         Block b1 = world.getBlock(mainPosX, mainPosY, mainPosZ);
         if (b1 != null && b1.isAir(world, mainPosX, mainPosY, mainPosZ)) {
-            position.x += (playerCenter.x - mainPosX);
-            position.z += (playerCenter.z - mainPosZ);
+            position.x += playerCenter.x - mainPosX;
+            position.z += playerCenter.z - mainPosZ;
 
             // If the footprint is still over air....
             Block b2 = world.getBlock(position.intX(), position.intY(), position.intZ());
@@ -1691,14 +1691,14 @@ public class WorldUtil {
         mainPosX = position.intX();
         mainPosZ = position.intZ();
 
-        double x0 = (Math.sin((45 - rotation) * Math.PI / 180.0D) * footprintScale) + position.x;
-        double x1 = (Math.sin((135 - rotation) * Math.PI / 180.0D) * footprintScale) + position.x;
-        double x2 = (Math.sin((225 - rotation) * Math.PI / 180.0D) * footprintScale) + position.x;
-        double x3 = (Math.sin((315 - rotation) * Math.PI / 180.0D) * footprintScale) + position.x;
-        double z0 = (Math.cos((45 - rotation) * Math.PI / 180.0D) * footprintScale) + position.z;
-        double z1 = (Math.cos((135 - rotation) * Math.PI / 180.0D) * footprintScale) + position.z;
-        double z2 = (Math.cos((225 - rotation) * Math.PI / 180.0D) * footprintScale) + position.z;
-        double z3 = (Math.cos((315 - rotation) * Math.PI / 180.0D) * footprintScale) + position.z;
+        double x0 = Math.sin((45 - rotation) * Math.PI / 180.0D) * footprintScale + position.x;
+        double x1 = Math.sin((135 - rotation) * Math.PI / 180.0D) * footprintScale + position.x;
+        double x2 = Math.sin((225 - rotation) * Math.PI / 180.0D) * footprintScale + position.x;
+        double x3 = Math.sin((315 - rotation) * Math.PI / 180.0D) * footprintScale + position.x;
+        double z0 = Math.cos((45 - rotation) * Math.PI / 180.0D) * footprintScale + position.z;
+        double z1 = Math.cos((135 - rotation) * Math.PI / 180.0D) * footprintScale + position.z;
+        double z2 = Math.cos((225 - rotation) * Math.PI / 180.0D) * footprintScale + position.z;
+        double z3 = Math.cos((315 - rotation) * Math.PI / 180.0D) * footprintScale + position.z;
 
         double xMin = Math.min(Math.min(x0, x1), Math.min(x2, x3));
         double xMax = Math.max(Math.max(x0, x1), Math.max(x2, x3));

@@ -78,9 +78,9 @@ public class RecipeManagerGC {
                 ? new ItemStack(GCItems.meteoricIronIngot, 1, 1)
                 : "compressedMeteoricIron";
         Object deshIngot = GalacticraftCore.isPlanetsLoaded
-                ? (ConfigManagerCore.recipesRequireGCAdvancedMetals
+                ? ConfigManagerCore.recipesRequireGCAdvancedMetals
                         ? new ItemStack(MarsItems.marsItemBasic, 1, 2)
-                        : "ingotDesh")
+                        : "ingotDesh"
                 : GCItems.heavyPlatingTier1;
 
         // RocketFuelRecipe.addFuel(GalacticraftCore.fluidFuel,1);

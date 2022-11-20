@@ -118,7 +118,7 @@ public class GuiAstroMinerDock extends GuiContainerGC {
     }
 
     private String getDeltaString(int num) {
-        return (num > 0) ? "+" + num : "" + num;
+        return num > 0 ? "+" + num : "" + num;
     }
 
     @Override
@@ -129,7 +129,7 @@ public class GuiAstroMinerDock extends GuiContainerGC {
             this.fontRendererObj.drawString(
                     "\u0394x: "
                             + getDeltaString(
-                                    (MathHelper.floor_double(this.tile.linkedMiner.posX) - this.tile.xCoord - 1)),
+                                    MathHelper.floor_double(this.tile.linkedMiner.posX) - this.tile.xCoord - 1),
                     186,
                     152,
                     2536735);
@@ -137,7 +137,7 @@ public class GuiAstroMinerDock extends GuiContainerGC {
         if (this.extraLines) {
             this.fontRendererObj.drawString(
                     "\u0394y: "
-                            + getDeltaString((MathHelper.floor_double(this.tile.linkedMiner.posY) - this.tile.yCoord)),
+                            + getDeltaString(MathHelper.floor_double(this.tile.linkedMiner.posY) - this.tile.yCoord),
                     186,
                     162,
                     2536735);
@@ -146,7 +146,7 @@ public class GuiAstroMinerDock extends GuiContainerGC {
             this.fontRendererObj.drawString(
                     "\u0394z: "
                             + getDeltaString(
-                                    (MathHelper.floor_double(this.tile.linkedMiner.posZ) - this.tile.zCoord - 1)),
+                                    MathHelper.floor_double(this.tile.linkedMiner.posZ) - this.tile.zCoord - 1),
                     186,
                     172,
                     2536735);

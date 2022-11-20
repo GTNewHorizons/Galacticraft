@@ -83,7 +83,7 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
             if (this.hasEnoughEnergyToRun && this.canProcess()) {
                 // 50% extra speed boost for Tier 2 machine if powered by Tier 2 power
                 if (this.tierGC == 2) {
-                    this.processTimeRequired = (this.poweredByTierGC == 2) ? 2 : 3;
+                    this.processTimeRequired = this.poweredByTierGC == 2 ? 2 : 3;
                 }
 
                 if (this.processTicks == 0) {
@@ -404,12 +404,12 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
 
     private int getOxygenOutputDirection() {
         int metaside = this.getBlockMetadata() + 2;
-        return (7 - (metaside ^ (metaside > 3 ? 0 : 1)) ^ 1);
+        return 7 - (metaside ^ (metaside > 3 ? 0 : 1)) ^ 1;
     }
 
     private int getHydrogenOutputDirection() {
         int metaside = this.getBlockMetadata() + 2;
-        return (metaside ^ 1);
+        return metaside ^ 1;
     }
 
     private boolean produceOxygen(ForgeDirection outputDirection) {

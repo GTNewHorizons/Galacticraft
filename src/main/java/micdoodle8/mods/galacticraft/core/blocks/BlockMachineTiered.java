@@ -354,7 +354,7 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
 
     @Override
     public String getShiftDescription(int meta) {
-        int tier = (meta >= 8 ? 2 : 1);
+        int tier = meta >= 8 ? 2 : 1;
         switch (meta & 4) {
             case ELECTRIC_FURNACE_METADATA:
                 return GCCoreUtil.translate("tile.electricFurnaceTier" + tier + ".description");

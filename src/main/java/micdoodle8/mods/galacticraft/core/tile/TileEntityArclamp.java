@@ -267,7 +267,7 @@ public class TileEntityArclamp extends TileEntity {
                 do {
                     // Skip the side which this was entered from
                     // and never go 'backwards'
-                    if ((bits & (1 << side)) == 0) {
+                    if ((bits & 1 << side) == 0) {
                         BlockVec3 sideVec = vec.newVecSide(side);
 
                         if (!checked.contains(sideVec)) {

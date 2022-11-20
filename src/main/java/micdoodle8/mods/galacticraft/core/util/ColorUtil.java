@@ -88,7 +88,7 @@ public class ColorUtil {
         a1 = y2 - y0;
         a0 = y1;
 
-        return (a3 * mu * mu2 + a2 * mu2 + a1 * mu + a0);
+        return a3 * mu * mu2 + a2 * mu2 + a1 * mu + a0;
     }
 
     private static Vector3 interpolateInArray(Vector3[] array, int i, double mu) {
@@ -139,7 +139,7 @@ public class ColorUtil {
         int rr = (r & 255) << 16;
         int gg = (g & 255) << 8;
 
-        return rr | gg | (b & 255);
+        return rr | gg | b & 255;
     }
 
     public static int lighten(int col, float factor) {
@@ -147,9 +147,9 @@ public class ColorUtil {
         int rr = gg >> 8;
         gg &= 255;
         int bb = col & 255;
-        rr *= (1F + factor);
-        gg *= (1F + factor);
-        bb *= (1F + factor);
+        rr *= 1F + factor;
+        gg *= 1F + factor;
+        bb *= 1F + factor;
         if (rr > 255) {
             rr = 255;
         }
@@ -168,6 +168,6 @@ public class ColorUtil {
         grey += gg & 255;
         grey += col & 255;
         grey /= 3;
-        return grey << 16 | grey << 8 | (grey & 255);
+        return grey << 16 | grey << 8 | grey & 255;
     }
 }

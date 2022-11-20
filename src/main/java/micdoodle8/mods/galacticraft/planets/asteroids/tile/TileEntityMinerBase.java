@@ -121,7 +121,7 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
                         this.xCoord + 1,
                         this.yCoord + 1,
                         this.zCoord + 1,
-                        (this.facing + 2) ^ 1,
+                        this.facing + 2 ^ 1,
                         new BlockVec3(this),
                         player)) {
                     this.findTargetPoints();
@@ -147,7 +147,7 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
 
             if (tileEntity != null) {
                 if (tileEntity instanceof TileEntityMinerBase) {
-                    masterTile = new WeakReference<TileEntityMinerBase>(((TileEntityMinerBase) tileEntity));
+                    masterTile = new WeakReference<TileEntityMinerBase>((TileEntityMinerBase) tileEntity);
                 }
             }
         }
@@ -458,7 +458,7 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
             y = this.mainBlockPosition.y;
             z = this.mainBlockPosition.z;
         }
-        int link = (this.linkedMinerID != null) ? 1 : 0;
+        int link = this.linkedMinerID != null ? 1 : 0;
         GalacticraftCore.packetPipeline.sendToDimension(
                 new PacketSimpleAsteroids(
                         EnumSimplePacketAsteroids.C_UPDATE_MINERBASE_FACING,
@@ -639,7 +639,7 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
 
     private void findTargetPoints() {
         this.targetPoints.clear();
-        int baseFacing = (this.facing + 2) ^ 1;
+        int baseFacing = this.facing + 2 ^ 1;
         BlockVec3 posnTarget = new BlockVec3(this);
 
         if (this.worldObj.provider instanceof WorldProviderAsteroids) {

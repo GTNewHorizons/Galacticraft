@@ -100,7 +100,7 @@ public class PlayerServer implements IPlayerServer {
                 if (titaniumCount == 4) {
                     titaniumCount = 5;
                 }
-                par2 *= (1 - 0.15D * titaniumCount);
+                par2 *= 1 - 0.15D * titaniumCount;
             }
         }
 

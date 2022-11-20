@@ -350,7 +350,7 @@ public class NetworkUtil {
     }
 
     public static boolean fuzzyEquals(Object a, Object b) {
-        if ((a == null) != (b == null)) {
+        if (a == null != (b == null)) {
             return false;
         } else if (a == null) {
             return true;

@@ -90,7 +90,7 @@ public class ItemAstroMiner extends Item implements IHoldableItem {
 
                 int astroCount = GCPlayerStats.get(playerMP).astroMinerCount;
                 if (astroCount >= ConfigManagerAsteroids.astroMinerMax
-                        && (!par2EntityPlayer.capabilities.isCreativeMode)) {
+                        && !par2EntityPlayer.capabilities.isCreativeMode) {
                     par2EntityPlayer.addChatMessage(
                             new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner2.fail")));
                     return false;

@@ -111,7 +111,7 @@ public class BlockBasicAsteroids extends Block implements IDetectableResource, I
         switch (meta) {
             case 4:
                 if (fortune >= 1) {
-                    return (random.nextFloat() < fortune * 0.29F - 0.25F) ? 2 : 1;
+                    return random.nextFloat() < fortune * 0.29F - 0.25F ? 2 : 1;
                 }
             default:
                 return 1;

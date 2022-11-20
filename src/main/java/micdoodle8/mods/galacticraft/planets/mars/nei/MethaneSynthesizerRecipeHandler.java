@@ -152,8 +152,8 @@ public class MethaneSynthesizerRecipeHandler extends TemplateRecipeHandler {
             if (inputItem != MarsItems.carbonFragments) {
                 stacks.add(new PositionedStack(
                         new ItemStack(inputItem, 1, inputItem.getMaxDamage()), input.relx, input.rely));
-            } else if ((this.ticksPassed % 144) < 104) {
-                int number = 24 - ((this.ticksPassed % 144) - 40) * 3 / 8;
+            } else if (this.ticksPassed % 144 < 104) {
+                int number = 24 - (this.ticksPassed % 144 - 40) * 3 / 8;
                 stacks.add(new PositionedStack(new ItemStack(inputItem, number, 0), input.relx, input.rely));
             }
             return stacks;

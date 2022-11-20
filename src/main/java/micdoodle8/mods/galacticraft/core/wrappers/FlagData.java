@@ -103,7 +103,7 @@ public class FlagData {
             for (int j = 0; j < width; j++) {
                 int color = colorRow[j];
                 flagData.color[j][i][0] = (byte) (color >> 16);
-                flagData.color[j][i][1] = (byte) ((color >> 8) & 255);
+                flagData.color[j][i][1] = (byte) (color >> 8 & 255);
                 flagData.color[j][i][2] = (byte) (color & 255);
             }
         }
@@ -128,9 +128,7 @@ public class FlagData {
         BufferedImage image = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
         for (int i = 0; i < this.width; i++) {
             for (int j = 0; j < this.height; j++) {
-                int col = ((this.color[i][j][0] + 128) << 16)
-                        | ((this.color[i][j][1] + 128) << 8)
-                        | (this.color[i][j][2] + 128);
+                int col = this.color[i][j][0] + 128 << 16 | this.color[i][j][1] + 128 << 8 | this.color[i][j][2] + 128;
                 image.setRGB(i, j, col);
             }
         }

@@ -147,7 +147,7 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
             Entity e = var1.getEntity();
             if (this.isEntityInvulnerable()
                     || this.posY > 300
-                    || (e instanceof EntityLivingBase && !(e instanceof EntityPlayer))) {
+                    || e instanceof EntityLivingBase && !(e instanceof EntityPlayer)) {
                 return false;
             } else {
                 this.rockDirection = -this.rockDirection;

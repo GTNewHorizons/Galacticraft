@@ -147,7 +147,7 @@ public class GameScreenCelestial implements IGameScreen {
                             pos.x,
                             pos.y,
                             ticks,
-                            (planet.getRelativeDistanceFromCenter().unScaledDistance < 1.5F) ? 2F : 2.8F);
+                            planet.getRelativeDistanceFromCenter().unScaledDistance < 1.5F ? 2F : 2.8F);
                 }
             }
         }
@@ -223,7 +223,7 @@ public class GameScreenCelestial implements IGameScreen {
         float sd = 0.002514F * scale;
         float x = this.getScale(cBody);
         float y = 0;
-        float grey = 0.1F + 0.65F * Math.max(0F, (0.5F - x));
+        float grey = 0.1F + 0.65F * Math.max(0F, 0.5F - x);
         x = x * scale / sd;
 
         GL11.glColor4f(grey, grey, grey, 1.0F);

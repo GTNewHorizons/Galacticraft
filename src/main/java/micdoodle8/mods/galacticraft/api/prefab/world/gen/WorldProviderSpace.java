@@ -107,7 +107,7 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
             } else {
                 // Detect jumps in world time (e.g. because of bed use on Overworld) and reverse
                 // them for this world
-                long diff = (newTime - this.preTickTime);
+                long diff = newTime - this.preTickTime;
                 if (diff > 1L) {
                     this.timeCurrentOffset -= diff - 1L;
                     this.saveTime();
@@ -210,7 +210,7 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
      */
     @Override
     public boolean isSurfaceWorld() {
-        return (this.worldObj == null) ? false : this.worldObj.isRemote;
+        return this.worldObj == null ? false : this.worldObj.isRemote;
     }
 
     /**
@@ -380,7 +380,7 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
         try {
             VillageCollection vc = this.worldObj.villageCollectionObj;
             tickCounter.setAccessible(true);
-            tickCounter.setInt(vc, (int) (this.getWorldTime()));
+            tickCounter.setInt(vc, (int) this.getWorldTime());
             vc.markDirty();
         } catch (Exception ignore) {
         }

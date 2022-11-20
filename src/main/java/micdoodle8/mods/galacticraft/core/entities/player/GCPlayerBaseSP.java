@@ -65,7 +65,7 @@ public class GCPlayerBaseSP extends ClientPlayerBase {
     public void afterUpdateEntityActionState() {
         if (this.player.worldObj.provider instanceof IZeroGDimension) {
             this.player.setJumping(false);
-            if ((this.player.boundingBox.minY % 1F) == 0.5F) {
+            if (this.player.boundingBox.minY % 1F == 0.5F) {
                 this.player.boundingBox.minY += 0.00001F;
             }
         }

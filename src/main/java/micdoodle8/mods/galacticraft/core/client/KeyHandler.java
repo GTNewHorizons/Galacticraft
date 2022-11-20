@@ -56,7 +56,7 @@ public abstract class KeyHandler {
                 continue;
             }
             boolean state =
-                    inChat ? false : (keyCode < 0 ? Mouse.isButtonDown(keyCode + 100) : Keyboard.isKeyDown(keyCode));
+                    inChat ? false : keyCode < 0 ? Mouse.isButtonDown(keyCode + 100) : Keyboard.isKeyDown(keyCode);
             if (state != this.keyDown[i] || state && this.repeatings[i]) {
                 if (state) {
                     this.keyDown(type, keyBinding, tickEnd, state != this.keyDown[i]);

@@ -80,7 +80,7 @@ public class DrawGameScreen extends IScreenManager {
         }
 
         if (cornerBlock) {
-            if ((this.mapFirstTick || ((int) ticks) % 400 == 0) && !mapDone) {
+            if ((this.mapFirstTick || (int) ticks % 400 == 0) && !mapDone) {
                 if (this.tickMapDone != (int) ticks) {
                     this.tickMapDone = (int) ticks;
                     this.makeMap();

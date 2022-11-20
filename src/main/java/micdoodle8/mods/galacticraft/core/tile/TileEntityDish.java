@@ -121,7 +121,7 @@ public class TileEntityDish extends TileBaseUniversalElectrical
                         new BlockVec3(placedPosition.x + x, placedPosition.y + 2, placedPosition.z + z);
 
                 ((BlockMulti) GCBlocks.fakeBlock)
-                        .makeFakeBlock(this.worldObj, vecToAdd, placedPosition, (this.getTierGC() == 1) ? 4 : 0);
+                        .makeFakeBlock(this.worldObj, vecToAdd, placedPosition, this.getTierGC() == 1 ? 4 : 0);
             }
         }
     }

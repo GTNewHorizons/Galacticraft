@@ -77,7 +77,7 @@ public class GasLiquefierRecipeHandler extends TemplateRecipeHandler {
                 GuiDraw.drawTexturedModalRect(127, 62 - level, 176 + 16, 26 - level, 16, level);
             } else {
                 GuiDraw.drawTexturedModalRect(
-                        127 + ((this.outputGas == 3) ? 21 : 0),
+                        127 + (this.outputGas == 3 ? 21 : 0),
                         62 - level,
                         1 + this.outputGas * 17,
                         26 - level,

@@ -198,7 +198,7 @@ public class GuiElementSlider extends GuiButton {
     }
 
     public double getColorValueD() {
-        return (this.sliderPos * 255.0D) / (this.height - 1);
+        return this.sliderPos * 255.0D / (this.height - 1);
     }
 
     public int getButtonHeight() {

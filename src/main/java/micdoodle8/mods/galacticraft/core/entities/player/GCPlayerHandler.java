@@ -935,7 +935,7 @@ public class GCPlayerHandler {
             count++;
         }
 
-        if (!temp.equals(playerStats.savedPlanetList) || (player.ticksExisted % 100 == 0)) {
+        if (!temp.equals(playerStats.savedPlanetList) || player.ticksExisted % 100 == 0) {
             GalacticraftCore.packetPipeline.sendTo(
                     new PacketSimple(
                             EnumSimplePacket.C_UPDATE_DIMENSION_LIST,
@@ -1035,7 +1035,7 @@ public class GCPlayerHandler {
         // This will speed things up a little
         final GCPlayerStats GCPlayer = GCPlayerStats.get(player);
 
-        if ((ConfigManagerCore.challengeSpawnHandling) && GCPlayer.unlockedSchematics.size() == 0) {
+        if (ConfigManagerCore.challengeSpawnHandling && GCPlayer.unlockedSchematics.size() == 0) {
             if (GCPlayer.startDimension.length() > 0) {
                 GCPlayer.startDimension = "";
             } else {

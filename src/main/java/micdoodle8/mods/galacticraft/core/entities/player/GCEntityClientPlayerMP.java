@@ -249,7 +249,7 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
                 this.moveStrafing *= 0.98F;
                 this.moveForward *= 0.98F;
                 this.randomYawVelocity *= 0.9F;
-                if ((this.boundingBox.minY % 1F) == 0.5F) {
+                if (this.boundingBox.minY % 1F == 0.5F) {
                     this.boundingBox.minY += 0.00001F;
                 }
                 this.moveEntityWithHeading(this.moveStrafing, this.moveForward);
@@ -315,7 +315,7 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
         } catch (RuntimeException e) {
             FMLLog.severe(
                     "A mod has crashed while Minecraft was doing a normal player tick update.  See details below.  GCEntityClientPlayerMP is in this because that is the player class name when Galacticraft is installed.  This is =*NOT*= a bug in Galacticraft, please report it to the mod indicated by the first lines of the crash report.");
-            throw (e);
+            throw e;
         }
         ClientProxyCore.playerClientHandler.onLivingUpdatePost(this);
     }

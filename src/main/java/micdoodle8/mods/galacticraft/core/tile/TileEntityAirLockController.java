@@ -125,9 +125,9 @@ public class TileEntityAirLockController extends TileEntityAirLock {
 
                     if (this.active
                             && (this.otherAirLocks != null
-                                    || (this.lastOtherAirLocks != null && this.otherAirLocks != this.lastOtherAirLocks)
-                                    || (this.lastOtherAirLocks != null
-                                            && this.otherAirLocks.size() != this.lastOtherAirLocks.size()))) {
+                                    || this.lastOtherAirLocks != null && this.otherAirLocks != this.lastOtherAirLocks
+                                    || this.lastOtherAirLocks != null
+                                            && this.otherAirLocks.size() != this.lastOtherAirLocks.size())) {
                         this.sealAirLock();
                     } else if (!this.active && this.lastActive
                             || this.otherAirLocks == null && this.lastOtherAirLocks != null) {

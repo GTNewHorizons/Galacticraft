@@ -387,8 +387,8 @@ public class TickHandlerClient {
                                     }
 
                                     if (isDetectable
-                                            || (block instanceof IDetectableResource
-                                                    && ((IDetectableResource) block).isValueable(metadata))) {
+                                            || block instanceof IDetectableResource
+                                                    && ((IDetectableResource) block).isValueable(metadata)) {
                                         ClientProxyCore.valueableBlocks.add(new BlockVec3(x, y, z));
                                     }
                                 }
@@ -540,7 +540,7 @@ public class TickHandlerClient {
                 ClientProxyCore.lastSpacebarDown = true;
             }
 
-            if (!(this.screenConnectionsUpdateList.isEmpty())) {
+            if (!this.screenConnectionsUpdateList.isEmpty()) {
                 HashSet<TileEntityScreen> updateListCopy =
                         (HashSet<TileEntityScreen>) screenConnectionsUpdateList.clone();
                 screenConnectionsUpdateList.clear();

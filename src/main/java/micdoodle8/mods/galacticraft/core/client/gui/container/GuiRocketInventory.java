@@ -69,7 +69,7 @@ public class GuiRocketInventory extends GuiContainerGC {
                 && this.mc.thePlayer.ridingEntity != null
                 && this.mc.thePlayer.ridingEntity instanceof EntitySpaceshipBase) {
             this.fontRendererObj.drawString(GCCoreUtil.translate("gui.message.fuel.name") + ":", 125, 15, 4210752);
-            final EntitySpaceshipBase spaceship = ((EntitySpaceshipBase) this.mc.thePlayer.ridingEntity);
+            final EntitySpaceshipBase spaceship = (EntitySpaceshipBase) this.mc.thePlayer.ridingEntity;
             final double percentage = spaceship.getScaledFuelLevel(100);
             final String color = percentage > 80.0D
                     ? EnumColor.BRIGHT_GREEN.getCode()

@@ -138,7 +138,7 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor
     @Override
     public double injectEnergy(ForgeDirection directionFrom, double amount, double voltage) {
         TileEntity tile = new BlockVec3(this).getTileEntityOnSide(this.worldObj, directionFrom);
-        int tier = ((int) voltage > 120) ? 2 : 1;
+        int tier = (int) voltage > 120 ? 2 : 1;
         if (tile instanceof IEnergySource && ((IEnergySource) tile).getOfferedEnergy() >= 128) {
             tier = 2;
         }

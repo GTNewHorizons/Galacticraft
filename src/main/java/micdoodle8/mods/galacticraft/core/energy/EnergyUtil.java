@@ -183,8 +183,8 @@ public class EnergyUtil {
                 continue;
             }
 
-            if ((isRF2Loaded && tileEntity instanceof IEnergyReceiver)
-                    || (isRF1Loaded && tileEntity instanceof IEnergyHandler)) {
+            if (isRF2Loaded && tileEntity instanceof IEnergyReceiver
+                    || isRF1Loaded && tileEntity instanceof IEnergyHandler) {
                 if (clazzEnderIOCable != null && clazzEnderIOCable.isInstance(tileEntity)) {
                     continue;
                 }

@@ -958,7 +958,7 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
 
     @Override
     public boolean isDockValid(IFuelDock dock) {
-        return (dock instanceof TileEntityLandingPad);
+        return dock instanceof TileEntityLandingPad;
     }
 
     @Override

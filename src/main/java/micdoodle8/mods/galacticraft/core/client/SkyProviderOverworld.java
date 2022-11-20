@@ -132,7 +132,7 @@ public class SkyProviderOverworld extends IRenderHandler {
                 GL11.glLoadIdentity();
 
                 if (zoom != 1.0D) {
-                    GL11.glTranslatef((float) yaw, (float) (-pitch), 0.0F);
+                    GL11.glTranslatef((float) yaw, (float) -pitch, 0.0F);
                     GL11.glScaled(zoom, zoom, 1.0D);
                 }
 
@@ -150,7 +150,7 @@ public class SkyProviderOverworld extends IRenderHandler {
         }
 
         float theta = MathHelper.sqrt_float(
-                ((float) (mc.thePlayer.posY) - Constants.OVERWORLD_SKYPROVIDER_STARTHEIGHT) / 1000.0F);
+                ((float) mc.thePlayer.posY - Constants.OVERWORLD_SKYPROVIDER_STARTHEIGHT) / 1000.0F);
         final float var21 = Math.max(1.0F - theta * 4.0F, 0.0F);
 
         GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -382,7 +382,7 @@ public class SkyProviderOverworld extends IRenderHandler {
                 GL11.glLoadIdentity();
 
                 if (zoom != 1.0D) {
-                    GL11.glTranslatef((float) yaw, (float) (-pitch), 0.0F);
+                    GL11.glTranslatef((float) yaw, (float) -pitch, 0.0F);
                     GL11.glScaled(zoom, zoom, 1.0D);
                 }
 

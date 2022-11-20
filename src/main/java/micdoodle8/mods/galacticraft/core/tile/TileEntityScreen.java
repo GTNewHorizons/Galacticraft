@@ -292,10 +292,10 @@ public class TileEntityScreen extends TileEntity {
         this.connectionsLeft = nbt.getInteger("connectionsLeft");
         this.connectionsRight = nbt.getInteger("connectionsRight");
         this.isMultiscreen = nbt.getBoolean("multiscreen");
-        this.connectedUp = (this.connectionsUp > 0);
-        this.connectedDown = (this.connectionsDown > 0);
-        this.connectedLeft = (this.connectionsLeft > 0);
-        this.connectedRight = (this.connectionsRight > 0);
+        this.connectedUp = this.connectionsUp > 0;
+        this.connectedDown = this.connectionsDown > 0;
+        this.connectedLeft = this.connectionsLeft > 0;
+        this.connectedRight = this.connectionsRight > 0;
     }
 
     @Override
@@ -362,7 +362,7 @@ public class TileEntityScreen extends TileEntity {
         vec = new BlockVec3(this);
         tile = this;
         int leftside = this.getLeft(meta);
-        while (left < ((up + down == 0) ? 1 : 8)) {
+        while (left < (up + down == 0 ? 1 : 8)) {
             if (tile.connectedLeft) {
                 left++;
                 TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, leftside);
@@ -384,7 +384,7 @@ public class TileEntityScreen extends TileEntity {
         vec = new BlockVec3(this);
         tile = this;
         int rightside = this.getRight(meta);
-        while (right < ((up + down == 0) ? 1 : 8) - left) {
+        while (right < (up + down == 0 ? 1 : 8) - left) {
             if (tile.connectedRight) {
                 right++;
                 TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, rightside);
@@ -407,13 +407,13 @@ public class TileEntityScreen extends TileEntity {
 
         vec = new BlockVec3(this);
         TileEntity newtile = vec.getTileEntityOnSide(this.worldObj, 1);
-        TileEntityScreen tileUp = (newtile instanceof TileEntityScreen) ? (TileEntityScreen) newtile : null;
+        TileEntityScreen tileUp = newtile instanceof TileEntityScreen ? (TileEntityScreen) newtile : null;
         newtile = vec.getTileEntityOnSide(this.worldObj, 0);
-        TileEntityScreen tileDown = (newtile instanceof TileEntityScreen) ? (TileEntityScreen) newtile : null;
+        TileEntityScreen tileDown = newtile instanceof TileEntityScreen ? (TileEntityScreen) newtile : null;
         newtile = vec.getTileEntityOnSide(this.worldObj, leftside);
-        TileEntityScreen tileLeft = (newtile instanceof TileEntityScreen) ? (TileEntityScreen) newtile : null;
+        TileEntityScreen tileLeft = newtile instanceof TileEntityScreen ? (TileEntityScreen) newtile : null;
         newtile = vec.getTileEntityOnSide(this.worldObj, rightside);
-        TileEntityScreen tileRight = (newtile instanceof TileEntityScreen) ? (TileEntityScreen) newtile : null;
+        TileEntityScreen tileRight = newtile instanceof TileEntityScreen ? (TileEntityScreen) newtile : null;
         // Prevent 3 x 1 and longer
         if (left + right == 0 && up + down >= 1) {
             if (up > 0 && !tileUp.connectedUp) // No need for null check if up > 0
@@ -884,7 +884,7 @@ public class TileEntityScreen extends TileEntity {
         }
         screenTile.refreshConnections(false);
         // Undo if the neighbour could not maintain the same left-right connections
-        if ((this.connectedLeft ^ screenTile.connectedLeft) || (this.connectedRight ^ screenTile.connectedRight)) {
+        if (this.connectedLeft ^ screenTile.connectedLeft || this.connectedRight ^ screenTile.connectedRight) {
             screenTile.connectedDown = false;
             return false;
         }
@@ -906,7 +906,7 @@ public class TileEntityScreen extends TileEntity {
         }
         screenTile.refreshConnections(false);
         // Undo if the neighbour could not maintain the same left-right connections
-        if ((this.connectedLeft ^ screenTile.connectedLeft) || (this.connectedRight ^ screenTile.connectedRight)) {
+        if (this.connectedLeft ^ screenTile.connectedLeft || this.connectedRight ^ screenTile.connectedRight) {
             screenTile.connectedUp = false;
             return false;
         }
@@ -919,7 +919,7 @@ public class TileEntityScreen extends TileEntity {
             return true; // No checks?
         }
 
-        if ((screenTile.connectedUp && !this.connectedUp) || (screenTile.connectedDown && !this.connectedDown)) {
+        if (screenTile.connectedUp && !this.connectedUp || screenTile.connectedDown && !this.connectedDown) {
             return false;
         }
 
@@ -932,7 +932,7 @@ public class TileEntityScreen extends TileEntity {
         }
         screenTile.refreshConnections(false);
         // Undo if the neighbour could not maintain the same up-down connections
-        if ((this.connectedUp ^ screenTile.connectedUp) || (this.connectedDown ^ screenTile.connectedDown)) {
+        if (this.connectedUp ^ screenTile.connectedUp || this.connectedDown ^ screenTile.connectedDown) {
             screenTile.connectedRight = false;
             return false;
         }
@@ -945,7 +945,7 @@ public class TileEntityScreen extends TileEntity {
             return true; // No checks?
         }
 
-        if ((screenTile.connectedUp && !this.connectedUp) || (screenTile.connectedDown && !this.connectedDown)) {
+        if (screenTile.connectedUp && !this.connectedUp || screenTile.connectedDown && !this.connectedDown) {
             return false;
         }
 
@@ -958,7 +958,7 @@ public class TileEntityScreen extends TileEntity {
         }
         screenTile.refreshConnections(false);
         // Undo if the neighbour could not maintain the same up-down connections
-        if ((this.connectedUp ^ screenTile.connectedUp) || (this.connectedDown ^ screenTile.connectedDown)) {
+        if (this.connectedUp ^ screenTile.connectedUp || this.connectedDown ^ screenTile.connectedDown) {
             screenTile.connectedLeft = false;
             return false;
         }

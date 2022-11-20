@@ -46,13 +46,13 @@ public class GameScreenBasic implements IGameScreen {
             textureBx = 1.0F;
             textureBy = 1.0F;
         } else if (scaleX < scaleY) {
-            textureAx = (1.0F - (scaleX / scaleY)) / 2;
+            textureAx = (1.0F - scaleX / scaleY) / 2;
             textureAy = 0F;
             textureBx = 1.0F - textureAx;
             textureBy = 1.0F;
         } else if (scaleY < scaleX) {
             textureAx = 0F;
-            textureAy = (1.0F - (scaleY / scaleX)) / 2;
+            textureAy = (1.0F - scaleY / scaleX) / 2;
             textureBx = 1.0F;
             textureBy = 1.0F - textureAy;
         }

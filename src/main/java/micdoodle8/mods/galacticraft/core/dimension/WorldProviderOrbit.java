@@ -184,7 +184,7 @@ public class WorldProviderOrbit extends WorldProviderSpaceStation
     // (with up-to-date API this makes zero difference)
     @Override
     public boolean isSurfaceWorld() {
-        return (this.worldObj == null) ? false : this.worldObj.isRemote;
+        return this.worldObj == null ? false : this.worldObj.isRemote;
     }
 
     // Overriding only in case the Galacticraft API is not up-to-date
@@ -315,7 +315,7 @@ public class WorldProviderOrbit extends WorldProviderSpaceStation
     @Override
     @SideOnly(Side.CLIENT)
     public void setSpinDeltaPerTick(float angle) {
-        SkyProviderOrbit skyProvider = ((SkyProviderOrbit) this.getSkyRenderer());
+        SkyProviderOrbit skyProvider = (SkyProviderOrbit) this.getSkyRenderer();
         if (skyProvider != null) {
             skyProvider.spinDeltaPerTick = angle;
         }

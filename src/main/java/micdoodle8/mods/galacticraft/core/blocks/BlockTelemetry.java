@@ -109,7 +109,7 @@ public class BlockTelemetry extends BlockAdvancedTile implements ItemBlockDesc.I
             case 5:
                 change = 0;
         }
-        change += (12 & metadata);
+        change += 12 & metadata;
         world.setBlockMetadataWithNotify(x, y, z, change, 2);
 
         return true;

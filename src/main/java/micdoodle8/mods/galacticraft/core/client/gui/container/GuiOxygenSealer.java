@@ -198,8 +198,8 @@ public class GuiOxygenSealer extends GuiContainerGC {
                 this.sealer.getWorldObj().getBlock(this.sealer.xCoord, this.sealer.yCoord + 1, this.sealer.zCoord);
 
         if (blockAbove != null
-                && !(blockAbove.isAir(
-                        this.sealer.getWorldObj(), this.sealer.xCoord, this.sealer.yCoord + 1, this.sealer.zCoord))
+                && !blockAbove.isAir(
+                        this.sealer.getWorldObj(), this.sealer.xCoord, this.sealer.yCoord + 1, this.sealer.zCoord)
                 && !OxygenPressureProtocol.canBlockPassAir(
                         this.sealer.getWorldObj(),
                         blockAbove,

@@ -426,7 +426,7 @@ public class EntityCreeperBoss extends EntityMob
         // of getting it
         // otherwise return the full list (note: addons could have added more schematics
         // to the list)
-        int range = (!hasT3Rocket) ? 2 : stackList.size();
+        int range = !hasT3Rocket ? 2 : stackList.size();
         return stackList.get(rand.nextInt(range)).copy();
     }
 

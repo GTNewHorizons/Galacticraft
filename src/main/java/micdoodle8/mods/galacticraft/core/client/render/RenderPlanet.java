@@ -27,14 +27,14 @@ public class RenderPlanet {
     public static void renderPlanet(int textureId, float scale, float ticks, float relSize) {
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
         float size = relSize / 70 * scale;
-        ticks = ((float) System.nanoTime()) / 50000000F;
+        ticks = (float) System.nanoTime() / 50000000F;
         RenderPlanet.drawTexturedRectUV(-size / 2, -size / 2, size, size, ticks);
     }
 
     public static void renderPlanet(ResourceLocation texture, float scale, float ticks, float relSize) {
         RenderPlanet.renderEngine.bindTexture(texture);
         float size = relSize / 70 * scale;
-        ticks = ((float) System.nanoTime()) / 50000000F;
+        ticks = (float) System.nanoTime() / 50000000F;
         RenderPlanet.drawTexturedRectUV(-size / 2, -size / 2, size, size, ticks);
     }
 
@@ -82,7 +82,7 @@ public class RenderPlanet {
             // - 80F * MathHelper.sin(angle)
             float factor = 1F + MathHelper.cos((7.5F + 10F * ysect) / 62F);
             drawTexturedRectUVSixth(
-                    x, y, width, height, (ticks / 1100F) % 1F - (1F - factor) * 0.15F, ysect / 6F, 0.16F * factor);
+                    x, y, width, height, ticks / 1100F % 1F - (1F - factor) * 0.15F, ysect / 6F, 0.16F * factor);
         }
     }
 

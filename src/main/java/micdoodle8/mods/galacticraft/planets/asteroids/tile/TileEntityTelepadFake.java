@@ -65,7 +65,7 @@ public class TileEntityTelepadFake extends TileBaseElectricBlock {
             if (tileEntity != null) {
                 if (tileEntity instanceof TileEntityShortRangeTelepad) {
                     mainTelepad =
-                            new WeakReference<TileEntityShortRangeTelepad>(((TileEntityShortRangeTelepad) tileEntity));
+                            new WeakReference<TileEntityShortRangeTelepad>((TileEntityShortRangeTelepad) tileEntity);
                 }
             }
         }

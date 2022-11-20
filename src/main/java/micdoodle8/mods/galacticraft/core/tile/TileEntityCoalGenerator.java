@@ -63,7 +63,7 @@ public class TileEntityCoalGenerator extends TileBaseUniversalElectricalSource
     @Override
     public void updateEntity() {
         if (!this.worldObj.isRemote && this.heatGJperTick - TileEntityCoalGenerator.MIN_GENERATE_GJ_PER_TICK > 0) {
-            this.receiveEnergyGC(null, (this.heatGJperTick - TileEntityCoalGenerator.MIN_GENERATE_GJ_PER_TICK), false);
+            this.receiveEnergyGC(null, this.heatGJperTick - TileEntityCoalGenerator.MIN_GENERATE_GJ_PER_TICK, false);
         }
 
         super.updateEntity();

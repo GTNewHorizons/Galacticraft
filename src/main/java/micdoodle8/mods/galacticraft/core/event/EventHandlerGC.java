@@ -326,7 +326,7 @@ public class EventHandlerGC {
                         && (!(entityLiving instanceof IEntityBreathable)
                                 || !((IEntityBreathable) entityLiving).canBreath())
                         && !((IGalacticraftWorldProvider) entityLiving.worldObj.provider).hasBreathableAtmosphere()) {
-                    if ((ConfigManagerCore.challengeMobDropsAndSpawning) && entityLiving instanceof EntityEnderman) {
+                    if (ConfigManagerCore.challengeMobDropsAndSpawning && entityLiving instanceof EntityEnderman) {
                         return;
                     }
 
@@ -886,7 +886,7 @@ public class EventHandlerGC {
                             x - 0.0015D, y - 0.0015D, z - 0.0015D, x + 0.0015D, y + 0.0015D, z + 0.0015D);
                     boolean playerInAtmosphere = OxygenUtil.isAABBInBreathableAirBlock(player);
                     boolean soundInAtmosphere = OxygenUtil.isAABBInBreathableAirBlock(player.worldObj, bb);
-                    if ((!playerInAtmosphere || !soundInAtmosphere)) {
+                    if (!playerInAtmosphere || !soundInAtmosphere) {
                         float volume = event.result.getVolume();
 
                         // First check for duplicate firing of PlaySoundEvent17 on this handler's own

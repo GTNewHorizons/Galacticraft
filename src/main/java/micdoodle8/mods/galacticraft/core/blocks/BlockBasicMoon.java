@@ -257,7 +257,7 @@ public class BlockBasicMoon extends BlockAdvancedTile
         switch (meta) {
             case 2:
                 if (fortune >= 1) {
-                    return (random.nextFloat() < fortune * 0.29F - 0.25F) ? 2 : 1;
+                    return random.nextFloat() < fortune * 0.29F - 0.25F ? 2 : 1;
                 }
                 return 1;
             case 15:
@@ -399,6 +399,6 @@ public class BlockBasicMoon extends BlockAdvancedTile
             return false;
         }
         int meta = world.getBlockMetadata(x, y, z);
-        return (meta == 3 || meta == 4);
+        return meta == 3 || meta == 4;
     }
 }

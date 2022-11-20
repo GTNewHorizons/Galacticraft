@@ -232,7 +232,7 @@ public class SpinManager {
                 }
 
                 for (int side = 0; side < 6; side++) {
-                    if ((bits & (1 << side)) == 1) {
+                    if ((bits & 1 << side) == 1) {
                         continue;
                     }
                     BlockVec3 sideVec = vec.newVecSide(side);

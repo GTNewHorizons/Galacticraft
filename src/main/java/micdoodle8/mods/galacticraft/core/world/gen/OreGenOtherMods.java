@@ -151,7 +151,7 @@ public class OreGenOtherMods {
 
         if (clumpSize == 0) {
             size = 1;
-            clusters = (3 * clusters) / 2;
+            clusters = 3 * clusters / 2;
         } else if (clumpSize == 2) {
             size *= 4;
             clusters /= 2;
@@ -179,7 +179,7 @@ public class OreGenOtherMods {
         int dimDetected = 0;
 
         WorldProvider prov = worldObj.provider;
-        if (!(prov instanceof IGalacticraftWorldProvider) || (prov instanceof WorldProviderSpaceStation)) {
+        if (!(prov instanceof IGalacticraftWorldProvider) || prov instanceof WorldProviderSpaceStation) {
             return;
         }
 

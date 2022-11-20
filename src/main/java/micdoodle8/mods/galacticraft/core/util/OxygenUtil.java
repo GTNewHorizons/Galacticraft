@@ -413,8 +413,8 @@ public class OxygenUtil {
 
     public static boolean noAtmosphericCombustion(WorldProvider provider) {
         if (provider instanceof IGalacticraftWorldProvider) {
-            return (!((IGalacticraftWorldProvider) provider).isGasPresent(IAtmosphericGas.OXYGEN)
-                    && !((IGalacticraftWorldProvider) provider).hasBreathableAtmosphere());
+            return !((IGalacticraftWorldProvider) provider).isGasPresent(IAtmosphericGas.OXYGEN)
+                    && !((IGalacticraftWorldProvider) provider).hasBreathableAtmosphere();
         }
 
         return false;

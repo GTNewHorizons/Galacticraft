@@ -30,7 +30,7 @@ public class BlockFluidGC extends BlockFluidClassic {
     public BlockFluidGC(Fluid fluid, String assetName) {
         super(
                 fluid,
-                (assetName.startsWith("oil") || assetName.startsWith("fuel"))
+                assetName.startsWith("oil") || assetName.startsWith("fuel")
                         ? GalacticraftCore.materialOil
                         : Material.water);
         this.setRenderPass(1);
@@ -103,7 +103,7 @@ public class BlockFluidGC extends BlockFluidClassic {
     public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
         if (world.getBlock(x, y, z) instanceof BlockLiquid) {
             int meta = world.getBlockMetadata(x, y, z);
-            return (meta > 1 || meta == -1);
+            return meta > 1 || meta == -1;
         }
 
         return super.canDisplace(world, x, y, z);
@@ -146,7 +146,7 @@ public class BlockFluidGC extends BlockFluidClassic {
             ((World) world).createExplosion(null, x, y, z, 6.0F, true);
             return true;
         }
-        return (this.fluidName.startsWith("oil"));
+        return this.fluidName.startsWith("oil");
     }
 
     @Override

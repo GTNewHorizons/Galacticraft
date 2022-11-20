@@ -60,7 +60,7 @@ public class TileEntityParaChest extends TileEntityAdvanced implements IInventor
     @Override
     public void setSizeInventory(int size) {
         if ((size - 3) % 18 != 0) {
-            size += 18 - ((size - 3) % 18);
+            size += 18 - (size - 3) % 18;
         }
         this.chestContents = new ItemStack[size];
     }
@@ -134,7 +134,7 @@ public class TileEntityParaChest extends TileEntityAdvanced implements IInventor
 
         int size = nbt.getInteger("chestContentLength");
         if ((size - 3) % 18 != 0) {
-            size += 18 - ((size - 3) % 18);
+            size += 18 - (size - 3) % 18;
         }
         this.chestContents = new ItemStack[size];
 

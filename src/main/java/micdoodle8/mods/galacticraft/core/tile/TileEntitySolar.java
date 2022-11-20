@@ -252,7 +252,7 @@ public class TileEntitySolar extends TileBaseUniversalElectricalSource
                         new BlockVec3(placedPosition.x + x, placedPosition.y + 2, placedPosition.z + z);
 
                 ((BlockMulti) GCBlocks.fakeBlock)
-                        .makeFakeBlock(this.worldObj, vecToAdd, placedPosition, (this.getTierGC() == 1) ? 4 : 0);
+                        .makeFakeBlock(this.worldObj, vecToAdd, placedPosition, this.getTierGC() == 1 ? 4 : 0);
             }
         }
     }
@@ -345,14 +345,14 @@ public class TileEntitySolar extends TileBaseUniversalElectricalSource
     public EnumSet<ForgeDirection> getElectricalOutputDirections() {
         int metadata = this.getBlockMetadata() & 3;
 
-        return EnumSet.of(ForgeDirection.getOrientation((metadata + 2) ^ 1), ForgeDirection.UNKNOWN);
+        return EnumSet.of(ForgeDirection.getOrientation(metadata + 2 ^ 1), ForgeDirection.UNKNOWN);
     }
 
     @Override
     public ForgeDirection getElectricalOutputDirectionMain() {
         int metadata = this.getBlockMetadata() & 3;
 
-        return ForgeDirection.getOrientation((metadata + 2) ^ 1);
+        return ForgeDirection.getOrientation(metadata + 2 ^ 1);
     }
 
     @Override

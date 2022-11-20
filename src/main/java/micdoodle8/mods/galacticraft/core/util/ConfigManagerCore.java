@@ -933,7 +933,7 @@ public class ConfigManagerCore {
                     ConfigManagerCore.detectableIDs[j] = new String((String) configs.get(dataCount++));
                 }
             } else if (dataLast instanceof String[]) {
-                ConfigManagerCore.detectableIDs = ((String[]) dataLast);
+                ConfigManagerCore.detectableIDs = (String[]) dataLast;
             }
             TickHandlerClient.registerDetectableBlocks(false);
         }

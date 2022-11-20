@@ -142,9 +142,9 @@ public enum Mixins {
     }
 
     private boolean shouldLoadSide() {
-        return (side == Side.BOTH
-                || (side == Side.SERVER && FMLLaunchHandler.side().isServer())
-                || (side == Side.CLIENT && FMLLaunchHandler.side().isClient()));
+        return side == Side.BOTH
+                || side == Side.SERVER && FMLLaunchHandler.side().isServer()
+                || side == Side.CLIENT && FMLLaunchHandler.side().isClient();
     }
 
     private boolean allModsLoaded(List<TargetedMod> targetedMods, Set<String> loadedCoreMods, Set<String> loadedMods) {
@@ -194,10 +194,10 @@ public enum Mixins {
     }
 
     public boolean shouldLoad(Set<String> loadedCoreMods, Set<String> loadedMods) {
-        return (shouldLoadSide()
+        return shouldLoadSide()
                 && applyIf.get()
                 && allModsLoaded(targetedMods, loadedCoreMods, loadedMods)
-                && noModsLoaded(excludedMods, loadedCoreMods, loadedMods));
+                && noModsLoaded(excludedMods, loadedCoreMods, loadedMods);
     }
 
     enum Side {

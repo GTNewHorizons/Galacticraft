@@ -384,10 +384,10 @@ public class EnergyConfigHandler {
         } catch (Exception e) {
         }
 
-        if ((count + count2 == 3 && count2 != 1) || count + count2 == 5) {
+        if (count + count2 == 3 && count2 != 1 || count + count2 == 5) {
             cachedRFLoadedValue = true;
-            cachedRF1LoadedValue = (count == 3);
-            cachedRF2LoadedValue = (count2 == 2);
+            cachedRF1LoadedValue = count == 3;
+            cachedRF2LoadedValue = count2 == 2;
         } else if (count > 0 || count2 > 0) {
             GCLog.severe(
                     "Incomplete Redstone Flux API detected: Galacticraft will not support RF energy connections until this is fixed.");

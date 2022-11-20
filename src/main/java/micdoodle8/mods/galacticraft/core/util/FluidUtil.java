@@ -164,9 +164,9 @@ public class FluidUtil {
                 liquid.amount, isCanister ? slotItem.getItemDamage() - 1 : FluidContainerRegistry.BUCKET_VOLUME);
 
         if (amountToFill <= 0
-                || (isCanister
+                || isCanister
                         && slotItem.getItem() != canisterType
-                        && slotItem.getItemDamage() != ItemCanisterGeneric.EMPTY)) {
+                        && slotItem.getItemDamage() != ItemCanisterGeneric.EMPTY) {
             return;
         }
 
@@ -237,7 +237,7 @@ public class FluidUtil {
     public static boolean isEmptyContainer(ItemStack var4, Item canisterType) {
         if (var4.getItem() instanceof ItemCanisterGeneric) {
             return var4.getItemDamage() == ItemCanisterGeneric.EMPTY
-                    || (var4.getItem() == canisterType && var4.getItemDamage() > 1);
+                    || var4.getItem() == canisterType && var4.getItemDamage() > 1;
         }
 
         return FluidContainerRegistry.isEmptyContainer(var4);

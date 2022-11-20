@@ -132,7 +132,7 @@ public class TileEntityShortRangeTelepad extends TileBaseElectricBlock
                     ShortRangeTelepadHandler.TelepadEntry entry =
                             ShortRangeTelepadHandler.getLocationFromAddress(this.targetAddress);
 
-                    BlockVec3 finalPos = (entry == null) ? null : entry.position;
+                    BlockVec3 finalPos = entry == null ? null : entry.position;
 
                     if (finalPos != null) {
                         TileEntity tileAt = finalPos.getTileEntityForce(this.worldObj);
@@ -434,11 +434,11 @@ public class TileEntityShortRangeTelepad extends TileBaseElectricBlock
         if (this.address >= 0) {
             ShortRangeTelepadHandler.TelepadEntry entry = ShortRangeTelepadHandler.getLocationFromAddress(this.address);
             this.addressValid = entry == null
-                    || (this.worldObj != null
-                            && (entry.dimensionID == this.worldObj.provider.dimensionId
-                                    && entry.position.x == this.xCoord
-                                    && entry.position.y == this.yCoord
-                                    && entry.position.z == this.zCoord));
+                    || this.worldObj != null
+                            && entry.dimensionID == this.worldObj.provider.dimensionId
+                            && entry.position.x == this.xCoord
+                            && entry.position.y == this.yCoord
+                            && entry.position.z == this.zCoord;
         } else {
             this.addressValid = false;
         }
@@ -629,8 +629,8 @@ public class TileEntityShortRangeTelepad extends TileBaseElectricBlock
         }
 
         float r = f * 0.3F;
-        float g = f * (0.3F + (teleportTimeScaled * 0.7F));
-        float b = f * (1.0F - (teleportTimeScaled * 0.7F));
+        float g = f * (0.3F + teleportTimeScaled * 0.7F);
+        float b = f * (1.0F - teleportTimeScaled * 0.7F);
 
         return new Vector3(r, g, b);
     }

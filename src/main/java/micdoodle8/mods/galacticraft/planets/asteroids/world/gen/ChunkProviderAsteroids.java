@@ -384,8 +384,8 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
                     if (isHollow && distance <= hollowSize) {
                         distanceAbove += this.asteroidTurbulance.getNoise(xx, y + 1, zz);
                         if (distanceAbove <= 1) {
-                            if ((y - 1) == terrainYY) {
-                                int index = indexBase | (y + 1);
+                            if (y - 1 == terrainYY) {
+                                int index = indexBase | y + 1;
                                 blockArray[index] = this.LIGHT;
                                 metaArray[index] = this.LIGHT_META;
                             }
@@ -457,7 +457,7 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
 
                         if (distance <= 1) {
                             int index = indexBase | y;
-                            int indexAbove = indexBase | (y + 1);
+                            int indexAbove = indexBase | y + 1;
                             if (Blocks.air == blockArray[indexAbove]
                                     && (blockArray[index] == ASTEROID_STONE || blockArray[index] == GRASS)) {
                                 if (this.rand.nextInt(GLOWSTONE_CHANCE) == 0) {
@@ -560,7 +560,7 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
     private String timeString(long time1, long time2) {
         int ms100 = (int) ((time2 - time1) / 10000);
         int msdecimal = ms100 % 100;
-        String msd = ((ms100 < 10) ? "0" : "") + ms100;
+        String msd = (ms100 < 10 ? "0" : "") + ms100;
         return "" + ms100 / 100 + "." + msd + "ms";
     }
 
@@ -623,7 +623,7 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
                 int y = this.rand.nextInt(yRange) + ChunkProviderAsteroids.MIN_ASTEROID_Y;
 
                 // 50:50 chance vertically as well
-                if (y0 == (y / 16) % 2) {
+                if (y0 == y / 16 % 2) {
                     int px = x + this.rand.nextInt(ChunkProviderAsteroids.CHUNK_SIZE_X);
                     int pz = z + this.rand.nextInt(ChunkProviderAsteroids.CHUNK_SIZE_Z);
 
@@ -839,46 +839,42 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
                             int count = 2;
 
                             if (x > 1) {
-                                if ((chunk.getBlock(x - 2, y, z) instanceof BlockAir)) {
+                                if (chunk.getBlock(x - 2, y, z) instanceof BlockAir) {
                                     count += 2;
                                 }
                             }
                             if (x > 2) {
-                                if ((chunk.getBlock(x - 3, y, z) instanceof BlockAir)) {
+                                if (chunk.getBlock(x - 3, y, z) instanceof BlockAir) {
                                     count += 2;
                                 }
-                                if ((chunk.getBlock(x - 3, y + 1, z) instanceof BlockAir)) {
+                                if (chunk.getBlock(x - 3, y + 1, z) instanceof BlockAir) {
                                     count++;
                                 }
-                                if ((chunk.getBlock(x - 3, y + 1, z) instanceof BlockAir)) {
+                                if (chunk.getBlock(x - 3, y + 1, z) instanceof BlockAir) {
                                     count++;
                                 }
-                                if ((z > 0 /* || ((xPos & 15) > 2 ? flagZDChunk : flagXZDChunk) */)
-                                        && (chunk.getBlock(x - 3, y, z - 1) instanceof BlockAir)) {
+                                if (z > 0 && chunk.getBlock(x - 3, y, z - 1) instanceof BlockAir) {
                                     count++;
                                 }
-                                if ((z < 15 /* || ((xPos & 15) > 2 ? flagZUChunk : flagXZUChunk) */)
-                                        && (chunk.getBlock(x - 3, y, z + 1) instanceof BlockAir)) {
+                                if (z < 15 && chunk.getBlock(x - 3, y, z + 1) instanceof BlockAir) {
                                     count++;
                                 }
                             }
                             if (
                             /* flagXChunk || */ x > 3) {
-                                if ((chunk.getBlock(x - 4, y, z) instanceof BlockAir)) {
+                                if (chunk.getBlock(x - 4, y, z) instanceof BlockAir) {
                                     count += 2;
                                 }
-                                if ((chunk.getBlock(x - 4, y + 1, z) instanceof BlockAir)) {
+                                if (chunk.getBlock(x - 4, y + 1, z) instanceof BlockAir) {
                                     count++;
                                 }
-                                if ((chunk.getBlock(x - 4, y + 1, z) instanceof BlockAir)) {
+                                if (chunk.getBlock(x - 4, y + 1, z) instanceof BlockAir) {
                                     count++;
                                 }
-                                if ((z > 0 /* || ((xPos & 15) > 3 ? flagZDChunk : flagXZDChunk) */)
-                                        && !(chunk.getBlock(x - 4, y, z - 1) instanceof BlockAir)) {
+                                if (z > 0 && !(chunk.getBlock(x - 4, y, z - 1) instanceof BlockAir)) {
                                     count++;
                                 }
-                                if ((z < 15 /* || ((xPos & 15) > 3 ? flagZUChunk : flagXZUChunk) */)
-                                        && !(chunk.getBlock(x - 4, y, z + 1) instanceof BlockAir)) {
+                                if (z < 15 && !(chunk.getBlock(x - 4, y, z + 1) instanceof BlockAir)) {
                                     count++;
                                 }
                             }
@@ -972,8 +968,8 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
     private boolean isLargeAsteroidAt0(int x0, int z0) {
         for (int x = x0; x < x0 + ChunkProviderAsteroids.CHUNK_SIZE_X; x += 2) {
             for (int z = z0; z < z0 + ChunkProviderAsteroids.CHUNK_SIZE_Z; z += 2) {
-                if ((Math.abs(this.randFromPoint(x, z))
-                        < (this.asteroidDensity.getNoise(x, z) + .4) / ChunkProviderAsteroids.ASTEROID_CHANCE)) {
+                if (Math.abs(this.randFromPoint(x, z))
+                        < (this.asteroidDensity.getNoise(x, z) + .4) / ChunkProviderAsteroids.ASTEROID_CHANCE) {
                     return true;
                 }
             }

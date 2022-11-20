@@ -81,7 +81,7 @@ public class ThreadFindSeal {
         if (!sealers.isEmpty()) {
             if (checkCount > 0) {
                 Block headBlock = head.getBlockID(this.world);
-                if (headBlock != null && !(headBlock.isAir(world, head.x, head.y, head.z))) {
+                if (headBlock != null && !headBlock.isAir(world, head.x, head.y, head.z)) {
                     this.canBlockPassAirCheck(headBlock, this.head, 1);
                     // reset the checkCount as canBlockPassAirCheck might have changed it
                     this.checkCount = checkCount;
@@ -394,7 +394,7 @@ public class ThreadFindSeal {
                 side = 0;
                 bits = vec.sideDoneBits;
                 do {
-                    if ((bits & (1 << side)) == 0) {
+                    if ((bits & 1 << side) == 0) {
                         if (!checkedContains(vec, side)) {
                             BlockVec3 sideVec = vec.newVecSide(side);
                             Block id = sideVec.getBlockIDsafe_noChunkLoad(world);
@@ -464,7 +464,7 @@ public class ThreadFindSeal {
                 bits = vec.sideDoneBits;
                 side = 0;
                 do {
-                    if ((bits & (1 << side)) == 1) {
+                    if ((bits & 1 << side) == 1) {
                         continue;
                     }
                     if (!checkedContains(vec, side)) {
@@ -542,7 +542,7 @@ public class ThreadFindSeal {
                     // Skip the side which this was entered from
                     // This is also used to skip looking on the solid sides of partially sealable
                     // blocks
-                    if ((bits & (1 << side)) == 0) {
+                    if ((bits & 1 << side) == 0) {
                         // The sides 0 to 5 correspond with the ForgeDirections
                         // but saves a bit of time not to call ForgeDirection
                         if (!checkedContains(vec, side)) {
@@ -652,7 +652,7 @@ public class ThreadFindSeal {
                     // Skip the side which this was entered from
                     // This is also used to skip looking on the solid sides of partially sealable
                     // blocks
-                    if ((bits & (1 << side)) == 0) {
+                    if ((bits & 1 << side) == 0) {
                         // The sides 0 to 5 correspond with the ForgeDirections
                         // but saves a bit of time not to call ForgeDirection
                         if (!checkedContains(vec, side)) {
@@ -852,7 +852,7 @@ public class ThreadFindSeal {
                 int y = k & 255;
                 k >>= 4;
                 int dx = (k & 0x3FF0) + ddx;
-                int dz = ((k >> 10) & 0x3FF0) + ddz;
+                int dz = (k >> 10 & 0x3FF0) + ddz;
                 if (dx > 0x2000) {
                     dx -= 0x4000;
                 }

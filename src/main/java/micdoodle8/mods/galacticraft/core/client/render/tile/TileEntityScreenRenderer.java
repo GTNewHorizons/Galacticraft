@@ -42,7 +42,7 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
         GL11.glTranslatef((float) d, (float) d1, (float) d2);
 
         int meta = tileEntity.getBlockMetadata();
-        boolean screenData = (meta >= 8);
+        boolean screenData = meta >= 8;
         meta &= 7;
 
         switch (meta) {
@@ -155,7 +155,7 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
         GL11.glRotatef(90, 1F, 0F, 0F);
         boolean cornerblock = false;
         if (tileEntity.connectionsLeft == 0 || tileEntity.connectionsRight == 0) {
-            cornerblock = (tileEntity.connectionsUp == 0 || tileEntity.connectionsDown == 0);
+            cornerblock = tileEntity.connectionsUp == 0 || tileEntity.connectionsDown == 0;
         }
         int totalLR = tileEntity.connectionsLeft + tileEntity.connectionsRight;
         int totalUD = tileEntity.connectionsUp + tileEntity.connectionsDown;

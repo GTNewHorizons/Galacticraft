@@ -335,7 +335,7 @@ public class AsteroidsModule implements IPlanetsModule {
             switch (ID) {
                 case GuiIdsPlanets.MACHINE_ASTEROIDS:
                     if (tile instanceof TileEntityShortRangeTelepad) {
-                        return new ContainerShortRangeTelepad(player.inventory, ((TileEntityShortRangeTelepad) tile));
+                        return new ContainerShortRangeTelepad(player.inventory, (TileEntityShortRangeTelepad) tile);
                     }
                     if (tile instanceof TileEntityMinerBase) {
                         return new ContainerAstroMinerDock(player.inventory, (TileEntityMinerBase) tile);

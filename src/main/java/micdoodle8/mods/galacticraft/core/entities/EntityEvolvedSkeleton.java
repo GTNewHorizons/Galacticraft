@@ -161,7 +161,7 @@ public class EntityEvolvedSkeleton extends EntitySkeleton implements IEntityBrea
         }
 
         // Drop lapis as semi-rare drop if player hit and if dropping bones
-        if (p_70628_1_ && (ConfigManagerCore.challengeMobDropsAndSpawning) && j > 1 && this.rand.nextInt(12) == 0) {
+        if (p_70628_1_ && ConfigManagerCore.challengeMobDropsAndSpawning && j > 1 && this.rand.nextInt(12) == 0) {
             this.entityDropItem(new ItemStack(Items.dye, 1, 4), 0.0F);
         }
     }

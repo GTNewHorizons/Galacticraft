@@ -81,15 +81,15 @@ public class MapGen {
             return;
         }
 
-        GCLog.debug("Starting map generation " + file.getName() + " top left " + ((biomeMapCx - limitX) * 16) + ","
-                + ((biomeMapCz - limitZ) * 16));
+        GCLog.debug("Starting map generation " + file.getName() + " top left " + (biomeMapCx - limitX) * 16 + ","
+                + (biomeMapCz - limitZ) * 16);
         field_147435_p = world.getWorldInfo().getTerrainType();
         this.initialise(world.getSeed());
     }
 
     public void writeOutputFile(boolean flag) {
         try {
-            if (!this.biomeMapFile.exists() || (this.biomeMapFile.canWrite() && this.biomeMapFile.canRead())) {
+            if (!this.biomeMapFile.exists() || this.biomeMapFile.canWrite() && this.biomeMapFile.canRead()) {
                 FileUtils.writeByteArrayToFile(this.biomeMapFile, this.biomeAndHeightArray);
             }
         } catch (IOException ex) {
@@ -180,12 +180,12 @@ public class MapGen {
                 // TODO: start in centre instead of top left
                 BIOMEDONE:
                 for (int xx = 0; xx < limit; xx++) {
-                    int hidx = ((xx + x) << 4) + z;
+                    int hidx = (xx + x << 4) + z;
                     for (int zz = 0; zz < limit; zz++) {
                         int height = heights[hidx + zz];
                         avgHeight += height;
                         divisor++;
-                        BiomeGenBase theBiome = biomesGrid[xx + x + ((zz + z) << 4)];
+                        BiomeGenBase theBiome = biomesGrid[xx + x + (zz + z << 4)];
                         if (theBiome != null) {
                             biome = theBiome.biomeID;
                         } else {
@@ -215,8 +215,7 @@ public class MapGen {
                 }
 
                 int arrayIndex = (ix * biomeMapSizeZ + iz) * 2;
-                this.biomeAndHeightArray[arrayIndex] =
-                        (byte) (cols.get(maxindex).intValue());
+                this.biomeAndHeightArray[arrayIndex] = (byte) cols.get(maxindex).intValue();
                 this.biomeAndHeightArray[arrayIndex + 1] = (byte) ((avgHeight + (divisor + 1) / 2) / divisor);
                 iz++;
             }

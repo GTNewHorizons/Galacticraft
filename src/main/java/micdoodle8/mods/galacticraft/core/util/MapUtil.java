@@ -359,8 +359,8 @@ public class MapUtil {
                 for (int xx = 0; xx < 4; xx++) {
                     for (int zz = 0; zz < 4; zz++) {
                         int col = overworldImage.getRGB(xx + x, zz + z);
-                        r += (col >> 16);
-                        g += (col >> 8) & 255;
+                        r += col >> 16;
+                        g += col >> 8 & 255;
                         b += col & 255;
                     }
                 }
@@ -370,8 +370,8 @@ public class MapUtil {
                 mapColPos.put(g - b, count);
                 if (x < overworldImage.getHeight()) {
                     int col = paletteImage.getRGB(x + 1, z + 1);
-                    r = (col >> 16);
-                    g = (col >> 8) & 255;
+                    r = col >> 16;
+                    g = col >> 8 & 255;
                     b = col & 255;
                     while (mapColPosB.containsKey(g - b)) {
                         g++;
@@ -452,7 +452,7 @@ public class MapUtil {
         if (raw.length == 18432 * 64) {
             File file0 = new File(folder, "overworldRaw.bin");
 
-            if (!file0.exists() || (file0.canRead() && file0.canWrite())) {
+            if (!file0.exists() || file0.canRead() && file0.canWrite()) {
                 FileUtils.writeByteArrayToFile(file0, raw);
             } else {
                 System.err.println("Cannot read/write to file %minecraftDir%/assets/temp/overworldRaw.bin");
@@ -466,8 +466,8 @@ public class MapUtil {
             for (int x = 0; x < 1536; x++) {
                 for (int z = 0; z < 384; z++) {
                     int arrayIndex = (x * 384 + z) * 2;
-                    int biome = ((int) raw[arrayIndex]) & 255;
-                    int height = ((int) raw[arrayIndex + 1]) & 255;
+                    int biome = (int) raw[arrayIndex] & 255;
+                    int height = (int) raw[arrayIndex + 1] & 255;
 
                     if (height < 63 && biome != 10) {
                         biome = 0;
@@ -504,8 +504,8 @@ public class MapUtil {
             for (int x = 0; x < 192; x++) {
                 for (int z = 0; z < 48; z++) {
                     int arrayIndex = (x * 48 + z) * 2;
-                    int biome = ((int) raw[arrayIndex]) & 255;
-                    int height = ((int) raw[arrayIndex + 1]) & 255;
+                    int biome = (int) raw[arrayIndex] & 255;
+                    int height = (int) raw[arrayIndex + 1] & 255;
 
                     if (height < 63 && biome != 10) {
                         biome = 0;
@@ -548,7 +548,7 @@ public class MapUtil {
         } else {
             File file0 = getFile(folder, cx, cz);
 
-            if (!file0.exists() || (file0.canRead() && file0.canWrite())) {
+            if (!file0.exists() || file0.canRead() && file0.canWrite()) {
                 FileUtils.writeByteArrayToFile(file0, raw);
             }
         }
@@ -657,8 +657,8 @@ public class MapUtil {
                 }
 
                 int arrayIndex = (x * SIZE_STD + z) * 2;
-                int biome = ((int) raw[arrayIndex]) & 255;
-                int height = ((int) raw[arrayIndex + 1]) & 255;
+                int biome = (int) raw[arrayIndex] & 255;
+                int height = (int) raw[arrayIndex + 1] & 255;
 
                 if (height < 63 && biome != 10) {
                     biome = 0;
@@ -834,7 +834,7 @@ public class MapUtil {
         try {
             File outputFile = new File(baseFolder, dim + "_" + chunkXPos + "_" + chunkZPos + ".jpg");
 
-            if (!outputFile.exists() || (outputFile.canWrite() && outputFile.canRead())) {
+            if (!outputFile.exists() || outputFile.canWrite() && outputFile.canRead()) {
                 ImageIO.write(image, "jpg", outputFile);
             }
         } catch (IOException e) {
