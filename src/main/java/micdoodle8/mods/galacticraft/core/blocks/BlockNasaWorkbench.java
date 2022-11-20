@@ -119,7 +119,7 @@ public class BlockNasaWorkbench extends BlockContainer
         for (int x = -1; x < 2; x++) {
             for (int y = 0; y < 4; y++) {
                 for (int z = -1; z < 2; z++) {
-                    if ((((x != 0) || (y != 0)) || (z != 0))) {
+                    if (x != 0 || y != 0 || z != 0) {
                         if (Math.abs(x) != 1 || Math.abs(z) != 1) {
                             final Block blockAt = world.getBlock(x0 + x, y0 + y, z0 + z);
 
@@ -172,7 +172,7 @@ public class BlockNasaWorkbench extends BlockContainer
         for (int x = -1; x < 2; x++) {
             for (int y = 0; y < 4; y++) {
                 for (int z = -1; z < 2; z++) {
-                    if ((((x != 0) || (y != 0)) || (z != 0))) {
+                    if (x != 0 || y != 0 || z != 0) {
                         if (Math.abs(x) != 1 || Math.abs(z) != 1) {
                             if ((y == 0 || y == 3) && x == 0 && z == 0) {
                                 if (world.getBlock(x0 + x, y0 + y, z0 + z) == GCBlocks.fakeBlock) {

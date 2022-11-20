@@ -225,8 +225,9 @@ public class GCPlayerHandler {
                 GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.REMOVE_LEFT_TANK);
                 GCPlayer.airRemaining = 0;
                 GCPlayerHandler.sendAirRemainingPacket(player, GCPlayer);
-            } else if ((GCPlayer.lastTankInSlot1 == null || forceSend)
-                    || (GCPlayer.tankInSlot1.getItem() != GCPlayer.lastTankInSlot1.getItem())) {
+            } else if (GCPlayer.lastTankInSlot1 == null
+                    || forceSend
+                    || GCPlayer.tankInSlot1.getItem() != GCPlayer.lastTankInSlot1.getItem()) {
                 if (GCPlayer.tankInSlot1.getItem() == GCItems.oxTankLight) {
                     GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDLEFTGREENTANK);
                 } else if (GCPlayer.tankInSlot1.getItem() == GCItems.oxTankMedium) {
@@ -256,8 +257,9 @@ public class GCPlayerHandler {
                 GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.REMOVE_RIGHT_TANK);
                 GCPlayer.airRemaining2 = 0;
                 GCPlayerHandler.sendAirRemainingPacket(player, GCPlayer);
-            } else if ((GCPlayer.lastTankInSlot2 == null || forceSend)
-                    || (GCPlayer.tankInSlot2.getItem() != GCPlayer.lastTankInSlot2.getItem())) {
+            } else if (GCPlayer.lastTankInSlot2 == null
+                    || forceSend
+                    || GCPlayer.tankInSlot2.getItem() != GCPlayer.lastTankInSlot2.getItem()) {
                 if (GCPlayer.tankInSlot2.getItem() == GCItems.oxTankLight) {
                     GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDRIGHTGREENTANK);
                 } else if (GCPlayer.tankInSlot2.getItem() == GCItems.oxTankMedium) {
@@ -286,8 +288,9 @@ public class GCPlayerHandler {
             if (GCPlayer.usingParachute) {
                 if (GCPlayer.parachuteInSlot == null) {
                     GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.REMOVE_PARACHUTE);
-                } else if ((GCPlayer.lastParachuteInSlot == null || forceSend)
-                        || (GCPlayer.parachuteInSlot.getItemDamage() != GCPlayer.lastParachuteInSlot.getItemDamage())) {
+                } else if (GCPlayer.lastParachuteInSlot == null
+                        || forceSend
+                        || GCPlayer.parachuteInSlot.getItemDamage() != GCPlayer.lastParachuteInSlot.getItemDamage()) {
                     GCPlayerHandler.sendGearUpdatePacket(
                             player, EnumModelPacket.ADD_PARACHUTE, GCPlayer.parachuteInSlot.getItemDamage());
                 }
@@ -517,8 +520,8 @@ public class GCPlayerHandler {
 
     protected void checkOxygen(EntityPlayerMP player, GCPlayerStats playerStats) {
         if ((player.dimension == 0 || player.worldObj.provider instanceof IGalacticraftWorldProvider)
-                && (((player.dimension != 0)
-                                && !((IGalacticraftWorldProvider) player.worldObj.provider).hasBreathableAtmosphere())
+                && (player.dimension != 0
+                                && !((IGalacticraftWorldProvider) player.worldObj.provider).hasBreathableAtmosphere()
                         || player.posY > GCPlayerHandler.OXYGENHEIGHTLIMIT)
                 && !player.capabilities.isCreativeMode
                 && !(player.ridingEntity instanceof EntityLanderBase)
@@ -601,8 +604,8 @@ public class GCPlayerHandler {
             if (player.isOnLadder()) {
                 playerStats.oxygenSetupValid = playerStats.lastOxygenSetupValid;
             } else {
-                playerStats.oxygenSetupValid = ((OxygenUtil.hasValidOxygenSetup(player) && !airEmpty)
-                        || OxygenUtil.isAABBInBreathableAirBlock(player));
+                playerStats.oxygenSetupValid = OxygenUtil.hasValidOxygenSetup(player) && !airEmpty
+                        || OxygenUtil.isAABBInBreathableAirBlock(player);
             }
 
             if (!player.worldObj.isRemote && player.isEntityAlive()) {

@@ -772,8 +772,8 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
 
     @Override
     public void onLaunch() {
-        if (((this.worldObj.provider.dimensionId != GalacticraftCore.planetOverworld.getDimensionID())
-                && !(this.worldObj.provider instanceof IGalacticraftWorldProvider))) {
+        if (this.worldObj.provider.dimensionId != GalacticraftCore.planetOverworld.getDimensionID()
+                && !(this.worldObj.provider instanceof IGalacticraftWorldProvider)) {
             if (ConfigManagerCore.disableRocketLaunchAllNonGC) {
                 this.cancelLaunch();
                 return;
@@ -937,7 +937,7 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
             // NOTE: setPad() is called also when a world or chunk is loaded - if the rocket
             // is Ignited (from NBT save
             // data) do not change those settings
-            if ((this.launchPhase != EnumLaunchPhase.IGNITED.ordinal())) {
+            if (this.launchPhase != EnumLaunchPhase.IGNITED.ordinal()) {
                 this.setLaunchPhase(EnumLaunchPhase.UNIGNITED);
                 this.targetVec = null;
                 if (GalacticraftCore.isPlanetsLoaded) {

@@ -754,7 +754,6 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
     }
 
     public void generateSkylightMap(Chunk chunk, int cx, int cz) {
-        final World w = chunk.worldObj;
         for (int j = 0; j < 16; j++) {
             if (chunk.getBlockStorageArray()[j] == null) {
                 chunk.getBlockStorageArray()[j] = new ExtendedBlockStorage(j << 4, false);

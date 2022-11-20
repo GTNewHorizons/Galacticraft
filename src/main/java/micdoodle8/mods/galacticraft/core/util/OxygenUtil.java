@@ -213,8 +213,9 @@ public class OxygenUtil {
                 } else {
                     return -1;
                 }
-            } else if ((block instanceof BlockGlass || block instanceof BlockStainedGlass)
-                    || (block instanceof BlockLiquid)) {
+            } else if (block instanceof BlockGlass
+                    || block instanceof BlockStainedGlass
+                    || block instanceof BlockLiquid) {
                 return -1;
             } else if (OxygenPressureProtocol.nonPermeableBlocks.containsKey(block)) {
                 final ArrayList<Integer> metaList = OxygenPressureProtocol.nonPermeableBlocks.get(block);
@@ -258,8 +259,8 @@ public class OxygenUtil {
 
         // Half slab seals on the top side or the bottom side according to its metadata
         if (block instanceof BlockSlab) {
-            return (((side != 0) || ((vec.getBlockMetadata(world) & 8) != 8))
-                    && ((side != 1) || ((vec.getBlockMetadata(world) & 8) != 0)));
+            return (side != 0 || (vec.getBlockMetadata(world) & 8) != 8)
+                    && (side != 1 || (vec.getBlockMetadata(world) & 8) != 0);
         }
 
         // Farmland etc only seals on the solid underside

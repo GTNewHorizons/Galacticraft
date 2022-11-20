@@ -76,9 +76,9 @@ public class RenderSlimeling extends RenderLiving {
         if (!mc.gameSettings.hideGUI
                 && !par1EntityLivingBase.isInvisible()
                 && (mc.currentScreen == null
-                        || ((!(mc.currentScreen instanceof GuiSlimeling)
-                                        && !(mc.currentScreen instanceof GuiSlimelingInventory))
-                                || !GuiSlimeling.renderingOnGui))) {
+                        || !(mc.currentScreen instanceof GuiSlimeling)
+                                && !(mc.currentScreen instanceof GuiSlimelingInventory)
+                        || !GuiSlimeling.renderingOnGui)) {
             this.renderLivingLabelWithColor(
                     par1EntityLivingBase,
                     ((EntitySlimeling) par1EntityLivingBase).getName(),

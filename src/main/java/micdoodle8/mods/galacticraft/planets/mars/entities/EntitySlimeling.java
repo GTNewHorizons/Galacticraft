@@ -495,7 +495,7 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
 
     @Override
     public boolean canMateWith(EntityAnimal par1EntityAnimal) {
-        if ((par1EntityAnimal == this) || !this.isTamed() || !(par1EntityAnimal instanceof EntitySlimeling)) {
+        if (par1EntityAnimal == this || !this.isTamed() || !(par1EntityAnimal instanceof EntitySlimeling)) {
             return false;
         } else {
             final EntitySlimeling slimeling = (EntitySlimeling) par1EntityAnimal;

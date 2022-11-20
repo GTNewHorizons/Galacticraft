@@ -89,7 +89,7 @@ public class BlockShortRangeTelepad extends BlockTileGC implements ItemBlockDesc
         for (int x = -1; x <= 1; x++) {
             for (int y = 0; y < 3; y += 2) {
                 for (int z = -1; z <= 1; z++) {
-                    if ((((x != 0) || (y != 0)) || (z != 0))) {
+                    if (x != 0 || y != 0 || z != 0) {
                         final Block blockAt = world.getBlock(x0 + x, y0 + y, z0 + z);
 
                         if (!blockAt.getMaterial().isReplaceable()) {
@@ -146,7 +146,7 @@ public class BlockShortRangeTelepad extends BlockTileGC implements ItemBlockDesc
         for (int x = -1; x <= 1; x++) {
             for (int y = 0; y < 3; y += 2) {
                 for (int z = -1; z <= 1; z++) {
-                    if ((((x != 0) || (y != 0)) || (z != 0))) {
+                    if (x != 0 || y != 0 || z != 0) {
                         if (world.getBlock(x0 + x, y0 + y, z0 + z) == AsteroidBlocks.fakeTelepad) {
                             fakeBlockCount++;
                         }
@@ -172,12 +172,9 @@ public class BlockShortRangeTelepad extends BlockTileGC implements ItemBlockDesc
 
         if (tileAt instanceof TileEntityShortRangeTelepad) {
             final TileEntityShortRangeTelepad telepad = (TileEntityShortRangeTelepad) tileAt;
-            final float teleportTimeScaled =
-                    Math.min(1.0F, telepad.teleportTime / (float) TileEntityShortRangeTelepad.MAX_TELEPORT_TIME);
-            float f;
+            Math.min(1.0F, telepad.teleportTime / (float) TileEntityShortRangeTelepad.MAX_TELEPORT_TIME);
             for (int i = 0; i < 6; i++) {
                 for (int j = 0; j < 4; j++) {
-                    f = rand.nextFloat() * 0.6F + 0.4F;
                     GalacticraftPlanets.spawnParticle(
                             "portalBlue",
                             new Vector3(x + 0.2 + rand.nextDouble() * 0.6, y + 0.1, z + 0.2 + rand.nextDouble() * 0.6),
@@ -186,7 +183,6 @@ public class BlockShortRangeTelepad extends BlockTileGC implements ItemBlockDesc
                             false);
                 }
 
-                f = rand.nextFloat() * 0.6F + 0.4F;
                 GalacticraftPlanets.spawnParticle(
                         "portalBlue",
                         new Vector3(x + 0.0 + rand.nextDouble() * 0.2, y + 2.9, z + rand.nextDouble()),

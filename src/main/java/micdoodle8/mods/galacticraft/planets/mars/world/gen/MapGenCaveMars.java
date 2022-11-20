@@ -205,10 +205,11 @@ public class MapGenCaveMars extends MapGenBaseMeta {
 
                                         if (yfactor > -0.7D && xfactorSq + yfactorSq + zfactorSq < 1.0D) {
                                             if (blockIdArray[coords] == MarsBlocks.marsBlock) {
-                                                if ((metaArray[coords] == 6 || metaArray[coords] == 9)
-                                                        || (metaArray[coords] == 5
+                                                if (metaArray[coords] == 6
+                                                        || metaArray[coords] == 9
+                                                        || metaArray[coords] == 5
                                                                 && random.nextInt(MapGenCaveMars.BREAK_THROUGH_CHANCE)
-                                                                        == 0)) {
+                                                                        == 0) {
                                                     blockIdArray[coords] = Blocks.air;
                                                 }
                                             }

@@ -95,7 +95,7 @@ public class TileEntityHydrogenPipe extends TileEntity implements ITransmitter {
          * Cache the adjacentConnections.
          */
         if (this.adjacentConnections == null) {
-            this.adjacentConnections = this.getAdjacentHydrogenConnections(this);
+            this.adjacentConnections = TileEntityHydrogenPipe.getAdjacentHydrogenConnections(this);
         }
 
         return this.adjacentConnections;

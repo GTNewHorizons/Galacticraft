@@ -35,7 +35,7 @@ class AirLockProtocol {
             for (int y = -1; y <= 1; y++) {
                 for (int x = -1; x <= 1; x++) {
                     for (int z = -1; z <= 1; z++) {
-                        if ((((x != 0) || (y != 0)) || (z != 0))) {
+                        if (x != 0 || y != 0 || z != 0) {
                             if (tile2.xCoord + x == this.head.xCoord || tile2.zCoord + z == this.head.zCoord) {
                                 final TileEntity tile = this.worldObj.getTileEntity(
                                         tile2.xCoord + x, tile2.yCoord + y, tile2.zCoord + z);
@@ -56,7 +56,7 @@ class AirLockProtocol {
             for (int y = -1; y <= 1; y++) {
                 for (int x = -1; x <= 1; x++) {
                     for (int z = -1; z <= 1; z++) {
-                        if ((((x != 0) || (y != 0)) || (z != 0))) {
+                        if (x != 0 || y != 0 || z != 0) {
                             if (tile2.yCoord + y == this.head.yCoord) {
                                 final TileEntity tile = this.worldObj.getTileEntity(
                                         tile2.xCoord + x, tile2.yCoord + y, tile2.zCoord + z);

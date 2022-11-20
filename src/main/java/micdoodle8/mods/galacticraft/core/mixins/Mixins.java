@@ -84,7 +84,7 @@ public enum Mixins {
     private static class Builder {
         private final String name;
         private final List<String> mixinClasses = new ArrayList<>();
-        private Supplier<Boolean> applyIf = () -> true;
+        private final Supplier<Boolean> applyIf = () -> true;
         private Side side = Side.BOTH;
         private Phase phase = Phase.LATE;
         private final List<TargetedMod> targetedMods = new ArrayList<>();

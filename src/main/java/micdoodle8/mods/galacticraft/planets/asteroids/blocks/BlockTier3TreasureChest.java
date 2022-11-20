@@ -361,7 +361,7 @@ public class BlockTier3TreasureChest extends BlockContainer
             float par9) {
         Object var10 = par1World.getTileEntity(par2, par3, par4);
 
-        if ((var10 == null)
+        if (var10 == null
                 || par1World.isSideSolid(par2, par3 + 1, par4, ForgeDirection.DOWN)
                 || BlockTier3TreasureChest.isOcelotBlockingChest(par1World, par2, par3, par4)) {
             return true;

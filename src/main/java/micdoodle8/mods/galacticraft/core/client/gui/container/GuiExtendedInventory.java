@@ -117,7 +117,7 @@ public class GuiExtendedInventory extends InventoryEffectRenderer {
         par0Minecraft.thePlayer.rotationYaw = (float) Math.atan(par4 / 40.0F) * 40.0F;
         par0Minecraft.thePlayer.rotationYaw = GuiExtendedInventory.rotation;
         par0Minecraft.thePlayer.rotationYawHead = par0Minecraft.thePlayer.rotationYaw;
-        par0Minecraft.thePlayer.rotationPitch = (float) Math.sin(par0Minecraft.getSystemTime() / 500.0F) * 3.0F;
+        par0Minecraft.thePlayer.rotationPitch = (float) Math.sin(Minecraft.getSystemTime() / 500.0F) * 3.0F;
         GL11.glTranslatef(0.0F, par0Minecraft.thePlayer.yOffset, 0.0F);
         RenderManager.instance.playerViewY = 180.0F;
         RenderManager.instance.renderEntityWithPosYaw(par0Minecraft.thePlayer, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);

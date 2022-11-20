@@ -75,7 +75,7 @@ public class WorldGenTerraformTree extends WorldGenerator {
                 }
             }
 
-            if (!flag || !(y < 256 - l - 1)) {
+            if (!flag || (y >= 256 - l - 1)) {
                 return false;
             } else {
                 b0 = 3;

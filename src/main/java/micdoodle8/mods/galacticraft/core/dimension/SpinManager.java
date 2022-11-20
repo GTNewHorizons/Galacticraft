@@ -194,7 +194,6 @@ public class SpinManager {
 
         float thismass = 0.1F; // Mass of a thruster
         float thismassCentreX = 0.1F * this.oneSSBlock.x;
-        float thismassCentreY = 0.1F * this.oneSSBlock.y;
         float thismassCentreZ = 0.1F * this.oneSSBlock.z;
         float thismoment = 0F;
         int thisssBoundsMaxX = this.oneSSBlock.x;
@@ -261,7 +260,6 @@ public class SpinManager {
                                 // Maybe also check for things in other mods by name: lead, uranium blocks?
                             }
                             thismassCentreX += m * sideVec.x;
-                            thismassCentreY += m * sideVec.y;
                             thismassCentreZ += m * sideVec.z;
                             thismass += m;
                             thismoment += m * (sideVec.x * sideVec.x + sideVec.z * sideVec.z);

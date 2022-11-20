@@ -107,7 +107,8 @@ public class GuiFuelLoader extends GuiContainerGC {
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         this.fontRendererObj.drawString(this.fuelLoader.getInventoryName(), 60, 10, 4210752);
         this.buttonLoadFuel.enabled = this.fuelLoader.disableCooldown == 0
-                && ((this.fuelLoader.fuelTank.getFluid() != null) && (this.fuelLoader.fuelTank.getFluid().amount != 0));
+                && this.fuelLoader.fuelTank.getFluid() != null
+                && this.fuelLoader.fuelTank.getFluid().amount != 0;
         this.buttonLoadFuel.displayString = !this.fuelLoader.getDisabled(0)
                 ? GCCoreUtil.translate("gui.button.stoploading.name")
                 : GCCoreUtil.translate("gui.button.loadfuel.name");

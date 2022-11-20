@@ -203,8 +203,9 @@ public class MapGenCavesMoon extends MapGenBaseMeta {
 
                                         if (yfactor > -0.7D && xfactorSq + yfactorSq + zfactorSq < 1.0D) {
                                             if (blockIdArray[coords] == GCBlocks.blockMoon) {
-                                                if ((metaArray[coords] == 3 || metaArray[coords] == 4)
-                                                        || (metaArray[coords] == 5)) {
+                                                if (metaArray[coords] == 3
+                                                        || metaArray[coords] == 4
+                                                        || metaArray[coords] == 5) {
                                                     blockIdArray[coords] = Blocks.air;
                                                 }
                                             }

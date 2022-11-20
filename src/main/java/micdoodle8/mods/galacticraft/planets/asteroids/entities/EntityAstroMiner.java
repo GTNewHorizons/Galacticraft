@@ -621,7 +621,7 @@ public class EntityAstroMiner extends Entity
     public void handlePacketData(Side side, EntityPlayer player) {}
 
     public void recall() {
-        if (this.AIstate > this.AISTATE_ATBASE && this.AIstate < this.AISTATE_RETURNING) {
+        if (this.AIstate > EntityAstroMiner.AISTATE_ATBASE && this.AIstate < EntityAstroMiner.AISTATE_RETURNING) {
             this.AIstate = AISTATE_RETURNING;
             this.pathBlockedCount = 0;
         }
@@ -736,7 +736,7 @@ public class EntityAstroMiner extends Entity
      * @return True if reached a turning point
      */
     private boolean moveToTarget() {
-        if (this.energyLevel < this.RETURNENERGY || this.inventoryDrops > this.RETURNDROPS) {
+        if (this.energyLevel < EntityAstroMiner.RETURNENERGY || this.inventoryDrops > EntityAstroMiner.RETURNDROPS) {
             this.AIstate = AISTATE_RETURNING;
             this.pathBlockedCount = 0;
             return true;
@@ -786,8 +786,9 @@ public class EntityAstroMiner extends Entity
                 MathHelper.floor_double(this.posX + 0.5D),
                 MathHelper.floor_double(this.posY + 1.5D),
                 MathHelper.floor_double(this.posZ + 0.5D));
-        int otherEnd =
-                this.worldObj.provider instanceof WorldProviderAsteroids ? this.MINE_LENGTH_AST : this.MINE_LENGTH;
+        int otherEnd = this.worldObj.provider instanceof WorldProviderAsteroids
+                ? EntityAstroMiner.MINE_LENGTH_AST
+                : EntityAstroMiner.MINE_LENGTH;
         if (this.baseFacing == 2 || this.baseFacing == 4) {
             otherEnd = -otherEnd;
         }
@@ -834,8 +835,8 @@ public class EntityAstroMiner extends Entity
      * @return True if reached a turning point
      */
     private boolean doMining() {
-        if (this.energyLevel < this.RETURNENERGY
-                || this.inventoryDrops > this.RETURNDROPS
+        if (this.energyLevel < EntityAstroMiner.RETURNENERGY
+                || this.inventoryDrops > EntityAstroMiner.RETURNDROPS
                 || this.minePoints.size() == 0) {
             if (this.minePoints.size() > 0 && this.minePointCurrent != null) {
                 this.minePoints.addFirst(this.minePointCurrent);
@@ -2025,7 +2026,7 @@ public class EntityAstroMiner extends Entity
     @Override
     protected void readEntityFromNBT(NBTTagCompound nbt) {
         final NBTTagList var2 = nbt.getTagList("Items", 10);
-        this.cargoItems = new ItemStack[this.INV_SIZE];
+        this.cargoItems = new ItemStack[EntityAstroMiner.INV_SIZE];
 
         if (var2 != null) {
             for (int var3 = 0; var3 < var2.tagCount(); ++var3) {

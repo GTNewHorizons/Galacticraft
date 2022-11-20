@@ -132,7 +132,7 @@ public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDes
                             } else {
                                 return this.airLockIcons[2];
                             }
-                        } else if ((orientation.offsetY == 1) || (orientation.ordinal() == side)) {
+                        } else if (orientation.offsetY == 1 || orientation.ordinal() == side) {
                             if (side == 0) {
                                 return this.airLockIcons[0];
                             } else if (side == 1) {
@@ -150,19 +150,19 @@ public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDes
 
                         if (connection != null && connection.equals(GCBlocks.airLockSeal)) {
                             if (orientation.offsetX == 1) {
-                                if ((side == 0) || (side == 1) || (side == 3)) {
+                                if (side == 0 || side == 1 || side == 3) {
                                     return this.airLockIcons[4];
                                 } else if (side == 2) {
                                     return this.airLockIcons[5];
                                 }
                             } else if (orientation.offsetX == -1) {
-                                if ((side == 0) || (side == 1) || (side == 3)) {
+                                if (side == 0 || side == 1 || side == 3) {
                                     return this.airLockIcons[5];
                                 } else if (side == 2) {
                                     return this.airLockIcons[4];
                                 }
                             } else if (orientation.offsetZ == 1) {
-                                if ((side == 0) || (side == 1)) {
+                                if (side == 0 || side == 1) {
                                     return this.airLockIcons[2];
                                 } else if (side == 4) {
                                     return this.airLockIcons[4];
@@ -170,7 +170,7 @@ public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDes
                                     return this.airLockIcons[5];
                                 }
                             } else if (orientation.offsetZ == -1) {
-                                if ((side == 0) || (side == 1)) {
+                                if (side == 0 || side == 1) {
                                     return this.airLockIcons[3];
                                 } else if (side == 4) {
                                     return this.airLockIcons[5];

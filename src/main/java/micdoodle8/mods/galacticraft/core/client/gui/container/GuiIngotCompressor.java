@@ -81,8 +81,9 @@ public class GuiIngotCompressor extends GuiContainerGC {
         this.drawTexturedModalRect(containerWidth, containerHeight, 0, 0, this.xSize, this.ySize);
 
         if (this.tileEntity.processTicks > 0) {
-            process = (int)
-                    ((double) this.tileEntity.processTicks / (double) this.tileEntity.PROCESS_TIME_REQUIRED * 100);
+            process = (int) ((double) this.tileEntity.processTicks
+                    / (double) TileEntityIngotCompressor.PROCESS_TIME_REQUIRED
+                    * 100);
         } else {
             process = 0;
         }

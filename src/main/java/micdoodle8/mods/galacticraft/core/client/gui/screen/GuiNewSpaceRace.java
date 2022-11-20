@@ -953,7 +953,8 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
                         }
                     }
 
-                    if (((!this.lastMousePressed || (this.checkboxSelector.isSelected == null))
+                    if ((!this.lastMousePressed
+                                    || this.checkboxSelector.isSelected == null
                                     || !this.checkboxSelector.isSelected)
                             && this.selectionMaxX - this.selectionMinX > 0
                             && this.selectionMaxY - this.selectionMinY > 0) {

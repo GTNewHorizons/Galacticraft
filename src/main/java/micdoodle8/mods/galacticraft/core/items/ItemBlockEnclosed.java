@@ -122,7 +122,7 @@ public class ItemBlockEnclosed extends ItemBlockDesc {
             }
 
             if (!entityplayer.canPlayerEdit(i, j, k, side, itemstack)
-                    || (j == 255 && this.field_150939_a.getMaterial().isSolid())
+                    || j == 255 && this.field_150939_a.getMaterial().isSolid()
                     || !world.canPlaceEntityOnSide(block, i, j, k, false, side, entityplayer, itemstack)) {
                 return false;
             } else {
