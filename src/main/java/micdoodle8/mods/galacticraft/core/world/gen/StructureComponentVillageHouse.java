@@ -498,7 +498,8 @@ public class StructureComponentVillageHouse extends StructureComponentVillage {
 
         for (int i = 5; i <= 11; i++) {
             for (int j = 5; j <= 11; j++) {
-                if (!(j == 5 && i == 5 || j == 5 && i == 11 || j == 11 && i == 5 || j == 11 && i == 11)) {
+                if ((((((j != 5) || (i != 5)) && ((j != 5) || (i != 11))) && ((j != 11) || (i != 5)))
+                        && ((j != 11) || (i != 11)))) {
                     if (i >= 7 && i <= 9 && j >= 7 && j <= 9) {
                         this.placeBlockAtCurrentPosition(
                                 par1World, Blocks.glass, 0, i, yLevel, j, par3StructureBoundingBox);

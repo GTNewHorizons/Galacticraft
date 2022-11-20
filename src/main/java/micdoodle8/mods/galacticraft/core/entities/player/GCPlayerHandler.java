@@ -557,8 +557,8 @@ public class GCPlayerHandler {
 
     protected void checkOxygen(EntityPlayerMP player, GCPlayerStats playerStats) {
         if ((player.dimension == 0 || player.worldObj.provider instanceof IGalacticraftWorldProvider)
-                && (!(player.dimension == 0
-                                || ((IGalacticraftWorldProvider) player.worldObj.provider).hasBreathableAtmosphere())
+                && (((player.dimension != 0)
+                                && !((IGalacticraftWorldProvider) player.worldObj.provider).hasBreathableAtmosphere())
                         || player.posY > GCPlayerHandler.OXYGENHEIGHTLIMIT)
                 && !player.capabilities.isCreativeMode
                 && !(player.ridingEntity instanceof EntityLanderBase)
@@ -641,8 +641,8 @@ public class GCPlayerHandler {
             if (player.isOnLadder()) {
                 playerStats.oxygenSetupValid = playerStats.lastOxygenSetupValid;
             } else {
-                playerStats.oxygenSetupValid = !((!OxygenUtil.hasValidOxygenSetup(player) || airEmpty)
-                        && !OxygenUtil.isAABBInBreathableAirBlock(player));
+                playerStats.oxygenSetupValid = ((OxygenUtil.hasValidOxygenSetup(player) && !airEmpty)
+                        || OxygenUtil.isAABBInBreathableAirBlock(player));
             }
 
             if (!player.worldObj.isRemote && player.isEntityAlive()) {

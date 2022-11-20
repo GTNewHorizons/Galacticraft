@@ -108,8 +108,8 @@ public class OxygenPressureProtocol {
 
         // Half slab seals on the top side or the bottom side according to its metadata
         if (block instanceof BlockSlab) {
-            return !(side == 0 && (vec.getBlockMetadata(world) & 8) == 8
-                    || side == 1 && (vec.getBlockMetadata(world) & 8) == 0);
+            return (((side != 0) || ((vec.getBlockMetadata(world) & 8) != 8))
+                    && ((side != 1) || ((vec.getBlockMetadata(world) & 8) != 0)));
         }
 
         // Farmland etc only seals on the solid underside

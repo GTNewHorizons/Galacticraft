@@ -287,7 +287,7 @@ public class GuiCelestialSelection extends GuiScreen {
 
         if (this.selectionState == EnumSelectionState.PREVIEW
                 && this.selectionCount < 2
-                && !(this.lastSelectedBody instanceof Planet && this.selectedBody instanceof Planet)) {
+                && (!(this.lastSelectedBody instanceof Planet) || !(this.selectedBody instanceof Planet))) {
             return this.zoom;
         }
 
@@ -411,8 +411,8 @@ public class GuiCelestialSelection extends GuiScreen {
             return false;
         }
 
-        if (!(atBody.getReachable() && (this.possibleBodies == null || this.possibleBodies.contains(atBody))
-                || ConfigManagerCore.allowSSatUnreachable)) {
+        if (((!atBody.getReachable() || ((this.possibleBodies != null) && !this.possibleBodies.contains(atBody)))
+                && !ConfigManagerCore.allowSSatUnreachable)) {
             // If parent body is unreachable, the satellite is also unreachable (will be
             // ignored if allowSSatUnreachable
             // is true)
@@ -884,8 +884,8 @@ public class GuiCelestialSelection extends GuiScreen {
                         && mouseY <= e.getValue().y + iconSize) {
                     if (this.selectedBody != bodyClicked || this.selectionCount < 2) {
                         if (this.selectionCount > 0 && this.selectedBody != bodyClicked) {
-                            if (!(this.selectedBody instanceof IChildBody
-                                    && ((IChildBody) this.selectedBody).getParentPlanet() == bodyClicked)) {
+                            if ((!(this.selectedBody instanceof IChildBody)
+                                    || (((IChildBody) this.selectedBody).getParentPlanet() != bodyClicked))) {
                                 this.unselectCelestialBody();
                             } else if (this.selectionCount == 2) {
                                 this.selectionCount--;

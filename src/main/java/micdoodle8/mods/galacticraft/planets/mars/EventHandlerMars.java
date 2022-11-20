@@ -54,7 +54,7 @@ public class EventHandlerMars {
         if (!event.entity.isEntityInvulnerable()
                 && !event.entity.worldObj.isRemote
                 && event.entityLiving.getHealth() <= 0.0F
-                && !(event.source.isFireDamage() && event.entityLiving.isPotionActive(Potion.fireResistance))) {
+                && (!event.source.isFireDamage() || !event.entityLiving.isPotionActive(Potion.fireResistance))) {
             final Entity entity = event.source.getEntity();
 
             if (entity instanceof EntitySlimeling) {
