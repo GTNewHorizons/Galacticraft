@@ -21,8 +21,7 @@ public abstract class GuiContainerGC extends GuiContainer {
     public void drawScreen(int par1, int par2, float par3) {
         super.drawScreen(par1, par2, par3);
 
-        for (int k = 0; k < this.infoRegions.size(); ++k) {
-            GuiElementInfoRegion guibutton = this.infoRegions.get(k);
+        for (GuiElementInfoRegion guibutton : this.infoRegions) {
             guibutton.drawRegion(par1, par2);
         }
     }
@@ -34,8 +33,8 @@ public abstract class GuiContainerGC extends GuiContainer {
     }
 
     public int getTooltipOffset(int par1, int par2) {
-        for (int i1 = 0; i1 < this.inventorySlots.inventorySlots.size(); ++i1) {
-            Slot slot = (Slot) this.inventorySlots.inventorySlots.get(i1);
+        for (Object element : this.inventorySlots.inventorySlots) {
+            Slot slot = (Slot) element;
 
             if (slot.func_111238_b()
                     && this.func_146978_c(slot.xDisplayPosition, slot.yDisplayPosition, 16, 16, par1, par2)) {

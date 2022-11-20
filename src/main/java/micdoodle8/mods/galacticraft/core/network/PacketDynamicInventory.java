@@ -58,9 +58,9 @@ public class PacketDynamicInventory implements IPacket {
 
         buffer.writeInt(this.stacks.length);
 
-        for (int i = 0; i < this.stacks.length; i++) {
+        for (ItemStack stack : this.stacks) {
             try {
-                NetworkUtil.writeItemStack(this.stacks[i], buffer);
+                NetworkUtil.writeItemStack(stack, buffer);
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -67,16 +67,16 @@ public class ConnectionPacket {
 
     public static FMLProxyPacket createDimPacket(Integer[] dims) {
         ArrayList<Integer> data = new ArrayList();
-        for (int i = 0; i < dims.length; i++) {
-            data.add(dims[i]);
+        for (Integer dim : dims) {
+            data.add(dim);
         }
         return createPacket((byte) 101, data);
     }
 
     public static FMLProxyPacket createSSPacket(Integer[] dims) {
         ArrayList<Integer> data = new ArrayList();
-        for (int i = 0; i < dims.length; i++) {
-            data.add(dims[i]);
+        for (Integer dim : dims) {
+            data.add(dim);
         }
         return createPacket((byte) 102, data);
     }

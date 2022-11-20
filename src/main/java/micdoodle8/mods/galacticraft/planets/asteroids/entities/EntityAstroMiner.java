@@ -2139,15 +2139,15 @@ public class EntityAstroMiner extends Entity
         nbt.setInteger("Facing", this.facingAI);
         if (this.wayPoints.size() > 0) {
             NBTTagList wpList = new NBTTagList();
-            for (int j = 0; j < this.wayPoints.size(); j++) {
-                wpList.appendTag(this.wayPoints.get(j).writeToNBT(new NBTTagCompound()));
+            for (BlockVec3 element : this.wayPoints) {
+                wpList.appendTag(element.writeToNBT(new NBTTagCompound()));
             }
             nbt.setTag("WayPoints", wpList);
         }
         if (this.minePoints.size() > 0) {
             NBTTagList mpList = new NBTTagList();
-            for (int j = 0; j < this.minePoints.size(); j++) {
-                mpList.appendTag(this.minePoints.get(j).writeToNBT(new NBTTagCompound()));
+            for (BlockVec3 element : this.minePoints) {
+                mpList.appendTag(element.writeToNBT(new NBTTagCompound()));
             }
             nbt.setTag("MinePoints", mpList);
         }

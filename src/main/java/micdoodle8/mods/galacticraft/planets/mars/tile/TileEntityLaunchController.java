@@ -383,9 +383,7 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
             this.destFrequencyValid = false;
             if (this.destFrequency >= 0) {
                 WorldServer[] servers = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
-                for (int i = 0; i < servers.length; i++) {
-                    WorldServer world = servers[i];
-
+                for (WorldServer world : servers) {
                     for (TileEntity tile2 : new ArrayList<TileEntity>(world.loadedTileEntityList)) {
                         if (this != tile2) {
                             tile2 = world.getTileEntity(tile2.xCoord, tile2.yCoord, tile2.zCoord);

@@ -1743,8 +1743,8 @@ public class WorldUtil {
         HashMap<Integer, Integer> data = Maps.newHashMap();
         if (!input.isEmpty()) {
             String[] str0 = input.split("\\?");
-            for (int i = 0; i < str0.length; ++i) {
-                String[] str1 = str0[i].split("\\$");
+            for (String element : str0) {
+                String[] str1 = element.split("\\$");
                 data.put(Integer.parseInt(str1[0]), Integer.parseInt(str1[1]));
             }
         }

@@ -86,8 +86,8 @@ public class GuiExtendedInventory extends InventoryEffectRenderer {
             int diff = newPotionOffset - this.potionOffsetLast;
             this.potionOffsetLast = newPotionOffset;
             this.guiLeft += diff;
-            for (int k = 0; k < this.buttonList.size(); ++k) {
-                GuiButton b = (GuiButton) this.buttonList.get(k);
+            for (Object element : this.buttonList) {
+                GuiButton b = (GuiButton) element;
                 if (!(b instanceof AbstractTab)) {
                     b.xPosition += diff;
                 }

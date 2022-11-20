@@ -293,8 +293,8 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
                     List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, axisalignedbb);
 
                     if (list != null) {
-                        for (int i = 0; i < list.size(); ++i) {
-                            Entity entity = (Entity) list.get(i);
+                        for (Object element : list) {
+                            Entity entity = (Entity) element;
 
                             if (!entity.isDead) {
                                 entity.onCollideWithPlayer(this);

@@ -577,8 +577,8 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
                 && this.gradientListAddPlayers != null
                 && this.ticksPassed % 20 == 0) {
             List<ListElement> playerNames = new ArrayList<ListElement>();
-            for (int i = 0; i < this.thePlayer.worldObj.playerEntities.size(); i++) {
-                EntityPlayer player = (EntityPlayer) this.thePlayer.worldObj.playerEntities.get(i);
+            for (Object element : this.thePlayer.worldObj.playerEntities) {
+                EntityPlayer player = (EntityPlayer) element;
 
                 if (player.getDistanceSqToEntity(this.thePlayer) <= 25 * 25) {
                     String username = player.getGameProfile().getName();

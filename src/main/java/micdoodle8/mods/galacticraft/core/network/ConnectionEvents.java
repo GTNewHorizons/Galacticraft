@@ -67,8 +67,8 @@ public class ConnectionEvents {
         if (ConfigManagerCore.enableDebug) {
             Integer[] idList = (Integer[]) WorldUtil.getPlanetList().get(0);
             String ids = "";
-            for (int j = 0; j < idList.length; j++) {
-                ids += idList[j].toString() + " ";
+            for (Integer element : idList) {
+                ids += element.toString() + " ";
             }
             GCLog.info("Galacticraft server sending dimension IDs to connecting client: " + ids);
         }

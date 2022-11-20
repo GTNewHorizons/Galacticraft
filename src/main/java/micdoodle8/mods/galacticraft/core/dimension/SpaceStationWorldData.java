@@ -159,9 +159,7 @@ public class SpaceStationWorldData extends WorldSavedData {
 
         final NBTTagList var2 = new NBTTagList();
 
-        for (int var3 = 0; var3 < this.allowedPlayers.size(); ++var3) {
-            final String player = this.allowedPlayers.get(var3);
-
+        for (final String player : this.allowedPlayers) {
             if (player != null) {
                 final NBTTagCompound var4 = new NBTTagCompound();
                 var4.setString("allowedPlayer", player);

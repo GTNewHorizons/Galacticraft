@@ -128,8 +128,7 @@ public class GuiElementInfoRegion extends Gui {
             this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 - 3 + 1, i2, i2);
             this.drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3, j2, j2);
 
-            for (int k2 = 0; k2 < this.tooltipStrings.size(); ++k2) {
-                String s1 = this.tooltipStrings.get(k2);
+            for (String s1 : this.tooltipStrings) {
                 FMLClientHandler.instance().getClient().fontRenderer.drawStringWithShadow(s1, i1, j1, -1);
 
                 j1 += 10;

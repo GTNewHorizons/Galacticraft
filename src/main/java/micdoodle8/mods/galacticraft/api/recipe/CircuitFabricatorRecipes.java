@@ -50,8 +50,8 @@ public class CircuitFabricatorRecipes {
             ArrayList<ItemStack> validItems = CircuitFabricatorRecipes.slotValidItems.get(i);
 
             boolean found = false;
-            for (int j = 0; j < validItems.size(); j++) {
-                if (inputStack.isItemEqual(validItems.get(j))) {
+            for (ItemStack validItem : validItems) {
+                if (inputStack.isItemEqual(validItem)) {
                     found = true;
                     break;
                 }

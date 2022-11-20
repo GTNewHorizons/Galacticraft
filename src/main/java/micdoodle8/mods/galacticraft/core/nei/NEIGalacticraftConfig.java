@@ -324,10 +324,8 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
     }
 
     private void addIngotCompressorRecipes() {
-        for (int i = 0; i < CompressorRecipes.getRecipeList().size(); i++) {
+        for (IRecipe rec : CompressorRecipes.getRecipeList()) {
             HashMap<Integer, PositionedStack> input1 = new HashMap<Integer, PositionedStack>();
-            IRecipe rec = CompressorRecipes.getRecipeList().get(i);
-
             if (rec instanceof ShapedRecipes) {
                 ShapedRecipes recipe = (ShapedRecipes) rec;
 

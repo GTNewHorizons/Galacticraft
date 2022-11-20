@@ -42,18 +42,7 @@ public class SpaceRaceManager {
         for (SpaceRace race : SpaceRaceManager.spaceRaces) {
             boolean playerOnline = false;
 
-            for (int j = 0;
-                    j
-                            < MinecraftServer.getServer()
-                                    .getConfigurationManager()
-                                    .playerEntityList
-                                    .size();
-                    j++) {
-                Object o = MinecraftServer.getServer()
-                        .getConfigurationManager()
-                        .playerEntityList
-                        .get(j);
-
+            for (Object o : MinecraftServer.getServer().getConfigurationManager().playerEntityList) {
                 if (o instanceof EntityPlayer) {
                     EntityPlayer player = (EntityPlayer) o;
 

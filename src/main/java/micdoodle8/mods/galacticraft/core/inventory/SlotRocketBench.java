@@ -30,8 +30,8 @@ public class SlotRocketBench extends Slot {
         if (this.player instanceof EntityPlayerMP) {
             final Object[] toSend = {this.x, this.y, this.z};
 
-            for (int var12 = 0; var12 < this.player.worldObj.playerEntities.size(); ++var12) {
-                final EntityPlayerMP var13 = (EntityPlayerMP) this.player.worldObj.playerEntities.get(var12);
+            for (Object element : this.player.worldObj.playerEntities) {
+                final EntityPlayerMP var13 = (EntityPlayerMP) element;
 
                 if (var13.dimension == this.player.worldObj.provider.dimensionId) {
                     final double var14 = this.x - var13.posX;

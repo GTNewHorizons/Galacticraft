@@ -218,8 +218,7 @@ public class TickHandlerServer {
             if (TickHandlerServer.tickCount % 100 == 0) {
                 WorldServer[] worlds = server.worldServers;
 
-                for (int i = 0; i < worlds.length; i++) {
-                    WorldServer world = worlds[i];
+                for (WorldServer world : worlds) {
                     ChunkProviderServer chunkProviderServer = world.theChunkProviderServer;
 
                     Map<Long, List<Footprint>> footprintMap =
@@ -259,7 +258,7 @@ public class TickHandlerServer {
                                             new PacketSimple(EnumSimplePacket.C_UPDATE_FOOTPRINT_LIST, new Object[] {
                                                 chunkKey, footprints.toArray(new Footprint[footprints.size()])
                                             }),
-                                            worlds[i].provider.dimensionId);
+                                            world.provider.dimensionId);
                                 }
                             }
                         }
@@ -275,9 +274,7 @@ public class TickHandlerServer {
                 for (BlockVec3Dim targetPoint : footprintBlockChanges) {
                     WorldServer[] worlds = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
 
-                    for (int i = 0; i < worlds.length; i++) {
-                        WorldServer world = worlds[i];
-
+                    for (WorldServer world : worlds) {
                         if (world.provider.dimensionId == targetPoint.dim) {
                             long chunkKey =
                                     ChunkCoordIntPair.chunkXZ2Int((int) targetPoint.x >> 4, (int) targetPoint.z >> 4);

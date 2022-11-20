@@ -1283,8 +1283,8 @@ public class GCPlayerHandler {
             String[] string2 =
                     GCCoreUtil.translate("gui.frequencymodule.warning1").split(" ");
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < string2.length; ++i) {
-                sb.append(" " + EnumColor.YELLOW + string2[i]);
+            for (String element : string2) {
+                sb.append(" " + EnumColor.YELLOW + element);
             }
             player.addChatMessage(new ChatComponentText(
                     EnumColor.YELLOW + GCCoreUtil.translate("gui.frequencymodule.warning0") + " " + EnumColor.AQUA

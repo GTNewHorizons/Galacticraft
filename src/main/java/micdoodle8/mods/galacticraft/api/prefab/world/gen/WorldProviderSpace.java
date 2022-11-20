@@ -275,8 +275,7 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
             Class<? extends IChunkProvider> chunkProviderClass = this.getChunkProviderClass();
 
             Constructor<?>[] constructors = chunkProviderClass.getConstructors();
-            for (int i = 0; i < constructors.length; i++) {
-                Constructor<?> constr = constructors[i];
+            for (Constructor<?> constr : constructors) {
                 if (Arrays.equals(constr.getParameterTypes(), new Object[] {World.class, long.class, boolean.class})) {
                     return (IChunkProvider) constr.newInstance(
                             this.worldObj,

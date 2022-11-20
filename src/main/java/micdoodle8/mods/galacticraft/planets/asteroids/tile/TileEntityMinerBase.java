@@ -210,8 +210,8 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
             nbt.setLong("LinkedUUIDLeast", this.linkedMinerID.getLeastSignificantBits());
         }
         NBTTagList mpList = new NBTTagList();
-        for (int j = 0; j < this.targetPoints.size(); j++) {
-            mpList.appendTag(this.targetPoints.get(j).writeToNBT(new NBTTagCompound()));
+        for (BlockVec3 element : this.targetPoints) {
+            mpList.appendTag(element.writeToNBT(new NBTTagCompound()));
         }
         nbt.setTag("TargetPoints", mpList);
     }

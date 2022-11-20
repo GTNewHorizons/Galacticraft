@@ -92,28 +92,28 @@ public class NetworkUtil {
                 Integer[] array = (Integer[]) dataValue;
                 buffer.writeInt(array.length);
 
-                for (int i = 0; i < array.length; i++) {
-                    buffer.writeInt(array[i]);
+                for (Integer element : array) {
+                    buffer.writeInt(element);
                 }
             } else if (dataValue instanceof String[]) {
                 String[] array = (String[]) dataValue;
                 buffer.writeInt(array.length);
 
-                for (int i = 0; i < array.length; i++) {
-                    ByteBufUtils.writeUTF8String(buffer, array[i]);
+                for (String element : array) {
+                    ByteBufUtils.writeUTF8String(buffer, element);
                 }
             } else if (dataValue instanceof Footprint[]) {
                 Footprint[] array = (Footprint[]) dataValue;
                 buffer.writeInt(array.length);
 
-                for (int i = 0; i < array.length; i++) {
-                    buffer.writeInt(array[i].dimension);
-                    buffer.writeFloat((float) array[i].position.x);
-                    buffer.writeFloat((float) array[i].position.y + 1);
-                    buffer.writeFloat((float) array[i].position.z);
-                    buffer.writeFloat(array[i].rotation);
-                    buffer.writeShort(array[i].age);
-                    ByteBufUtils.writeUTF8String(buffer, array[i].owner);
+                for (Footprint element : array) {
+                    buffer.writeInt(element.dimension);
+                    buffer.writeFloat((float) element.position.x);
+                    buffer.writeFloat((float) element.position.y + 1);
+                    buffer.writeFloat((float) element.position.z);
+                    buffer.writeFloat(element.rotation);
+                    buffer.writeShort(element.age);
+                    ByteBufUtils.writeUTF8String(buffer, element.owner);
                 }
             } else {
                 if (dataValue == null) {

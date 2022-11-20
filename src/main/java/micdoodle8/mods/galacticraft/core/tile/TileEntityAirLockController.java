@@ -92,9 +92,7 @@ public class TileEntityAirLockController extends TileEntityAirLock {
 
                 boolean foundPlayer = false;
 
-                for (int i = 0; i < playersWithin.size(); i++) {
-                    Object o = playersWithin.get(i);
-
+                for (Object o : playersWithin) {
                     if (o instanceof EntityPlayer) {
                         if (this.playerNameMatches) {
                             if (((EntityPlayer) o).getGameProfile().getName().equalsIgnoreCase(this.playerToOpenFor)) {
