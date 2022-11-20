@@ -99,7 +99,7 @@ public class EntityBuggy extends Entity
     public int getScaledFuelLevel(int i) {
         final double fuelLevel = this.buggyFuelTank.getFluid() == null ? 0 : this.buggyFuelTank.getFluid().amount;
 
-        return (int) (fuelLevel * i / this.tankCapacity);
+        return (int) (fuelLevel * i / EntityBuggy.tankCapacity);
     }
 
     public ModelBase getModel() {

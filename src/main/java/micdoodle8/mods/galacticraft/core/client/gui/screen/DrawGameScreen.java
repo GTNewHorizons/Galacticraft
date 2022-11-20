@@ -59,7 +59,7 @@ public class DrawGameScreen extends IScreenManager {
     }
 
     private void makeMap() {
-        if (this.mapDone || this.reusableMap == null || this.driver.getWorldObj().provider.dimensionId != 0) {
+        if (this.mapDone || DrawGameScreen.reusableMap == null || this.driver.getWorldObj().provider.dimensionId != 0) {
             return;
         }
         this.localMap = new int[MapUtil.SIZE_STD2 * MapUtil.SIZE_STD2];

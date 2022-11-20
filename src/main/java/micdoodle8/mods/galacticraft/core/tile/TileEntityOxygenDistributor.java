@@ -150,7 +150,7 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
                     if (i1 == -1 && i2 == -1 && i3 == -1 && i4 == -1) {
                         continue;
                     }
-                    this.loadedTiles.add(new BlockVec3Dim(i1, i2, i3, i4));
+                    TileEntityOxygenDistributor.loadedTiles.add(new BlockVec3Dim(i1, i2, i3, i4));
                 }
             }
             this.bubbleSize = dataStream.readFloat();

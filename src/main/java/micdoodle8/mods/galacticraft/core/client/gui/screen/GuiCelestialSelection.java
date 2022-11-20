@@ -41,6 +41,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.ResourceLocation;
@@ -484,22 +485,22 @@ public class GuiCelestialSelection extends GuiScreen {
         }
 
         if (!this.renamingSpaceStation && (this.selectedBody == null || this.selectionCount < 2)) {
-            if (this.mc.gameSettings.isKeyDown(KeyHandlerClient.leftKey)) {
+            if (GameSettings.isKeyDown(KeyHandlerClient.leftKey)) {
                 this.translation.x += -2.0F;
                 this.translation.y += -2.0F;
             }
 
-            if (this.mc.gameSettings.isKeyDown(KeyHandlerClient.rightKey)) {
+            if (GameSettings.isKeyDown(KeyHandlerClient.rightKey)) {
                 this.translation.x += 2.0F;
                 this.translation.y += 2.0F;
             }
 
-            if (this.mc.gameSettings.isKeyDown(KeyHandlerClient.upKey)) {
+            if (GameSettings.isKeyDown(KeyHandlerClient.upKey)) {
                 this.translation.x += 2.0F;
                 this.translation.y += -2.0F;
             }
 
-            if (this.mc.gameSettings.isKeyDown(KeyHandlerClient.downKey)) {
+            if (GameSettings.isKeyDown(KeyHandlerClient.downKey)) {
                 this.translation.x += -2.0F;
                 this.translation.y += 2.0F;
             }
@@ -1087,7 +1088,7 @@ public class GuiCelestialSelection extends GuiScreen {
                             ? (float) (Math.sin(this.ticksSinceSelection / 2.0F) * 0.5F + 0.5F)
                             : 1.0F;
                     GL11.glColor4f(1.0F, 1.0F, 0.0F, 1 * colMod);
-                    int width = this.getWidthForCelestialBodyStatic(this.selectedBody);
+                    int width = GuiCelestialSelection.getWidthForCelestialBodyStatic(this.selectedBody);
                     if (this.selectionCount == 1) {
                         width /= 2;
                         width *= 3;
@@ -1239,7 +1240,7 @@ public class GuiCelestialSelection extends GuiScreen {
                     }
 
                     if (!preEvent.isCanceled()) {
-                        int size = this.getWidthForCelestialBodyStatic(star);
+                        int size = GuiCelestialSelection.getWidthForCelestialBodyStatic(star);
                         if (star == this.selectedBody && this.selectionCount == 1) {
                             size /= 2;
                             size *= 3;
@@ -1311,7 +1312,7 @@ public class GuiCelestialSelection extends GuiScreen {
                     }
 
                     if (!preEvent.isCanceled()) {
-                        final int size = this.getWidthForCelestialBodyStatic(planet);
+                        final int size = GuiCelestialSelection.getWidthForCelestialBodyStatic(planet);
                         this.drawTexturedModalRect(
                                 -size / 2,
                                 -size / 2,
@@ -1375,7 +1376,7 @@ public class GuiCelestialSelection extends GuiScreen {
                     }
 
                     if (!preEvent.isCanceled()) {
-                        final int size = this.getWidthForCelestialBodyStatic(moon);
+                        final int size = GuiCelestialSelection.getWidthForCelestialBodyStatic(moon);
                         this.drawTexturedModalRect(
                                 -size / 2,
                                 -size / 2,
@@ -1437,7 +1438,7 @@ public class GuiCelestialSelection extends GuiScreen {
                         this.mc.renderEngine.bindTexture(preEvent.celestialBodyTexture);
 
                         if (!preEvent.isCanceled()) {
-                            final int size = this.getWidthForCelestialBodyStatic(satellite);
+                            final int size = GuiCelestialSelection.getWidthForCelestialBodyStatic(satellite);
                             this.drawTexturedModalRect(
                                     -size / 2,
                                     -size / 2,
@@ -2142,7 +2143,7 @@ public class GuiCelestialSelection extends GuiScreen {
                             if (next instanceof ItemStack) {
                                 final int amount = this.getAmountInInventory((ItemStack) next);
                                 RenderHelper.enableGUIStandardItemLighting();
-                                GuiCelestialSelection.itemRender.renderItemAndEffectIntoGUI(
+                                GuiScreen.itemRender.renderItemAndEffectIntoGUI(
                                         this.fontRendererObj,
                                         this.mc.renderEngine,
                                         ((ItemStack) next).copy(),
@@ -2223,7 +2224,7 @@ public class GuiCelestialSelection extends GuiScreen {
                                 RenderHelper.enableGUIStandardItemLighting();
                                 final ItemStack stack = items.get(this.ticksSinceMenuOpen / 20 % items.size())
                                         .copy();
-                                GuiCelestialSelection.itemRender.renderItemAndEffectIntoGUI(
+                                GuiScreen.itemRender.renderItemAndEffectIntoGUI(
                                         this.fontRendererObj, this.mc.renderEngine, stack, xPos, yPos);
                                 RenderHelper.disableStandardItemLighting();
                                 GL11.glEnable(GL11.GL_BLEND);

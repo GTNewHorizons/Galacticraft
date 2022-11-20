@@ -1173,11 +1173,11 @@ public class ClientProxyCore extends CommonProxyCore {
 
     @SubscribeEvent
     public void onRenderPlanetPost(CelestialBodyRenderEvent.Post event) {
-        if (this.mc.currentScreen instanceof GuiCelestialSelection) {
+        if (ClientProxyCore.mc.currentScreen instanceof GuiCelestialSelection) {
             if (event.celestialBody == GalacticraftCore.planetSaturn) {
-                this.mc.renderEngine.bindTexture(saturnRingTexture);
+                ClientProxyCore.mc.renderEngine.bindTexture(saturnRingTexture);
                 final float size = GuiCelestialSelection.getWidthForCelestialBodyStatic(event.celestialBody) / 6.0F;
-                ((GuiCelestialSelection) this.mc.currentScreen)
+                ((GuiCelestialSelection) ClientProxyCore.mc.currentScreen)
                         .drawTexturedModalRect(
                                 -7.5F * size,
                                 -1.75F * size,
@@ -1192,9 +1192,9 @@ public class ClientProxyCore extends CommonProxyCore {
                                 30,
                                 7);
             } else if (event.celestialBody == GalacticraftCore.planetUranus) {
-                this.mc.renderEngine.bindTexture(uranusRingTexture);
+                ClientProxyCore.mc.renderEngine.bindTexture(uranusRingTexture);
                 final float size = GuiCelestialSelection.getWidthForCelestialBodyStatic(event.celestialBody) / 6.0F;
-                ((GuiCelestialSelection) this.mc.currentScreen)
+                ((GuiCelestialSelection) ClientProxyCore.mc.currentScreen)
                         .drawTexturedModalRect(
                                 -1.75F * size,
                                 -7.0F * size,

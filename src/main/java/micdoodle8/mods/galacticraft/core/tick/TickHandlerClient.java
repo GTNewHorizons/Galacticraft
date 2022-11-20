@@ -540,7 +540,7 @@ public class TickHandlerClient {
                 ClientProxyCore.lastSpacebarDown = true;
             }
 
-            if (!this.screenConnectionsUpdateList.isEmpty()) {
+            if (!TickHandlerClient.screenConnectionsUpdateList.isEmpty()) {
                 final HashSet<TileEntityScreen> updateListCopy =
                         (HashSet<TileEntityScreen>) screenConnectionsUpdateList.clone();
                 screenConnectionsUpdateList.clear();

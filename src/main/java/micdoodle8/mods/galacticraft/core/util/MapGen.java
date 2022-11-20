@@ -72,10 +72,10 @@ public class MapGen {
                     .getClass()
                     .getDeclaredField(VersionUtil.getNameDynamic(VersionUtil.KEY_FIELD_BIOMEINDEXLAYER));
             bil.setAccessible(true);
-            this.biomeMapGenLayer = (GenLayer) bil.get(this.biomeMapWCM);
+            MapGen.biomeMapGenLayer = (GenLayer) bil.get(this.biomeMapWCM);
         } catch (final Exception e) {
         }
-        if (this.biomeMapGenLayer == null) {
+        if (MapGen.biomeMapGenLayer == null) {
             this.calculatingMap = false;
             GCLog.debug("Failed to get gen layer from World Chunk Manager.");
             return;
