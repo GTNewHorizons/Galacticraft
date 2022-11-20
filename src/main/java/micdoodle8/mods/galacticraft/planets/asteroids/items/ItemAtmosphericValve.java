@@ -32,6 +32,7 @@ public class ItemAtmosphericValve extends Item {
         return ClientProxyCore.galacticraftItem;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
         this.itemIcon = iconRegister.registerIcon(this.getIconString());

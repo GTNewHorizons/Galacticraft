@@ -46,10 +46,12 @@ public class GameScreenText implements IGameScreen {
         }
     }
 
+    @Override
     public void setFrameSize(float frameSize) {
         this.frameA = frameSize;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void render(int type, float ticks, float sizeX, float sizeY, IScreenManager scr) {
         final DrawGameScreen screen = (DrawGameScreen) scr;

@@ -648,6 +648,7 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
             this.setMutexBits(5);
         }
 
+        @Override
         public boolean shouldExecute() {
             if (!this.theEntity.isTamed()) {
                 return false;
@@ -664,15 +665,18 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
             }
         }
 
+        @Override
         public void startExecuting() {
             this.theEntity.getNavigator().clearPathEntity();
             this.theEntity.setSitting(true);
         }
 
+        @Override
         public void resetTask() {
             this.theEntity.setSitting(false);
         }
 
+        @Override
         public void setSitting(boolean isSitting) {
             this.isSitting = isSitting;
         }

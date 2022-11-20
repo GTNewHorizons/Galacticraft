@@ -118,6 +118,7 @@ public class GuiSlimelingInventory extends GuiContainer {
         GuiSlimeling.renderingOnGui = false;
     }
 
+    @Override
     public void drawScreen(int par1, int par2, float par3) {
         GL11.glPushMatrix();
         super.drawScreen(par1, par2, par3);

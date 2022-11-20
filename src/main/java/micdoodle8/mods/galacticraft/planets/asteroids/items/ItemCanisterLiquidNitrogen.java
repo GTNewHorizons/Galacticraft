@@ -77,6 +77,7 @@ public class ItemCanisterLiquidNitrogen extends ItemCanisterGeneric {
         return null;
     }
 
+    @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World par2World, EntityPlayer par3EntityPlayer) {
         final int damage = itemStack.getItemDamage() + 125;
         if (damage > itemStack.getMaxDamage()) {

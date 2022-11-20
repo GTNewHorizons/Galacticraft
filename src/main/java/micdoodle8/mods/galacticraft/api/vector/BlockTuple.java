@@ -13,6 +13,7 @@ public class BlockTuple {
         this.meta = m;
     }
 
+    @Override
     public String toString() {
         final Item item = Item.getItemFromBlock(this.block);
         if (item == null) {

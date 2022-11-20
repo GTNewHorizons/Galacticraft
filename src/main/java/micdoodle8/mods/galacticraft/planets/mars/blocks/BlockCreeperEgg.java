@@ -87,6 +87,7 @@ public class BlockCreeperEgg extends BlockDragonEgg implements ItemBlockDesc.IBl
         this.onBlockDestroyedByExplosion(world, x, y, z, explosion);
     }
 
+    @Override
     public boolean canDropFromExplosion(Explosion explose) {
         return false;
     }
@@ -101,6 +102,7 @@ public class BlockCreeperEgg extends BlockDragonEgg implements ItemBlockDesc.IBl
         return stack.getItem() == MarsItems.deshPickSlime;
     }
 
+    @Override
     public float getPlayerRelativeBlockHardness(EntityPlayer player, World worldIn, int x, int y, int z) {
         final ItemStack stack = player.inventory.getCurrentItem();
         if (stack != null && stack.getItem() == MarsItems.deshPickSlime) {

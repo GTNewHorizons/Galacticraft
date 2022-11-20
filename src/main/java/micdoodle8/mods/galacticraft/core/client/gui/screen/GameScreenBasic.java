@@ -32,10 +32,12 @@ public class GameScreenBasic implements IGameScreen {
         }
     }
 
+    @Override
     public void setFrameSize(float frameSize) {
         this.frameA = frameSize;
     }
 
+    @Override
     public void render(int type, float ticks, float scaleX, float scaleY, IScreenManager scr) {
         this.frameBx = scaleX - this.frameA;
         this.frameBy = scaleY - this.frameA;

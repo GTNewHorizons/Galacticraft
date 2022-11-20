@@ -47,10 +47,12 @@ public class GameScreenCelestial implements IGameScreen {
         }
     }
 
+    @Override
     public void setFrameSize(float frameSize) {
         this.frameA = frameSize;
     }
 
+    @Override
     public void render(int type, float ticks, float scaleX, float scaleY, IScreenManager scr) {
         this.centreX = scaleX / 2;
         this.centreY = scaleY / 2;

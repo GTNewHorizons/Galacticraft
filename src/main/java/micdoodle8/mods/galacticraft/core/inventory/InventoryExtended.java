@@ -90,6 +90,7 @@ public class InventoryExtended implements IInventoryGC {
         return false;
     }
 
+    @Override
     public void dropExtendedItems(EntityPlayer player) {
         for (int i = 0; i < this.inventoryStacks.length; i++) {
             final ItemStack stack = this.inventoryStacks[i];
@@ -148,6 +149,7 @@ public class InventoryExtended implements IInventoryGC {
         return tagList;
     }
 
+    @Override
     public void copyInventory(IInventoryGC par1InventoryPlayer) {
         final InventoryExtended toCopy = (InventoryExtended) par1InventoryPlayer;
         for (int i = 0; i < this.inventoryStacks.length; ++i) {

@@ -66,6 +66,7 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
         return 0;
     }
 
+    @Override
     public boolean isDaytime() {
         return true;
     }

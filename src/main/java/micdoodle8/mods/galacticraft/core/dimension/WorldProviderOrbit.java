@@ -137,6 +137,7 @@ public class WorldProviderOrbit extends WorldProviderSpaceStation
         return WorldChunkManagerOrbit.class;
     }
 
+    @Override
     public boolean isDaytime() {
         final float a = this.worldObj.getCelestialAngle(0F);
         // TODO: adjust this according to size of planet below

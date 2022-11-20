@@ -273,6 +273,7 @@ public abstract class ItemElectricBase extends Item
         return itemStack != null && !(itemStack.getItem() instanceof ItemBatteryInfinite);
     }
 
+    @Override
     public boolean canSend(ItemStack itemStack) {
         return true;
     }

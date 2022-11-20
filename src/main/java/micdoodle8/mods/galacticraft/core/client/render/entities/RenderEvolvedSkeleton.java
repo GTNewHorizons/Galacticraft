@@ -139,6 +139,7 @@ public class RenderEvolvedSkeleton extends RenderBiped {
         return super.shouldRenderPass(par1EntityLiving, par2, par3);
     }
 
+    @Override
     protected void renderEquippedItems(EntityLiving par1EntityLiving, float par2) {
         final ItemStack stack = par1EntityLiving.getLastActiveItems()[0];
         par1EntityLiving.getLastActiveItems()[0] = null;

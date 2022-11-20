@@ -578,6 +578,7 @@ public class EnergyNetwork implements IElectricityNetwork {
         }
     }
 
+    @Override
     public void split(IConductor splitPoint) {
         if (splitPoint instanceof TileEntity) {
             this.getTransmitters().remove(splitPoint);

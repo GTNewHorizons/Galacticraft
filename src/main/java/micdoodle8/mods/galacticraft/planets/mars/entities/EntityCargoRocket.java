@@ -404,6 +404,7 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
         return false;
     }
 
+    @Override
     public double getOnPadYOffset() {
         return 0D; // -0.25D;
     }

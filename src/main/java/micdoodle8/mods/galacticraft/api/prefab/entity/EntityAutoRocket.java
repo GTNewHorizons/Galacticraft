@@ -457,6 +457,7 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
 
     public abstract boolean isPlayerRocket();
 
+    @Override
     public void landEntity(int x, int y, int z) {
         final TileEntity tile = this.worldObj.getTileEntity(x, y, z);
 
@@ -1201,11 +1202,13 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public IUpdatePlayerListBox getSoundUpdater() {
         return this.rocketSoundUpdater;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public ISound setSoundUpdater(EntityPlayerSP player) {
         this.rocketSoundUpdater = new SoundUpdaterRocket(player, this);

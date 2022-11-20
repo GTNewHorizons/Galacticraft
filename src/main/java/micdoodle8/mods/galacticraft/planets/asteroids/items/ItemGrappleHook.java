@@ -88,6 +88,7 @@ public class ItemGrappleHook extends ItemBow {
         return par1ItemStack;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
         this.itemIcon = iconRegister.registerIcon("arrow");

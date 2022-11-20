@@ -101,6 +101,7 @@ public abstract class EnergyStorageTile extends TileEntityAdvanced implements IE
         return 0;
     }
 
+    @Override
     public int getTierGC() {
         return this.tierGC;
     }

@@ -1872,6 +1872,7 @@ public class EntityAstroMiner extends Entity
         super.setLocationAndAngles(x, y, z, rotYaw, rotPitch);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void setPositionAndRotation2(double x, double y, double z, float yaw, float pitch, int rotationIncrements) {
         this.minecartX = x;
@@ -1885,6 +1886,7 @@ public class EntityAstroMiner extends Entity
         this.motionZ = this.velocityZ;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void setVelocity(double x, double y, double z) {
         this.velocityX = this.motionX = x;
@@ -1928,6 +1930,7 @@ public class EntityAstroMiner extends Entity
         }
     }
 
+    @Override
     public boolean isEntityInvulnerable() {
         // Can't be damaged if its player is offline - it's in a fully dormant state
         return this.playerMP == null;
@@ -1960,11 +1963,13 @@ public class EntityAstroMiner extends Entity
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public IUpdatePlayerListBox getSoundUpdater() {
         return this.soundUpdater;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public ISound setSoundUpdater(EntityPlayerSP player) {
         this.soundUpdater = new SoundUpdaterMiner(player, this);
@@ -1978,6 +1983,7 @@ public class EntityAstroMiner extends Entity
         this.soundToStop = false;
     }
 
+    @Override
     public void transmitData(int[] data) {
         data[0] = (int) this.posX;
         data[1] = (int) this.posY;
@@ -1986,6 +1992,7 @@ public class EntityAstroMiner extends Entity
         data[4] = this.AIstate;
     }
 
+    @Override
     public void receiveData(int[] data, String[] str) {
         str[0] = "";
         str[1] = "x: " + data[0];
@@ -2018,6 +2025,7 @@ public class EntityAstroMiner extends Entity
         }
     }
 
+    @Override
     public void adjustDisplay(int[] data) {
         GL11.glScalef(0.9F, 0.9F, 0.9F);
     }

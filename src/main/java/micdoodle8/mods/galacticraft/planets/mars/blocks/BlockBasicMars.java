@@ -45,6 +45,7 @@ public class BlockBasicMars extends Block
     // 9 Mars stone
     // 10 dungeon spawner (invisible)
 
+    @Override
     public MapColor getMapColor(int meta) {
         switch (meta) {
             case 7:

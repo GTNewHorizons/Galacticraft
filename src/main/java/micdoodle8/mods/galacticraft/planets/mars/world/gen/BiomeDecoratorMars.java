@@ -44,10 +44,12 @@ public class BiomeDecoratorMars extends BiomeDecoratorSpace {
         }
     }
 
+    @Override
     protected void setCurrentWorld(World world) {
         this.currentWorld = world;
     }
 
+    @Override
     protected World getCurrentWorld() {
         return this.currentWorld;
     }

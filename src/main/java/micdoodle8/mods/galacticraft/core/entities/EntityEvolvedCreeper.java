@@ -53,6 +53,7 @@ public class EntityEvolvedCreeper extends EntityCreeper implements IEntityBreath
         this.setSize(0.7F, 2.2F);
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.getDataWatcher().addObject(12, Byte.valueOf((byte) 0));
@@ -92,6 +93,7 @@ public class EntityEvolvedCreeper extends EntityCreeper implements IEntityBreath
         this.setCreeperScale(isChild ? 0.5F : 1.0F);
     }
 
+    @Override
     protected final void setSize(float sizeX, float sizeY) {
         final boolean flag = this.sizeXBase > 0.0F && this.sizeYBase > 0.0F;
         this.sizeXBase = sizeX;
@@ -107,10 +109,12 @@ public class EntityEvolvedCreeper extends EntityCreeper implements IEntityBreath
         // FMLLog.info("" + this.sizeYBase + " " + scale);
     }
 
+    @Override
     public boolean isChild() {
         return this.getDataWatcher().getWatchableObjectByte(12) == 1;
     }
 
+    @Override
     protected int getExperiencePoints(EntityPlayer p_70693_1_) {
         if (this.isChild()) {
             this.experienceValue = this.experienceValue * 5 / 2;

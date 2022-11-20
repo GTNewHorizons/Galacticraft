@@ -708,6 +708,7 @@ public class ClientProxyCore extends CommonProxyCore {
                             final ResourceLocation resourcelocation = new ResourceLocation("gcCapes/" + hash);
                             final ThreadDownloadImageDataGC threaddownloadimagedata =
                                     new ThreadDownloadImageDataGC(file2, url, null, new IImageBuffer() {
+                                        @Override
                                         public BufferedImage parseUserSkin(BufferedImage p_78432_1_) {
                                             if (p_78432_1_ == null) {
                                                 return null;
@@ -721,6 +722,7 @@ public class ClientProxyCore extends CommonProxyCore {
                                             return p_78432_1_;
                                         }
 
+                                        @Override
                                         public void func_152634_a() {}
                                     });
 

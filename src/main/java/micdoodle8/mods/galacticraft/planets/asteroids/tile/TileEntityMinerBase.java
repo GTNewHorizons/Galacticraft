@@ -417,6 +417,7 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
                 this.xCoord, this.yCoord, this.zCoord, this.xCoord + 2, this.yCoord + 2, this.zCoord + 2);
     }
 
+    @Override
     public void updateFacing() {
         if (this.isMaster && this.linkedMinerID == null) {
             // Re-orient the block

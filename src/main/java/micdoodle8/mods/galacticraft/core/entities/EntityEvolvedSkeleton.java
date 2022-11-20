@@ -56,6 +56,7 @@ public class EntityEvolvedSkeleton extends EntitySkeleton implements IEntityBrea
         return true;
     }
 
+    @Override
     public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2) {
         final EntityArrow entityarrow = new EntityArrow(
                 this.worldObj,
@@ -140,6 +141,7 @@ public class EntityEvolvedSkeleton extends EntitySkeleton implements IEntityBrea
         }
     }
 
+    @Override
     protected void dropFewItems(boolean p_70628_1_, int p_70628_2_) {
         final Item item = this.getDropItem();
 

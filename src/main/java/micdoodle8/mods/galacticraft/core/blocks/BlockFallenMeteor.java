@@ -195,6 +195,7 @@ public class BlockFallenMeteor extends Block implements ITileEntityProvider, Ite
         return true;
     }
 
+    @Override
     public float getPlayerRelativeBlockHardness(EntityPlayer player, World world, int x, int y, int z) {
         final int metadata = world.getBlockMetadata(x, y, z);
         final float hardness = this.getBlockHardness(world, x, y, z);

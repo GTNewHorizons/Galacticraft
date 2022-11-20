@@ -110,6 +110,7 @@ public class EntityGrapple extends Entity implements IProjectile {
         this.setRotation(par7, par8);
     }
 
+    @Override
     public void setPosition(double x, double y, double z) {
         super.setPosition(x, y, z);
     }

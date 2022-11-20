@@ -18,6 +18,7 @@ public class CanisterRecipes extends ShapelessRecipes {
     /**
      * Used to check if a recipe matches current crafting inventory
      */
+    @Override
     public boolean matches(InventoryCrafting p_77569_1_, World p_77569_2_) {
         ItemStack itemCanister = null;
         ItemStack itemTank = null;
@@ -66,6 +67,7 @@ public class CanisterRecipes extends ShapelessRecipes {
     /**
      * Returns an Item that is the result of this recipe
      */
+    @Override
     public ItemStack getCraftingResult(InventoryCrafting inv) {
         ItemStack itemTank = null;
         ItemStack itemCanister = null;
