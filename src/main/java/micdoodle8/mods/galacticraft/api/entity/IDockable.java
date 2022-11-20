@@ -18,8 +18,8 @@ public interface IDockable extends IFuelable, ICargoEntity {
     public IFuelDock getLandingPad();
 
     /**
-     * When the fuel dock is destroyed. Most likely kills the entity and drops
-     * it's containing items.
+     * When the fuel dock is destroyed. Most likely kills the entity and drops it's
+     * containing items.
      */
     public void onPadDestroyed();
 

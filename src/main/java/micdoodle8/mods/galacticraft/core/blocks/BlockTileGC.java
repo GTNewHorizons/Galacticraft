@@ -29,8 +29,8 @@ public abstract class BlockTileGC extends BlockAdvanced implements ITileEntityPr
     }
 
     /**
-     * ejects contained items into the world, and notifies neighbours of an
-     * update, as appropriate
+     * ejects contained items into the world, and notifies neighbours of an update,
+     * as appropriate
      */
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int par6) {
@@ -40,8 +40,8 @@ public abstract class BlockTileGC extends BlockAdvanced implements ITileEntityPr
 
     /**
      * Called when the block receives a BlockEvent - see World.addBlockEvent. By
-     * default, passes it on to the tile entity at this location. Args: world,
-     * x, y, z, blockID, EventID, event parameter
+     * default, passes it on to the tile entity at this location. Args: world, x, y,
+     * z, blockID, EventID, event parameter
      */
     @Override
     public boolean onBlockEventReceived(World par1World, int par2, int par3, int par4, int par5, int par6) {

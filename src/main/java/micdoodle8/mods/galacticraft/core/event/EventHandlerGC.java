@@ -96,13 +96,15 @@ public class EventHandlerGC {
 
     @SubscribeEvent
     public void onRocketLaunch(EntitySpaceshipBase.RocketLaunchEvent event) {
-        //        if (!event.entity.worldObj.isRemote && event.entity.worldObj.provider.dimensionId == 0)
-        //        {
-        //            if (event.rocket.riddenByEntity instanceof EntityPlayerMP)
-        //            {
-        //                TickHandlerServer.playersRequestingMapData.add((EntityPlayerMP) event.rocket.riddenByEntity);
-        //            }
-        //        }
+        // if (!event.entity.worldObj.isRemote &&
+        // event.entity.worldObj.provider.dimensionId == 0)
+        // {
+        // if (event.rocket.riddenByEntity instanceof EntityPlayerMP)
+        // {
+        // TickHandlerServer.playersRequestingMapData.add((EntityPlayerMP)
+        // event.rocket.riddenByEntity);
+        // }
+        // }
     }
 
     @SubscribeEvent
@@ -226,7 +228,8 @@ public class EventHandlerGC {
                 return;
             }
 
-            // Optionally prevent beds from exploding - depends on canRespawnHere() in the WorldProvider interacting
+            // Optionally prevent beds from exploding - depends on canRespawnHere() in the
+            // WorldProvider interacting
             // with this
             EventHandlerGC.bedActivated = true;
             if (worldObj.provider.canRespawnHere() && !EventHandlerGC.bedActivated) {
@@ -650,58 +653,84 @@ public class EventHandlerGC {
     // ;
     // }
 
-    //	@SideOnly(Side.CLIENT)
-    //	@SubscribeEvent
-    //	public void onSoundLoad(SoundLoadEvent event)
-    //	{
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "ambience/scaryscape.ogg");
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "ambience/singledrip1.ogg");
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "ambience/singledrip2.ogg");
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "ambience/singledrip3.ogg");
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "ambience/singledrip4.ogg");
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "ambience/singledrip5.ogg");
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "ambience/singledrip6.ogg");
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "ambience/singledrip7.ogg");
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "ambience/singledrip8.ogg");
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "entity/bossdeath.ogg");
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "entity/bosslaugh.ogg");
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "entity/bossliving.ogg");
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "entity/slime_death.ogg");
-    //		ClientProxyCore.newMusic.add(this.func_110654_c(event.manager.soundPoolMusic, GalacticraftCore.TEXTURE_PREFIX +
+    // @SideOnly(Side.CLIENT)
+    // @SubscribeEvent
+    // public void onSoundLoad(SoundLoadEvent event)
+    // {
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "ambience/scaryscape.ogg");
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "ambience/singledrip1.ogg");
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "ambience/singledrip2.ogg");
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "ambience/singledrip3.ogg");
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "ambience/singledrip4.ogg");
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "ambience/singledrip5.ogg");
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "ambience/singledrip6.ogg");
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "ambience/singledrip7.ogg");
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "ambience/singledrip8.ogg");
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "entity/bossdeath.ogg");
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "entity/bosslaugh.ogg");
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "entity/bossliving.ogg");
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "entity/slime_death.ogg");
+    // ClientProxyCore.newMusic.add(this.func_110654_c(event.manager.soundPoolMusic,
+    // GalacticraftCore.TEXTURE_PREFIX +
     // "music/mars_JC.ogg"));
-    //		ClientProxyCore.newMusic.add(this.func_110654_c(event.manager.soundPoolMusic, GalacticraftCore.TEXTURE_PREFIX +
+    // ClientProxyCore.newMusic.add(this.func_110654_c(event.manager.soundPoolMusic,
+    // GalacticraftCore.TEXTURE_PREFIX +
     // "music/mimas_JC.ogg"));
-    //		ClientProxyCore.newMusic.add(this.func_110654_c(event.manager.soundPoolMusic, GalacticraftCore.TEXTURE_PREFIX +
+    // ClientProxyCore.newMusic.add(this.func_110654_c(event.manager.soundPoolMusic,
+    // GalacticraftCore.TEXTURE_PREFIX +
     // "music/orbit_JC.ogg"));
-    //		ClientProxyCore.newMusic.add(this.func_110654_c(event.manager.soundPoolMusic, GalacticraftCore.TEXTURE_PREFIX +
+    // ClientProxyCore.newMusic.add(this.func_110654_c(event.manager.soundPoolMusic,
+    // GalacticraftCore.TEXTURE_PREFIX +
     // "music/scary_ambience.ogg"));
-    //		ClientProxyCore.newMusic.add(this.func_110654_c(event.manager.soundPoolMusic, GalacticraftCore.TEXTURE_PREFIX +
+    // ClientProxyCore.newMusic.add(this.func_110654_c(event.manager.soundPoolMusic,
+    // GalacticraftCore.TEXTURE_PREFIX +
     // "music/spacerace_JC.ogg"));
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "player/closeairlock.ogg");
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "player/openairlock.ogg");
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "player/parachute.ogg");
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "player/unlockchest.ogg");
-    //		event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX + "shuttle/shuttle.ogg");
-    //	}
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "player/closeairlock.ogg");
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "player/openairlock.ogg");
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "player/parachute.ogg");
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "player/unlockchest.ogg");
+    // event.manager.addSound(GalacticraftCore.TEXTURE_PREFIX +
+    // "shuttle/shuttle.ogg");
+    // }
     //
-    //	@SideOnly(Side.CLIENT)
-    //	private SoundPoolEntry func_110654_c(SoundPool pool, String par1Str)
-    //	{
-    //		try
-    //		{
-    //			ResourceLocation resourcelocation = new ResourceLocation(par1Str);
-    //			String s1 = String.format("%s:%s:%s/%s", new Object[] { "mcsounddomain", resourcelocation.getResourceDomain(),
+    // @SideOnly(Side.CLIENT)
+    // private SoundPoolEntry func_110654_c(SoundPool pool, String par1Str)
+    // {
+    // try
+    // {
+    // ResourceLocation resourcelocation = new ResourceLocation(par1Str);
+    // String s1 = String.format("%s:%s:%s/%s", new Object[] { "mcsounddomain",
+    // resourcelocation.getResourceDomain(),
     // "sound", resourcelocation.getResourcePath() });
-    //			SoundPoolProtocolHandler soundpoolprotocolhandler = new SoundPoolProtocolHandler(pool);
-    //			return new SoundPoolEntry(par1Str, new URL((URL) null, s1, soundpoolprotocolhandler));
-    //		}
-    //		catch (MalformedURLException e)
-    //		{
-    //			e.printStackTrace();
-    //		}
+    // SoundPoolProtocolHandler soundpoolprotocolhandler = new
+    // SoundPoolProtocolHandler(pool);
+    // return new SoundPoolEntry(par1Str, new URL((URL) null, s1,
+    // soundpoolprotocolhandler));
+    // }
+    // catch (MalformedURLException e)
+    // {
+    // e.printStackTrace();
+    // }
     //
-    //		return null;
-    //	} TODO Fix sounds
+    // return null;
+    // } TODO Fix sounds
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
@@ -775,7 +804,8 @@ public class EventHandlerGC {
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void onSoundPlayed(PlaySoundEvent17 event) {
-        // The event.result starts off equal to event.sound, but could have been altered or set to null by another mod
+        // The event.result starts off equal to event.sound, but could have been altered
+        // or set to null by another mod
         if (event.result == null) return;
 
         EntityPlayerSP player = FMLClientHandler.instance().getClient().thePlayer;
@@ -794,8 +824,10 @@ public class EventHandlerGC {
                 float z = event.result.getZPosF();
 
                 if (gearData == null || gearData.getFrequencyModule() == -1) {
-                    // If the player doesn't have a frequency module, and the player isn't in an oxygenated environment
-                    // Note: this is a very simplistic approach, and nowhere near realistic, but required for
+                    // If the player doesn't have a frequency module, and the player isn't in an
+                    // oxygenated environment
+                    // Note: this is a very simplistic approach, and nowhere near realistic, but
+                    // required for
                     // performance reasons
                     AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(
                             x - 0.0015D, y - 0.0015D, z - 0.0015D, x + 0.0015D, y + 0.0015D, z + 0.0015D);
@@ -804,7 +836,8 @@ public class EventHandlerGC {
                     if ((!playerInAtmosphere || !soundInAtmosphere)) {
                         float volume = event.result.getVolume();
 
-                        // First check for duplicate firing of PlaySoundEvent17 on this handler's own playing of a
+                        // First check for duplicate firing of PlaySoundEvent17 on this handler's own
+                        // playing of a
                         // reduced volume sound (see below)
                         for (int i = 0; i < this.soundPlayList.size(); i++) {
                             SoundPlayEntry entry = this.soundPlayList.get(i);

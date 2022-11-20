@@ -35,30 +35,13 @@ public class TileEntityArclampRenderer extends TileEntitySpecialRenderer {
         int metaFacing = tileEntity.facing;
 
         // int facing;
-        /*switch (side)
-        {
-        case 0:
-        case 1:
-        	facing = metaFacing + 2;
-        	break;
-        case 2:
-        	facing = metaFacing;
-        	if (metaFacing > 1) facing= 7 - metaFacing;
-        	break;
-        case 3:
-        	facing = metaFacing;
-        	if (metaFacing > 1) facing+=2;
-        	break;
-        case 4:
-        	facing = metaFacing;
-        	break;
-        case 5:
-        	facing = metaFacing;
-        	if (metaFacing > 1) facing= 5 - metaFacing;
-        	break;
-        default:
-        	return;
-        }*/
+        /*
+         * switch (side) { case 0: case 1: facing = metaFacing + 2; break; case 2:
+         * facing = metaFacing; if (metaFacing > 1) facing= 7 - metaFacing; break; case
+         * 3: facing = metaFacing; if (metaFacing > 1) facing+=2; break; case 4: facing
+         * = metaFacing; break; case 5: facing = metaFacing; if (metaFacing > 1) facing=
+         * 5 - metaFacing; break; default: return; }
+         */
 
         GL11.glPushMatrix();
         GL11.glTranslatef((float) d + 0.5F, (float) d1 + 0.5F, (float) d2 + 0.5F);

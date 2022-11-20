@@ -109,7 +109,7 @@ public class RenderAstroMiner extends Render {
         lastPartTime = partialTickTime;
         while (partTime < 0) partTime += 1F;
 
-        //      RenderHelper.enableStandardItemLighting();
+        // RenderHelper.enableStandardItemLighting();
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPushMatrix();
         final float rotPitch =
@@ -142,12 +142,12 @@ public class RenderAstroMiner extends Render {
         }
         partBlock /= 0.06F;
 
-        //        else if (rotPitch > 0F)
-        //        {
-        //            GL11.glTranslatef(-0.65F, -0.65F, 0);
-        //        	GL11.glRotatef(rotPitch, 0, 0, 1);
-        //            GL11.glTranslatef(0.65F, 0.65F, 0);
-        //        }
+        // else if (rotPitch > 0F)
+        // {
+        // GL11.glTranslatef(-0.65F, -0.65F, 0);
+        // GL11.glRotatef(rotPitch, 0, 0, 1);
+        // GL11.glTranslatef(0.65F, 0.65F, 0);
+        // }
         GL11.glRotatef(rotYaw + 180F, 0, 1, 0);
         if (rotPitch != 0F) {
             GL11.glTranslatef(-0.65F, -0.65F, 0);

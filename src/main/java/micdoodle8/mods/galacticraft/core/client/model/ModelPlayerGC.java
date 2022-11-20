@@ -28,10 +28,12 @@ import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
 
 /**
- * This renders the Galacticraft equipment, if RenderPlayerAPI / Smart Moving are not installed.
+ * This renders the Galacticraft equipment, if RenderPlayerAPI / Smart Moving
+ * are not installed.
  *
- * This also adjusts player limb positions (etc) of the vanilla player prior to rendering the player.
- * for example holding both hands overhead when holding a rocket.
+ * This also adjusts player limb positions (etc) of the vanilla player prior to
+ * rendering the player. for example holding both hands overhead when holding a
+ * rocket.
  *
  */
 public class ModelPlayerGC extends ModelBiped {

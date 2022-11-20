@@ -120,7 +120,8 @@ public class SkyProviderAsteroids extends IRenderHandler {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         var12 = this.sunSize / 1.2F;
-        // 110 distance instead of the normal 100, because there is no atmosphere to make the disk seem larger
+        // 110 distance instead of the normal 100, because there is no atmosphere to
+        // make the disk seem larger
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(SkyProviderAsteroids.sunTexture);
         var23.startDrawingQuads();
         var23.addVertexWithUV(-var12, 90.0D, -var12, 0.0D, 0.0D);
@@ -157,46 +158,46 @@ public class SkyProviderAsteroids extends IRenderHandler {
         GL11.glColor3f(0.0F, 0.0F, 0.0F);
         final double var25 = mc.thePlayer.getPosition(partialTicks).yCoord - world.getHorizon();
 
-        //		if (var25 < 0.0D)
-        //		{
-        //			GL11.glPushMatrix();
-        //			GL11.glTranslatef(0.0F, 12.0F, 0.0F);
-        //			GL11.glCallList(this.glSkyList2);
-        //			GL11.glPopMatrix();
-        //			var10 = 1.0F;
-        //			var11 = -((float) (var25 + 65.0D));
-        //			var12 = -var10;
-        //			var23.startDrawingQuads();
-        //			var23.setColorRGBA_I(0, 255);
-        //			var23.addVertex(-var10, var11, var10);
-        //			var23.addVertex(var10, var11, var10);
-        //			var23.addVertex(var10, var12, var10);
-        //			var23.addVertex(-var10, var12, var10);
-        //			var23.addVertex(-var10, var12, -var10);
-        //			var23.addVertex(var10, var12, -var10);
-        //			var23.addVertex(var10, var11, -var10);
-        //			var23.addVertex(-var10, var11, -var10);
-        //			var23.addVertex(var10, var12, -var10);
-        //			var23.addVertex(var10, var12, var10);
-        //			var23.addVertex(var10, var11, var10);
-        //			var23.addVertex(var10, var11, -var10);
-        //			var23.addVertex(-var10, var11, -var10);
-        //			var23.addVertex(-var10, var11, var10);
-        //			var23.addVertex(-var10, var12, var10);
-        //			var23.addVertex(-var10, var12, -var10);
-        //			var23.addVertex(-var10, var12, -var10);
-        //			var23.addVertex(-var10, var12, var10);
-        //			var23.addVertex(var10, var12, var10);
-        //			var23.addVertex(var10, var12, -var10);
-        //			var23.draw();
-        //		}
+        // if (var25 < 0.0D)
+        // {
+        // GL11.glPushMatrix();
+        // GL11.glTranslatef(0.0F, 12.0F, 0.0F);
+        // GL11.glCallList(this.glSkyList2);
+        // GL11.glPopMatrix();
+        // var10 = 1.0F;
+        // var11 = -((float) (var25 + 65.0D));
+        // var12 = -var10;
+        // var23.startDrawingQuads();
+        // var23.setColorRGBA_I(0, 255);
+        // var23.addVertex(-var10, var11, var10);
+        // var23.addVertex(var10, var11, var10);
+        // var23.addVertex(var10, var12, var10);
+        // var23.addVertex(-var10, var12, var10);
+        // var23.addVertex(-var10, var12, -var10);
+        // var23.addVertex(var10, var12, -var10);
+        // var23.addVertex(var10, var11, -var10);
+        // var23.addVertex(-var10, var11, -var10);
+        // var23.addVertex(var10, var12, -var10);
+        // var23.addVertex(var10, var12, var10);
+        // var23.addVertex(var10, var11, var10);
+        // var23.addVertex(var10, var11, -var10);
+        // var23.addVertex(-var10, var11, -var10);
+        // var23.addVertex(-var10, var11, var10);
+        // var23.addVertex(-var10, var12, var10);
+        // var23.addVertex(-var10, var12, -var10);
+        // var23.addVertex(-var10, var12, -var10);
+        // var23.addVertex(-var10, var12, var10);
+        // var23.addVertex(var10, var12, var10);
+        // var23.addVertex(var10, var12, -var10);
+        // var23.draw();
+        // }
 
         GL11.glColor3f(70F / 256F, 70F / 256F, 70F / 256F);
 
-        //		GL11.glPushMatrix();
-        //		GL11.glTranslatef(0.0F, -((float) (var25 - 16.0D)), 0.0F);
-        //		GL11.glCallList(this.glSkyList2);
-        //		GL11.glPopMatrix();
+        // GL11.glPushMatrix();
+        // GL11.glTranslatef(0.0F, -((float) (var25 - 16.0D)), 0.0F);
+        // GL11.glCallList(this.glSkyList2);
+        // GL11.glPopMatrix();
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDepthMask(true);
 

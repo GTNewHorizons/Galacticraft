@@ -32,7 +32,8 @@ public class TileEntityCoalGenerator extends TileBaseUniversalElectricalSource
     // because on max heat it produces 120 gJ/t over 320 ticks
 
     // Below the min_generate, all heat is wasted
-    // At max generate, 100% efficient conversion coal energy -> electric makes 120 gJ/t
+    // At max generate, 100% efficient conversion coal energy -> electric makes 120
+    // gJ/t
     public static final int MAX_GENERATE_GJ_PER_TICK = 150;
     public static final int MIN_GENERATE_GJ_PER_TICK = 30;
 
@@ -50,8 +51,7 @@ public class TileEntityCoalGenerator extends TileBaseUniversalElectricalSource
     @NetworkedField(targetSide = Side.CLIENT)
     public int itemCookTime = 0;
     /**
-     * The ItemStacks that hold the items currently being used in the battery
-     * box
+     * The ItemStacks that hold the items currently being used in the battery box
      */
     private ItemStack[] containingItems = new ItemStack[1];
 
@@ -248,12 +248,8 @@ public class TileEntityCoalGenerator extends TileBaseUniversalElectricalSource
     }
 
     /*
-       @Override
-    public float getRequest(ForgeDirection direction)
-    {
-    	return 0;
-    }
-    */
+     * @Override public float getRequest(ForgeDirection direction) { return 0; }
+     */
 
     @Override
     public EnumSet<ForgeDirection> getElectricalInputDirections() {

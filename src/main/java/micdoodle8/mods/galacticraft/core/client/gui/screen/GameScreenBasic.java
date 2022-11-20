@@ -60,7 +60,7 @@ public class GameScreenBasic implements IGameScreen {
         switch (type) {
             case 0:
                 drawBlackBackground(0.09F);
-                //        	ClientProxyCore.overworldTextureLocal = null;
+                // ClientProxyCore.overworldTextureLocal = null;
                 break;
             case 1:
                 if (scr instanceof DrawGameScreen && ((DrawGameScreen) scr).mapDone) {

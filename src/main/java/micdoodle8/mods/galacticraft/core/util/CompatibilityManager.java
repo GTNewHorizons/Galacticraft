@@ -149,9 +149,9 @@ public class CompatibilityManager {
 
     public static boolean isAndroid(EntityPlayer player) {
         if (CompatibilityManager.modMatterOverdriveLoaded) {
-            //          Equivalent to:
-            //            AndroidPlayer androidPlayer = AndroidPlayer.get(player);
-            //            return (androidPlayer != null && androidPlayer.isAndroid());
+            // Equivalent to:
+            // AndroidPlayer androidPlayer = AndroidPlayer.get(player);
+            // return (androidPlayer != null && androidPlayer.isAndroid());
             try {
                 Object androidPlayer = CompatibilityManager.androidPlayerGet.invoke(null, player);
                 if (androidPlayer != null) {

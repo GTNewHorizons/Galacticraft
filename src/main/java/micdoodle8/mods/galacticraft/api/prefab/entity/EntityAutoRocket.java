@@ -171,7 +171,8 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
     }
 
     protected boolean setTarget(boolean doSet, int destFreq) {
-        // Server instance can sometimes be null on a single player game switched to LAN mode
+        // Server instance can sometimes be null on a single player game switched to LAN
+        // mode
         if (FMLCommonHandler.instance().getMinecraftServerInstance() == null
                 || FMLCommonHandler.instance().getMinecraftServerInstance().worldServers == null
                 || !GalacticraftCore.isPlanetsLoaded
@@ -252,7 +253,8 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                 double yDiff = this.posY - this.getOnPadYOffset() - this.targetVec.y;
                 this.motionY = Math.max(-2.0, (yDiff - 0.04) / -70.0);
 
-                // Some lateral motion in case not exactly on target (happens if rocket was moving laterally during
+                // Some lateral motion in case not exactly on target (happens if rocket was
+                // moving laterally during
                 // launch)
                 double diff = this.posX - this.targetVec.x - 0.5D;
                 double motX, motZ;
@@ -468,7 +470,8 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
         try {
             for (ILandingPadAttachable updatedTile : connectedTiles) {
                 if (controllerClass.isInstance(updatedTile)) {
-                    // This includes a check for whether it has enough energy to run (if it doesn't, then a launch would
+                    // This includes a check for whether it has enough energy to run (if it doesn't,
+                    // then a launch would
                     // not go to the destination frequency and the rocket would be lost!)
                     Boolean autoLaunchEnabled =
                             controllerClass.getField("controlEnabled").getBoolean(updatedTile);
@@ -487,9 +490,11 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                                 if (this.autoLaunchCountdown <= 0 || this.autoLaunchCountdown > 12)
                                     this.autoLaunchCountdown = 12;
                                 break;
-                                // The other settings set time to count down AFTER player mounts rocket but BEFORE
+                                // The other settings set time to count down AFTER player mounts rocket but
+                                // BEFORE
                                 // engine ignition
-                                // TODO: if autoLaunchCountdown > 0 add some smoke (but not flame) particle effects or
+                                // TODO: if autoLaunchCountdown > 0 add some smoke (but not flame) particle
+                                // effects or
                                 // other pre-flight test feedback so the player knows something is happening
                             case TIME_10_SECONDS:
                                 if (this.autoLaunchCountdown <= 0 || this.autoLaunchCountdown > 200)
@@ -507,8 +512,10 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                                 break;
                         }
                     } else {
-                        // This LaunchController is out of power, disabled, invalid target or set not to launch
-                        // No auto launch - but maybe another connectedTile will have some launch settings?
+                        // This LaunchController is out of power, disabled, invalid target or set not to
+                        // launch
+                        // No auto launch - but maybe another connectedTile will have some launch
+                        // settings?
                         this.autoLaunchSetting = null;
                         this.autoLaunchCountdown = 0;
                     }
@@ -668,7 +675,8 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
     protected void failRocket() {
         if (this.shouldCancelExplosion()) {
             // TODO: why looking around when already know the target?
-            // TODO: it would be good to land on an alternative neighbouring pad if there is already a rocket on the
+            // TODO: it would be good to land on an alternative neighbouring pad if there is
+            // already a rocket on the
             // target pad
             for (int i = -3; i <= 3; i++) {
                 if (this.landing
@@ -794,7 +802,8 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                 }
             }
 
-            // Set the player's launchpad item for return on landing - or null if launchpads not removed
+            // Set the player's launchpad item for return on landing - or null if launchpads
+            // not removed
             if (stats != null) {
                 stats.launchpadStack = amountRemoved == 9 ? new ItemStack(GCBlocks.landingPad, 9, 0) : null;
             }
@@ -897,7 +906,8 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
         this.landingPad = pad;
         if (pad != null) {
             pad.dockEntity(this);
-            // NOTE: setPad() is called also when a world or chunk is loaded - if the rocket is Ignited (from NBT save
+            // NOTE: setPad() is called also when a world or chunk is loaded - if the rocket
+            // is Ignited (from NBT save
             // data) do not change those settings
             if (!(this.launchPhase == EnumLaunchPhase.IGNITED.ordinal())) {
                 this.setLaunchPhase(EnumLaunchPhase.UNIGNITED);

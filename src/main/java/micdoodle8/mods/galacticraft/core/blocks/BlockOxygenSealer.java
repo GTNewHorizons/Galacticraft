@@ -150,16 +150,14 @@ public class BlockOxygenSealer extends BlockAdvancedTile implements ItemBlockDes
          * TileEntity tile = world.getTileEntity(x, y, z);
          *
          * if (tile instanceof GCCoreTileEntityOxygenSealer) {
-         * GCCoreTileEntityOxygenSealer sealer = (GCCoreTileEntityOxygenSealer)
-         * tile;
+         * GCCoreTileEntityOxygenSealer sealer = (GCCoreTileEntityOxygenSealer) tile;
          *
-         * if (sealer.threadSeal != null && sealer.threadSeal.sealed) { for
-         * (BlockVec3 checkedVec : sealer.threadSeal.checked) { int blockID =
+         * if (sealer.threadSeal != null && sealer.threadSeal.sealed) { for (BlockVec3
+         * checkedVec : sealer.threadSeal.checked) { int blockID =
          * checkedVec.getBlockID(world);
          *
-         * if (blockID == GCCoreBlocks.breatheableAir) {
-         * world.setBlock(checkedVec.x, checkedVec.y, checkedVec.z, 0, 0, 2); }
-         * } } }
+         * if (blockID == GCCoreBlocks.breatheableAir) { world.setBlock(checkedVec.x,
+         * checkedVec.y, checkedVec.z, 0, 0, 2); } } } }
          */
 
         super.breakBlock(world, x, y, z, block, par6);

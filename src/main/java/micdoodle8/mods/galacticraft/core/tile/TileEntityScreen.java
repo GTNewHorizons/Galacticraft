@@ -69,10 +69,10 @@ public class TileEntityScreen extends TileEntity {
     }
 
     /**
-     * Call when a screen (which maybe part of a multiscreen) is either
-     * broken or rotated.
+     * Call when a screen (which maybe part of a multiscreen) is either broken or
+     * rotated.
      *
-     * @param meta  The meta of the screen prior to breaking or rotation
+     * @param meta The meta of the screen prior to breaking or rotation
      */
     public void breakScreen(int meta) {
         BlockVec3 vec = new BlockVec3(this);
@@ -104,7 +104,7 @@ public class TileEntityScreen extends TileEntity {
             }
         }
 
-        // TODO  Try to generate largest screen possible out of remaining blocks
+        // TODO Try to generate largest screen possible out of remaining blocks
 
         this.connectedUp = this.connectedDown = this.connectedLeft = this.connectedRight = false;
 
@@ -147,10 +147,10 @@ public class TileEntityScreen extends TileEntity {
     }
 
     /**
-     * Check whether the screen can sustain 'multi-screen' connections on each of its 4 sides
-     * (note: this can be called recursively from inside itself)
+     * Check whether the screen can sustain 'multi-screen' connections on each of
+     * its 4 sides (note: this can be called recursively from inside itself)
      *
-     * @param  doScreen  If true, build a new multi-screen if connections are found
+     * @param doScreen If true, build a new multi-screen if connections are found
      */
     public void refreshConnections(boolean doScreen) {
         this.log("Starting connection check");
@@ -431,16 +431,20 @@ public class TileEntityScreen extends TileEntity {
     }
 
     /**
-     * After figuring out the screen edges (overall screen dimensions)
-     * check that the screen is a whole A x B rectangle with no tiles missing
+     * After figuring out the screen edges (overall screen dimensions) check that
+     * the screen is a whole A x B rectangle with no tiles missing
      *
      * If it is whole, set all tiles in the screen to match this screen type
      *
-     * @param up  Number of blocks the screen edge is away from this in the up direction
-     * @param down  Number of blocks the screen edge is away from this in the down direction
-     * @param left  Number of blocks the screen edge is away from this in the left direction
-     * @param right  Number of blocks the screen edge is away from this in the right direction
-     * @return  True if the screen was whole
+     * @param up    Number of blocks the screen edge is away from this in the up
+     *              direction
+     * @param down  Number of blocks the screen edge is away from this in the down
+     *              direction
+     * @param left  Number of blocks the screen edge is away from this in the left
+     *              direction
+     * @param right Number of blocks the screen edge is away from this in the right
+     *              direction
+     * @return True if the screen was whole
      */
     private boolean checkWholeScreen(int up, int down, int left, int right) {
         if (up + down + left + right == 0 || up < 0 || down < 0 || left < 0 || right < 0) {
@@ -448,7 +452,8 @@ public class TileEntityScreen extends TileEntity {
             return true;
         }
 
-        // System.out.println("Checking screen size at "+this.xCoord+","+this.zCoord+": Up "+up+" Dn "+down+" Lf
+        // System.out.println("Checking screen size at "+this.xCoord+","+this.zCoord+":
+        // Up "+up+" Dn "+down+" Lf
         // "+left+" Rg "+right);
 
         boolean screenWhole = true;
@@ -572,8 +577,8 @@ public class TileEntityScreen extends TileEntity {
     }
 
     /**
-     * Get the Minecraft direction which is on the left side
-     * for the block orientation given by metadata
+     * Get the Minecraft direction which is on the left side for the block
+     * orientation given by metadata
      */
     private int getLeft(int meta) {
         switch (meta) {
@@ -590,8 +595,8 @@ public class TileEntityScreen extends TileEntity {
     }
 
     /**
-     * Get the Minecraft direction which is on the right side
-     * for the block orientation given by metadata
+     * Get the Minecraft direction which is on the right side for the block
+     * orientation given by metadata
      */
     private int getRight(int meta) {
         switch (meta) {
@@ -829,7 +834,8 @@ public class TileEntityScreen extends TileEntity {
         if (this.connectedLeft) connections += "L";
         if (this.connectedRight) connections += "R";
         if (this.worldObj.isRemote) strSide = "C";
-        // System.out.println(strSide + ":" + msg + " at "+this.xCoord+","+this.zCoord+" "+connections);
+        // System.out.println(strSide + ":" + msg + " at "+this.xCoord+","+this.zCoord+"
+        // "+connections);
     }
 
     @SideOnly(Side.CLIENT)

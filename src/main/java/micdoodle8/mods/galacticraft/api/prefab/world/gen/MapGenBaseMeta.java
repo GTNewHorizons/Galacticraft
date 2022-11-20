@@ -8,7 +8,8 @@ import net.minecraft.world.chunk.IChunkProvider;
 /**
  * Do not include this prefab class in your released mod download.
  * <p/>
- * This is a base class for World Gen such as caves. Override and generate features in recursiveGenerate
+ * This is a base class for World Gen such as caves. Override and generate
+ * features in recursiveGenerate
  */
 public abstract class MapGenBaseMeta {
     /**

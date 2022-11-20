@@ -294,7 +294,8 @@ public class ClientProxyCore extends CommonProxyCore {
         RenderingRegistry.registerEntityRenderingHandler(EntityFlag.class, new RenderFlag());
         RenderingRegistry.registerEntityRenderingHandler(EntityParachest.class, new RenderParaChest());
         RenderingRegistry.registerEntityRenderingHandler(EntityAlienVillager.class, new RenderAlienVillager());
-        //        RenderingRegistry.registerEntityRenderingHandler(EntityBubble.class, new RenderBubble(0.25F, 0.25F,
+        // RenderingRegistry.registerEntityRenderingHandler(EntityBubble.class, new
+        // RenderBubble(0.25F, 0.25F,
         // 1.0F));
         RenderingRegistry.registerEntityRenderingHandler(EntityLander.class, new RenderLander());
         RenderingRegistry.registerEntityRenderingHandler(EntityCelestialFake.class, new RenderEntityFake());
@@ -389,22 +390,12 @@ public class ClientProxyCore extends CommonProxyCore {
         }
 
         /**
-         * if (Loader.isModLoaded("CoFHCore"))
-         * {
-         * for (Entry<String, String> e : ClientProxyCore.capeMap.entrySet())
-         * {
-         * try
-         * {
-         * Object capeRegistry = Class.forName("cofh.api.core.RegistryAccess").getField("capeRegistry").get(null);
-         * Class.forName("cofh.api.core.ISimpleRegistry").getMethod("register", String.class, String.class).invoke(capeRegistry, e.getKey(), e.getValue());
-         * }
-         * catch (Exception e1)
-         * {
-         * e1.printStackTrace();
-         * break;
-         * }
-         * }
-         * }
+         * if (Loader.isModLoaded("CoFHCore")) { for (Entry<String, String> e :
+         * ClientProxyCore.capeMap.entrySet()) { try { Object capeRegistry =
+         * Class.forName("cofh.api.core.RegistryAccess").getField("capeRegistry").get(null);
+         * Class.forName("cofh.api.core.ISimpleRegistry").getMethod("register",
+         * String.class, String.class).invoke(capeRegistry, e.getKey(), e.getValue()); }
+         * catch (Exception e1) { e1.printStackTrace(); break; } } }
          **/
     }
 
@@ -785,7 +776,8 @@ public class ClientProxyCore extends CommonProxyCore {
     public static void adjustRenderPos(Entity entity, double offsetX, double offsetY, double offsetZ) {
         GL11.glPushMatrix();
         // Skip mobs in mobspawners
-        // Note: can also look for (entity.posY!=0.0D || entity.posX!=0.0D || entity.posZ!=0.0) which filters hand-held
+        // Note: can also look for (entity.posY!=0.0D || entity.posX!=0.0D ||
+        // entity.posZ!=0.0) which filters hand-held
         // entities and the player in an inventory GUI
         if (ClientProxyCore.smallMoonActive && (offsetX != 0.0D || offsetY != 0.0D || offsetZ != 0.0D)) {
             final EntityPlayerSP player = ClientProxyCore.mc.thePlayer;
@@ -970,12 +962,13 @@ public class ClientProxyCore extends CommonProxyCore {
             GL11.glRotatef(yaw * stats.gdir.getYawGravityY(), 0.0F, 1.0F, 0.0F);
             GL11.glRotatef(yaw * stats.gdir.getYawGravityZ(), 0.0F, 0.0F, 1.0F);
 
-            //            if (player.isSneaking())
-            //            {
-            //            	float sneakY = -0.2F;
-            //            	GL11.glTranslatef(sneakY * stats.gdir.getSneakVecX(), sneakY * stats.gdir.getSneakVecY(),
+            // if (player.isSneaking())
+            // {
+            // float sneakY = -0.2F;
+            // GL11.glTranslatef(sneakY * stats.gdir.getSneakVecX(), sneakY *
+            // stats.gdir.getSneakVecY(),
             // sneakY * stats.gdir.getSneakVecZ());
-            //            }
+            // }
             //
             GL11.glTranslatef(
                     eyeHeightChange * stats.gdir.getEyeVecX(),

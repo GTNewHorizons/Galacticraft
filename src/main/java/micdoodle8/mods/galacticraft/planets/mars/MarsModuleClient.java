@@ -97,7 +97,8 @@ public class MarsModuleClient implements IPlanetsModuleClient {
         RenderingRegistry.registerEntityRenderingHandler(
                 EntityTier2Rocket.class,
                 new RenderTier1Rocket(new ModelTier2Rocket(), MarsModule.ASSET_PREFIX, "rocketT2"));
-        //        RenderingRegistry.registerEntityRenderingHandler(EntityTerraformBubble.class, new RenderBubble(0.25F,
+        // RenderingRegistry.registerEntityRenderingHandler(EntityTerraformBubble.class,
+        // new RenderBubble(0.25F,
         // 1.0F, 0.25F));
         RenderingRegistry.registerEntityRenderingHandler(EntityProjectileTNT.class, new RenderProjectileTNT());
         RenderingRegistry.registerEntityRenderingHandler(EntityLandingBalloons.class, new RenderLandingBalloons());

@@ -45,10 +45,11 @@ public class EnergyUtil {
     public static boolean initialisedIC2Methods = EnergyUtil.initialiseIC2Methods();
 
     /**
-     * Tests whether an IConductor tile (a GC Aluminium Wire) can connect on each its 6 sides
-     * Returns a 6 member array, containing for each of the 6 standard directions:
-     * the connectable TileEntity if a connection was found, or else null.
-     * (This saves on the calling code having to use World.getTileEntity(x, y, z) a second time.)
+     * Tests whether an IConductor tile (a GC Aluminium Wire) can connect on each
+     * its 6 sides Returns a 6 member array, containing for each of the 6 standard
+     * directions: the connectable TileEntity if a connection was found, or else
+     * null. (This saves on the calling code having to use World.getTileEntity(x, y,
+     * z) a second time.)
      *
      * @param tile
      * @return
@@ -123,9 +124,10 @@ public class EnergyUtil {
 
     /**
      * Similar to getAdjacentPowerConnections but specific to energy receivers only
-     * Adds the adjacent power connections found to the passed acceptors, directions parameter Lists
-     * (Note: an acceptor can therefore sometimes be entered in the Lists more than once, with a different direction each time:
-     * this would represent GC wires connected to the acceptor on more than one side.)
+     * Adds the adjacent power connections found to the passed acceptors, directions
+     * parameter Lists (Note: an acceptor can therefore sometimes be entered in the
+     * Lists more than once, with a different direction each time: this would
+     * represent GC wires connected to the acceptor on more than one side.)
      *
      * @param conductor
      * @param acceptors
@@ -139,10 +141,8 @@ public class EnergyUtil {
         for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
             TileEntity tileEntity = thisVec.getTileEntityOnSide(world, direction);
 
-            if (tileEntity == null
-                    || tileEntity
-                            instanceof
-                            IConductor) // world.getTileEntity will not have returned an invalid tile, invalid tiles are
+            if (tileEntity == null || tileEntity instanceof IConductor) // world.getTileEntity will not have returned an
+            // invalid tile, invalid tiles are
             // null
             {
                 continue;
@@ -232,7 +232,8 @@ public class EnergyUtil {
                                     MathHelper.floor_float(toSend * EnergyConfigHandler.TO_RF_RATIO),
                                     simulate)
                     / EnergyConfigHandler.TO_RF_RATIO;
-            //        	GCLog.debug("Beam/storage offering RF1 up to " + toSend + " into pipe, it accepted " + sent);
+            // GCLog.debug("Beam/storage offering RF1 up to " + toSend + " into pipe, it
+            // accepted " + sent);
             return sent;
         } else if (isRF2Loaded && !EnergyConfigHandler.disableRFOutput && tileAdj instanceof IEnergyReceiver) {
             float sent = ((IEnergyReceiver) tileAdj)
@@ -241,7 +242,8 @@ public class EnergyUtil {
                                     MathHelper.floor_float(toSend * EnergyConfigHandler.TO_RF_RATIO),
                                     simulate)
                     / EnergyConfigHandler.TO_RF_RATIO;
-            //        	GCLog.debug("Beam/storage offering RF2 up to " + toSend + " into pipe, it accepted " + sent);
+            // GCLog.debug("Beam/storage offering RF2 up to " + toSend + " into pipe, it
+            // accepted " + sent);
             return sent;
         }
         return 0F;
@@ -294,10 +296,13 @@ public class EnergyUtil {
     }
 
     /**
-     * Test whether an energy connection can be made to a tile using other mods' energy methods.
+     * Test whether an energy connection can be made to a tile using other mods'
+     * energy methods.
      *
      * Parameters:
-     * @param tileAdj - the tile under test, it might be an energy tile from another mod
+     *
+     * @param tileAdj  - the tile under test, it might be an energy tile from
+     *                 another mod
      * @param inputAdj - the energy input side for that tile which is under test
      */
     public static boolean otherModCanReceive(TileEntity tileAdj, ForgeDirection inputAdj) {
@@ -316,11 +321,14 @@ public class EnergyUtil {
 
     /**
      * Test whether a tile can output energy using other mods' energy methods.
-     * Currently restricted to IC2 and RF mods - Mekanism tiles do not provide an interface to "output" energy
+     * Currently restricted to IC2 and RF mods - Mekanism tiles do not provide an
+     * interface to "output" energy
      *
      * Parameters:
-     * @param tileAdj - the tile under test, it might be an energy tile from another mod
-     * @param side - the energy output side for that tile which is under test
+     *
+     * @param tileAdj - the tile under test, it might be an energy tile from another
+     *                mod
+     * @param side    - the energy output side for that tile which is under test
      */
     public static boolean otherModCanProduce(TileEntity tileAdj, ForgeDirection side) {
         if (tileAdj instanceof TileBaseConductor || tileAdj instanceof EnergyStorageTile)

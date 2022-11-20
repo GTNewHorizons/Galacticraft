@@ -50,10 +50,12 @@ public class GuiTerraformer extends GuiContainerGC implements ICheckBoxCallback 
 
         this.enableTreesButton.displayString = GCCoreUtil.translate(
                         this.terraformer.treesDisabled ? "gui.button.enable.name" : "gui.button.disable.name")
-                + " " + GCCoreUtil.translate("gui.message.trees.name");
+                + " "
+                + GCCoreUtil.translate("gui.message.trees.name");
         this.enableGrassButton.displayString = GCCoreUtil.translate(
                         this.terraformer.grassDisabled ? "gui.button.enable.name" : "gui.button.disable.name")
-                + " " + GCCoreUtil.translate("gui.message.grass.name");
+                + " "
+                + GCCoreUtil.translate("gui.message.grass.name");
 
         super.drawScreen(par1, par2, par3);
     }
@@ -142,9 +144,10 @@ public class GuiTerraformer extends GuiContainerGC implements ICheckBoxCallback 
                 displayString, this.xSize / 2 - this.fontRendererObj.getStringWidth(displayString) / 2, 5, 4210752);
         this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, 144, 4210752);
         this.fontRendererObj.drawSplitString(this.getStatus(), 105, 24, this.xSize - 105, 4210752);
-        //		this.fontRendererObj.drawString(ElectricityDisplay.getDisplay(this.terraformer.ueWattsPerTick * 20,
+        // this.fontRendererObj.drawString(ElectricityDisplay.getDisplay(this.terraformer.ueWattsPerTick
+        // * 20,
         // ElectricUnit.WATT), 105, 56, 4210752);
-        //		this.fontRendererObj.drawString(ElectricityDisplay.getDisplay(this.terraformer.getVoltage(),
+        // this.fontRendererObj.drawString(ElectricityDisplay.getDisplay(this.terraformer.getVoltage(),
         // ElectricUnit.VOLTAGE), 105, 68, 4210752);
     }
 

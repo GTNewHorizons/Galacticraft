@@ -39,27 +39,29 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
         return world.getBlock(x, y, z).isSideSolid(world, x, y, z, direction);
     }
 
-    //	@Override
-    //	@SideOnly(Side.CLIENT)
-    //	public IIcon getIcon(IBlockAccess par1IBlockAccess, int x, int y, int z, int par5)
-    //	{
-    //		return BlockSpinThruster.thrusterIcon;
-    //	}
+    // @Override
+    // @SideOnly(Side.CLIENT)
+    // public IIcon getIcon(IBlockAccess par1IBlockAccess, int x, int y, int z, int
+    // par5)
+    // {
+    // return BlockSpinThruster.thrusterIcon;
+    // }
     //
-    //	@Override
-    //	@SideOnly(Side.CLIENT)
-    //	public IIcon getIcon(int par1, int x)
-    //	{
-    //		return BlockSpinThruster.thrusterIcon;
-    //	}
+    // @Override
+    // @SideOnly(Side.CLIENT)
+    // public IIcon getIcon(int par1, int x)
+    // {
+    // return BlockSpinThruster.thrusterIcon;
+    // }
     //
-    //	@Override
-    //	@SideOnly(Side.CLIENT)
-    //	public void registerBlockIcons(IIconRegister par1IconRegister)
-    //	{
-    //		BlockSpinThruster.thrusterIcon = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX +
+    // @Override
+    // @SideOnly(Side.CLIENT)
+    // public void registerBlockIcons(IIconRegister par1IconRegister)
+    // {
+    // BlockSpinThruster.thrusterIcon =
+    // par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX +
     // "spinThruster");
-    //	}
+    // }
 
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int x, int y, int z) {
@@ -173,8 +175,8 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
 
     /**
      * Lets the block know when one of its neighbor changes. Doesn't know which
-     * neighbor changed (coordinates passed are their own) Args: x, y, z,
-     * neighbor blockID
+     * neighbor changed (coordinates passed are their own) Args: x, y, z, neighbor
+     * blockID
      */
     @Override
     public void onNeighborBlockChange(World par1World, int x, int y, int z, Block par5) {
@@ -258,10 +260,12 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
     @Override
     @SideOnly(Side.CLIENT)
     /**
-     * A randomly called display update to be able to add particles or other items for display
+     * A randomly called display update to be able to add particles or other items
+     * for display
      */
     public void randomDisplayTick(World par1World, int x, int y, int z, Random par5Random) {
-        // TODO this is torch code as a placeholder, still need to adjust positioning and particle type
+        // TODO this is torch code as a placeholder, still need to adjust positioning
+        // and particle type
         // Also make small thrust sounds
         if (par1World.provider instanceof WorldProviderSpaceStation) {
             if (((WorldProviderSpaceStation) par1World.provider).getSpinManager().thrustersFiring

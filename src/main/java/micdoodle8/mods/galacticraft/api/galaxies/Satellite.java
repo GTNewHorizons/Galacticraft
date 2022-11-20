@@ -24,7 +24,8 @@ public class Satellite extends CelestialBody implements IChildBody {
     @Deprecated
     public CelestialBody setDimensionInfo(
             int providerId, Class<? extends WorldProvider> providerClass, boolean autoRegister) {
-        // Since satellites need a static ID, the subclass method will not work correctly.
+        // Since satellites need a static ID, the subclass method will not work
+        // correctly.
         throw new UnsupportedOperationException(
                 "Satellite registered using an outdated method (setDimensionInfo)! Tell Galacticraft addon authors to update to the latest API.");
     }

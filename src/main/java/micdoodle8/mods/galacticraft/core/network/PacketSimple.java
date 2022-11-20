@@ -299,9 +299,9 @@ public class PacketSimple extends Packet implements IPacket {
                     List<CelestialBody> possibleCelestialBodies = Lists.newArrayList();
                     Map<Integer, Map<String, GuiCelestialSelection.StationDataGUI>> spaceStationData =
                             Maps.newHashMap();
-                    //                Map<String, String> spaceStationNames = Maps.newHashMap();
-                    //                Map<String, Integer> spaceStationIDs = Maps.newHashMap();
-                    //                Map<String, Integer> spaceStationHomes = Maps.newHashMap();
+                    // Map<String, String> spaceStationNames = Maps.newHashMap();
+                    // Map<String, Integer> spaceStationIDs = Maps.newHashMap();
+                    // Map<String, Integer> spaceStationHomes = Maps.newHashMap();
 
                     for (String str : destinations) {
                         CelestialBody celestialBody = WorldUtil.getReachableCelestialBodiesForName(str);
@@ -331,9 +331,9 @@ public class PacketSimple extends Packet implements IPacket {
                                             new GuiCelestialSelection.StationDataGUI(
                                                     values[2], Integer.parseInt(values[3])));
 
-                            //                        spaceStationNames.put(values[1], values[2]);
-                            //                        spaceStationIDs.put(values[1], Integer.parseInt(values[3]));
-                            //                        spaceStationHomes.put(values[1], Integer.parseInt(values[4]));
+                            // spaceStationNames.put(values[1], values[2]);
+                            // spaceStationIDs.put(values[1], Integer.parseInt(values[3]));
+                            // spaceStationHomes.put(values[1], Integer.parseInt(values[4]));
                         }
 
                         if (celestialBody != null) {
@@ -345,19 +345,20 @@ public class PacketSimple extends Packet implements IPacket {
                         if (!(FMLClientHandler.instance().getClient().currentScreen instanceof GuiCelestialSelection)) {
                             GuiCelestialSelection gui = new GuiCelestialSelection(false, possibleCelestialBodies);
                             gui.spaceStationMap = spaceStationData;
-                            //                        gui.spaceStationNames = spaceStationNames;
-                            //                        gui.spaceStationIDs = spaceStationIDs;
+                            // gui.spaceStationNames = spaceStationNames;
+                            // gui.spaceStationIDs = spaceStationIDs;
                             FMLClientHandler.instance().getClient().displayGuiScreen(gui);
                         } else {
                             ((GuiCelestialSelection) FMLClientHandler.instance().getClient().currentScreen)
                                     .possibleBodies = possibleCelestialBodies;
                             ((GuiCelestialSelection) FMLClientHandler.instance().getClient().currentScreen)
                                     .spaceStationMap = spaceStationData;
-                            //                        ((GuiCelestialSelection)
+                            // ((GuiCelestialSelection)
                             // FMLClientHandler.instance().getClient().currentScreen).spaceStationNames =
                             // spaceStationNames;
-                            //                        ((GuiCelestialSelection)
-                            // FMLClientHandler.instance().getClient().currentScreen).spaceStationIDs = spaceStationIDs;
+                            // ((GuiCelestialSelection)
+                            // FMLClientHandler.instance().getClient().currentScreen).spaceStationIDs =
+                            // spaceStationIDs;
                         }
                     }
                 }
@@ -724,14 +725,14 @@ public class PacketSimple extends Packet implements IPacket {
                 player.addChatMessage(
                         new ChatComponentText(GameSettings.getKeyDisplayString(KeyHandlerClient.spaceKey.getKeyCode())
                                 + "  - " + GCCoreUtil.translate("gui.rocket.launch.name")));
-                player.addChatMessage(
-                        new ChatComponentText(GameSettings.getKeyDisplayString(KeyHandlerClient.leftKey.getKeyCode())
-                                + " / " + GameSettings.getKeyDisplayString(KeyHandlerClient.rightKey.getKeyCode())
-                                + "  - " + GCCoreUtil.translate("gui.rocket.turn.name")));
+                player.addChatMessage(new ChatComponentText(GameSettings.getKeyDisplayString(
+                                KeyHandlerClient.leftKey.getKeyCode())
+                        + " / " + GameSettings.getKeyDisplayString(KeyHandlerClient.rightKey.getKeyCode()) + "  - "
+                        + GCCoreUtil.translate("gui.rocket.turn.name")));
                 player.addChatMessage(new ChatComponentText(
-                        GameSettings.getKeyDisplayString(KeyHandlerClient.accelerateKey.getKeyCode()) + " / "
-                                + GameSettings.getKeyDisplayString(KeyHandlerClient.decelerateKey.getKeyCode()) + "  - "
-                                + GCCoreUtil.translate("gui.rocket.updown.name")));
+                        GameSettings.getKeyDisplayString(KeyHandlerClient.accelerateKey.getKeyCode())
+                                + " / " + GameSettings.getKeyDisplayString(KeyHandlerClient.decelerateKey.getKeyCode())
+                                + "  - " + GCCoreUtil.translate("gui.rocket.updown.name")));
                 player.addChatMessage(new ChatComponentText(
                         GameSettings.getKeyDisplayString(KeyHandlerClient.openFuelGui.getKeyCode()) + "       - "
                                 + GCCoreUtil.translate("gui.rocket.inv.name")));
@@ -1308,56 +1309,62 @@ public class PacketSimple extends Packet implements IPacket {
                 break;
             case S_REQUEST_OVERWORLD_IMAGE:
                 MapUtil.sendOverworldToClient(playerBase);
-                //        	if (GalacticraftCore.enableJPEG)
-                //        	{
-                //            ChunkCoordIntPair chunkCoordIntPair = new
+                // if (GalacticraftCore.enableJPEG)
+                // {
+                // ChunkCoordIntPair chunkCoordIntPair = new
                 // ChunkCoordIntPair((int)Math.floor(stats.coordsTeleportedFromX) >> 4,
                 // (int)Math.floor(stats.coordsTeleportedFromZ) >> 4);
-                //            File baseFolder = new
+                // File baseFolder = new
                 // File(MinecraftServer.getServer().worldServerForDimension(0).getChunkSaveLocation(),
                 // "galacticraft/overworldMap");
-                //            if (!baseFolder.exists())
-                //            {
-                //                if (!baseFolder.mkdirs())
-                //                {
-                //                	GCLog.severe("Base folder(s) could not be created: " + baseFolder.getAbsolutePath());
-                //                }
-                //            }
-                //            File outputFile = new File(baseFolder, "" + chunkCoordIntPair.chunkXPos + "_" +
+                // if (!baseFolder.exists())
+                // {
+                // if (!baseFolder.mkdirs())
+                // {
+                // GCLog.severe("Base folder(s) could not be created: " +
+                // baseFolder.getAbsolutePath());
+                // }
+                // }
+                // File outputFile = new File(baseFolder, "" + chunkCoordIntPair.chunkXPos + "_"
+                // +
                 // chunkCoordIntPair.chunkZPos + ".bin");
-                //            boolean success = true;
+                // boolean success = true;
                 //
-                //            if (!outputFile.exists() || !outputFile.isFile())
-                //            {
-                //                success = false;
-                //                //BufferedImage image = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
-                //                //MapUtil.getLocalMap(MinecraftServer.getServer().worldServerForDimension(0),
+                // if (!outputFile.exists() || !outputFile.isFile())
+                // {
+                // success = false;
+                // //BufferedImage image = new BufferedImage(400, 400,
+                // BufferedImage.TYPE_INT_RGB);
+                // //MapUtil.getLocalMap(MinecraftServer.getServer().worldServerForDimension(0),
                 // chunkCoordIntPair.chunkXPos, chunkCoordIntPair.chunkZPos, image);
-                //                int scale = 4;
-                //                //ConfigManagerCore.mapsize
-                //                MapUtil.getBiomeMapForCoords(MinecraftServer.getServer().worldServerForDimension(0),
-                // chunkCoordIntPair.chunkXPos, chunkCoordIntPair.chunkZPos, scale, 64, 64, outputFile, playerBase);
-                //            }
+                // int scale = 4;
+                // //ConfigManagerCore.mapsize
+                // MapUtil.getBiomeMapForCoords(MinecraftServer.getServer().worldServerForDimension(0),
+                // chunkCoordIntPair.chunkXPos, chunkCoordIntPair.chunkZPos, scale, 64, 64,
+                // outputFile, playerBase);
+                // }
                 //
-                //            if (success)
-                //            {
-                //                try
-                //                {
-                //                    byte[] bytes = FileUtils.readFileToByteArray(outputFile);
-                //                    //Class c =
+                // if (success)
+                // {
+                // try
+                // {
+                // byte[] bytes = FileUtils.readFileToByteArray(outputFile);
+                // //Class c =
                 // Launch.classLoader.loadClass("org.apache.commons.codec.binary.Base64");
-                //                    //byte[] bytes64 = (byte[])c.getMethod("encodeBase64", byte[].class).invoke(null,
+                // //byte[] bytes64 = (byte[])c.getMethod("encodeBase64",
+                // byte[].class).invoke(null,
                 // bytes);
-                //                    GalacticraftCore.packetPipeline.sendTo(new
-                // PacketSimple(EnumSimplePacket.C_SEND_OVERWORLD_IMAGE, new Object[] { bytes } ), playerBase);
-                //                }
-                //                catch (Exception ex)
-                //                {
-                //                    System.err.println("Error sending overworld image to player.");
-                //                    ex.printStackTrace();
-                //                }
-                //            }
-                //        	}
+                // GalacticraftCore.packetPipeline.sendTo(new
+                // PacketSimple(EnumSimplePacket.C_SEND_OVERWORLD_IMAGE, new Object[] { bytes }
+                // ), playerBase);
+                // }
+                // catch (Exception ex)
+                // {
+                // System.err.println("Error sending overworld image to player.");
+                // ex.printStackTrace();
+                // }
+                // }
+                // }
                 break;
             case S_REQUEST_MAP_IMAGE:
                 int dim = (Integer) this.data.get(0);
@@ -1401,7 +1408,8 @@ public class PacketSimple extends Packet implements IPacket {
      *
      * BEGIN "net.minecraft.network.Packet" IMPLEMENTATION
      *
-     * This is for handling server->client packets before the player has joined the world
+     * This is for handling server->client packets before the player has joined the
+     * world
      *
      */
 
@@ -1433,7 +1441,8 @@ public class PacketSimple extends Packet implements IPacket {
      *
      * END "net.minecraft.network.Packet" IMPLEMENTATION
      *
-     * This is for handling server->client packets before the player has joined the world
+     * This is for handling server->client packets before the player has joined the
+     * world
      *
      */
 }

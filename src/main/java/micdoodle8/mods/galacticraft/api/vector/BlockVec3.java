@@ -65,12 +65,12 @@ public class BlockVec3 implements Cloneable {
     }
 
     /**
-     * Get block ID at the BlockVec3 coordinates, with a forced chunk load if
-     * the coordinates are unloaded.
+     * Get block ID at the BlockVec3 coordinates, with a forced chunk load if the
+     * coordinates are unloaded.
      *
      * @param world
-     * @return the block ID, or null if the y-coordinate is less than 0 or
-     * greater than 256 or the x or z is outside the Minecraft worldmap.
+     * @return the block ID, or null if the y-coordinate is less than 0 or greater
+     *         than 256 or the x or z is outside the Minecraft worldmap.
      */
     public Block getBlockID(World world) {
         if (this.y < 0
@@ -115,10 +115,10 @@ public class BlockVec3 implements Cloneable {
      * Get block ID at the BlockVec3 coordinates without forcing a chunk load.
      *
      * @param world
-     * @return the block ID, or null if the y-coordinate is less than 0 or
-     * greater than 256 or the x or z is outside the Minecraft worldmap.
-     * Returns Blocks.bedrock if the coordinates being checked are in an
-     * unloaded chunk
+     * @return the block ID, or null if the y-coordinate is less than 0 or greater
+     *         than 256 or the x or z is outside the Minecraft worldmap. Returns
+     *         Blocks.bedrock if the coordinates being checked are in an unloaded
+     *         chunk
      */
     public Block getBlockID_noChunkLoad(World world) {
         if (this.y < 0
@@ -168,14 +168,14 @@ public class BlockVec3 implements Cloneable {
     }
 
     /**
-     * Get block ID at the BlockVec3 coordinates without forcing a chunk load.
-     * Only call this 'safe' version if x and z coordinates are within the
-     * Minecraft world map (-30m to +30m)
+     * Get block ID at the BlockVec3 coordinates without forcing a chunk load. Only
+     * call this 'safe' version if x and z coordinates are within the Minecraft
+     * world map (-30m to +30m)
      *
      * @param world
-     * @return the block ID, or null if the y-coordinate is less than 0 or
-     * greater than 256. Returns Blocks.bedrock if the coordinates being
-     * checked are in an unloaded chunk
+     * @return the block ID, or null if the y-coordinate is less than 0 or greater
+     *         than 256. Returns Blocks.bedrock if the coordinates being checked are
+     *         in an unloaded chunk
      */
     public Block getBlockIDsafe_noChunkLoad(World world) {
         if (this.y < 0 || this.y >= 256) {

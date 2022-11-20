@@ -52,8 +52,8 @@ public class GuiElectricFurnace extends GuiContainerGC {
     }
 
     /**
-     * Draw the foreground layer for the GuiContainer (everything in front of
-     * the items)
+     * Draw the foreground layer for the GuiContainer (everything in front of the
+     * items)
      */
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
@@ -68,15 +68,16 @@ public class GuiElectricFurnace extends GuiContainerGC {
 
         this.fontRendererObj.drawString(
                 GCCoreUtil.translate("gui.message.status.name") + ": " + displayText, 97, 52, 4210752);
-        //		this.fontRendererObj.drawString("" + this.tileEntity.storage.getMaxExtract(), 97, 56, 4210752);
-        //		this.fontRendererObj.drawString("Voltage: " + (int) (this.tileEntity.getVoltage() * 1000.0F), 97, 68,
+        // this.fontRendererObj.drawString("" + this.tileEntity.storage.getMaxExtract(),
+        // 97, 56, 4210752);
+        // this.fontRendererObj.drawString("Voltage: " + (int)
+        // (this.tileEntity.getVoltage() * 1000.0F), 97, 68,
         // 4210752);
         this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 
     /**
-     * Draw the background layer for the GuiContainer (everything behind the
-     * items)
+     * Draw the background layer for the GuiContainer (everything behind the items)
      */
     @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {

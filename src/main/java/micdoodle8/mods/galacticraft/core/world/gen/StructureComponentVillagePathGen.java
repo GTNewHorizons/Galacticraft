@@ -190,8 +190,8 @@ public class StructureComponentVillagePathGen extends StructureComponentVillageR
     }
 
     /**
-     * second Part of Structure generating, this for example places Spiderwebs,
-     * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
+     * second Part of Structure generating, this for example places Spiderwebs, Mob
+     * Spawners, it closes Mineshafts at the end, it adds Fences...
      */
     @Override
     public boolean addComponentParts(

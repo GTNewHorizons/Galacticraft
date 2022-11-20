@@ -72,7 +72,7 @@ public class GameScreenText implements IGameScreen {
         yPos = 0;
 
         TileEntityTelemetry telemeter = TileEntityTelemetry.getNearest(screen.driver);
-        // Make the text to draw.  To look good it's important the width and height
+        // Make the text to draw. To look good it's important the width and height
         // of the whole text box are correctly set here.
         String strName = "";
         String[] str = {GCCoreUtil.translate("gui.display.nolink"), "", "", "", ""};
@@ -138,11 +138,11 @@ public class GameScreenText implements IGameScreen {
                 ((ITelemetry) entity).receiveData(telemeter.clientData, str);
             } else if (entity instanceof EntityLivingBase) {
                 // Living entity:
-                //  data0 = time to show red damage
-                //  data1 = health in half-hearts
-                //  data2 = pulse
-                //  data3 = hunger (for player); horsetype (for horse)
-                //  data4 = oxygen (for player); horsevariant (for horse)
+                // data0 = time to show red damage
+                // data1 = health in half-hearts
+                // data2 = pulse
+                // data3 = hunger (for player); horsetype (for horse)
+                // data4 = oxygen (for player); horsevariant (for horse)
                 str[0] = telemeter.clientData[0] > 0 ? GCCoreUtil.translate("gui.player.ouch") : "";
                 if (telemeter.clientData[1] >= 0) {
                     str[1] = GCCoreUtil.translate("gui.player.health") + ": " + telemeter.clientData[1] + "%";
@@ -162,12 +162,13 @@ public class GameScreenText implements IGameScreen {
                 }
             } else
             // Generic - could be boats or minecarts etc - just show the speed
-            // TODO  can add more here, e.g. position data?
+            // TODO can add more here, e.g. position data?
             if (telemeter.clientData[2] >= 0) {
                 str[2] = makeSpeedString(telemeter.clientData[2]);
             }
         } else {
-            // Default - draw a simple time display just to show the Display Screen is working
+            // Default - draw a simple time display just to show the Display Screen is
+            // working
             World w1 = screen.driver.getWorldObj();
             int time1 = w1 != null ? (int) ((w1.getWorldTime() + 6000L) % 24000L) : 0;
             str[2] = makeTimeString(time1 * 360);
@@ -234,8 +235,9 @@ public class GameScreenText implements IGameScreen {
             OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
         }
 
-        // TODO  Cross-dimensional tracking (i.e. old entity setDead, new entity created)
-        // TODO  Deal with text off screen (including where localizations longer than English)
+        // TODO Cross-dimensional tracking (i.e. old entity setDead, new entity created)
+        // TODO Deal with text off screen (including where localizations longer than
+        // English)
 
         screen.telemetryLastClass = (telemeter == null) ? null : telemeter.clientClass;
         screen.telemetryLastEntity = entity;

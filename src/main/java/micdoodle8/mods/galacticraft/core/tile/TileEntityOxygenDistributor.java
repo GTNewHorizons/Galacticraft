@@ -40,7 +40,7 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
 
     public TileEntityOxygenDistributor() {
         super(6000, 8);
-        //        this.oxygenBubble = null;
+        // this.oxygenBubble = null;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
 
     @Override
     public void invalidate() {
-        if (!this.worldObj.isRemote /* && this.oxygenBubble != null*/) {
+        if (!this.worldObj.isRemote /* && this.oxygenBubble != null */) {
             int bubbleR = MathHelper.ceiling_double_int(bubbleSize);
             int bubbleR2 = (int) (bubbleSize * bubbleSize);
             for (int x = this.xCoord - bubbleR; x < this.xCoord + bubbleR; x++) {
@@ -74,7 +74,7 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
                     }
                 }
             }
-            //        	this.oxygenBubble.setDead();
+            // this.oxygenBubble.setDead();
             TileEntityOxygenDistributor.loadedTiles.remove(
                     new BlockVec3Dim(this.xCoord, this.yCoord, this.zCoord, this.worldObj.provider.dimensionId));
         }
@@ -89,11 +89,11 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
 
     public void addExtraNetworkedData(List<Object> networkedList) {
         if (!this.worldObj.isRemote && !this.isInvalid()) {
-            //            networkedList.add(this.oxygenBubble != null);
-            //            if (this.oxygenBubble != null)
-            //            {
-            //                networkedList.add(this.oxygenBubble.getEntityId());
-            //            }
+            // networkedList.add(this.oxygenBubble != null);
+            // if (this.oxygenBubble != null)
+            // {
+            // networkedList.add(this.oxygenBubble.getEntityId());
+            // }
             if (MinecraftServer.getServer().isDedicatedServer()) {
                 networkedList.add(loadedTiles.size());
                 // TODO: Limit this to ones in the same dimension as this tile?
@@ -132,10 +132,11 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
     @Override
     public void readExtraNetworkedData(ByteBuf dataStream) {
         if (this.worldObj.isRemote) {
-            //            if (dataStream.readBoolean())
-            //            {
-            //                this.oxygenBubble = (EntityBubble) worldObj.getEntityByID(dataStream.readInt());
-            //            }
+            // if (dataStream.readBoolean())
+            // {
+            // this.oxygenBubble = (EntityBubble)
+            // worldObj.getEntityByID(dataStream.readInt());
+            // }
             int size = dataStream.readInt();
             if (size >= 0) {
                 loadedTiles.clear();
@@ -185,19 +186,21 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
             this.bubbleSize = Math.min(Math.max(this.bubbleSize, 0.0F), 10.0F);
         }
 
-        //        if (!hasValidBubble && !this.worldObj.isRemote && (this.oxygenBubble == null || this.ticks < 25))
-        //        {
-        //            //Check it's a world without a breathable atmosphere
-        //        	if (this.oxygenBubble == null && this.worldObj.provider instanceof IGalacticraftWorldProvider &&
+        // if (!hasValidBubble && !this.worldObj.isRemote && (this.oxygenBubble == null
+        // || this.ticks < 25))
+        // {
+        // //Check it's a world without a breathable atmosphere
+        // if (this.oxygenBubble == null && this.worldObj.provider instanceof
+        // IGalacticraftWorldProvider &&
         // !((IGalacticraftWorldProvider)this.worldObj.provider).hasBreathableAtmosphere())
-        //            {
-        //                this.oxygenBubble = new EntityBubble(this.worldObj, new Vector3(this), this);
-        //                this.hasValidBubble = true;
-        //                this.worldObj.spawnEntityInWorld(this.oxygenBubble);
-        //            }
-        //        }
+        // {
+        // this.oxygenBubble = new EntityBubble(this.worldObj, new Vector3(this), this);
+        // this.hasValidBubble = true;
+        // this.worldObj.spawnEntityInWorld(this.oxygenBubble);
+        // }
+        // }
 
-        if (!this.worldObj.isRemote /* && this.oxygenBubble != null*/) {
+        if (!this.worldObj.isRemote /* && this.oxygenBubble != null */) {
             this.active = bubbleSize >= 1 && this.hasEnoughEnergyToRun && this.storedOxygen > this.oxygenPerTick;
 
             if (this.ticks % (this.active ? 20 : 4) == 0) {
@@ -237,7 +240,7 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
         if (nbt.func_150296_c().contains("bubbleSize")) {
             this.bubbleSize = nbt.getFloat("bubbleSize");
         }
-        //        this.hasValidBubble = nbt.getBoolean("hasValidBubble");
+        // this.hasValidBubble = nbt.getBoolean("hasValidBubble");
 
         final NBTTagList var2 = nbt.getTagList("Items", 10);
         this.containingItems = new ItemStack[this.getSizeInventory()];
@@ -258,7 +261,7 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
 
         nbt.setBoolean("bubbleVisible", this.shouldRenderBubble);
         nbt.setFloat("bubbleSize", this.bubbleSize);
-        //        nbt.setBoolean("hasValidBubble", this.hasValidBubble);
+        // nbt.setBoolean("hasValidBubble", this.hasValidBubble);
 
         final NBTTagList list = new NBTTagList();
 
@@ -426,11 +429,11 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
         return EnumSet.noneOf(ForgeDirection.class);
     }
 
-    //    @Override
-    //    public IBubble getBubble()
-    //    {
-    //        return this.oxygenBubble;
-    //    }
+    // @Override
+    // public IBubble getBubble()
+    // {
+    // return this.oxygenBubble;
+    // }
 
     public boolean inBubble(double pX, double pY, double pZ) {
         double r = bubbleSize;
@@ -448,7 +451,7 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
     @Override
     public void setBubbleVisible(boolean shouldRender) {
         this.shouldRenderBubble = shouldRender;
-        //        this.oxygenBubble.setShouldRender(shouldRender);
+        // this.oxygenBubble.setShouldRender(shouldRender);
     }
 
     @Override

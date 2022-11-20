@@ -61,10 +61,11 @@ public class SoundUpdaterRocket extends MovingSound {
             } else this.field_147663_c = 1.0F;
 
             if (this.theRocket.launchPhase == EnumLaunchPhase.IGNITED.ordinal() || this.theRocket.getLaunched()) {
-                //    			float var10 = MathHelper.clamp_float((float) this.minecartSpeed, 0.0F, 4.0F) / 4.0F;
-                //    			this.minecartRideSoundVolume = 0.0F + var10 * 0.75F;
-                //    			var10 = MathHelper.clamp_float(var10 * 2.0F, 0.0F, 1.0F);
-                //    			this.minecartMoveSoundVolume = 0.0F + var10 * 6.7F;
+                // float var10 = MathHelper.clamp_float((float) this.minecartSpeed, 0.0F, 4.0F)
+                // / 4.0F;
+                // this.minecartRideSoundVolume = 0.0F + var10 * 0.75F;
+                // var10 = MathHelper.clamp_float(var10 * 2.0F, 0.0F, 1.0F);
+                // this.minecartMoveSoundVolume = 0.0F + var10 * 6.7F;
 
                 if (this.theRocket.posY > 1000) {
                     this.volume = 0F;

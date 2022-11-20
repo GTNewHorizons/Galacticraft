@@ -92,7 +92,8 @@ public class SchematicRegistry {
     /**
      * Finds the correct schematic when player presses NEXT
      *
-     * @param currentIndex the current index of unlocked schematics the player is viewing
+     * @param currentIndex the current index of unlocked schematics the player is
+     *                     viewing
      * @return the schematic page that will be shown when the player clicks NEXT
      */
     @SideOnly(Side.CLIENT)
@@ -107,7 +108,8 @@ public class SchematicRegistry {
     /**
      * Finds the correct schematic when player presses BACK
      *
-     * @param currentIndex the current index of unlocked schematics the player is viewing
+     * @param currentIndex the current index of unlocked schematics the player is
+     *                     viewing
      * @return the schematic page that will be shown when the player clicks BACK
      */
     @SideOnly(Side.CLIENT)

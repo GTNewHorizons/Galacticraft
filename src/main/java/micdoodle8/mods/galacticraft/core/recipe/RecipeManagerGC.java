@@ -125,66 +125,60 @@ public class RecipeManagerGC {
 
         // Handled by GalaxySpace
         HashMap<Integer, ItemStack> input = new HashMap<Integer, ItemStack>();
-        /*input.put(1, new ItemStack(GCItems.partNoseCone));
-        input.put(2, new ItemStack(GCItems.heavyPlatingTier1));
-        input.put(3, new ItemStack(GCItems.heavyPlatingTier1));
-        input.put(4, new ItemStack(GCItems.heavyPlatingTier1));
-        input.put(5, new ItemStack(GCItems.heavyPlatingTier1));
-        input.put(6, new ItemStack(GCItems.heavyPlatingTier1));
-        input.put(7, new ItemStack(GCItems.heavyPlatingTier1));
-        input.put(8, new ItemStack(GCItems.heavyPlatingTier1));
-        input.put(9, new ItemStack(GCItems.heavyPlatingTier1));
-        input.put(10, new ItemStack(GCItems.partFins));
-        input.put(11, new ItemStack(GCItems.partFins));
-        input.put(12, new ItemStack(GCItems.rocketEngine));
-        input.put(13, new ItemStack(GCItems.partFins));
-        input.put(14, new ItemStack(GCItems.partFins));
-        input.put(15, null);
-        input.put(16, null);
-        input.put(17, null);
-        RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 0), input);*/
+        /*
+         * input.put(1, new ItemStack(GCItems.partNoseCone)); input.put(2, new
+         * ItemStack(GCItems.heavyPlatingTier1)); input.put(3, new
+         * ItemStack(GCItems.heavyPlatingTier1)); input.put(4, new
+         * ItemStack(GCItems.heavyPlatingTier1)); input.put(5, new
+         * ItemStack(GCItems.heavyPlatingTier1)); input.put(6, new
+         * ItemStack(GCItems.heavyPlatingTier1)); input.put(7, new
+         * ItemStack(GCItems.heavyPlatingTier1)); input.put(8, new
+         * ItemStack(GCItems.heavyPlatingTier1)); input.put(9, new
+         * ItemStack(GCItems.heavyPlatingTier1)); input.put(10, new
+         * ItemStack(GCItems.partFins)); input.put(11, new ItemStack(GCItems.partFins));
+         * input.put(12, new ItemStack(GCItems.rocketEngine)); input.put(13, new
+         * ItemStack(GCItems.partFins)); input.put(14, new ItemStack(GCItems.partFins));
+         * input.put(15, null); input.put(16, null); input.put(17, null);
+         * RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 0),
+         * input);
+         */
 
         HashMap<Integer, ItemStack> input2 = new HashMap<Integer, ItemStack>(input); /*
-        input2.put(15, new ItemStack(Blocks.chest));
-        input2.put(16, null);
-        input2.put(17, null);
-        RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 1), input2);
-
-        input2 = new HashMap<Integer, ItemStack>(input);
-        input2.put(15, null);
-        input2.put(16, new ItemStack(Blocks.chest));
-        input2.put(17, null);
-        RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 1), input2);
-
-        input2 = new HashMap<Integer, ItemStack>(input);
-        input2.put(15, null);
-        input2.put(16, null);
-        input2.put(17, new ItemStack(Blocks.chest));
-        RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 1), input2);
-
-        input2 = new HashMap<Integer, ItemStack>(input);
-        input2.put(15, new ItemStack(Blocks.chest));
-        input2.put(16, new ItemStack(Blocks.chest));
-        input2.put(17, null);
-        RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 2), input2);
-
-        input2 = new HashMap<Integer, ItemStack>(input);
-        input2.put(15, new ItemStack(Blocks.chest));
-        input2.put(16, null);
-        input2.put(17, new ItemStack(Blocks.chest));
-        RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 2), input2);
-
-        input2 = new HashMap<Integer, ItemStack>(input);
-        input2.put(15, null);
-        input2.put(16, new ItemStack(Blocks.chest));
-        input2.put(17, new ItemStack(Blocks.chest));
-        RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 2), input2);
-
-        input2 = new HashMap<Integer, ItemStack>(input);
-        input2.put(15, new ItemStack(Blocks.chest));
-        input2.put(16, new ItemStack(Blocks.chest));
-        input2.put(17, new ItemStack(Blocks.chest));
-        RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 3), input2);*/
+                         * input2.put(15, new ItemStack(Blocks.chest)); input2.put(16, null);
+                         * input2.put(17, null); RecipeUtil.addRocketBenchRecipe(new
+                         * ItemStack(GCItems.rocketTier1, 1, 1), input2);
+                         *
+                         * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, null);
+                         * input2.put(16, new ItemStack(Blocks.chest)); input2.put(17, null);
+                         * RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 1),
+                         * input2);
+                         *
+                         * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, null);
+                         * input2.put(16, null); input2.put(17, new ItemStack(Blocks.chest));
+                         * RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 1),
+                         * input2);
+                         *
+                         * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, new
+                         * ItemStack(Blocks.chest)); input2.put(16, new ItemStack(Blocks.chest));
+                         * input2.put(17, null); RecipeUtil.addRocketBenchRecipe(new
+                         * ItemStack(GCItems.rocketTier1, 1, 2), input2);
+                         *
+                         * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, new
+                         * ItemStack(Blocks.chest)); input2.put(16, null); input2.put(17, new
+                         * ItemStack(Blocks.chest)); RecipeUtil.addRocketBenchRecipe(new
+                         * ItemStack(GCItems.rocketTier1, 1, 2), input2);
+                         *
+                         * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, null);
+                         * input2.put(16, new ItemStack(Blocks.chest)); input2.put(17, new
+                         * ItemStack(Blocks.chest)); RecipeUtil.addRocketBenchRecipe(new
+                         * ItemStack(GCItems.rocketTier1, 1, 2), input2);
+                         *
+                         * input2 = new HashMap<Integer, ItemStack>(input); input2.put(15, new
+                         * ItemStack(Blocks.chest)); input2.put(16, new ItemStack(Blocks.chest));
+                         * input2.put(17, new ItemStack(Blocks.chest));
+                         * RecipeUtil.addRocketBenchRecipe(new ItemStack(GCItems.rocketTier1, 1, 3),
+                         * input2);
+                         */
 
         //
 
@@ -455,8 +449,10 @@ public class RecipeManagerGC {
             GCBlocks.oxygenPipe
         });
 
-        // RecipeUtil.addRecipe(new ItemStack(GCItems.oxTankMedium, 1, GCItems.oxTankMedium.getMaxDamage()), new
-        // Object[] { "ZZ", "XX", "YY", 'X', new ItemStack(GCItems.canister, 1, 0), 'Y', "compressedMeteoricIron", 'Z',
+        // RecipeUtil.addRecipe(new ItemStack(GCItems.oxTankMedium, 1,
+        // GCItems.oxTankMedium.getMaxDamage()), new
+        // Object[] { "ZZ", "XX", "YY", 'X', new ItemStack(GCItems.canister, 1, 0), 'Y',
+        // "compressedMeteoricIron", 'Z',
         // GCBlocks.oxygenPipe});
 
         RecipeUtil.addRecipe(new ItemStack(GCItems.sensorGlasses, 1), new Object[] {
@@ -619,12 +615,16 @@ public class RecipeManagerGC {
         });
 
         // Handled by Galaxy Space
-        // RecipeUtil.addRecipe(new ItemStack(GCBlocks.nasaWorkbench, 1), new Object[] { "XZX", "UWU", "YVY", 'U',
-        // Blocks.lever, 'V', Blocks.redstone_torch, 'W', "waferAdvanced", 'X', "compressedSteel", 'Y',
+        // RecipeUtil.addRecipe(new ItemStack(GCBlocks.nasaWorkbench, 1), new Object[] {
+        // "XZX", "UWU", "YVY", 'U',
+        // Blocks.lever, 'V', Blocks.redstone_torch, 'W', "waferAdvanced", 'X',
+        // "compressedSteel", 'Y',
         // "compressedSteel", 'Z', Blocks.crafting_table });
 
-        // RecipeUtil.addRecipe(new ItemStack(GCItems.oxTankHeavy, 1, GCItems.oxTankHeavy.getMaxDamage()), new Object[]
-        // { "ZZZ", "XXX", "YYY", 'X', new ItemStack(GCItems.canister, 1, 0), 'Y', "compressedSteel", 'Z', new
+        // RecipeUtil.addRecipe(new ItemStack(GCItems.oxTankHeavy, 1,
+        // GCItems.oxTankHeavy.getMaxDamage()), new Object[]
+        // { "ZZZ", "XXX", "YYY", 'X', new ItemStack(GCItems.canister, 1, 0), 'Y',
+        // "compressedSteel", 'Z', new
         // ItemStack(Blocks.wool, 1, 14) });
 
         RecipeUtil.addRecipe(
@@ -710,7 +710,8 @@ public class RecipeManagerGC {
         });
 
         // Disable oil extractor:
-        // RecipeUtil.addRecipe(new ItemStack(GCItems.oilExtractor), new Object[] { "X  ", " XY", "ZYY", 'X',
+        // RecipeUtil.addRecipe(new ItemStack(GCItems.oilExtractor), new Object[] { "X
+        // ", " XY", "ZYY", 'X',
         // "compressedSteel", 'Y', "compressedBronze", 'Z', Items.redstone });
 
         RecipeUtil.addRecipe(new ItemStack(GCItems.basicItem, 1, 20), new Object[] {
@@ -1071,12 +1072,11 @@ public class RecipeManagerGC {
             }
         }
 
-        /*        // Support for all the spellings of Aluminum
-                for (ItemStack stack : aluminumIngots)
-                {
-                  	CompressorRecipes.addShapelessRecipe(new ItemStack(GCItems.basicItem, 1, 8), stack, stack);
-                }
-        */
+        /*
+         * // Support for all the spellings of Aluminum for (ItemStack stack :
+         * aluminumIngots) { CompressorRecipes.addShapelessRecipe(new
+         * ItemStack(GCItems.basicItem, 1, 8), stack, stack); }
+         */
         if (OreDictionary.getOres("ingotBronze").size() > 0) {
             CompressorRecipes.addShapelessRecipe(new ItemStack(GCItems.basicItem, 1, 10), "ingotBronze", "ingotBronze");
         }
@@ -1161,43 +1161,46 @@ public class RecipeManagerGC {
     }
 
     private static void addBuildCraftCraftingRecipes() {
-        //        boolean refineryDone = false;
-        //        boolean newBCAPI = false;
-        //    	try
-        //        {
-        //    		Class<?> clazz = Class.forName("buildcraft.api.recipes.IRefineryRecipeManager");
-        //    		Method[] mzz = clazz.getMethods();
-        //    		for (Method m : mzz)
-        //    		{
-        //    			if (m.getName().equals("addRecipe"))
-        //    			{
-        //    				if (m.getParameterTypes()[0].equals(String.class))
-        //    				{
-        //    		    		newBCAPI = true;
-        //    		    		break;
-        //    				}
-        //    			}
-        //    		}
+        // boolean refineryDone = false;
+        // boolean newBCAPI = false;
+        // try
+        // {
+        // Class<?> clazz =
+        // Class.forName("buildcraft.api.recipes.IRefineryRecipeManager");
+        // Method[] mzz = clazz.getMethods();
+        // for (Method m : mzz)
+        // {
+        // if (m.getName().equals("addRecipe"))
+        // {
+        // if (m.getParameterTypes()[0].equals(String.class))
+        // {
+        // newBCAPI = true;
+        // break;
+        // }
+        // }
+        // }
         //
-        //    		if (newBCAPI)
-        //    		{
-        //	    		//Newer Buildcraft API versions
-        //	        	BuildcraftRecipeRegistry.refinery.addRecipe("buildcraft:fuel", new
-        // FluidStack(GalacticraftCore.gcFluidOil, 1), new FluidStack(FluidRegistry.getFluid("fuel"), 1), 120, 1);
-        //	        	refineryDone = true;
-        //    		}
-        //    		else
-        //    		{
-        //	    		//Older Buildcraft API versions
-        //	        	BuildcraftRecipes.refinery.addRecipe(new FluidStack(GalacticraftCore.gcFluidOil, 1), new
+        // if (newBCAPI)
+        // {
+        // //Newer Buildcraft API versions
+        // BuildcraftRecipeRegistry.refinery.addRecipe("buildcraft:fuel", new
+        // FluidStack(GalacticraftCore.gcFluidOil, 1), new
         // FluidStack(FluidRegistry.getFluid("fuel"), 1), 120, 1);
-        //	        	refineryDone = true;
-        //    		}
-        //        }
-        //        catch (Exception e) { }
+        // refineryDone = true;
+        // }
+        // else
+        // {
+        // //Older Buildcraft API versions
+        // BuildcraftRecipes.refinery.addRecipe(new
+        // FluidStack(GalacticraftCore.gcFluidOil, 1), new
+        // FluidStack(FluidRegistry.getFluid("fuel"), 1), 120, 1);
+        // refineryDone = true;
+        // }
+        // }
+        // catch (Exception e) { }
         //
-        //    	if (refineryDone)
-        //    		GCLog.info("Successfully added GC oil to Buildcraft Refinery recipes.");
+        // if (refineryDone)
+        // GCLog.info("Successfully added GC oil to Buildcraft Refinery recipes.");
 
         try {
             Class<?> clazz = Class.forName("buildcraft.BuildCraftTransport");

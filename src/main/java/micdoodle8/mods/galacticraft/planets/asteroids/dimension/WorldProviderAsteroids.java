@@ -30,11 +30,11 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
     private AsteroidSaveData datafile;
     private double solarMultiplier = -1D;
 
-    //	@Override
-    //	public void registerWorldChunkManager()
-    //	{
-    //		this.worldChunkMgr = new WorldChunkManagerAsteroids(this.worldObj, 0F);
-    //	}
+    // @Override
+    // public void registerWorldChunkManager()
+    // {
+    // this.worldChunkMgr = new WorldChunkManagerAsteroids(this.worldObj, 0F);
+    // }
 
     @Override
     public CelestialBody getCelestialBody() {
@@ -96,12 +96,12 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
         return 1.0F;
     }
 
-    //	@Override
-    //	public IChunkProvider createChunkGenerator()
-    //	{
-    //		return new ChunkProviderAsteroids(this.worldObj, this.worldObj.getSeed(),
+    // @Override
+    // public IChunkProvider createChunkGenerator()
+    // {
+    // return new ChunkProviderAsteroids(this.worldObj, this.worldObj.getSeed(),
     // this.worldObj.getWorldInfo().isMapFeaturesEnabled());
-    //	}
+    // }
 
     @Override
     public double getHorizon() {

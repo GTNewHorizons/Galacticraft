@@ -450,7 +450,8 @@ public class GCPlayerHandler {
                     return;
                 }
 
-                // For each piece of thermal equipment being used, slow down the the harmful thermal change slightly
+                // For each piece of thermal equipment being used, slow down the the harmful
+                // thermal change slightly
                 if (thermalPaddingHelm != null) {
                     thermalLevelTickCooldown += thermalLevelCooldownBase;
                 }
@@ -464,9 +465,10 @@ public class GCPlayerHandler {
                     thermalLevelTickCooldown += thermalLevelCooldownBase;
                 }
 
-                // Instead of increasing/decreasing the thermal level by a large amount every ~200 ticks,
+                // Instead of increasing/decreasing the thermal level by a large amount every
+                // ~200 ticks,
                 // increase/decrease
-                //      by a small amount each time (still the same average increase/decrease)
+                // by a small amount each time (still the same average increase/decrease)
                 int thermalLevelTickCooldownSingle =
                         MathHelper.floor_double(thermalLevelTickCooldown / absThermalLevelMod);
                 if (thermalLevelTickCooldownSingle < 1)
@@ -561,7 +563,8 @@ public class GCPlayerHandler {
                 playerStats.airRemaining2 = tankInSlot2.getMaxDamage() - tankInSlot2.getItemDamage();
                 hasInfinityTank |= tankInSlot2.getMaxDamage() == Integer.MAX_VALUE;
             }
-            // Exit early if at least one Infinite Oxygen Supply is present (-> Oxygen Tank modification and damage
+            // Exit early if at least one Infinite Oxygen Supply is present (-> Oxygen Tank
+            // modification and damage
             // application are skipped)
             if (hasInfinityTank) {
                 playerStats.oxygenSetupValid = true;
@@ -759,7 +762,8 @@ public class GCPlayerHandler {
     }
 
     public void registerTorchType(BlockUnlitTorch spaceTorch, Block vanillaTorch) {
-        // Space Torch registration must be unique; there may be multiple mappings for vanillaTorch
+        // Space Torch registration must be unique; there may be multiple mappings for
+        // vanillaTorch
         Item itemSpaceTorch = Item.getItemFromBlock(spaceTorch);
         Item itemVanillaTorch = Item.getItemFromBlock(vanillaTorch);
         torchItems.put(itemSpaceTorch, itemVanillaTorch);
@@ -796,7 +800,8 @@ public class GCPlayerHandler {
                     // If it has been long enough since the last step
                     if (playerStats.distanceSinceLastStep > 0.35D) {
                         Vector3 pos = new Vector3(player);
-                        // Set the footprint position to the block below and add random number to stop z-fighting
+                        // Set the footprint position to the block below and add random number to stop
+                        // z-fighting
                         pos.y = MathHelper.floor_double(player.posY - 1D) + player.worldObj.rand.nextFloat() / 100.0F;
 
                         // Adjust footprint to left or right depending on step count
@@ -884,8 +889,10 @@ public class GCPlayerHandler {
     protected void sendPlanetList(EntityPlayerMP player, GCPlayerStats playerStats) {
         HashMap<String, Integer> map;
         if (player.ticksExisted % 50 == 0)
-            // Check for genuine update - e.g. maybe some other player created a space station or changed permissions
-            // CAUTION: possible server load due to dimension loading, if any planets or moons were (contrary to GC
+            // Check for genuine update - e.g. maybe some other player created a space
+            // station or changed permissions
+            // CAUTION: possible server load due to dimension loading, if any planets or
+            // moons were (contrary to GC
             // default) set to hotload
             map = WorldUtil.getArrayOfPossibleDimensions(playerStats.spaceshipTier, player);
         else map = WorldUtil.getArrayOfPossibleDimensionsAgain(playerStats.spaceshipTier, player);
@@ -1111,17 +1118,17 @@ public class GCPlayerHandler {
         this.checkCurrentItem(player);
 
         if (GCPlayer.usingPlanetSelectionGui) {
-            // This sends the planets list again periodically (forcing the Celestial Selection screen to open) in case
+            // This sends the planets list again periodically (forcing the Celestial
+            // Selection screen to open) in case
             // of server/client lag
             // #PACKETSPAM
             this.sendPlanetList(player, GCPlayer);
         }
 
-        /*		if (isInGCDimension || player.usingPlanetSelectionGui)
-                      {
-        			player.playerNetServerHandler.ticksForFloatKick = 0;
-        		}
-        */
+        /*
+         * if (isInGCDimension || player.usingPlanetSelectionGui) {
+         * player.playerNetServerHandler.ticksForFloatKick = 0; }
+         */
         if (GCPlayer.damageCounter > 0) {
             GCPlayer.damageCounter--;
         }

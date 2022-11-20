@@ -77,10 +77,12 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
 
     /**
      * This is used in place of ModelPlayerGC whenever RenderPlayerAPI is installed
-     * It adjusts player limb positions to match Galacticraft movement, arms overhead etc
-     * (the arm adjustments take effect even when Smart Moving is installed)
+     * It adjusts player limb positions to match Galacticraft movement, arms
+     * overhead etc (the arm adjustments take effect even when Smart Moving is
+     * installed)
      *
-     * It also renders the Galacticraft equipment, if RenderPlayerAPI but not Smart Moving is installed
+     * It also renders the Galacticraft equipment, if RenderPlayerAPI but not Smart
+     * Moving is installed
      *
      * @param modelPlayerAPI
      */
@@ -121,7 +123,8 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
     private void init() {
         float var1 = 0.0F;
 
-        // Do not add GC equipment to the model for armor model - only actual player model
+        // Do not add GC equipment to the model for armor model - only actual player
+        // model
         final Render render = RenderManager.instance.getEntityClassRenderObject(EntityClientPlayerMP.class);
         final ModelBiped modelBipedMain = ((RenderPlayer) render).modelBipedMain;
 
@@ -295,11 +298,10 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
 
             // TODO: Frequency module
             /*
-            ModelRenderer fModule = createModelRenderer(this.modelPlayer, 0, 0, 9);
-            fModule.addBox(0, 0, 0, 1, 1, 1, var1);
-            fModule.setRotationPoint(-2F, 2F, 3.8F);
-            fModule.mirror = true;
-            */
+             * ModelRenderer fModule = createModelRenderer(this.modelPlayer, 0, 0, 9);
+             * fModule.addBox(0, 0, 0, 1, 1, 1, var1); fModule.setRotationPoint(-2F, 2F,
+             * 3.8F); fModule.mirror = true;
+             */
         }
     }
 
@@ -363,11 +365,15 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
                     MathHelper.cos(par1 * 0.1162F * 2 + (float) Math.PI) * 1.4F * par2;
             this.modelPlayer.bipedRightLeg.rotateAngleX -= MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
             this.modelPlayer.bipedRightLeg.rotateAngleX += MathHelper.cos(par1 * 0.1162F * 2) * 1.4F * par2;
-            //    		this.modelPlayer.bipedRightArm.rotateAngleX = -angularSwingArm * 4.0F * par2 * 0.5F;
-            //    		this.modelPlayer.bipedLeftArm.rotateAngleX = angularSwingArm * 4.0F * par2 * 0.5F;
-            //    		this.modelPlayer.bipedLeftLeg.rotateAngleX = MathHelper.cos(par1 * 0.1162F * 2 + (float)Math.PI) *
+            // this.modelPlayer.bipedRightArm.rotateAngleX = -angularSwingArm * 4.0F * par2
+            // * 0.5F;
+            // this.modelPlayer.bipedLeftArm.rotateAngleX = angularSwingArm * 4.0F * par2 *
+            // 0.5F;
+            // this.modelPlayer.bipedLeftLeg.rotateAngleX = MathHelper.cos(par1 * 0.1162F *
+            // 2 + (float)Math.PI) *
             // 1.4F * par2;
-            //    		this.modelPlayer.bipedRightLeg.rotateAngleX = MathHelper.cos(par1 * 0.1162F * 2) * 1.4F * par2;
+            // this.modelPlayer.bipedRightLeg.rotateAngleX = MathHelper.cos(par1 * 0.1162F *
+            // 2) * 1.4F * par2;
         }
 
         if (usingParachute) {
@@ -438,7 +444,8 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
         // Deal with RenderPlayerAPIEnhancer calling this for skeletons etc
         if (!(var1 instanceof EntityPlayer)) return;
 
-        // Do not render GC equipment on top of armor - only on top of player - see .init() method
+        // Do not render GC equipment on top of armor - only on top of player - see
+        // .init() method
         if (this.oxygenMask == null) return;
 
         final EntityPlayer player = (EntityPlayer) var1;
@@ -475,25 +482,21 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
 
             // TODO: Frequency module
             /*
-               if (wearingFrequencyModule)
-               {
-                   FMLClientHandler.instance().getClient().renderEngine.bindTexture(ModelPlayerBaseGC.frequencyModuleTexture);
-                   GL11.glPushMatrix();
-                   GL11.glRotatef(180, 1, 0, 0);
-
-                   GL11.glRotatef((float) (this.modelPlayer.bipedHeadwear.rotateAngleY * (-180.0F / Math.PI)), 0, 1, 0);
-                   GL11.glRotatef((float) (this.modelPlayer.bipedHeadwear.rotateAngleX * (180.0F / Math.PI)), 1, 0, 0);
-                   GL11.glScalef(0.3F, 0.3F, 0.3F);
-                   GL11.glTranslatef(-1.1F, 1.2F, 0);
-                   this.frequencyModule.renderPart("Main");
-                   GL11.glTranslatef(0, 1.2F, 0);
-                   GL11.glRotatef((float) (Math.sin(var1.ticksExisted * 0.05) * 50.0F), 1, 0, 0);
-                   GL11.glRotatef((float) (Math.cos(var1.ticksExisted * 0.1) * 50.0F), 0, 1, 0);
-                   GL11.glTranslatef(0, -1.2F, 0);
-                   this.frequencyModule.renderPart("Radar");
-                   GL11.glPopMatrix();
-               }
-            */
+             * if (wearingFrequencyModule) {
+             * FMLClientHandler.instance().getClient().renderEngine.bindTexture(
+             * ModelPlayerBaseGC.frequencyModuleTexture); GL11.glPushMatrix();
+             * GL11.glRotatef(180, 1, 0, 0);
+             *
+             * GL11.glRotatef((float) (this.modelPlayer.bipedHeadwear.rotateAngleY *
+             * (-180.0F / Math.PI)), 0, 1, 0); GL11.glRotatef((float)
+             * (this.modelPlayer.bipedHeadwear.rotateAngleX * (180.0F / Math.PI)), 1, 0, 0);
+             * GL11.glScalef(0.3F, 0.3F, 0.3F); GL11.glTranslatef(-1.1F, 1.2F, 0);
+             * this.frequencyModule.renderPart("Main"); GL11.glTranslatef(0, 1.2F, 0);
+             * GL11.glRotatef((float) (Math.sin(var1.ticksExisted * 0.05) * 50.0F), 1, 0,
+             * 0); GL11.glRotatef((float) (Math.cos(var1.ticksExisted * 0.1) * 50.0F), 0, 1,
+             * 0); GL11.glTranslatef(0, -1.2F, 0); this.frequencyModule.renderPart("Radar");
+             * GL11.glPopMatrix(); }
+             */
             //
 
             FMLClientHandler.instance().getClient().renderEngine.bindTexture(ModelPlayerBaseGC.playerTexture);

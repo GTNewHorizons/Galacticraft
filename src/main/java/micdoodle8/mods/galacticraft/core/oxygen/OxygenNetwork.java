@@ -160,13 +160,13 @@ public class OxygenNetwork implements IOxygenNetwork {
                     continue;
                 }
 
-                // This causes problems with Sealed Oxygen Pipes (and maybe also unwanted chunk loading)
-                /*                if (!(((TileEntity) transmitter).getWorldObj().getBlock(((TileEntity) transmitter).xCoord, ((TileEntity) transmitter).yCoord, ((TileEntity) transmitter).zCoord) instanceof BlockTransmitter))
-                                {
-                                    it.remove();
-                                    continue;
-                                }
-                */
+                // This causes problems with Sealed Oxygen Pipes (and maybe also unwanted chunk
+                // loading)
+                /*
+                 * if (!(((TileEntity) transmitter).getWorldObj().getBlock(((TileEntity)
+                 * transmitter).xCoord, ((TileEntity) transmitter).yCoord, ((TileEntity)
+                 * transmitter).zCoord) instanceof BlockTransmitter)) { it.remove(); continue; }
+                 */
                 int i = 0;
                 for (TileEntity acceptor : transmitter.getAdjacentConnections()) {
                     if (!(acceptor instanceof ITransmitter) && acceptor instanceof IConnector) {
@@ -205,8 +205,8 @@ public class OxygenNetwork implements IOxygenNetwork {
             this.pipes.remove(splitPoint);
 
             /**
-             * Loop through the connected blocks and attempt to see if there are
-             * connections between the two points elsewhere.
+             * Loop through the connected blocks and attempt to see if there are connections
+             * between the two points elsewhere.
              */
             TileEntity[] connectedBlocks = splitPoint.getAdjacentConnections();
 
@@ -223,9 +223,8 @@ public class OxygenNetwork implements IOxygenNetwork {
 
                             if (finder.results.size() > 0) {
                                 /**
-                                 * The connections A and B are still intact
-                                 * elsewhere. Set all references of wire
-                                 * connection into one network.
+                                 * The connections A and B are still intact elsewhere. Set all references of
+                                 * wire connection into one network.
                                  */
                                 for (BlockVec3 node : finder.closedSet) {
                                     TileEntity nodeTile = node.getTileEntity(((TileEntity) splitPoint).getWorldObj());
@@ -238,8 +237,8 @@ public class OxygenNetwork implements IOxygenNetwork {
                                 }
                             } else {
                                 /**
-                                 * The connections A and B are not connected
-                                 * anymore. Give both of them a new network.
+                                 * The connections A and B are not connected anymore. Give both of them a new
+                                 * network.
                                  */
                                 IOxygenNetwork newNetwork = new OxygenNetwork();
 

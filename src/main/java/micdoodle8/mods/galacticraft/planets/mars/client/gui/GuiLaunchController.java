@@ -118,7 +118,7 @@ public class GuiLaunchController extends GuiContainerGC
         this.labelList = labelList;
         this.infoRegions = infoRegions;
 
-        //		GL11.glEnable(GL11.GL_TEXTURE_2D);
+        // GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         RenderHelper.enableStandardItemLighting();
@@ -347,11 +347,15 @@ public class GuiLaunchController extends GuiContainerGC
         displayString = this.getStatus();
         this.fontRendererObj.drawSplitString(
                 displayString, 60 - this.fontRendererObj.getStringWidth(displayString) / 2, 94, 60, 4210752);
-        //		displayString = ElectricityDisplay.getDisplay(this.launchController.ueWattsPerTick * 20, ElectricUnit.WATT);
-        //		this.fontRendererObj.drawString(displayString, this.xSize - 26 -
+        // displayString =
+        // ElectricityDisplay.getDisplay(this.launchController.ueWattsPerTick * 20,
+        // ElectricUnit.WATT);
+        // this.fontRendererObj.drawString(displayString, this.xSize - 26 -
         // this.fontRendererObj.getStringWidth(displayString), 94, 4210752);
-        //		displayString = ElectricityDisplay.getDisplay(this.launchController.getVoltage(), ElectricUnit.VOLTAGE);
-        //		this.fontRendererObj.drawString(displayString, this.xSize - 26 -
+        // displayString =
+        // ElectricityDisplay.getDisplay(this.launchController.getVoltage(),
+        // ElectricUnit.VOLTAGE);
+        // this.fontRendererObj.drawString(displayString, this.xSize - 26 -
         // this.fontRendererObj.getStringWidth(displayString), 104, 4210752);
         this.fontRendererObj.drawString(GCCoreUtil.translate("gui.message.frequency.name") + ":", 7, 22, 4210752);
         this.fontRendererObj.drawString(GCCoreUtil.translate("gui.message.destFrequency.name") + ":", 7, 44, 4210752);

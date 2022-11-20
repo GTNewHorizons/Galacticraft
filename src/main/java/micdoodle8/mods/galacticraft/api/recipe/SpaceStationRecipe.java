@@ -15,8 +15,8 @@ public class SpaceStationRecipe {
 
     /**
      * @param objMap a map of the items required. Each entry should be an object of
-     *               ItemStack, Item/Block or String(OreDict) and the amount of
-     *               that item required
+     *               ItemStack, Item/Block or String(OreDict) and the amount of that
+     *               item required
      */
     public SpaceStationRecipe(HashMap<Object, Integer> objMap) {
         for (final Object obj : objMap.keySet()) {
@@ -146,9 +146,8 @@ public class SpaceStationRecipe {
     }
 
     /**
-     * Returns the input for this recipe, any mod accessing this value should
-     * never manipulate the values in this array as it will effect the recipe
-     * itself.
+     * Returns the input for this recipe, any mod accessing this value should never
+     * manipulate the values in this array as it will effect the recipe itself.
      *
      * @return The recipes input vales.
      */

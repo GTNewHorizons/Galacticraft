@@ -63,10 +63,7 @@ public class BlockMinerBaseFull extends BlockTileGC {
     public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int side) {
         // TODO
         /*
-        if (this.getMetadataFromAngle(world, x, y, z, side) != -1)
-           {
-               return true;
-           }
+         * if (this.getMetadataFromAngle(world, x, y, z, side) != -1) { return true; }
          */
 
         return true;

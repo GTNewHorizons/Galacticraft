@@ -48,24 +48,21 @@ public class EnergyStorage implements IEnergyStorageGC {
     }
 
     /*
-     * Sets the maximum energy transfer rate on input
-     * Call this AFTER setMaxExtract().
+     * Sets the maximum energy transfer rate on input Call this AFTER
+     * setMaxExtract().
      */
     public void setMaxReceive(float maxReceive) {
         this.maxReceive = maxReceive;
     }
 
     /*
-     * Sets the energy consumption rate in gJ/t
-     * (For machines, this is the energy used per tick.)
-     * (For energy sources, this is the maximum output.)
+     * Sets the energy consumption rate in gJ/t (For machines, this is the energy
+     * used per tick.) (For energy sources, this is the maximum output.)
      *
-     * Also sets the receive rate at a default value
-     * of 2 * the energy consumption rate - so the machine's
-     * energy store can charge up even while it is working.
+     * Also sets the receive rate at a default value of 2 * the energy consumption
+     * rate - so the machine's energy store can charge up even while it is working.
      *
-     * If that is not required, call setMaxReceive() AFTER
-     * calling setMaxExtract().
+     * If that is not required, call setMaxReceive() AFTER calling setMaxExtract().
      */
     public void setMaxExtract(float maxExtract) {
         this.maxExtract = maxExtract;

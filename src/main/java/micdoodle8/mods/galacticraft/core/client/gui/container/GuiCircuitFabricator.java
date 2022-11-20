@@ -74,10 +74,11 @@ public class GuiCircuitFabricator extends GuiContainerGC {
         this.fontRendererObj.drawString(
                 displayText, 115 - this.fontRendererObj.getStringWidth(displayText) / 2, 90, 4210752);
         this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 93, 4210752);
-        //		str = "" + this.tileEntity.storage.getMaxExtract();
-        //		this.fontRendererObj.drawString(str, 5, 42, 4210752);
-        //		//		str = ElectricityDisplay.getDisplay(this.tileEntity.getVoltage(), ElectricUnit.VOLTAGE);
-        //		this.fontRendererObj.drawString(str, 5, 52, 4210752);
+        // str = "" + this.tileEntity.storage.getMaxExtract();
+        // this.fontRendererObj.drawString(str, 5, 42, 4210752);
+        // // str = ElectricityDisplay.getDisplay(this.tileEntity.getVoltage(),
+        // ElectricUnit.VOLTAGE);
+        // this.fontRendererObj.drawString(str, 5, 52, 4210752);
     }
 
     @Override

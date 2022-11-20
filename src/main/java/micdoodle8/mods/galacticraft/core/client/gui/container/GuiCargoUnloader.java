@@ -103,9 +103,10 @@ public class GuiCargoUnloader extends GuiContainerGC {
                 28 + offsetX,
                 45 + 23 - 46 + offsetY,
                 4210752);
-        // this.fontRendererObj.drawString("" + this.cargoUnloader.storage.getMaxExtract(), 28 + offsetX, 56 + 23 - 46 +
+        // this.fontRendererObj.drawString("" +
+        // this.cargoUnloader.storage.getMaxExtract(), 28 + offsetX, 56 + 23 - 46 +
         // offsetY, 4210752);
-        //		this.fontRendererObj.drawString(ElectricityDisplay.getDisplay(this.cargoUnloader.getVoltage(),
+        // this.fontRendererObj.drawString(ElectricityDisplay.getDisplay(this.cargoUnloader.getVoltage(),
         // ElectricUnit.VOLTAGE), 28 + offsetX, 68 + 23 - 46 + offsetY, 4210752);
         this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 90, 4210752);
     }
@@ -138,7 +139,8 @@ public class GuiCargoUnloader extends GuiContainerGC {
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         EnergyDisplayHelper.getEnergyDisplayTooltip(
                 this.cargoUnloader.getEnergyStoredGC(), this.cargoUnloader.getMaxEnergyStoredGC(), electricityDesc);
-        //		electricityDesc.add(EnumColor.YELLOW + GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)
+        // electricityDesc.add(EnumColor.YELLOW +
+        // GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)
         // Math.floor(this.cargoUnloader.getEnergyStoredGC()) + " / " + (int)
         // Math.floor(this.cargoUnloader.getMaxEnergyStoredGC())));
         this.electricInfoRegion.tooltipStrings = electricityDesc;

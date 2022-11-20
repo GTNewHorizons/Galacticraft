@@ -36,8 +36,8 @@ public abstract class TileBaseUniversalElectrical extends EnergyStorageTile
     protected boolean isAddedToEnergyNet;
     protected Object powerHandlerBC;
 
-    //	@NetworkedField(targetSide = Side.CLIENT)
-    //	public float energyStored = 0;
+    // @NetworkedField(targetSide = Side.CLIENT)
+    // public float energyStored = 0;
     private float IC2surplusInGJ = 0F;
 
     @Override
@@ -80,87 +80,92 @@ public abstract class TileBaseUniversalElectrical extends EnergyStorageTile
         return 0F;
     }
 
-    //	@Override
-    //	public float receiveElectricity(ForgeDirection from, ElectricityPack receive, boolean doReceive)
-    //	{
-    //		if (from == ForgeDirection.UNKNOWN || this.getElectricalInputDirections().contains(from))
-    //		{
-    //			if (!doReceive)
-    //			{
-    //				return this.getRequest(from);
-    //			}
+    // @Override
+    // public float receiveElectricity(ForgeDirection from, ElectricityPack receive,
+    // boolean doReceive)
+    // {
+    // if (from == ForgeDirection.UNKNOWN ||
+    // this.getElectricalInputDirections().contains(from))
+    // {
+    // if (!doReceive)
+    // {
+    // return this.getRequest(from);
+    // }
     //
-    //			return this.receiveElectricity(receive, doReceive);
-    //		}
+    // return this.receiveElectricity(receive, doReceive);
+    // }
     //
-    //		return 0F;
-    //	}
+    // return 0F;
+    // }
 
     /**
-     * A non-side specific version of receiveElectricity for you to optionally
-     * use it internally.
+     * A non-side specific version of receiveElectricity for you to optionally use
+     * it internally.
      */
-    //	public float receiveElectricity(ElectricityPack receive, boolean doReceive)
-    //	{
-    //		if (receive != null)
-    //		{
-    //			float prevEnergyStored = this.getEnergyStored();
-    //			float newStoredEnergy = Math.min(this.getEnergyStored() + receive.getWatts(), this.getMaxEnergyStored());
+    // public float receiveElectricity(ElectricityPack receive, boolean doReceive)
+    // {
+    // if (receive != null)
+    // {
+    // float prevEnergyStored = this.getEnergyStored();
+    // float newStoredEnergy = Math.min(this.getEnergyStored() + receive.getWatts(),
+    // this.getMaxEnergyStored());
     //
-    //			if (doReceive)
-    //			{
-    //				this.setEnergyStored(newStoredEnergy);
-    //			}
+    // if (doReceive)
+    // {
+    // this.setEnergyStored(newStoredEnergy);
+    // }
     //
-    //			return Math.max(newStoredEnergy - prevEnergyStored, 0);
-    //		}
+    // return Math.max(newStoredEnergy - prevEnergyStored, 0);
+    // }
     //
-    //		return 0;
-    //	}
+    // return 0;
+    // }
 
-    //	public float receiveElectricity(float energy, boolean doReceive)
-    //	{
-    //		return this.receiveElectricity(ElectricityPack.getFromWatts(energy, this.getVoltage()), doReceive);
-    //	}
+    // public float receiveElectricity(float energy, boolean doReceive)
+    // {
+    // return this.receiveElectricity(ElectricityPack.getFromWatts(energy,
+    // this.getVoltage()), doReceive);
+    // }
 
-    //	@Override
-    //	public void setEnergyStored(float energy)
-    //	{
-    //		this.energyStored = Math.max(Math.min(energy, this.getMaxEnergyStored()), 0);
-    //	}
+    // @Override
+    // public void setEnergyStored(float energy)
+    // {
+    // this.energyStored = Math.max(Math.min(energy, this.getMaxEnergyStored()), 0);
+    // }
 
-    //	@Override
-    //	public float getEnergyStored()
-    //	{
-    //		return this.energyStored;
-    //	}
+    // @Override
+    // public float getEnergyStored()
+    // {
+    // return this.energyStored;
+    // }
 
-    //	public boolean canConnect(ForgeDirection direction, NetworkType type)
-    //	{
-    //		if (direction == null || direction.equals(ForgeDirection.UNKNOWN) || type != NetworkType.POWER)
-    //		{
-    //			return false;
-    //		}
+    // public boolean canConnect(ForgeDirection direction, NetworkType type)
+    // {
+    // if (direction == null || direction.equals(ForgeDirection.UNKNOWN) || type !=
+    // NetworkType.POWER)
+    // {
+    // return false;
+    // }
     //
-    //		return this.getElectricalInputDirections().contains(direction) ||
+    // return this.getElectricalInputDirections().contains(direction) ||
     // this.getElectricalOutputDirections().contains(direction);
-    //	}
+    // }
 
-    //	@Override
-    //	public float getVoltage()
-    //	{
-    //		return 0.120F;
-    //	}
+    // @Override
+    // public float getVoltage()
+    // {
+    // return 0.120F;
+    // }
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        //		this.energyStored = nbt.getFloat("energyStored");
+        // this.energyStored = nbt.getFloat("energyStored");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
-        //		nbt.setFloat("energyStored", this.energyStored);
+        // nbt.setFloat("energyStored", this.energyStored);
     }
 
     /**

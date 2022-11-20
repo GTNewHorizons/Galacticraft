@@ -29,9 +29,9 @@ public class TileEntityBeamReceiver extends TileEntityBeamOutput implements IEne
 
     private int preLoadFacing = -1;
     private float maxRate = 1500;
-    private EnergyStorage storage = new EnergyStorage(
-            10 * maxRate,
-            maxRate); // In broken circuits, Beam Receiver will accept energy for 0.5s (15000gJ max) then stop
+    private EnergyStorage storage = new EnergyStorage(10 * maxRate, maxRate); // In broken circuits, Beam Receiver will
+    // accept energy for 0.5s (15000gJ max)
+    // then stop
 
     @NetworkedField(targetSide = Side.CLIENT)
     public int modeReceive = ReceiverMode.UNDEFINED.ordinal();
@@ -69,7 +69,8 @@ public class TileEntityBeamReceiver extends TileEntityBeamOutput implements IEne
                     }
                 } else if (!(tile instanceof EnergyStorageTile) && !(tile instanceof TileBaseConductor))
                 // Another mod's energy source
-                // But don't use other mods methods to connect Beam Receivers to GC's own wires or machines
+                // But don't use other mods methods to connect Beam Receivers to GC's own wires
+                // or machines
                 {
                     ForgeDirection inputAdj = ForgeDirection.getOrientation(this.facing);
                     float availableToSend = EnergyUtil.otherModsEnergyExtract(tile, inputAdj, this.maxRate, true);
@@ -83,7 +84,8 @@ public class TileEntityBeamReceiver extends TileEntityBeamOutput implements IEne
                     }
                 }
             } else if (this.modeReceive == ReceiverMode.RECEIVE.ordinal() && this.storage.getEnergyStoredGC() > 0) {
-                // One Beam Receiver might be powered by multiple transmitters - allow for 5 at maximum transfer rate
+                // One Beam Receiver might be powered by multiple transmitters - allow for 5 at
+                // maximum transfer rate
                 float maxTransfer = Math.min(this.storage.getEnergyStoredGC(), maxRate * 5);
 
                 if (maxTransfer < 0.01F)
@@ -100,7 +102,8 @@ public class TileEntityBeamReceiver extends TileEntityBeamOutput implements IEne
                         this.storage.extractEnergyGCnoMax(
                                 electricalTile.receiveEnergyGC(source, maxTransfer, false), false);
                     } else if (!(tileAdj instanceof EnergyStorageTile) && !(tileAdj instanceof TileBaseConductor))
-                    // Dont use other mods methods to connect Beam Receivers to GC's own wires or machines
+                    // Dont use other mods methods to connect Beam Receivers to GC's own wires or
+                    // machines
                     {
                         ForgeDirection inputAdj = ForgeDirection.getOrientation(this.facing);
                         float otherModTransferred =
@@ -192,13 +195,14 @@ public class TileEntityBeamReceiver extends TileEntityBeamOutput implements IEne
             return 0;
         }
 
-        //		if (received < amount)
-        //		{
-        //			if (tile instanceof EnergyStorageTile)
-        //			{
-        //				received += ((EnergyStorageTile) tile).storage.receiveEnergyGC(amount - received, simulate);
-        //			}
-        //		}
+        // if (received < amount)
+        // {
+        // if (tile instanceof EnergyStorageTile)
+        // {
+        // received += ((EnergyStorageTile) tile).storage.receiveEnergyGC(amount -
+        // received, simulate);
+        // }
+        // }
 
         return this.storage.receiveEnergyGC(amount, simulate);
     }

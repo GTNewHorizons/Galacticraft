@@ -19,7 +19,8 @@ public interface IHydrogenNetwork extends IGridNetwork<IHydrogenNetwork, ITransm
     /**
      * Gets the total amount of hydrogen requested/needed in the network.
      *
-     * @param ignoreTiles The TileEntities to ignore during this calculation (optional).
+     * @param ignoreTiles The TileEntities to ignore during this calculation
+     *                    (optional).
      */
     public float getRequest(TileEntity... ignoreTiles);
 }

@@ -273,8 +273,8 @@ public class BlockTier2TreasureChest extends BlockContainer
     }
 
     /**
-     * Checks the neighbor blocks to see if there is a chest there. Args: world,
-     * x, y, z
+     * Checks the neighbor blocks to see if there is a chest there. Args: world, x,
+     * y, z
      */
     private boolean isThereANeighborChest(World par1World, int par2, int par3, int par4) {
         return par1World.getBlock(par2, par3, par4) == this

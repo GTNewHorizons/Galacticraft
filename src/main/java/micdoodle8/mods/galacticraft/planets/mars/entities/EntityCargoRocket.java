@@ -262,7 +262,8 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
                         GCLog.debug("Cargo rocket arrived at destination dimension, going into landing mode.");
                         e.setPosition(this.targetVec.x + 0.5F, this.targetVec.y + 800, this.targetVec.z + 0.5F);
                         ((EntityCargoRocket) e).landing = true;
-                        // No setDead() following successful transferEntityToDimension() - see javadoc on that
+                        // No setDead() following successful transferEntityToDimension() - see javadoc
+                        // on that
                     } else {
                         GCLog.info("Error: failed to recreate the cargo rocket in landing mode on target planet.");
                         e.setDead();
@@ -358,35 +359,41 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
         return droppedItemList;
     }
 
-    //	@RuntimeInterface(clazz = "icbm.api.IMissileLockable", modID = "ICBM|Explosion")
-    //	public boolean canLock(IMissile missile)
-    //	{
-    //		return true;
-    //	}
+    // @RuntimeInterface(clazz = "icbm.api.IMissileLockable", modID =
+    // "ICBM|Explosion")
+    // public boolean canLock(IMissile missile)
+    // {
+    // return true;
+    // }
     //
-    //	@RuntimeInterface(clazz = "icbm.api.IMissileLockable", modID = "ICBM|Explosion")
-    //	public Vector3 getPredictedPosition(int ticks)
-    //	{
-    //		return new Vector3(this);
-    //	}
+    // @RuntimeInterface(clazz = "icbm.api.IMissileLockable", modID =
+    // "ICBM|Explosion")
+    // public Vector3 getPredictedPosition(int ticks)
+    // {
+    // return new Vector3(this);
+    // }
     //
-    //	@RuntimeInterface(clazz = "icbm.api.sentry.IAATarget", modID = "ICBM|Explosion")
-    //	public void destroyCraft()
-    //	{
-    //		this.setDead();
-    //	}
+    // @RuntimeInterface(clazz = "icbm.api.sentry.IAATarget", modID =
+    // "ICBM|Explosion")
+    // public void destroyCraft()
+    // {
+    // this.setDead();
+    // }
     //
-    //	@RuntimeInterface(clazz = "icbm.api.sentry.IAATarget", modID = "ICBM|Explosion")
-    //	public int doDamage(int damage)
-    //	{
-    //		return (int) (this.shipDamage += damage);
-    //	}
+    // @RuntimeInterface(clazz = "icbm.api.sentry.IAATarget", modID =
+    // "ICBM|Explosion")
+    // public int doDamage(int damage)
+    // {
+    // return (int) (this.shipDamage += damage);
+    // }
     //
-    //	@RuntimeInterface(clazz = "icbm.api.sentry.IAATarget", modID = "ICBM|Explosion")
-    //	public boolean canBeTargeted(Object entity)
-    //	{
-    //		return this.launchPhase == EnumLaunchPhase.LAUNCHED.getPhase() && this.timeSinceLaunch > 50;
-    //	} TODO Fix ICBM integration
+    // @RuntimeInterface(clazz = "icbm.api.sentry.IAATarget", modID =
+    // "ICBM|Explosion")
+    // public boolean canBeTargeted(Object entity)
+    // {
+    // return this.launchPhase == EnumLaunchPhase.LAUNCHED.getPhase() &&
+    // this.timeSinceLaunch > 50;
+    // } TODO Fix ICBM integration
 
     @Override
     public boolean isPlayerRocket() {

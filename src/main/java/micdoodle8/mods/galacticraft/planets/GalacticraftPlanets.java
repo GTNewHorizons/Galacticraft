@@ -59,7 +59,8 @@ public class GalacticraftPlanets {
     public void preInit(FMLPreInitializationEvent event) {
         FMLCommonHandler.instance().bus().register(this);
 
-        // Initialise configs, converting mars.conf + asteroids.conf to planets.conf if necessary
+        // Initialise configs, converting mars.conf + asteroids.conf to planets.conf if
+        // necessary
         File oldMarsConf = new File(event.getModConfigurationDirectory(), "Galacticraft/mars.conf");
         File newPlanetsConf = new File(event.getModConfigurationDirectory(), "Galacticraft/planets.conf");
         boolean update = false;
@@ -74,7 +75,8 @@ public class GalacticraftPlanets {
         GalacticraftPlanets.commonModules.put(GalacticraftPlanets.MODULE_KEY_ASTEROIDS, new AsteroidsModule());
         GalacticraftPlanets.proxy.preInit(event);
 
-        // Force initialisation of GC biome types in preinit (after config load) - this helps BiomeTweaker
+        // Force initialisation of GC biome types in preinit (after config load) - this
+        // helps BiomeTweaker
         BiomeGenBase biomeMarsPreInit = BiomeGenBaseMars.marsFlat;
         BiomeGenBase biomeAsteroidsPreInit = BiomeGenBaseAsteroids.asteroid;
     }
@@ -116,7 +118,8 @@ public class GalacticraftPlanets {
     public static List<IConfigElement> getConfigElements() {
         List<IConfigElement> list = new ArrayList<IConfigElement>();
 
-        // Get the last planet to be configured only, as all will reference and re-use the same planets.conf config file
+        // Get the last planet to be configured only, as all will reference and re-use
+        // the same planets.conf config file
         IPlanetsModule module = GalacticraftPlanets.commonModules.get(MODULE_KEY_ASTEROIDS);
         list.addAll(new ConfigElement(module.getConfiguration().getCategory(Constants.CONFIG_CATEGORY_DIMENSIONS))
                 .getChildElements());

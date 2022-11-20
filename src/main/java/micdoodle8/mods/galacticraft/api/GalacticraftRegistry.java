@@ -63,11 +63,11 @@ public class GalacticraftRegistry {
     }
 
     /**
-     * Add loot to the list of items that can possibly spawn in dungeon chests,
-     * but it is guaranteed that one will always spawn
+     * Add loot to the list of items that can possibly spawn in dungeon chests, but
+     * it is guaranteed that one will always spawn
      *
-     * @param tier Tier of dungeon chest to add loot to. For example Moon is 1
-     *             and Mars is 2
+     * @param tier Tier of dungeon chest to add loot to. For example Moon is 1 and
+     *             Mars is 2
      * @param loot The itemstack to add to the possible list of items
      */
     public static void addDungeonLoot(int tier, ItemStack loot) {
@@ -171,8 +171,9 @@ public class GalacticraftRegistry {
     }
 
     /***
-     * Now returns a boolean to indicate whether registration of the WorldProvider type was successful.
-     * (If it failed, you should probably set the CelestialBody as unreachable.)
+     * Now returns a boolean to indicate whether registration of the WorldProvider
+     * type was successful. (If it failed, you should probably set the CelestialBody
+     * as unreachable.)
      *
      * @param id
      * @param provider
@@ -186,8 +187,8 @@ public class GalacticraftRegistry {
             GalacticraftRegistry.worldProviderIDs.add(id);
             return true;
         } else {
-            GalacticraftRegistry.worldProviderIDs.add(
-                    defaultID); // Adding the 0 here preserves the order, important for network compatibility between GC
+            GalacticraftRegistry.worldProviderIDs.add(defaultID); // Adding the 0 here preserves the order, important
+            // for network compatibility between GC
             // versions
             FMLLog.severe("Could not register dimension " + id
                     + " - does it clash with another mod?  Change the ID in config.");
@@ -196,8 +197,9 @@ public class GalacticraftRegistry {
     }
 
     /**
-     * You should now use GalacticraftRegistry.registerProvider(int id, Class<? extends WorldProvider> provider, boolean keepLoaded, int defaultID)
-     * which returns a boolean indicating if the Provider was registered OK.
+     * You should now use GalacticraftRegistry.registerProvider(int id, Class<?
+     * extends WorldProvider> provider, boolean keepLoaded, int defaultID) which
+     * returns a boolean indicating if the Provider was registered OK.
      *
      * @param id
      * @param provider
@@ -215,8 +217,8 @@ public class GalacticraftRegistry {
     /**
      * Register an IGameScreen so the Display Screen can access it
      *
-     * @param screen  The IGameScreen to be registered
-     * @return   The type ID assigned to this screen type
+     * @param screen The IGameScreen to be registered
+     * @return The type ID assigned to this screen type
      */
     public static int registerScreen(IGameScreen screen) {
         GalacticraftRegistry.gameScreens.add(screen);

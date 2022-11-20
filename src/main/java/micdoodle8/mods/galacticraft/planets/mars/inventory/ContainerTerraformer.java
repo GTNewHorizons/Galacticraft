@@ -166,7 +166,8 @@ public class ContainerTerraformer extends Container {
                 try {
                     Item item = Item.getItemFromBlock(b);
                     if (item != null) {
-                        // item.getSubItems(item, null, subItemsList); - can't use because clientside only
+                        // item.getSubItems(item, null, subItemsList); - can't use because clientside
+                        // only
                         ContainerTerraformer.saplingList.add(new ItemStack(item, 1, 0));
                         String basicName = item.getUnlocalizedName(new ItemStack(item, 1, 0));
                         for (int i = 1; i < 16; i++) {

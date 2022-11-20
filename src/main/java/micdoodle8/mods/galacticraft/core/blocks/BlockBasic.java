@@ -20,8 +20,8 @@ import net.minecraft.world.World;
 
 /**
  * Metadata: 3 = Tin Decoration Block 1 4 = Tin Decoration Block 2 5 = Copper
- * Ore 6 = Tin Ore 7 = Aluminium Ore 8 = Silicon Ore 9 = Copper Block
- * 10 = Tin Block  11 = Aluminium Block  12 = Meteoric Iron Block
+ * Ore 6 = Tin Ore 7 = Aluminium Ore 8 = Silicon Ore 9 = Copper Block 10 = Tin
+ * Block 11 = Aluminium Block 12 = Meteoric Iron Block
  */
 public class BlockBasic extends Block implements IDetectableResource {
 

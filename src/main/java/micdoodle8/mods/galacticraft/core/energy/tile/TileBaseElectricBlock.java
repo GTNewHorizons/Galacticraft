@@ -20,8 +20,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 @Interface(modid = "IC2API", iface = "ic2.api.tile.IWrenchable")
 public abstract class TileBaseElectricBlock extends TileBaseUniversalElectrical
         implements IDisableableMachine, IConnector, IWrenchable {
-    //	public int energyPerTick = 200;
-    //	private final float ueMaxEnergy;
+    // public int energyPerTick = 200;
+    // private final float ueMaxEnergy;
 
     @NetworkedField(targetSide = Side.CLIENT)
     public boolean disabled = false;
@@ -44,50 +44,50 @@ public abstract class TileBaseElectricBlock extends TileBaseUniversalElectrical
 
     public abstract ItemStack getBatteryInSlot();
 
-    //	public TileBaseElectricBlock()
-    //	{
-    //		this.storage.setMaxReceive(ueWattsPerTick);
-    //		this.storage.setMaxExtract(0);
-    //		this.storage.setCapacity(maxEnergy);
-    ////		this.ueMaxEnergy = maxEnergy;
-    ////		this.ueWattsPerTick = ueWattsPerTick;
+    // public TileBaseElectricBlock()
+    // {
+    // this.storage.setMaxReceive(ueWattsPerTick);
+    // this.storage.setMaxExtract(0);
+    // this.storage.setCapacity(maxEnergy);
+    //// this.ueMaxEnergy = maxEnergy;
+    //// this.ueWattsPerTick = ueWattsPerTick;
     //
-    //		/*
-    //		 * if (PowerFramework.currentFramework != null) { this.bcPowerProvider =
-    //		 * new GCCoreLinkedPowerProvider(this);
-    //		 * this.bcPowerProvider.configure(20, 1, 10, 10, 1000); }
-    //		 */
-    //	}
+    // /*
+    // * if (PowerFramework.currentFramework != null) { this.bcPowerProvider =
+    // * new GCCoreLinkedPowerProvider(this);
+    // * this.bcPowerProvider.configure(20, 1, 10, 10, 1000); }
+    // */
+    // }
 
-    //	@Override
-    //	public float getMaxEnergyStored()
-    //	{
-    //		return this.ueMaxEnergy;
-    //	}
+    // @Override
+    // public float getMaxEnergyStored()
+    // {
+    // return this.ueMaxEnergy;
+    // }
 
     public int getScaledElecticalLevel(int i) {
         return (int) Math.floor(this.getEnergyStoredGC(null) * i / this.getMaxEnergyStoredGC(null));
         // - this.ueWattsPerTick;
     }
 
-    //	@Override
-    //	public float getRequest(ForgeDirection direction)
-    //	{
-    //		if (this.shouldPullEnergy())
-    //		{
-    //			return this.ueWattsPerTick * 2;
-    //		}
-    //		else
-    //		{
-    //			return 0;
-    //		}
-    //	}
+    // @Override
+    // public float getRequest(ForgeDirection direction)
+    // {
+    // if (this.shouldPullEnergy())
+    // {
+    // return this.ueWattsPerTick * 2;
+    // }
+    // else
+    // {
+    // return 0;
+    // }
+    // }
     //
-    //	@Override
-    //	public float getProvide(ForgeDirection direction)
-    //	{
-    //		return 0;
-    //	}
+    // @Override
+    // public float getProvide(ForgeDirection direction)
+    // {
+    // return 0;
+    // }
 
     @Override
     public void updateEntity() {

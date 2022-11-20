@@ -43,7 +43,7 @@ public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventor
     }
 
     /*
-     * @param tier: 1 = Electric Furnace  2 = Electric Arc Furnace
+     * @param tier: 1 = Electric Furnace 2 = Electric Arc Furnace
      */
     public TileEntityElectricFurnace(int tier) {
         this.initialised = true;
@@ -93,7 +93,8 @@ public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventor
                         }
                     }
                 } else if (this.processTicks > 0 && this.processTicks < this.processTimeRequired) {
-                    // Apply a "cooling down" process if the electric furnace runs out of energy while smelting
+                    // Apply a "cooling down" process if the electric furnace runs out of energy
+                    // while smelting
                     if (this.worldObj.rand.nextInt(4) == 0) {
                         this.processTicks++;
                     }
@@ -128,8 +129,8 @@ public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventor
     }
 
     /**
-     * Turn one item from the furnace source stack into the appropriate smelted
-     * item in the furnace result stack
+     * Turn one item from the furnace source stack into the appropriate smelted item
+     * in the furnace result stack
      */
     public void smeltItem() {
         if (this.canProcess()) {

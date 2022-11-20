@@ -136,9 +136,11 @@ public class GuiSolar extends GuiContainerGC {
                 this.xSize / 2 - this.fontRendererObj.getStringWidth(displayString) / 2,
                 56 + 23 - 46 + offsetY,
                 4210752);
-        //		displayString = ElectricityDisplay.getDisplay(this.solarPanel.getVoltage(), ElectricUnit.VOLTAGE);
-        //		this.fontRendererObj.drawString(displayString, this.xSize / 2 -
-        // this.fontRendererObj.getStringWidth(displayString) / 2, 68 + 23 - 46 + offsetY, 4210752);
+        // displayString = ElectricityDisplay.getDisplay(this.solarPanel.getVoltage(),
+        // ElectricUnit.VOLTAGE);
+        // this.fontRendererObj.drawString(displayString, this.xSize / 2 -
+        // this.fontRendererObj.getStringWidth(displayString) / 2, 68 + 23 - 46 +
+        // offsetY, 4210752);
         this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 94, 4210752);
     }
 
@@ -182,8 +184,9 @@ public class GuiSolar extends GuiContainerGC {
         List<String> electricityDesc = new ArrayList<String>();
         EnergyDisplayHelper.getEnergyDisplayTooltip(
                 this.solarPanel.getEnergyStoredGC(), this.solarPanel.getMaxEnergyStoredGC(), electricityDesc);
-        //		electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
-        //		electricityDesc.add(EnumColor.YELLOW + GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)
+        // electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
+        // electricityDesc.add(EnumColor.YELLOW +
+        // GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)
         // Math.floor(this.solarPanel.getEnergyStoredGC()) + " / " + (int)
         // Math.floor(this.solarPanel.getMaxEnergyStoredGC())));
         this.electricInfoRegion.tooltipStrings = electricityDesc;

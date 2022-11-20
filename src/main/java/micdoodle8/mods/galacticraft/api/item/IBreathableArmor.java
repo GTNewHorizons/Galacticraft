@@ -26,8 +26,7 @@ public interface IBreathableArmor {
      * @param helmetInSlot  The armor itemstack
      * @param playerWearing The player wearing the armor
      * @param type          The oxygen gear type @see EnumGearType
-     * @return true if this armor item is valid for the provided oxygen gear
-     * type
+     * @return true if this armor item is valid for the provided oxygen gear type
      */
     public boolean canBreathe(ItemStack helmetInSlot, EntityPlayer playerWearing, EnumGearType type);
 }

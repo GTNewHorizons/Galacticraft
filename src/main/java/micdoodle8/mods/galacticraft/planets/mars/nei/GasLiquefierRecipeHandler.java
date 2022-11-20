@@ -27,8 +27,8 @@ public class GasLiquefierRecipeHandler extends TemplateRecipeHandler {
             new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/gui/gasesMethaneOxygenNitrogen.png");
     int ticksPassed;
     int extra = 0;
-    int inputGas = 0; // 0 is methane   1 is oxygen   2 is atmosphere or nitrogen
-    int outputGas = 0; // 0 is fuel   1 is oxygen   2 is nitrogen
+    int inputGas = 0; // 0 is methane 1 is oxygen 2 is atmosphere or nitrogen
+    int outputGas = 0; // 0 is fuel 1 is oxygen 2 is nitrogen
     boolean fillAtmos = false;
     protected FontRenderer fontRendererObj = Minecraft.getMinecraft().fontRenderer;
 
@@ -86,7 +86,7 @@ public class GasLiquefierRecipeHandler extends TemplateRecipeHandler {
                 GuiDraw.changeTexture(GasLiquefierRecipeHandler.liquefierGuiTexture);
             }
 
-            // Offsets from GUI: x - 5,  y - 4
+            // Offsets from GUI: x - 5, y - 4
             int powerlevel = 53 - (progress - 41) / 6;
             GuiDraw.drawTexturedModalRect(37, 13, 176, 38, powerlevel, 7);
             GuiDraw.drawTexturedModalRect(23, 12, 208, 0, 11, 10);

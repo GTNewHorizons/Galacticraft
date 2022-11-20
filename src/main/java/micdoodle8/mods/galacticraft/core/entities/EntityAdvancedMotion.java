@@ -185,9 +185,9 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
     public abstract boolean shouldSpawnParticles();
 
     /**
-     * @return map of the particle vectors. Map key is the position and map
-     * value is the motion of the particles. Each entry will be spawned
-     * as a separate particle
+     * @return map of the particle vectors. Map key is the position and map value is
+     *         the motion of the particles. Each entry will be spawned as a separate
+     *         particle
      */
     public abstract Map<Vector3, Vector3> getParticleMap();
 
@@ -204,9 +204,8 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
     public abstract Vector3 getMotionVec();
 
     /**
-     * Can be called in the superclass init method
-     * before the subclass fields have been initialised!
-     * Therefore include null checks!!!
+     * Can be called in the superclass init method before the subclass fields have
+     * been initialised! Therefore include null checks!!!
      */
     public abstract ArrayList<Object> getNetworkedData();
 
@@ -216,8 +215,7 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
     public abstract int getPacketTickSpacing();
 
     /**
-     * @return players within this distance will recieve packets from this
-     * entity
+     * @return players within this distance will recieve packets from this entity
      */
     public abstract double getPacketSendDistance();
 
@@ -295,10 +293,10 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
                 this.setPosition(x, y, z);
                 this.setRotation(this.rotationYaw, this.rotationPitch);
             } else {
-                //                x = this.posX + this.motionX;
-                //                y = this.posY + this.motionY;
-                //                z = this.posZ + this.motionZ;
-                //                this.setPosition(x, y, z);
+                // x = this.posX + this.motionX;
+                // y = this.posY + this.motionY;
+                // z = this.posZ + this.motionZ;
+                // this.setPosition(x, y, z);
             }
         }
 
@@ -326,7 +324,8 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
             this.motionY = mot.y;
             this.motionZ = mot.z;
         }
-        // Necessary on both server and client to achieve a correct this.onGround setting
+        // Necessary on both server and client to achieve a correct this.onGround
+        // setting
         this.moveEntity(this.motionX, this.motionY, this.motionZ);
 
         if (this.onGround && !this.lastOnGround) {

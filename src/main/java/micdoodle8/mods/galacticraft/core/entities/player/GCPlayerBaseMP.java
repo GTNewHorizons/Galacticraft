@@ -22,22 +22,22 @@ public class GCPlayerBaseMP extends ServerPlayerBase {
         this.getClientHandler().clonePlayer(this.player, oldPlayer, keepInv);
     }
 
-    //    @Override
-    //    public void updateRidden()
-    //    {
-    //        this.getClientHandler().updateRiddenPre(this);
-    //        super.updateRidden();
-    //        this.getClientHandler().updateRiddenPost(this);
-    //    }
+    // @Override
+    // public void updateRidden()
+    // {
+    // this.getClientHandler().updateRiddenPre(this);
+    // super.updateRidden();
+    // this.getClientHandler().updateRiddenPost(this);
+    // }
     //
-    //    @Override
-    //    public void mountEntity(Entity par1Entity)
-    //    {
-    //        if (!this.getClientHandler().mountEntity(this, par1Entity))
-    //        {
-    //            super.mountEntity(par1Entity);
-    //        }
-    //    }
+    // @Override
+    // public void mountEntity(Entity par1Entity)
+    // {
+    // if (!this.getClientHandler().mountEntity(this, par1Entity))
+    // {
+    // super.mountEntity(par1Entity);
+    // }
+    // }
 
     @Override
     public void moveEntity(double par1, double par3, double par5) {

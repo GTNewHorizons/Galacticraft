@@ -67,7 +67,8 @@ public class OxygenPressureProtocol {
                     .isSealed(world, vec.x, vec.y, vec.z, ForgeDirection.getOrientation(side));
         }
 
-        // Check leaves first, because their isOpaqueCube() test depends on graphics settings
+        // Check leaves first, because their isOpaqueCube() test depends on graphics
+        // settings
         // (See net.minecraft.block.BlockLeaves.isOpaqueCube()!)
         if (block instanceof BlockLeavesBase) {
             return true;
@@ -112,9 +113,12 @@ public class OxygenPressureProtocol {
             return false;
         }
 
-        // General case - this should cover any block which correctly implements isBlockSolidOnSide
-        // including most modded blocks - Forge microblocks in particular is covered by this.
-        // ### Any exceptions in mods should implement the IPartialSealableBlock interface ###
+        // General case - this should cover any block which correctly implements
+        // isBlockSolidOnSide
+        // including most modded blocks - Forge microblocks in particular is covered by
+        // this.
+        // ### Any exceptions in mods should implement the IPartialSealableBlock
+        // interface ###
         return !block.isSideSolid(world, vec.x, vec.y, vec.z, ForgeDirection.getOrientation(side ^ 1));
     }
 }

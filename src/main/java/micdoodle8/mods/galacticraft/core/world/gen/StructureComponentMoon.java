@@ -211,8 +211,7 @@ public abstract class StructureComponentMoon extends StructureComponent {
     }
 
     /**
-     * current Position depends on currently set Coordinates mode, is computed
-     * here
+     * current Position depends on currently set Coordinates mode, is computed here
      */
     @Override
     protected void placeBlockAtCurrentPosition(

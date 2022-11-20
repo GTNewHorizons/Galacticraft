@@ -526,8 +526,7 @@ public class Vector3 implements Cloneable {
     }
 
     /**
-     * Rotates a point by a yaw and pitch around the anchor 0,0 by a specific
-     * angle.
+     * Rotates a point by a yaw and pitch around the anchor 0,0 by a specific angle.
      */
     public void rotate(double yaw, double pitch) {
         this.rotate(yaw, pitch, 0);
@@ -546,9 +545,9 @@ public class Vector3 implements Cloneable {
     }
 
     /**
-     * Gets the delta look position based on the rotation yaw and pitch.
-     * Minecraft coordinates are messed up. Y and Z are flipped. Yaw is
-     * displaced by 90 degrees. Pitch is inversed.
+     * Gets the delta look position based on the rotation yaw and pitch. Minecraft
+     * coordinates are messed up. Y and Z are flipped. Yaw is displaced by 90
+     * degrees. Pitch is inversed.
      *
      * @param rotationYaw
      * @param rotationPitch

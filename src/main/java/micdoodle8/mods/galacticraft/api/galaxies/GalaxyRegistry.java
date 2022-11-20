@@ -184,24 +184,23 @@ public class GalaxyRegistry {
     }
 
     /**
-     * Returns a read-only map containing Solar System Names and their
-     * associated Solar Systems.
+     * Returns a read-only map containing Solar System Names and their associated
+     * Solar Systems.
      */
     public static Map<String, SolarSystem> getRegisteredSolarSystems() {
         return ImmutableMap.copyOf(GalaxyRegistry.solarSystems);
     }
 
     /**
-     * Returns a read-only map containing Solar System Names and their
-     * associated IDs.
+     * Returns a read-only map containing Solar System Names and their associated
+     * IDs.
      */
     public static Map<String, Integer> getRegisteredSolarSystemIDs() {
         return ImmutableMap.copyOf(GalaxyRegistry.solarSystemIDs);
     }
 
     /**
-     * Returns a read-only map containing Planet Names and their associated
-     * Planets.
+     * Returns a read-only map containing Planet Names and their associated Planets.
      */
     public static Map<String, Planet> getRegisteredPlanets() {
         return (Map<String, Planet>) GalaxyRegistry.planets.clone();
@@ -229,7 +228,8 @@ public class GalaxyRegistry {
     }
 
     /**
-     * Returns a read-only map containing Satellite Names and their associated Satellite.
+     * Returns a read-only map containing Satellite Names and their associated
+     * Satellite.
      */
     public static Map<String, Satellite> getRegisteredSatellites() {
         return ImmutableMap.copyOf(GalaxyRegistry.satellites);

@@ -54,7 +54,7 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
         ClientProxyCore.playerClientHandler.onLivingUpdatePre(this);
         try {
             if (this.worldObj.provider instanceof IZeroGDimension) {
-                //  from: EntityPlayerSP
+                // from: EntityPlayerSP
                 if (this.sprintingTicksLeft > 0) {
                     --this.sprintingTicksLeft;
 
@@ -210,7 +210,7 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
                 this.inventory.decrementAnimations();
                 this.prevCameraYaw = this.cameraYaw;
 
-                //  from: EntityLivingBase
+                // from: EntityLivingBase
                 if (this.newPosRotationIncrements > 0) {
                     double d0 = this.posX + (this.newPosX - this.posX) / (double) this.newPosRotationIncrements;
                     double d1 = this.posY + (this.newPosY - this.posY) / (double) this.newPosRotationIncrements;
@@ -256,7 +256,7 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
 
                 // Omit IAttributeInstance - seems relevant only on server
 
-                // Omit        this.jumpMovementFactor = this.speedInAir;
+                // Omit this.jumpMovementFactor = this.speedInAir;
                 // (no bounding in space)
 
                 float f = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
@@ -301,7 +301,7 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
                     }
                 }
 
-                //  from: EntityPlayerSP
+                // from: EntityPlayerSP
                 // (modified CUSTOM)
                 if (this.lastIsFlying != this.capabilities.isFlying) {
                     this.lastIsFlying = this.capabilities.isFlying;
@@ -358,16 +358,17 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
         return ClientProxyCore.playerClientHandler.getBedOrientationInDegrees(this, super.getBedOrientationInDegrees());
     }
     //
-    //    @Override
-    //    @SideOnly(Side.CLIENT)
-    //    public void setVelocity(double xx, double yy, double zz)
-    //    {
-    //      if (this.worldObj.provider instanceof WorldProviderOrbit)
-    //      {
-    //          ((WorldProviderOrbit)this.worldObj.provider).setVelocityClient(this, xx, yy, zz);
-    //      }
-    //      super.setVelocity(xx, yy, zz);
-    //    }
+    // @Override
+    // @SideOnly(Side.CLIENT)
+    // public void setVelocity(double xx, double yy, double zz)
+    // {
+    // if (this.worldObj.provider instanceof WorldProviderOrbit)
+    // {
+    // ((WorldProviderOrbit)this.worldObj.provider).setVelocityClient(this, xx, yy,
+    // zz);
+    // }
+    // super.setVelocity(xx, yy, zz);
+    // }
     //
 
     @Override

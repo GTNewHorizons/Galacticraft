@@ -213,9 +213,10 @@ public class GuiGasLiquefier extends GuiContainerGC {
         this.fontRendererObj.drawString(
                 GCCoreUtil.translate("gui.message.status.name") + ":", 56, 45 + 23 + yOffset, 4210752);
         this.fontRendererObj.drawString(displayText, 62, 45 + 33 + yOffset, 4210752);
-        //		this.fontRendererObj.drawString(ElectricityDisplay.getDisplay(this.tileEntity.ueWattsPerTick * 20,
+        // this.fontRendererObj.drawString(ElectricityDisplay.getDisplay(this.tileEntity.ueWattsPerTick
+        // * 20,
         // ElectricUnit.WATT), 72, 56 + 23 + yOffset, 4210752);
-        //		this.fontRendererObj.drawString(ElectricityDisplay.getDisplay(this.tileEntity.getVoltage(),
+        // this.fontRendererObj.drawString(ElectricityDisplay.getDisplay(this.tileEntity.getVoltage(),
         // ElectricUnit.VOLTAGE), 72, 68 + 23 + yOffset, 4210752);
         this.fontRendererObj.drawString(
                 GCCoreUtil.translate("container.inventory"), 8, this.ySize - 118 + 2 + 23, 4210752);
@@ -334,7 +335,8 @@ public class GuiGasLiquefier extends GuiContainerGC {
 
         List<String> electricityDesc = new ArrayList<String>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
-        //		electricityDesc.add(EnumColor.YELLOW + GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)
+        // electricityDesc.add(EnumColor.YELLOW +
+        // GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)
         // Math.floor(this.tileEntity.getEnergyStoredGC()) + " / " + (int)
         // Math.floor(this.tileEntity.getMaxEnergyStoredGC())));
         EnergyDisplayHelper.getEnergyDisplayTooltip(

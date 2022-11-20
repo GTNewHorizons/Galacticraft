@@ -59,8 +59,9 @@ public class TileEntityOxygenSealer extends TileEntityOxygen implements IInvento
         this.noRedstoneControl = true;
         this.storage.setMaxExtract(5.0F); // Half of a standard machine's power draw
         this.storage.setMaxReceive(25.0F);
-        this.storage.setCapacity(EnergyStorageTile.STANDARD_CAPACITY
-                * 2); // Large capacity so it can keep working for a while even if chunk unloads affect its power supply
+        this.storage.setCapacity(EnergyStorageTile.STANDARD_CAPACITY * 2); // Large capacity so it can keep working for
+        // a while even if chunk unloads affect its
+        // power supply
     }
 
     @Override
@@ -145,7 +146,8 @@ public class TileEntityOxygenSealer extends TileEntityOxygen implements IInvento
 
             this.active = this.storedOxygen >= 1 && this.hasEnoughEnergyToRun && !this.disabled;
 
-            // TODO: if multithreaded, this codeblock should not run if the current threadSeal is flagged looping
+            // TODO: if multithreaded, this codeblock should not run if the current
+            // threadSeal is flagged looping
             if (this.stopSealThreadCooldown > 0) {
                 this.stopSealThreadCooldown--;
             } else if (!TileEntityOxygenSealer.sealerCheckedThisTick) {

@@ -49,7 +49,7 @@ public class GCLoadingPlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
     public void injectData(Map<String, Object> data) {
         dev = !(boolean) data.get("runtimeDeobfuscationEnabled");
         debugOutputDir = new File((File) data.get("mcLocation"), ".asm");
-        //noinspection ResultOfMethodCallIgnored
+        // noinspection ResultOfMethodCallIgnored
         debugOutputDir.mkdir();
     }
 

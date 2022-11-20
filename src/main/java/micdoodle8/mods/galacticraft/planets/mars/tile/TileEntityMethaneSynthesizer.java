@@ -93,7 +93,8 @@ public class TileEntityMethaneSynthesizer extends TileBaseElectricBlockWithInven
                 }
             }
 
-            // Now see if any methane from the methane tank needs to be put into the output slot
+            // Now see if any methane from the methane tank needs to be put into the output
+            // slot
             checkFluidTankTransfer(4, this.liquidTank);
 
             if (this.hasEnoughEnergyToRun && this.canProcess()) {

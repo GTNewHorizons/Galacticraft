@@ -126,7 +126,8 @@ public class BlockOxygenPipe extends BlockTransmitter implements ITileEntityProv
                     }
 
                     //
-                    //	GCCorePacketManager.sendPacketToClients(GCCorePacketManager.getPacket(GalacticraftCore.CHANNELENTITIES, tileEntity, tileEntity.getColor(), (byte) -1)); TODO Fix pipe color
+                    // GCCorePacketManager.sendPacketToClients(GCCorePacketManager.getPacket(GalacticraftCore.CHANNELENTITIES,
+                    // tileEntity, tileEntity.getColor(), (byte) -1)); TODO Fix pipe color
 
                     BlockVec3 tileVec = new BlockVec3(tileEntity);
                     for (final ForgeDirection dir : ForgeDirection.values()) {

@@ -13,8 +13,8 @@ public class CircuitFabricatorRecipes {
     public static ArrayList<ArrayList<ItemStack>> slotValidItems = new ArrayList<ArrayList<ItemStack>>(5);
 
     /**
-     * Input list must be ItemStack array with 5 elements, contain null if no
-     * item is used in the slot.
+     * Input list must be ItemStack array with 5 elements, contain null if no item
+     * is used in the slot.
      * <p/>
      * 0 - Crystal slot 1 - Silicon slot 2 - Silicon slot 3 - Redstone slot 4 -
      * Optional slot
@@ -39,7 +39,8 @@ public class CircuitFabricatorRecipes {
                 CircuitFabricatorRecipes.slotValidItems.add(entry);
             }
         }
-        // Now see if the recipe items are already valid for their slots, if not add them
+        // Now see if the recipe items are already valid for their slots, if not add
+        // them
         for (int i = 0; i < 5; i++) {
             ItemStack inputStack = inputList[i];
             if (inputStack == null) {

@@ -62,49 +62,51 @@ public class WorldProviderMars extends WorldProviderSpace implements IGalacticra
         return WorldChunkManagerMars.class;
     }
 
-    //    @Override
-    //	public void setDimension(int var1)
-    //	{
-    //		this.dimensionId = var1;
-    //		super.setDimension(var1);
-    //	}
+    // @Override
+    // public void setDimension(int var1)
+    // {
+    // this.dimensionId = var1;
+    // super.setDimension(var1);
+    // }
     //
-    //	@Override
-    //	protected void generateLightBrightnessTable()
-    //	{
-    //		final float var1 = 0.0F;
+    // @Override
+    // protected void generateLightBrightnessTable()
+    // {
+    // final float var1 = 0.0F;
     //
-    //		for (int var2 = 0; var2 <= 15; ++var2)
-    //		{
-    //			final float var3 = 1.0F - var2 / 15.0F;
-    //			this.lightBrightnessTable[var2] = (1.0F - var3) / (var3 * 3.0F + 1.0F) * (1.0F - var1) + var1;
-    //		}
-    //	}
+    // for (int var2 = 0; var2 <= 15; ++var2)
+    // {
+    // final float var3 = 1.0F - var2 / 15.0F;
+    // this.lightBrightnessTable[var2] = (1.0F - var3) / (var3 * 3.0F + 1.0F) *
+    // (1.0F - var1) + var1;
+    // }
+    // }
 
-    //	@Override
-    //	public float[] calcSunriseSunsetColors(float var1, float var2)
-    //	{
-    //		return null;
-    //	}
+    // @Override
+    // public float[] calcSunriseSunsetColors(float var1, float var2)
+    // {
+    // return null;
+    // }
 
-    //	@Override
-    //	public void registerWorldChunkManager()
-    //	{
-    //		this.worldChunkMgr = new WorldChunkManagerMars();
-    //	}
+    // @Override
+    // public void registerWorldChunkManager()
+    // {
+    // this.worldChunkMgr = new WorldChunkManagerMars();
+    // }
 
-    //	@SideOnly(Side.CLIENT)
-    //	@Override
-    //	public Vec3 getFogColor(float var1, float var2)
-    //	{
-    //		return Vec3.createVectorHelper((double) 210F / 255F, (double) 120F / 255F, (double) 59F / 255F);
-    //	}
+    // @SideOnly(Side.CLIENT)
+    // @Override
+    // public Vec3 getFogColor(float var1, float var2)
+    // {
+    // return Vec3.createVectorHelper((double) 210F / 255F, (double) 120F / 255F,
+    // (double) 59F / 255F);
+    // }
     //
-    //	@Override
-    //	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks)
-    //	{
-    //		return Vec3.createVectorHelper(154 / 255.0F, 114 / 255.0F, 66 / 255.0F);
-    //	}
+    // @Override
+    // public Vec3 getSkyColor(Entity cameraEntity, float partialTicks)
+    // {
+    // return Vec3.createVectorHelper(154 / 255.0F, 114 / 255.0F, 66 / 255.0F);
+    // }
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -123,34 +125,34 @@ public class WorldProviderMars extends WorldProviderSpace implements IGalacticra
         return f2 * f2 * 0.75F;
     }
 
-    //	@Override
-    //	public float calculateCelestialAngle(long par1, float par3)
-    //	{
-    //		return super.calculateCelestialAngle(par1, par3);
-    //	}
+    // @Override
+    // public float calculateCelestialAngle(long par1, float par3)
+    // {
+    // return super.calculateCelestialAngle(par1, par3);
+    // }
     //
-    //	public float calculatePhobosAngle(long par1, float par3)
-    //	{
-    //		return this.calculateCelestialAngle(par1, par3) * 3000;
-    //	}
+    // public float calculatePhobosAngle(long par1, float par3)
+    // {
+    // return this.calculateCelestialAngle(par1, par3) * 3000;
+    // }
     //
-    //	public float calculateDeimosAngle(long par1, float par3)
-    //	{
-    //		return this.calculatePhobosAngle(par1, par3) * 0.0000000001F;
-    //	}
+    // public float calculateDeimosAngle(long par1, float par3)
+    // {
+    // return this.calculatePhobosAngle(par1, par3) * 0.0000000001F;
+    // }
     //
-    //	@Override
-    //	public IChunkProvider createChunkGenerator()
-    //	{
-    //		return new ChunkProviderMars(this.worldObj, this.worldObj.getSeed(),
+    // @Override
+    // public IChunkProvider createChunkGenerator()
+    // {
+    // return new ChunkProviderMars(this.worldObj, this.worldObj.getSeed(),
     // this.worldObj.getWorldInfo().isMapFeaturesEnabled());
-    //	}
+    // }
     //
-    //	@Override
-    //	public boolean isSkyColored()
-    //	{
-    //		return true;
-    //	}
+    // @Override
+    // public boolean isSkyColored()
+    // {
+    // return true;
+    // }
 
     @Override
     public double getHorizon() {
@@ -191,53 +193,53 @@ public class WorldProviderMars extends WorldProviderSpace implements IGalacticra
         return this.shouldForceRespawn() ? this.dimensionId : 0;
     }
 
-    //	@Override
-    //	public String getSaveFolder()
-    //	{
-    //		return "DIM" + ConfigManagerMars.dimensionIDMars;
-    //	}
+    // @Override
+    // public String getSaveFolder()
+    // {
+    // return "DIM" + ConfigManagerMars.dimensionIDMars;
+    // }
     //
-    //	@Override
-    //	public String getWelcomeMessage()
-    //	{
-    //		return "Entering Mars";
-    //	}
+    // @Override
+    // public String getWelcomeMessage()
+    // {
+    // return "Entering Mars";
+    // }
     //
-    //	@Override
-    //	public String getDepartMessage()
-    //	{
-    //		return "Leaving Mars";
-    //	}
+    // @Override
+    // public String getDepartMessage()
+    // {
+    // return "Leaving Mars";
+    // }
     //
-    //	@Override
-    //	public String getDimensionName()
-    //	{
-    //		return "Mars";
-    //	}
+    // @Override
+    // public String getDimensionName()
+    // {
+    // return "Mars";
+    // }
 
-    //	@Override
-    //	public boolean canSnowAt(int x, int y, int z)
-    //	{
-    //		return false;
-    //	}
+    // @Override
+    // public boolean canSnowAt(int x, int y, int z)
+    // {
+    // return false;
+    // }
 
-    //	@Override
-    //	public boolean canBlockFreeze(int x, int y, int z, boolean byWater)
-    //	{
-    //		return false;
-    //	}
+    // @Override
+    // public boolean canBlockFreeze(int x, int y, int z, boolean byWater)
+    // {
+    // return false;
+    // }
     //
-    //	@Override
-    //	public boolean canDoLightning(Chunk chunk)
-    //	{
-    //		return false;
-    //	}
+    // @Override
+    // public boolean canDoLightning(Chunk chunk)
+    // {
+    // return false;
+    // }
     //
-    //	@Override
-    //	public boolean canDoRainSnowIce(Chunk chunk)
-    //	{
-    //		return false;
-    //	}
+    // @Override
+    // public boolean canDoRainSnowIce(Chunk chunk)
+    // {
+    // return false;
+    // }
 
     @Override
     public float getGravity() {

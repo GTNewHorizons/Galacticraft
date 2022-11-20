@@ -140,7 +140,7 @@ public class EntityAstroMiner extends Entity
     private boolean flagCheckPlayer = false;
 
     // To do:
-    //   break the entity drops it as an item
+    // break the entity drops it as an item
 
     private int turnProgress;
     private double minecartX;
@@ -177,7 +177,8 @@ public class EntityAstroMiner extends Entity
 
     static {
         // Avoid:
-        // Overworld: avoid lava source blocks, mossy cobble, End Portal and Fortress blocks
+        // Overworld: avoid lava source blocks, mossy cobble, End Portal and Fortress
+        // blocks
         // railtrack, levers, redstone dust, GC walkways,
         // Anything with a tileEntity will also be avoided:
         // spawners, chests, oxygen pipes, hydrogen pipes, wires
@@ -214,8 +215,8 @@ public class EntityAstroMiner extends Entity
         this.setSize(cLENGTH, cWIDTH);
         this.yOffset = 0;
         this.myEntitySize = Entity.EnumEntitySize.SIZE_6;
-        //        this.dataWatcher.addObject(this.currentDamage, new Integer(0));
-        //        this.dataWatcher.addObject(this.timeSinceHit, new Integer(0));
+        // this.dataWatcher.addObject(this.currentDamage, new Integer(0));
+        // this.dataWatcher.addObject(this.timeSinceHit, new Integer(0));
         this.noClip = true;
 
         if (world != null && world.isRemote) {
@@ -361,7 +362,8 @@ public class EntityAstroMiner extends Entity
             if (this.turnProgress == 0) {
                 this.turnProgress++;
                 if (this.AIstate < AISTATE_TRAVELLING) {
-                    // It should be stationary, so this deals with the spooky movement (due to minor differences between
+                    // It should be stationary, so this deals with the spooky movement (due to minor
+                    // differences between
                     // server and client position)
                     this.posX = this.minecartX;
                     this.posY = this.minecartY;
@@ -435,7 +437,8 @@ public class EntityAstroMiner extends Entity
 
         if (this.playerMP == null) {
             // Go into dormant state if player is offline
-            // but do not actually set the dormant state on the server, so can resume immediately if player comes online
+            // but do not actually set the dormant state on the server, so can resume
+            // immediately if player comes online
             this.motionX = 0;
             this.motionY = 0;
             this.motionZ = 0;
@@ -465,7 +468,8 @@ public class EntityAstroMiner extends Entity
                 this.freeze(FAIL_OUTOFENERGY);
             } else if (!(this.worldObj.provider instanceof WorldProviderAsteroids) && this.ticksExisted % 2 == 0)
                 this.energyLevel--;
-            // No energy consumption when moving in space in Asteroids dimension (this reduces the risk of the Astro
+            // No energy consumption when moving in space in Asteroids dimension (this
+            // reduces the risk of the Astro
             // Miner becoming stranded!)
         }
 
@@ -478,7 +482,8 @@ public class EntityAstroMiner extends Entity
                         // The base was destroyed - see if it has been replaced?
                         this.atBase();
                     } else {
-                        // See if the return path has been unblocked, and give a small amount of backup energy to try to
+                        // See if the return path has been unblocked, and give a small amount of backup
+                        // energy to try to
                         // get home
                         this.AIstate = AISTATE_RETURNING;
                         if (this.energyLevel <= 0) this.energyLevel = 20;
@@ -531,16 +536,17 @@ public class EntityAstroMiner extends Entity
         this.posZ += this.motionZ;
         this.boundingBox.minZ += this.motionZ;
         this.boundingBox.maxZ += this.motionZ;
-        /*        if (this.dataWatcher.getWatchableObjectInt(this.timeSinceHit) > 0)
-                {
-                    this.dataWatcher.updateObject(this.timeSinceHit, Integer.valueOf(this.dataWatcher.getWatchableObjectInt(this.timeSinceHit) - 1));
-                }
-
-                if (this.dataWatcher.getWatchableObjectInt(this.currentDamage) > 0)
-                {
-                    this.dataWatcher.updateObject(this.currentDamage, Integer.valueOf(this.dataWatcher.getWatchableObjectInt(this.currentDamage) - 1));
-                }
-        */
+        /*
+         * if (this.dataWatcher.getWatchableObjectInt(this.timeSinceHit) > 0) {
+         * this.dataWatcher.updateObject(this.timeSinceHit,
+         * Integer.valueOf(this.dataWatcher.getWatchableObjectInt(this.timeSinceHit) -
+         * 1)); }
+         *
+         * if (this.dataWatcher.getWatchableObjectInt(this.currentDamage) > 0) {
+         * this.dataWatcher.updateObject(this.currentDamage,
+         * Integer.valueOf(this.dataWatcher.getWatchableObjectInt(this.currentDamage) -
+         * 1)); }
+         */
     }
 
     private void checkPlayer() {
@@ -630,7 +636,8 @@ public class EntityAstroMiner extends Entity
         }
 
         TileEntityMinerBase minerBase = (TileEntityMinerBase) tileEntity;
-        // If it's successfully reached its base, clear all fail messages except number 6, which is that all mining
+        // If it's successfully reached its base, clear all fail messages except number
+        // 6, which is that all mining
         // areas are finished (see below)
         this.givenFailMessage &= 64;
         this.wayPoints.clear();
@@ -674,7 +681,8 @@ public class EntityAstroMiner extends Entity
     }
 
     private boolean findNextTarget(TileEntityMinerBase minerBase) {
-        // If mining has finished, or path has been blocked two or more times, try mining elsewhere
+        // If mining has finished, or path has been blocked two or more times, try
+        // mining elsewhere
         if (!this.minePoints.isEmpty() && this.pathBlockedCount < 2) {
             this.posTarget = this.minePoints.getFirst().clone();
             GCLog.debug("Still mining at: " + posTarget.toString() + " Remaining shafts: " + this.minePoints.size());
@@ -695,7 +703,7 @@ public class EntityAstroMiner extends Entity
 
     /**
      *
-     * @return  True if reached a turning point
+     * @return True if reached a turning point
      */
     private boolean moveToTarget() {
         if (this.energyLevel < this.RETURNENERGY || this.inventoryDrops > this.RETURNDROPS) {
@@ -738,7 +746,8 @@ public class EntityAstroMiner extends Entity
     }
 
     private void setMinePoints() {
-        // Still some areas left to mine from last visit (maybe it was full or out of power?)
+        // Still some areas left to mine from last visit (maybe it was full or out of
+        // power?)
         if (this.minePoints.size() > 0) return;
 
         BlockVec3 inFront = new BlockVec3(
@@ -788,7 +797,7 @@ public class EntityAstroMiner extends Entity
 
     /**
      *
-     * @return  True if reached a turning point
+     * @return True if reached a turning point
      */
     private boolean doMining() {
         if (this.energyLevel < this.RETURNENERGY
@@ -837,9 +846,10 @@ public class EntityAstroMiner extends Entity
 
     /**
      * Mine out the area in front of the miner (dist blocks from miner centre)
-     * @param limit   Maximum block count to be mined this tick
+     *
+     * @param limit Maximum block count to be mined this tick
      * @param dist
-     * @return  True if the mining failed (meaning the miner's path is blocked)
+     * @return True if the mining failed (meaning the miner's path is blocked)
      */
     private boolean prepareMove(int limit, int dist) {
         if (this.mineCountDown > 0) {
@@ -877,9 +887,11 @@ public class EntityAstroMiner extends Entity
         this.tryBlockLimit = limit;
 
         // Check not obstructed by something immovable e.g. bedrock
-        // Mine out the 12 blocks in front of it in direction of travel when getting close
-        // There are 12 blocks around ... and 12 in front.  One block per tick?
-        // (That means can move at 5/6 block per second when mining, and 1.67 bps when traveling)
+        // Mine out the 12 blocks in front of it in direction of travel when getting
+        // close
+        // There are 12 blocks around ... and 12 in front. One block per tick?
+        // (That means can move at 5/6 block per second when mining, and 1.67 bps when
+        // traveling)
         switch (this.facingAI & 6) {
             case 0:
                 if (tryMineBlock(x, y, z)) wayBarred = true;
@@ -976,9 +988,11 @@ public class EntityAstroMiner extends Entity
         this.tryBlockLimit = limit;
 
         // Check not obstructed by something immovable e.g. bedrock
-        // Mine out the 12 blocks in front of it in direction of travel when getting close
-        // There are 12 blocks around ... and 12 in front.  One block per tick?
-        // (That means can move at 5/6 block per second when mining, and 1.67 bps when traveling)
+        // Mine out the 12 blocks in front of it in direction of travel when getting
+        // close
+        // There are 12 blocks around ... and 12 in front. One block per tick?
+        // (That means can move at 5/6 block per second when mining, and 1.67 bps when
+        // traveling)
         switch (this.facing & 6) {
             case 0:
                 if (tryBlockClient(x, y, z)) wayBarred = true;
@@ -1037,7 +1051,8 @@ public class EntityAstroMiner extends Entity
     }
 
     private boolean tryMineBlock(int x, int y, int z) {
-        // Check things to avoid in front of it (see static list for list) including base type things
+        // Check things to avoid in front of it (see static list for list) including
+        // base type things
         // Can move through liquids including flowing lava
         Block b = this.worldObj.getBlock(x, y, z);
         if (b.getMaterial() == Material.air) return false;
@@ -1212,8 +1227,8 @@ public class EntityAstroMiner extends Entity
      * Logic to move the miner to a given position
      *
      * @param pos
-     * @param reverse   True if returning home (re-use same tunnels)
-     * @return   False while the miner is en route, True when the position is reached
+     * @param reverse True if returning home (re-use same tunnels)
+     * @return False while the miner is en route, True when the position is reached
      */
     private boolean moveToPos(BlockVec3 pos, boolean reverse) {
         this.noSpeedup = false;
@@ -1393,7 +1408,8 @@ public class EntityAstroMiner extends Entity
         return flag;
     }
 
-    /** x y z should be the mid-point of the 4 base blocks
+    /**
+     * x y z should be the mid-point of the 4 base blocks
      *
      * @param world
      * @param x
@@ -1441,7 +1457,8 @@ public class EntityAstroMiner extends Entity
         // Increase motion speed when moving in empty space between asteroids
         miner.speedup = (world.provider instanceof WorldProviderAsteroids) ? SPEEDUP * 1.6D : SPEEDUP;
 
-        // Clear blocks, and test to see if its movement area in front of the base is blocked
+        // Clear blocks, and test to see if its movement area in front of the base is
+        // blocked
         if (miner.prepareMove(12, 0)) {
             miner.isDead = true;
             return false;
@@ -1504,7 +1521,8 @@ public class EntityAstroMiner extends Entity
         if (!this.worldObj.isRemote) {
             Entity e = par1DamageSource.getEntity();
 
-            // If creative mode player, kill the entity (even if player owner is offline) and drop nothing
+            // If creative mode player, kill the entity (even if player owner is offline)
+            // and drop nothing
             if (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode) {
                 if (this.playerMP == null && !this.spawnedInCreative)
                     ((EntityPlayer) e)
@@ -1520,14 +1538,14 @@ public class EntityAstroMiner extends Entity
                 return false;
             } else {
                 this.setBeenAttacked();
-                //                this.dataWatcher.updateObject(this.timeSinceHit, Integer.valueOf(10));
-                //                this.dataWatcher.updateObject(this.currentDamage, Integer.valueOf((int)
+                // this.dataWatcher.updateObject(this.timeSinceHit, Integer.valueOf(10));
+                // this.dataWatcher.updateObject(this.currentDamage, Integer.valueOf((int)
                 // (this.dataWatcher.getWatchableObjectInt(this.currentDamage) + par2 * 10)));
                 this.shipDamage += par2 * 10;
 
                 if (e instanceof EntityPlayer) {
                     this.shipDamage += par2 * 21;
-                    //                    this.dataWatcher.updateObject(this.currentDamage, 100);
+                    // this.dataWatcher.updateObject(this.currentDamage, 100);
                 }
 
                 if (this.shipDamage > 90) {
@@ -1565,9 +1583,10 @@ public class EntityAstroMiner extends Entity
 
     @Override
     public void performHurtAnimation() {
-        //	    this.dataWatcher.updateObject(this.timeSinceHit, Integer.valueOf(10));
-        //	    this.dataWatcher.updateObject(this.currentDamage,
-        // Integer.valueOf(this.dataWatcher.getWatchableObjectInt(this.currentDamage) * 5));
+        // this.dataWatcher.updateObject(this.timeSinceHit, Integer.valueOf(10));
+        // this.dataWatcher.updateObject(this.currentDamage,
+        // Integer.valueOf(this.dataWatcher.getWatchableObjectInt(this.currentDamage) *
+        // 5));
     }
 
     public float getDamage() {

@@ -52,9 +52,9 @@ public class ElectricItemHelper {
     }
 
     /**
-     * Returns an uncharged version of the electric item. Use this if you want
-     * the crafting recipe to use a charged version of the electric item instead
-     * of an empty version of the electric item
+     * Returns an uncharged version of the electric item. Use this if you want the
+     * crafting recipe to use a charged version of the electric item instead of an
+     * empty version of the electric item
      *
      * @return An electrical ItemStack with a specific charge.
      */

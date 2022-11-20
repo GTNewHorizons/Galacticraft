@@ -161,8 +161,8 @@ public class StructureVillagePiecesMoon {
     }
 
     /**
-     * attempts to find a next Structure Component to be spawned, private
-     * Village function
+     * attempts to find a next Structure Component to be spawned, private Village
+     * function
      */
     private static StructureComponent getNextVillageStructureComponent(
             StructureComponentVillageStartPiece par0ComponentVillageStartPiece,

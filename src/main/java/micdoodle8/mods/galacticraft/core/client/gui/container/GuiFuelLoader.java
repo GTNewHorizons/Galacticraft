@@ -113,8 +113,9 @@ public class GuiFuelLoader extends GuiContainerGC {
                 : GCCoreUtil.translate("gui.button.loadfuel.name");
         this.fontRendererObj.drawString(
                 GCCoreUtil.translate("gui.message.status.name") + ": " + this.getStatus(), 28, 45 + 23 - 46, 4210752);
-        // this.fontRendererObj.drawString("" + this.fuelLoader.storage.getMaxExtract(), 28, 56 + 23 - 46, 4210752);
-        //		this.fontRendererObj.drawString(ElectricityDisplay.getDisplay(this.fuelLoader.getVoltage(),
+        // this.fontRendererObj.drawString("" + this.fuelLoader.storage.getMaxExtract(),
+        // 28, 56 + 23 - 46, 4210752);
+        // this.fontRendererObj.drawString(ElectricityDisplay.getDisplay(this.fuelLoader.getVoltage(),
         // ElectricUnit.VOLTAGE), 28, 68 + 23 - 46, 4210752);
         this.fontRendererObj.drawString(
                 GCCoreUtil.translate("container.inventory"), 8, this.ySize - 118 + 2 + 11, 4210752);
@@ -151,7 +152,8 @@ public class GuiFuelLoader extends GuiContainerGC {
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         EnergyDisplayHelper.getEnergyDisplayTooltip(
                 this.fuelLoader.getEnergyStoredGC(), this.fuelLoader.getMaxEnergyStoredGC(), electricityDesc);
-        //		electricityDesc.add(EnumColor.YELLOW + GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)
+        // electricityDesc.add(EnumColor.YELLOW +
+        // GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)
         // Math.floor(this.fuelLoader.getEnergyStoredGC()) + " / " + (int)
         // Math.floor(this.fuelLoader.getMaxEnergyStoredGC())));
         this.electricInfoRegion.tooltipStrings = electricityDesc;

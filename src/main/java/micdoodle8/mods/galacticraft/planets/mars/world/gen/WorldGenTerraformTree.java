@@ -191,8 +191,8 @@ public class WorldGenTerraformTree extends WorldGenerator {
     }
 
     /**
-     * Grows vines downward from the given block for a given length. Args:
-     * World, x, starty, z, vine-length
+     * Grows vines downward from the given block for a given length. Args: World, x,
+     * starty, z, vine-length
      */
     private void growVines(World par1World, int x, int y, int z, int meta) {
         this.setBlockAndNotifyAdequately(par1World, x, y, z, Blocks.vine, meta);

@@ -18,35 +18,37 @@ public class EnergyConfigHandler {
     private static Configuration config;
 
     /**
-     * Ratio of Build craft(MJ) energy to Galacticraft energy(gJ).
-     * Multiply BC3 energy by this to convert to gJ.
+     * Ratio of Build craft(MJ) energy to Galacticraft energy(gJ). Multiply BC3
+     * energy by this to convert to gJ.
      */
     public static float BC3_RATIO = 16F;
 
     // Note on energy equivalence:
     //
     // In BuildCraft, 1 lump of coal produces 1600 MJ (Minecraft Joules)
-    // in a Stirling Engine.  This is by design: coal has 1600 ticks burn time
+    // in a Stirling Engine. This is by design: coal has 1600 ticks burn time
     // in a vanilla Furnace, which corresponds with 1600 MJ in BuildCraft.
     //
     // In Galacticraft, 1 lump of coal produces 38,400 gJ
-    // in a coal generator operating at 100% hull heat (less efficient at lower hull heats).
+    // in a coal generator operating at 100% hull heat (less efficient at lower hull
+    // heats).
 
     // If 1600 MJ = 38,400 gJ then strictly 1 MJ = 24 gJ.
-    // But, that feels imbalanced - for example redstone engines make too much gJ if the ratio is 24.
+    // But, that feels imbalanced - for example redstone engines make too much gJ if
+    // the ratio is 24.
     // So, the BC conversion ratio is set at 16.
     // Think of it as the Galacticraft coal generator at full heat turning coal into
     // electrical energy 50% more efficiently than BuildCraft's Stirling Engine can.
 
     /**
-     * Ratio of RF energy to Galacticraft energy(gJ).
-     * Multiply RF energy by this to convert to gJ.
+     * Ratio of RF energy to Galacticraft energy(gJ). Multiply RF energy by this to
+     * convert to gJ.
      */
     public static float RF_RATIO = EnergyConfigHandler.BC3_RATIO / 10F;
 
     /**
-     * Ratio of IC2 energy (EU) to Galacticraft energy(gJ).
-     * Multiply IC2 power by this to convert to gJ.
+     * Ratio of IC2 energy (EU) to Galacticraft energy(gJ). Multiply IC2 power by
+     * this to convert to gJ.
      */
     public static float IC2_RATIO = EnergyConfigHandler.BC3_RATIO / 2.44F;
 

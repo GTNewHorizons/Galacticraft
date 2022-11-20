@@ -38,11 +38,12 @@ public class NEIGalacticraftMarsConfig implements IConfigureNEI {
         API.registerRecipeHandler(new CargoRocketRecipeHandler());
         API.registerUsageHandler(new CargoRocketRecipeHandler());
 
-        /* Not used in GTNH
-        API.registerRecipeHandler(new GasLiquefierRecipeHandler());
-        API.registerUsageHandler(new GasLiquefierRecipeHandler());
-        API.registerRecipeHandler(new MethaneSynthesizerRecipeHandler());
-        API.registerUsageHandler(new MethaneSynthesizerRecipeHandler()); */
+        /*
+         * Not used in GTNH API.registerRecipeHandler(new GasLiquefierRecipeHandler());
+         * API.registerUsageHandler(new GasLiquefierRecipeHandler());
+         * API.registerRecipeHandler(new MethaneSynthesizerRecipeHandler());
+         * API.registerUsageHandler(new MethaneSynthesizerRecipeHandler());
+         */
 
         API.registerHighlightIdentifier(MarsBlocks.marsBlock, planetsHighlightHandler);
     }
@@ -95,58 +96,121 @@ public class NEIGalacticraftMarsConfig implements IConfigureNEI {
 
         ArrayList<PositionedStack> input = new ArrayList<PositionedStack>();
 
-        /*input1.add(new PositionedStack(new ItemStack(GCItems.partNoseCone), 45, -8 + changeY));
-        input1.add(new PositionedStack(new ItemStack(MarsItems.marsItemBasic, 1, 3), 36, -6 + 16 + changeY));
-        input1.add(new PositionedStack(new ItemStack(MarsItems.marsItemBasic, 1, 3), 36, -6 + 18 + 16 + changeY));
-        input1.add(new PositionedStack(new ItemStack(MarsItems.marsItemBasic, 1, 3), 36, -6 + 36 + 16 + changeY));
-        input1.add(new PositionedStack(new ItemStack(MarsItems.marsItemBasic, 1, 3), 36, -6 + 54 + 16 + changeY));
-        input1.add(new PositionedStack(new ItemStack(MarsItems.marsItemBasic, 1, 3), 36, -6 + 72 + 16 + changeY));
-        input1.add(new PositionedStack(new ItemStack(MarsItems.marsItemBasic, 1, 3), 54, -6 + 16 + changeY));
-        input1.add(new PositionedStack(new ItemStack(MarsItems.marsItemBasic, 1, 3), 54, -6 + 18 + 16 + changeY));
-        input1.add(new PositionedStack(new ItemStack(MarsItems.marsItemBasic, 1, 3), 54, -6 + 36 + 16 + changeY));
-        input1.add(new PositionedStack(new ItemStack(MarsItems.marsItemBasic, 1, 3), 54, -6 + 54 + 16 + changeY));
-        input1.add(new PositionedStack(new ItemStack(MarsItems.marsItemBasic, 1, 3), 54, -6 + 72 + 16 + changeY));
-        input1.add(new PositionedStack(new ItemStack(GCItems.rocketEngine), 45, 100 + changeY));
-        input1.add(new PositionedStack(new ItemStack(GCItems.rocketEngine, 1, 1), 18, 64 + changeY));
-        input1.add(new PositionedStack(new ItemStack(GCItems.rocketEngine, 1, 1), 72, 64 + changeY));
-        input1.add(new PositionedStack(new ItemStack(GCItems.partFins), 18, 82 + changeY));
-        input1.add(new PositionedStack(new ItemStack(GCItems.partFins), 18, 100 + changeY));
-        input1.add(new PositionedStack(new ItemStack(GCItems.partFins), 72, 82 + changeY));
-        input1.add(new PositionedStack(new ItemStack(GCItems.partFins), 72, 100 + changeY));
-        this.registerRocketBenchRecipe(input1, new PositionedStack(new ItemStack(MarsItems.spaceship, 1, 0), 139, 87 + changeY));*/
+        /*
+         * input1.add(new PositionedStack(new ItemStack(GCItems.partNoseCone), 45, -8 +
+         * changeY)); input1.add(new PositionedStack(new
+         * ItemStack(MarsItems.marsItemBasic, 1, 3), 36, -6 + 16 + changeY));
+         * input1.add(new PositionedStack(new ItemStack(MarsItems.marsItemBasic, 1, 3),
+         * 36, -6 + 18 + 16 + changeY)); input1.add(new PositionedStack(new
+         * ItemStack(MarsItems.marsItemBasic, 1, 3), 36, -6 + 36 + 16 + changeY));
+         * input1.add(new PositionedStack(new ItemStack(MarsItems.marsItemBasic, 1, 3),
+         * 36, -6 + 54 + 16 + changeY)); input1.add(new PositionedStack(new
+         * ItemStack(MarsItems.marsItemBasic, 1, 3), 36, -6 + 72 + 16 + changeY));
+         * input1.add(new PositionedStack(new ItemStack(MarsItems.marsItemBasic, 1, 3),
+         * 54, -6 + 16 + changeY)); input1.add(new PositionedStack(new
+         * ItemStack(MarsItems.marsItemBasic, 1, 3), 54, -6 + 18 + 16 + changeY));
+         * input1.add(new PositionedStack(new ItemStack(MarsItems.marsItemBasic, 1, 3),
+         * 54, -6 + 36 + 16 + changeY)); input1.add(new PositionedStack(new
+         * ItemStack(MarsItems.marsItemBasic, 1, 3), 54, -6 + 54 + 16 + changeY));
+         * input1.add(new PositionedStack(new ItemStack(MarsItems.marsItemBasic, 1, 3),
+         * 54, -6 + 72 + 16 + changeY)); input1.add(new PositionedStack(new
+         * ItemStack(GCItems.rocketEngine), 45, 100 + changeY)); input1.add(new
+         * PositionedStack(new ItemStack(GCItems.rocketEngine, 1, 1), 18, 64 +
+         * changeY)); input1.add(new PositionedStack(new ItemStack(GCItems.rocketEngine,
+         * 1, 1), 72, 64 + changeY)); input1.add(new PositionedStack(new
+         * ItemStack(GCItems.partFins), 18, 82 + changeY)); input1.add(new
+         * PositionedStack(new ItemStack(GCItems.partFins), 18, 100 + changeY));
+         * input1.add(new PositionedStack(new ItemStack(GCItems.partFins), 72, 82 +
+         * changeY)); input1.add(new PositionedStack(new ItemStack(GCItems.partFins),
+         * 72, 100 + changeY)); this.registerRocketBenchRecipe(input1, new
+         * PositionedStack(new ItemStack(MarsItems.spaceship, 1, 0), 139, 87 +
+         * changeY));
+         */
 
         ArrayList<PositionedStack> input2 = new ArrayList<PositionedStack>(); /*
-        input2.add(new PositionedStack(new ItemStack(Blocks.chest), 90, -15 + changeY));
-        this.registerRocketBenchRecipe(input2, new PositionedStack(new ItemStack(MarsItems.spaceship, 1, 1), 139, 87 + changeY));
-
-        input2 = new ArrayList<PositionedStack>(input1);
-        input2.add(new PositionedStack(new ItemStack(Blocks.chest), 90 + 26, -15 + changeY));
-        this.registerRocketBenchRecipe(input2, new PositionedStack(new ItemStack(MarsItems.spaceship, 1, 1), 139, 87 + changeY));
-
-        input2 = new ArrayList<PositionedStack>(input1);
-        input2.add(new PositionedStack(new ItemStack(Blocks.chest), 90 + 52, -15 + changeY));
-        this.registerRocketBenchRecipe(input2, new PositionedStack(new ItemStack(MarsItems.spaceship, 1, 1), 139, 87 + changeY));
-
-        input2 = new ArrayList<PositionedStack>(input1);
-        input2.add(new PositionedStack(new ItemStack(Blocks.chest), 90, -15 + changeY));
-        input2.add(new PositionedStack(new ItemStack(Blocks.chest), 90 + 26, -15 + changeY));
-        this.registerRocketBenchRecipe(input2, new PositionedStack(new ItemStack(MarsItems.spaceship, 1, 2), 139, 87 + changeY));
-
-        input2 = new ArrayList<PositionedStack>(input1);
-        input2.add(new PositionedStack(new ItemStack(Blocks.chest), 90 + 26, -15 + changeY));
-        input2.add(new PositionedStack(new ItemStack(Blocks.chest), 90 + 52, -15 + changeY));
-        this.registerRocketBenchRecipe(input2, new PositionedStack(new ItemStack(MarsItems.spaceship, 1, 2), 139, 87 + changeY));
-
-        input2 = new ArrayList<PositionedStack>(input1);
-        input2.add(new PositionedStack(new ItemStack(Blocks.chest), 90, -15 + changeY));
-        input2.add(new PositionedStack(new ItemStack(Blocks.chest), 90 + 52, -15 + changeY));
-        this.registerRocketBenchRecipe(input2, new PositionedStack(new ItemStack(MarsItems.spaceship, 1, 2), 139, 87 + changeY));
-
-        input2 = new ArrayList<PositionedStack>(input1);
-        input2.add(new PositionedStack(new ItemStack(Blocks.chest), 90, -15 + changeY));
-        input2.add(new PositionedStack(new ItemStack(Blocks.chest), 90 + 26, -15 + changeY));
-        input2.add(new PositionedStack(new ItemStack(Blocks.chest), 90 + 52, -15 + changeY));
-        this.registerRocketBenchRecipe(input2, new PositionedStack(new ItemStack(MarsItems.spaceship, 1, 3), 139, 87 + changeY));*/
+                                                                               * input2.add(new PositionedStack(new
+                                                                               * ItemStack(Blocks.chest), 90, -15 +
+                                                                               * changeY));
+                                                                               * this.registerRocketBenchRecipe(input2,
+                                                                               * new PositionedStack(new
+                                                                               * ItemStack(MarsItems.spaceship, 1, 1),
+                                                                               * 139, 87 + changeY));
+                                                                               *
+                                                                               * input2 = new
+                                                                               * ArrayList<PositionedStack>(input1);
+                                                                               * input2.add(new PositionedStack(new
+                                                                               * ItemStack(Blocks.chest), 90 + 26, -15 +
+                                                                               * changeY));
+                                                                               * this.registerRocketBenchRecipe(input2,
+                                                                               * new PositionedStack(new
+                                                                               * ItemStack(MarsItems.spaceship, 1, 1),
+                                                                               * 139, 87 + changeY));
+                                                                               *
+                                                                               * input2 = new
+                                                                               * ArrayList<PositionedStack>(input1);
+                                                                               * input2.add(new PositionedStack(new
+                                                                               * ItemStack(Blocks.chest), 90 + 52, -15 +
+                                                                               * changeY));
+                                                                               * this.registerRocketBenchRecipe(input2,
+                                                                               * new PositionedStack(new
+                                                                               * ItemStack(MarsItems.spaceship, 1, 1),
+                                                                               * 139, 87 + changeY));
+                                                                               *
+                                                                               * input2 = new
+                                                                               * ArrayList<PositionedStack>(input1);
+                                                                               * input2.add(new PositionedStack(new
+                                                                               * ItemStack(Blocks.chest), 90, -15 +
+                                                                               * changeY)); input2.add(new
+                                                                               * PositionedStack(new
+                                                                               * ItemStack(Blocks.chest), 90 + 26, -15 +
+                                                                               * changeY));
+                                                                               * this.registerRocketBenchRecipe(input2,
+                                                                               * new PositionedStack(new
+                                                                               * ItemStack(MarsItems.spaceship, 1, 2),
+                                                                               * 139, 87 + changeY));
+                                                                               *
+                                                                               * input2 = new
+                                                                               * ArrayList<PositionedStack>(input1);
+                                                                               * input2.add(new PositionedStack(new
+                                                                               * ItemStack(Blocks.chest), 90 + 26, -15 +
+                                                                               * changeY)); input2.add(new
+                                                                               * PositionedStack(new
+                                                                               * ItemStack(Blocks.chest), 90 + 52, -15 +
+                                                                               * changeY));
+                                                                               * this.registerRocketBenchRecipe(input2,
+                                                                               * new PositionedStack(new
+                                                                               * ItemStack(MarsItems.spaceship, 1, 2),
+                                                                               * 139, 87 + changeY));
+                                                                               *
+                                                                               * input2 = new
+                                                                               * ArrayList<PositionedStack>(input1);
+                                                                               * input2.add(new PositionedStack(new
+                                                                               * ItemStack(Blocks.chest), 90, -15 +
+                                                                               * changeY)); input2.add(new
+                                                                               * PositionedStack(new
+                                                                               * ItemStack(Blocks.chest), 90 + 52, -15 +
+                                                                               * changeY));
+                                                                               * this.registerRocketBenchRecipe(input2,
+                                                                               * new PositionedStack(new
+                                                                               * ItemStack(MarsItems.spaceship, 1, 2),
+                                                                               * 139, 87 + changeY));
+                                                                               *
+                                                                               * input2 = new
+                                                                               * ArrayList<PositionedStack>(input1);
+                                                                               * input2.add(new PositionedStack(new
+                                                                               * ItemStack(Blocks.chest), 90, -15 +
+                                                                               * changeY)); input2.add(new
+                                                                               * PositionedStack(new
+                                                                               * ItemStack(Blocks.chest), 90 + 26, -15 +
+                                                                               * changeY)); input2.add(new
+                                                                               * PositionedStack(new
+                                                                               * ItemStack(Blocks.chest), 90 + 52, -15 +
+                                                                               * changeY));
+                                                                               * this.registerRocketBenchRecipe(input2,
+                                                                               * new PositionedStack(new
+                                                                               * ItemStack(MarsItems.spaceship, 1, 3),
+                                                                               * 139, 87 + changeY));
+                                                                               */
 
         int x = CargoRocketRecipeHandler.tX - CargoRocketRecipeHandler.x;
         int y = CargoRocketRecipeHandler.tY - CargoRocketRecipeHandler.y;

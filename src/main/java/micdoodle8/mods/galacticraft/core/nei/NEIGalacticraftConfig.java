@@ -56,8 +56,10 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
         }
 
         // Handled by GalaxySpace
-        /*API.registerRecipeHandler(new RocketT1RecipeHandler());
-        API.registerUsageHandler(new RocketT1RecipeHandler());*/
+        /*
+         * API.registerRecipeHandler(new RocketT1RecipeHandler());
+         * API.registerUsageHandler(new RocketT1RecipeHandler());
+         */
         API.registerRecipeHandler(new BuggyRecipeHandler());
         API.registerUsageHandler(new BuggyRecipeHandler());
         API.registerRecipeHandler(new RefineryRecipeHandler());
@@ -65,11 +67,13 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
         API.registerRecipeHandler(new CircuitFabricatorRecipeHandler());
         API.registerUsageHandler(new CircuitFabricatorRecipeHandler());
 
-        /* Not used in GTNH
-        API.registerRecipeHandler(new IngotCompressorRecipeHandler());
-        API.registerUsageHandler(new IngotCompressorRecipeHandler());
-        API.registerRecipeHandler(new ElectricIngotCompressorRecipeHandler());
-        API.registerUsageHandler(new ElectricIngotCompressorRecipeHandler()); */
+        /*
+         * Not used in GTNH API.registerRecipeHandler(new
+         * IngotCompressorRecipeHandler()); API.registerUsageHandler(new
+         * IngotCompressorRecipeHandler()); API.registerRecipeHandler(new
+         * ElectricIngotCompressorRecipeHandler()); API.registerUsageHandler(new
+         * ElectricIngotCompressorRecipeHandler());
+         */
 
         API.registerHighlightIdentifier(GCBlocks.basicBlock, new GCNEIHighlightHandler());
         API.registerHighlightIdentifier(GCBlocks.blockMoon, new GCNEIHighlightHandler());
@@ -290,7 +294,8 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
         int siliconCount =
                 OreDictionary.getOres(ConfigManagerCore.otherModsSilicon).size();
         ItemStack[] silicons = new ItemStack[siliconCount];
-        //        silicons[0] = new ItemStack(GCItems.basicItem, 1, 2);  //This is now included in the oredict
+        // silicons[0] = new ItemStack(GCItems.basicItem, 1, 2); //This is now included
+        // in the oredict
         for (int j = 0; j < siliconCount; j++) {
             silicons[j] =
                     OreDictionary.getOres(ConfigManagerCore.otherModsSilicon).get(j);

@@ -46,8 +46,8 @@ public abstract class BlockTransmitter extends BlockContainer {
     }
 
     /**
-     * Returns a bounding box from the pool of bounding boxes (this means this
-     * box can change after the pool has been cleared to be reused)
+     * Returns a bounding box from the pool of bounding boxes (this means this box
+     * can change after the pool has been cleared to be reused)
      */
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {

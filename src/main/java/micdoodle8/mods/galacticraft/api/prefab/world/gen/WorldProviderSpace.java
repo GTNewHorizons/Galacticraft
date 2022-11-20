@@ -52,7 +52,8 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
     public abstract boolean canRainOrSnow();
 
     /**
-     * Whether or not to render vanilla sunset (can be overridden with custom sky provider)
+     * Whether or not to render vanilla sunset (can be overridden with custom sky
+     * provider)
      */
     public abstract boolean hasSunset();
 
@@ -102,7 +103,8 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
                 }
                 this.timeCurrentOffset = savedTick - newTime;
             } else {
-                // Detect jumps in world time (e.g. because of bed use on Overworld) and reverse them for this world
+                // Detect jumps in world time (e.g. because of bed use on Overworld) and reverse
+                // them for this world
                 long diff = (newTime - this.preTickTime);
                 if (diff > 1L) {
                     this.timeCurrentOffset -= diff - 1L;
@@ -201,7 +203,8 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
      * Do not override this.
      *
      * Returns true on clients (to allow rendering of sky etc, maybe even clouds).
-     * Returns false on servers (to disable Nether Portal mob spawning and sleeping in beds).
+     * Returns false on servers (to disable Nether Portal mob spawning and sleeping
+     * in beds).
      */
     @Override
     public boolean isSurfaceWorld() {
@@ -209,13 +212,14 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
     }
 
     /**
-     * This must normally return false, so that if the dimension is set for 'static' loading
-     * it will not keep chunks around the dimension spawn position permanently loaded.
-     * It is also needed to be false so that the 'Force Overworld Respawn' setting in core.conf
-     * will work correctly - see also WorldProviderS[ace.getRespawnDimension().
+     * This must normally return false, so that if the dimension is set for 'static'
+     * loading it will not keep chunks around the dimension spawn position
+     * permanently loaded. It is also needed to be false so that the 'Force
+     * Overworld Respawn' setting in core.conf will work correctly - see also
+     * WorldProviderS[ace.getRespawnDimension().
      *
-     * But: returning 'false' will cause beds to explode in this dimension.
-     * If you want beds NOT to explode, you can override this, like in WorldProviderMoon.
+     * But: returning 'false' will cause beds to explode in this dimension. If you
+     * want beds NOT to explode, you can override this, like in WorldProviderMoon.
      */
     @Override
     public boolean canRespawnHere() {
@@ -225,8 +229,9 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
     /**
      * Do NOT override this in your add-ons.
      *
-     * This controls whether the player will respawn in the space dimension or the Overworld
-     * in accordance with the 'Force Overworld Respawn' setting on core.conf.
+     * This controls whether the player will respawn in the space dimension or the
+     * Overworld in accordance with the 'Force Overworld Respawn' setting on
+     * core.conf.
      */
     @Override
     public int getRespawnDimension(EntityPlayerMP player) {
@@ -236,9 +241,10 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
     /**
      * If true, the the player should respawn in this dimension upon death.
      *
-     * Obeying the 'Force Overworld Respawn' setting from core.conf is an important protection
-     * for players are endlessly dying in a space dimension: for example respawning
-     * in an airless environment with no oxygen tanks and no oxygen machinery.
+     * Obeying the 'Force Overworld Respawn' setting from core.conf is an important
+     * protection for players are endlessly dying in a space dimension: for example
+     * respawning in an airless environment with no oxygen tanks and no oxygen
+     * machinery.
      */
     public boolean shouldForceRespawn() {
         return !ConfigManagerCore.forceOverworldRespawn;
@@ -250,9 +256,9 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
     }
 
     /**
-     * If false (the default) then Nether Portals will have no function on this world.
-     * Nether Portals can still be constructed, if the player can make fire, they just
-     * won't do anything.
+     * If false (the default) then Nether Portals will have no function on this
+     * world. Nether Portals can still be constructed, if the player can make fire,
+     * they just won't do anything.
      *
      * @return True if Nether Portals should work like on the Overworld.
      */
@@ -317,7 +323,8 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
         return 1.0F / this.getCelestialBody().getRelativeDistanceFromCenter().unScaledDistance;
     }
 
-    // Work around vanilla feature: worlds which are not the Overworld cannot change the time, as the worldInfo is a
+    // Work around vanilla feature: worlds which are not the Overworld cannot change
+    // the time, as the worldInfo is a
     // DerivedWorldInfo
     // Therefore each Galacticraft dimension maintains its own timeCurrentOffset
     @Override
@@ -352,8 +359,9 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
     }
 
     /**
-     * Adjust time offset on Galacticraft worlds when the Overworld time jumps and you don't want the time
-     * on all the other Galacticraft worlds to jump also - see WorldUtil.setNextMorning() for example
+     * Adjust time offset on Galacticraft worlds when the Overworld time jumps and
+     * you don't want the time on all the other Galacticraft worlds to jump also -
+     * see WorldUtil.setNextMorning() for example
      */
     public void adjustTimeOffset(long diff) {
         this.timeCurrentOffset -= diff;
@@ -364,7 +372,8 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
     }
 
     /**
-     * Save this world's custom time (from timeCurrentOffset) into this world's villages.dat :)
+     * Save this world's custom time (from timeCurrentOffset) into this world's
+     * villages.dat :)
      */
     private void saveTime() {
         try {

@@ -231,10 +231,10 @@ public class TileEntityTelemetry extends TileEntity {
     }
 
     /**
-     * Call this when a player wears a frequency module to check
-     * whether it has been linked with a Telemetry Unit.
+     * Call this when a player wears a frequency module to check whether it has been
+     * linked with a Telemetry Unit.
      *
-     * @param ItemStack  The frequency module
+     * @param ItemStack The frequency module
      * @param player
      */
     public static void frequencyModulePlayer(ItemStack held, EntityPlayerMP player) {

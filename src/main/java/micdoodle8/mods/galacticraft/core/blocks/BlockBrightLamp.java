@@ -23,7 +23,8 @@ import net.minecraft.world.World;
 public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlockShiftDesc {
     public static IIcon icon;
 
-    // Metadata: bits 0-2 are the side of the base plate using standard side convention (0-5)
+    // Metadata: bits 0-2 are the side of the base plate using standard side
+    // convention (0-5)
 
     protected BlockBrightLamp(String assetName) {
         super(Material.glass);
@@ -95,8 +96,8 @@ public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlo
 
     /**
      * Lets the block know when one of its neighbor changes. Doesn't know which
-     * neighbor changed (coordinates passed are their own) Args: x, y, z,
-     * neighbor blockID
+     * neighbor changed (coordinates passed are their own) Args: x, y, z, neighbor
+     * blockID
      */
     @Override
     public void onNeighborBlockChange(World par1World, int x, int y, int z, Block par5) {

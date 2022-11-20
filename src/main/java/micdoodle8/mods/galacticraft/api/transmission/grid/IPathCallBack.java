@@ -7,8 +7,8 @@ public interface IPathCallBack {
     /**
      * @param finder      - The Pathfinder object.
      * @param currentNode - The node being iterated through.
-     * @return A set of nodes connected to the currentNode. Essentially one
-     * should return a set of neighboring nodes.
+     * @return A set of nodes connected to the currentNode. Essentially one should
+     *         return a set of neighboring nodes.
      */
     public Set<BlockVec3> getConnectedNodes(Pathfinder finder, BlockVec3 currentNode);
 

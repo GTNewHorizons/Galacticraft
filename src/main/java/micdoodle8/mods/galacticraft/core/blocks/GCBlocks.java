@@ -190,7 +190,8 @@ public class GCBlocks {
         GCBlocks.hiddenBlocks.add(GCBlocks.spaceStationBase);
         GCBlocks.hiddenBlocks.add(GCBlocks.slabGCDouble);
 
-        // Register blocks before register ores, so that the ItemStack picks up the correct item
+        // Register blocks before register ores, so that the ItemStack picks up the
+        // correct item
         GCBlocks.registerBlocks();
         GCBlocks.setHarvestLevels();
 

@@ -62,7 +62,7 @@ public class GCItems {
     public static Item meteoricIronIngot;
     public static Item bucketOil;
     public static Item bucketFuel;
-    //	public static Item cheeseBlock;
+    // public static Item cheeseBlock;
 
     public static ArmorMaterial ARMOR_SENSOR_GLASSES =
             EnumHelper.addArmorMaterial("SENSORGLASSES", 200, new int[] {0, 0, 0, 0}, 0);
@@ -117,7 +117,8 @@ public class GCItems {
         GCItems.meteorChunk = new ItemMeteorChunk("meteorChunk");
         GCItems.wrench = new ItemUniversalWrench("standardWrench");
         GCItems.cheeseCurd = new ItemCheese(1, 0.1F, false);
-        //		GCItems.cheeseBlock = new ItemBlockCheese(GCBlocks.cheeseBlock, "cheeseBlock");
+        // GCItems.cheeseBlock = new ItemBlockCheese(GCBlocks.cheeseBlock,
+        // "cheeseBlock");
         GCItems.meteoricIronRaw = new ItemMeteoricIron("meteoricIronRaw");
         GCItems.meteoricIronIngot = new ItemMoon("meteoricIronIngot");
 
@@ -200,7 +201,8 @@ public class GCItems {
         GCCoreUtil.registerGalacticraftItem("parachuteCyan", GCItems.parachute, 14);
         GCCoreUtil.registerGalacticraftItem("parachuteYellow", GCItems.parachute, 15);
         GCCoreUtil.registerGalacticraftItem("canvas", GCItems.canvas);
-        // These exact names are important, ItemCanisterGeneric searches for "CanisterFull"
+        // These exact names are important, ItemCanisterGeneric searches for
+        // "CanisterFull"
         GCCoreUtil.registerGalacticraftItem("fuelCanisterFull", GCItems.fuelCanister, 1);
         GCCoreUtil.registerGalacticraftItem("oilCanisterFull", GCItems.oilCanister, 1);
         GCCoreUtil.registerGalacticraftItem(
@@ -308,7 +310,7 @@ public class GCItems {
         GCItems.registerItem(GCItems.cheeseCurd);
         GCItems.registerItem(GCItems.meteoricIronRaw);
         GCItems.registerItem(GCItems.meteoricIronIngot);
-        //		GCItems.registerItem(GCItems.cheeseBlock);
+        // GCItems.registerItem(GCItems.cheeseBlock);
         GCItems.registerItem(GCItems.flag);
         GCItems.registerItem(GCItems.parachute);
     }

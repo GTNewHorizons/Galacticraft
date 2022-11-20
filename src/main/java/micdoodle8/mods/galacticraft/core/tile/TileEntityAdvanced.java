@@ -36,7 +36,8 @@ public abstract class TileEntityAdvanced extends TileEntity implements IPacketRe
                 }
 
                 if (this.worldObj != null && this.worldObj.isRemote && this.fieldCacheClient.size() > 0) {
-                    // Request any networked information from server on first client update (maybe client just logged
+                    // Request any networked information from server on first client update (maybe
+                    // client just logged
                     // on, but server networkdata didn't change recently)
                     GalacticraftCore.packetPipeline.sendToServer(new PacketDynamic(this));
                 }

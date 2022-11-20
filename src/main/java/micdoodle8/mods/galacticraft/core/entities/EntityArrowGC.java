@@ -127,8 +127,8 @@ public class EntityArrowGC extends Entity {
     }
 
     /**
-     * Uses the provided coordinates as a heading and determines the velocity
-     * from it with the set force and random variance. Args: x, y, z, force,
+     * Uses the provided coordinates as a heading and determines the velocity from
+     * it with the set force and random variance. Args: x, y, z, force,
      * forceVariation
      */
     public void setArrowHeading(double par1, double par3, double par5, float par7, float par8) {
@@ -154,8 +154,8 @@ public class EntityArrowGC extends Entity {
     @Override
     @SideOnly(Side.CLIENT)
     /**
-     * Sets the position and rotation. Only difference from the other one is no bounding on the rotation. Args: posX,
-     * posY, posZ, yaw, pitch
+     * Sets the position and rotation. Only difference from the other one is no
+     * bounding on the rotation. Args: posX, posY, posZ, yaw, pitch
      */
     public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
         this.setPosition(par1, par3, par5);
@@ -518,8 +518,7 @@ public class EntityArrowGC extends Entity {
     }
 
     /**
-     * Whether the arrow has a stream of critical hit particles flying behind
-     * it.
+     * Whether the arrow has a stream of critical hit particles flying behind it.
      */
     public void setIsCritical(boolean par1) {
         final byte var2 = this.dataWatcher.getWatchableObjectByte(16);
@@ -532,8 +531,7 @@ public class EntityArrowGC extends Entity {
     }
 
     /**
-     * Whether the arrow has a stream of critical hit particles flying behind
-     * it.
+     * Whether the arrow has a stream of critical hit particles flying behind it.
      */
     public boolean getIsCritical() {
         final byte var1 = this.dataWatcher.getWatchableObjectByte(16);

@@ -301,11 +301,12 @@ public class TileEntityRefinery extends TileBaseElectricBlockWithInventory imple
                 if (liquidName.equals(GalacticraftCore.fluidOil.getName())) used = this.oilTank.fill(resource, doFill);
                 else used = this.oilTank.fill(new FluidStack(GalacticraftCore.fluidOil, resource.amount), doFill);
             }
-            //            else if (liquidName != null && liquidName.equalsIgnoreCase("oilgc"))
-            //            {
-            //                used = this.oilTank.fill(new FluidStack(GalacticraftCore.fluidOil, resource.amount),
+            // else if (liquidName != null && liquidName.equalsIgnoreCase("oilgc"))
+            // {
+            // used = this.oilTank.fill(new FluidStack(GalacticraftCore.fluidOil,
+            // resource.amount),
             // doFill);
-            //            }
+            // }
         }
 
         return used;

@@ -37,9 +37,9 @@ public interface IGridNetwork<N, C, A> {
     public N merge(N network);
 
     /**
-     * Splits a network by the conductor referenced in the parameters. It will
-     * then create and refresh the new independent networks possibly created by
-     * this operation.
+     * Splits a network by the conductor referenced in the parameters. It will then
+     * create and refresh the new independent networks possibly created by this
+     * operation.
      *
      * @param connection
      */

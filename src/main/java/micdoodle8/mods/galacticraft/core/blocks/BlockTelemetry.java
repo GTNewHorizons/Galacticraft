@@ -28,7 +28,7 @@ public class BlockTelemetry extends BlockAdvancedTile implements ItemBlockDesc.I
     private IIcon iconFront;
     private IIcon iconSide;
 
-    // Metadata: 0-3 = orientation;  bits 2,3 = reserved for future use
+    // Metadata: 0-3 = orientation; bits 2,3 = reserved for future use
     protected BlockTelemetry(String assetName) {
         super(Material.iron);
         this.setHardness(1.0F);

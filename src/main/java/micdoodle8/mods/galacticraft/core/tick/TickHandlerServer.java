@@ -122,7 +122,7 @@ public class TickHandlerServer {
      * Only use this for AIR blocks (any type of BlockAir)
      *
      * @param dimID
-     * @param changeAdd  List of <ScheduledBlockChange>
+     * @param changeAdd List of <ScheduledBlockChange>
      */
     public static void scheduleNewBlockChange(int dimID, List<ScheduledBlockChange> changeAdd) {
         CopyOnWriteArrayList<ScheduledBlockChange> changeList = TickHandlerServer.scheduledBlockChanges.get(dimID);
@@ -277,19 +277,21 @@ public class TickHandlerServer {
                                     new NetworkRegistry.TargetPoint(
                                             targetPoint.dim, targetPoint.x, targetPoint.y, targetPoint.z, 50));
 
-                            //                            Map<Long, List<Footprint>> footprintMap =
+                            // Map<Long, List<Footprint>> footprintMap =
                             // TickHandlerServer.serverFootprintMap.get(world.provider.dimensionId);
                             //
-                            //                            if (footprintMap != null && !footprintMap.isEmpty())
-                            //                            {
-                            //                                List<Footprint> footprints = footprintMap.get(chunkKey);
-                            //                                if (footprints != null)
-                            //                                	GalacticraftCore.packetPipeline.sendToAllAround(new
-                            // PacketSimple(EnumSimplePacket.C_UPDATE_FOOTPRINT_LIST, new Object[] { chunkKey,
+                            // if (footprintMap != null && !footprintMap.isEmpty())
+                            // {
+                            // List<Footprint> footprints = footprintMap.get(chunkKey);
+                            // if (footprints != null)
+                            // GalacticraftCore.packetPipeline.sendToAllAround(new
+                            // PacketSimple(EnumSimplePacket.C_UPDATE_FOOTPRINT_LIST, new Object[] {
+                            // chunkKey,
                             // footprints.toArray(new Footprint[footprints.size()]) }), new
-                            // NetworkRegistry.TargetPoint(targetPoint.dim, targetPoint.x, targetPoint.y, targetPoint.z,
+                            // NetworkRegistry.TargetPoint(targetPoint.dim, targetPoint.x, targetPoint.y,
+                            // targetPoint.z,
                             // 50));
-                            //                            }
+                            // }
                         }
                     }
                 }
@@ -410,7 +412,8 @@ public class TickHandlerServer {
                         if (change != null) {
                             BlockVec3 changePosition = change.getChangePosition();
                             Block block = world.getBlock(changePosition.x, changePosition.y, changePosition.z);
-                            // Only replace blocks of type BlockAir or fire - this is to prevent accidents where other
+                            // Only replace blocks of type BlockAir or fire - this is to prevent accidents
+                            // where other
                             // mods have moved blocks
                             if (changePosition != null && (block instanceof BlockAir || block == Blocks.fire)) {
                                 world.setBlock(

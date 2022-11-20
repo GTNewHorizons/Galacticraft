@@ -60,7 +60,8 @@ public class TeleportTypeAsteroids implements ITeleportType {
 
             int attemptCount = 0;
 
-            // Small pre-generate with a chunk loading radius of 3, to make sure some asteroids get generated
+            // Small pre-generate with a chunk loading radius of 3, to make sure some
+            // asteroids get generated
             // (if the world is already generated here, this will be very quick)
             this.preGenChunks(world, x >> 4, z >> 4);
 
@@ -71,7 +72,8 @@ public class TeleportTypeAsteroids implements ITeleportType {
                 }
 
                 if (bv3 != null) {
-                    // Check whether the returned asteroid is too far from the desired entry location in which case,
+                    // Check whether the returned asteroid is too far from the desired entry
+                    // location in which case,
                     // give up
                     if (bv3.distanceSquared(new BlockVec3(x, 128, z)) > 25600) {
                         break;
@@ -272,10 +274,10 @@ public class TeleportTypeAsteroids implements ITeleportType {
     public void setupAdventureSpawn(EntityPlayerMP player) {
         GCPlayerStats stats = GCPlayerStats.get(player);
         SchematicRegistry.unlockNewPage(player, new ItemStack(GCItems.schematic, 1, 1)); // Knows how to build T2 rocket
-        SchematicRegistry.unlockNewPage(
-                player, new ItemStack(MarsItems.schematic, 1, 0)); // Knows how to build T3 rocket
-        SchematicRegistry.unlockNewPage(
-                player, new ItemStack(MarsItems.schematic, 1, 2)); // Knows how to build Astro Miner
+        SchematicRegistry.unlockNewPage(player, new ItemStack(MarsItems.schematic, 1, 0)); // Knows how to build T3
+        // rocket
+        SchematicRegistry.unlockNewPage(player, new ItemStack(MarsItems.schematic, 1, 2)); // Knows how to build Astro
+        // Miner
         stats.rocketStacks = new ItemStack[20];
         stats.fuelLevel = 1000;
         int i = 0;

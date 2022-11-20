@@ -57,17 +57,19 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
     protected void entityInit() {
         super.entityInit();
 
-        // TODO reimplement once Resonant Engine comes out of alpha, bug DarkGuardsman for info
+        // TODO reimplement once Resonant Engine comes out of alpha, bug DarkGuardsman
+        // for info
         // if (Loader.isModLoaded("ICBM|Explosion"))
         // {
-        //    try
-        //    {
-        //        Class.forName("icbm.api.RadarRegistry").getMethod("register", Entity.class).invoke(null, this);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        e.printStackTrace();
-        //    }
+        // try
+        // {
+        // Class.forName("icbm.api.RadarRegistry").getMethod("register",
+        // Entity.class).invoke(null, this);
+        // }
+        // catch (Exception e)
+        // {
+        // e.printStackTrace();
+        // }
         // }
     }
 
@@ -78,14 +80,15 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
         // TODO reimplement once Resonant Engine comes out of alpha, bug Dark for info
         // if (Loader.isModLoaded("ICBM|Explosion"))
         // {
-        //    try
-        //    {
-        //        Class.forName("icbm.api.RadarRegistry").getMethod("unregister", Entity.class).invoke(null, this);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        e.printStackTrace();
-        //    }
+        // try
+        // {
+        // Class.forName("icbm.api.RadarRegistry").getMethod("unregister",
+        // Entity.class).invoke(null, this);
+        // }
+        // catch (Exception e)
+        // {
+        // e.printStackTrace();
+        // }
         // }
     }
 
@@ -111,16 +114,22 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
     private void initiatePlanetsPreGen(int cx, int cz) {
         this.preGenList.clear();
 
-        // Pre-generate terrain on all possible destination planets if the destination is not being controlled by a
+        // Pre-generate terrain on all possible destination planets if the destination
+        // is not being controlled by a
         // Launch Controller
         // (note: this does NOT include the Moon!)
 
-        // This generates with a chunk radius of 12: so for 2 planets that's 1250 chunks to pregen
-        // It starts at the centre and generates in circles radiating out in case it doesn't have time to finish
-        // These will be done: 2 chunks per tick during IGNITE phase (so 800 chunks during the 20 second launch
+        // This generates with a chunk radius of 12: so for 2 planets that's 1250 chunks
+        // to pregen
+        // It starts at the centre and generates in circles radiating out in case it
+        // doesn't have time to finish
+        // These will be done: 2 chunks per tick during IGNITE phase (so 800 chunks
+        // during the 20 second launch
         // countdown)
-        // then the ones that are left 1 chunk per tick during flight (normally flight will last more than 450 ticks)
-        // If the server is at less than 20tps then maybe some of the outermost chunks won't be pre-generated but that's
+        // then the ones that are left 1 chunk per tick during flight (normally flight
+        // will last more than 450 ticks)
+        // If the server is at less than 20tps then maybe some of the outermost chunks
+        // won't be pre-generated but that's
         // probably OK
         if (this.destinationFrequency == -1 && !EntityTieredRocket.preGenInProgress) {
             ArrayList<Integer> toPreGen = new ArrayList();
@@ -301,7 +310,8 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                                 dimensionAllowed = true;
                             else dimensionAllowed = false;
                         } else
-                        // No rocket flight to non-Galacticraft dimensions other than the Overworld allowed unless
+                        // No rocket flight to non-Galacticraft dimensions other than the Overworld
+                        // allowed unless
                         // config
                         if (this.targetDimension > 1 || this.targetDimension < -1) {
                             try {
@@ -347,7 +357,8 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                             return;
                         }
                     }
-                    // No destination world found - in this situation continue into regular take-off (as if Not launch
+                    // No destination world found - in this situation continue into regular take-off
+                    // (as if Not launch
                     // controlled)
                 } else {
                     // Same dimension controlled rocket flight
@@ -356,7 +367,8 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                         fromSky = 0;
                     }
                     this.setPosition(this.targetVec.x + 0.5F, this.targetVec.y + fromSky, this.targetVec.z + 0.5F);
-                    // Stop any lateral motion, otherwise it will update to an incorrect x,z position first tick after
+                    // Stop any lateral motion, otherwise it will update to an incorrect x,z
+                    // position first tick after
                     // spawning above target
                     this.motionX = this.motionZ = 0.0D;
                     // Small upward motion initially, to keep clear of own flame trail from launch
@@ -375,7 +387,8 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                     return;
                 }
             } else {
-                // Launch controlled launch but no valid target frequency = rocket loss [INVESTIGATE]
+                // Launch controlled launch but no valid target frequency = rocket loss
+                // [INVESTIGATE]
                 GCLog.info(
                         "Error: the launch controlled rocket failed to find a valid landing spot when it reached space.");
                 this.fuelTank.drain(Integer.MAX_VALUE, true);
@@ -399,10 +412,12 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                 WorldUtil.toCelestialSelection(player, stats, this.getRocketTier());
             }
 
-            // Destroy any rocket which reached the top of the atmosphere and is not controlled by a Launch Controller
+            // Destroy any rocket which reached the top of the atmosphere and is not
+            // controlled by a Launch Controller
             this.setDead();
         }
-        // Client side, non-launch controlled, do nothing - no reason why it can't continue flying until the
+        // Client side, non-launch controlled, do nothing - no reason why it can't
+        // continue flying until the
         // GUICelestialSelection activates
     }
 

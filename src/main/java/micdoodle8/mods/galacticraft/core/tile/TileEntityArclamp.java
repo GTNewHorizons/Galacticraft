@@ -163,7 +163,8 @@ public class TileEntityArclamp extends TileEntity {
                         }
                         EntityCreature e = (EntityCreature) entry;
                         // Check whether the mob can actually *see* the arclamp tile
-                        // if (this.worldObj.func_147447_a(thisPos, Vec3.createVectorHelper(e.posX, e.posY, e.posZ),
+                        // if (this.worldObj.func_147447_a(thisPos, Vec3.createVectorHelper(e.posX,
+                        // e.posY, e.posZ),
                         // true, true, false) != null) continue;
 
                         Vec3 vecNewTarget =
@@ -188,7 +189,8 @@ public class TileEntityArclamp extends TileEntity {
                                 e.getNavigator()
                                         .tryMoveToXYZ(
                                                 vecNewTarget.xCoord, vecNewTarget.yCoord, vecNewTarget.zCoord, 0.3D);
-                                // System.out.println("Debug: Arclamp repelling entity: "+e.getClass().getSimpleName());
+                                // System.out.println("Debug: Arclamp repelling entity:
+                                // "+e.getClass().getSimpleName());
                             }
                         }
                     }
@@ -367,7 +369,8 @@ public class TileEntityArclamp extends TileEntity {
                 this.worldObj.setBlock(vec.x, vec.y, vec.z, Blocks.air, 0, 2);
             } else if (b == brightBreatheableAir) {
                 this.worldObj.setBlock(vec.x, vec.y, vec.z, GCBlocks.breatheableAir, 0, 2);
-                // No block update - not necessary for changing air to air, also must not trigger a sealer edge check
+                // No block update - not necessary for changing air to air, also must not
+                // trigger a sealer edge check
             }
         }
         this.airToRestore.clear();

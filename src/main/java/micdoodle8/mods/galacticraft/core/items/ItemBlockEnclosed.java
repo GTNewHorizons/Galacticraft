@@ -142,7 +142,8 @@ public class ItemBlockEnclosed extends ItemBlockDesc {
                             AEApi.instance().definitions().parts().cableGlass().stack(AEColor.Transparent, 1);
                     itemME.stackSize = 2; // Fool AppEng into not destroying anything in the player inventory
                     return AEApi.instance().partHelper().placeBus(itemME, x, y, z, side, entityplayer, world);
-                    // Might be better to do appeng.parts.PartPlacement.place( is, x, y, z, side, player, w,
+                    // Might be better to do appeng.parts.PartPlacement.place( is, x, y, z, side,
+                    // player, w,
                     // PartPlacement.PlaceType.INTERACT_SECOND_PASS, 0 );
                 }
                 return true;
@@ -162,8 +163,10 @@ public class ItemBlockEnclosed extends ItemBlockDesc {
 
     @Override
     public int getMetadata(int damage) {
-        // TE_CONDUIT (item damage 0: currently unused) and HV_CABLE (item damage 4) have had to have swapped metadata
-        // in 1.7.10 because IC2's TileCable tile entity doesn't like a block with metadata 4
+        // TE_CONDUIT (item damage 0: currently unused) and HV_CABLE (item damage 4)
+        // have had to have swapped metadata
+        // in 1.7.10 because IC2's TileCable tile entity doesn't like a block with
+        // metadata 4
         if (damage == 4) return 0;
         if (damage == 0) return 4;
         return damage;

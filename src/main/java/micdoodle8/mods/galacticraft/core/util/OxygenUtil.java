@@ -70,7 +70,8 @@ public class OxygenUtil {
         double sy = entity.boundingBox.maxY - entity.boundingBox.minY;
         double sz = entity.boundingBox.maxZ - entity.boundingBox.minZ;
 
-        // A good first estimate of head size is that it's the smallest of the entity's 3 dimensions (e.g. front to
+        // A good first estimate of head size is that it's the smallest of the entity's
+        // 3 dimensions (e.g. front to
         // back, for Steve)
         double smin = Math.min(sx, Math.min(sy, sz)) / 2;
 
@@ -140,8 +141,8 @@ public class OxygenUtil {
                 for (int y = k; y <= l; ++y) {
                     for (int z = i1; z <= j1; ++z) {
                         Block block = world.getBlock(x, y, z);
-                        if (OxygenUtil.testContactWithBreathableAir(world, block, x, y, z, 0)
-                                == 1) // Thermal air has metadata 1
+                        if (OxygenUtil.testContactWithBreathableAir(world, block, x, y, z, 0) == 1) // Thermal air has
+                        // metadata 1
                         {
                             return true;
                         }
@@ -154,9 +155,9 @@ public class OxygenUtil {
     }
 
     /*
-     * A simplified version of the breathable air check which checks
-     * all 6 sides of the given block (because a torch can pass air on all sides)
-     * Used in BlockUnlitTorch.
+     * A simplified version of the breathable air check which checks all 6 sides of
+     * the given block (because a torch can pass air on all sides) Used in
+     * BlockUnlitTorch.
      */
     public static boolean checkTorchHasOxygen(World world, Block block, int x, int y, int z) {
         if (OxygenUtil.inOxygenBubble(world, x + 0.5D, y + 0.6D, z + 0.5D)) return true;
@@ -173,12 +174,11 @@ public class OxygenUtil {
     }
 
     /*
-     * Test whether the given block at (x,y,z) coordinates is either:
-     * - breathable air (returns true)
-     * - solid, or air which is not breathable (returns false)
-     * - an air-permeable block, for example a torch, in which case test the surrounding
-     * air-reachable blocks (up to 5 blocks away) and return true if breathable air is found
-     * in one of them, or false if not.
+     * Test whether the given block at (x,y,z) coordinates is either: - breathable
+     * air (returns true) - solid, or air which is not breathable (returns false) -
+     * an air-permeable block, for example a torch, in which case test the
+     * surrounding air-reachable blocks (up to 5 blocks away) and return true if
+     * breathable air is found in one of them, or false if not.
      */
     private static int testContactWithBreathableAir(World world, Block block, int x, int y, int z, int limitCount) {
         BlockVec3 vec = new BlockVec3(x, y, z);
@@ -235,9 +235,11 @@ public class OxygenUtil {
 
         return -1;
     }
-    // TODO - performance, could add a 'safe' version of this code (inside world borders)
+    // TODO - performance, could add a 'safe' version of this code (inside world
+    // borders)
 
-    // TODO - add more performance increase, these sided checks could be done once only
+    // TODO - add more performance increase, these sided checks could be done once
+    // only
     private static boolean canBlockPassAirOnSide(World world, Block block, BlockVec3 vec, int side) {
         if (block instanceof IPartialSealableBlock) {
             return !((IPartialSealableBlock) block)

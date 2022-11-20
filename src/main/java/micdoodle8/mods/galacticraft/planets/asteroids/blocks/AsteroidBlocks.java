@@ -17,7 +17,7 @@ public class AsteroidBlocks {
     public static Block blockWalkwayWire;
     public static Block blockWalkwayOxygenPipe;
     public static Block blockBasic;
-    //	public static Block machineFrame;
+    // public static Block machineFrame;
     public static Block beamReflector;
     public static Block beamReceiver;
     public static Block shortRangeTelepad;
@@ -35,7 +35,7 @@ public class AsteroidBlocks {
         AsteroidBlocks.blockWalkwayWire = new BlockWalkway("walkwayWire");
         AsteroidBlocks.blockWalkwayOxygenPipe = new BlockWalkway("walkwayOxygenPipe");
         AsteroidBlocks.blockBasic = new BlockBasicAsteroids("asteroidsBlock");
-        //		AsteroidBlocks.machineFrame = new BlockMachineFrame("machineFrameOld");
+        // AsteroidBlocks.machineFrame = new BlockMachineFrame("machineFrameOld");
         AsteroidBlocks.beamReflector = new BlockBeamReflector("beamReflector");
         AsteroidBlocks.beamReceiver = new BlockBeamReceiver("beamReceiver");
         AsteroidBlocks.shortRangeTelepad = new BlockShortRangeTelepad("telepadShort");
@@ -69,7 +69,7 @@ public class AsteroidBlocks {
                 AsteroidBlocks.blockWalkwayOxygenPipe,
                 ItemBlockWalkway.class,
                 AsteroidBlocks.blockWalkwayOxygenPipe.getUnlocalizedName());
-        //		GameRegistry.registerBlock(AsteroidBlocks.machineFrame, ItemBlockGC.class,
+        // GameRegistry.registerBlock(AsteroidBlocks.machineFrame, ItemBlockGC.class,
         // AsteroidBlocks.machineFrame.getUnlocalizedName());
         GameRegistry.registerBlock(
                 AsteroidBlocks.beamReflector, ItemBlockDesc.class, AsteroidBlocks.beamReflector.getUnlocalizedName());

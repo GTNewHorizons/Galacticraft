@@ -29,11 +29,13 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import org.lwjgl.opengl.GL11;
 
 /**
- * This renders the thermal armor (unless RenderPlayerAPI is installed).
- * The thermal armor render is done after the corresponding body part of the player is drawn.
- * This ALSO patches RenderPlayer so that it uses ModelPlayerGC in place of ModelPlayer to draw the player.
+ * This renders the thermal armor (unless RenderPlayerAPI is installed). The
+ * thermal armor render is done after the corresponding body part of the player
+ * is drawn. This ALSO patches RenderPlayer so that it uses ModelPlayerGC in
+ * place of ModelPlayer to draw the player.
  *
- * Finally, this also adds a hook into rotateCorpse so as to fire a RotatePlayerEvent - used by the Cryogenic Chamber
+ * Finally, this also adds a hook into rotateCorpse so as to fire a
+ * RotatePlayerEvent - used by the Cryogenic Chamber
  *
  * @author User
  *
@@ -103,7 +105,7 @@ public class RenderPlayerGC extends RenderPlayer {
 
                         int padding = gearData.getThermalPadding(i);
 
-                        // Padding sub-type 0 is standard Thermal Armor.  See PacketSimple handling of
+                        // Padding sub-type 0 is standard Thermal Armor. See PacketSimple handling of
                         // C_UPDATE_GEAR_SLOT for how the sub-type gets set
                         if (padding == 0 && !par1EntityLivingBase.isInvisible()) {
                             GL11.glColor4f(1, 1, 1, 1);

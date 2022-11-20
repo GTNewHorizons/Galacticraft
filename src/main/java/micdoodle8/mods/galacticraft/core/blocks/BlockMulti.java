@@ -32,14 +32,14 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
     private IIcon[] fakeIcons;
 
     // Meta values:
-    //  0 : Solar panel strut and variable angle parts
-    //  1 : Space station base
-    //  2 : Rocket fueling pad
-    //  3 : NASA workbench
-    //  4 : Solar panel fixed horizontal panel parts (in basic panel)
-    //  5 : Cryogenic chamber
-    //  6 : Buggy fueling pad
-    //  7 unused
+    // 0 : Solar panel strut and variable angle parts
+    // 1 : Space station base
+    // 2 : Rocket fueling pad
+    // 3 : NASA workbench
+    // 4 : Solar panel fixed horizontal panel parts (in basic panel)
+    // 5 : Cryogenic chamber
+    // 6 : Buggy fueling pad
+    // 7 unused
 
     public BlockMulti(String assetName) {
         super(GCBlocks.machine);
@@ -106,10 +106,10 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
         if (meta == 2 || meta == 6) {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.2F, 1.0F);
         }
-        /*else if (meta == 7)
-        {
-            this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.38F, 1.0F);
-        }*/
+        /*
+         * else if (meta == 7) { this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.38F,
+         * 1.0F); }
+         */
         else {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         }
@@ -125,11 +125,11 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.2F, 1.0F);
             super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
         }
-        /*else if (meta == 7)
-        {
-            this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.38F, 1.0F);
-            super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
-        }*/
+        /*
+         * else if (meta == 7) { this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.38F,
+         * 1.0F); super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list,
+         * entity); }
+         */
         else {
             super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
         }
@@ -207,10 +207,10 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
     }
 
     /**
-     * Called when the block is right clicked by the player. This modified
-     * version detects electric items and wrench actions on your machine block.
-     * Do not override this function. Use machineActivated instead! (It does the
-     * same thing)
+     * Called when the block is right clicked by the player. This modified version
+     * detects electric items and wrench actions on your machine block. Do not
+     * override this function. Use machineActivated instead! (It does the same
+     * thing)
      */
     @Override
     public boolean onBlockActivated(

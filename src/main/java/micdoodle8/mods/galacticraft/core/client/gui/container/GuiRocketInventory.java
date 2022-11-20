@@ -74,7 +74,8 @@ public class GuiRocketInventory extends GuiContainerGC {
             final String color = percentage > 80.0D
                     ? EnumColor.BRIGHT_GREEN.getCode()
                     : percentage > 40.0D ? EnumColor.ORANGE.getCode() : EnumColor.RED.getCode();
-            // final String str = percentage + "% " + GCCoreUtil.translate("gui.message.full.name");
+            // final String str = percentage + "% " +
+            // GCCoreUtil.translate("gui.message.full.name");
             final String str1 = String.format("%.1f%% %s", percentage, GCCoreUtil.translate("gui.message.full.name"));
             final String str2 = String.format(
                     "%.1f/%.1f B",

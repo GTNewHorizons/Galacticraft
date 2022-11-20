@@ -108,7 +108,7 @@ public abstract class TileEntityOxygen extends TileBaseElectricBlock implements 
                     || this.getOxygenOutputDirections().contains(direction);
         }
         if (type == NetworkType.POWER)
-        //			return this.nodeAvailable(new EnergySourceAdjacent(direction));
+        // return this.nodeAvailable(new EnergySourceAdjacent(direction));
         {
             return super.canConnect(direction, type);
         }
@@ -224,9 +224,9 @@ public abstract class TileEntityOxygen extends TileBaseElectricBlock implements 
     }
 
     /**
-     * Make sure this does not exceed the oxygen stored.
-     * This should return 0 if no oxygen is stored.
-     * Implementing tiles must respect this or you will generate infinite oxygen.
+     * Make sure this does not exceed the oxygen stored. This should return 0 if no
+     * oxygen is stored. Implementing tiles must respect this or you will generate
+     * infinite oxygen.
      */
     @Override
     public float getOxygenProvide(ForgeDirection direction) {

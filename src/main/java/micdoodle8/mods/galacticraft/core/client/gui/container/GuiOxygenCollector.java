@@ -139,7 +139,8 @@ public class GuiOxygenCollector extends GuiContainerGC {
             electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
             EnergyDisplayHelper.getEnergyDisplayTooltip(
                     this.collector.getEnergyStoredGC(), this.collector.getMaxEnergyStoredGC(), electricityDesc);
-            //			electricityDesc.add(EnumColor.YELLOW + GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)
+            // electricityDesc.add(EnumColor.YELLOW +
+            // GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)
             // Math.floor(this.collector.getEnergyStoredGC()) + " / " + (int)
             // Math.floor(this.collector.getMaxEnergyStoredGC())));
             this.electricInfoRegion.tooltipStrings = electricityDesc;

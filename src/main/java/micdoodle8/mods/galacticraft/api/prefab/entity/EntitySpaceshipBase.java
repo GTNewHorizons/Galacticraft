@@ -199,8 +199,9 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
                         ? ((IExitHeight) this.worldObj.provider).getYCoordinateToTeleport()
                         : 1200)) {
             this.onReachAtmosphere();
-            //            if (this.worldObj.isRemote)
-            //            	this.posY = 1 + (this.worldObj.provider instanceof IExitHeight ? ((IExitHeight)
+            // if (this.worldObj.isRemote)
+            // this.posY = 1 + (this.worldObj.provider instanceof IExitHeight ?
+            // ((IExitHeight)
             // this.worldObj.provider).getYCoordinateToTeleport() : 1200);
         }
 
@@ -518,11 +519,11 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
 
     public void receiveData(int[] data, String[] str) {
         // Spaceships:
-        //  data0 = launch countdown
-        //  data1 = height
-        //  data2 = speed
-        //  data3 = fuel remaining
-        //  data4 = pitch angle
+        // data0 = launch countdown
+        // data1 = height
+        // data2 = speed
+        // data3 = fuel remaining
+        // data4 = pitch angle
         int countdown = data[0];
         str[0] = "";
         str[1] = (countdown == 400)

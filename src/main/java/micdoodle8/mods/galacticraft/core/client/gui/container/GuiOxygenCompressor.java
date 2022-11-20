@@ -124,11 +124,15 @@ public class GuiOxygenCompressor extends GuiContainerGC {
                 + GCCoreUtil.translate("gui.perSecond");
         this.fontRendererObj.drawString(
                 status, this.xSize / 2 - this.fontRendererObj.getStringWidth(status) / 2, 60, 4210752);
-        //		status = ElectricityDisplay.getDisplay(this.compressor.ueWattsPerTick * 20, ElectricUnit.WATT);
-        //		this.fontRendererObj.drawString(status, this.xSize / 2 - this.fontRendererObj.getStringWidth(status) / 2,
+        // status = ElectricityDisplay.getDisplay(this.compressor.ueWattsPerTick * 20,
+        // ElectricUnit.WATT);
+        // this.fontRendererObj.drawString(status, this.xSize / 2 -
+        // this.fontRendererObj.getStringWidth(status) / 2,
         // 70, 4210752);
-        //		status = ElectricityDisplay.getDisplay(this.compressor.getVoltage(), ElectricUnit.VOLTAGE);
-        //		this.fontRendererObj.drawString(status, this.xSize / 2 - this.fontRendererObj.getStringWidth(status) / 2,
+        // status = ElectricityDisplay.getDisplay(this.compressor.getVoltage(),
+        // ElectricUnit.VOLTAGE);
+        // this.fontRendererObj.drawString(status, this.xSize / 2 -
+        // this.fontRendererObj.getStringWidth(status) / 2,
         // 80, 4210752);
         this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 104 + 17, 4210752);
     }
@@ -184,7 +188,8 @@ public class GuiOxygenCompressor extends GuiContainerGC {
             electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
             EnergyDisplayHelper.getEnergyDisplayTooltip(
                     this.compressor.getEnergyStoredGC(), this.compressor.getMaxEnergyStoredGC(), electricityDesc);
-            //			electricityDesc.add(EnumColor.YELLOW + GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)
+            // electricityDesc.add(EnumColor.YELLOW +
+            // GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)
             // Math.floor(this.compressor.getEnergyStoredGC()) + " / " + (int)
             // Math.floor(this.compressor.getMaxEnergyStoredGC())));
             this.electricInfoRegion.tooltipStrings = electricityDesc;

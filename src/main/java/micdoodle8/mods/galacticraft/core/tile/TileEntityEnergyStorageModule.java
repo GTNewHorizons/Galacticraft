@@ -36,7 +36,7 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
     }
 
     /*
-     * @param tier: 1 = Electric Furnace  2 = Electric Arc Furnace
+     * @param tier: 1 = Electric Furnace 2 = Electric Arc Furnace
      */
     public TileEntityEnergyStorageModule(int tier) {
         this.initialised = true;

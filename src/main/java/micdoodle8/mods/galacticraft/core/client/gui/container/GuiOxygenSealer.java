@@ -159,11 +159,15 @@ public class GuiOxygenSealer extends GuiContainerGC {
         status = GCCoreUtil.translate("gui.message.thermalStatus.name") + ": " + this.getThermalStatus();
         this.fontRendererObj.drawString(
                 status, this.xSize / 2 - this.fontRendererObj.getStringWidth(status) / 2, 70, 4210752);
-        //		status = ElectricityDisplay.getDisplay(this.sealer.ueWattsPerTick * 20, ElectricUnit.WATT);
-        //		this.fontRendererObj.drawString(status, this.xSize / 2 - this.fontRendererObj.getStringWidth(status) / 2,
+        // status = ElectricityDisplay.getDisplay(this.sealer.ueWattsPerTick * 20,
+        // ElectricUnit.WATT);
+        // this.fontRendererObj.drawString(status, this.xSize / 2 -
+        // this.fontRendererObj.getStringWidth(status) / 2,
         // 70, 4210752);
-        //		status = ElectricityDisplay.getDisplay(this.sealer.getVoltage(), ElectricUnit.VOLTAGE);
-        //		this.fontRendererObj.drawString(status, this.xSize / 2 - this.fontRendererObj.getStringWidth(status) / 2,
+        // status = ElectricityDisplay.getDisplay(this.sealer.getVoltage(),
+        // ElectricUnit.VOLTAGE);
+        // this.fontRendererObj.drawString(status, this.xSize / 2 -
+        // this.fontRendererObj.getStringWidth(status) / 2,
         // 80, 4210752);
         this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 90 + 3, 4210752);
     }
@@ -203,11 +207,12 @@ public class GuiOxygenSealer extends GuiContainerGC {
             return EnumColor.DARK_RED + GCCoreUtil.translate("gui.status.sealerblocked.name");
         }
 
-        //        if (RedstoneUtil.isBlockReceivingRedstone(this.sealer.getWorldObj(), this.sealer.xCoord,
+        // if (RedstoneUtil.isBlockReceivingRedstone(this.sealer.getWorldObj(),
+        // this.sealer.xCoord,
         // this.sealer.yCoord, this.sealer.zCoord))
-        //        {
-        //            return EnumColor.DARK_RED + GCCoreUtil.translate("gui.status.off.name");
-        //        }
+        // {
+        // return EnumColor.DARK_RED + GCCoreUtil.translate("gui.status.off.name");
+        // }
 
         if (this.sealer.disabled) {
             return EnumColor.ORANGE + GCCoreUtil.translate("gui.status.disabled.name");
@@ -270,7 +275,8 @@ public class GuiOxygenSealer extends GuiContainerGC {
             electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
             EnergyDisplayHelper.getEnergyDisplayTooltip(
                     this.sealer.getEnergyStoredGC(), this.sealer.getMaxEnergyStoredGC(), electricityDesc);
-            //			electricityDesc.add(EnumColor.YELLOW + GCCoreUtil.translate("gui.energyStorage.desc.1") + ": " + ((int)
+            // electricityDesc.add(EnumColor.YELLOW +
+            // GCCoreUtil.translate("gui.energyStorage.desc.1") + ": " + ((int)
             // Math.floor(this.sealer.getEnergyStoredGC()) + " / " + (int)
             // Math.floor(this.sealer.getMaxEnergyStoredGC())));
             this.electricInfoRegion.tooltipStrings = electricityDesc;

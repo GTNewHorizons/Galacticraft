@@ -62,8 +62,10 @@ public class SpinManager {
     private HashSet<BlockVec3> checked = new HashSet<BlockVec3>();
 
     private float artificialG;
-    // Used to make continuous particles + thrust sounds at the spin thrusters in this dimension
-    // If false, make particles + sounds occasionally in small bursts, just for fun (micro attitude changes)
+    // Used to make continuous particles + thrust sounds at the spin thrusters in
+    // this dimension
+    // If false, make particles + sounds occasionally in small bursts, just for fun
+    // (micro attitude changes)
     // see: BlockSpinThruster.randomDisplayTick()
     public boolean thrustersFiring = false;
     private boolean dataNotLoaded = true;
@@ -156,15 +158,14 @@ public class SpinManager {
     }
 
     /**
-     * This will check all blocks which are in contact with each other to find
-     * the shape of the spacestation. It also finds the centre of mass (to
-     * rotate around) and the moment of inertia (how easy/hard this is to
-     * rotate).
+     * This will check all blocks which are in contact with each other to find the
+     * shape of the spacestation. It also finds the centre of mass (to rotate
+     * around) and the moment of inertia (how easy/hard this is to rotate).
      * <p/>
      * If placingThruster is true, it will return false if the thruster (at
-     * baseBlock) is not in contact with the "existing" spacestation - so the
-     * player cannot place thrusters on outlying disconnected blocks and expect
-     * them to have an effect.
+     * baseBlock) is not in contact with the "existing" spacestation - so the player
+     * cannot place thrusters on outlying disconnected blocks and expect them to
+     * have an effect.
      * <p/>
      * Note: this check will briefly load, server-side, all chunks which have
      * spacestation blocks in them or 1 block adjacent to those.
@@ -284,7 +285,8 @@ public class SpinManager {
 
         if (placingThruster && !this.checked.contains(baseBlock)) {
             if (foundThrusters.size() > 0) {
-                // The thruster was not placed on the existing contiguous space station: it must be.
+                // The thruster was not placed on the existing contiguous space station: it must
+                // be.
                 if (ConfigManagerCore.enableDebug) {
                     GCLog.info("Thruster placed on wrong part of space station: base at " + this.oneSSBlock.x + ","
                             + this.oneSSBlock.y + "," + this.oneSSBlock.z + " - baseBlock was " + baseBlock.x + ","
@@ -293,8 +295,10 @@ public class SpinManager {
                 return false;
             }
 
-            // No thruster on the original space station - so assume the player made new station and start check again
-            // This offers players a reset option: just remove all thrusters from original station then starting adding
+            // No thruster on the original space station - so assume the player made new
+            // station and start check again
+            // This offers players a reset option: just remove all thrusters from original
+            // station then starting adding
             // to new one
             // (This first check prevents an infinite loop)
             if (!this.oneSSBlock.equals(baseBlock)) {
@@ -403,10 +407,12 @@ public class SpinManager {
                 float maxRz = Math.max(this.ssBoundsMaxZ - this.massCentreZ, this.massCentreZ - this.ssBoundsMinZ);
                 float maxR = Math.max(maxRx, maxRz);
                 this.angularVelocityTarget = MathHelper.sqrt_float(GFORCE / maxR) / 2;
-                // The divide by 2 is not scientific but is a Minecraft factor as everything happens more quickly
+                // The divide by 2 is not scientific but is a Minecraft factor as everything
+                // happens more quickly
                 float spinCap = 0.00125F * countThrusters;
 
-                // TODO: increase this above 20F in release versions so everything happens more slowly
+                // TODO: increase this above 20F in release versions so everything happens more
+                // slowly
                 this.angularVelocityAccel = netTorque / this.momentOfInertia / 20F;
                 if (this.angularVelocityAccel < 0) {
                     this.angularVelocityAccel = -this.angularVelocityAccel;
@@ -503,9 +509,11 @@ public class SpinManager {
                                 && e.boundingBox.minZ <= this.ssBoundsMaxZ) {
                             // Entity is somewhere within the space station boundaries
 
-                            // Check if the entity's bounding box is in the same block coordinates as any non-vacuum
+                            // Check if the entity's bounding box is in the same block coordinates as any
+                            // non-vacuum
                             // block (including torches etc)
-                            // If so, it's assumed the entity has something close enough to catch onto, so is not in
+                            // If so, it's assumed the entity has something close enough to catch onto, so
+                            // is not in
                             // freefall
                             // Note: breatheable air here means the entity is definitely not in freefall
                             int xmx = MathHelper.floor_double(e.boundingBox.maxX + 0.2D);
@@ -557,7 +565,8 @@ public class SpinManager {
                                 }
 
                                 e.boundingBox.offset(offsetX, 0.0D, offsetZ);
-                                // TODO check for block collisions here - if so move the entity appropriately and apply
+                                // TODO check for block collisions here - if so move the entity appropriately
+                                // and apply
                                 // fall damage
                                 // Moving the entity = slide along / down
                                 e.rotationYaw += this.skyAngularVelocity;
@@ -596,8 +605,10 @@ public class SpinManager {
     public boolean updatePlayerForSpin(EntityPlayerSP p, float partialTicks) {
         float angleDelta = partialTicks * this.angularVelocityRadians;
         if (this.doSpinning && angleDelta != 0F) {
-            // TODO maybe need to test to make sure xx and zz are not too large (outside sight range of SS)
-            // TODO think about server + network load (loading/unloading chunks) when movement is rapid
+            // TODO maybe need to test to make sure xx and zz are not too large (outside
+            // sight range of SS)
+            // TODO think about server + network load (loading/unloading chunks) when
+            // movement is rapid
             // Maybe reduce chunkloading radius?
 
             boolean doGravity = false;
@@ -619,9 +630,11 @@ public class SpinManager {
             double offsetZ = arc * MathHelper.cos(angle);
 
             // Check for block collisions here - if so move the player appropriately
-            // First check that there are no existing collisions where the player is now (TODO: bounce the player away)
+            // First check that there are no existing collisions where the player is now
+            // (TODO: bounce the player away)
             if (p.worldObj.getCollidingBoundingBoxes(p, p.boundingBox).size() == 0) {
-                // Now check for collisions in the new direction and if there are some, try reducing the movement
+                // Now check for collisions in the new direction and if there are some, try
+                // reducing the movement
                 int collisions = 0;
                 do {
                     List<AxisAlignedBB> list =
@@ -756,8 +769,8 @@ public class SpinManager {
     /**
      * Call this when player first login/transfer to this dimension
      * <p/>
-     * TODO how can this code be called by other mods / plugins with teleports
-     * (e.g. Bukkit)? See WorldUtil.teleportEntity()
+     * TODO how can this code be called by other mods / plugins with teleports (e.g.
+     * Bukkit)? See WorldUtil.teleportEntity()
      *
      * @param player
      */

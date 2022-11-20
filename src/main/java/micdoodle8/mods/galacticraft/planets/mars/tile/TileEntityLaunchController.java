@@ -73,8 +73,8 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
     public boolean requiresClientUpdate;
     public Object attachedDock = null;
     private boolean frequencyCheckNeeded = false;
-    //    private static Map<Integer, Long> tickCounts = new HashMap();
-    //    private static Map<Integer, Integer> instanceCounts = new HashMap();
+    // private static Map<Integer, Long> tickCounts = new HashMap();
+    // private static Map<Integer, Integer> instanceCounts = new HashMap();
 
     public TileEntityLaunchController() {
         this.storage.setMaxExtract(10);
@@ -86,29 +86,30 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
         super.updateEntity();
 
         if (!this.worldObj.isRemote) {
-            //            if (ConfigManagerCore.enableDebug)
-            //            {
-            //            	int dim = this.worldObj.provider.dimensionId;
-            //            	Long tickCount = tickCounts.get(dim);
-            //            	if (tickCount == null)
-            //            	{
-            //            		tickCount = 0L;
-            //            		tickCounts.put(dim, tickCount);
-            //            		instanceCounts.put(dim, 0);
-            //            	}
-            //            	int instanceCount = instanceCounts.get(dim);
-            //	        	if (this.worldObj.getTotalWorldTime() > tickCount)
-            //	            {
-            //	            	tickCount = this.worldObj.getTotalWorldTime();
-            //	            	if (tickCount % 20L == 0L) GCLog.debug("Dim " + dim + ": Number of Launch Controllers
+            // if (ConfigManagerCore.enableDebug)
+            // {
+            // int dim = this.worldObj.provider.dimensionId;
+            // Long tickCount = tickCounts.get(dim);
+            // if (tickCount == null)
+            // {
+            // tickCount = 0L;
+            // tickCounts.put(dim, tickCount);
+            // instanceCounts.put(dim, 0);
+            // }
+            // int instanceCount = instanceCounts.get(dim);
+            // if (this.worldObj.getTotalWorldTime() > tickCount)
+            // {
+            // tickCount = this.worldObj.getTotalWorldTime();
+            // if (tickCount % 20L == 0L) GCLog.debug("Dim " + dim + ": Number of Launch
+            // Controllers
             // updating each tick: " + instanceCount);
-            //	            	instanceCount = 1;
-            //	            }
-            //	            else
-            //	            	instanceCount++;
-            //	        	tickCounts.put(dim, tickCount);
-            //	        	instanceCounts.put(dim, instanceCount);
-            //            }
+            // instanceCount = 1;
+            // }
+            // else
+            // instanceCount++;
+            // tickCounts.put(dim, tickCount);
+            // instanceCounts.put(dim, instanceCount);
+            // }
 
             this.controlEnabled = this.launchSchedulingEnabled && this.hasEnoughEnergyToRun && !this.getDisabled(0);
 

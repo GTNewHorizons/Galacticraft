@@ -258,7 +258,8 @@ public class GalacticraftCore {
         GCBlocks.initBlocks();
         GCItems.initItems();
 
-        // Allow canisters to be filled from other mods' tanks containing fuel / oil fluids
+        // Allow canisters to be filled from other mods' tanks containing fuel / oil
+        // fluids
         FluidContainerRegistry.registerFluidContainer(new FluidContainerData(
                 new FluidStack(fluidFuel, 1000),
                 new ItemStack(GCItems.fuelCanister, 1, 1),
@@ -268,7 +269,8 @@ public class GalacticraftCore {
                 new ItemStack(GCItems.oilCanister, 1, 1),
                 new ItemStack(GCItems.oilCanister, 1, ItemCanisterGeneric.EMPTY)));
 
-        // Force initialisation of GC biome types in preinit (after config load) - this helps BiomeTweaker
+        // Force initialisation of GC biome types in preinit (after config load) - this
+        // helps BiomeTweaker
         BiomeGenBase biomeOrbitPreInit = BiomeGenBaseOrbit.space;
         BiomeGenBase biomeMoonPreInit = BiomeGenBaseMoon.moonFlat;
     }
@@ -380,7 +382,8 @@ public class GalacticraftCore {
         FMLInterModComms.sendMessage("OpenBlocks", "donateUrl", "http://www.patreon.com/micdoodle8");
         registerCoreGameScreens();
 
-        // If any other mod has registered "fuel" or "oil" and GC has not, then allow GC's appropriate canisters to be
+        // If any other mod has registered "fuel" or "oil" and GC has not, then allow
+        // GC's appropriate canisters to be
         // fillable with that one as well
         if (ConfigManagerCore.useOldFuelFluidID && FluidRegistry.isFluidRegistered("fuel")) {
             FluidContainerRegistry.registerFluidContainer(new FluidContainerData(
@@ -403,9 +406,11 @@ public class GalacticraftCore {
         }
 
         // Register now any unregistered "oil", "fuel", "oilgc" and "fuelgc" fluids
-        // This is for legacy compatibility with any 'in the world' tanks and items filled in different GC versions or
+        // This is for legacy compatibility with any 'in the world' tanks and items
+        // filled in different GC versions or
         // with different GC config
-        // In those cases, FluidUtil methods (and TileEntityRefinery) will attempt to fresh containers/tanks with the
+        // In those cases, FluidUtil methods (and TileEntityRefinery) will attempt to
+        // fresh containers/tanks with the
         // current fuel or oil type
         if (!FluidRegistry.isFluidRegistered("oil")) {
             FluidRegistry.registerFluid(new Fluid("oil").setDensity(800).setViscosity(1500));
@@ -422,9 +427,11 @@ public class GalacticraftCore {
     }
 
     private void registerOilandFuel() {
-        // NOTE: the way this operates will depend on the order in which different mods initialize (normally
+        // NOTE: the way this operates will depend on the order in which different mods
+        // initialize (normally
         // alphabetical order)
-        // Galacticraft can handle things OK if another mod registers oil or fuel first.  The other mod may not be so
+        // Galacticraft can handle things OK if another mod registers oil or fuel first.
+        // The other mod may not be so
         // happy if GC registers oil or fuel first.
 
         String oilID = "oil";
@@ -575,7 +582,8 @@ public class GalacticraftCore {
         for (CelestialBody body : cBodyList) {
             if (body.shouldAutoRegister()) {
                 int id = Arrays.binarySearch(ConfigManagerCore.staticLoadDimensions, body.getDimensionID());
-                // It's important this is done in the same order as planets will be registered by
+                // It's important this is done in the same order as planets will be registered
+                // by
                 // WorldUtil.registerPlanet();
                 if (!GalacticraftRegistry.registerProvider(
                         body.getDimensionID(), body.getWorldProvider(), body.getForceStaticLoad() || id < 0, 0))
@@ -592,7 +600,8 @@ public class GalacticraftCore {
         GalacticraftRegistry.registerScreen(new GameScreenText()); // Screen API demo
         // Note: add-ons can register their own screens in postInit by calling
         // GalacticraftRegistry.registerScreen(IGameScreen) like this.
-        // [Called on both client and server: do not include any client-specific code in the new game screen's
+        // [Called on both client and server: do not include any client-specific code in
+        // the new game screen's
         // constructor method.]
 
         try {
@@ -769,7 +778,8 @@ public class GalacticraftCore {
         GCCoreUtil.registerGalacticraftNonMobEntity(EntityBuggy.class, "Buggy", 150, 5, true);
         GCCoreUtil.registerGalacticraftNonMobEntity(EntityFlag.class, "GCFlag", 150, 5, true);
         GCCoreUtil.registerGalacticraftNonMobEntity(EntityParachest.class, "ParaChest", 150, 5, true);
-        //        GCCoreUtil.registerGalacticraftNonMobEntity(EntityBubble.class, "OxygenBubble", 150, 20, false);
+        // GCCoreUtil.registerGalacticraftNonMobEntity(EntityBubble.class,
+        // "OxygenBubble", 150, 20, false);
         GCCoreUtil.registerGalacticraftNonMobEntity(EntityLander.class, "Lander", 150, 5, false);
         GCCoreUtil.registerGalacticraftNonMobEntity(EntityMeteorChunk.class, "MeteorChunk", 150, 5, true);
         GCCoreUtil.registerGalacticraftNonMobEntity(EntityCelestialFake.class, "CelestialScreen", 150, 5, false);

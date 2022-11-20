@@ -94,7 +94,8 @@ public class FreefallHandler {
             if (e instanceof EntitySpaceshipBase) return ((EntitySpaceshipBase) e).getLaunched();
             if (e instanceof EntityLanderBase) return false;
             // TODO: should check whether lander has landed (whatever that means)
-            // TODO: could check other ridden entities - every entity should have its own freefall check :(
+            // TODO: could check other ridden entities - every entity should have its own
+            // freefall check :(
         }
 
         // This is an "on the ground" check
@@ -127,9 +128,11 @@ public class FreefallHandler {
             if (checkBlockWithinReach)
             // Player is somewhere within the space station boundaries
             {
-                // Check if the player's bounding box is in the same block coordinates as any non-vacuum block
+                // Check if the player's bounding box is in the same block coordinates as any
+                // non-vacuum block
                 // (including torches etc)
-                // If so, it's assumed the player has something close enough to grab onto, so is not in freefall
+                // If so, it's assumed the player has something close enough to grab onto, so is
+                // not in freefall
                 // Note: breatheable air here means the player is definitely not in freefall
                 int xm = MathHelper.floor_double(playerReach.minX);
                 int xx = MathHelper.floor_double(playerReach.maxX);
@@ -152,71 +155,36 @@ public class FreefallHandler {
         }
 
         /*
-        if (freefall)
-        {
-        	//If that check didn't produce a result, see if the player is inside the walls
-        	//TODO: could apply special weightless movement here like Coriolis force - the player is inside the walls,  not touching them, and in a vacuum
-        	int quadrant = 0;
-        	double xd = p.posX - this.spinCentreX;
-        	double zd = p.posZ - this.spinCentreZ;
-        	if (xd<0)
-        	{
-        		if (xd<-Math.abs(zd))
-        		{
-        			quadrant = 2;
-        		} else
-        			quadrant = (zd<0) ? 3 : 1;
-        	} else
-        		if (xd>Math.abs(zd))
-        		{
-        			quadrant = 0;
-        		} else
-        			quadrant = (zd<0) ? 3 : 1;
-
-        	int ymin = MathHelper.floor_double(p.boundingBox.minY)-1;
-        	int ymax = MathHelper.floor_double(p.boundingBox.maxY);
-        	int xmin, xmax, zmin, zmax;
-
-        	switch (quadrant)
-        	{
-        	case 0:
-        		xmin = MathHelper.floor_double(p.boundingBox.maxX);
-        		xmax = this.ssBoundsMaxX - 1;
-        		zmin = MathHelper.floor_double(p.boundingBox.minZ)-1;
-        		zmax = MathHelper.floor_double(p.boundingBox.maxZ)+1;
-        		break;
-        	case 1:
-        		xmin = MathHelper.floor_double(p.boundingBox.minX)-1;
-        		xmax = MathHelper.floor_double(p.boundingBox.maxX)+1;
-        		zmin = MathHelper.floor_double(p.boundingBox.maxZ);
-        		zmax = this.ssBoundsMaxZ - 1;
-        		break;
-        	case 2:
-        		zmin = MathHelper.floor_double(p.boundingBox.minZ)-1;
-        		zmax = MathHelper.floor_double(p.boundingBox.maxZ)+1;
-        		xmin = this.ssBoundsMinX;
-        		xmax = MathHelper.floor_double(p.boundingBox.minX);
-        		break;
-        	case 3:
-        	default:
-        		xmin = MathHelper.floor_double(p.boundingBox.minX)-1;
-        		xmax = MathHelper.floor_double(p.boundingBox.maxX)+1;
-        		zmin = this.ssBoundsMinZ;
-        		zmax = MathHelper.floor_double(p.boundingBox.minZ);
-        		break;
-        	}
-
-        	//This block search could cost a lot of CPU (but client side) - maybe optimise later
-        	BLOCKCHECK0:
-        	for(int x = xmin; x <= xmax; x++)
-        		for (int z = zmin; z <= zmax; z++)
-        			for (int y = ymin; y <= ymax; y++)
-        				if (Blocks.air != this.worldObj.getBlock(x, y, z))
-        				{
-        					freefall = false;
-        					break BLOCKCHECK0;
-        				}
-        }*/
+         * if (freefall) { //If that check didn't produce a result, see if the player is
+         * inside the walls //TODO: could apply special weightless movement here like
+         * Coriolis force - the player is inside the walls, not touching them, and in a
+         * vacuum int quadrant = 0; double xd = p.posX - this.spinCentreX; double zd =
+         * p.posZ - this.spinCentreZ; if (xd<0) { if (xd<-Math.abs(zd)) { quadrant = 2;
+         * } else quadrant = (zd<0) ? 3 : 1; } else if (xd>Math.abs(zd)) { quadrant = 0;
+         * } else quadrant = (zd<0) ? 3 : 1;
+         *
+         * int ymin = MathHelper.floor_double(p.boundingBox.minY)-1; int ymax =
+         * MathHelper.floor_double(p.boundingBox.maxY); int xmin, xmax, zmin, zmax;
+         *
+         * switch (quadrant) { case 0: xmin =
+         * MathHelper.floor_double(p.boundingBox.maxX); xmax = this.ssBoundsMaxX - 1;
+         * zmin = MathHelper.floor_double(p.boundingBox.minZ)-1; zmax =
+         * MathHelper.floor_double(p.boundingBox.maxZ)+1; break; case 1: xmin =
+         * MathHelper.floor_double(p.boundingBox.minX)-1; xmax =
+         * MathHelper.floor_double(p.boundingBox.maxX)+1; zmin =
+         * MathHelper.floor_double(p.boundingBox.maxZ); zmax = this.ssBoundsMaxZ - 1;
+         * break; case 2: zmin = MathHelper.floor_double(p.boundingBox.minZ)-1; zmax =
+         * MathHelper.floor_double(p.boundingBox.maxZ)+1; xmin = this.ssBoundsMinX; xmax
+         * = MathHelper.floor_double(p.boundingBox.minX); break; case 3: default: xmin =
+         * MathHelper.floor_double(p.boundingBox.minX)-1; xmax =
+         * MathHelper.floor_double(p.boundingBox.maxX)+1; zmin = this.ssBoundsMinZ; zmax
+         * = MathHelper.floor_double(p.boundingBox.minZ); break; }
+         *
+         * //This block search could cost a lot of CPU (but client side) - maybe
+         * optimise later BLOCKCHECK0: for(int x = xmin; x <= xmax; x++) for (int z =
+         * zmin; z <= zmax; z++) for (int y = ymin; y <= ymax; y++) if (Blocks.air !=
+         * this.worldObj.getBlock(x, y, z)) { freefall = false; break BLOCKCHECK0; } }
+         */
 
         return true;
     }
@@ -261,7 +229,7 @@ public class FreefallHandler {
         }
 
         p.motionX -= dX;
-        //        p.motionY -= dY;    //Enabling this will disable jetpacks
+        // p.motionY -= dY; //Enabling this will disable jetpacks
         p.motionZ -= dZ;
 
         if (p.movementInput.moveForward != 0) {
@@ -280,13 +248,13 @@ public class FreefallHandler {
 
         if (p.movementInput.sneak) {
             if (!sneakLast) {
-                //            	posOffsetY += 0.0268;
+                // posOffsetY += 0.0268;
                 sneakLast = true;
             }
             p.motionY -= ConfigManagerCore.hardMode ? 0.002D : 0.0032D;
         } else if (sneakLast) {
             sneakLast = false;
-            //        	posOffsetY -= 0.0268;
+            // posOffsetY -= 0.0268;
         }
 
         if (!jetpackUsed && p.movementInput.jump) {
@@ -319,27 +287,14 @@ public class FreefallHandler {
         p.moveEntity(p.motionX + posOffsetX, p.motionY + posOffsetY, p.motionZ + posOffsetZ);
     }
 
-    /*				double dyaw = p.rotationYaw - p.prevRotationYaw;
-    	p.rotationYaw -= dyaw * 0.8D;
-    	double dyawh = p.rotationYawHead - p.prevRotationYawHead;
-    	p.rotationYawHead -= dyawh * 0.8D;
-    	while (p.rotationYaw > 360F)
-    	{
-    		p.rotationYaw -= 360F;
-    	}
-    	while (p.rotationYaw < 0F)
-    	{
-    		p.rotationYaw += 360F;
-    	}
-    	while (p.rotationYawHead > 360F)
-    	{
-    		p.rotationYawHead -= 360F;
-    	}
-    	while (p.rotationYawHead < 0F)
-    	{
-    		p.rotationYawHead += 360F;
-    	}
-    */
+    /*
+     * double dyaw = p.rotationYaw - p.prevRotationYaw; p.rotationYaw -= dyaw *
+     * 0.8D; double dyawh = p.rotationYawHead - p.prevRotationYawHead;
+     * p.rotationYawHead -= dyawh * 0.8D; while (p.rotationYaw > 360F) {
+     * p.rotationYaw -= 360F; } while (p.rotationYaw < 0F) { p.rotationYaw += 360F;
+     * } while (p.rotationYawHead > 360F) { p.rotationYawHead -= 360F; } while
+     * (p.rotationYawHead < 0F) { p.rotationYawHead += 360F; }
+     */
 
     public static void updateFreefall(EntityPlayer p) {
         pPrevMotionX = p.motionX;
@@ -423,9 +378,12 @@ public class FreefallHandler {
                 }
             }
             // TODO: Think about endless drift?
-            // Player may run out of oxygen - that will kill the player eventually if can't get back to SS
-            // Could auto-kill + respawn the player if floats too far away (config option whether to lose items or not)
-            // But we want players to be able to enjoy the view of the spinning space station from the outside
+            // Player may run out of oxygen - that will kill the player eventually if can't
+            // get back to SS
+            // Could auto-kill + respawn the player if floats too far away (config option
+            // whether to lose items or not)
+            // But we want players to be able to enjoy the view of the spinning space
+            // station from the outside
             // Arm and leg movements could start tumbling the player?
         } else
         // Not freefall - within arm's length of something or jumping
@@ -437,9 +395,9 @@ public class FreefallHandler {
                 if ((p.onGround || stats.pWasOnGround) && !p.capabilities.isCreativeMode) {
                     if (stats.pjumpticks < 25) stats.pjumpticks++;
                     p.motionY -= dy;
-                    //                    p.onGround = false;
-                    //                    p.posY -= 0.1D;
-                    //                    p.boundingBox.offset(0, -0.1D, 0);
+                    // p.onGround = false;
+                    // p.posY -= 0.1D;
+                    // p.boundingBox.offset(0, -0.1D, 0);
                 } else {
                     p.motionY += 0.015D;
                     if (stats.pjumpticks == 0) {

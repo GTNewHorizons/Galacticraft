@@ -62,7 +62,8 @@ public class ThreadFindSeal {
 
         this.sealersAround = TileEntityOxygenSealer.getSealersAround(world, head.x, head.y, head.z, 1024 * 1024);
 
-        // If called by a sealer test the head block and if partiallySealable mark its sides done as required
+        // If called by a sealer test the head block and if partiallySealable mark its
+        // sides done as required
         if (!sealers.isEmpty()) {
             if (checkCount > 0) {
                 Block headBlock = head.getBlockID(this.world);
@@ -78,14 +79,14 @@ public class ThreadFindSeal {
                 eachSealer.threadSeal = this;
             }
 
-            //            if (ConfigManagerCore.enableSealerMultithreading)
-            //            {
-            //                new ThreadedFindSeal();
-            //            }
-            //            else
-            //            {
+            // if (ConfigManagerCore.enableSealerMultithreading)
+            // {
+            // new ThreadedFindSeal();
+            // }
+            // else
+            // {
             this.check();
-            //            }
+            // }
         } else
         // If not called by a sealer, it's a breathable air edge check
         {
@@ -156,7 +157,8 @@ public class ThreadFindSeal {
 
         long time2 = System.nanoTime();
 
-        // Can only be properly sealed if there is at least one sealer here (on edge check)
+        // Can only be properly sealed if there is at least one sealer here (on edge
+        // check)
         if (this.sealers.isEmpty()) {
             this.sealed = false;
         }
@@ -254,7 +256,8 @@ public class ThreadFindSeal {
                     this.sealers = sealersSave;
                     this.torchesToUpdate = torchesSave;
                 } else {
-                    // If the second search sealed the area, there may also be air or torches to update
+                    // If the second search sealed the area, there may also be air or torches to
+                    // update
                     this.makeSealGood(foundAmbientThermal);
                 }
             }
@@ -278,7 +281,8 @@ public class ThreadFindSeal {
         TileEntityOxygenSealer headSealer =
                 this.sealersAround.get(this.head.clone().translate(0, -1, 0));
 
-        // TODO: if multi-threaded, this final code block giving access to the sealer tiles needs to be threadsafe
+        // TODO: if multi-threaded, this final code block giving access to the sealer
+        // tiles needs to be threadsafe
 
         // If it is sealed, cooldown can be extended as frequent checks are not needed
         if (headSealer != null) {
@@ -478,7 +482,8 @@ public class ThreadFindSeal {
                             if (id != null && Blocks.air != id && id != GCBlocks.brightAir) {
                                 // This test applies any necessary checkedAdd();
                                 if (this.canBlockPassAirCheck(id, sideVec, side)) {
-                                    // Look outbound through partially sealable blocks in case there is breatheableAir
+                                    // Look outbound through partially sealable blocks in case there is
+                                    // breatheableAir
                                     // to clear beyond
                                     nextLayer.add(sideVec);
                                 }
@@ -515,7 +520,8 @@ public class ThreadFindSeal {
                 bits = vec.sideDoneBits;
                 do {
                     // Skip the side which this was entered from
-                    // This is also used to skip looking on the solid sides of partially sealable blocks
+                    // This is also used to skip looking on the solid sides of partially sealable
+                    // blocks
                     if ((bits & (1 << side)) == 0) {
                         // The sides 0 to 5 correspond with the ForgeDirections
                         // but saves a bit of time not to call ForgeDirection
@@ -624,7 +630,8 @@ public class ThreadFindSeal {
                 bits = vec.sideDoneBits;
                 do {
                     // Skip the side which this was entered from
-                    // This is also used to skip looking on the solid sides of partially sealable blocks
+                    // This is also used to skip looking on the solid sides of partially sealable
+                    // blocks
                     if ((bits & (1 << side)) == 0) {
                         // The sides 0 to 5 correspond with the ForgeDirections
                         // but saves a bit of time not to call ForgeDirection
@@ -858,9 +865,11 @@ public class ThreadFindSeal {
 
     /**
      *
-     * @param block - the block ID, already taken from the world (can't be null or air here)
-     * @param vec - the position of the block to check: metadata might be needed
-     * @param side - this is the side approached from, e.g. 1 means this was approached from beneath
+     * @param block - the block ID, already taken from the world (can't be null or
+     *              air here)
+     * @param vec   - the position of the block to check: metadata might be needed
+     * @param side  - this is the side approached from, e.g. 1 means this was
+     *              approached from beneath
      * @return
      */
     private boolean canBlockPassAirCheck(Block block, BlockVec3 vec, int side) {
@@ -875,7 +884,8 @@ public class ThreadFindSeal {
                 return false;
             }
 
-            // Find the solid sides so they don't get iterated into, when doing the next layer
+            // Find the solid sides so they don't get iterated into, when doing the next
+            // layer
             for (int i = 0; i < 6; i++) {
                 if (i == side) {
                     continue;
@@ -888,7 +898,8 @@ public class ThreadFindSeal {
             return true;
         }
 
-        // Check leaves first, because their isOpaqueCube() test depends on graphics settings
+        // Check leaves first, because their isOpaqueCube() test depends on graphics
+        // settings
         // (See net.minecraft.block.BlockLeaves.isOpaqueCube()!)
         if (block instanceof BlockLeavesBase) {
             checkedAdd(vec);
@@ -968,9 +979,12 @@ public class ThreadFindSeal {
             return false;
         }
 
-        // General case - this should cover any block which correctly implements isBlockSolidOnSide
-        // including most modded blocks - Forge microblocks in particular is covered by this.
-        // ### Any exceptions in mods should implement the IPartialSealableBlock interface ###
+        // General case - this should cover any block which correctly implements
+        // isBlockSolidOnSide
+        // including most modded blocks - Forge microblocks in particular is covered by
+        // this.
+        // ### Any exceptions in mods should implement the IPartialSealableBlock
+        // interface ###
         if (block.isSideSolid(this.world, vec.x, vec.y, vec.z, ForgeDirection.getOrientation(side ^ 1))) {
             // Solid on all sides
             if (block.getMaterial().blocksMovement() && block.renderAsNormalBlock()) {
@@ -989,7 +1003,8 @@ public class ThreadFindSeal {
         }
 
         // Not solid on that side.
-        // Look to see if there is any other side which is solid in which case a check will not be needed next time
+        // Look to see if there is any other side which is solid in which case a check
+        // will not be needed next time
         for (int i = 0; i < 6; i++) {
             if (i == (side ^ 1)) {
                 continue;

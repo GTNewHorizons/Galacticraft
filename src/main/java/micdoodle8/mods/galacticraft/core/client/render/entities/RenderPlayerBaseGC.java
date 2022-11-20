@@ -36,7 +36,8 @@ public class RenderPlayerBaseGC extends RenderPlayerBase {
 
     /**
      * This is used in place of RenderPlayerGC only if RenderPlayerAPI is installed
-     * It renders the thermal armor (also does something connected with rotating a sleeping player)
+     * It renders the thermal armor (also does something connected with rotating a
+     * sleeping player)
      *
      * @param renderPlayerAPI
      */
@@ -84,7 +85,8 @@ public class RenderPlayerBaseGC extends RenderPlayerBase {
 
                     int padding = gearData.getThermalPadding(i);
 
-                    // Padding sub-type 0 is standard Thermal Armor.  See PacketSimple handling of C_UPDATE_GEAR_SLOT
+                    // Padding sub-type 0 is standard Thermal Armor. See PacketSimple handling of
+                    // C_UPDATE_GEAR_SLOT
                     // for how the sub-type gets set
                     if (padding == 0 && !par1EntityLivingBase.isInvisible()) {
                         // First draw the thermal armor without any color tinting

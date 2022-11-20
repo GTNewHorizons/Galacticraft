@@ -18,7 +18,8 @@ public class OrbitSpinSaveData extends WorldSavedData {
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         this.alldata = nbt;
-        // world.loadItemData calls this but can't extract from alldata until we know the dimension ID
+        // world.loadItemData calls this but can't extract from alldata until we know
+        // the dimension ID
     }
 
     @Override

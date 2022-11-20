@@ -8,8 +8,7 @@ import net.minecraft.item.ItemStack;
  */
 public interface IKeyable {
     /**
-     * @return -1 for any tier, or return tier required for key activated to
-     * pass
+     * @return -1 for any tier, or return tier required for key activated to pass
      */
     public int getTierOfKeyRequired();
 

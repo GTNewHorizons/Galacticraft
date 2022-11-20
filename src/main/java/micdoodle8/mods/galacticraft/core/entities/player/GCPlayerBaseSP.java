@@ -19,14 +19,14 @@ public class GCPlayerBaseSP extends ClientPlayerBase {
         return ClientProxyCore.playerClientHandler;
     }
 
-    //    @Override
-    //    public void wakeUpPlayer(boolean par1, boolean par2, boolean par3)
-    //    {
-    //        if (!this.getClientHandler().wakeUpPlayer(this, par1, par2, par3))
-    //        {
-    //            super.wakeUpPlayer(par1, par2, par3);
-    //        }
-    //    }
+    // @Override
+    // public void wakeUpPlayer(boolean par1, boolean par2, boolean par3)
+    // {
+    // if (!this.getClientHandler().wakeUpPlayer(this, par1, par2, par3))
+    // {
+    // super.wakeUpPlayer(par1, par2, par3);
+    // }
+    // }
 
     @Override
     public boolean isEntityInsideOpaqueBlock() {
@@ -109,10 +109,11 @@ public class GCPlayerBaseSP extends ClientPlayerBase {
         return super.isSneaking();
     }
 
-    //    @Override
-    //    @SideOnly(Side.CLIENT)
-    //    public float getBedOrientationInDegrees()
-    //    {
-    //        return this.getClientHandler().getBedOrientationInDegrees(this, super.getBedOrientationInDegrees());
-    //    }
+    // @Override
+    // @SideOnly(Side.CLIENT)
+    // public float getBedOrientationInDegrees()
+    // {
+    // return this.getClientHandler().getBedOrientationInDegrees(this,
+    // super.getBedOrientationInDegrees());
+    // }
 }

@@ -27,7 +27,7 @@ public class BlockScreen extends BlockAdvanced implements ItemBlockDesc.IBlockSh
     private IIcon iconFront;
     private IIcon iconSide;
 
-    // Metadata: 0-5 = direction of screen back;  bit 3 = reserved for future use
+    // Metadata: 0-5 = direction of screen back; bit 3 = reserved for future use
     protected BlockScreen(String assetName) {
         super(Material.circuits);
         this.setHardness(0.1F);

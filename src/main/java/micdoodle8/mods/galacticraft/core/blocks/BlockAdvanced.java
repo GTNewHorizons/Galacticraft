@@ -20,23 +20,23 @@ public abstract class BlockAdvanced extends BlockContainer {
     }
 
     /**
-     * DO NOT OVERRIDE THIS FUNCTION! Called when the block is right clicked by
-     * the player. This modified version detects electric items and wrench
-     * actions on your machine block. Do not override this function. Use
-     * onMachineActivated instead! (It does the same thing)
+     * DO NOT OVERRIDE THIS FUNCTION! Called when the block is right clicked by the
+     * player. This modified version detects electric items and wrench actions on
+     * your machine block. Do not override this function. Use onMachineActivated
+     * instead! (It does the same thing)
      *
      * @param world The World Object.
      * @param x     , y, z The coordinate of the block.
      * @param side  The side the player clicked on.
-     * @param hitX  , hitY, hitZ The position the player clicked on relative to
-     *              the block.
+     * @param hitX  , hitY, hitZ The position the player clicked on relative to the
+     *              block.
      */
     @Override
     public boolean onBlockActivated(
             World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float hitX, float hitY, float hitZ) {
         /**
-         * Check if the player is holding a wrench or an electric item. If so,
-         * call the wrench event.
+         * Check if the player is holding a wrench or an electric item. If so, call the
+         * wrench event.
          */
         if (this.isUsableWrench(entityPlayer, entityPlayer.inventory.getCurrentItem(), x, y, z)) {
             this.damageWrench(entityPlayer, entityPlayer.inventory.getCurrentItem(), x, y, z);
@@ -63,8 +63,8 @@ public abstract class BlockAdvanced extends BlockContainer {
 
     /**
      * A function that denotes if an itemStack is a wrench that can be used.
-     * Override this for more wrench compatibility. Compatible with Buildcraft
-     * and IC2 wrench API via reflection.
+     * Override this for more wrench compatibility. Compatible with Buildcraft and
+     * IC2 wrench API via reflection.
      *
      * @return True if it is a wrench.
      */
@@ -168,8 +168,8 @@ public abstract class BlockAdvanced extends BlockContainer {
     }
 
     /**
-     * Called when a player uses a wrench on the machine while sneaking. Only
-     * works with the UE wrench.
+     * Called when a player uses a wrench on the machine while sneaking. Only works
+     * with the UE wrench.
      *
      * @return True if some happens
      */

@@ -5,7 +5,8 @@ import net.minecraft.world.World;
 public class RedstoneUtil {
 
     /**
-     * Returns the highest redstone signal strength powering the given block. Args: X, Y, Z.
+     * Returns the highest redstone signal strength powering the given block. Args:
+     * X, Y, Z.
      */
     public static boolean isBlockReceivingRedstone(World w, int x, int y, int z) {
         if (w == null) return false;

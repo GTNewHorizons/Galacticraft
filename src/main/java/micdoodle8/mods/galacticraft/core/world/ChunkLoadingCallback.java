@@ -58,7 +58,8 @@ public class ChunkLoadingCallback implements LoadingCallback {
         try {
             // keepLoadedOffline = config.get("CHUNKLOADING",
             // "OfflineKeepLoaded", true,
-            // "Set to false if you want each player's chunk loaders to unload when they log out.").getBoolean(true);
+            // "Set to false if you want each player's chunk loaders to unload when they log
+            // out.").getBoolean(true);
             ChunkLoadingCallback.loadOnLogin = ChunkLoadingCallback.config
                     .get(
                             "CHUNKLOADING",

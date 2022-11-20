@@ -56,7 +56,7 @@ public class TileEntitySolar extends TileBaseUniversalElectricalSource
     }
 
     /*
-     * @param tier: 1 = Basic Solar  2 = Advanced Solar
+     * @param tier: 1 = Basic Solar 2 = Advanced Solar
      */
     public TileEntitySolar(int tier) {
         this.storage.setMaxExtract(TileEntitySolar.MAX_GENERATE_WATTS);
@@ -328,12 +328,9 @@ public class TileEntitySolar extends TileBaseUniversalElectricalSource
         nbt.setTag("Items", list);
     }
 
-    /*@Override
-       public float getRequest(ForgeDirection direction)
-    {
-    	return 0;
-    }
-    */
+    /*
+     * @Override public float getRequest(ForgeDirection direction) { return 0; }
+     */
 
     @Override
     public EnumSet<ForgeDirection> getElectricalInputDirections() {

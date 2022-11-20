@@ -163,7 +163,8 @@ public class BlockEnclosed extends BlockContainer
 
     @Override
     public int damageDropped(int meta) {
-        // TE_CONDUIT and HV_CABLE have had to have swapped metadata in 1.7.10 because IC2's TileCable tile entity
+        // TE_CONDUIT and HV_CABLE have had to have swapped metadata in 1.7.10 because
+        // IC2's TileCable tile entity
         // doesn't like a block with metadata 4
         if (meta == 0) return 4;
         if (meta == 4) return 0;
@@ -328,9 +329,9 @@ public class BlockEnclosed extends BlockContainer
         try {
             // ------
             // This section makes these three calls to initialise the TileEntity:
-            //	Pipe pipe = BlockGenericPipe.createPipe(Item);
-            //  tilePipe.initialize(pipe);
-            //	and optionally: tilePipe.sendUpdateToClient();
+            // Pipe pipe = BlockGenericPipe.createPipe(Item);
+            // tilePipe.initialize(pipe);
+            // and optionally: tilePipe.sendUpdateToClient();
 
             Item pipeItem = pipeItemsBC[metadata - 7];
             Class<?> clazzBlockPipe = CompatibilityManager.classBCBlockGenericPipe;
@@ -349,7 +350,8 @@ public class BlockEnclosed extends BlockContainer
                 if (initializePipe != null) {
                     initializePipe.invoke(tilePipe, pipe);
 
-                    // Legacy compatibility: TileGenericPipe.sendUpdateToClient() is not in recent BC versions
+                    // Legacy compatibility: TileGenericPipe.sendUpdateToClient() is not in recent
+                    // BC versions
                     Method m = null;
                     try {
                         m = clazzTilePipe.getMethod("sendUpdateToClient");

@@ -44,7 +44,8 @@ public class VersionUtil {
     private static boolean deobfuscated = true;
     private static HashMap<String, ObfuscationEntry> nodemap = Maps.newHashMap();
     private static HashMap<Integer, Object> reflectionCache = Maps.newHashMap();
-    // Note: in reflectionCache, currently positions 3, 5, 7, 11, 13, 15, 17 are unused and 21 onwards are also free.
+    // Note: in reflectionCache, currently positions 3, 5, 7, 11, 13, 15, 17 are
+    // unused and 21 onwards are also free.
 
     private static final String KEY_CLASS_COMPRESSED_STREAM_TOOLS = "compressedStreamTools";
     private static final String KEY_CLASS_NBT_SIZE_TRACKER = "nbtSizeTracker";
@@ -91,17 +92,20 @@ public class VersionUtil {
         }
 
         if (mcVersion1_7_10) {
-            //            nodemap.put(KEY_CLASS_COMPRESSED_STREAM_TOOLS, new
+            // nodemap.put(KEY_CLASS_COMPRESSED_STREAM_TOOLS, new
             // ObfuscationEntry("net/minecraft/nbt/CompressedStreamTools", "du"));
-            //            nodemap.put(KEY_CLASS_NBT_SIZE_TRACKER, new
+            // nodemap.put(KEY_CLASS_NBT_SIZE_TRACKER, new
             // ObfuscationEntry("net/minecraft/nbt/NBTSizeTracker", "ds"));
-            //            nodemap.put(KEY_CLASS_YGG_CONVERTER, new
-            // ObfuscationEntry("net/minecraft/server/management/PreYggdrasilConverter", "nz"));
-            //            nodemap.put(KEY_CLASS_TEXTURE_UTIL, new
-            // ObfuscationEntry("net/minecraft/client/renderer/texture/TextureUtil", "bqi"));
-            //            nodemap.put(KEY_CLASS_COMMAND_BASE, new ObfuscationEntry("net/minecraft/command/CommandBase",
+            // nodemap.put(KEY_CLASS_YGG_CONVERTER, new
+            // ObfuscationEntry("net/minecraft/server/management/PreYggdrasilConverter",
+            // "nz"));
+            // nodemap.put(KEY_CLASS_TEXTURE_UTIL, new
+            // ObfuscationEntry("net/minecraft/client/renderer/texture/TextureUtil",
+            // "bqi"));
+            // nodemap.put(KEY_CLASS_COMMAND_BASE, new
+            // ObfuscationEntry("net/minecraft/command/CommandBase",
             // "y"));
-            //            nodemap.put(KEY_CLASS_SCALED_RES, new
+            // nodemap.put(KEY_CLASS_SCALED_RES, new
             // ObfuscationEntry("net/minecraft/client/gui/ScaledResolution", "bca"));
             nodemap.put(
                     KEY_CLASS_COMPRESSED_STREAM_TOOLS, new ObfuscationEntry("net/minecraft/nbt/CompressedStreamTools"));
@@ -129,15 +133,19 @@ public class VersionUtil {
             nodemap.put(KEY_METHOD_PLAYER_TEXTURE, new MethodObfuscationEntry("getEntityTexture", "func_110775_a", ""));
             sand = Blocks.sand;
         } else if (mcVersion1_7_2) {
-            //            nodemap.put(KEY_CLASS_COMPRESSED_STREAM_TOOLS, new
+            // nodemap.put(KEY_CLASS_COMPRESSED_STREAM_TOOLS, new
             // ObfuscationEntry("net/minecraft/nbt/CompressedStreamTools", "dr"));
-            //            nodemap.put(KEY_CLASS_NBT_SIZE_TRACKER, new ObfuscationEntry("", "")); // Not part of 1.7.2
-            //            nodemap.put(KEY_CLASS_YGG_CONVERTER, new ObfuscationEntry("", "")); // Not part of 1.7.2
-            //            nodemap.put(KEY_CLASS_TEXTURE_UTIL, new
-            // ObfuscationEntry("net/minecraft/client/renderer/texture/TextureUtil", "bqa"));
-            //            nodemap.put(KEY_CLASS_COMMAND_BASE, new ObfuscationEntry("net/minecraft/command/CommandBase",
+            // nodemap.put(KEY_CLASS_NBT_SIZE_TRACKER, new ObfuscationEntry("", "")); // Not
+            // part of 1.7.2
+            // nodemap.put(KEY_CLASS_YGG_CONVERTER, new ObfuscationEntry("", "")); // Not
+            // part of 1.7.2
+            // nodemap.put(KEY_CLASS_TEXTURE_UTIL, new
+            // ObfuscationEntry("net/minecraft/client/renderer/texture/TextureUtil",
+            // "bqa"));
+            // nodemap.put(KEY_CLASS_COMMAND_BASE, new
+            // ObfuscationEntry("net/minecraft/command/CommandBase",
             // "y"));
-            //            nodemap.put(KEY_CLASS_SCALED_RES, new
+            // nodemap.put(KEY_CLASS_SCALED_RES, new
             // ObfuscationEntry("net/minecraft/client/gui/ScaledResolution", "bam"));
             nodemap.put(
                     KEY_CLASS_COMPRESSED_STREAM_TOOLS, new ObfuscationEntry("net/minecraft/nbt/CompressedStreamTools"));
@@ -463,7 +471,7 @@ public class VersionUtil {
 
     public static void putClassToIDMapping(Class mobClazz, int id) {
         // Achieves this, with private field:
-        //    EntityList.classToIDMapping.put(mobClazz, id);
+        // EntityList.classToIDMapping.put(mobClazz, id);
         try {
             Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_ENTITYLIST).replace('/', '.'));
             Field f = c.getDeclaredField(getNameDynamic(KEY_FIELD_CLASSTOIDMAPPING));
@@ -481,7 +489,7 @@ public class VersionUtil {
 
     public static int getClassToIDMapping(Class mobClazz) {
         // Achieves this, with private field:
-        //    EntityList.classToIDMapping.put(mobClazz, id);
+        // EntityList.classToIDMapping.put(mobClazz, id);
         try {
             Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_ENTITYLIST).replace('/', '.'));
             Field f = c.getDeclaredField(getNameDynamic(KEY_FIELD_CLASSTOIDMAPPING));

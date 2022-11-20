@@ -30,7 +30,7 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor
     protected boolean isAddedToEnergyNet;
     protected Object powerHandlerBC;
 
-    //	public float buildcraftBuffer = EnergyConfigHandler.BC3_RATIO * 50;
+    // public float buildcraftBuffer = EnergyConfigHandler.BC3_RATIO * 50;
     private float IC2surplusJoules = 0F;
 
     public TileBaseUniversalConductor() {
@@ -166,7 +166,8 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor
             return false;
         }
 
-        // Don't make connection with IC2 wires [don't want risk of multiple connections + there is a graphical glitch
+        // Don't make connection with IC2 wires [don't want risk of multiple connections
+        // + there is a graphical glitch
         // in IC2]
         try {
             Class<?> conductorIC2 = Class.forName("ic2.api.energy.tile.IEnergyConductor");
@@ -187,7 +188,8 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor
             return false;
         }
 
-        // Don't make connection with IC2 wires [don't want risk of multiple connections + there is a graphical glitch
+        // Don't make connection with IC2 wires [don't want risk of multiple connections
+        // + there is a graphical glitch
         // in IC2]
         try {
             Class<?> conductorIC2 = Class.forName("ic2.api.energy.tile.IEnergyConductor");

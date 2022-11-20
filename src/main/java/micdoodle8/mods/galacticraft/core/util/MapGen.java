@@ -35,7 +35,7 @@ public class MapGen {
     private int biomeMapSizeX;
     private int biomeMapSizeZ;
     private Random rand = new Random();
-    //	private WeakReference<World> biomeMapWorld;
+    // private WeakReference<World> biomeMapWorld;
     private int[] heights = null;
     private double[] heighttemp = null;
     private WorldType field_147435_p = WorldType.DEFAULT;
@@ -47,9 +47,9 @@ public class MapGen {
         this.biomeMapCx = cx >> 4;
         this.biomeMapCz = cz >> 4;
         if (file.exists()) {
-            //			try {
-            //				this.sendToClient(FileUtils.readFileToByteArray(file));
-            //			} catch (IOException e) { e.printStackTrace(); }
+            // try {
+            // this.sendToClient(FileUtils.readFileToByteArray(file));
+            // } catch (IOException e) { e.printStackTrace(); }
             return;
         }
 
@@ -66,7 +66,7 @@ public class MapGen {
         this.ix = 0;
         this.iz = 0;
         this.biomeMapWCM = world.getWorldChunkManager();
-        //  	this.biomeMapWorld = new WeakReference<World>(world);
+        // this.biomeMapWorld = new WeakReference<World>(world);
         try {
             Field bil = biomeMapWCM
                     .getClass()
@@ -144,9 +144,10 @@ public class MapGen {
     }
 
     private void biomeMapOneChunk(int x0, int z0, int ix, int iz, int factor, int limit) {
-        //      IntCache.resetIntCache();
-        //		int[] biomesGrid = biomeMapGenLayer.getInts(x0 << 4, z0 << 4, 16, 16);
-        //		TODO: For some reason getInts() may not work in Minecraft 1.7.2, gives a banded result where part of the
+        // IntCache.resetIntCache();
+        // int[] biomesGrid = biomeMapGenLayer.getInts(x0 << 4, z0 << 4, 16, 16);
+        // TODO: For some reason getInts() may not work in Minecraft 1.7.2, gives a
+        // banded result where part of the
         // array is 0
         biomesGrid = biomeMapWCM.getBiomeGenAt(biomesGrid, x0 << 4, z0 << 4, 16, 16, false);
         if (biomesGrid == null) return;

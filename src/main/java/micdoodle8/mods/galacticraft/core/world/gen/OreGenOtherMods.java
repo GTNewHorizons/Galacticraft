@@ -34,8 +34,8 @@ public class OreGenOtherMods {
             try {
                 int slash = str.indexOf('/');
                 String s;
-                int rarity = 0; // 0 = common  1 = uncommon  2 = rare
-                int depth = 0; // 0 = even   1 = deep   2 = shallow
+                int rarity = 0; // 0 = common 1 = uncommon 2 = rare
+                int depth = 0; // 0 = even 1 = deep 2 = shallow
                 int size = 1; // 0 = single 1 = standard 2 = large
                 boolean extraRandom = false;
                 int dim = 0;

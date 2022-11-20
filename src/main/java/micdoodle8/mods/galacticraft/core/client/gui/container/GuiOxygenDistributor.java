@@ -123,11 +123,15 @@ public class GuiOxygenDistributor extends GuiContainerGC implements ICheckBoxCal
                 + GCCoreUtil.translate("gui.perSecond");
         this.fontRendererObj.drawString(
                 status, this.xSize / 2 - this.fontRendererObj.getStringWidth(status) / 2, 60, 4210752);
-        //		status = ElectricityDisplay.getDisplay(this.distributor.ueWattsPerTick * 20, ElectricUnit.WATT);
-        //		this.fontRendererObj.drawString(status, this.xSize / 2 - this.fontRendererObj.getStringWidth(status) / 2,
+        // status = ElectricityDisplay.getDisplay(this.distributor.ueWattsPerTick * 20,
+        // ElectricUnit.WATT);
+        // this.fontRendererObj.drawString(status, this.xSize / 2 -
+        // this.fontRendererObj.getStringWidth(status) / 2,
         // 70, 4210752);
-        //		status = ElectricityDisplay.getDisplay(this.distributor.getVoltage(), ElectricUnit.VOLTAGE);
-        //		this.fontRendererObj.drawString(status, this.xSize / 2 - this.fontRendererObj.getStringWidth(status) / 2,
+        // status = ElectricityDisplay.getDisplay(this.distributor.getVoltage(),
+        // ElectricUnit.VOLTAGE);
+        // this.fontRendererObj.drawString(status, this.xSize / 2 -
+        // this.fontRendererObj.getStringWidth(status) / 2,
         // 80, 4210752);
         this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 90 + 3, 4210752);
     }
@@ -173,7 +177,8 @@ public class GuiOxygenDistributor extends GuiContainerGC implements ICheckBoxCal
             electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
             EnergyDisplayHelper.getEnergyDisplayTooltip(
                     this.distributor.getEnergyStoredGC(), this.distributor.getMaxEnergyStoredGC(), electricityDesc);
-            //			electricityDesc.add(EnumColor.YELLOW + GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)
+            // electricityDesc.add(EnumColor.YELLOW +
+            // GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)
             // Math.floor(this.distributor.getEnergyStoredGC()) + " / " + (int)
             // Math.floor(this.distributor.getMaxEnergyStoredGC())));
             this.electricInfoRegion.tooltipStrings = electricityDesc;

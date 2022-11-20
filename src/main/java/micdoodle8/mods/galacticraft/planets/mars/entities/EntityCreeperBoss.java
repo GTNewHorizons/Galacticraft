@@ -162,8 +162,9 @@ public class EntityCreeperBoss extends EntityMob
                 GalacticraftCore.packetPipeline.sendToAllAround(
                         new PacketSimple(EnumSimplePacket.C_PLAY_SOUND_EXPLODE, new Object[] {}),
                         new TargetPoint(this.worldObj.provider.dimensionId, this.posX, this.posY, this.posZ, 40.0D));
-                //				PacketDispatcher.sendPacketToAllAround(this.posX, this.posY, this.posZ, 40.0,
-                // this.worldObj.provider.dimensionId, PacketUtil.createPacket(GalacticraftCore.CHANNEL,
+                // PacketDispatcher.sendPacketToAllAround(this.posX, this.posY, this.posZ, 40.0,
+                // this.worldObj.provider.dimensionId,
+                // PacketUtil.createPacket(GalacticraftCore.CHANNEL,
                 // EnumPacketClient.PLAY_SOUND_EXPLODE, new Object[] { 0 }));
             }
 
@@ -182,8 +183,9 @@ public class EntityCreeperBoss extends EntityMob
                 GalacticraftCore.packetPipeline.sendToAllAround(
                         new PacketSimple(EnumSimplePacket.C_PLAY_SOUND_BOSS_DEATH, new Object[] {}),
                         new TargetPoint(this.worldObj.provider.dimensionId, this.posX, this.posY, this.posZ, 40.0D));
-                //				PacketDispatcher.sendPacketToAllAround(this.posX, this.posY, this.posZ, 40.0,
-                // this.worldObj.provider.dimensionId, PacketUtil.createPacket(GalacticraftCore.CHANNEL,
+                // PacketDispatcher.sendPacketToAllAround(this.posX, this.posY, this.posZ, 40.0,
+                // this.worldObj.provider.dimensionId,
+                // PacketUtil.createPacket(GalacticraftCore.CHANNEL,
                 // EnumPacketClient.PLAY_SOUND_BOSS_DEATH, new Object[] { 0 }));
             }
         }
@@ -375,8 +377,10 @@ public class EntityCreeperBoss extends EntityMob
         stackList.addAll(GalacticraftRegistry.getDungeonLoot(2));
         boolean hasT3Rocket = false;
         boolean hasAstroMiner = false;
-        // Check if player seems to have Tier 3 rocket or Astro Miner already - in that case we don't want more
-        // (we don't really want him giving powerful schematics to his friends who are still on Overworld)
+        // Check if player seems to have Tier 3 rocket or Astro Miner already - in that
+        // case we don't want more
+        // (we don't really want him giving powerful schematics to his friends who are
+        // still on Overworld)
         final EntityPlayer player = this.worldObj.getClosestPlayer(this.posX, this.posY, this.posZ, 20.0);
         if (player != null) {
             GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) player);
@@ -390,7 +394,8 @@ public class EntityCreeperBoss extends EntityMob
                 }
             }
         }
-        // The following code assumes the list start is hard coded to: Cargo Rocket, T3 Rocket, Astro Miner in that
+        // The following code assumes the list start is hard coded to: Cargo Rocket, T3
+        // Rocket, Astro Miner in that
         // order
         // (see MarsModule.init())
         //
@@ -408,8 +413,10 @@ public class EntityCreeperBoss extends EntityMob
         } else if (hasAstroMiner) {
             stackList.remove(2);
         }
-        // If he does not yet have the T3 rocket, limit the list size to 2 so 50% chance of getting it
-        // otherwise return the full list (note: addons could have added more schematics to the list)
+        // If he does not yet have the T3 rocket, limit the list size to 2 so 50% chance
+        // of getting it
+        // otherwise return the full list (note: addons could have added more schematics
+        // to the list)
         int range = (!hasT3Rocket) ? 2 : stackList.size();
         return stackList.get(rand.nextInt(range)).copy();
     }

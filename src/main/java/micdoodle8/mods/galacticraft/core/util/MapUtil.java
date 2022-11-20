@@ -53,7 +53,7 @@ public class MapUtil {
     private static MapGen currentMap = null;
     private static MapGen slowMap = null;
     private static Random rand = new Random();
-    //    public static int WORLD_BORDER = 14992;
+    // public static int WORLD_BORDER = 14992;
     private static final int SIZE_STD = 176;
     public static final int SIZE_STD2 = SIZE_STD * 2;
     private static LinkedList<MapGen> queuedMaps = new LinkedList();
@@ -102,7 +102,8 @@ public class MapUtil {
     }
 
     /**
-     * The BufferedImage needs to be already set up as a 400 x 400 image of TYPE_INT_RGB
+     * The BufferedImage needs to be already set up as a 400 x 400 image of
+     * TYPE_INT_RGB
      */
     public static void getLocalMap(World world, int chunkXPos, int chunkZPos, BufferedImage image) {
         for (int x0 = -12; x0 <= 12; x0++) {
@@ -148,16 +149,17 @@ public class MapUtil {
             return;
         }
 
-        //		try {
-        //			IResourceManager rm = Minecraft.getMinecraft().getResourceManager();
-        //			BufferedImage paletteImage2 = null;
-        //			InputStream in = rm.getResource(new ResourceLocation(GalacticraftCore.ASSET_PREFIX,
+        // try {
+        // IResourceManager rm = Minecraft.getMinecraft().getResourceManager();
+        // BufferedImage paletteImage2 = null;
+        // InputStream in = rm.getResource(new
+        // ResourceLocation(GalacticraftCore.ASSET_PREFIX,
         // "textures/gui/celestialbodies/earth.png")).getInputStream();
-        //			paletteImage2 = readImage(in);
-        //			in.close();
-        //			writeOutputFile(paletteImage2, false);
-        //			biomeMapFile.renameTo(new File("OWdiffread.jpg"));
-        //		} catch (Exception e) { e.printStackTrace(); }
+        // paletteImage2 = readImage(in);
+        // in.close();
+        // writeOutputFile(paletteImage2, false);
+        // biomeMapFile.renameTo(new File("OWdiffread.jpg"));
+        // } catch (Exception e) { e.printStackTrace(); }
 
         if (MapUtil.getBiomeMapForCoords(world, 0, 0, 7, 192, 48, baseFolder)) doneOverworldTexture = true;
 
@@ -258,12 +260,13 @@ public class MapUtil {
         if (sizeX != sizeZ) {
             outputFile = new File(baseFolder, "Overworld" + sizeX + ".bin");
             if (sizeX == 1536) {
-                //        		MapGen newGen = new MapGen(world, sizeX, sizeZ, cx, cz, 1 << scale, outputFile);
-                //            	if (newGen.calculatingMap)
-                //            	{
-                //            		slowMap = newGen;
-                //            		calculatingMap.set(true);
-                //            	}
+                // MapGen newGen = new MapGen(world, sizeX, sizeZ, cx, cz, 1 << scale,
+                // outputFile);
+                // if (newGen.calculatingMap)
+                // {
+                // slowMap = newGen;
+                // calculatingMap.set(true);
+                // }
                 return false;
             }
         } else outputFile = getFile(baseFolder, cx, cz);
@@ -286,7 +289,8 @@ public class MapUtil {
             doingSlow = true;
         } else return;
 
-        // Allow GC background mapping around 9% of the server tick time if server running at full speed
+        // Allow GC background mapping around 9% of the server tick time if server
+        // running at full speed
         // (on a slow server, it will be proportionately lower %)
         long end = System.nanoTime() + 4500000L;
         while (System.nanoTime() < end) {
@@ -307,10 +311,13 @@ public class MapUtil {
     }
 
     /**
-     * Converts a 48px high image to a 12px high image with a palette chosen only from the colours in the paletteImage
+     * Converts a 48px high image to a 12px high image with a palette chosen only
+     * from the colours in the paletteImage
      *
-     * @param overworldImage  Output image already created as a blank image, dimensions biomeMapSizeX x biomeMapSizeY
-     * @param paletteImage   Palette image, dimensions must be a square with sides biomeMapSizeZ / 4
+     * @param overworldImage Output image already created as a blank image,
+     *                       dimensions biomeMapSizeX x biomeMapSizeY
+     * @param paletteImage   Palette image, dimensions must be a square with sides
+     *                       biomeMapSizeZ / 4
      */
     public static BufferedImage convertTo12pxTexture(BufferedImage overworldImage, BufferedImage paletteImage) {
         BufferedImage result =
@@ -652,7 +659,8 @@ public class MapUtil {
                 Material.snow.getMaterialMapColor().colorValue, Material.ice.getMaterialMapColor().colorValue, 5));
         // mushroomIsland = MushroomIsland(14) colour(16711935) "MushroomIsland"
         MapUtil.biomeColours.add(new BlockVec3(0x63565f, 0x7c1414, 10));
-        // mushroomIslandShore = MushroomIsland(15) colour(10486015) "MushroomIslandShore"
+        // mushroomIslandShore = MushroomIsland(15) colour(10486015)
+        // "MushroomIslandShore"
         MapUtil.biomeColours.add(new BlockVec3(0x6a6066, 0, 0));
         // beach = Beach(16) colour(16440917) "Beach"
         MapUtil.biomeColours.add(new BlockVec3(Material.sand.getMaterialMapColor().colorValue, 0, 0));

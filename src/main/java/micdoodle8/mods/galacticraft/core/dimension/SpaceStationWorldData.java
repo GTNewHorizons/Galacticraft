@@ -180,7 +180,8 @@ public class SpaceStationWorldData extends WorldSavedData {
     }
 
     /**
-     * Retrieve a space station data entry, creating if necessary (with provided data)
+     * Retrieve a space station data entry, creating if necessary (with provided
+     * data)
      */
     public static SpaceStationWorldData getStationData(
             World world, int stationID, int homeID, int providerIdDynamic, int providerIdStatic, EntityPlayer owner) {
@@ -188,7 +189,8 @@ public class SpaceStationWorldData extends WorldSavedData {
 
         boolean foundMatch = false;
 
-        // Loop through all registered satellites, checking for a provider ID match. If none is found, this method is
+        // Loop through all registered satellites, checking for a provider ID match. If
+        // none is found, this method is
         // being called on an incorrect
         for (Satellite satellite : GalaxyRegistry.getRegisteredSatellites().values()) {
             if (satellite.getDimensionIdStatic() == providerType || satellite.getDimensionID() == providerType) {

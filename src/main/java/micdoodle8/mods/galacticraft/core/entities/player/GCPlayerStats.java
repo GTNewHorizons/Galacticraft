@@ -248,7 +248,8 @@ public class GCPlayerStats implements IExtendedEntityProperties {
         this.coordsTeleportedFromZ = nbt.getDouble("coordsTeleportedFromZ");
         this.startDimension = nbt.hasKey("startDimension") ? nbt.getString("startDimension") : "";
         if (nbt.hasKey("spaceStationDimensionID")) {
-            // If loading from an old save file, the home space station is always the overworld, so use 0 as home planet
+            // If loading from an old save file, the home space station is always the
+            // overworld, so use 0 as home planet
             this.spaceStationDimensionData =
                     WorldUtil.stringToSpaceStationData("0$" + nbt.getInteger("spaceStationDimensionID"));
         } else {
@@ -306,7 +307,8 @@ public class GCPlayerStats implements IExtendedEntityProperties {
                 this.launchpadStack = null;
             }
         } else {
-            // for backwards compatibility with saves which don't have this tag - players can't lose launchpads
+            // for backwards compatibility with saves which don't have this tag - players
+            // can't lose launchpads
             this.launchpadStack = new ItemStack(GCBlocks.landingPad, 9, 0);
         }
 

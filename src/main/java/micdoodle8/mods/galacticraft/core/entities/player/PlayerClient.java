@@ -83,20 +83,22 @@ public class PlayerClient implements IPlayerClient {
             }
         }
 
-        //        if (player.boundingBox != null && stats.boundingBoxBefore == null)
-        //        {
-        //            GCLog.debug("Changed player BB from " + player.boundingBox.minY);
-        //            stats.boundingBoxBefore = player.boundingBox;
-        //            player.boundingBox.setBounds(stats.boundingBoxBefore.minX + 0.4, stats.boundingBoxBefore.minY +
-        // 0.9, stats.boundingBoxBefore.minZ + 0.4, stats.boundingBoxBefore.maxX - 0.4, stats.boundingBoxBefore.maxY -
+        // if (player.boundingBox != null && stats.boundingBoxBefore == null)
+        // {
+        // GCLog.debug("Changed player BB from " + player.boundingBox.minY);
+        // stats.boundingBoxBefore = player.boundingBox;
+        // player.boundingBox.setBounds(stats.boundingBoxBefore.minX + 0.4,
+        // stats.boundingBoxBefore.minY +
+        // 0.9, stats.boundingBoxBefore.minZ + 0.4, stats.boundingBoxBefore.maxX - 0.4,
+        // stats.boundingBoxBefore.maxY -
         // 0.9, stats.boundingBoxBefore.maxZ - 0.4);
-        //            GCLog.debug("Changed player BB to " + player.boundingBox.minY);
-        //        }
-        //        else if (player.boundingBox != null && stats.boundingBoxBefore != null)
-        //        {
-        //            player.boundingBox.setBB(stats.boundingBoxBefore);
-        //            GCLog.debug("Changed player BB to " + player.boundingBox.minY);
-        //        }
+        // GCLog.debug("Changed player BB to " + player.boundingBox.minY);
+        // }
+        // else if (player.boundingBox != null && stats.boundingBoxBefore != null)
+        // {
+        // player.boundingBox.setBB(stats.boundingBoxBefore);
+        // GCLog.debug("Changed player BB to " + player.boundingBox.minY);
+        // }
     }
 
     @Override
@@ -211,7 +213,8 @@ public class PlayerClient implements IPlayerClient {
             int z = player.playerLocation.posZ;
 
             if (player.worldObj.getTileEntity(x, y, z) instanceof TileEntityAdvanced) {
-                //                int j = player.worldObj.getBlock(x, y, z).getBedDirection(player.worldObj, x, y, z);
+                // int j = player.worldObj.getBlock(x, y, z).getBedDirection(player.worldObj, x,
+                // y, z);
                 switch (player.worldObj.getBlockMetadata(x, y, z) - 4) {
                     case 0:
                         return 90.0F;
@@ -251,7 +254,8 @@ public class PlayerClient implements IPlayerClient {
                     // If it has been long enough since the last step
                     if (stats.distanceSinceLastStep > 0.35) {
                         Vector3 pos = new Vector3(player);
-                        // Set the footprint position to the block below and add random number to stop z-fighting
+                        // Set the footprint position to the block below and add random number to stop
+                        // z-fighting
                         pos.y = MathHelper.floor_double(player.posY - 1)
                                 + player.getRNG().nextFloat() / 100.0F;
 
@@ -339,7 +343,8 @@ public class PlayerClient implements IPlayerClient {
                         + "\"color\":\"green\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":" + "{\"text\":\""
                         + GCCoreUtil.translate("gui.message.clicklink") + "\",\"color\":\"yellow\"}},"
                         + "\"clickEvent\":{\"action\":\"open_url\",\"value\":\"" + "http://wiki."
-                        + GalacticraftCore.PREFIX + "com/wiki/1" + "\"}}]"));
+                        + GalacticraftCore.PREFIX
+                        + "com/wiki/1" + "\"}}]"));
                 player.addChatMessage(new ChatComponentText(
                         GCCoreUtil.translate("gui.message.help1a") + EnumColor.AQUA + " /gchelp"));
                 break;
@@ -352,7 +357,8 @@ public class PlayerClient implements IPlayerClient {
                         + "\"color\":\"green\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":" + "{\"text\":\""
                         + GCCoreUtil.translate("gui.message.clicklink") + "\",\"color\":\"yellow\"}},"
                         + "\"clickEvent\":{\"action\":\"open_url\",\"value\":\"" + "http://wiki."
-                        + GalacticraftCore.PREFIX + "com/wiki/2" + "\"}}]"));
+                        + GalacticraftCore.PREFIX
+                        + "com/wiki/2" + "\"}}]"));
                 break;
             case 7:
                 player.addChatMessage(IChatComponent.Serializer.func_150699_a("[{\"text\":\""
@@ -361,7 +367,8 @@ public class PlayerClient implements IPlayerClient {
                         + "\"color\":\"green\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":" + "{\"text\":\""
                         + GCCoreUtil.translate("gui.message.clicklink") + "\",\"color\":\"yellow\"}},"
                         + "\"clickEvent\":{\"action\":\"open_url\",\"value\":\"" + "http://wiki."
-                        + GalacticraftCore.PREFIX + "com/wiki/oil" + "\"}}]"));
+                        + GalacticraftCore.PREFIX
+                        + "com/wiki/oil" + "\"}}]"));
                 break;
             case 8:
                 player.addChatMessage(IChatComponent.Serializer.func_150699_a("[{\"text\":\""
@@ -370,7 +377,8 @@ public class PlayerClient implements IPlayerClient {
                         + "\"color\":\"green\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":" + "{\"text\":\""
                         + GCCoreUtil.translate("gui.message.clicklink") + "\",\"color\":\"yellow\"}},"
                         + "\"clickEvent\":{\"action\":\"open_url\",\"value\":\"" + "http://wiki."
-                        + GalacticraftCore.PREFIX + "com/wiki/pre" + "\"}}]"));
+                        + GalacticraftCore.PREFIX
+                        + "com/wiki/pre" + "\"}}]"));
                 break;
         }
     }

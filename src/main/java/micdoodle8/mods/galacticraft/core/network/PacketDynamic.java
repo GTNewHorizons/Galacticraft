@@ -131,7 +131,8 @@ public class PacketDynamic implements IPacket {
                 if (entity instanceof IPacketReceiver) {
                     ((IPacketReceiver) entity).handlePacketData(side, player);
 
-                    // Treat any packet received by a server from a client as an update request specifically to that
+                    // Treat any packet received by a server from a client as an update request
+                    // specifically to that
                     // client
                     if (side == Side.SERVER && player instanceof EntityPlayerMP) {
                         GalacticraftCore.packetPipeline.sendTo(new PacketDynamic(entity), (EntityPlayerMP) player);
@@ -146,7 +147,8 @@ public class PacketDynamic implements IPacket {
                 if (tile instanceof IPacketReceiver) {
                     ((IPacketReceiver) tile).handlePacketData(side, player);
 
-                    // Treat any packet received by a server from a client as an update request specifically to that
+                    // Treat any packet received by a server from a client as an update request
+                    // specifically to that
                     // client
                     if (side == Side.SERVER && player instanceof EntityPlayerMP) {
                         GalacticraftCore.packetPipeline.sendTo(new PacketDynamic(tile), (EntityPlayerMP) player);

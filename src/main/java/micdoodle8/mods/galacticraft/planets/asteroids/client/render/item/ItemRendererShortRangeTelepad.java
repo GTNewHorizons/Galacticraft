@@ -105,9 +105,9 @@ public class ItemRendererShortRangeTelepad implements IItemRenderer {
             GL11.glScalef(1.3F, 1.3F, 1.3F);
         }
 
-        //		GL11.glRotatef(30, 1, 0, 0);
-        //		GL11.glScalef(-1F, -1F, 1);
-        //		GL11.glTranslatef(-0.4F, 0.0F, 0.0F);
+        // GL11.glRotatef(30, 1, 0, 0);
+        // GL11.glScalef(-1F, -1F, 1);
+        // GL11.glTranslatef(-0.4F, 0.0F, 0.0F);
     }
 
     /**

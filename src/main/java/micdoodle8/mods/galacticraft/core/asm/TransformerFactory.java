@@ -23,8 +23,10 @@ class TransformerFactory {
     }
 
     /**
-     * @param factory      the constructor of actual ClassVisitor. First argument is api level. Second argument is downstream ClassVisitor
-     * @param activeSide   the side this transformer will be active on. null for both side.
+     * @param factory      the constructor of actual ClassVisitor. First argument is
+     *                     api level. Second argument is downstream ClassVisitor
+     * @param activeSide   the side this transformer will be active on. null for
+     *                     both side.
      * @param expandFrames whether the frames need to be recalculated
      */
     public TransformerFactory(

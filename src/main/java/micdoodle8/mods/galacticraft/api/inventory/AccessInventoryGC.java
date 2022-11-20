@@ -5,8 +5,7 @@ import java.lang.reflect.Method;
 import net.minecraft.entity.player.EntityPlayerMP;
 
 /**
- * A static method for other mods to access the Galacticraft
- * extended inventory.
+ * A static method for other mods to access the Galacticraft extended inventory.
  *
  * Call: AccessInventoryGC.getGCInventoryForPlayer(player)
  */

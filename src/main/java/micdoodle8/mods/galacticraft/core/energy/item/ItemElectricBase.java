@@ -78,8 +78,8 @@ public abstract class ItemElectricBase extends Item
     }
 
     /**
-     * Makes sure the item is uncharged when it is crafted and not charged.
-     * Change this if you do not want this to happen!
+     * Makes sure the item is uncharged when it is crafted and not charged. Change
+     * this if you do not want this to happen!
      */
     @Override
     public void onCreated(ItemStack itemStack, World par2World, EntityPlayer par3EntityPlayer) {

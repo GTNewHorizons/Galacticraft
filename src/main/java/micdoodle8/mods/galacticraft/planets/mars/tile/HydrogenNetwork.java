@@ -156,12 +156,11 @@ public class HydrogenNetwork implements IHydrogenNetwork {
                     continue;
                 }
 
-                /*                if (!(((TileEntity) transmitter).getWorldObj().getBlock(((TileEntity) transmitter).xCoord, ((TileEntity) transmitter).yCoord, ((TileEntity) transmitter).zCoord) instanceof BlockTransmitter))
-                                {
-                                    it.remove();
-                                    continue;
-                                }
-                */
+                /*
+                 * if (!(((TileEntity) transmitter).getWorldObj().getBlock(((TileEntity)
+                 * transmitter).xCoord, ((TileEntity) transmitter).yCoord, ((TileEntity)
+                 * transmitter).zCoord) instanceof BlockTransmitter)) { it.remove(); continue; }
+                 */
                 for (int i = 0; i < transmitter.getAdjacentConnections().length; i++) {
                     TileEntity acceptor = transmitter.getAdjacentConnections()[i];
 
@@ -200,8 +199,8 @@ public class HydrogenNetwork implements IHydrogenNetwork {
             this.pipes.remove(splitPoint);
 
             /**
-             * Loop through the connected blocks and attempt to see if there are
-             * connections between the two points elsewhere.
+             * Loop through the connected blocks and attempt to see if there are connections
+             * between the two points elsewhere.
              */
             TileEntity[] connectedBlocks = splitPoint.getAdjacentConnections();
 
@@ -218,9 +217,8 @@ public class HydrogenNetwork implements IHydrogenNetwork {
 
                             if (finder.results.size() > 0) {
                                 /**
-                                 * The connections A and B are still intact
-                                 * elsewhere. Set all references of wire
-                                 * connection into one network.
+                                 * The connections A and B are still intact elsewhere. Set all references of
+                                 * wire connection into one network.
                                  */
                                 for (BlockVec3 node : finder.closedSet) {
                                     TileEntity nodeTile = node.getTileEntity(((TileEntity) splitPoint).getWorldObj());
@@ -233,8 +231,8 @@ public class HydrogenNetwork implements IHydrogenNetwork {
                                 }
                             } else {
                                 /**
-                                 * The connections A and B are not connected
-                                 * anymore. Give both of them a new network.
+                                 * The connections A and B are not connected anymore. Give both of them a new
+                                 * network.
                                  */
                                 IHydrogenNetwork newNetwork = new HydrogenNetwork();
 

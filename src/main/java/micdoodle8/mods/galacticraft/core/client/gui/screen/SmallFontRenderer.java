@@ -37,8 +37,8 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     public Random fontRandom = new Random();
 
     /**
-     * Array of the start/end column (in upper/lower nibble) for every glyph in
-     * the /font directory.
+     * Array of the start/end column (in upper/lower nibble) for every glyph in the
+     * /font directory.
      */
     private byte[] glyphWidth = new byte[65536];
 
@@ -72,8 +72,8 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     private boolean unicodeFlag;
 
     /**
-     * If true, the Unicode Bidirectional Algorithm should be run before
-     * rendering any string.
+     * If true, the Unicode Bidirectional Algorithm should be run before rendering
+     * any string.
      */
     private boolean bidiFlag;
 
@@ -123,8 +123,7 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     private boolean underlineStyle;
 
     /**
-     * Set if the "m" style (strikethrough) is active in currently rendering
-     * string
+     * Set if the "m" style (strikethrough) is active in currently rendering string
      */
     private boolean strikethroughStyle;
 
@@ -251,8 +250,8 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     }
 
     /**
-     * Render a single character with the default.png font at current
-     * (posX,posY) location...
+     * Render a single character with the default.png font at current (posX,posY)
+     * location...
      */
     private float renderDefaultChar(int par1, boolean par2) {
         float f = par1 % 16 * 8;
@@ -291,8 +290,8 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     }
 
     /**
-     * Render a single Unicode character at current (posX,posY) location using
-     * one of the /font/glyph_XX.png files...
+     * Render a single Unicode character at current (posX,posY) location using one
+     * of the /font/glyph_XX.png files...
      */
     private float renderUnicodeChar(char par1, boolean par2) {
         if (this.glyphWidth[par1] == 0) {
@@ -756,8 +755,8 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     }
 
     /**
-     * Perform actual work of rendering a multi-line string with wordwrap and
-     * with darker drop shadow color if flag is set
+     * Perform actual work of rendering a multi-line string with wordwrap and with
+     * darker drop shadow color if flag is set
      */
     private void renderSplitString(String par1Str, int par2, int par3, int par4, boolean par5) {
         List<?> list = this.listFormattedStringToWidth(par1Str, par4);
@@ -769,32 +768,31 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     }
 
     /**
-     * Returns the width of the wordwrapped String (maximum length is parameter
-     * k)
+     * Returns the width of the wordwrapped String (maximum length is parameter k)
      */
     public int splitStringWidth(String par1Str, int par2) {
         return this.FONT_HEIGHT * this.listFormattedStringToWidth(par1Str, par2).size();
     }
 
     /**
-     * Set unicodeFlag controlling whether strings should be rendered with
-     * Unicode fonts instead of the default.png font.
+     * Set unicodeFlag controlling whether strings should be rendered with Unicode
+     * fonts instead of the default.png font.
      */
     public void setUnicodeFlag(boolean par1) {
         this.unicodeFlag = par1;
     }
 
     /**
-     * Get unicodeFlag controlling whether strings should be rendered with
-     * Unicode fonts instead of the default.png font.
+     * Get unicodeFlag controlling whether strings should be rendered with Unicode
+     * fonts instead of the default.png font.
      */
     public boolean getUnicodeFlag() {
         return this.unicodeFlag;
     }
 
     /**
-     * Set bidiFlag to control if the Unicode Bidirectional Algorithm should be
-     * run before rendering any string.
+     * Set bidiFlag to control if the Unicode Bidirectional Algorithm should be run
+     * before rendering any string.
      */
     public void setBidiFlag(boolean par1) {
         this.bidiFlag = par1;
@@ -808,8 +806,8 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     }
 
     /**
-     * Inserts newline and formatting into a string to wrap it within the
-     * specified width.
+     * Inserts newline and formatting into a string to wrap it within the specified
+     * width.
      */
     String wrapFormattedStringToWidth(String par1Str, int par2) {
         int j = this.sizeStringToWidth(par1Str, par2);
@@ -826,8 +824,8 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     }
 
     /**
-     * Determines how many characters from the string will fit into the
-     * specified width.
+     * Determines how many characters from the string will fit into the specified
+     * width.
      */
     private int sizeStringToWidth(String par1Str, int par2) {
         int j = par1Str.length();
@@ -889,16 +887,15 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     }
 
     /**
-     * Checks if the char code is O-K...lLrRk-o... used to set special
-     * formatting.
+     * Checks if the char code is O-K...lLrRk-o... used to set special formatting.
      */
     private static boolean isFormatSpecial(char par0) {
         return par0 >= 107 && par0 <= 111 || par0 >= 75 && par0 <= 79 || par0 == 114 || par0 == 82;
     }
 
     /**
-     * Digests a string for nonprinting formatting characters then returns a
-     * string containing only that formatting.
+     * Digests a string for nonprinting formatting characters then returns a string
+     * containing only that formatting.
      */
     private static String getFormatFromString(String par0Str) {
         String s1 = "";
@@ -921,8 +918,8 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     }
 
     /**
-     * Get bidiFlag that controls if the Unicode Bidirectional Algorithm should
-     * be run before rendering any string
+     * Get bidiFlag that controls if the Unicode Bidirectional Algorithm should be
+     * run before rendering any string
      */
     public boolean getBidiFlag() {
         return this.bidiFlag;

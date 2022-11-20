@@ -212,7 +212,8 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
                 }
             }
 
-            // Now see if any liquids from the output tanks need to be put into the output slot
+            // Now see if any liquids from the output tanks need to be put into the output
+            // slot
             checkFluidTankTransfer(2, this.liquidTank);
             checkFluidTankTransfer(3, this.liquidTank2);
 

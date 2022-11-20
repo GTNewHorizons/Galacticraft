@@ -70,11 +70,11 @@ public class BlockVec3Dim implements Cloneable {
     }
 
     /**
-     * Get block ID at the BlockVec3Dim coordinates, with a forced chunk load if
-     * the coordinates are unloaded.  Only works server-side.
+     * Get block ID at the BlockVec3Dim coordinates, with a forced chunk load if the
+     * coordinates are unloaded. Only works server-side.
      *
-     * @return the block ID, or null if the y-coordinate is less than 0 or
-     * greater than 256 or the x or z is outside the Minecraft worldmap.
+     * @return the block ID, or null if the y-coordinate is less than 0 or greater
+     *         than 256 or the x or z is outside the Minecraft worldmap.
      */
     public Block getBlockID() {
         if (this.y < 0
@@ -121,10 +121,10 @@ public class BlockVec3Dim implements Cloneable {
     /**
      * Get block ID at the BlockVec3 coordinates without forcing a chunk load.
      *
-     * @return the block ID, or null if the y-coordinate is less than 0 or
-     * greater than 256 or the x or z is outside the Minecraft worldmap.
-     * Returns Blocks.bedrock if the coordinates being checked are in an
-     * unloaded chunk
+     * @return the block ID, or null if the y-coordinate is less than 0 or greater
+     *         than 256 or the x or z is outside the Minecraft worldmap. Returns
+     *         Blocks.bedrock if the coordinates being checked are in an unloaded
+     *         chunk
      */
     public Block getBlockID_noChunkLoad() {
         if (this.y < 0
@@ -252,7 +252,8 @@ public class BlockVec3Dim implements Cloneable {
     }
 
     /**
-     * This will load the chunk - use getTileEntityNoLoad() if just updating things if present.
+     * This will load the chunk - use getTileEntityNoLoad() if just updating things
+     * if present.
      */
     public TileEntity getTileEntity() {
         World world = getWorldForId(this.dim);

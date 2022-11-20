@@ -137,7 +137,8 @@ public class EntityEvolvedZombie extends EntityZombie implements IEntityBreathab
             }
         }
 
-        // Drop copper ingot as semi-rare drop if player hit and if dropping rotten flesh (50% chance)
+        // Drop copper ingot as semi-rare drop if player hit and if dropping rotten
+        // flesh (50% chance)
         if (p_70628_1_ && (ConfigManagerCore.challengeMobDropsAndSpawning) && j > 0 && this.rand.nextInt(6) == 0)
             this.entityDropItem(new ItemStack(GCItems.basicItem, 1, 3), 0.0F);
     }

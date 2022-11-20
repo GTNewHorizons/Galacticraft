@@ -45,7 +45,8 @@ public class AsteroidsItems {
         AsteroidsItems.methaneCanister = new ItemCanisterMethane("methaneCanisterPartial");
         AsteroidsItems.canisterLOX = new ItemCanisterLiquidOxygen("canisterPartialLOX");
         AsteroidsItems.canisterLN2 = new ItemCanisterLiquidNitrogen("canisterPartialLN2");
-        // AsteroidsItems.canisterLAr = new ItemCanisterLiquidArgon("canisterPartialLAr");
+        // AsteroidsItems.canisterLAr = new
+        // ItemCanisterLiquidArgon("canisterPartialLAr");
         AsteroidsItems.atmosphericValve = new ItemAtmosphericValve("atmosphericValve");
         AsteroidsItems.heavyNoseCone = new ItemHeavyNoseCone("heavyNoseCone");
         AsteroidsItems.orionDrive = new ItemOrionDrive("orionDrive");
@@ -98,7 +99,8 @@ public class AsteroidsItems {
         registerItem(AsteroidsItems.titaniumHoe);
         registerItem(AsteroidsItems.titaniumSword);
 
-        // These exact names are important, ItemCanisterGeneric searches for "CanisterFull"
+        // These exact names are important, ItemCanisterGeneric searches for
+        // "CanisterFull"
         GCCoreUtil.registerGalacticraftItem("LOXCanisterFull", AsteroidsItems.canisterLOX, 1);
         GCCoreUtil.registerGalacticraftItem("LN2CanisterFull", AsteroidsItems.canisterLN2, 1);
         GCCoreUtil.registerGalacticraftItem("methaneCanisterFull", AsteroidsItems.methaneCanister, 1);

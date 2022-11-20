@@ -53,8 +53,8 @@ public class ConfigManagerCore {
     public static boolean recipesRequireGCAdvancedMetals = true;
     public static boolean alwaysDisplayOxygenHUD = false;
     public static boolean allowSSatUnreachable;
-    //    public static int mapfactor;
-    //    public static int mapsize;
+    // public static int mapfactor;
+    // public static int mapsize;
 
     // DIMENSIONS
     public static int idDimensionOverworld;
@@ -614,17 +614,17 @@ public class ConfigManagerCore {
             rocketFuelFactor = prop.getInt(1);
             propOrder.add(prop.getName());
 
-            //            prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Map factor", 1);
-            //            prop.comment = "Allowed values 1-4 etc";
-            //            prop.setLanguageKey("gc.configgui.mapFactor");
-            //            mapfactor = prop.getInt(1);
-            //            propOrder.add(prop.getName());
+            // prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Map factor", 1);
+            // prop.comment = "Allowed values 1-4 etc";
+            // prop.setLanguageKey("gc.configgui.mapFactor");
+            // mapfactor = prop.getInt(1);
+            // propOrder.add(prop.getName());
             //
-            //            prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Map size", 400);
-            //            prop.comment = "Suggested value 400";
-            //            prop.setLanguageKey("gc.configgui.mapSize");
-            //            mapsize = prop.getInt(400);
-            //            propOrder.add(prop.getName());
+            // prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Map size", 400);
+            // prop.comment = "Suggested value 400";
+            // prop.setLanguageKey("gc.configgui.mapSize");
+            // mapsize = prop.getInt(400);
+            // propOrder.add(prop.getName());
             //
             prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Map Scroll Mouse Sensitivity", 1.0);
             prop.comment = "Increase to make the mouse drag scroll more sensitive, decrease to lower sensitivity.";
@@ -785,12 +785,14 @@ public class ConfigManagerCore {
         if (GalacticraftCore.isPlanetsLoaded)
             ((BiomeGenBaseAsteroids) BiomeGenBaseAsteroids.asteroid)
                     .resetMonsterListByMode(challengeMobDropsAndSpawning);
-        // TODO: could also increase mob spawn frequency in Hard Mode on various dimensions e.g. Moon and Mars?
+        // TODO: could also increase mob spawn frequency in Hard Mode on various
+        // dimensions e.g. Moon and Mars?
     }
 
     /**
-     * Note for this to be effective, the prop = config.get() call has to provide a String[] as the default values
-     * If you use an Integer[] then the config parser deletes all non-numerical lines from the config before GC even sees them
+     * Note for this to be effective, the prop = config.get() call has to provide a
+     * String[] as the default values If you use an Integer[] then the config parser
+     * deletes all non-numerical lines from the config before GC even sees them
      */
     private static boolean searchAsterisk(String[] strings) {
         for (String s : strings) {
@@ -868,7 +870,8 @@ public class ConfigManagerCore {
         returnList.add(ConfigManagerCore.suffocationCooldown);
         returnList.add(ConfigManagerCore.rocketFuelFactor);
         returnList.add(ConfigManagerCore.otherModsSilicon);
-        // If changing this, update definition of EnumSimplePacket.C_UPDATE_CONFIGS - see comment in setConfigOverride()
+        // If changing this, update definition of EnumSimplePacket.C_UPDATE_CONFIGS -
+        // see comment in setConfigOverride()
         // below
         EnergyConfigHandler.serverConfigOverride(returnList);
 
@@ -892,10 +895,13 @@ public class ConfigManagerCore {
         ConfigManagerCore.suffocationCooldown = (Integer) configs.get(dataCount++);
         ConfigManagerCore.rocketFuelFactor = (Integer) configs.get(dataCount++);
         ConfigManagerCore.otherModsSilicon = (String) configs.get(dataCount++);
-        // If adding any additional data objects here, also remember to update the packet definition of
+        // If adding any additional data objects here, also remember to update the
+        // packet definition of
         // EnumSimplePacket.C_UPDATE_CONFIGS in PacketSimple
-        // Current working packet definition: Integer.class, Double.class, Integer.class, Integer.class, Integer.class,
-        // String.class, Float.class, Float.class, Float.class, Float.class, Integer.class, String[].class
+        // Current working packet definition: Integer.class, Double.class,
+        // Integer.class, Integer.class, Integer.class,
+        // String.class, Float.class, Float.class, Float.class, Float.class,
+        // Integer.class, String[].class
 
         EnergyConfigHandler.setConfigOverride(
                 (Float) configs.get(dataCount++),

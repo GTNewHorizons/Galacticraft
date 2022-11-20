@@ -78,7 +78,7 @@ public class MethaneSynthesizerRecipeHandler extends TemplateRecipeHandler {
             }
             GuiDraw.drawTexturedModalRect(148, 62 - level, 1, 26 - level, 16, level);
 
-            // Offsets from GUI: x - 5,  y - 4
+            // Offsets from GUI: x - 5, y - 4
             int powerlevel = 53 - (progress - 41) / 6;
             GuiDraw.changeTexture(MethaneSynthesizerRecipeHandler.synthesizerGuiTexture);
             GuiDraw.drawTexturedModalRect(61, 13, 176, 38, powerlevel, 7);

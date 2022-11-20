@@ -51,7 +51,8 @@ public class ContainerSlimeling extends Container {
     @SuppressWarnings("unchecked")
     public static void addAdditionalSlots(ContainerSlimeling container, EntitySlimeling slimeling, ItemStack stack) {
         if (stack != null && stack.getItem() == MarsItems.marsItemBasic && stack.getItemDamage() == 4) {
-            // Note that if NEI is installed, this can be called by InventorySlimeling.setInventorySlotContents even if
+            // Note that if NEI is installed, this can be called by
+            // InventorySlimeling.setInventorySlotContents even if
             // the container already has the slots
             if (container.inventorySlots.size() < 63) {
                 for (int var3 = 0; var3 < 3; ++var3) {

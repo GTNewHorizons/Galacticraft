@@ -45,10 +45,10 @@ public class GuiElementDropdown extends GuiButton {
         }
 
         if (this.visible) {
-            //            GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-            //            RenderHelper.disableStandardItemLighting();
-            //            GL11.glDisable(GL11.GL_LIGHTING);
-            //            GL11.glDisable(GL11.GL_DEPTH_TEST);
+            // GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+            // RenderHelper.disableStandardItemLighting();
+            // GL11.glDisable(GL11.GL_LIGHTING);
+            // GL11.glDisable(GL11.GL_DEPTH_TEST);
             GL11.glPushMatrix();
 
             this.zLevel = 300.0F;
@@ -107,10 +107,10 @@ public class GuiElementDropdown extends GuiButton {
 
             GL11.glPopMatrix();
             this.zLevel = 0.0F;
-            //            GL11.glEnable(GL11.GL_LIGHTING);
-            //            GL11.glEnable(GL11.GL_DEPTH_TEST);
-            //            RenderHelper.enableStandardItemLighting();
-            //            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+            // GL11.glEnable(GL11.GL_LIGHTING);
+            // GL11.glEnable(GL11.GL_DEPTH_TEST);
+            // RenderHelper.enableStandardItemLighting();
+            // GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         }
     }
 

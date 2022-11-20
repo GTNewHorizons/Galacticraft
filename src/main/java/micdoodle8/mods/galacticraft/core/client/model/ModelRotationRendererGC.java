@@ -12,13 +12,15 @@ import net.smart.render.ModelRotationRenderer;
 import org.lwjgl.opengl.GL11;
 
 /**
- *  If Smart Moving is installed, this is used by ModelPlayerBaseGC as the ModelRenderer
- *  - see ModelPlayerBaseGC.createModelRenderer()
+ * If Smart Moving is installed, this is used by ModelPlayerBaseGC as the
+ * ModelRenderer - see ModelPlayerBaseGC.createModelRenderer()
  *
- *  This renders the player equipment, there is one of these renderers for each type of equipment.
- *  Smart Moving will call this.doRender() when the corresponding player body part is being drawn.
- *  Most GC equipment is rendered when the body is drawn; Oxygen Mask and Frequency Module are rendered when the head is drawn.
- *  Smart Moving handles all relevant transformations so that the position will match the Smart Moving model.
+ * This renders the player equipment, there is one of these renderers for each
+ * type of equipment. Smart Moving will call this.doRender() when the
+ * corresponding player body part is being drawn. Most GC equipment is rendered
+ * when the body is drawn; Oxygen Mask and Frequency Module are rendered when
+ * the head is drawn. Smart Moving handles all relevant transformations so that
+ * the position will match the Smart Moving model.
  *
  * @author User
  *

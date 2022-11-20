@@ -73,15 +73,17 @@ public class GuiElectricIngotCompressor extends GuiContainerGC {
         String str = GCCoreUtil.translate("gui.message.status.name") + ": " + displayText;
         this.fontRendererObj.drawString(str, 120 - this.fontRendererObj.getStringWidth(str) / 2, 75, 4210752);
         this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 93, 4210752);
-        //		str = "" + this.tileEntity.storage.getMaxExtract();
-        //		this.fontRendererObj.drawString(str, 120 - this.fontRendererObj.getStringWidth(str) / 2, 85, 4210752);
-        //		//		str = ElectricityDisplay.getDisplay(this.tileEntity.getVoltage(), ElectricUnit.VOLTAGE);
-        //		this.fontRendererObj.drawString(str, 120 - this.fontRendererObj.getStringWidth(str) / 2, 95, 4210752);
+        // str = "" + this.tileEntity.storage.getMaxExtract();
+        // this.fontRendererObj.drawString(str, 120 -
+        // this.fontRendererObj.getStringWidth(str) / 2, 85, 4210752);
+        // // str = ElectricityDisplay.getDisplay(this.tileEntity.getVoltage(),
+        // ElectricUnit.VOLTAGE);
+        // this.fontRendererObj.drawString(str, 120 -
+        // this.fontRendererObj.getStringWidth(str) / 2, 95, 4210752);
     }
 
     /**
-     * Draw the background layer for the GuiContainer (everything behind the
-     * items)
+     * Draw the background layer for the GuiContainer (everything behind the items)
      */
     @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {

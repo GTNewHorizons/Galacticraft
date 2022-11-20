@@ -32,7 +32,8 @@ public class TileBaseUniversalElectricalSource extends TileBaseUniversalElectric
      * The main function to output energy each tick from a source.
      *
      * The source will attempt to produce into its outputDirections whatever energy
-     * it has available, and will reduce its stored energy by the amount which is in fact used.
+     * it has available, and will reduce its stored energy by the amount which is in
+     * fact used.
      *
      * Max output = this.storage.maxExtract.
      *
@@ -47,12 +48,12 @@ public class TileBaseUniversalElectricalSource extends TileBaseUniversalElectric
     }
 
     /*
-     * Function to produce energy each tick into the outputs of a source.
-     * If simulate is true, no energy is in fact transferred.
+     * Function to produce energy each tick into the outputs of a source. If
+     * simulate is true, no energy is in fact transferred.
      *
-     * Note: even if simulate is false this does NOT reduce the source's own
-     * energy storage by the amount produced, that needs to be done elsewhere
-     * See this.produce() for an example.
+     * Note: even if simulate is false this does NOT reduce the source's own energy
+     * storage by the amount produced, that needs to be done elsewhere See
+     * this.produce() for an example.
      */
     public float produce(boolean simulate) {
         float amountProduced = 0;
@@ -125,7 +126,8 @@ public class TileBaseUniversalElectricalSource extends TileBaseUniversalElectric
                     Class<?> itemManagerIC2 = Class.forName("ic2.api.item.IElectricItemManager");
                     if (itemElectricIC2.isInstance(item)) {
                         // Implement by reflection:
-                        // float energy = (float) ((ISpecialElectricItem)item).getManager(itemStack).charge(itemStack,
+                        // float energy = (float)
+                        // ((ISpecialElectricItem)item).getManager(itemStack).charge(itemStack,
                         // energyToCharge * EnergyConfigHandler.TO_IC2_RATIO, 4, false, false) *
                         // EnergyConfigHandler.IC2_RATIO;
                         Object IC2item = itemElectricIC2.cast(item);
@@ -187,13 +189,16 @@ public class TileBaseUniversalElectricalSource extends TileBaseUniversalElectric
                     e.printStackTrace();
                 }
             }
-            //			else if (GCCoreCompatibilityManager.isTELoaded() && itemStack.getItem() instanceof
+            // else if (GCCoreCompatibilityManager.isTELoaded() && itemStack.getItem()
+            // instanceof
             // IEnergyContainerItem)
-            //			{
-            //				int accepted = ((IEnergyContainerItem) itemStack.getItem()).receiveEnergy(itemStack, (int)
-            // Math.floor(this.getProvide(ForgeDirection.UNKNOWN) * EnergyConfigHandler.TO_TE_RATIO), false);
-            //				this.provideElectricity(accepted * EnergyConfigHandler.TE_RATIO, true);
-            //			}
+            // {
+            // int accepted = ((IEnergyContainerItem)
+            // itemStack.getItem()).receiveEnergy(itemStack, (int)
+            // Math.floor(this.getProvide(ForgeDirection.UNKNOWN) *
+            // EnergyConfigHandler.TO_TE_RATIO), false);
+            // this.provideElectricity(accepted * EnergyConfigHandler.TE_RATIO, true);
+            // }
 
             if (this.tierGC > 1) {
                 this.storage.setMaxExtract(maxExtractSave);
@@ -253,7 +258,8 @@ public class TileBaseUniversalElectricalSource extends TileBaseUniversalElectric
             TileEntity tile =
                     new BlockVec3(this).getTileEntityOnSide(this.worldObj, this.getElectricalOutputDirectionMain());
             if (tile instanceof IConductor) {
-                // No power provide to IC2 mod if it's a Galacticraft wire on the output.  Galacticraft network will
+                // No power provide to IC2 mod if it's a Galacticraft wire on the output.
+                // Galacticraft network will
                 // provide the power.
                 return 0.0F;
             }

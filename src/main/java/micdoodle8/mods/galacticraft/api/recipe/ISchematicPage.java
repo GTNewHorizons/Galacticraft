@@ -12,8 +12,8 @@ import net.minecraft.item.ItemStack;
  */
 public interface ISchematicPage extends Comparable<ISchematicPage> {
     /**
-     * Get the page ID. Make it configurable since it has to be unique between
-     * other Galacticraft addons. Determines order of schematics.
+     * Get the page ID. Make it configurable since it has to be unique between other
+     * Galacticraft addons. Determines order of schematics.
      */
     public int getPageID();
 

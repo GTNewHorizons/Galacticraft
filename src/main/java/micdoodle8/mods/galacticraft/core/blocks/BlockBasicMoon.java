@@ -38,7 +38,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class BlockBasicMoon extends BlockAdvancedTile
         implements IDetectableResource, IPlantableBlock, ITerraformableBlock {
     // CopperMoon: 0, TinMoon: 1, CheeseStone: 2
-    // Moon dirt: 3;  Moon rock: 4;  Moon topsoil: 5-13 (6-13 have GC2 footprints);  Moon dungeon brick: 14;  Moon boss
+    // Moon dirt: 3; Moon rock: 4; Moon topsoil: 5-13 (6-13 have GC2 footprints);
+    // Moon dungeon brick: 14; Moon boss
     // spawner: 15;
     @SideOnly(Side.CLIENT)
     private IIcon[] moonBlockIcons;

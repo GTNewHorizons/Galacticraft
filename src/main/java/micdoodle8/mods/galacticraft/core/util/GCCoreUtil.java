@@ -84,7 +84,8 @@ public class GCCoreUtil {
         int eggID = 255;
 
         // Non-global entity IDs - for egg ID purposes - can be greater than 255
-        // The spawn egg will have this metadata.  Metadata up to 65535 is acceptable (see potions).
+        // The spawn egg will have this metadata. Metadata up to 65535 is acceptable
+        // (see potions).
 
         do {
             eggID++;

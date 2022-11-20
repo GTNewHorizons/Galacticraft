@@ -102,7 +102,8 @@ public class GuiCargoLoader extends GuiContainerGC {
                 28 + offsetX,
                 45 + 23 - 46 + offsetY,
                 4210752);
-        // this.fontRendererObj.drawString("" + this.cargoLoader.storage.getMaxExtract(), 28 + offsetX, 56 + 23 - 46 +
+        // this.fontRendererObj.drawString("" +
+        // this.cargoLoader.storage.getMaxExtract(), 28 + offsetX, 56 + 23 - 46 +
         // offsetY, 4210752);
         this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 90, 4210752);
     }
@@ -139,7 +140,8 @@ public class GuiCargoLoader extends GuiContainerGC {
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         EnergyDisplayHelper.getEnergyDisplayTooltip(
                 this.cargoLoader.getEnergyStoredGC(), this.cargoLoader.getMaxEnergyStoredGC(), electricityDesc);
-        //		electricityDesc.add(EnumColor.YELLOW + GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)
+        // electricityDesc.add(EnumColor.YELLOW +
+        // GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)
         // Math.floor(this.cargoLoader.getEnergyStoredGC()) + " / " + (int)
         // Math.floor(this.cargoLoader.getMaxEnergyStoredGC())));
         this.electricInfoRegion.tooltipStrings = electricityDesc;

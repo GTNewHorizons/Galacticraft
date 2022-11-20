@@ -89,14 +89,15 @@ public class TileEntityTerraformer extends TileBaseElectricBlockWithInventory
     public void updateEntity() {
         super.updateEntity();
 
-        //        if (this.terraformBubble == null)
-        //        {
-        //            if (!this.worldObj.isRemote)
-        //            {
-        //                this.terraformBubble = new EntityTerraformBubble(this.worldObj, new Vector3(this), this);
-        //                this.worldObj.spawnEntityInWorld(this.terraformBubble);
-        //            }
-        //        }
+        // if (this.terraformBubble == null)
+        // {
+        // if (!this.worldObj.isRemote)
+        // {
+        // this.terraformBubble = new EntityTerraformBubble(this.worldObj, new
+        // Vector3(this), this);
+        // this.worldObj.spawnEntityInWorld(this.terraformBubble);
+        // }
+        // }
 
         if (!this.worldObj.isRemote) {
             if (this.containingItems[0] != null) {
@@ -530,11 +531,11 @@ public class TileEntityTerraformer extends TileBaseElectricBlockWithInventory
         return false;
     }
 
-    //    @Override
-    //    public IBubble getBubble()
-    //    {
-    //        return this.terraformBubble;
-    //    }
+    // @Override
+    // public IBubble getBubble()
+    // {
+    // return this.terraformBubble;
+    // }
 
     @Override
     public void setBubbleVisible(boolean shouldRender) {

@@ -306,7 +306,8 @@ public class TickHandlerClient {
                     && player.ridingEntity != null
                     && player.ridingEntity instanceof IIgnoreShift
                     && ((IIgnoreShift) player.ridingEntity).shouldIgnoreShiftExit()) {
-                // Remove "Press shift to dismount" message when shift-exiting is disabled (not ideal, but the only
+                // Remove "Press shift to dismount" message when shift-exiting is disabled (not
+                // ideal, but the only
                 // option)
                 String str = I18n.format("mount.onboard", new Object[] {
                     GameSettings.getKeyDisplayString(minecraft.gameSettings.keyBindSneak.getKeyCode())
@@ -388,7 +389,8 @@ public class TickHandlerClient {
                     if (nearestSealer != null) // && nearestSealer.threadSeal != null)
                     {
                         ClientProxyCore.leakTrace = new ArrayList(); // nearestSealer.threadSeal.leakTrace;
-                        // TODO: revert. Temporarily for testing purposes any sealer should show a leak block directly
+                        // TODO: revert. Temporarily for testing purposes any sealer should show a leak
+                        // block directly
                         // above itself
                         ClientProxyCore.leakTrace.add(new BlockVec3(nearestSealer).translate(0, 1, 0));
                     }

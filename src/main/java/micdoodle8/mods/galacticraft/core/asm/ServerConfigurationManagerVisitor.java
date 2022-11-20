@@ -10,7 +10,8 @@ import org.objectweb.asm.MethodVisitor;
 /**
  * This cannot be a mixin, as it'd otherwise break on thermos server
  *
- * Scrubs ServerConfigurationManager for new EntityPlayerMP and replace it with new GCEntityPlayerMP
+ * Scrubs ServerConfigurationManager for new EntityPlayerMP and replace it with
+ * new GCEntityPlayerMP
  */
 public class ServerConfigurationManagerVisitor extends ClassVisitor {
 

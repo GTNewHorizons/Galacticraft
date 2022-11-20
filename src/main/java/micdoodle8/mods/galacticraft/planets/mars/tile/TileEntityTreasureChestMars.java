@@ -99,8 +99,8 @@ public class TileEntityTreasureChestMars extends TileEntityAdvanced implements I
     }
 
     /**
-     * Removes from an inventory slot (first arg) up to a specified number
-     * (second arg) of items and returns them in a new stack.
+     * Removes from an inventory slot (first arg) up to a specified number (second
+     * arg) of items and returns them in a new stack.
      */
     @Override
     public ItemStack decrStackSize(int par1, int par2) {
@@ -129,8 +129,7 @@ public class TileEntityTreasureChestMars extends TileEntityAdvanced implements I
 
     /**
      * When some containers are closed they call this on each slot, then drop
-     * whatever it returns as an EntityItem - like when you close a workbench
-     * GUI.
+     * whatever it returns as an EntityItem - like when you close a workbench GUI.
      */
     @Override
     public ItemStack getStackInSlotOnClosing(int par1) {
@@ -202,8 +201,8 @@ public class TileEntityTreasureChestMars extends TileEntityAdvanced implements I
     }
 
     /**
-     * Returns the maximum stack size for a inventory slot. Seems to always be
-     * 64, possibly will be extended. *Isn't this more of a set than a get?*
+     * Returns the maximum stack size for a inventory slot. Seems to always be 64,
+     * possibly will be extended. *Isn't this more of a set than a get?*
      */
     @Override
     public int getInventoryStackLimit() {
@@ -211,8 +210,8 @@ public class TileEntityTreasureChestMars extends TileEntityAdvanced implements I
     }
 
     /**
-     * Do not make give this method the name canInteractWith because it clashes
-     * with Container
+     * Do not make give this method the name canInteractWith because it clashes with
+     * Container
      */
     @Override
     public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
@@ -222,8 +221,7 @@ public class TileEntityTreasureChestMars extends TileEntityAdvanced implements I
 
     /**
      * Causes the TileEntity to reset all it's cached values for it's container
-     * block, blockID, metaData and in the case of chests, the adjcacent chest
-     * check
+     * block, blockID, metaData and in the case of chests, the adjcacent chest check
      */
     @Override
     public void updateContainingBlockInfo() {
@@ -263,8 +261,8 @@ public class TileEntityTreasureChestMars extends TileEntityAdvanced implements I
     }
 
     /**
-     * Performs the check for adjacent chests to determine if this chest is
-     * double or not.
+     * Performs the check for adjacent chests to determine if this chest is double
+     * or not.
      */
     public void checkForAdjacentChests() {
         if (!this.adjacentChestChecked) {
@@ -318,9 +316,9 @@ public class TileEntityTreasureChestMars extends TileEntityAdvanced implements I
     }
 
     /**
-     * Allows the entity to update its state. Overridden in most subclasses,
-     * e.g. the mob spawner uses this to count ticks and creates a new spawn
-     * inside its implementation.
+     * Allows the entity to update its state. Overridden in most subclasses, e.g.
+     * the mob spawner uses this to count ticks and creates a new spawn inside its
+     * implementation.
      */
     @Override
     public void updateEntity() {
@@ -427,8 +425,8 @@ public class TileEntityTreasureChestMars extends TileEntityAdvanced implements I
     }
 
     /**
-     * Called when a client event is received with the event number and
-     * argument, see World.sendClientEvent
+     * Called when a client event is received with the event number and argument,
+     * see World.sendClientEvent
      */
     @Override
     public boolean receiveClientEvent(int par1, int par2) {

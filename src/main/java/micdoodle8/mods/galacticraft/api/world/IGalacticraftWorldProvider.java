@@ -5,8 +5,8 @@ import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 
 public interface IGalacticraftWorldProvider {
     /**
-     * gets additional gravity to add to players in this dimension. Typical
-     * values range from 0.040 to 0.065
+     * gets additional gravity to add to players in this dimension. Typical values
+     * range from 0.040 to 0.065
      *
      * @return additional gravity for this provider
      */
@@ -23,11 +23,11 @@ public interface IGalacticraftWorldProvider {
     public double getMeteorFrequency();
 
     /**
-     * Depending on gravity, different fuel depletion rates will occur in
-     * spacecraft (less force required to lift)
+     * Depending on gravity, different fuel depletion rates will occur in spacecraft
+     * (less force required to lift)
      *
      * @return multiplier of fuel usage, relative to the earth. Lower gravity =
-     * Lower fuel usage (multiplier less than zero)
+     *         Lower fuel usage (multiplier less than zero)
      */
     public double getFuelUsageMultiplier();
 
@@ -36,8 +36,7 @@ public interface IGalacticraftWorldProvider {
      * dimension
      *
      * @param tier The tier of the spaceship entering this dimension
-     * @return Whether or not the spaceship with given tier can enter this
-     * dimension
+     * @return Whether or not the spaceship with given tier can enter this dimension
      */
     public boolean canSpaceshipTierPass(int tier);
 
@@ -49,12 +48,12 @@ public interface IGalacticraftWorldProvider {
     public float getFallDamageModifier();
 
     /**
-     * Changes volume of sounds on this planet. You should be using higher
-     * values for thin atmospheres and high values for dense atmospheres
+     * Changes volume of sounds on this planet. You should be using higher values
+     * for thin atmospheres and high values for dense atmospheres
      *
-     * @return Sound reduction divisor. Value of 10 will make sounds ten times
-     * more quiet. Value of 0.1 will make sounds 10 times louder. Be
-     * careful with the values you choose!
+     * @return Sound reduction divisor. Value of 10 will make sounds ten times more
+     *         quiet. Value of 0.1 will make sounds 10 times louder. Be careful with
+     *         the values you choose!
      */
     public float getSoundVolReductionAmount();
 
@@ -67,9 +66,9 @@ public interface IGalacticraftWorldProvider {
     public boolean hasBreathableAtmosphere();
 
     /**
-     * If false (the default) then Nether Portals will have no function on this world.
-     * Nether Portals can still be constructed, if the player can make fire, they just
-     * won't do anything.
+     * If false (the default) then Nether Portals will have no function on this
+     * world. Nether Portals can still be constructed, if the player can make fire,
+     * they just won't do anything.
      *
      * @return True if Nether Portals should work like on the Overworld.
      */
@@ -83,11 +82,11 @@ public interface IGalacticraftWorldProvider {
     public boolean isGasPresent(IAtmosphericGas gas);
 
     /**
-     * This value will affect player's thermal level, damaging them if it
-     * reaches too high or too low.
+     * This value will affect player's thermal level, damaging them if it reaches
+     * too high or too low.
      *
-     * @return Positive integer for hot celestial bodies, negative for cold.
-     * Zero for neutral
+     * @return Positive integer for hot celestial bodies, negative for cold. Zero
+     *         for neutral
      */
     public float getThermalLevelModifier();
 
@@ -104,7 +103,7 @@ public interface IGalacticraftWorldProvider {
      * Factor by which the sun is to be drawn smaller (<1.0) or larger (>1.0) than
      * the sun on the Overworld
      *
-     * @return  factor
+     * @return factor
      */
     public float getSolarSize();
 

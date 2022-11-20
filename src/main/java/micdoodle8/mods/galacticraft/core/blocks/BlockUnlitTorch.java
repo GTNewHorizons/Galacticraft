@@ -159,8 +159,8 @@ public class BlockUnlitTorch extends Block implements IOxygenReliantBlock {
 
     /**
      * Lets the block know when one of its neighbor changes. Doesn't know which
-     * neighbor changed (coordinates passed are their own) Args: x, y, z,
-     * neighbor blockID
+     * neighbor changed (coordinates passed are their own) Args: x, y, z, neighbor
+     * blockID
      */
     @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block par5) {
@@ -260,7 +260,8 @@ public class BlockUnlitTorch extends Block implements IOxygenReliantBlock {
     @Override
     @SideOnly(Side.CLIENT)
     /**
-     * A randomly called display update to be able to add particles or other items for display
+     * A randomly called display update to be able to add particles or other items
+     * for display
      */
     public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         boolean doSmoke = par5Random.nextInt(5) == 0;
