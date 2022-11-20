@@ -221,7 +221,7 @@ public class MapGen {
                 }
 
                 final int arrayIndex = (ix * this.biomeMapSizeZ + iz) * 2;
-                this.biomeAndHeightArray[arrayIndex] = (byte) cols.get(maxindex).intValue();
+                this.biomeAndHeightArray[arrayIndex] = (byte) cols.get(maxindex);
                 this.biomeAndHeightArray[arrayIndex + 1] = (byte) ((avgHeight + (divisor + 1) / 2) / divisor);
                 iz++;
             }

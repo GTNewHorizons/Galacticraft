@@ -87,7 +87,7 @@ public class ConnectionPacket {
         payload.writeByte(packetId);
         payload.writeInt(data.size());
         for (final Integer i : data) {
-            payload.writeInt(i.intValue());
+            payload.writeInt(i);
         }
         payload.writeInt(3519); // signature
         return new FMLProxyPacket(payload, CHANNEL);
