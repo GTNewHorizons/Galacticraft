@@ -213,7 +213,7 @@ public class MethaneSynthesizerRecipeHandler extends TemplateRecipeHandler {
     public void drawForeground(int recipe) {}
 
     @Override
-    public List<String> handleTooltip(GuiRecipe gui, List<String> currenttip, int recipe) {
+    public List<String> handleTooltip(GuiRecipe<?> gui, List<String> currenttip, int recipe) {
         Point mousePos = getMousePosition();
         try {
             Class<GuiContainer> clazz = GuiContainer.class;
