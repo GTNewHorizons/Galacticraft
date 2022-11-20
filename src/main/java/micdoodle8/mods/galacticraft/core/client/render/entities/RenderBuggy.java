@@ -50,7 +50,7 @@ public class RenderBuggy extends Render {
         GL11.glScalef(0.41F, 0.41F, 0.41F);
         this.bindTexture(RenderBuggy.buggyTextureWheel);
 
-        float rotation = entity.wheelRotationX;
+        final float rotation = entity.wheelRotationX;
 
         // Front wheel covers
         GL11.glPushMatrix();

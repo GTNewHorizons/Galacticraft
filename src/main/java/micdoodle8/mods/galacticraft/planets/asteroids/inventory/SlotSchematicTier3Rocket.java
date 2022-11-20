@@ -29,7 +29,7 @@ public class SlotSchematicTier3Rocket extends Slot {
     @Override
     public void onSlotChanged() {
         if (this.player instanceof EntityPlayerMP) {
-            for (Object element : this.player.worldObj.playerEntities) {
+            for (final Object element : this.player.worldObj.playerEntities) {
                 final EntityPlayerMP var13 = (EntityPlayerMP) element;
 
                 if (var13.dimension == this.player.worldObj.provider.dimensionId) {

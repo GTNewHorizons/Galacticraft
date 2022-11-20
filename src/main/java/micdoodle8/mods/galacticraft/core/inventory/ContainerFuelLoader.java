@@ -11,7 +11,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerFuelLoader extends Container {
-    private TileBaseElectricBlock tileEntity;
+    private final TileBaseElectricBlock tileEntity;
 
     public ContainerFuelLoader(InventoryPlayer par1InventoryPlayer, TileEntityFuelLoader fuelLoader) {
         this.tileEntity = fuelLoader;

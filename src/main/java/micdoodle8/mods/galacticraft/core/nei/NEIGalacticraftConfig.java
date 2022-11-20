@@ -43,11 +43,11 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
     public void loadConfig() {
         this.registerRecipes();
 
-        for (Item item : GCItems.hiddenItems) {
+        for (final Item item : GCItems.hiddenItems) {
             API.hideItem(new ItemStack(item, 1, 0));
         }
 
-        for (Block block : GCBlocks.hiddenBlocks) {
+        for (final Block block : GCBlocks.hiddenBlocks) {
             API.hideItem(new ItemStack(block, 1, 0));
             if (block == GCBlocks.slabGCDouble) {
                 for (int j = 1; j < (GalacticraftCore.isPlanetsLoaded ? 6 : 4); j++) {
@@ -144,9 +144,9 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
     }
 
     private void addBuggyRecipes() {
-        int x = BuggyRecipeHandler.tX - BuggyRecipeHandler.x;
-        int y = BuggyRecipeHandler.tY - BuggyRecipeHandler.y;
-        HashMap<Integer, PositionedStack> input = new HashMap<Integer, PositionedStack>();
+        final int x = BuggyRecipeHandler.tX - BuggyRecipeHandler.x;
+        final int y = BuggyRecipeHandler.tY - BuggyRecipeHandler.y;
+        final HashMap<Integer, PositionedStack> input = new HashMap<Integer, PositionedStack>();
         input.put(1, new PositionedStack(new ItemStack(GCItems.basicItem, 1, 19), 62 - x, 19 - y));
         input.put(2, new PositionedStack(new ItemStack(GCItems.partBuggy, 1, 1), 62 - x, 55 - y));
         if (GalacticraftCore.isGalaxySpaceLoaded) {
@@ -238,7 +238,7 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
     }
 
     private void addRocketRecipes() {
-        HashMap<Integer, PositionedStack> input1 = new HashMap<Integer, PositionedStack>();
+        final HashMap<Integer, PositionedStack> input1 = new HashMap<Integer, PositionedStack>();
         input1.put(0, new PositionedStack(new ItemStack(GCItems.partNoseCone), 45, 15));
         input1.put(1, new PositionedStack(new ItemStack(GCItems.heavyPlatingTier1), 36, 33));
         input1.put(2, new PositionedStack(new ItemStack(GCItems.heavyPlatingTier1), 36, 51));
@@ -290,11 +290,11 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
     }
 
     private void addCircuitFabricatorRecipes() {
-        HashMap<Integer, PositionedStack> input1 = new HashMap<Integer, PositionedStack>();
+        final HashMap<Integer, PositionedStack> input1 = new HashMap<Integer, PositionedStack>();
         input1.put(0, new PositionedStack(new ItemStack(Items.diamond), 10, 22));
-        int siliconCount =
+        final int siliconCount =
                 OreDictionary.getOres(ConfigManagerCore.otherModsSilicon).size();
-        ItemStack[] silicons = new ItemStack[siliconCount];
+        final ItemStack[] silicons = new ItemStack[siliconCount];
         // silicons[0] = new ItemStack(GCItems.basicItem, 1, 2); //This is now included
         // in the oredict
         for (int j = 0; j < siliconCount; j++) {
@@ -324,27 +324,27 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
     }
 
     private void addIngotCompressorRecipes() {
-        for (IRecipe rec : CompressorRecipes.getRecipeList()) {
-            HashMap<Integer, PositionedStack> input1 = new HashMap<Integer, PositionedStack>();
+        for (final IRecipe rec : CompressorRecipes.getRecipeList()) {
+            final HashMap<Integer, PositionedStack> input1 = new HashMap<Integer, PositionedStack>();
             if (rec instanceof ShapedRecipes) {
-                ShapedRecipes recipe = (ShapedRecipes) rec;
+                final ShapedRecipes recipe = (ShapedRecipes) rec;
 
                 for (int j = 0; j < recipe.recipeItems.length; j++) {
-                    ItemStack stack = recipe.recipeItems[j];
+                    final ItemStack stack = recipe.recipeItems[j];
 
                     input1.put(j, new PositionedStack(stack, 21 + j % 3 * 18, 26 + j / 3 * 18));
                 }
             } else if (rec instanceof ShapelessOreRecipe) {
-                ShapelessOreRecipe recipe = (ShapelessOreRecipe) rec;
+                final ShapelessOreRecipe recipe = (ShapelessOreRecipe) rec;
 
                 for (int j = 0; j < recipe.getInput().size(); j++) {
-                    Object obj = recipe.getInput().get(j);
+                    final Object obj = recipe.getInput().get(j);
 
                     input1.put(j, new PositionedStack(obj, 21 + j % 3 * 18, 26 + j / 3 * 18));
                 }
             }
 
-            ItemStack resultItemStack = rec.getRecipeOutput();
+            final ItemStack resultItemStack = rec.getRecipeOutput();
             if (ConfigManagerCore.quickMode) {
                 if (resultItemStack
                         .getItem()

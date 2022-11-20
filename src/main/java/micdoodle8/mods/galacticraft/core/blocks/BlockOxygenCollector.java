@@ -85,7 +85,7 @@ public class BlockOxygenCollector extends BlockAdvancedTile implements ItemBlock
                 break;
         }
 
-        TileEntity te = par1World.getTileEntity(x, y, z);
+        final TileEntity te = par1World.getTileEntity(x, y, z);
         if (te instanceof TileBaseUniversalElectrical) {
             ((TileBaseUniversalElectrical) te).updateFacing();
         }
@@ -148,12 +148,12 @@ public class BlockOxygenCollector extends BlockAdvancedTile implements ItemBlock
             if (((TileEntityOxygenCollector) par1World.getTileEntity(x, y, z)).lastOxygenCollected > 1) {
                 for (int particleCount = 0; particleCount < 10; particleCount++) {
                     double x2 = x + rand.nextFloat();
-                    double y2 = y + rand.nextFloat();
+                    final double y2 = y + rand.nextFloat();
                     double z2 = z + rand.nextFloat();
                     double mX = 0.0D;
                     double mY = 0.0D;
                     double mZ = 0.0D;
-                    int dir = rand.nextInt(2) * 2 - 1;
+                    final int dir = rand.nextInt(2) * 2 - 1;
                     mX = (rand.nextFloat() - 0.5D) * 0.5D;
                     mY = (rand.nextFloat() - 0.5D) * 0.5D;
                     mZ = (rand.nextFloat() - 0.5D) * 0.5D;

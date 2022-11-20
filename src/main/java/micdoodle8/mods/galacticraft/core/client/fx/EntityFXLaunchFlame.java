@@ -16,9 +16,9 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class EntityFXLaunchFlame extends EntityFX {
-    private float smokeParticleScale;
-    private boolean spawnSmokeShort;
-    private EntityLivingBase ridingEntity;
+    private final float smokeParticleScale;
+    private final boolean spawnSmokeShort;
+    private final EntityLivingBase ridingEntity;
 
     public EntityFXLaunchFlame(
             World par1World, Vector3 position, Vector3 motion, boolean launched, EntityLivingBase ridingEntity) {

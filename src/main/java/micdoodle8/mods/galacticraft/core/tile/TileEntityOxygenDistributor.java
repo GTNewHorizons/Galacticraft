@@ -62,12 +62,12 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
     @Override
     public void invalidate() {
         if (!this.worldObj.isRemote /* && this.oxygenBubble != null */) {
-            int bubbleR = MathHelper.ceiling_double_int(bubbleSize);
-            int bubbleR2 = (int) (bubbleSize * bubbleSize);
+            final int bubbleR = MathHelper.ceiling_double_int(bubbleSize);
+            final int bubbleR2 = (int) (bubbleSize * bubbleSize);
             for (int x = this.xCoord - bubbleR; x < this.xCoord + bubbleR; x++) {
                 for (int y = this.yCoord - bubbleR; y < this.yCoord + bubbleR; y++) {
                     for (int z = this.zCoord - bubbleR; z < this.zCoord + bubbleR; z++) {
-                        Block block = this.worldObj.getBlock(x, y, z);
+                        final Block block = this.worldObj.getBlock(x, y, z);
 
                         if (block instanceof IOxygenReliantBlock && this.getDistanceFromServer(x, y, z) <= bubbleR2) {
                             this.worldObj.scheduleBlockUpdateWithPriority(x, y, z, block, 1, 0);
@@ -98,7 +98,7 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
             if (MinecraftServer.getServer().isDedicatedServer()) {
                 networkedList.add(loadedTiles.size());
                 // TODO: Limit this to ones in the same dimension as this tile?
-                for (BlockVec3Dim distributor : loadedTiles) {
+                for (final BlockVec3Dim distributor : loadedTiles) {
                     if (distributor == null) {
                         networkedList.add(-1);
                         networkedList.add(-1);
@@ -139,14 +139,14 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
             // this.oxygenBubble = (EntityBubble)
             // worldObj.getEntityByID(dataStream.readInt());
             // }
-            int size = dataStream.readInt();
+            final int size = dataStream.readInt();
             if (size >= 0) {
                 loadedTiles.clear();
                 for (int i = 0; i < size; ++i) {
-                    int i1 = dataStream.readInt();
-                    int i2 = dataStream.readInt();
-                    int i3 = dataStream.readInt();
-                    int i4 = dataStream.readInt();
+                    final int i1 = dataStream.readInt();
+                    final int i2 = dataStream.readInt();
+                    final int i3 = dataStream.readInt();
+                    final int i4 = dataStream.readInt();
                     if (i1 == -1 && i2 == -1 && i3 == -1 && i4 == -1) {
                         continue;
                     }
@@ -167,10 +167,10 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
     @Override
     public void updateEntity() {
         if (!this.worldObj.isRemote) {
-            ItemStack oxygenItemStack = this.getStackInSlot(1);
+            final ItemStack oxygenItemStack = this.getStackInSlot(1);
             if (oxygenItemStack != null && oxygenItemStack.getItem() instanceof IItemOxygenSupply) {
-                IItemOxygenSupply oxygenItem = (IItemOxygenSupply) oxygenItemStack.getItem();
-                float oxygenDraw = Math.min(this.oxygenPerTick * 2.5F, this.maxOxygen - this.storedOxygen);
+                final IItemOxygenSupply oxygenItem = (IItemOxygenSupply) oxygenItemStack.getItem();
+                final float oxygenDraw = Math.min(this.oxygenPerTick * 2.5F, this.maxOxygen - this.storedOxygen);
                 this.storedOxygen += oxygenItem.discharge(oxygenItemStack, oxygenDraw);
                 if (this.storedOxygen > this.maxOxygen) {
                     this.storedOxygen = this.maxOxygen;
@@ -210,13 +210,13 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
             this.active = bubbleSize >= 1 && this.hasEnoughEnergyToRun && this.storedOxygen > this.oxygenPerTick;
 
             if (this.ticks % (this.active ? 20 : 4) == 0) {
-                double size = bubbleSize;
-                int bubbleR = MathHelper.floor_double(size) + 4;
-                int bubbleR2 = (int) (size * size);
+                final double size = bubbleSize;
+                final int bubbleR = MathHelper.floor_double(size) + 4;
+                final int bubbleR2 = (int) (size * size);
                 for (int x = this.xCoord - bubbleR; x <= this.xCoord + bubbleR; x++) {
                     for (int y = this.yCoord - bubbleR; y <= this.yCoord + bubbleR; y++) {
                         for (int z = this.zCoord - bubbleR; z <= this.zCoord + bubbleR; z++) {
-                            Block block = this.worldObj.getBlock(x, y, z);
+                            final Block block = this.worldObj.getBlock(x, y, z);
 
                             if (block instanceof IOxygenReliantBlock) {
                                 if (this.getDistanceFromServer(x, y, z) <= bubbleR2) {
@@ -460,7 +460,7 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
         if (d3 + d4 > r) {
             return false;
         }
-        double d5 = this.yCoord + 0.5D - pY;
+        final double d5 = this.yCoord + 0.5D - pY;
         return d3 + d4 + d5 * d5 < r;
     }
 

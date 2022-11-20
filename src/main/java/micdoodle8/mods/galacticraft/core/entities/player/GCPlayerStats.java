@@ -150,9 +150,9 @@ public class GCPlayerStats implements IExtendedEntityProperties {
 
         Collections.sort(this.unlockedSchematics);
 
-        NBTTagList tagList = new NBTTagList();
+        final NBTTagList tagList = new NBTTagList();
 
-        for (ISchematicPage page : this.unlockedSchematics) {
+        for (final ISchematicPage page : this.unlockedSchematics) {
             if (page != null) {
                 final NBTTagCompound nbttagcompound = new NBTTagCompound();
                 nbttagcompound.setInteger("UnlockedPage", page.getPageID());
@@ -166,7 +166,7 @@ public class GCPlayerStats implements IExtendedEntityProperties {
         nbt.setInteger("SpaceshipTier", this.spaceshipTier);
         nbt.setInteger("FuelLevel", this.fuelLevel);
         if (this.rocketItem != null) {
-            ItemStack returnRocket = new ItemStack(this.rocketItem, 1, this.rocketType);
+            final ItemStack returnRocket = new ItemStack(this.rocketItem, 1, this.rocketType);
             nbt.setTag("ReturnRocket", returnRocket.writeToNBT(new NBTTagCompound()));
         }
 
@@ -205,7 +205,7 @@ public class GCPlayerStats implements IExtendedEntityProperties {
         this.thermalLevel = nbt.getInteger("thermalLevel");
 
         // Backwards compatibility
-        NBTTagList nbttaglist = nbt.getTagList("Inventory", 10);
+        final NBTTagList nbttaglist = nbt.getTagList("Inventory", 10);
         this.extendedInventory.readFromNBTOld(nbttaglist);
 
         if (nbt.hasKey("ExtendedInventoryGC")) {
@@ -216,9 +216,9 @@ public class GCPlayerStats implements IExtendedEntityProperties {
         // inventory, load it now
         // (if there was no offline load, then the dontload flag in doLoad()
         // will make sure nothing happens)
-        EntityPlayerMP p = this.player.get();
+        final EntityPlayerMP p = this.player.get();
         if (p != null) {
-            ItemStack[] saveinv =
+            final ItemStack[] saveinv =
                     CommandGCInv.getSaveData(p.getGameProfile().getName().toLowerCase());
             if (saveinv != null) {
                 CommandGCInv.doLoad(p);
@@ -234,7 +234,7 @@ public class GCPlayerStats implements IExtendedEntityProperties {
             this.fuelLevel = nbt.getInteger("FuelLevel");
         }
         if (nbt.hasKey("ReturnRocket")) {
-            ItemStack returnRocket = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("ReturnRocket"));
+            final ItemStack returnRocket = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("ReturnRocket"));
             if (returnRocket != null) {
                 this.rocketItem = returnRocket.getItem();
                 this.rocketType = returnRocket.getItemDamage();
@@ -263,7 +263,7 @@ public class GCPlayerStats implements IExtendedEntityProperties {
 
         if (nbt.hasKey("RocketItems") && nbt.hasKey("rocketStacksLength")) {
             final NBTTagList var23 = nbt.getTagList("RocketItems", 10);
-            int length = nbt.getInteger("rocketStacksLength");
+            final int length = nbt.getInteger("rocketStacksLength");
 
             this.rocketStacks = new ItemStack[length];
 

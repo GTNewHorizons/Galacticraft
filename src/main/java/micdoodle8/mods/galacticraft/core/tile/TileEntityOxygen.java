@@ -131,8 +131,8 @@ public abstract class TileEntityOxygen extends TileBaseElectricBlock implements 
 
     public float receiveOxygen(float receive, boolean doReceive) {
         if (receive > 0) {
-            float prevOxygenStored = this.getOxygenStored();
-            float newStoredOxygen = Math.min(prevOxygenStored + receive, this.getMaxOxygenStored());
+            final float prevOxygenStored = this.getOxygenStored();
+            final float newStoredOxygen = Math.min(prevOxygenStored + receive, this.getMaxOxygenStored());
 
             if (doReceive) {
                 TileEntityOxygen.timeSinceOxygenRequest = 20;
@@ -156,7 +156,7 @@ public abstract class TileEntityOxygen extends TileBaseElectricBlock implements 
 
     public float provideOxygen(float request, boolean doProvide) {
         if (request > 0) {
-            float requestedOxygen = Math.min(request, this.storedOxygen);
+            final float requestedOxygen = Math.min(request, this.storedOxygen);
 
             if (doProvide) {
                 this.setOxygenStored(this.storedOxygen - requestedOxygen);
@@ -170,7 +170,7 @@ public abstract class TileEntityOxygen extends TileBaseElectricBlock implements 
 
     public void produceOxygen() {
         if (!this.worldObj.isRemote) {
-            for (ForgeDirection direction : this.getOxygenOutputDirections()) {
+            for (final ForgeDirection direction : this.getOxygenOutputDirections()) {
                 if (direction != ForgeDirection.UNKNOWN) {
                     this.produceOxygen(direction);
                 }
@@ -179,26 +179,28 @@ public abstract class TileEntityOxygen extends TileBaseElectricBlock implements 
     }
 
     public boolean produceOxygen(ForgeDirection outputDirection) {
-        float provide = this.getOxygenProvide(outputDirection);
+        final float provide = this.getOxygenProvide(outputDirection);
 
         if (provide > 0F) {
-            TileEntity outputTile = new BlockVec3(this).getTileEntityOnSide(this.worldObj, outputDirection);
-            IOxygenNetwork outputNetwork = NetworkHelper.getOxygenNetworkFromTileEntity(outputTile, outputDirection);
+            final TileEntity outputTile = new BlockVec3(this).getTileEntityOnSide(this.worldObj, outputDirection);
+            final IOxygenNetwork outputNetwork =
+                    NetworkHelper.getOxygenNetworkFromTileEntity(outputTile, outputDirection);
 
             if (outputNetwork != null) {
-                float powerRequest = outputNetwork.getRequest(this);
+                final float powerRequest = outputNetwork.getRequest(this);
 
                 if (powerRequest > 0) {
-                    float rejectedPower = outputNetwork.produce(provide, this);
+                    final float rejectedPower = outputNetwork.produce(provide, this);
 
                     this.provideOxygen(Math.max(provide - rejectedPower, 0), true);
                     return true;
                 }
             } else if (outputTile instanceof IOxygenReceiver) {
-                float requestedOxygen = ((IOxygenReceiver) outputTile).getOxygenRequest(outputDirection.getOpposite());
+                final float requestedOxygen =
+                        ((IOxygenReceiver) outputTile).getOxygenRequest(outputDirection.getOpposite());
 
                 if (requestedOxygen > 0) {
-                    float acceptedOxygen =
+                    final float acceptedOxygen =
                             ((IOxygenReceiver) outputTile).receiveOxygen(outputDirection.getOpposite(), provide, true);
                     this.provideOxygen(acceptedOxygen, true);
                     return true;

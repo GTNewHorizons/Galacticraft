@@ -25,12 +25,12 @@ public class PathfinderChecker extends Pathfinder {
         super(new IPathCallBack() {
             @Override
             public Set<BlockVec3> getConnectedNodes(Pathfinder finder, BlockVec3 currentNode) {
-                Set<BlockVec3> neighbors = new HashSet<BlockVec3>();
+                final Set<BlockVec3> neighbors = new HashSet<BlockVec3>();
 
                 for (int i = 0; i < 6; i++) {
-                    ForgeDirection direction = ForgeDirection.getOrientation(i);
-                    BlockVec3 position = currentNode.clone().modifyPositionFromSide(direction);
-                    TileEntity connectedBlock = position.getTileEntity(world);
+                    final ForgeDirection direction = ForgeDirection.getOrientation(i);
+                    final BlockVec3 position = currentNode.clone().modifyPositionFromSide(direction);
+                    final TileEntity connectedBlock = position.getTileEntity(world);
 
                     if (connectedBlock instanceof ITransmitter
                             && !Arrays.asList(ignoreConnector).contains(connectedBlock)) {

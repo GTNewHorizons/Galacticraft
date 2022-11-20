@@ -82,7 +82,7 @@ public class BlockBeamReflector extends BlockTileGC implements ItemBlockDesc.IBl
     @Override
     public boolean onMachineActivated(
             World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float hitX, float hitY, float hitZ) {
-        TileEntity tile = world.getTileEntity(x, y, z);
+        final TileEntity tile = world.getTileEntity(x, y, z);
 
         if (tile instanceof TileEntityBeamReflector) {
             return ((TileEntityBeamReflector) tile)

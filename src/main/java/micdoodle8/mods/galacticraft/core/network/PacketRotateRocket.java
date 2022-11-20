@@ -37,7 +37,7 @@ public class PacketRotateRocket implements IPacket {
 
     @Override
     public void handleServerSide(EntityPlayer player) {
-        Entity entity = player.worldObj.getEntityByID(this.entityID);
+        final Entity entity = player.worldObj.getEntityByID(this.entityID);
 
         if (entity != null) {
             entity.rotationPitch = this.entityPitch;

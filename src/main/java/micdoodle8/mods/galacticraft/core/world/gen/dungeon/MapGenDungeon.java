@@ -527,7 +527,7 @@ public class MapGenDungeon {
                 while (j > 0) {
                     j--;
 
-                    Block block = this.getBlock(blocks, x + i, j, z + k, cx + i / 16, cz + k / 16);
+                    final Block block = this.getBlock(blocks, x + i, j, z + k, cx + i / 16, cz + k / 16);
 
                     if (Blocks.air != block && block != null) {
                         break;

@@ -59,10 +59,10 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
     @Override
     public void updateEntity() {
         if (!this.initialised) {
-            int metadata = this.getBlockMetadata();
+            final int metadata = this.getBlockMetadata();
 
             // for version update compatibility
-            Block b = this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord);
+            final Block b = this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord);
             if (b == GCBlocks.machineBase) {
                 this.worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, GCBlocks.machineTiered, 0, 2);
             } else if (metadata >= 8) {
@@ -71,7 +71,7 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
             this.initialised = true;
         }
 
-        float energy = this.storage.getEnergyStoredGC();
+        final float energy = this.storage.getEnergyStoredGC();
         if (this.getTierGC() == 1 && !this.worldObj.isRemote) {
             if (this.lastEnergy - energy > this.storage.getMaxExtract() - 1) {
                 // Deplete faster if being drained at maximum output
@@ -119,12 +119,12 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
             this.initialised = false;
         }
 
-        NBTTagList var2 = par1NBTTagCompound.getTagList("Items", 10);
+        final NBTTagList var2 = par1NBTTagCompound.getTagList("Items", 10);
         this.containingItems = new ItemStack[this.getSizeInventory()];
 
         for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
-            NBTTagCompound var4 = var2.getCompoundTagAt(var3);
-            int var5 = var4.getByte("Slot") & 255;
+            final NBTTagCompound var4 = var2.getCompoundTagAt(var3);
+            final int var5 = var4.getByte("Slot") & 255;
 
             if (var5 < this.containingItems.length) {
                 this.containingItems[var5] = ItemStack.loadItemStackFromNBT(var4);
@@ -142,11 +142,11 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
         }
 
         super.writeToNBT(par1NBTTagCompound);
-        NBTTagList var2 = new NBTTagList();
+        final NBTTagList var2 = new NBTTagList();
 
         for (int var3 = 0; var3 < this.containingItems.length; ++var3) {
             if (this.containingItems[var3] != null) {
-                NBTTagCompound var4 = new NBTTagCompound();
+                final NBTTagCompound var4 = new NBTTagCompound();
                 var4.setByte("Slot", (byte) var3);
                 this.containingItems[var3].writeToNBT(var4);
                 var2.appendTag(var4);
@@ -192,7 +192,7 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
     @Override
     public ItemStack getStackInSlotOnClosing(int par1) {
         if (this.containingItems[par1] != null) {
-            ItemStack var2 = this.containingItems[par1];
+            final ItemStack var2 = this.containingItems[par1];
             this.containingItems[par1] = null;
             return var2;
         } else {
@@ -288,7 +288,7 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
             return false;
         }
 
-        int metadata = this.getBlockMetadata() & 3;
+        final int metadata = this.getBlockMetadata() & 3;
 
         return direction == ForgeDirection.getOrientation(metadata + 2)
                 || direction == ForgeDirection.getOrientation(metadata + 2 ^ 1);

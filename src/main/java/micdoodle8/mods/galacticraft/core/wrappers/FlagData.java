@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 public class FlagData {
     private int height;
     private int width;
-    private byte[][][] color;
+    private final byte[][][] color;
 
     public FlagData(int width, int height) {
         this.height = height;
@@ -77,10 +77,10 @@ public class FlagData {
     public static FlagData readFlagData(NBTTagCompound nbt) {
         if (nbt.hasKey("FlagWidth")) {
             // Legacy saves
-            int width = nbt.getInteger("FlagWidth");
-            int height = nbt.getInteger("FlagHeight");
+            final int width = nbt.getInteger("FlagWidth");
+            final int height = nbt.getInteger("FlagHeight");
 
-            FlagData flagData = new FlagData(width, height);
+            final FlagData flagData = new FlagData(width, height);
 
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
@@ -94,14 +94,14 @@ public class FlagData {
         }
 
         // New more compact flag save style
-        int width = nbt.getInteger("FWidth");
-        int height = nbt.getInteger("FHeight");
+        final int width = nbt.getInteger("FWidth");
+        final int height = nbt.getInteger("FHeight");
 
-        FlagData flagData = new FlagData(width, height);
+        final FlagData flagData = new FlagData(width, height);
         for (int i = 0; i < height; i++) {
-            int[] colorRow = nbt.getIntArray("FRow" + i);
+            final int[] colorRow = nbt.getIntArray("FRow" + i);
             for (int j = 0; j < width; j++) {
-                int color = colorRow[j];
+                final int color = colorRow[j];
                 flagData.color[j][i][0] = (byte) (color >> 16);
                 flagData.color[j][i][1] = (byte) (color >> 8 & 255);
                 flagData.color[j][i][2] = (byte) (color & 255);
@@ -115,9 +115,9 @@ public class FlagData {
         nbt.setInteger("FHeight", this.height);
 
         for (int i = 0; i < this.height; i++) {
-            int[] colorRow = new int[this.width];
+            final int[] colorRow = new int[this.width];
             for (int j = 0; j < this.width; j++) {
-                byte[] arrayColor = this.color[j][i];
+                final byte[] arrayColor = this.color[j][i];
                 colorRow[j] = ColorUtil.to32BitColorB(arrayColor[0], arrayColor[1], arrayColor[2]);
             }
             nbt.setIntArray("FRow" + i, colorRow);
@@ -125,10 +125,11 @@ public class FlagData {
     }
 
     public BufferedImage toBufferedImage() {
-        BufferedImage image = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
+        final BufferedImage image = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
         for (int i = 0; i < this.width; i++) {
             for (int j = 0; j < this.height; j++) {
-                int col = this.color[i][j][0] + 128 << 16 | this.color[i][j][1] + 128 << 8 | this.color[i][j][2] + 128;
+                final int col =
+                        this.color[i][j][0] + 128 << 16 | this.color[i][j][1] + 128 << 8 | this.color[i][j][2] + 128;
                 image.setRGB(i, j, col);
             }
         }
@@ -144,7 +145,7 @@ public class FlagData {
             return false;
         }
 
-        FlagData flagData = (FlagData) o;
+        final FlagData flagData = (FlagData) o;
 
         if (height != flagData.height) {
             return false;

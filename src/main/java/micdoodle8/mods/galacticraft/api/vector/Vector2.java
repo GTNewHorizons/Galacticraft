@@ -40,20 +40,20 @@ public class Vector2 implements Cloneable {
     }
 
     public static double distance(Vector2 point1, Vector2 point2) {
-        double xDifference = point1.x - point2.x;
-        double yDiference = point1.y - point2.y;
+        final double xDifference = point1.x - point2.x;
+        final double yDiference = point1.y - point2.y;
         return Math.sqrt(xDifference * xDifference + yDiference * yDiference);
     }
 
     public static double slope(Vector2 point1, Vector2 point2) {
-        double xDifference = point1.x - point2.x;
-        double yDiference = point1.y - point2.y;
+        final double xDifference = point1.x - point2.x;
+        final double yDiference = point1.y - point2.y;
         return yDiference / xDifference;
     }
 
     public double distanceTo(Vector2 target) {
-        double xDifference = this.x - target.x;
-        double yDifference = this.y - target.y;
+        final double xDifference = this.x - target.x;
+        final double yDifference = this.y - target.y;
         return Math.sqrt(xDifference * xDifference + yDifference * yDifference);
     }
 
@@ -100,7 +100,7 @@ public class Vector2 implements Cloneable {
     @Override
     public boolean equals(Object o) {
         if (o instanceof Vector2) {
-            Vector2 vector = (Vector2) o;
+            final Vector2 vector = (Vector2) o;
             return this.x == vector.x && this.y == vector.y;
         }
 

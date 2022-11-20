@@ -76,7 +76,7 @@ public class TileEntityCircuitFabricator extends TileBaseElectricBlockWithInvent
     }
 
     private boolean canCompress() {
-        ItemStack itemstack = this.producingStack;
+        final ItemStack itemstack = this.producingStack;
         if (itemstack == null) {
             return false;
         }
@@ -86,13 +86,14 @@ public class TileEntityCircuitFabricator extends TileBaseElectricBlockWithInvent
         if (this.containingItems[6] != null && !this.containingItems[6].isItemEqual(itemstack)) {
             return false;
         }
-        int result = this.containingItems[6] == null ? 0 : this.containingItems[6].stackSize + itemstack.stackSize;
+        final int result =
+                this.containingItems[6] == null ? 0 : this.containingItems[6].stackSize + itemstack.stackSize;
         return result <= this.getInventoryStackLimit() && result <= itemstack.getMaxStackSize();
     }
 
     public void compressItems() {
         if (this.canCompress()) {
-            ItemStack resultItemStack = this.producingStack.copy();
+            final ItemStack resultItemStack = this.producingStack.copy();
             if (ConfigManagerCore.quickMode) {
                 if (resultItemStack.getItem() == GCItems.basicItem) {
                     if (resultItemStack.getItemDamage() == ItemBasic.WAFER_BASIC) {
@@ -108,11 +109,11 @@ public class TileEntityCircuitFabricator extends TileBaseElectricBlockWithInvent
             } else if (this.containingItems[6].isItemEqual(resultItemStack)) {
                 if (this.containingItems[6].stackSize + resultItemStack.stackSize > 64) {
                     for (int i = 0; i < this.containingItems[6].stackSize + resultItemStack.stackSize - 64; i++) {
-                        float var = 0.7F;
-                        double dx = this.worldObj.rand.nextFloat() * var + (1.0F - var) * 0.5D;
-                        double dy = this.worldObj.rand.nextFloat() * var + (1.0F - var) * 0.5D;
-                        double dz = this.worldObj.rand.nextFloat() * var + (1.0F - var) * 0.5D;
-                        EntityItem entityitem = new EntityItem(
+                        final float var = 0.7F;
+                        final double dx = this.worldObj.rand.nextFloat() * var + (1.0F - var) * 0.5D;
+                        final double dy = this.worldObj.rand.nextFloat() * var + (1.0F - var) * 0.5D;
+                        final double dz = this.worldObj.rand.nextFloat() * var + (1.0F - var) * 0.5D;
+                        final EntityItem entityitem = new EntityItem(
                                 this.worldObj,
                                 this.xCoord + dx,
                                 this.yCoord + dy,
@@ -174,9 +175,9 @@ public class TileEntityCircuitFabricator extends TileBaseElectricBlockWithInvent
             return false;
         }
 
-        ArrayList<ItemStack> list = CircuitFabricatorRecipes.slotValidItems.get(slotID - 1);
+        final ArrayList<ItemStack> list = CircuitFabricatorRecipes.slotValidItems.get(slotID - 1);
 
-        for (ItemStack test : list) {
+        for (final ItemStack test : list) {
             if (test.isItemEqual(itemStack)) {
                 return true;
             }
@@ -192,7 +193,7 @@ public class TileEntityCircuitFabricator extends TileBaseElectricBlockWithInvent
         }
 
         // Offer whichever silicon slot has less silicon
-        boolean siliconFlag = this.containingItems[2] != null
+        final boolean siliconFlag = this.containingItems[2] != null
                 && (this.containingItems[3] == null
                         || this.containingItems[3].stackSize < this.containingItems[2].stackSize);
         return siliconFlag ? new int[] {0, 1, 3, 4, 5} : new int[] {0, 1, 2, 4, 5};

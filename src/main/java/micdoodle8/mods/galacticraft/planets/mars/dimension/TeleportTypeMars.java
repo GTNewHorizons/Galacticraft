@@ -20,10 +20,10 @@ public class TeleportTypeMars implements ITeleportType {
     @Override
     public Vector3 getPlayerSpawnLocation(WorldServer world, EntityPlayerMP player) {
         if (player != null) {
-            GCPlayerStats stats = GCPlayerStats.get(player);
+            final GCPlayerStats stats = GCPlayerStats.get(player);
             double x = stats.coordsTeleportedFromX;
             double z = stats.coordsTeleportedFromZ;
-            int limit = ConfigManagerCore.otherPlanetWorldBorders - 2;
+            final int limit = ConfigManagerCore.otherPlanetWorldBorders - 2;
             if (limit > 20) {
                 if (x > limit) {
                     z *= limit / x;
@@ -63,7 +63,7 @@ public class TeleportTypeMars implements ITeleportType {
                 player.capabilities.isFlying = false;
             }
 
-            EntityLandingBalloons lander = new EntityLandingBalloons(player);
+            final EntityLandingBalloons lander = new EntityLandingBalloons(player);
 
             if (!newWorld.isRemote) {
                 newWorld.spawnEntityInWorld(lander);

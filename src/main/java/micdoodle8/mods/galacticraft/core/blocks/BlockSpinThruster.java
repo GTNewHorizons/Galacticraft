@@ -127,7 +127,7 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
     @Override
     public void onBlockAdded(World par1World, int x, int y, int z) {
         int metadata = par1World.getBlockMetadata(x, y, z);
-        TileEntityThruster tile = (TileEntityThruster) par1World.getTileEntity(x, y, z);
+        final TileEntityThruster tile = (TileEntityThruster) par1World.getTileEntity(x, y, z);
 
         if (metadata == 0) {
             if (BlockSpinThruster.isBlockSolidOnSide(par1World, x - 1, y, z, ForgeDirection.EAST, true)) {
@@ -242,7 +242,7 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
     @Override
     public MovingObjectPosition collisionRayTrace(World par1World, int x, int y, int z, Vec3 par5Vec3, Vec3 par6Vec3) {
         final int var7 = par1World.getBlockMetadata(x, y, z) & 7;
-        float var8 = 0.3F;
+        final float var8 = 0.3F;
 
         if (var7 == 1) {
             this.setBlockBounds(0.0F, 0.2F, 0.5F - var8, var8 * 2.0F, 0.8F, 0.5F + var8);
@@ -299,7 +299,7 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
         world.setBlockMetadataWithNotify(x, y, z, change, 2);
 
         if (world.provider instanceof WorldProviderSpaceStation && !world.isRemote) {
-            SpinManager worldOrbital = ((WorldProviderSpaceStation) world.provider).getSpinManager();
+            final SpinManager worldOrbital = ((WorldProviderSpaceStation) world.provider).getSpinManager();
             worldOrbital.checkSS(new BlockVec3(x, y, z), true);
         }
         return true;
@@ -315,8 +315,8 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
         if (!world.isRemote) {
             final int facing = metadata & 8;
             if (world.provider instanceof WorldProviderSpaceStation) {
-                SpinManager worldOrbital = ((WorldProviderSpaceStation) world.provider).getSpinManager();
-                BlockVec3 baseBlock = new BlockVec3(x, y, z);
+                final SpinManager worldOrbital = ((WorldProviderSpaceStation) world.provider).getSpinManager();
+                final BlockVec3 baseBlock = new BlockVec3(x, y, z);
                 worldOrbital.removeThruster(baseBlock, facing == 0);
                 worldOrbital.updateSpinSpeed();
             }

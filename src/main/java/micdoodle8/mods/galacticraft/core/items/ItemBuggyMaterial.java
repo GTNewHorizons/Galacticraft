@@ -46,7 +46,7 @@ public class ItemBuggyMaterial extends Item {
     public void registerIcons(IIconRegister iconRegister) {
         int i = 0;
 
-        for (String name : ItemBuggyMaterial.names) {
+        for (final String name : ItemBuggyMaterial.names) {
             this.icons[i++] = iconRegister.registerIcon(this.getIconString() + "." + name);
         }
     }

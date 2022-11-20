@@ -18,7 +18,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class RecipeUtil {
     public static ItemStack findMatchingBuggy(InventoryBuggyBench benchStacks) {
-        for (INasaWorkbenchRecipe recipe : GalacticraftRegistry.getBuggyBenchRecipes()) {
+        for (final INasaWorkbenchRecipe recipe : GalacticraftRegistry.getBuggyBenchRecipes()) {
             if (recipe.matches(benchStacks)) {
                 return recipe.getRecipeOutput();
             }
@@ -28,7 +28,7 @@ public class RecipeUtil {
     }
 
     public static ItemStack findMatchingSpaceshipRecipe(InventoryRocketBench inventoryRocketBench) {
-        for (INasaWorkbenchRecipe recipe : GalacticraftRegistry.getRocketT1Recipes()) {
+        for (final INasaWorkbenchRecipe recipe : GalacticraftRegistry.getRocketT1Recipes()) {
             if (recipe.matches(inventoryRocketBench)) {
                 return recipe.getRecipeOutput();
             }
@@ -81,7 +81,7 @@ public class RecipeUtil {
     }
 
     public static ItemStack getChestItemStack(int size, int meta) {
-        Block block = getChestBlock();
+        final Block block = getChestBlock();
         return new ItemStack(block, size, meta);
     }
 }

@@ -115,7 +115,7 @@ public class AsteroidsModule implements IPlanetsModule {
         playerHandler = new AsteroidsPlayerHandler();
         MinecraftForge.EVENT_BUS.register(playerHandler);
         FMLCommonHandler.instance().bus().register(playerHandler);
-        AsteroidsEventHandler eventHandler = new AsteroidsEventHandler();
+        final AsteroidsEventHandler eventHandler = new AsteroidsEventHandler();
         MinecraftForge.EVENT_BUS.register(eventHandler);
         FMLCommonHandler.instance().bus().register(eventHandler);
         RecipeSorter.register(
@@ -170,7 +170,7 @@ public class AsteroidsModule implements IPlanetsModule {
 
         GalacticraftCore.packetPipeline.addDiscriminator(7, PacketSimpleAsteroids.class);
 
-        AsteroidsTickHandlerServer eventHandler = new AsteroidsTickHandlerServer();
+        final AsteroidsTickHandlerServer eventHandler = new AsteroidsTickHandlerServer();
         FMLCommonHandler.instance().bus().register(eventHandler);
         MinecraftForge.EVENT_BUS.register(eventHandler);
 
@@ -193,7 +193,7 @@ public class AsteroidsModule implements IPlanetsModule {
         GalacticraftRegistry.registerTeleportType(WorldProviderAsteroids.class, new TeleportTypeAsteroids());
 
         // Handled by Galaxy Space
-        HashMap<Integer, ItemStack> input = new HashMap<Integer, ItemStack>();
+        final HashMap<Integer, ItemStack> input = new HashMap<Integer, ItemStack>();
         /*
          * input.put(1, new ItemStack(AsteroidsItems.heavyNoseCone)); input.put(2, new
          * ItemStack(AsteroidsItems.basicItem, 1, 0)); input.put(3, new
@@ -290,15 +290,15 @@ public class AsteroidsModule implements IPlanetsModule {
     @Override
     public void postInit(FMLPostInitializationEvent event) {
         try {
-            ZipFile zf = new ZipFile(GCPlanetsSource);
+            final ZipFile zf = new ZipFile(GCPlanetsSource);
             final Pattern assetENUSLang = Pattern.compile("assets/(.*)/lang/(?:.+/|)([\\w_-]+).lang");
-            for (ZipEntry ze : Collections.list(zf.entries())) {
+            for (final ZipEntry ze : Collections.list(zf.entries())) {
                 if (!ze.getName().contains("galacticraftasteroids/lang")) {
                     continue;
                 }
-                Matcher matcher = assetENUSLang.matcher(ze.getName());
+                final Matcher matcher = assetENUSLang.matcher(ze.getName());
                 if (matcher.matches()) {
-                    String lang = matcher.group(2);
+                    final String lang = matcher.group(2);
                     LanguageRegistry.instance()
                             .injectLanguage(lang, StringTranslate.parseLangFile(zf.getInputStream(ze)));
                     if ("en_US".equals(lang) && event.getSide() == Side.SERVER) {
@@ -307,7 +307,7 @@ public class AsteroidsModule implements IPlanetsModule {
                 }
             }
             zf.close();
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
     }
 
@@ -330,7 +330,7 @@ public class AsteroidsModule implements IPlanetsModule {
     @Override
     public Object getGuiElement(Side side, int ID, EntityPlayer player, World world, int x, int y, int z) {
         if (side == Side.SERVER) {
-            TileEntity tile = world.getTileEntity(x, y, z);
+            final TileEntity tile = world.getTileEntity(x, y, z);
 
             switch (ID) {
                 case GuiIdsPlanets.MACHINE_ASTEROIDS:
@@ -366,17 +366,17 @@ public class AsteroidsModule implements IPlanetsModule {
 
     private void registerMicroBlocks() {
         try {
-            Class clazz = Class.forName("codechicken.microblock.MicroMaterialRegistry");
+            final Class clazz = Class.forName("codechicken.microblock.MicroMaterialRegistry");
             if (clazz != null) {
                 Method registerMethod = null;
-                Method[] methodz = clazz.getMethods();
-                for (Method m : methodz) {
+                final Method[] methodz = clazz.getMethods();
+                for (final Method m : methodz) {
                     if (m.getName().equals("registerMaterial")) {
                         registerMethod = m;
                         break;
                     }
                 }
-                Class clazzbm = Class.forName("codechicken.microblock.BlockMicroMaterial");
+                final Class clazzbm = Class.forName("codechicken.microblock.BlockMicroMaterial");
                 registerMethod.invoke(
                         null,
                         clazzbm.getConstructor(Block.class, int.class).newInstance(AsteroidBlocks.blockBasic, 0),
@@ -394,7 +394,7 @@ public class AsteroidsModule implements IPlanetsModule {
                         clazzbm.getConstructor(Block.class, int.class).newInstance(AsteroidBlocks.blockDenseIce, 0),
                         "tile.denseIce");
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
     }
 

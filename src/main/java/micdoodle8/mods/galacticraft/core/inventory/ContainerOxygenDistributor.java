@@ -11,7 +11,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerOxygenDistributor extends Container {
-    private TileBaseElectricBlock tileEntity;
+    private final TileBaseElectricBlock tileEntity;
 
     public ContainerOxygenDistributor(InventoryPlayer par1InventoryPlayer, TileEntityOxygenDistributor distributor) {
         this.tileEntity = distributor;

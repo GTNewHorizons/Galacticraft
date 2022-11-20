@@ -30,7 +30,7 @@ public class BlockRendererOxygenPipe implements ISimpleBlockRenderingHandler {
         if (tileEntity != null) {
             final TileEntity[] connections = OxygenUtil.getAdjacentOxygenConnections(tileEntity);
 
-            for (TileEntity connection : connections) {
+            for (final TileEntity connection : connections) {
                 if (connection != null) {
                     final int side = Arrays.asList(connections).indexOf(connection);
 

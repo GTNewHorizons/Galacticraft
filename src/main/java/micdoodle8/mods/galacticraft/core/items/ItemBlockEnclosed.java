@@ -63,7 +63,7 @@ public class ItemBlockEnclosed extends ItemBlockDesc {
                 try {
                     name = BlockEnclosed.getTypeFromMeta(par1ItemStack.getItemDamage())
                             .getPipeType();
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     name = "null";
                 }
                 break;
@@ -84,12 +84,12 @@ public class ItemBlockEnclosed extends ItemBlockDesc {
             float par8,
             float par9,
             float par10) {
-        int metadata = this.getMetadata(itemstack.getItemDamage());
+        final int metadata = this.getMetadata(itemstack.getItemDamage());
         if (metadata == EnumEnclosedBlock.ME_CABLE.getMetadata() && CompatibilityManager.isAppEngLoaded()) {
-            int x = i;
-            int y = j;
-            int z = k;
-            Block block = world.getBlock(i, j, k);
+            final int x = i;
+            final int y = j;
+            final int z = k;
+            final Block block = world.getBlock(i, j, k);
 
             if (block == Blocks.snow_layer && (world.getBlockMetadata(i, j, k) & 7) < 1) {
                 side = 1;
@@ -126,7 +126,7 @@ public class ItemBlockEnclosed extends ItemBlockDesc {
             } else if (j == 255 && this.field_150939_a.getMaterial().isSolid()) {
                 return false;
             } else if (world.canPlaceEntityOnSide(block, i, j, k, false, side, entityplayer, itemstack)) {
-                int j1 = this.field_150939_a.onBlockPlaced(world, i, j, k, side, par8, par9, par10, metadata);
+                final int j1 = this.field_150939_a.onBlockPlaced(world, i, j, k, side, par8, par9, par10, metadata);
 
                 if (placeBlockAt(itemstack, entityplayer, world, i, j, k, side, par8, par9, par10, j1)) {
                     world.playSoundEffect(
@@ -138,7 +138,7 @@ public class ItemBlockEnclosed extends ItemBlockDesc {
                             this.field_150939_a.stepSound.getPitch() * 0.8F);
                     --itemstack.stackSize;
 
-                    ItemStack itemME =
+                    final ItemStack itemME =
                             AEApi.instance().definitions().parts().cableGlass().stack(AEColor.Transparent, 1);
                     itemME.stackSize = 2; // Fool AppEng into not destroying anything in the player inventory
                     return AEApi.instance().partHelper().placeBus(itemME, x, y, z, side, entityplayer, world);

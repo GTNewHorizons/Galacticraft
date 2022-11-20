@@ -33,7 +33,7 @@ public abstract class BlockTransmitter extends BlockContainer {
     public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
         super.onNeighborBlockChange(world, x, y, z, block);
 
-        TileEntity tile = world.getTileEntity(x, y, z);
+        final TileEntity tile = world.getTileEntity(x, y, z);
 
         this.setBlockBoundsBasedOnState(world, x, y, z);
         GalacticraftCore.packetPipeline.sendToAllAround(
@@ -66,7 +66,7 @@ public abstract class BlockTransmitter extends BlockContainer {
      */
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        final TileEntity tileEntity = world.getTileEntity(x, y, z);
 
         if (tileEntity instanceof ITransmitter) {
             TileEntity[] connectable = new TileEntity[6];
@@ -134,7 +134,7 @@ public abstract class BlockTransmitter extends BlockContainer {
                 (float) this.maxVector.z);
         super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
 
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        final TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity instanceof ITransmitter) {
             TileEntity[] connectable;
             switch (this.getNetworkType()) {

@@ -78,7 +78,7 @@ public class BlockParaChest extends BlockContainer implements ITileEntityProvide
         if (par1World.isRemote) {
             return true;
         } else {
-            IInventory iinventory = this.getInventory(par1World, par2, par3, par4);
+            final IInventory iinventory = this.getInventory(par1World, par2, par3, par4);
 
             if (iinventory != null && par5EntityPlayer instanceof EntityPlayerMP) {
                 par5EntityPlayer.openGui(GalacticraftCore.instance, -1, par1World, par2, par3, par4);
@@ -101,7 +101,7 @@ public class BlockParaChest extends BlockContainer implements ITileEntityProvide
 
     @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block par5) {
-        TileEntityParaChest tileentitychest = (TileEntityParaChest) par1World.getTileEntity(par2, par3, par4);
+        final TileEntityParaChest tileentitychest = (TileEntityParaChest) par1World.getTileEntity(par2, par3, par4);
 
         if (tileentitychest != null) {
             tileentitychest.updateContainingBlockInfo();
@@ -115,18 +115,18 @@ public class BlockParaChest extends BlockContainer implements ITileEntityProvide
 
     @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6) {
-        TileEntityParaChest tileentitychest = (TileEntityParaChest) par1World.getTileEntity(par2, par3, par4);
+        final TileEntityParaChest tileentitychest = (TileEntityParaChest) par1World.getTileEntity(par2, par3, par4);
 
         if (tileentitychest != null) {
             for (int j1 = 0; j1 < tileentitychest.getSizeInventory(); ++j1) {
-                ItemStack itemstack = tileentitychest.getStackInSlot(j1);
+                final ItemStack itemstack = tileentitychest.getStackInSlot(j1);
 
                 if (itemstack != null) {
-                    float f = this.random.nextFloat() * 0.8F + 0.1F;
-                    float f1 = this.random.nextFloat() * 0.8F + 0.1F;
+                    final float f = this.random.nextFloat() * 0.8F + 0.1F;
+                    final float f1 = this.random.nextFloat() * 0.8F + 0.1F;
                     EntityItem entityitem;
 
-                    for (float f2 = this.random.nextFloat() * 0.8F + 0.1F;
+                    for (final float f2 = this.random.nextFloat() * 0.8F + 0.1F;
                             itemstack.stackSize > 0;
                             par1World.spawnEntityInWorld(entityitem)) {
                         int k1 = this.random.nextInt(21) + 10;
@@ -142,7 +142,7 @@ public class BlockParaChest extends BlockContainer implements ITileEntityProvide
                                 par3 + f1,
                                 par4 + f2,
                                 new ItemStack(itemstack.getItem(), k1, itemstack.getItemDamage()));
-                        float f3 = 0.05F;
+                        final float f3 = 0.05F;
                         entityitem.motionX = (float) this.random.nextGaussian() * f3;
                         entityitem.motionY = (float) this.random.nextGaussian() * f3 + 0.2F;
                         entityitem.motionZ = (float) this.random.nextGaussian() * f3;
@@ -162,7 +162,7 @@ public class BlockParaChest extends BlockContainer implements ITileEntityProvide
     }
 
     public IInventory getInventory(World par1World, int par2, int par3, int par4) {
-        Object object = par1World.getTileEntity(par2, par3, par4);
+        final Object object = par1World.getTileEntity(par2, par3, par4);
 
         if (object == null) {
             return null;
@@ -176,7 +176,7 @@ public class BlockParaChest extends BlockContainer implements ITileEntityProvide
     }
 
     public static boolean isOcelotBlockingChest(World par0World, int par1, int par2, int par3) {
-        Iterator<?> iterator = par0World
+        final Iterator<?> iterator = par0World
                 .getEntitiesWithinAABB(
                         EntityOcelot.class,
                         AxisAlignedBB.getBoundingBox(par1, par2 + 1, par3, par1 + 1, par2 + 2, par3 + 1))

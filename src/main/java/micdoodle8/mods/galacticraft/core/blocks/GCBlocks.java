@@ -242,14 +242,14 @@ public class GCBlocks {
             try {
                 try {
                     // This is the more recent TConstruct class
-                    Class clazz = Class.forName("slimeknights.tconstruct.gadgets.TinkerGadgets");
+                    final Class clazz = Class.forName("slimeknights.tconstruct.gadgets.TinkerGadgets");
                     modTorch = (Block) clazz.getField("stoneTorch").get(null);
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     // This is the older TConstruct class
-                    Class clazz = Class.forName("tconstruct.world.TinkerWorld");
+                    final Class clazz = Class.forName("tconstruct.world.TinkerWorld");
                     modTorch = (Block) clazz.getField("stoneTorch").get(null);
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
             }
             if (modTorch != null) {
                 torch = new BlockUnlitTorch(false, "unlitTorch_Stone");

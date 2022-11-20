@@ -19,9 +19,9 @@ import org.lwjgl.opengl.GL11;
 public class GuiElectricFurnace extends GuiContainerGC {
     private static final ResourceLocation electricFurnaceTexture =
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/electric_furnace.png");
-    private GuiElementInfoRegion electricInfoRegion = new GuiElementInfoRegion(0, 0, 56, 9, null, 0, 0, this);
+    private final GuiElementInfoRegion electricInfoRegion = new GuiElementInfoRegion(0, 0, 56, 9, null, 0, 0, this);
 
-    private TileEntityElectricFurnace tileEntity;
+    private final TileEntityElectricFurnace tileEntity;
 
     public GuiElectricFurnace(InventoryPlayer par1InventoryPlayer, TileEntityElectricFurnace tileEntity) {
         super(new ContainerElectricFurnace(par1InventoryPlayer, tileEntity));
@@ -37,7 +37,7 @@ public class GuiElectricFurnace extends GuiContainerGC {
         this.electricInfoRegion.parentWidth = this.width;
         this.electricInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.electricInfoRegion);
-        List<String> batterySlotDesc = new ArrayList<String>();
+        final List<String> batterySlotDesc = new ArrayList<String>();
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.0"));
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(
@@ -84,12 +84,12 @@ public class GuiElectricFurnace extends GuiContainerGC {
         this.mc.renderEngine.bindTexture(GuiElectricFurnace.electricFurnaceTexture);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        int containerWidth = (this.width - this.xSize) / 2;
-        int containerHeight = (this.height - this.ySize) / 2;
+        final int containerWidth = (this.width - this.xSize) / 2;
+        final int containerHeight = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(containerWidth, containerHeight, 0, 0, this.xSize, this.ySize);
         int scale;
 
-        List<String> electricityDesc = new ArrayList<String>();
+        final List<String> electricityDesc = new ArrayList<String>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         EnergyDisplayHelper.getEnergyDisplayTooltip(
                 this.tileEntity.getEnergyStoredGC(), this.tileEntity.getMaxEnergyStoredGC(), electricityDesc);

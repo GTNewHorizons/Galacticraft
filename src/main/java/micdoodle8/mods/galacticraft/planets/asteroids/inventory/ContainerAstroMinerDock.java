@@ -11,7 +11,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerAstroMinerDock extends Container {
-    private TileEntityMinerBase tileEntity;
+    private final TileEntityMinerBase tileEntity;
 
     public ContainerAstroMinerDock(InventoryPlayer par1InventoryPlayer, IInventory tile) {
         this.tileEntity = (TileEntityMinerBase) tile;
@@ -48,7 +48,7 @@ public class ContainerAstroMinerDock extends Container {
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
         ItemStack var3 = null;
         final Slot slot = (Slot) this.inventorySlots.get(par2);
-        int b = TileEntityMinerBase.HOLDSIZE + 1;
+        final int b = TileEntityMinerBase.HOLDSIZE + 1;
 
         if (slot != null && slot.getHasStack()) {
             final ItemStack var5 = slot.getStack();

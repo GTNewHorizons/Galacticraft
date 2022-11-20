@@ -54,17 +54,17 @@ public class TileEntityRefinery extends TileBaseElectricBlockWithInventory imple
             if (this.containingItems[1] != null) {
                 if (this.containingItems[1].getItem() instanceof ItemCanisterGeneric) {
                     if (this.containingItems[1].getItem() == GCItems.oilCanister) {
-                        int originalDamage = this.containingItems[1].getItemDamage();
-                        int used = this.oilTank.fill(
+                        final int originalDamage = this.containingItems[1].getItemDamage();
+                        final int used = this.oilTank.fill(
                                 new FluidStack(GalacticraftCore.fluidOil, ItemCanisterGeneric.EMPTY - originalDamage),
                                 true);
                         this.containingItems[1] = new ItemStack(GCItems.oilCanister, 1, originalDamage + used);
                     }
                 } else {
-                    FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(this.containingItems[1]);
+                    final FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(this.containingItems[1]);
 
                     if (liquid != null) {
-                        boolean isOil = FluidRegistry.getFluidName(liquid).startsWith("oil");
+                        final boolean isOil = FluidRegistry.getFluidName(liquid).startsWith("oil");
 
                         if (isOil) {
                             if (this.oilTank.getFluid() == null

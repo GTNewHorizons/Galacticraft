@@ -59,11 +59,11 @@ public class OverlayLander extends Overlay {
         GL11.glPopMatrix();
 
         if (OverlayLander.minecraft.thePlayer.ridingEntity.motionY != 0.0D) {
-            String string = GCCoreUtil.translate("gui.lander.velocity") + ": "
+            final String string = GCCoreUtil.translate("gui.lander.velocity") + ": "
                     + Math.round(((EntityLander) OverlayLander.minecraft.thePlayer.ridingEntity).motionY * 1000)
                             / 100.0D
                     + " " + GCCoreUtil.translate("gui.lander.velocityu");
-            int color = ColorUtil.to32BitColor(
+            final int color = ColorUtil.to32BitColor(
                     255,
                     (int) Math.floor(Math.abs(OverlayLander.minecraft.thePlayer.ridingEntity.motionY) * 51.0D),
                     255 - (int) Math.floor(Math.abs(OverlayLander.minecraft.thePlayer.ridingEntity.motionY) * 51.0D),

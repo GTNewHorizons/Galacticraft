@@ -48,13 +48,14 @@ public class CommandSpaceStationAddOwner extends CommandBase {
                         PlayerUtil.getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
 
                 if (playerBase != null) {
-                    GCPlayerStats stats = GCPlayerStats.get(playerBase);
+                    final GCPlayerStats stats = GCPlayerStats.get(playerBase);
 
                     if (stats.spaceStationDimensionData.isEmpty()) {
                         throw new WrongUsageException(
                                 GCCoreUtil.translate("commands.ssinvite.notFound"), new Object[0]);
                     } else {
-                        for (Map.Entry<Integer, Integer> ownedStations : stats.spaceStationDimensionData.entrySet()) {
+                        for (final Map.Entry<Integer, Integer> ownedStations :
+                                stats.spaceStationDimensionData.entrySet()) {
                             final SpaceStationWorldData data = SpaceStationWorldData.getStationData(
                                     playerBase.worldObj, ownedStations.getValue(), playerBase);
 

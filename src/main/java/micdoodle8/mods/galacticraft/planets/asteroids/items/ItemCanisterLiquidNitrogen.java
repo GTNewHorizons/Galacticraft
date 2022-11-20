@@ -78,21 +78,21 @@ public class ItemCanisterLiquidNitrogen extends ItemCanisterGeneric {
     }
 
     public ItemStack onItemRightClick(ItemStack itemStack, World par2World, EntityPlayer par3EntityPlayer) {
-        int damage = itemStack.getItemDamage() + 125;
+        final int damage = itemStack.getItemDamage() + 125;
         if (damage > itemStack.getMaxDamage()) {
             return itemStack;
         }
 
-        MovingObjectPosition movingobjectposition =
+        final MovingObjectPosition movingobjectposition =
                 this.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, true);
 
         if (movingobjectposition == null) {
             return itemStack;
         } else {
             if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-                int x = movingobjectposition.blockX;
-                int y = movingobjectposition.blockY;
-                int z = movingobjectposition.blockZ;
+                final int x = movingobjectposition.blockX;
+                final int y = movingobjectposition.blockY;
+                final int z = movingobjectposition.blockZ;
 
                 if (!par2World.canMineBlock(par3EntityPlayer, x, y, z)) {
                     return itemStack;
@@ -103,10 +103,10 @@ public class ItemCanisterLiquidNitrogen extends ItemCanisterGeneric {
                 }
 
                 // Material material = par2World.getBlock(i, j, k).getMaterial();
-                Block b = par2World.getBlock(x, y, z);
-                int meta = par2World.getBlockMetadata(x, y, z);
+                final Block b = par2World.getBlock(x, y, z);
+                final int meta = par2World.getBlockMetadata(x, y, z);
 
-                Block result = this.canFreeze(b, meta);
+                final Block result = this.canFreeze(b, meta);
                 if (result != null) {
                     this.setNewDamage(itemStack, damage);
                     par2World.playSoundEffect(

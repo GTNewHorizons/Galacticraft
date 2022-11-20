@@ -42,7 +42,7 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
 
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-        int meta = world.getBlockMetadata(x, y, z);
+        final int meta = world.getBlockMetadata(x, y, z);
 
         if (meta == 0) {
             this.setBlockBounds(0.0F, 0.55F, 0.0F, 1.0F, 1.0F, 1.0F);
@@ -57,7 +57,7 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
     @Override
     public void addCollisionBoxesToList(
             World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List list, Entity entity) {
-        int meta = world.getBlockMetadata(x, y, z);
+        final int meta = world.getBlockMetadata(x, y, z);
 
         if (meta == 0) {
             this.setBlockBounds(0.0F, 0.55F, 0.0F, 1.0F, 1.0F, 1.0F);
@@ -94,10 +94,10 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
 
     @Override
     public float getBlockHardness(World par1World, int par2, int par3, int par4) {
-        TileEntity tileEntity = par1World.getTileEntity(par2, par3, par4);
+        final TileEntity tileEntity = par1World.getTileEntity(par2, par3, par4);
 
         if (tileEntity instanceof TileEntityTelepadFake) {
-            BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
+            final BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
 
             if (mainBlockPosition != null) {
                 return mainBlockPosition.getBlock(par1World).getBlockHardness(par1World, par2, par3, par4);
@@ -115,7 +115,7 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
 
     @Override
     public void breakBlock(World world, int x, int y, int z, Block par5, int par6) {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        final TileEntity tileEntity = world.getTileEntity(x, y, z);
 
         if (tileEntity instanceof TileEntityTelepadFake) {
             ((TileEntityTelepadFake) tileEntity).onBlockRemoval();
@@ -135,7 +135,7 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
             float par7,
             float par8,
             float par9) {
-        TileEntityTelepadFake tileEntity = (TileEntityTelepadFake) par1World.getTileEntity(x, y, z);
+        final TileEntityTelepadFake tileEntity = (TileEntityTelepadFake) par1World.getTileEntity(x, y, z);
         return tileEntity.onActivated(par5EntityPlayer);
     }
 
@@ -161,11 +161,11 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
 
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
-        BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
+        final TileEntity tileEntity = world.getTileEntity(x, y, z);
+        final BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
 
         if (mainBlockPosition != null) {
-            Block mainBlockID = world.getBlock(mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z);
+            final Block mainBlockID = world.getBlock(mainBlockPosition.x, mainBlockPosition.y, mainBlockPosition.z);
 
             if (Blocks.air != mainBlockID) {
                 return mainBlockID.getPickBlock(
@@ -178,8 +178,8 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
 
     @Override
     public int getBedDirection(IBlockAccess world, int x, int y, int z) {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
-        BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
+        final TileEntity tileEntity = world.getTileEntity(x, y, z);
+        final BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
 
         if (mainBlockPosition != null) {
             return mainBlockPosition
@@ -192,8 +192,8 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
 
     @Override
     public boolean isBed(IBlockAccess world, int x, int y, int z, EntityLivingBase player) {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
-        BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
+        final TileEntity tileEntity = world.getTileEntity(x, y, z);
+        final BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
 
         if (mainBlockPosition != null) {
             return mainBlockPosition
@@ -206,8 +206,8 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
 
     @Override
     public void setBedOccupied(IBlockAccess world, int x, int y, int z, EntityPlayer player, boolean occupied) {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
-        BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
+        final TileEntity tileEntity = world.getTileEntity(x, y, z);
+        final BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
 
         if (mainBlockPosition != null) {
             mainBlockPosition
@@ -226,10 +226,10 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
             return true;
         }
 
-        TileEntity tileEntity = worldObj.getTileEntity(target.blockX, target.blockY, target.blockZ);
+        final TileEntity tileEntity = worldObj.getTileEntity(target.blockX, target.blockY, target.blockZ);
 
         if (tileEntity instanceof TileEntityTelepadFake) {
-            BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
+            final BlockVec3 mainBlockPosition = ((TileEntityTelepadFake) tileEntity).mainBlockPosition;
 
             if (mainBlockPosition != null) {
                 effectRenderer.addBlockHitEffects(

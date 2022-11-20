@@ -180,7 +180,7 @@ public class MapGenCavernMars extends MapGenBaseMeta {
                         caveMaxZ = 16;
                     }
 
-                    boolean isBlockWater = false;
+                    final boolean isBlockWater = false;
                     int var42;
                     int var45;
 
@@ -214,7 +214,7 @@ public class MapGenCavernMars extends MapGenBaseMeta {
 
                                     if (var59 * var59 + var51 * var51 + var46 * var46 < 1.0D) {
                                         if (var51 > -0.7D) {
-                                            int coords = (var42 * 16 + var45) * 256 + var50;
+                                            final int coords = (var42 * 16 + var45) * 256 + var50;
 
                                             if (arrayOfIDs[coords] == MarsBlocks.marsBlock
                                                     || arrayOfIDs[coords] == MarsBlocks.blockSludge
@@ -240,8 +240,8 @@ public class MapGenCavernMars extends MapGenBaseMeta {
 
                                     if (var59 * var59 + var51 * var51 + var46 * var46 < 1.0D) {
                                         if (var51 > -0.7D) {
-                                            int coords = (var42 * 16 + var45) * 256 + var50;
-                                            int coordsAbove = (var42 * 16 + var45) * 256 + var50 + 1;
+                                            final int coords = (var42 * 16 + var45) * 256 + var50;
+                                            final int coordsAbove = (var42 * 16 + var45) * 256 + var50 + 1;
                                             int coordsBelow = (var42 * 16 + var45) * 256 + var50 - 1;
 
                                             if (Blocks.air == arrayOfIDs[coords]) {

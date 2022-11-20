@@ -34,12 +34,12 @@ public class SkyProviderMars extends IRenderHandler {
     public int starList;
     public int glSkyList;
     public int glSkyList2;
-    private float sunSize;
+    private final float sunSize;
 
     public SkyProviderMars(IGalacticraftWorldProvider marsProvider) {
         this.sunSize = 17.5F * marsProvider.getSolarSize();
 
-        int displayLists = GLAllocation.generateDisplayLists(3);
+        final int displayLists = GLAllocation.generateDisplayLists(3);
         this.starList = displayLists;
         this.glSkyList = displayLists + 1;
         this.glSkyList2 = displayLists + 2;
@@ -90,15 +90,15 @@ public class SkyProviderMars extends IRenderHandler {
     public void render(float partialTicks, WorldClient world, Minecraft mc) {
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-        Vec3 vec3 = world.getSkyColor(mc.renderViewEntity, partialTicks);
+        final Vec3 vec3 = world.getSkyColor(mc.renderViewEntity, partialTicks);
         float f1 = (float) vec3.xCoord;
         float f2 = (float) vec3.yCoord;
         float f3 = (float) vec3.zCoord;
         float f6;
 
         if (mc.gameSettings.anaglyph) {
-            float f4 = (f1 * 30.0F + f2 * 59.0F + f3 * 11.0F) / 100.0F;
-            float f5 = (f1 * 30.0F + f2 * 70.0F) / 100.0F;
+            final float f4 = (f1 * 30.0F + f2 * 59.0F + f3 * 11.0F) / 100.0F;
+            final float f5 = (f1 * 30.0F + f2 * 70.0F) / 100.0F;
             f6 = (f1 * 30.0F + f3 * 70.0F) / 100.0F;
             f1 = f4;
             f2 = f5;
@@ -106,7 +106,7 @@ public class SkyProviderMars extends IRenderHandler {
         }
 
         GL11.glColor3f(f1, f2, f3);
-        Tessellator tessellator1 = Tessellator.instance;
+        final Tessellator tessellator1 = Tessellator.instance;
         GL11.glDepthMask(false);
         GL11.glEnable(GL11.GL_FOG);
         GL11.glColor3f(f1, f2, f3);
@@ -128,7 +128,7 @@ public class SkyProviderMars extends IRenderHandler {
             GL11.glCallList(this.starList);
         }
 
-        float[] afloat = new float[4];
+        final float[] afloat = new float[4];
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glShadeModel(GL11.GL_SMOOTH);
         GL11.glPushMatrix();
@@ -157,7 +157,7 @@ public class SkyProviderMars extends IRenderHandler {
         tessellator1.startDrawing(GL11.GL_TRIANGLE_FAN);
         tessellator1.setColorRGBA_F(f6 * f18, f7 * f18, f8 * f18, afloat[3] * 2 / f18);
         tessellator1.addVertex(0.0D, 100.0D, 0.0D);
-        byte b0 = 16;
+        final byte b0 = 16;
         tessellator1.setColorRGBA_F(afloat[0] * f18, afloat[1] * f18, afloat[2] * f18, 0.0F);
 
         // Render sun aura
@@ -248,7 +248,7 @@ public class SkyProviderMars extends IRenderHandler {
         GL11.glPopMatrix();
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glColor3f(0.0F, 0.0F, 0.0F);
-        double d0 = mc.thePlayer.getPosition(partialTicks).yCoord - world.getHorizon();
+        final double d0 = mc.thePlayer.getPosition(partialTicks).yCoord - world.getHorizon();
 
         if (d0 < 0.0D) {
             GL11.glPushMatrix();

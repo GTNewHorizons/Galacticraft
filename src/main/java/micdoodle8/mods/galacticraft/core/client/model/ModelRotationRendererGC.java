@@ -26,7 +26,7 @@ import org.lwjgl.opengl.GL11;
  *
  */
 public class ModelRotationRendererGC extends ModelRotationRenderer {
-    private int type;
+    private final int type;
 
     public ModelRotationRendererGC(ModelBase modelBase, int i, int j, ModelRenderer baseRenderer, int type) {
         super(modelBase, i, j, (ModelRotationRenderer) baseRenderer);
@@ -37,7 +37,7 @@ public class ModelRotationRendererGC extends ModelRotationRenderer {
 
     @Override
     public boolean preRender(float f) {
-        boolean b = super.preRender(f);
+        final boolean b = super.preRender(f);
 
         if (ModelPlayerBaseGC.currentGearData == null) {
             return false;
@@ -89,7 +89,7 @@ public class ModelRotationRendererGC extends ModelRotationRenderer {
     @Override
     public void doRender(float f, boolean useParentTransformations) {
         if (this.preRender(f)) {
-            int saveTex = GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D);
+            final int saveTex = GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D);
 
             switch (type) {
                 case 0:

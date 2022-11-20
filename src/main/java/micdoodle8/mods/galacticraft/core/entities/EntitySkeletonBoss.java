@@ -235,7 +235,7 @@ public class EntitySkeletonBoss extends EntityMob
                         final double d4 = tile.yCoord + 0.5D - this.posY;
                         final double d5 = tile.zCoord + 0.5D - this.posZ;
                         final double dSq = d3 * d3 + d4 * d4 + d5 * d5;
-                        TileEntityTreasureChest chest = (TileEntityTreasureChest) tile;
+                        final TileEntityTreasureChest chest = (TileEntityTreasureChest) tile;
 
                         if (dSq < 10000) {
                             if (!chest.locked) {
@@ -246,7 +246,7 @@ public class EntitySkeletonBoss extends EntityMob
                                 chest.setInventorySlotContents(k, null);
                             }
 
-                            ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
+                            final ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
 
                             // Generate twice, since it's an extra special chest
                             WeightedRandomChestContent.generateChestContents(
@@ -254,8 +254,8 @@ public class EntitySkeletonBoss extends EntityMob
                             WeightedRandomChestContent.generateChestContents(
                                     this.rand, info.getItems(this.rand), chest, info.getCount(this.rand));
 
-                            ItemStack schematic = this.getGuaranteedLoot(this.rand);
-                            int slot = this.rand.nextInt(chest.getSizeInventory());
+                            final ItemStack schematic = this.getGuaranteedLoot(this.rand);
+                            final int slot = this.rand.nextInt(chest.getSizeInventory());
                             chest.setInventorySlotContents(slot, schematic);
 
                             break;
@@ -350,7 +350,7 @@ public class EntitySkeletonBoss extends EntityMob
 
         if (this.roomCoords != null && this.roomSize != null) {
             @SuppressWarnings("unchecked")
-            List<Entity> entitiesWithin = this.worldObj.getEntitiesWithinAABB(
+            final List<Entity> entitiesWithin = this.worldObj.getEntitiesWithinAABB(
                     EntityPlayer.class,
                     AxisAlignedBB.getBoundingBox(
                             this.roomCoords.intX() - 1,
@@ -364,7 +364,7 @@ public class EntitySkeletonBoss extends EntityMob
 
             if (this.entitiesWithin == 0 && this.entitiesWithinLast != 0) {
                 @SuppressWarnings("unchecked")
-                List<EntityPlayer> entitiesWithin2 = this.worldObj.getEntitiesWithinAABB(
+                final List<EntityPlayer> entitiesWithin2 = this.worldObj.getEntitiesWithinAABB(
                         EntityPlayer.class,
                         AxisAlignedBB.getBoundingBox(
                                 this.roomCoords.intX() - 11,
@@ -374,7 +374,7 @@ public class EntitySkeletonBoss extends EntityMob
                                 this.roomCoords.intY() + this.roomSize.intY() + 10,
                                 this.roomCoords.intZ() + this.roomSize.intZ() + 10));
 
-                for (EntityPlayer p : entitiesWithin2) {
+                for (final EntityPlayer p : entitiesWithin2) {
                     p.addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.skeletonBoss.message")));
                 }
 
@@ -499,7 +499,7 @@ public class EntitySkeletonBoss extends EntityMob
     }
 
     public ItemStack getGuaranteedLoot(Random rand) {
-        List<ItemStack> stackList = GalacticraftRegistry.getDungeonLoot(1);
+        final List<ItemStack> stackList = GalacticraftRegistry.getDungeonLoot(1);
         return stackList.get(rand.nextInt(stackList.size())).copy();
     }
 

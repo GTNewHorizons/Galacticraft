@@ -32,7 +32,7 @@ public class OreGenOtherMods {
     static {
         for (final String str : ConfigManagerCore.oregenIDs) {
             try {
-                int slash = str.indexOf('/');
+                final int slash = str.indexOf('/');
                 String s;
                 int rarity = 0; // 0 = common 1 = uncommon 2 = rare
                 int depth = 0; // 0 = even 1 = deep 2 = shallow
@@ -42,7 +42,7 @@ public class OreGenOtherMods {
 
                 if (slash >= 0) {
                     s = str.substring(0, slash).trim();
-                    String params = str.substring(slash).toUpperCase();
+                    final String params = str.substring(slash).toUpperCase();
                     if (params.contains("UNCOMMON")) {
                         rarity = 1;
                     } else if (params.contains("RARE")) {
@@ -75,7 +75,7 @@ public class OreGenOtherMods {
                     s = str;
                 }
 
-                BlockTuple bt = ConfigManagerCore.stringToBlock(s, "Other mod ore generate IDs", true);
+                final BlockTuple bt = ConfigManagerCore.stringToBlock(s, "Other mod ore generate IDs", true);
                 if (bt == null) {
                     continue;
                 }
@@ -165,7 +165,7 @@ public class OreGenOtherMods {
             }
         }
 
-        OreGenData ore = new OreGenData(block, meta, clusters, size, min, max, dim);
+        final OreGenData ore = new OreGenData(block, meta, clusters, size, min, max, dim);
         OreGenOtherMods.data.add(ore);
     }
 
@@ -178,7 +178,7 @@ public class OreGenOtherMods {
 
         int dimDetected = 0;
 
-        WorldProvider prov = worldObj.provider;
+        final WorldProvider prov = worldObj.provider;
         if (!(prov instanceof IGalacticraftWorldProvider) || prov instanceof WorldProviderSpaceStation) {
             return;
         }
@@ -200,7 +200,7 @@ public class OreGenOtherMods {
             return;
         }
 
-        for (OreGenData ore : OreGenOtherMods.data) {
+        for (final OreGenData ore : OreGenOtherMods.data) {
             if (ore.dimRestrict == 0 || ore.dimRestrict == dimDetected) {
                 this.oreGen = new WorldGenMinableMeta(
                         ore.oreBlock, ore.sizeCluster, ore.oreMeta, true, stoneBlock, stoneMeta);

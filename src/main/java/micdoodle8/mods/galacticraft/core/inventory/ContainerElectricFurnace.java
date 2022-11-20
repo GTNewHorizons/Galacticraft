@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 
 public class ContainerElectricFurnace extends Container {
-    private TileEntityElectricFurnace tileEntity;
+    private final TileEntityElectricFurnace tileEntity;
 
     public ContainerElectricFurnace(InventoryPlayer par1InventoryPlayer, TileEntityElectricFurnace tileEntity) {
         this.tileEntity = tileEntity;
@@ -58,10 +58,10 @@ public class ContainerElectricFurnace extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par1) {
         ItemStack var2 = null;
-        Slot var3 = (Slot) this.inventorySlots.get(par1);
+        final Slot var3 = (Slot) this.inventorySlots.get(par1);
 
         if (var3 != null && var3.getHasStack()) {
-            ItemStack var4 = var3.getStack();
+            final ItemStack var4 = var3.getStack();
             var2 = var4.copy();
 
             if (par1 == 2) {

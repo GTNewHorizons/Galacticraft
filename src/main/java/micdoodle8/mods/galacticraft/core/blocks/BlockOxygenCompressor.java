@@ -112,7 +112,7 @@ public class BlockOxygenCompressor extends BlockAdvancedTile implements ItemBloc
             meta += BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA;
         }
 
-        TileEntity te = par1World.getTileEntity(x, y, z);
+        final TileEntity te = par1World.getTileEntity(x, y, z);
         if (te instanceof TileBaseUniversalElectrical) {
             ((TileBaseUniversalElectrical) te).updateFacing();
         }
@@ -231,7 +231,7 @@ public class BlockOxygenCompressor extends BlockAdvancedTile implements ItemBloc
 
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
-        int metadata = this.getDamageValue(world, x, y, z);
+        final int metadata = this.getDamageValue(world, x, y, z);
 
         return new ItemStack(this, 1, metadata);
     }

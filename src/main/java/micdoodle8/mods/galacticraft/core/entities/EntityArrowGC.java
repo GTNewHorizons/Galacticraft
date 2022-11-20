@@ -202,11 +202,11 @@ public class EntityArrowGC extends Entity {
             this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(this.motionY, var1) * 180.0D / Math.PI);
         }
 
-        Block block = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
+        final Block block = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 
         if (block.getMaterial() != Material.air) {
             block.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
-            AxisAlignedBB axisalignedbb =
+            final AxisAlignedBB axisalignedbb =
                     block.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
 
             if (axisalignedbb != null
@@ -220,7 +220,7 @@ public class EntityArrowGC extends Entity {
         }
 
         if (this.inGround) {
-            int j = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
+            final int j = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
 
             if (block == this.inTile && j == this.inData) {
                 ++this.ticksInGround;

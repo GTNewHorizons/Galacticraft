@@ -19,9 +19,9 @@ import org.lwjgl.opengl.GL11;
 public class GuiCircuitFabricator extends GuiContainerGC {
     private static final ResourceLocation circuitFabricatorTexture =
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/circuitFabricator.png");
-    private TileEntityCircuitFabricator tileEntity;
-    private GuiElementInfoRegion electricInfoRegion = new GuiElementInfoRegion(0, 0, 56, 9, null, 0, 0, this);
-    private GuiElementInfoRegion processInfoRegion = new GuiElementInfoRegion(0, 0, 53, 12, null, 0, 0, this);
+    private final TileEntityCircuitFabricator tileEntity;
+    private final GuiElementInfoRegion electricInfoRegion = new GuiElementInfoRegion(0, 0, 56, 9, null, 0, 0, this);
+    private final GuiElementInfoRegion processInfoRegion = new GuiElementInfoRegion(0, 0, 53, 12, null, 0, 0, this);
 
     public GuiCircuitFabricator(InventoryPlayer par1InventoryPlayer, TileEntityCircuitFabricator tileEntity) {
         super(new ContainerCircuitFabricator(par1InventoryPlayer, tileEntity));
@@ -38,7 +38,7 @@ public class GuiCircuitFabricator extends GuiContainerGC {
         this.electricInfoRegion.parentWidth = this.width;
         this.electricInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.electricInfoRegion);
-        List<String> batterySlotDesc = new ArrayList<String>();
+        final List<String> batterySlotDesc = new ArrayList<String>();
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.0"));
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(
@@ -69,7 +69,7 @@ public class GuiCircuitFabricator extends GuiContainerGC {
             displayText = EnumColor.ORANGE + GCCoreUtil.translate("gui.status.idle.name");
         }
 
-        String str = GCCoreUtil.translate("gui.message.status.name") + ":";
+        final String str = GCCoreUtil.translate("gui.message.status.name") + ":";
         this.fontRendererObj.drawString(str, 115 - this.fontRendererObj.getStringWidth(str) / 2, 80, 4210752);
         this.fontRendererObj.drawString(
                 displayText, 115 - this.fontRendererObj.getStringWidth(displayText) / 2, 90, 4210752);
@@ -86,12 +86,12 @@ public class GuiCircuitFabricator extends GuiContainerGC {
         this.mc.renderEngine.bindTexture(GuiCircuitFabricator.circuitFabricatorTexture);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        int containerWidth = (this.width - this.xSize) / 2;
-        int containerHeight = (this.height - this.ySize) / 2;
+        final int containerWidth = (this.width - this.xSize) / 2;
+        final int containerHeight = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(containerWidth, containerHeight, 0, 0, this.xSize, this.ySize);
         int scale;
 
-        List<String> electricityDesc = new ArrayList<String>();
+        final List<String> electricityDesc = new ArrayList<String>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         EnergyDisplayHelper.getEnergyDisplayTooltip(
                 this.tileEntity.getEnergyStoredGC(), this.tileEntity.getMaxEnergyStoredGC(), electricityDesc);
@@ -105,7 +105,7 @@ public class GuiCircuitFabricator extends GuiContainerGC {
             scale = 0;
         }
 
-        List<String> processDesc = new ArrayList<String>();
+        final List<String> processDesc = new ArrayList<String>();
         processDesc.clear();
         processDesc.add(GCCoreUtil.translate("gui.electricCompressor.desc.0") + ": " + scale + "%");
         this.processInfoRegion.tooltipStrings = processDesc;

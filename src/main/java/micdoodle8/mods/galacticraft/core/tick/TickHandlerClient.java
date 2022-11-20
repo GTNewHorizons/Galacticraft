@@ -93,7 +93,7 @@ public class TickHandlerClient {
         ClientProxyCore.detectableBlocks.clear();
 
         for (final String s : ConfigManagerCore.detectableIDs) {
-            BlockTuple bt = ConfigManagerCore.stringToBlock(s, "External Detectable IDs", logging);
+            final BlockTuple bt = ConfigManagerCore.stringToBlock(s, "External Detectable IDs", logging);
             if (bt == null) {
                 continue;
             }
@@ -104,7 +104,7 @@ public class TickHandlerClient {
             }
 
             boolean flag = false;
-            for (BlockMetaList blockMetaList : ClientProxyCore.detectableBlocks) {
+            for (final BlockMetaList blockMetaList : ClientProxyCore.detectableBlocks) {
                 if (blockMetaList.getBlock() == bt.block) {
                     if (!blockMetaList.getMetaList().contains(meta)) {
                         blockMetaList.getMetaList().add(meta);
@@ -115,7 +115,7 @@ public class TickHandlerClient {
             }
 
             if (!flag) {
-                List<Integer> metaList = Lists.newArrayList();
+                final List<Integer> metaList = Lists.newArrayList();
                 metaList.add(meta);
                 ClientProxyCore.detectableBlocks.add(new BlockMetaList(bt.block, metaList));
             }
@@ -135,8 +135,8 @@ public class TickHandlerClient {
 
         if (event.phase == Phase.END) {
             if (minecraft.currentScreen instanceof GuiIngameMenu) {
-                int i = Mouse.getEventX() * minecraft.currentScreen.width / minecraft.displayWidth;
-                int j = minecraft.currentScreen.height
+                final int i = Mouse.getEventX() * minecraft.currentScreen.width / minecraft.displayWidth;
+                final int j = minecraft.currentScreen.height
                         - Mouse.getEventY() * minecraft.currentScreen.height / minecraft.displayHeight
                         - 1;
 
@@ -290,7 +290,7 @@ public class TickHandlerClient {
                     var7 = 90;
                 }
 
-                int thermalLevel = stats.thermalLevel + 22;
+                final int thermalLevel = stats.thermalLevel + 22;
                 OverlayOxygenTanks.renderOxygenTankIndicator(
                         thermalLevel,
                         var6,
@@ -324,7 +324,7 @@ public class TickHandlerClient {
                 // Remove "Press shift to dismount" message when shift-exiting is disabled (not
                 // ideal, but the only
                 // option)
-                String str = I18n.format("mount.onboard", new Object[] {
+                final String str = I18n.format("mount.onboard", new Object[] {
                     GameSettings.getKeyDisplayString(minecraft.gameSettings.keyBindSneak.getKeyCode())
                 });
                 if (minecraft.ingameGUI.recordPlaying.equals(str)) {
@@ -348,10 +348,10 @@ public class TickHandlerClient {
             TickHandlerClient.tickCount++;
 
             if (TickHandlerClient.tickCount % 20 == 0) {
-                for (List<Footprint> fpList : ClientProxyCore.footprintRenderer.footprints.values()) {
-                    Iterator<Footprint> fpIt = fpList.iterator();
+                for (final List<Footprint> fpList : ClientProxyCore.footprintRenderer.footprints.values()) {
+                    final Iterator<Footprint> fpIt = fpList.iterator();
                     while (fpIt.hasNext()) {
-                        Footprint fp = fpIt.next();
+                        final Footprint fp = fpIt.next();
                         fp.age += 20;
 
                         if (fp.age >= Footprint.MAX_AGE) {
@@ -366,19 +366,19 @@ public class TickHandlerClient {
                     ClientProxyCore.valueableBlocks.clear();
 
                     for (int i = -4; i < 5; i++) {
-                        int x = MathHelper.floor_double(player.posX + i);
+                        final int x = MathHelper.floor_double(player.posX + i);
                         for (int j = -4; j < 5; j++) {
-                            int y = MathHelper.floor_double(player.posY + j);
+                            final int y = MathHelper.floor_double(player.posY + j);
                             for (int k = -4; k < 5; k++) {
-                                int z = MathHelper.floor_double(player.posZ + k);
+                                final int z = MathHelper.floor_double(player.posZ + k);
 
                                 final Block block = player.worldObj.getBlock(x, y, z);
 
                                 if (block.getMaterial() != Material.air) {
-                                    int metadata = world.getBlockMetadata(x, y, z);
+                                    final int metadata = world.getBlockMetadata(x, y, z);
                                     boolean isDetectable = false;
 
-                                    for (BlockMetaList blockMetaList : ClientProxyCore.detectableBlocks) {
+                                    for (final BlockMetaList blockMetaList : ClientProxyCore.detectableBlocks) {
                                         if (blockMetaList.getBlock() == block
                                                 && blockMetaList.getMetaList().contains(metadata)) {
                                             isDetectable = true;
@@ -395,7 +395,7 @@ public class TickHandlerClient {
                             }
                         }
                     }
-                    TileEntityOxygenSealer nearestSealer = TileEntityOxygenSealer.getNearestSealer(
+                    final TileEntityOxygenSealer nearestSealer = TileEntityOxygenSealer.getNearestSealer(
                             world,
                             MathHelper.floor_double(player.posX),
                             MathHelper.floor_double(player.posY),
@@ -435,7 +435,7 @@ public class TickHandlerClient {
             }
 
             if (player != null && player.ridingEntity != null && player.ridingEntity instanceof EntitySpaceshipBase) {
-                EntitySpaceshipBase rocket = (EntitySpaceshipBase) player.ridingEntity;
+                final EntitySpaceshipBase rocket = (EntitySpaceshipBase) player.ridingEntity;
                 if (rocket.prevRotationPitch != rocket.rotationPitch || rocket.prevRotationYaw != rocket.rotationYaw) {
                     GalacticraftCore.packetPipeline.sendToServer(new PacketRotateRocket(player.ridingEntity));
                 }
@@ -501,12 +501,12 @@ public class TickHandlerClient {
             }
 
             if (world != null) {
-                List entityList = world.loadedEntityList;
-                for (Object e : entityList) {
+                final List entityList = world.loadedEntityList;
+                for (final Object e : entityList) {
                     if (e instanceof IEntityNoisy) {
-                        IEntityNoisy vehicle = (IEntityNoisy) e;
+                        final IEntityNoisy vehicle = (IEntityNoisy) e;
                         if (vehicle.getSoundUpdater() == null) {
-                            ISound noise = vehicle.setSoundUpdater(
+                            final ISound noise = vehicle.setSoundUpdater(
                                     FMLClientHandler.instance().getClient().thePlayer);
                             FMLClientHandler.instance()
                                     .getClient()
@@ -541,10 +541,10 @@ public class TickHandlerClient {
             }
 
             if (!this.screenConnectionsUpdateList.isEmpty()) {
-                HashSet<TileEntityScreen> updateListCopy =
+                final HashSet<TileEntityScreen> updateListCopy =
                         (HashSet<TileEntityScreen>) screenConnectionsUpdateList.clone();
                 screenConnectionsUpdateList.clear();
-                for (TileEntityScreen te : updateListCopy) {
+                for (final TileEntityScreen te : updateListCopy) {
                     if (te.refreshOnUpdate) {
                         te.refreshConnections(true);
                     }
@@ -563,20 +563,20 @@ public class TickHandlerClient {
     }
 
     private void drawGradientRect(int par1, int par2, int par3, int par4, int par5, int par6) {
-        float f = (par5 >> 24 & 255) / 255.0F;
-        float f1 = (par5 >> 16 & 255) / 255.0F;
-        float f2 = (par5 >> 8 & 255) / 255.0F;
-        float f3 = (par5 & 255) / 255.0F;
-        float f4 = (par6 >> 24 & 255) / 255.0F;
-        float f5 = (par6 >> 16 & 255) / 255.0F;
-        float f6 = (par6 >> 8 & 255) / 255.0F;
-        float f7 = (par6 & 255) / 255.0F;
+        final float f = (par5 >> 24 & 255) / 255.0F;
+        final float f1 = (par5 >> 16 & 255) / 255.0F;
+        final float f2 = (par5 >> 8 & 255) / 255.0F;
+        final float f3 = (par5 & 255) / 255.0F;
+        final float f4 = (par6 >> 24 & 255) / 255.0F;
+        final float f5 = (par6 >> 16 & 255) / 255.0F;
+        final float f6 = (par6 >> 8 & 255) / 255.0F;
+        final float f7 = (par6 & 255) / 255.0F;
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_ALPHA_TEST);
         OpenGlHelper.glBlendFunc(770, 771, 1, 0);
         GL11.glShadeModel(GL11.GL_SMOOTH);
-        Tessellator tessellator = Tessellator.instance;
+        final Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.setColorRGBA_F(f1, f2, f3, f);
         tessellator.addVertex(par3, par2, 0.0D);

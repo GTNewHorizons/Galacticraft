@@ -18,7 +18,7 @@ public class TileEntityDungeonSpawnerMars extends TileEntityDungeonSpawner {
 
     @Override
     public List<Class<? extends EntityLiving>> getDisabledCreatures() {
-        List<Class<? extends EntityLiving>> list = new ArrayList<Class<? extends EntityLiving>>();
+        final List<Class<? extends EntityLiving>> list = new ArrayList<Class<? extends EntityLiving>>();
         list.add(EntityEvolvedSkeleton.class);
         list.add(EntityEvolvedZombie.class);
         list.add(EntityEvolvedSpider.class);

@@ -41,7 +41,7 @@ public class GuiRocketInventory extends GuiContainerGC {
     @Override
     public void initGui() {
         super.initGui();
-        List<String> fuelTankDesc = new ArrayList<String>();
+        final List<String> fuelTankDesc = new ArrayList<String>();
         fuelTankDesc.add(GCCoreUtil.translate("gui.fuelTank.desc.0"));
         fuelTankDesc.add(GCCoreUtil.translate("gui.fuelTank.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(

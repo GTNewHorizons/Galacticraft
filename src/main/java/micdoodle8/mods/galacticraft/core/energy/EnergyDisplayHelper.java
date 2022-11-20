@@ -23,7 +23,7 @@ public class EnergyDisplayHelper {
         } else if (EnergyConfigHandler.displayEnergyUnitsRF) {
             return getEnergyDisplayRF(energyVal * EnergyConfigHandler.TO_RF_RATIOdisp);
         }
-        String val = String.valueOf(getEnergyDisplayI(energyVal));
+        final String val = String.valueOf(getEnergyDisplayI(energyVal));
         String newVal = "";
 
         for (int i = val.length() - 1; i >= 0; i--) {
@@ -37,7 +37,7 @@ public class EnergyDisplayHelper {
     }
 
     public static String getEnergyDisplayIC2(float energyVal) {
-        String val = String.valueOf(getEnergyDisplayI(energyVal));
+        final String val = String.valueOf(getEnergyDisplayI(energyVal));
         String newVal = "";
 
         for (int i = val.length() - 1; i >= 0; i--) {
@@ -51,26 +51,26 @@ public class EnergyDisplayHelper {
     }
 
     public static String getEnergyDisplayBC(float energyVal) {
-        String val = String.valueOf(getEnergyDisplayI(energyVal));
+        final String val = String.valueOf(getEnergyDisplayI(energyVal));
 
         return val + " MJ";
     }
 
     public static String getEnergyDisplayMek(float energyVal) {
         if (energyVal < 1000) {
-            String val = String.valueOf(getEnergyDisplayI(energyVal));
+            final String val = String.valueOf(getEnergyDisplayI(energyVal));
             return val + " J";
         } else if (energyVal < 1000000) {
-            String val = getEnergyDisplay1DP(energyVal / 1000);
+            final String val = getEnergyDisplay1DP(energyVal / 1000);
             return val + " kJ";
         } else {
-            String val = getEnergyDisplay1DP(energyVal / 1000000);
+            final String val = getEnergyDisplay1DP(energyVal / 1000000);
             return val + " MJ";
         }
     }
 
     public static String getEnergyDisplayRF(float energyVal) {
-        String val = String.valueOf(getEnergyDisplayI(energyVal));
+        final String val = String.valueOf(getEnergyDisplayI(energyVal));
 
         return val + " RF";
     }

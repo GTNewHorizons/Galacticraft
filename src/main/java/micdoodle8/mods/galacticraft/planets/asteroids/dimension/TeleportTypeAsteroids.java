@@ -37,10 +37,10 @@ public class TeleportTypeAsteroids implements ITeleportType {
     @Override
     public Vector3 getPlayerSpawnLocation(WorldServer world, EntityPlayerMP player) {
         if (player != null) {
-            GCPlayerStats stats = GCPlayerStats.get(player);
+            final GCPlayerStats stats = GCPlayerStats.get(player);
             int x = MathHelper.floor_double(stats.coordsTeleportedFromX);
             int z = MathHelper.floor_double(stats.coordsTeleportedFromZ);
-            int limit = ConfigManagerCore.otherPlanetWorldBorders - 2;
+            final int limit = ConfigManagerCore.otherPlanetWorldBorders - 2;
             if (limit > 20) {
                 if (x > limit) {
                     z *= limit / x;
@@ -213,7 +213,7 @@ public class TeleportTypeAsteroids implements ITeleportType {
     }
 
     private void doBlock(World world, int x, int y, int z) {
-        int meta = (int) (world.rand.nextFloat() * 1.5F);
+        final int meta = (int) (world.rand.nextFloat() * 1.5F);
         if (world.isAirBlock(x, y, z)) {
             world.setBlock(x, y, z, AsteroidBlocks.blockBasic, meta, 2);
         }
@@ -232,10 +232,10 @@ public class TeleportTypeAsteroids implements ITeleportType {
     private void preGenChunks(World w, int cx, int cz) {
         this.preGenChunk(w, cx, cz);
         for (int r = 1; r < 3; r++) {
-            int xmin = cx - r;
-            int xmax = cx + r;
-            int zmin = cz - r;
-            int zmax = cz + r;
+            final int xmin = cx - r;
+            final int xmax = cx + r;
+            final int zmin = cz - r;
+            final int zmax = cz + r;
             for (int i = -r; i < r; i++) {
                 this.preGenChunk(w, xmin, cz + i);
                 this.preGenChunk(w, xmax, cz - i);
@@ -252,7 +252,7 @@ public class TeleportTypeAsteroids implements ITeleportType {
     @Override
     public void onSpaceDimensionChanged(World newWorld, EntityPlayerMP player, boolean ridingAutoRocket) {
         if (!ridingAutoRocket && player != null) {
-            GCPlayerStats stats = GCPlayerStats.get(player);
+            final GCPlayerStats stats = GCPlayerStats.get(player);
 
             if (stats.teleportCooldown <= 0) {
                 if (player.capabilities.isFlying) {
@@ -260,7 +260,7 @@ public class TeleportTypeAsteroids implements ITeleportType {
                 }
 
                 if (!newWorld.isRemote) {
-                    EntityEntryPod entryPod = new EntityEntryPod(player);
+                    final EntityEntryPod entryPod = new EntityEntryPod(player);
 
                     newWorld.spawnEntityInWorld(entryPod);
                 }
@@ -272,7 +272,7 @@ public class TeleportTypeAsteroids implements ITeleportType {
 
     @Override
     public void setupAdventureSpawn(EntityPlayerMP player) {
-        GCPlayerStats stats = GCPlayerStats.get(player);
+        final GCPlayerStats stats = GCPlayerStats.get(player);
         SchematicRegistry.unlockNewPage(player, new ItemStack(GCItems.schematic, 1, 1)); // Knows how to build T2 rocket
         SchematicRegistry.unlockNewPage(player, new ItemStack(MarsItems.schematic, 1, 0)); // Knows how to build T3
         // rocket

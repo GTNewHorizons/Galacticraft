@@ -28,11 +28,11 @@ public class CompatibilityManager {
         if (Loader.isModLoaded("gregtech") || Loader.isModLoaded("GregTech_Addon") || Loader.isModLoaded("GregTech")) {
             CompatibilityManager.modGTLoaded = true;
             try {
-                Class<?> clazz = Class.forName("gregtech.common.blocks.GT_Block_Ores");
+                final Class<?> clazz = Class.forName("gregtech.common.blocks.GT_Block_Ores");
                 if (clazz != null) {
                     classGTOre = clazz;
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }
@@ -45,11 +45,11 @@ public class CompatibilityManager {
             CompatibilityManager.modIc2Loaded = true;
 
             try {
-                Class<?> clazz = Class.forName("ic2.core.block.wiring.TileEntityCable");
+                final Class<?> clazz = Class.forName("ic2.core.block.wiring.TileEntityCable");
                 if (clazz != null) {
                     BlockEnclosed.onBlockNeighbourChangeIC2 = clazz.getMethod("onNeighborBlockChange");
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }
@@ -66,13 +66,13 @@ public class CompatibilityManager {
                         (BlockContainer) GameRegistry.findBlock("BuildCraft|Transport", "pipeBlock");
                 classBCBlockGenericPipe = BlockEnclosed.blockPipeBC.getClass();
 
-                for (Method m : classBCBlockGenericPipe.getMethods()) {
+                for (final Method m : classBCBlockGenericPipe.getMethods()) {
                     if (m.getName().equals("createPipe") && m.getParameterTypes().length == 1) {
                         methodBCBlockPipe_createPipe = m;
                         break;
                     }
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
 
@@ -101,11 +101,11 @@ public class CompatibilityManager {
 
         if (Loader.isModLoaded("mo")) {
             try {
-                Class<?> androidPlayer = Class.forName("matteroverdrive.entity.player.AndroidPlayer");
+                final Class<?> androidPlayer = Class.forName("matteroverdrive.entity.player.AndroidPlayer");
                 CompatibilityManager.androidPlayerGet = androidPlayer.getMethod("get", EntityPlayer.class);
                 CompatibilityManager.androidPlayerIsAndroid = androidPlayer.getMethod("isAndroid");
                 CompatibilityManager.modMatterOverdriveLoaded = true;
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }
@@ -153,11 +153,11 @@ public class CompatibilityManager {
             // AndroidPlayer androidPlayer = AndroidPlayer.get(player);
             // return (androidPlayer != null && androidPlayer.isAndroid());
             try {
-                Object androidPlayer = CompatibilityManager.androidPlayerGet.invoke(null, player);
+                final Object androidPlayer = CompatibilityManager.androidPlayerGet.invoke(null, player);
                 if (androidPlayer != null) {
                     return (Boolean) CompatibilityManager.androidPlayerIsAndroid.invoke(androidPlayer);
                 }
-            } catch (Exception ignore) {
+            } catch (final Exception ignore) {
             }
         }
         return false;

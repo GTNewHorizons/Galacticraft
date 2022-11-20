@@ -12,13 +12,13 @@ public class GuiElementCheckbox extends GuiButton {
     protected static final ResourceLocation texture =
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/gui.png");
     public Boolean isSelected;
-    private ICheckBoxCallback parentGui;
-    private int textColor;
-    private int texWidth;
-    private int texHeight;
-    private int texX;
-    private int texY;
-    private boolean shiftOnHover;
+    private final ICheckBoxCallback parentGui;
+    private final int textColor;
+    private final int texWidth;
+    private final int texHeight;
+    private final int texX;
+    private final int texY;
+    private final boolean shiftOnHover;
 
     public GuiElementCheckbox(int id, ICheckBoxCallback parentGui, int x, int y, String text) {
         this(id, parentGui, x, y, text, 4210752);
@@ -98,9 +98,9 @@ public class GuiElementCheckbox extends GuiButton {
 
     @Override
     public void drawTexturedModalRect(int par1, int par2, int par3, int par4, int par5, int par6) {
-        float f = 0.00390625F;
-        float f1 = 0.00390625F;
-        Tessellator tessellator = Tessellator.instance;
+        final float f = 0.00390625F;
+        final float f1 = 0.00390625F;
+        final Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(par1 + 0, par2 + par6, this.zLevel, (par3 + 0) * f, (par4 + this.texHeight) * f1);
         tessellator.addVertexWithUV(

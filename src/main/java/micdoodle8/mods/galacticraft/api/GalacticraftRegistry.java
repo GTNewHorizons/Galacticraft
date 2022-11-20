@@ -116,7 +116,7 @@ public class GalacticraftRegistry {
     }
 
     public static void registerSpaceStation(SpaceStationType type) {
-        for (SpaceStationType type1 : GalacticraftRegistry.spaceStations) {
+        for (final SpaceStationType type1 : GalacticraftRegistry.spaceStations) {
             if (type1.getWorldToOrbitID() == type.getWorldToOrbitID()) {
                 throw new RuntimeException(
                         "Two space station types registered with the same home planet ID: " + type.getWorldToOrbitID());
@@ -182,7 +182,7 @@ public class GalacticraftRegistry {
      */
     public static boolean registerProvider(
             int id, Class<? extends WorldProvider> provider, boolean keepLoaded, int defaultID) {
-        boolean flag = DimensionManager.registerProviderType(id, provider, keepLoaded);
+        final boolean flag = DimensionManager.registerProviderType(id, provider, keepLoaded);
         if (flag) {
             GalacticraftRegistry.worldProviderIDs.add(id);
             return true;

@@ -65,7 +65,7 @@ public class KeyHandlerClient extends KeyHandler {
     }
 
     private static KeyBinding[] getVanillaKeyBindings() {
-        KeyBinding invKey = KeyHandlerClient.mc.gameSettings.keyBindInventory;
+        final KeyBinding invKey = KeyHandlerClient.mc.gameSettings.keyBindInventory;
         KeyHandlerClient.accelerateKey = KeyHandlerClient.mc.gameSettings.keyBindForward;
         KeyHandlerClient.decelerateKey = KeyHandlerClient.mc.gameSettings.keyBindBack;
         KeyHandlerClient.leftKey = KeyHandlerClient.mc.gameSettings.keyBindLeft;
@@ -88,14 +88,14 @@ public class KeyHandlerClient extends KeyHandler {
     @Override
     public void keyDown(Type types, KeyBinding kb, boolean tickEnd, boolean isRepeat) {
         if (KeyHandlerClient.mc.thePlayer != null && tickEnd) {
-            EntityClientPlayerMP playerBase =
+            final EntityClientPlayerMP playerBase =
                     PlayerUtil.getPlayerBaseClientFromPlayer(KeyHandlerClient.mc.thePlayer, false);
 
             if (playerBase == null) {
                 return;
             }
 
-            GCPlayerStatsClient stats = GCPlayerStatsClient.get(playerBase);
+            final GCPlayerStatsClient stats = GCPlayerStatsClient.get(playerBase);
 
             if (kb.getKeyCode() == KeyHandlerClient.galaxyMap.getKeyCode()) {
                 if (KeyHandlerClient.mc.currentScreen == null) {
@@ -138,9 +138,9 @@ public class KeyHandlerClient extends KeyHandler {
                 keyNum = 5;
             }
 
-            Entity entityTest = KeyHandlerClient.mc.thePlayer.ridingEntity;
+            final Entity entityTest = KeyHandlerClient.mc.thePlayer.ridingEntity;
             if (entityTest != null && entityTest instanceof IControllableEntity && keyNum != -1) {
-                IControllableEntity entity = (IControllableEntity) entityTest;
+                final IControllableEntity entity = (IControllableEntity) entityTest;
 
                 if (kb.getKeyCode() == KeyHandlerClient.mc.gameSettings.keyBindInventory.getKeyCode()) {
                     KeyBinding.setKeyBindState(KeyHandlerClient.mc.gameSettings.keyBindInventory.getKeyCode(), false);
@@ -148,7 +148,7 @@ public class KeyHandlerClient extends KeyHandler {
 
                 entity.pressKey(keyNum);
             } else if (entityTest != null && entityTest instanceof EntityAutoRocket) {
-                EntityAutoRocket autoRocket = (EntityAutoRocket) entityTest;
+                final EntityAutoRocket autoRocket = (EntityAutoRocket) entityTest;
 
                 if (autoRocket.landing) {
                     if (kb == KeyHandlerClient.leftShiftKey) {

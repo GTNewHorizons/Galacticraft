@@ -75,14 +75,14 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
     public EntityLanderBase(EntityPlayerMP player, float yOffset) {
         this(player.worldObj, player.posX, player.posY, player.posZ, yOffset);
 
-        GCPlayerStats stats = GCPlayerStats.get(player);
+        final GCPlayerStats stats = GCPlayerStats.get(player);
         this.containedItems = new ItemStack[stats.rocketStacks.length + 1];
         // this.fuelTank.setFluid(new FluidStack(GalacticraftCore.fluidFuel,
         // stats.fuelLevel));
         // ItemStack rocket = new ItemStack(stats.rocketItem, 1, stats.rocketType);
         for (int i = 0; i < stats.rocketStacks.length; i++) {
             if (stats.rocketStacks[i] != null) {
-                ItemStack item = stats.rocketStacks[i].copy();
+                final ItemStack item = stats.rocketStacks[i].copy();
                 // if (item.isItemEqual(rocket))
                 // {
                 // NBTTagCompound nbt = new NBTTagCompound();
@@ -120,12 +120,12 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
             this.checkFluidTankTransfer(this.containedItems.length - 1, this.fuelTank);
         }
 
-        AxisAlignedBB box = this.boundingBox.expand(0.2D, 0.4D, 0.2D);
+        final AxisAlignedBB box = this.boundingBox.expand(0.2D, 0.4D, 0.2D);
 
         final List<Entity> var15 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, box);
 
         if (var15 != null && !var15.isEmpty()) {
-            for (Entity entity : var15) {
+            for (final Entity entity : var15) {
                 if (entity != this.riddenByEntity) {
                     this.pushEntityAway(entity);
                 }
@@ -213,7 +213,7 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
             nbt.setTag("fuelTank", this.fuelTank.writeToNBT(new NBTTagCompound()));
         }
 
-        UUID id = this.getOwnerUUID();
+        final UUID id = this.getOwnerUUID();
 
         if (id != null) {
             nbt.setLong("RiderUUID_LSB", id.getLeastSignificantBits());
@@ -256,7 +256,7 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
         final ArrayList<Object> objList = new ArrayList<Object>();
 
         if (!this.worldObj.isRemote) {
-            Integer cargoLength = this.containedItems != null ? this.containedItems.length : 0;
+            final Integer cargoLength = this.containedItems != null ? this.containedItems.length : 0;
             objList.add(cargoLength);
             objList.add(this.fuelTank.getFluid() == null ? 0 : this.fuelTank.getFluid().amount);
         }
@@ -305,7 +305,7 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
                     this.hasReceivedPacket = true;
                 }
 
-                int cargoLength = buffer.readInt();
+                final int cargoLength = buffer.readInt();
                 if (this.containedItems == null || this.containedItems.length == 0) {
                     this.containedItems = new ItemStack[cargoLength];
                     GalacticraftCore.packetPipeline.sendToServer(new PacketDynamicInventory(this));
@@ -316,7 +316,7 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
                 this.shouldMoveServer = buffer.readBoolean();
 
                 // Check has correct rider on client
-                int shouldBeMountedId = buffer.readInt();
+                final int shouldBeMountedId = buffer.readInt();
                 if (this.riddenByEntity == null) {
                     if (shouldBeMountedId > -1) {
                         Entity e = FMLClientHandler.instance().getWorldClient().getEntityByID(shouldBeMountedId);

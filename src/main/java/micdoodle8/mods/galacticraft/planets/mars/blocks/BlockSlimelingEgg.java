@@ -59,17 +59,17 @@ public class BlockSlimelingEgg extends Block implements ITileEntityProvider, Ite
 
     @Override
     public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
-        Block block = par1World.getBlock(par2, par3 - 1, par4);
+        final Block block = par1World.getBlock(par2, par3 - 1, par4);
         return block.isSideSolid(par1World, par2, par3, par4, ForgeDirection.UP);
     }
 
     private boolean beginHatch(World world, int x, int y, int z, EntityPlayer player) {
-        int l = world.getBlockMetadata(x, y, z);
+        final int l = world.getBlockMetadata(x, y, z);
 
         if (l < 3) {
             world.setBlockMetadataWithNotify(x, y, z, l + 3, 2);
 
-            TileEntity tile = world.getTileEntity(x, y, z);
+            final TileEntity tile = world.getTileEntity(x, y, z);
 
             if (tile instanceof TileEntitySlimelingEgg) {
                 ((TileEntitySlimelingEgg) tile).timeToHatch = world.rand.nextInt(50) + 20;
@@ -87,7 +87,7 @@ public class BlockSlimelingEgg extends Block implements ITileEntityProvider, Ite
 
     @Override
     public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest) {
-        ItemStack currentStack = player.getCurrentEquippedItem();
+        final ItemStack currentStack = player.getCurrentEquippedItem();
         if (currentStack != null && currentStack.getItem() instanceof ItemPickaxe) {
             return world.setBlockToAir(x, y, z);
         } else if (player.capabilities.isCreativeMode) {
@@ -105,7 +105,7 @@ public class BlockSlimelingEgg extends Block implements ITileEntityProvider, Ite
 
     @Override
     public void harvestBlock(World world, EntityPlayer par2EntityPlayer, int x, int y, int z, int par6) {
-        ItemStack currentStack = par2EntityPlayer.getCurrentEquippedItem();
+        final ItemStack currentStack = par2EntityPlayer.getCurrentEquippedItem();
 
         if (currentStack != null && currentStack.getItem() instanceof ItemPickaxe) {
             par2EntityPlayer.addStat(StatList.mineBlockStatArray[Block.getIdFromBlock(this)], 1);
@@ -113,7 +113,7 @@ public class BlockSlimelingEgg extends Block implements ITileEntityProvider, Ite
             this.dropBlockAsItem(world, x, y, z, par6 % 3, 0);
             if (currentStack.getItem() == MarsItems.deshPickaxe
                     && EnchantmentHelper.getSilkTouchModifier(par2EntityPlayer)) {
-                ItemStack itemstack = new ItemStack(MarsItems.deshPickSlime, 1, currentStack.getItemDamage());
+                final ItemStack itemstack = new ItemStack(MarsItems.deshPickSlime, 1, currentStack.getItemDamage());
                 if (currentStack.stackTagCompound != null) {
                     itemstack.stackTagCompound = (NBTTagCompound) currentStack.stackTagCompound.copy();
                 }
@@ -175,7 +175,7 @@ public class BlockSlimelingEgg extends Block implements ITileEntityProvider, Ite
 
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
-        int metadata = world.getBlockMetadata(x, y, z);
+        final int metadata = world.getBlockMetadata(x, y, z);
 
         if (metadata == 3) {
             return new ItemStack(Item.getItemFromBlock(this), 1, 0);

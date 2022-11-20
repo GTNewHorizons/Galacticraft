@@ -104,7 +104,7 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
         }
 
         if (!this.worldObj.isRemote) {
-            FluidStack currentgas = this.gasTank.getFluid();
+            final FluidStack currentgas = this.gasTank.getFluid();
             if (currentgas == null || currentgas.amount <= 0) {
                 this.gasTankType = -1;
             } else {
@@ -133,27 +133,27 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
             }
 
             // First, see if any gas needs to be put into the gas storage
-            ItemStack inputCanister = this.containingItems[1];
+            final ItemStack inputCanister = this.containingItems[1];
             if (inputCanister != null) {
                 if (inputCanister.getItem() instanceof ItemAtmosphericValve && this.airProducts > 0) {
                     // Air -> Air tank
                     if (this.gasTankType == -1
                             || this.gasTankType == TankGases.AIR.index
                                     && this.gasTank.getFluid().amount < this.gasTank.getCapacity()) {
-                        Block blockAbove = this.worldObj.getBlock(this.xCoord, this.yCoord + 1, this.zCoord);
+                        final Block blockAbove = this.worldObj.getBlock(this.xCoord, this.yCoord + 1, this.zCoord);
                         if (blockAbove != null
                                 && blockAbove.getMaterial() == Material.air
                                 && blockAbove != GCBlocks.breatheableAir
                                 && blockAbove != GCBlocks.brightBreatheableAir) {
-                            FluidStack gcAtmosphere = FluidRegistry.getFluidStack(TankGases.AIR.gas, 4);
+                            final FluidStack gcAtmosphere = FluidRegistry.getFluidStack(TankGases.AIR.gas, 4);
                             this.gasTank.fill(gcAtmosphere, true);
                             this.gasTankType = TankGases.AIR.index;
                         }
                     }
                 } else if (inputCanister.getItem() instanceof ItemCanisterGeneric) {
-                    int amount = ItemCanisterGeneric.EMPTY - inputCanister.getItemDamage();
+                    final int amount = ItemCanisterGeneric.EMPTY - inputCanister.getItemDamage();
                     if (amount > 0) {
-                        Item canisterType = inputCanister.getItem();
+                        final Item canisterType = inputCanister.getItem();
                         FluidStack canisterGas = null;
                         int factor = 1;
                         if (this.gasTankType <= 0 && canisterType == AsteroidsItems.methaneCanister) {
@@ -174,7 +174,7 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
                         }
 
                         if (canisterGas != null) {
-                            int used = this.gasTank.fill(canisterGas, true) / factor;
+                            final int used = this.gasTank.fill(canisterGas, true) / factor;
                             if (used == amount) {
                                 this.containingItems[1] =
                                         new ItemStack(GCItems.oilCanister, 1, ItemCanisterGeneric.EMPTY);
@@ -185,13 +185,13 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
                         }
                     }
                 } else {
-                    FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(inputCanister);
+                    final FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(inputCanister);
                     if (liquid != null && liquid.amount > 0) {
-                        String inputName = FluidRegistry.getFluidName(liquid);
+                        final String inputName = FluidRegistry.getFluidName(liquid);
                         // Methane -> Methane tank
                         if (this.gasTankType <= 0 && inputName.contains("methane")) {
                             if (currentgas == null || currentgas.amount + liquid.amount <= this.gasTank.getCapacity()) {
-                                FluidStack gcMethane =
+                                final FluidStack gcMethane =
                                         FluidRegistry.getFluidStack(TankGases.METHANE.gas, liquid.amount);
                                 this.gasTank.fill(gcMethane, true);
                                 this.gasTankType = 0;
@@ -203,7 +203,7 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
                                 && inputName.contains("oxygen")) {
                             if (currentgas == null
                                     || currentgas.amount + liquid.amount * 2 <= this.gasTank.getCapacity()) {
-                                FluidStack gcgas = FluidRegistry.getFluidStack(
+                                final FluidStack gcgas = FluidRegistry.getFluidStack(
                                         TankGases.OXYGEN.gas, liquid.amount * (inputName.contains("liquid") ? 2 : 1));
                                 this.gasTank.fill(gcgas, true);
                                 this.gasTankType = TankGases.OXYGEN.index;
@@ -215,7 +215,7 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
                                 && inputName.contains("nitrogen")) {
                             if (currentgas == null
                                     || currentgas.amount + liquid.amount * 2 <= this.gasTank.getCapacity()) {
-                                FluidStack gcgas = FluidRegistry.getFluidStack(
+                                final FluidStack gcgas = FluidRegistry.getFluidStack(
                                         TankGases.NITROGEN.gas, liquid.amount * (inputName.contains("liquid") ? 2 : 1));
                                 this.gasTank.fill(gcgas, true);
                                 this.gasTankType = TankGases.NITROGEN.index;
@@ -261,7 +261,7 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
             final FluidStack liquid = tank.getFluid();
 
             if (liquid != null && liquid.amount > 0) {
-                String liquidname = liquid.getFluid().getName();
+                final String liquidname = liquid.getFluid().getName();
                 if (liquidname.startsWith("fuel")) {
                     FluidUtil.tryFillContainerFuel(tank, this.containingItems, slot);
                 } else if (liquidname.equals(TankGases.OXYGEN.liquid)) {
@@ -277,7 +277,7 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
     }
 
     public int getIdFromName(String gasname) {
-        for (TankGases type : TankGases.values()) {
+        for (final TankGases type : TankGases.values()) {
             if (type.gas.equals(gasname)) {
                 return type.index;
             }
@@ -287,7 +287,7 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
     }
 
     public int getProductIdFromName(String gasname) {
-        for (TankGases type : TankGases.values()) {
+        for (final TankGases type : TankGases.values()) {
             if (type.liquid.equals(gasname)) {
                 return type.index;
             }
@@ -321,13 +321,13 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
             return true;
         }
 
-        boolean tank1HasSpace = this.liquidTank.getFluidAmount() < this.liquidTank.getCapacity();
-        boolean tank2HasSpace = this.liquidTank2.getFluidAmount() < this.liquidTank2.getCapacity();
+        final boolean tank1HasSpace = this.liquidTank.getFluidAmount() < this.liquidTank.getCapacity();
+        final boolean tank2HasSpace = this.liquidTank2.getFluidAmount() < this.liquidTank2.getCapacity();
 
         if (this.gasTankType == TankGases.AIR.index) {
             int airProducts = this.airProducts;
             do {
-                int thisProduct = (airProducts & 15) - 1;
+                final int thisProduct = (airProducts & 15) - 1;
                 if (thisProduct == this.fluidTankType && tank1HasSpace
                         || thisProduct == this.fluidTank2Type && tank2HasSpace) {
                     return true;
@@ -346,10 +346,10 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
     }
 
     public int getAirProducts() {
-        WorldProvider WP = this.worldObj.provider;
+        final WorldProvider WP = this.worldObj.provider;
         if (WP instanceof WorldProviderSpace) {
             int result = 0;
-            ArrayList<IAtmosphericGas> atmos = ((WorldProviderSpace) WP).getCelestialBody().atmosphere;
+            final ArrayList<IAtmosphericGas> atmos = ((WorldProviderSpace) WP).getCelestialBody().atmosphere;
             if (atmos.size() > 0) {
                 result = this.getIdFromName(atmos.get(0).name().toLowerCase()) + 1;
             }
@@ -381,7 +381,7 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
             }
 
             do {
-                int thisProduct = (airProducts & 15) - 1;
+                final int thisProduct = (airProducts & 15) - 1;
                 // -1 indicates a gas which can't be liquefied (e.g. Carbon Dioxide)
                 if (thisProduct >= 0) {
                     this.gasTank.drain(this.placeIntoFluidTanks(thisProduct, amountToDrain) * 2, true);
@@ -558,8 +558,8 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
 
     @Override
     public boolean canDrain(ForgeDirection from, Fluid fluid) {
-        int metaside = this.getBlockMetadata() + 2;
-        int side = from.ordinal();
+        final int metaside = this.getBlockMetadata() + 2;
+        final int side = from.ordinal();
         if (side == (metaside ^ 1)) {
             return this.liquidTank2.getFluid() != null && this.liquidTank2.getFluidAmount() > 0;
         }
@@ -574,8 +574,8 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
 
     @Override
     public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-        int metaside = this.getBlockMetadata() + 2;
-        int side = from.ordinal();
+        final int metaside = this.getBlockMetadata() + 2;
+        final int side = from.ordinal();
         if (side == (metaside ^ 1)) {
             if (resource != null && resource.isFluidEqual(this.liquidTank2.getFluid())) {
                 return this.liquidTank2.drain(resource.amount, doDrain);
@@ -594,8 +594,8 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
 
     @Override
     public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-        int metaside = this.getBlockMetadata() + 2;
-        int side = from.ordinal();
+        final int metaside = this.getBlockMetadata() + 2;
+        final int side = from.ordinal();
         if (side == (metaside ^ 1)) {
             return this.liquidTank2.drain(maxDrain, doDrain);
         }
@@ -623,13 +623,14 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
         int used = 0;
 
         if (resource != null && this.canFill(from, resource.getFluid())) {
-            int type = this.getIdFromName(FluidRegistry.getFluidName(resource));
+            final int type = this.getIdFromName(FluidRegistry.getFluidName(resource));
 
             if (this.gasTankType == -1
                     || this.gasTankType == type && this.gasTank.getFluidAmount() < this.gasTank.getCapacity()) {
                 if (type > 0) {
-                    float conversion = 2F * Constants.LOX_GAS_RATIO;
-                    FluidStack fluidToFill = new FluidStack(resource.getFluid(), (int) (resource.amount * conversion));
+                    final float conversion = 2F * Constants.LOX_GAS_RATIO;
+                    final FluidStack fluidToFill =
+                            new FluidStack(resource.getFluid(), (int) (resource.amount * conversion));
                     used = MathHelper.ceiling_float_int(this.gasTank.fill(fluidToFill, doFill) / conversion);
                 } else {
                     used = this.gasTank.fill(resource, doFill);
@@ -643,8 +644,8 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
     @Override
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
         FluidTankInfo[] tankInfo = new FluidTankInfo[] {};
-        int metaside = this.getBlockMetadata() + 2;
-        int side = from.ordinal();
+        final int metaside = this.getBlockMetadata() + 2;
+        final int side = from.ordinal();
 
         if (metaside == side) {
             tankInfo = new FluidTankInfo[] {new FluidTankInfo(this.gasTank)};
@@ -675,9 +676,9 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
     @Override
     public float receiveOxygen(ForgeDirection from, float receive, boolean doReceive) {
         if (from.ordinal() == this.getBlockMetadata() + 2 && this.shouldPullOxygen()) {
-            float conversion = 2F * Constants.LOX_GAS_RATIO;
-            FluidStack fluidToFill = new FluidStack(AsteroidsModule.fluidOxygenGas, (int) (receive * conversion));
-            int used = MathHelper.ceiling_float_int(this.gasTank.fill(fluidToFill, doReceive) / conversion);
+            final float conversion = 2F * Constants.LOX_GAS_RATIO;
+            final FluidStack fluidToFill = new FluidStack(AsteroidsModule.fluidOxygenGas, (int) (receive * conversion));
+            final int used = MathHelper.ceiling_float_int(this.gasTank.fill(fluidToFill, doReceive) / conversion);
             return used;
         }
 

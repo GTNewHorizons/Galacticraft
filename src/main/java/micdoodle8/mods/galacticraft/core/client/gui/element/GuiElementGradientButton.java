@@ -15,13 +15,13 @@ public class GuiElementGradientButton extends GuiButton {
     @Override
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
         if (this.visible) {
-            FontRenderer fontrenderer = mc.fontRenderer;
+            final FontRenderer fontrenderer = mc.fontRenderer;
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             this.field_146123_n = mouseX >= this.xPosition
                     && mouseY >= this.yPosition
                     && mouseX < this.xPosition + this.width
                     && mouseY < this.yPosition + this.height;
-            int k = this.getHoverState(this.field_146123_n);
+            final int k = this.getHoverState(this.field_146123_n);
             GL11.glEnable(GL11.GL_BLEND);
             OpenGlHelper.glBlendFunc(770, 771, 1, 0);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

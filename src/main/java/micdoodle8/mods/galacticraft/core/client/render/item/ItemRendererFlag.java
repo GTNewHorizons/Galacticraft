@@ -14,9 +14,9 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 public class ItemRendererFlag implements IItemRenderer {
-    private EntityFlag entityFlagDummy =
+    private final EntityFlag entityFlagDummy =
             new EntityFlag(FMLClientHandler.instance().getClient().theWorld);
-    private ModelFlag modelFlag = new ModelFlag();
+    private final ModelFlag modelFlag = new ModelFlag();
 
     private void renderFlag(
             ItemRenderType type,
@@ -39,10 +39,10 @@ public class ItemRendererFlag implements IItemRenderer {
         this.entityFlagDummy.setType(item.getItemDamage());
 
         if (type == ItemRenderType.EQUIPPED) {
-            EntityLivingBase entityHolding = (EntityLivingBase) data[1];
+            final EntityLivingBase entityHolding = (EntityLivingBase) data[1];
 
             if (entityHolding instanceof EntityPlayer) {
-                String playerName =
+                final String playerName =
                         ((EntityPlayer) entityHolding).getGameProfile().getName();
 
                 if (!playerName.equals(this.entityFlagDummy.getOwner())) {
@@ -51,7 +51,7 @@ public class ItemRendererFlag implements IItemRenderer {
                 }
             }
         } else {
-            String playerName = FMLClientHandler.instance()
+            final String playerName = FMLClientHandler.instance()
                     .getClient()
                     .thePlayer
                     .getGameProfile()

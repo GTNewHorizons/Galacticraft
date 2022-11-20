@@ -26,7 +26,7 @@ public class SolarSystem {
     }
 
     public String getLocalizedName() {
-        String s = this.getUnlocalizedName();
+        final String s = this.getUnlocalizedName();
         return s == null ? "" : StatCollector.translateToLocal(s);
     }
 
@@ -54,7 +54,7 @@ public class SolarSystem {
     }
 
     public String getLocalizedParentGalaxyName() {
-        String s = this.getUnlocalizedParentGalaxyName();
+        final String s = this.getUnlocalizedParentGalaxyName();
         return s == null ? "" : StatCollector.translateToLocal(s);
     }
 

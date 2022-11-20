@@ -55,10 +55,10 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer {
     public ItemStack getContainerItem(ItemStack itemStack) {
         // Workaround for strange behaviour in TE Transposer
         if (isTELoaded) {
-            StackTraceElement[] st = Thread.currentThread().getStackTrace();
-            int imax = Math.max(st.length, 5);
+            final StackTraceElement[] st = Thread.currentThread().getStackTrace();
+            final int imax = Math.max(st.length, 5);
             for (int i = 1; i < imax; i++) {
-                String ste = st[i].getClassName();
+                final String ste = st[i].getClassName();
                 if (ste.equals("thermalexpansion.block.machine.TileTransposer")) {
                     return null;
                 }
@@ -103,12 +103,12 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer {
             return 0;
         }
 
-        String fluidName = resource.getFluid().getName();
+        final String fluidName = resource.getFluid().getName();
         if (container.getItemDamage() == ItemCanisterGeneric.EMPTY) {
             // Empty canister - find a new canister to match the fluid
-            for (String key : GalacticraftCore.itemList.keySet()) {
+            for (final String key : GalacticraftCore.itemList.keySet()) {
                 if (key.contains("CanisterFull")) {
-                    Item i = GalacticraftCore.itemList.get(key).getItem();
+                    final Item i = GalacticraftCore.itemList.get(key).getItem();
                     if (i instanceof ItemCanisterGeneric
                             && fluidName.equalsIgnoreCase(((ItemCanisterGeneric) i).allowedFluid)) {
                         if (!doFill) {
@@ -129,7 +129,7 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer {
         }
 
         if (fluidName.equalsIgnoreCase(((ItemCanisterGeneric) container.getItem()).allowedFluid)) {
-            int added = super.fill(container, resource, doFill);
+            final int added = super.fill(container, resource, doFill);
             if (doFill && added > 0) {
                 container.setItemDamage(Math.max(1, container.getItemDamage() - added));
             }
@@ -149,7 +149,7 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer {
         container.stackTagCompound = null;
         super.fill(container, this.getFluid(container), true);
 
-        FluidStack used = super.drain(container, maxDrain, doDrain);
+        final FluidStack used = super.drain(container, maxDrain, doDrain);
         if (doDrain && used != null && used.amount > 0) {
             this.setNewDamage(container, container.getItemDamage() + used.amount);
         }
@@ -172,7 +172,7 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer {
     private void replaceEmptyCanisterItem(ItemStack container, Item newItem) {
         // This is a neat trick to change the item ID in an ItemStack
         final int stackSize = container.stackSize;
-        NBTTagCompound tag = new NBTTagCompound();
+        final NBTTagCompound tag = new NBTTagCompound();
         tag.setShort("id", (short) Item.getIdFromItem(newItem));
         tag.setByte("Count", (byte) stackSize);
         tag.setShort("Damage", (short) ItemCanisterGeneric.EMPTY);
@@ -181,12 +181,12 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer {
 
     @Override
     public FluidStack getFluid(ItemStack container) {
-        String fluidName = ((ItemCanisterGeneric) container.getItem()).allowedFluid;
+        final String fluidName = ((ItemCanisterGeneric) container.getItem()).allowedFluid;
         if (fluidName == null || ItemCanisterGeneric.EMPTY == container.getItemDamage()) {
             return null;
         }
 
-        Fluid fluid = FluidRegistry.getFluid(fluidName);
+        final Fluid fluid = FluidRegistry.getFluid(fluidName);
         if (fluid == null) {
             return null;
         }

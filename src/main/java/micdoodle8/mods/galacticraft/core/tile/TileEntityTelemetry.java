@@ -70,7 +70,7 @@ public class TileEntityTelemetry extends TileEntity {
             }
 
             String name;
-            int[] data = {-1, -1, -1, -1, -1};
+            final int[] data = {-1, -1, -1, -1, -1};
             String strUUID = "";
 
             if (linkedEntity != null) {
@@ -92,18 +92,18 @@ public class TileEntityTelemetry extends TileEntity {
                         name = "";
                     }
 
-                    double xmotion = linkedEntity.motionX;
-                    double ymotion = linkedEntity instanceof EntityLivingBase
+                    final double xmotion = linkedEntity.motionX;
+                    final double ymotion = linkedEntity instanceof EntityLivingBase
                             ? linkedEntity.motionY + 0.078D
                             : linkedEntity.motionY;
-                    double zmotion = linkedEntity.motionZ;
+                    final double zmotion = linkedEntity.motionZ;
                     data[2] = (int)
                             (MathHelper.sqrt_double(xmotion * xmotion + ymotion * ymotion + zmotion * zmotion) * 2000D);
 
                     if (linkedEntity instanceof ITelemetry) {
                         ((ITelemetry) linkedEntity).transmitData(data);
                     } else if (linkedEntity instanceof EntityLivingBase) {
-                        EntityLivingBase eLiving = (EntityLivingBase) linkedEntity;
+                        final EntityLivingBase eLiving = (EntityLivingBase) linkedEntity;
                         data[0] = eLiving.hurtTime;
 
                         // Calculate a "pulse rate" based on motion and taking damage
@@ -129,9 +129,9 @@ public class TileEntityTelemetry extends TileEntity {
                         data[1] = (int) (eLiving.getHealth() * 100 / eLiving.getMaxHealth());
                         if (eLiving instanceof EntityPlayerMP) {
                             data[3] = ((EntityPlayerMP) eLiving).getFoodStats().getFoodLevel() * 5;
-                            GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) eLiving);
+                            final GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) eLiving);
                             data[4] = stats.airRemaining * 4096 + stats.airRemaining2;
-                            UUID uuid = ((EntityPlayerMP) eLiving).getUniqueID();
+                            final UUID uuid = ((EntityPlayerMP) eLiving).getUniqueID();
                             if (uuid != null) {
                                 strUUID = uuid.toString();
                             }
@@ -180,8 +180,8 @@ public class TileEntityTelemetry extends TileEntity {
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        Long msb = nbt.getLong("entityUUIDMost");
-        Long lsb = nbt.getLong("entityUUIDLeast");
+        final Long msb = nbt.getLong("entityUUIDMost");
+        final Long lsb = nbt.getLong("entityUUIDLeast");
         this.toUpdate = new UUID(msb, lsb);
     }
 
@@ -197,8 +197,8 @@ public class TileEntityTelemetry extends TileEntity {
     public void addTrackedEntity(UUID uuid) {
         this.pulseRate = 400;
         this.lastHurttime = 0;
-        List<Entity> eList = this.worldObj.loadedEntityList;
-        for (Entity e : eList) {
+        final List<Entity> eList = this.worldObj.loadedEntityList;
+        for (final Entity e : eList) {
             if (e.getUniqueID().equals(uuid)) {
                 this.linkedEntity = e;
                 if (e instanceof EntitySpaceshipBase) {
@@ -229,16 +229,16 @@ public class TileEntityTelemetry extends TileEntity {
         if (te == null) {
             return null;
         }
-        BlockVec3 target = new BlockVec3(te);
+        final BlockVec3 target = new BlockVec3(te);
 
         int distSq = 1025;
         BlockVec3Dim nearest = null;
-        int dim = te.getWorldObj().provider.dimensionId;
-        for (BlockVec3Dim telemeter : loadedList) {
+        final int dim = te.getWorldObj().provider.dimensionId;
+        for (final BlockVec3Dim telemeter : loadedList) {
             if (telemeter.dim != dim) {
                 continue;
             }
-            int dist = telemeter.distanceSquared(target);
+            final int dist = telemeter.distanceSquared(target);
             if (dist < distSq) {
                 distSq = dist;
                 nearest = telemeter;
@@ -248,7 +248,7 @@ public class TileEntityTelemetry extends TileEntity {
         if (nearest == null) {
             return null;
         }
-        TileEntity result = te.getWorldObj().getTileEntity(nearest.x, nearest.y, nearest.z);
+        final TileEntity result = te.getWorldObj().getTileEntity(nearest.x, nearest.y, nearest.z);
         if (result instanceof TileEntityTelemetry) {
             return (TileEntityTelemetry) result;
         }
@@ -266,18 +266,18 @@ public class TileEntityTelemetry extends TileEntity {
         if (held == null) {
             return;
         }
-        NBTTagCompound fmData = held.stackTagCompound;
+        final NBTTagCompound fmData = held.stackTagCompound;
         if (fmData != null && fmData.hasKey("teDim")) {
-            int dim = fmData.getInteger("teDim");
-            int x = fmData.getInteger("teCoordX");
-            int y = fmData.getInteger("teCoordY");
-            int z = fmData.getInteger("teCoordZ");
-            WorldProvider wp = WorldUtil.getProviderForDimensionServer(dim);
+            final int dim = fmData.getInteger("teDim");
+            final int x = fmData.getInteger("teCoordX");
+            final int y = fmData.getInteger("teCoordY");
+            final int z = fmData.getInteger("teCoordZ");
+            final WorldProvider wp = WorldUtil.getProviderForDimensionServer(dim);
             // TODO
             if (wp == null || wp.worldObj == null) {
                 GCLog.debug("Frequency module worn: world provider is null.  This is a bug. " + dim);
             } else {
-                TileEntity te = wp.worldObj.getTileEntity(x, y, z);
+                final TileEntity te = wp.worldObj.getTileEntity(x, y, z);
                 if (te instanceof TileEntityTelemetry) {
                     if (player == null) {
                         ((TileEntityTelemetry) te).removeTrackedEntity();
@@ -290,8 +290,8 @@ public class TileEntityTelemetry extends TileEntity {
     }
 
     public static void updateLinkedPlayer(EntityPlayerMP playerOld, EntityPlayerMP playerNew) {
-        for (BlockVec3Dim telemeter : loadedList) {
-            TileEntity te = telemeter.getTileEntityNoLoad();
+        for (final BlockVec3Dim telemeter : loadedList) {
+            final TileEntity te = telemeter.getTileEntityNoLoad();
             if (te instanceof TileEntityTelemetry) {
                 if (((TileEntityTelemetry) te).linkedEntity == playerOld) {
                     ((TileEntityTelemetry) te).linkedEntity = playerNew;

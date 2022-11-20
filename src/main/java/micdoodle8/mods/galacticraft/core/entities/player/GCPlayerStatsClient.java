@@ -66,7 +66,7 @@ public class GCPlayerStatsClient implements IExtendedEntityProperties {
             return;
         }
         this.gravityTurnRatePrev = this.gravityTurnRate = 0.0F;
-        float turnSpeed = 0.05F;
+        final float turnSpeed = 0.05F;
         this.gravityTurnVecX = 0.0F;
         this.gravityTurnVecY = 0.0F;
         this.gravityTurnVecZ = 0.0F;

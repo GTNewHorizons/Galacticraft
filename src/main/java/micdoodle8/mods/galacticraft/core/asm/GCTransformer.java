@@ -31,18 +31,18 @@ public class GCTransformer implements IClassTransformer {
 
     @Override
     public byte[] transform(String name, String transformedName, byte[] basicClass) {
-        TransformerFactory factory = transformers.get(name);
+        final TransformerFactory factory = transformers.get(name);
         if (factory == null || factory.isInactive()) {
             return basicClass;
         }
         GCLoadingPlugin.LOGGER.info("Transforming class {}", name);
-        ClassReader cr = new ClassReader(basicClass);
-        ClassWriter cw = new ClassWriter(factory.isExpandFrames() ? ClassWriter.COMPUTE_FRAMES : 0);
+        final ClassReader cr = new ClassReader(basicClass);
+        final ClassWriter cw = new ClassWriter(factory.isExpandFrames() ? ClassWriter.COMPUTE_FRAMES : 0);
         // we are very probably the last one to run.
         byte[] transformedBytes = null;
         if (DEBUG) {
-            int curCount = transformCounts.compute(transformedName, (k, v) -> v == null ? 0 : v + 1);
-            String infix = curCount == 0 ? "" : "_" + curCount;
+            final int curCount = transformCounts.compute(transformedName, (k, v) -> v == null ? 0 : v + 1);
+            final String infix = curCount == 0 ? "" : "_" + curCount;
             try (PrintWriter origOut = new PrintWriter(new File(debugOutputDir, name + infix + "_orig.txt"), "UTF-8");
                     PrintWriter tranOut =
                             new PrintWriter(new File(debugOutputDir, name + infix + "_tran.txt"), "UTF-8")) {
@@ -50,7 +50,7 @@ public class GCTransformer implements IClassTransformer {
                         new TraceClassVisitor(factory.apply(ASM5, new TraceClassVisitor(cw, tranOut)), origOut),
                         factory.isExpandFrames() ? ClassReader.SKIP_FRAMES : 0);
                 transformedBytes = cw.toByteArray();
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 GCLoadingPlugin.LOGGER.warn(
                         "Unable to transform with debug output on. Now retrying without debug output.", e);
             }
@@ -59,7 +59,7 @@ public class GCTransformer implements IClassTransformer {
             try {
                 cr.accept(factory.apply(ASM5, cw), factory.isExpandFrames() ? ClassReader.SKIP_FRAMES : 0);
                 transformedBytes = cw.toByteArray();
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 catching(e);
             }
         }

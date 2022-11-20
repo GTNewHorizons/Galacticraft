@@ -86,7 +86,7 @@ public class EntityParachest extends Entity {
                     final int y = MathHelper.floor_double(this.posY);
                     final int z = MathHelper.floor_double(this.posZ);
 
-                    Block block = this.worldObj.getBlock(x, y + i, z);
+                    final Block block = this.worldObj.getBlock(x, y + i, z);
 
                     if (block.getMaterial().isReplaceable()) {
                         if (this.placeChest(x, y + i, z)) {

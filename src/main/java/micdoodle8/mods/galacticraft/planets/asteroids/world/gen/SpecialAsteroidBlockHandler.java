@@ -9,7 +9,7 @@ public class SpecialAsteroidBlockHandler {
 
     public SpecialAsteroidBlockHandler(SpecialAsteroidBlock... asteroidBlocks) {
         this.asteroidBlocks = new ArrayList<SpecialAsteroidBlock>();
-        for (SpecialAsteroidBlock asteroidBlock : this.asteroidBlocks) {
+        for (final SpecialAsteroidBlock asteroidBlock : this.asteroidBlocks) {
             for (int i = 0; i < asteroidBlock.probability; i++) {
                 this.asteroidBlocks.add(asteroidBlock);
             }
@@ -27,13 +27,13 @@ public class SpecialAsteroidBlockHandler {
     }
 
     public SpecialAsteroidBlock getBlock(Random rand, int size) {
-        int s = this.asteroidBlocks.size();
+        final int s = this.asteroidBlocks.size();
         if (s < 10) {
             return this.asteroidBlocks.get(rand.nextInt(s));
         }
 
-        Double r = rand.nextDouble();
-        int index = (int) (s * Math.pow(r, (size + 5) * 0.05D));
+        final Double r = rand.nextDouble();
+        final int index = (int) (s * Math.pow(r, (size + 5) * 0.05D));
         return this.asteroidBlocks.get(index);
     }
 }

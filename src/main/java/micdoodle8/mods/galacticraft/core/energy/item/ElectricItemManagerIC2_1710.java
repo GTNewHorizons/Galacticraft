@@ -17,12 +17,12 @@ public class ElectricItemManagerIC2_1710 implements IElectricItemManager {
     @Override
     public double charge(ItemStack itemStack, double amount, int tier, boolean ignoreTransferLimit, boolean simulate) {
         if (itemStack.getItem() instanceof IItemElectricBase) {
-            IItemElectricBase item = (IItemElectricBase) itemStack.getItem();
+            final IItemElectricBase item = (IItemElectricBase) itemStack.getItem();
             if (amount > ((ISpecialElectricItem) item).getMaxCharge(itemStack)) {
                 amount = ((ISpecialElectricItem) item).getMaxCharge(itemStack);
             }
-            float energy = (float) amount * EnergyConfigHandler.IC2_RATIO;
-            float rejectedElectricity = Math.max(
+            final float energy = (float) amount * EnergyConfigHandler.IC2_RATIO;
+            final float rejectedElectricity = Math.max(
                     item.getElectricityStored(itemStack) + energy - item.getMaxElectricityStored(itemStack), 0);
             float energyToReceive = energy - rejectedElectricity;
             if (!ignoreTransferLimit && energyToReceive > item.getMaxTransferGC(itemStack)) {
@@ -51,8 +51,8 @@ public class ElectricItemManagerIC2_1710 implements IElectricItemManager {
             boolean externally,
             boolean simulate) {
         if (itemStack.getItem() instanceof IItemElectricBase) {
-            IItemElectricBase item = (IItemElectricBase) itemStack.getItem();
-            float energy = (float) amount / EnergyConfigHandler.TO_IC2_RATIO;
+            final IItemElectricBase item = (IItemElectricBase) itemStack.getItem();
+            final float energy = (float) amount / EnergyConfigHandler.TO_IC2_RATIO;
             float energyToTransfer = Math.min(item.getElectricityStored(itemStack), energy);
             if (!ignoreTransferLimit) {
                 energyToTransfer = Math.min(energyToTransfer, item.getMaxTransferGC(itemStack));
@@ -70,7 +70,7 @@ public class ElectricItemManagerIC2_1710 implements IElectricItemManager {
     @Override
     public double getCharge(ItemStack itemStack) {
         if (itemStack.getItem() instanceof IItemElectricBase) {
-            IItemElectricBase item = (IItemElectricBase) itemStack.getItem();
+            final IItemElectricBase item = (IItemElectricBase) itemStack.getItem();
             return item.getElectricityStored(itemStack) * EnergyConfigHandler.TO_IC2_RATIO;
         }
         return 0D;

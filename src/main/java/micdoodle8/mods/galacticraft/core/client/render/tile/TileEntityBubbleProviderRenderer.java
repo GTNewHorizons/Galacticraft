@@ -31,7 +31,7 @@ public class TileEntityBubbleProviderRenderer extends TileEntitySpecialRenderer 
 
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float var8) {
-        IBubbleProvider provider = (IBubbleProvider) tileEntity;
+        final IBubbleProvider provider = (IBubbleProvider) tileEntity;
 
         if (!provider.getBubbleVisible()) {
             return;
@@ -53,8 +53,8 @@ public class TileEntityBubbleProviderRenderer extends TileEntitySpecialRenderer 
         GL11.glLoadIdentity();
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
         GL11.glDepthMask(false);
-        float lightMapSaveX = OpenGlHelper.lastBrightnessX;
-        float lightMapSaveY = OpenGlHelper.lastBrightnessY;
+        final float lightMapSaveX = OpenGlHelper.lastBrightnessX;
+        final float lightMapSaveY = OpenGlHelper.lastBrightnessY;
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240F, 240F);
         GL11.glScalef(provider.getBubbleSize(), provider.getBubbleSize(), provider.getBubbleSize());
 

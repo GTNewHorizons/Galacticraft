@@ -105,8 +105,8 @@ public class EntityLander extends EntityLanderBase implements IIgnoreShift, ICam
             return false;
         }
 
-        float turnFactor = 2.0F;
-        float angle = 45;
+        final float turnFactor = 2.0F;
+        final float angle = 45;
 
         switch (key) {
             case 0:
@@ -177,9 +177,9 @@ public class EntityLander extends EntityLanderBase implements IIgnoreShift, ICam
                 this.motionY -= 0.008D;
             }
 
-            double motY = -1 * Math.sin(this.rotationPitch * Math.PI / 180.0D);
-            double motX = Math.cos(this.rotationYaw * Math.PI / 180.0D) * motY;
-            double motZ = Math.sin(this.rotationYaw * Math.PI / 180.0D) * motY;
+            final double motY = -1 * Math.sin(this.rotationPitch * Math.PI / 180.0D);
+            final double motX = Math.cos(this.rotationYaw * Math.PI / 180.0D) * motY;
+            final double motZ = Math.sin(this.rotationYaw * Math.PI / 180.0D) * motY;
             this.motionX = motX / 2.0F;
             this.motionZ = motZ / 2.0F;
         }

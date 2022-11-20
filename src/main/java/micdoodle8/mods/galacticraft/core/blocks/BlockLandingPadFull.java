@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockLandingPadFull extends BlockAdvancedTile implements IPartialSealableBlock {
-    private IIcon[] icons = new IIcon[3];
+    private final IIcon[] icons = new IIcon[3];
 
     public BlockLandingPadFull(String assetName) {
         super(Material.rock);
@@ -177,7 +177,7 @@ public class BlockLandingPadFull extends BlockAdvancedTile implements IPartialSe
 
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
-        int metadata = world.getBlockMetadata(x, y, z);
+        final int metadata = world.getBlockMetadata(x, y, z);
         return new ItemStack(Item.getItemFromBlock(GCBlocks.landingPad), 1, metadata);
     }
 }

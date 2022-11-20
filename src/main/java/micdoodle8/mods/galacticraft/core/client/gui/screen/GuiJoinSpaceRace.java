@@ -32,28 +32,29 @@ public class GuiJoinSpaceRace extends GuiScreen implements ICheckBoxCallback, IT
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/gui.png");
 
     private int ticksPassed;
-    private EntityPlayer thePlayer;
+    private final EntityPlayer thePlayer;
     private boolean initialized;
 
     private int buttonFlag_height;
     private int buttonFlag_xPosition;
     private int buttonFlag_yPosition;
 
-    private EntityFlag dummyFlag = new EntityFlag(FMLClientHandler.instance().getClient().theWorld);
-    private ModelFlag dummyModel = new ModelFlag();
+    private final EntityFlag dummyFlag =
+            new EntityFlag(FMLClientHandler.instance().getClient().theWorld);
+    private final ModelFlag dummyModel = new ModelFlag();
 
     private SpaceRace spaceRaceData;
 
     public GuiJoinSpaceRace(EntityClientPlayerMP player) {
         this.thePlayer = player;
-        GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
+        final GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
 
-        SpaceRace race = SpaceRaceManager.getSpaceRaceFromID(stats.spaceRaceInviteTeamID);
+        final SpaceRace race = SpaceRaceManager.getSpaceRaceFromID(stats.spaceRaceInviteTeamID);
 
         if (race != null) {
             this.spaceRaceData = race;
         } else {
-            List<String> playerList = new ArrayList<String>();
+            final List<String> playerList = new ArrayList<String>();
             playerList.add(player.getGameProfile().getName());
             this.spaceRaceData =
                     new SpaceRace(playerList, SpaceRace.DEFAULT_NAME, new FlagData(48, 32), new Vector3(1, 1, 1));
@@ -70,7 +71,7 @@ public class GuiJoinSpaceRace extends GuiScreen implements ICheckBoxCallback, IT
             final int var5 = (this.width - this.width / 4) / 2;
             final int var6 = (this.height - this.height / 4) / 2;
 
-            int buttonFlag_width = 81;
+            final int buttonFlag_width = 81;
             this.buttonFlag_height = 58;
             this.buttonFlag_xPosition = this.width / 2 - buttonFlag_width / 2;
             this.buttonFlag_yPosition = this.height / 2 - this.height / 3 + 10;
@@ -82,7 +83,7 @@ public class GuiJoinSpaceRace extends GuiScreen implements ICheckBoxCallback, IT
                     50,
                     15,
                     GCCoreUtil.translate("gui.spaceRace.create.close.name")));
-            int width = (int) (var5 / 1.0F);
+            final int width = (int) (var5 / 1.0F);
             this.buttonList.add(new GuiElementGradientButton(
                     1,
                     this.width / 2 - width / 2,
@@ -194,8 +195,8 @@ public class GuiJoinSpaceRace extends GuiScreen implements ICheckBoxCallback, IT
     @Override
     public void drawWorldBackground(int i) {
         if (this.mc.theWorld != null) {
-            int scaleX = Math.min(this.ticksPassed * 14, this.width / 3);
-            int scaleY = Math.min(this.ticksPassed * 14, this.height / 3);
+            final int scaleX = Math.min(this.ticksPassed * 14, this.width / 3);
+            final int scaleY = Math.min(this.ticksPassed * 14, this.height / 3);
 
             if (scaleX == this.width / 3 && scaleY == this.height / 3 && !this.initialized) {
                 this.initialized = true;

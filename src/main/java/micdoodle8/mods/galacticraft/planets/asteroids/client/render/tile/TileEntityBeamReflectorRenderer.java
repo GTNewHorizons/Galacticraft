@@ -38,9 +38,9 @@ public class TileEntityBeamReflectorRenderer extends TileEntitySpecialRenderer {
         TileEntityBeamReflectorRenderer.reflectorModel.renderPart("Base");
         GL11.glRotatef(tileEntity.yaw, 0, 1, 0);
         TileEntityBeamReflectorRenderer.reflectorModel.renderPart("Axle");
-        float dX = 0.0F;
-        float dY = 1.13228F;
-        float dZ = 0.0F;
+        final float dX = 0.0F;
+        final float dY = 1.13228F;
+        final float dZ = 0.0F;
         GL11.glTranslatef(dX, dY, dZ);
         GL11.glRotatef(tileEntity.pitch, 1, 0, 0);
         GL11.glTranslatef(-dX, -dY, -dZ);

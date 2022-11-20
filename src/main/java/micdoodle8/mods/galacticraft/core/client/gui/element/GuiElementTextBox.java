@@ -14,7 +14,7 @@ public class GuiElementTextBox extends GuiButton {
     public String text;
     public boolean numericOnly;
     public boolean centered;
-    private int maxLength;
+    private final int maxLength;
 
     public long timeBackspacePressed;
     public int cursorPulse;
@@ -22,9 +22,9 @@ public class GuiElementTextBox extends GuiButton {
     public boolean isTextFocused = false;
     public int incorrectUseTimer;
 
-    private ITextBoxCallback parentGui;
+    private final ITextBoxCallback parentGui;
 
-    private Minecraft mc = FMLClientHandler.instance().getClient();
+    private final Minecraft mc = FMLClientHandler.instance().getClient();
 
     public GuiElementTextBox(
             int id,
@@ -52,7 +52,7 @@ public class GuiElementTextBox extends GuiButton {
             if (keyID == Keyboard.KEY_BACK) {
                 if (this.text.length() > 0) {
                     if (this.parentGui.canPlayerEdit(this, this.mc.thePlayer)) {
-                        String toBeParsed = this.text.substring(0, this.text.length() - 1);
+                        final String toBeParsed = this.text.substring(0, this.text.length() - 1);
 
                         if (this.isValid(toBeParsed)) {
                             this.text = toBeParsed;
@@ -127,7 +127,7 @@ public class GuiElementTextBox extends GuiButton {
                     if (System.currentTimeMillis() - this.timeBackspacePressed
                                     > 200 / (1 + this.backspacePressed * 0.3F)
                             && this.parentGui.canPlayerEdit(this, this.mc.thePlayer)) {
-                        String toBeParsed = this.text.substring(0, this.text.length() - 1);
+                        final String toBeParsed = this.text.substring(0, this.text.length() - 1);
 
                         if (this.isValid(toBeParsed)) {
                             this.text = toBeParsed;
@@ -172,7 +172,7 @@ public class GuiElementTextBox extends GuiButton {
     public int getIntegerValue() {
         try {
             return Integer.parseInt(this.text.equals("") ? "0" : this.text);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             return -1;
         }
     }
@@ -183,7 +183,7 @@ public class GuiElementTextBox extends GuiButton {
                 try {
                     Integer.parseInt(string);
                     return true;
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     return false;
                 }
             } else {

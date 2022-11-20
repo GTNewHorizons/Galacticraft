@@ -44,7 +44,7 @@ public class ItemBasicMars extends Item {
     public void registerIcons(IIconRegister iconRegister) {
         int i = 0;
 
-        for (String name : ItemBasicMars.names) {
+        for (final String name : ItemBasicMars.names) {
             this.icons[i++] = iconRegister.registerIcon(MarsModule.TEXTURE_PREFIX + name);
         }
     }

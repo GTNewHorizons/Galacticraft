@@ -28,7 +28,7 @@ public class TileEntityArclamp extends TileEntity {
     private int ticks = 0;
     private int sideRear = 0;
     public int facing = 0;
-    private HashSet<BlockVec3> airToRestore = new HashSet();
+    private final HashSet<BlockVec3> airToRestore = new HashSet();
     private boolean isActive = false;
     private AxisAlignedBB thisAABB;
     private Vec3 thisPos;
@@ -68,7 +68,7 @@ public class TileEntityArclamp extends TileEntity {
             // Test for first tick after placement
             if (this.thisAABB == null) {
                 initialLight = true;
-                int side = this.getBlockMetadata();
+                final int side = this.getBlockMetadata();
                 switch (side) {
                     case 0:
                         this.sideRear = side; // Down
@@ -155,26 +155,26 @@ public class TileEntityArclamp extends TileEntity {
             }
 
             if (this.worldObj.rand.nextInt(20) == 0) {
-                List<Entity> moblist =
+                final List<Entity> moblist =
                         this.worldObj.getEntitiesWithinAABBExcludingEntity(null, this.thisAABB, IMob.mobSelector);
 
                 if (!moblist.isEmpty()) {
-                    for (Entity entry : moblist) {
+                    for (final Entity entry : moblist) {
                         if (!(entry instanceof EntityCreature)) {
                             continue;
                         }
-                        EntityCreature e = (EntityCreature) entry;
+                        final EntityCreature e = (EntityCreature) entry;
                         // Check whether the mob can actually *see* the arclamp tile
                         // if (this.worldObj.func_147447_a(thisPos, Vec3.createVectorHelper(e.posX,
                         // e.posY, e.posZ),
                         // true, true, false) != null) continue;
 
-                        Vec3 vecNewTarget =
+                        final Vec3 vecNewTarget =
                                 RandomPositionGenerator.findRandomTargetBlockAwayFrom(e, 16, 7, this.thisPos);
                         if (vecNewTarget == null) {
                             continue;
                         }
-                        PathNavigate nav = e.getNavigator();
+                        final PathNavigate nav = e.getNavigator();
                         if (nav == null) {
                             continue;
                         }
@@ -182,7 +182,7 @@ public class TileEntityArclamp extends TileEntity {
                         if (nav.getPath() != null && !nav.getPath().isFinished()) {
                             vecOldTarget = nav.getPath().getPosition(e);
                         }
-                        double distanceNew = vecNewTarget.squareDistanceTo(this.xCoord, this.yCoord, this.zCoord);
+                        final double distanceNew = vecNewTarget.squareDistanceTo(this.xCoord, this.yCoord, this.zCoord);
 
                         if (distanceNew > e.getDistanceSq(this.xCoord, this.yCoord, this.zCoord)) {
                             if (vecOldTarget == null
@@ -227,22 +227,22 @@ public class TileEntityArclamp extends TileEntity {
     }
 
     public void lightArea() {
-        Block air = Blocks.air;
-        Block breatheableAirID = GCBlocks.breatheableAir;
-        Block brightAir = GCBlocks.brightAir;
-        Block brightBreatheableAir = GCBlocks.brightBreatheableAir;
-        HashSet<BlockVec3> checked = new HashSet();
+        final Block air = Blocks.air;
+        final Block breatheableAirID = GCBlocks.breatheableAir;
+        final Block brightAir = GCBlocks.brightAir;
+        final Block brightBreatheableAir = GCBlocks.brightBreatheableAir;
+        final HashSet<BlockVec3> checked = new HashSet();
         LinkedList<BlockVec3> currentLayer = new LinkedList();
         LinkedList<BlockVec3> nextLayer = new LinkedList();
-        BlockVec3 thisvec = new BlockVec3(this);
+        final BlockVec3 thisvec = new BlockVec3(this);
         currentLayer.add(thisvec);
-        World world = this.worldObj;
-        int sideskip1 = this.sideRear;
-        int sideskip2 = this.facingSide ^ 1;
+        final World world = this.worldObj;
+        final int sideskip1 = this.sideRear;
+        final int sideskip2 = this.facingSide ^ 1;
         for (int i = 0; i < 6; i++) {
             if (i != sideskip1 && i != sideskip2 && i != (sideskip1 ^ 1) && i != (sideskip2 ^ 1)) {
-                BlockVec3 onEitherSide = thisvec.newVecSide(i);
-                Block b = onEitherSide.getBlockIDsafe_noChunkLoad(world);
+                final BlockVec3 onEitherSide = thisvec.newVecSide(i);
+                final Block b = onEitherSide.getBlockIDsafe_noChunkLoad(world);
                 if (b != null && b.getLightOpacity() < 15) {
                     currentLayer.add(onEitherSide);
                 }
@@ -251,7 +251,7 @@ public class TileEntityArclamp extends TileEntity {
         BlockVec3 inFront = new BlockVec3(this);
         for (int i = 0; i < 5; i++) {
             inFront = inFront.newVecSide(this.facingSide).newVecSide(sideskip1 ^ 1);
-            Block b = inFront.getBlockIDsafe_noChunkLoad(world);
+            final Block b = inFront.getBlockIDsafe_noChunkLoad(world);
             if (b != null && b.getLightOpacity() < 15) {
                 currentLayer.add(inFront);
             }
@@ -260,7 +260,7 @@ public class TileEntityArclamp extends TileEntity {
         int side, bits;
 
         for (int count = 0; count < 14; count++) {
-            for (BlockVec3 vec : currentLayer) {
+            for (final BlockVec3 vec : currentLayer) {
                 side = 0;
                 bits = vec.sideDoneBits;
                 boolean allAir = true;
@@ -268,12 +268,12 @@ public class TileEntityArclamp extends TileEntity {
                     // Skip the side which this was entered from
                     // and never go 'backwards'
                     if ((bits & 1 << side) == 0) {
-                        BlockVec3 sideVec = vec.newVecSide(side);
+                        final BlockVec3 sideVec = vec.newVecSide(side);
 
                         if (!checked.contains(sideVec)) {
                             checked.add(sideVec);
 
-                            Block b = sideVec.getBlockIDsafe_noChunkLoad(world);
+                            final Block b = sideVec.getBlockIDsafe_noChunkLoad(world);
                             if (b instanceof BlockAir) {
                                 if (side != sideskip1 && side != sideskip2) {
                                     nextLayer.add(sideVec);
@@ -292,7 +292,7 @@ public class TileEntityArclamp extends TileEntity {
                 } while (side < 6);
 
                 if (!allAir) {
-                    Block id = vec.getBlockIDsafe_noChunkLoad(world);
+                    final Block id = vec.getBlockIDsafe_noChunkLoad(world);
                     if (Blocks.air == id) {
                         world.setBlock(vec.x, vec.y, vec.z, brightAir, 0, 2);
                         this.airToRestore.add(vec);
@@ -320,10 +320,10 @@ public class TileEntityArclamp extends TileEntity {
         this.updateClientFlag = true;
 
         this.airToRestore.clear();
-        NBTTagList airBlocks = nbt.getTagList("AirBlocks", 10);
+        final NBTTagList airBlocks = nbt.getTagList("AirBlocks", 10);
         if (airBlocks.tagCount() > 0) {
             for (int j = airBlocks.tagCount() - 1; j >= 0; j--) {
-                NBTTagCompound tag1 = airBlocks.getCompoundTagAt(j);
+                final NBTTagCompound tag1 = airBlocks.getCompoundTagAt(j);
                 if (tag1 != null) {
                     this.airToRestore.add(BlockVec3.readFromNBT(tag1));
                 }
@@ -337,10 +337,10 @@ public class TileEntityArclamp extends TileEntity {
 
         nbt.setInteger("Facing", this.facing);
 
-        NBTTagList airBlocks = new NBTTagList();
+        final NBTTagList airBlocks = new NBTTagList();
 
-        for (BlockVec3 vec : this.airToRestore) {
-            NBTTagCompound tag = new NBTTagCompound();
+        for (final BlockVec3 vec : this.airToRestore) {
+            final NBTTagCompound tag = new NBTTagCompound();
             vec.writeToNBT(tag);
             airBlocks.appendTag(tag);
         }
@@ -365,10 +365,10 @@ public class TileEntityArclamp extends TileEntity {
     }
 
     private void revertAir() {
-        Block brightAir = GCBlocks.brightAir;
-        Block brightBreatheableAir = GCBlocks.brightBreatheableAir;
-        for (BlockVec3 vec : this.airToRestore) {
-            Block b = vec.getBlock(this.worldObj);
+        final Block brightAir = GCBlocks.brightAir;
+        final Block brightBreatheableAir = GCBlocks.brightBreatheableAir;
+        for (final BlockVec3 vec : this.airToRestore) {
+            final Block b = vec.getBlock(this.worldObj);
             if (b == brightAir) {
                 this.worldObj.setBlock(vec.x, vec.y, vec.z, Blocks.air, 0, 2);
             } else if (b == brightBreatheableAir) {

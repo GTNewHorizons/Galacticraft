@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
 
 public class ContainerIngotCompressor extends Container {
-    private TileEntityIngotCompressor tileEntity;
+    private final TileEntityIngotCompressor tileEntity;
 
     public ContainerIngotCompressor(InventoryPlayer par1InventoryPlayer, TileEntityIngotCompressor tileEntity) {
         this.tileEntity = tileEntity;
@@ -69,10 +69,10 @@ public class ContainerIngotCompressor extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par1) {
         ItemStack var2 = null;
-        Slot slot = (Slot) this.inventorySlots.get(par1);
+        final Slot slot = (Slot) this.inventorySlots.get(par1);
 
         if (slot != null && slot.getHasStack()) {
-            ItemStack var4 = slot.getStack();
+            final ItemStack var4 = slot.getStack();
             var2 = var4.copy();
 
             if (par1 <= 10) {

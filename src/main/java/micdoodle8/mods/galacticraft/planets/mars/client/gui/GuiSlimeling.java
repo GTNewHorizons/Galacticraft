@@ -179,7 +179,7 @@ public class GuiSlimeling extends GuiScreen {
         Gui.drawRect(var5, var6, var5 + this.xSize, var6 + this.ySize - 20, 0xFF000000);
         GL11.glPopMatrix();
 
-        int yOffset = (int) Math.floor(30.0D * (1.0F - this.slimeling.getScale()));
+        final int yOffset = (int) Math.floor(30.0D * (1.0F - this.slimeling.getScale()));
 
         GuiSlimeling.drawSlimelingOnGui(
                 this, this.slimeling, this.width / 2, var6 + 62 - yOffset, 70, var5 + 51 - par1, var6 + 75 - 50 - par2);
@@ -311,9 +311,9 @@ public class GuiSlimeling extends GuiScreen {
         GL11.glPopMatrix();
 
         try {
-            Class clazz = Class.forName("micdoodle8.mods.galacticraft.core.atoolkit.ProcessGraphic");
+            final Class clazz = Class.forName("micdoodle8.mods.galacticraft.core.atoolkit.ProcessGraphic");
             clazz.getMethod("go").invoke(null);
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
     }
 
@@ -325,9 +325,9 @@ public class GuiSlimeling extends GuiScreen {
         GL11.glTranslatef(par1, par2, 50.0F);
         GL11.glScalef(-par3 / 2.0F, par3 / 2.0F, par3 / 2.0F);
         GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-        float f2 = slimeling.renderYawOffset;
-        float f3 = slimeling.rotationYaw;
-        float f4 = slimeling.rotationPitch;
+        final float f2 = slimeling.renderYawOffset;
+        final float f3 = slimeling.rotationYaw;
+        final float f4 = slimeling.rotationPitch;
         par4 += 40;
         par5 -= 20;
         GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);

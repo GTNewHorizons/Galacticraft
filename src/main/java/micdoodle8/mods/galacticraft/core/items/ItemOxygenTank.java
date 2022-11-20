@@ -16,7 +16,7 @@ public class ItemOxygenTank extends Item {
     public ItemOxygenTank(int tier, String assetName) {
         super();
         this.setMaxStackSize(1);
-        double factor = 2.0;
+        final double factor = 2.0;
         // Config modifier goes here if anyone wants it.
         this.setMaxDamage((int) (Math.round(Math.pow(factor, tier - 1) * 10) * 100));
         this.setUnlocalizedName(assetName);

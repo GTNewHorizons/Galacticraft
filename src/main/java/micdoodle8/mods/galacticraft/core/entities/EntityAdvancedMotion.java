@@ -144,7 +144,7 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
         if (this.isDead || var1.equals(DamageSource.cactus) || !this.allowDamageSource(var1)) {
             return true;
         } else {
-            Entity e = var1.getEntity();
+            final Entity e = var1.getEntity();
             if (this.isEntityInvulnerable()
                     || this.posY > 300
                     || e instanceof EntityLivingBase && !(e instanceof EntityPlayer)) {
@@ -319,7 +319,7 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
         }
 
         if (this.worldObj.isRemote) {
-            Vector3 mot = this.getMotionVec();
+            final Vector3 mot = this.getMotionVec();
             this.motionX = mot.x;
             this.motionY = mot.y;
             this.motionZ = mot.z;

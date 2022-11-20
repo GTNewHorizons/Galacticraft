@@ -14,7 +14,7 @@ public class BlockTuple {
     }
 
     public String toString() {
-        Item item = Item.getItemFromBlock(this.block);
+        final Item item = Item.getItemFromBlock(this.block);
         if (item == null) {
             return "unknown";
         }

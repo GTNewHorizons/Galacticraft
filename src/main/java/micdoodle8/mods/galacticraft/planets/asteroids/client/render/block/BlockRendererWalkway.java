@@ -239,17 +239,17 @@ public class BlockRendererWalkway implements ISimpleBlockRenderingHandler {
         renderBlocks.setRenderBounds(0.45F, 0.5F, 0.45F, 0.55F, 0.9F, 0.55F);
         renderBlocks.renderStandardBlock(block, x, y, z);
 
-        int meta = var1.getBlockMetadata(x, y, z);
+        final int meta = var1.getBlockMetadata(x, y, z);
 
         // Check meta value for connectedness
         boolean connectedNorth = (meta & 1) != 0;
         boolean connectedEast = (meta & 2) != 0;
         boolean connectedSouth = (meta & 4) != 0;
         boolean connectedWest = (meta & 8) != 0;
-        boolean connectedNorth2 = connectedNorth;
-        boolean connectedEast2 = connectedEast;
-        boolean connectedSouth2 = connectedSouth;
-        boolean connectedWest2 = connectedWest;
+        final boolean connectedNorth2 = connectedNorth;
+        final boolean connectedEast2 = connectedEast;
+        final boolean connectedSouth2 = connectedSouth;
+        final boolean connectedWest2 = connectedWest;
 
         if (block == AsteroidBlocks.blockWalkwayOxygenPipe) {
             renderBlocks.setOverrideBlockTexture(GCBlocks.oxygenPipe.getBlockTextureFromSide(0));
@@ -266,7 +266,7 @@ public class BlockRendererWalkway implements ISimpleBlockRenderingHandler {
             if (tileEntity != null) {
                 final TileEntity[] connections = OxygenUtil.getAdjacentOxygenConnections(tileEntity);
 
-                for (TileEntity connection : connections) {
+                for (final TileEntity connection : connections) {
                     if (connection != null) {
                         final int side = Arrays.asList(connections).indexOf(connection);
 

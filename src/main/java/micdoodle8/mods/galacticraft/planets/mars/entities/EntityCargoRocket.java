@@ -50,7 +50,7 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
     public float getCargoFilledAmount() {
         float weight = 1;
 
-        for (ItemStack stack : this.cargoItems) {
+        for (final ItemStack stack : this.cargoItems) {
             if (stack != null) {
                 weight += 0.1D;
             }
@@ -71,7 +71,7 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
 
             motionScalar = Math.min(motionScalar, 1);
 
-            double modifier = this.getCargoFilledAmount();
+            final double modifier = this.getCargoFilledAmount();
             motionScalar *= 5.0D / modifier;
 
             if (!this.landing) {
@@ -253,11 +253,11 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
             GCLog.debug("Destination location = " + this.targetVec.toString());
             if (this.targetDimension != this.worldObj.provider.dimensionId) {
                 GCLog.debug("Destination is in different dimension: " + this.targetDimension);
-                WorldProvider targetDim = WorldUtil.getProviderForDimensionServer(this.targetDimension);
+                final WorldProvider targetDim = WorldUtil.getProviderForDimensionServer(this.targetDimension);
                 if (targetDim != null && targetDim.worldObj instanceof WorldServer) {
                     GCLog.debug("Loaded destination dimension " + this.targetDimension);
                     this.setPosition(this.targetVec.x + 0.5F, this.targetVec.y + 800, this.targetVec.z + 0.5F);
-                    Entity e = WorldUtil.transferEntityToDimension(
+                    final Entity e = WorldUtil.transferEntityToDimension(
                             this, this.targetDimension, (WorldServer) targetDim.worldObj, false, null);
 
                     if (e instanceof EntityCargoRocket) {
@@ -356,7 +356,7 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
     @Override
     public List<ItemStack> getItemsDropped(List<ItemStack> droppedItemList) {
         super.getItemsDropped(droppedItemList);
-        ItemStack rocket = new ItemStack(MarsItems.spaceship, 1, this.rocketType.getIndex() + 10);
+        final ItemStack rocket = new ItemStack(MarsItems.spaceship, 1, this.rocketType.getIndex() + 10);
         rocket.setTagCompound(new NBTTagCompound());
         rocket.getTagCompound().setInteger("RocketFuel", this.fuelTank.getFluidAmount());
         droppedItemList.add(rocket);

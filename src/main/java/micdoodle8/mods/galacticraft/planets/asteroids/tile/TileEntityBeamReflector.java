@@ -8,7 +8,7 @@ import micdoodle8.mods.galacticraft.core.energy.tile.EnergyStorage;
 
 public class TileEntityBeamReflector extends TileEntityBeamOutput implements ILaserNode {
     public Vector3 color = new Vector3(0, 1, 0);
-    private EnergyStorage storage = new EnergyStorage(10, 1);
+    private final EnergyStorage storage = new EnergyStorage(10, 1);
 
     @Override
     public void updateEntity() {
@@ -17,12 +17,12 @@ public class TileEntityBeamReflector extends TileEntityBeamOutput implements ILa
 
     @Override
     public Vector3 getInputPoint() {
-        float distance = 0.15F;
-        Vector3 deviation = new Vector3(
+        final float distance = 0.15F;
+        final Vector3 deviation = new Vector3(
                 Math.sin(Math.toRadians(this.yaw - 180)) * distance,
                 0,
                 Math.cos(Math.toRadians(this.yaw - 180)) * distance);
-        Vector3 headVec = new Vector3(this.xCoord + 0.5, this.yCoord + 1.13228 / 2.0, this.zCoord + 0.5);
+        final Vector3 headVec = new Vector3(this.xCoord + 0.5, this.yCoord + 1.13228 / 2.0, this.zCoord + 0.5);
         headVec.translate(deviation.clone().invert());
         return headVec;
     }

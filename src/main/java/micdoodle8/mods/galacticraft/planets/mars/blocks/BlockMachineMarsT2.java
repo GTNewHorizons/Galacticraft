@@ -89,7 +89,7 @@ public class BlockMachineMarsT2 extends BlockTileGC implements ItemBlockDesc.IBl
             return this.blockIcon;
         }
 
-        int metaside = (metadata & 3) + 2;
+        final int metaside = (metadata & 3) + 2;
         metadata &= 12;
 
         if (metadata == BlockMachineMarsT2.GAS_LIQUEFIER) {
@@ -139,9 +139,9 @@ public class BlockMachineMarsT2 extends BlockTileGC implements ItemBlockDesc.IBl
      */
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
-        int metadata = world.getBlockMetadata(x, y, z);
+        final int metadata = world.getBlockMetadata(x, y, z);
 
-        int angle = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        final int angle = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         int change = 0;
 
         switch (angle) {
@@ -173,8 +173,8 @@ public class BlockMachineMarsT2 extends BlockTileGC implements ItemBlockDesc.IBl
             float hitX,
             float hitY,
             float hitZ) {
-        int metadata = par1World.getBlockMetadata(x, y, z);
-        int original = metadata & 3;
+        final int metadata = par1World.getBlockMetadata(x, y, z);
+        final int original = metadata & 3;
         int change = 0;
 
         // Re-orient the block
@@ -193,7 +193,7 @@ public class BlockMachineMarsT2 extends BlockTileGC implements ItemBlockDesc.IBl
                 break;
         }
 
-        TileEntity te = par1World.getTileEntity(x, y, z);
+        final TileEntity te = par1World.getTileEntity(x, y, z);
         if (te instanceof TileBaseUniversalElectrical) {
             ((TileBaseUniversalElectrical) te).updateFacing();
         }
@@ -216,7 +216,7 @@ public class BlockMachineMarsT2 extends BlockTileGC implements ItemBlockDesc.IBl
             float hitX,
             float hitY,
             float hitZ) {
-        int metadata = world.getBlockMetadata(x, y, z);
+        final int metadata = world.getBlockMetadata(x, y, z);
 
         par5EntityPlayer.openGui(GalacticraftPlanets.instance, GuiIdsPlanets.MACHINE_MARS, world, x, y, z);
         return true;
@@ -252,7 +252,7 @@ public class BlockMachineMarsT2 extends BlockTileGC implements ItemBlockDesc.IBl
 
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
-        int metadata = this.getDamageValue(world, x, y, z);
+        final int metadata = this.getDamageValue(world, x, y, z);
 
         return new ItemStack(this, 1, metadata);
     }

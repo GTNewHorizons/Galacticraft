@@ -8,8 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class NasaWorkbenchRecipe implements INasaWorkbenchRecipe {
-    private ItemStack output;
-    private HashMap<Integer, ItemStack> input;
+    private final ItemStack output;
+    private final HashMap<Integer, ItemStack> input;
 
     public NasaWorkbenchRecipe(ItemStack output, HashMap<Integer, ItemStack> input) {
         this.output = output;
@@ -18,8 +18,8 @@ public class NasaWorkbenchRecipe implements INasaWorkbenchRecipe {
 
     @Override
     public boolean matches(IInventory inventory) {
-        for (Entry<Integer, ItemStack> entry : this.input.entrySet()) {
-            ItemStack stackAt = inventory.getStackInSlot(entry.getKey());
+        for (final Entry<Integer, ItemStack> entry : this.input.entrySet()) {
+            final ItemStack stackAt = inventory.getStackInSlot(entry.getKey());
 
             if (!this.checkItemEquals(stackAt, entry.getValue())) {
                 return false;

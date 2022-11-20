@@ -57,14 +57,14 @@ public class EntityEvolvedSkeleton extends EntitySkeleton implements IEntityBrea
     }
 
     public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2) {
-        EntityArrow entityarrow = new EntityArrow(
+        final EntityArrow entityarrow = new EntityArrow(
                 this.worldObj,
                 this,
                 par1EntityLivingBase,
                 0.4F,
                 17 - this.worldObj.difficultySetting.getDifficultyId() * 4);
-        int i = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
-        int j = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());
+        final int i = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
+        final int j = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());
         entityarrow.setDamage(par2 * 2.0F
                 + this.rand.nextGaussian() * 0.25D
                 + this.worldObj.difficultySetting.getDifficultyId() * 0.11F);
@@ -98,7 +98,7 @@ public class EntityEvolvedSkeleton extends EntitySkeleton implements IEntityBrea
         }
 
         if (this.isSprinting()) {
-            float f = this.rotationYaw * 0.017453292F;
+            final float f = this.rotationYaw * 0.017453292F;
             this.motionX -= MathHelper.sin(f) * 0.2F;
             this.motionZ += MathHelper.cos(f) * 0.2F;
         }
@@ -114,7 +114,7 @@ public class EntityEvolvedSkeleton extends EntitySkeleton implements IEntityBrea
             return;
         }
 
-        int r = this.rand.nextInt(12);
+        final int r = this.rand.nextInt(12);
         switch (r) {
             case 0:
             case 1:
@@ -141,7 +141,7 @@ public class EntityEvolvedSkeleton extends EntitySkeleton implements IEntityBrea
     }
 
     protected void dropFewItems(boolean p_70628_1_, int p_70628_2_) {
-        Item item = this.getDropItem();
+        final Item item = this.getDropItem();
 
         int j = this.rand.nextInt(3);
 

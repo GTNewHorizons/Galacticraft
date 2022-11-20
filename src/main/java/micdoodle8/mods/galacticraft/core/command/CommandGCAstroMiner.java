@@ -71,13 +71,13 @@ public class CommandGCAstroMiner extends CommandBase {
         } else if (astring[0].equalsIgnoreCase("reset")) {
             type = 2;
         } else if (astring[0].length() > 3 && astring[0].substring(0, 3).equalsIgnoreCase("set")) {
-            String number = astring[0].substring(3);
+            final String number = astring[0].substring(3);
             try {
                 newvalue = Integer.parseInt(number);
                 if (newvalue > 0) {
                     type = 3;
                 }
-            } catch (NumberFormatException ex) {
+            } catch (final NumberFormatException ex) {
             }
         }
 
@@ -93,7 +93,7 @@ public class CommandGCAstroMiner extends CommandBase {
                 }
 
                 if (playerBase != null) {
-                    GCPlayerStats stats = GCPlayerStats.get(playerBase);
+                    final GCPlayerStats stats = GCPlayerStats.get(playerBase);
                     switch (type) {
                         case 1:
                             icommandsender.addChatMessage(new ChatComponentText(GCCoreUtil.translateWithFormat(

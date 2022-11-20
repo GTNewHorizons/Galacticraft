@@ -81,7 +81,7 @@ public class PacketSimpleMars implements IPacket {
 
         try {
             NetworkUtil.encodeData(buffer, this.data);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
@@ -136,7 +136,7 @@ public class PacketSimpleMars implements IPacket {
                         break;
                 }
             case C_BEGIN_CRYOGENIC_SLEEP:
-                TileEntity tile = player.worldObj.getTileEntity(
+                final TileEntity tile = player.worldObj.getTileEntity(
                         (Integer) this.data.get(0), (Integer) this.data.get(1), (Integer) this.data.get(2));
 
                 if (tile instanceof TileEntityCryogenicChamber) {
@@ -151,17 +151,17 @@ public class PacketSimpleMars implements IPacket {
 
     @Override
     public void handleServerSide(EntityPlayer player) {
-        EntityPlayerMP playerBase = PlayerUtil.getPlayerBaseServerFromPlayer(player, false);
-        GCPlayerStats stats = GCPlayerStats.get(playerBase);
+        final EntityPlayerMP playerBase = PlayerUtil.getPlayerBaseServerFromPlayer(player, false);
+        final GCPlayerStats stats = GCPlayerStats.get(playerBase);
 
         switch (this.type) {
             case S_UPDATE_SLIMELING_DATA:
-                Entity entity = player.worldObj.getEntityByID((Integer) this.data.get(0));
+                final Entity entity = player.worldObj.getEntityByID((Integer) this.data.get(0));
 
                 if (entity instanceof EntitySlimeling) {
-                    EntitySlimeling slimeling = (EntitySlimeling) entity;
+                    final EntitySlimeling slimeling = (EntitySlimeling) entity;
 
-                    int subType = (Integer) this.data.get(1);
+                    final int subType = (Integer) this.data.get(1);
 
                     switch (subType) {
                         case 0:
@@ -210,53 +210,53 @@ public class PacketSimpleMars implements IPacket {
                 }
                 break;
             case S_WAKE_PLAYER:
-                ChunkCoordinates c = playerBase.playerLocation;
+                final ChunkCoordinates c = playerBase.playerLocation;
 
                 if (c != null) {
-                    EventWakePlayer event =
+                    final EventWakePlayer event =
                             new EventWakePlayer(playerBase, c.posX, c.posY, c.posZ, true, true, false, true);
                     MinecraftForge.EVENT_BUS.post(event);
                     playerBase.wakeUpPlayer(true, true, false);
                 }
                 break;
             case S_UPDATE_ADVANCED_GUI:
-                TileEntity tile = player.worldObj.getTileEntity(
+                final TileEntity tile = player.worldObj.getTileEntity(
                         (Integer) this.data.get(1), (Integer) this.data.get(2), (Integer) this.data.get(3));
 
                 switch ((Integer) this.data.get(0)) {
                     case 0:
                         if (tile instanceof TileEntityLaunchController) {
-                            TileEntityLaunchController launchController = (TileEntityLaunchController) tile;
+                            final TileEntityLaunchController launchController = (TileEntityLaunchController) tile;
                             launchController.setFrequency((Integer) this.data.get(4));
                         }
                         break;
                     case 1:
                         if (tile instanceof TileEntityLaunchController) {
-                            TileEntityLaunchController launchController = (TileEntityLaunchController) tile;
+                            final TileEntityLaunchController launchController = (TileEntityLaunchController) tile;
                             launchController.setLaunchDropdownSelection((Integer) this.data.get(4));
                         }
                         break;
                     case 2:
                         if (tile instanceof TileEntityLaunchController) {
-                            TileEntityLaunchController launchController = (TileEntityLaunchController) tile;
+                            final TileEntityLaunchController launchController = (TileEntityLaunchController) tile;
                             launchController.setDestinationFrequency((Integer) this.data.get(4));
                         }
                         break;
                     case 3:
                         if (tile instanceof TileEntityLaunchController) {
-                            TileEntityLaunchController launchController = (TileEntityLaunchController) tile;
+                            final TileEntityLaunchController launchController = (TileEntityLaunchController) tile;
                             launchController.launchPadRemovalDisabled = (Integer) this.data.get(4) == 1;
                         }
                         break;
                     case 4:
                         if (tile instanceof TileEntityLaunchController) {
-                            TileEntityLaunchController launchController = (TileEntityLaunchController) tile;
+                            final TileEntityLaunchController launchController = (TileEntityLaunchController) tile;
                             launchController.setLaunchSchedulingEnabled((Integer) this.data.get(4) == 1);
                         }
                         break;
                     case 5:
                         if (tile instanceof TileEntityLaunchController) {
-                            TileEntityLaunchController launchController = (TileEntityLaunchController) tile;
+                            final TileEntityLaunchController launchController = (TileEntityLaunchController) tile;
                             launchController.requiresClientUpdate = true;
                         }
                         break;
@@ -265,10 +265,10 @@ public class PacketSimpleMars implements IPacket {
                 }
                 break;
             case S_UPDATE_CARGO_ROCKET_STATUS:
-                Entity entity2 = player.worldObj.getEntityByID((Integer) this.data.get(0));
+                final Entity entity2 = player.worldObj.getEntityByID((Integer) this.data.get(0));
 
                 if (entity2 instanceof EntityCargoRocket) {
-                    EntityCargoRocket rocket = (EntityCargoRocket) entity2;
+                    final EntityCargoRocket rocket = (EntityCargoRocket) entity2;
                     rocket.statusValid = rocket.checkLaunchValidity();
                 }
                 break;

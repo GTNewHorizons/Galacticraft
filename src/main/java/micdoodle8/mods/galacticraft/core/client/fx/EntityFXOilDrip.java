@@ -58,7 +58,7 @@ public class EntityFXOilDrip extends EntityFX {
             this.motionZ *= 0.699999988079071D;
         }
 
-        Material material = this.worldObj
+        final Material material = this.worldObj
                 .getBlock(
                         MathHelper.floor_double(this.posX),
                         MathHelper.floor_double(this.posY),
@@ -66,7 +66,7 @@ public class EntityFXOilDrip extends EntityFX {
                 .getMaterial();
 
         if (material.isLiquid() || material.isSolid()) {
-            double var2 = MathHelper.floor_double(this.posY)
+            final double var2 = MathHelper.floor_double(this.posY)
                     + 1
                     - BlockLiquid.getLiquidHeightPercent(this.worldObj.getBlockMetadata(
                             MathHelper.floor_double(this.posX),

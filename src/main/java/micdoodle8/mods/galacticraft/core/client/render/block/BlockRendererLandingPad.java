@@ -85,7 +85,7 @@ public class BlockRendererLandingPad implements ISimpleBlockRenderingHandler {
             renderBlocks.renderStandardBlock(par1Block, par2, par3, par4);
         }
 
-        IFuelDock landingPad = (IFuelDock) var1.getTileEntity(par2, par3, par4);
+        final IFuelDock landingPad = (IFuelDock) var1.getTileEntity(par2, par3, par4);
 
         if (landingPad != null) {
             // +X left
@@ -162,18 +162,18 @@ public class BlockRendererLandingPad implements ISimpleBlockRenderingHandler {
         }
 
         if (var1.getBlockMetadata(par2, par3, par4) == 2) {
-            Tessellator tessellator = Tessellator.instance;
+            final Tessellator tessellator = Tessellator.instance;
             tessellator.setBrightness(Blocks.hopper.getMixedBrightnessForBlock(var1, par2, par3, par4));
-            float f1 = 1.0F;
-            int j1 = Blocks.hopper.colorMultiplier(var1, par2, par3, par4);
+            final float f1 = 1.0F;
+            final int j1 = Blocks.hopper.colorMultiplier(var1, par2, par3, par4);
             float f = (j1 >> 16 & 255) / 255.0F;
             float f2 = (j1 >> 8 & 255) / 255.0F;
             float f3 = (j1 & 255) / 255.0F;
 
             if (EntityRenderer.anaglyphEnable) {
-                float f4 = (f * 30.0F + f2 * 59.0F + f3 * 11.0F) / 100.0F;
-                float f5 = (f * 30.0F + f2 * 70.0F) / 100.0F;
-                float f6 = (f * 30.0F + f3 * 70.0F) / 100.0F;
+                final float f4 = (f * 30.0F + f2 * 59.0F + f3 * 11.0F) / 100.0F;
+                final float f5 = (f * 30.0F + f2 * 70.0F) / 100.0F;
+                final float f6 = (f * 30.0F + f3 * 70.0F) / 100.0F;
                 f = f4;
                 f2 = f5;
                 f3 = f6;
@@ -183,11 +183,11 @@ public class BlockRendererLandingPad implements ISimpleBlockRenderingHandler {
 
             renderBlocks.clearOverrideBlockTexture();
 
-            IIcon icon = BlockHopper.getHopperIcon("hopper");
+            final IIcon icon = BlockHopper.getHopperIcon("hopper");
             BlockHopper.getHopperIcon("hopper_inside");
 
             f = 0.125F;
-            double d0 = 0.625D;
+            final double d0 = 0.625D;
 
             renderBlocks.setOverrideBlockTexture(icon);
 
@@ -213,8 +213,8 @@ public class BlockRendererLandingPad implements ISimpleBlockRenderingHandler {
 
             renderBlocks.setOverrideBlockTexture(icon);
 
-            double d1 = 0.1D;
-            double d2 = 0.1D;
+            final double d1 = 0.1D;
+            final double d2 = 0.1D;
             renderBlocks.setRenderBounds(d1, d2, d1, 1.0D - d1, d0 - 0.002D, 1.0D - d1);
             renderBlocks.renderStandardBlock(Blocks.hopper, par2, par3, par4);
         }

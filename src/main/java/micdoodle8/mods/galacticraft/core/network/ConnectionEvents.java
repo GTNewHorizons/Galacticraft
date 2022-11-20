@@ -39,15 +39,15 @@ public class ConnectionEvents {
         ChunkLoadingCallback.onPlayerLogin(event.player);
 
         if (event.player instanceof EntityPlayerMP) {
-            EntityPlayerMP thePlayer = (EntityPlayerMP) event.player;
-            GCPlayerStats stats = GCPlayerStats.get(thePlayer);
+            final EntityPlayerMP thePlayer = (EntityPlayerMP) event.player;
+            final GCPlayerStats stats = GCPlayerStats.get(thePlayer);
             SpaceStationWorldData.checkAllStations(thePlayer, stats);
             GalacticraftCore.packetPipeline.sendTo(
                     new PacketSimple(
                             EnumSimplePacket.C_UPDATE_SPACESTATION_CLIENT_ID,
                             new Object[] {WorldUtil.spaceStationDataToString(stats.spaceStationDimensionData)}),
                     thePlayer);
-            SpaceRace raceForPlayer = SpaceRaceManager.getSpaceRaceFromPlayer(
+            final SpaceRace raceForPlayer = SpaceRaceManager.getSpaceRaceFromPlayer(
                     thePlayer.getGameProfile().getName());
             if (raceForPlayer != null) {
                 SpaceRaceManager.sendSpaceRaceData(thePlayer, raceForPlayer);
@@ -65,9 +65,9 @@ public class ConnectionEvents {
     @SubscribeEvent
     public void onConnectionReceived(ServerConnectionFromClientEvent event) {
         if (ConfigManagerCore.enableDebug) {
-            Integer[] idList = (Integer[]) WorldUtil.getPlanetList().get(0);
+            final Integer[] idList = (Integer[]) WorldUtil.getPlanetList().get(0);
             String ids = "";
-            for (Integer element : idList) {
+            for (final Integer element : idList) {
                 ids += element.toString() + " ";
             }
             GCLog.info("Galacticraft server sending dimension IDs to connecting client: " + ids);

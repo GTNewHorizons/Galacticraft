@@ -183,18 +183,18 @@ public class GCItems {
     public static ItemStack requestItem(String key, int amount) {
         try {
             if (GCItems.itemsList == null) {
-                Class<?> clazz = Class.forName(GCItems.getItemListClass());
-                Field f = clazz.getDeclaredField("itemList");
+                final Class<?> clazz = Class.forName(GCItems.getItemListClass());
+                final Field f = clazz.getDeclaredField("itemList");
                 GCItems.itemsList = f.get(null);
             }
 
             if (GCItems.itemsList instanceof HashMap) {
                 @SuppressWarnings("unchecked")
-                HashMap<String, ItemStack> blockMap = (HashMap<String, ItemStack>) GCItems.itemsList;
-                ItemStack stack = blockMap.get(key);
+                final HashMap<String, ItemStack> blockMap = (HashMap<String, ItemStack>) GCItems.itemsList;
+                final ItemStack stack = blockMap.get(key);
                 return new ItemStack(stack.getItem(), amount, stack.getItemDamage());
             }
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ex.printStackTrace();
         }
 
@@ -217,18 +217,18 @@ public class GCItems {
     public static ItemStack requestBlock(String key, int amount) {
         try {
             if (GCItems.blocksList == null) {
-                Class<?> clazz = Class.forName(GCItems.getItemListClass());
-                Field f = clazz.getDeclaredField("blocksList");
+                final Class<?> clazz = Class.forName(GCItems.getItemListClass());
+                final Field f = clazz.getDeclaredField("blocksList");
                 GCItems.blocksList = f.get(null);
             }
 
             if (GCItems.blocksList instanceof HashMap) {
                 @SuppressWarnings("unchecked")
-                HashMap<String, ItemStack> blockMap = (HashMap<String, ItemStack>) GCItems.blocksList;
-                ItemStack stack = blockMap.get(key);
+                final HashMap<String, ItemStack> blockMap = (HashMap<String, ItemStack>) GCItems.blocksList;
+                final ItemStack stack = blockMap.get(key);
                 return new ItemStack(stack.getItem(), amount, stack.getItemDamage());
             }
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ex.printStackTrace();
         }
 

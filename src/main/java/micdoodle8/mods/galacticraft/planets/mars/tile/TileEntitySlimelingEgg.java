@@ -20,7 +20,7 @@ public class TileEntitySlimelingEgg extends TileEntity {
             if (this.timeToHatch > 0) {
                 this.timeToHatch--;
             } else if (this.timeToHatch == 0 && lastTouchedPlayerUUID != null && lastTouchedPlayerUUID.length() > 0) {
-                int metadata = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord) % 3;
+                final int metadata = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord) % 3;
 
                 float colorRed = 0.0F;
                 float colorGreen = 0.0F;
@@ -39,7 +39,7 @@ public class TileEntitySlimelingEgg extends TileEntity {
                         break;
                 }
 
-                EntitySlimeling slimeling = new EntitySlimeling(this.worldObj, colorRed, colorGreen, colorBlue);
+                final EntitySlimeling slimeling = new EntitySlimeling(this.worldObj, colorRed, colorGreen, colorBlue);
 
                 slimeling.setPosition(this.xCoord + 0.5, this.yCoord + 1.0, this.zCoord + 0.5);
                 VersionUtil.setSlimelingOwner(slimeling, this.lastTouchedPlayerUUID);

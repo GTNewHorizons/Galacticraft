@@ -40,7 +40,8 @@ public class EntitySmallAsteroid extends Entity {
             this.rotationYaw += this.getSpinYaw();
         }
 
-        double sqrdMotion = this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ;
+        final double sqrdMotion =
+                this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ;
 
         if (sqrdMotion < 0.05) {
             // If the motion is too low (for some odd reason), speed it back up slowly.

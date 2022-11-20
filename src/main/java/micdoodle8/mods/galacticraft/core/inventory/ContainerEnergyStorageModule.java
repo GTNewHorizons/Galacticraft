@@ -9,7 +9,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerEnergyStorageModule extends Container {
-    private TileEntityEnergyStorageModule tileEntity;
+    private final TileEntityEnergyStorageModule tileEntity;
 
     public ContainerEnergyStorageModule(InventoryPlayer par1InventoryPlayer, TileEntityEnergyStorageModule batteryBox) {
         this.tileEntity = batteryBox;
@@ -51,11 +51,11 @@ public class ContainerEnergyStorageModule extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slotID) {
         ItemStack returnStack = null;
-        Slot slot = (Slot) this.inventorySlots.get(slotID);
+        final Slot slot = (Slot) this.inventorySlots.get(slotID);
         final int b = this.inventorySlots.size();
 
         if (slot != null && slot.getHasStack()) {
-            ItemStack itemStack = slot.getStack();
+            final ItemStack itemStack = slot.getStack();
             returnStack = itemStack.copy();
 
             if (slotID != 0 && slotID != 1) {

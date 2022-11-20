@@ -89,7 +89,7 @@ public class BlockBasicMars extends Block
             double explosionX,
             double explosionY,
             double explosionZ) {
-        int metadata = world.getBlockMetadata(x, y, z);
+        final int metadata = world.getBlockMetadata(x, y, z);
 
         if (metadata == 10) {
             return 10000.0F;
@@ -279,7 +279,7 @@ public class BlockBasicMars extends Block
     @Override
     public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
         if (rand.nextInt(10) == 0) {
-            int metadata = world.getBlockMetadata(x, y, z);
+            final int metadata = world.getBlockMetadata(x, y, z);
 
             if (metadata == 7) {
                 GalacticraftPlanets.spawnParticle(
@@ -314,7 +314,7 @@ public class BlockBasicMars extends Block
 
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
-        int metadata = world.getBlockMetadata(x, y, z);
+        final int metadata = world.getBlockMetadata(x, y, z);
         if (metadata == 2) {
             return new ItemStack(Item.getItemFromBlock(this), 1, metadata);
         }
@@ -333,7 +333,7 @@ public class BlockBasicMars extends Block
         if (target != Blocks.stone) {
             return false;
         }
-        int meta = world.getBlockMetadata(x, y, z);
+        final int meta = world.getBlockMetadata(x, y, z);
         return meta == 6 || meta == 9;
     }
 

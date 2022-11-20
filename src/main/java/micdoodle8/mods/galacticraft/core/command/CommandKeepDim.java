@@ -45,7 +45,7 @@ public class CommandKeepDim extends CommandBase {
                     } else {
                         try {
                             dimID = CommandBase.parseInt(icommandsender, astring[0]);
-                        } catch (Exception e) {
+                        } catch (final Exception e) {
                             throw new WrongUsageException(
                                     "Needs a dimension number! Usage: " + this.getCommandUsage(icommandsender),
                                     new Object[0]);

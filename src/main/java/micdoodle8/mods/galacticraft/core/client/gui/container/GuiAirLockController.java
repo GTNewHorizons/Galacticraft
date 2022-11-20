@@ -51,7 +51,7 @@ public class GuiAirLockController extends GuiScreen implements ICheckBoxCallback
                 0, this, this.width / 2 - 78, var6 + 18, GCCoreUtil.translate("gui.checkbox.redstoneSignal.name"));
         this.checkboxPlayerDistance = new GuiElementCheckbox(
                 1, this, this.width / 2 - 78, var6 + 33, GCCoreUtil.translate("gui.checkbox.playerWithin.name") + ": ");
-        String[] dropboxStrings = {
+        final String[] dropboxStrings = {
             GCCoreUtil.translate("gui.dropbox.playerDistance.name.0"),
             GCCoreUtil.translate("gui.dropbox.playerDistance.name.1"),
             GCCoreUtil.translate("gui.dropbox.playerDistance.name.2"),

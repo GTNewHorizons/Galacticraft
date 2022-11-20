@@ -149,7 +149,7 @@ public class EventHandlerGC {
                 }
                 try {
                     Thread.sleep(1000);
-                } catch (InterruptedException e) {
+                } catch (final InterruptedException e) {
                     e.printStackTrace();
                 }
             }
@@ -201,7 +201,7 @@ public class EventHandlerGC {
     @SubscribeEvent
     public void onEntityFall(LivingFallEvent event) {
         if (event.entityLiving instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) event.entityLiving;
+            final EntityPlayer player = (EntityPlayer) event.entityLiving;
             if (player.ridingEntity instanceof EntityAutoRocket || player.ridingEntity instanceof EntityLanderBase) {
                 event.distance = 0.0F;
                 event.setCanceled(true);
@@ -331,7 +331,7 @@ public class EventHandlerGC {
                     }
 
                     if (!OxygenUtil.isAABBInBreathableAirBlock(entityLiving)) {
-                        GCCoreOxygenSuffocationEvent suffocationEvent =
+                        final GCCoreOxygenSuffocationEvent suffocationEvent =
                                 new GCCoreOxygenSuffocationEvent.Pre(entityLiving);
                         MinecraftForge.EVENT_BUS.post(suffocationEvent);
 
@@ -341,7 +341,7 @@ public class EventHandlerGC {
 
                         entityLiving.attackEntityFrom(DamageSourceGC.oxygenSuffocation, 1);
 
-                        GCCoreOxygenSuffocationEvent suffocationEventPost =
+                        final GCCoreOxygenSuffocationEvent suffocationEventPost =
                                 new GCCoreOxygenSuffocationEvent.Post(entityLiving);
                         MinecraftForge.EVENT_BUS.post(suffocationEventPost);
                     }
@@ -351,9 +351,9 @@ public class EventHandlerGC {
     }
 
     private ItemStack fillBucket(World world, MovingObjectPosition position) {
-        Block block = world.getBlock(position.blockX, position.blockY, position.blockZ);
+        final Block block = world.getBlock(position.blockX, position.blockY, position.blockZ);
 
-        Item bucket = bucketList.get(block);
+        final Item bucket = bucketList.get(block);
 
         if (bucket != null && world.getBlockMetadata(position.blockX, position.blockY, position.blockZ) == 0) {
             world.setBlockToAir(position.blockX, position.blockY, position.blockZ);
@@ -365,9 +365,9 @@ public class EventHandlerGC {
 
     @SubscribeEvent
     public void onBucketFill(FillBucketEvent event) {
-        MovingObjectPosition pos = event.target;
+        final MovingObjectPosition pos = event.target;
 
-        ItemStack ret = fillBucket(event.world, pos);
+        final ItemStack ret = fillBucket(event.world, pos);
 
         if (ret == null) {
             return;
@@ -402,7 +402,7 @@ public class EventHandlerGC {
     public static boolean oilPresent(World world, Random rand, int x, int z, BlockVec3 pos) {
         boolean doGen2 = false;
 
-        for (Integer dim : ConfigManagerCore.externalOilGen) {
+        for (final Integer dim : ConfigManagerCore.externalOilGen) {
             if (dim == world.provider.dimensionId) {
                 doGen2 = true;
                 break;
@@ -420,8 +420,8 @@ public class EventHandlerGC {
         }
 
         rand.setSeed(world.getSeed());
-        long i1 = rand.nextInt() / 2L * 2L + 1L;
-        long j1 = rand.nextInt() / 2L * 2L + 1L;
+        final long i1 = rand.nextInt() / 2L * 2L + 1L;
+        final long j1 = rand.nextInt() / 2L * 2L + 1L;
         rand.setSeed(x * i1 + z * j1 ^ world.getSeed());
 
         double randMod = Math.min(0.2D, 0.08D * ConfigManagerCore.oilGenFactor);
@@ -450,12 +450,12 @@ public class EventHandlerGC {
     }
 
     public static void generateOil(World world, Random rand, int xx, int zz, boolean testFirst) {
-        BlockVec3 pos = new BlockVec3();
+        final BlockVec3 pos = new BlockVec3();
         if (oilPresent(world, rand, xx, zz, pos)) {
-            int x = pos.x;
-            int cy = pos.y;
-            int z = pos.z;
-            int r = 3 + rand.nextInt(5);
+            final int x = pos.x;
+            final int cy = pos.y;
+            final int z = pos.z;
+            final int r = 3 + rand.nextInt(5);
 
             if (testFirst && checkOilPresent(world, x, cy, z, r)) {
                 return;
@@ -536,14 +536,14 @@ public class EventHandlerGC {
     }
 
     public static void retrogenOil(World world, Chunk chunk) {
-        int cx = chunk.xPosition;
-        int cz = chunk.zPosition;
+        final int cx = chunk.xPosition;
+        final int cz = chunk.zPosition;
 
         generateOil(world, new Random(), cx << 4, cz << 4, true);
     }
 
     private static boolean checkBlock(World w, int x, int y, int z) {
-        Block b = w.getBlock(x, y, z);
+        final Block b = w.getBlock(x, y, z);
         if (b.getMaterial() == Material.air) {
             return true;
         }
@@ -551,7 +551,7 @@ public class EventHandlerGC {
     }
 
     private static boolean checkBlockAbove(World w, int x, int y, int z) {
-        Block b = w.getBlock(x, y, z);
+        final Block b = w.getBlock(x, y, z);
         if (b instanceof BlockSand) {
             return true;
         }
@@ -563,21 +563,21 @@ public class EventHandlerGC {
 
     @SubscribeEvent
     public void schematicUnlocked(Unlock event) {
-        GCPlayerStats stats = GCPlayerStats.get(event.player);
+        final GCPlayerStats stats = GCPlayerStats.get(event.player);
 
         if (!stats.unlockedSchematics.contains(event.page)) {
             stats.unlockedSchematics.add(event.page);
             Collections.sort(stats.unlockedSchematics);
 
             if (event.player != null && event.player.playerNetServerHandler != null) {
-                Integer[] iArray = new Integer[stats.unlockedSchematics.size()];
+                final Integer[] iArray = new Integer[stats.unlockedSchematics.size()];
 
                 for (int i = 0; i < iArray.length; i++) {
-                    ISchematicPage page = stats.unlockedSchematics.get(i);
+                    final ISchematicPage page = stats.unlockedSchematics.get(i);
                     iArray[i] = page == null ? -2 : page.getPageID();
                 }
 
-                List<Object> objList = new ArrayList<Object>();
+                final List<Object> objList = new ArrayList<Object>();
                 objList.add(iArray);
 
                 GalacticraftCore.packetPipeline.sendTo(
@@ -620,9 +620,9 @@ public class EventHandlerGC {
     private static ISchematicPage getNextSchematic(int currentIndex) {
         final HashMap<Integer, Integer> idList = new HashMap<Integer, Integer>();
 
-        EntityClientPlayerMP player = PlayerUtil.getPlayerBaseClientFromPlayer(
+        final EntityClientPlayerMP player = PlayerUtil.getPlayerBaseClientFromPlayer(
                 FMLClientHandler.instance().getClient().thePlayer, false);
-        GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
+        final GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
 
         for (int i = 0; i < stats.unlockedSchematics.size(); i++) {
             idList.put(i, stats.unlockedSchematics.get(i).getPageID());
@@ -651,9 +651,9 @@ public class EventHandlerGC {
     private static ISchematicPage getLastSchematic(int currentIndex) {
         final HashMap<Integer, Integer> idList = new HashMap<Integer, Integer>();
 
-        EntityClientPlayerMP player = PlayerUtil.getPlayerBaseClientFromPlayer(
+        final EntityClientPlayerMP player = PlayerUtil.getPlayerBaseClientFromPlayer(
                 FMLClientHandler.instance().getClient().thePlayer, false);
-        GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
+        final GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
 
         for (int i = 0; i < stats.unlockedSchematics.size(); i++) {
             idList.put(i, stats.unlockedSchematics.get(i).getPageID());
@@ -681,11 +681,11 @@ public class EventHandlerGC {
     @SubscribeEvent
     public void onPlayerDeath(PlayerDropsEvent event) {
         if (event.entityLiving instanceof EntityPlayerMP) {
-            GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) event.entityLiving);
+            final GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) event.entityLiving);
             if (!event.entityLiving.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
                 event.entityLiving.captureDrops = true;
                 for (int i = stats.extendedInventory.getSizeInventory() - 1; i >= 0; i--) {
-                    ItemStack stack = stats.extendedInventory.getStackInSlot(i);
+                    final ItemStack stack = stats.extendedInventory.getStackInSlot(i);
 
                     if (stack != null) {
                         ((EntityPlayerMP) event.entityLiving).func_146097_a(stack, true, false);
@@ -786,12 +786,12 @@ public class EventHandlerGC {
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void onLeaveBedButtonClicked(SleepCancelledEvent event) {
-        EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
+        final EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 
-        ChunkCoordinates c = player.playerLocation;
+        final ChunkCoordinates c = player.playerLocation;
 
         if (c != null) {
-            EventWakePlayer event0 = new EventWakePlayer(player, c.posX, c.posY, c.posZ, true, true, false, true);
+            final EventWakePlayer event0 = new EventWakePlayer(player, c.posX, c.posY, c.posZ, true, true, false, true);
             MinecraftForge.EVENT_BUS.post(event0);
             player.wakeUpPlayer(true, true, false);
             if (player.worldObj.isRemote && GalacticraftCore.isPlanetsLoaded) {
@@ -822,7 +822,7 @@ public class EventHandlerGC {
     public void overrideSkyColor(FogColors event) {
         // Disable any night vision effects on the sky, if the planet has no atmosphere
         if (event.entity.isPotionActive(Potion.nightVision)) {
-            WorldClient worldclient = Minecraft.getMinecraft().theWorld;
+            final WorldClient worldclient = Minecraft.getMinecraft().theWorld;
 
             if (worldclient.provider instanceof IGalacticraftWorldProvider
                     && ((IGalacticraftWorldProvider) worldclient.provider)
@@ -832,7 +832,7 @@ public class EventHandlerGC {
                             == 0
                     && event.block.getMaterial() == Material.air
                     && !((IGalacticraftWorldProvider) worldclient.provider).hasBreathableAtmosphere()) {
-                Vec3 vec = worldclient.getFogColor(1.0F);
+                final Vec3 vec = worldclient.getFogColor(1.0F);
                 event.red = (float) vec.xCoord;
                 event.green = (float) vec.yCoord;
                 event.blue = (float) vec.zCoord;
@@ -841,7 +841,7 @@ public class EventHandlerGC {
 
             if (worldclient.provider.getSkyRenderer() instanceof SkyProviderOverworld
                     && event.entity.posY > Constants.OVERWORLD_SKYPROVIDER_STARTHEIGHT) {
-                Vec3 vec = WorldUtil.getFogColorHook(event.entity.worldObj);
+                final Vec3 vec = WorldUtil.getFogColorHook(event.entity.worldObj);
                 event.red = (float) vec.xCoord;
                 event.green = (float) vec.yCoord;
                 event.blue = (float) vec.zCoord;
@@ -850,7 +850,7 @@ public class EventHandlerGC {
         }
     }
 
-    private List<SoundPlayEntry> soundPlayList = new ArrayList<SoundPlayEntry>();
+    private final List<SoundPlayEntry> soundPlayList = new ArrayList<SoundPlayEntry>();
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
@@ -861,7 +861,7 @@ public class EventHandlerGC {
             return;
         }
 
-        EntityPlayerSP player = FMLClientHandler.instance().getClient().thePlayer;
+        final EntityPlayerSP player = FMLClientHandler.instance().getClient().thePlayer;
 
         if (player != null
                 && player.worldObj != null
@@ -869,12 +869,12 @@ public class EventHandlerGC {
                 && event != null) {
             // Only modify standard game sounds, not music
             if (event.result.getAttenuationType() != ISound.AttenuationType.NONE) {
-                PlayerGearData gearData = ClientProxyCore.playerItemData.get(
+                final PlayerGearData gearData = ClientProxyCore.playerItemData.get(
                         player.getGameProfile().getName());
 
-                float x = event.result.getXPosF();
-                float y = event.result.getYPosF();
-                float z = event.result.getZPosF();
+                final float x = event.result.getXPosF();
+                final float y = event.result.getYPosF();
+                final float z = event.result.getZPosF();
 
                 if (gearData == null || gearData.getFrequencyModule() == -1) {
                     // If the player doesn't have a frequency module, and the player isn't in an
@@ -882,18 +882,18 @@ public class EventHandlerGC {
                     // Note: this is a very simplistic approach, and nowhere near realistic, but
                     // required for
                     // performance reasons
-                    AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(
+                    final AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(
                             x - 0.0015D, y - 0.0015D, z - 0.0015D, x + 0.0015D, y + 0.0015D, z + 0.0015D);
-                    boolean playerInAtmosphere = OxygenUtil.isAABBInBreathableAirBlock(player);
-                    boolean soundInAtmosphere = OxygenUtil.isAABBInBreathableAirBlock(player.worldObj, bb);
+                    final boolean playerInAtmosphere = OxygenUtil.isAABBInBreathableAirBlock(player);
+                    final boolean soundInAtmosphere = OxygenUtil.isAABBInBreathableAirBlock(player.worldObj, bb);
                     if (!playerInAtmosphere || !soundInAtmosphere) {
-                        float volume = event.result.getVolume();
+                        final float volume = event.result.getVolume();
 
                         // First check for duplicate firing of PlaySoundEvent17 on this handler's own
                         // playing of a
                         // reduced volume sound (see below)
                         for (int i = 0; i < this.soundPlayList.size(); i++) {
-                            SoundPlayEntry entry = this.soundPlayList.get(i);
+                            final SoundPlayEntry entry = this.soundPlayList.get(i);
 
                             if (entry.name.equals(event.name)
                                     && entry.x == x
@@ -906,14 +906,14 @@ public class EventHandlerGC {
                         }
 
                         // If it's not a duplicate: play the same sound but at reduced volume
-                        float newVolume = volume
+                        final float newVolume = volume
                                 / Math.max(
                                         0.01F,
                                         ((IGalacticraftWorldProvider) player.worldObj.provider)
                                                 .getSoundVolReductionAmount());
 
                         this.soundPlayList.add(new SoundPlayEntry(event.name, x, y, z, newVolume));
-                        ISound newSound = new PositionedSoundRecord(
+                        final ISound newSound = new PositionedSoundRecord(
                                 event.result.getPositionedSoundLocation(), newVolume, event.result.getPitch(), x, y, z);
                         event.manager.playSound(newSound);
                         event.result = null;

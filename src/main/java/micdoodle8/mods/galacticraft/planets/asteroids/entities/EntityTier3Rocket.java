@@ -133,10 +133,10 @@ public class EntityTier3Rocket extends EntityTieredRocket {
 
     @Override
     public void onTeleport(EntityPlayerMP player) {
-        EntityPlayerMP playerBase = PlayerUtil.getPlayerBaseServerFromPlayer(player, false);
+        final EntityPlayerMP playerBase = PlayerUtil.getPlayerBaseServerFromPlayer(player, false);
 
         if (playerBase != null) {
-            GCPlayerStats stats = GCPlayerStats.get(playerBase);
+            final GCPlayerStats stats = GCPlayerStats.get(playerBase);
 
             if (this.cargoItems == null || this.cargoItems.length == 0) {
                 stats.rocketStacks = new ItemStack[2];
@@ -167,15 +167,15 @@ public class EntityTier3Rocket extends EntityTieredRocket {
 
             final double x2 = this.posX + x1 + this.motionX;
             final double z2 = this.posZ + z1 + this.motionZ;
-            Vector3 motionVec = new Vector3(x1 + this.motionX, y1 + this.motionY, z1 + this.motionZ);
-            Vector3 d1 = new Vector3(y1 * 0.1D, -x1 * 0.1D, z1 * 0.1D).rotate(315 - this.rotationYaw, motionVec);
-            Vector3 d2 = new Vector3(x1 * 0.1D, -z1 * 0.1D, y1 * 0.1D).rotate(315 - this.rotationYaw, motionVec);
-            Vector3 d3 = new Vector3(-y1 * 0.1D, x1 * 0.1D, z1 * 0.1D).rotate(315 - this.rotationYaw, motionVec);
-            Vector3 d4 = new Vector3(x1 * 0.1D, z1 * 0.1D, -y1 * 0.1D).rotate(315 - this.rotationYaw, motionVec);
-            Vector3 mv1 = motionVec.clone().translate(d1);
-            Vector3 mv2 = motionVec.clone().translate(d2);
-            Vector3 mv3 = motionVec.clone().translate(d3);
-            Vector3 mv4 = motionVec.clone().translate(d4);
+            final Vector3 motionVec = new Vector3(x1 + this.motionX, y1 + this.motionY, z1 + this.motionZ);
+            final Vector3 d1 = new Vector3(y1 * 0.1D, -x1 * 0.1D, z1 * 0.1D).rotate(315 - this.rotationYaw, motionVec);
+            final Vector3 d2 = new Vector3(x1 * 0.1D, -z1 * 0.1D, y1 * 0.1D).rotate(315 - this.rotationYaw, motionVec);
+            final Vector3 d3 = new Vector3(-y1 * 0.1D, x1 * 0.1D, z1 * 0.1D).rotate(315 - this.rotationYaw, motionVec);
+            final Vector3 d4 = new Vector3(x1 * 0.1D, z1 * 0.1D, -y1 * 0.1D).rotate(315 - this.rotationYaw, motionVec);
+            final Vector3 mv1 = motionVec.clone().translate(d1);
+            final Vector3 mv2 = motionVec.clone().translate(d2);
+            final Vector3 mv3 = motionVec.clone().translate(d3);
+            final Vector3 mv4 = motionVec.clone().translate(d4);
             // T3 - Four flameballs which spread
             makeFlame(x2 + d1.x, y2 + d1.y, z2 + d1.z, mv1, this.getLaunched());
             makeFlame(x2 + d2.x, y2 + d2.y, z2 + d2.z, mv2, this.getLaunched());
@@ -219,9 +219,9 @@ public class EntityTier3Rocket extends EntityTieredRocket {
             return;
         }
 
-        double x1 = motionVec.x;
-        double y1 = motionVec.y;
-        double z1 = motionVec.z;
+        final double x1 = motionVec.x;
+        final double y1 = motionVec.y;
+        final double z1 = motionVec.z;
         GalacticraftCore.proxy.spawnParticle(
                 "launchFlameIdle",
                 new Vector3(x2 + 0.4 - this.rand.nextDouble() / 10, y2, z2 + 0.4 - this.rand.nextDouble() / 10),
@@ -348,7 +348,7 @@ public class EntityTier3Rocket extends EntityTieredRocket {
     @Override
     public List<ItemStack> getItemsDropped(List<ItemStack> droppedItems) {
         super.getItemsDropped(droppedItems);
-        ItemStack rocket = new ItemStack(AsteroidsItems.tier3Rocket, 1, this.rocketType.getIndex());
+        final ItemStack rocket = new ItemStack(AsteroidsItems.tier3Rocket, 1, this.rocketType.getIndex());
         rocket.setTagCompound(new NBTTagCompound());
         rocket.getTagCompound().setInteger("RocketFuel", this.fuelTank.getFluidAmount());
         droppedItems.add(rocket);

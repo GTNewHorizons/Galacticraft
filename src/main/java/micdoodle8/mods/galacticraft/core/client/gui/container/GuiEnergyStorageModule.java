@@ -17,7 +17,7 @@ public class GuiEnergyStorageModule extends GuiContainer {
     private static final ResourceLocation batteryBoxTexture =
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/energyStorageModule.png");
 
-    private TileEntityEnergyStorageModule tileEntity;
+    private final TileEntityEnergyStorageModule tileEntity;
 
     public GuiEnergyStorageModule(InventoryPlayer par1InventoryPlayer, TileEntityEnergyStorageModule batteryBox) {
         super(new ContainerEnergyStorageModule(par1InventoryPlayer, batteryBox));
@@ -61,12 +61,13 @@ public class GuiEnergyStorageModule extends GuiContainer {
         this.mc.renderEngine.bindTexture(GuiEnergyStorageModule.batteryBoxTexture);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        int containerWidth = (this.width - this.xSize) / 2;
-        int containerHeight = (this.height - this.ySize) / 2;
+        final int containerWidth = (this.width - this.xSize) / 2;
+        final int containerHeight = (this.height - this.ySize) / 2;
         // Background energy bar
         this.drawTexturedModalRect(containerWidth, containerHeight, 0, 0, this.xSize, this.ySize);
         // Foreground energy bar
-        int scale = (int) ((this.tileEntity.getEnergyStoredGC() + 49) / this.tileEntity.getMaxEnergyStoredGC() * 72);
+        final int scale =
+                (int) ((this.tileEntity.getEnergyStoredGC() + 49) / this.tileEntity.getMaxEnergyStoredGC() * 72);
         this.drawTexturedModalRect(containerWidth + 87, containerHeight + 52, 176, 0, scale, 3);
     }
 }

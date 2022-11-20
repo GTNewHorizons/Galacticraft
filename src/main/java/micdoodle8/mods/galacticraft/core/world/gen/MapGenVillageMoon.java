@@ -17,7 +17,7 @@ public class MapGenVillageMoon extends MapGenStructure {
     static {
         try {
             MapGenVillageMoon.initiateStructures();
-        } catch (Throwable e) {
+        } catch (final Throwable e) {
 
         }
     }

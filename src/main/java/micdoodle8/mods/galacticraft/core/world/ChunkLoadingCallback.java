@@ -40,14 +40,14 @@ public class ChunkLoadingCallback implements LoadingCallback {
 
     @Override
     public void ticketsLoaded(List<Ticket> tickets, World world) {
-        for (Ticket ticket : tickets) {
-            NBTTagCompound nbt = ticket.getModData();
+        for (final Ticket ticket : tickets) {
+            final NBTTagCompound nbt = ticket.getModData();
 
             if (nbt != null) {
-                int tileX = nbt.getInteger("ChunkLoaderTileX");
-                int tileY = nbt.getInteger("ChunkLoaderTileY");
-                int tileZ = nbt.getInteger("ChunkLoaderTileZ");
-                TileEntity tile = world.getTileEntity(tileX, tileY, tileZ);
+                final int tileX = nbt.getInteger("ChunkLoaderTileX");
+                final int tileY = nbt.getInteger("ChunkLoaderTileY");
+                final int tileZ = nbt.getInteger("ChunkLoaderTileZ");
+                final TileEntity tile = world.getTileEntity(tileX, tileY, tileZ);
 
                 if (tile instanceof IChunkLoader) {
                     ((IChunkLoader) tile).onTicketLoaded(ticket, false);
@@ -105,7 +105,7 @@ public class ChunkLoadingCallback implements LoadingCallback {
 
     public static void forceChunk(Ticket ticket, World world, int x, int y, int z, String playerName) {
         ChunkLoadingCallback.addToList(world, x, y, z, playerName);
-        ChunkCoordIntPair chunkPos = new ChunkCoordIntPair(x >> 4, z >> 4);
+        final ChunkCoordIntPair chunkPos = new ChunkCoordIntPair(x >> 4, z >> 4);
         ForgeChunkManager.forceChunk(ticket, chunkPos);
         //
         // TileEntity tile = world.getTileEntity(x, y, z);
@@ -129,17 +129,17 @@ public class ChunkLoadingCallback implements LoadingCallback {
     }
 
     public static void save(WorldServer world) {
-        File saveDir = ChunkLoadingCallback.getSaveDir();
+        final File saveDir = ChunkLoadingCallback.getSaveDir();
 
         if (saveDir != null) {
-            File saveFile = new File(saveDir, "chunkloaders.dat");
+            final File saveFile = new File(saveDir, "chunkloaders.dat");
 
             if (!saveFile.exists()) {
                 try {
                     if (!saveFile.createNewFile()) {
                         GCLog.severe("Could not create chunk loader data file: " + saveFile.getAbsolutePath());
                     }
-                } catch (IOException e) {
+                } catch (final IOException e) {
                     GCLog.severe("Could not create chunk loader data file: " + saveFile.getAbsolutePath());
                     e.printStackTrace();
                 }
@@ -148,38 +148,38 @@ public class ChunkLoadingCallback implements LoadingCallback {
             FileOutputStream fos = null;
             try {
                 fos = new FileOutputStream(saveFile);
-            } catch (FileNotFoundException e) {
+            } catch (final FileNotFoundException e) {
                 e.printStackTrace();
             }
             if (fos != null) {
-                DataOutputStream dataStream = new DataOutputStream(fos);
+                final DataOutputStream dataStream = new DataOutputStream(fos);
                 try {
                     dataStream.writeInt(ChunkLoadingCallback.chunkLoaderList.size());
 
-                    for (Entry<String, HashMap<Integer, HashSet<ChunkCoordinates>>> playerEntry :
+                    for (final Entry<String, HashMap<Integer, HashSet<ChunkCoordinates>>> playerEntry :
                             ChunkLoadingCallback.chunkLoaderList.entrySet()) {
                         dataStream.writeUTF(playerEntry.getKey());
                         dataStream.writeInt(playerEntry.getValue().size());
 
-                        for (Entry<Integer, HashSet<ChunkCoordinates>> dimensionEntry :
+                        for (final Entry<Integer, HashSet<ChunkCoordinates>> dimensionEntry :
                                 playerEntry.getValue().entrySet()) {
                             dataStream.writeInt(dimensionEntry.getKey());
                             dataStream.writeInt(dimensionEntry.getValue().size());
 
-                            for (ChunkCoordinates coords : dimensionEntry.getValue()) {
+                            for (final ChunkCoordinates coords : dimensionEntry.getValue()) {
                                 dataStream.writeInt(coords.posX);
                                 dataStream.writeInt(coords.posY);
                                 dataStream.writeInt(coords.posZ);
                             }
                         }
                     }
-                } catch (IOException e) {
+                } catch (final IOException e) {
                     e.printStackTrace();
                 }
                 try {
                     dataStream.close();
                     fos.close();
-                } catch (IOException e) {
+                } catch (final IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -188,7 +188,7 @@ public class ChunkLoadingCallback implements LoadingCallback {
 
     private static File getSaveDir() {
         if (DimensionManager.getWorld(0) != null) {
-            File saveDir = new File(DimensionManager.getCurrentSaveRootDirectory(), "galacticraft");
+            final File saveDir = new File(DimensionManager.getCurrentSaveRootDirectory(), "galacticraft");
 
             if (!saveDir.exists()) {
                 if (!saveDir.mkdirs()) {
@@ -210,7 +210,7 @@ public class ChunkLoadingCallback implements LoadingCallback {
         DataInputStream dataStream = null;
 
         try {
-            File saveDir = ChunkLoadingCallback.getSaveDir();
+            final File saveDir = ChunkLoadingCallback.getSaveDir();
 
             if (saveDir != null) {
                 if (!saveDir.exists()) {
@@ -219,25 +219,25 @@ public class ChunkLoadingCallback implements LoadingCallback {
                     }
                 }
 
-                File saveFile = new File(saveDir, "chunkloaders.dat");
+                final File saveFile = new File(saveDir, "chunkloaders.dat");
 
                 if (saveFile.exists()) {
                     dataStream = new DataInputStream(new FileInputStream(saveFile));
 
-                    int playerCount = dataStream.readInt();
+                    final int playerCount = dataStream.readInt();
 
                     for (int l = 0; l < playerCount; l++) {
-                        String ownerName = dataStream.readUTF();
+                        final String ownerName = dataStream.readUTF();
 
-                        int mapSize = dataStream.readInt();
-                        HashMap<Integer, HashSet<ChunkCoordinates>> dimensionMap =
+                        final int mapSize = dataStream.readInt();
+                        final HashMap<Integer, HashSet<ChunkCoordinates>> dimensionMap =
                                 new HashMap<Integer, HashSet<ChunkCoordinates>>();
 
                         for (int i = 0; i < mapSize; i++) {
-                            int dimensionID = dataStream.readInt();
-                            HashSet<ChunkCoordinates> coords = new HashSet<ChunkCoordinates>();
+                            final int dimensionID = dataStream.readInt();
+                            final HashSet<ChunkCoordinates> coords = new HashSet<ChunkCoordinates>();
                             dimensionMap.put(dimensionID, coords);
-                            int coordSetSize = dataStream.readInt();
+                            final int coordSetSize = dataStream.readInt();
 
                             for (int j = 0; j < coordSetSize; j++) {
                                 coords.add(new ChunkCoordinates(
@@ -251,13 +251,13 @@ public class ChunkLoadingCallback implements LoadingCallback {
                     dataStream.close();
                 }
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
 
             if (dataStream != null) {
                 try {
                     dataStream.close();
-                } catch (IOException e1) {
+                } catch (final IOException e1) {
                     e1.printStackTrace();
                 }
             }
@@ -267,12 +267,12 @@ public class ChunkLoadingCallback implements LoadingCallback {
     }
 
     public static void onPlayerLogin(EntityPlayer player) {
-        for (Entry<String, HashMap<Integer, HashSet<ChunkCoordinates>>> playerEntry :
+        for (final Entry<String, HashMap<Integer, HashSet<ChunkCoordinates>>> playerEntry :
                 ChunkLoadingCallback.chunkLoaderList.entrySet()) {
             if (player.getGameProfile().getName().equals(playerEntry.getKey())) {
-                for (Entry<Integer, HashSet<ChunkCoordinates>> dimensionEntry :
+                for (final Entry<Integer, HashSet<ChunkCoordinates>> dimensionEntry :
                         playerEntry.getValue().entrySet()) {
-                    int dimID = dimensionEntry.getKey();
+                    final int dimID = dimensionEntry.getKey();
 
                     if (ChunkLoadingCallback.loadOnLogin) {
                         MinecraftServer.getServer().worldServerForDimension(dimID);

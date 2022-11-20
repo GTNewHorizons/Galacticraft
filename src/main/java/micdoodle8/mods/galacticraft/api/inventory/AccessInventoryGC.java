@@ -22,12 +22,12 @@ public class AccessInventoryGC {
                 extendedInventoryField = playerStatsClass.getField("extendedInventory");
             }
 
-            Object stats = getMethod.invoke(null, player);
+            final Object stats = getMethod.invoke(null, player);
             if (stats == null) {
                 return null;
             }
             return (IInventoryGC) extendedInventoryField.get(stats);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 

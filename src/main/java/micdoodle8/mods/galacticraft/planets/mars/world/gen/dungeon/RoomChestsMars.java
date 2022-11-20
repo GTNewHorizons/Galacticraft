@@ -79,7 +79,7 @@ public class RoomChestsMars extends DungeonRoom {
         if (!this.chests.isEmpty()) {
             this.worldObj.setBlock(
                     this.chests.get(0).posX, this.chests.get(0).posY, this.chests.get(0).posZ, Blocks.chest, 0, 2);
-            TileEntityChest chest = (TileEntityChest) this.worldObj.getTileEntity(
+            final TileEntityChest chest = (TileEntityChest) this.worldObj.getTileEntity(
                     this.chests.get(0).posX, this.chests.get(0).posY, this.chests.get(0).posZ);
 
             if (chest != null) {
@@ -87,7 +87,7 @@ public class RoomChestsMars extends DungeonRoom {
                     chest.setInventorySlotContents(i, null);
                 }
 
-                ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
+                final ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
 
                 WeightedRandomChestContent.generateChestContents(rand, info.getItems(rand), chest, info.getCount(rand));
             }

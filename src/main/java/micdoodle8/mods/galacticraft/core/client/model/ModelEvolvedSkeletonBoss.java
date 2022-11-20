@@ -44,7 +44,7 @@ public class ModelEvolvedSkeletonBoss extends ModelBase {
         this.textureWidth = 128;
         this.textureHeight = 128;
 
-        float halfPI = (float) (Math.PI / 2.0);
+        final float halfPI = (float) (Math.PI / 2.0);
 
         this.upperHead = new ModelRenderer(this, 0, 16);
         this.upperHead.addBox(-4F, -8F, -6F, 8, 8, 8);

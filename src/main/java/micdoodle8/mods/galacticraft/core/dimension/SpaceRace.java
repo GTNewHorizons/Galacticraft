@@ -25,7 +25,7 @@ public class SpaceRace {
     private FlagData flagData;
     private Vector3 teamColor;
     private int ticksSpent;
-    private Map<CelestialBody, Integer> celestialBodyStatusList = new HashMap<CelestialBody, Integer>();
+    private final Map<CelestialBody, Integer> celestialBodyStatusList = new HashMap<CelestialBody, Integer>();
 
     public SpaceRace() {}
 
@@ -51,15 +51,15 @@ public class SpaceRace {
 
         NBTTagList tagList = nbt.getTagList("PlayerList", 10);
         for (int i = 0; i < tagList.tagCount(); i++) {
-            NBTTagCompound tagAt = tagList.getCompoundTagAt(i);
+            final NBTTagCompound tagAt = tagList.getCompoundTagAt(i);
             this.playerNames.add(tagAt.getString("PlayerName"));
         }
 
         tagList = nbt.getTagList("CelestialBodyList", 10);
         for (int i = 0; i < tagList.tagCount(); i++) {
-            NBTTagCompound tagAt = tagList.getCompoundTagAt(i);
+            final NBTTagCompound tagAt = tagList.getCompoundTagAt(i);
 
-            CelestialBody body =
+            final CelestialBody body =
                     GalaxyRegistry.getCelestialBodyFromUnlocalizedName(tagAt.getString("CelestialBodyName"));
 
             if (body != null) {
@@ -84,8 +84,8 @@ public class SpaceRace {
         nbt.setDouble("teamColorB", this.teamColor.z);
 
         NBTTagList tagList = new NBTTagList();
-        for (String player : this.playerNames) {
-            NBTTagCompound tagComp = new NBTTagCompound();
+        for (final String player : this.playerNames) {
+            final NBTTagCompound tagComp = new NBTTagCompound();
             tagComp.setString("PlayerName", player);
             tagList.appendTag(tagComp);
         }
@@ -93,8 +93,8 @@ public class SpaceRace {
         nbt.setTag("PlayerList", tagList);
 
         tagList = new NBTTagList();
-        for (Entry<CelestialBody, Integer> celestialBody : this.celestialBodyStatusList.entrySet()) {
-            NBTTagCompound tagComp = new NBTTagCompound();
+        for (final Entry<CelestialBody, Integer> celestialBody : this.celestialBodyStatusList.entrySet()) {
+            final NBTTagCompound tagComp = new NBTTagCompound();
             tagComp.setString("CelestialBodyName", celestialBody.getKey().getUnlocalizedName());
             tagComp.setInteger("TimeTaken", celestialBody.getValue());
             tagList.appendTag(tagComp);

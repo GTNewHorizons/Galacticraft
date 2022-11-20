@@ -46,7 +46,7 @@ public class EntityAIArrowAttack extends EntityAIBase {
      */
     @Override
     public boolean shouldExecute() {
-        EntityLivingBase entitylivingbase = this.entityHost.getAttackTarget();
+        final EntityLivingBase entitylivingbase = this.entityHost.getAttackTarget();
 
         if (entitylivingbase == null) {
             return false;
@@ -78,9 +78,9 @@ public class EntityAIArrowAttack extends EntityAIBase {
      */
     @Override
     public void updateTask() {
-        double d0 = this.entityHost.getDistanceSq(
+        final double d0 = this.entityHost.getDistanceSq(
                 this.attackTarget.posX, this.attackTarget.boundingBox.minY, this.attackTarget.posZ);
-        boolean flag = this.entityHost.getEntitySenses().canSee(this.attackTarget);
+        final boolean flag = this.entityHost.getEntitySenses().canSee(this.attackTarget);
 
         this.entityHost.getNavigator().tryMoveToEntityLiving(this.attackTarget, this.entityMoveSpeed);
 

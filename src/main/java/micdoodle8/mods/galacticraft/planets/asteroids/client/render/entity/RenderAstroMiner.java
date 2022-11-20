@@ -23,7 +23,7 @@ import org.lwjgl.opengl.GL12;
 public class RenderAstroMiner extends Render {
     private static final float LSIZE = 0.12F;
     private static final float RETRACTIONSPEED = 0.02F;
-    private RenderBlocks blockRenderer = new RenderBlocks();
+    private final RenderBlocks blockRenderer = new RenderBlocks();
     private float spin;
     private float lastPartTime;
 
@@ -67,7 +67,7 @@ public class RenderAstroMiner extends Render {
     public RenderAstroMiner() {
         this.shadowSize = 2F;
 
-        Random rand = new Random();
+        final Random rand = new Random();
         this.wobbleX = new Gradient(rand.nextLong(), 2, 1);
         this.wobbleX.amplitude = 0.5F;
         this.wobbleX.frequencyX = 0.025F;
@@ -95,15 +95,15 @@ public class RenderAstroMiner extends Render {
 
     @Override
     public void doRender(Entity entity, double x, double y, double z, float f, float partialTickTime) {
-        EntityAstroMiner astroMiner = (EntityAstroMiner) entity;
-        int ais = ((EntityAstroMiner) entity).AIstate;
-        boolean active = ais > EntityAstroMiner.AISTATE_ATBASE;
+        final EntityAstroMiner astroMiner = (EntityAstroMiner) entity;
+        final int ais = ((EntityAstroMiner) entity).AIstate;
+        final boolean active = ais > EntityAstroMiner.AISTATE_ATBASE;
 
-        float time = astroMiner.ticksExisted + partialTickTime;
-        float sinOfTheTime = (MathHelper.sin(time / 4) + 1F) / 4F + 0.5F;
-        float wx = active ? this.wobbleX.getNoise(time) + this.wobbleXX.getNoise(time) : 0F;
-        float wy = active ? this.wobbleY.getNoise(time) + this.wobbleYY.getNoise(time) : 0F;
-        float wz = active ? this.wobbleZ.getNoise(time) + this.wobbleZZ.getNoise(time) : 0F;
+        final float time = astroMiner.ticksExisted + partialTickTime;
+        final float sinOfTheTime = (MathHelper.sin(time / 4) + 1F) / 4F + 0.5F;
+        final float wx = active ? this.wobbleX.getNoise(time) + this.wobbleXX.getNoise(time) : 0F;
+        final float wy = active ? this.wobbleY.getNoise(time) + this.wobbleYY.getNoise(time) : 0F;
+        final float wz = active ? this.wobbleZ.getNoise(time) + this.wobbleZZ.getNoise(time) : 0F;
 
         float partTime = partialTickTime - lastPartTime;
         lastPartTime = partialTickTime;
@@ -185,8 +185,8 @@ public class RenderAstroMiner extends Render {
 
             renderLaserModel(astroMiner.retraction);
 
-            float lightMapSaveX = OpenGlHelper.lastBrightnessX;
-            float lightMapSaveY = OpenGlHelper.lastBrightnessY;
+            final float lightMapSaveX = OpenGlHelper.lastBrightnessX;
+            final float lightMapSaveY = OpenGlHelper.lastBrightnessY;
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240F, 240F);
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glColor4f(sinOfTheTime, sinOfTheTime, sinOfTheTime, 1.0F);
@@ -244,7 +244,7 @@ public class RenderAstroMiner extends Render {
                 GL11.glPushMatrix();
                 GL11.glTranslatef(
                         (float) (x - astroMiner.posX), (float) (y - astroMiner.posY), (float) (z - astroMiner.posZ));
-                for (Integer blockTime : new ArrayList<Integer>(astroMiner.laserTimes)) {
+                for (final Integer blockTime : new ArrayList<Integer>(astroMiner.laserTimes)) {
                     if (blockTime < astroMiner.ticksExisted - 19) {
                         removeCount++;
                     } else if (blockTime < astroMiner.ticksExisted - 3) {
@@ -255,7 +255,7 @@ public class RenderAstroMiner extends Render {
                     astroMiner.removeLaserBlocks(removeCount);
                 }
                 int count = 0;
-                for (BlockVec3 blockLaser : new ArrayList<BlockVec3>(astroMiner.laserBlocks)) {
+                for (final BlockVec3 blockLaser : new ArrayList<BlockVec3>(astroMiner.laserBlocks)) {
                     if (count < afterglowCount) {
                         int fade = astroMiner.ticksExisted - astroMiner.laserTimes.get(count) - 8;
                         if (fade < 0) {
@@ -321,8 +321,8 @@ public class RenderAstroMiner extends Render {
         GL11.glTranslatef(blockLaser.x, blockLaser.y, blockLaser.z);
         final Tessellator tess = Tessellator.instance;
         GL11.glColor4f(1.0F, 0.7F, 0.7F, 0.016667F * (12 - level));
-        float cA = -0.01F;
-        float cB = 1.01F;
+        final float cA = -0.01F;
+        final float cB = 1.01F;
         tess.startDrawingQuads();
         tess.addVertexWithUV(cA, cB, cA, 0D, 1D);
         tess.addVertexWithUV(cB, cB, cA, 1D, 1D);
@@ -368,8 +368,8 @@ public class RenderAstroMiner extends Render {
         GL11.glTranslatef(blockLaser.x, blockLaser.y, blockLaser.z);
         final Tessellator tess = Tessellator.instance;
         GL11.glColor4f(1.0F, 0.7F, 0.7F, 0.2F);
-        float cA = -0.01F;
-        float cB = 1.01F;
+        final float cA = -0.01F;
+        final float cB = 1.01F;
         tess.startDrawingQuads();
         tess.addVertexWithUV(cA, cB, cA, 0D, 1D);
         tess.addVertexWithUV(cB, cB, cA, 1D, 1D);
@@ -408,10 +408,10 @@ public class RenderAstroMiner extends Render {
         tess.draw();
 
         GL11.glColor4f(1.0F, 0.79F, 0.79F, 0.17F);
-        float bb = 1.7F;
-        float cc = 0.4F;
-        float radiansYaw = entity.rotationYaw * 0.017453292F;
-        float radiansPitch = entity.rotationPitch * 0.017453292F / 4F;
+        final float bb = 1.7F;
+        final float cc = 0.4F;
+        final float radiansYaw = entity.rotationYaw * 0.017453292F;
+        final float radiansPitch = entity.rotationPitch * 0.017453292F / 4F;
         float mainLaserX = bb * MathHelper.sin(radiansYaw) * MathHelper.cos(radiansPitch);
         float mainLaserY = cc + bb * MathHelper.sin(radiansPitch);
         float mainLaserZ = bb * MathHelper.cos(radiansYaw) * MathHelper.cos(radiansPitch);
@@ -420,12 +420,12 @@ public class RenderAstroMiner extends Render {
         mainLaserY += entity.posY - blockLaser.y;
         mainLaserZ += entity.posZ - blockLaser.z;
 
-        float xD = mainLaserX - 0.5F;
-        float yD = mainLaserY - 0.5F;
-        float zD = mainLaserZ - 0.5F;
-        float xDa = Math.abs(xD);
-        float yDa = Math.abs(yD);
-        float zDa = Math.abs(zD);
+        final float xD = mainLaserX - 0.5F;
+        final float yD = mainLaserY - 0.5F;
+        final float zD = mainLaserZ - 0.5F;
+        final float xDa = Math.abs(xD);
+        final float yDa = Math.abs(yD);
+        final float zDa = Math.abs(zD);
 
         float xx, yy, zz;
 

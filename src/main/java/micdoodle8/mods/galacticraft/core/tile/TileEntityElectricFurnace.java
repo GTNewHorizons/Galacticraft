@@ -65,9 +65,9 @@ public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventor
     @Override
     public void updateEntity() {
         if (!this.initialised) {
-            int metadata = this.getBlockMetadata();
+            final int metadata = this.getBlockMetadata();
             // for version update compatibility
-            Block b = this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord);
+            final Block b = this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord);
             if (b == GCBlocks.machineBase) {
                 this.worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, GCBlocks.machineTiered, 4, 2);
             } else if (metadata >= 8) {
@@ -136,12 +136,12 @@ public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventor
      */
     public void smeltItem() {
         if (this.canProcess()) {
-            ItemStack resultItemStack = FurnaceRecipes.smelting().getSmeltingResult(this.containingItems[1]);
+            final ItemStack resultItemStack = FurnaceRecipes.smelting().getSmeltingResult(this.containingItems[1]);
 
             if (this.containingItems[2] == null) {
                 this.containingItems[2] = resultItemStack.copy();
                 if (this.tierGC > 1) {
-                    String nameSmelted =
+                    final String nameSmelted =
                             this.containingItems[1].getUnlocalizedName().toLowerCase();
                     if (resultItemStack.getUnlocalizedName().toLowerCase().contains("ingot")
                             && (nameSmelted.contains("ore")
@@ -155,7 +155,7 @@ public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventor
             } else if (this.containingItems[2].isItemEqual(resultItemStack)) {
                 this.containingItems[2].stackSize += resultItemStack.stackSize;
                 if (this.tierGC > 1) {
-                    String nameSmelted =
+                    final String nameSmelted =
                             this.containingItems[1].getUnlocalizedName().toLowerCase();
                     if (resultItemStack.getUnlocalizedName().toLowerCase().contains("ingot")
                             && (nameSmelted.contains("ore")

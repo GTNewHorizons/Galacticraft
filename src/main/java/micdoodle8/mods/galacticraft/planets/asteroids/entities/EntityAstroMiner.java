@@ -85,8 +85,8 @@ public class EntityAstroMiner extends Entity
     public static final int FAIL_RETURNPATHBLOCKED = 5;
     public static final int FAIL_ANOTHERWASLINKED = 8;
 
-    private boolean TEMPDEBUG = false;
-    private boolean TEMPFAST = false;
+    private final boolean TEMPDEBUG = false;
+    private final boolean TEMPFAST = false;
 
     public ItemStack[] cargoItems;
 
@@ -102,8 +102,8 @@ public class EntityAstroMiner extends Entity
     private BlockVec3 posTarget;
     private BlockVec3 posBase;
     private BlockVec3 waypointBase;
-    private LinkedList<BlockVec3> wayPoints = new LinkedList();
-    private LinkedList<BlockVec3> minePoints = new LinkedList();
+    private final LinkedList<BlockVec3> wayPoints = new LinkedList();
+    private final LinkedList<BlockVec3> minePoints = new LinkedList();
     private BlockVec3 minePointCurrent = null;
     private int baseFacing;
     public int facing;
@@ -317,9 +317,9 @@ public class EntityAstroMiner extends Entity
     }
 
     private boolean emptyInventory(TileEntityMinerBase minerBase) {
-        boolean doneOne = false;
+        final boolean doneOne = false;
         for (int i = 0; i < this.cargoItems.length; i++) {
-            ItemStack stack = this.cargoItems[i];
+            final ItemStack stack = this.cargoItems[i];
             if (stack == null) {
                 continue;
             }
@@ -327,7 +327,7 @@ public class EntityAstroMiner extends Entity
                 this.cargoItems[i] = null;
                 continue;
             }
-            int sizeprev = stack.stackSize;
+            final int sizeprev = stack.stackSize;
             minerBase.addToInventory(stack);
             if (stack == null || stack.stackSize == 0) {
                 this.cargoItems[i] = null;
@@ -371,9 +371,9 @@ public class EntityAstroMiner extends Entity
                     this.posY = this.minecartY;
                     this.posZ = this.minecartZ;
                 } else {
-                    double diffX = this.minecartX - this.posX;
-                    double diffY = this.minecartY - this.posY;
-                    double diffZ = this.minecartZ - this.posZ;
+                    final double diffX = this.minecartX - this.posX;
+                    final double diffY = this.minecartY - this.posY;
+                    final double diffZ = this.minecartZ - this.posZ;
                     if (Math.abs(diffX) > 1.0D || Math.abs(diffY) > 1.0D || Math.abs(diffZ) > 1.0D) {
                         this.posX = this.minecartX;
                         this.posY = this.minecartY;
@@ -416,12 +416,12 @@ public class EntityAstroMiner extends Entity
         if (this.ticksExisted % 10 == 0 || this.flagLink) {
             this.flagLink = false;
             this.checkPlayer();
-            TileEntity tileEntity = posBase.getTileEntity(this.worldObj);
+            final TileEntity tileEntity = posBase.getTileEntity(this.worldObj);
             if (tileEntity instanceof TileEntityMinerBase
                     && ((TileEntityMinerBase) tileEntity).isMaster
                     && !tileEntity.isInvalid()) {
                 // Create link with base on loading the EntityAstroMiner
-                UUID linker = ((TileEntityMinerBase) tileEntity).getLinkedMiner();
+                final UUID linker = ((TileEntityMinerBase) tileEntity).getLinkedMiner();
                 if (!this.getUniqueID().equals(linker)) {
                     if (linker == null) {
                         ((TileEntityMinerBase) tileEntity).linkMiner(this);
@@ -595,11 +595,11 @@ public class EntityAstroMiner extends Entity
         this.targetPitch = buffer.readFloat();
         this.targetYaw = buffer.readFloat();
         this.mineCount = buffer.readInt();
-        int x = buffer.readInt();
-        int y = buffer.readInt();
-        int z = buffer.readInt();
+        final int x = buffer.readInt();
+        final int y = buffer.readInt();
+        final int z = buffer.readInt();
         if (this.worldObj.blockExists(x, y, z)) {
-            TileEntity tile = this.worldObj.getTileEntity(x, y, z);
+            final TileEntity tile = this.worldObj.getTileEntity(x, y, z);
             if (tile instanceof TileEntityMinerBase) {
                 ((TileEntityMinerBase) tile).linkedMiner = this;
                 ((TileEntityMinerBase) tile).linkCountDown = 20;
@@ -639,7 +639,7 @@ public class EntityAstroMiner extends Entity
         if (this.rotationPitch < -45F) {
             return 0;
         }
-        float rY = this.rotationYaw % 360F;
+        final float rY = this.rotationYaw % 360F;
         // rotationYaw 5 90 4 270 2 180 3 0
         if (rY < 45F || rY > 315F) {
             return 3;
@@ -654,7 +654,7 @@ public class EntityAstroMiner extends Entity
     }
 
     private void atBase() {
-        TileEntity tileEntity = posBase.getTileEntity(this.worldObj);
+        final TileEntity tileEntity = posBase.getTileEntity(this.worldObj);
 
         if (!(tileEntity instanceof TileEntityMinerBase)
                 || tileEntity.isInvalid()
@@ -663,7 +663,7 @@ public class EntityAstroMiner extends Entity
             return;
         }
 
-        TileEntityMinerBase minerBase = (TileEntityMinerBase) tileEntity;
+        final TileEntityMinerBase minerBase = (TileEntityMinerBase) tileEntity;
         // If it's successfully reached its base, clear all fail messages except number
         // 6, which is that all mining
         // areas are finished (see below)
@@ -786,7 +786,7 @@ public class EntityAstroMiner extends Entity
             return;
         }
 
-        BlockVec3 inFront = new BlockVec3(
+        final BlockVec3 inFront = new BlockVec3(
                 MathHelper.floor_double(this.posX + 0.5D),
                 MathHelper.floor_double(this.posY + 1.5D),
                 MathHelper.floor_double(this.posZ + 0.5D));
@@ -894,7 +894,7 @@ public class EntityAstroMiner extends Entity
             this.mineCountDown--;
             return false;
         }
-        BlockVec3 inFront = new BlockVec3(
+        final BlockVec3 inFront = new BlockVec3(
                 MathHelper.floor_double(this.posX + 0.5D),
                 MathHelper.floor_double(this.posY + 1.5D),
                 MathHelper.floor_double(this.posZ + 0.5D));
@@ -915,9 +915,9 @@ public class EntityAstroMiner extends Entity
             return false;
         }
 
-        int x = inFront.x;
-        int y = inFront.y;
-        int z = inFront.z;
+        final int x = inFront.x;
+        final int y = inFront.y;
+        final int z = inFront.z;
 
         // Test not trying to mine own dock!
         if (y == this.waypointBase.y
@@ -1084,7 +1084,7 @@ public class EntityAstroMiner extends Entity
     }
 
     private boolean prepareMoveClient(int limit, int dist) {
-        BlockVec3 inFront = new BlockVec3(
+        final BlockVec3 inFront = new BlockVec3(
                 MathHelper.floor_double(this.posX + 0.5D),
                 MathHelper.floor_double(this.posY + 1.5D),
                 MathHelper.floor_double(this.posZ + 0.5D));
@@ -1102,9 +1102,9 @@ public class EntityAstroMiner extends Entity
             return false;
         }
 
-        int x = inFront.x;
-        int y = inFront.y;
-        int z = inFront.z;
+        final int x = inFront.x;
+        final int y = inFront.y;
+        final int z = inFront.z;
 
         boolean wayBarred = false;
         this.tryBlockLimit = limit;
@@ -1248,7 +1248,7 @@ public class EntityAstroMiner extends Entity
         // Check things to avoid in front of it (see static list for list) including
         // base type things
         // Can move through liquids including flowing lava
-        Block b = this.worldObj.getBlock(x, y, z);
+        final Block b = this.worldObj.getBlock(x, y, z);
         if (b.getMaterial() == Material.air) {
             return false;
         }
@@ -1276,7 +1276,7 @@ public class EntityAstroMiner extends Entity
                 blockingBlock.meta = this.worldObj.getBlockMetadata(x, y, z);
                 return true;
             }
-            int meta = this.worldObj.getBlockMetadata(x, y, z);
+            final int meta = this.worldObj.getBlockMetadata(x, y, z);
             if (b.getBlockHardness(this.worldObj, x, y, z) < 0) {
                 blockingBlock.block = b;
                 blockingBlock.meta = meta;
@@ -1296,7 +1296,7 @@ public class EntityAstroMiner extends Entity
         if (this.tryBlockLimit == 0) {
             return false;
         }
-        BlockEvent.BreakEvent event = ForgeHooks.onBlockBreakEvent(
+        final BlockEvent.BreakEvent event = ForgeHooks.onBlockBreakEvent(
                 this.worldObj, this.playerMP.theItemInWorldManager.getGameType(), this.playerMP, x, y, z);
         if (event.isCanceled()) {
             return true;
@@ -1304,7 +1304,8 @@ public class EntityAstroMiner extends Entity
 
         this.tryBlockLimit--;
 
-        ItemStack drops = gtFlag ? getGTDrops(this.worldObj, x, y, z, b) : getPickBlock(this.worldObj, x, y, z, b);
+        final ItemStack drops =
+                gtFlag ? getGTDrops(this.worldObj, x, y, z, b) : getPickBlock(this.worldObj, x, y, z, b);
         if (drops != null && !this.addToInventory(drops)) {
             // drop itemstack if AstroMiner can't hold it
             dropStack(x, y, z, drops);
@@ -1315,23 +1316,23 @@ public class EntityAstroMiner extends Entity
     }
 
     private void dropStack(int x, int y, int z, ItemStack drops) {
-        float f = 0.7F;
-        double d0 = this.worldObj.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-        double d1 = this.worldObj.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-        double d2 = this.worldObj.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-        EntityItem entityitem = new EntityItem(this.worldObj, x + d0, y + d1, z + d2, drops);
+        final float f = 0.7F;
+        final double d0 = this.worldObj.rand.nextFloat() * f + (1.0F - f) * 0.5D;
+        final double d1 = this.worldObj.rand.nextFloat() * f + (1.0F - f) * 0.5D;
+        final double d2 = this.worldObj.rand.nextFloat() * f + (1.0F - f) * 0.5D;
+        final EntityItem entityitem = new EntityItem(this.worldObj, x + d0, y + d1, z + d2, drops);
         entityitem.delayBeforeCanPickup = 10;
         this.worldObj.spawnEntityInWorld(entityitem);
         this.inventoryDrops++;
     }
 
     private boolean gregTechCheck(Block b) {
-        Class clazz = CompatibilityManager.classGTOre;
+        final Class clazz = CompatibilityManager.classGTOre;
         return clazz != null && clazz.isInstance(b);
     }
 
     private ItemStack getGTDrops(World w, int x, int y, int z, Block b) {
-        ArrayList<ItemStack> array = b.getDrops(w, x, y, z, 0, 1);
+        final ArrayList<ItemStack> array = b.getDrops(w, x, y, z, 0, 1);
         if (array != null && array.size() > 0) {
             return array.get(0);
         }
@@ -1339,13 +1340,13 @@ public class EntityAstroMiner extends Entity
     }
 
     private boolean tryBlockClient(int x, int y, int z) {
-        BlockVec3 bv = new BlockVec3(x, y, z);
+        final BlockVec3 bv = new BlockVec3(x, y, z);
         if (this.laserBlocks.contains(bv)) {
             return false;
         }
 
         // Add minable blocks to the laser fx list
-        Block b = this.worldObj.getBlock(x, y, z);
+        final Block b = this.worldObj.getBlock(x, y, z);
         if (b.getMaterial() == Material.air) {
             return false;
         }
@@ -1361,7 +1362,7 @@ public class EntityAstroMiner extends Entity
         if (b instanceof IPlantable) {
             return true;
         }
-        int meta = this.worldObj.getBlockMetadata(x, y, z);
+        final int meta = this.worldObj.getBlockMetadata(x, y, z);
         if (b.hasTileEntity(meta) || b.getBlockHardness(this.worldObj, x, y, z) < 0) {
             return true;
         }
@@ -1394,7 +1395,7 @@ public class EntityAstroMiner extends Entity
     private boolean addToInventory(ItemStack itemstack) {
         boolean flag1 = false;
         int k = 0;
-        int invSize = this.getSizeInventory();
+        final int invSize = this.getSizeInventory();
 
         ItemStack itemstack1;
 
@@ -1406,7 +1407,7 @@ public class EntityAstroMiner extends Entity
                         && itemstack1.getItem() == itemstack.getItem()
                         && (!itemstack.getHasSubtypes() || itemstack.getItemDamage() == itemstack1.getItemDamage())
                         && ItemStack.areItemStackTagsEqual(itemstack, itemstack1)) {
-                    int l = itemstack1.stackSize + itemstack.stackSize;
+                    final int l = itemstack1.stackSize + itemstack.stackSize;
 
                     if (l <= itemstack.getMaxStackSize()) {
                         itemstack.stackSize = 0;
@@ -1783,7 +1784,7 @@ public class EntityAstroMiner extends Entity
         }
 
         if (!this.worldObj.isRemote) {
-            Entity e = par1DamageSource.getEntity();
+            final Entity e = par1DamageSource.getEntity();
 
             // If creative mode player, kill the entity (even if player owner is offline)
             // and drop nothing
@@ -1907,7 +1908,7 @@ public class EntityAstroMiner extends Entity
     @Override
     public void setDead() {
         if (!this.worldObj.isRemote && this.playerMP != null && !this.spawnedInCreative) {
-            int astroCount = GCPlayerStats.get(this.playerMP).astroMinerCount;
+            final int astroCount = GCPlayerStats.get(this.playerMP).astroMinerCount;
             if (astroCount > 0) {
                 GCPlayerStats.get(this.playerMP).astroMinerCount--;
             }
@@ -1915,7 +1916,7 @@ public class EntityAstroMiner extends Entity
 
         super.setDead();
         if (posBase != null) {
-            TileEntity tileEntity = posBase.getTileEntity(this.worldObj);
+            final TileEntity tileEntity = posBase.getTileEntity(this.worldObj);
             if (tileEntity instanceof TileEntityMinerBase) {
                 ((TileEntityMinerBase) tileEntity).unlinkMiner();
             }
@@ -1932,7 +1933,7 @@ public class EntityAstroMiner extends Entity
     }
 
     public List<ItemStack> getItemsDropped(List<ItemStack> droppedItems) {
-        ItemStack rocket = new ItemStack(AsteroidsItems.astroMiner, 1, 0);
+        final ItemStack rocket = new ItemStack(AsteroidsItems.astroMiner, 1, 0);
         droppedItems.add(rocket);
         for (int i = 0; i < this.cargoItems.length; i++) {
             if (this.cargoItems[i] != null) {
@@ -1949,7 +1950,7 @@ public class EntityAstroMiner extends Entity
         }
 
         for (final ItemStack item : this.getItemsDropped(new ArrayList<ItemStack>())) {
-            EntityItem entityItem = this.entityDropItem(item, 0);
+            final EntityItem entityItem = this.entityDropItem(item, 0);
 
             if (item.hasTagCompound()) {
                 entityItem.getEntityItem().setTagCompound((NBTTagCompound)
@@ -1989,7 +1990,7 @@ public class EntityAstroMiner extends Entity
         str[1] = "x: " + data[0];
         str[2] = "y: " + data[1];
         str[3] = "z: " + data[2];
-        int energyPerCent = data[3] / 120;
+        final int energyPerCent = data[3] / 120;
         str[4] = GCCoreUtil.translate("gui.energyStorage.desc.1") + ": " + energyPerCent + "%";
         switch (data[4]) {
             case EntityAstroMiner.AISTATE_STUCK:
@@ -2065,7 +2066,7 @@ public class EntityAstroMiner extends Entity
             this.wayPoints.clear();
             final NBTTagList wpList = nbt.getTagList("WayPoints", 10);
             for (int j = 0; j < wpList.tagCount(); j++) {
-                NBTTagCompound bvTag = wpList.getCompoundTagAt(j);
+                final NBTTagCompound bvTag = wpList.getCompoundTagAt(j);
                 this.wayPoints.add(BlockVec3.readFromNBT(bvTag));
             }
         }
@@ -2073,7 +2074,7 @@ public class EntityAstroMiner extends Entity
             this.minePoints.clear();
             final NBTTagList mpList = nbt.getTagList("MinePoints", 10);
             for (int j = 0; j < mpList.tagCount(); j++) {
-                NBTTagCompound bvTag = mpList.getCompoundTagAt(j);
+                final NBTTagCompound bvTag = mpList.getCompoundTagAt(j);
                 this.minePoints.add(BlockVec3.readFromNBT(bvTag));
             }
         }
@@ -2138,15 +2139,15 @@ public class EntityAstroMiner extends Entity
         nbt.setInteger("AIState", this.AIstate);
         nbt.setInteger("Facing", this.facingAI);
         if (this.wayPoints.size() > 0) {
-            NBTTagList wpList = new NBTTagList();
-            for (BlockVec3 element : this.wayPoints) {
+            final NBTTagList wpList = new NBTTagList();
+            for (final BlockVec3 element : this.wayPoints) {
                 wpList.appendTag(element.writeToNBT(new NBTTagCompound()));
             }
             nbt.setTag("WayPoints", wpList);
         }
         if (this.minePoints.size() > 0) {
-            NBTTagList mpList = new NBTTagList();
-            for (BlockVec3 element : this.minePoints) {
+            final NBTTagList mpList = new NBTTagList();
+            for (final BlockVec3 element : this.minePoints) {
                 mpList.appendTag(element.writeToNBT(new NBTTagCompound()));
             }
             nbt.setTag("MinePoints", mpList);

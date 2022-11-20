@@ -36,22 +36,22 @@ public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlo
     }
 
     public int getLightValue(IBlockAccess world, int x, int y, int z) {
-        Block block = world.getBlock(x, y, z);
+        final Block block = world.getBlock(x, y, z);
         if (block != this) {
             return block.getLightValue(world, x, y, z);
         }
         /**
          * Gets the light value of the specified block coords. Args: x, y, z
          */
-        int redstone = 0;
-        World w = VersionUtil.getWorld(world);
+        final int redstone = 0;
+        final World w = VersionUtil.getWorld(world);
         return RedstoneUtil.isBlockReceivingRedstone(w, x, y, z) ? 0 : this.getLightValue();
     }
 
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int x, int y, int z) {
-        double boundsMin = 0.2D;
-        double boundsMax = 0.8D;
+        final double boundsMin = 0.2D;
+        final double boundsMax = 0.8D;
         return AxisAlignedBB.getBoundingBox(
                 x + boundsMin, y + boundsMin, z + boundsMin, x + boundsMax, y + boundsMax, z + boundsMax);
     }
@@ -73,7 +73,7 @@ public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlo
 
     @Override
     public boolean canPlaceBlockAt(World par1World, int x, int y, int z) {
-        BlockVec3 thisvec = new BlockVec3(x, y, z);
+        final BlockVec3 thisvec = new BlockVec3(x, y, z);
         for (int i = 0; i < 6; i++) {
             if (thisvec.blockOnSideHasSolidFace(par1World, i)) {
                 return true;
@@ -85,7 +85,7 @@ public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlo
     @Override
     public int onBlockPlaced(
             World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metaOld) {
-        BlockVec3 thisvec = new BlockVec3(x, y, z);
+        final BlockVec3 thisvec = new BlockVec3(x, y, z);
 
         if (thisvec.blockOnSideHasSolidFace(world, side ^ 1)) {
             return side ^ 1;
@@ -103,7 +103,7 @@ public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlo
     public void onNeighborBlockChange(World par1World, int x, int y, int z, Block par5) {
         final int side = par1World.getBlockMetadata(x, y, z);
 
-        BlockVec3 thisvec = new BlockVec3(x, y, z);
+        final BlockVec3 thisvec = new BlockVec3(x, y, z);
 
         if (thisvec.blockOnSideHasSolidFace(par1World, side)) {
             return;
@@ -120,7 +120,7 @@ public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlo
     @Override
     public MovingObjectPosition collisionRayTrace(World par1World, int x, int y, int z, Vec3 par5Vec3, Vec3 par6Vec3) {
         final int var7 = par1World.getBlockMetadata(x, y, z);
-        float var8 = 0.3F;
+        final float var8 = 0.3F;
 
         if (var7 == 4) {
             this.setBlockBounds(0.0F, 0.2F, 0.5F - var8, var8 * 2.0F, 0.8F, 0.5F + var8);
@@ -143,7 +143,7 @@ public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlo
     public boolean onUseWrench(
             World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
-            TileEntity tile = world.getTileEntity(x, y, z);
+            final TileEntity tile = world.getTileEntity(x, y, z);
             if (tile instanceof TileEntityArclamp) {
                 ((TileEntityArclamp) tile).facingChanged();
             }

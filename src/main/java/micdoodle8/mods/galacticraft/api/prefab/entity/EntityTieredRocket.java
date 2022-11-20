@@ -39,7 +39,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
     public EnumRocketType rocketType;
     public float rumble;
     public int launchCooldown;
-    private ArrayList<BlockVec3> preGenList = new ArrayList();
+    private final ArrayList<BlockVec3> preGenList = new ArrayList();
     private Iterator<BlockVec3> preGenIterator = null;
     static boolean preGenInProgress = false;
 
@@ -136,8 +136,8 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
         // won't be pre-generated but that's
         // probably OK
         if (this.destinationFrequency == -1 && !EntityTieredRocket.preGenInProgress) {
-            ArrayList<Integer> toPreGen = new ArrayList();
-            for (Planet planet : GalaxyRegistry.getRegisteredPlanets().values()) {
+            final ArrayList<Integer> toPreGen = new ArrayList();
+            for (final Planet planet : GalaxyRegistry.getRegisteredPlanets().values()) {
                 if (planet.getDimensionID() == this.dimension) {
                     continue;
                 }
@@ -147,7 +147,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
             }
 
             if (toPreGen.size() > 0) {
-                for (Integer dimID : toPreGen) {
+                for (final Integer dimID : toPreGen) {
                     this.preGenList.add(new BlockVec3(cx, dimID, cz));
                     if (ConfigManagerCore.enableDebug) {
                         GCLog.info("Starting terrain pregen for dimension " + dimID + " at " + (cx * 16 + 8) + ", "
@@ -155,12 +155,12 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                     }
                 }
                 for (int r = 1; r < 12; r++) {
-                    int xmin = cx - r;
-                    int xmax = cx + r;
-                    int zmin = cz - r;
-                    int zmax = cz + r;
+                    final int xmin = cx - r;
+                    final int xmax = cx + r;
+                    final int zmin = cz - r;
+                    final int zmax = cz + r;
                     for (int i = -r; i < r; i++) {
-                        for (Integer dimID : toPreGen) {
+                        for (final Integer dimID : toPreGen) {
                             this.preGenList.add(new BlockVec3(xmin, dimID, cz + i));
                             this.preGenList.add(new BlockVec3(xmax, dimID, cz - i));
                             this.preGenList.add(new BlockVec3(cx - i, dimID, zmin));
@@ -182,7 +182,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
             if (this.riddenByEntity != null) {
                 if (this.ticks >= 40) {
                     if (!this.worldObj.isRemote) {
-                        Entity e = this.riddenByEntity;
+                        final Entity e = this.riddenByEntity;
                         e.mountEntity(null);
                         e.mountEntity(this);
                         if (ConfigManagerCore.enableDebug) {
@@ -210,7 +210,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
 
             if (this.preGenIterator != null) {
                 if (this.preGenIterator.hasNext()) {
-                    MinecraftServer mcserver = FMLCommonHandler.instance().getMinecraftServerInstance();
+                    final MinecraftServer mcserver = FMLCommonHandler.instance().getMinecraftServerInstance();
                     // mcserver can be null if client switches to a LAN server
                     if (mcserver != null) {
                         BlockVec3 coords = this.preGenIterator.next();
@@ -244,8 +244,8 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
             this.riddenByEntity.posX += rumbleAmount;
             this.riddenByEntity.posZ += rumbleAmount;
         }
-        boolean isIgnited = this.launchPhase == EnumLaunchPhase.IGNITED.ordinal();
-        boolean isLaunched = this.launchPhase == EnumLaunchPhase.LAUNCHED.ordinal();
+        final boolean isIgnited = this.launchPhase == EnumLaunchPhase.IGNITED.ordinal();
+        final boolean isLaunched = this.launchPhase == EnumLaunchPhase.LAUNCHED.ordinal();
 
         if (isIgnited || isLaunched) {
             this.performHurtAnimation();
@@ -282,7 +282,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
         list.add(this.rocketType != null ? this.rocketType.getIndex() : 0);
         super.getNetworkedData(list);
 
-        boolean sendPosUpdates =
+        final boolean sendPosUpdates =
                 this.ticks < 25 || this.launchPhase != EnumLaunchPhase.LAUNCHED.ordinal() || this.landing;
         list.add(sendPosUpdates);
 
@@ -307,7 +307,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
 
             if (this.targetVec != null) {
                 if (this.targetDimension != this.worldObj.provider.dimensionId) {
-                    WorldProvider targetDim = WorldUtil.getProviderForDimensionServer(this.targetDimension);
+                    final WorldProvider targetDim = WorldUtil.getProviderForDimensionServer(this.targetDimension);
                     if (targetDim != null && targetDim.worldObj instanceof WorldServer) {
                         boolean dimensionAllowed = this.targetDimension == ConfigManagerCore.idDimensionOverworld;
 
@@ -323,14 +323,14 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                         // config
                         if (this.targetDimension > 1 || this.targetDimension < -1) {
                             try {
-                                Class<?> marsConfig =
+                                final Class<?> marsConfig =
                                         Class.forName("micdoodle8.mods.galacticraft.planets.mars.ConfigManagerMars");
                                 if (marsConfig
                                         .getField("launchControllerAllDims")
                                         .getBoolean(null)) {
                                     dimensionAllowed = true;
                                 }
-                            } catch (Exception e) {
+                            } catch (final Exception e) {
                                 e.printStackTrace();
                             }
                         }
@@ -344,7 +344,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                                         false,
                                         this);
                             } else {
-                                Entity e = WorldUtil.transferEntityToDimension(
+                                final Entity e = WorldUtil.transferEntityToDimension(
                                         this, this.targetDimension, (WorldServer) targetDim.worldObj, false, null);
                                 if (e instanceof EntityAutoRocket) {
                                     int fromSky = 800;
@@ -417,10 +417,10 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
         // Not launch controlled
         if (!this.worldObj.isRemote) {
             if (this.riddenByEntity instanceof EntityPlayerMP) {
-                EntityPlayerMP player = (EntityPlayerMP) this.riddenByEntity;
+                final EntityPlayerMP player = (EntityPlayerMP) this.riddenByEntity;
 
                 this.onTeleport(player);
-                GCPlayerStats stats = GCPlayerStats.get(player);
+                final GCPlayerStats stats = GCPlayerStats.get(player);
                 WorldUtil.toCelestialSelection(player, stats, this.getRocketTier());
             }
 
@@ -468,7 +468,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                 GalacticraftCore.packetPipeline.sendTo(
                         new PacketSimple(EnumSimplePacket.C_RESET_THIRD_PERSON, new Object[] {}),
                         (EntityPlayerMP) par1EntityPlayer);
-                GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) par1EntityPlayer);
+                final GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) par1EntityPlayer);
                 stats.chatCooldown = 0;
                 par1EntityPlayer.mountEntity(null);
             }
@@ -479,7 +479,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                 GalacticraftCore.packetPipeline.sendTo(
                         new PacketSimple(EnumSimplePacket.C_DISPLAY_ROCKET_CONTROLS, new Object[] {}),
                         (EntityPlayerMP) par1EntityPlayer);
-                GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) par1EntityPlayer);
+                final GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) par1EntityPlayer);
                 stats.chatCooldown = 0;
                 par1EntityPlayer.mountEntity(this);
             }

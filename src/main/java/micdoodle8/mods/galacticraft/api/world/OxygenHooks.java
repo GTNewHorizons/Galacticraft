@@ -35,7 +35,7 @@ public class OxygenHooks {
                 combusionTestMethod = oxygenUtilClass.getDeclaredMethod("noAtmosphericCombustion", WorldProvider.class);
             }
             return (Boolean) combusionTestMethod.invoke(null, provider);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 
@@ -71,7 +71,7 @@ public class OxygenHooks {
                         "isAABBInBreathableAirBlock", World.class, AxisAlignedBB.class);
             }
             return (Boolean) breathableAirBlockMethod.invoke(null, world, bb);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 
@@ -98,7 +98,7 @@ public class OxygenHooks {
                         oxygenUtilClass.getDeclaredMethod("isAABBInBreathableAirBlock", EntityLivingBase.class);
             }
             return (Boolean) breathableAirBlockEntityMethod.invoke(null, entity);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 
@@ -130,7 +130,7 @@ public class OxygenHooks {
                         "checkTorchHasOxygen", World.class, Block.class, int.class, int.class, int.class);
             }
             return (Boolean) torchHasOxygenMethod.invoke(null, world, block, x, y, z);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 
@@ -157,7 +157,7 @@ public class OxygenHooks {
                         "inOxygenBubble", World.class, double.class, double.class, double.class);
             }
             return (Boolean) oxygenBubbleMethod.invoke(null, worldObj, avgX, avgY, avgZ);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 
@@ -180,7 +180,7 @@ public class OxygenHooks {
                 validOxygenSetupMethod = oxygenUtilClass.getDeclaredMethod("hasValidOxygenSetup", EntityPlayerMP.class);
             }
             return (Boolean) validOxygenSetupMethod.invoke(null, player);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 

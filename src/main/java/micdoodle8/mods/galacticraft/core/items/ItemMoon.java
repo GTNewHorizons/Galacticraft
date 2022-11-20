@@ -28,7 +28,7 @@ public class ItemMoon extends Item {
     public void registerIcons(IIconRegister iconRegister) {
         int i = 0;
 
-        for (String name : ItemMoon.names) {
+        for (final String name : ItemMoon.names) {
             this.icons[i++] = iconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX_MOON + name);
         }
     }

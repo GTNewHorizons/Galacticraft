@@ -31,12 +31,12 @@ public class OxygenPressureProtocol {
     static {
         for (final String s : ConfigManagerCore.sealableIDs) {
             try {
-                BlockTuple bt = ConfigManagerCore.stringToBlock(s, "External Sealable IDs", true);
+                final BlockTuple bt = ConfigManagerCore.stringToBlock(s, "External Sealable IDs", true);
                 if (bt == null) {
                     continue;
                 }
 
-                int meta = bt.meta;
+                final int meta = bt.meta;
 
                 if (OxygenPressureProtocol.nonPermeableBlocks.containsKey(bt.block)) {
                     final ArrayList<Integer> list = OxygenPressureProtocol.nonPermeableBlocks.get(bt.block);
@@ -60,7 +60,7 @@ public class OxygenPressureProtocol {
     public static void updateSealerStatus(TileEntityOxygenSealer head) {
         try {
             head.threadSeal = new ThreadFindSeal(head);
-        } catch (IllegalThreadStateException e) {
+        } catch (final IllegalThreadStateException e) {
 
         }
     }
@@ -100,7 +100,7 @@ public class OxygenPressureProtocol {
 
         // Solid but non-opaque blocks, for example special glass
         if (OxygenPressureProtocol.nonPermeableBlocks.containsKey(block)) {
-            ArrayList<Integer> metaList = OxygenPressureProtocol.nonPermeableBlocks.get(block);
+            final ArrayList<Integer> metaList = OxygenPressureProtocol.nonPermeableBlocks.get(block);
             if (metaList.contains(Integer.valueOf(-1)) || metaList.contains(vec.getBlockMetadata(world))) {
                 return false;
             }
@@ -118,10 +118,10 @@ public class OxygenPressureProtocol {
         }
 
         if (block instanceof BlockPistonBase) {
-            BlockPistonBase piston = (BlockPistonBase) block;
-            int meta = vec.getBlockMetadata(world);
+            final BlockPistonBase piston = (BlockPistonBase) block;
+            final int meta = vec.getBlockMetadata(world);
             if (BlockPistonBase.isExtended(meta)) {
-                int facing = BlockPistonBase.getPistonOrientation(meta);
+                final int facing = BlockPistonBase.getPistonOrientation(meta);
                 return side != facing;
             }
             return false;

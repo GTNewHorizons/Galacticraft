@@ -58,8 +58,8 @@ public class MapGen {
         this.biomeMapSizeX = sx;
         this.biomeMapSizeZ = sz;
         this.biomeMapFactor = scale;
-        int limitX = biomeMapSizeX * biomeMapFactor / 32;
-        int limitZ = biomeMapSizeZ * biomeMapFactor / 32;
+        final int limitX = biomeMapSizeX * biomeMapFactor / 32;
+        final int limitZ = biomeMapSizeZ * biomeMapFactor / 32;
         this.biomeMapz00 = -limitZ;
         this.biomeMapx0 = -limitX;
         this.biomeMapz0 = this.biomeMapz00;
@@ -68,12 +68,12 @@ public class MapGen {
         this.biomeMapWCM = world.getWorldChunkManager();
         // this.biomeMapWorld = new WeakReference<World>(world);
         try {
-            Field bil = biomeMapWCM
+            final Field bil = biomeMapWCM
                     .getClass()
                     .getDeclaredField(VersionUtil.getNameDynamic(VersionUtil.KEY_FIELD_BIOMEINDEXLAYER));
             bil.setAccessible(true);
             this.biomeMapGenLayer = (GenLayer) bil.get(biomeMapWCM);
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
         if (this.biomeMapGenLayer == null) {
             this.calculatingMap = false;
@@ -92,7 +92,7 @@ public class MapGen {
             if (!this.biomeMapFile.exists() || this.biomeMapFile.canWrite() && this.biomeMapFile.canRead()) {
                 FileUtils.writeByteArrayToFile(this.biomeMapFile, this.biomeAndHeightArray);
             }
-        } catch (IOException ex) {
+        } catch (final IOException ex) {
             ex.printStackTrace();
         }
 
@@ -108,14 +108,14 @@ public class MapGen {
             GalacticraftCore.packetPipeline.sendToAll(new PacketSimple(
                     EnumSimplePacket.C_SEND_OVERWORLD_IMAGE,
                     new Object[] {this.biomeMapCx << 4, this.biomeMapCz << 4, toSend}));
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             System.err.println("Error sending map image to player.");
             ex.printStackTrace();
         }
     }
 
     public boolean BiomeMapOneTick() {
-        int limit = Math.min(biomeMapFactor, 16);
+        final int limit = Math.min(biomeMapFactor, 16);
         if (this.biomeAndHeightArray == null) {
             this.biomeAndHeightArray = new byte[biomeMapSizeX * biomeMapSizeZ * 2];
             this.heights = new int[256];
@@ -161,13 +161,13 @@ public class MapGen {
             return;
         }
         getHeightMap(x0, z0);
-        int halfFactor = limit * limit / 2;
-        ArrayList<Integer> cols = new ArrayList<Integer>();
+        final int halfFactor = limit * limit / 2;
+        final ArrayList<Integer> cols = new ArrayList<Integer>();
         for (int j = 0; j < biomeCount.length; j++) {
             biomeCount[j] = 0;
         }
         for (int x = 0; x < 16; x += factor) {
-            int izstore = iz;
+            final int izstore = iz;
             for (int z = 0; z < 16; z += factor) {
                 cols.clear();
                 int maxcount = 0;
@@ -180,12 +180,12 @@ public class MapGen {
                 // TODO: start in centre instead of top left
                 BIOMEDONE:
                 for (int xx = 0; xx < limit; xx++) {
-                    int hidx = (xx + x << 4) + z;
+                    final int hidx = (xx + x << 4) + z;
                     for (int zz = 0; zz < limit; zz++) {
-                        int height = heights[hidx + zz];
+                        final int height = heights[hidx + zz];
                         avgHeight += height;
                         divisor++;
-                        BiomeGenBase theBiome = biomesGrid[xx + x + (zz + z << 4)];
+                        final BiomeGenBase theBiome = biomesGrid[xx + x + (zz + z << 4)];
                         if (theBiome != null) {
                             biome = theBiome.biomeID;
                         } else {
@@ -214,7 +214,7 @@ public class MapGen {
                     biomeCount[j] = 0;
                 }
 
-                int arrayIndex = (ix * biomeMapSizeZ + iz) * 2;
+                final int arrayIndex = (ix * biomeMapSizeZ + iz) * 2;
                 this.biomeAndHeightArray[arrayIndex] = (byte) cols.get(maxindex).intValue();
                 this.biomeAndHeightArray[arrayIndex + 1] = (byte) ((avgHeight + (divisor + 1) / 2) / divisor);
                 iz++;
@@ -233,35 +233,35 @@ public class MapGen {
         final double d9 = 0.25D;
 
         for (int xx = 0; xx < 4; ++xx) {
-            int xa = xx * 5;
-            int xb = xa + 5;
+            final int xa = xx * 5;
+            final int xb = xa + 5;
 
             for (int zz = 0; zz < 4; ++zz) {
-                int aa = (xa + zz) * 33;
-                int ab = aa + 33;
-                int ba = (xb + zz) * 33;
-                int bb = ba + 33;
+                final int aa = (xa + zz) * 33;
+                final int ab = aa + 33;
+                final int ba = (xb + zz) * 33;
+                final int bb = ba + 33;
 
                 for (int yy = 2; yy < 18; ++yy) {
                     double d1 = heighttemp[aa + yy];
                     double d2 = heighttemp[ab + yy];
                     double d3 = heighttemp[ba + yy];
                     double d4 = heighttemp[bb + yy];
-                    double d5 = (heighttemp[aa + yy + 1] - d1) * d0;
-                    double d6 = (heighttemp[ab + yy + 1] - d2) * d0;
-                    double d7 = (heighttemp[ba + yy + 1] - d3) * d0;
-                    double d8 = (heighttemp[bb + yy + 1] - d4) * d0;
+                    final double d5 = (heighttemp[aa + yy + 1] - d1) * d0;
+                    final double d6 = (heighttemp[ab + yy + 1] - d2) * d0;
+                    final double d7 = (heighttemp[ba + yy + 1] - d3) * d0;
+                    final double d8 = (heighttemp[bb + yy + 1] - d4) * d0;
 
                     for (int y = 0; y < 8; ++y) {
                         double d10 = d1;
                         double d11 = d2;
-                        double d12 = (d3 - d1) * d9;
-                        double d13 = (d4 - d2) * d9;
+                        final double d12 = (d3 - d1) * d9;
+                        final double d13 = (d4 - d2) * d9;
 
-                        int truey = yy * 8 + y;
+                        final int truey = yy * 8 + y;
                         for (int x = 0; x < 4; ++x) {
-                            int idx = x + xx * 4 << 4 | zz * 4;
-                            double d16 = (d11 - d10) * d9;
+                            final int idx = x + xx * 4 << 4 | zz * 4;
+                            final double d16 = (d11 - d10) * d9;
                             double d15 = d10 - d16;
 
                             for (int z = 0; z < 4; ++z) {
@@ -302,33 +302,33 @@ public class MapGen {
     }
 
     private void func_147423_a(int cx, int cy, int cz) {
-        double d0 = 684.412D;
-        double d1 = 684.412D;
-        double d2 = 512.0D;
-        double d3 = 512.0D;
+        final double d0 = 684.412D;
+        final double d1 = 684.412D;
+        final double d2 = 512.0D;
+        final double d3 = 512.0D;
         noiseField4 = noiseGen4.generateNoiseOctaves(noiseField4, cx, cz, 5, 5, 200.0D, 200.0D, 0.5D);
         noiseField3 = noiseGen3.generateNoiseOctaves(
                 noiseField3, cx, cy, cz, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D);
         noiseField1 = noiseGen1.generateNoiseOctaves(noiseField1, cx, cy, cz, 5, 33, 5, 684.412D, 684.412D, 684.412D);
         noiseField2 = noiseGen2.generateNoiseOctaves(noiseField2, cx, cy, cz, 5, 33, 5, 684.412D, 684.412D, 684.412D);
-        boolean flag1 = false;
-        boolean flag = false;
+        final boolean flag1 = false;
+        final boolean flag = false;
         int l = 2;
         int i1 = 0;
-        double d4 = 8.5D;
-        boolean amplified = field_147435_p == WorldType.AMPLIFIED;
+        final double d4 = 8.5D;
+        final boolean amplified = field_147435_p == WorldType.AMPLIFIED;
 
         for (int xx = 0; xx < 5; ++xx) {
             for (int zz = 0; zz < 5; ++zz) {
                 float f = 0.0F;
                 float f1 = 0.0F;
                 float f2 = 0.0F;
-                BiomeGenBase biomegenbase = biomesGridHeights[xx + 22 + zz * 10];
+                final BiomeGenBase biomegenbase = biomesGridHeights[xx + 22 + zz * 10];
 
                 for (int x = -2; x <= 2; ++x) {
-                    int baseIndex = xx + x + 22 + zz * 10;
+                    final int baseIndex = xx + x + 22 + zz * 10;
                     for (int z = -2; z <= 2; ++z) {
-                        BiomeGenBase biomegenbase1 = biomesGridHeights[baseIndex + z * 10];
+                        final BiomeGenBase biomegenbase1 = biomesGridHeights[baseIndex + z * 10];
                         float f3 = biomegenbase1.rootHeight;
                         float f4 = biomegenbase1.heightVariation;
 
@@ -383,7 +383,7 @@ public class MapGen {
                 final double d14 = (double) f / 6.0D;
                 d13 += d12 * 0.2D;
                 d13 = d13 * 8.5D / 8.0D;
-                double d5 = 8.5D + d13 * 4.0D;
+                final double d5 = 8.5D + d13 * 4.0D;
 
                 for (int j2 = 2; j2 < 19; ++j2) {
                     double d6 = ((double) j2 - d5) / d14;
@@ -391,9 +391,9 @@ public class MapGen {
                         d6 *= 4.0D;
                     }
 
-                    double d7 = noiseField1[l] / 512.0D;
-                    double d8 = noiseField2[l] / 512.0D;
-                    double d9 = (noiseField3[l] / 10.0D + 1.0D) / 2.0D;
+                    final double d7 = noiseField1[l] / 512.0D;
+                    final double d8 = noiseField2[l] / 512.0D;
+                    final double d9 = (noiseField3[l] / 10.0D + 1.0D) / 2.0D;
                     heighttemp[l] = MathHelper.denormalizeClamp(d7, d8, d9) - d6;
                     ++l;
                 }

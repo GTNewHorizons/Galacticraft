@@ -22,9 +22,9 @@ public class FootprintRenderer {
 
     public void renderFootprints(EntityPlayer player, float partialTicks) {
         GL11.glPushMatrix();
-        double interpPosX = player.lastTickPosX + (player.posX - player.lastTickPosX) * partialTicks;
-        double interpPosY = player.lastTickPosY + (player.posY - player.lastTickPosY) * partialTicks;
-        double interpPosZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * partialTicks;
+        final double interpPosX = player.lastTickPosX + (player.posX - player.lastTickPosX) * partialTicks;
+        final double interpPosY = player.lastTickPosY + (player.posY - player.lastTickPosY) * partialTicks;
+        final double interpPosZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * partialTicks;
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(FootprintRenderer.footprintTexture);
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -35,31 +35,31 @@ public class FootprintRenderer {
 
         GL11.glEnable(GL11.GL_BLEND);
         OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
-        Tessellator tessellator = Tessellator.instance;
-        float f7 = 1.0F;
-        float f6 = 0.0F;
-        float f8 = 0.0F;
-        float f9 = 1.0F;
+        final Tessellator tessellator = Tessellator.instance;
+        final float f7 = 1.0F;
+        final float f6 = 0.0F;
+        final float f8 = 0.0F;
+        final float f9 = 1.0F;
 
-        float f10 = 0.4F;
+        final float f10 = 0.4F;
         GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 
-        for (List<Footprint> footprintList : this.footprints.values()) {
-            for (Footprint footprint : footprintList) {
+        for (final List<Footprint> footprintList : this.footprints.values()) {
+            for (final Footprint footprint : footprintList) {
                 if (footprint.dimension == player.worldObj.provider.dimensionId) {
                     GL11.glPushMatrix();
-                    float ageScale = footprint.age / (float) Footprint.MAX_AGE;
+                    final float ageScale = footprint.age / (float) Footprint.MAX_AGE;
                     tessellator.startDrawingQuads();
 
-                    float f11 = (float) (footprint.position.x - interpPosX);
-                    float f12 = (float) (footprint.position.y - interpPosY) + 0.001F;
-                    float f13 = (float) (footprint.position.z - interpPosZ);
+                    final float f11 = (float) (footprint.position.x - interpPosX);
+                    final float f12 = (float) (footprint.position.y - interpPosY) + 0.001F;
+                    final float f13 = (float) (footprint.position.z - interpPosZ);
 
                     GL11.glTranslatef(f11, f12, f13);
 
                     tessellator.setBrightness((int) (100 + ageScale * 155));
                     GL11.glColor4f(1 - ageScale, 1 - ageScale, 1 - ageScale, 1 - ageScale);
-                    double footprintScale = 0.5F;
+                    final double footprintScale = 0.5F;
                     tessellator.addVertexWithUV(
                             0 + Math.sin((45 - footprint.rotation) * Math.PI / 180.0D) * footprintScale,
                             0,
@@ -118,9 +118,9 @@ public class FootprintRenderer {
             footprintList = new ArrayList<Footprint>();
         }
 
-        Iterator<Footprint> i = footprintList.iterator();
+        final Iterator<Footprint> i = footprintList.iterator();
         while (i.hasNext()) {
-            Footprint print = i.next();
+            final Footprint print = i.next();
             if (!print.owner.equals(
                     FMLClientHandler.instance().getClient().thePlayer.getCommandSenderName())) {
                 i.remove();

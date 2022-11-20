@@ -33,7 +33,7 @@ public class TileEntityScreen extends TileEntity {
     public int screenOffsetx = 0;
     public int screenOffsetz = 0;
 
-    private int requiresUpdate = 0;
+    private final int requiresUpdate = 0;
     // Used on client side only
     public boolean refreshOnUpdate = false;
 
@@ -71,7 +71,7 @@ public class TileEntityScreen extends TileEntity {
 
     @Override
     public void invalidate() {
-        int meta = this.getBlockMetadata() & 7;
+        final int meta = this.getBlockMetadata() & 7;
         super.invalidate();
         this.breakScreen(meta);
     }
@@ -83,26 +83,26 @@ public class TileEntityScreen extends TileEntity {
      * @param meta The meta of the screen prior to breaking or rotation
      */
     public void breakScreen(int meta) {
-        BlockVec3 vec = new BlockVec3(this);
+        final BlockVec3 vec = new BlockVec3(this);
         TileEntity tile;
-        int side = this.getRight(meta);
+        final int side = this.getRight(meta);
 
-        int left = this.connectionsLeft;
-        int right = this.connectionsRight;
-        int up = this.connectionsUp;
-        int down = this.connectionsDown;
+        final int left = this.connectionsLeft;
+        final int right = this.connectionsRight;
+        final int up = this.connectionsUp;
+        final int down = this.connectionsDown;
 
-        boolean doUp = this.connectedUp;
-        boolean doDown = this.connectedDown;
-        boolean doLeft = this.connectedLeft;
-        boolean doRight = this.connectedRight;
+        final boolean doUp = this.connectedUp;
+        final boolean doDown = this.connectedDown;
+        final boolean doLeft = this.connectedLeft;
+        final boolean doRight = this.connectedRight;
 
         for (int x = -left; x <= right; x++) {
             for (int z = -up; z <= down; z++) {
                 if (x == 0 && z == 0) {
                     this.resetToSingle();
                 } else {
-                    BlockVec3 newVec = vec.clone()
+                    final BlockVec3 newVec = vec.clone()
                             .modifyPositionFromSide(ForgeDirection.getOrientation(side), x)
                             .modifyPositionFromSide(ForgeDirection.DOWN, z);
                     tile = newVec.getTileEntity(this.worldObj);
@@ -180,7 +180,7 @@ public class TileEntityScreen extends TileEntity {
     public void refreshConnections(boolean doScreen) {
         this.log("Starting connection check");
 
-        int meta = this.getBlockMetadata() & 7;
+        final int meta = this.getBlockMetadata() & 7;
         if (meta < 2) {
             // TODO System.out.println("Up/down oriented screens cannot be multiscreen");
             this.resetToSingle();
@@ -191,7 +191,7 @@ public class TileEntityScreen extends TileEntity {
         TileEntity tileDown = null;
         TileEntity tileLeft = null;
         TileEntity tileRight = null;
-        BlockVec3 vec = new BlockVec3(this);
+        final BlockVec3 vec = new BlockVec3(this);
 
         // First, basic check that a neighbour is there and in the same orientation
         if (this.connectedUp) {
@@ -208,7 +208,7 @@ public class TileEntityScreen extends TileEntity {
         }
 
         if (this.connectedLeft) {
-            int side = this.getLeft(meta);
+            final int side = this.getLeft(meta);
             tileLeft = vec.getTileEntityOnSide(this.worldObj, side);
             this.connectedLeft = tileLeft instanceof TileEntityScreen
                     && tileLeft.getBlockMetadata() == meta
@@ -216,7 +216,7 @@ public class TileEntityScreen extends TileEntity {
         }
 
         if (this.connectedRight) {
-            int side = this.getRight(meta);
+            final int side = this.getRight(meta);
             tileRight = vec.getTileEntityOnSide(this.worldObj, side);
             this.connectedRight = tileRight instanceof TileEntityScreen
                     && tileRight.getBlockMetadata() == meta
@@ -315,14 +315,14 @@ public class TileEntityScreen extends TileEntity {
         int down = 0;
         int left = 0;
         int right = 0;
-        int meta = this.getBlockMetadata() & 7;
+        final int meta = this.getBlockMetadata() & 7;
 
         BlockVec3 vec = new BlockVec3(this);
         TileEntityScreen tile = this;
         while (up < 8) {
             if (tile.connectedUp) {
                 up++;
-                TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, 1);
+                final TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, 1);
                 if (newTile instanceof TileEntityScreen) {
                     tile = (TileEntityScreen) newTile;
                     vec.translate(0, 1, 0);
@@ -343,7 +343,7 @@ public class TileEntityScreen extends TileEntity {
         while (down < 8 - up) {
             if (tile.connectedDown) {
                 down++;
-                TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, 0);
+                final TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, 0);
                 if (newTile instanceof TileEntityScreen) {
                     tile = (TileEntityScreen) newTile;
                     vec.translate(0, -1, 0);
@@ -361,11 +361,11 @@ public class TileEntityScreen extends TileEntity {
 
         vec = new BlockVec3(this);
         tile = this;
-        int leftside = this.getLeft(meta);
+        final int leftside = this.getLeft(meta);
         while (left < (up + down == 0 ? 1 : 8)) {
             if (tile.connectedLeft) {
                 left++;
-                TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, leftside);
+                final TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, leftside);
                 if (newTile instanceof TileEntityScreen) {
                     tile = (TileEntityScreen) newTile;
                     vec = vec.newVecSide(leftside);
@@ -383,11 +383,11 @@ public class TileEntityScreen extends TileEntity {
 
         vec = new BlockVec3(this);
         tile = this;
-        int rightside = this.getRight(meta);
+        final int rightside = this.getRight(meta);
         while (right < (up + down == 0 ? 1 : 8) - left) {
             if (tile.connectedRight) {
                 right++;
-                TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, rightside);
+                final TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, rightside);
                 if (newTile instanceof TileEntityScreen) {
                     tile = (TileEntityScreen) newTile;
                     vec = vec.newVecSide(rightside);
@@ -407,13 +407,13 @@ public class TileEntityScreen extends TileEntity {
 
         vec = new BlockVec3(this);
         TileEntity newtile = vec.getTileEntityOnSide(this.worldObj, 1);
-        TileEntityScreen tileUp = newtile instanceof TileEntityScreen ? (TileEntityScreen) newtile : null;
+        final TileEntityScreen tileUp = newtile instanceof TileEntityScreen ? (TileEntityScreen) newtile : null;
         newtile = vec.getTileEntityOnSide(this.worldObj, 0);
-        TileEntityScreen tileDown = newtile instanceof TileEntityScreen ? (TileEntityScreen) newtile : null;
+        final TileEntityScreen tileDown = newtile instanceof TileEntityScreen ? (TileEntityScreen) newtile : null;
         newtile = vec.getTileEntityOnSide(this.worldObj, leftside);
-        TileEntityScreen tileLeft = newtile instanceof TileEntityScreen ? (TileEntityScreen) newtile : null;
+        final TileEntityScreen tileLeft = newtile instanceof TileEntityScreen ? (TileEntityScreen) newtile : null;
         newtile = vec.getTileEntityOnSide(this.worldObj, rightside);
-        TileEntityScreen tileRight = newtile instanceof TileEntityScreen ? (TileEntityScreen) newtile : null;
+        final TileEntityScreen tileRight = newtile instanceof TileEntityScreen ? (TileEntityScreen) newtile : null;
         // Prevent 3 x 1 and longer
         if (left + right == 0 && up + down >= 1) {
             if (up > 0 && !tileUp.connectedUp) // No need for null check if up > 0
@@ -512,20 +512,20 @@ public class TileEntityScreen extends TileEntity {
         int barrierLeft = left;
         int barrierRight = right;
 
-        int meta = this.getBlockMetadata() & 7;
-        BlockVec3 vec = new BlockVec3(this);
-        ArrayList<TileEntityScreen> screenList = new ArrayList<TileEntityScreen>();
+        final int meta = this.getBlockMetadata() & 7;
+        final BlockVec3 vec = new BlockVec3(this);
+        final ArrayList<TileEntityScreen> screenList = new ArrayList<TileEntityScreen>();
 
-        int side = this.getRight(meta);
+        final int side = this.getRight(meta);
 
         for (int x = -left; x <= right; x++) {
             for (int z = -up; z <= down; z++) {
-                BlockVec3 newVec = vec.clone()
+                final BlockVec3 newVec = vec.clone()
                         .modifyPositionFromSide(ForgeDirection.getOrientation(side), x)
                         .modifyPositionFromSide(ForgeDirection.DOWN, z);
-                TileEntity tile = newVec.getTileEntity(this.worldObj);
+                final TileEntity tile = newVec.getTileEntity(this.worldObj);
                 if (tile instanceof TileEntityScreen && tile.getBlockMetadata() == meta && !tile.isInvalid()) {
-                    TileEntityScreen screenTile = (TileEntityScreen) tile;
+                    final TileEntityScreen screenTile = (TileEntityScreen) tile;
                     screenList.add(screenTile);
 
                     if (screenTile.isMultiscreen) {
@@ -553,7 +553,7 @@ public class TileEntityScreen extends TileEntity {
         }
 
         if (!screenWhole) {
-            for (TileEntityScreen scr : screenList) {
+            for (final TileEntityScreen scr : screenList) {
                 scr.resetToSingle();
             }
 
@@ -566,7 +566,7 @@ public class TileEntityScreen extends TileEntity {
 
         DrawGameScreen newScreen = null;
         boolean serverside = true;
-        TileEntity bottomLeft = vec.clone()
+        final TileEntity bottomLeft = vec.clone()
                 .modifyPositionFromSide(ForgeDirection.getOrientation(side), -left)
                 .modifyPositionFromSide(ForgeDirection.DOWN, down)
                 .getTileEntity(this.worldObj);
@@ -581,10 +581,10 @@ public class TileEntityScreen extends TileEntity {
             serverside = false;
         }
 
-        Iterator<TileEntityScreen> it = screenList.iterator();
+        final Iterator<TileEntityScreen> it = screenList.iterator();
         for (int x = -left; x <= right; x++) {
             for (int z = -up; z <= down; z++) {
-                TileEntityScreen screenTile = it.next();
+                final TileEntityScreen screenTile = it.next();
                 screenTile.screenOffsetx = x + left;
                 screenTile.screenOffsetz = z + up;
                 screenTile.screen = newScreen;
@@ -667,12 +667,12 @@ public class TileEntityScreen extends TileEntity {
     }
 
     private boolean canJoinRight() {
-        int meta = this.getBlockMetadata();
-        TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, this.getRight(meta));
+        final int meta = this.getBlockMetadata();
+        final TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, this.getRight(meta));
         if (!(te instanceof TileEntityScreen)) {
             return false;
         }
-        TileEntityScreen screenTile = (TileEntityScreen) te;
+        final TileEntityScreen screenTile = (TileEntityScreen) te;
         if (screenTile.getBlockMetadata() != meta) {
             return false;
         }
@@ -695,12 +695,12 @@ public class TileEntityScreen extends TileEntity {
     }
 
     private boolean canJoinLeft() {
-        int meta = this.getBlockMetadata();
-        TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, this.getLeft(meta));
+        final int meta = this.getBlockMetadata();
+        final TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, this.getLeft(meta));
         if (!(te instanceof TileEntityScreen)) {
             return false;
         }
-        TileEntityScreen screenTile = (TileEntityScreen) te;
+        final TileEntityScreen screenTile = (TileEntityScreen) te;
         if (screenTile.getBlockMetadata() != meta) {
             return false;
         }
@@ -723,12 +723,12 @@ public class TileEntityScreen extends TileEntity {
     }
 
     private boolean canJoinUp() {
-        int meta = this.getBlockMetadata();
-        TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, 1);
+        final int meta = this.getBlockMetadata();
+        final TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, 1);
         if (!(te instanceof TileEntityScreen)) {
             return false;
         }
-        TileEntityScreen screenTile = (TileEntityScreen) te;
+        final TileEntityScreen screenTile = (TileEntityScreen) te;
         if (screenTile.getBlockMetadata() != meta) {
             return false;
         }
@@ -751,12 +751,12 @@ public class TileEntityScreen extends TileEntity {
     }
 
     private boolean canJoinDown() {
-        int meta = this.getBlockMetadata();
-        TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, 0);
+        final int meta = this.getBlockMetadata();
+        final TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, 0);
         if (!(te instanceof TileEntityScreen)) {
             return false;
         }
-        TileEntityScreen screenTile = (TileEntityScreen) te;
+        final TileEntityScreen screenTile = (TileEntityScreen) te;
         if (screenTile.getBlockMetadata() != meta) {
             return false;
         }
@@ -779,21 +779,21 @@ public class TileEntityScreen extends TileEntity {
     }
 
     private void joinRight() {
-        int meta = this.getBlockMetadata();
-        int side = this.getRight(meta);
-        BlockVec3 vec = new BlockVec3(this);
+        final int meta = this.getBlockMetadata();
+        final int side = this.getRight(meta);
+        final BlockVec3 vec = new BlockVec3(this);
         for (int z = -this.connectionsUp; z <= this.connectionsDown; z++) {
             TileEntity tile;
-            BlockVec3 newVec = vec.clone().modifyPositionFromSide(ForgeDirection.DOWN, z);
+            final BlockVec3 newVec = vec.clone().modifyPositionFromSide(ForgeDirection.DOWN, z);
             if (z == 0) {
                 tile = this;
             } else {
                 tile = newVec.getTileEntity(this.worldObj);
             }
             if (tile instanceof TileEntityScreen && tile.getBlockMetadata() == meta && !tile.isInvalid()) {
-                TileEntityScreen screenTile = (TileEntityScreen) tile;
+                final TileEntityScreen screenTile = (TileEntityScreen) tile;
                 screenTile.connectedRight = true;
-                TileEntity te2 = newVec.getTileEntityOnSide(this.worldObj, side);
+                final TileEntity te2 = newVec.getTileEntityOnSide(this.worldObj, side);
                 if (te2 instanceof TileEntityScreen && te2.getBlockMetadata() == meta && !te2.isInvalid()) {
                     screenTile.tryConnectRight((TileEntityScreen) te2);
                 }
@@ -802,21 +802,21 @@ public class TileEntityScreen extends TileEntity {
     }
 
     private void joinLeft() {
-        int meta = this.getBlockMetadata();
-        int side = this.getLeft(meta);
-        BlockVec3 vec = new BlockVec3(this);
+        final int meta = this.getBlockMetadata();
+        final int side = this.getLeft(meta);
+        final BlockVec3 vec = new BlockVec3(this);
         for (int z = -this.connectionsUp; z <= this.connectionsDown; z++) {
             TileEntity tile;
-            BlockVec3 newVec = vec.clone().modifyPositionFromSide(ForgeDirection.DOWN, z);
+            final BlockVec3 newVec = vec.clone().modifyPositionFromSide(ForgeDirection.DOWN, z);
             if (z == 0) {
                 tile = this;
             } else {
                 tile = newVec.getTileEntity(this.worldObj);
             }
             if (tile instanceof TileEntityScreen && tile.getBlockMetadata() == meta && !tile.isInvalid()) {
-                TileEntityScreen screenTile = (TileEntityScreen) tile;
+                final TileEntityScreen screenTile = (TileEntityScreen) tile;
                 screenTile.connectedLeft = true;
-                TileEntity te2 = newVec.getTileEntityOnSide(this.worldObj, side);
+                final TileEntity te2 = newVec.getTileEntityOnSide(this.worldObj, side);
                 if (te2 instanceof TileEntityScreen && te2.getBlockMetadata() == meta && !te2.isInvalid()) {
                     screenTile.tryConnectLeft((TileEntityScreen) te2);
                 }
@@ -825,21 +825,21 @@ public class TileEntityScreen extends TileEntity {
     }
 
     private void joinUp() {
-        int meta = this.getBlockMetadata();
-        ForgeDirection side = ForgeDirection.getOrientation(this.getRight(meta));
-        BlockVec3 vec = new BlockVec3(this);
+        final int meta = this.getBlockMetadata();
+        final ForgeDirection side = ForgeDirection.getOrientation(this.getRight(meta));
+        final BlockVec3 vec = new BlockVec3(this);
         for (int x = -this.connectionsLeft; x <= this.connectionsRight; x++) {
             TileEntity tile;
-            BlockVec3 newVec = vec.clone().modifyPositionFromSide(side, x);
+            final BlockVec3 newVec = vec.clone().modifyPositionFromSide(side, x);
             if (x == 0) {
                 tile = this;
             } else {
                 tile = newVec.getTileEntity(this.worldObj);
             }
             if (tile instanceof TileEntityScreen && tile.getBlockMetadata() == meta && !tile.isInvalid()) {
-                TileEntityScreen screenTile = (TileEntityScreen) tile;
+                final TileEntityScreen screenTile = (TileEntityScreen) tile;
                 screenTile.connectedUp = true;
-                TileEntity te2 = newVec.getTileEntityOnSide(this.worldObj, 1);
+                final TileEntity te2 = newVec.getTileEntityOnSide(this.worldObj, 1);
                 if (te2 instanceof TileEntityScreen && te2.getBlockMetadata() == meta && !te2.isInvalid()) {
                     screenTile.tryConnectUp((TileEntityScreen) te2);
                 }
@@ -848,21 +848,21 @@ public class TileEntityScreen extends TileEntity {
     }
 
     private void joinDown() {
-        int meta = this.getBlockMetadata();
-        ForgeDirection side = ForgeDirection.getOrientation(this.getRight(meta));
-        BlockVec3 vec = new BlockVec3(this);
+        final int meta = this.getBlockMetadata();
+        final ForgeDirection side = ForgeDirection.getOrientation(this.getRight(meta));
+        final BlockVec3 vec = new BlockVec3(this);
         for (int x = -this.connectionsLeft; x <= this.connectionsRight; x++) {
             TileEntity tile;
-            BlockVec3 newVec = vec.clone().modifyPositionFromSide(side, x);
+            final BlockVec3 newVec = vec.clone().modifyPositionFromSide(side, x);
             if (x == 0) {
                 tile = this;
             } else {
                 tile = newVec.getTileEntity(this.worldObj);
             }
             if (tile instanceof TileEntityScreen && tile.getBlockMetadata() == meta && !tile.isInvalid()) {
-                TileEntityScreen screenTile = (TileEntityScreen) tile;
+                final TileEntityScreen screenTile = (TileEntityScreen) tile;
                 screenTile.connectedDown = true;
-                TileEntity te2 = newVec.getTileEntityOnSide(this.worldObj, 0);
+                final TileEntity te2 = newVec.getTileEntityOnSide(this.worldObj, 0);
                 if (te2 instanceof TileEntityScreen && te2.getBlockMetadata() == meta && !te2.isInvalid()) {
                     screenTile.tryConnectDown((TileEntityScreen) te2);
                 }

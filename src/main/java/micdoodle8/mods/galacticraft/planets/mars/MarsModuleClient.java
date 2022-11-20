@@ -104,9 +104,9 @@ public class MarsModuleClient implements IPlanetsModuleClient {
 
     @Override
     public void postInit(FMLPostInitializationEvent event) {
-        IModelCustom chamberModel =
+        final IModelCustom chamberModel =
                 AdvancedModelLoader.loadModel(new ResourceLocation(MarsModule.ASSET_PREFIX, "models/chamber.obj"));
-        IModelCustom cargoRocketModel =
+        final IModelCustom cargoRocketModel =
                 AdvancedModelLoader.loadModel(new ResourceLocation(MarsModule.ASSET_PREFIX, "models/cargoRocket.obj"));
 
         // Tile Entity Renderers
@@ -148,7 +148,7 @@ public class MarsModuleClient implements IPlanetsModuleClient {
     @Override
     public Object getGuiElement(Side side, int ID, EntityPlayer player, World world, int x, int y, int z) {
         if (side == Side.CLIENT) {
-            TileEntity tile = world.getTileEntity(x, y, z);
+            final TileEntity tile = world.getTileEntity(x, y, z);
 
             if (ID == GuiIdsPlanets.MACHINE_MARS) {
                 if (tile instanceof TileEntityTerraformer) {
@@ -187,7 +187,7 @@ public class MarsModuleClient implements IPlanetsModuleClient {
 
     @Override
     public void spawnParticle(String particleID, Vector3 position, Vector3 motion, Object... extraData) {
-        Minecraft mc = FMLClientHandler.instance().getClient();
+        final Minecraft mc = FMLClientHandler.instance().getClient();
 
         if (mc != null && mc.renderViewEntity != null && mc.effectRenderer != null) {
             final double dPosX = mc.renderViewEntity.posX - position.x;

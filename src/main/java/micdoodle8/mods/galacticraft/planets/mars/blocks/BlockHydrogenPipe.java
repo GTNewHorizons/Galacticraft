@@ -52,7 +52,7 @@ public class BlockHydrogenPipe extends BlockTransmitter implements ITileEntityPr
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(IBlockAccess par1IBlockAccess, int x, int y, int z, int par5) {
-        BlockVec3 thisVec = new BlockVec3(x, y, z).modifyPositionFromSide(ForgeDirection.getOrientation(par5));
+        final BlockVec3 thisVec = new BlockVec3(x, y, z).modifyPositionFromSide(ForgeDirection.getOrientation(par5));
         final Block blockAt = thisVec.getBlock(par1IBlockAccess);
 
         if (blockAt == MarsBlocks.hydrogenPipe) {

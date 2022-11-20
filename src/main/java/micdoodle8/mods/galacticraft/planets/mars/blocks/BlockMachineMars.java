@@ -119,9 +119,9 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
      */
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
-        int metadata = world.getBlockMetadata(x, y, z);
+        final int metadata = world.getBlockMetadata(x, y, z);
 
-        int angle = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        final int angle = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         int change = 0;
 
         switch (angle) {
@@ -195,7 +195,7 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
             world.setBlockMetadataWithNotify(x, y, z, BlockMachineMars.TERRAFORMER_METADATA + change, 3);
         }
 
-        TileEntity var8 = world.getTileEntity(x, y, z);
+        final TileEntity var8 = world.getTileEntity(x, y, z);
 
         if (var8 instanceof IMultiBlock) {
             ((IMultiBlock) var8).onCreate(new BlockVec3(x, y, z));
@@ -240,7 +240,7 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
             float hitX,
             float hitY,
             float hitZ) {
-        int metadata = par1World.getBlockMetadata(x, y, z);
+        final int metadata = par1World.getBlockMetadata(x, y, z);
         int original = metadata;
 
         int change = 0;
@@ -273,7 +273,7 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
 
         if (metadata >= BlockMachineMars.LAUNCH_CONTROLLER_METADATA
                 || metadata < BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) {
-            TileEntity te = par1World.getTileEntity(x, y, z);
+            final TileEntity te = par1World.getTileEntity(x, y, z);
             if (te instanceof TileBaseUniversalElectrical) {
                 ((TileBaseUniversalElectrical) te).updateFacing();
             }
@@ -297,7 +297,7 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
             float hitX,
             float hitY,
             float hitZ) {
-        int metadata = world.getBlockMetadata(x, y, z);
+        final int metadata = world.getBlockMetadata(x, y, z);
 
         if (metadata >= BlockMachineMars.LAUNCH_CONTROLLER_METADATA) {
             par5EntityPlayer.openGui(GalacticraftPlanets.instance, GuiIdsPlanets.MACHINE_MARS, world, x, y, z);
@@ -372,8 +372,8 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
 
     private boolean canPlaceChamberAt(World world, int x0, int y0, int z0, EntityLivingBase player) {
         for (int y = 0; y < 3; y++) {
-            Block blockAt = world.getBlock(x0, y0 + y, z0);
-            int metaAt = world.getBlockMetadata(x0, y0 + y, z0);
+            final Block blockAt = world.getBlock(x0, y0 + y, z0);
+            final int metaAt = world.getBlockMetadata(x0, y0 + y, z0);
 
             if (y == 0
                     && blockAt == MarsBlocks.machine
@@ -416,7 +416,7 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
 
     @Override
     public void setBedOccupied(IBlockAccess world, int x, int y, int z, EntityPlayer player, boolean occupied) {
-        TileEntity tile = world.getTileEntity(x, y, z);
+        final TileEntity tile = world.getTileEntity(x, y, z);
 
         if (tile instanceof TileEntityCryogenicChamber) {
             ((TileEntityCryogenicChamber) tile).isOccupied = true;
@@ -426,10 +426,10 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
     public static ChunkCoordinates getNearestEmptyChunkCoordinates(
             World par0World, int par1, int par2, int par3, int par4) {
         for (int k1 = 0; k1 <= 1; ++k1) {
-            int l1 = par1 - 1;
-            int i2 = par3 - 1;
-            int j2 = l1 + 2;
-            int k2 = i2 + 2;
+            final int l1 = par1 - 1;
+            final int i2 = par3 - 1;
+            final int j2 = l1 + 2;
+            final int k2 = i2 + 2;
 
             for (int l2 = l1; l2 <= j2; ++l2) {
                 for (int i3 = i2; i3 <= k2; ++i3) {
@@ -483,7 +483,7 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
 
     @Override
     public boolean isSealed(World world, int x, int y, int z, ForgeDirection direction) {
-        int meta = world.getBlockMetadata(x, y, z) & 12;
+        final int meta = world.getBlockMetadata(x, y, z) & 12;
         return meta != CRYOGENIC_CHAMBER_METADATA;
     }
 }

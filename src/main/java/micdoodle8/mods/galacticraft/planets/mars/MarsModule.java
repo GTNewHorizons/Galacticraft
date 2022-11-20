@@ -196,17 +196,17 @@ public class MarsModule implements IPlanetsModule {
 
     private void registerMicroBlocks() {
         try {
-            Class clazz = Class.forName("codechicken.microblock.MicroMaterialRegistry");
+            final Class clazz = Class.forName("codechicken.microblock.MicroMaterialRegistry");
             if (clazz != null) {
                 Method registerMethod = null;
-                Method[] methodz = clazz.getMethods();
-                for (Method m : methodz) {
+                final Method[] methodz = clazz.getMethods();
+                for (final Method m : methodz) {
                     if (m.getName().equals("registerMaterial")) {
                         registerMethod = m;
                         break;
                     }
                 }
-                Class clazzbm = Class.forName("codechicken.microblock.BlockMicroMaterial");
+                final Class clazzbm = Class.forName("codechicken.microblock.BlockMicroMaterial");
                 registerMethod.invoke(
                         null,
                         clazzbm.getConstructor(Block.class, int.class).newInstance(MarsBlocks.marsBlock, 4),
@@ -232,7 +232,7 @@ public class MarsModule implements IPlanetsModule {
                         clazzbm.getConstructor(Block.class, int.class).newInstance(MarsBlocks.marsBlock, 9),
                         "tile.mars.marsstone");
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
     }
 
@@ -279,7 +279,7 @@ public class MarsModule implements IPlanetsModule {
 
     public void registerGalacticraftCreature(Class<? extends Entity> var0, String var1, int back, int fore) {
         MarsModule.registerGalacticraftNonMobEntity(var0, var1, 80, 3, true);
-        int nextEggID = GCCoreUtil.getNextValidEggID();
+        final int nextEggID = GCCoreUtil.getNextValidEggID();
         if (nextEggID < 65536) {
             EntityList.IDtoClassMapping.put(nextEggID, var0);
             VersionUtil.putClassToIDMapping(var0, nextEggID);
@@ -313,7 +313,7 @@ public class MarsModule implements IPlanetsModule {
     @Override
     public Object getGuiElement(Side side, int ID, EntityPlayer player, World world, int x, int y, int z) {
         if (side == Side.SERVER) {
-            TileEntity tile = world.getTileEntity(x, y, z);
+            final TileEntity tile = world.getTileEntity(x, y, z);
 
             if (ID == GuiIdsPlanets.MACHINE_MARS) {
                 if (tile instanceof TileEntityTerraformer) {

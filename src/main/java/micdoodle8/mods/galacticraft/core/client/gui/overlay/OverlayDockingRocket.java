@@ -32,37 +32,37 @@ public class OverlayDockingRocket extends Overlay {
         OverlayDockingRocket.minecraft.entityRenderer.setupOverlayRendering();
 
         if (OverlayDockingRocket.minecraft.thePlayer.ridingEntity instanceof EntityAutoRocket) {
-            EntityAutoRocket rocket = (EntityAutoRocket) OverlayDockingRocket.minecraft.thePlayer.ridingEntity;
+            final EntityAutoRocket rocket = (EntityAutoRocket) OverlayDockingRocket.minecraft.thePlayer.ridingEntity;
 
             if (rocket.landing && rocket.targetVec != null) {
-                double dX = Math.round((rocket.posX - rocket.targetVec.x) * 100.0D) / 100.0D;
-                double dY = Math.round((rocket.posY - rocket.targetVec.y) * 100.0D) / 100.0D;
-                double dZ = Math.round((rocket.posZ - rocket.targetVec.z) * 100.0D) / 100.0D;
-                String dXStr = String.valueOf(dX);
-                String dYStr = String.valueOf(dY);
-                String dZStr = String.valueOf(dZ);
+                final double dX = Math.round((rocket.posX - rocket.targetVec.x) * 100.0D) / 100.0D;
+                final double dY = Math.round((rocket.posY - rocket.targetVec.y) * 100.0D) / 100.0D;
+                final double dZ = Math.round((rocket.posZ - rocket.targetVec.z) * 100.0D) / 100.0D;
+                final String dXStr = String.valueOf(dX);
+                final String dYStr = String.valueOf(dY);
+                final String dZStr = String.valueOf(dZ);
 
-                String warning = GCCoreUtil.translateWithFormat(
+                final String warning = GCCoreUtil.translateWithFormat(
                         "gui.dockingRocket.warning.name.0",
                         GameSettings.getKeyDisplayString(KeyHandlerClient.spaceKey.getKeyCode()));
-                String warning2 = GCCoreUtil.translateWithFormat(
+                final String warning2 = GCCoreUtil.translateWithFormat(
                         "gui.dockingRocket.warning.name.1",
                         GameSettings.getKeyDisplayString(KeyHandlerClient.leftShiftKey.getKeyCode()));
 
-                double targetMotionY =
+                final double targetMotionY =
                         Math.round(Math.max((rocket.posY - rocket.targetVec.y) / -100.0D, -0.9D) * 100.0D) / 100.0D;
-                double currentMotionY = Math.round(rocket.motionY * 100.0D) / 100.0D;
-                double dMY = Math.floor((targetMotionY - currentMotionY) * 300);
-                int dMotionY = (int) Math.max(1, Math.min(255, dMY));
-                int dMotionYN = (int) Math.max(1, Math.min(255, -dMY));
-                String targetMotionYStr =
+                final double currentMotionY = Math.round(rocket.motionY * 100.0D) / 100.0D;
+                final double dMY = Math.floor((targetMotionY - currentMotionY) * 300);
+                final int dMotionY = (int) Math.max(1, Math.min(255, dMY));
+                final int dMotionYN = (int) Math.max(1, Math.min(255, -dMY));
+                final String targetMotionYStr =
                         GCCoreUtil.translate("gui.dockingRocket.targetVel.name") + ": " + String.valueOf(targetMotionY);
-                String currentMotionYStr = GCCoreUtil.translate("gui.dockingRocket.currentVel.name") + ": "
+                final String currentMotionYStr = GCCoreUtil.translate("gui.dockingRocket.currentVel.name") + ": "
                         + String.valueOf(currentMotionY);
 
-                int red = ColorUtil.to32BitColor(dMY > 0 ? 0 : dMotionYN, 255, 255, 255);
-                int green = ColorUtil.to32BitColor(dMY < 0 ? 0 : dMotionY, 255, 255, 255);
-                int grey = ColorUtil.to32BitColor(255, 220, 220, 220);
+                final int red = ColorUtil.to32BitColor(dMY > 0 ? 0 : dMotionYN, 255, 255, 255);
+                final int green = ColorUtil.to32BitColor(dMY < 0 ? 0 : dMotionY, 255, 255, 255);
+                final int grey = ColorUtil.to32BitColor(255, 220, 220, 220);
 
                 if (dMY > 25) {
                     OverlayDockingRocket.minecraft.fontRenderer.drawString(

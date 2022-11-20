@@ -64,7 +64,7 @@ public class BlockCargoLoader extends BlockAdvancedTile implements ItemBlockDesc
     public void onBlockAdded(World world, int x, int y, int z) {
         super.onBlockAdded(world, x, y, z);
 
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        final TileEntity tileEntity = world.getTileEntity(x, y, z);
 
         if (tileEntity != null) {
             if (tileEntity instanceof TileEntityCargoLoader) {
@@ -182,7 +182,7 @@ public class BlockCargoLoader extends BlockAdvancedTile implements ItemBlockDesc
                 break;
         }
 
-        TileEntity te = world.getTileEntity(x, y, z);
+        final TileEntity te = world.getTileEntity(x, y, z);
         if (te instanceof TileBaseUniversalElectrical) {
             ((TileBaseUniversalElectrical) te).updateFacing();
         }

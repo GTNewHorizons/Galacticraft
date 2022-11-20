@@ -31,16 +31,17 @@ public class ElectricIngotCompressorRecipeHandler extends TemplateRecipeHandler 
     }
 
     public Set<Entry<ArrayList<PositionedStack>, PositionedStack>> getRecipes() {
-        HashMap<ArrayList<PositionedStack>, PositionedStack> recipes =
+        final HashMap<ArrayList<PositionedStack>, PositionedStack> recipes =
                 new HashMap<ArrayList<PositionedStack>, PositionedStack>();
 
-        for (Entry<HashMap<Integer, PositionedStack>, PositionedStack> stack :
+        for (final Entry<HashMap<Integer, PositionedStack>, PositionedStack> stack :
                 NEIGalacticraftConfig.getIngotCompressorRecipes()) {
-            ArrayList<PositionedStack> inputStacks = new ArrayList<PositionedStack>();
+            final ArrayList<PositionedStack> inputStacks = new ArrayList<PositionedStack>();
 
-            for (Map.Entry<Integer, PositionedStack> input : stack.getKey().entrySet()) {
-                PositionedStack inputStack = input.getValue().copy();
-                for (ItemStack inputItemStack : inputStack.items) {
+            for (final Map.Entry<Integer, PositionedStack> input :
+                    stack.getKey().entrySet()) {
+                final PositionedStack inputStack = input.getValue().copy();
+                for (final ItemStack inputItemStack : inputStack.items) {
                     inputItemStack.stackSize = 2;
                 }
                 inputStacks.add(inputStack);
@@ -139,10 +140,10 @@ public class ElectricIngotCompressorRecipeHandler extends TemplateRecipeHandler 
         public ElectricCompressorRecipe(ArrayList<PositionedStack> pstack1, PositionedStack pstack2) {
             super();
 
-            ArrayList<PositionedStack> ingred = new ArrayList<PositionedStack>();
+            final ArrayList<PositionedStack> ingred = new ArrayList<PositionedStack>();
 
-            for (PositionedStack stack : pstack1) {
-                PositionedStack stack2 = stack.copy();
+            for (final PositionedStack stack : pstack1) {
+                final PositionedStack stack2 = stack.copy();
                 ingred.add(stack2);
             }
 
@@ -160,7 +161,7 @@ public class ElectricIngotCompressorRecipeHandler extends TemplateRecipeHandler 
         @Override
         public PositionedStack getOtherStack() {
             if (ElectricIngotCompressorRecipeHandler.ticksPassed % 70 >= 53) {
-                PositionedStack outputCopy = this.output.copy();
+                final PositionedStack outputCopy = this.output.copy();
                 outputCopy.rely += 18;
                 return outputCopy;
             }

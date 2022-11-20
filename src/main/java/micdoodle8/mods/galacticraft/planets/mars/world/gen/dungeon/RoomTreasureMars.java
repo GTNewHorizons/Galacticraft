@@ -81,9 +81,9 @@ public class RoomTreasureMars extends DungeonRoom {
     @Override
     protected void handleTileEntities(Random rand) {
         if (!this.chests.isEmpty()) {
-            HashSet<ChunkCoordinates> removeList = new HashSet<ChunkCoordinates>();
+            final HashSet<ChunkCoordinates> removeList = new HashSet<ChunkCoordinates>();
 
-            for (ChunkCoordinates coords : this.chests) {
+            for (final ChunkCoordinates coords : this.chests) {
                 this.worldObj.setBlock(coords.posX, coords.posY, coords.posZ, MarsBlocks.tier2TreasureChest, 0, 3);
                 this.worldObj.setTileEntity(coords.posX, coords.posY, coords.posZ, new TileEntityTreasureChestMars());
                 removeList.add(coords);

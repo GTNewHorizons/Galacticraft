@@ -33,7 +33,7 @@ public class GuiCargoRocket extends GuiContainerGC {
 
     private final IInventory upperChestInventory;
     private final EnumRocketType rocketType;
-    private EntityCargoRocket rocket;
+    private final EntityCargoRocket rocket;
     private GuiButton launchButton;
 
     public GuiCargoRocket(IInventory par1IInventory, EntityCargoRocket rocket) {
@@ -71,7 +71,7 @@ public class GuiCargoRocket extends GuiContainerGC {
         this.launchButton =
                 new GuiButton(0, var7 + 116, var6 + 26, 50, 20, GCCoreUtil.translate("gui.message.launch.name"));
         this.buttonList.add(this.launchButton);
-        List<String> fuelTankDesc = new ArrayList<String>();
+        final List<String> fuelTankDesc = new ArrayList<String>();
         fuelTankDesc.add(GCCoreUtil.translate("gui.fuelTank.desc.0"));
         fuelTankDesc.add(GCCoreUtil.translate("gui.fuelTank.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(
@@ -104,7 +104,7 @@ public class GuiCargoRocket extends GuiContainerGC {
         String str = GCCoreUtil.translate("gui.message.fuel.name") + ":";
         this.fontRendererObj.drawString(str, 140 - this.fontRendererObj.getStringWidth(str) / 2, 5, 4210752);
         final double percentage = this.rocket.getScaledFuelLevel(100);
-        String color = percentage > 80.0D
+        final String color = percentage > 80.0D
                 ? EnumColor.BRIGHT_GREEN.getCode()
                 : percentage > 40.0D ? EnumColor.ORANGE.getCode() : EnumColor.RED.getCode();
         str = percentage + "% " + GCCoreUtil.translate("gui.message.full.name");
@@ -132,7 +132,7 @@ public class GuiCargoRocket extends GuiContainerGC {
         }
 
         int y = 2;
-        for (String splitString : spltString) {
+        for (final String splitString : spltString) {
             this.fontRendererObj.drawString(
                     colour + splitString, 35 - this.fontRendererObj.getStringWidth(splitString) / 2, 9 * y, 4210752);
             y++;

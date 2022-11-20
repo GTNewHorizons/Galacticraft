@@ -59,7 +59,7 @@ public class EntitySludgeling extends EntityMob implements IEntityBreathable {
 
     @Override
     protected Entity findPlayerToAttack() {
-        double var1 = 8.0D;
+        final double var1 = 8.0D;
         return this.worldObj.getClosestVulnerablePlayerToEntity(this, var1);
     }
 
@@ -82,9 +82,9 @@ public class EntitySludgeling extends EntityMob implements IEntityBreathable {
         double var9 = -1.0D;
         EntityPlayer var11 = null;
 
-        for (Object element : this.worldObj.loadedEntityList) {
-            EntityPlayer var13 = (EntityPlayer) element;
-            double var14 = var13.getDistanceSq(par1, par3, par5);
+        for (final Object element : this.worldObj.loadedEntityList) {
+            final EntityPlayer var13 = (EntityPlayer) element;
+            final double var14 = var13.getDistanceSq(par1, par3, par5);
 
             if ((par7 < 0.0D || var14 < par7 * par7) && (var9 == -1.0D || var14 < var9)) {
                 var9 = var14;
@@ -130,7 +130,7 @@ public class EntitySludgeling extends EntityMob implements IEntityBreathable {
     @Override
     public boolean getCanSpawnHere() {
         if (super.getCanSpawnHere()) {
-            EntityPlayer var1 = this.worldObj.getClosestPlayerToEntity(this, 5.0D);
+            final EntityPlayer var1 = this.worldObj.getClosestPlayerToEntity(this, 5.0D);
             return var1 == null;
         } else {
             return false;

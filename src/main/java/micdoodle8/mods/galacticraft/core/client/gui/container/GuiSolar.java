@@ -23,7 +23,7 @@ public class GuiSolar extends GuiContainerGC {
     private final TileEntitySolar solarPanel;
 
     private GuiButton buttonEnableSolar;
-    private GuiElementInfoRegion electricInfoRegion = new GuiElementInfoRegion(
+    private final GuiElementInfoRegion electricInfoRegion = new GuiElementInfoRegion(
             (this.width - this.xSize) / 2 + 107,
             (this.height - this.ySize) / 2 + 101,
             56,
@@ -55,7 +55,7 @@ public class GuiSolar extends GuiContainerGC {
     @Override
     public void initGui() {
         super.initGui();
-        List<String> electricityDesc = new ArrayList<String>();
+        final List<String> electricityDesc = new ArrayList<String>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         electricityDesc.add(EnumColor.YELLOW
                 + GCCoreUtil.translate("gui.energyStorage.desc.1")
@@ -67,7 +67,7 @@ public class GuiSolar extends GuiContainerGC {
         this.electricInfoRegion.parentWidth = this.width;
         this.electricInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.electricInfoRegion);
-        List<String> batterySlotDesc = new ArrayList<String>();
+        final List<String> batterySlotDesc = new ArrayList<String>();
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.0"));
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(
@@ -79,8 +79,8 @@ public class GuiSolar extends GuiContainerGC {
                 this.width,
                 this.height,
                 this));
-        List<String> sunGenDesc = new ArrayList<String>();
-        float sunVisible = Math.round(this.solarPanel.solarStrength / 9.0F * 1000) / 10.0F;
+        final List<String> sunGenDesc = new ArrayList<String>();
+        final float sunVisible = Math.round(this.solarPanel.solarStrength / 9.0F * 1000) / 10.0F;
         sunGenDesc.add(
                 this.solarPanel.solarStrength > 0
                         ? GCCoreUtil.translate("gui.status.sunVisible.name") + ": " + sunVisible + "%"
@@ -106,7 +106,7 @@ public class GuiSolar extends GuiContainerGC {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-        int offsetY = 35;
+        final int offsetY = 35;
         this.buttonEnableSolar.enabled = this.solarPanel.disableCooldown == 0;
         this.buttonEnableSolar.displayString = !this.solarPanel.getDisabled(0)
                 ? GCCoreUtil.translate("gui.button.disable.name")
@@ -129,7 +129,7 @@ public class GuiSolar extends GuiContainerGC {
                 this.xSize / 2 - this.fontRendererObj.getStringWidth(displayString) / 2,
                 34 + 23 - 46 + offsetY,
                 4210752);
-        float boost = Math.round((this.solarPanel.getSolarBoost() - 1) * 1000) / 10.0F;
+        final float boost = Math.round((this.solarPanel.getSolarBoost() - 1) * 1000) / 10.0F;
         displayString = GCCoreUtil.translate("gui.message.environment.name") + ": " + boost + "%";
         this.fontRendererObj.drawString(
                 displayString,
@@ -181,7 +181,7 @@ public class GuiSolar extends GuiContainerGC {
         final int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
 
-        List<String> electricityDesc = new ArrayList<String>();
+        final List<String> electricityDesc = new ArrayList<String>();
         EnergyDisplayHelper.getEnergyDisplayTooltip(
                 this.solarPanel.getEnergyStoredGC(), this.solarPanel.getMaxEnergyStoredGC(), electricityDesc);
         // electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));

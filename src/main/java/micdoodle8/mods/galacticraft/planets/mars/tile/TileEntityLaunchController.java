@@ -43,7 +43,7 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
     public boolean launchPadRemovalDisabled = true;
 
     private Ticket chunkLoadTicket;
-    private List<ChunkCoordinates> connectedPads = new ArrayList<ChunkCoordinates>();
+    private final List<ChunkCoordinates> connectedPads = new ArrayList<ChunkCoordinates>();
 
     @NetworkedField(targetSide = Side.CLIENT)
     public int frequency = -1;
@@ -132,8 +132,8 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
             if (this.ticks % 20 == 0) {
                 if (this.chunkLoadTicket != null) {
                     for (int i = 0; i < this.connectedPads.size(); i++) {
-                        ChunkCoordinates coords = this.connectedPads.get(i);
-                        Block block = this.worldObj.getBlock(coords.posX, coords.posY, coords.posZ);
+                        final ChunkCoordinates coords = this.connectedPads.get(i);
+                        final Block block = this.worldObj.getBlock(coords.posX, coords.posY, coords.posZ);
 
                         if (block != GCBlocks.landingPadFull) {
                             this.connectedPads.remove(i);
@@ -182,14 +182,14 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
                 this.chunkLoadTicket = ticket;
             }
 
-            NBTTagCompound nbt = this.chunkLoadTicket.getModData();
+            final NBTTagCompound nbt = this.chunkLoadTicket.getModData();
             nbt.setInteger("ChunkLoaderTileX", this.xCoord);
             nbt.setInteger("ChunkLoaderTileY", this.yCoord);
             nbt.setInteger("ChunkLoaderTileZ", this.zCoord);
 
             for (int x = -2; x <= 2; x++) {
                 for (int z = -2; z <= 2; z++) {
-                    Block blockID = this.worldObj.getBlock(this.xCoord + x, this.yCoord, this.zCoord + z);
+                    final Block blockID = this.worldObj.getBlock(this.xCoord + x, this.yCoord, this.zCoord + z);
 
                     if (blockID instanceof BlockLandingPadFull) {
                         if (this.xCoord + x >> 4 != this.xCoord >> 4 || this.zCoord + z >> 4 != this.zCoord >> 4) {
@@ -331,7 +331,7 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
 
     @Override
     public boolean canAttachToLandingPad(IBlockAccess world, int x, int y, int z) {
-        TileEntity tile = world.getTileEntity(x, y, z);
+        final TileEntity tile = world.getTileEntity(x, y, z);
 
         return tile instanceof TileEntityLandingPad;
     }
@@ -341,11 +341,11 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
 
         if (this.frequency >= 0 && FMLCommonHandler.instance().getMinecraftServerInstance() != null) {
             this.frequencyValid = true;
-            WorldServer[] servers = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
+            final WorldServer[] servers = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
 
             worldLoop:
             for (int i = 0; i < servers.length; i++) {
-                WorldServer world = servers[i];
+                final WorldServer world = servers[i];
 
                 for (TileEntity tile2 : new ArrayList<TileEntity>(world.loadedTileEntityList)) {
                     if (this != tile2) {
@@ -355,7 +355,7 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
                         }
 
                         if (tile2 instanceof TileEntityLaunchController) {
-                            TileEntityLaunchController launchController2 = (TileEntityLaunchController) tile2;
+                            final TileEntityLaunchController launchController2 = (TileEntityLaunchController) tile2;
 
                             if (launchController2.frequency == this.frequency) {
                                 this.frequencyValid = false;
@@ -382,8 +382,8 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
         if (!this.worldObj.isRemote && FMLCommonHandler.instance().getMinecraftServerInstance() != null) {
             this.destFrequencyValid = false;
             if (this.destFrequency >= 0) {
-                WorldServer[] servers = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
-                for (WorldServer world : servers) {
+                final WorldServer[] servers = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
+                for (final WorldServer world : servers) {
                     for (TileEntity tile2 : new ArrayList<TileEntity>(world.loadedTileEntityList)) {
                         if (this != tile2) {
                             tile2 = world.getTileEntity(tile2.xCoord, tile2.yCoord, tile2.zCoord);
@@ -392,7 +392,7 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
                             }
 
                             if (tile2 instanceof TileEntityLaunchController) {
-                                TileEntityLaunchController launchController2 = (TileEntityLaunchController) tile2;
+                                final TileEntityLaunchController launchController2 = (TileEntityLaunchController) tile2;
 
                                 if (launchController2.frequency == this.destFrequency) {
                                     this.destFrequencyValid = true;
@@ -429,8 +429,8 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
 
     public void updateRocketOnDockSettings() {
         if (this.attachedDock instanceof TileEntityLandingPad) {
-            TileEntityLandingPad pad = (TileEntityLandingPad) this.attachedDock;
-            IDockable rocket = pad.getDockedEntity();
+            final TileEntityLandingPad pad = (TileEntityLandingPad) this.attachedDock;
+            final IDockable rocket = pad.getDockedEntity();
             if (rocket instanceof EntityAutoRocket) {
                 ((EntityAutoRocket) rocket).updateControllerSettings(pad);
             }

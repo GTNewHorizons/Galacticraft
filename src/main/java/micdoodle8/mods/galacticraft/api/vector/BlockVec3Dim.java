@@ -86,13 +86,13 @@ public class BlockVec3Dim implements Cloneable {
             return null;
         }
 
-        World world = getWorldForId(this.dim);
+        final World world = getWorldForId(this.dim);
         if (world == null) {
             return null;
         }
 
-        int chunkx = this.x >> 4;
-        int chunkz = this.z >> 4;
+        final int chunkx = this.x >> 4;
+        final int chunkz = this.z >> 4;
         try {
             // In a typical inner loop, 80% of the time consecutive calls to
             // this will be within the same chunk
@@ -110,10 +110,10 @@ public class BlockVec3Dim implements Cloneable {
                 BlockVec3Dim.chunkCacheZ = chunkz;
                 return chunk.getBlock(this.x & 15, this.y, this.z & 15);
             }
-        } catch (Throwable throwable) {
-            CrashReport crashreport = CrashReport.makeCrashReport(
+        } catch (final Throwable throwable) {
+            final CrashReport crashreport = CrashReport.makeCrashReport(
                     throwable, "Oxygen Sealer thread: Exception getting block type in world");
-            CrashReportCategory crashreportcategory = crashreport.makeCategory("Requested block coordinates");
+            final CrashReportCategory crashreportcategory = crashreport.makeCategory("Requested block coordinates");
             crashreportcategory.addCrashSection(
                     "Location", CrashReportCategory.getLocationInfo(this.x, this.y, this.z));
             throw new ReportedException(crashreport);
@@ -138,13 +138,13 @@ public class BlockVec3Dim implements Cloneable {
             return null;
         }
 
-        World world = getWorldForId(this.dim);
+        final World world = getWorldForId(this.dim);
         if (world == null) {
             return null;
         }
 
-        int chunkx = this.x >> 4;
-        int chunkz = this.z >> 4;
+        final int chunkx = this.x >> 4;
+        final int chunkz = this.z >> 4;
         try {
             if (world.getChunkProvider().chunkExists(chunkx, chunkz)) {
                 // In a typical inner loop, 80% of the time consecutive calls to
@@ -166,10 +166,10 @@ public class BlockVec3Dim implements Cloneable {
             }
             // Chunk doesn't exist - meaning, it is not loaded
             return Blocks.bedrock;
-        } catch (Throwable throwable) {
-            CrashReport crashreport = CrashReport.makeCrashReport(
+        } catch (final Throwable throwable) {
+            final CrashReport crashreport = CrashReport.makeCrashReport(
                     throwable, "Oxygen Sealer thread: Exception getting block type in world");
-            CrashReportCategory crashreportcategory = crashreport.makeCategory("Requested block coordinates");
+            final CrashReportCategory crashreportcategory = crashreport.makeCategory("Requested block coordinates");
             crashreportcategory.addCrashSection(
                     "Location", CrashReportCategory.getLocationInfo(this.x, this.y, this.z));
             throw new ReportedException(crashreport);
@@ -177,7 +177,7 @@ public class BlockVec3Dim implements Cloneable {
     }
 
     public Block getBlock() {
-        World world = getWorldForId(this.dim);
+        final World world = getWorldForId(this.dim);
         if (world == null) {
             return null;
         }
@@ -209,7 +209,7 @@ public class BlockVec3Dim implements Cloneable {
     }
 
     public BlockVec3Dim newVecSide(int side) {
-        BlockVec3Dim vec = new BlockVec3Dim(this.x, this.y, this.z, this.dim);
+        final BlockVec3Dim vec = new BlockVec3Dim(this.x, this.y, this.z, this.dim);
         switch (side) {
             case 0:
                 vec.y--;
@@ -245,7 +245,7 @@ public class BlockVec3Dim implements Cloneable {
     @Override
     public boolean equals(Object o) {
         if (o instanceof BlockVec3Dim) {
-            BlockVec3Dim vector = (BlockVec3Dim) o;
+            final BlockVec3Dim vector = (BlockVec3Dim) o;
             return this.x == vector.x && this.y == vector.y && this.z == vector.z && this.dim == vector.dim;
         }
 
@@ -262,7 +262,7 @@ public class BlockVec3Dim implements Cloneable {
      * if present.
      */
     public TileEntity getTileEntity() {
-        World world = getWorldForId(this.dim);
+        final World world = getWorldForId(this.dim);
         if (world == null) {
             return null;
         }
@@ -270,7 +270,7 @@ public class BlockVec3Dim implements Cloneable {
     }
 
     public TileEntity getTileEntityNoLoad() {
-        World world = getWorldForId(this.dim);
+        final World world = getWorldForId(this.dim);
         if (world == null) {
             return null;
         }
@@ -281,7 +281,7 @@ public class BlockVec3Dim implements Cloneable {
     }
 
     public int getBlockMetadata() {
-        World world = getWorldForId(this.dim);
+        final World world = getWorldForId(this.dim);
         if (world == null) {
             return 0;
         }
@@ -289,7 +289,7 @@ public class BlockVec3Dim implements Cloneable {
     }
 
     public static BlockVec3Dim readFromNBT(NBTTagCompound nbtCompound) {
-        BlockVec3Dim tempVector = new BlockVec3Dim();
+        final BlockVec3Dim tempVector = new BlockVec3Dim();
         tempVector.x = nbtCompound.getInteger("x");
         tempVector.y = nbtCompound.getInteger("y");
         tempVector.z = nbtCompound.getInteger("z");
@@ -321,7 +321,7 @@ public class BlockVec3Dim implements Cloneable {
     }
 
     public void setBlock(Block block) {
-        World world = getWorldForId(this.dim);
+        final World world = getWorldForId(this.dim);
         if (world == null) {
             return;
         }
@@ -329,7 +329,7 @@ public class BlockVec3Dim implements Cloneable {
     }
 
     public boolean blockExists() {
-        World world = getWorldForId(this.dim);
+        final World world = getWorldForId(this.dim);
         if (world == null) {
             return false;
         }
@@ -343,15 +343,15 @@ public class BlockVec3Dim implements Cloneable {
      * @return
      */
     public int distanceSquared(BlockVec3 vector) {
-        int var2 = vector.x - this.x;
-        int var4 = vector.y - this.y;
-        int var6 = vector.z - this.z;
+        final int var2 = vector.x - this.x;
+        final int var4 = vector.y - this.y;
+        final int var6 = vector.z - this.z;
         return var2 * var2 + var4 * var4 + var6 * var6;
     }
 
     private World getWorldForId(int dimensionID) {
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
-            MinecraftServer theServer = FMLCommonHandler.instance().getMinecraftServerInstance();
+            final MinecraftServer theServer = FMLCommonHandler.instance().getMinecraftServerInstance();
             if (theServer == null) {
                 return null;
             }
@@ -363,7 +363,7 @@ public class BlockVec3Dim implements Cloneable {
 
     @SideOnly(Side.CLIENT)
     private World getWorldForIdClient(int dimensionID) {
-        World world = FMLClientHandler.instance().getClient().theWorld;
+        final World world = FMLClientHandler.instance().getClient().theWorld;
 
         if (world != null && world.provider.dimensionId == dimensionID) {
             return world;

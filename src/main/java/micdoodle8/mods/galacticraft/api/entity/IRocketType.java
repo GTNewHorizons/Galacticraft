@@ -10,10 +10,10 @@ public interface IRocketType {
         INVENTORY54(3, StatCollector.translateToLocal("gui.rocketType.2"), false, 56),
         PREFUELED(4, StatCollector.translateToLocal("gui.rocketType.3"), true, 2);
 
-        private int index;
-        private String tooltip;
-        private boolean preFueled;
-        private int inventorySpace;
+        private final int index;
+        private final String tooltip;
+        private final boolean preFueled;
+        private final int inventorySpace;
 
         private EnumRocketType(int index, String tooltip, boolean preFueled, int inventorySpace) {
             this.index = index;

@@ -34,13 +34,13 @@ public class BlockSludge extends BlockFluidClassic {
                 return;
             }
 
-            int range = 5;
-            List<?> l = world.getEntitiesWithinAABB(
+            final int range = 5;
+            final List<?> l = world.getEntitiesWithinAABB(
                     EntitySludgeling.class,
                     AxisAlignedBB.getBoundingBox(x - range, y - range, z - range, x + range, y + range, z + range));
 
             if (l.size() < 3) {
-                EntitySludgeling sludgeling = new EntitySludgeling(world);
+                final EntitySludgeling sludgeling = new EntitySludgeling(world);
                 sludgeling.setPosition(x + world.rand.nextInt(5) - 2, y, z + world.rand.nextInt(5) - 2);
                 world.spawnEntityInWorld(sludgeling);
             }

@@ -117,14 +117,17 @@ public class SkyProviderOverworld extends IRenderHandler {
 
         if (!optifinePresent) {
             try {
-                Class<?> c = mc.entityRenderer.getClass();
-                Field cameraZoom = c.getDeclaredField(VersionUtil.getNameDynamic(VersionUtil.KEY_FIELD_CAMERA_ZOOM));
+                final Class<?> c = mc.entityRenderer.getClass();
+                final Field cameraZoom =
+                        c.getDeclaredField(VersionUtil.getNameDynamic(VersionUtil.KEY_FIELD_CAMERA_ZOOM));
                 cameraZoom.setAccessible(true);
                 zoom = cameraZoom.getDouble(mc.entityRenderer);
-                Field cameraYaw = c.getDeclaredField(VersionUtil.getNameDynamic(VersionUtil.KEY_FIELD_CAMERA_YAW));
+                final Field cameraYaw =
+                        c.getDeclaredField(VersionUtil.getNameDynamic(VersionUtil.KEY_FIELD_CAMERA_YAW));
                 cameraYaw.setAccessible(true);
                 yaw = cameraYaw.getDouble(mc.entityRenderer);
-                Field cameraPitch = c.getDeclaredField(VersionUtil.getNameDynamic(VersionUtil.KEY_FIELD_CAMERA_PITCH));
+                final Field cameraPitch =
+                        c.getDeclaredField(VersionUtil.getNameDynamic(VersionUtil.KEY_FIELD_CAMERA_PITCH));
                 cameraPitch.setAccessible(true);
                 pitch = cameraPitch.getDouble(mc.entityRenderer);
 
@@ -144,7 +147,7 @@ public class SkyProviderOverworld extends IRenderHandler {
                 m = c.getDeclaredMethod(VersionUtil.getNameDynamic(VersionUtil.KEY_METHOD_ORIENT_CAMERA), float.class);
                 m.setAccessible(true);
                 m.invoke(mc.entityRenderer, mc.gameSettings.fovSetting);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }
@@ -251,21 +254,21 @@ public class SkyProviderOverworld extends IRenderHandler {
         GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
 
         GL11.glRotatef(this.minecraft.theWorld.getCelestialAngle(partialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
-        double playerHeight = this.minecraft.thePlayer.posY;
+        final double playerHeight = this.minecraft.thePlayer.posY;
 
         // Draw stars
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         float threshold;
-        Vec3 vec = WorldUtil.getFogColorHook(this.minecraft.theWorld);
+        final Vec3 vec = WorldUtil.getFogColorHook(this.minecraft.theWorld);
         threshold = Math.max(0.1F, (float) vec.lengthVector() - 0.1F);
         float var20 = ((float) playerHeight - Constants.OVERWORLD_SKYPROVIDER_STARTHEIGHT) / 1000.0F;
         var20 = MathHelper.sqrt_float(var20);
-        float bright1 = Math.min(0.9F, var20 * 3);
-        float bright2 = Math.min(0.85F, var20 * 2.5F);
-        float bright3 = Math.min(0.8F, var20 * 2);
-        float bright4 = Math.min(0.75F, var20 * 1.5F);
-        float bright5 = Math.min(0.7F, var20 * 0.75F);
+        final float bright1 = Math.min(0.9F, var20 * 3);
+        final float bright2 = Math.min(0.85F, var20 * 2.5F);
+        final float bright3 = Math.min(0.8F, var20 * 2);
+        final float bright4 = Math.min(0.75F, var20 * 1.5F);
+        final float bright5 = Math.min(0.7F, var20 * 0.75F);
         if (bright1 > threshold) {
             GL11.glColor4f(bright1, bright1, bright1, 1.0F);
             GL11.glCallList(this.starGLCallList);
@@ -303,7 +306,7 @@ public class SkyProviderOverworld extends IRenderHandler {
         // Draw moon
         r = 40.0F;
         this.minecraft.renderEngine.bindTexture(SkyProviderOverworld.moonTexture);
-        float sinphi = this.minecraft.theWorld.getMoonPhase();
+        final float sinphi = this.minecraft.theWorld.getMoonPhase();
         final int cosphi = (int) (sinphi % 4);
         final int var29 = (int) (sinphi / 4 % 2);
         final float yy = (cosphi + 0) / 4.0F;
@@ -327,7 +330,7 @@ public class SkyProviderOverworld extends IRenderHandler {
         GL11.glColor3f(0.0F, 0.0F, 0.0F);
 
         // TODO get exact height figure here
-        double var25 = playerHeight - 64;
+        final double var25 = playerHeight - 64;
 
         if (var25 > this.minecraft.gameSettings.renderDistanceChunks * 16) {
             theta *= 400.0F;
@@ -361,7 +364,7 @@ public class SkyProviderOverworld extends IRenderHandler {
                 zoomIn = 0F;
             }
             zoomIn = 0.0F;
-            float cornerB = 1.0F - zoomIn;
+            final float cornerB = 1.0F - zoomIn;
             var23.addVertexWithUV(-size, 0, size, zoomIn, cornerB);
             var23.addVertexWithUV(size, 0, size, cornerB, cornerB);
             var23.addVertexWithUV(size, 0, -size, cornerB, zoomIn);
@@ -395,7 +398,7 @@ public class SkyProviderOverworld extends IRenderHandler {
                 GL11.glLoadIdentity();
 
                 m.invoke(mc.entityRenderer, mc.gameSettings.fovSetting);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }

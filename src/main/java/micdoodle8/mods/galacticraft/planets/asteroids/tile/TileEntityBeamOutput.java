@@ -27,7 +27,7 @@ public abstract class TileEntityBeamOutput extends TileEntityAdvanced implements
     @Override
     public void updateEntity() {
         if (this.preLoadTarget != null) {
-            TileEntity tileAtTarget =
+            final TileEntity tileAtTarget =
                     this.worldObj.getTileEntity(this.preLoadTarget.x, this.preLoadTarget.y, this.preLoadTarget.z);
 
             if (tileAtTarget != null && tileAtTarget instanceof ILaserNode) {
@@ -68,7 +68,7 @@ public abstract class TileEntityBeamOutput extends TileEntityAdvanced implements
     }
 
     public void invalidateReflector() {
-        for (ILaserNode node : this.nodeList) {
+        for (final ILaserNode node : this.nodeList) {
             node.removeNode(this);
         }
 
@@ -78,23 +78,23 @@ public abstract class TileEntityBeamOutput extends TileEntityAdvanced implements
     public void initiateReflector() {
         this.nodeList.clear();
 
-        int chunkXMin = this.xCoord - 15 >> 4;
-        int chunkZMin = this.zCoord - 15 >> 4;
-        int chunkXMax = this.xCoord + 15 >> 4;
-        int chunkZMax = this.zCoord + 15 >> 4;
+        final int chunkXMin = this.xCoord - 15 >> 4;
+        final int chunkZMin = this.zCoord - 15 >> 4;
+        final int chunkXMax = this.xCoord + 15 >> 4;
+        final int chunkZMax = this.zCoord + 15 >> 4;
 
         for (int cX = chunkXMin; cX <= chunkXMax; cX++) {
             for (int cZ = chunkZMin; cZ <= chunkZMax; cZ++) {
                 if (this.worldObj.getChunkProvider().chunkExists(cX, cZ)) {
-                    Chunk chunk = this.worldObj.getChunkFromChunkCoords(cX, cZ);
+                    final Chunk chunk = this.worldObj.getChunkFromChunkCoords(cX, cZ);
 
-                    for (Object obj : chunk.chunkTileEntityMap.values()) {
+                    for (final Object obj : chunk.chunkTileEntityMap.values()) {
                         if (obj != this && obj instanceof ILaserNode) {
-                            BlockVec3 deltaPos =
+                            final BlockVec3 deltaPos =
                                     new BlockVec3(this).subtract(new BlockVec3(((ILaserNode) obj).getTile()));
 
                             if (deltaPos.x < 16 && deltaPos.y < 16 && deltaPos.z < 16) {
-                                ILaserNode laserNode = (ILaserNode) obj;
+                                final ILaserNode laserNode = (ILaserNode) obj;
 
                                 if (this.canConnectTo(laserNode) && laserNode.canConnectTo(this)) {
                                     this.addNode(laserNode);
@@ -183,7 +183,7 @@ public abstract class TileEntityBeamOutput extends TileEntityAdvanced implements
 
     public void updateOrientation() {
         if (this.getTarget() != null) {
-            Vector3 direction = Vector3.subtract(
+            final Vector3 direction = Vector3.subtract(
                             this.getOutputPoint(false), this.getTarget().getInputPoint())
                     .normalize();
             this.pitch = (float) -Vector3.getAngle(
@@ -201,8 +201,9 @@ public abstract class TileEntityBeamOutput extends TileEntityAdvanced implements
 
     @Override
     public int compareTo(ILaserNode otherNode, BlockVec3 origin) {
-        int thisDistance = new BlockVec3(this).subtract(origin).getMagnitudeSquared();
-        int otherDistance = new BlockVec3(otherNode.getTile()).subtract(origin).getMagnitudeSquared();
+        final int thisDistance = new BlockVec3(this).subtract(origin).getMagnitudeSquared();
+        final int otherDistance =
+                new BlockVec3(otherNode.getTile()).subtract(origin).getMagnitudeSquared();
 
         if (thisDistance < otherDistance) {
             return 1;
@@ -245,7 +246,8 @@ public abstract class TileEntityBeamOutput extends TileEntityAdvanced implements
     @Override
     public ILaserNode getTarget() {
         if (!this.targetVec.equals(BlockVec3.INVALID_VECTOR)) {
-            TileEntity tileAtTarget = this.worldObj.getTileEntity(this.targetVec.x, this.targetVec.y, this.targetVec.z);
+            final TileEntity tileAtTarget =
+                    this.worldObj.getTileEntity(this.targetVec.x, this.targetVec.y, this.targetVec.z);
 
             if (tileAtTarget != null && tileAtTarget instanceof ILaserNode) {
                 return (ILaserNode) tileAtTarget;

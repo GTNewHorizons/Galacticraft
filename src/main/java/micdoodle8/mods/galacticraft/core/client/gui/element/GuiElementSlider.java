@@ -12,9 +12,9 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 public class GuiElementSlider extends GuiButton {
-    private SmallFontRenderer customFontRenderer;
-    private Vector3 firstColor;
-    private Vector3 lastColor;
+    private final SmallFontRenderer customFontRenderer;
+    private final Vector3 firstColor;
+    private final Vector3 lastColor;
     private final boolean isVertical;
     private int sliderPos;
 
@@ -66,7 +66,7 @@ public class GuiElementSlider extends GuiButton {
             GL11.glDisable(GL11.GL_ALPHA_TEST);
             OpenGlHelper.glBlendFunc(770, 771, 1, 0);
             GL11.glShadeModel(GL11.GL_SMOOTH);
-            Tessellator tessellator = Tessellator.instance;
+            final Tessellator tessellator = Tessellator.instance;
 
             if (this.isVertical) {
                 tessellator.startDrawingQuads();

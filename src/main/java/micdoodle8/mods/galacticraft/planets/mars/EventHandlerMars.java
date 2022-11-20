@@ -41,7 +41,7 @@ public class EventHandlerMars {
     @SubscribeEvent
     public void onLivingDeath(LivingDeathEvent event) {
         if (event.source.damageType.equals("slimeling") && event.source instanceof EntityDamageSource) {
-            EntityDamageSource source = (EntityDamageSource) event.source;
+            final EntityDamageSource source = (EntityDamageSource) event.source;
 
             if (source.getEntity() instanceof EntitySlimeling && !source.getEntity().worldObj.isRemote) {
                 ((EntitySlimeling) source.getEntity()).kills++;
@@ -55,10 +55,10 @@ public class EventHandlerMars {
                 && !event.entity.worldObj.isRemote
                 && event.entityLiving.getHealth() <= 0.0F
                 && !(event.source.isFireDamage() && event.entityLiving.isPotionActive(Potion.fireResistance))) {
-            Entity entity = event.source.getEntity();
+            final Entity entity = event.source.getEntity();
 
             if (entity instanceof EntitySlimeling) {
-                EntitySlimeling entitywolf = (EntitySlimeling) entity;
+                final EntitySlimeling entitywolf = (EntitySlimeling) entity;
 
                 if (entitywolf.isTamed()) {
                     event.entityLiving.recentlyHit = 100;
@@ -70,9 +70,9 @@ public class EventHandlerMars {
 
     @SubscribeEvent
     public void onPlayerWakeUp(EventWakePlayer event) {
-        ChunkCoordinates c = event.entityPlayer.playerLocation;
-        Block blockID = event.entityPlayer.worldObj.getBlock(c.posX, c.posY, c.posZ);
-        int metadata = event.entityPlayer.worldObj.getBlockMetadata(c.posX, c.posY, c.posZ);
+        final ChunkCoordinates c = event.entityPlayer.playerLocation;
+        final Block blockID = event.entityPlayer.worldObj.getBlock(c.posX, c.posY, c.posZ);
+        final int metadata = event.entityPlayer.worldObj.getBlockMetadata(c.posX, c.posY, c.posZ);
 
         if (blockID == MarsBlocks.machine && metadata >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) {
             if (!event.flag1 && event.flag2 && event.flag3) {
@@ -82,7 +82,7 @@ public class EventHandlerMars {
                     event.entityPlayer.heal(5.0F);
                     GCPlayerStats.get((EntityPlayerMP) event.entityPlayer).cryogenicChamberCooldown = 6000;
 
-                    WorldServer ws = (WorldServer) event.entityPlayer.worldObj;
+                    final WorldServer ws = (WorldServer) event.entityPlayer.worldObj;
                     ws.updateAllPlayersSleepingFlag();
                     if (ws.areAllPlayersAsleep() && ws.getGameRules().getGameRuleBooleanValue("doDaylightCycle")) {
                         WorldUtil.setNextMorning(ws);
@@ -95,15 +95,15 @@ public class EventHandlerMars {
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void onPlayerRotate(RotatePlayerEvent event) {
-        ChunkCoordinates c = event.entityPlayer.playerLocation;
+        final ChunkCoordinates c = event.entityPlayer.playerLocation;
         for (int x = -1; x < 2; x++) {
             for (int z = -1; z < 2; z++) {
                 if (x * z != 0) {
                     continue;
                 }
-                Block block = event.entityPlayer.worldObj.getBlock(c.posX + x, c.posY, c.posZ + z);
+                final Block block = event.entityPlayer.worldObj.getBlock(c.posX + x, c.posY, c.posZ + z);
                 if (block == MarsBlocks.machine) {
-                    int metadata = event.entityPlayer.worldObj.getBlockMetadata(c.posX + x, c.posY, c.posZ + z);
+                    final int metadata = event.entityPlayer.worldObj.getBlockMetadata(c.posX + x, c.posY, c.posZ + z);
                     if (metadata >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) {
                         event.shouldRotate = true;
                         event.vanillaOverride = true;
@@ -123,7 +123,7 @@ public class EventHandlerMars {
         }
 
         if (event.worldObj.provider instanceof WorldProviderMars) {
-            int eggsPerChunk = 2;
+            final int eggsPerChunk = 2;
             int x;
             int y;
             int z;
@@ -140,12 +140,12 @@ public class EventHandlerMars {
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void orientCamera(OrientCameraEvent event) {
-        EntityPlayer entity = Minecraft.getMinecraft().thePlayer;
+        final EntityPlayer entity = Minecraft.getMinecraft().thePlayer;
 
         if (entity != null) {
-            int x = MathHelper.floor_double(entity.posX);
-            int y = MathHelper.floor_double(entity.posY);
-            int z = MathHelper.floor_double(entity.posZ);
+            final int x = MathHelper.floor_double(entity.posX);
+            final int y = MathHelper.floor_double(entity.posY);
+            final int z = MathHelper.floor_double(entity.posZ);
             TileEntity tile = Minecraft.getMinecraft().theWorld.getTileEntity(x, y - 1, z);
 
             if (tile instanceof TileEntityMulti) {
@@ -190,12 +190,12 @@ public class EventHandlerMars {
 
     @SubscribeEvent
     public void onLandingPadRemoved(EventLandingPadRemoval event) {
-        TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
+        final TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
 
         if (tile instanceof IFuelDock) {
-            IFuelDock dock = (IFuelDock) tile;
+            final IFuelDock dock = (IFuelDock) tile;
 
-            for (ILandingPadAttachable connectedTile : dock.getConnectedTiles()) {
+            for (final ILandingPadAttachable connectedTile : dock.getConnectedTiles()) {
                 if (connectedTile instanceof TileEntityLaunchController) {
                     final TileEntityLaunchController launchController =
                             (TileEntityLaunchController) event.world.getTileEntity(

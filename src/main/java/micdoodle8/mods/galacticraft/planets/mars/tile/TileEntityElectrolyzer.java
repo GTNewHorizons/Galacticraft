@@ -162,8 +162,8 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
             return false;
         }
 
-        boolean tank1HasSpace = this.liquidTank.getFluidAmount() < this.liquidTank.getCapacity();
-        boolean tank2HasSpace = this.liquidTank2.getFluidAmount() < this.liquidTank2.getCapacity();
+        final boolean tank1HasSpace = this.liquidTank.getFluidAmount() < this.liquidTank.getCapacity();
+        final boolean tank2HasSpace = this.liquidTank2.getFluidAmount() < this.liquidTank2.getCapacity();
 
         return tank1HasSpace || tank2HasSpace;
     }
@@ -258,7 +258,7 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
 
     @Override
     public boolean isItemValidForSlot(int slotID, ItemStack itemstack) {
-        Item item = itemstack.getItem();
+        final Item item = itemstack.getItem();
         switch (slotID) {
             case 0:
                 return ItemElectricBase.isElectricItem(item);
@@ -286,8 +286,8 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
 
     @Override
     public boolean canDrain(ForgeDirection from, Fluid fluid) {
-        int metaside = this.getBlockMetadata() + 2;
-        int side = from.ordinal();
+        final int metaside = this.getBlockMetadata() + 2;
+        final int side = from.ordinal();
         if (side == (metaside ^ 1)) {
             return this.liquidTank2.getFluid() != null && this.liquidTank2.getFluidAmount() > 0;
         }
@@ -302,8 +302,8 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
 
     @Override
     public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-        int metaside = this.getBlockMetadata() + 2;
-        int side = from.ordinal();
+        final int metaside = this.getBlockMetadata() + 2;
+        final int side = from.ordinal();
         if (side == (metaside ^ 1)) {
             if (resource != null && resource.isFluidEqual(this.liquidTank2.getFluid())) {
                 return this.liquidTank2.drain(resource.amount, doDrain);
@@ -322,8 +322,8 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
 
     @Override
     public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-        int metaside = this.getBlockMetadata() + 2;
-        int side = from.ordinal();
+        final int metaside = this.getBlockMetadata() + 2;
+        final int side = from.ordinal();
         if (side == (metaside ^ 1)) {
             return this.liquidTank2.drain(maxDrain, doDrain);
         }
@@ -360,8 +360,8 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
     @Override
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
         FluidTankInfo[] tankInfo = new FluidTankInfo[] {};
-        int metaside = this.getBlockMetadata() + 2;
-        int side = from.ordinal();
+        final int metaside = this.getBlockMetadata() + 2;
+        final int side = from.ordinal();
 
         if (metaside == side) {
             tankInfo = new FluidTankInfo[] {new FluidTankInfo(this.waterTank)};
@@ -403,39 +403,41 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
     }
 
     private int getOxygenOutputDirection() {
-        int metaside = this.getBlockMetadata() + 2;
+        final int metaside = this.getBlockMetadata() + 2;
         return 7 - (metaside ^ (metaside > 3 ? 0 : 1)) ^ 1;
     }
 
     private int getHydrogenOutputDirection() {
-        int metaside = this.getBlockMetadata() + 2;
+        final int metaside = this.getBlockMetadata() + 2;
         return metaside ^ 1;
     }
 
     private boolean produceOxygen(ForgeDirection outputDirection) {
-        float provide = this.getOxygenProvide(outputDirection);
+        final float provide = this.getOxygenProvide(outputDirection);
 
         if (provide > 0) {
-            TileEntity outputTile =
+            final TileEntity outputTile =
                     new BlockVec3(this).modifyPositionFromSide(outputDirection).getTileEntity(this.worldObj);
-            IOxygenNetwork outputNetwork = NetworkHelper.getOxygenNetworkFromTileEntity(outputTile, outputDirection);
+            final IOxygenNetwork outputNetwork =
+                    NetworkHelper.getOxygenNetworkFromTileEntity(outputTile, outputDirection);
 
             if (outputNetwork != null) {
-                float powerRequest = outputNetwork.getRequest(this);
+                final float powerRequest = outputNetwork.getRequest(this);
 
                 if (powerRequest > 0) {
-                    float toSend = Math.min(this.getOxygenStored(), provide);
-                    float rejectedPower = outputNetwork.produce(toSend, this);
+                    final float toSend = Math.min(this.getOxygenStored(), provide);
+                    final float rejectedPower = outputNetwork.produce(toSend, this);
 
                     this.provideOxygen(Math.max(toSend - rejectedPower, 0), true);
                     return true;
                 }
             } else if (outputTile instanceof IOxygenReceiver) {
-                float requestedOxygen = ((IOxygenReceiver) outputTile).getOxygenRequest(outputDirection.getOpposite());
+                final float requestedOxygen =
+                        ((IOxygenReceiver) outputTile).getOxygenRequest(outputDirection.getOpposite());
 
                 if (requestedOxygen > 0) {
-                    float toSend = Math.min(this.getOxygenStored(), provide);
-                    float acceptedOxygen =
+                    final float toSend = Math.min(this.getOxygenStored(), provide);
+                    final float acceptedOxygen =
                             ((IOxygenReceiver) outputTile).receiveOxygen(outputDirection.getOpposite(), toSend, true);
                     this.provideOxygen(acceptedOxygen, true);
                     return true;
@@ -447,31 +449,31 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
     }
 
     private boolean produceHydrogen(ForgeDirection outputDirection) {
-        float provide = this.getHydrogenProvide(outputDirection);
+        final float provide = this.getHydrogenProvide(outputDirection);
 
         if (provide > 0) {
-            TileEntity outputTile =
+            final TileEntity outputTile =
                     new BlockVec3(this).modifyPositionFromSide(outputDirection).getTileEntity(this.worldObj);
-            IHydrogenNetwork outputNetwork =
+            final IHydrogenNetwork outputNetwork =
                     NetworkHelper.getHydrogenNetworkFromTileEntity(outputTile, outputDirection);
 
             if (outputNetwork != null) {
-                float powerRequest = outputNetwork.getRequest(this);
+                final float powerRequest = outputNetwork.getRequest(this);
 
                 if (powerRequest > 0) {
-                    float toSend = Math.min(this.getHydrogenStored(), provide);
-                    float rejectedPower = outputNetwork.produce(toSend, this);
+                    final float toSend = Math.min(this.getHydrogenStored(), provide);
+                    final float rejectedPower = outputNetwork.produce(toSend, this);
 
                     this.provideHydrogen((int) Math.max(toSend - rejectedPower, 0), true);
                     return true;
                 }
             } else if (outputTile instanceof TileEntityMethaneSynthesizer) {
-                float requestedHydrogen =
+                final float requestedHydrogen =
                         ((TileEntityMethaneSynthesizer) outputTile).getHydrogenRequest(outputDirection.getOpposite());
 
                 if (requestedHydrogen > 0) {
-                    float toSend = Math.min(this.getHydrogenStored(), provide);
-                    float acceptedHydrogen = ((TileEntityMethaneSynthesizer) outputTile)
+                    final float toSend = Math.min(this.getHydrogenStored(), provide);
+                    final float acceptedHydrogen = ((TileEntityMethaneSynthesizer) outputTile)
                             .receiveHydrogen(outputDirection.getOpposite(), toSend, true);
                     this.provideHydrogen((int) acceptedHydrogen, true);
                     return true;
@@ -493,7 +495,7 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
 
     public float provideOxygen(float request, boolean doProvide) {
         if (request > 0) {
-            float requestedOxygen = Math.min(request, this.liquidTank.getFluidAmount());
+            final float requestedOxygen = Math.min(request, this.liquidTank.getFluidAmount());
 
             if (doProvide) {
                 this.setOxygenStored(this.liquidTank.getFluidAmount() - requestedOxygen);
@@ -507,8 +509,8 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
 
     public int provideHydrogen(int request, boolean doProvide) {
         if (request > 0) {
-            int currentHydrogen = this.liquidTank2.getFluidAmount();
-            int requestedHydrogen = Math.min(request, currentHydrogen);
+            final int currentHydrogen = this.liquidTank2.getFluidAmount();
+            final int requestedHydrogen = Math.min(request, currentHydrogen);
 
             if (doProvide) {
                 this.liquidTank2.setFluid(

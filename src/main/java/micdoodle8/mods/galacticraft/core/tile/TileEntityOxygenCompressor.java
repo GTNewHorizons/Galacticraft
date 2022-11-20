@@ -28,10 +28,10 @@ public class TileEntityOxygenCompressor extends TileEntityOxygen implements IInv
     @Override
     public void updateEntity() {
         if (!this.worldObj.isRemote) {
-            ItemStack oxygenItemStack = this.getStackInSlot(2);
+            final ItemStack oxygenItemStack = this.getStackInSlot(2);
             if (oxygenItemStack != null && oxygenItemStack.getItem() instanceof IItemOxygenSupply) {
-                IItemOxygenSupply oxygenItem = (IItemOxygenSupply) oxygenItemStack.getItem();
-                float oxygenDraw = Math.min(this.oxygenPerTick * 2.5F, this.maxOxygen - this.storedOxygen);
+                final IItemOxygenSupply oxygenItem = (IItemOxygenSupply) oxygenItemStack.getItem();
+                final float oxygenDraw = Math.min(this.oxygenPerTick * 2.5F, this.maxOxygen - this.storedOxygen);
                 this.storedOxygen += oxygenItem.discharge(oxygenItemStack, oxygenDraw);
                 if (this.storedOxygen > this.maxOxygen) {
                     this.storedOxygen = this.maxOxygen;
@@ -44,7 +44,7 @@ public class TileEntityOxygenCompressor extends TileEntityOxygen implements IInv
         if (!this.worldObj.isRemote) {
             this.usingEnergy = false;
             if (this.storedOxygen > 0 && this.hasEnoughEnergyToRun) {
-                ItemStack tank0 = this.containingItems[0];
+                final ItemStack tank0 = this.containingItems[0];
 
                 if (tank0 != null) {
                     if (tank0.getItem() instanceof ItemOxygenTank && tank0.getItemDamage() > 0) {

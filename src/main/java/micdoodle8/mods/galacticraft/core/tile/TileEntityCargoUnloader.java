@@ -47,12 +47,12 @@ public class TileEntityCargoUnloader extends TileBaseElectricBlockWithInventory
 
             if (this.attachedFuelable != null) {
                 this.noTarget = false;
-                RemovalResult result = this.attachedFuelable.removeCargo(false);
+                final RemovalResult result = this.attachedFuelable.removeCargo(false);
 
                 if (result.resultStack != null) {
                     this.targetEmpty = false;
 
-                    EnumCargoLoadingState state = this.addCargo(result.resultStack, false);
+                    final EnumCargoLoadingState state = this.addCargo(result.resultStack, false);
 
                     this.targetEmpty = state == EnumCargoLoadingState.EMPTY;
 
@@ -173,7 +173,7 @@ public class TileEntityCargoUnloader extends TileBaseElectricBlockWithInventory
         int count = 1;
 
         for (count = 1; count < this.containingItems.length; count++) {
-            ItemStack stackAt = this.containingItems[count];
+            final ItemStack stackAt = this.containingItems[count];
 
             if (stackAt != null
                     && stackAt.getItem() == stack.getItem()
@@ -188,8 +188,8 @@ public class TileEntityCargoUnloader extends TileBaseElectricBlockWithInventory
                     return EnumCargoLoadingState.SUCCESS;
                 } else {
                     // Part of the stack can fill this slot but there will be some left over
-                    int origSize = stackAt.stackSize;
-                    int surplus = origSize + stack.stackSize - stackAt.getMaxStackSize();
+                    final int origSize = stackAt.stackSize;
+                    final int surplus = origSize + stack.stackSize - stackAt.getMaxStackSize();
 
                     if (doAdd) {
                         this.containingItems[count].stackSize = stackAt.getMaxStackSize();
@@ -208,7 +208,7 @@ public class TileEntityCargoUnloader extends TileBaseElectricBlockWithInventory
         }
 
         for (count = 1; count < this.containingItems.length; count++) {
-            ItemStack stackAt = this.containingItems[count];
+            final ItemStack stackAt = this.containingItems[count];
 
             if (stackAt == null) {
                 if (doAdd) {
@@ -225,10 +225,10 @@ public class TileEntityCargoUnloader extends TileBaseElectricBlockWithInventory
 
     public RemovalResult removeCargo(boolean doRemove) {
         for (int i = 1; i < this.containingItems.length; i++) {
-            ItemStack stackAt = this.containingItems[i];
+            final ItemStack stackAt = this.containingItems[i];
 
             if (stackAt != null) {
-                ItemStack resultStack = stackAt.copy();
+                final ItemStack resultStack = stackAt.copy();
                 resultStack.stackSize = 1;
 
                 if (doRemove && --stackAt.stackSize <= 0) {

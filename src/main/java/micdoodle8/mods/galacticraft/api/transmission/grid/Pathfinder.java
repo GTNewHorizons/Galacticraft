@@ -43,7 +43,7 @@ public class Pathfinder {
             return false;
         }
 
-        for (BlockVec3 node : this.callBackCheck.getConnectedNodes(this, currentNode)) {
+        for (final BlockVec3 node : this.callBackCheck.getConnectedNodes(this, currentNode)) {
             if (!this.closedSet.contains(node)) {
                 if (this.findNodes(node)) {
                     return true;

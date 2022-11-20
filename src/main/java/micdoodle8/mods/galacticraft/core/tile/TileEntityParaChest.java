@@ -98,7 +98,7 @@ public class TileEntityParaChest extends TileEntityAdvanced implements IInventor
     @Override
     public ItemStack getStackInSlotOnClosing(int par1) {
         if (this.chestContents[par1] != null) {
-            ItemStack itemstack = this.chestContents[par1];
+            final ItemStack itemstack = this.chestContents[par1];
             this.chestContents[par1] = null;
             return itemstack;
         } else {
@@ -130,7 +130,7 @@ public class TileEntityParaChest extends TileEntityAdvanced implements IInventor
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        NBTTagList nbttaglist = nbt.getTagList("Items", 10);
+        final NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 
         int size = nbt.getInteger("chestContentLength");
         if ((size - 3) % 18 != 0) {
@@ -139,8 +139,8 @@ public class TileEntityParaChest extends TileEntityAdvanced implements IInventor
         this.chestContents = new ItemStack[size];
 
         for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-            NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-            int j = nbttagcompound1.getByte("Slot") & 255;
+            final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+            final int j = nbttagcompound1.getByte("Slot") & 255;
 
             if (j < this.chestContents.length) {
                 this.chestContents[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
@@ -158,11 +158,11 @@ public class TileEntityParaChest extends TileEntityAdvanced implements IInventor
 
         nbt.setInteger("chestContentLength", this.chestContents.length);
 
-        NBTTagList nbttaglist = new NBTTagList();
+        final NBTTagList nbttaglist = new NBTTagList();
 
         for (int i = 0; i < this.chestContents.length; ++i) {
             if (this.chestContents[i] != null) {
-                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+                final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
                 nbttagcompound1.setByte("Slot", (byte) i);
                 this.chestContents[i].writeToNBT(nbttagcompound1);
                 nbttaglist.appendTag(nbttagcompound1);
@@ -203,7 +203,7 @@ public class TileEntityParaChest extends TileEntityAdvanced implements IInventor
                 && (this.ticks + this.xCoord + this.yCoord + this.zCoord) % 200 == 0) {
             this.numUsingPlayers = 0;
             f = 5.0F;
-            List<?> list = this.worldObj.getEntitiesWithinAABB(
+            final List<?> list = this.worldObj.getEntitiesWithinAABB(
                     EntityPlayer.class,
                     AxisAlignedBB.getBoundingBox(
                             this.xCoord - f,
@@ -212,10 +212,10 @@ public class TileEntityParaChest extends TileEntityAdvanced implements IInventor
                             this.xCoord + 1 + f,
                             this.yCoord + 1 + f,
                             this.zCoord + 1 + f));
-            Iterator<?> iterator = list.iterator();
+            final Iterator<?> iterator = list.iterator();
 
             while (iterator.hasNext()) {
-                EntityPlayer entityplayer = (EntityPlayer) iterator.next();
+                final EntityPlayer entityplayer = (EntityPlayer) iterator.next();
 
                 if (entityplayer.openContainer instanceof ContainerParaChest) {
                     ++this.numUsingPlayers;
@@ -228,7 +228,7 @@ public class TileEntityParaChest extends TileEntityAdvanced implements IInventor
         double d0;
 
         if (this.numUsingPlayers > 0 && this.lidAngle == 0.0F) {
-            double d1 = this.xCoord + 0.5D;
+            final double d1 = this.xCoord + 0.5D;
             d0 = this.zCoord + 0.5D;
 
             this.worldObj.playSoundEffect(
@@ -236,7 +236,7 @@ public class TileEntityParaChest extends TileEntityAdvanced implements IInventor
         }
 
         if (this.numUsingPlayers == 0 && this.lidAngle > 0.0F || this.numUsingPlayers > 0 && this.lidAngle < 1.0F) {
-            float f1 = this.lidAngle;
+            final float f1 = this.lidAngle;
 
             if (this.numUsingPlayers > 0) {
                 this.lidAngle += f;
@@ -248,11 +248,11 @@ public class TileEntityParaChest extends TileEntityAdvanced implements IInventor
                 this.lidAngle = 1.0F;
             }
 
-            float f2 = 0.5F;
+            final float f2 = 0.5F;
 
             if (this.lidAngle < f2 && f1 >= f2) {
                 d0 = this.xCoord + 0.5D;
-                double d2 = this.zCoord + 0.5D;
+                final double d2 = this.zCoord + 0.5D;
 
                 this.worldObj.playSoundEffect(
                         d0,

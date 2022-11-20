@@ -19,7 +19,7 @@ import net.minecraft.world.chunk.IChunkProvider;
  *
  */
 public abstract class WorldProviderSpaceStation extends WorldProviderSpace {
-    private SpinManager spinManager = new SpinManager(this);
+    private final SpinManager spinManager = new SpinManager(this);
 
     /**
      * Do not return null here, the calling code does not perform a null check!

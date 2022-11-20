@@ -67,7 +67,7 @@ public class GCLoadingPlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
     public List<String> getMixins(Set<String> loadedCoreMods) {
         final List<String> mixins = new ArrayList<>();
         final List<String> notLoading = new ArrayList<>();
-        for (Mixins mixin : Mixins.values()) {
+        for (final Mixins mixin : Mixins.values()) {
             if (mixin.phase == Mixins.Phase.EARLY) {
                 if (mixin.shouldLoad(loadedCoreMods, Collections.emptySet())) {
                     mixins.addAll(mixin.mixinClasses);

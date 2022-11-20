@@ -48,11 +48,11 @@ public class CommandPlanetTeleport extends CommandBase {
                 }
 
                 if (playerBase != null) {
-                    MinecraftServer server = MinecraftServer.getServer();
-                    WorldServer worldserver =
+                    final MinecraftServer server = MinecraftServer.getServer();
+                    final WorldServer worldserver =
                             server.worldServerForDimension(server.worldServers[0].provider.dimensionId);
-                    ChunkCoordinates chunkcoordinates = worldserver.getSpawnPoint();
-                    GCPlayerStats stats = GCPlayerStats.get(playerBase);
+                    final ChunkCoordinates chunkcoordinates = worldserver.getSpawnPoint();
+                    final GCPlayerStats stats = GCPlayerStats.get(playerBase);
                     stats.rocketStacks = new ItemStack[2];
                     stats.rocketType = IRocketType.EnumRocketType.DEFAULT.ordinal();
                     stats.rocketItem = GCItems.rocketTier1;
@@ -62,7 +62,7 @@ public class CommandPlanetTeleport extends CommandBase {
 
                     try {
                         WorldUtil.toCelestialSelection(playerBase, stats, Integer.MAX_VALUE);
-                    } catch (Exception e) {
+                    } catch (final Exception e) {
                         e.printStackTrace();
                         throw e;
                     }

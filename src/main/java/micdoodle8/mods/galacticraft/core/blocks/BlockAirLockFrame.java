@@ -60,7 +60,7 @@ public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDes
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
         super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
 
-        TileEntity tile = world.getTileEntity(x, y, z);
+        final TileEntity tile = world.getTileEntity(x, y, z);
 
         if (tile instanceof TileEntityAirLockController && entityLiving instanceof EntityPlayer) {
             ((TileEntityAirLockController) tile).ownerName =
@@ -103,10 +103,10 @@ public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDes
                 return this.airLockIcons[0];
             }
 
-            TileEntity tile = world.getTileEntity(par2, par3, par4);
+            final TileEntity tile = world.getTileEntity(par2, par3, par4);
 
             if (tile instanceof TileEntityAirLockController) {
-                TileEntityAirLockController controller = (TileEntityAirLockController) tile;
+                final TileEntityAirLockController controller = (TileEntityAirLockController) tile;
 
                 if (controller.active) {
                     return this.airLockIcons[6];
@@ -248,8 +248,8 @@ public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDes
     @Override
     public boolean onMachineActivated(
             World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float hitX, float hitY, float hitZ) {
-        int metadata = world.getBlockMetadata(x, y, z);
-        TileEntity tile = world.getTileEntity(x, y, z);
+        final int metadata = world.getBlockMetadata(x, y, z);
+        final TileEntity tile = world.getTileEntity(x, y, z);
 
         if (metadata >= BlockAirLockFrame.METADATA_AIR_LOCK_CONTROLLER && tile instanceof TileEntityAirLockController) {
             entityPlayer.openGui(GalacticraftCore.instance, -1, world, x, y, z);
@@ -261,7 +261,7 @@ public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDes
 
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int par6) {
-        TileEntity tile = world.getTileEntity(x, y, z);
+        final TileEntity tile = world.getTileEntity(x, y, z);
 
         if (tile instanceof TileEntityAirLockController) {
             ((TileEntityAirLockController) tile).unsealAirLock();

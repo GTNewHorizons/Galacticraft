@@ -174,8 +174,8 @@ public abstract class TileBaseUniversalElectrical extends EnergyStorageTile
      */
     public void discharge(ItemStack itemStack) {
         if (itemStack != null) {
-            Item item = itemStack.getItem();
-            float energyToDischarge = this.getRequest(ForgeDirection.UNKNOWN);
+            final Item item = itemStack.getItem();
+            final float energyToDischarge = this.getRequest(ForgeDirection.UNKNOWN);
 
             if (item instanceof IItemElectric) {
                 this.storage.receiveEnergyGC(ElectricItemHelper.dischargeItem(itemStack, energyToDischarge));
@@ -186,13 +186,13 @@ public abstract class TileBaseUniversalElectrical extends EnergyStorageTile
                         * EnergyConfigHandler.RF_RATIO);
             } else if (EnergyConfigHandler.isIndustrialCraft2Loaded()) {
                 if (item instanceof IElectricItem) {
-                    IElectricItem electricItem = (IElectricItem) item;
+                    final IElectricItem electricItem = (IElectricItem) item;
                     if (electricItem.canProvideEnergy(itemStack)) {
                         double result = 0;
-                        double energyDischargeIC2 = energyToDischarge / EnergyConfigHandler.IC2_RATIO;
+                        final double energyDischargeIC2 = energyToDischarge / EnergyConfigHandler.IC2_RATIO;
                         result = ic2.api.item.ElectricItem.manager.discharge(
                                 itemStack, energyDischargeIC2, 4, false, false, false);
-                        float energyDischarged = (float) result * EnergyConfigHandler.IC2_RATIO;
+                        final float energyDischarged = (float) result * EnergyConfigHandler.IC2_RATIO;
                         this.storage.receiveEnergyGC(energyDischarged);
                     }
                 }
@@ -242,15 +242,15 @@ public abstract class TileBaseUniversalElectrical extends EnergyStorageTile
     protected void initIC() {
         if (EnergyConfigHandler.isIndustrialCraft2Loaded()) {
             try {
-                Class<?> tileLoadEvent = Class.forName("ic2.api.energy.event.EnergyTileLoadEvent");
-                Class<?> energyTile = Class.forName("ic2.api.energy.tile.IEnergyTile");
-                Constructor<?> constr = tileLoadEvent.getConstructor(energyTile);
-                Object o = constr.newInstance(this);
+                final Class<?> tileLoadEvent = Class.forName("ic2.api.energy.event.EnergyTileLoadEvent");
+                final Class<?> energyTile = Class.forName("ic2.api.energy.tile.IEnergyTile");
+                final Constructor<?> constr = tileLoadEvent.getConstructor(energyTile);
+                final Object o = constr.newInstance(this);
 
                 if (o != null && o instanceof Event) {
                     MinecraftForge.EVENT_BUS.post((Event) o);
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }
@@ -262,15 +262,15 @@ public abstract class TileBaseUniversalElectrical extends EnergyStorageTile
         if (this.isAddedToEnergyNet && this.worldObj != null) {
             if (EnergyConfigHandler.isIndustrialCraft2Loaded() && !this.worldObj.isRemote) {
                 try {
-                    Class<?> tileLoadEvent = Class.forName("ic2.api.energy.event.EnergyTileUnloadEvent");
-                    Class<?> energyTile = Class.forName("ic2.api.energy.tile.IEnergyTile");
-                    Constructor<?> constr = tileLoadEvent.getConstructor(energyTile);
-                    Object o = constr.newInstance(this);
+                    final Class<?> tileLoadEvent = Class.forName("ic2.api.energy.event.EnergyTileUnloadEvent");
+                    final Class<?> energyTile = Class.forName("ic2.api.energy.tile.IEnergyTile");
+                    final Constructor<?> constr = tileLoadEvent.getConstructor(energyTile);
+                    final Object o = constr.newInstance(this);
 
                     if (o != null && o instanceof Event) {
                         MinecraftForge.EVENT_BUS.post((Event) o);
                     }
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -291,12 +291,12 @@ public abstract class TileBaseUniversalElectrical extends EnergyStorageTile
                 return Math.ceil(this.storage.receiveEnergyGC(Integer.MAX_VALUE, true) / EnergyConfigHandler.IC2_RATIO);
             }
 
-            float received = this.storage.receiveEnergyGC(this.IC2surplusInGJ, true);
+            final float received = this.storage.receiveEnergyGC(this.IC2surplusInGJ, true);
             if (received == this.IC2surplusInGJ) {
                 return Math.ceil((this.storage.receiveEnergyGC(Integer.MAX_VALUE, true) - this.IC2surplusInGJ)
                         / EnergyConfigHandler.IC2_RATIO);
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
         return 0D;
@@ -307,9 +307,9 @@ public abstract class TileBaseUniversalElectrical extends EnergyStorageTile
         if (!EnergyConfigHandler.disableIC2Input
                 && (direction == ForgeDirection.UNKNOWN
                         || this.getElectricalInputDirections().contains(direction))) {
-            float convertedEnergy = (float) amount * EnergyConfigHandler.IC2_RATIO;
-            int tierFromIC2 = (int) voltage > 120 ? 2 : 1;
-            float receive = this.receiveElectricity(direction, convertedEnergy, tierFromIC2, true);
+            final float convertedEnergy = (float) amount * EnergyConfigHandler.IC2_RATIO;
+            final int tierFromIC2 = (int) voltage > 120 ? 2 : 1;
+            final float receive = this.receiveElectricity(direction, convertedEnergy, tierFromIC2, true);
 
             if (convertedEnergy > receive) {
                 this.IC2surplusInGJ = convertedEnergy - receive;
@@ -337,11 +337,11 @@ public abstract class TileBaseUniversalElectrical extends EnergyStorageTile
         }
 
         try {
-            Class<?> energyTile = Class.forName("ic2.api.energy.tile.IEnergyTile");
+            final Class<?> energyTile = Class.forName("ic2.api.energy.tile.IEnergyTile");
             if (!energyTile.isInstance(emitter)) {
                 return false;
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 

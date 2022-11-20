@@ -72,12 +72,12 @@ public class RecipeManagerGC {
         RocketFuelRecipe.addFuel("rocket_fuel", 8);
         RocketFuelRecipe.addFuel("nitrofuel", 2);
 
-        Object meteoricIronIngot =
+        final Object meteoricIronIngot =
                 ConfigManagerCore.recipesRequireGCAdvancedMetals ? GCItems.meteoricIronIngot : "ingotMeteoricIron";
-        Object meteoricIronPlate = ConfigManagerCore.recipesRequireGCAdvancedMetals
+        final Object meteoricIronPlate = ConfigManagerCore.recipesRequireGCAdvancedMetals
                 ? new ItemStack(GCItems.meteoricIronIngot, 1, 1)
                 : "compressedMeteoricIron";
-        Object deshIngot = GalacticraftCore.isPlanetsLoaded
+        final Object deshIngot = GalacticraftCore.isPlanetsLoaded
                 ? ConfigManagerCore.recipesRequireGCAdvancedMetals
                         ? new ItemStack(MarsItems.marsItemBasic, 1, 2)
                         : "ingotDesh"
@@ -222,10 +222,10 @@ public class RecipeManagerGC {
         RecipeUtil.addBuggyBenchRecipe(new ItemStack(GCItems.buggy, 1, 3), input2);
 
         aluminumIngots.addAll(OreDictionary.getOres("ingotAluminum"));
-        ArrayList<ItemStack> addedList = new ArrayList<ItemStack>();
-        for (ItemStack ingotNew : OreDictionary.getOres("ingotAluminium")) {
+        final ArrayList<ItemStack> addedList = new ArrayList<ItemStack>();
+        for (final ItemStack ingotNew : OreDictionary.getOres("ingotAluminium")) {
             boolean flag = false;
-            for (ItemStack ingotDone : aluminumIngots) {
+            for (final ItemStack ingotDone : aluminumIngots) {
                 if (ItemStack.areItemStacksEqual(ingotNew, ingotDone)) {
                     flag = true;
                     break;
@@ -240,8 +240,8 @@ public class RecipeManagerGC {
             aluminumIngots.addAll(addedList);
             addedList.clear();
         }
-        for (ItemStack ingotNew : OreDictionary.getOres("ingotNaturalAluminum")) {
-            for (ItemStack ingotDone : aluminumIngots) {
+        for (final ItemStack ingotNew : OreDictionary.getOres("ingotNaturalAluminum")) {
+            for (final ItemStack ingotDone : aluminumIngots) {
                 if (!ItemStack.areItemStacksEqual(ingotNew, ingotDone)) {
                     addedList.add(ingotNew);
                 }
@@ -1103,15 +1103,15 @@ public class RecipeManagerGC {
     }
 
     public static void setConfigurableRecipes() {
-        ItemStack solarPanels = new ItemStack(GCItems.basicItem, 9, 12);
-        ItemStack basicWafers = new ItemStack(GCItems.basicItem, 3, 13);
-        ItemStack advancedWafers = new ItemStack(GCItems.basicItem, 1, 14);
+        final ItemStack solarPanels = new ItemStack(GCItems.basicItem, 9, 12);
+        final ItemStack basicWafers = new ItemStack(GCItems.basicItem, 3, 13);
+        final ItemStack advancedWafers = new ItemStack(GCItems.basicItem, 1, 14);
 
         CircuitFabricatorRecipes.removeRecipe(solarPanels);
         CircuitFabricatorRecipes.removeRecipe(basicWafers);
         CircuitFabricatorRecipes.removeRecipe(advancedWafers);
-        ArrayList<ItemStack> silicons = OreDictionary.getOres(ConfigManagerCore.otherModsSilicon);
-        int siliconCount = silicons.size();
+        final ArrayList<ItemStack> silicons = OreDictionary.getOres(ConfigManagerCore.otherModsSilicon);
+        final int siliconCount = silicons.size();
         for (int j = 0; j <= siliconCount; j++) {
             ItemStack silicon;
             if (j == 0) {
@@ -1209,15 +1209,16 @@ public class RecipeManagerGC {
         // GCLog.info("Successfully added GC oil to Buildcraft Refinery recipes.");
 
         try {
-            Class<?> clazz = Class.forName("buildcraft.BuildCraftTransport");
+            final Class<?> clazz = Class.forName("buildcraft.BuildCraftTransport");
 
-            Object pipeItemsStone = clazz.getField("pipeItemsStone").get(null);
-            Object pipeItemsCobblestone = clazz.getField("pipeItemsCobblestone").get(null);
-            Object pipeFluidsCobblestone =
+            final Object pipeItemsStone = clazz.getField("pipeItemsStone").get(null);
+            final Object pipeItemsCobblestone =
+                    clazz.getField("pipeItemsCobblestone").get(null);
+            final Object pipeFluidsCobblestone =
                     clazz.getField("pipeFluidsCobblestone").get(null);
-            Object pipeFluidsStone = clazz.getField("pipeFluidsStone").get(null);
-            Object pipePowerStone = clazz.getField("pipePowerStone").get(null);
-            Object pipePowerGold = clazz.getField("pipePowerGold").get(null);
+            final Object pipeFluidsStone = clazz.getField("pipeFluidsStone").get(null);
+            final Object pipePowerStone = clazz.getField("pipePowerStone").get(null);
+            final Object pipePowerGold = clazz.getField("pipePowerGold").get(null);
 
             RecipeUtil.addRecipe(
                     new ItemStack(GCBlocks.sealableBlock, 1, EnumEnclosedBlock.BC_ITEM_COBBLESTONEPIPE.getMetadata()),
@@ -1238,7 +1239,7 @@ public class RecipeManagerGC {
                     new ItemStack(GCBlocks.sealableBlock, 1, EnumEnclosedBlock.BC_POWER_GOLDPIPE.getMetadata()),
                     new Object[] {"XYX", 'Y', pipePowerGold, 'X', new ItemStack(GCBlocks.basicBlock, 1, 4)});
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }
@@ -1333,14 +1334,14 @@ public class RecipeManagerGC {
 
     private static void addExNihiloRecipes() {
         try {
-            Class registry = Class.forName("exnihilo.registries.HeatRegistry");
-            Method m = registry.getMethod("register", Block.class, float.class);
+            final Class registry = Class.forName("exnihilo.registries.HeatRegistry");
+            final Method m = registry.getMethod("register", Block.class, float.class);
             m.invoke(null, GCBlocks.unlitTorchLit, 0.1F);
-            for (Block torch : GCBlocks.otherModTorchesLit) {
+            for (final Block torch : GCBlocks.otherModTorchesLit) {
                 m.invoke(null, torch, 0.1F);
             }
             GCLog.info("Successfully added space torches as heat sources for Ex Nihilo crucibles etc");
-        } catch (Throwable e) {
+        } catch (final Throwable e) {
         }
     }
 }

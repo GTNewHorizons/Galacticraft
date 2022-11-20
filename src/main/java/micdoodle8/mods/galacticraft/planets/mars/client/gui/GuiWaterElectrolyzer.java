@@ -37,7 +37,7 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
 
     private GuiButton buttonDisable;
 
-    private GuiElementInfoRegion fuelTankRegion = new GuiElementInfoRegion(
+    private final GuiElementInfoRegion fuelTankRegion = new GuiElementInfoRegion(
             (this.width - this.xSize) / 2 + 153,
             (this.height - this.ySize) / 2 + 28,
             16,
@@ -46,7 +46,7 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
             this.width,
             this.height,
             this);
-    private GuiElementInfoRegion fuelTank2Region = new GuiElementInfoRegion(
+    private final GuiElementInfoRegion fuelTank2Region = new GuiElementInfoRegion(
             (this.width - this.xSize) / 2 + 153,
             (this.height - this.ySize) / 2 + 28,
             16,
@@ -55,7 +55,7 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
             this.width,
             this.height,
             this);
-    private GuiElementInfoRegion gasTankRegion = new GuiElementInfoRegion(
+    private final GuiElementInfoRegion gasTankRegion = new GuiElementInfoRegion(
             (this.width - this.xSize) / 2 + 7,
             (this.height - this.ySize) / 2 + 28,
             16,
@@ -64,7 +64,7 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
             this.width,
             this.height,
             this);
-    private GuiElementInfoRegion electricInfoRegion = new GuiElementInfoRegion(
+    private final GuiElementInfoRegion electricInfoRegion = new GuiElementInfoRegion(
             (this.width - this.xSize) / 2 + 62,
             (this.height - this.ySize) / 2 + 16,
             56,
@@ -91,7 +91,7 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
         this.gasTankRegion.parentHeight = this.height;
         this.infoRegions.add(this.gasTankRegion);
 
-        List<String> batterySlotDesc = new ArrayList<String>();
+        final List<String> batterySlotDesc = new ArrayList<String>();
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.0"));
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(
@@ -123,7 +123,7 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
         // 131, (this.height - this.ySize)
         // / 2 + 6, 18, 18, fuelSlotDesc, this.width, this.height, this));
 
-        List<String> fuelSlotDesc = new ArrayList<String>();
+        final List<String> fuelSlotDesc = new ArrayList<String>();
         fuelSlotDesc.addAll(GCCoreUtil.translateWithSplit("gui.waterBucketSlot.desc"));
         this.infoRegions.add(new GuiElementInfoRegion(
                 (this.width - this.xSize) / 2 + 6,
@@ -168,7 +168,7 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         this.fontRendererObj.drawString(this.tileEntity.getInventoryName(), 30, 5, 4210752);
         String displayText = "";
-        int yOffset = -18;
+        final int yOffset = -18;
 
         if (RedstoneUtil.isBlockReceivingRedstone(
                 this.tileEntity.getWorldObj(),
@@ -212,11 +212,11 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
         this.mc.renderEngine.bindTexture(GuiWaterElectrolyzer.refineryTexture);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        int edgeLeft = (this.width - this.xSize) / 2;
-        int edgeTop = (this.height - this.ySize) / 2;
+        final int edgeLeft = (this.width - this.xSize) / 2;
+        final int edgeTop = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(edgeLeft, edgeTop, 0, 0, this.xSize, this.ySize);
 
-        int waterLevel = this.tileEntity.getScaledGasLevel(38);
+        final int waterLevel = this.tileEntity.getScaledGasLevel(38);
         // Water
         this.mc.renderEngine.bindTexture(GuiWaterElectrolyzer.gasTextures);
         this.drawTexturedModalRect(
@@ -243,7 +243,7 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
     }
 
     private void addToolTips() {
-        List<String> gasTankDesc = new ArrayList<String>();
+        final List<String> gasTankDesc = new ArrayList<String>();
         gasTankDesc.add(GCCoreUtil.translate("gui.terraformer.desc.0"));
         this.gasTankRegion.tooltipStrings = gasTankDesc;
 
@@ -251,7 +251,8 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
         fuelTankDesc.add(GCCoreUtil.translate("gui.gasTank.desc.0"));
         FluidStack gasTankContents = this.tileEntity.liquidTank != null ? this.tileEntity.liquidTank.getFluid() : null;
         if (gasTankContents != null) {
-            String gasname = GCCoreUtil.translate(gasTankContents.getFluid().getUnlocalizedName());
+            final String gasname =
+                    GCCoreUtil.translate(gasTankContents.getFluid().getUnlocalizedName());
             fuelTankDesc.add("(" + gasname + ")");
         } else {
             fuelTankDesc.add(" ");
@@ -265,7 +266,8 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
         fuelTankDesc.add(GCCoreUtil.translate("gui.gasTank.desc.0"));
         gasTankContents = this.tileEntity.liquidTank2 != null ? this.tileEntity.liquidTank2.getFluid() : null;
         if (gasTankContents != null) {
-            String gasname = GCCoreUtil.translate(gasTankContents.getFluid().getUnlocalizedName());
+            final String gasname =
+                    GCCoreUtil.translate(gasTankContents.getFluid().getUnlocalizedName());
             fuelTankDesc.add("(" + gasname + ")");
         } else {
             fuelTankDesc.add(" ");
@@ -275,7 +277,7 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
         fuelTankDesc.add(EnumColor.YELLOW + " " + fuelLevel + " / " + fuelCapacity);
         this.fuelTank2Region.tooltipStrings = fuelTankDesc;
 
-        List<String> electricityDesc = new ArrayList<String>();
+        final List<String> electricityDesc = new ArrayList<String>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         // electricityDesc.add(EnumColor.YELLOW +
         // GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int)

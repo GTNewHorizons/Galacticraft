@@ -60,7 +60,7 @@ public class PacketDynamic implements IPacket {
 
         try {
             NetworkUtil.encodeData(buffer, this.sendData);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
@@ -86,7 +86,7 @@ public class PacketDynamic implements IPacket {
                 this.data[0] = buffer.readInt();
 
                 if (world != null) {
-                    Entity entity = world.getEntityByID((Integer) this.data[0]);
+                    final Entity entity = world.getEntityByID((Integer) this.data[0]);
 
                     if (entity instanceof IPacketReceiver && buffer.readableBytes() > 0) {
                         ((IPacketReceiver) entity).decodePacketdata(buffer);
@@ -101,7 +101,7 @@ public class PacketDynamic implements IPacket {
                 this.data[2] = buffer.readInt();
 
                 if (world != null) {
-                    TileEntity tile =
+                    final TileEntity tile =
                             world.getTileEntity((Integer) this.data[0], (Integer) this.data[1], (Integer) this.data[2]);
 
                     if (tile instanceof IPacketReceiver) {
@@ -126,7 +126,7 @@ public class PacketDynamic implements IPacket {
     private void handleData(Side side, EntityPlayer player) {
         switch (this.type) {
             case 0:
-                Entity entity = player.worldObj.getEntityByID((Integer) this.data[0]);
+                final Entity entity = player.worldObj.getEntityByID((Integer) this.data[0]);
 
                 if (entity instanceof IPacketReceiver) {
                     ((IPacketReceiver) entity).handlePacketData(side, player);
@@ -141,7 +141,7 @@ public class PacketDynamic implements IPacket {
 
                 break;
             case 1:
-                TileEntity tile = player.worldObj.getTileEntity(
+                final TileEntity tile = player.worldObj.getTileEntity(
                         (Integer) this.data[0], (Integer) this.data[1], (Integer) this.data[2]);
 
                 if (tile instanceof IPacketReceiver) {

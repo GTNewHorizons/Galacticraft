@@ -37,11 +37,12 @@ public class BlockWallGC extends BlockWall {
 
         if (GalacticraftCore.isPlanetsLoaded) {
             try {
-                Class<?> c = Class.forName("micdoodle8.mods.galacticraft.planets.mars.MarsModule");
-                String texturePrefix = (String) c.getField("TEXTURE_PREFIX").get(null);
+                final Class<?> c = Class.forName("micdoodle8.mods.galacticraft.planets.mars.MarsModule");
+                final String texturePrefix =
+                        (String) c.getField("TEXTURE_PREFIX").get(null);
                 this.wallBlockIcon[4] = par1IconRegister.registerIcon(texturePrefix + "cobblestone");
                 this.wallBlockIcon[5] = par1IconRegister.registerIcon(texturePrefix + "brick");
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 this.wallBlockIcon[4] = this.wallBlockIcon[3];
                 this.wallBlockIcon[5] = this.wallBlockIcon[3];
                 e.printStackTrace();
@@ -99,10 +100,10 @@ public class BlockWallGC extends BlockWall {
 
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
-        boolean flag = this.canConnectWallTo(par1IBlockAccess, par2, par3, par4 - 1);
-        boolean flag1 = this.canConnectWallTo(par1IBlockAccess, par2, par3, par4 + 1);
-        boolean flag2 = this.canConnectWallTo(par1IBlockAccess, par2 - 1, par3, par4);
-        boolean flag3 = this.canConnectWallTo(par1IBlockAccess, par2 + 1, par3, par4);
+        final boolean flag = this.canConnectWallTo(par1IBlockAccess, par2, par3, par4 - 1);
+        final boolean flag1 = this.canConnectWallTo(par1IBlockAccess, par2, par3, par4 + 1);
+        final boolean flag2 = this.canConnectWallTo(par1IBlockAccess, par2 - 1, par3, par4);
+        final boolean flag3 = this.canConnectWallTo(par1IBlockAccess, par2 + 1, par3, par4);
         float f = 0.25F;
         float f1 = 0.75F;
         float f2 = 0.25F;
@@ -146,7 +147,7 @@ public class BlockWallGC extends BlockWall {
 
     @Override
     public boolean canConnectWallTo(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
-        Block block = par1IBlockAccess.getBlock(par2, par3, par4);
+        final Block block = par1IBlockAccess.getBlock(par2, par3, par4);
 
         if (block != this && block != Blocks.fence_gate) {
             return block != null && block.getMaterial().isOpaque() && block.renderAsNormalBlock()

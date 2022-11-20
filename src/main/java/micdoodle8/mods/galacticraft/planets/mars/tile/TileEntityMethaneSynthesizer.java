@@ -78,19 +78,19 @@ public class TileEntityMethaneSynthesizer extends TileBaseElectricBlockWithInven
             // TODO add support for hydrogen atmospheres
 
             // Now check the CO2 storage
-            ItemStack inputCanister = this.containingItems[2];
+            final ItemStack inputCanister = this.containingItems[2];
             if (inputCanister != null) {
                 if (inputCanister.getItem() instanceof ItemAtmosphericValve && this.hasCO2 > 0) {
                     // CO2 -> CO2 tank
                     if (this.gasTank2.getFluidAmount() < this.gasTank2.getCapacity()) {
-                        Block blockAbove = this.worldObj.getBlock(this.xCoord, this.yCoord + 1, this.zCoord);
+                        final Block blockAbove = this.worldObj.getBlock(this.xCoord, this.yCoord + 1, this.zCoord);
                         if (blockAbove != null
                                 && blockAbove.getMaterial() == Material.air
                                 && blockAbove != GCBlocks.breatheableAir
                                 && blockAbove != GCBlocks.brightBreatheableAir) {
                             if (!OxygenUtil.inOxygenBubble(
                                     this.worldObj, this.xCoord + 0.5D, this.yCoord + 1D, this.zCoord + 0.5D)) {
-                                FluidStack gcAtmosphere = FluidRegistry.getFluidStack("carbondioxide", 4);
+                                final FluidStack gcAtmosphere = FluidRegistry.getFluidStack("carbondioxide", 4);
                                 this.gasTank2.fill(gcAtmosphere, true);
                             }
                         }
@@ -172,9 +172,9 @@ public class TileEntityMethaneSynthesizer extends TileBaseElectricBlockWithInven
     }
 
     public int getAirProducts() {
-        WorldProvider WP = this.worldObj.provider;
+        final WorldProvider WP = this.worldObj.provider;
         if (WP instanceof WorldProviderSpace) {
-            ArrayList<IAtmosphericGas> atmos = ((WorldProviderSpace) WP).getCelestialBody().atmosphere;
+            final ArrayList<IAtmosphericGas> atmos = ((WorldProviderSpace) WP).getCelestialBody().atmosphere;
             if (atmos.size() > 0) {
                 if (atmos.get(0) == IAtmosphericGas.CO2) {
                     return 1;
@@ -356,8 +356,8 @@ public class TileEntityMethaneSynthesizer extends TileBaseElectricBlockWithInven
 
     @Override
     public boolean canDrain(ForgeDirection from, Fluid fluid) {
-        int metaside = this.getBlockMetadata() + 2;
-        int side = from.ordinal();
+        final int metaside = this.getBlockMetadata() + 2;
+        final int side = from.ordinal();
         if (side == (metaside ^ 1)) {
             return this.liquidTank.getFluid() != null && this.liquidTank.getFluidAmount() > 0;
         }
@@ -367,8 +367,8 @@ public class TileEntityMethaneSynthesizer extends TileBaseElectricBlockWithInven
 
     @Override
     public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-        int metaside = this.getBlockMetadata() + 2;
-        int side = from.ordinal();
+        final int metaside = this.getBlockMetadata() + 2;
+        final int side = from.ordinal();
         if (side == (metaside ^ 1)) {
             if (resource != null && resource.isFluidEqual(this.liquidTank.getFluid())) {
                 return this.liquidTank.drain(resource.amount, doDrain);
@@ -380,8 +380,8 @@ public class TileEntityMethaneSynthesizer extends TileBaseElectricBlockWithInven
 
     @Override
     public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-        int metaside = this.getBlockMetadata() + 2;
-        int side = from.ordinal();
+        final int metaside = this.getBlockMetadata() + 2;
+        final int side = from.ordinal();
         if (side == (metaside ^ 1)) {
             return this.liquidTank.drain(maxDrain, doDrain);
         }
@@ -458,7 +458,7 @@ public class TileEntityMethaneSynthesizer extends TileBaseElectricBlockWithInven
 
     public float receiveHydrogen(ForgeDirection from, float receive, boolean doReceive) {
         if (from.ordinal() == this.getBlockMetadata() + 2 && this.shouldPullHydrogen()) {
-            FluidStack fluidToFill = FluidRegistry.getFluidStack("hydrogen", (int) receive);
+            final FluidStack fluidToFill = FluidRegistry.getFluidStack("hydrogen", (int) receive);
             return this.gasTank.fill(fluidToFill, doReceive);
         }
 

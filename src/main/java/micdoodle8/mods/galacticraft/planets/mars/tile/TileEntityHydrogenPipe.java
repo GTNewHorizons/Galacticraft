@@ -58,7 +58,7 @@ public class TileEntityHydrogenPipe extends TileEntity implements ITransmitter {
     public void onNetworkChanged() {}
 
     protected void resetNetwork() {
-        HydrogenNetwork network = new HydrogenNetwork();
+        final HydrogenNetwork network = new HydrogenNetwork();
         network.getTransmitters().add(this);
         this.setNetwork(network);
     }
@@ -73,8 +73,8 @@ public class TileEntityHydrogenPipe extends TileEntity implements ITransmitter {
         if (!this.worldObj.isRemote) {
             this.adjacentConnections = null;
 
-            for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
-                TileEntity tileEntity = new BlockVec3(this).getTileEntityOnSide(this.worldObj, side);
+            for (final ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
+                final TileEntity tileEntity = new BlockVec3(this).getTileEntityOnSide(this.worldObj, side);
 
                 if (tileEntity != null) {
                     if (tileEntity.getClass() == this.getClass()
@@ -103,13 +103,13 @@ public class TileEntityHydrogenPipe extends TileEntity implements ITransmitter {
     }
 
     public static TileEntity[] getAdjacentHydrogenConnections(TileEntity tile) {
-        TileEntity[] adjacentConnections = new TileEntity[ForgeDirection.VALID_DIRECTIONS.length];
+        final TileEntity[] adjacentConnections = new TileEntity[ForgeDirection.VALID_DIRECTIONS.length];
 
-        boolean isMekLoaded = EnergyConfigHandler.isMekanismLoaded();
+        final boolean isMekLoaded = EnergyConfigHandler.isMekanismLoaded();
 
-        BlockVec3 thisVec = new BlockVec3(tile);
-        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-            TileEntity tileEntity = thisVec.getTileEntityOnSide(tile.getWorldObj(), direction);
+        final BlockVec3 thisVec = new BlockVec3(tile);
+        for (final ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+            final TileEntity tileEntity = thisVec.getTileEntityOnSide(tile.getWorldObj(), direction);
 
             if (tileEntity instanceof IConnector) {
                 if (((IConnector) tileEntity).canConnect(direction.getOpposite(), NetworkType.HYDROGEN)) {

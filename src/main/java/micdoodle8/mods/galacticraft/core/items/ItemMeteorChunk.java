@@ -84,7 +84,7 @@ public class ItemMeteorChunk extends Item {
             float burnTime = 0.0F;
 
             if (itemstack.hasTagCompound()) {
-                float meteorBurnTime = itemstack.getTagCompound().getFloat("MeteorBurnTimeF");
+                final float meteorBurnTime = itemstack.getTagCompound().getFloat("MeteorBurnTimeF");
                 burnTime = Math.round(meteorBurnTime / 10.0F) / 2.0F;
             } else {
                 burnTime = 45.0F;
@@ -115,7 +115,7 @@ public class ItemMeteorChunk extends Item {
         world.playSoundAtEntity(player, "random.bow", 1.0F, 0.0001F / (Item.itemRand.nextFloat() * 0.1F));
 
         if (!world.isRemote) {
-            EntityMeteorChunk meteor = new EntityMeteorChunk(world, player, 1.0F);
+            final EntityMeteorChunk meteor = new EntityMeteorChunk(world, player, 1.0F);
 
             if (itemStack.getItemDamage() > 0) {
                 meteor.setFire(20);

@@ -27,7 +27,7 @@ public class ModelEvolvedZombie extends ModelBiped {
     ModelRenderer tubeLeft8;
     ModelRenderer oxygenMask;
     private float saveGravity;
-    private boolean renderGear;
+    private final boolean renderGear;
 
     public ModelEvolvedZombie(boolean renderGear) {
         this(0.0F, false, renderGear);
@@ -164,7 +164,7 @@ public class ModelEvolvedZombie extends ModelBiped {
         this.setRotationAngles(f, f1, f2, f3, f4, f5);
 
         if (this.isChild) {
-            float f6 = 2.0F;
+            final float f6 = 2.0F;
             GL11.glPushMatrix();
             GL11.glScalef(1.5F / f6, 1.5F / f6, 1.5F / f6);
             GL11.glTranslatef(0.0F, 16.0F * f5, 0.0F);

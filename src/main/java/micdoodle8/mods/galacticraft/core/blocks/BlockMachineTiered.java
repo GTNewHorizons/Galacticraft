@@ -74,9 +74,10 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
 
         if (GalacticraftCore.isPlanetsLoaded) {
             try {
-                String prefix = (String) Class.forName("micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule")
-                        .getField("TEXTURE_PREFIX")
-                        .get(null);
+                final String prefix =
+                        (String) Class.forName("micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule")
+                                .getField("TEXTURE_PREFIX")
+                                .get(null);
                 this.iconTier2 = iconRegister.registerIcon(prefix + "machine");
                 this.iconInputT2 = iconRegister.registerIcon(prefix + "machine_input");
                 this.iconOutputT2 = iconRegister.registerIcon(prefix + "machine_output");
@@ -86,7 +87,7 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
                     this.iconEnergyStorageModuleT2[i] = iconRegister.registerIcon(prefix + "energyStorageModule_" + i);
                 }
                 this.iconElectricFurnaceT2 = iconRegister.registerIcon(prefix + "electricFurnace");
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
                 this.iconTier2 = iconRegister.registerIcon("void");
                 this.iconInputT2 = iconRegister.registerIcon("void");
@@ -113,9 +114,9 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
 
     @Override
     public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-        int metadata = world.getBlockMetadata(x, y, z);
-        int type = metadata & 4;
-        int metaside = (metadata & 3) + 2;
+        final int metadata = world.getBlockMetadata(x, y, z);
+        final int type = metadata & 4;
+        final int metaside = (metadata & 3) + 2;
 
         if (type == BlockMachineTiered.STORAGE_MODULE_METADATA) {
             if (side == 0 || side == 1) {
@@ -140,7 +141,7 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
                 return this.iconInput;
             }
 
-            TileEntity tile = world.getTileEntity(x, y, z);
+            final TileEntity tile = world.getTileEntity(x, y, z);
 
             int level = 0;
             if (tile instanceof TileEntityEnergyStorageModule) {
@@ -158,7 +159,7 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
 
     @Override
     public IIcon getIcon(int side, int metadata) {
-        int metaside = (metadata & 3) + 2;
+        final int metaside = (metadata & 3) + 2;
 
         if (side == 0 || side == 1) {
             if (metadata >= 8) {
@@ -218,9 +219,9 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
      */
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
-        int metadata = world.getBlockMetadata(x, y, z);
+        final int metadata = world.getBlockMetadata(x, y, z);
 
-        int angle = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        final int angle = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         int change = 0;
 
         switch (angle) {
@@ -252,8 +253,8 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
             float hitX,
             float hitY,
             float hitZ) {
-        int metadata = par1World.getBlockMetadata(x, y, z);
-        int original = metadata & 3;
+        final int metadata = par1World.getBlockMetadata(x, y, z);
+        final int original = metadata & 3;
         int change = 0;
 
         // Re-orient the block
@@ -272,7 +273,7 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
                 break;
         }
 
-        TileEntity te = par1World.getTileEntity(x, y, z);
+        final TileEntity te = par1World.getTileEntity(x, y, z);
         if (te instanceof TileBaseUniversalElectrical) {
             ((TileBaseUniversalElectrical) te).updateFacing();
         }
@@ -304,7 +305,7 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
 
     @Override
     public TileEntity createTileEntity(World world, int metadata) {
-        int tier = metadata / 8 + 1;
+        final int tier = metadata / 8 + 1;
 
         if ((metadata & 4) == BlockMachineTiered.ELECTRIC_FURNACE_METADATA) {
             return new TileEntityElectricFurnace(tier);
@@ -347,14 +348,14 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
 
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
-        int metadata = this.getDamageValue(world, x, y, z);
+        final int metadata = this.getDamageValue(world, x, y, z);
 
         return new ItemStack(this, 1, metadata);
     }
 
     @Override
     public String getShiftDescription(int meta) {
-        int tier = meta >= 8 ? 2 : 1;
+        final int tier = meta >= 8 ? 2 : 1;
         switch (meta & 4) {
             case ELECTRIC_FURNACE_METADATA:
                 return GCCoreUtil.translate("tile.electricFurnaceTier" + tier + ".description");

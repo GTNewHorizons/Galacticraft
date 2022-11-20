@@ -79,19 +79,19 @@ public class BlockWalkway extends BlockTransmitter implements ITileEntityProvide
     }
 
     public int getWalkwayOrientation(World world, int x, int y, int z) {
-        int connectedNorth =
+        final int connectedNorth =
                 isBlockNormalCube(world.getBlock(x, y, z - 1)) || world.getBlock(x, y, z - 1) instanceof BlockWalkway
                         ? 1
                         : 0;
-        int connectedEast =
+        final int connectedEast =
                 isBlockNormalCube(world.getBlock(x + 1, y, z)) || world.getBlock(x + 1, y, z) instanceof BlockWalkway
                         ? 2
                         : 0;
-        int connectedSouth =
+        final int connectedSouth =
                 isBlockNormalCube(world.getBlock(x, y, z + 1)) || world.getBlock(x, y, z + 1) instanceof BlockWalkway
                         ? 4
                         : 0;
-        int connectedWest =
+        final int connectedWest =
                 isBlockNormalCube(world.getBlock(x - 1, y, z)) || world.getBlock(x - 1, y, z) instanceof BlockWalkway
                         ? 8
                         : 0;
@@ -131,7 +131,7 @@ public class BlockWalkway extends BlockTransmitter implements ITileEntityProvide
 
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        final TileEntity tileEntity = world.getTileEntity(x, y, z);
         TileEntity[] connectable = new TileEntity[6];
 
         if (tileEntity != null) {
@@ -148,12 +148,12 @@ public class BlockWalkway extends BlockTransmitter implements ITileEntityProvide
                 }
             }
 
-            float minX = 0.0F;
+            final float minX = 0.0F;
             float minY = 0.32F;
-            float minZ = 0.0F;
-            float maxX = 1.0F;
-            float maxY = 1.0F;
-            float maxZ = 1.0F;
+            final float minZ = 0.0F;
+            final float maxX = 1.0F;
+            final float maxY = 1.0F;
+            final float maxZ = 1.0F;
 
             if (connectable[0] != null) {
                 minY = 0.0F;
@@ -164,7 +164,7 @@ public class BlockWalkway extends BlockTransmitter implements ITileEntityProvide
     }
 
     private void addCollisionBox(World world, int x, int y, int z, AxisAlignedBB aabb, List list) {
-        AxisAlignedBB axisalignedbb1 = this.getCollisionBoundingBoxFromPool(world, x, y, z);
+        final AxisAlignedBB axisalignedbb1 = this.getCollisionBoundingBoxFromPool(world, x, y, z);
 
         if (axisalignedbb1 != null && aabb.intersectsWith(axisalignedbb1)) {
             list.add(axisalignedbb1);
@@ -175,7 +175,7 @@ public class BlockWalkway extends BlockTransmitter implements ITileEntityProvide
     @Override
     public void addCollisionBoxesToList(
             World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List list, Entity entity) {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        final TileEntity tileEntity = world.getTileEntity(x, y, z);
         TileEntity[] connectable = new TileEntity[6];
 
         if (this.getNetworkType() != null) {

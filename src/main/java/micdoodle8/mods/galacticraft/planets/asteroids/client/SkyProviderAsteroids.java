@@ -29,7 +29,7 @@ public class SkyProviderAsteroids extends IRenderHandler {
     public int glSkyList;
     public int glSkyList2;
 
-    private float sunSize;
+    private final float sunSize;
 
     public SkyProviderAsteroids(IGalacticraftWorldProvider asteroidsProvider) {
         this.sunSize = 17.5F * asteroidsProvider.getSolarSize();
@@ -78,8 +78,8 @@ public class SkyProviderAsteroids extends IRenderHandler {
 
     @Override
     public void render(float partialTicks, WorldClient world, Minecraft mc) {
-        float var10;
-        float var11;
+        final float var10;
+        final float var11;
         float var12;
         final Tessellator var23 = Tessellator.instance;
 

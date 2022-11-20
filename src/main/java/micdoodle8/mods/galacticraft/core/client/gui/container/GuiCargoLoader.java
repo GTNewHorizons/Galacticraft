@@ -23,7 +23,7 @@ public class GuiCargoLoader extends GuiContainerGC {
     private final TileEntityCargoLoader cargoLoader;
 
     private GuiButton buttonLoadItems;
-    private GuiElementInfoRegion electricInfoRegion = new GuiElementInfoRegion(
+    private final GuiElementInfoRegion electricInfoRegion = new GuiElementInfoRegion(
             (this.width - this.xSize) / 2 + 107,
             (this.height - this.ySize) / 2 + 101,
             56,
@@ -54,7 +54,7 @@ public class GuiCargoLoader extends GuiContainerGC {
     @Override
     public void initGui() {
         super.initGui();
-        List<String> electricityDesc = new ArrayList<String>();
+        final List<String> electricityDesc = new ArrayList<String>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         electricityDesc.add(EnumColor.YELLOW
                 + GCCoreUtil.translate("gui.energyStorage.desc.1")
@@ -66,7 +66,7 @@ public class GuiCargoLoader extends GuiContainerGC {
         this.electricInfoRegion.parentWidth = this.width;
         this.electricInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.electricInfoRegion);
-        List<String> batterySlotDesc = new ArrayList<String>();
+        final List<String> batterySlotDesc = new ArrayList<String>();
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.0"));
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(
@@ -90,8 +90,8 @@ public class GuiCargoLoader extends GuiContainerGC {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-        int offsetX = -17;
-        int offsetY = 45;
+        final int offsetX = -17;
+        final int offsetY = 45;
         this.fontRendererObj.drawString(this.cargoLoader.getInventoryName(), 60, 12, 4210752);
         this.buttonLoadItems.enabled = this.cargoLoader.disableCooldown == 0;
         this.buttonLoadItems.displayString = !this.cargoLoader.getDisabled(0)
@@ -136,7 +136,7 @@ public class GuiCargoLoader extends GuiContainerGC {
         final int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6 + 5, 0, 0, this.xSize, this.ySize);
 
-        List<String> electricityDesc = new ArrayList<String>();
+        final List<String> electricityDesc = new ArrayList<String>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         EnergyDisplayHelper.getEnergyDisplayTooltip(
                 this.cargoLoader.getEnergyStoredGC(), this.cargoLoader.getMaxEnergyStoredGC(), electricityDesc);

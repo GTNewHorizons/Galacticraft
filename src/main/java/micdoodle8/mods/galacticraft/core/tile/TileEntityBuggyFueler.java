@@ -157,7 +157,7 @@ public class TileEntityBuggyFueler extends TileEntityMulti implements IMultiBloc
 
     @Override
     public HashSet<ILandingPadAttachable> getConnectedTiles() {
-        HashSet<ILandingPadAttachable> connectedTiles = new HashSet<ILandingPadAttachable>();
+        final HashSet<ILandingPadAttachable> connectedTiles = new HashSet<ILandingPadAttachable>();
 
         for (int x = -2; x < 3; x++) {
             for (int z = -2; z < 3; z++) {
@@ -182,7 +182,7 @@ public class TileEntityBuggyFueler extends TileEntityMulti implements IMultiBloc
 
     @Override
     public boolean isBlockAttachable(IBlockAccess world, int x, int y, int z) {
-        TileEntity tile = world.getTileEntity(x, y, z);
+        final TileEntity tile = world.getTileEntity(x, y, z);
 
         if (tile != null && tile instanceof ILandingPadAttachable) {
             return ((ILandingPadAttachable) tile).canAttachToLandingPad(world, this.xCoord, this.yCoord, this.zCoord);

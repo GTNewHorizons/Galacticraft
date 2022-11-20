@@ -94,7 +94,7 @@ public class NEIGalacticraftMarsConfig implements IConfigureNEI {
         // Handled by GalaxySpace
         // final int changeY = 15;
 
-        ArrayList<PositionedStack> input = new ArrayList<PositionedStack>();
+        final ArrayList<PositionedStack> input = new ArrayList<PositionedStack>();
 
         /*
          * input1.add(new PositionedStack(new ItemStack(GCItems.partNoseCone), 45, -8 +
@@ -212,8 +212,8 @@ public class NEIGalacticraftMarsConfig implements IConfigureNEI {
          * 139, 87 + changeY));
          */
 
-        int x = CargoRocketRecipeHandler.tX - CargoRocketRecipeHandler.x;
-        int y = CargoRocketRecipeHandler.tY - CargoRocketRecipeHandler.y;
+        final int x = CargoRocketRecipeHandler.tX - CargoRocketRecipeHandler.x;
+        final int y = CargoRocketRecipeHandler.tY - CargoRocketRecipeHandler.y;
         input.add(new PositionedStack(new ItemStack(GCItems.basicItem, 1, 14), 134 - x, 10 - y));
         if (GalacticraftCore.isGalaxySpaceLoaded) {
             input.add(new PositionedStack(

@@ -33,9 +33,9 @@ public class SpaceStationWorldData extends WorldSavedData {
             @Override
             public boolean contains(Object o) {
                 if (o instanceof String) {
-                    String paramStr = (String) o;
+                    final String paramStr = (String) o;
 
-                    for (String s : this) {
+                    for (final String s : this) {
                         if (paramStr.equalsIgnoreCase(s)) {
                             return true;
                         }
@@ -183,14 +183,15 @@ public class SpaceStationWorldData extends WorldSavedData {
      */
     public static SpaceStationWorldData getStationData(
             World world, int stationID, int homeID, int providerIdDynamic, int providerIdStatic, EntityPlayer owner) {
-        int providerType = DimensionManager.getProviderType(stationID);
+        final int providerType = DimensionManager.getProviderType(stationID);
 
         boolean foundMatch = false;
 
         // Loop through all registered satellites, checking for a provider ID match. If
         // none is found, this method is
         // being called on an incorrect
-        for (Satellite satellite : GalaxyRegistry.getRegisteredSatellites().values()) {
+        for (final Satellite satellite :
+                GalaxyRegistry.getRegisteredSatellites().values()) {
             if (satellite.getDimensionIdStatic() == providerType || satellite.getDimensionID() == providerType) {
                 foundMatch = true;
                 break;
@@ -300,7 +301,7 @@ public class SpaceStationWorldData extends WorldSavedData {
             }
         } else {
             // This player is the owner of the station - remove from stats data
-            Integer savedOwned = stats.spaceStationDimensionData.get(stationData.getHomePlanet());
+            final Integer savedOwned = stats.spaceStationDimensionData.get(stationData.getHomePlanet());
             if (savedOwned != null && savedOwned == stationID) {
                 GCLog.debug("Player does not own station: " + stationData.getSpaceStationName() + " with home planet "
                         + stationData.getHomePlanet());
@@ -310,8 +311,8 @@ public class SpaceStationWorldData extends WorldSavedData {
     }
 
     public static void checkAllStations(EntityPlayerMP thePlayer, GCPlayerStats stats) {
-        String name = thePlayer.getGameProfile().getName().replace(".", "");
-        for (int id : WorldUtil.registeredSpaceStations.keySet()) {
+        final String name = thePlayer.getGameProfile().getName().replace(".", "");
+        for (final int id : WorldUtil.registeredSpaceStations.keySet()) {
             SpaceStationWorldData.updateSSOwnership(thePlayer, name, stats, id, null);
         }
     }

@@ -59,7 +59,7 @@ public class GuiElementGradientList extends Gui {
 
                     if (this.lastMousePosY > 0) {
                         if (mousePosY >= this.sliderPos && mousePosY < this.sliderPos + 15) {
-                            int deltaY = this.lastMousePosY - this.sliderPos;
+                            final int deltaY = this.lastMousePosY - this.sliderPos;
                             this.sliderPos = mousePosY - deltaY;
                         } else {
                             this.sliderPos = mousePosY - 7;
@@ -80,7 +80,7 @@ public class GuiElementGradientList extends Gui {
                     && mousePosX < this.xPosition + this.width - 10
                     && mousePosY >= this.yPosition
                     && mousePosY < this.yPosition + this.height) {
-                int clickPosY = mousePosY
+                final int clickPosY = mousePosY
                         - this.yPosition
                         + (int) Math.floor(
                                 (this.listContents.size() * GuiElementGradientList.BUTTON_HEIGHT - this.height)
@@ -182,10 +182,10 @@ public class GuiElementGradientList extends Gui {
                 + 1
                 - (int) Math.floor((this.listContents.size() * GuiElementGradientList.BUTTON_HEIGHT - this.height)
                         * this.getSliderPercentage());
-        FontRenderer fontRenderer = FMLClientHandler.instance().getClient().fontRenderer;
+        final FontRenderer fontRenderer = FMLClientHandler.instance().getClient().fontRenderer;
 
         for (int i = 0; i < this.listContents.size(); i++) {
-            ListElement displayButton = this.listContents.get(i);
+            final ListElement displayButton = this.listContents.get(i);
 
             if (displayButton != null && displayButton.value != null && !displayButton.value.isEmpty()) {
                 int yCoord0 = currentDrawHeight;
@@ -195,7 +195,7 @@ public class GuiElementGradientList extends Gui {
                     yCoord0 = Math.max(this.yPosition + 1, yCoord0);
                     yCoord1 = Math.min(this.yPosition + this.height - 1, yCoord1);
 
-                    int color = i == this.selectedIndex
+                    final int color = i == this.selectedIndex
                             ? ColorUtil.to32BitColor(255, 35, 35, 35)
                             : ColorUtil.to32BitColor(255, 25, 25, 25);
 

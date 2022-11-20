@@ -20,7 +20,7 @@ public class ClientUtil {
     }
 
     public static FlagData updateFlagData(String playerName, boolean sendPacket) {
-        SpaceRace race = SpaceRaceManager.getSpaceRaceFromPlayer(playerName);
+        final SpaceRace race = SpaceRaceManager.getSpaceRaceFromPlayer(playerName);
 
         if (race != null) {
             return race.getFlagData();
@@ -34,7 +34,7 @@ public class ClientUtil {
     }
 
     public static Vector3 updateTeamColor(String playerName, boolean sendPacket) {
-        SpaceRace race = SpaceRaceManager.getSpaceRaceFromPlayer(playerName);
+        final SpaceRace race = SpaceRaceManager.getSpaceRaceFromPlayer(playerName);
 
         if (race != null) {
             return race.getTeamColor();

@@ -13,9 +13,9 @@ public class NetworkFinder {
     public World worldObj;
     public BlockVec3 start;
     private int theDim;
-    private BlockVec3 toIgnore;
+    private final BlockVec3 toIgnore;
 
-    private Set<BlockVec3> iterated = new HashSet<BlockVec3>();
+    private final Set<BlockVec3> iterated = new HashSet<BlockVec3>();
     public List<IConductor> found = new LinkedList<IConductor>();
 
     public NetworkFinder(World world, BlockVec3 location, BlockVec3 ignore) {
@@ -55,7 +55,7 @@ public class NetworkFinder {
             if (!iterated.contains(obj)) {
                 iterated.add(obj);
 
-                TileEntity tileEntity = worldObj.getTileEntity(obj.x, obj.y, obj.z);
+                final TileEntity tileEntity = worldObj.getTileEntity(obj.x, obj.y, obj.z);
 
                 if (tileEntity instanceof IConductor) {
                     found.add((IConductor) tileEntity);

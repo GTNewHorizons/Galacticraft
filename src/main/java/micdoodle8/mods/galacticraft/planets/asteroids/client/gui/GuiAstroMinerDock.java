@@ -27,10 +27,10 @@ public class GuiAstroMinerDock extends GuiContainerGC {
     private static final ResourceLocation dockGui =
             new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/gui/guiAstroMinerDock.png");
 
-    private TileEntityMinerBase tile;
+    private final TileEntityMinerBase tile;
 
     private GuiButton recallButton;
-    private GuiElementInfoRegion electricInfoRegion = new GuiElementInfoRegion(
+    private final GuiElementInfoRegion electricInfoRegion = new GuiElementInfoRegion(
             (this.width - this.xSize) / 2 + 233,
             (this.height - this.ySize) / 2 + 31,
             10,
@@ -55,7 +55,7 @@ public class GuiAstroMinerDock extends GuiContainerGC {
         if (this.tile.linkedMinerID == null) {
             this.recallButton.enabled = false;
         } else {
-            EntityAstroMiner miner = this.tile.linkedMiner;
+            final EntityAstroMiner miner = this.tile.linkedMiner;
             if (miner == null
                     || miner.isDead
                     || this.tile.linkCountDown == 0
@@ -73,9 +73,9 @@ public class GuiAstroMinerDock extends GuiContainerGC {
     @Override
     public void initGui() {
         super.initGui();
-        int xPos = (this.width - this.xSize) / 2;
-        int yPos = (this.height - this.ySize) / 2;
-        List<String> electricityDesc = new ArrayList<String>();
+        final int xPos = (this.width - this.xSize) / 2;
+        final int yPos = (this.height - this.ySize) / 2;
+        final List<String> electricityDesc = new ArrayList<String>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         electricityDesc.add(EnumColor.YELLOW
                 + GCCoreUtil.translate("gui.energyStorage.desc.1")
@@ -87,7 +87,7 @@ public class GuiAstroMinerDock extends GuiContainerGC {
         this.electricInfoRegion.parentWidth = this.width;
         this.electricInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.electricInfoRegion);
-        List<String> batterySlotDesc = new ArrayList<String>();
+        final List<String> batterySlotDesc = new ArrayList<String>();
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.0"));
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(
@@ -166,7 +166,7 @@ public class GuiAstroMinerDock extends GuiContainerGC {
         if (this.tile.linkedMinerID == null) {
             return "";
         }
-        EntityAstroMiner miner = this.tile.linkedMiner;
+        final EntityAstroMiner miner = this.tile.linkedMiner;
         if (miner == null || miner.isDead) {
             return "";
         }
@@ -200,11 +200,11 @@ public class GuiAstroMinerDock extends GuiContainerGC {
     @Override
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        int xPos = (this.width - this.xSize) / 2;
-        int yPos = (this.height - this.ySize) / 2;
+        final int xPos = (this.width - this.xSize) / 2;
+        final int yPos = (this.height - this.ySize) / 2;
         this.mc.getTextureManager().bindTexture(GuiAstroMinerDock.dockGui);
         this.drawTexturedModalRect(xPos, yPos, 0, 0, this.xSize, this.ySize);
-        List<String> electricityDesc = new ArrayList<String>();
+        final List<String> electricityDesc = new ArrayList<String>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         EnergyDisplayHelper.getEnergyDisplayTooltip(
                 this.tile.getEnergyStoredGC(), this.tile.getMaxEnergyStoredGC(), electricityDesc);
@@ -215,14 +215,14 @@ public class GuiAstroMinerDock extends GuiContainerGC {
             this.drawTexturedModalRect(xPos + 233, yPos + 17, 176, 0, 11, 10);
         }
 
-        int level = Math.min(this.tile.getScaledElecticalLevel(66), 66);
+        final int level = Math.min(this.tile.getScaledElecticalLevel(66), 66);
         this.drawColorModalRect(xPos + 234, yPos + 29 + 66 - level, 8, level, 0xc1aa24);
     }
 
     public void drawColorModalRect(int x, int y, int width, int height, int color) {
-        float f = 0.00390625F;
-        float f1 = 0.00390625F;
-        Tessellator tessellator = Tessellator.instance;
+        final float f = 0.00390625F;
+        final float f1 = 0.00390625F;
+        final Tessellator tessellator = Tessellator.instance;
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         OpenGlHelper.glBlendFunc(770, 771, 1, 0);

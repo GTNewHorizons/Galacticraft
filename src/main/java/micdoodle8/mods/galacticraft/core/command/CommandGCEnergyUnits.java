@@ -46,14 +46,14 @@ public class CommandGCEnergyUnits extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender icommandsender, String[] astring) {
-        EntityPlayerMP playerBase =
+        final EntityPlayerMP playerBase =
                 PlayerUtil.getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
         if (playerBase == null) {
             return;
         }
 
         if (astring.length == 1) {
-            String param = astring[0].toLowerCase();
+            final String param = astring[0].toLowerCase();
             if (param.length() <= 2) {
                 int paramvalue = 0;
                 if ("gj".equals(param)) {

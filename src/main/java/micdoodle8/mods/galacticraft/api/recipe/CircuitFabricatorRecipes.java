@@ -35,22 +35,22 @@ public class CircuitFabricatorRecipes {
         // First initialise the ArrayList if this is the first time it's used
         if (CircuitFabricatorRecipes.slotValidItems.size() == 0) {
             for (int i = 0; i < 5; i++) {
-                ArrayList<ItemStack> entry = new ArrayList<ItemStack>();
+                final ArrayList<ItemStack> entry = new ArrayList<ItemStack>();
                 CircuitFabricatorRecipes.slotValidItems.add(entry);
             }
         }
         // Now see if the recipe items are already valid for their slots, if not add
         // them
         for (int i = 0; i < 5; i++) {
-            ItemStack inputStack = inputList[i];
+            final ItemStack inputStack = inputList[i];
             if (inputStack == null) {
                 continue;
             }
 
-            ArrayList<ItemStack> validItems = CircuitFabricatorRecipes.slotValidItems.get(i);
+            final ArrayList<ItemStack> validItems = CircuitFabricatorRecipes.slotValidItems.get(i);
 
             boolean found = false;
-            for (ItemStack validItem : validItems) {
+            for (final ItemStack validItem : validItems) {
                 if (inputStack.isItemEqual(validItem)) {
                     found = true;
                     break;
@@ -73,12 +73,12 @@ public class CircuitFabricatorRecipes {
             return null;
         }
 
-        for (Entry<ItemStack[], ItemStack> recipe : CircuitFabricatorRecipes.recipes.entrySet()) {
+        for (final Entry<ItemStack[], ItemStack> recipe : CircuitFabricatorRecipes.recipes.entrySet()) {
             boolean found = true;
 
             for (int i = 0; i < 5; i++) {
-                ItemStack recipeStack = recipe.getKey()[i];
-                ItemStack inputStack = inputList[i];
+                final ItemStack recipeStack = recipe.getKey()[i];
+                final ItemStack inputStack = inputList[i];
 
                 if (recipeStack == null || inputStack == null) {
                     if (recipeStack != null || inputStack != null) {
@@ -103,10 +103,10 @@ public class CircuitFabricatorRecipes {
     }
 
     public static void removeRecipe(ItemStack match) {
-        for (Iterator<Map.Entry<ItemStack[], ItemStack>> it =
+        for (final Iterator<Map.Entry<ItemStack[], ItemStack>> it =
                         CircuitFabricatorRecipes.recipes.entrySet().iterator();
                 it.hasNext(); ) {
-            Map.Entry<ItemStack[], ItemStack> recipe = it.next();
+            final Map.Entry<ItemStack[], ItemStack> recipe = it.next();
             if (ItemStack.areItemStacksEqual(match, recipe.getValue())) {
                 it.remove();
             }

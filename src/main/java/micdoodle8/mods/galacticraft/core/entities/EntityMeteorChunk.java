@@ -67,19 +67,19 @@ public class EntityMeteorChunk extends Entity implements IProjectile {
         }
 
         this.posY = shootingEntity.posY + shootingEntity.getEyeHeight() - 0.10000000149011612D;
-        double d0 = target.posX - shootingEntity.posX;
-        double d1 = target.boundingBox.minY + target.height / 3.0F - this.posY;
-        double d2 = target.posZ - shootingEntity.posZ;
-        double d3 = MathHelper.sqrt_double(d0 * d0 + d2 * d2);
+        final double d0 = target.posX - shootingEntity.posX;
+        final double d1 = target.boundingBox.minY + target.height / 3.0F - this.posY;
+        final double d2 = target.posZ - shootingEntity.posZ;
+        final double d3 = MathHelper.sqrt_double(d0 * d0 + d2 * d2);
 
         if (d3 >= 1.0E-7D) {
-            float f2 = (float) (Math.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
-            float f3 = (float) -(Math.atan2(d1, d3) * 180.0D / Math.PI);
-            double d4 = d0 / d3;
-            double d5 = d2 / d3;
+            final float f2 = (float) (Math.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
+            final float f3 = (float) -(Math.atan2(d1, d3) * 180.0D / Math.PI);
+            final double d4 = d0 / d3;
+            final double d5 = d2 / d3;
             this.setLocationAndAngles(shootingEntity.posX + d4, this.posY, shootingEntity.posZ + d5, f2, f3);
             this.yOffset = 0.0F;
-            float f4 = (float) d3 * 0.2F;
+            final float f4 = (float) d3 * 0.2F;
             this.setThrowableHeading(d0, d1 + f4, d2, speed, randMod);
         }
     }
@@ -115,7 +115,7 @@ public class EntityMeteorChunk extends Entity implements IProjectile {
 
     @Override
     public void setThrowableHeading(double headingX, double headingY, double headingZ, float speed, float randMod) {
-        float f2 = MathHelper.sqrt_double(headingX * headingX + headingY * headingY + headingZ * headingZ);
+        final float f2 = MathHelper.sqrt_double(headingX * headingX + headingY * headingY + headingZ * headingZ);
         headingX /= f2;
         headingY /= f2;
         headingZ /= f2;
@@ -128,7 +128,7 @@ public class EntityMeteorChunk extends Entity implements IProjectile {
         this.motionX = headingX;
         this.motionY = headingY;
         this.motionZ = headingZ;
-        float f3 = MathHelper.sqrt_double(headingX * headingX + headingZ * headingZ);
+        final float f3 = MathHelper.sqrt_double(headingX * headingX + headingZ * headingZ);
         this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(headingX, headingZ) * 180.0D / Math.PI);
         this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(headingY, f3) * 180.0D / Math.PI);
         this.ticksInGround = 0;
@@ -142,7 +142,7 @@ public class EntityMeteorChunk extends Entity implements IProjectile {
         this.motionZ = par5;
 
         if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F) {
-            float f = MathHelper.sqrt_double(par1 * par1 + par5 * par5);
+            final float f = MathHelper.sqrt_double(par1 * par1 + par5 * par5);
             this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(par1, par5) * 180.0D / Math.PI);
             this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(par3, f) * 180.0D / Math.PI);
             this.prevRotationPitch = this.rotationPitch;
@@ -167,17 +167,17 @@ public class EntityMeteorChunk extends Entity implements IProjectile {
         }
 
         if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F) {
-            float f = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
+            final float f = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
             this.prevRotationYaw =
                     this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
             this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(this.motionY, f) * 180.0D / Math.PI);
         }
 
-        Block block = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
+        final Block block = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 
         if (block != null && !block.isAir(this.worldObj, this.xTile, this.yTile, this.zTile)) {
             block.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
-            AxisAlignedBB axisalignedbb =
+            final AxisAlignedBB axisalignedbb =
                     block.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
 
             if (axisalignedbb != null
@@ -187,8 +187,8 @@ public class EntityMeteorChunk extends Entity implements IProjectile {
         }
 
         if (this.inGround) {
-            Block j = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
-            int k = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
+            final Block j = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
+            final int k = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
 
             if (j == this.inTile && k == this.inData) {
                 ++this.ticksInGround;
@@ -224,7 +224,7 @@ public class EntityMeteorChunk extends Entity implements IProjectile {
             this.rotationPitch += 1F;
 
             Entity entity = null;
-            List<Entity> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(
+            final List<Entity> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(
                     this,
                     this.boundingBox
                             .addCoord(this.motionX, this.motionY, this.motionZ)
@@ -234,15 +234,15 @@ public class EntityMeteorChunk extends Entity implements IProjectile {
             float f1;
 
             for (l = 0; l < list.size(); ++l) {
-                Entity entity1 = list.get(l);
+                final Entity entity1 = list.get(l);
 
                 if (entity1.canBeCollidedWith() && (entity1 != this.shootingEntity || this.ticksInAir >= 5)) {
                     f1 = 0.3F;
-                    AxisAlignedBB axisalignedbb1 = entity1.boundingBox.expand(f1, f1, f1);
-                    MovingObjectPosition movingobjectposition1 = axisalignedbb1.calculateIntercept(vec3, vec31);
+                    final AxisAlignedBB axisalignedbb1 = entity1.boundingBox.expand(f1, f1, f1);
+                    final MovingObjectPosition movingobjectposition1 = axisalignedbb1.calculateIntercept(vec3, vec31);
 
                     if (movingobjectposition1 != null) {
-                        double d1 = vec3.distanceTo(movingobjectposition1.hitVec);
+                        final double d1 = vec3.distanceTo(movingobjectposition1.hitVec);
 
                         if (d1 < d0 || d0 == 0.0D) {
                             entity = entity1;
@@ -259,7 +259,7 @@ public class EntityMeteorChunk extends Entity implements IProjectile {
             if (movingobjectposition != null
                     && movingobjectposition.entityHit != null
                     && movingobjectposition.entityHit instanceof EntityPlayer) {
-                EntityPlayer entityplayer = (EntityPlayer) movingobjectposition.entityHit;
+                final EntityPlayer entityplayer = (EntityPlayer) movingobjectposition.entityHit;
 
                 if (entityplayer.capabilities.disableDamage
                         || this.shootingEntity instanceof EntityPlayer
@@ -270,13 +270,13 @@ public class EntityMeteorChunk extends Entity implements IProjectile {
 
             float f2;
             float f3;
-            double damage = ConfigManagerCore.hardMode ? 3.2D : 1.6D;
+            final double damage = ConfigManagerCore.hardMode ? 3.2D : 1.6D;
 
             if (movingobjectposition != null) {
                 if (movingobjectposition.entityHit != null) {
                     f2 = MathHelper.sqrt_double(
                             this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-                    int i1 = MathHelper.ceiling_double_int(f2 * damage);
+                    final int i1 = MathHelper.ceiling_double_int(f2 * damage);
 
                     DamageSource damagesource = null;
 
@@ -293,7 +293,7 @@ public class EntityMeteorChunk extends Entity implements IProjectile {
 
                     if (movingobjectposition.entityHit.attackEntityFrom(damagesource, i1)) {
                         if (movingobjectposition.entityHit instanceof EntityLivingBase) {
-                            EntityLivingBase entitylivingbase = (EntityLivingBase) movingobjectposition.entityHit;
+                            final EntityLivingBase entitylivingbase = (EntityLivingBase) movingobjectposition.entityHit;
 
                             if (!this.worldObj.isRemote) {
                                 entitylivingbase.setArrowCountInEntity(entitylivingbase.getArrowCountInEntity() + 1);

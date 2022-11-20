@@ -16,7 +16,7 @@ import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
 public class RenderTier3Rocket extends Render {
-    private ResourceLocation rocketTexture;
+    private final ResourceLocation rocketTexture;
 
     protected IModelCustom rocketModelObj;
 
@@ -60,7 +60,7 @@ public class RenderTier3Rocket extends Render {
         GL11.glScalef(0.9F, 0.9F, 0.9F);
 
         this.rocketModelObj.renderOnly("Boosters", "Rocket");
-        Vector3 teamColor = ClientUtil.updateTeamColor(
+        final Vector3 teamColor = ClientUtil.updateTeamColor(
                 FMLClientHandler.instance().getClient().thePlayer.getCommandSenderName(), true);
         if (teamColor != null) {
             GL11.glColor3f(teamColor.floatX(), teamColor.floatY(), teamColor.floatZ());

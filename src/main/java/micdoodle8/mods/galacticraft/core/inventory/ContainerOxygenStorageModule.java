@@ -9,7 +9,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerOxygenStorageModule extends Container {
-    private TileEntityOxygenStorageModule tileEntity;
+    private final TileEntityOxygenStorageModule tileEntity;
 
     public ContainerOxygenStorageModule(
             InventoryPlayer par1InventoryPlayer, TileEntityOxygenStorageModule storageModule) {

@@ -38,9 +38,9 @@ public class TileEntityAluminumWireRenderer extends TileEntitySpecialRenderer {
         GL11.glTranslatef((float) d + 0.5F, (float) d1 + 0.5F, (float) d2 + 0.5F);
         GL11.glScalef(1.0F, -1F, -1F);
 
-        TileEntity[] adjecentConnections = EnergyUtil.getAdjacentPowerConnections(tileEntity);
+        final TileEntity[] adjecentConnections = EnergyUtil.getAdjacentPowerConnections(tileEntity);
 
-        int metadata =
+        final int metadata =
                 tileEntity.getWorldObj().getBlockMetadata(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
 
         IModelCustom model = null;

@@ -84,7 +84,7 @@ public class EnergyStorage implements IEnergyStorageGC {
 
     @Override
     public float receiveEnergyGC(float maxReceive, boolean simulate) {
-        float energyReceived = Math.min(this.capacity - this.energy, Math.min(this.maxReceive, maxReceive));
+        final float energyReceived = Math.min(this.capacity - this.energy, Math.min(this.maxReceive, maxReceive));
 
         if (!simulate) {
             this.energy += energyReceived;
@@ -94,14 +94,14 @@ public class EnergyStorage implements IEnergyStorageGC {
     }
 
     public float receiveEnergyGC(float amount) {
-        float energyReceived = Math.min(this.capacity - this.energy, Math.min(this.maxReceive, amount));
+        final float energyReceived = Math.min(this.capacity - this.energy, Math.min(this.maxReceive, amount));
         this.energy += energyReceived;
         return energyReceived;
     }
 
     @Override
     public float extractEnergyGC(float amount, boolean simulate) {
-        float energyExtracted = Math.min(this.energy, Math.min(this.maxExtractRemaining, amount));
+        final float energyExtracted = Math.min(this.energy, Math.min(this.maxExtractRemaining, amount));
 
         if (!simulate) {
             this.energy -= energyExtracted;
@@ -111,7 +111,7 @@ public class EnergyStorage implements IEnergyStorageGC {
     }
 
     public float extractEnergyGCnoMax(float amount, boolean simulate) {
-        float energyExtracted = Math.min(this.energy, amount);
+        final float energyExtracted = Math.min(this.energy, amount);
 
         if (!simulate) {
             this.energy -= energyExtracted;
@@ -136,7 +136,7 @@ public class EnergyStorage implements IEnergyStorageGC {
             return false;
         }
         if (obj instanceof EnergyStorage) {
-            EnergyStorage storage = (EnergyStorage) obj;
+            final EnergyStorage storage = (EnergyStorage) obj;
             return storage.getEnergyStoredGC() == energy
                     && storage.getCapacityGC() == capacity
                     && storage.getMaxReceive() == maxReceive

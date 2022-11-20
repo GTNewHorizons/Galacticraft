@@ -22,13 +22,13 @@ public class PlayerUtil {
     }
 
     public static EntityPlayerMP getPlayerBaseServerFromPlayerUsername(String username, boolean ignoreCase) {
-        MinecraftServer server = MinecraftServer.getServer();
+        final MinecraftServer server = MinecraftServer.getServer();
 
         if (server != null) {
             if (ignoreCase) {
                 return getPlayerForUsernameVanilla(server, username);
             } else {
-                Iterator iterator =
+                final Iterator iterator =
                         server.getConfigurationManager().playerEntityList.iterator();
                 EntityPlayerMP entityplayermp;
 
@@ -63,7 +63,7 @@ public class PlayerUtil {
 
     @SideOnly(Side.CLIENT)
     public static EntityClientPlayerMP getPlayerBaseClientFromPlayer(EntityPlayer player, boolean ignoreCase) {
-        EntityClientPlayerMP clientPlayer = FMLClientHandler.instance().getClientPlayerEntity();
+        final EntityClientPlayerMP clientPlayer = FMLClientHandler.instance().getClientPlayerEntity();
 
         if (clientPlayer == null && player != null) {
             GCLog.severe("Warning: Could not find player base client instance for player "
@@ -81,9 +81,9 @@ public class PlayerUtil {
     @SideOnly(Side.CLIENT)
     public static GameProfile makeOtherPlayerProfile(String strName, String strUUID) {
         GameProfile profile = null;
-        for (Object e : FMLClientHandler.instance().getWorldClient().getLoadedEntityList()) {
+        for (final Object e : FMLClientHandler.instance().getWorldClient().getLoadedEntityList()) {
             if (e instanceof AbstractClientPlayer) {
-                GameProfile gp2 = ((AbstractClientPlayer) e).getGameProfile();
+                final GameProfile gp2 = ((AbstractClientPlayer) e).getGameProfile();
                 if (gp2.getName().equals(strName)) {
                     profile = gp2;
                     break;
@@ -92,9 +92,9 @@ public class PlayerUtil {
         }
         if (profile == null) {
             try {
-                UUID uuid = strUUID.isEmpty() ? UUID.randomUUID() : UUID.fromString(strUUID);
+                final UUID uuid = strUUID.isEmpty() ? UUID.randomUUID() : UUID.fromString(strUUID);
                 profile = VersionUtil.constructGameProfile(uuid, strName);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }
@@ -107,7 +107,7 @@ public class PlayerUtil {
     }
 
     public static EntityPlayerMP getPlayerByUUID(UUID theUUID) {
-        List players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+        final List players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
         EntityPlayerMP entityplayermp;
         for (int i = players.size() - 1; i >= 0; --i) {
             entityplayermp = (EntityPlayerMP) players.get(i);

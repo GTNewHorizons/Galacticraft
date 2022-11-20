@@ -10,7 +10,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerOxygenCollector extends Container {
-    private TileBaseElectricBlock tileEntity;
+    private final TileBaseElectricBlock tileEntity;
 
     public ContainerOxygenCollector(InventoryPlayer par1InventoryPlayer, TileEntityOxygenCollector collector) {
         this.tileEntity = collector;

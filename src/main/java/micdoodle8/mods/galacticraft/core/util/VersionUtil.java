@@ -171,9 +171,9 @@ public class VersionUtil {
             nodemap.put(KEY_METHOD_PLAYER_TEXTURE, new MethodObfuscationEntry("getEntityTexture", "func_110775_a", ""));
 
             try {
-                Field sandField = Blocks.class.getField(deobfuscated ? "sand" : "field_150354_m");
+                final Field sandField = Blocks.class.getField(deobfuscated ? "sand" : "field_150354_m");
                 sand = (Block) sandField.get(null);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }
@@ -209,7 +209,7 @@ public class VersionUtil {
             }
 
             m.invoke(slimeling, ownerName);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             t.printStackTrace();
         }
     }
@@ -224,7 +224,7 @@ public class VersionUtil {
             }
 
             return (String) m.invoke(slimeling);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             t.printStackTrace();
         }
 
@@ -241,13 +241,13 @@ public class VersionUtil {
                     Method m = (Method) reflectionCache.get(2);
 
                     if (m == null) {
-                        Class<?> c = Class.forName(
+                        final Class<?> c = Class.forName(
                                 getNameDynamic(KEY_CLASS_YGG_CONVERTER).replace('/', '.'));
                         m = c.getMethod(getNameDynamic(KEY_METHOD_CONVERT_UUID), new Class[] {String.class});
                         reflectionCache.put(2, m);
                     }
 
-                    String s1 = nbt.getString("Owner");
+                    final String s1 = nbt.getString("Owner");
                     s = (String) m.invoke(null, s1);
                 }
             }
@@ -255,7 +255,7 @@ public class VersionUtil {
             if (s.length() > 0) {
                 egg.lastTouchedPlayerUUID = s;
             }
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             t.printStackTrace();
         }
     }
@@ -273,19 +273,19 @@ public class VersionUtil {
                 }
 
                 if (m == null) {
-                    Class<?> c = Class.forName(
+                    final Class<?> c = Class.forName(
                             getNameDynamic(KEY_CLASS_COMPRESSED_STREAM_TOOLS).replace('/', '.'));
                     m = c.getMethod(getNameDynamic(KEY_METHOD_DECOMPRESS_NBT), byte[].class, c0);
                     reflectionCache.put(6, m);
                 }
 
-                Object nbtSizeTracker = c0.getConstructor(long.class).newInstance(2097152L);
+                final Object nbtSizeTracker = c0.getConstructor(long.class).newInstance(2097152L);
                 return (NBTTagCompound) m.invoke(null, compressedNBT, nbtSizeTracker);
             } else if (mcVersion1_7_2) {
                 Method m = (Method) reflectionCache.get(6);
 
                 if (m == null) {
-                    Class<?> c = Class.forName(
+                    final Class<?> c = Class.forName(
                             getNameDynamic(KEY_CLASS_COMPRESSED_STREAM_TOOLS).replace('/', '.'));
                     m = c.getMethod(getNameDynamic(KEY_METHOD_DECOMPRESS_NBT), byte[].class);
                     reflectionCache.put(6, m);
@@ -293,7 +293,7 @@ public class VersionUtil {
 
                 return (NBTTagCompound) m.invoke(null, compressedNBT);
             }
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             t.printStackTrace();
         }
 
@@ -306,7 +306,7 @@ public class VersionUtil {
                 Method m = (Method) reflectionCache.get(8);
 
                 if (m == null) {
-                    Class<?> c =
+                    final Class<?> c =
                             Class.forName(getNameDynamic(KEY_CLASS_TEXTURE_UTIL).replace('/', '.'));
                     m = c.getMethod(
                             getNameDynamic(KEY_METHOD_SET_MIPMAP),
@@ -319,7 +319,7 @@ public class VersionUtil {
                 Method m = (Method) reflectionCache.get(8);
 
                 if (m == null) {
-                    Class<?> c =
+                    final Class<?> c =
                             Class.forName(getNameDynamic(KEY_CLASS_TEXTURE_UTIL).replace('/', '.'));
                     m = c.getMethod(getNameDynamic(KEY_METHOD_SET_MIPMAP), new Class[] {boolean.class, boolean.class});
                     reflectionCache.put(8, m);
@@ -327,7 +327,7 @@ public class VersionUtil {
 
                 m.invoke(null, b0, b1);
             }
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             t.printStackTrace();
         }
     }
@@ -338,7 +338,7 @@ public class VersionUtil {
                 Method m = (Method) reflectionCache.get(10);
 
                 if (m == null) {
-                    Class<?> c =
+                    final Class<?> c =
                             Class.forName(getNameDynamic(KEY_CLASS_COMMAND_BASE).replace('/', '.'));
                     m = c.getMethod(
                             getNameDynamic(KEY_METHOD_NOTIFY_ADMINS),
@@ -351,7 +351,7 @@ public class VersionUtil {
                 Method m = (Method) reflectionCache.get(10);
 
                 if (m == null) {
-                    Class<?> c =
+                    final Class<?> c =
                             Class.forName(getNameDynamic(KEY_CLASS_COMMAND_BASE).replace('/', '.'));
                     m = c.getMethod(
                             getNameDynamic(KEY_METHOD_NOTIFY_ADMINS),
@@ -361,7 +361,7 @@ public class VersionUtil {
 
                 m.invoke(null, sender, name, objects);
             }
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             t.printStackTrace();
         }
     }
@@ -371,13 +371,13 @@ public class VersionUtil {
             Method m = (Method) reflectionCache.get(12);
 
             if (m == null) {
-                Class<?> c = server.getConfigurationManager().getClass();
+                final Class<?> c = server.getConfigurationManager().getClass();
                 m = c.getMethod(getNameDynamic(KEY_METHOD_PLAYER_FOR_NAME), new Class[] {String.class});
                 reflectionCache.put(12, m);
             }
 
             return (EntityPlayerMP) m.invoke(server.getConfigurationManager(), username);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             t.printStackTrace();
         }
 
@@ -390,7 +390,7 @@ public class VersionUtil {
                 Method m = (Method) reflectionCache.get(14);
 
                 if (m == null) {
-                    Class<?> c = player.mcServer.getConfigurationManager().getClass();
+                    final Class<?> c = player.mcServer.getConfigurationManager().getClass();
                     m = c.getMethod(getNameDynamic(KEY_METHOD_PLAYER_IS_OPPED), new Class[] {GameProfile.class});
                     reflectionCache.put(14, m);
                 }
@@ -400,7 +400,7 @@ public class VersionUtil {
                 Method m = (Method) reflectionCache.get(14);
 
                 if (m == null) {
-                    Class<?> c = player.mcServer.getConfigurationManager().getClass();
+                    final Class<?> c = player.mcServer.getConfigurationManager().getClass();
                     m = c.getMethod(getNameDynamic(KEY_METHOD_PLAYER_IS_OPPED), new Class[] {String.class});
                     reflectionCache.put(14, m);
                 }
@@ -409,7 +409,7 @@ public class VersionUtil {
                         player.mcServer.getConfigurationManager(),
                         player.getGameProfile().getName());
             }
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             t.printStackTrace();
         }
 
@@ -423,7 +423,7 @@ public class VersionUtil {
                 Constructor m = (Constructor) reflectionCache.get(16);
 
                 if (m == null) {
-                    Class<?> c =
+                    final Class<?> c =
                             Class.forName(getNameDynamic(KEY_CLASS_SCALED_RES).replace('/', '.'));
                     m = c.getConstructor(new Class[] {Minecraft.class, int.class, int.class});
                     reflectionCache.put(16, m);
@@ -434,7 +434,7 @@ public class VersionUtil {
                 Constructor m = (Constructor) reflectionCache.get(16);
 
                 if (m == null) {
-                    Class<?> c =
+                    final Class<?> c =
                             Class.forName(getNameDynamic(KEY_CLASS_SCALED_RES).replace('/', '.'));
                     m = c.getConstructor(new Class[] {GameSettings.class, int.class, int.class});
                     reflectionCache.put(16, m);
@@ -442,7 +442,7 @@ public class VersionUtil {
 
                 return (ScaledResolution) m.newInstance(mc.gameSettings, width, height);
             }
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             t.printStackTrace();
         }
 
@@ -454,7 +454,7 @@ public class VersionUtil {
             Method m = (Method) reflectionCache.get(18);
 
             if (m == null) {
-                Class<?> c =
+                final Class<?> c =
                         Class.forName(getNameDynamic(KEY_CLASS_RENDER_PLAYER).replace('/', '.'));
                 m = c.getMethod(getNameDynamic(KEY_METHOD_PLAYER_TEXTURE), new Class[] {AbstractClientPlayer.class});
                 m.setAccessible(true);
@@ -462,7 +462,7 @@ public class VersionUtil {
             }
 
             return m;
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             t.printStackTrace();
         }
 
@@ -473,14 +473,15 @@ public class VersionUtil {
         // Achieves this, with private field:
         // EntityList.classToIDMapping.put(mobClazz, id);
         try {
-            Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_ENTITYLIST).replace('/', '.'));
-            Field f = c.getDeclaredField(getNameDynamic(KEY_FIELD_CLASSTOIDMAPPING));
+            final Class<?> c =
+                    Class.forName(getNameDynamic(KEY_CLASS_ENTITYLIST).replace('/', '.'));
+            final Field f = c.getDeclaredField(getNameDynamic(KEY_FIELD_CLASSTOIDMAPPING));
             f.setAccessible(true);
-            Map classToIDMapping = (Map) f.get(null);
+            final Map classToIDMapping = (Map) f.get(null);
             classToIDMapping.put(mobClazz, id);
 
             return;
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             t.printStackTrace();
         }
 
@@ -491,14 +492,15 @@ public class VersionUtil {
         // Achieves this, with private field:
         // EntityList.classToIDMapping.put(mobClazz, id);
         try {
-            Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_ENTITYLIST).replace('/', '.'));
-            Field f = c.getDeclaredField(getNameDynamic(KEY_FIELD_CLASSTOIDMAPPING));
+            final Class<?> c =
+                    Class.forName(getNameDynamic(KEY_CLASS_ENTITYLIST).replace('/', '.'));
+            final Field f = c.getDeclaredField(getNameDynamic(KEY_FIELD_CLASSTOIDMAPPING));
             f.setAccessible(true);
-            Map classToIDMapping = (Map) f.get(null);
-            Integer i = (Integer) classToIDMapping.get(mobClazz);
+            final Map classToIDMapping = (Map) f.get(null);
+            final Integer i = (Integer) classToIDMapping.get(mobClazz);
 
             return i != null ? i : 0;
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             t.printStackTrace();
         }
 
@@ -520,7 +522,7 @@ public class VersionUtil {
             } else {
                 return getObfName(keyName);
             }
-        } catch (NullPointerException e) {
+        } catch (final NullPointerException e) {
             System.err.println("Could not find key: " + keyName);
             throw e;
         }
@@ -542,7 +544,7 @@ public class VersionUtil {
                 return (GameProfile) c.getConstructor(String.class, String.class)
                         .newInstance(uuid.toString().replaceAll("-", ""), strName);
             }
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             t.printStackTrace();
         }
 
@@ -558,14 +560,14 @@ public class VersionUtil {
             try {
                 Field f = (Field) reflectionCache.get(20);
                 if (f == null) {
-                    Class c = Class.forName("net.minecraft.world.ChunkCache");
+                    final Class c = Class.forName("net.minecraft.world.ChunkCache");
                     f = c.getDeclaredField(getNameDynamic(KEY_FIELD_CHUNKCACHE_WORLDOBJ));
                     f.setAccessible(true);
                     reflectionCache.put(20, f);
                 }
 
                 return (World) f.get(world);
-            } catch (Throwable t) {
+            } catch (final Throwable t) {
                 t.printStackTrace();
             }
         }
@@ -577,9 +579,9 @@ public class VersionUtil {
         try {
             Method m = (Method) reflectionCache.get(3);
             if (m == null) {
-                Class c = Class.forName("net.minecraft.block.Block");
-                Method mm[] = c.getDeclaredMethods();
-                for (Method testMethod : mm) {
+                final Class c = Class.forName("net.minecraft.block.Block");
+                final Method mm[] = c.getDeclaredMethods();
+                for (final Method testMethod : mm) {
                     if (testMethod.getName().equals("func_149644_j")) {
                         m = testMethod;
                         break;
@@ -590,7 +592,7 @@ public class VersionUtil {
             }
 
             return (ItemStack) m.invoke(block, meta);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             t.printStackTrace();
         }
 

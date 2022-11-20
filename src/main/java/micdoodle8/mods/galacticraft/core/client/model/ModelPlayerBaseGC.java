@@ -69,7 +69,7 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
                         Class.forName("micdoodle8.mods.galacticraft.core.client.model.ModelRotationRendererGC");
                 modelRotationGCSmartMovingInit = modelRotationGCSmartMoving.getConstructor(
                         ModelBase.class, int.class, int.class, ModelRenderer.class, int.class);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }
@@ -112,7 +112,7 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
                                 SmartRender.getPlayerBase(this.modelPlayer).getBody(),
                                 type);
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }
@@ -121,7 +121,7 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
     }
 
     private void init() {
-        float var1 = 0.0F;
+        final float var1 = 0.0F;
 
         // Do not add GC equipment to the model for armor model - only actual player
         // model
@@ -313,7 +313,7 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
         usingParachute = false;
 
         final EntityPlayer player = (EntityPlayer) var1;
-        PlayerGearData gearData = ClientProxyCore.playerItemData.get(player.getCommandSenderName());
+        final PlayerGearData gearData = ClientProxyCore.playerItemData.get(player.getCommandSenderName());
 
         if (gearData != null) {
             usingParachute = gearData.getParachute() != null;
@@ -322,7 +322,7 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
         currentGearData = ClientProxyCore.playerItemData.get(playerRendering.getCommandSenderName());
 
         if (currentGearData == null) {
-            String id = player.getGameProfile().getName();
+            final String id = player.getGameProfile().getName();
 
             if (!ClientProxyCore.gearDataRequests.contains(id)) {
                 GalacticraftCore.packetPipeline.sendToServer(
@@ -353,10 +353,10 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
                 && par7Entity.worldObj.provider instanceof IGalacticraftWorldProvider
                 && par7Entity.ridingEntity == null
                 && !(currentItemStack != null && currentItemStack.getItem() instanceof IHoldableItem)) {
-            float speedModifier = 0.1162F * 2;
+            final float speedModifier = 0.1162F * 2;
 
-            float angularSwingArm = MathHelper.cos(par1 * (speedModifier / 2));
-            float rightMod = this.modelPlayer.heldItemRight != 0 ? 1 : 2;
+            final float angularSwingArm = MathHelper.cos(par1 * (speedModifier / 2));
+            final float rightMod = this.modelPlayer.heldItemRight != 0 ? 1 : 2;
             this.modelPlayer.bipedRightArm.rotateAngleX -=
                     MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * rightMod * par2 * 0.5F;
             this.modelPlayer.bipedLeftArm.rotateAngleX -= MathHelper.cos(par1 * 0.6662F) * 2.0F * par2 * 0.5F;
@@ -388,7 +388,7 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
 
         if (player.inventory.getCurrentItem() != null
                 && player.inventory.getCurrentItem().getItem() instanceof IHoldableItem) {
-            IHoldableItem holdableItem =
+            final IHoldableItem holdableItem =
                     (IHoldableItem) player.inventory.getCurrentItem().getItem();
 
             if (holdableItem.shouldHoldLeftHandUp(player)) {
@@ -458,24 +458,24 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
         }
 
         final EntityPlayer player = (EntityPlayer) var1;
-        PlayerGearData gearData = ClientProxyCore.playerItemData.get(player.getCommandSenderName());
+        final PlayerGearData gearData = ClientProxyCore.playerItemData.get(player.getCommandSenderName());
 
         if (var1 instanceof AbstractClientPlayer && gearData != null) {
             this.usingParachute = gearData.getParachute() != null;
-            boolean wearingMask = gearData.getMask() > -1;
-            boolean wearingGear = gearData.getGear() > -1;
-            boolean wearingLeftTankGreen = gearData.getLeftTank() == 0;
-            boolean wearingLeftTankOrange = gearData.getLeftTank() == 1;
-            boolean wearingLeftTankRed = gearData.getLeftTank() == 2;
-            boolean wearingLeftTankBlue = gearData.getLeftTank() == 3;
-            boolean wearingLeftTankViolet = gearData.getLeftTank() == 4;
-            boolean wearingLeftTankGray = gearData.getLeftTank() == Integer.MAX_VALUE;
-            boolean wearingRightTankGreen = gearData.getRightTank() == 0;
-            boolean wearingRightTankOrange = gearData.getRightTank() == 1;
-            boolean wearingRightTankRed = gearData.getRightTank() == 2;
-            boolean wearingRightTankBlue = gearData.getRightTank() == 3;
-            boolean wearingRightTankViolet = gearData.getRightTank() == 4;
-            boolean wearingRightTankGray = gearData.getRightTank() == Integer.MAX_VALUE;
+            final boolean wearingMask = gearData.getMask() > -1;
+            final boolean wearingGear = gearData.getGear() > -1;
+            final boolean wearingLeftTankGreen = gearData.getLeftTank() == 0;
+            final boolean wearingLeftTankOrange = gearData.getLeftTank() == 1;
+            final boolean wearingLeftTankRed = gearData.getLeftTank() == 2;
+            final boolean wearingLeftTankBlue = gearData.getLeftTank() == 3;
+            final boolean wearingLeftTankViolet = gearData.getLeftTank() == 4;
+            final boolean wearingLeftTankGray = gearData.getLeftTank() == Integer.MAX_VALUE;
+            final boolean wearingRightTankGreen = gearData.getRightTank() == 0;
+            final boolean wearingRightTankOrange = gearData.getRightTank() == 1;
+            final boolean wearingRightTankRed = gearData.getRightTank() == 2;
+            final boolean wearingRightTankBlue = gearData.getRightTank() == 3;
+            final boolean wearingRightTankViolet = gearData.getRightTank() == 4;
+            final boolean wearingRightTankGray = gearData.getRightTank() == Integer.MAX_VALUE;
             // boolean wearingFrequencyModule = gearData.getFrequencyModule() > -1;
 
             if (wearingMask) {

@@ -20,7 +20,7 @@ public class GuiOxygenDecompressor extends GuiContainerGC {
 
     private final TileEntityOxygenDecompressor decompressor;
 
-    private GuiElementInfoRegion oxygenInfoRegion = new GuiElementInfoRegion(
+    private final GuiElementInfoRegion oxygenInfoRegion = new GuiElementInfoRegion(
             (this.width - this.xSize) / 2 + 112,
             (this.height - this.ySize) / 2 + 24,
             56,
@@ -29,7 +29,7 @@ public class GuiOxygenDecompressor extends GuiContainerGC {
             this.width,
             this.height,
             this);
-    private GuiElementInfoRegion electricInfoRegion = new GuiElementInfoRegion(
+    private final GuiElementInfoRegion electricInfoRegion = new GuiElementInfoRegion(
             (this.width - this.xSize) / 2 + 112,
             (this.height - this.ySize) / 2 + 37,
             56,
@@ -49,7 +49,7 @@ public class GuiOxygenDecompressor extends GuiContainerGC {
     @Override
     public void initGui() {
         super.initGui();
-        List<String> batterySlotDesc = new ArrayList<String>();
+        final List<String> batterySlotDesc = new ArrayList<String>();
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.0"));
         batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(
@@ -61,7 +61,7 @@ public class GuiOxygenDecompressor extends GuiContainerGC {
                 this.width,
                 this.height,
                 this));
-        List<String> compressorSlotDesc = new ArrayList<String>();
+        final List<String> compressorSlotDesc = new ArrayList<String>();
         compressorSlotDesc.add(GCCoreUtil.translate("gui.oxygenDecompressor.slot.desc.0"));
         compressorSlotDesc.add(GCCoreUtil.translate("gui.oxygenDecompressor.slot.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(
@@ -73,7 +73,7 @@ public class GuiOxygenDecompressor extends GuiContainerGC {
                 this.width,
                 this.height,
                 this));
-        List<String> oxygenDesc = new ArrayList<String>();
+        final List<String> oxygenDesc = new ArrayList<String>();
         oxygenDesc.add(GCCoreUtil.translate("gui.oxygenStorage.desc.0"));
         oxygenDesc.add(EnumColor.YELLOW + GCCoreUtil.translate("gui.oxygenStorage.desc.1") + ": "
                 + ((int) Math.floor(this.decompressor.storedOxygen) + " / "
@@ -84,7 +84,7 @@ public class GuiOxygenDecompressor extends GuiContainerGC {
         this.oxygenInfoRegion.parentWidth = this.width;
         this.oxygenInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.oxygenInfoRegion);
-        List<String> electricityDesc = new ArrayList<String>();
+        final List<String> electricityDesc = new ArrayList<String>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         electricityDesc.add(EnumColor.YELLOW
                 + GCCoreUtil.translate("gui.energyStorage.desc.1")
@@ -162,14 +162,14 @@ public class GuiOxygenDecompressor extends GuiContainerGC {
                 this.drawTexturedModalRect(var5 + 100, var6 + 24, 187, 0, 10, 10);
             }
 
-            List<String> oxygenDesc = new ArrayList<String>();
+            final List<String> oxygenDesc = new ArrayList<String>();
             oxygenDesc.add(GCCoreUtil.translate("gui.oxygenStorage.desc.0"));
             oxygenDesc.add(EnumColor.YELLOW + GCCoreUtil.translate("gui.oxygenStorage.desc.1") + ": "
                     + ((int) Math.floor(this.decompressor.storedOxygen) + " / "
                             + (int) Math.floor(this.decompressor.maxOxygen)));
             this.oxygenInfoRegion.tooltipStrings = oxygenDesc;
 
-            List<String> electricityDesc = new ArrayList<String>();
+            final List<String> electricityDesc = new ArrayList<String>();
             electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
             EnergyDisplayHelper.getEnergyDisplayTooltip(
                     this.decompressor.getEnergyStoredGC(), this.decompressor.getMaxEnergyStoredGC(), electricityDesc);

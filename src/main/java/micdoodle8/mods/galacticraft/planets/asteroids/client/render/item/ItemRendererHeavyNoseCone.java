@@ -29,7 +29,7 @@ public class ItemRendererHeavyNoseCone implements IItemRenderer {
             GL11.glPushMatrix();
 
             if (i == 1) {
-                SpaceRace race = SpaceRaceManager.getSpaceRaceFromPlayer(FMLClientHandler.instance()
+                final SpaceRace race = SpaceRaceManager.getSpaceRaceFromPlayer(FMLClientHandler.instance()
                         .getClientPlayerEntity()
                         .getGameProfile()
                         .getName());
@@ -46,7 +46,8 @@ public class ItemRendererHeavyNoseCone implements IItemRenderer {
                 GL11.glColor4f(color.floatX(), color.floatY(), color.floatZ(), 1.0F);
             }
 
-            IIcon iicon = FMLClientHandler.instance().getClientPlayerEntity().getItemIcon(item, i);
+            final IIcon iicon =
+                    FMLClientHandler.instance().getClientPlayerEntity().getItemIcon(item, i);
 
             if (iicon == null) {
                 GL11.glPopMatrix();
@@ -61,16 +62,16 @@ public class ItemRendererHeavyNoseCone implements IItemRenderer {
                             .getTextureManager()
                             .getResourceLocation(item.getItemSpriteNumber()));
             VersionUtil.setMipMap(false, false);
-            Tessellator tessellator = Tessellator.instance;
-            float f = iicon.getMinU();
-            float f1 = iicon.getMaxU();
-            float f2 = iicon.getMinV();
-            float f3 = iicon.getMaxV();
-            float f4 = 0.0F;
-            float f5 = 1.0F;
+            final Tessellator tessellator = Tessellator.instance;
+            final float f = iicon.getMinU();
+            final float f1 = iicon.getMaxU();
+            final float f2 = iicon.getMinV();
+            final float f3 = iicon.getMaxV();
+            final float f4 = 0.0F;
+            final float f5 = 1.0F;
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
             GL11.glScalef(1.0F, -1.0F, 1.0F);
-            float f6 = 16.0F;
+            final float f6 = 16.0F;
             GL11.glScalef(f6, f6, f6);
             GL11.glTranslatef(-f4, -f5, 0.0F);
             ItemRenderer.renderItemIn2D(

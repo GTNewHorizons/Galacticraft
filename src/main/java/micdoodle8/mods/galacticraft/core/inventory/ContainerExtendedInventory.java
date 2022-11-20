@@ -131,7 +131,7 @@ public class ContainerExtendedInventory extends Container {
                 slotStack = slot.getStack();
 
                 if (slotStack == null) {
-                    ItemStack stackOneItem = par1ItemStack.copy();
+                    final ItemStack stackOneItem = par1ItemStack.copy();
                     stackOneItem.stackSize = 1;
                     par1ItemStack.stackSize--;
                     slot.putStack(stackOneItem);

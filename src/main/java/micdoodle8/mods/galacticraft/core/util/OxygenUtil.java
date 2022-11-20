@@ -72,18 +72,18 @@ public class OxygenUtil {
     }
 
     public static boolean isAABBInBreathableAirBlock(EntityLivingBase entity, boolean testThermal) {
-        double y = entity.posY + entity.getEyeHeight();
-        double x = entity.posX;
-        double z = entity.posZ;
+        final double y = entity.posY + entity.getEyeHeight();
+        final double x = entity.posX;
+        final double z = entity.posZ;
 
-        double sx = entity.boundingBox.maxX - entity.boundingBox.minX;
-        double sy = entity.boundingBox.maxY - entity.boundingBox.minY;
-        double sz = entity.boundingBox.maxZ - entity.boundingBox.minZ;
+        final double sx = entity.boundingBox.maxX - entity.boundingBox.minX;
+        final double sy = entity.boundingBox.maxY - entity.boundingBox.minY;
+        final double sz = entity.boundingBox.maxZ - entity.boundingBox.minZ;
 
         // A good first estimate of head size is that it's the smallest of the entity's
         // 3 dimensions (e.g. front to
         // back, for Steve)
-        double smin = Math.min(sx, Math.min(sy, sz)) / 2;
+        final double smin = Math.min(sx, Math.min(sy, sz)) / 2;
 
         return OxygenUtil.isAABBInBreathableAirBlock(
                 entity.worldObj,
@@ -113,19 +113,19 @@ public class OxygenUtil {
     }
 
     public static boolean isInOxygenBlock(World world, AxisAlignedBB bb) {
-        int i = MathHelper.floor_double(bb.minX);
-        int j = MathHelper.floor_double(bb.maxX);
-        int k = MathHelper.floor_double(bb.minY);
-        int l = MathHelper.floor_double(bb.maxY);
-        int i1 = MathHelper.floor_double(bb.minZ);
-        int j1 = MathHelper.floor_double(bb.maxZ);
+        final int i = MathHelper.floor_double(bb.minX);
+        final int j = MathHelper.floor_double(bb.maxX);
+        final int k = MathHelper.floor_double(bb.minY);
+        final int l = MathHelper.floor_double(bb.maxY);
+        final int i1 = MathHelper.floor_double(bb.minZ);
+        final int j1 = MathHelper.floor_double(bb.maxZ);
 
         OxygenUtil.checked = new HashSet();
         if (world.checkChunksExist(i, k, i1, j, l, j1)) {
             for (int x = i; x <= j; ++x) {
                 for (int y = k; y <= l; ++y) {
                     for (int z = i1; z <= j1; ++z) {
-                        Block block = world.getBlock(x, y, z);
+                        final Block block = world.getBlock(x, y, z);
                         if (OxygenUtil.testContactWithBreathableAir(world, block, x, y, z, 0) >= 0) {
                             return true;
                         }
@@ -138,19 +138,19 @@ public class OxygenUtil {
     }
 
     public static boolean isInOxygenAndThermalBlock(World world, AxisAlignedBB bb) {
-        int i = MathHelper.floor_double(bb.minX);
-        int j = MathHelper.floor_double(bb.maxX);
-        int k = MathHelper.floor_double(bb.minY);
-        int l = MathHelper.floor_double(bb.maxY);
-        int i1 = MathHelper.floor_double(bb.minZ);
-        int j1 = MathHelper.floor_double(bb.maxZ);
+        final int i = MathHelper.floor_double(bb.minX);
+        final int j = MathHelper.floor_double(bb.maxX);
+        final int k = MathHelper.floor_double(bb.minY);
+        final int l = MathHelper.floor_double(bb.maxY);
+        final int i1 = MathHelper.floor_double(bb.minZ);
+        final int j1 = MathHelper.floor_double(bb.maxZ);
 
         OxygenUtil.checked = new HashSet();
         if (world.checkChunksExist(i, k, i1, j, l, j1)) {
             for (int x = i; x <= j; ++x) {
                 for (int y = k; y <= l; ++y) {
                     for (int z = i1; z <= j1; ++z) {
-                        Block block = world.getBlock(x, y, z);
+                        final Block block = world.getBlock(x, y, z);
                         if (OxygenUtil.testContactWithBreathableAir(world, block, x, y, z, 0) == 1) // Thermal air has
                         // metadata 1
                         {
@@ -174,10 +174,10 @@ public class OxygenUtil {
             return true;
         }
         OxygenUtil.checked = new HashSet();
-        BlockVec3 vec = new BlockVec3(x, y, z);
+        final BlockVec3 vec = new BlockVec3(x, y, z);
         for (int side = 0; side < 6; side++) {
-            BlockVec3 sidevec = vec.newVecSide(side);
-            Block newblock = sidevec.getBlockID_noChunkLoad(world);
+            final BlockVec3 sidevec = vec.newVecSide(side);
+            final Block newblock = sidevec.getBlockID_noChunkLoad(world);
             if (OxygenUtil.testContactWithBreathableAir(world, newblock, sidevec.x, sidevec.y, sidevec.z, 1) >= 0) {
                 return true;
             }
@@ -193,7 +193,7 @@ public class OxygenUtil {
      * breathable air is found in one of them, or false if not.
      */
     private static int testContactWithBreathableAir(World world, Block block, int x, int y, int z, int limitCount) {
-        BlockVec3 vec = new BlockVec3(x, y, z);
+        final BlockVec3 vec = new BlockVec3(x, y, z);
         checked.add(vec);
         if (block == GCBlocks.breatheableAir || block == GCBlocks.brightBreatheableAir) {
             return world.getBlockMetadata(x, y, z);
@@ -219,7 +219,7 @@ public class OxygenUtil {
             } else if (block instanceof BlockLiquid) {
                 return -1;
             } else if (OxygenPressureProtocol.nonPermeableBlocks.containsKey(block)) {
-                ArrayList<Integer> metaList = OxygenPressureProtocol.nonPermeableBlocks.get(block);
+                final ArrayList<Integer> metaList = OxygenPressureProtocol.nonPermeableBlocks.get(block);
                 if (metaList.contains(Integer.valueOf(-1)) || metaList.contains(world.getBlockMetadata(x, y, z))) {
                     return -1;
                 }
@@ -232,10 +232,10 @@ public class OxygenUtil {
         if (limitCount < 5) {
             for (int side = 0; side < 6; side++) {
                 if (permeableFlag || OxygenUtil.canBlockPassAirOnSide(world, block, vec, side)) {
-                    BlockVec3 sidevec = vec.newVecSide(side);
+                    final BlockVec3 sidevec = vec.newVecSide(side);
                     if (!checked.contains(sidevec)) {
-                        Block newblock = sidevec.getBlockID_noChunkLoad(world);
-                        int adjResult = OxygenUtil.testContactWithBreathableAir(
+                        final Block newblock = sidevec.getBlockID_noChunkLoad(world);
+                        final int adjResult = OxygenUtil.testContactWithBreathableAir(
                                 world, newblock, sidevec.x, sidevec.y, sidevec.z, limitCount + 1);
                         if (adjResult >= 0) {
                             return adjResult;
@@ -270,10 +270,10 @@ public class OxygenUtil {
         }
 
         if (block instanceof BlockPistonBase) {
-            BlockPistonBase piston = (BlockPistonBase) block;
-            int meta = vec.getBlockMetadata(world);
+            final BlockPistonBase piston = (BlockPistonBase) block;
+            final int meta = vec.getBlockMetadata(world);
             if (BlockPistonBase.isExtended(meta)) {
-                int facing = BlockPistonBase.getPistonOrientation(meta);
+                final int facing = BlockPistonBase.getPistonOrientation(meta);
                 return side != facing;
             }
             return false;
@@ -283,10 +283,10 @@ public class OxygenUtil {
     }
 
     public static int getDrainSpacing(ItemStack tank, ItemStack tank2) {
-        boolean tank1Valid = tank != null
+        final boolean tank1Valid = tank != null
                 && tank.getItem() instanceof ItemOxygenTank
                 && tank.getMaxDamage() - tank.getItemDamage() > 0;
-        boolean tank2Valid = tank2 != null
+        final boolean tank2Valid = tank2 != null
                 && tank2.getItem() instanceof ItemOxygenTank
                 && tank2.getMaxDamage() - tank2.getItemDamage() > 0;
 
@@ -300,7 +300,7 @@ public class OxygenUtil {
     public static boolean hasValidOxygenSetup(EntityPlayerMP player) {
         boolean missingComponent = false;
 
-        GCPlayerStats stats = GCPlayerStats.get(player);
+        final GCPlayerStats stats = GCPlayerStats.get(player);
 
         if (stats.extendedInventory.getStackInSlot(0) == null
                 || !OxygenUtil.isItemValidForPlayerTankInv(0, stats.extendedInventory.getStackInSlot(0))) {
@@ -392,14 +392,14 @@ public class OxygenUtil {
     }
 
     public static TileEntity[] getAdjacentOxygenConnections(TileEntity tile) {
-        TileEntity[] adjacentConnections = new TileEntity[ForgeDirection.VALID_DIRECTIONS.length];
+        final TileEntity[] adjacentConnections = new TileEntity[ForgeDirection.VALID_DIRECTIONS.length];
 
-        boolean isMekLoaded = EnergyConfigHandler.isMekanismLoaded();
+        final boolean isMekLoaded = EnergyConfigHandler.isMekanismLoaded();
 
-        BlockVec3 thisVec = new BlockVec3(tile);
-        World world = tile.getWorldObj();
-        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-            TileEntity tileEntity = thisVec.getTileEntityOnSide(world, direction);
+        final BlockVec3 thisVec = new BlockVec3(tile);
+        final World world = tile.getWorldObj();
+        for (final ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+            final TileEntity tileEntity = thisVec.getTileEntityOnSide(world, direction);
 
             if (tileEntity instanceof IConnector) {
                 if (((IConnector) tileEntity).canConnect(direction.getOpposite(), NetworkType.OXYGEN)) {
@@ -423,7 +423,7 @@ public class OxygenUtil {
     public static boolean inOxygenBubble(World worldObj, double avgX, double avgY, double avgZ) {
         for (final BlockVec3Dim blockVec : TileEntityOxygenDistributor.loadedTiles) {
             if (blockVec != null && blockVec.dim == worldObj.provider.dimensionId) {
-                TileEntity tile = worldObj.getTileEntity(blockVec.x, blockVec.y, blockVec.z);
+                final TileEntity tile = worldObj.getTileEntity(blockVec.x, blockVec.y, blockVec.z);
                 if (tile instanceof TileEntityOxygenDistributor) {
                     if (((TileEntityOxygenDistributor) tile).inBubble(avgX, avgY, avgZ)) {
                         return true;

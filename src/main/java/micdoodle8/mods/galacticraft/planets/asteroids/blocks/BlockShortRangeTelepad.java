@@ -82,7 +82,7 @@ public class BlockShortRangeTelepad extends BlockTileGC implements ItemBlockDesc
             World world, int x0, int y0, int z0, EntityLivingBase entityLiving, ItemStack itemStack) {
         super.onBlockPlacedBy(world, x0, y0, z0, entityLiving, itemStack);
 
-        TileEntity tile = world.getTileEntity(x0, y0, z0);
+        final TileEntity tile = world.getTileEntity(x0, y0, z0);
 
         boolean validSpot = true;
 
@@ -90,7 +90,7 @@ public class BlockShortRangeTelepad extends BlockTileGC implements ItemBlockDesc
             for (int y = 0; y < 3; y += 2) {
                 for (int z = -1; z <= 1; z++) {
                     if (!(x == 0 && y == 0 && z == 0)) {
-                        Block blockAt = world.getBlock(x0 + x, y0 + y, z0 + z);
+                        final Block blockAt = world.getBlock(x0 + x, y0 + y, z0 + z);
 
                         if (!blockAt.getMaterial().isReplaceable()) {
                             validSpot = false;
@@ -171,8 +171,8 @@ public class BlockShortRangeTelepad extends BlockTileGC implements ItemBlockDesc
         final TileEntity tileAt = world.getTileEntity(x, y, z);
 
         if (tileAt instanceof TileEntityShortRangeTelepad) {
-            TileEntityShortRangeTelepad telepad = (TileEntityShortRangeTelepad) tileAt;
-            float teleportTimeScaled =
+            final TileEntityShortRangeTelepad telepad = (TileEntityShortRangeTelepad) tileAt;
+            final float teleportTimeScaled =
                     Math.min(1.0F, telepad.teleportTime / (float) TileEntityShortRangeTelepad.MAX_TELEPORT_TIME);
             float f;
             float r;

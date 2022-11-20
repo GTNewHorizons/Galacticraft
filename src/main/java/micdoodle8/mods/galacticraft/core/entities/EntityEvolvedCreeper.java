@@ -93,7 +93,7 @@ public class EntityEvolvedCreeper extends EntityCreeper implements IEntityBreath
     }
 
     protected final void setSize(float sizeX, float sizeY) {
-        boolean flag = this.sizeXBase > 0.0F && this.sizeYBase > 0.0F;
+        final boolean flag = this.sizeXBase > 0.0F && this.sizeYBase > 0.0F;
         this.sizeXBase = sizeX;
         this.sizeYBase = sizeY;
 
@@ -123,7 +123,8 @@ public class EntityEvolvedCreeper extends EntityCreeper implements IEntityBreath
         this.getDataWatcher().updateObject(12, Byte.valueOf((byte) (isChild ? 1 : 0)));
 
         if (this.worldObj != null && !this.worldObj.isRemote) {
-            IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
+            final IAttributeInstance iattributeinstance =
+                    this.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
             iattributeinstance.removeModifier(babySpeedBoostModifier);
 
             if (isChild) {
@@ -146,7 +147,7 @@ public class EntityEvolvedCreeper extends EntityCreeper implements IEntityBreath
         }
 
         if (this.isSprinting()) {
-            float f = this.rotationYaw * 0.017453292F;
+            final float f = this.rotationYaw * 0.017453292F;
             this.motionX -= MathHelper.sin(f) * 0.2F;
             this.motionZ += MathHelper.cos(f) * 0.2F;
         }

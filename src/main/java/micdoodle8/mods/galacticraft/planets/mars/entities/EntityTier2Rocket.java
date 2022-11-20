@@ -136,10 +136,10 @@ public class EntityTier2Rocket extends EntityTieredRocket {
 
     @Override
     public void onTeleport(EntityPlayerMP player) {
-        EntityPlayerMP playerBase = PlayerUtil.getPlayerBaseServerFromPlayer(player, false);
+        final EntityPlayerMP playerBase = PlayerUtil.getPlayerBaseServerFromPlayer(player, false);
 
         if (playerBase != null) {
-            GCPlayerStats stats = GCPlayerStats.get(playerBase);
+            final GCPlayerStats stats = GCPlayerStats.get(playerBase);
 
             if (this.cargoItems == null || this.cargoItems.length == 0) {
                 stats.rocketStacks = new ItemStack[2];
@@ -177,7 +177,7 @@ public class EntityTier2Rocket extends EntityTieredRocket {
             final double x3 = x2 + x1 / 2D;
             final double y3 = y + y1 / 2D;
             final double z3 = z2 + z1 / 2D;
-            Vector3 motionVec = new Vector3(x1, y1, z1);
+            final Vector3 motionVec = new Vector3(x1, y1, z1);
 
             GalacticraftCore.proxy.spawnParticle(
                     this.getLaunched() ? "launchFlameLaunched" : "launchFlameIdle",
@@ -405,7 +405,7 @@ public class EntityTier2Rocket extends EntityTieredRocket {
     @Override
     public List<ItemStack> getItemsDropped(List<ItemStack> droppedItems) {
         super.getItemsDropped(droppedItems);
-        ItemStack rocket = new ItemStack(MarsItems.spaceship, 1, this.rocketType.getIndex());
+        final ItemStack rocket = new ItemStack(MarsItems.spaceship, 1, this.rocketType.getIndex());
         rocket.setTagCompound(new NBTTagCompound());
         rocket.getTagCompound().setInteger("RocketFuel", this.fuelTank.getFluidAmount());
         droppedItems.add(rocket);

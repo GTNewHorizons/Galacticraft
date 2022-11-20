@@ -25,7 +25,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 
 public class WorldProviderAsteroids extends WorldProviderSpace implements ISolarLevel {
     // Used to list asteroid centres to external code that needs to know them
-    private HashSet<AsteroidData> asteroids = new HashSet();
+    private final HashSet<AsteroidData> asteroids = new HashSet();
     private boolean dataNotLoaded = true;
     private AsteroidSaveData datafile;
     private double solarMultiplier = -1D;
@@ -183,7 +183,7 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
     }
 
     public void addAsteroid(int x, int y, int z, int size, int core) {
-        AsteroidData coords = new AsteroidData(x, y, z, size, core);
+        final AsteroidData coords = new AsteroidData(x, y, z, size, core);
         if (!this.asteroids.contains(coords)) {
             if (this.dataNotLoaded) {
                 this.loadAsteroidSavedData();
@@ -196,7 +196,7 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
     }
 
     public void removeAsteroid(int x, int y, int z) {
-        AsteroidData coords = new AsteroidData(x, y, z);
+        final AsteroidData coords = new AsteroidData(x, y, z);
         if (this.asteroids.contains(coords)) {
             this.asteroids.remove(coords);
 
@@ -223,10 +223,10 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
     }
 
     private void readFromNBT(NBTTagCompound nbt) {
-        NBTTagList coordList = nbt.getTagList("coords", 10);
+        final NBTTagList coordList = nbt.getTagList("coords", 10);
         if (coordList.tagCount() > 0) {
             for (int j = 0; j < coordList.tagCount(); j++) {
-                NBTTagCompound tag1 = coordList.getCompoundTagAt(j);
+                final NBTTagCompound tag1 = coordList.getCompoundTagAt(j);
 
                 if (tag1 != null) {
                     this.asteroids.add(AsteroidData.readFromNBT(tag1));
@@ -236,9 +236,9 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
     }
 
     private void writeToNBT(NBTTagCompound nbt) {
-        NBTTagList coordList = new NBTTagList();
-        for (AsteroidData coords : this.asteroids) {
-            NBTTagCompound tag = new NBTTagCompound();
+        final NBTTagList coordList = new NBTTagList();
+        for (final AsteroidData coords : this.asteroids) {
+            final NBTTagCompound tag = new NBTTagCompound();
             coords.writeToNBT(tag);
             coordList.appendTag(tag);
         }
@@ -247,8 +247,8 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
     }
 
     private void addToNBT(NBTTagCompound nbt, AsteroidData coords) {
-        NBTTagList coordList = nbt.getTagList("coords", 10);
-        NBTTagCompound tag = new NBTTagCompound();
+        final NBTTagList coordList = nbt.getTagList("coords", 10);
+        final NBTTagCompound tag = new NBTTagCompound();
         coords.writeToNBT(tag);
         coordList.appendTag(tag);
         nbt.setTag("coords", coordList);
@@ -268,14 +268,14 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
         AsteroidData resultRoid = null;
         int lowestDistance = Integer.MAX_VALUE;
 
-        for (AsteroidData test : this.asteroids) {
+        for (final AsteroidData test : this.asteroids) {
             if ((test.sizeAndLandedFlag & 128) > 0) {
                 continue;
             }
 
-            int dx = x - test.centre.x;
-            int dz = z - test.centre.z;
-            int a = dx * dx + dz * dz;
+            final int dx = x - test.centre.x;
+            final int dz = z - test.centre.z;
+            final int a = dx * dx + dz * dz;
             if (a < lowestDistance) {
                 lowestDistance = a;
                 result = test.centre;
@@ -301,10 +301,10 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
             return null;
         }
 
-        TreeMap<Integer, BlockVec3> targets = new TreeMap();
+        final TreeMap<Integer, BlockVec3> targets = new TreeMap();
 
-        for (AsteroidData roid : this.asteroids) {
-            BlockVec3 test = roid.centre;
+        for (final AsteroidData roid : this.asteroids) {
+            final BlockVec3 test = roid.centre;
             switch (facing) {
                 case 2:
                     if (z - 16 < test.z) {
@@ -327,24 +327,24 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
                     }
                     break;
             }
-            int dx = x - test.x;
-            int dz = z - test.z;
-            int a = dx * dx + dz * dz;
+            final int dx = x - test.x;
+            final int dz = z - test.z;
+            final int a = dx * dx + dz * dz;
             if (a < 262144) {
                 targets.put(a, test);
             }
         }
 
-        int max = Math.max(count, targets.size());
+        final int max = Math.max(count, targets.size());
         if (max <= 0) {
             return null;
         }
 
-        ArrayList<BlockVec3> returnValues = new ArrayList();
+        final ArrayList<BlockVec3> returnValues = new ArrayList();
         int i = 0;
-        int offset = EntityAstroMiner.MINE_LENGTH_AST / 2;
-        for (BlockVec3 target : targets.values()) {
-            BlockVec3 coords = target.clone();
+        final int offset = EntityAstroMiner.MINE_LENGTH_AST / 2;
+        for (final BlockVec3 target : targets.values()) {
+            final BlockVec3 coords = target.clone();
             GCLog.debug("Found nearby asteroid at " + target.toString());
             switch (facing) {
                 case 2:
@@ -388,7 +388,7 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
     @Override
     public double getSolarEnergyMultiplier() {
         if (this.solarMultiplier < 0D) {
-            double s = this.getSolarSize();
+            final double s = this.getSolarSize();
             this.solarMultiplier = s * s * s * ConfigManagerCore.spaceStationEnergyScalar;
         }
         return this.solarMultiplier;
@@ -425,12 +425,12 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
         @Override
         public boolean equals(Object o) {
             if (o instanceof AsteroidData) {
-                BlockVec3 vector = ((AsteroidData) o).centre;
+                final BlockVec3 vector = ((AsteroidData) o).centre;
                 return this.centre.x == vector.x && this.centre.y == vector.y && this.centre.z == vector.z;
             }
 
             if (o instanceof BlockVec3) {
-                BlockVec3 vector = (BlockVec3) o;
+                final BlockVec3 vector = (BlockVec3) o;
                 return this.centre.x == vector.x && this.centre.y == vector.y && this.centre.z == vector.z;
             }
 
@@ -447,12 +447,12 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
         }
 
         public static AsteroidData readFromNBT(NBTTagCompound tag) {
-            BlockVec3 tempVector = new BlockVec3();
+            final BlockVec3 tempVector = new BlockVec3();
             tempVector.x = tag.getInteger("x");
             tempVector.y = tag.getInteger("y");
             tempVector.z = tag.getInteger("z");
 
-            AsteroidData roid = new AsteroidData(tempVector);
+            final AsteroidData roid = new AsteroidData(tempVector);
             if (tag.hasKey("coreAndFlag")) {
                 roid.coreAndSpawnedFlag = tag.getInteger("coreAndFlag");
             }

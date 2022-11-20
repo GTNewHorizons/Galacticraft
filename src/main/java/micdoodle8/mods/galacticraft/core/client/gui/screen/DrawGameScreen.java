@@ -18,7 +18,7 @@ import net.minecraft.world.WorldProvider;
 import org.lwjgl.opengl.GL11;
 
 public class DrawGameScreen extends IScreenManager {
-    private TextureManager renderEngine = FMLClientHandler.instance().getClient().renderEngine;
+    private final TextureManager renderEngine = FMLClientHandler.instance().getClient().renderEngine;
     private static FloatBuffer colorBuffer = GLAllocation.createDirectFloatBuffer(16);
     private static int texCount = 1;
 
@@ -30,8 +30,8 @@ public class DrawGameScreen extends IScreenManager {
     private int callCount = 0;
     private int tickMapDone = -1;
 
-    private float scaleX;
-    private float scaleZ;
+    private final float scaleX;
+    private final float scaleZ;
 
     public TileEntity driver;
     public Class telemetryLastClass;
@@ -63,7 +63,7 @@ public class DrawGameScreen extends IScreenManager {
             return;
         }
         this.localMap = new int[MapUtil.SIZE_STD2 * MapUtil.SIZE_STD2];
-        boolean result =
+        final boolean result =
                 MapUtil.getMap(this.localMap, this.driver.getWorldObj(), this.driver.xCoord, this.driver.zCoord);
         if (result) {
             TextureUtil.uploadTexture(
@@ -154,8 +154,8 @@ public class DrawGameScreen extends IScreenManager {
     }
 
     private void doDraw(int type, float ticks) {
-        float lightMapSaveX = OpenGlHelper.lastBrightnessX;
-        float lightMapSaveY = OpenGlHelper.lastBrightnessY;
+        final float lightMapSaveX = OpenGlHelper.lastBrightnessX;
+        final float lightMapSaveY = OpenGlHelper.lastBrightnessY;
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240F, 240F);
 
         if (type > 0) {

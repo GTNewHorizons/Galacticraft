@@ -38,7 +38,7 @@ public class RenderLander extends Render {
         GL11.glRotatef(180.0F - par8, 0.0F, 1.0F, 0.0F);
         GL11.glRotatef(-var24, 0.0F, 0.0F, 1.0F);
 
-        float f6 = entity.timeSinceHit - par9;
+        final float f6 = entity.timeSinceHit - par9;
         float f7 = entity.currentDamage - par9;
 
         if (f7 < 0.0F) {

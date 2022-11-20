@@ -29,7 +29,7 @@ public class ItemBlockEgg extends ItemBlockDesc {
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        String name = BlockSlimelingEgg.names[itemstack.getItemDamage() % 3];
+        final String name = BlockSlimelingEgg.names[itemstack.getItemDamage() % 3];
 
         return this.field_150939_a.getUnlocalizedName() + "." + name;
     }

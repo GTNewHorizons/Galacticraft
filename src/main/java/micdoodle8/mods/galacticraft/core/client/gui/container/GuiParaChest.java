@@ -21,8 +21,8 @@ public class GuiParaChest extends GuiContainerGC {
         }
     }
 
-    private IInventory upperChestInventory;
-    private IInventory lowerChestInventory;
+    private final IInventory upperChestInventory;
+    private final IInventory lowerChestInventory;
 
     private int inventorySlots = 0;
 
@@ -51,12 +51,12 @@ public class GuiParaChest extends GuiContainerGC {
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(GuiParaChest.parachestTexture[(this.inventorySlots - 3) / 18]);
-        int k = (this.width - this.xSize) / 2;
-        int l = (this.height - this.ySize) / 2;
+        final int k = (this.width - this.xSize) / 2;
+        final int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
 
         if (this.lowerChestInventory instanceof IScaleableFuelLevel) {
-            int fuelLevel = ((IScaleableFuelLevel) this.lowerChestInventory).getScaledFuelLevel(28);
+            final int fuelLevel = ((IScaleableFuelLevel) this.lowerChestInventory).getScaledFuelLevel(28);
             this.drawTexturedModalRect(
                     k + 17,
                     l + (this.inventorySlots == 3 ? 40 : 42) - fuelLevel + this.inventorySlots * 2,

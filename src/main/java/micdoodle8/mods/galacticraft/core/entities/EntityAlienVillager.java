@@ -93,7 +93,7 @@ public class EntityAlienVillager extends EntityAgeable implements IEntityBreatha
             if (this.villageObj == null) {
                 this.detachHome();
             } else {
-                ChunkCoordinates chunkcoordinates = this.villageObj.getCenter();
+                final ChunkCoordinates chunkcoordinates = this.villageObj.getCenter();
                 this.setHomeArea(chunkcoordinates.posX, chunkcoordinates.posY, chunkcoordinates.posZ, (int)
                         (this.villageObj.getVillageRadius() * 0.6F));
 

@@ -27,7 +27,7 @@ public class ColorUtil {
         double previous_angle = colorwheelAngles[1];
 
         for (int i = 2; i < colorwheelAngles.length - 2; i++) {
-            Double angle = colorwheelAngles[i];
+            final Double angle = colorwheelAngles[i];
             if (deg <= angle) {
                 return interpolateInArray(colorwheelColors, i, (angle - deg) / (angle - previous_angle));
             }
@@ -38,18 +38,18 @@ public class ColorUtil {
     }
 
     private static double rgb_to_hue(Vector3 input) {
-        double maxCol = Math.max(Math.max(input.x, input.y), input.z);
+        final double maxCol = Math.max(Math.max(input.x, input.y), input.z);
         if (maxCol <= 0) {
             return 0;
         }
-        Vector3 rgb = input.scale(255D / maxCol);
+        final Vector3 rgb = input.scale(255D / maxCol);
 
         double mindist = 1024;
         int mini = 0;
 
         for (int i = 2; i < colorwheelAngles.length - 2; i++) {
-            Vector3 color = colorwheelColors[i];
-            double separation = color.distance(rgb);
+            final Vector3 color = colorwheelColors[i];
+            final double separation = color.distance(rgb);
             if (separation < mindist) {
                 mindist = separation;
                 mini = i;
@@ -63,13 +63,13 @@ public class ColorUtil {
 
         double hue;
         if (separation1 < separation2) {
-            double separationtot = colorwheelColors[mini - 1].distance(colorwheelColors[mini]);
+            final double separationtot = colorwheelColors[mini - 1].distance(colorwheelColors[mini]);
             hue = interpolateInArray(colorwheelAngles, mini, mindist / separationtot);
             if (hue < 0) {
                 hue += 360D;
             }
         } else {
-            double separationtot = colorwheelColors[mini + 1].distance(colorwheelColors[mini]);
+            final double separationtot = colorwheelColors[mini + 1].distance(colorwheelColors[mini]);
             hue = interpolateInArray(colorwheelAngles, mini + 1, separation2 / separationtot);
             if (hue > 360D) {
                 hue -= 360D;
@@ -92,14 +92,14 @@ public class ColorUtil {
     }
 
     private static Vector3 interpolateInArray(Vector3[] array, int i, double mu) {
-        Vector3 point0 = array[i + 1];
-        Vector3 point1 = array[i];
-        Vector3 point2 = array[i - 1];
-        Vector3 point3 = array[i - 2];
+        final Vector3 point0 = array[i + 1];
+        final Vector3 point1 = array[i];
+        final Vector3 point2 = array[i - 1];
+        final Vector3 point3 = array[i - 2];
 
-        double x = cubicInterpolate(point0.x, point1.x, point2.x, point3.x, mu);
-        double y = cubicInterpolate(point0.y, point1.y, point2.y, point3.y, mu);
-        double z = cubicInterpolate(point0.z, point1.z, point2.z, point3.z, mu);
+        final double x = cubicInterpolate(point0.x, point1.x, point2.x, point3.x, mu);
+        final double y = cubicInterpolate(point0.y, point1.y, point2.y, point3.y, mu);
+        final double z = cubicInterpolate(point0.z, point1.z, point2.z, point3.z, mu);
 
         return new Vector3(x, y, z);
     }
@@ -136,8 +136,8 @@ public class ColorUtil {
     }
 
     public static int to32BitColorB(byte r, byte g, byte b) {
-        int rr = (r & 255) << 16;
-        int gg = (g & 255) << 8;
+        final int rr = (r & 255) << 16;
+        final int gg = (g & 255) << 8;
 
         return rr | gg | b & 255;
     }
@@ -163,7 +163,7 @@ public class ColorUtil {
     }
 
     public static int toGreyscale(int col) {
-        int gg = col >> 8;
+        final int gg = col >> 8;
         int grey = gg >> 8;
         grey += gg & 255;
         grey += col & 255;

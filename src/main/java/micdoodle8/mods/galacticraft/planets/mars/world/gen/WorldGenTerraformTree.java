@@ -29,7 +29,7 @@ public class WorldGenTerraformTree extends WorldGenerator {
 
     @Override
     public boolean generate(World par1World, Random par2Random, int x, int y, int z) {
-        int l = par2Random.nextInt(3) + this.minTreeHeight;
+        final int l = par2Random.nextInt(3) + this.minTreeHeight;
         boolean flag = true;
 
         if (y >= 1 && y + l + 1 <= 256) {
@@ -55,10 +55,10 @@ public class WorldGenTerraformTree extends WorldGenerator {
                 for (int l1 = x - b0; l1 <= x + b0 && flag; ++l1) {
                     for (j1 = z - b0; j1 <= z + b0 && flag; ++j1) {
                         if (i1 >= 0 && i1 < 256) {
-                            Block k1b = par1World.getBlock(l1, i1, j1);
+                            final Block k1b = par1World.getBlock(l1, i1, j1);
                             k2 = par1World.getBlockMetadata(l1, i1, j1);
 
-                            boolean isAir = par1World.isAirBlock(l1, i1, j1);
+                            final boolean isAir = par1World.isAirBlock(l1, i1, j1);
 
                             if (!isAir
                                     && k1b != Blocks.grass
@@ -80,7 +80,7 @@ public class WorldGenTerraformTree extends WorldGenerator {
             } else {
                 if (y < 256 - l - 1) {
                     b0 = 3;
-                    byte b1 = 0;
+                    final byte b1 = 0;
                     int i2;
                     int j2;
 
@@ -92,10 +92,10 @@ public class WorldGenTerraformTree extends WorldGenerator {
                             k2 = j2 - x;
 
                             for (int l2 = z - i2; l2 <= z + i2; ++l2) {
-                                int i3 = l2 - z;
+                                final int i3 = l2 - z;
 
                                 if (Math.abs(k2) != i2 || Math.abs(i3) != i2 || par2Random.nextInt(2) != 0 && k1 != 0) {
-                                    Block block = par1World.getBlock(j2, j1, l2);
+                                    final Block block = par1World.getBlock(j2, j1, l2);
 
                                     if (block == null || block.canBeReplacedByLeaves(par1World, j2, j1, l2)) {
                                         this.setBlockAndNotifyAdequately(
@@ -107,7 +107,7 @@ public class WorldGenTerraformTree extends WorldGenerator {
                     }
 
                     for (j1 = 0; j1 < l; ++j1) {
-                        Block block = par1World.getBlock(x, y + j1, z);
+                        final Block block = par1World.getBlock(x, y + j1, z);
                         if (block == null) {
                             continue;
                         }
@@ -142,7 +142,7 @@ public class WorldGenTerraformTree extends WorldGenerator {
 
                             for (j2 = x - i2; j2 <= x + i2; ++j2) {
                                 for (k2 = z - i2; k2 <= z + i2; ++k2) {
-                                    Block block = par1World.getBlock(j2, j1, k2);
+                                    final Block block = par1World.getBlock(j2, j1, k2);
                                     if (block != null && block.isLeaves(par1World, j2, j1, k2)) {
                                         if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(j2 - 1, j1, k2)) {
                                             this.growVines(par1World, j2 - 1, j1, k2, 8);

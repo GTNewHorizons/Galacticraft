@@ -76,7 +76,7 @@ public class BlockSpaceStationBase extends BlockContainer implements ITileEntity
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
         super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
 
-        TileEntity tile = world.getTileEntity(x, y, z);
+        final TileEntity tile = world.getTileEntity(x, y, z);
 
         if (tile instanceof IMultiBlock) {
             ((IMultiBlock) tile).onCreate(new BlockVec3(x, y, z));

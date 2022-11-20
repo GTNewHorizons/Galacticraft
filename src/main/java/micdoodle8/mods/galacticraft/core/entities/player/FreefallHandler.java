@@ -33,33 +33,33 @@ public class FreefallHandler {
     private static double pPrevdY;
     public static boolean sneakLast;
 
-    private GCPlayerStatsClient stats;
+    private final GCPlayerStatsClient stats;
 
     public FreefallHandler(GCPlayerStatsClient statsClient) {
         this.stats = statsClient;
     }
 
     public static boolean testFreefall(EntityPlayer player) {
-        ZeroGravityEvent zeroGEvent = new ZeroGravityEvent.InFreefall(player);
+        final ZeroGravityEvent zeroGEvent = new ZeroGravityEvent.InFreefall(player);
         MinecraftForge.EVENT_BUS.post(zeroGEvent);
         if (zeroGEvent.isCanceled()) {
             return false;
         }
 
         // Test whether feet are on a block, also stops the login glitch
-        int playerFeetOnY = (int) (player.boundingBox.minY - 0.01D);
-        int xx = MathHelper.floor_double(player.posX);
-        int zz = MathHelper.floor_double(player.posZ);
-        Block b = player.worldObj.getBlock(xx, playerFeetOnY, zz);
+        final int playerFeetOnY = (int) (player.boundingBox.minY - 0.01D);
+        final int xx = MathHelper.floor_double(player.posX);
+        final int zz = MathHelper.floor_double(player.posZ);
+        final Block b = player.worldObj.getBlock(xx, playerFeetOnY, zz);
         if (b.getMaterial() != Material.air && !(b instanceof BlockLiquid)) {
-            double blockYmax = playerFeetOnY + b.getBlockBoundsMaxY();
+            final double blockYmax = playerFeetOnY + b.getBlockBoundsMaxY();
             if (player.boundingBox.minY - blockYmax < 0.01D && player.boundingBox.minY - blockYmax > -0.5D) {
                 player.onGround = true;
                 if (player.boundingBox.minY - blockYmax > 0D) {
                     player.posY -= player.boundingBox.minY - blockYmax;
                     player.boundingBox.offset(0, blockYmax - player.boundingBox.minY, 0);
                 } else if (b.canCollideCheck(player.worldObj.getBlockMetadata(xx, playerFeetOnY, zz), false)) {
-                    AxisAlignedBB collisionBox =
+                    final AxisAlignedBB collisionBox =
                             b.getCollisionBoundingBoxFromPool(player.worldObj, xx, playerFeetOnY, zz);
                     if (collisionBox != null && collisionBox.intersectsWith(player.boundingBox)) {
                         player.posY -= player.boundingBox.minY - blockYmax;
@@ -74,12 +74,12 @@ public class FreefallHandler {
 
     @SideOnly(Side.CLIENT)
     private boolean testFreefall(EntityPlayerSP p, boolean flag) {
-        World world = p.worldObj;
-        WorldProvider worldProvider = world.provider;
+        final World world = p.worldObj;
+        final WorldProvider worldProvider = world.provider;
         if (!(worldProvider instanceof IZeroGDimension)) {
             return false;
         }
-        ZeroGravityEvent zeroGEvent = new ZeroGravityEvent.InFreefall(p);
+        final ZeroGravityEvent zeroGEvent = new ZeroGravityEvent.InFreefall(p);
         MinecraftForge.EVENT_BUS.post(zeroGEvent);
         if (zeroGEvent.isCanceled()) {
             return false;
@@ -90,7 +90,7 @@ public class FreefallHandler {
         }
 
         if (p.ridingEntity != null) {
-            Entity e = p.ridingEntity;
+            final Entity e = p.ridingEntity;
             if (e instanceof EntitySpaceshipBase) {
                 return ((EntitySpaceshipBase) e).getLaunched();
             }
@@ -106,7 +106,7 @@ public class FreefallHandler {
         if (!flag) {
             return false;
         } else {
-            float rY = p.rotationYaw % 360F;
+            final float rY = p.rotationYaw % 360F;
             double zreach = 0D;
             double xreach = 0D;
             if (rY < 80F || rY > 280F) {
@@ -121,11 +121,11 @@ public class FreefallHandler {
             if (rY < 350F && rY > 190F) {
                 xreach = -0.2D;
             }
-            AxisAlignedBB playerReach = p.boundingBox.addCoord(xreach, 0, zreach);
+            final AxisAlignedBB playerReach = p.boundingBox.addCoord(xreach, 0, zreach);
 
             boolean checkBlockWithinReach;
             if (worldProvider instanceof WorldProviderSpaceStation) {
-                SpinManager spinManager = ((WorldProviderSpaceStation) worldProvider).getSpinManager();
+                final SpinManager spinManager = ((WorldProviderSpaceStation) worldProvider).getSpinManager();
                 checkBlockWithinReach = playerReach.maxX >= spinManager.ssBoundsMinX
                         && playerReach.minX <= spinManager.ssBoundsMaxX
                         && playerReach.maxY >= spinManager.ssBoundsMinY
@@ -146,17 +146,17 @@ public class FreefallHandler {
                 // If so, it's assumed the player has something close enough to grab onto, so is
                 // not in freefall
                 // Note: breatheable air here means the player is definitely not in freefall
-                int xm = MathHelper.floor_double(playerReach.minX);
-                int xx = MathHelper.floor_double(playerReach.maxX);
-                int ym = MathHelper.floor_double(playerReach.minY);
-                int yy = MathHelper.floor_double(playerReach.maxY);
-                int zm = MathHelper.floor_double(playerReach.minZ);
-                int zz = MathHelper.floor_double(playerReach.maxZ);
+                final int xm = MathHelper.floor_double(playerReach.minX);
+                final int xx = MathHelper.floor_double(playerReach.maxX);
+                final int ym = MathHelper.floor_double(playerReach.minY);
+                final int yy = MathHelper.floor_double(playerReach.maxY);
+                final int zm = MathHelper.floor_double(playerReach.minZ);
+                final int zz = MathHelper.floor_double(playerReach.maxZ);
                 for (int x = xm; x <= xx; x++) {
                     for (int y = ym; y <= yy; y++) {
                         for (int z = zm; z <= zz; z++) {
                             // Blocks.air is hard vacuum - we want to check for that, here
-                            Block b = world.getBlock(x, y, z);
+                            final Block b = world.getBlock(x, y, z);
                             if (Blocks.air != b && GCBlocks.brightAir != b) {
                                 return false;
                             }
@@ -203,7 +203,7 @@ public class FreefallHandler {
 
     @SideOnly(Side.CLIENT)
     public static void setupFreefallPre(EntityPlayerSP p) {
-        double dY = p.motionY - pPrevMotionY;
+        final double dY = p.motionY - pPrevMotionY;
         jetpackBoost = 0F;
         pPrevdY = dY;
         pPrevMotionX = p.motionX;
@@ -214,16 +214,16 @@ public class FreefallHandler {
     @SideOnly(Side.CLIENT)
     public static void freefallMotion(EntityPlayerSP p) {
         boolean jetpackUsed = false;
-        double dX = p.motionX - pPrevMotionX;
-        double dY = p.motionY - pPrevMotionY;
-        double dZ = p.motionZ - pPrevMotionZ;
+        final double dX = p.motionX - pPrevMotionX;
+        final double dY = p.motionY - pPrevMotionY;
+        final double dZ = p.motionZ - pPrevMotionZ;
 
-        double posOffsetX = -p.motionX;
+        final double posOffsetX = -p.motionX;
         double posOffsetY = -p.motionY;
         if (posOffsetY == -WorldUtil.getGravityForEntity(p)) {
             posOffsetY = 0;
         }
-        double posOffsetZ = -p.motionZ;
+        final double posOffsetZ = -p.motionZ;
         // if (p.capabilities.isFlying)
 
         /// Undo whatever vanilla tried to do to our y motion
@@ -232,9 +232,9 @@ public class FreefallHandler {
         } else if (dY > 0.01D && GCPlayerStatsClient.get(p).inFreefallLast) {
             // Impulse upwards - it's probably a jetpack from another mod
             if (dX < 0.01D && dZ < 0.01D) {
-                float pitch = p.rotationPitch / 57.29578F;
+                final float pitch = p.rotationPitch / 57.29578F;
                 jetpackBoost = (float) dY * MathHelper.cos(pitch) * 0.1F;
-                float factor = 1 + MathHelper.sin(pitch) / 5;
+                final float factor = 1 + MathHelper.sin(pitch) / 5;
                 p.motionY -= dY * factor;
                 jetpackUsed = true;
             } else {
@@ -275,7 +275,7 @@ public class FreefallHandler {
             p.motionY += ConfigManagerCore.hardMode ? 0.002D : 0.0032D;
         }
 
-        float speedLimit = ConfigManagerCore.hardMode ? 0.9F : 0.7F;
+        final float speedLimit = ConfigManagerCore.hardMode ? 0.9F : 0.7F;
 
         if (p.motionX > speedLimit) {
             p.motionX = speedLimit;
@@ -324,12 +324,12 @@ public class FreefallHandler {
 
     @SideOnly(Side.CLIENT)
     public void postVanillaMotion(EntityPlayerSP p) {
-        World world = p.worldObj;
-        WorldProvider worldProvider = world.provider;
+        final World world = p.worldObj;
+        final WorldProvider worldProvider = world.provider;
         if (!(worldProvider instanceof IZeroGDimension)) {
             return;
         }
-        ZeroGravityEvent zeroGEvent = new ZeroGravityEvent.Motion(p);
+        final ZeroGravityEvent zeroGEvent = new ZeroGravityEvent.Motion(p);
         MinecraftForge.EVENT_BUS.post(zeroGEvent);
         if (zeroGEvent.isCanceled()) {
             return;
@@ -367,9 +367,9 @@ public class FreefallHandler {
             } else {
                 p.capabilities.isFlying = true;
                 // Half the normal acceleration in Creative mode
-                double dx = p.motionX - this.pPrevMotionX;
-                double dy = p.motionY - this.pPrevMotionY;
-                double dz = p.motionZ - this.pPrevMotionZ;
+                final double dx = p.motionX - this.pPrevMotionX;
+                final double dy = p.motionY - this.pPrevMotionY;
+                final double dz = p.motionZ - this.pPrevMotionZ;
                 p.motionX -= dx / 2;
                 p.motionY -= dy / 2;
                 p.motionZ -= dz / 2;
@@ -404,7 +404,7 @@ public class FreefallHandler {
         } else
         // Not freefall - within arm's length of something or jumping
         {
-            double dy = p.motionY - this.pPrevMotionY;
+            final double dy = p.motionY - this.pPrevMotionY;
             // if (p.motionY < 0 && this.pPrevMotionY >= 0) p.posY -= p.motionY;
             // if (p.motionY != 0) p.motionY = this.pPrevMotionY;
             if (p.movementInput.jump) {

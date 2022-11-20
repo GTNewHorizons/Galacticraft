@@ -16,10 +16,10 @@ public class BiomeDecoratorMoon {
     private int chunkX;
     private int chunkZ;
 
-    private WorldGenerator dirtGen;
-    private WorldGenerator cheeseGen;
-    private WorldGenerator copperGen;
-    private WorldGenerator tinGen;
+    private final WorldGenerator dirtGen;
+    private final WorldGenerator cheeseGen;
+    private final WorldGenerator copperGen;
+    private final WorldGenerator tinGen;
 
     public BiomeDecoratorMoon(BiomeGenBase par1BiomeGenBase) {
         this.copperGen = new WorldGenMinableMeta(GCBlocks.blockMoon, 4, 0, true, GCBlocks.blockMoon, 4);

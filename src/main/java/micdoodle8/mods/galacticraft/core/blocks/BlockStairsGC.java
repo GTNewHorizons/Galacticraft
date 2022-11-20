@@ -69,7 +69,7 @@ public class BlockStairsGC extends BlockStairs {
 
         if (GalacticraftCore.isPlanetsLoaded) {
             try {
-                String prefix = (String) Class.forName("micdoodle8.mods.galacticraft.planets.mars.MarsModule")
+                final String prefix = (String) Class.forName("micdoodle8.mods.galacticraft.planets.mars.MarsModule")
                         .getField("TEXTURE_PREFIX")
                         .get(null);
                 if (this.category == StairsCategoryGC.MARS_COBBLESTONE) // Mars Cobblestone
@@ -79,7 +79,7 @@ public class BlockStairsGC extends BlockStairs {
                 {
                     this.blockIcon = par1IconRegister.registerIcon(prefix + "brick");
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }
@@ -90,7 +90,7 @@ public class BlockStairsGC extends BlockStairs {
     }
 
     public boolean isWoodCategory(String block) {
-        String type = StairsCategoryGC.valueOf(block).type;
+        final String type = StairsCategoryGC.valueOf(block).type;
 
         if (type.equals("wood")) {
             return true;
@@ -99,7 +99,7 @@ public class BlockStairsGC extends BlockStairs {
     }
 
     public boolean isStoneCategory(String block) {
-        String type = StairsCategoryGC.valueOf(block).type;
+        final String type = StairsCategoryGC.valueOf(block).type;
 
         if (type.equals("stone")) {
             return true;
@@ -110,7 +110,7 @@ public class BlockStairsGC extends BlockStairs {
     public static int getWoodCategoryAmount() {
         int woodCatNo = 0;
 
-        for (StairsCategoryGC cat : StairsCategoryGC.values()) {
+        for (final StairsCategoryGC cat : StairsCategoryGC.values()) {
             if (cat.values.contains("wood")) {
                 ++woodCatNo;
             }
@@ -121,7 +121,7 @@ public class BlockStairsGC extends BlockStairs {
     public static int getStoneCategoryAmount() {
         int woodCatNo = 0;
 
-        for (StairsCategoryGC cat : StairsCategoryGC.values()) {
+        for (final StairsCategoryGC cat : StairsCategoryGC.values()) {
             if (cat.values.contains("stone")) {
                 ++woodCatNo;
             }

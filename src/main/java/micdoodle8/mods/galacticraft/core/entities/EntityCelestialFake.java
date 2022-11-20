@@ -85,12 +85,12 @@ public class EntityCelestialFake extends EntityAdvancedMotion implements IIgnore
             }
         }
 
-        AxisAlignedBB box = this.boundingBox.expand(0.2D, 0.4D, 0.2D);
+        final AxisAlignedBB box = this.boundingBox.expand(0.2D, 0.4D, 0.2D);
 
         final List<Entity> var15 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, box);
 
         if (var15 != null && !var15.isEmpty()) {
-            for (Entity entity : var15) {
+            for (final Entity entity : var15) {
                 if (entity != this.riddenByEntity) {
                     this.pushEntityAway(entity);
                 }
@@ -136,7 +136,7 @@ public class EntityCelestialFake extends EntityAdvancedMotion implements IIgnore
     protected void writeEntityToNBT(NBTTagCompound nbt) {
         final NBTTagList nbttaglist = new NBTTagList();
 
-        UUID id = this.getOwnerUUID();
+        final UUID id = this.getOwnerUUID();
 
         if (id != null) {
             nbt.setLong("RiderUUID_LSB", id.getLeastSignificantBits());
@@ -205,10 +205,11 @@ public class EntityCelestialFake extends EntityAdvancedMotion implements IIgnore
                 this.shouldMoveServer = buffer.readBoolean();
 
                 // Check has correct rider on client
-                int shouldBeMountedId = buffer.readInt();
+                final int shouldBeMountedId = buffer.readInt();
                 if (this.riddenByEntity == null) {
                     if (shouldBeMountedId > -1) {
-                        Entity e = FMLClientHandler.instance().getWorldClient().getEntityByID(shouldBeMountedId);
+                        final Entity e =
+                                FMLClientHandler.instance().getWorldClient().getEntityByID(shouldBeMountedId);
                         if (e != null) {
                             e.mountEntity(this);
                         }
@@ -217,7 +218,8 @@ public class EntityCelestialFake extends EntityAdvancedMotion implements IIgnore
                     if (shouldBeMountedId == -1) {
                         this.riddenByEntity.mountEntity(null);
                     } else {
-                        Entity e = FMLClientHandler.instance().getWorldClient().getEntityByID(shouldBeMountedId);
+                        final Entity e =
+                                FMLClientHandler.instance().getWorldClient().getEntityByID(shouldBeMountedId);
                         if (e != null) {
                             e.mountEntity(this);
                         }

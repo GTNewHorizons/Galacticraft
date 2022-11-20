@@ -9,7 +9,7 @@ public class PlayerGearData {
     private int gear;
     private int leftTank;
     private int rightTank;
-    private int[] thermalPadding;
+    private final int[] thermalPadding;
     private ResourceLocation parachute;
     private int frequencyModule;
 

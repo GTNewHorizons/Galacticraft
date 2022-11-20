@@ -143,7 +143,7 @@ public class ConfigManagerCore {
     }
 
     public static void syncConfig(boolean load) {
-        List<String> propOrder = new ArrayList<String>();
+        final List<String> propOrder = new ArrayList<String>();
 
         try {
             Property prop;
@@ -477,7 +477,7 @@ public class ConfigManagerCore {
                 prop.setLanguageKey("gc.configgui.sealableIDs").setRequiresMcRestart(true);
                 sealableIDs = prop.getStringList();
                 propOrder.add(prop.getName());
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 FMLLog.severe(
                         "[Galacticraft] It appears you have installed the 'Dev' version of Galacticraft instead of the regular version (or vice versa).  Please re-install.");
             }
@@ -668,7 +668,7 @@ public class ConfigManagerCore {
             disableUpdateCheck = prop.getBoolean(false);
             propOrder.add(prop.getName());
 
-            boolean thisIsMC172 = VersionUtil.mcVersion1_7_2;
+            final boolean thisIsMC172 = VersionUtil.mcVersion1_7_2;
             prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Disable Biome Type Registrations", thisIsMC172);
             prop.comment =
                     "Biome Types will not be registered in the BiomeDictionary if this is set to true. Ignored (always true) for MC 1.7.2.";
@@ -700,7 +700,7 @@ public class ConfigManagerCore {
     public static boolean setLoaded(int newID) {
         boolean found = false;
 
-        for (int staticLoadDimension : ConfigManagerCore.staticLoadDimensions) {
+        for (final int staticLoadDimension : ConfigManagerCore.staticLoadDimensions) {
             if (staticLoadDimension == newID) {
                 found = true;
                 break;
@@ -708,19 +708,19 @@ public class ConfigManagerCore {
         }
 
         if (!found) {
-            int[] oldIDs = ConfigManagerCore.staticLoadDimensions;
+            final int[] oldIDs = ConfigManagerCore.staticLoadDimensions;
             ConfigManagerCore.staticLoadDimensions = new int[ConfigManagerCore.staticLoadDimensions.length + 1];
             System.arraycopy(oldIDs, 0, staticLoadDimensions, 0, oldIDs.length);
 
             ConfigManagerCore.staticLoadDimensions[ConfigManagerCore.staticLoadDimensions.length - 1] = newID;
-            String[] values = new String[ConfigManagerCore.staticLoadDimensions.length];
+            final String[] values = new String[ConfigManagerCore.staticLoadDimensions.length];
             Arrays.sort(ConfigManagerCore.staticLoadDimensions);
 
             for (int i = 0; i < values.length; i++) {
                 values[i] = String.valueOf(ConfigManagerCore.staticLoadDimensions[i]);
             }
 
-            Property prop = config.get(
+            final Property prop = config.get(
                     Constants.CONFIG_CATEGORY_DIMENSIONS,
                     "Static Loaded Dimensions",
                     ConfigManagerCore.staticLoadDimensions);
@@ -737,14 +737,14 @@ public class ConfigManagerCore {
     public static boolean setUnloaded(int idToRemove) {
         int foundCount = 0;
 
-        for (int staticLoadDimension : ConfigManagerCore.staticLoadDimensions) {
+        for (final int staticLoadDimension : ConfigManagerCore.staticLoadDimensions) {
             if (staticLoadDimension == idToRemove) {
                 foundCount++;
             }
         }
 
         if (foundCount > 0) {
-            List<Integer> idArray = new ArrayList<Integer>(Ints.asList(ConfigManagerCore.staticLoadDimensions));
+            final List<Integer> idArray = new ArrayList<Integer>(Ints.asList(ConfigManagerCore.staticLoadDimensions));
             idArray.removeAll(Collections.singleton(idToRemove));
 
             ConfigManagerCore.staticLoadDimensions = new int[idArray.size()];
@@ -753,14 +753,14 @@ public class ConfigManagerCore {
                 ConfigManagerCore.staticLoadDimensions[i] = idArray.get(i);
             }
 
-            String[] values = new String[ConfigManagerCore.staticLoadDimensions.length];
+            final String[] values = new String[ConfigManagerCore.staticLoadDimensions.length];
             Arrays.sort(ConfigManagerCore.staticLoadDimensions);
 
             for (int i = 0; i < values.length; i++) {
                 values[i] = String.valueOf(ConfigManagerCore.staticLoadDimensions[i]);
             }
 
-            Property prop = config.get(
+            final Property prop = config.get(
                     Constants.CONFIG_CATEGORY_DIMENSIONS,
                     "Static Loaded Dimensions",
                     ConfigManagerCore.staticLoadDimensions);
@@ -802,7 +802,7 @@ public class ConfigManagerCore {
      * deletes all non-numerical lines from the config before GC even sees them
      */
     private static boolean searchAsterisk(String[] strings) {
-        for (String s : strings) {
+        for (final String s : strings) {
             if (s != null && "*".equals(s.trim())) {
                 return true;
             }
@@ -811,7 +811,7 @@ public class ConfigManagerCore {
     }
 
     public static List<IConfigElement> getConfigElements() {
-        List<IConfigElement> list = new ArrayList<IConfigElement>();
+        final List<IConfigElement> list = new ArrayList<IConfigElement>();
         list.addAll(new ConfigElement(config.getCategory(Constants.CONFIG_CATEGORY_DIMENSIONS)).getChildElements());
         list.addAll(new ConfigElement(config.getCategory(Constants.CONFIG_CATEGORY_SCHEMATIC)).getChildElements());
         list.addAll(new ConfigElement(config.getCategory(Constants.CONFIG_CATEGORY_ACHIEVEMENTS)).getChildElements());
@@ -821,14 +821,14 @@ public class ConfigManagerCore {
     }
 
     public static BlockTuple stringToBlock(String s, String caller, boolean logging) {
-        int lastColon = s.lastIndexOf(':');
+        final int lastColon = s.lastIndexOf(':');
         int meta = -1;
         String name;
 
         if (lastColon > 0) {
             try {
                 meta = Integer.parseInt(s.substring(lastColon + 1, s.length()));
-            } catch (NumberFormatException ex) {
+            } catch (final NumberFormatException ex) {
             }
         }
 
@@ -840,7 +840,7 @@ public class ConfigManagerCore {
 
         Block block = Block.getBlockFromName(name);
         if (block == null) {
-            Item item = (Item) Item.itemRegistry.getObject(name);
+            final Item item = (Item) Item.itemRegistry.getObject(name);
             if (item instanceof ItemBlock) {
                 block = ((ItemBlock) item).field_150939_a;
             }
@@ -853,12 +853,12 @@ public class ConfigManagerCore {
         }
         try {
             Integer.parseInt(name);
-            String bName = GameData.getBlockRegistry().getNameForObject(block);
+            final String bName = GameData.getBlockRegistry().getNameForObject(block);
             if (logging) {
                 GCLog.info("[config] " + caller + ": the use of numeric IDs is discouraged, please use " + bName
                         + " instead of " + name);
             }
-        } catch (NumberFormatException ex) {
+        } catch (final NumberFormatException ex) {
         }
         if (Blocks.air == block) {
             if (logging) {
@@ -871,7 +871,7 @@ public class ConfigManagerCore {
     }
 
     public static List<Object> getServerConfigOverride() {
-        ArrayList<Object> returnList = new ArrayList();
+        final ArrayList<Object> returnList = new ArrayList();
         int modeFlags = ConfigManagerCore.hardMode ? 1 : 0;
         modeFlags += ConfigManagerCore.quickMode ? 2 : 0;
         modeFlags += ConfigManagerCore.challengeMode ? 4 : 0;
@@ -897,7 +897,7 @@ public class ConfigManagerCore {
     @SideOnly(Side.CLIENT)
     public static void setConfigOverride(List<Object> configs) {
         int dataCount = 0;
-        int modeFlag = (Integer) configs.get(dataCount++);
+        final int modeFlag = (Integer) configs.get(dataCount++);
         ConfigManagerCore.hardMode = (modeFlag & 1) != 0;
         ConfigManagerCore.quickMode = (modeFlag & 2) != 0;
         ConfigManagerCore.challengeMode = (modeFlag & 4) != 0;
@@ -924,9 +924,9 @@ public class ConfigManagerCore {
                 (Float) configs.get(dataCount++),
                 (Integer) configs.get(dataCount++));
 
-        int sizeIDs = configs.size() - dataCount;
+        final int sizeIDs = configs.size() - dataCount;
         if (sizeIDs > 0) {
-            Object dataLast = configs.get(dataCount);
+            final Object dataLast = configs.get(dataCount);
             if (dataLast instanceof String) {
                 ConfigManagerCore.detectableIDs = new String[sizeIDs];
                 for (int j = 0; j < sizeIDs; j++) {

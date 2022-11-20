@@ -158,7 +158,7 @@ public class TileEntityLandingPad extends TileEntityMulti
 
     @Override
     public HashSet<ILandingPadAttachable> getConnectedTiles() {
-        HashSet<ILandingPadAttachable> connectedTiles = new HashSet<ILandingPadAttachable>();
+        final HashSet<ILandingPadAttachable> connectedTiles = new HashSet<ILandingPadAttachable>();
 
         for (int x = this.xCoord - 1; x < this.xCoord + 2; x++) {
             this.testConnectedTile(x, this.zCoord - 2, connectedTiles);
@@ -216,7 +216,7 @@ public class TileEntityLandingPad extends TileEntityMulti
 
     @Override
     public boolean isBlockAttachable(IBlockAccess world, int x, int y, int z) {
-        TileEntity tile = world.getTileEntity(x, y, z);
+        final TileEntity tile = world.getTileEntity(x, y, z);
 
         if (tile != null && tile instanceof ILandingPadAttachable) {
             return ((ILandingPadAttachable) tile).canAttachToLandingPad(world, this.xCoord, this.yCoord, this.zCoord);

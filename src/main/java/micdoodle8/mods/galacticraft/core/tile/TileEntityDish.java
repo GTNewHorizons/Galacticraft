@@ -58,14 +58,14 @@ public class TileEntityDish extends TileBaseUniversalElectrical
             }
         }
 
-        float angle = this.worldObj.getCelestialAngle(1.0F) - 0.7845194F < 0 ? 1.0F - 0.7845194F : -0.7845194F;
+        final float angle = this.worldObj.getCelestialAngle(1.0F) - 0.7845194F < 0 ? 1.0F - 0.7845194F : -0.7845194F;
         float celestialAngle = (this.worldObj.getCelestialAngle(1.0F) + angle) * 360.0F;
 
         celestialAngle %= 360;
 
         {
             if (celestialAngle > 30 && celestialAngle < 150) {
-                float difference = this.targetAngle - celestialAngle;
+                final float difference = this.targetAngle - celestialAngle;
 
                 this.targetAngle -= difference / 20.0F;
             } else if (!this.worldObj.isDaytime() || this.worldObj.isRaining() || this.worldObj.isThundering()) {
@@ -77,7 +77,7 @@ public class TileEntityDish extends TileBaseUniversalElectrical
             }
         }
 
-        float difference = this.targetAngle - this.currentAngle;
+        final float difference = this.targetAngle - this.currentAngle;
 
         this.currentAngle += difference / 20.0F;
     }
@@ -104,7 +104,7 @@ public class TileEntityDish extends TileBaseUniversalElectrical
 
     @Override
     public void onCreate(BlockVec3 placedPosition) {
-        int buildHeight = this.worldObj.getHeight() - 1;
+        final int buildHeight = this.worldObj.getHeight() - 1;
 
         if (placedPosition.y + 1 > buildHeight) {
             return;

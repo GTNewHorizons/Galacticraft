@@ -39,10 +39,10 @@ public class TileEntityOxygenStorageModule extends TileEntityOxygen implements I
     @Override
     public void updateEntity() {
         if (!this.worldObj.isRemote) {
-            ItemStack oxygenItemStack = this.getStackInSlot(0);
+            final ItemStack oxygenItemStack = this.getStackInSlot(0);
             if (oxygenItemStack != null && oxygenItemStack.getItem() instanceof IItemOxygenSupply) {
-                IItemOxygenSupply oxygenItem = (IItemOxygenSupply) oxygenItemStack.getItem();
-                float oxygenDraw = Math.min(this.oxygenPerTick * 2.5F, this.maxOxygen - this.storedOxygen);
+                final IItemOxygenSupply oxygenItem = (IItemOxygenSupply) oxygenItemStack.getItem();
+                final float oxygenDraw = Math.min(this.oxygenPerTick * 2.5F, this.maxOxygen - this.storedOxygen);
                 this.storedOxygen += oxygenItem.discharge(oxygenItemStack, oxygenDraw);
                 if (this.storedOxygen > this.maxOxygen) {
                     this.storedOxygen = this.maxOxygen;
@@ -347,8 +347,8 @@ public class TileEntityOxygenStorageModule extends TileEntityOxygen implements I
     @Override
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
         FluidTankInfo[] tankInfo = new FluidTankInfo[] {};
-        int metaside = this.getBlockMetadata() - BlockMachine2.OXYGEN_STORAGE_MODULE_METADATA + 2;
-        int side = from.ordinal();
+        final int metaside = this.getBlockMetadata() - BlockMachine2.OXYGEN_STORAGE_MODULE_METADATA + 2;
+        final int side = from.ordinal();
 
         if (metaside == side && GalacticraftCore.isPlanetsLoaded) {
             tankInfo = new FluidTankInfo[] {

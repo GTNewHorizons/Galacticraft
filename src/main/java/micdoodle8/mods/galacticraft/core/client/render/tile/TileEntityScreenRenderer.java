@@ -29,10 +29,10 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/screen1Quarters.obj"));
     public static final IModelCustom screenModel4 = AdvancedModelLoader.loadModel(
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/screen0Quarters.obj"));
-    private TextureManager renderEngine = FMLClientHandler.instance().getClient().renderEngine;
+    private final TextureManager renderEngine = FMLClientHandler.instance().getClient().renderEngine;
     private static FloatBuffer colorBuffer = GLAllocation.createDirectFloatBuffer(16);
 
-    private float yPlane = 0.91F;
+    private final float yPlane = 0.91F;
     float frame = 0.098F;
 
     public void renderModelAt(TileEntityScreen tileEntity, double d, double d1, double d2, float f) {
@@ -42,7 +42,7 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
         GL11.glTranslatef((float) d, (float) d1, (float) d2);
 
         int meta = tileEntity.getBlockMetadata();
-        boolean screenData = meta >= 8;
+        final boolean screenData = meta >= 8;
         meta &= 7;
 
         switch (meta) {
@@ -157,8 +157,8 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
         if (tileEntity.connectionsLeft == 0 || tileEntity.connectionsRight == 0) {
             cornerblock = tileEntity.connectionsUp == 0 || tileEntity.connectionsDown == 0;
         }
-        int totalLR = tileEntity.connectionsLeft + tileEntity.connectionsRight;
-        int totalUD = tileEntity.connectionsUp + tileEntity.connectionsDown;
+        final int totalLR = tileEntity.connectionsLeft + tileEntity.connectionsRight;
+        final int totalUD = tileEntity.connectionsUp + tileEntity.connectionsDown;
         if (totalLR > 1 && totalUD > 1 && !cornerblock) {
             // centre block
             if (tileEntity.connectionsLeft == tileEntity.connectionsRight - (totalLR | 1)) {

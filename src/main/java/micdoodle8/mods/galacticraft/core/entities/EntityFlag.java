@@ -41,7 +41,7 @@ public class EntityFlag extends Entity {
 
     @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-        boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer
+        final boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer
                 && ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode;
 
         if (!this.worldObj.isRemote && !this.isDead && !this.indestructable) {

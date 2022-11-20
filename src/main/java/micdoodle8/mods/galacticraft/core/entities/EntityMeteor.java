@@ -137,7 +137,8 @@ public class EntityMeteor extends Entity {
     protected void onImpact(MovingObjectPosition movingObjPos) {
         if (!this.worldObj.isRemote) {
             if (movingObjPos != null) {
-                Block b = this.worldObj.getBlock(movingObjPos.blockX, movingObjPos.blockY + 1, movingObjPos.blockZ);
+                final Block b =
+                        this.worldObj.getBlock(movingObjPos.blockX, movingObjPos.blockY + 1, movingObjPos.blockZ);
                 if (b != null && b.isAir(worldObj, movingObjPos.blockX, movingObjPos.blockY + 1, movingObjPos.blockZ)) {
                     this.worldObj.setBlock(
                             movingObjPos.blockX,

@@ -20,10 +20,10 @@ public class TeleportTypeMoon implements ITeleportType {
     @Override
     public Vector3 getPlayerSpawnLocation(WorldServer world, EntityPlayerMP player) {
         if (player != null) {
-            GCPlayerStats stats = GCPlayerStats.get(player);
+            final GCPlayerStats stats = GCPlayerStats.get(player);
             double x = stats.coordsTeleportedFromX;
             double z = stats.coordsTeleportedFromZ;
-            int limit = ConfigManagerCore.otherPlanetWorldBorders - 2;
+            final int limit = ConfigManagerCore.otherPlanetWorldBorders - 2;
             if (limit > 20) {
                 if (x > limit) {
                     z *= limit / x;
@@ -64,13 +64,13 @@ public class TeleportTypeMoon implements ITeleportType {
 
     @Override
     public void onSpaceDimensionChanged(World newWorld, EntityPlayerMP player, boolean ridingAutoRocket) {
-        GCPlayerStats stats = GCPlayerStats.get(player);
+        final GCPlayerStats stats = GCPlayerStats.get(player);
         if (!ridingAutoRocket && !ConfigManagerCore.disableLander && stats.teleportCooldown <= 0) {
             if (player.capabilities.isFlying) {
                 player.capabilities.isFlying = false;
             }
 
-            EntityLander lander = new EntityLander(player);
+            final EntityLander lander = new EntityLander(player);
             lander.setPosition(player.posX, player.posY, player.posZ);
 
             if (!newWorld.isRemote) {

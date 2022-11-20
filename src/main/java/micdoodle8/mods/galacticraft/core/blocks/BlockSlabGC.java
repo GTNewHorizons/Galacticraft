@@ -38,12 +38,12 @@ public class BlockSlabGC extends BlockSlab {
 
         if (GalacticraftCore.isPlanetsLoaded) {
             try {
-                String prefix = (String) Class.forName("micdoodle8.mods.galacticraft.planets.mars.MarsModule")
+                final String prefix = (String) Class.forName("micdoodle8.mods.galacticraft.planets.mars.MarsModule")
                         .getField("TEXTURE_PREFIX")
                         .get(null);
                 this.textures[4] = par1IconRegister.registerIcon(prefix + "cobblestone");
                 this.textures[5] = par1IconRegister.registerIcon(prefix + "brick");
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
                 this.textures[4] = this.textures[3];
                 this.textures[5] = this.textures[3];
@@ -126,7 +126,7 @@ public class BlockSlabGC extends BlockSlab {
 
     @Override
     public float getBlockHardness(World world, int x, int y, int z) {
-        int meta = world.getBlockMetadata(x, y, z);
+        final int meta = world.getBlockMetadata(x, y, z);
         float hardness = this.blockHardness;
 
         switch (getTypeFromMeta(meta)) {

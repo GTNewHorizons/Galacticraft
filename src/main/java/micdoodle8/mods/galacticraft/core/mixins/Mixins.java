@@ -152,7 +152,7 @@ public enum Mixins {
             return false;
         }
 
-        for (TargetedMod target : targetedMods) {
+        for (final TargetedMod target : targetedMods) {
             if (target == TargetedMod.VANILLA) {
                 continue;
             }
@@ -175,7 +175,7 @@ public enum Mixins {
             return true;
         }
 
-        for (TargetedMod target : targetedMods) {
+        for (final TargetedMod target : targetedMods) {
             if (target == TargetedMod.VANILLA) {
                 continue;
             }

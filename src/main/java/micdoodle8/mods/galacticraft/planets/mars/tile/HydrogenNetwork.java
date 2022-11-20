@@ -38,21 +38,21 @@ public class HydrogenNetwork implements IHydrogenNetwork {
             final float totalHydrogenRequest = this.getRequest(ignoreTiles);
 
             if (totalHydrogenRequest > 0) {
-                List<TileEntity> ignoreTilesList = Arrays.asList(ignoreTiles);
-                for (TileEntity tileEntity : new HashSet<TileEntity>(this.hydrogenTiles.keySet())) {
+                final List<TileEntity> ignoreTilesList = Arrays.asList(ignoreTiles);
+                for (final TileEntity tileEntity : new HashSet<TileEntity>(this.hydrogenTiles.keySet())) {
                     if (!ignoreTilesList.contains(tileEntity)) {
                         if (tileEntity instanceof TileEntityMethaneSynthesizer) {
-                            TileEntityMethaneSynthesizer hydrogenTile = (TileEntityMethaneSynthesizer) tileEntity;
+                            final TileEntityMethaneSynthesizer hydrogenTile = (TileEntityMethaneSynthesizer) tileEntity;
 
                             if (hydrogenTile.shouldPullHydrogen()) {
-                                for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-                                    TileEntity tile = new BlockVec3(tileEntity)
+                                for (final ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+                                    final TileEntity tile = new BlockVec3(tileEntity)
                                             .modifyPositionFromSide(direction, 1)
                                             .getTileEntity(tileEntity.getWorldObj());
 
                                     if (hydrogenTile.canConnect(direction, NetworkType.HYDROGEN)
                                             && this.pipes.contains(tile)) {
-                                        float hydrogenToSend = Math.max(
+                                        final float hydrogenToSend = Math.max(
                                                 totalHydrogen,
                                                 totalHydrogen
                                                         * (hydrogenTile.getHydrogenRequest(direction)
@@ -79,14 +79,14 @@ public class HydrogenNetwork implements IHydrogenNetwork {
      */
     @Override
     public float getRequest(TileEntity... ignoreTiles) {
-        List<Float> requests = new ArrayList<Float>();
+        final List<Float> requests = new ArrayList<Float>();
 
         if (this.hydrogenTiles.isEmpty()) {
             this.refreshHydrogenTiles();
         }
 
-        List<TileEntity> ignoreTilesList = Arrays.asList(ignoreTiles);
-        for (TileEntity tileEntity : new HashSet<TileEntity>(this.hydrogenTiles.keySet())) {
+        final List<TileEntity> ignoreTilesList = Arrays.asList(ignoreTiles);
+        for (final TileEntity tileEntity : new HashSet<TileEntity>(this.hydrogenTiles.keySet())) {
             if (ignoreTilesList.contains(tileEntity)) {
                 continue;
             }
@@ -96,9 +96,9 @@ public class HydrogenNetwork implements IHydrogenNetwork {
                 if (!tileEntity.isInvalid()) {
                     if (tileEntity.getWorldObj().getTileEntity(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord)
                             == tileEntity) {
-                        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-                            BlockVec3 tileVec = new BlockVec3(tileEntity);
-                            TileEntity tile = tileVec.modifyPositionFromSide(direction, 1)
+                        for (final ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+                            final BlockVec3 tileVec = new BlockVec3(tileEntity);
+                            final TileEntity tile = tileVec.modifyPositionFromSide(direction, 1)
                                     .getTileEntity(tileEntity.getWorldObj());
 
                             if (((TileEntityMethaneSynthesizer) tileEntity).canConnect(direction, NetworkType.HYDROGEN)
@@ -113,7 +113,7 @@ public class HydrogenNetwork implements IHydrogenNetwork {
 
         float total = 0.0F;
 
-        for (Float f : requests) {
+        for (final Float f : requests) {
             total += f;
         }
 
@@ -128,10 +128,10 @@ public class HydrogenNetwork implements IHydrogenNetwork {
         this.hydrogenTiles.clear();
 
         try {
-            Iterator<ITransmitter> it = this.pipes.iterator();
+            final Iterator<ITransmitter> it = this.pipes.iterator();
 
             while (it.hasNext()) {
-                ITransmitter transmitter = it.next();
+                final ITransmitter transmitter = it.next();
 
                 if (transmitter == null) {
                     it.remove();
@@ -147,7 +147,7 @@ public class HydrogenNetwork implements IHydrogenNetwork {
                     transmitter.setNetwork(this);
                 }
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             FMLLog.severe("Failed to refresh hydrogen pipe network.");
             e.printStackTrace();
         }
@@ -155,10 +155,10 @@ public class HydrogenNetwork implements IHydrogenNetwork {
 
     public void refreshHydrogenTiles() {
         try {
-            Iterator<ITransmitter> it = this.pipes.iterator();
+            final Iterator<ITransmitter> it = this.pipes.iterator();
 
             while (it.hasNext()) {
-                ITransmitter transmitter = it.next();
+                final ITransmitter transmitter = it.next();
 
                 if (transmitter == null
                         || ((TileEntity) transmitter).isInvalid()
@@ -173,14 +173,14 @@ public class HydrogenNetwork implements IHydrogenNetwork {
                  * transmitter).zCoord) instanceof BlockTransmitter)) { it.remove(); continue; }
                  */
                 for (int i = 0; i < transmitter.getAdjacentConnections().length; i++) {
-                    TileEntity acceptor = transmitter.getAdjacentConnections()[i];
+                    final TileEntity acceptor = transmitter.getAdjacentConnections()[i];
 
                     if (!(acceptor instanceof ITransmitter) && acceptor instanceof IConnector) {
                         this.hydrogenTiles.put(acceptor, ForgeDirection.getOrientation(i));
                     }
                 }
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             FMLLog.severe("Failed to refresh hydrogen pipe network.");
             e.printStackTrace();
         }
@@ -194,7 +194,7 @@ public class HydrogenNetwork implements IHydrogenNetwork {
     @Override
     public IHydrogenNetwork merge(IHydrogenNetwork network) {
         if (network != null && network != this) {
-            HydrogenNetwork newNetwork = new HydrogenNetwork();
+            final HydrogenNetwork newNetwork = new HydrogenNetwork();
             newNetwork.pipes.addAll(this.pipes);
             newNetwork.pipes.addAll(network.getTransmitters());
             newNetwork.refresh();
@@ -213,13 +213,13 @@ public class HydrogenNetwork implements IHydrogenNetwork {
              * Loop through the connected blocks and attempt to see if there are connections
              * between the two points elsewhere.
              */
-            TileEntity[] connectedBlocks = splitPoint.getAdjacentConnections();
+            final TileEntity[] connectedBlocks = splitPoint.getAdjacentConnections();
 
-            for (TileEntity connectedBlockA : connectedBlocks) {
+            for (final TileEntity connectedBlockA : connectedBlocks) {
                 if (connectedBlockA instanceof INetworkConnection) {
                     for (final TileEntity connectedBlockB : connectedBlocks) {
                         if (connectedBlockA != connectedBlockB && connectedBlockB instanceof INetworkConnection) {
-                            Pathfinder finder = new PathfinderChecker(
+                            final Pathfinder finder = new PathfinderChecker(
                                     ((TileEntity) splitPoint).getWorldObj(),
                                     (INetworkConnection) connectedBlockB,
                                     NetworkType.HYDROGEN,
@@ -231,8 +231,9 @@ public class HydrogenNetwork implements IHydrogenNetwork {
                                  * The connections A and B are still intact elsewhere. Set all references of
                                  * wire connection into one network.
                                  */
-                                for (BlockVec3 node : finder.closedSet) {
-                                    TileEntity nodeTile = node.getTileEntity(((TileEntity) splitPoint).getWorldObj());
+                                for (final BlockVec3 node : finder.closedSet) {
+                                    final TileEntity nodeTile =
+                                            node.getTileEntity(((TileEntity) splitPoint).getWorldObj());
 
                                     if (nodeTile instanceof INetworkProvider) {
                                         if (nodeTile != splitPoint) {
@@ -245,10 +246,11 @@ public class HydrogenNetwork implements IHydrogenNetwork {
                                  * The connections A and B are not connected anymore. Give both of them a new
                                  * network.
                                  */
-                                IHydrogenNetwork newNetwork = new HydrogenNetwork();
+                                final IHydrogenNetwork newNetwork = new HydrogenNetwork();
 
-                                for (BlockVec3 node : finder.closedSet) {
-                                    TileEntity nodeTile = node.getTileEntity(((TileEntity) splitPoint).getWorldObj());
+                                for (final BlockVec3 node : finder.closedSet) {
+                                    final TileEntity nodeTile =
+                                            node.getTileEntity(((TileEntity) splitPoint).getWorldObj());
 
                                     if (nodeTile instanceof INetworkProvider) {
                                         if (nodeTile != splitPoint) {

@@ -49,11 +49,11 @@ public class BlockAirLockWall extends BlockBreakable implements IPartialSealable
         float var5;
         float var6;
 
-        Block frameID = GCBlocks.airLockFrame;
-        Block sealID = GCBlocks.airLockSeal;
+        final Block frameID = GCBlocks.airLockFrame;
+        final Block sealID = GCBlocks.airLockSeal;
 
-        Block idXMin = world.getBlock(x - 1, y, z);
-        Block idXMax = world.getBlock(x + 1, y, z);
+        final Block idXMin = world.getBlock(x - 1, y, z);
+        final Block idXMax = world.getBlock(x + 1, y, z);
 
         if (idXMin != frameID && idXMax != frameID && idXMin != sealID && idXMax != sealID) {
             var5 = 0.25F;
@@ -62,11 +62,11 @@ public class BlockAirLockWall extends BlockBreakable implements IPartialSealable
         } else {
             int adjacentCount = 0;
 
-            for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+            for (final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
                 if (dir != ForgeDirection.UP && dir != ForgeDirection.DOWN) {
                     Vector3 thisVec = new Vector3(x, y, z);
                     thisVec = thisVec.modifyPositionFromSide(dir);
-                    Block blockID = thisVec.getBlock(world);
+                    final Block blockID = thisVec.getBlock(world);
 
                     if (blockID == GCBlocks.airLockFrame || blockID == GCBlocks.airLockSeal) {
                         adjacentCount++;

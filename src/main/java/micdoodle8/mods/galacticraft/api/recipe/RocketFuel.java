@@ -4,8 +4,8 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 public class RocketFuel {
-    private int fluidId;
-    private int maxTier;
+    private final int fluidId;
+    private final int maxTier;
 
     public RocketFuel(int fluidId, int maxTier) {
         this.fluidId = fluidId;

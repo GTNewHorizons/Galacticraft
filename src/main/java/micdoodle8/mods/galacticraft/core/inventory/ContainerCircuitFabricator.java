@@ -17,7 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ContainerCircuitFabricator extends Container {
-    private TileEntityCircuitFabricator tileEntity;
+    private final TileEntityCircuitFabricator tileEntity;
 
     public ContainerCircuitFabricator(InventoryPlayer playerInv, TileEntityCircuitFabricator tileEntity) {
         this.tileEntity = tileEntity;
@@ -81,11 +81,11 @@ public class ContainerCircuitFabricator extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par1) {
         ItemStack var2 = null;
-        Slot slot = (Slot) this.inventorySlots.get(par1);
+        final Slot slot = (Slot) this.inventorySlots.get(par1);
         final int b = this.inventorySlots.size();
 
         if (slot != null && slot.getHasStack()) {
-            ItemStack var4 = slot.getStack();
+            final ItemStack var4 = slot.getStack();
             var2 = var4.copy();
 
             if (par1 < b - 36) {
@@ -97,7 +97,7 @@ public class ContainerCircuitFabricator extends Container {
                     slot.onSlotChange(var4, var2);
                 }
             } else {
-                Item i = var4.getItem();
+                final Item i = var4.getItem();
                 if (i instanceof IItemElectric) {
                     if (!this.mergeItemStack(var4, 0, 1, false)) {
                         return null;

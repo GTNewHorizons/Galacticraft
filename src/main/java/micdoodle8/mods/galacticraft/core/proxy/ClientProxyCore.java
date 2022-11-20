@@ -262,7 +262,7 @@ public class ClientProxyCore extends CommonProxyCore {
 
     @Override
     public void init(FMLInitializationEvent event) {
-        Class[][] commonTypes = {
+        final Class[][] commonTypes = {
             {MusicTicker.MusicType.class, ResourceLocation.class, int.class, int.class},
         };
         MUSIC_TYPE_MARS = EnumHelper.addEnum(
@@ -287,12 +287,12 @@ public class ClientProxyCore extends CommonProxyCore {
         // ClientProxyCore.playerList = GLAllocation.generateDisplayLists(1);
 
         try {
-            Field ftc = Minecraft.getMinecraft()
+            final Field ftc = Minecraft.getMinecraft()
                     .getClass()
                     .getDeclaredField(VersionUtil.getNameDynamic(VersionUtil.KEY_FIELD_MUSICTICKER));
             ftc.setAccessible(true);
             ftc.set(Minecraft.getMinecraft(), new MusicTickerGC(Minecraft.getMinecraft()));
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }
@@ -351,7 +351,7 @@ public class ClientProxyCore extends CommonProxyCore {
     }
 
     public static void registerHandlers() {
-        TickHandlerClient tickHandlerClient = new TickHandlerClient();
+        final TickHandlerClient tickHandlerClient = new TickHandlerClient();
         FMLCommonHandler.instance().bus().register(tickHandlerClient);
         MinecraftForge.EVENT_BUS.register(tickHandlerClient);
         FMLCommonHandler.instance().bus().register(new KeyHandlerClient());
@@ -402,7 +402,7 @@ public class ClientProxyCore extends CommonProxyCore {
     public static void setupCapes() {
         try {
             ClientProxyCore.updateCapeList();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             FMLLog.severe("Error while setting up Galacticraft donor capes");
             e.printStackTrace();
         }
@@ -418,12 +418,12 @@ public class ClientProxyCore extends CommonProxyCore {
     }
 
     private static void updateCapeList() {
-        int timeout = 10000;
+        final int timeout = 10000;
         URL capeListUrl = null;
 
         try {
             capeListUrl = new URL("https://raw.github.com/micdoodle8/Galacticraft/master/capes.txt");
-        } catch (MalformedURLException e) {
+        } catch (final MalformedURLException e) {
             FMLLog.severe("Error getting capes list URL");
             e.printStackTrace();
             return;
@@ -433,7 +433,7 @@ public class ClientProxyCore extends CommonProxyCore {
 
         try {
             connection = capeListUrl.openConnection();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
             return;
         }
@@ -444,42 +444,42 @@ public class ClientProxyCore extends CommonProxyCore {
 
         try {
             stream = connection.getInputStream();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
             return;
         }
 
-        InputStreamReader streamReader = new InputStreamReader(stream);
-        BufferedReader reader = new BufferedReader(streamReader);
+        final InputStreamReader streamReader = new InputStreamReader(stream);
+        final BufferedReader reader = new BufferedReader(streamReader);
 
         String line;
         try {
             while ((line = reader.readLine()) != null) {
                 if (line.contains(":")) {
-                    int splitLocation = line.indexOf(":");
-                    String username = line.substring(0, splitLocation);
-                    String capeUrl = "https://raw.github.com/micdoodle8/Galacticraft/master/capes/"
+                    final int splitLocation = line.indexOf(":");
+                    final String username = line.substring(0, splitLocation);
+                    final String capeUrl = "https://raw.github.com/micdoodle8/Galacticraft/master/capes/"
                             + line.substring(splitLocation + 1) + ".png";
                     ClientProxyCore.capeMap.put(username, capeUrl);
                 }
             }
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
 
         try {
             reader.close();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
         try {
             streamReader.close();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
         try {
             stream.close();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
@@ -557,20 +557,20 @@ public class ClientProxyCore extends CommonProxyCore {
             return;
         }
 
-        Tessellator tessellator = Tessellator.instance;
-        float f1 = ClientProxyCore.mc.thePlayer.getBrightness(partialTicks) / 3.0F;
+        final Tessellator tessellator = Tessellator.instance;
+        final float f1 = ClientProxyCore.mc.thePlayer.getBrightness(partialTicks) / 3.0F;
         GL11.glColor4f(f1, f1, f1, 1.0F);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glPushMatrix();
-        float f2 = 4.0F;
-        float f3 = -1.0F;
-        float f4 = 1.0F;
-        float f5 = -1.0F;
-        float f6 = 1.0F;
-        float f7 = -0.5F;
-        float f8 = -ClientProxyCore.mc.thePlayer.rotationYaw / 64.0F;
-        float f9 = ClientProxyCore.mc.thePlayer.rotationPitch / 64.0F;
+        final float f2 = 4.0F;
+        final float f3 = -1.0F;
+        final float f4 = 1.0F;
+        final float f5 = -1.0F;
+        final float f6 = 1.0F;
+        final float f7 = -0.5F;
+        final float f8 = -ClientProxyCore.mc.thePlayer.rotationYaw / 64.0F;
+        final float f9 = ClientProxyCore.mc.thePlayer.rotationPitch / 64.0F;
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(f3, f5, f7, f2 + f8, f2 + f9);
         tessellator.addVertexWithUV(f4, f5, f7, 0.0F + f8, f2 + f9);
@@ -583,11 +583,11 @@ public class ClientProxyCore extends CommonProxyCore {
     }
 
     public static boolean isInsideOfFluid(Entity entity, Fluid fluid) {
-        double d0 = entity.posY + entity.getEyeHeight();
-        int i = MathHelper.floor_double(entity.posX);
-        int j = MathHelper.floor_float(MathHelper.floor_double(d0));
-        int k = MathHelper.floor_double(entity.posZ);
-        Block block = entity.worldObj.getBlock(i, j, k);
+        final double d0 = entity.posY + entity.getEyeHeight();
+        final int i = MathHelper.floor_double(entity.posX);
+        final int j = MathHelper.floor_float(MathHelper.floor_double(d0));
+        final int k = MathHelper.floor_double(entity.posZ);
+        final Block block = entity.worldObj.getBlock(i, j, k);
 
         if (block != null
                 && block instanceof IFluidBlock
@@ -620,7 +620,7 @@ public class ClientProxyCore extends CommonProxyCore {
 
     @Override
     public World getWorldForID(int dimensionID) {
-        World world = ClientProxyCore.mc.theWorld;
+        final World world = ClientProxyCore.mc.theWorld;
 
         if (world != null && world.provider.dimensionId == dimensionID) {
             return world;
@@ -638,14 +638,14 @@ public class ClientProxyCore extends CommonProxyCore {
         if (player.ridingEntity instanceof ICameraZoomEntity
                 && player == Minecraft.getMinecraft().thePlayer
                 && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0) {
-            Entity entity = player.ridingEntity;
+            final Entity entity = player.ridingEntity;
             float rotateOffset = ((ICameraZoomEntity) entity).getRotateOffset();
             if (rotateOffset > -10F) {
                 rotateOffset += PLAYER_Y_OFFSET;
                 GL11.glTranslatef(0, -rotateOffset, 0);
-                float anglePitch = entity.prevRotationPitch
+                final float anglePitch = entity.prevRotationPitch
                         + (entity.rotationPitch - entity.prevRotationPitch) * event.partialRenderTick;
-                float angleYaw = entity.prevRotationYaw
+                final float angleYaw = entity.prevRotationYaw
                         + (entity.rotationYaw - entity.prevRotationYaw) * event.partialRenderTick;
                 GL11.glRotatef(-angleYaw, 0.0F, 1.0F, 0.0F);
                 GL11.glRotatef(anglePitch, 0.0F, 0.0F, 1.0F);
@@ -679,16 +679,16 @@ public class ClientProxyCore extends CommonProxyCore {
 
     @SubscribeEvent
     public void onPostRender(RenderPlayerEvent.Specials.Post event) {
-        AbstractClientPlayer player = (AbstractClientPlayer) event.entityPlayer;
-        boolean flag = ClientProxyCore.capeMap.containsKey(event.entityPlayer.getCommandSenderName());
+        final AbstractClientPlayer player = (AbstractClientPlayer) event.entityPlayer;
+        final boolean flag = ClientProxyCore.capeMap.containsKey(event.entityPlayer.getCommandSenderName());
         float f4;
 
         if (flag && !player.isInvisible() && !player.getHideCape()) {
-            String url = ClientProxyCore.capeMap.get(player.getCommandSenderName());
+            final String url = ClientProxyCore.capeMap.get(player.getCommandSenderName());
             ResourceLocation capeLoc = capesMap.get(url);
             if (!capesMap.containsKey(url)) {
                 try {
-                    String dirName = Minecraft.getMinecraft().mcDataDir.getAbsolutePath();
+                    final String dirName = Minecraft.getMinecraft().mcDataDir.getAbsolutePath();
                     File directory = new File(dirName, "assets");
                     boolean success = true;
                     if (!directory.exists()) {
@@ -701,19 +701,19 @@ public class ClientProxyCore extends CommonProxyCore {
                         }
 
                         if (success) {
-                            String hash =
+                            final String hash =
                                     String.valueOf(player.getCommandSenderName().hashCode());
-                            File file1 = new File(directory, hash.substring(0, 2));
-                            File file2 = new File(file1, hash);
+                            final File file1 = new File(directory, hash.substring(0, 2));
+                            final File file2 = new File(file1, hash);
                             final ResourceLocation resourcelocation = new ResourceLocation("gcCapes/" + hash);
-                            ThreadDownloadImageDataGC threaddownloadimagedata =
+                            final ThreadDownloadImageDataGC threaddownloadimagedata =
                                     new ThreadDownloadImageDataGC(file2, url, null, new IImageBuffer() {
                                         public BufferedImage parseUserSkin(BufferedImage p_78432_1_) {
                                             if (p_78432_1_ == null) {
                                                 return null;
                                             } else {
-                                                BufferedImage bufferedimage1 = new BufferedImage(512, 256, 2);
-                                                Graphics graphics = bufferedimage1.getGraphics();
+                                                final BufferedImage bufferedimage1 = new BufferedImage(512, 256, 2);
+                                                final Graphics graphics = bufferedimage1.getGraphics();
                                                 graphics.drawImage(p_78432_1_, 0, 0, null);
                                                 graphics.dispose();
                                                 p_78432_1_ = bufferedimage1;
@@ -731,7 +731,7 @@ public class ClientProxyCore extends CommonProxyCore {
                             }
                         }
                     }
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     e.printStackTrace();
                 }
 
@@ -742,20 +742,20 @@ public class ClientProxyCore extends CommonProxyCore {
                 ClientProxyCore.mc.getTextureManager().bindTexture(capeLoc);
                 GL11.glPushMatrix();
                 GL11.glTranslatef(0.0F, 0.0F, 0.125F);
-                double d3 = player.field_71091_bM
+                final double d3 = player.field_71091_bM
                         + (player.field_71094_bP - player.field_71091_bM) * event.partialRenderTick
                         - (player.prevPosX + (player.posX - player.prevPosX) * event.partialRenderTick);
-                double d4 = player.field_71096_bN
+                final double d4 = player.field_71096_bN
                         + (player.field_71095_bQ - player.field_71096_bN) * event.partialRenderTick
                         - (player.prevPosY + (player.posY - player.prevPosY) * event.partialRenderTick);
-                double d0 = player.field_71097_bO
+                final double d0 = player.field_71097_bO
                         + (player.field_71085_bR - player.field_71097_bO) * event.partialRenderTick
                         - (player.prevPosZ + (player.posZ - player.prevPosZ) * event.partialRenderTick);
                 f4 = (player.prevRenderYawOffset
                                 + (player.renderYawOffset - player.prevRenderYawOffset) * event.partialRenderTick)
                         / 57.29578F;
-                double d1 = MathHelper.sin(f4);
-                double d2 = -MathHelper.cos(f4);
+                final double d1 = MathHelper.sin(f4);
+                final double d2 = -MathHelper.cos(f4);
                 float f5 = (float) d4 * 10.0F;
 
                 if (f5 < -6.0F) {
@@ -767,13 +767,14 @@ public class ClientProxyCore extends CommonProxyCore {
                 }
 
                 float f6 = (float) (d3 * d1 + d0 * d2) * 100.0F;
-                float f7 = (float) (d3 * d2 - d0 * d1) * 100.0F;
+                final float f7 = (float) (d3 * d2 - d0 * d1) * 100.0F;
 
                 if (f6 < 0.0F) {
                     f6 = 0.0F;
                 }
 
-                float f8 = player.prevCameraYaw + (player.cameraYaw - player.prevCameraYaw) * event.partialRenderTick;
+                final float f8 =
+                        player.prevCameraYaw + (player.cameraYaw - player.prevCameraYaw) * event.partialRenderTick;
                 f5 += MathHelper.sin((player.prevDistanceWalkedModified
                                         + (player.distanceWalkedModified - player.prevDistanceWalkedModified)
                                                 * event.partialRenderTick)
@@ -804,20 +805,20 @@ public class ClientProxyCore extends CommonProxyCore {
         if (ClientProxyCore.smallMoonActive && (offsetX != 0.0D || offsetY != 0.0D || offsetZ != 0.0D)) {
             final EntityPlayerSP player = ClientProxyCore.mc.thePlayer;
             if (player.posY > ClientProxyCore.terrainHeight + 8F && player.ridingEntity != entity && player != entity) {
-                double globalArc = ClientProxyCore.globalRadius / 57.2957795D;
+                final double globalArc = ClientProxyCore.globalRadius / 57.2957795D;
 
-                int pX = MathHelper.floor_double(player.posX / 16D) << 4;
-                int pZ = MathHelper.floor_double(player.posZ / 16D) << 4;
+                final int pX = MathHelper.floor_double(player.posX / 16D) << 4;
+                final int pZ = MathHelper.floor_double(player.posZ / 16D) << 4;
 
-                int eX = MathHelper.floor_double(entity.posX / 16D) << 4;
-                int eY = MathHelper.floor_double(entity.posY / 16D) << 4;
-                int eZ = MathHelper.floor_double(entity.posZ / 16D) << 4;
+                final int eX = MathHelper.floor_double(entity.posX / 16D) << 4;
+                final int eY = MathHelper.floor_double(entity.posY / 16D) << 4;
+                final int eZ = MathHelper.floor_double(entity.posZ / 16D) << 4;
 
                 float dX = eX - pX;
                 float dZ = eZ - pZ;
 
-                float floatPX = (float) player.posX;
-                float floatPZ = (float) player.posZ;
+                final float floatPX = (float) player.posX;
+                final float floatPZ = (float) player.posZ;
 
                 if (dX > 0) {
                     dX -= 16F;
@@ -851,7 +852,7 @@ public class ClientProxyCore extends CommonProxyCore {
                 if (phi < 0) {
                     phi += 360F;
                 }
-                float ytranslate = ClientProxyCore.globalRadius
+                final float ytranslate = ClientProxyCore.globalRadius
                         + (float) (player.posY - entity.posY)
                         + eY
                         - ClientProxyCore.terrainHeight;
@@ -875,20 +876,20 @@ public class ClientProxyCore extends CommonProxyCore {
             final WorldProvider provider = ClientProxyCore.mc.theWorld.provider;
             if (provider instanceof WorldProviderMoon) {
                 if (player.posY > ClientProxyCore.terrainHeight + 8F) {
-                    double globalArc = ClientProxyCore.globalRadius / 57.2957795D;
+                    final double globalArc = ClientProxyCore.globalRadius / 57.2957795D;
 
-                    int pX = MathHelper.floor_double(player.posX / 16D) << 4;
-                    int pZ = MathHelper.floor_double(player.posZ / 16D) << 4;
+                    final int pX = MathHelper.floor_double(player.posX / 16D) << 4;
+                    final int pZ = MathHelper.floor_double(player.posZ / 16D) << 4;
 
-                    int eX = tile.xCoord / 16 << 4;
-                    int eY = tile.yCoord / 16 << 4;
-                    int eZ = tile.zCoord / 16 << 4;
+                    final int eX = tile.xCoord / 16 << 4;
+                    final int eY = tile.yCoord / 16 << 4;
+                    final int eZ = tile.zCoord / 16 << 4;
 
                     float dX = eX - pX;
                     float dZ = eZ - pZ;
 
-                    float floatPX = (float) player.posX;
-                    float floatPZ = (float) player.posZ;
+                    final float floatPX = (float) player.posX;
+                    final float floatPZ = (float) player.posZ;
 
                     if (dX > 0) {
                         dX -= 16F;
@@ -922,7 +923,7 @@ public class ClientProxyCore extends CommonProxyCore {
                     if (phi < 0) {
                         phi += 360F;
                     }
-                    float ytranslate = ClientProxyCore.globalRadius
+                    final float ytranslate = ClientProxyCore.globalRadius
                             + (float) player.posY
                             - tile.yCoord
                             + eY
@@ -941,20 +942,21 @@ public class ClientProxyCore extends CommonProxyCore {
     }
 
     public static void orientCamera(float partialTicks) {
-        EntityClientPlayerMP player = ClientProxyCore.mc.thePlayer;
-        GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
+        final EntityClientPlayerMP player = ClientProxyCore.mc.thePlayer;
+        final GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
 
-        EntityLivingBase entityLivingBase = ClientProxyCore.mc.renderViewEntity;
+        final EntityLivingBase entityLivingBase = ClientProxyCore.mc.renderViewEntity;
 
         if (player.ridingEntity instanceof ICameraZoomEntity && ClientProxyCore.mc.gameSettings.thirdPersonView == 0) {
-            Entity entity = player.ridingEntity;
+            final Entity entity = player.ridingEntity;
             float offset = ((ICameraZoomEntity) entity).getRotateOffset();
             if (offset > -10F) {
                 offset += PLAYER_Y_OFFSET;
                 GL11.glTranslatef(0, -offset, 0);
-                float anglePitch =
+                final float anglePitch =
                         entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks;
-                float angleYaw = entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks;
+                final float angleYaw =
+                        entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks;
                 GL11.glRotatef(-anglePitch, 0.0F, 0.0F, 1.0F);
                 GL11.glRotatef(angleYaw, 0.0F, 1.0F, 0.0F);
                 GL11.glTranslatef(0, offset, 0);
@@ -963,13 +965,13 @@ public class ClientProxyCore extends CommonProxyCore {
 
         if (entityLivingBase.worldObj.provider instanceof WorldProviderSpaceStation
                 && !entityLivingBase.isPlayerSleeping()) {
-            float f1 = entityLivingBase.yOffset - 1.62F;
-            float pitch = entityLivingBase.prevRotationPitch
+            final float f1 = entityLivingBase.yOffset - 1.62F;
+            final float pitch = entityLivingBase.prevRotationPitch
                     + (entityLivingBase.rotationPitch - entityLivingBase.prevRotationPitch) * partialTicks;
-            float yaw = entityLivingBase.prevRotationYaw
+            final float yaw = entityLivingBase.prevRotationYaw
                     + (entityLivingBase.rotationYaw - entityLivingBase.prevRotationYaw) * partialTicks
                     + 180.0F;
-            float eyeHeightChange = entityLivingBase.yOffset - entityLivingBase.width / 2.0F;
+            final float eyeHeightChange = entityLivingBase.yOffset - entityLivingBase.width / 2.0F;
 
             GL11.glTranslatef(0.0F, -f1, 0.0F);
             GL11.glRotatef(-yaw, 0.0F, 1.0F, 0.0F);
@@ -1022,7 +1024,7 @@ public class ClientProxyCore extends CommonProxyCore {
     public static void setPositionList(WorldRenderer rend, int glRenderList) {
         GL11.glNewList(glRenderList + 3, GL11.GL_COMPILE);
 
-        EntityLivingBase entitylivingbase = ClientProxyCore.mc.renderViewEntity;
+        final EntityLivingBase entitylivingbase = ClientProxyCore.mc.renderViewEntity;
 
         if (entitylivingbase != null) {
             if (rend.worldObj.provider instanceof WorldProviderMoon) {
@@ -1033,11 +1035,11 @@ public class ClientProxyCore extends CommonProxyCore {
 
                 if (entitylivingbase.posY > ClientProxyCore.terrainHeight + 8F) {
                     ClientProxyCore.smallMoonActive = true;
-                    double globalArc = ClientProxyCore.globalRadius / 57.2957795D;
-                    float globeRadius = ClientProxyCore.globalRadius - ClientProxyCore.terrainHeight;
+                    final double globalArc = ClientProxyCore.globalRadius / 57.2957795D;
+                    final float globeRadius = ClientProxyCore.globalRadius - ClientProxyCore.terrainHeight;
 
-                    int pX = MathHelper.floor_double(entitylivingbase.posX / 16D) << 4;
-                    int pZ = MathHelper.floor_double(entitylivingbase.posZ / 16D) << 4;
+                    final int pX = MathHelper.floor_double(entitylivingbase.posX / 16D) << 4;
+                    final int pZ = MathHelper.floor_double(entitylivingbase.posZ / 16D) << 4;
 
                     float dX = rend.posX - pX;
                     float dZ = rend.posZ - pZ;
@@ -1088,9 +1090,9 @@ public class ClientProxyCore extends CommonProxyCore {
                         }
                     }
 
-                    float origClipX = rend.posXClip;
-                    float origClipY = rend.posYClip;
-                    float origClipZ = rend.posZClip;
+                    final float origClipX = rend.posXClip;
+                    final float origClipY = rend.posYClip;
+                    final float origClipZ = rend.posZClip;
 
                     float theta = (float) MathHelper.wrapAngleTo180_double(dX / globalArc);
                     float phi = (float) MathHelper.wrapAngleTo180_double(dZ / globalArc);
@@ -1109,9 +1111,9 @@ public class ClientProxyCore extends CommonProxyCore {
                     }
                     GL11.glTranslatef(-8F, origClipY + globeRadius - 8F, -8F);
                     if (dX != 0 || dZ != 0) {
-                        float scalex =
+                        final float scalex =
                                 (ClientProxyCore.globalRadius * 2F + scalerX) / ClientProxyCore.globalRadius / 2F;
-                        float scalez =
+                        final float scalez =
                                 (ClientProxyCore.globalRadius * 2F + scalerZ) / ClientProxyCore.globalRadius / 2F;
                         ClientProxyCore.scaleup.rewind();
                         ClientProxyCore.scaleup.put(scalex);
@@ -1148,7 +1150,7 @@ public class ClientProxyCore extends CommonProxyCore {
 
     // For testing purposes only
     public void addVertex(double x, double y, double z) {
-        double var7 = 1 + (y + ClientProxyCore.offsetY) / ClientProxyCore.globalRadius;
+        final double var7 = 1 + (y + ClientProxyCore.offsetY) / ClientProxyCore.globalRadius;
         x += (x % 16 - 8) * var7 + 8;
         z += (z % 16 - 8) * var7 + 8;
     }
@@ -1174,7 +1176,7 @@ public class ClientProxyCore extends CommonProxyCore {
         if (this.mc.currentScreen instanceof GuiCelestialSelection) {
             if (event.celestialBody == GalacticraftCore.planetSaturn) {
                 this.mc.renderEngine.bindTexture(saturnRingTexture);
-                float size = GuiCelestialSelection.getWidthForCelestialBodyStatic(event.celestialBody) / 6.0F;
+                final float size = GuiCelestialSelection.getWidthForCelestialBodyStatic(event.celestialBody) / 6.0F;
                 ((GuiCelestialSelection) this.mc.currentScreen)
                         .drawTexturedModalRect(
                                 -7.5F * size,
@@ -1191,7 +1193,7 @@ public class ClientProxyCore extends CommonProxyCore {
                                 7);
             } else if (event.celestialBody == GalacticraftCore.planetUranus) {
                 this.mc.renderEngine.bindTexture(uranusRingTexture);
-                float size = GuiCelestialSelection.getWidthForCelestialBodyStatic(event.celestialBody) / 6.0F;
+                final float size = GuiCelestialSelection.getWidthForCelestialBodyStatic(event.celestialBody) / 6.0F;
                 ((GuiCelestialSelection) this.mc.currentScreen)
                         .drawTexturedModalRect(
                                 -1.75F * size,

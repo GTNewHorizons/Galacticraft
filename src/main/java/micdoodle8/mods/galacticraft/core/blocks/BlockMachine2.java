@@ -78,17 +78,17 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
 
     @Override
     public void randomDisplayTick(World par1World, int x, int y, int z, Random par5Random) {
-        TileEntity tile = par1World.getTileEntity(x, y, z);
+        final TileEntity tile = par1World.getTileEntity(x, y, z);
 
         if (tile instanceof TileEntityCoalGenerator) {
-            TileEntityCoalGenerator tileEntity = (TileEntityCoalGenerator) tile;
+            final TileEntityCoalGenerator tileEntity = (TileEntityCoalGenerator) tile;
             if (tileEntity.heatGJperTick > 0) {
-                int metadata = par1World.getBlockMetadata(x, y, z);
-                float var7 = x + 0.5F;
-                float var8 = y + 0.0F + par5Random.nextFloat() * 6.0F / 16.0F;
-                float var9 = z + 0.5F;
-                float var10 = 0.52F;
-                float var11 = par5Random.nextFloat() * 0.6F - 0.3F;
+                final int metadata = par1World.getBlockMetadata(x, y, z);
+                final float var7 = x + 0.5F;
+                final float var8 = y + 0.0F + par5Random.nextFloat() * 6.0F / 16.0F;
+                final float var9 = z + 0.5F;
+                final float var10 = 0.52F;
+                final float var11 = par5Random.nextFloat() * 0.6F - 0.3F;
 
                 if (metadata == 3) {
                     par1World.spawnParticle("smoke", var7 - var10, var8, var9 + var11, 0.0D, 0.0D, 0.0D);
@@ -129,7 +129,7 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
             }
 
             int oxygenLevel = 0;
-            TileEntity tile = world.getTileEntity(x, y, z);
+            final TileEntity tile = world.getTileEntity(x, y, z);
             if (tile instanceof TileEntityOxygenStorageModule) {
                 oxygenLevel = Math.min(((TileEntityOxygenStorageModule) tile).scaledOxygenLevel, 16);
             }
@@ -200,9 +200,9 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
      */
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
-        int metadata = world.getBlockMetadata(x, y, z);
+        final int metadata = world.getBlockMetadata(x, y, z);
 
-        int angle = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        final int angle = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         int change = 0;
 
         switch (angle) {
@@ -240,7 +240,7 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
             float hitX,
             float hitY,
             float hitZ) {
-        int metadata = par1World.getBlockMetadata(x, y, z);
+        final int metadata = par1World.getBlockMetadata(x, y, z);
         int original = metadata;
 
         int change = 0;
@@ -252,7 +252,7 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
         } else if (metadata >= BlockMachine2.ELECTRIC_COMPRESSOR_METADATA) {
             original -= BlockMachine2.ELECTRIC_COMPRESSOR_METADATA;
 
-            TileEntity te = par1World.getTileEntity(x, y, z);
+            final TileEntity te = par1World.getTileEntity(x, y, z);
             if (te instanceof TileBaseUniversalElectrical) {
                 ((TileBaseUniversalElectrical) te).updateFacing();
             }
@@ -356,7 +356,7 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
 
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
-        int metadata = this.getDamageValue(world, x, y, z);
+        final int metadata = this.getDamageValue(world, x, y, z);
 
         return new ItemStack(this, 1, metadata);
     }

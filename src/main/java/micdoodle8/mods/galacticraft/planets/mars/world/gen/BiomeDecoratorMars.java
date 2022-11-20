@@ -9,12 +9,12 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeDecoratorMars extends BiomeDecoratorSpace {
-    private WorldGenerator dirtGen;
-    private WorldGenerator deshGen;
-    private WorldGenerator tinGen;
-    private WorldGenerator copperGen;
-    private WorldGenerator ironGen;
-    private WorldGenerator iceGen;
+    private final WorldGenerator dirtGen;
+    private final WorldGenerator deshGen;
+    private final WorldGenerator tinGen;
+    private final WorldGenerator copperGen;
+    private final WorldGenerator ironGen;
+    private final WorldGenerator iceGen;
     private World currentWorld;
 
     public BiomeDecoratorMars() {

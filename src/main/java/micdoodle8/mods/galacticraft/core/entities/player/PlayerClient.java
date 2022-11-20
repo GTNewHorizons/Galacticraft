@@ -49,7 +49,7 @@ public class PlayerClient implements IPlayerClient {
 
     @Override
     public void onUpdate(EntityPlayerSP player) {
-        GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
+        final GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
         stats.tick++;
 
         if (stats.usingParachute && !player.capabilities.isFlying && !player.handleWaterMovement()) {
@@ -70,7 +70,7 @@ public class PlayerClient implements IPlayerClient {
 
     @Override
     public void onLivingUpdatePre(EntityPlayerSP player) {
-        GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
+        final GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
 
         if (player.worldObj.provider instanceof IGalacticraftWorldProvider) {
             if (!startup) {
@@ -107,7 +107,7 @@ public class PlayerClient implements IPlayerClient {
 
     @Override
     public void onLivingUpdatePost(EntityPlayerSP player) {
-        GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
+        final GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
 
         if (player.worldObj.provider instanceof IZeroGDimension) {
             stats.freefallHandler.postVanillaMotion(player);
@@ -116,7 +116,7 @@ public class PlayerClient implements IPlayerClient {
                 // No limb swing
                 player.limbSwing -= player.limbSwingAmount;
                 player.limbSwingAmount = player.prevLimbSwingAmount;
-                float adjust = Math.min(Math.abs(player.limbSwing), Math.abs(player.limbSwingAmount) / 3);
+                final float adjust = Math.min(Math.abs(player.limbSwing), Math.abs(player.limbSwingAmount) / 3);
                 if (player.limbSwing < 0) {
                     player.limbSwing += adjust;
                 } else if (player.limbSwing > 0) {
@@ -132,7 +132,7 @@ public class PlayerClient implements IPlayerClient {
                         }
                         stats.landingTicks = GCPlayerStatsClient.MAX_LANDINGTICKS;
                     }
-                    float dYmax = 0.3F * stats.landingTicks / GCPlayerStatsClient.MAX_LANDINGTICKS;
+                    final float dYmax = 0.3F * stats.landingTicks / GCPlayerStatsClient.MAX_LANDINGTICKS;
                     float factor = 1F;
                     for (int i = 0; i <= stats.landingTicks; i++) {
                         stats.landingYOffset[i] = dYmax * MathHelper.sin(i * 3.1415926F / stats.landingTicks) * factor;
@@ -150,7 +150,7 @@ public class PlayerClient implements IPlayerClient {
             stats.inFreefall = false;
         }
 
-        boolean ridingThirdPersonEntity = player.ridingEntity instanceof ICameraZoomEntity
+        final boolean ridingThirdPersonEntity = player.ridingEntity instanceof ICameraZoomEntity
                 && ((ICameraZoomEntity) player.ridingEntity).defaultThirdPerson();
 
         if (ridingThirdPersonEntity && !stats.lastRidingCameraZoomEntity) {
@@ -177,7 +177,7 @@ public class PlayerClient implements IPlayerClient {
             player.fallDistance = 0.0F;
         }
 
-        PlayerGearData gearData = ClientProxyCore.playerItemData.get(player.getCommandSenderName());
+        final PlayerGearData gearData = ClientProxyCore.playerItemData.get(player.getCommandSenderName());
 
         stats.usingParachute = false;
 
@@ -218,9 +218,9 @@ public class PlayerClient implements IPlayerClient {
     @Override
     public float getBedOrientationInDegrees(EntityPlayerSP player, float vanillaDegrees) {
         if (player.playerLocation != null) {
-            int x = player.playerLocation.posX;
-            int y = player.playerLocation.posY;
-            int z = player.playerLocation.posZ;
+            final int x = player.playerLocation.posX;
+            final int y = player.playerLocation.posY;
+            final int z = player.playerLocation.posZ;
 
             if (player.worldObj.getTileEntity(x, y, z) instanceof TileEntityAdvanced) {
                 // int j = player.worldObj.getBlock(x, y, z).getBedDirection(player.worldObj, x,
@@ -244,8 +244,8 @@ public class PlayerClient implements IPlayerClient {
     }
 
     private void updateFeet(EntityPlayerSP player, double motionX, double motionZ) {
-        GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
-        double motionSqrd = motionX * motionX + motionZ * motionZ;
+        final GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
+        final double motionSqrd = motionX * motionX + motionZ * motionZ;
 
         // If the player is on the moon, not airbourne and not riding anything
         if (motionSqrd > 0.001
@@ -253,9 +253,9 @@ public class PlayerClient implements IPlayerClient {
                 && player.worldObj.provider instanceof WorldProviderMoon
                 && player.ridingEntity == null
                 && !player.capabilities.isFlying) {
-            int iPosX = (int) Math.floor(player.posX);
-            int iPosY = (int) Math.floor(player.posY - 2);
-            int iPosZ = (int) Math.floor(player.posZ);
+            final int iPosX = (int) Math.floor(player.posX);
+            final int iPosY = (int) Math.floor(player.posY - 2);
+            final int iPosZ = (int) Math.floor(player.posZ);
 
             // If the block below is the moon block
             if (player.worldObj.getBlock(iPosX, iPosY, iPosZ) == GCBlocks.blockMoon) {
@@ -288,7 +288,7 @@ public class PlayerClient implements IPlayerClient {
                         pos = WorldUtil.getFootprintPosition(
                                 player.worldObj, player.rotationYaw - 180, pos, new BlockVec3(player));
 
-                        long chunkKey = ChunkCoordIntPair.chunkXZ2Int(pos.intX() >> 4, pos.intZ() >> 4);
+                        final long chunkKey = ChunkCoordIntPair.chunkXZ2Int(pos.intX() >> 4, pos.intZ() >> 4);
                         ClientProxyCore.footprintRenderer.addFootprint(
                                 chunkKey,
                                 player.worldObj.provider.dimensionId,
@@ -309,10 +309,10 @@ public class PlayerClient implements IPlayerClient {
     }
 
     public boolean wakeUpPlayer(EntityPlayerSP player, boolean par1, boolean par2, boolean par3, boolean bypass) {
-        ChunkCoordinates c = player.playerLocation;
+        final ChunkCoordinates c = player.playerLocation;
 
         if (c != null) {
-            EventWakePlayer event = new EventWakePlayer(player, c.posX, c.posY, c.posZ, par1, par2, par3, bypass);
+            final EventWakePlayer event = new EventWakePlayer(player, c.posX, c.posY, c.posZ, par1, par2, par3, bypass);
             MinecraftForge.EVENT_BUS.post(event);
 
             if (bypass || event.result == null || event.result == EntityPlayer.EnumStatus.OK) {
@@ -330,7 +330,7 @@ public class PlayerClient implements IPlayerClient {
         // 4,5,6 : Fuel loader, Launchpad, NASA Workbench
         // 7: oil found 8: placed rocket
 
-        GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
+        final GCPlayerStatsClient stats = GCPlayerStatsClient.get(player);
         int flag = stats.buildFlags;
         if (flag == -1) {
             flag = 0;

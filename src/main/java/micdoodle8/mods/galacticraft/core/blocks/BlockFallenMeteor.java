@@ -70,10 +70,10 @@ public class BlockFallenMeteor extends Block implements ITileEntityProvider, Ite
 
     @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
-        TileEntity tile = par1World.getTileEntity(par2, par3, par4);
+        final TileEntity tile = par1World.getTileEntity(par2, par3, par4);
 
         if (tile instanceof TileEntityFallenMeteor) {
-            TileEntityFallenMeteor meteor = (TileEntityFallenMeteor) tile;
+            final TileEntityFallenMeteor meteor = (TileEntityFallenMeteor) tile;
 
             if (meteor.getHeatLevel() <= 0) {
                 return;
@@ -138,7 +138,8 @@ public class BlockFallenMeteor extends Block implements ITileEntityProvider, Ite
 
     private void tryToFall(World par1World, int par2, int par3, int par4) {
         if (BlockFallenMeteor.canFallBelow(par1World, par2, par3 - 1, par4) && par3 >= 0) {
-            int prevHeatLevel = ((TileEntityFallenMeteor) par1World.getTileEntity(par2, par3, par4)).getHeatLevel();
+            final int prevHeatLevel =
+                    ((TileEntityFallenMeteor) par1World.getTileEntity(par2, par3, par4)).getHeatLevel();
             par1World.setBlock(par2, par3, par4, Blocks.air, 0, 3);
 
             while (BlockFallenMeteor.canFallBelow(par1World, par2, par3 - 1, par4) && par3 > 0) {
@@ -167,12 +168,12 @@ public class BlockFallenMeteor extends Block implements ITileEntityProvider, Ite
 
     @Override
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
-        TileEntity tile = par1IBlockAccess.getTileEntity(par2, par3, par4);
+        final TileEntity tile = par1IBlockAccess.getTileEntity(par2, par3, par4);
 
         if (tile instanceof TileEntityFallenMeteor) {
-            TileEntityFallenMeteor meteor = (TileEntityFallenMeteor) tile;
+            final TileEntityFallenMeteor meteor = (TileEntityFallenMeteor) tile;
 
-            Vector3 col = new Vector3(198, 108, 58);
+            final Vector3 col = new Vector3(198, 108, 58);
             col.translate(200 - meteor.getScaledHeatLevel() * 200);
             col.x = Math.min(255, col.x);
             col.y = Math.min(255, col.y);
@@ -195,13 +196,13 @@ public class BlockFallenMeteor extends Block implements ITileEntityProvider, Ite
     }
 
     public float getPlayerRelativeBlockHardness(EntityPlayer player, World world, int x, int y, int z) {
-        int metadata = world.getBlockMetadata(x, y, z);
-        float hardness = this.getBlockHardness(world, x, y, z);
+        final int metadata = world.getBlockMetadata(x, y, z);
+        final float hardness = this.getBlockHardness(world, x, y, z);
         if (hardness < 0.0F) {
             return 0.0F;
         }
 
-        int power = canHarvestBlock(this, player, metadata);
+        final int power = canHarvestBlock(this, player, metadata);
         if (power > 0) {
             return power * player.getBreakSpeed(this, true, metadata, x, y, z) / hardness / 30F;
         } else {
@@ -210,13 +211,13 @@ public class BlockFallenMeteor extends Block implements ITileEntityProvider, Ite
     }
 
     public int canHarvestBlock(Block block, EntityPlayer player, int metadata) {
-        ItemStack stack = player.inventory.getCurrentItem();
-        String tool = block.getHarvestTool(metadata);
+        final ItemStack stack = player.inventory.getCurrentItem();
+        final String tool = block.getHarvestTool(metadata);
         if (stack == null || tool == null) {
             return player.canHarvestBlock(block) ? 1 : 0;
         }
 
-        int toolLevel = stack.getItem().getHarvestLevel(stack, tool) - block.getHarvestLevel(metadata) + 1;
+        final int toolLevel = stack.getItem().getHarvestLevel(stack, tool) - block.getHarvestLevel(metadata) + 1;
         if (toolLevel < 1) {
             return player.canHarvestBlock(block) ? 1 : 0;
         }

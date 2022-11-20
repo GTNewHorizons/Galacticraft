@@ -33,7 +33,7 @@ public class CommandGCHelp extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender icommandsender, String[] astring) {
-        EntityPlayerMP playerBase =
+        final EntityPlayerMP playerBase =
                 PlayerUtil.getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
         if (playerBase == null) {
             return;

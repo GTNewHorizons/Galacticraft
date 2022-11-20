@@ -19,7 +19,7 @@ import org.lwjgl.opengl.GL11;
 public class ItemRendererTier2Rocket extends ItemRendererTier1Rocket {
     private static final ResourceLocation cargoRocketTexture =
             new ResourceLocation(MarsModule.ASSET_PREFIX, "textures/model/cargoRocket.png");
-    private IModelCustom cargoRocketModel;
+    private final IModelCustom cargoRocketModel;
 
     public ItemRendererTier2Rocket(IModelCustom cargoRocketModel) {
         super(
@@ -55,7 +55,7 @@ public class ItemRendererTier2Rocket extends ItemRendererTier1Rocket {
         }
 
         if (type == ItemRenderType.INVENTORY) {
-            int index = Math.min(
+            final int index = Math.min(
                     Math.max(item.getItemDamage() >= 10 ? item.getItemDamage() - 10 : item.getItemDamage(), 0),
                     EnumRocketType.values().length - 1);
 

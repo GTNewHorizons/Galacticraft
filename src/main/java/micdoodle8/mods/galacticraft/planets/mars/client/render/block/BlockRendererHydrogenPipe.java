@@ -30,7 +30,7 @@ public class BlockRendererHydrogenPipe implements ISimpleBlockRenderingHandler {
 
             final TileEntity[] connections = TileEntityHydrogenPipe.getAdjacentHydrogenConnections(tileEntity);
 
-            for (TileEntity connection : connections) {
+            for (final TileEntity connection : connections) {
                 if (connection != null) {
                     final int side = Arrays.asList(connections).indexOf(connection);
 

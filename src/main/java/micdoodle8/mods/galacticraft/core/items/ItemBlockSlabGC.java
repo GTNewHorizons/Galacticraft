@@ -27,7 +27,7 @@ public class ItemBlockSlabGC extends ItemSlab {
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
-        BlockSlabGC slab = (BlockSlabGC) Block.getBlockFromItem(itemStack.getItem());
+        final BlockSlabGC slab = (BlockSlabGC) Block.getBlockFromItem(itemStack.getItem());
         return super.getUnlocalizedName() + "."
                 + new StringBuilder()
                         .append(slab.func_150002_b(itemStack.getItemDamage()))

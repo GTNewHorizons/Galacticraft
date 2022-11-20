@@ -10,8 +10,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 public abstract class TileBaseElectricBlockWithInventory extends TileBaseElectricBlock implements IInventory {
     public ItemStack[] readStandardItemsFromNBT(NBTTagCompound nbt) {
         final NBTTagList var2 = nbt.getTagList("Items", 10);
-        int length = this.getSizeInventory();
-        ItemStack[] result = new ItemStack[length];
+        final int length = this.getSizeInventory();
+        final ItemStack[] result = new ItemStack[length];
 
         for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
             final NBTTagCompound var4 = var2.getCompoundTagAt(var3);
@@ -26,8 +26,8 @@ public abstract class TileBaseElectricBlockWithInventory extends TileBaseElectri
 
     public void writeStandardItemsToNBT(NBTTagCompound nbt) {
         final NBTTagList list = new NBTTagList();
-        int length = this.getSizeInventory();
-        ItemStack containingItems[] = this.getContainingItems();
+        final int length = this.getSizeInventory();
+        final ItemStack containingItems[] = this.getContainingItems();
 
         for (int var3 = 0; var3 < length; ++var3) {
             if (containingItems[var3] != null) {
@@ -53,7 +53,7 @@ public abstract class TileBaseElectricBlockWithInventory extends TileBaseElectri
 
     @Override
     public ItemStack decrStackSize(int par1, int par2) {
-        ItemStack containingItems[] = this.getContainingItems();
+        final ItemStack containingItems[] = this.getContainingItems();
         if (containingItems[par1] != null) {
             ItemStack var3;
 
@@ -79,7 +79,7 @@ public abstract class TileBaseElectricBlockWithInventory extends TileBaseElectri
 
     @Override
     public ItemStack getStackInSlotOnClosing(int par1) {
-        ItemStack containingItems[] = this.getContainingItems();
+        final ItemStack containingItems[] = this.getContainingItems();
         if (containingItems[par1] != null) {
             final ItemStack var2 = containingItems[par1];
             containingItems[par1] = null;
@@ -92,7 +92,7 @@ public abstract class TileBaseElectricBlockWithInventory extends TileBaseElectri
 
     @Override
     public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
-        ItemStack containingItems[] = this.getContainingItems();
+        final ItemStack containingItems[] = this.getContainingItems();
         containingItems[par1] = par2ItemStack;
 
         if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit()) {

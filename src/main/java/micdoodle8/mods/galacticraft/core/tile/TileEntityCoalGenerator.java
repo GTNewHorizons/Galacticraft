@@ -113,12 +113,12 @@ public class TileEntityCoalGenerator extends TileBaseUniversalElectricalSource
         super.readFromNBT(par1NBTTagCompound);
         this.itemCookTime = par1NBTTagCompound.getInteger("itemCookTime");
         this.heatGJperTick = par1NBTTagCompound.getInteger("generateRateInt");
-        NBTTagList var2 = par1NBTTagCompound.getTagList("Items", 10);
+        final NBTTagList var2 = par1NBTTagCompound.getTagList("Items", 10);
         this.containingItems = new ItemStack[this.getSizeInventory()];
 
         for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
-            NBTTagCompound var4 = var2.getCompoundTagAt(var3);
-            int var5 = var4.getByte("Slot") & 255;
+            final NBTTagCompound var4 = var2.getCompoundTagAt(var3);
+            final int var5 = var4.getByte("Slot") & 255;
 
             if (var5 < this.containingItems.length) {
                 this.containingItems[var5] = ItemStack.loadItemStackFromNBT(var4);
@@ -134,11 +134,11 @@ public class TileEntityCoalGenerator extends TileBaseUniversalElectricalSource
         super.writeToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setInteger("itemCookTime", this.itemCookTime);
         par1NBTTagCompound.setFloat("generateRate", this.heatGJperTick);
-        NBTTagList var2 = new NBTTagList();
+        final NBTTagList var2 = new NBTTagList();
 
         for (int var3 = 0; var3 < this.containingItems.length; ++var3) {
             if (this.containingItems[var3] != null) {
-                NBTTagCompound var4 = new NBTTagCompound();
+                final NBTTagCompound var4 = new NBTTagCompound();
                 var4.setByte("Slot", (byte) var3);
                 this.containingItems[var3].writeToNBT(var4);
                 var2.appendTag(var4);
@@ -184,7 +184,7 @@ public class TileEntityCoalGenerator extends TileBaseUniversalElectricalSource
     @Override
     public ItemStack getStackInSlotOnClosing(int par1) {
         if (this.containingItems[par1] != null) {
-            ItemStack var2 = this.containingItems[par1];
+            final ItemStack var2 = this.containingItems[par1];
             this.containingItems[par1] = null;
             return var2;
         } else {

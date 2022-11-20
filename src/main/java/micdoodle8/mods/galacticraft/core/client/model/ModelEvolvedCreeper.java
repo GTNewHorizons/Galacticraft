@@ -194,7 +194,7 @@ public class ModelEvolvedCreeper extends ModelBase {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7);
 
         if (this.isChild) {
-            float f6 = 2.0F;
+            final float f6 = 2.0F;
             GL11.glPushMatrix();
             GL11.glScalef(1.5F / f6, 1.5F / f6, 1.5F / f6);
             GL11.glTranslatef(0.0F, 16.0F * par7, 0.0F);

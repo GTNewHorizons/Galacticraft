@@ -27,12 +27,12 @@ public class RecipeManagerMars {
     private static void addUniversalRecipes() {
         OreDictionary.registerOre("ingotDesh", new ItemStack(MarsItems.marsItemBasic, 1, 2));
         OreDictionary.registerOre("compressedDesh", new ItemStack(MarsItems.marsItemBasic, 1, 5));
-        Object meteoricIronIngot =
+        final Object meteoricIronIngot =
                 ConfigManagerCore.recipesRequireGCAdvancedMetals ? GCItems.meteoricIronIngot : "ingotMeteoricIron";
-        Object deshIngot = ConfigManagerCore.recipesRequireGCAdvancedMetals
+        final Object deshIngot = ConfigManagerCore.recipesRequireGCAdvancedMetals
                 ? new ItemStack(MarsItems.marsItemBasic, 1, 2)
                 : "ingotDesh";
-        Object deshPlate = ConfigManagerCore.recipesRequireGCAdvancedMetals
+        final Object deshPlate = ConfigManagerCore.recipesRequireGCAdvancedMetals
                 ? new ItemStack(MarsItems.marsItemBasic, 1, 5)
                 : "compressedDesh";
 
@@ -289,7 +289,7 @@ public class RecipeManagerMars {
 
         // Handled by Galaxy Space
         // Schematic
-        HashMap<Integer, ItemStack> input = new HashMap<Integer, ItemStack>();
+        final HashMap<Integer, ItemStack> input = new HashMap<Integer, ItemStack>();
         /*
          * input.put(1, new ItemStack(GCItems.partNoseCone)); input.put(2, new
          * ItemStack(MarsItems.marsItemBasic, 1, 3)); input.put(3, new

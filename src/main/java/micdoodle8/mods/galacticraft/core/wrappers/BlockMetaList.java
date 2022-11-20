@@ -5,8 +5,8 @@ import java.util.List;
 import net.minecraft.block.Block;
 
 public class BlockMetaList {
-    private Block block;
-    private List<Integer> metaList;
+    private final Block block;
+    private final List<Integer> metaList;
 
     public BlockMetaList(Block blockID, Integer... metadata) {
         this(blockID, Arrays.asList(metadata));

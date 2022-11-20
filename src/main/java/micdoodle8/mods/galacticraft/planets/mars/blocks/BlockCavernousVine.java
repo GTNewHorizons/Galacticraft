@@ -63,7 +63,7 @@ public class BlockCavernousVine extends Block implements IShearable, ItemBlockDe
 
     @Override
     public boolean canBlockStay(World world, int x, int y, int z) {
-        Block blockAbove = world.getBlock(x, y + 1, z);
+        final Block blockAbove = world.getBlock(x, y + 1, z);
         return blockAbove == this || blockAbove.getMaterial().isSolid();
     }
 
@@ -181,7 +181,7 @@ public class BlockCavernousVine extends Block implements IShearable, ItemBlockDe
     public void updateTick(World world, int x, int y, int z, Random rand) {
         if (!world.isRemote) {
             for (int y2 = y - 1; y2 >= y - 2; y2--) {
-                Block blockID = world.getBlock(x, y2, z);
+                final Block blockID = world.getBlock(x, y2, z);
 
                 if (blockID == null || !blockID.isAir(world, x, y, z)) {
                     return;
@@ -223,7 +223,7 @@ public class BlockCavernousVine extends Block implements IShearable, ItemBlockDe
 
     @Override
     public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
-        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+        final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
         ret.add(new ItemStack(this, 1, 0));
         return ret;
     }

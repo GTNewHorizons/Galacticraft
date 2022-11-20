@@ -26,8 +26,8 @@ public class ModelTier2Rocket extends ModelBase {
         this.textureWidth = 256;
         this.textureHeight = 256;
 
-        float halfPI = (float) (Math.PI / 2.0);
-        float fullPI = (float) Math.PI;
+        final float halfPI = (float) (Math.PI / 2.0);
+        final float fullPI = (float) Math.PI;
 
         this.inside[0] = new ModelRenderer(this, 0, 59);
         this.inside[0].addBox(-9F, -57F, -9F, 18, 1, 18, var1);

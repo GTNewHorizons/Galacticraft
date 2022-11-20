@@ -21,11 +21,11 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public class NetworkHelper {
     public static EnumSet<ForgeDirection> getDirections(TileEntity tileEntity, NetworkType type) {
-        EnumSet<ForgeDirection> possibleSides = EnumSet.noneOf(ForgeDirection.class);
+        final EnumSet<ForgeDirection> possibleSides = EnumSet.noneOf(ForgeDirection.class);
 
         if (tileEntity instanceof IConnector) {
             for (int i = 0; i < 6; i++) {
-                ForgeDirection direction = ForgeDirection.getOrientation(i);
+                final ForgeDirection direction = ForgeDirection.getOrientation(i);
                 if (((IConnector) tileEntity).canConnect(direction, type)) {
                     possibleSides.add(direction);
                 }
@@ -45,11 +45,11 @@ public class NetworkHelper {
             TileEntity tileEntity, EnumSet<ForgeDirection> approachingDirection) {
         final Set<IElectricityNetwork> connectedNetworks = new HashSet<IElectricityNetwork>();
 
-        BlockVec3 tileVec = new BlockVec3(tileEntity);
-        for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
+        final BlockVec3 tileVec = new BlockVec3(tileEntity);
+        for (final ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
             if (approachingDirection.contains(side)) {
-                TileEntity outputConductor = tileVec.getTileEntityOnSide(tileEntity.getWorldObj(), side);
-                IElectricityNetwork electricityNetwork =
+                final TileEntity outputConductor = tileVec.getTileEntityOnSide(tileEntity.getWorldObj(), side);
+                final IElectricityNetwork electricityNetwork =
                         NetworkHelper.getElectricalNetworkFromTileEntity(outputConductor, side);
 
                 if (electricityNetwork != null) {

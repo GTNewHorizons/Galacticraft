@@ -28,7 +28,7 @@ public class ItemBlockMachine extends ItemBlockDesc implements IHoldableItem {
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
         int index = 0;
-        int typenum = itemstack.getItemDamage() & 12;
+        final int typenum = itemstack.getItemDamage() & 12;
 
         if (this.field_150939_a == MarsBlocks.machine) {
             if (typenum == BlockMachineMars.LAUNCH_CONTROLLER_METADATA) {
@@ -62,7 +62,7 @@ public class ItemBlockMachine extends ItemBlockDesc implements IHoldableItem {
 
     @Override
     public boolean shouldHoldLeftHandUp(EntityPlayer player) {
-        ItemStack currentStack = player.getCurrentEquippedItem();
+        final ItemStack currentStack = player.getCurrentEquippedItem();
 
         return currentStack != null
                 && this.field_150939_a == MarsBlocks.machine
@@ -72,7 +72,7 @@ public class ItemBlockMachine extends ItemBlockDesc implements IHoldableItem {
 
     @Override
     public boolean shouldHoldRightHandUp(EntityPlayer player) {
-        ItemStack currentStack = player.getCurrentEquippedItem();
+        final ItemStack currentStack = player.getCurrentEquippedItem();
 
         return currentStack != null
                 && this.field_150939_a == MarsBlocks.machine

@@ -83,9 +83,9 @@ public class TileEntityBeamReceiverRenderer extends TileEntitySpecialRenderer {
         TileEntityBeamReceiverRenderer.receiverModel.renderPart("Receiver");
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_CULL_FACE);
-        float dX = 0.34772F;
-        float dY = 0.75097F;
-        float dZ = 0.0F;
+        final float dX = 0.34772F;
+        final float dY = 0.75097F;
+        final float dZ = 0.0F;
         GL11.glTranslatef(dX, dY, dZ);
         if (tileEntity.modeReceive != ReceiverMode.UNDEFINED.ordinal()) {
             GL11.glRotatef(-tileEntity.ticks * 50, 1, 0, 0);

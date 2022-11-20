@@ -27,10 +27,10 @@ public class RecipeManagerAsteroids {
     }
 
     private static void addUniversalRecipes() {
-        Object titaniumIngot = ConfigManagerCore.recipesRequireGCAdvancedMetals
+        final Object titaniumIngot = ConfigManagerCore.recipesRequireGCAdvancedMetals
                 ? new ItemStack(AsteroidsItems.basicItem, 1, 5)
                 : "ingotTitanium";
-        Object titaniumPlate = ConfigManagerCore.recipesRequireGCAdvancedMetals
+        final Object titaniumPlate = ConfigManagerCore.recipesRequireGCAdvancedMetals
                 ? new ItemStack(AsteroidsItems.basicItem, 1, 6)
                 : "compressedTitanium";
 
@@ -356,7 +356,7 @@ public class RecipeManagerAsteroids {
                     new ItemStack(AsteroidsItems.basicItem, 1, 6), titaniumIngot, titaniumIngot);
         } else {
             if (OreDictionary.getOres("ingotTitanium").size() > 0) {
-                for (ItemStack stack : OreDictionary.getOres("ingotTitanium")) {
+                for (final ItemStack stack : OreDictionary.getOres("ingotTitanium")) {
                     CompressorRecipes.addShapelessRecipe(new ItemStack(AsteroidsItems.basicItem, 1, 6), stack, stack);
                 }
             }
@@ -369,11 +369,11 @@ public class RecipeManagerAsteroids {
 
         // All this is for NEI's benefit
         if (ConfigManagerCore.handfillOxygen) {
-            List<ItemStack> list1 = new ArrayList<>();
-            List<ItemStack> list2 = new ArrayList<>();
-            List<ItemStack> list3 = new ArrayList<>();
-            List<ItemStack> list4 = new ArrayList<>();
-            List<ItemStack> list5 = new ArrayList<>();
+            final List<ItemStack> list1 = new ArrayList<>();
+            final List<ItemStack> list2 = new ArrayList<>();
+            final List<ItemStack> list3 = new ArrayList<>();
+            final List<ItemStack> list4 = new ArrayList<>();
+            final List<ItemStack> list5 = new ArrayList<>();
             list1.add(new ItemStack(AsteroidsItems.canisterLOX, 1, 700));
             list2.add(new ItemStack(AsteroidsItems.canisterLOX, 1, 800));
             list3.add(new ItemStack(AsteroidsItems.canisterLOX, 1, 900));

@@ -84,7 +84,7 @@ public class TickHandlerServer {
         TickHandlerServer.playersRequestingMapData.clear();
         TickHandlerServer.networkTicks.clear();
 
-        for (SpaceRace race : SpaceRaceManager.getSpaceRaces()) {
+        for (final SpaceRace race : SpaceRaceManager.getSpaceRaces()) {
             SpaceRaceManager.removeSpaceRace(race);
         }
 
@@ -164,10 +164,11 @@ public class TickHandlerServer {
     }
 
     public static boolean scheduledForChange(int dimID, BlockVec3 test) {
-        CopyOnWriteArrayList<ScheduledBlockChange> changeList = TickHandlerServer.scheduledBlockChanges.get(dimID);
+        final CopyOnWriteArrayList<ScheduledBlockChange> changeList =
+                TickHandlerServer.scheduledBlockChanges.get(dimID);
 
         if (changeList != null) {
-            for (ScheduledBlockChange change : changeList) {
+            for (final ScheduledBlockChange change : changeList) {
                 if (test.equals(change.getChangePosition())) {
                     return true;
                 }
@@ -186,7 +187,7 @@ public class TickHandlerServer {
 
     @SubscribeEvent
     public void onServerTick(ServerTickEvent event) {
-        MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+        final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
         // Prevent issues when clients switch to LAN servers
         if (server == null) {
             return;
@@ -200,7 +201,7 @@ public class TickHandlerServer {
             }
 
             if (TickHandlerServer.spaceRaceData == null) {
-                World world =
+                final World world =
                         FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0);
                 TickHandlerServer.spaceRaceData = (WorldDataSpaceRaces)
                         world.mapStorage.loadData(WorldDataSpaceRaces.class, WorldDataSpaceRaces.saveDataID);
@@ -216,28 +217,28 @@ public class TickHandlerServer {
             TileEntityOxygenSealer.onServerTick();
 
             if (TickHandlerServer.tickCount % 100 == 0) {
-                WorldServer[] worlds = server.worldServers;
+                final WorldServer[] worlds = server.worldServers;
 
-                for (WorldServer world : worlds) {
-                    ChunkProviderServer chunkProviderServer = world.theChunkProviderServer;
+                for (final WorldServer world : worlds) {
+                    final ChunkProviderServer chunkProviderServer = world.theChunkProviderServer;
 
-                    Map<Long, List<Footprint>> footprintMap =
+                    final Map<Long, List<Footprint>> footprintMap =
                             TickHandlerServer.serverFootprintMap.get(world.provider.dimensionId);
 
                     if (footprintMap != null) {
                         boolean mapChanged = false;
 
                         if (chunkProviderServer != null) {
-                            Iterator iterator = chunkProviderServer.loadedChunks.iterator();
+                            final Iterator iterator = chunkProviderServer.loadedChunks.iterator();
 
                             while (iterator.hasNext()) {
-                                Chunk chunk = (Chunk) iterator.next();
-                                long chunkKey = ChunkCoordIntPair.chunkXZ2Int(chunk.xPosition, chunk.zPosition);
+                                final Chunk chunk = (Chunk) iterator.next();
+                                final long chunkKey = ChunkCoordIntPair.chunkXZ2Int(chunk.xPosition, chunk.zPosition);
 
-                                List<Footprint> footprints = footprintMap.get(chunkKey);
+                                final List<Footprint> footprints = footprintMap.get(chunkKey);
 
                                 if (footprints != null) {
-                                    List<Footprint> toRemove = new ArrayList<Footprint>();
+                                    final List<Footprint> toRemove = new ArrayList<Footprint>();
 
                                     for (int j = 0; j < footprints.size(); j++) {
                                         footprints.get(j).age += 100;
@@ -271,12 +272,12 @@ public class TickHandlerServer {
             }
 
             if (!footprintBlockChanges.isEmpty()) {
-                for (BlockVec3Dim targetPoint : footprintBlockChanges) {
-                    WorldServer[] worlds = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
+                for (final BlockVec3Dim targetPoint : footprintBlockChanges) {
+                    final WorldServer[] worlds = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
 
-                    for (WorldServer world : worlds) {
+                    for (final WorldServer world : worlds) {
                         if (world.provider.dimensionId == targetPoint.dim) {
-                            long chunkKey =
+                            final long chunkKey =
                                     ChunkCoordIntPair.chunkXZ2Int((int) targetPoint.x >> 4, (int) targetPoint.z >> 4);
                             GalacticraftCore.packetPipeline.sendToAllAround(
                                     new PacketSimple(EnumSimplePacket.C_FOOTPRINTS_REMOVED, new Object[] {
@@ -309,7 +310,7 @@ public class TickHandlerServer {
 
             if (tickCount % 20 == 0) {
                 if (!playersRequestingMapData.isEmpty()) {
-                    File baseFolder = new File(
+                    final File baseFolder = new File(
                             MinecraftServer.getServer()
                                     .worldServerForDimension(0)
                                     .getChunkSaveLocation(),
@@ -317,10 +318,10 @@ public class TickHandlerServer {
                     if (!baseFolder.exists() && !baseFolder.mkdirs()) {
                         GCLog.severe("Base folder(s) could not be created: " + baseFolder.getAbsolutePath());
                     } else {
-                        ArrayList<EntityPlayerMP> copy = new ArrayList<EntityPlayerMP>(playersRequestingMapData);
-                        BufferedImage reusable = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
-                        for (EntityPlayerMP playerMP : copy) {
-                            GCPlayerStats stats = GCPlayerStats.get(playerMP);
+                        final ArrayList<EntityPlayerMP> copy = new ArrayList<EntityPlayerMP>(playersRequestingMapData);
+                        final BufferedImage reusable = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
+                        for (final EntityPlayerMP playerMP : copy) {
+                            final GCPlayerStats stats = GCPlayerStats.get(playerMP);
                             MapUtil.makeVanillaMap(
                                     playerMP.dimension,
                                     (int) Math.floor(stats.coordsTeleportedFromX) >> 4,
@@ -343,10 +344,10 @@ public class TickHandlerServer {
         } else if (event.phase == Phase.END) {
             int maxPasses = 10;
             while (!TickHandlerServer.networkTicks.isEmpty()) {
-                LinkedList<EnergyNetwork> pass = new LinkedList();
+                final LinkedList<EnergyNetwork> pass = new LinkedList();
                 pass.addAll(TickHandlerServer.networkTicks);
                 TickHandlerServer.networkTicks.clear();
-                for (EnergyNetwork grid : pass) {
+                for (final EnergyNetwork grid : pass) {
                     grid.tickEnd();
                 }
 
@@ -357,10 +358,10 @@ public class TickHandlerServer {
 
             maxPasses = 10;
             while (!TickHandlerServer.oxygenTransmitterUpdates.isEmpty()) {
-                LinkedList<TileEntityOxygenTransmitter> pass = new LinkedList();
+                final LinkedList<TileEntityOxygenTransmitter> pass = new LinkedList();
                 pass.addAll(TickHandlerServer.oxygenTransmitterUpdates);
                 TickHandlerServer.oxygenTransmitterUpdates.clear();
-                for (TileEntityOxygenTransmitter newTile : pass) {
+                for (final TileEntityOxygenTransmitter newTile : pass) {
                     if (!newTile.isInvalid()) {
                         newTile.refresh();
                     }
@@ -373,10 +374,10 @@ public class TickHandlerServer {
 
             maxPasses = 10;
             while (!TickHandlerServer.hydrogenTransmitterUpdates.isEmpty()) {
-                LinkedList<TileEntityHydrogenPipe> pass = new LinkedList();
+                final LinkedList<TileEntityHydrogenPipe> pass = new LinkedList();
                 pass.addAll(TickHandlerServer.hydrogenTransmitterUpdates);
                 TickHandlerServer.hydrogenTransmitterUpdates.clear();
-                for (TileEntityHydrogenPipe newTile : pass) {
+                for (final TileEntityHydrogenPipe newTile : pass) {
                     if (!newTile.isInvalid()) {
                         newTile.refresh();
                     }
@@ -389,10 +390,10 @@ public class TickHandlerServer {
 
             maxPasses = 10;
             while (!TickHandlerServer.energyTransmitterUpdates.isEmpty()) {
-                LinkedList<TileBaseConductor> pass = new LinkedList();
+                final LinkedList<TileBaseConductor> pass = new LinkedList();
                 pass.addAll(TickHandlerServer.energyTransmitterUpdates);
                 TickHandlerServer.energyTransmitterUpdates.clear();
-                for (TileBaseConductor newTile : pass) {
+                for (final TileBaseConductor newTile : pass) {
                     if (!newTile.isInvalid()) {
                         newTile.refresh();
                     }
@@ -410,22 +411,22 @@ public class TickHandlerServer {
         if (event.phase == Phase.START) {
             final WorldServer world = (WorldServer) event.world;
 
-            CopyOnWriteArrayList<ScheduledBlockChange> changeList =
+            final CopyOnWriteArrayList<ScheduledBlockChange> changeList =
                     TickHandlerServer.scheduledBlockChanges.get(world.provider.dimensionId);
 
             if (changeList != null && !changeList.isEmpty()) {
                 int blockCount = 0;
-                int blockCountMax = Math.max(this.MAX_BLOCKS_PER_TICK, changeList.size() / 4);
-                List<ScheduledBlockChange> newList =
+                final int blockCountMax = Math.max(this.MAX_BLOCKS_PER_TICK, changeList.size() / 4);
+                final List<ScheduledBlockChange> newList =
                         new ArrayList<ScheduledBlockChange>(Math.max(0, changeList.size() - blockCountMax));
 
-                for (ScheduledBlockChange change : changeList) {
+                for (final ScheduledBlockChange change : changeList) {
                     if (++blockCount > blockCountMax) {
                         newList.add(change);
                     } else {
                         if (change != null) {
-                            BlockVec3 changePosition = change.getChangePosition();
-                            Block block = world.getBlock(changePosition.x, changePosition.y, changePosition.z);
+                            final BlockVec3 changePosition = change.getChangePosition();
+                            final Block block = world.getBlock(changePosition.x, changePosition.y, changePosition.z);
                             // Only replace blocks of type BlockAir or fire - this is to prevent accidents
                             // where other
                             // mods have moved blocks
@@ -450,13 +451,13 @@ public class TickHandlerServer {
                 }
             }
 
-            CopyOnWriteArrayList<BlockVec3> torchList =
+            final CopyOnWriteArrayList<BlockVec3> torchList =
                     TickHandlerServer.scheduledTorchUpdates.get(world.provider.dimensionId);
 
             if (torchList != null && !torchList.isEmpty()) {
-                for (BlockVec3 torch : torchList) {
+                for (final BlockVec3 torch : torchList) {
                     if (torch != null) {
-                        Block b = world.getBlock(torch.x, torch.y, torch.z);
+                        final Block b = world.getBlock(torch.x, torch.y, torch.z);
                         if (b instanceof BlockUnlitTorch) {
                             world.scheduleBlockUpdateWithPriority(
                                     torch.x, torch.y, torch.z, b, 2 + world.rand.nextInt(30), 0);
@@ -482,7 +483,7 @@ public class TickHandlerServer {
                                 int dim = 0;
                                 try {
                                     dim = WorldUtil.getProviderForNameServer(dimension.getPlanetToOrbit()).dimensionId;
-                                } catch (Exception ex) {
+                                } catch (final Exception ex) {
                                 }
 
                                 WorldUtil.transferEntityToDimension(e, dim, world, false, null);
@@ -494,19 +495,19 @@ public class TickHandlerServer {
         } else if (event.phase == Phase.END) {
             final WorldServer world = (WorldServer) event.world;
 
-            List<BlockVec3> edgesList = TickHandlerServer.edgeChecks.get(world.provider.dimensionId);
+            final List<BlockVec3> edgesList = TickHandlerServer.edgeChecks.get(world.provider.dimensionId);
             final HashSet<BlockVec3> checkedThisTick = new HashSet();
 
             if (edgesList != null && !edgesList.isEmpty()) {
-                List<BlockVec3> edgesListCopy = new ArrayList();
+                final List<BlockVec3> edgesListCopy = new ArrayList();
                 edgesListCopy.addAll(edgesList);
-                for (BlockVec3 edgeBlock : edgesListCopy) {
+                for (final BlockVec3 edgeBlock : edgesListCopy) {
                     if (edgeBlock != null && !checkedThisTick.contains(edgeBlock)) {
                         if (TickHandlerServer.scheduledForChange(world.provider.dimensionId, edgeBlock)) {
                             continue;
                         }
 
-                        ThreadFindSeal done =
+                        final ThreadFindSeal done =
                                 new ThreadFindSeal(world, edgeBlock, 2000, new ArrayList<TileEntityOxygenSealer>());
                         checkedThisTick.addAll(done.checkedAll());
                     }

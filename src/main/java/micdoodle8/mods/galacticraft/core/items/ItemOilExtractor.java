@@ -77,7 +77,7 @@ public class ItemOilExtractor extends Item {
 
     @Override
     public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
-        Vector3 blockHit = this.getNearestOilBlock(player);
+        final Vector3 blockHit = this.getNearestOilBlock(player);
 
         if (blockHit != null) {
             final int x = MathHelper.floor_double(blockHit.x);
@@ -151,15 +151,15 @@ public class ItemOilExtractor extends Item {
     }
 
     private boolean isOilBlock(EntityPlayer player, World world, int x, int y, int z, boolean doDrain) {
-        Block block = world.getBlock(x, y, z);
+        final Block block = world.getBlock(x, y, z);
 
         if (block instanceof IFluidBlock) {
-            IFluidBlock fluidBlockHit = (IFluidBlock) block;
+            final IFluidBlock fluidBlockHit = (IFluidBlock) block;
             boolean flag = false;
             if (block == GCBlocks.crudeOil) {
                 flag = true;
             } else {
-                Fluid fluidHit = FluidRegistry.lookupFluidForBlock(block);
+                final Fluid fluidHit = FluidRegistry.lookupFluidForBlock(block);
 
                 if (fluidHit != null) {
                     if (fluidHit.getName().startsWith("oil")) {
@@ -169,7 +169,7 @@ public class ItemOilExtractor extends Item {
             }
 
             if (flag) {
-                FluidStack stack = fluidBlockHit.drain(world, x, y, z, doDrain);
+                final FluidStack stack = fluidBlockHit.drain(world, x, y, z, doDrain);
                 return stack != null && stack.amount > 0;
             }
         }

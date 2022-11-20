@@ -61,7 +61,7 @@ public abstract class TileEntityOxygenTransmitter extends TileEntityAdvanced imp
     public void onNetworkChanged() {}
 
     protected void resetNetwork() {
-        OxygenNetwork network = new OxygenNetwork();
+        final OxygenNetwork network = new OxygenNetwork();
         network.getTransmitters().add(this);
         this.setNetwork(network);
     }
@@ -76,8 +76,8 @@ public abstract class TileEntityOxygenTransmitter extends TileEntityAdvanced imp
         if (!this.worldObj.isRemote) {
             this.adjacentConnections = null;
 
-            for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
-                TileEntity tileEntity = new BlockVec3(this).getTileEntityOnSide(this.worldObj, side);
+            for (final ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
+                final TileEntity tileEntity = new BlockVec3(this).getTileEntityOnSide(this.worldObj, side);
 
                 if (tileEntity != null) {
                     if (tileEntity.getClass() == this.getClass()

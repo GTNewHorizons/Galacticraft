@@ -35,7 +35,7 @@ public class ModelFlag extends ModelBase {
         super.render(entity, f, f1, f2, f3, f4, f5);
 
         if (entity instanceof EntityFlag) {
-            EntityFlag flag = (EntityFlag) entity;
+            final EntityFlag flag = (EntityFlag) entity;
             this.renderPole(flag, f5);
             this.renderFlag(flag, flag.ticksExisted);
         }
@@ -76,10 +76,10 @@ public class ModelFlag extends ModelBase {
                         offsetAhead *= windLevel;
                     }
 
-                    Vector3 col = entity.flagData.getColorAt(i, j);
+                    final Vector3 col = entity.flagData.getColorAt(i, j);
                     GL11.glColor3f(col.floatX(), col.floatY(), col.floatZ());
 
-                    Tessellator tess = Tessellator.instance;
+                    final Tessellator tess = Tessellator.instance;
                     tess.startDrawing(GL11.GL_TRIANGLES);
                     tess.addVertex(i / 24.0F + 0.0 / 24.0F, j / 24.0F + 0.0 / 24.0F + offset, offset);
                     tess.addVertex(i / 24.0F + 0.0 / 24.0F, j / 24.0F + 1.0 / 24.0F + offset, offset);

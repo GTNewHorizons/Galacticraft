@@ -64,8 +64,8 @@ public class EnergyUtil {
 
         final BlockVec3 thisVec = new BlockVec3(tile);
         final World world = tile.getWorldObj();
-        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-            TileEntity tileEntity = thisVec.getTileEntityOnSide(world, direction);
+        for (final ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+            final TileEntity tileEntity = thisVec.getTileEntityOnSide(world, direction);
 
             if (tileEntity == null) {
                 continue;
@@ -148,8 +148,8 @@ public class EnergyUtil {
             TileEntity conductor, List<TileEntity> acceptors, List<ForgeDirection> directions) throws Exception {
         final BlockVec3 thisVec = new BlockVec3(conductor);
         final World world = conductor.getWorldObj();
-        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-            TileEntity tileEntity = thisVec.getTileEntityOnSide(world, direction);
+        for (final ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+            final TileEntity tileEntity = thisVec.getTileEntityOnSide(world, direction);
 
             if (tileEntity == null || tileEntity instanceof IConductor) // world.getTileEntity will not have returned an
             // invalid tile, invalid tiles are
@@ -158,7 +158,7 @@ public class EnergyUtil {
                 continue;
             }
 
-            ForgeDirection sideFrom = direction.getOpposite();
+            final ForgeDirection sideFrom = direction.getOpposite();
 
             if (tileEntity instanceof IElectrical) {
                 if (((IElectrical) tileEntity).canConnect(sideFrom, NetworkType.POWER)) {
@@ -208,7 +208,7 @@ public class EnergyUtil {
             double demanded = 0;
             try {
                 demanded = (Double) EnergyUtil.demandedEnergyIC2.invoke(tileAdj);
-            } catch (Exception ex) {
+            } catch (final Exception ex) {
                 if (ConfigManagerCore.enableDebug) {
                     ex.printStackTrace();
                 }
@@ -218,7 +218,7 @@ public class EnergyUtil {
                 return Math.min(toSend, (float) demanded / EnergyConfigHandler.TO_IC2_RATIO);
             }
 
-            double energySendingIC2 = Math.min(toSend * EnergyConfigHandler.TO_IC2_RATIO, demanded);
+            final double energySendingIC2 = Math.min(toSend * EnergyConfigHandler.TO_IC2_RATIO, demanded);
             if (energySendingIC2 >= 1D) {
                 double result = 0;
                 try {
@@ -229,7 +229,7 @@ public class EnergyUtil {
                         result = energySendingIC2
                                 - (Double) EnergyUtil.injectEnergyIC2.invoke(tileAdj, inputAdj, energySendingIC2);
                     }
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     if (ConfigManagerCore.enableDebug) {
                         ex.printStackTrace();
                     }
@@ -240,7 +240,7 @@ public class EnergyUtil {
                 return (float) result / EnergyConfigHandler.TO_IC2_RATIO;
             }
         } else if (isRF1Loaded && !EnergyConfigHandler.disableRFOutput && tileAdj instanceof IEnergyHandler) {
-            float sent = ((IEnergyHandler) tileAdj)
+            final float sent = ((IEnergyHandler) tileAdj)
                             .receiveEnergy(
                                     inputAdj,
                                     MathHelper.floor_float(toSend * EnergyConfigHandler.TO_RF_RATIO),
@@ -250,7 +250,7 @@ public class EnergyUtil {
             // accepted " + sent);
             return sent;
         } else if (isRF2Loaded && !EnergyConfigHandler.disableRFOutput && tileAdj instanceof IEnergyReceiver) {
-            float sent = ((IEnergyReceiver) tileAdj)
+            final float sent = ((IEnergyReceiver) tileAdj)
                             .receiveEnergy(
                                     inputAdj,
                                     MathHelper.floor_float(toSend * EnergyConfigHandler.TO_RF_RATIO),
@@ -269,7 +269,7 @@ public class EnergyUtil {
             double offered = 0;
             try {
                 offered = (Double) EnergyUtil.offeredEnergyIC2.invoke(tileAdj);
-            } catch (Exception ex) {
+            } catch (final Exception ex) {
                 if (ConfigManagerCore.enableDebug) {
                     ex.printStackTrace();
                 }
@@ -279,12 +279,12 @@ public class EnergyUtil {
                 return Math.min(toPull, (float) offered / EnergyConfigHandler.TO_IC2_RATIO);
             }
 
-            double energySendingIC2 = Math.min(toPull * EnergyConfigHandler.TO_IC2_RATIO, offered);
+            final double energySendingIC2 = Math.min(toPull * EnergyConfigHandler.TO_IC2_RATIO, offered);
             if (energySendingIC2 >= 1D) {
                 double resultIC2 = 0;
                 try {
                     resultIC2 = energySendingIC2 - (Double) EnergyUtil.drawEnergyIC2.invoke(tileAdj, energySendingIC2);
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     if (ConfigManagerCore.enableDebug) {
                         ex.printStackTrace();
                     }
@@ -295,7 +295,7 @@ public class EnergyUtil {
                 return (float) resultIC2 / EnergyConfigHandler.TO_IC2_RATIO;
             }
         } else if (isRF2Loaded && !EnergyConfigHandler.disableRFInput && tileAdj instanceof IEnergyProvider) {
-            float sent = ((IEnergyProvider) tileAdj)
+            final float sent = ((IEnergyProvider) tileAdj)
                             .extractEnergy(
                                     inputAdj,
                                     MathHelper.floor_float(toPull * EnergyConfigHandler.TO_RF_RATIO),
@@ -303,7 +303,7 @@ public class EnergyUtil {
                     / EnergyConfigHandler.TO_RF_RATIO;
             return sent;
         } else if (isRF1Loaded && !EnergyConfigHandler.disableRFInput && tileAdj instanceof IEnergyHandler) {
-            float sent = ((IEnergyHandler) tileAdj)
+            final float sent = ((IEnergyHandler) tileAdj)
                             .extractEnergy(
                                     inputAdj,
                                     MathHelper.floor_float(toPull * EnergyConfigHandler.TO_RF_RATIO),
@@ -370,46 +370,46 @@ public class EnergyUtil {
         // Initialise a couple of non-IC2 classes
         try {
             clazzMekCable = Class.forName("codechicken.multipart.TileMultipart");
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
         try {
             clazzEnderIOCable = Class.forName("crazypants.enderio.conduit.TileConduitBundle");
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
         try {
             clazzMFRRednetEnergyCable =
                     Class.forName("powercrystals.minefactoryreloaded.tile.rednet.TileEntityRedNetEnergy");
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
         try {
             clazzRailcraftEngine = Class.forName("mods.railcraft.common.blocks.machine.beta.TileEngine");
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
         try {
             clazzPipeTile = Class.forName("buildcraft.transport.TileGenericPipe");
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
         try {
             clazzPipeWood = Class.forName("buildcraft.transport.pipes.PipePowerWood");
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
 
         if (isIC2Loaded) {
             GCLog.debug("Initialising IC2 methods OK");
 
             try {
-                Class<?> clazz = Class.forName("ic2.api.energy.tile.IEnergySink");
+                final Class<?> clazz = Class.forName("ic2.api.energy.tile.IEnergySink");
 
                 GCLog.debug("Found IC2 IEnergySink class OK");
 
                 try {
                     // 1.7.2 version
                     EnergyUtil.demandedEnergyIC2 = clazz.getMethod("demandedEnergyUnits");
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     // if that fails, try 1.7.10 version
                     try {
                         EnergyUtil.demandedEnergyIC2 = clazz.getMethod("getDemandedEnergy");
-                    } catch (Exception ee) {
+                    } catch (final Exception ee) {
                         ee.printStackTrace();
                     }
                 }
@@ -421,22 +421,22 @@ public class EnergyUtil {
                     EnergyUtil.injectEnergyIC2 =
                             clazz.getMethod("injectEnergyUnits", ForgeDirection.class, double.class);
                     GCLog.debug("IC2 inject 1.7.2 succeeded");
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     // if that fails, try 1.7.10 version
                     try {
                         EnergyUtil.injectEnergyIC2 =
                                 clazz.getMethod("injectEnergy", ForgeDirection.class, double.class, double.class);
                         EnergyUtil.voltageParameterIC2 = true;
                         GCLog.debug("IC2 inject 1.7.10 succeeded");
-                    } catch (Exception ee) {
+                    } catch (final Exception ee) {
                         ee.printStackTrace();
                     }
                 }
 
-                Class<?> clazzSource = Class.forName("ic2.api.energy.tile.IEnergySource");
+                final Class<?> clazzSource = Class.forName("ic2.api.energy.tile.IEnergySource");
                 EnergyUtil.offeredEnergyIC2 = clazzSource.getMethod("getOfferedEnergy");
                 EnergyUtil.drawEnergyIC2 = clazzSource.getMethod("drawEnergy", double.class);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }

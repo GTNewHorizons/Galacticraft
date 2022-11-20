@@ -51,7 +51,7 @@ public class OverlayOxygenTanks extends Overlay {
         int maxRightX = 0;
         double bottomY = 0;
         double topY = 0;
-        double zLevel = -190.0D;
+        final double zLevel = -190.0D;
 
         if (right) {
             minLeftX = i - 59;
@@ -73,7 +73,7 @@ public class OverlayOxygenTanks extends Overlay {
 
         bottomY = topY + 46.5;
 
-        float texMod = 0.00390625F;
+        final float texMod = 0.00390625F;
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(minLeftX, bottomY, zLevel, 66 * texMod, 47 * texMod);
         tessellator.addVertexWithUV(minLeftX + 9, bottomY, zLevel, (66 + 9) * texMod, 47 * texMod);
@@ -81,9 +81,9 @@ public class OverlayOxygenTanks extends Overlay {
         tessellator.addVertexWithUV(minLeftX, topY, zLevel, 66 * texMod, 47 * 2 * texMod);
         tessellator.draw();
 
-        int heatLevelScaled = Math.min(Math.max(heatLevel, 1), 45);
-        int heatLeveLScaledMax = Math.min(heatLevelScaled + 2, 45);
-        int heatLevelScaledMin = Math.max(heatLeveLScaledMax - 2, 0);
+        final int heatLevelScaled = Math.min(Math.max(heatLevel, 1), 45);
+        final int heatLeveLScaledMax = Math.min(heatLevelScaled + 2, 45);
+        final int heatLevelScaledMin = Math.max(heatLeveLScaledMax - 2, 0);
 
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(
@@ -211,7 +211,7 @@ public class OverlayOxygenTanks extends Overlay {
         }
 
         if (invalid) {
-            String value = GCCoreUtil.translate("gui.warning.invalidThermal");
+            final String value = GCCoreUtil.translate("gui.warning.invalidThermal");
             OverlayOxygenTanks.minecraft.fontRenderer.drawString(
                     value,
                     minLeftX - 18 - OverlayOxygenTanks.minecraft.fontRenderer.getStringWidth(value),

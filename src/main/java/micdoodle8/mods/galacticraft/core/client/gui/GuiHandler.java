@@ -85,7 +85,7 @@ import net.minecraft.world.World;
 public class GuiHandler implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        EntityPlayerMP playerBase = PlayerUtil.getPlayerBaseServerFromPlayer(player, false);
+        final EntityPlayerMP playerBase = PlayerUtil.getPlayerBaseServerFromPlayer(player, false);
 
         if (playerBase == null) {
             player.addChatMessage(
@@ -93,7 +93,7 @@ public class GuiHandler implements IGuiHandler {
             return null;
         }
 
-        GCPlayerStats stats = GCPlayerStats.get(playerBase);
+        final GCPlayerStats stats = GCPlayerStats.get(playerBase);
 
         if (ID == GuiIdsCore.ROCKET_INVENTORY && player.ridingEntity instanceof EntityTieredRocket) {
             return new ContainerRocketInventory(
@@ -104,7 +104,7 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerExtendedInventory(player, stats.extendedInventory);
         }
 
-        TileEntity tile = world.getTileEntity(x, y, z);
+        final TileEntity tile = world.getTileEntity(x, y, z);
 
         if (tile != null) {
             if (tile instanceof TileEntityRefinery) {
@@ -146,7 +146,7 @@ public class GuiHandler implements IGuiHandler {
             }
         }
 
-        for (ISchematicPage page : stats.unlockedSchematics) {
+        for (final ISchematicPage page : stats.unlockedSchematics) {
             if (ID == page.getGuiID()) {
                 return page.getResultContainer(playerBase, x, y, z);
             }
@@ -166,7 +166,7 @@ public class GuiHandler implements IGuiHandler {
 
     @SideOnly(Side.CLIENT)
     private Object getClientGuiElement(int ID, EntityPlayer player, World world, Vector3 position) {
-        EntityClientPlayerMP playerClient = PlayerUtil.getPlayerBaseClientFromPlayer(player, false);
+        final EntityClientPlayerMP playerClient = PlayerUtil.getPlayerBaseClientFromPlayer(player, false);
 
         if (ID == GuiIdsCore.GALAXY_MAP) {
             return new GuiCelestialSelection(true, null);
@@ -183,7 +183,7 @@ public class GuiHandler implements IGuiHandler {
             return new GuiJoinSpaceRace(playerClient);
         }
 
-        TileEntity tile = world.getTileEntity(position.intX(), position.intY(), position.intZ());
+        final TileEntity tile = world.getTileEntity(position.intX(), position.intY(), position.intZ());
 
         if (tile != null) {
             if (tile instanceof TileEntityRefinery) {
@@ -229,10 +229,10 @@ public class GuiHandler implements IGuiHandler {
         }
 
         if (playerClient != null) {
-            GCPlayerStatsClient stats = GCPlayerStatsClient.get(playerClient);
-            for (ISchematicPage page : stats.unlockedSchematics) {
+            final GCPlayerStatsClient stats = GCPlayerStatsClient.get(playerClient);
+            for (final ISchematicPage page : stats.unlockedSchematics) {
                 if (ID == page.getGuiID()) {
-                    GuiScreen screen =
+                    final GuiScreen screen =
                             page.getResultScreen(playerClient, position.intX(), position.intY(), position.intZ());
 
                     if (screen instanceof ISchematicResultPage) {

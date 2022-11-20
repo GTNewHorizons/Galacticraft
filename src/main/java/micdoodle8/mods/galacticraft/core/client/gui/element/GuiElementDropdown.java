@@ -19,11 +19,11 @@ public class GuiElementDropdown extends GuiButton {
     public String[] optionStrings;
     public int selectedOption = -1;
     public SmallFontRenderer font;
-    private IDropboxCallback parentClass;
+    private final IDropboxCallback parentClass;
 
     public GuiElementDropdown(int id, IDropboxCallback parentClass, int x, int y, String... text) {
         super(id, x, y, 13, 13, "");
-        Minecraft mc = FMLClientHandler.instance().getClient();
+        final Minecraft mc = FMLClientHandler.instance().getClient();
         this.parentClass = parentClass;
         this.font = new SmallFontRenderer(
                 mc.gameSettings, new ResourceLocation("textures/font/ascii.png"), mc.renderEngine, false);
@@ -31,7 +31,7 @@ public class GuiElementDropdown extends GuiButton {
 
         int largestString = Integer.MIN_VALUE;
 
-        for (String element : text) {
+        for (final String element : text) {
             largestString = Math.max(largestString, this.font.getStringWidth(element));
         }
 
@@ -76,7 +76,7 @@ public class GuiElementDropdown extends GuiButton {
                     && par3 >= this.yPosition
                     && par2 < this.xPosition + this.width
                     && par3 < this.yPosition + this.height * this.optionStrings.length) {
-                int hoverPos = (par3 - this.yPosition) / this.height;
+                final int hoverPos = (par3 - this.yPosition) / this.height;
                 Gui.drawRect(
                         this.xPosition + 1,
                         this.yPosition + this.height * hoverPos + 1,
@@ -138,7 +138,7 @@ public class GuiElementDropdown extends GuiButton {
                     && par2 < this.xPosition + this.width
                     && par3 < this.yPosition + this.height * this.optionStrings.length) {
                 if (this.parentClass.canBeClickedBy(this, par1Minecraft.thePlayer)) {
-                    int optionClicked = (par3 - this.yPosition) / this.height;
+                    final int optionClicked = (par3 - this.yPosition) / this.height;
                     this.selectedOption = optionClicked % this.optionStrings.length;
                     this.dropdownClicked = false;
                     this.parentClass.onSelectionChanged(this, this.selectedOption);

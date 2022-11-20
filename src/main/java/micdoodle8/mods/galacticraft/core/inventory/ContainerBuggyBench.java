@@ -111,10 +111,10 @@ public class ContainerBuggyBench extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
         ItemStack stack = null;
-        Slot currentSlot = (Slot) this.inventorySlots.get(slotIndex);
+        final Slot currentSlot = (Slot) this.inventorySlots.get(slotIndex);
 
         if (currentSlot != null && currentSlot.getHasStack()) {
-            ItemStack currentStack = currentSlot.getStack();
+            final ItemStack currentStack = currentSlot.getStack();
             stack = currentStack.copy();
 
             if (!this.mergeOneItem(currentStack)) {
@@ -143,10 +143,10 @@ public class ContainerBuggyBench extends Container {
         boolean nothingLeft = false;
         if (itemStack.stackSize > 0) {
             for (int i = 1; i <= 35; i++) {
-                Slot slot = (Slot) this.inventorySlots.get(i);
-                ItemStack slotStack = slot.getStack();
+                final Slot slot = (Slot) this.inventorySlots.get(i);
+                final ItemStack slotStack = slot.getStack();
                 if (slotStack == null && slot.isItemValid(itemStack)) {
-                    ItemStack stackOneItem = itemStack.copy();
+                    final ItemStack stackOneItem = itemStack.copy();
                     stackOneItem.stackSize = 1;
                     itemStack.stackSize--;
                     slot.putStack(stackOneItem);

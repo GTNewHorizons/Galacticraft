@@ -45,7 +45,7 @@ public class ItemUniversalWrench extends Item implements IToolWrench {
 
     @Override
     public void wrenchUsed(EntityPlayer entityPlayer, int x, int y, int z) {
-        ItemStack stack = entityPlayer.inventory.getCurrentItem();
+        final ItemStack stack = entityPlayer.inventory.getCurrentItem();
 
         if (stack != null) {
             stack.damageItem(1, entityPlayer);
@@ -102,7 +102,7 @@ public class ItemUniversalWrench extends Item implements IToolWrench {
         if (world.isRemote) {
             return false;
         }
-        Block blockID = world.getBlock(x, y, z);
+        final Block blockID = world.getBlock(x, y, z);
 
         if (blockID == Blocks.furnace
                 || blockID == Blocks.lit_furnace
@@ -111,7 +111,7 @@ public class ItemUniversalWrench extends Item implements IToolWrench {
                 || blockID == Blocks.dispenser
                 || blockID == Blocks.piston
                 || blockID == Blocks.sticky_piston) {
-            int metadata = world.getBlockMetadata(x, y, z);
+            final int metadata = world.getBlockMetadata(x, y, z);
 
             int[] rotationMatrix = {1, 2, 3, 4, 5, 0};
 

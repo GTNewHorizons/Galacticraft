@@ -23,8 +23,8 @@ public class AsteroidsEventHandlerClient {
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void onClientTick(ClientTickEvent event) {
-        Minecraft minecraft = Minecraft.getMinecraft();
-        WorldClient world = minecraft.theWorld;
+        final Minecraft minecraft = Minecraft.getMinecraft();
+        final WorldClient world = minecraft.theWorld;
 
         if (world != null) {
             if (world.provider instanceof WorldProviderAsteroids) {
@@ -56,8 +56,8 @@ public class AsteroidsEventHandlerClient {
             final float cos = (float) Math.cos(theta);
             final float sin = (float) Math.sin(theta);
 
-            float min = 72.0F;
-            float max = 78.0F;
+            final float min = 72.0F;
+            final float max = 78.0F;
 
             float x = max * renderEvent.celestialBody.getRelativeDistanceFromCenter().unScaledDistance;
             float y = 0;

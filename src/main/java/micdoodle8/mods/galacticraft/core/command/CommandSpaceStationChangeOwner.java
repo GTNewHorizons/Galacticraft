@@ -37,7 +37,7 @@ public class CommandSpaceStationChangeOwner extends CommandBase {
         String oldOwner = null;
         String newOwner = "ERROR";
         int stationID = -1;
-        EntityPlayerMP playerAdmin =
+        final EntityPlayerMP playerAdmin =
                 PlayerUtil.getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
 
         if (astring.length > 1) {
@@ -60,7 +60,8 @@ public class CommandSpaceStationChangeOwner extends CommandBase {
             }
 
             try {
-                SpaceStationWorldData stationData = SpaceStationWorldData.getMPSpaceStationData(null, stationID, null);
+                final SpaceStationWorldData stationData =
+                        SpaceStationWorldData.getMPSpaceStationData(null, stationID, null);
                 if (stationData == null) {
                     throw new WrongUsageException(
                             GCCoreUtil.translateWithFormat(

@@ -68,16 +68,16 @@ public class CommandGCInv extends CommandBase {
 
         if (astring.length == 2) {
             try {
-                EntityPlayerMP thePlayer = PlayerUtil.getPlayerBaseServerFromPlayerUsername(astring[1], true);
+                final EntityPlayerMP thePlayer = PlayerUtil.getPlayerBaseServerFromPlayerUsername(astring[1], true);
                 if (thePlayer != null && !thePlayer.isDead && thePlayer.worldObj != null) {
-                    GCPlayerStats stats = GCPlayerStats.get(thePlayer);
+                    final GCPlayerStats stats = GCPlayerStats.get(thePlayer);
 
                     if (astring[0].equalsIgnoreCase("drop")) {
-                        InventoryExtended gcInventory = stats.extendedInventory;
+                        final InventoryExtended gcInventory = stats.extendedInventory;
                         gcInventory.dropExtendedItems(thePlayer);
                     } else if (astring[0].equalsIgnoreCase("save")) {
-                        InventoryExtended gcInventory = stats.extendedInventory;
-                        ItemStack[] saveinv = new ItemStack[gcInventory.getSizeInventory()];
+                        final InventoryExtended gcInventory = stats.extendedInventory;
+                        final ItemStack[] saveinv = new ItemStack[gcInventory.getSizeInventory()];
                         for (int i = 0; i < gcInventory.getSizeInventory(); i++) {
                             saveinv[i] = gcInventory.getStackInSlot(i);
                             gcInventory.setInventorySlotContents(i, null);
@@ -89,7 +89,7 @@ public class CommandGCInv extends CommandBase {
                         System.out.println("[GCInv] Saving and clearing GC inventory slots of "
                                 + thePlayer.getGameProfile().getName());
                     } else if (astring[0].equalsIgnoreCase("restore")) {
-                        ItemStack[] saveinv = CommandGCInv.savedata.get(astring[1].toLowerCase());
+                        final ItemStack[] saveinv = CommandGCInv.savedata.get(astring[1].toLowerCase());
                         CommandGCInv.dontload.remove(astring[1].toLowerCase());
                         if (saveinv == null) {
                             System.out.println("[GCInv] Tried to restore but player "
@@ -99,7 +99,7 @@ public class CommandGCInv extends CommandBase {
 
                         CommandGCInv.doLoad(thePlayer);
                     } else if (astring[0].equalsIgnoreCase("clear")) {
-                        InventoryExtended gcInventory = stats.extendedInventory;
+                        final InventoryExtended gcInventory = stats.extendedInventory;
                         for (int i = 0; i < gcInventory.getSizeInventory(); i++) {
                             gcInventory.setInventorySlotContents(i, null);
                         }
@@ -112,7 +112,7 @@ public class CommandGCInv extends CommandBase {
                     // look to see if the player is offline (i.e. had a saved
                     // inventory already)
                     if (astring[0].equalsIgnoreCase("restore")) {
-                        ItemStack[] saveinv = CommandGCInv.savedata.get(astring[1].toLowerCase());
+                        final ItemStack[] saveinv = CommandGCInv.savedata.get(astring[1].toLowerCase());
                         if (saveinv != null) {
                             System.out.println("[GCInv] Restore command for offline player " + astring[1]
                                     + ", setting to restore GCInv on next login.");
@@ -143,15 +143,15 @@ public class CommandGCInv extends CommandBase {
     }
 
     public static void doLoad(EntityPlayerMP thePlayer) {
-        String theName = thePlayer.getGameProfile().getName().toLowerCase();
+        final String theName = thePlayer.getGameProfile().getName().toLowerCase();
         if (!CommandGCInv.dontload.contains(theName))
         // This is a simple flag: if the playername is in dontload then no
         // restore command has yet been run.
         // Dontload resets to nothing on server restart so that all will
         // auto-restore on a server restart.
         {
-            ItemStack[] saveinv = CommandGCInv.savedata.get(theName);
-            InventoryExtended gcInventory = GCPlayerStats.get(thePlayer).extendedInventory;
+            final ItemStack[] saveinv = CommandGCInv.savedata.get(theName);
+            final InventoryExtended gcInventory = GCPlayerStats.get(thePlayer).extendedInventory;
             for (int i = 0; i < gcInventory.getSizeInventory(); i++) {
                 gcInventory.setInventorySlotContents(i, saveinv[i]);
             }
@@ -172,7 +172,7 @@ public class CommandGCInv extends CommandBase {
     }
 
     private static void initialise() {
-        World world0 = GalacticraftCore.proxy.getWorldForID(0);
+        final World world0 = GalacticraftCore.proxy.getWorldForID(0);
         if (world0 == null) {
             return;
         }

@@ -18,7 +18,7 @@ public class GuiOxygenStorageModule extends GuiContainerGC {
     private static final ResourceLocation batteryBoxTexture =
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/oxygenStorageModule.png");
 
-    private TileEntityOxygenStorageModule tileEntity;
+    private final TileEntityOxygenStorageModule tileEntity;
 
     public GuiOxygenStorageModule(InventoryPlayer par1InventoryPlayer, TileEntityOxygenStorageModule storageModule) {
         super(new ContainerOxygenStorageModule(par1InventoryPlayer, storageModule));
@@ -28,7 +28,7 @@ public class GuiOxygenStorageModule extends GuiContainerGC {
     @Override
     public void initGui() {
         super.initGui();
-        List<String> oxygenSlotDesc = new ArrayList<String>();
+        final List<String> oxygenSlotDesc = new ArrayList<String>();
         oxygenSlotDesc.add(GCCoreUtil.translate("gui.oxygenSlot.desc.0"));
         oxygenSlotDesc.add(GCCoreUtil.translate("gui.oxygenSlot.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(
@@ -48,13 +48,13 @@ public class GuiOxygenStorageModule extends GuiContainerGC {
      */
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-        String guiTitle = GCCoreUtil.translate("tile.machine2.6.name");
+        final String guiTitle = GCCoreUtil.translate("tile.machine2.6.name");
         this.fontRendererObj.drawString(
                 guiTitle, this.xSize / 2 - this.fontRendererObj.getStringWidth(guiTitle) / 2, 6, 4210752);
-        String displayJoules =
+        final String displayJoules =
                 (int) (this.tileEntity.storedOxygen + 0.5F) + " " + GCCoreUtil.translate("gui.message.of.name");
-        String displayMaxJoules = "" + (int) this.tileEntity.maxOxygen;
-        String maxOutputLabel = GCCoreUtil.translate("gui.maxOutput.desc") + ": "
+        final String displayMaxJoules = "" + (int) this.tileEntity.maxOxygen;
+        final String maxOutputLabel = GCCoreUtil.translate("gui.maxOutput.desc") + ": "
                 + TileEntityOxygenStorageModule.OUTPUT_PER_TICK * 20 + GCCoreUtil.translate("gui.perSecond");
 
         this.fontRendererObj.drawString(
@@ -74,12 +74,12 @@ public class GuiOxygenStorageModule extends GuiContainerGC {
         this.mc.renderEngine.bindTexture(GuiOxygenStorageModule.batteryBoxTexture);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        int containerWidth = (this.width - this.xSize) / 2;
-        int containerHeight = (this.height - this.ySize) / 2;
+        final int containerWidth = (this.width - this.xSize) / 2;
+        final int containerHeight = (this.height - this.ySize) / 2;
         // Background energy bar
         this.drawTexturedModalRect(containerWidth, containerHeight, 0, 0, this.xSize, this.ySize);
         // Foreground energy bar
-        int scale = (int) ((double) this.tileEntity.storedOxygen / (double) this.tileEntity.maxOxygen * 72);
+        final int scale = (int) ((double) this.tileEntity.storedOxygen / (double) this.tileEntity.maxOxygen * 72);
         this.drawTexturedModalRect(containerWidth + 52, containerHeight + 52, 176, 0, scale, 3);
     }
 }

@@ -44,7 +44,7 @@ public class GCCoreUtil {
     public static void openBuggyInv(EntityPlayerMP player, IInventory buggyInv, int type) {
         player.getNextWindowId();
         player.closeContainer();
-        int id = player.currentWindowId;
+        final int id = player.currentWindowId;
         GalacticraftCore.packetPipeline.sendTo(
                 new PacketSimple(EnumSimplePacket.C_OPEN_PARACHEST_GUI, new Object[] {id, 0, 0}), player);
         player.openContainer = new ContainerBuggy(player.inventory, buggyInv, type);
@@ -55,7 +55,7 @@ public class GCCoreUtil {
     public static void openParachestInv(EntityPlayerMP player, EntityLanderBase landerInv) {
         player.getNextWindowId();
         player.closeContainer();
-        int windowId = player.currentWindowId;
+        final int windowId = player.currentWindowId;
         GalacticraftCore.packetPipeline.sendTo(
                 new PacketSimple(
                         EnumSimplePacket.C_OPEN_PARACHEST_GUI, new Object[] {windowId, 1, landerInv.getEntityId()}),
@@ -72,7 +72,7 @@ public class GCCoreUtil {
 
     public static void registerGalacticraftCreature(Class<? extends Entity> var0, String var1, int back, int fore) {
         registerGalacticraftNonMobEntity(var0, var1, 80, 3, true);
-        int nextEggID = getNextValidEggID();
+        final int nextEggID = getNextValidEggID();
         if (nextEggID < 65536) {
             EntityList.IDtoClassMapping.put(nextEggID, var0);
             VersionUtil.putClassToIDMapping(var0, nextEggID);
@@ -131,21 +131,21 @@ public class GCCoreUtil {
     }
 
     public static String translate(String key) {
-        String result = StatCollector.translateToLocal(key);
-        int comment = result.indexOf('#');
+        final String result = StatCollector.translateToLocal(key);
+        final int comment = result.indexOf('#');
         return comment > 0 ? result.substring(0, comment).trim() : result;
     }
 
     public static List<String> translateWithSplit(String key) {
         String translated = translate(key);
-        int comment = translated.indexOf('#');
+        final int comment = translated.indexOf('#');
         translated = comment > 0 ? translated.substring(0, comment).trim() : translated;
         return Arrays.asList(translated.split("\\$"));
     }
 
     public static String translateWithFormat(String key, Object... values) {
-        String result = StatCollector.translateToLocalFormatted(key, values);
-        int comment = result.indexOf('#');
+        final String result = StatCollector.translateToLocalFormatted(key, values);
+        final int comment = result.indexOf('#');
         return comment > 0 ? result.substring(0, comment).trim() : result;
     }
 
@@ -158,7 +158,7 @@ public class GCCoreUtil {
     }
 
     public static String lowerCaseNoun(String string) {
-        Language l = Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage();
+        final Language l = Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage();
         if (l.getLanguageCode().equals("de_DE")) {
             return string;
         }

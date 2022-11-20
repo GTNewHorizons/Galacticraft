@@ -100,7 +100,7 @@ public class RenderEvolvedCreeper extends RenderCreeper {
 
     @Override
     protected int shouldRenderPass(EntityLivingBase par1EntityLiving, int par2, float par3) {
-        EntityEvolvedCreeper creeper = (EntityEvolvedCreeper) par1EntityLiving;
+        final EntityEvolvedCreeper creeper = (EntityEvolvedCreeper) par1EntityLiving;
         final Minecraft minecraft = FMLClientHandler.instance().getClient();
 
         final EntityPlayerSP player = minecraft.thePlayer;

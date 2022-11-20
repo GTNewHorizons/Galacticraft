@@ -106,7 +106,7 @@ public class BlockRendererUnlitTorch implements ISimpleBlockRenderingHandler {
         // if (par1Block instanceof GCCoreBlockUnlitTorch)
         {
             final Tessellator tessellator = Tessellator.instance;
-            IIcon icon = renderBlocks.getBlockIconFromSideAndMetadata(par1Block, 0, 0);
+            final IIcon icon = renderBlocks.getBlockIconFromSideAndMetadata(par1Block, 0, 0);
 
             final double d5 = icon.getMinU();
             final double d6 = icon.getMinV();

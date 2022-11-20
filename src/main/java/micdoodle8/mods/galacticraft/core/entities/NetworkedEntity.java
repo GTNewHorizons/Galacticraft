@@ -20,7 +20,7 @@ public abstract class NetworkedEntity extends Entity implements IPacketReceiver 
     public void onUpdate() {
         super.onUpdate();
 
-        PacketDynamic packet = new PacketDynamic(this);
+        final PacketDynamic packet = new PacketDynamic(this);
         if (this.networkedDataChanged()) {
             if (!this.worldObj.isRemote) {
                 GalacticraftCore.packetPipeline.sendToAllAround(

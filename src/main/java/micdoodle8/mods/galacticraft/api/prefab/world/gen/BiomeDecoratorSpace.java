@@ -36,7 +36,7 @@ public abstract class BiomeDecoratorSpace {
     protected abstract World getCurrentWorld();
 
     protected void generateOre(int amountPerChunk, WorldGenerator worldGenerator, int minY, int maxY) {
-        World currentWorld = this.getCurrentWorld();
+        final World currentWorld = this.getCurrentWorld();
         for (int var5 = 0; var5 < amountPerChunk; ++var5) {
             final int var6 = this.chunkX + this.rand.nextInt(16);
             final int var7 = this.rand.nextInt(maxY - minY) + minY;

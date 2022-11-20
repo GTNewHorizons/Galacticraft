@@ -18,7 +18,7 @@ public class GalacticraftConfigAccess {
 
         try {
             return (boolean) quickMode.getBoolean(null);
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
         return false;
     }
@@ -30,7 +30,7 @@ public class GalacticraftConfigAccess {
 
         try {
             return (boolean) hardMode.getBoolean(null);
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
         return false;
     }
@@ -42,7 +42,7 @@ public class GalacticraftConfigAccess {
 
         try {
             return (boolean) adventureMode.getBoolean(null);
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
         return false;
     }
@@ -54,7 +54,7 @@ public class GalacticraftConfigAccess {
 
         try {
             return (boolean) adventureRecipes.getBoolean(null);
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
         return false;
     }
@@ -66,7 +66,7 @@ public class GalacticraftConfigAccess {
 
         try {
             return (boolean) adventureMobDropsAndSpawning.getBoolean(null);
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
         return false;
     }
@@ -78,7 +78,7 @@ public class GalacticraftConfigAccess {
 
         try {
             return (boolean) adventureSpawnHandling.getBoolean(null);
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
         return false;
     }
@@ -90,14 +90,14 @@ public class GalacticraftConfigAccess {
 
         try {
             return (boolean) adventureAsteroidPopulation.getBoolean(null);
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
         return false;
     }
 
     private static void setup() {
         try {
-            Class<?> GCConfig = Class.forName("micdoodle8.mods.galacticraft.core.util.ConfigManagerCore");
+            final Class<?> GCConfig = Class.forName("micdoodle8.mods.galacticraft.core.util.ConfigManagerCore");
             quickMode = GCConfig.getField("quickMode");
             hardMode = GCConfig.getField("hardMode");
             adventureMode = GCConfig.getField("challengeMode");
@@ -105,7 +105,7 @@ public class GalacticraftConfigAccess {
             adventureMobDropsAndSpawning = GCConfig.getField("challengeMobDropsAndSpawning");
             adventureSpawnHandling = GCConfig.getField("challengeSpawnHandling");
             adventureAsteroidPopulation = GCConfig.getField("challengeAsteroidPopulation");
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }

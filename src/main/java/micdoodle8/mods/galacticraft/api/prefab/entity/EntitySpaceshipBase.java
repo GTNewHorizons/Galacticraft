@@ -54,7 +54,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
     public float timeSinceLaunch;
     public float rollAmplitude;
     public float shipDamage;
-    private ArrayList<BlockVec3Dim> telemetryList = new ArrayList<BlockVec3Dim>();
+    private final ArrayList<BlockVec3Dim> telemetryList = new ArrayList<BlockVec3Dim>();
     private boolean addToTelemetry = false;
     public FluidTank fuelTank = new FluidTank(this.getFuelTankCapacity() * ConfigManagerCore.rocketFuelFactor);
 
@@ -100,9 +100,9 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
     @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
         if (!this.worldObj.isRemote && !this.isDead) {
-            boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer
+            final boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer
                     && ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode;
-            Entity e = par1DamageSource.getEntity();
+            final Entity e = par1DamageSource.getEntity();
             if (this.isEntityInvulnerable() || this.posY > 255 || !(e instanceof EntityPlayer)) {
                 return false;
             } else {
@@ -141,7 +141,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
         }
 
         for (final ItemStack item : this.getItemsDropped(new ArrayList<ItemStack>())) {
-            EntityItem entityItem = this.entityDropItem(item, 0);
+            final EntityItem entityItem = this.entityDropItem(item, 0);
 
             if (item.hasTagCompound()) {
                 entityItem.getEntityItem().setTagCompound((NBTTagCompound)
@@ -181,8 +181,8 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
 
         if (this.addToTelemetry) {
             this.addToTelemetry = false;
-            for (BlockVec3Dim vec : new ArrayList<BlockVec3Dim>(this.telemetryList)) {
-                TileEntity t1 = vec.getTileEntityNoLoad();
+            for (final BlockVec3Dim vec : new ArrayList<BlockVec3Dim>(this.telemetryList)) {
+                final TileEntity t1 = vec.getTileEntityNoLoad();
                 if (t1 instanceof TileEntityTelemetry && !t1.isInvalid()) {
                     if (((TileEntityTelemetry) t1).linkedEntity == this) {
                         ((TileEntityTelemetry) t1).addTrackedEntity(this);
@@ -223,7 +223,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
                                     : 1200)
                             + 100) {
                 if (this.riddenByEntity instanceof EntityPlayerMP) {
-                    GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) this.riddenByEntity);
+                    final GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) this.riddenByEntity);
                     if (stats.usingPlanetSelectionGui) {
                         this.kill();
                     }
@@ -375,9 +375,9 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
         nbt.setInteger("launchPhase", this.launchPhase + 1);
         nbt.setInteger("timeUntilLaunch", this.timeUntilLaunch);
         if (telemetryList.size() > 0) {
-            NBTTagList teleNBTList = new NBTTagList();
-            for (BlockVec3Dim vec : new ArrayList<BlockVec3Dim>(this.telemetryList)) {
-                NBTTagCompound tag = new NBTTagCompound();
+            final NBTTagList teleNBTList = new NBTTagList();
+            for (final BlockVec3Dim vec : new ArrayList<BlockVec3Dim>(this.telemetryList)) {
+                final NBTTagCompound tag = new NBTTagCompound();
                 vec.writeToNBT(tag);
                 teleNBTList.appendTag(tag);
             }
@@ -395,7 +395,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
         if (nbt.func_150296_c().contains("launched")) {
             hasOldTags = true;
 
-            boolean launched = nbt.getBoolean("launched");
+            final boolean launched = nbt.getBoolean("launched");
 
             if (launched) {
                 this.setLaunchPhase(EnumLaunchPhase.LAUNCHED);
@@ -406,7 +406,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
         if (nbt.func_150296_c().contains("ignite")) {
             hasOldTags = true;
 
-            int ignite = nbt.getInteger("ignite");
+            final int ignite = nbt.getInteger("ignite");
 
             if (ignite == 1) {
                 this.setLaunchPhase(EnumLaunchPhase.IGNITED);
@@ -426,10 +426,10 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
         // Update all Telemetry Units which are still tracking this rocket
         this.telemetryList.clear();
         if (nbt.hasKey("telemetryList")) {
-            NBTTagList teleNBT = nbt.getTagList("telemetryList", 10);
+            final NBTTagList teleNBT = nbt.getTagList("telemetryList", 10);
             if (teleNBT.tagCount() > 0) {
                 for (int j = teleNBT.tagCount() - 1; j >= 0; j--) {
-                    NBTTagCompound tag1 = teleNBT.getCompoundTagAt(j);
+                    final NBTTagCompound tag1 = teleNBT.getCompoundTagAt(j);
                     if (tag1 != null) {
                         this.telemetryList.add(BlockVec3Dim.readFromNBT(tag1));
                     }
@@ -502,9 +502,9 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
     }
 
     public ArrayList<TileEntityTelemetry> getTelemetry() {
-        ArrayList<TileEntityTelemetry> returnList = new ArrayList<TileEntityTelemetry>();
-        for (BlockVec3Dim vec : new ArrayList<BlockVec3Dim>(this.telemetryList)) {
-            TileEntity t1 = vec.getTileEntity();
+        final ArrayList<TileEntityTelemetry> returnList = new ArrayList<TileEntityTelemetry>();
+        for (final BlockVec3Dim vec : new ArrayList<BlockVec3Dim>(this.telemetryList)) {
+            final TileEntity t1 = vec.getTileEntity();
             if (t1 instanceof TileEntityTelemetry && !t1.isInvalid()) {
                 if (((TileEntityTelemetry) t1).linkedEntity == this) {
                     returnList.add((TileEntityTelemetry) t1);
@@ -529,7 +529,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
         // data2 = speed
         // data3 = fuel remaining
         // data4 = pitch angle
-        int countdown = data[0];
+        final int countdown = data[0];
         str[0] = "";
         str[1] = countdown == 400
                 ? GCCoreUtil.translate("gui.rocket.onLaunchpad")

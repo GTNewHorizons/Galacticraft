@@ -36,7 +36,7 @@ public class ModelParaChestTile extends ModelChest {
 
     public void renderAll(boolean lidUp) {
         if (lidUp) {
-            for (ModelRenderer m : this.keyParts) {
+            for (final ModelRenderer m : this.keyParts) {
                 m.render(0.0625F);
             }
         }

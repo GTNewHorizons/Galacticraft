@@ -17,7 +17,7 @@ public class ItemRendererMachine implements IItemRenderer {
     private static final ResourceLocation chamberTexture1 =
             new ResourceLocation(MarsModule.ASSET_PREFIX, "textures/model/chamber2_dark.png");
 
-    private IModelCustom model;
+    private final IModelCustom model;
 
     public ItemRendererMachine(IModelCustom model) {
         this.model = model;

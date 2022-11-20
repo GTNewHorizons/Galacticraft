@@ -77,7 +77,7 @@ public class AsteroidsModuleClient implements IPlanetsModuleClient {
         AsteroidsModuleClient.treasureChestID = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(
                 new BlockRendererTier3TreasureChest(AsteroidsModuleClient.treasureChestID));
-        AsteroidsEventHandlerClient clientEventHandler = new AsteroidsEventHandlerClient();
+        final AsteroidsEventHandlerClient clientEventHandler = new AsteroidsEventHandlerClient();
         FMLCommonHandler.instance().bus().register(clientEventHandler);
         MinecraftForge.EVENT_BUS.register(clientEventHandler);
         FluidTexturesGC.init();
@@ -87,16 +87,16 @@ public class AsteroidsModuleClient implements IPlanetsModuleClient {
     public void postInit(FMLPostInitializationEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(EntitySmallAsteroid.class, new RenderSmallAsteroid());
         RenderingRegistry.registerEntityRenderingHandler(EntityGrapple.class, new RenderGrapple());
-        IModelCustom podModel =
+        final IModelCustom podModel =
                 AdvancedModelLoader.loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/pod.obj"));
         RenderingRegistry.registerEntityRenderingHandler(EntityEntryPod.class, new RenderEntryPod(podModel));
-        IModelCustom rocketModel = AdvancedModelLoader.loadModel(
+        final IModelCustom rocketModel = AdvancedModelLoader.loadModel(
                 new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/tier3rocket.obj"));
         RenderingRegistry.registerEntityRenderingHandler(
                 EntityTier3Rocket.class,
                 new RenderTier3Rocket(rocketModel, AsteroidsModule.ASSET_PREFIX, "tier3rocket"));
         RenderingRegistry.registerEntityRenderingHandler(EntityAstroMiner.class, new RenderAstroMiner());
-        IModelCustom grappleModel =
+        final IModelCustom grappleModel =
                 AdvancedModelLoader.loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/grapple.obj"));
         MinecraftForgeClient.registerItemRenderer(AsteroidsItems.grapple, new ItemRendererGrappleHook(grappleModel));
         MinecraftForgeClient.registerItemRenderer(
@@ -133,7 +133,7 @@ public class AsteroidsModuleClient implements IPlanetsModuleClient {
 
     @Override
     public Object getGuiElement(Side side, int ID, EntityPlayer player, World world, int x, int y, int z) {
-        TileEntity tile = world.getTileEntity(x, y, z);
+        final TileEntity tile = world.getTileEntity(x, y, z);
 
         switch (ID) {
             case GuiIdsPlanets.MACHINE_ASTEROIDS:
@@ -167,14 +167,14 @@ public class AsteroidsModuleClient implements IPlanetsModuleClient {
 
     @Override
     public void spawnParticle(String particleID, Vector3 position, Vector3 motion, Object... extraData) {
-        Minecraft mc = FMLClientHandler.instance().getClient();
+        final Minecraft mc = FMLClientHandler.instance().getClient();
 
         if (mc != null && mc.renderViewEntity != null && mc.effectRenderer != null) {
-            double dX = mc.renderViewEntity.posX - position.x;
-            double dY = mc.renderViewEntity.posY - position.y;
-            double dZ = mc.renderViewEntity.posZ - position.z;
+            final double dX = mc.renderViewEntity.posX - position.x;
+            final double dY = mc.renderViewEntity.posY - position.y;
+            final double dZ = mc.renderViewEntity.posZ - position.z;
             EntityFX particle = null;
-            double viewDistance = 64.0D;
+            final double viewDistance = 64.0D;
 
             if (dX * dX + dY * dY + dZ * dZ < viewDistance * viewDistance) {
                 if (particleID.equals("portalBlue")) {

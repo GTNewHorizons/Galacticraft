@@ -12,14 +12,14 @@ import net.minecraft.entity.EntityLivingBase;
 @SideOnly(Side.CLIENT)
 public class EffectHandler {
     public static void spawnParticle(String particleID, Vector3 position, Vector3 motion, Object... otherInfo) {
-        Minecraft mc = FMLClientHandler.instance().getClient();
+        final Minecraft mc = FMLClientHandler.instance().getClient();
 
         if (mc != null && mc.renderViewEntity != null && mc.effectRenderer != null) {
-            double dX = mc.renderViewEntity.posX - position.x;
-            double dY = mc.renderViewEntity.posY - position.y;
-            double dZ = mc.renderViewEntity.posZ - position.z;
+            final double dX = mc.renderViewEntity.posX - position.x;
+            final double dY = mc.renderViewEntity.posY - position.y;
+            final double dZ = mc.renderViewEntity.posZ - position.z;
             EntityFX particle = null;
-            double viewDistance = 64.0D;
+            final double viewDistance = 64.0D;
 
             if (particleID.equals("whiteSmokeIdle")) {
                 particle = new EntityFXLaunchSmoke(mc.theWorld, position, motion, 1.0F, false);

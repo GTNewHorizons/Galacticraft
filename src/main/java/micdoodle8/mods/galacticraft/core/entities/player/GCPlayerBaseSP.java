@@ -43,7 +43,7 @@ public class GCPlayerBaseSP extends ClientPlayerBase {
     @Override
     public void beforeUpdateEntityActionState() {
         if (this.player.worldObj.provider instanceof IZeroGDimension) {
-            GCPlayerStatsClient stats = GCPlayerStatsClient.get(this.player);
+            final GCPlayerStatsClient stats = GCPlayerStatsClient.get(this.player);
             if (stats.landingTicks > 0) {
                 this.player.ySize = stats.landingYOffset[stats.landingTicks];
                 this.player.movementInput.moveStrafe *= 0.5F;
@@ -96,7 +96,7 @@ public class GCPlayerBaseSP extends ClientPlayerBase {
     @Override
     public boolean isSneaking() {
         if (this.player.worldObj.provider instanceof IZeroGDimension) {
-            GCPlayerStatsClient stats = GCPlayerStatsClient.get(this.player);
+            final GCPlayerStatsClient stats = GCPlayerStatsClient.get(this.player);
             if (stats.landingTicks > 0) {
                 if (this.lastLandingTicks == 0) {
                     this.lastLandingTicks = stats.landingTicks;

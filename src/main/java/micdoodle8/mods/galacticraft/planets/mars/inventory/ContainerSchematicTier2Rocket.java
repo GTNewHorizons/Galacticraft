@@ -129,7 +129,7 @@ public class ContainerSchematicTier2Rocket extends Container {
                 }
             } else {
                 for (int i = 1; i < 19; i++) {
-                    Slot testSlot = (Slot) this.inventorySlots.get(i);
+                    final Slot testSlot = (Slot) this.inventorySlots.get(i);
                     if (!testSlot.getHasStack() && testSlot.isItemValid(var2)) {
                         if (!this.mergeOneItem(var4, i, i + 1, false)) {
                             return null;
@@ -196,7 +196,7 @@ public class ContainerSchematicTier2Rocket extends Container {
                 slotStack = slot.getStack();
 
                 if (slotStack == null) {
-                    ItemStack stackOneItem = par1ItemStack.copy();
+                    final ItemStack stackOneItem = par1ItemStack.copy();
                     stackOneItem.stackSize = 1;
                     par1ItemStack.stackSize--;
                     slot.putStack(stackOneItem);

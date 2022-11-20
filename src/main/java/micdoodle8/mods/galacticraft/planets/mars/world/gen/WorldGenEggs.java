@@ -6,7 +6,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenEggs extends WorldGenerator {
-    private Block eggBlock;
+    private final Block eggBlock;
 
     public WorldGenEggs(Block egg) {
         this.eggBlock = egg;
@@ -14,9 +14,9 @@ public class WorldGenEggs extends WorldGenerator {
 
     @Override
     public boolean generate(World par1World, Random par2Random, int x, int y, int z) {
-        int i1 = x + par2Random.nextInt(8) - par2Random.nextInt(8);
-        int j1 = y + par2Random.nextInt(4) - par2Random.nextInt(4);
-        int k1 = z + par2Random.nextInt(8) - par2Random.nextInt(8);
+        final int i1 = x + par2Random.nextInt(8) - par2Random.nextInt(8);
+        final int j1 = y + par2Random.nextInt(4) - par2Random.nextInt(4);
+        final int k1 = z + par2Random.nextInt(8) - par2Random.nextInt(8);
 
         if (!par1World.blockExists(i1, j1, k1)) {
             return false;

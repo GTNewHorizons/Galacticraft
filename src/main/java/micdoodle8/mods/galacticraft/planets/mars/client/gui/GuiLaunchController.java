@@ -42,7 +42,7 @@ public class GuiLaunchController extends GuiContainerGC
     private static final ResourceLocation launchControllerGui =
             new ResourceLocation(MarsModule.ASSET_PREFIX, "textures/gui/launchController.png");
 
-    private TileEntityLaunchController launchController;
+    private final TileEntityLaunchController launchController;
 
     private GuiButton enableControllerButton;
     private GuiButton hideDestinationFrequency;
@@ -51,8 +51,8 @@ public class GuiLaunchController extends GuiContainerGC
     private GuiElementDropdown dropdownTest;
     private GuiElementTextBox frequency;
     private GuiElementTextBox destinationFrequency;
-    private GuiElementInfoRegion electricInfoRegion = new GuiElementInfoRegion(0, 0, 52, 9, null, 0, 0, this);
-    private GuiElementInfoRegion waterTankInfoRegion = new GuiElementInfoRegion(0, 0, 41, 28, null, 0, 0, this);
+    private final GuiElementInfoRegion electricInfoRegion = new GuiElementInfoRegion(0, 0, 52, 9, null, 0, 0, this);
+    private final GuiElementInfoRegion waterTankInfoRegion = new GuiElementInfoRegion(0, 0, 41, 28, null, 0, 0, this);
 
     private int cannotEditTimer;
 
@@ -69,7 +69,7 @@ public class GuiLaunchController extends GuiContainerGC
             this.enablePadRemovalButton.enabled = false;
             this.hideDestinationFrequency.enabled = false;
         } else {
-            boolean isOwner = FMLClientHandler.instance()
+            final boolean isOwner = FMLClientHandler.instance()
                     .getClient()
                     .thePlayer
                     .getGameProfile()
@@ -87,9 +87,9 @@ public class GuiLaunchController extends GuiContainerGC
                 ? GCCoreUtil.translate("gui.button.unhideDest.name")
                 : GCCoreUtil.translate("gui.button.hideDest.name");
         // Hacky way of rendering buttons properly, possibly bugs here:
-        List buttonList = new ArrayList(this.buttonList);
-        List labelList = new ArrayList(this.labelList);
-        List<GuiElementInfoRegion> infoRegions = new ArrayList(this.infoRegions);
+        final List buttonList = new ArrayList(this.buttonList);
+        final List labelList = new ArrayList(this.labelList);
+        final List<GuiElementInfoRegion> infoRegions = new ArrayList(this.infoRegions);
         this.buttonList.clear();
         this.labelList.clear();
         this.infoRegions.clear();
@@ -133,7 +133,7 @@ public class GuiLaunchController extends GuiContainerGC
                 // in case the player is not equal to the owner of the controller,
                 // scramble the destination number such that other players can't
                 // fly to it directly
-                Random r = new Random();
+                final Random r = new Random();
                 String fakefrequency = "";
                 for (int i = 0; i < this.destinationFrequency.getMaxLength(); i++) {
                     fakefrequency += (char) (r.nextInt(126 - 33) + 33);
@@ -165,7 +165,7 @@ public class GuiLaunchController extends GuiContainerGC
             try {
                 Integer.parseInt(string);
                 return true;
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 return false;
             }
         } else {
@@ -387,7 +387,7 @@ public class GuiLaunchController extends GuiContainerGC
         final int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
 
-        List<String> electricityDesc = new ArrayList<String>();
+        final List<String> electricityDesc = new ArrayList<String>();
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         EnergyDisplayHelper.getEnergyDisplayTooltip(
                 this.launchController.getEnergyStoredGC(),
@@ -398,7 +398,7 @@ public class GuiLaunchController extends GuiContainerGC
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         if (this.launchController.getEnergyStoredGC() > 0) {
-            int scale = this.launchController.getScaledElecticalLevel(54);
+            final int scale = this.launchController.getScaledElecticalLevel(54);
             this.drawTexturedModalRect(var5 + 99, var6 + 114, 176, 0, Math.min(scale, 54), 7);
         }
 
@@ -491,7 +491,7 @@ public class GuiLaunchController extends GuiContainerGC
                 // in case the player is not equal to the owner of the controller,
                 // scramble the destination number such that other players can't
                 // fly to it directly
-                Random r = new Random();
+                final Random r = new Random();
                 String fakefrequency = "";
                 for (int i = 0; i < this.destinationFrequency.getMaxLength(); i++) {
                     fakefrequency += (char) (r.nextInt(126 - 33) + 33);

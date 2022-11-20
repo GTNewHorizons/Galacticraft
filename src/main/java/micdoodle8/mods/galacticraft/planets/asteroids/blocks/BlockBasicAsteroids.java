@@ -75,7 +75,7 @@ public class BlockBasicAsteroids extends Block implements IDetectableResource, I
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
         switch (metadata) {
             case 4:
-                ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+                final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 
                 int count = quantityDropped(metadata, fortune, world.rand);
                 for (int i = 0; i < count; i++) {
@@ -164,7 +164,7 @@ public class BlockBasicAsteroids extends Block implements IDetectableResource, I
 
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
-        int metadata = world.getBlockMetadata(x, y, z);
+        final int metadata = world.getBlockMetadata(x, y, z);
         if (metadata == 4) {
             return new ItemStack(Item.getItemFromBlock(this), 1, metadata);
         }

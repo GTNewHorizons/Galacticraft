@@ -36,13 +36,13 @@ public class CommandJoinSpaceRace extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender icommandsender, String[] astring) {
-        EntityPlayerMP playerBase =
+        final EntityPlayerMP playerBase =
                 PlayerUtil.getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
 
         if (astring.length == 0) {
             try {
                 if (playerBase != null) {
-                    GCPlayerStats stats = GCPlayerStats.get(playerBase);
+                    final GCPlayerStats stats = GCPlayerStats.get(playerBase);
 
                     if (stats.spaceRaceInviteTeamID > 0) {
                         SpaceRaceManager.sendSpaceRaceData(

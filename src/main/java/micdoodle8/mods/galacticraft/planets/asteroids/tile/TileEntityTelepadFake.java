@@ -28,7 +28,7 @@ public class TileEntityTelepadFake extends TileBaseElectricBlock {
     }
 
     public void onBlockRemoval() {
-        TileEntityShortRangeTelepad telepad = this.getBaseTelepad();
+        final TileEntityShortRangeTelepad telepad = this.getBaseTelepad();
 
         if (telepad != null) {
             telepad.onDestroy(this);
@@ -36,7 +36,7 @@ public class TileEntityTelepadFake extends TileBaseElectricBlock {
     }
 
     public boolean onActivated(EntityPlayer par5EntityPlayer) {
-        TileEntityShortRangeTelepad telepad = this.getBaseTelepad();
+        final TileEntityShortRangeTelepad telepad = this.getBaseTelepad();
         return telepad != null && telepad.onActivated(par5EntityPlayer);
     }
 
@@ -44,7 +44,7 @@ public class TileEntityTelepadFake extends TileBaseElectricBlock {
     public void updateEntity() {
         super.updateEntity();
 
-        TileEntityShortRangeTelepad telepad = this.getBaseTelepad();
+        final TileEntityShortRangeTelepad telepad = this.getBaseTelepad();
 
         if (telepad != null) {
             this.storage.setCapacity(telepad.storage.getCapacityGC());
@@ -60,7 +60,7 @@ public class TileEntityTelepadFake extends TileBaseElectricBlock {
         }
 
         if (mainTelepad == null) {
-            TileEntity tileEntity = this.mainBlockPosition.getTileEntity(this.worldObj);
+            final TileEntity tileEntity = this.mainBlockPosition.getTileEntity(this.worldObj);
 
             if (tileEntity != null) {
                 if (tileEntity instanceof TileEntityShortRangeTelepad) {
@@ -73,7 +73,7 @@ public class TileEntityTelepadFake extends TileBaseElectricBlock {
         if (mainTelepad == null) {
             this.worldObj.setBlockToAir(this.mainBlockPosition.x, this.mainBlockPosition.y, this.mainBlockPosition.z);
         } else {
-            TileEntityShortRangeTelepad telepad = this.mainTelepad.get();
+            final TileEntityShortRangeTelepad telepad = this.mainTelepad.get();
 
             if (telepad != null) {
                 return telepad;

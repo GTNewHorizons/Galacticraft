@@ -25,19 +25,19 @@ public class ChunkPowerHandler {
     public void onChunkLoad(ChunkEvent.Load event) {
         if (!event.world.isRemote && event.getChunk() != null) {
             try {
-                ArrayList<Object> tileList = Lists.newArrayList();
+                final ArrayList<Object> tileList = Lists.newArrayList();
                 tileList.addAll(event.getChunk().chunkTileEntityMap.values());
 
-                for (Object o : tileList) {
+                for (final Object o : tileList) {
                     if (o instanceof TileEntity) {
-                        TileEntity tile = (TileEntity) o;
+                        final TileEntity tile = (TileEntity) o;
 
                         if (tile instanceof INetworkConnection) {
                             ((INetworkConnection) tile).refresh();
                         }
                     }
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
 

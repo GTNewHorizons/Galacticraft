@@ -35,19 +35,19 @@ public class GalaxyRegistry {
     static HashMap<SolarSystem, List<Planet>> solarSystemList = Maps.newHashMap();
 
     public static CelestialBody getCelestialBodyFromDimensionID(int dimensionID) {
-        for (Planet planet : GalaxyRegistry.planets.values()) {
+        for (final Planet planet : GalaxyRegistry.planets.values()) {
             if (planet.getDimensionID() == dimensionID) {
                 return planet;
             }
         }
 
-        for (Moon moon : GalaxyRegistry.moons.values()) {
+        for (final Moon moon : GalaxyRegistry.moons.values()) {
             if (moon.getDimensionID() == dimensionID) {
                 return moon;
             }
         }
 
-        for (Satellite satellite : GalaxyRegistry.satellites.values()) {
+        for (final Satellite satellite : GalaxyRegistry.satellites.values()) {
             if (satellite.getDimensionID() == dimensionID) {
                 return satellite;
             }
@@ -61,8 +61,8 @@ public class GalaxyRegistry {
         GalaxyRegistry.satelliteList.clear();
         GalaxyRegistry.solarSystemList.clear();
 
-        for (Moon moon : GalaxyRegistry.getRegisteredMoons().values()) {
-            Planet planet = moon.getParentPlanet();
+        for (final Moon moon : GalaxyRegistry.getRegisteredMoons().values()) {
+            final Planet planet = moon.getParentPlanet();
             List<Moon> listOfMoons = GalaxyRegistry.moonList.get(planet);
             if (listOfMoons == null) {
                 listOfMoons = new ArrayList<Moon>();
@@ -71,8 +71,9 @@ public class GalaxyRegistry {
             GalaxyRegistry.moonList.put(planet, listOfMoons);
         }
 
-        for (Satellite satellite : GalaxyRegistry.getRegisteredSatellites().values()) {
-            CelestialBody celestialBody = satellite.getParentPlanet();
+        for (final Satellite satellite :
+                GalaxyRegistry.getRegisteredSatellites().values()) {
+            final CelestialBody celestialBody = satellite.getParentPlanet();
             List<Satellite> satelliteList1 = GalaxyRegistry.satelliteList.get(celestialBody);
             if (satelliteList1 == null) {
                 satelliteList1 = new ArrayList<Satellite>();
@@ -81,8 +82,8 @@ public class GalaxyRegistry {
             GalaxyRegistry.satelliteList.put(celestialBody, satelliteList1);
         }
 
-        for (Planet planet : GalaxyRegistry.getRegisteredPlanets().values()) {
-            SolarSystem solarSystem = planet.getParentSolarSystem();
+        for (final Planet planet : GalaxyRegistry.getRegisteredPlanets().values()) {
+            final SolarSystem solarSystem = planet.getParentSolarSystem();
             List<Planet> planetList = GalaxyRegistry.solarSystemList.get(solarSystem);
             if (planetList == null) {
                 planetList = new ArrayList<Planet>();
@@ -93,7 +94,7 @@ public class GalaxyRegistry {
     }
 
     public static List<Planet> getPlanetsForSolarSystem(SolarSystem solarSystem) {
-        List<Planet> solarSystemListLocal = GalaxyRegistry.solarSystemList.get(solarSystem);
+        final List<Planet> solarSystemListLocal = GalaxyRegistry.solarSystemList.get(solarSystem);
 
         if (solarSystemListLocal == null) {
             return new ArrayList<Planet>();
@@ -103,7 +104,7 @@ public class GalaxyRegistry {
     }
 
     public static List<Moon> getMoonsForPlanet(Planet planet) {
-        List<Moon> moonListLocal = GalaxyRegistry.moonList.get(planet);
+        final List<Moon> moonListLocal = GalaxyRegistry.moonList.get(planet);
 
         if (moonListLocal == null) {
             return new ArrayList<Moon>();
@@ -113,7 +114,7 @@ public class GalaxyRegistry {
     }
 
     public static List<Satellite> getSatellitesForCelestialBody(CelestialBody celestialBody) {
-        List<Satellite> satelliteList1 = GalaxyRegistry.satelliteList.get(celestialBody);
+        final List<Satellite> satelliteList1 = GalaxyRegistry.satelliteList.get(celestialBody);
 
         if (satelliteList1 == null) {
             return new ArrayList<Satellite>();
@@ -123,13 +124,13 @@ public class GalaxyRegistry {
     }
 
     public static CelestialBody getCelestialBodyFromUnlocalizedName(String unlocalizedName) {
-        for (Planet planet : GalaxyRegistry.planets.values()) {
+        for (final Planet planet : GalaxyRegistry.planets.values()) {
             if (planet.getUnlocalizedName().equals(unlocalizedName)) {
                 return planet;
             }
         }
 
-        for (Moon moon : GalaxyRegistry.moons.values()) {
+        for (final Moon moon : GalaxyRegistry.moons.values()) {
             if (moon.getUnlocalizedName().equals(unlocalizedName)) {
                 return moon;
             }

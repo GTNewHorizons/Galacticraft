@@ -17,7 +17,7 @@ public class GuiCoalGenerator extends GuiContainer {
     private static final ResourceLocation coalGeneratorTexture =
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/coal_generator.png");
 
-    private TileEntityCoalGenerator tileEntity;
+    private final TileEntityCoalGenerator tileEntity;
 
     public GuiCoalGenerator(InventoryPlayer playerInventory, TileEntityCoalGenerator tileEntity) {
         super(new ContainerCoalGenerator(playerInventory, tileEntity));
@@ -57,8 +57,8 @@ public class GuiCoalGenerator extends GuiContainer {
         this.mc.renderEngine.bindTexture(GuiCoalGenerator.coalGeneratorTexture);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        int containerWidth = (this.width - this.xSize) / 2;
-        int containerHeight = (this.height - this.ySize) / 2;
+        final int containerWidth = (this.width - this.xSize) / 2;
+        final int containerHeight = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(containerWidth, containerHeight, 0, 0, this.xSize, this.ySize);
     }
 }

@@ -84,7 +84,7 @@ public class PacketSimpleAsteroids implements IPacket {
 
         try {
             NetworkUtil.encodeData(buffer, this.data);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
@@ -113,27 +113,27 @@ public class PacketSimpleAsteroids implements IPacket {
                 Entity entity = playerBaseClient.worldObj.getEntityByID((Integer) this.data.get(1));
 
                 if (entity != null && entity instanceof EntityLivingBase) {
-                    BlockVec3 pos = (BlockVec3) this.data.get(0);
+                    final BlockVec3 pos = (BlockVec3) this.data.get(0);
                     entity.setPosition(pos.x + 0.5, pos.y + 2.2, pos.z + 0.5);
                 }
                 break;
             case C_UPDATE_GRAPPLE_POS:
                 entity = playerBaseClient.worldObj.getEntityByID((Integer) this.data.get(0));
                 if (entity != null && entity instanceof EntityGrapple) {
-                    Vector3 vec = (Vector3) this.data.get(1);
+                    final Vector3 vec = (Vector3) this.data.get(1);
                     entity.setPosition(vec.x, vec.y, vec.z);
                 }
                 break;
             case C_UPDATE_MINERBASE_FACING:
                 tile = player.worldObj.getTileEntity(
                         (Integer) this.data.get(0), (Integer) this.data.get(1), (Integer) this.data.get(2));
-                int facingNew = (Integer) this.data.get(3);
+                final int facingNew = (Integer) this.data.get(3);
                 if (tile instanceof TileEntityMinerBase) {
                     ((TileEntityMinerBase) tile).facing = facingNew;
                     ((TileEntityMinerBase) tile)
                             .setMainBlockPos(
                                     (Integer) this.data.get(4), (Integer) this.data.get(5), (Integer) this.data.get(6));
-                    int link = (Integer) this.data.get(7);
+                    final int link = (Integer) this.data.get(7);
                     if (link > 0) {
                         ((TileEntityMinerBase) tile).linkedMinerID = UUID.randomUUID();
                     } else {
@@ -148,7 +148,7 @@ public class PacketSimpleAsteroids implements IPacket {
 
     @Override
     public void handleServerSide(EntityPlayer player) {
-        EntityPlayerMP playerBase = PlayerUtil.getPlayerBaseServerFromPlayer(player, false);
+        final EntityPlayerMP playerBase = PlayerUtil.getPlayerBaseServerFromPlayer(player, false);
 
         switch (this.type) {
             case S_UPDATE_ADVANCED_GUI:
@@ -158,13 +158,13 @@ public class PacketSimpleAsteroids implements IPacket {
                 switch ((Integer) this.data.get(0)) {
                     case 0:
                         if (tile instanceof TileEntityShortRangeTelepad) {
-                            TileEntityShortRangeTelepad launchController = (TileEntityShortRangeTelepad) tile;
+                            final TileEntityShortRangeTelepad launchController = (TileEntityShortRangeTelepad) tile;
                             launchController.setAddress((Integer) this.data.get(4));
                         }
                         break;
                     case 1:
                         if (tile instanceof TileEntityShortRangeTelepad) {
-                            TileEntityShortRangeTelepad launchController = (TileEntityShortRangeTelepad) tile;
+                            final TileEntityShortRangeTelepad launchController = (TileEntityShortRangeTelepad) tile;
                             launchController.setTargetAddress((Integer) this.data.get(4));
                         }
                         break;

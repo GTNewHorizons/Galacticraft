@@ -29,7 +29,7 @@ public class TileEntityOxygenDecompressor extends TileEntityOxygen implements II
 
         if (!this.worldObj.isRemote) {
             this.usingEnergy = false;
-            ItemStack tank1 = this.containingItems[0];
+            final ItemStack tank1 = this.containingItems[0];
 
             if (tank1 != null && this.hasEnoughEnergyToRun && this.getOxygenStored() < this.getMaxOxygenStored()) {
                 if (tank1.getItem() instanceof ItemOxygenTank && tank1.getItemDamage() < tank1.getMaxDamage()) {

@@ -42,7 +42,7 @@ public class RenderSlimeling extends RenderLiving {
         super.preRenderCallback(par1EntityLivingBase, par2);
 
         GL11.glRotatef(180.0F, 0, 1, 0);
-        EntitySlimeling slimeling = (EntitySlimeling) par1EntityLivingBase;
+        final EntitySlimeling slimeling = (EntitySlimeling) par1EntityLivingBase;
 
         GL11.glColor3f(slimeling.getColorRed(), slimeling.getColorGreen(), slimeling.getColorBlue());
         GL11.glScalef(slimeling.getScale(), slimeling.getScale(), slimeling.getScale());
@@ -71,7 +71,7 @@ public class RenderSlimeling extends RenderLiving {
 
     @Override
     protected void passSpecialRender(EntityLivingBase par1EntityLivingBase, double par2, double par4, double par6) {
-        Minecraft mc = FMLClientHandler.instance().getClient();
+        final Minecraft mc = FMLClientHandler.instance().getClient();
 
         if (!mc.gameSettings.hideGUI
                 && !par1EntityLivingBase.isInvisible()
@@ -90,11 +90,11 @@ public class RenderSlimeling extends RenderLiving {
                     0,
                     0);
             int health = (int) Math.floor(((EntitySlimeling) par1EntityLivingBase).getHealth() + 0.6D);
-            int maxHealth = (int) ((EntitySlimeling) par1EntityLivingBase).getMaxHealth();
+            final int maxHealth = (int) ((EntitySlimeling) par1EntityLivingBase).getMaxHealth();
             if (health > maxHealth) {
                 health = maxHealth;
             }
-            float difference = health / (float) maxHealth;
+            final float difference = health / (float) maxHealth;
 
             if (difference < 0.33333F) {
                 this.renderLivingLabelWithColor(
@@ -123,12 +123,12 @@ public class RenderSlimeling extends RenderLiving {
             float cR,
             float cG,
             float cB) {
-        double d3 = par1EntityLivingBase.getDistanceSqToEntity(this.renderManager.livingPlayer);
+        final double d3 = par1EntityLivingBase.getDistanceSqToEntity(this.renderManager.livingPlayer);
 
         if (d3 <= par9 * par9) {
-            FontRenderer fontrenderer = this.getFontRendererFromRenderManager();
-            float f = 1.6F;
-            float f1 = 0.016666668F * f;
+            final FontRenderer fontrenderer = this.getFontRendererFromRenderManager();
+            final float f = 1.6F;
+            final float f1 = 0.016666668F * f;
             GL11.glPushMatrix();
             GL11.glTranslatef((float) par3 + 0.0F, (float) par5 + par1EntityLivingBase.height + 0.55F, (float) par7);
             GL11.glNormal3f(0.0F, 1.0F, 0.0F);
@@ -140,7 +140,7 @@ public class RenderSlimeling extends RenderLiving {
             GL11.glDisable(GL11.GL_DEPTH_TEST);
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            Tessellator tessellator = Tessellator.instance;
+            final Tessellator tessellator = Tessellator.instance;
             byte b0 = 0;
 
             if (par2Str.equals("deadmau5")) {
@@ -149,7 +149,7 @@ public class RenderSlimeling extends RenderLiving {
 
             GL11.glDisable(GL11.GL_TEXTURE_2D);
             tessellator.startDrawingQuads();
-            int j = fontrenderer.getStringWidth(par2Str) / 2;
+            final int j = fontrenderer.getStringWidth(par2Str) / 2;
             tessellator.setColorRGBA_F(cR, cG, cB, 0.25F);
             tessellator.addVertex(-j - 1, -1 + b0, 0.0D);
             tessellator.addVertex(-j - 1, 8 + b0, 0.0D);

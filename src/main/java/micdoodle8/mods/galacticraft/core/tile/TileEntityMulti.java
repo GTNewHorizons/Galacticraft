@@ -24,11 +24,11 @@ public class TileEntityMulti extends TileEntityAdvanced {
 
     public void onBlockRemoval() {
         if (this.mainBlockPosition != null) {
-            TileEntity tileEntity = this.worldObj.getTileEntity(
+            final TileEntity tileEntity = this.worldObj.getTileEntity(
                     this.mainBlockPosition.x, this.mainBlockPosition.y, this.mainBlockPosition.z);
 
             if (tileEntity instanceof IMultiBlock) {
-                IMultiBlock mainBlock = (IMultiBlock) tileEntity;
+                final IMultiBlock mainBlock = (IMultiBlock) tileEntity;
                 mainBlock.onDestroy(this);
             }
         }
@@ -36,7 +36,7 @@ public class TileEntityMulti extends TileEntityAdvanced {
 
     public boolean onBlockActivated(World par1World, int x, int y, int z, EntityPlayer par5EntityPlayer) {
         if (this.mainBlockPosition != null) {
-            TileEntity tileEntity = this.worldObj.getTileEntity(
+            final TileEntity tileEntity = this.worldObj.getTileEntity(
                     this.mainBlockPosition.x, this.mainBlockPosition.y, this.mainBlockPosition.z);
 
             if (tileEntity instanceof IMultiBlock) {

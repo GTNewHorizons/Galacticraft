@@ -11,12 +11,12 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class RenderSmallAsteroid extends Render {
-    private RenderBlocks blockRenderer = new RenderBlocks();
+    private final RenderBlocks blockRenderer = new RenderBlocks();
 
     @Override
     public void doRender(Entity entity, double x, double y, double z, float f, float partialTickTime) {
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-        EntitySmallAsteroid asteroid = (EntitySmallAsteroid) entity;
+        final EntitySmallAsteroid asteroid = (EntitySmallAsteroid) entity;
 
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x, (float) y + 0.5F, (float) z);

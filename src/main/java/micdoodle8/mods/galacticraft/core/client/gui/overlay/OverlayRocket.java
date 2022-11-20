@@ -46,7 +46,7 @@ public class OverlayRocket extends Overlay {
         float var6 = 1.0F;
         float var7 = 1.0F;
         float var8 = 1.0F;
-        float sizeScale = 0.65F;
+        final float sizeScale = 0.65F;
 
         final Tessellator var9 = Tessellator.instance;
         var9.startDrawingQuads();
@@ -59,7 +59,7 @@ public class OverlayRocket extends Overlay {
 
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
-        Render spaceshipRender = (Render)
+        final Render spaceshipRender = (Render)
                 RenderManager.instance.entityRenderMap.get(OverlayRocket.minecraft.thePlayer.ridingEntity.getClass());
 
         final int y1 = height / 2
@@ -100,7 +100,7 @@ public class OverlayRocket extends Overlay {
                     0,
                     0,
                     0);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 

@@ -63,8 +63,8 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
             if (this.ticks % 10 == 0 && this.containingItems[1] != null) {
                 if (this.containingItems[1].getItem() instanceof ItemCanisterGeneric) {
                     if (this.containingItems[1].getItem() == GCItems.fuelCanister) {
-                        int originalDamage = this.containingItems[1].getItemDamage();
-                        int used = this.fuelTank.fill(
+                        final int originalDamage = this.containingItems[1].getItemDamage();
+                        final int used = this.fuelTank.fill(
                                 new FluidStack(GalacticraftCore.fluidFuel, ItemCanisterGeneric.EMPTY - originalDamage),
                                 true);
                         if (originalDamage + used == ItemCanisterGeneric.EMPTY) {
@@ -79,7 +79,7 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
 
                     if (liquid != null && this.containingItems[1].stackSize == 1) {
                         // boolean isFuel = FluidUtil.testFuel(FluidRegistry.getFluidName(liquid));
-                        boolean isFuel = RocketFuelRecipe.isValidFuel(liquid);
+                        final boolean isFuel = RocketFuelRecipe.isValidFuel(liquid);
                         if (isFuel) {
                             if (this.fuelTank.getFluid() == null
                                     || this.fuelTank.getFluid().isFluidEqual(liquid)
@@ -94,7 +94,7 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
                     }
                 } else if (this.containingItems[1].getItem() instanceof IFluidContainerItem
                         && this.containingItems[1].stackSize == 1) {
-                    IFluidContainerItem fluidContainer = (IFluidContainerItem) this.containingItems[1].getItem();
+                    final IFluidContainerItem fluidContainer = (IFluidContainerItem) this.containingItems[1].getItem();
                     final FluidStack liquid = fluidContainer.getFluid(this.containingItems[1]);
                     if (liquid != null
                             && RocketFuelRecipe.isValidFuel(liquid)
@@ -104,7 +104,7 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
                         final int toDrain = Integer.min(
                                 this.fuelTank.getCapacity() - this.fuelTank.getFluidAmount(), liquid.amount);
                         if (toDrain > 0) {
-                            FluidStack drained = fluidContainer.drain(this.containingItems[1], toDrain, true);
+                            final FluidStack drained = fluidContainer.drain(this.containingItems[1], toDrain, true);
                             this.fuelTank.fill(drained, true);
                             markDirty();
                         }
@@ -140,7 +140,7 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
                         new FluidStack(GalacticraftCore.fluidFuel, 2 * ConfigManagerCore.rocketFuelFactor);
 
                 if (this.hasEnoughEnergyToRun && !this.disabled) {
-                    int filled = this.attachedFuelable.addFuel(liquid, true);
+                    final int filled = this.attachedFuelable.addFuel(liquid, true);
                     this.loadedFuelLastTick = filled > 0;
                     this.fuelTank.drain(filled, true);
                     markDirty();
@@ -156,7 +156,7 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
             return false;
         }
         if (fuelable instanceof IFuelableTiered) {
-            int tier = ((IFuelableTiered) fuelable).getRocketTier();
+            final int tier = ((IFuelableTiered) fuelable).getRocketTier();
             if (tier > 0) {
                 if (tier > RocketFuelRecipe.getfuelMaxTier(this.fuelTank.getFluid())) {
                     coorectTier = false;

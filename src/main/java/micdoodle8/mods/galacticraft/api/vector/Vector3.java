@@ -170,7 +170,7 @@ public class Vector3 implements Cloneable {
      * Converts Vector3 into a ForgeDirection.
      */
     public ForgeDirection toForgeDirection() {
-        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+        for (final ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
             if (this.x == direction.offsetX && this.y == direction.offsetY && this.z == direction.offsetZ) {
                 return direction;
             }
@@ -188,7 +188,7 @@ public class Vector3 implements Cloneable {
     }
 
     public Vector3 normalize() {
-        double d = this.getMagnitude();
+        final double d = this.getMagnitude();
 
         if (d != 0) {
             this.scale(1 / d);
@@ -212,7 +212,7 @@ public class Vector3 implements Cloneable {
     }
 
     public double distance(Vector3 compare) {
-        Vector3 difference = this.clone().difference(compare);
+        final Vector3 difference = this.clone().difference(compare);
         return difference.getMagnitude();
     }
 
@@ -405,9 +405,9 @@ public class Vector3 implements Cloneable {
      * @return The cross product between this vector and another.
      */
     public Vector3 toCrossProduct(Vector3 compare) {
-        double newX = this.y * compare.z - this.z * compare.y;
-        double newY = this.z * compare.x - this.x * compare.z;
-        double newZ = this.x * compare.y - this.y * compare.x;
+        final double newX = this.y * compare.z - this.z * compare.y;
+        final double newY = this.z * compare.x - this.x * compare.z;
+        final double newZ = this.x * compare.y - this.y * compare.x;
         this.x = newX;
         this.y = newY;
         this.z = newZ;
@@ -458,15 +458,15 @@ public class Vector3 implements Cloneable {
     }
 
     public double[] getRotationMatrix(float angle) {
-        double[] matrix = new double[16];
-        Vector3 axis = this.clone().normalize();
-        double x = axis.x;
-        double y = axis.y;
-        double z = axis.z;
+        final double[] matrix = new double[16];
+        final Vector3 axis = this.clone().normalize();
+        final double x = axis.x;
+        final double y = axis.y;
+        final double z = axis.z;
         angle *= 0.0174532925D;
-        float cos = (float) Math.cos(angle);
-        float ocos = 1.0F - cos;
-        float sin = (float) Math.sin(angle);
+        final float cos = (float) Math.cos(angle);
+        final float ocos = 1.0F - cos;
+        final float sin = (float) Math.sin(angle);
         matrix[0] = x * x * ocos + cos;
         matrix[1] = y * x * ocos + z * sin;
         matrix[2] = x * z * ocos - y * sin;
@@ -481,9 +481,10 @@ public class Vector3 implements Cloneable {
     }
 
     public static Vector3 translateMatrix(double[] matrix, Vector3 translation) {
-        double x = translation.x * matrix[0] + translation.y * matrix[1] + translation.z * matrix[2] + matrix[3];
-        double y = translation.x * matrix[4] + translation.y * matrix[5] + translation.z * matrix[6] + matrix[7];
-        double z = translation.x * matrix[8] + translation.y * matrix[9] + translation.z * matrix[10] + matrix[11];
+        final double x = translation.x * matrix[0] + translation.y * matrix[1] + translation.z * matrix[2] + matrix[3];
+        final double y = translation.x * matrix[4] + translation.y * matrix[5] + translation.z * matrix[6] + matrix[7];
+        final double z =
+                translation.x * matrix[8] + translation.y * matrix[9] + translation.z * matrix[10] + matrix[11];
         translation.x = x;
         translation.y = y;
         translation.z = z;
@@ -498,13 +499,13 @@ public class Vector3 implements Cloneable {
      * Rotates this Vector by a yaw, pitch and roll value.
      */
     public void rotate(double yaw, double pitch, double roll) {
-        double yawRadians = Math.toRadians(yaw);
-        double pitchRadians = Math.toRadians(pitch);
-        double rollRadians = Math.toRadians(roll);
+        final double yawRadians = Math.toRadians(yaw);
+        final double pitchRadians = Math.toRadians(pitch);
+        final double rollRadians = Math.toRadians(roll);
 
-        double x = this.x;
-        double y = this.y;
-        double z = this.z;
+        final double x = this.x;
+        final double y = this.y;
+        final double z = this.z;
 
         this.x = x * Math.cos(yawRadians) * Math.cos(pitchRadians)
                 + z
@@ -533,10 +534,10 @@ public class Vector3 implements Cloneable {
     }
 
     public void rotate(double yaw) {
-        double yawRadians = Math.toRadians(yaw);
+        final double yawRadians = Math.toRadians(yaw);
 
-        double x = this.x;
-        double z = this.z;
+        final double x = this.x;
+        final double z = this.z;
 
         if (yaw != 0) {
             this.x = x * Math.cos(yawRadians) - z * Math.sin(yawRadians);
@@ -645,31 +646,31 @@ public class Vector3 implements Cloneable {
      */
     public MovingObjectPosition rayTraceEntities(World world, Vector3 target) {
         MovingObjectPosition pickedEntity = null;
-        Vec3 startingPosition = this.toVec3();
-        Vec3 look = target.toVec3();
-        double reachDistance = this.distance(target);
-        Vec3 reachPoint = Vec3.createVectorHelper(
+        final Vec3 startingPosition = this.toVec3();
+        final Vec3 look = target.toVec3();
+        final double reachDistance = this.distance(target);
+        final Vec3 reachPoint = Vec3.createVectorHelper(
                 startingPosition.xCoord + look.xCoord * reachDistance,
                 startingPosition.yCoord + look.yCoord * reachDistance,
                 startingPosition.zCoord + look.zCoord * reachDistance);
 
-        double checkBorder = 1.1 * reachDistance;
-        AxisAlignedBB boxToScan = AxisAlignedBB.getBoundingBox(
+        final double checkBorder = 1.1 * reachDistance;
+        final AxisAlignedBB boxToScan = AxisAlignedBB.getBoundingBox(
                         -checkBorder, -checkBorder, -checkBorder, checkBorder, checkBorder, checkBorder)
                 .offset(this.x, this.y, this.z);
 
         @SuppressWarnings("unchecked")
-        List<Entity> entitiesHit = world.getEntitiesWithinAABBExcludingEntity(null, boxToScan);
+        final List<Entity> entitiesHit = world.getEntitiesWithinAABBExcludingEntity(null, boxToScan);
         double closestEntity = reachDistance;
 
         if (entitiesHit == null || entitiesHit.isEmpty()) {
             return null;
         }
-        for (Entity entityHit : entitiesHit) {
+        for (final Entity entityHit : entitiesHit) {
             if (entityHit != null && entityHit.canBeCollidedWith() && entityHit.boundingBox != null) {
-                float border = entityHit.getCollisionBorderSize();
-                AxisAlignedBB aabb = entityHit.boundingBox.expand(border, border, border);
-                MovingObjectPosition hitMOP = aabb.calculateIntercept(startingPosition, reachPoint);
+                final float border = entityHit.getCollisionBorderSize();
+                final AxisAlignedBB aabb = entityHit.boundingBox.expand(border, border, border);
+                final MovingObjectPosition hitMOP = aabb.calculateIntercept(startingPosition, reachPoint);
 
                 if (hitMOP != null) {
                     if (aabb.isVecInside(startingPosition)) {
@@ -681,7 +682,7 @@ public class Vector3 implements Cloneable {
                             }
                         }
                     } else {
-                        double distance = startingPosition.distanceTo(hitMOP.hitVec);
+                        final double distance = startingPosition.distanceTo(hitMOP.hitVec);
 
                         if (distance < closestEntity || closestEntity == 0.0D) {
                             pickedEntity = new MovingObjectPosition(entityHit);
@@ -707,7 +708,7 @@ public class Vector3 implements Cloneable {
     @Override
     public boolean equals(Object o) {
         if (o instanceof Vector3) {
-            Vector3 vector3 = (Vector3) o;
+            final Vector3 vector3 = (Vector3) o;
             return new EqualsBuilder()
                     .append(this.x, vector3.x)
                     .append(this.y, vector3.y)

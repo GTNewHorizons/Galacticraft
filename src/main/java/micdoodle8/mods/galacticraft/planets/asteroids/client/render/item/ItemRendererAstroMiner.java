@@ -36,7 +36,7 @@ public class ItemRendererAstroMiner implements IItemRenderer {
             float translateX,
             float translateY,
             float translateZ) {
-        boolean saveCullState = GL11.glIsEnabled(GL11.GL_CULL_FACE);
+        final boolean saveCullState = GL11.glIsEnabled(GL11.GL_CULL_FACE);
         GL11.glEnable(GL11.GL_CULL_FACE);
         GL11.glPushMatrix();
 

@@ -21,7 +21,7 @@ public class TileEntityOxygenPipe extends TileEntityOxygenTransmitter implements
 
     @Override
     public boolean canConnect(ForgeDirection direction, NetworkType type) {
-        TileEntity adjacentTile = new BlockVec3(this).getTileEntityOnSide(this.worldObj, direction);
+        final TileEntity adjacentTile = new BlockVec3(this).getTileEntityOnSide(this.worldObj, direction);
 
         if (type == NetworkType.OXYGEN) {
             if (adjacentTile instanceof IColorable) {
@@ -119,7 +119,7 @@ public class TileEntityOxygenPipe extends TileEntityOxygenTransmitter implements
 
     @Override
     public void decodePacketdata(ByteBuf buffer) {
-        byte colorBefore = this.pipeColor;
+        final byte colorBefore = this.pipeColor;
         super.decodePacketdata(buffer);
 
         if (this.pipeColor != colorBefore && this.worldObj instanceof WorldClient) {

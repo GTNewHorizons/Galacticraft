@@ -20,7 +20,7 @@ public class NetworkRenderer {
         if (System.currentTimeMillis() > t + 1000) {
             t = System.currentTimeMillis();
             nodes.clear();
-            for (Object o : new ArrayList<TileEntity>(world.loadedTileEntityList)) {
+            for (final Object o : new ArrayList<TileEntity>(world.loadedTileEntityList)) {
                 if (o instanceof TileEntityBeamOutput) {
                     nodes.add((TileEntityBeamOutput) o);
                 }
@@ -31,32 +31,32 @@ public class NetworkRenderer {
             return;
         }
 
-        Tessellator tess = Tessellator.instance;
-        EntityClientPlayerMP player = FMLClientHandler.instance().getClient().thePlayer;
-        double interpPosX = player.lastTickPosX + (player.posX - player.lastTickPosX) * partialTicks;
-        double interpPosY = player.lastTickPosY + (player.posY - player.lastTickPosY) * partialTicks;
-        double interpPosZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * partialTicks;
+        final Tessellator tess = Tessellator.instance;
+        final EntityClientPlayerMP player = FMLClientHandler.instance().getClient().thePlayer;
+        final double interpPosX = player.lastTickPosX + (player.posX - player.lastTickPosX) * partialTicks;
+        final double interpPosY = player.lastTickPosY + (player.posY - player.lastTickPosY) * partialTicks;
+        final double interpPosZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * partialTicks;
 
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_CULL_FACE);
 
-        for (TileEntityBeamOutput tileEntity : nodes) {
+        for (final TileEntityBeamOutput tileEntity : nodes) {
             if (tileEntity.getTarget() == null) {
                 continue;
             }
 
             GL11.glPushMatrix();
 
-            Vector3 outputPoint = tileEntity.getOutputPoint(true);
-            Vector3 targetInputPoint = tileEntity.getTarget().getInputPoint();
+            final Vector3 outputPoint = tileEntity.getOutputPoint(true);
+            final Vector3 targetInputPoint = tileEntity.getTarget().getInputPoint();
 
-            Vector3 direction = Vector3.subtract(outputPoint, targetInputPoint);
-            float directionLength = (float) direction.getMagnitude();
+            final Vector3 direction = Vector3.subtract(outputPoint, targetInputPoint);
+            final float directionLength = (float) direction.getMagnitude();
 
-            float posX = (float) (tileEntity.xCoord - interpPosX);
-            float posY = (float) (tileEntity.yCoord - interpPosY);
-            float posZ = (float) (tileEntity.zCoord - interpPosZ);
+            final float posX = (float) (tileEntity.xCoord - interpPosX);
+            final float posY = (float) (tileEntity.yCoord - interpPosY);
+            final float posZ = (float) (tileEntity.zCoord - interpPosZ);
             GL11.glTranslatef(posX, posY, posZ);
 
             GL11.glTranslatef(
@@ -74,7 +74,7 @@ public class NetworkRenderer {
                     1.0F);
             tess.startDrawing(GL11.GL_LINES);
 
-            for (ForgeDirection dir : ForgeDirection.values()) {
+            for (final ForgeDirection dir : ForgeDirection.values()) {
                 tess.addVertex(dir.offsetX / 40.0F, dir.offsetY / 40.0F, dir.offsetZ / 40.0F);
                 tess.addVertex(dir.offsetX / 40.0F, dir.offsetY / 40.0F, directionLength + dir.offsetZ / 40.0F);
             }

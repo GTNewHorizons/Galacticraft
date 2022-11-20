@@ -35,7 +35,7 @@ public class ItemBlockDummy extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        int metadata = itemstack.getItemDamage();
+        final int metadata = itemstack.getItemDamage();
         String blockName = "";
 
         switch (metadata) {

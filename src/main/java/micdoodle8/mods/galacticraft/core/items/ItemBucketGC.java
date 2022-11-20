@@ -13,7 +13,7 @@ import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 
 public class ItemBucketGC extends ItemBucket {
-    private String texture_prefix;
+    private final String texture_prefix;
 
     public ItemBucketGC(Block block, String texture_prefix) {
         super(block);

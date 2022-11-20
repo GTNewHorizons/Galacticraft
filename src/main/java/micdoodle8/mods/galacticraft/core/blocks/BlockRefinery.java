@@ -132,7 +132,7 @@ public class BlockRefinery extends BlockAdvancedTile implements ItemBlockDesc.IB
                 break;
         }
 
-        TileEntity te = par1World.getTileEntity(x, y, z);
+        final TileEntity te = par1World.getTileEntity(x, y, z);
         if (te instanceof TileBaseUniversalElectrical) {
             ((TileBaseUniversalElectrical) te).updateFacing();
         }

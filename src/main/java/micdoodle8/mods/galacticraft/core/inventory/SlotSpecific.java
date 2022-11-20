@@ -36,33 +36,33 @@ public class SlotSpecific extends Slot {
         if (validClasses != null && Arrays.asList(validClasses).contains(IItemElectric.class)) {
             if (EnergyConfigHandler.isRFAPILoaded()) {
                 try {
-                    Class<?> itemElectricRF = Class.forName("cofh.api.energy.IEnergyContainerItem");
-                    ArrayList<Class> existing = new ArrayList(Arrays.asList(validClasses));
+                    final Class<?> itemElectricRF = Class.forName("cofh.api.energy.IEnergyContainerItem");
+                    final ArrayList<Class> existing = new ArrayList(Arrays.asList(validClasses));
                     existing.add(itemElectricRF);
                     validClasses = existing.toArray(new Class[existing.size()]);
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     e.printStackTrace();
                 }
             }
             if (EnergyConfigHandler.isIndustrialCraft2Loaded()) {
                 try {
-                    Class<?> itemElectricIC2a = Class.forName("ic2.api.item.IElectricItem");
-                    Class<?> itemElectricIC2b = Class.forName("ic2.api.item.ISpecialElectricItem");
-                    ArrayList<Class> existing = new ArrayList(Arrays.asList(validClasses));
+                    final Class<?> itemElectricIC2a = Class.forName("ic2.api.item.IElectricItem");
+                    final Class<?> itemElectricIC2b = Class.forName("ic2.api.item.ISpecialElectricItem");
+                    final ArrayList<Class> existing = new ArrayList(Arrays.asList(validClasses));
                     existing.add(itemElectricIC2a);
                     existing.add(itemElectricIC2b);
                     validClasses = existing.toArray(new Class[existing.size()]);
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     e.printStackTrace();
                 }
             }
             if (EnergyConfigHandler.isMekanismLoaded()) {
                 try {
-                    Class<?> itemElectricMek = Class.forName("mekanism.api.energy.IEnergizedItem");
-                    ArrayList<Class> existing = new ArrayList(Arrays.asList(validClasses));
+                    final Class<?> itemElectricMek = Class.forName("mekanism.api.energy.IEnergizedItem");
+                    final ArrayList<Class> existing = new ArrayList(Arrays.asList(validClasses));
                     existing.add(itemElectricMek);
                     validClasses = existing.toArray(new Class[existing.size()]);
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -100,7 +100,7 @@ public class SlotSpecific extends Slot {
     public boolean isItemValid(ItemStack compareStack) {
         boolean returnValue = false;
 
-        for (ItemStack itemStack : this.validItemStacks) {
+        for (final ItemStack itemStack : this.validItemStacks) {
             if (compareStack.isItemEqual(itemStack) || !this.isMetadataSensitive && compareStack == itemStack) {
                 returnValue = true;
                 break;
@@ -108,7 +108,7 @@ public class SlotSpecific extends Slot {
         }
 
         if (!returnValue) {
-            for (Class clazz : this.validClasses) {
+            for (final Class clazz : this.validClasses) {
                 if (clazz.isInstance(compareStack.getItem())) {
                     returnValue = true;
                     break;

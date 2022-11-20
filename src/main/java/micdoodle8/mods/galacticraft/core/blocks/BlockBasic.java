@@ -142,7 +142,7 @@ public class BlockBasic extends Block implements IDetectableResource {
             double explosionX,
             double explosionY,
             double explosionZ) {
-        int metadata = world.getBlockMetadata(x, y, z);
+        final int metadata = world.getBlockMetadata(x, y, z);
 
         if (metadata < 5) {
             return 2.0F;
@@ -193,7 +193,7 @@ public class BlockBasic extends Block implements IDetectableResource {
 
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
-        int metadata = world.getBlockMetadata(x, y, z);
+        final int metadata = world.getBlockMetadata(x, y, z);
         if (metadata == 8) {
             return new ItemStack(Item.getItemFromBlock(this), 1, metadata);
         }

@@ -16,7 +16,7 @@ public class AsteroidsTickHandlerServer {
 
     @SubscribeEvent
     public void onServerTick(TickEvent.ServerTickEvent event) {
-        MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+        final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
         // Prevent issues when clients switch to LAN servers
         if (server == null) {
             return;
@@ -24,7 +24,7 @@ public class AsteroidsTickHandlerServer {
 
         if (event.phase == TickEvent.Phase.START) {
             if (AsteroidsTickHandlerServer.spaceRaceData == null) {
-                World world = server.worldServerForDimension(0);
+                final World world = server.worldServerForDimension(0);
                 AsteroidsTickHandlerServer.spaceRaceData = (ShortRangeTelepadHandler)
                         world.mapStorage.loadData(ShortRangeTelepadHandler.class, ShortRangeTelepadHandler.saveDataID);
 

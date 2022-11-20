@@ -15,7 +15,7 @@ public class PlanetsProxyClient extends PlanetsProxy {
 
         super.preInit(event);
 
-        for (IPlanetsModuleClient module : GalacticraftPlanets.clientModules.values()) {
+        for (final IPlanetsModuleClient module : GalacticraftPlanets.clientModules.values()) {
             module.preInit(event);
         }
     }
@@ -24,7 +24,7 @@ public class PlanetsProxyClient extends PlanetsProxy {
     public void init(FMLInitializationEvent event) {
         super.init(event);
 
-        for (IPlanetsModuleClient module : GalacticraftPlanets.clientModules.values()) {
+        for (final IPlanetsModuleClient module : GalacticraftPlanets.clientModules.values()) {
             module.init(event);
         }
     }
@@ -33,7 +33,7 @@ public class PlanetsProxyClient extends PlanetsProxy {
     public void postInit(FMLPostInitializationEvent event) {
         super.postInit(event);
 
-        for (IPlanetsModuleClient module : GalacticraftPlanets.clientModules.values()) {
+        for (final IPlanetsModuleClient module : GalacticraftPlanets.clientModules.values()) {
             module.postInit(event);
         }
     }

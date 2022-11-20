@@ -27,12 +27,12 @@ public class TileEntityDishRenderer extends TileEntitySpecialRenderer {
             AdvancedModelLoader.loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/telefork.obj"));
     private static final IModelCustom modelDish =
             AdvancedModelLoader.loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/teledish.obj"));
-    private TextureManager renderEngine = FMLClientHandler.instance().getClient().renderEngine;
+    private final TextureManager renderEngine = FMLClientHandler.instance().getClient().renderEngine;
 
     @Override
     public void renderTileEntityAt(TileEntity var1, double par2, double par4, double par6, float partialTickTime) {
-        TileEntityDish dish = (TileEntityDish) var1;
-        float time = (dish.ticks + partialTickTime) % 1440F;
+        final TileEntityDish dish = (TileEntityDish) var1;
+        final float time = (dish.ticks + partialTickTime) % 1440F;
         final EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 
         GL11.glPushMatrix();

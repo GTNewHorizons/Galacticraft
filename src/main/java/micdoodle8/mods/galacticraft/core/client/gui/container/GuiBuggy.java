@@ -39,7 +39,7 @@ public class GuiBuggy extends GuiContainerGC {
     @Override
     public void initGui() {
         super.initGui();
-        List<String> oxygenDesc = new ArrayList<String>();
+        final List<String> oxygenDesc = new ArrayList<String>();
         oxygenDesc.add(GCCoreUtil.translate("gui.fuelTank.desc.0"));
         oxygenDesc.add(GCCoreUtil.translate("gui.fuelTank.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion(

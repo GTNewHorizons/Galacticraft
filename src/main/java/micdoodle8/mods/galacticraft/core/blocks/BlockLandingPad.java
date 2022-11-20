@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockLandingPad extends BlockAdvancedTile implements IPartialSealableBlock, ItemBlockDesc.IBlockShiftDesc {
-    private IIcon[] icons = new IIcon[3];
+    private final IIcon[] icons = new IIcon[3];
 
     public BlockLandingPad(String assetName) {
         super(Material.iron);

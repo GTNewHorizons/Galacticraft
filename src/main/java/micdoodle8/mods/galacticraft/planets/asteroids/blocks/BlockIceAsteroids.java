@@ -58,15 +58,15 @@ public class BlockIceAsteroids extends BlockBreakable {
         player.addExhaustion(0.025F);
 
         if (this.canSilkHarvest(world, player, x, y, z, meta) && EnchantmentHelper.getSilkTouchModifier(player)) {
-            ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-            ItemStack itemstack = this.createStackedBlock(meta);
+            final ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+            final ItemStack itemstack = this.createStackedBlock(meta);
 
             if (itemstack != null) {
                 items.add(itemstack);
             }
 
             ForgeEventFactory.fireBlockHarvesting(items, world, this, x, y, z, meta, 0, 1.0f, true, player);
-            for (ItemStack is : items) {
+            for (final ItemStack is : items) {
                 this.dropBlockAsItem(world, x, y, z, is);
             }
         } else {
@@ -75,11 +75,11 @@ public class BlockIceAsteroids extends BlockBreakable {
                 return;
             }
 
-            int i1 = EnchantmentHelper.getFortuneModifier(player);
+            final int i1 = EnchantmentHelper.getFortuneModifier(player);
             harvesters.set(player);
             this.dropBlockAsItem(world, x, y, z, meta, i1);
             harvesters.set(null);
-            Material material = world.getBlock(x, y - 1, z).getMaterial();
+            final Material material = world.getBlock(x, y - 1, z).getMaterial();
 
             if (material.blocksMovement() || material.isLiquid()) {
                 world.setBlock(x, y, z, Blocks.flowing_water);

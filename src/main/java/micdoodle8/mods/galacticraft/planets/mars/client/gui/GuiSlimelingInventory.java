@@ -90,9 +90,9 @@ public class GuiSlimelingInventory extends GuiContainer {
         GL11.glTranslatef(par1, par2, 50.0F);
         GL11.glScalef(-par3 / 2.0F, par3 / 2.0F, par3 / 2.0F);
         GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-        float f2 = slimeling.renderYawOffset;
-        float f3 = slimeling.rotationYaw;
-        float f4 = slimeling.rotationPitch;
+        final float f2 = slimeling.renderYawOffset;
+        final float f3 = slimeling.rotationYaw;
+        final float f4 = slimeling.rotationPitch;
         par4 += 40;
         par5 -= 20;
         GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
@@ -133,7 +133,7 @@ public class GuiSlimelingInventory extends GuiContainer {
         Gui.drawRect(var5, var6, var5 + this.xSize, var6 + this.ySize, 0xFF000000);
         GL11.glPopMatrix();
 
-        int yOffset = (int) Math.floor(30.0D * (1.0F - this.slimeling.getScale()));
+        final int yOffset = (int) Math.floor(30.0D * (1.0F - this.slimeling.getScale()));
 
         GuiSlimelingInventory.drawSlimelingOnGui(
                 this, this.slimeling, this.width / 2, var6 + 62 - yOffset, 70, var5 + 51 - i, var6 + 75 - 50 - j);
@@ -174,11 +174,11 @@ public class GuiSlimelingInventory extends GuiContainer {
         this.drawTexturedModalRect(var5 + 8, var6 + 8, 176, 9, 18, 18);
         this.drawTexturedModalRect(var5 + 8, var6 + 29, 176, 9, 18, 18);
 
-        ItemStack stack = this.slimeling.getCargoSlot();
+        final ItemStack stack = this.slimeling.getCargoSlot();
 
         if (stack != null && stack.getItem() == MarsItems.marsItemBasic && stack.getItemDamage() == 4) {
-            int offsetX = 7;
-            int offsetY = 53;
+            final int offsetX = 7;
+            final int offsetY = 53;
 
             for (int y = 0; y < 3; ++y) {
                 for (int x = 0; x < 9; ++x) {

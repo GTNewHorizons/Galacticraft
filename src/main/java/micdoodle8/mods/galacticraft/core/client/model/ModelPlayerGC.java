@@ -57,7 +57,7 @@ public class ModelPlayerGC extends ModelBiped {
 
     private boolean usingParachute;
 
-    private IModelCustom frequencyModule;
+    private final IModelCustom frequencyModule;
 
     private static boolean crossbowModLoaded = false;
 
@@ -249,7 +249,7 @@ public class ModelPlayerGC extends ModelBiped {
         boolean wearingFrequencyModule = false;
 
         final EntityPlayer player = (EntityPlayer) var1;
-        PlayerGearData gearData = ClientProxyCore.playerItemData.get(player.getCommandSenderName());
+        final PlayerGearData gearData = ClientProxyCore.playerItemData.get(player.getCommandSenderName());
 
         if (gearData != null) {
             usingParachute = gearData.getParachute() != null;
@@ -269,7 +269,7 @@ public class ModelPlayerGC extends ModelBiped {
             wearingRightTankGray = gearData.getRightTank() == Integer.MAX_VALUE;
             wearingFrequencyModule = gearData.getFrequencyModule() > -1;
         } else {
-            String id = player.getGameProfile().getName();
+            final String id = player.getGameProfile().getName();
 
             if (!ClientProxyCore.gearDataRequests.contains(id)) {
                 GalacticraftCore.packetPipeline.sendToServer(
@@ -436,10 +436,10 @@ public class ModelPlayerGC extends ModelBiped {
                 && par7Entity.worldObj.provider instanceof IGalacticraftWorldProvider
                 && par7Entity.ridingEntity == null
                 && !(currentItemStack != null && currentItemStack.getItem() instanceof IHoldableItem)) {
-            float speedModifier = 0.1162F * 2;
+            final float speedModifier = 0.1162F * 2;
 
-            float angularSwingArm = MathHelper.cos(par1 * (speedModifier / 2));
-            float rightMod = this.heldItemRight != 0 ? 1 : 2;
+            final float angularSwingArm = MathHelper.cos(par1 * (speedModifier / 2));
+            final float rightMod = this.heldItemRight != 0 ? 1 : 2;
             this.bipedRightArm.rotateAngleX -=
                     MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * rightMod * par2 * 0.5F;
             this.bipedLeftArm.rotateAngleX -= MathHelper.cos(par1 * 0.6662F) * 2.0F * par2 * 0.5F;
@@ -474,7 +474,7 @@ public class ModelPlayerGC extends ModelBiped {
 
         if (player.inventory.getCurrentItem() != null
                 && player.inventory.getCurrentItem().getItem() instanceof IHoldableItem) {
-            IHoldableItem holdableItem =
+            final IHoldableItem holdableItem =
                     (IHoldableItem) player.inventory.getCurrentItem().getItem();
 
             if (holdableItem.shouldHoldLeftHandUp(player)) {

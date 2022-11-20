@@ -21,7 +21,7 @@ public class BlockRendererMachine implements ISimpleBlockRenderingHandler {
         par1Block.setBlockBoundsBasedOnState(iblockaccess, x, y, z);
         renderBlocks.setRenderBoundsFromBlock(par1Block);
 
-        int metadata = iblockaccess.getBlockMetadata(x, y, z) & 12;
+        final int metadata = iblockaccess.getBlockMetadata(x, y, z) & 12;
 
         if (metadata == BlockMachineMars.CRYOGENIC_CHAMBER_METADATA && par1Block == MarsBlocks.machine) {
 
@@ -34,7 +34,7 @@ public class BlockRendererMachine implements ISimpleBlockRenderingHandler {
 
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-        Tessellator tessellator = Tessellator.instance;
+        final Tessellator tessellator = Tessellator.instance;
         block.setBlockBoundsForItemRender();
         renderer.setRenderBoundsFromBlock(block);
         GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);

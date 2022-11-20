@@ -70,7 +70,7 @@ public class ItemThermalPadding extends Item implements IItemThermal {
     public void registerIcons(IIconRegister iconRegister) {
         int i = 0;
 
-        for (String name : ItemThermalPadding.names) {
+        for (final String name : ItemThermalPadding.names) {
             this.icons[i++] = iconRegister.registerIcon(AsteroidsModule.TEXTURE_PREFIX + name);
         }
     }

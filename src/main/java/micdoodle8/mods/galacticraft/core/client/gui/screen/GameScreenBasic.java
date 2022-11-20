@@ -68,8 +68,8 @@ public class GameScreenBasic implements IGameScreen {
                     draw2DTexture();
                 } else if (ClientProxyCore.overworldTexturesValid) {
                     GL11.glPushMatrix();
-                    float centreX = scaleX / 2;
-                    float centreY = scaleY / 2;
+                    final float centreX = scaleX / 2;
+                    final float centreY = scaleY / 2;
                     GL11.glTranslatef(centreX, centreY, 0F);
                     RenderPlanet.renderPlanet(
                             ClientProxyCore.overworldTextureWide.getGlTextureId(),

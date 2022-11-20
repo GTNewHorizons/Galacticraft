@@ -53,8 +53,8 @@ public class ContainerRocketInventory extends Container {
     private void addSlotsWithInventory(int slotCount) {
         int var4;
         int var5;
-        int lastRow = slotCount / 9;
-        int ySize = 145 + (this.rocketType.getInventorySpace() - 2) * 2;
+        final int lastRow = slotCount / 9;
+        final int ySize = 145 + (this.rocketType.getInventorySpace() - 2) * 2;
 
         for (var4 = 0; var4 < lastRow; ++var4) {
             for (var5 = 0; var5 < 9; ++var5) {

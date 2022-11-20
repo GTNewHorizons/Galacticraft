@@ -51,26 +51,26 @@ public class ShortRangeTelepadHandler extends WorldSavedData {
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
-        NBTTagList tagList = nbt.getTagList("TelepadList", 10);
+        final NBTTagList tagList = nbt.getTagList("TelepadList", 10);
         tileMap.clear();
 
         for (int i = 0; i < tagList.tagCount(); i++) {
-            NBTTagCompound nbt2 = tagList.getCompoundTagAt(i);
-            int address = nbt2.getInteger("Address");
-            int dimID = nbt2.getInteger("DimID");
-            int posX = nbt2.getInteger("PosX");
-            int posY = nbt2.getInteger("PosY");
-            int posZ = nbt2.getInteger("PosZ");
+            final NBTTagCompound nbt2 = tagList.getCompoundTagAt(i);
+            final int address = nbt2.getInteger("Address");
+            final int dimID = nbt2.getInteger("DimID");
+            final int posX = nbt2.getInteger("PosX");
+            final int posY = nbt2.getInteger("PosY");
+            final int posZ = nbt2.getInteger("PosZ");
             tileMap.put(address, new TelepadEntry(dimID, new BlockVec3(posX, posY, posZ)));
         }
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
-        NBTTagList tagList = new NBTTagList();
+        final NBTTagList tagList = new NBTTagList();
 
-        for (Map.Entry<Integer, TelepadEntry> e : tileMap.entrySet()) {
-            NBTTagCompound nbt2 = new NBTTagCompound();
+        for (final Map.Entry<Integer, TelepadEntry> e : tileMap.entrySet()) {
+            final NBTTagCompound nbt2 = new NBTTagCompound();
             nbt2.setInteger("Address", e.getKey());
             nbt2.setInteger("DimID", e.getValue().dimensionID);
             nbt2.setInteger("PosX", e.getValue().position.x);
@@ -85,9 +85,9 @@ public class ShortRangeTelepadHandler extends WorldSavedData {
     public static void addShortRangeTelepad(TileEntityShortRangeTelepad telepad) {
         if (!telepad.getWorldObj().isRemote) {
             if (telepad.addressValid) {
-                TelepadEntry newEntry =
+                final TelepadEntry newEntry =
                         new TelepadEntry(telepad.getWorldObj().provider.dimensionId, new BlockVec3(telepad));
-                TelepadEntry previous = tileMap.put(telepad.address, newEntry);
+                final TelepadEntry previous = tileMap.put(telepad.address, newEntry);
 
                 if (previous == null || !previous.equals(newEntry)) {
                     AsteroidsTickHandlerServer.spaceRaceData.setDirty(true);

@@ -75,7 +75,7 @@ public class GuiElementInfoRegion extends Gui {
 
         if (this.drawRegion) {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            int k = this.getHoverState(this.withinRegion);
+            final int k = this.getHoverState(this.withinRegion);
             Gui.drawRect(
                     this.xPosition,
                     this.yPosition,
@@ -86,11 +86,12 @@ public class GuiElementInfoRegion extends Gui {
 
         if (this.tooltipStrings != null && !this.tooltipStrings.isEmpty() && this.withinRegion) {
             int k = 0;
-            Iterator<String> iterator = this.tooltipStrings.iterator();
+            final Iterator<String> iterator = this.tooltipStrings.iterator();
 
             while (iterator.hasNext()) {
-                String s = iterator.next();
-                int l = FMLClientHandler.instance().getClient().fontRenderer.getStringWidth(s);
+                final String s = iterator.next();
+                final int l =
+                        FMLClientHandler.instance().getClient().fontRenderer.getStringWidth(s);
 
                 if (l > k) {
                     k = l;
@@ -115,20 +116,20 @@ public class GuiElementInfoRegion extends Gui {
 
             this.zLevel = 300.0F;
             GuiElementInfoRegion.itemRenderer.zLevel = 300.0F;
-            int l1 = -267386864;
+            final int l1 = -267386864;
             this.drawGradientRect(i1 - 3, j1 - 4, i1 + k + 3, j1 - 3, l1, l1);
             this.drawGradientRect(i1 - 3, j1 + k1 + 3, i1 + k + 3, j1 + k1 + 4, l1, l1);
             this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 + k1 + 3, l1, l1);
             this.drawGradientRect(i1 - 4, j1 - 3, i1 - 3, j1 + k1 + 3, l1, l1);
             this.drawGradientRect(i1 + k + 3, j1 - 3, i1 + k + 4, j1 + k1 + 3, l1, l1);
-            int i2 = 1347420415;
-            int j2 = (i2 & 16711422) >> 1 | i2 & -16777216;
+            final int i2 = 1347420415;
+            final int j2 = (i2 & 16711422) >> 1 | i2 & -16777216;
             this.drawGradientRect(i1 - 3, j1 - 3 + 1, i1 - 3 + 1, j1 + k1 + 3 - 1, i2, j2);
             this.drawGradientRect(i1 + k + 2, j1 - 3 + 1, i1 + k + 3, j1 + k1 + 3 - 1, i2, j2);
             this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 - 3 + 1, i2, i2);
             this.drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3, j2, j2);
 
-            for (String s1 : this.tooltipStrings) {
+            for (final String s1 : this.tooltipStrings) {
                 FMLClientHandler.instance().getClient().fontRenderer.drawStringWithShadow(s1, i1, j1, -1);
 
                 j1 += 10;

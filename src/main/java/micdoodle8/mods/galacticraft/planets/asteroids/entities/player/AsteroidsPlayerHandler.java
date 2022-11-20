@@ -56,8 +56,8 @@ public class AsteroidsPlayerHandler {
                 if (closestPlayer == null || closestPlayer.getEntityId() <= player.getEntityId()) {
                     double x, y, z;
                     double motX, motY, motZ;
-                    double r = player.worldObj.rand.nextInt(60) + 30D;
-                    double theta = Math.PI * 2.0 * player.worldObj.rand.nextDouble();
+                    final double r = player.worldObj.rand.nextInt(60) + 30D;
+                    final double theta = Math.PI * 2.0 * player.worldObj.rand.nextDouble();
                     x = player.posX + Math.cos(theta) * r;
                     y = player.posY + player.worldObj.rand.nextInt(5);
                     z = player.posZ + Math.sin(theta) * r;

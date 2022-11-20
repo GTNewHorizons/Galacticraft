@@ -36,18 +36,18 @@ public class BlockRendererCavernousVines implements ISimpleBlockRenderingHandler
 
     public void renderBlockMeteor(
             RenderBlocks renderBlocks, Block par1Block, IBlockAccess var1, int par2, int par3, int par4) {
-        Tessellator tessellator = Tessellator.instance;
+        final Tessellator tessellator = Tessellator.instance;
         tessellator.setBrightness(par1Block.getMixedBrightnessForBlock(var1, par2, par3, par4));
-        float f = 1.0F;
-        int l = par1Block.colorMultiplier(var1, par2, par3, par4);
+        final float f = 1.0F;
+        final int l = par1Block.colorMultiplier(var1, par2, par3, par4);
         float f1 = (l >> 16 & 255) / 255.0F;
         float f2 = (l >> 8 & 255) / 255.0F;
         float f3 = (l & 255) / 255.0F;
 
         if (EntityRenderer.anaglyphEnable) {
-            float f4 = (f1 * 30.0F + f2 * 59.0F + f3 * 11.0F) / 100.0F;
-            float f5 = (f1 * 30.0F + f2 * 70.0F) / 100.0F;
-            float f6 = (f1 * 30.0F + f3 * 70.0F) / 100.0F;
+            final float f4 = (f1 * 30.0F + f2 * 59.0F + f3 * 11.0F) / 100.0F;
+            final float f5 = (f1 * 30.0F + f2 * 70.0F) / 100.0F;
+            final float f6 = (f1 * 30.0F + f3 * 70.0F) / 100.0F;
             f1 = f4;
             f2 = f5;
             f3 = f6;

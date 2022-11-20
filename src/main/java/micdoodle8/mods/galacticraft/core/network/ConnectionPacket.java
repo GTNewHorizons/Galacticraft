@@ -26,18 +26,18 @@ public class ConnectionPacket {
     public static FMLEventChannel bus;
 
     public void handle(ByteBuf payload, EntityPlayer player) {
-        int packetId = payload.readByte();
+        final int packetId = payload.readByte();
         List<Object> data = new ArrayList<Object>();
         switch (packetId) {
             case 101:
-                int length = payload.readInt();
+                final int length = payload.readInt();
                 for (int i = 0; i < length; i++) {
                     data.add(payload.readInt());
                 }
                 WorldUtil.decodePlanetsListClient(data);
                 break;
             case 102:
-                int llength = payload.readInt();
+                final int llength = payload.readInt();
                 for (int i = 0; i < llength; i++) {
                     data.add(payload.readInt());
                 }
@@ -51,7 +51,7 @@ public class ConnectionPacket {
                     if (ConfigManagerCore.enableDebug) {
                         GCLog.info("Server-set configs received OK on client.");
                     }
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     System.err.println(
                             "[Galacticraft] Error handling connection packet - maybe the player's Galacticraft version does not match the server version?");
                     e.printStackTrace();
@@ -66,27 +66,27 @@ public class ConnectionPacket {
     }
 
     public static FMLProxyPacket createDimPacket(Integer[] dims) {
-        ArrayList<Integer> data = new ArrayList();
-        for (Integer dim : dims) {
+        final ArrayList<Integer> data = new ArrayList();
+        for (final Integer dim : dims) {
             data.add(dim);
         }
         return createPacket((byte) 101, data);
     }
 
     public static FMLProxyPacket createSSPacket(Integer[] dims) {
-        ArrayList<Integer> data = new ArrayList();
-        for (Integer dim : dims) {
+        final ArrayList<Integer> data = new ArrayList();
+        for (final Integer dim : dims) {
             data.add(dim);
         }
         return createPacket((byte) 102, data);
     }
 
     public static FMLProxyPacket createPacket(byte packetId, Collection<Integer> data) {
-        ByteBuf payload = Unpooled.buffer();
+        final ByteBuf payload = Unpooled.buffer();
 
         payload.writeByte(packetId);
         payload.writeInt(data.size());
-        for (Integer i : data) {
+        for (final Integer i : data) {
             payload.writeInt(i.intValue());
         }
         payload.writeInt(3519); // signature
@@ -94,11 +94,11 @@ public class ConnectionPacket {
     }
 
     public static FMLProxyPacket createConfigPacket(List<Object> data) {
-        ByteBuf payload = Unpooled.buffer();
+        final ByteBuf payload = Unpooled.buffer();
         payload.writeByte(103);
         try {
             NetworkUtil.encodeData(payload, data);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
         payload.writeInt(3519); // signature
@@ -108,14 +108,14 @@ public class ConnectionPacket {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void onPacketData(FMLNetworkEvent.ClientCustomPacketEvent event) {
-        FMLProxyPacket pkt = event.packet;
+        final FMLProxyPacket pkt = event.packet;
 
         onFMLProxyPacketData(event.manager, pkt, Minecraft.getMinecraft().thePlayer);
     }
 
     @SubscribeEvent
     public void onPacketData(FMLNetworkEvent.ServerCustomPacketEvent event) {
-        FMLProxyPacket pkt = event.packet;
+        final FMLProxyPacket pkt = event.packet;
 
         onFMLProxyPacketData(event.manager, pkt, ((NetHandlerPlayServer) event.handler).playerEntity);
     }
@@ -125,9 +125,9 @@ public class ConnectionPacket {
             if (packet == null || packet.payload() == null) {
                 throw new RuntimeException("Empty packet sent to Galacticraft channel");
             }
-            ByteBuf data = packet.payload();
+            final ByteBuf data = packet.payload();
             this.handle(data, player);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             GCLog.severe("GC login packet handler: Failed to read packet");
             GCLog.severe(e.toString());
             e.printStackTrace();

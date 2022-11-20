@@ -57,7 +57,7 @@ public class ContainerSlimeling extends Container {
             if (container.inventorySlots.size() < 63) {
                 for (int var3 = 0; var3 < 3; ++var3) {
                     for (int var4 = 0; var4 < 9; ++var4) {
-                        Slot slot = new Slot(
+                        final Slot slot = new Slot(
                                 slimeling.slimelingInventory, var4 + var3 * 9 + 2, 8 + var4 * 18, 54 + var3 * 18);
                         slot.slotNumber = container.inventorySlots.size();
                         container.inventorySlots.add(slot);

@@ -81,15 +81,15 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor
     protected void initIC() {
         if (EnergyConfigHandler.isIndustrialCraft2Loaded() && !this.worldObj.isRemote) {
             try {
-                Class<?> tileLoadEvent = Class.forName("ic2.api.energy.event.EnergyTileLoadEvent");
-                Class<?> energyTile = Class.forName("ic2.api.energy.tile.IEnergyTile");
-                Constructor<?> constr = tileLoadEvent.getConstructor(energyTile);
-                Object o = constr.newInstance(this);
+                final Class<?> tileLoadEvent = Class.forName("ic2.api.energy.event.EnergyTileLoadEvent");
+                final Class<?> energyTile = Class.forName("ic2.api.energy.tile.IEnergyTile");
+                final Constructor<?> constr = tileLoadEvent.getConstructor(energyTile);
+                final Object o = constr.newInstance(this);
 
                 if (o != null && o instanceof Event) {
                     MinecraftForge.EVENT_BUS.post((Event) o);
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }
@@ -99,15 +99,15 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor
         if (this.isAddedToEnergyNet && this.worldObj != null) {
             if (!this.worldObj.isRemote && EnergyConfigHandler.isIndustrialCraft2Loaded()) {
                 try {
-                    Class<?> tileLoadEvent = Class.forName("ic2.api.energy.event.EnergyTileUnloadEvent");
-                    Class<?> energyTile = Class.forName("ic2.api.energy.tile.IEnergyTile");
-                    Constructor<?> constr = tileLoadEvent.getConstructor(energyTile);
-                    Object o = constr.newInstance(this);
+                    final Class<?> tileLoadEvent = Class.forName("ic2.api.energy.event.EnergyTileUnloadEvent");
+                    final Class<?> energyTile = Class.forName("ic2.api.energy.tile.IEnergyTile");
+                    final Constructor<?> constr = tileLoadEvent.getConstructor(energyTile);
+                    final Object o = constr.newInstance(this);
 
                     if (o != null && o instanceof Event) {
                         MinecraftForge.EVENT_BUS.post((Event) o);
                     }
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -137,13 +137,13 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor
 
     @Override
     public double injectEnergy(ForgeDirection directionFrom, double amount, double voltage) {
-        TileEntity tile = new BlockVec3(this).getTileEntityOnSide(this.worldObj, directionFrom);
+        final TileEntity tile = new BlockVec3(this).getTileEntityOnSide(this.worldObj, directionFrom);
         int tier = (int) voltage > 120 ? 2 : 1;
         if (tile instanceof IEnergySource && ((IEnergySource) tile).getOfferedEnergy() >= 128) {
             tier = 2;
         }
-        float convertedEnergy = (float) amount * EnergyConfigHandler.IC2_RATIO;
-        float surplus = this.getNetwork().produce(convertedEnergy, true, tier, this, tile);
+        final float convertedEnergy = (float) amount * EnergyConfigHandler.IC2_RATIO;
+        final float surplus = this.getNetwork().produce(convertedEnergy, true, tier, this, tile);
 
         if (surplus >= 0.001F) {
             this.IC2surplusJoules = surplus;
@@ -170,11 +170,11 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor
         // + there is a graphical glitch
         // in IC2]
         try {
-            Class<?> conductorIC2 = Class.forName("ic2.api.energy.tile.IEnergyConductor");
+            final Class<?> conductorIC2 = Class.forName("ic2.api.energy.tile.IEnergyConductor");
             if (conductorIC2.isInstance(emitter)) {
                 return false;
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 
@@ -192,11 +192,11 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor
         // + there is a graphical glitch
         // in IC2]
         try {
-            Class<?> conductorIC2 = Class.forName("ic2.api.energy.tile.IEnergyConductor");
+            final Class<?> conductorIC2 = Class.forName("ic2.api.energy.tile.IEnergyConductor");
             if (conductorIC2.isInstance(receiver)) {
                 return false;
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 
@@ -208,8 +208,8 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor
         if (this.getNetwork() == null) {
             return 0;
         }
-        float receiveGC = maxReceive * EnergyConfigHandler.RF_RATIO;
-        float sentGC = receiveGC - this.getNetwork().produce(receiveGC, !simulate, 1);
+        final float receiveGC = maxReceive * EnergyConfigHandler.RF_RATIO;
+        final float sentGC = receiveGC - this.getNetwork().produce(receiveGC, !simulate, 1);
         return MathHelper.floor_float(sentGC / EnergyConfigHandler.RF_RATIO);
     }
 
@@ -221,12 +221,12 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor
     @Override
     public boolean canConnectEnergy(ForgeDirection from) {
         // Do not form wire-to-wire connections with EnderIO conduits
-        TileEntity tile = new BlockVec3(this).getTileEntityOnSide(this.worldObj, from);
+        final TileEntity tile = new BlockVec3(this).getTileEntityOnSide(this.worldObj, from);
         try {
             if (EnergyUtil.clazzEnderIOCable != null && EnergyUtil.clazzEnderIOCable.isInstance(tile)) {
                 return false;
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
         return true;
     }
@@ -262,12 +262,12 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor
             return false;
         }
 
-        TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, side);
+        final TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, side);
         try {
             if (Class.forName("codechicken.multipart.TileMultipart").isInstance(te)) {
                 return false;
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 

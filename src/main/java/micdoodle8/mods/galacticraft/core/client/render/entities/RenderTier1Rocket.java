@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class RenderTier1Rocket extends Render {
-    private ResourceLocation spaceshipTexture;
+    private final ResourceLocation spaceshipTexture;
 
     protected ModelBase modelSpaceship;
     protected IModelCustom modelSpaceshipObj;

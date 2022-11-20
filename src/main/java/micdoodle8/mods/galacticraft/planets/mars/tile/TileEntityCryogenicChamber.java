@@ -41,7 +41,7 @@ public class TileEntityCryogenicChamber extends TileEntityMulti implements IMult
             return false;
         }
 
-        EnumStatus enumstatus = this.sleepInBedAt(entityPlayer, this.xCoord, this.yCoord, this.zCoord);
+        final EnumStatus enumstatus = this.sleepInBedAt(entityPlayer, this.xCoord, this.yCoord, this.zCoord);
 
         switch (enumstatus) {
             case OK:
@@ -115,7 +115,7 @@ public class TileEntityCryogenicChamber extends TileEntityMulti implements IMult
     public void onCreate(BlockVec3 placedPosition) {
         this.mainBlockPosition = placedPosition;
         this.markDirty();
-        int buildHeight = this.worldObj.getHeight() - 1;
+        final int buildHeight = this.worldObj.getHeight() - 1;
 
         for (int y = 0; y < 3; y++) {
             if (placedPosition.y + y > buildHeight) {

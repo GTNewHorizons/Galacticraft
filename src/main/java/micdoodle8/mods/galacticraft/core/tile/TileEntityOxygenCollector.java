@@ -127,8 +127,8 @@ public class TileEntityOxygenCollector extends TileEntityOxygen implements IInve
                             // fixed (x,z) coordinates meaning fixed chunk
                             // coordinates
                             for (int x = this.xCoord - 5; x <= this.xCoord + 5; x++) {
-                                int chunkx = x >> 4;
-                                int intrachunkx = x & 15;
+                                final int chunkx = x >> 4;
+                                final int intrachunkx = x & 15;
                                 // Preload the first chunk for the z loop - there
                                 // can be a maximum of 2 chunks in the z loop
                                 int chunkz = this.zCoord - 5 >> 4;

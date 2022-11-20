@@ -31,7 +31,7 @@ public class BlockSolar extends BlockTileGC implements ItemBlockDesc.IBlockShift
 
     public static String[] names = {"basic", "advanced"};
 
-    private IIcon[] icons = new IIcon[6];
+    private final IIcon[] icons = new IIcon[6];
 
     public BlockSolar(String assetName) {
         super(Material.iron);
@@ -69,7 +69,7 @@ public class BlockSolar extends BlockTileGC implements ItemBlockDesc.IBlockShift
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
         if (meta >= BlockSolar.ADVANCED_METADATA) {
-            int shiftedMeta = meta -= BlockSolar.ADVANCED_METADATA;
+            final int shiftedMeta = meta -= BlockSolar.ADVANCED_METADATA;
 
             if (side
                     == ForgeDirection.getOrientation(shiftedMeta + 2)
@@ -84,7 +84,7 @@ public class BlockSolar extends BlockTileGC implements ItemBlockDesc.IBlockShift
                 return this.icons[3];
             }
         } else if (meta >= BlockSolar.BASIC_METADATA) {
-            int shiftedMeta = meta -= BlockSolar.BASIC_METADATA;
+            final int shiftedMeta = meta -= BlockSolar.BASIC_METADATA;
 
             if (side
                     == ForgeDirection.getOrientation(shiftedMeta + 2)
@@ -108,7 +108,7 @@ public class BlockSolar extends BlockTileGC implements ItemBlockDesc.IBlockShift
         for (int y = 1; y <= 2; y++) {
             for (int x = -1; x <= 1; x++) {
                 for (int z = -1; z <= 1; z++) {
-                    Block block = world.getBlock(x1 + (y == 2 ? x : 0), y1 + y, z1 + (y == 2 ? z : 0));
+                    final Block block = world.getBlock(x1 + (y == 2 ? x : 0), y1 + y, z1 + (y == 2 ? z : 0));
 
                     if (block.getMaterial() != Material.air && !block.isReplaceable(world, x1 + x, y1 + y, z1 + z)) {
                         return false;
@@ -122,9 +122,9 @@ public class BlockSolar extends BlockTileGC implements ItemBlockDesc.IBlockShift
 
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
-        int metadata = world.getBlockMetadata(x, y, z);
+        final int metadata = world.getBlockMetadata(x, y, z);
 
-        int angle = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        final int angle = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         int change = 0;
 
         switch (angle) {
@@ -148,7 +148,7 @@ public class BlockSolar extends BlockTileGC implements ItemBlockDesc.IBlockShift
             world.setBlockMetadataWithNotify(x, y, z, BlockSolar.BASIC_METADATA + change, 3);
         }
 
-        TileEntity tile = world.getTileEntity(x, y, z);
+        final TileEntity tile = world.getTileEntity(x, y, z);
 
         if (tile instanceof TileEntitySolar) {
             ((TileEntitySolar) tile).onCreate(new BlockVec3(x, y, z));
@@ -177,7 +177,7 @@ public class BlockSolar extends BlockTileGC implements ItemBlockDesc.IBlockShift
             float hitX,
             float hitY,
             float hitZ) {
-        int metadata = par1World.getBlockMetadata(x, y, z);
+        final int metadata = par1World.getBlockMetadata(x, y, z);
         int original = metadata;
 
         int change = 0;
@@ -205,7 +205,7 @@ public class BlockSolar extends BlockTileGC implements ItemBlockDesc.IBlockShift
             change += BlockSolar.ADVANCED_METADATA;
         }
 
-        TileEntity te = par1World.getTileEntity(x, y, z);
+        final TileEntity te = par1World.getTileEntity(x, y, z);
         if (te instanceof TileBaseUniversalElectrical) {
             ((TileBaseUniversalElectrical) te).updateFacing();
         }
@@ -232,7 +232,7 @@ public class BlockSolar extends BlockTileGC implements ItemBlockDesc.IBlockShift
 
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
-        int metadata = this.getDamageValue(world, x, y, z);
+        final int metadata = this.getDamageValue(world, x, y, z);
 
         return new ItemStack(this, 1, metadata);
     }

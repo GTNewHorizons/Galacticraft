@@ -27,7 +27,7 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     /**
      * Array of width of all the characters in default.png
      */
-    private int[] charWidth = new int[256];
+    private final int[] charWidth = new int[256];
 
     /**
      * the height in pixels of default text
@@ -40,13 +40,13 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
      * Array of the start/end column (in upper/lower nibble) for every glyph in the
      * /font directory.
      */
-    private byte[] glyphWidth = new byte[65536];
+    private final byte[] glyphWidth = new byte[65536];
 
     /**
      * Array of RGB triplets defining the 16 standard chat colors followed by 16
      * darker version of the same colors for drop shadows.
      */
-    private int[] colorCode = new int[32];
+    private final int[] colorCode = new int[32];
 
     private final ResourceLocation field_111273_g;
 
@@ -137,7 +137,7 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
         this.unicodeFlag = true;
 
         for (int i = 0; i < 32; ++i) {
-            int j = (i >> 3 & 1) * 85;
+            final int j = (i >> 3 & 1) * 85;
             int k = (i >> 2 & 1) * 170 + j;
             int l = (i >> 1 & 1) * 170 + j;
             int i1 = (i & 1) * 170 + j;
@@ -147,9 +147,9 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
             }
 
             if (par1GameSettings.anaglyph) {
-                int j1 = (k * 30 + l * 59 + i1 * 11) / 100;
-                int k1 = (k * 30 + l * 70) / 100;
-                int l1 = (k * 30 + i1 * 70) / 100;
+                final int j1 = (k * 30 + l * 59 + i1 * 11) / 100;
+                final int k1 = (k * 30 + l * 70) / 100;
+                final int l1 = (k * 30 + i1 * 70) / 100;
                 k = j1;
                 l = k1;
                 i1 = l1;
@@ -175,23 +175,23 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
                     .getResourceManager()
                     .getResource(this.field_111273_g)
                     .getInputStream());
-        } catch (IOException ioexception) {
+        } catch (final IOException ioexception) {
             throw new RuntimeException(ioexception);
         }
 
-        int i = bufferedimage.getWidth();
-        int j = bufferedimage.getHeight();
-        int[] aint = new int[i * j];
+        final int i = bufferedimage.getWidth();
+        final int j = bufferedimage.getHeight();
+        final int[] aint = new int[i * j];
         bufferedimage.getRGB(0, 0, i, j, aint, 0, i);
-        int k = j / 16;
-        int l = i / 16;
-        byte b0 = 1;
-        float f = 8.0F / l;
+        final int k = j / 16;
+        final int l = i / 16;
+        final byte b0 = 1;
+        final float f = 8.0F / l;
         int i1 = 0;
 
         while (i1 < 256) {
-            int j1 = i1 % 16;
-            int k1 = i1 / 16;
+            final int j1 = i1 % 16;
+            final int k1 = i1 / 16;
 
             if (i1 == 32) {
                 this.charWidth[i1] = 3 + b0;
@@ -201,11 +201,11 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
 
             while (true) {
                 if (l1 >= 0) {
-                    int i2 = j1 * l + l1;
+                    final int i2 = j1 * l + l1;
                     boolean flag = true;
 
                     for (int j2 = 0; j2 < k && flag; ++j2) {
-                        int k2 = (k1 * l + j2) * i;
+                        final int k2 = (k1 * l + j2) * i;
 
                         if ((aint[i2 + k2] >> 24 & 255) != 0) {
                             flag = false;
@@ -228,12 +228,12 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
 
     private void readGlyphSizes() {
         try {
-            InputStream inputstream = Minecraft.getMinecraft()
+            final InputStream inputstream = Minecraft.getMinecraft()
                     .getResourceManager()
                     .getResource(new ResourceLocation("font/glyph_sizes.bin"))
                     .getInputStream();
             inputstream.read(this.glyphWidth);
-        } catch (IOException ioexception) {
+        } catch (final IOException ioexception) {
             throw new RuntimeException(ioexception);
         }
     }
@@ -254,11 +254,11 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
      * location...
      */
     private float renderDefaultChar(int par1, boolean par2) {
-        float f = par1 % 16 * 8;
-        float f1 = par1 / 16 * 8;
-        float f2 = par2 ? 1.0F : 0.0F;
+        final float f = par1 % 16 * 8;
+        final float f1 = par1 / 16 * 8;
+        final float f2 = par2 ? 1.0F : 0.0F;
         this.renderEngine.bindTexture(this.field_111273_g);
-        float f3 = this.charWidth[par1] - 0.01F;
+        final float f3 = this.charWidth[par1] - 0.01F;
         GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
         GL11.glTexCoord2f(f / 128.0F, f1 / 128.0F);
         GL11.glVertex3f(this.posX + f2, this.posY, 0.0F);
@@ -297,15 +297,15 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
         if (this.glyphWidth[par1] == 0) {
             return 0.0F;
         } else {
-            int i = par1 / 256;
+            final int i = par1 / 256;
             this.loadGlyphTexture(i);
-            int j = this.glyphWidth[par1] >>> 4;
-            int k = this.glyphWidth[par1] & 15;
-            float f1 = k + 1;
-            float f2 = par1 % 16 * 16 + j;
-            float f3 = (par1 & 255) / 16 * 16;
-            float f4 = f1 - j - 0.02F;
-            float f5 = par2 ? 1.0F : 0.0F;
+            final int j = this.glyphWidth[par1] >>> 4;
+            final int k = this.glyphWidth[par1] & 15;
+            final float f1 = k + 1;
+            final float f2 = par1 % 16 * 16 + j;
+            final float f3 = (par1 & 255) / 16 * 16;
+            final float f4 = f1 - j - 0.02F;
+            final float f5 = par2 ? 1.0F : 0.0F;
             GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
             GL11.glTexCoord2f(f2 / 256.0F, f3 / 256.0F);
             GL11.glVertex3f(this.posX + f5, this.posY, 0.0F);
@@ -362,23 +362,23 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
      */
     private String bidiReorder(String par1Str) {
         if (par1Str != null && Bidi.requiresBidi(par1Str.toCharArray(), 0, par1Str.length())) {
-            Bidi bidi = new Bidi(par1Str, -2);
-            byte[] abyte = new byte[bidi.getRunCount()];
-            String[] astring = new String[abyte.length];
+            final Bidi bidi = new Bidi(par1Str, -2);
+            final byte[] abyte = new byte[bidi.getRunCount()];
+            final String[] astring = new String[abyte.length];
             int i;
 
             for (int j = 0; j < abyte.length; ++j) {
-                int k = bidi.getRunStart(j);
+                final int k = bidi.getRunStart(j);
                 i = bidi.getRunLimit(j);
-                int l = bidi.getRunLevel(j);
-                String s1 = par1Str.substring(k, i);
+                final int l = bidi.getRunLevel(j);
+                final String s1 = par1Str.substring(k, i);
                 abyte[j] = (byte) l;
                 astring[j] = s1;
             }
 
-            String[] astring1 = astring.clone();
+            final String[] astring1 = astring.clone();
             Bidi.reorderVisually(abyte, 0, astring, 0, abyte.length);
-            StringBuilder stringbuilder = new StringBuilder();
+            final StringBuilder stringbuilder = new StringBuilder();
             i = 0;
 
             while (i < astring.length) {
@@ -439,7 +439,7 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
      */
     private void renderStringAtPos(String par1Str, boolean par2) {
         for (int i = 0; i < par1Str.length(); ++i) {
-            char c0 = par1Str.charAt(i);
+            final char c0 = par1Str.charAt(i);
             int j;
             int k;
 
@@ -497,8 +497,8 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
                     j = k;
                 }
 
-                float f = this.unicodeFlag ? 0.5F : 1.0F;
-                boolean flag1 = (c0 == 0 || j == -1 || this.unicodeFlag) && par2;
+                final float f = this.unicodeFlag ? 0.5F : 1.0F;
+                final boolean flag1 = (c0 == 0 || j == -1 || this.unicodeFlag) && par2;
 
                 if (flag1) {
                     this.posX -= f;
@@ -549,7 +549,7 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
                     tessellator = Tessellator.instance;
                     GL11.glDisable(GL11.GL_TEXTURE_2D);
                     tessellator.startDrawingQuads();
-                    int l = this.underlineStyle ? -1 : 0;
+                    final int l = this.underlineStyle ? -1 : 0;
                     tessellator.addVertex(this.posX + l, this.posY + this.FONT_HEIGHT, 0.0D);
                     tessellator.addVertex(this.posX + f1, this.posY + this.FONT_HEIGHT, 0.0D);
                     tessellator.addVertex(this.posX + f1, this.posY + this.FONT_HEIGHT - 1.0F, 0.0D);
@@ -569,7 +569,7 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     private int renderStringAligned(String par1Str, int par2, int par3, int par4, int par5, boolean par6) {
         if (this.bidiFlag) {
             par1Str = this.bidiReorder(par1Str);
-            int i1 = this.getStringWidth(par1Str);
+            final int i1 = this.getStringWidth(par1Str);
             par2 = par2 + par4 - i1;
         }
 
@@ -654,7 +654,7 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
         } else if (par1 == 32) {
             return 4;
         } else {
-            int i =
+            final int i =
                     "\u00c0\u00c1\u00c2\u00c8\u00ca\u00cb\u00cd\u00d3\u00d4\u00d5\u00da\u00df\u00e3\u00f5\u011f\u0130\u0131\u0152\u0153\u015e\u015f\u0174\u0175\u017e\u0207\u0000\u0000\u0000\u0000\u0000\u0000\u0000 !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u0000\u00c7\u00fc\u00e9\u00e2\u00e4\u00e0\u00e5\u00e7\u00ea\u00eb\u00e8\u00ef\u00ee\u00ec\u00c4\u00c5\u00c9\u00e6\u00c6\u00f4\u00f6\u00f2\u00fb\u00f9\u00ff\u00d6\u00dc\u00f8\u00a3\u00d8\u00d7\u0192\u00e1\u00ed\u00f3\u00fa\u00f1\u00d1\u00aa\u00ba\u00bf\u00ae\u00ac\u00bd\u00bc\u00a1\u00ab\u00bb\u2591\u2592\u2593\u2502\u2524\u2561\u2562\u2556\u2555\u2563\u2551\u2557\u255d\u255c\u255b\u2510\u2514\u2534\u252c\u251c\u2500\u253c\u255e\u255f\u255a\u2554\u2569\u2566\u2560\u2550\u256c\u2567\u2568\u2564\u2565\u2559\u2558\u2552\u2553\u256b\u256a\u2518\u250c\u2588\u2584\u258c\u2590\u2580\u03b1\u03b2\u0393\u03c0\u03a3\u03c3\u03bc\u03c4\u03a6\u0398\u03a9\u03b4\u221e\u2205\u2208\u2229\u2261\u00b1\u2265\u2264\u2320\u2321\u00f7\u2248\u00b0\u2219\u00b7\u221a\u207f\u00b2\u25a0\u0000"
                             .indexOf(par1);
 
@@ -688,16 +688,16 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
      * Trims a string to a specified width, and will reverse it if par3 is set.
      */
     public String trimStringToWidth(String par1Str, int par2, boolean par3) {
-        StringBuilder stringbuilder = new StringBuilder();
+        final StringBuilder stringbuilder = new StringBuilder();
         int j = 0;
-        int k = par3 ? par1Str.length() - 1 : 0;
-        int l = par3 ? -1 : 1;
+        final int k = par3 ? par1Str.length() - 1 : 0;
+        final int l = par3 ? -1 : 1;
         boolean flag1 = false;
         boolean flag2 = false;
 
         for (int i1 = k; i1 >= 0 && i1 < par1Str.length() && j < par2; i1 += l) {
-            char c0 = par1Str.charAt(i1);
-            int j1 = this.getCharWidth(c0);
+            final char c0 = par1Str.charAt(i1);
+            final int j1 = this.getCharWidth(c0);
 
             if (flag1) {
                 flag1 = false;
@@ -759,10 +759,10 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
      * darker drop shadow color if flag is set
      */
     private void renderSplitString(String par1Str, int par2, int par3, int par4, boolean par5) {
-        List<?> list = this.listFormattedStringToWidth(par1Str, par4);
+        final List<?> list = this.listFormattedStringToWidth(par1Str, par4);
 
-        for (Iterator<?> iterator = list.iterator(); iterator.hasNext(); par3 += this.FONT_HEIGHT) {
-            String s1 = (String) iterator.next();
+        for (final Iterator<?> iterator = list.iterator(); iterator.hasNext(); par3 += this.FONT_HEIGHT) {
+            final String s1 = (String) iterator.next();
             this.renderStringAligned(s1, par2, par3, par4, this.textColor, par5);
         }
     }
@@ -810,15 +810,15 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
      * width.
      */
     String wrapFormattedStringToWidth(String par1Str, int par2) {
-        int j = this.sizeStringToWidth(par1Str, par2);
+        final int j = this.sizeStringToWidth(par1Str, par2);
 
         if (par1Str.length() <= j) {
             return par1Str;
         } else {
-            String s1 = par1Str.substring(0, j);
-            char c0 = par1Str.charAt(j);
-            boolean flag = c0 == 32 || c0 == 10;
-            String s2 = SmallFontRenderer.getFormatFromString(s1) + par1Str.substring(j + (flag ? 1 : 0));
+            final String s1 = par1Str.substring(0, j);
+            final char c0 = par1Str.charAt(j);
+            final boolean flag = c0 == 32 || c0 == 10;
+            final String s2 = SmallFontRenderer.getFormatFromString(s1) + par1Str.substring(j + (flag ? 1 : 0));
             return s1 + "\n" + this.wrapFormattedStringToWidth(s2, par2);
         }
     }
@@ -828,13 +828,13 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
      * width.
      */
     private int sizeStringToWidth(String par1Str, int par2) {
-        int j = par1Str.length();
+        final int j = par1Str.length();
         int k = 0;
         int l = 0;
         int i1 = -1;
 
         for (boolean flag = false; l < j; ++l) {
-            char c0 = par1Str.charAt(l);
+            final char c0 = par1Str.charAt(l);
 
             switch (c0) {
                 case 10:
@@ -843,7 +843,7 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
                 case 167:
                     if (l < j - 1) {
                         ++l;
-                        char c1 = par1Str.charAt(l);
+                        final char c1 = par1Str.charAt(l);
 
                         if (c1 != 108 && c1 != 76) {
                             if (c1 == 114 || c1 == 82 || SmallFontRenderer.isFormatColor(c1)) {
@@ -900,11 +900,11 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     private static String getFormatFromString(String par0Str) {
         String s1 = "";
         int i = -1;
-        int j = par0Str.length();
+        final int j = par0Str.length();
 
         while ((i = par0Str.indexOf(167, i + 1)) != -1) {
             if (i < j - 1) {
-                char c0 = par0Str.charAt(i + 1);
+                final char c0 = par0Str.charAt(i + 1);
 
                 if (SmallFontRenderer.isFormatColor(c0)) {
                     s1 = "\u00a7" + c0;

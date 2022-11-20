@@ -58,10 +58,10 @@ public class PacketDynamicInventory implements IPacket {
 
         buffer.writeInt(this.stacks.length);
 
-        for (ItemStack stack : this.stacks) {
+        for (final ItemStack stack : this.stacks) {
             try {
                 NetworkUtil.writeItemStack(stack, buffer);
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 e.printStackTrace();
             }
         }
@@ -89,7 +89,7 @@ public class PacketDynamicInventory implements IPacket {
         for (int i = 0; i < this.stacks.length; i++) {
             try {
                 this.stacks[i] = NetworkUtil.readItemStack(buffer);
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 e.printStackTrace();
             }
         }
@@ -103,7 +103,7 @@ public class PacketDynamicInventory implements IPacket {
 
         switch (this.type) {
             case 0:
-                Entity entity = player.worldObj.getEntityByID((Integer) this.data[0]);
+                final Entity entity = player.worldObj.getEntityByID((Integer) this.data[0]);
 
                 if (entity instanceof IInventorySettable) {
                     this.setInventoryStacks((IInventorySettable) entity);
@@ -111,7 +111,7 @@ public class PacketDynamicInventory implements IPacket {
 
                 break;
             case 1:
-                TileEntity tile = player.worldObj.getTileEntity(
+                final TileEntity tile = player.worldObj.getTileEntity(
                         (Integer) this.data[0], (Integer) this.data[1], (Integer) this.data[2]);
 
                 if (tile instanceof IInventorySettable) {
@@ -126,7 +126,7 @@ public class PacketDynamicInventory implements IPacket {
     public void handleServerSide(EntityPlayer player) {
         switch (this.type) {
             case 0:
-                Entity entity = player.worldObj.getEntityByID((Integer) this.data[0]);
+                final Entity entity = player.worldObj.getEntityByID((Integer) this.data[0]);
 
                 if (entity instanceof IInventorySettable) {
                     GalacticraftCore.packetPipeline.sendTo(new PacketDynamicInventory(entity), (EntityPlayerMP) player);
@@ -134,7 +134,7 @@ public class PacketDynamicInventory implements IPacket {
 
                 break;
             case 1:
-                TileEntity tile = player.worldObj.getTileEntity(
+                final TileEntity tile = player.worldObj.getTileEntity(
                         (Integer) this.data[0], (Integer) this.data[1], (Integer) this.data[2]);
 
                 if (tile instanceof IInventorySettable) {

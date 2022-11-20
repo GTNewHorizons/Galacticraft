@@ -218,7 +218,7 @@ public abstract class ChunkProviderSpace extends ChunkProviderGenerate {
             this.worldGenerators = this.getWorldGenerators();
         }
 
-        for (MapGenBaseMeta generator : this.worldGenerators) {
+        for (final MapGenBaseMeta generator : this.worldGenerators) {
             generator.generate(this, this.worldObj, par1, par2, ids, meta);
         }
 
@@ -307,8 +307,8 @@ public abstract class ChunkProviderSpace extends ChunkProviderGenerate {
     @Override
     public void populate(IChunkProvider par1IChunkProvider, int par2, int par3) {
         BlockFalling.fallInstantly = true;
-        int var4 = par2 * 16;
-        int var5 = par3 * 16;
+        final int var4 = par2 * 16;
+        final int var5 = par3 * 16;
         this.worldObj.getBiomeGenForCoords(var4 + 16, var5 + 16);
         this.rand.setSeed(this.worldObj.getSeed());
         final long var7 = this.rand.nextLong() / 2L * 2L + 1L;
@@ -341,7 +341,7 @@ public abstract class ChunkProviderSpace extends ChunkProviderGenerate {
         if (par1EnumCreatureType == EnumCreatureType.monster) {
             final List monsters = new ArrayList();
 
-            for (SpawnListEntry monster : this.getMonsters()) {
+            for (final SpawnListEntry monster : this.getMonsters()) {
                 monsters.add(monster);
             }
 
@@ -349,7 +349,7 @@ public abstract class ChunkProviderSpace extends ChunkProviderGenerate {
         } else if (par1EnumCreatureType == EnumCreatureType.creature) {
             final List creatures = new ArrayList();
 
-            for (SpawnListEntry creature : this.getCreatures()) {
+            for (final SpawnListEntry creature : this.getCreatures()) {
                 creatures.add(creature);
             }
 

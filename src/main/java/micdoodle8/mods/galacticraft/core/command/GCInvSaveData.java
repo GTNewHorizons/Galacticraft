@@ -18,17 +18,17 @@ public class GCInvSaveData extends WorldSavedData {
 
     @Override
     public void readFromNBT(NBTTagCompound filedata) {
-        for (Object obj : filedata.func_150296_c()) {
+        for (final Object obj : filedata.func_150296_c()) {
             if (obj instanceof NBTTagList) {
-                NBTTagList entry = (NBTTagList) obj;
-                String name = entry.toString(); // TODO See if this is equivilent to 1.6's getName function
-                ItemStack[] saveinv = new ItemStack[6];
+                final NBTTagList entry = (NBTTagList) obj;
+                final String name = entry.toString(); // TODO See if this is equivilent to 1.6's getName function
+                final ItemStack[] saveinv = new ItemStack[6];
                 if (entry.tagCount() > 0) {
                     for (int j = 0; j < entry.tagCount(); j++) {
-                        NBTTagCompound obj1 = entry.getCompoundTagAt(j);
+                        final NBTTagCompound obj1 = entry.getCompoundTagAt(j);
 
                         if (obj1 != null) {
-                            int i = obj1.getByte("Slot") & 7;
+                            final int i = obj1.getByte("Slot") & 7;
                             if (i >= 6) {
                                 System.out.println("GCInv error retrieving savefile: slot was outside range 0-5");
                                 return;
@@ -44,13 +44,13 @@ public class GCInvSaveData extends WorldSavedData {
 
     @Override
     public void writeToNBT(NBTTagCompound toSave) {
-        for (String name : CommandGCInv.savedata.keySet()) {
-            NBTTagList par1NBTTagList = new NBTTagList();
-            ItemStack[] saveinv = CommandGCInv.savedata.get(name);
+        for (final String name : CommandGCInv.savedata.keySet()) {
+            final NBTTagList par1NBTTagList = new NBTTagList();
+            final ItemStack[] saveinv = CommandGCInv.savedata.get(name);
 
             for (int i = 0; i < 6; i++) {
                 if (saveinv[i] != null) {
-                    NBTTagCompound nbttagcompound = new NBTTagCompound();
+                    final NBTTagCompound nbttagcompound = new NBTTagCompound();
                     nbttagcompound.setByte("Slot", (byte) (i + 200));
                     saveinv[i].writeToNBT(nbttagcompound);
                     par1NBTTagList.appendTag(nbttagcompound);

@@ -69,7 +69,7 @@ public class BlockOxygenPipe extends BlockTransmitter implements ITileEntityProv
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(IBlockAccess par1IBlockAccess, int x, int y, int z, int par5) {
-        BlockVec3 thisVec = new BlockVec3(x, y, z).modifyPositionFromSide(ForgeDirection.getOrientation(par5));
+        final BlockVec3 thisVec = new BlockVec3(x, y, z).modifyPositionFromSide(ForgeDirection.getOrientation(par5));
         final Block blockAt = thisVec.getBlock(par1IBlockAccess);
 
         final TileEntityOxygenPipe tileEntity = (TileEntityOxygenPipe) par1IBlockAccess.getTileEntity(x, y, z);
@@ -129,7 +129,7 @@ public class BlockOxygenPipe extends BlockTransmitter implements ITileEntityProv
                     // GCCorePacketManager.sendPacketToClients(GCCorePacketManager.getPacket(GalacticraftCore.CHANNELENTITIES,
                     // tileEntity, tileEntity.getColor(), (byte) -1)); TODO Fix pipe color
 
-                    BlockVec3 tileVec = new BlockVec3(tileEntity);
+                    final BlockVec3 tileVec = new BlockVec3(tileEntity);
                     for (final ForgeDirection dir : ForgeDirection.values()) {
                         final TileEntity tileAt = tileVec.getTileEntityOnSide(tileEntity.getWorldObj(), dir);
 

@@ -12,7 +12,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerOxygenSealer extends Container {
-    private TileBaseElectricBlock tileEntity;
+    private final TileBaseElectricBlock tileEntity;
 
     public ContainerOxygenSealer(InventoryPlayer par1InventoryPlayer, TileEntityOxygenSealer sealer) {
         this.tileEntity = sealer;

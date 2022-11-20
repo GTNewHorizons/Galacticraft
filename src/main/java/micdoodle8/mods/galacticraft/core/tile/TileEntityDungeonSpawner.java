@@ -77,7 +77,7 @@ public class TileEntityDungeonSpawner extends TileEntityAdvanced {
                             this.roomCoords.intY() + this.roomSize.intY() + 3,
                             this.roomCoords.intZ() + this.roomSize.intZ() + 3));
 
-            for (Entity mob : entitiesWithin) {
+            for (final Entity mob : entitiesWithin) {
                 if (this.getDisabledCreatures().contains(mob.getClass())) {
                     mob.setDead();
                 }
@@ -85,11 +85,11 @@ public class TileEntityDungeonSpawner extends TileEntityAdvanced {
 
             if (this.boss == null && !this.isBossDefeated) {
                 try {
-                    Constructor<?> c = this.bossClass.getConstructor(new Class[] {World.class});
+                    final Constructor<?> c = this.bossClass.getConstructor(new Class[] {World.class});
                     this.boss = (IBoss) c.newInstance(new Object[] {this.worldObj});
                     ((Entity) this.boss).setPosition(this.xCoord + 0.5, this.yCoord + 1.0, this.zCoord + 0.5);
                     this.boss.setRoom(this.roomCoords, this.roomSize);
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -134,7 +134,7 @@ public class TileEntityDungeonSpawner extends TileEntityAdvanced {
     public void playSpawnSound(Entity entity) {}
 
     public List<Class<? extends EntityLiving>> getDisabledCreatures() {
-        List<Class<? extends EntityLiving>> list = new ArrayList<Class<? extends EntityLiving>>();
+        final List<Class<? extends EntityLiving>> list = new ArrayList<Class<? extends EntityLiving>>();
         list.add(EntityEvolvedSkeleton.class);
         list.add(EntityEvolvedCreeper.class);
         list.add(EntityEvolvedZombie.class);
@@ -159,7 +159,7 @@ public class TileEntityDungeonSpawner extends TileEntityAdvanced {
 
         try {
             this.bossClass = (Class<? extends IBoss>) Class.forName(nbt.getString("bossClass"));
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 

@@ -10,7 +10,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerCargoLoader extends Container {
-    private TileBaseElectricBlock tileEntity;
+    private final TileBaseElectricBlock tileEntity;
 
     public ContainerCargoLoader(InventoryPlayer par1InventoryPlayer, IInventory cargoLoader) {
         this.tileEntity = (TileBaseElectricBlock) cargoLoader;

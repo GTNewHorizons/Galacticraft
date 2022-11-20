@@ -21,7 +21,7 @@ public abstract class GuiContainerGC extends GuiContainer {
     public void drawScreen(int par1, int par2, float par3) {
         super.drawScreen(par1, par2, par3);
 
-        for (GuiElementInfoRegion guibutton : this.infoRegions) {
+        for (final GuiElementInfoRegion guibutton : this.infoRegions) {
             guibutton.drawRegion(par1, par2);
         }
     }
@@ -33,15 +33,16 @@ public abstract class GuiContainerGC extends GuiContainer {
     }
 
     public int getTooltipOffset(int par1, int par2) {
-        for (Object element : this.inventorySlots.inventorySlots) {
-            Slot slot = (Slot) element;
+        for (final Object element : this.inventorySlots.inventorySlots) {
+            final Slot slot = (Slot) element;
 
             if (slot.func_111238_b()
                     && this.func_146978_c(slot.xDisplayPosition, slot.yDisplayPosition, 16, 16, par1, par2)) {
-                ItemStack itemStack = slot.getStack();
+                final ItemStack itemStack = slot.getStack();
 
                 if (itemStack != null) {
-                    List list = itemStack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
+                    final List list =
+                            itemStack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
                     int size = list.size();
 
                     if (Loader.isModLoaded("Waila")) {

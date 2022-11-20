@@ -46,7 +46,7 @@ public abstract class BlockTileGC extends BlockAdvanced implements ITileEntityPr
     @Override
     public boolean onBlockEventReceived(World par1World, int par2, int par3, int par4, int par5, int par6) {
         super.onBlockEventReceived(par1World, par2, par3, par4, par5, par6);
-        TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
+        final TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
         return tileentity != null && tileentity.receiveClientEvent(par5, par6);
     }
 
@@ -55,20 +55,20 @@ public abstract class BlockTileGC extends BlockAdvanced implements ITileEntityPr
      * machine if it has an inventory.
      */
     public void dropEntireInventory(World world, int x, int y, int z, Block block, int par6) {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        final TileEntity tileEntity = world.getTileEntity(x, y, z);
 
         if (tileEntity != null) {
             if (tileEntity instanceof IInventory) {
-                IInventory inventory = (IInventory) tileEntity;
+                final IInventory inventory = (IInventory) tileEntity;
 
                 for (int var6 = 0; var6 < inventory.getSizeInventory(); ++var6) {
-                    ItemStack var7 = inventory.getStackInSlot(var6);
+                    final ItemStack var7 = inventory.getStackInSlot(var6);
 
                     if (var7 != null) {
-                        Random random = new Random();
-                        float var8 = random.nextFloat() * 0.8F + 0.1F;
-                        float var9 = random.nextFloat() * 0.8F + 0.1F;
-                        float var10 = random.nextFloat() * 0.8F + 0.1F;
+                        final Random random = new Random();
+                        final float var8 = random.nextFloat() * 0.8F + 0.1F;
+                        final float var9 = random.nextFloat() * 0.8F + 0.1F;
+                        final float var10 = random.nextFloat() * 0.8F + 0.1F;
 
                         while (var7.stackSize > 0) {
                             int var11 = random.nextInt(21) + 10;
@@ -78,7 +78,7 @@ public abstract class BlockTileGC extends BlockAdvanced implements ITileEntityPr
                             }
 
                             var7.stackSize -= var11;
-                            EntityItem var12 = new EntityItem(
+                            final EntityItem var12 = new EntityItem(
                                     world,
                                     x + var8,
                                     y + var9,
@@ -90,7 +90,7 @@ public abstract class BlockTileGC extends BlockAdvanced implements ITileEntityPr
                                         var7.getTagCompound().copy());
                             }
 
-                            float var13 = 0.05F;
+                            final float var13 = 0.05F;
                             var12.motionX = (float) random.nextGaussian() * var13;
                             var12.motionY = (float) random.nextGaussian() * var13 + 0.2F;
                             var12.motionZ = (float) random.nextGaussian() * var13;

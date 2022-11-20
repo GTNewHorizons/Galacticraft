@@ -241,7 +241,7 @@ public class PacketSimple extends Packet implements IPacket {
 
         try {
             NetworkUtil.encodeData(buffer, this.data);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
@@ -257,7 +257,7 @@ public class PacketSimple extends Packet implements IPacket {
             if (buffer.readableBytes() > 0) {
                 GCLog.severe("Galacticraft packet length problem for packet type " + this.type.toString());
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             System.err.println("[Galacticraft] Error handling simple packet type: " + this.type.toString() + " "
                     + buffer.toString());
             e.printStackTrace();
@@ -300,7 +300,7 @@ public class PacketSimple extends Packet implements IPacket {
                                 .thePlayer
                                 .getGameProfile()
                                 .getName())) {
-                    String dimensionList = (String) this.data.get(1);
+                    final String dimensionList = (String) this.data.get(1);
                     if (ConfigManagerCore.enableDebug) {
                         if (!dimensionList.equals(PacketSimple.spamCheckString)) {
                             GCLog.info("DEBUG info: " + dimensionList);
@@ -308,22 +308,22 @@ public class PacketSimple extends Packet implements IPacket {
                         }
                     }
                     final String[] destinations = dimensionList.split("\\?");
-                    List<CelestialBody> possibleCelestialBodies = Lists.newArrayList();
-                    Map<Integer, Map<String, GuiCelestialSelection.StationDataGUI>> spaceStationData =
+                    final List<CelestialBody> possibleCelestialBodies = Lists.newArrayList();
+                    final Map<Integer, Map<String, GuiCelestialSelection.StationDataGUI>> spaceStationData =
                             Maps.newHashMap();
                     // Map<String, String> spaceStationNames = Maps.newHashMap();
                     // Map<String, Integer> spaceStationIDs = Maps.newHashMap();
                     // Map<String, Integer> spaceStationHomes = Maps.newHashMap();
 
-                    for (String str : destinations) {
+                    for (final String str : destinations) {
                         CelestialBody celestialBody = WorldUtil.getReachableCelestialBodiesForName(str);
 
                         if (celestialBody == null && str.contains("$")) {
-                            String[] values = str.split("\\$");
+                            final String[] values = str.split("\\$");
 
-                            int homePlanetID = Integer.parseInt(values[4]);
+                            final int homePlanetID = Integer.parseInt(values[4]);
 
-                            for (Satellite satellite :
+                            for (final Satellite satellite :
                                     GalaxyRegistry.getRegisteredSatellites().values()) {
                                 if (satellite.getParentPlanet().getDimensionID() == homePlanetID) {
                                     celestialBody = satellite;
@@ -355,7 +355,7 @@ public class PacketSimple extends Packet implements IPacket {
 
                     if (FMLClientHandler.instance().getClient().theWorld != null) {
                         if (!(FMLClientHandler.instance().getClient().currentScreen instanceof GuiCelestialSelection)) {
-                            GuiCelestialSelection gui = new GuiCelestialSelection(false, possibleCelestialBodies);
+                            final GuiCelestialSelection gui = new GuiCelestialSelection(false, possibleCelestialBodies);
                             gui.spaceStationMap = spaceStationData;
                             // gui.spaceStationNames = spaceStationNames;
                             // gui.spaceStationIDs = spaceStationIDs;
@@ -380,7 +380,7 @@ public class PacketSimple extends Packet implements IPacket {
                 x = (Integer) this.data.get(0);
                 y = (Integer) this.data.get(1);
                 z = (Integer) this.data.get(2);
-                Minecraft mc = Minecraft.getMinecraft();
+                final Minecraft mc = Minecraft.getMinecraft();
 
                 for (int i = 0; i < 4; i++) {
                     if (mc != null && mc.renderViewEntity != null && mc.effectRenderer != null && mc.theWorld != null) {
@@ -399,10 +399,10 @@ public class PacketSimple extends Packet implements IPacket {
                 }
                 break;
             case C_UPDATE_GEAR_SLOT:
-                int subtype = (Integer) this.data.get(2);
+                final int subtype = (Integer) this.data.get(2);
                 EntityPlayer gearDataPlayer = null;
-                MinecraftServer server = MinecraftServer.getServer();
-                String gearName = (String) this.data.get(0);
+                final MinecraftServer server = MinecraftServer.getServer();
+                final String gearName = (String) this.data.get(0);
 
                 if (server != null) {
                     gearDataPlayer = PlayerUtil.getPlayerForUsernameVanilla(server, gearName);
@@ -425,7 +425,7 @@ public class PacketSimple extends Packet implements IPacket {
                         ClientProxyCore.gearDataRequests.remove(gearName);
                     }
 
-                    EnumModelPacket type = EnumModelPacket.values()[(Integer) this.data.get(1)];
+                    final EnumModelPacket type = EnumModelPacket.values()[(Integer) this.data.get(1)];
 
                     switch (type) {
                         case ADDMASK:
@@ -542,7 +542,7 @@ public class PacketSimple extends Packet implements IPacket {
                 WorldUtil.decodeSpaceStationListClient(data);
                 break;
             case C_UPDATE_SPACESTATION_DATA:
-                SpaceStationWorldData var4 = SpaceStationWorldData.getMPSpaceStationData(
+                final SpaceStationWorldData var4 = SpaceStationWorldData.getMPSpaceStationData(
                         player.worldObj, (Integer) this.data.get(0), player);
                 var4.readFromNBT((NBTTagCompound) this.data.get(1));
                 break;
@@ -563,8 +563,8 @@ public class PacketSimple extends Packet implements IPacket {
                 }
                 break;
             case C_UPDATE_SCHEMATIC_LIST:
-                for (Object o : this.data) {
-                    Integer schematicID = (Integer) o;
+                for (final Object o : this.data) {
+                    final Integer schematicID = (Integer) o;
 
                     if (schematicID != -2) {
                         Collections.sort(stats.unlockedSchematics);
@@ -606,8 +606,8 @@ public class PacketSimple extends Packet implements IPacket {
                         }
                         break;
                     case 1:
-                        int entityID = (Integer) this.data.get(2);
-                        Entity entity = player.worldObj.getEntityByID(entityID);
+                        final int entityID = (Integer) this.data.get(2);
+                        final Entity entity = player.worldObj.getEntityByID(entityID);
 
                         if (entity != null && entity instanceof IInventorySettable) {
                             FMLClientHandler.instance()
@@ -645,19 +645,19 @@ public class PacketSimple extends Packet implements IPacket {
                 }
                 break;
             case C_UPDATE_SPACE_RACE_DATA:
-                Integer teamID = (Integer) this.data.get(0);
-                String teamName = (String) this.data.get(1);
-                FlagData flagData = (FlagData) this.data.get(2);
-                Vector3 teamColor = (Vector3) this.data.get(3);
-                List<String> playerList = new ArrayList<String>();
+                final Integer teamID = (Integer) this.data.get(0);
+                final String teamName = (String) this.data.get(1);
+                final FlagData flagData = (FlagData) this.data.get(2);
+                final Vector3 teamColor = (Vector3) this.data.get(3);
+                final List<String> playerList = new ArrayList<String>();
 
                 for (int i = 4; i < this.data.size(); i++) {
-                    String playerName = (String) this.data.get(i);
+                    final String playerName = (String) this.data.get(i);
                     ClientProxyCore.flagRequestsSent.remove(playerName);
                     playerList.add(playerName);
                 }
 
-                SpaceRace race = new SpaceRace(playerList, teamName, flagData, teamColor);
+                final SpaceRace race = new SpaceRace(playerList, teamName, flagData, teamColor);
                 race.setSpaceRaceID(teamID);
                 SpaceRaceManager.addSpaceRace(race);
                 break;
@@ -672,10 +672,10 @@ public class PacketSimple extends Packet implements IPacket {
                         (int) player.posZ);
                 break;
             case C_UPDATE_FOOTPRINT_LIST:
-                List<Footprint> printList = new ArrayList<Footprint>();
-                long chunkKey = (Long) this.data.get(0);
+                final List<Footprint> printList = new ArrayList<Footprint>();
+                final long chunkKey = (Long) this.data.get(0);
                 for (int i = 1; i < this.data.size(); i++) {
-                    Footprint print = (Footprint) this.data.get(i);
+                    final Footprint print = (Footprint) this.data.get(i);
                     if (!print.owner.equals(player.getCommandSenderName())) {
                         printList.add(print);
                     }
@@ -683,13 +683,13 @@ public class PacketSimple extends Packet implements IPacket {
                 ClientProxyCore.footprintRenderer.setFootprints(chunkKey, printList);
                 break;
             case C_FOOTPRINTS_REMOVED:
-                long chunkKey0 = (Long) this.data.get(0);
-                BlockVec3 position = (BlockVec3) this.data.get(1);
-                List<Footprint> footprintList = ClientProxyCore.footprintRenderer.footprints.get(chunkKey0);
-                List<Footprint> toRemove = new ArrayList<Footprint>();
+                final long chunkKey0 = (Long) this.data.get(0);
+                final BlockVec3 position = (BlockVec3) this.data.get(1);
+                final List<Footprint> footprintList = ClientProxyCore.footprintRenderer.footprints.get(chunkKey0);
+                final List<Footprint> toRemove = new ArrayList<Footprint>();
 
                 if (footprintList != null) {
-                    for (Footprint footprint : footprintList) {
+                    for (final Footprint footprint : footprintList) {
                         if (footprint.position.x > position.x
                                 && footprint.position.x < position.x + 1
                                 && footprint.position.z > position.z
@@ -754,20 +754,22 @@ public class PacketSimple extends Packet implements IPacket {
             case C_GET_CELESTIAL_BODY_LIST:
                 String str = "";
 
-                for (CelestialBody cBody : GalaxyRegistry.getRegisteredPlanets().values()) {
+                for (final CelestialBody cBody :
+                        GalaxyRegistry.getRegisteredPlanets().values()) {
                     str = str.concat(cBody.getUnlocalizedName() + ";");
                 }
 
-                for (CelestialBody cBody : GalaxyRegistry.getRegisteredMoons().values()) {
+                for (final CelestialBody cBody :
+                        GalaxyRegistry.getRegisteredMoons().values()) {
                     str = str.concat(cBody.getUnlocalizedName() + ";");
                 }
 
-                for (CelestialBody cBody :
+                for (final CelestialBody cBody :
                         GalaxyRegistry.getRegisteredSatellites().values()) {
                     str = str.concat(cBody.getUnlocalizedName() + ";");
                 }
 
-                for (SolarSystem solarSystem :
+                for (final SolarSystem solarSystem :
                         GalaxyRegistry.getRegisteredSolarSystems().values()) {
                     str = str.concat(solarSystem.getUnlocalizedName() + ";");
                 }
@@ -784,15 +786,15 @@ public class PacketSimple extends Packet implements IPacket {
                 if (ConfigManagerCore.enableDebug) {
                     GCLog.info("DEBUG: Client receiving respawn packet for dim " + dimID);
                 }
-                int par2 = (Integer) this.data.get(1);
-                String par3 = (String) this.data.get(2);
-                int par4 = (Integer) this.data.get(3);
+                final int par2 = (Integer) this.data.get(1);
+                final String par3 = (String) this.data.get(2);
+                final int par4 = (Integer) this.data.get(3);
                 WorldUtil.forceRespawnClient(dimID, par2, par3, par4);
                 break;
             case C_UPDATE_ARCLAMP_FACING:
                 tile = player.worldObj.getTileEntity(
                         (Integer) this.data.get(0), (Integer) this.data.get(1), (Integer) this.data.get(2));
-                int facingNew = (Integer) this.data.get(3);
+                final int facingNew = (Integer) this.data.get(3);
                 if (tile instanceof TileEntityArclamp) {
                     ((TileEntityArclamp) tile).facing = facingNew;
                 }
@@ -804,9 +806,9 @@ public class PacketSimple extends Packet implements IPacket {
                 tile = player.worldObj.getTileEntity(
                         (Integer) this.data.get(0), (Integer) this.data.get(1), (Integer) this.data.get(2));
                 if (tile instanceof TileEntityScreen) {
-                    TileEntityScreen screenTile = (TileEntityScreen) tile;
-                    int screenType = (Integer) this.data.get(3);
-                    int flags = (Integer) this.data.get(4);
+                    final TileEntityScreen screenTile = (TileEntityScreen) tile;
+                    final int screenType = (Integer) this.data.get(3);
+                    final int flags = (Integer) this.data.get(4);
                     screenTile.imageType = screenType;
                     screenTile.connectedUp = (flags & 8) != 0;
                     screenTile.connectedDown = (flags & 4) != 0;
@@ -819,11 +821,11 @@ public class PacketSimple extends Packet implements IPacket {
                 tile = player.worldObj.getTileEntity(
                         (Integer) this.data.get(0), (Integer) this.data.get(1), (Integer) this.data.get(2));
                 if (tile instanceof TileEntityTelemetry) {
-                    String name = (String) this.data.get(3);
+                    final String name = (String) this.data.get(3);
                     if (name.startsWith("$")) {
                         // It's a player name
                         ((TileEntityTelemetry) tile).clientClass = EntityPlayerMP.class;
-                        String strName = name.substring(1);
+                        final String strName = name.substring(1);
                         ((TileEntityTelemetry) tile).clientName = strName;
                         GameProfile profile = FMLClientHandler.instance()
                                 .getClientPlayerEntity()
@@ -831,7 +833,7 @@ public class PacketSimple extends Packet implements IPacket {
                         if (!strName.equals(profile.getName())) {
                             profile = PlayerUtil.getOtherPlayerProfile(strName);
                             if (profile == null) {
-                                String strUUID = (String) this.data.get(9);
+                                final String strUUID = (String) this.data.get(9);
                                 profile = PlayerUtil.makeOtherPlayerProfile(strName, strUUID);
                             }
                             if (VersionUtil.mcVersion1_7_10
@@ -851,10 +853,10 @@ public class PacketSimple extends Packet implements IPacket {
                 }
                 break;
             case C_SEND_PLAYERSKIN:
-                String strName = (String) this.data.get(0);
-                String s1 = (String) this.data.get(1);
-                String s2 = (String) this.data.get(2);
-                String strUUID = (String) this.data.get(3);
+                final String strName = (String) this.data.get(0);
+                final String s1 = (String) this.data.get(1);
+                final String s2 = (String) this.data.get(2);
+                final String strUUID = (String) this.data.get(3);
                 GameProfile gp = PlayerUtil.getOtherPlayerProfile(strName);
                 if (gp == null) {
                     gp = PlayerUtil.makeOtherPlayerProfile(strName, strUUID);
@@ -863,21 +865,21 @@ public class PacketSimple extends Packet implements IPacket {
                 break;
             case C_SEND_OVERWORLD_IMAGE:
                 try {
-                    int cx = (Integer) this.data.get(0);
-                    int cz = (Integer) this.data.get(1);
-                    byte[] bytes = (byte[]) this.data.get(2);
+                    final int cx = (Integer) this.data.get(0);
+                    final int cz = (Integer) this.data.get(1);
+                    final byte[] bytes = (byte[]) this.data.get(2);
 
                     try {
-                        File folder = new File(FMLClientHandler.instance().getClient().mcDataDir, "assets/temp");
+                        final File folder = new File(FMLClientHandler.instance().getClient().mcDataDir, "assets/temp");
                         if (folder.exists() || folder.mkdir()) {
                             MapUtil.getOverworldImageFromRaw(folder, cx, cz, bytes);
                         } else {
                             System.err.println("Cannot create directory %minecraftDir%/assets/temp!");
                         }
-                    } catch (Exception e) {
+                    } catch (final Exception e) {
                         e.printStackTrace();
                     }
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     ;
                 }
                 break;
@@ -888,13 +890,13 @@ public class PacketSimple extends Packet implements IPacket {
 
     @Override
     public void handleServerSide(EntityPlayer player) {
-        EntityPlayerMP playerBase = PlayerUtil.getPlayerBaseServerFromPlayer(player, false);
+        final EntityPlayerMP playerBase = PlayerUtil.getPlayerBaseServerFromPlayer(player, false);
 
         if (playerBase == null) {
             return;
         }
 
-        GCPlayerStats stats = GCPlayerStats.get(playerBase);
+        final GCPlayerStats stats = GCPlayerStats.get(playerBase);
 
         switch (this.type) {
             case S_RESPAWN_PLAYER:
@@ -994,14 +996,14 @@ public class PacketSimple extends Packet implements IPacket {
                 }
                 break;
             case S_SET_ENTITY_FIRE:
-                Entity entity = player.worldObj.getEntityByID((Integer) this.data.get(0));
+                final Entity entity = player.worldObj.getEntityByID((Integer) this.data.get(0));
 
                 if (entity instanceof EntityLivingBase) {
                     ((EntityLivingBase) entity).setFire(3);
                 }
                 break;
             case S_BIND_SPACE_STATION_ID:
-                int homeID = (Integer) this.data.get(0);
+                final int homeID = (Integer) this.data.get(0);
                 if ((!stats.spaceStationDimensionData.containsKey(homeID)
                                 || stats.spaceStationDimensionData.get(homeID) == -1
                                 || stats.spaceStationDimensionData.get(homeID) == 0)
@@ -1073,50 +1075,50 @@ public class PacketSimple extends Packet implements IPacket {
                 player.openGui(GalacticraftCore.instance, GuiIdsCore.EXTENDED_INVENTORY, player.worldObj, 0, 0, 0);
                 break;
             case S_ON_ADVANCED_GUI_CLICKED_INT:
-                TileEntity tile1 = player.worldObj.getTileEntity(
+                final TileEntity tile1 = player.worldObj.getTileEntity(
                         (Integer) this.data.get(1), (Integer) this.data.get(2), (Integer) this.data.get(3));
 
                 switch ((Integer) this.data.get(0)) {
                     case 0:
                         if (tile1 instanceof TileEntityAirLockController) {
-                            TileEntityAirLockController airlockController = (TileEntityAirLockController) tile1;
+                            final TileEntityAirLockController airlockController = (TileEntityAirLockController) tile1;
                             airlockController.redstoneActivation = (Integer) this.data.get(4) == 1;
                         }
                         break;
                     case 1:
                         if (tile1 instanceof TileEntityAirLockController) {
-                            TileEntityAirLockController airlockController = (TileEntityAirLockController) tile1;
+                            final TileEntityAirLockController airlockController = (TileEntityAirLockController) tile1;
                             airlockController.playerDistanceActivation = (Integer) this.data.get(4) == 1;
                         }
                         break;
                     case 2:
                         if (tile1 instanceof TileEntityAirLockController) {
-                            TileEntityAirLockController airlockController = (TileEntityAirLockController) tile1;
+                            final TileEntityAirLockController airlockController = (TileEntityAirLockController) tile1;
                             airlockController.playerDistanceSelection = (Integer) this.data.get(4);
                         }
                         break;
                     case 3:
                         if (tile1 instanceof TileEntityAirLockController) {
-                            TileEntityAirLockController airlockController = (TileEntityAirLockController) tile1;
+                            final TileEntityAirLockController airlockController = (TileEntityAirLockController) tile1;
                             airlockController.playerNameMatches = (Integer) this.data.get(4) == 1;
                         }
                         break;
                     case 4:
                         if (tile1 instanceof TileEntityAirLockController) {
-                            TileEntityAirLockController airlockController = (TileEntityAirLockController) tile1;
+                            final TileEntityAirLockController airlockController = (TileEntityAirLockController) tile1;
                             airlockController.invertSelection = (Integer) this.data.get(4) == 1;
                         }
                         break;
                     case 5:
                         if (tile1 instanceof TileEntityAirLockController) {
-                            TileEntityAirLockController airlockController = (TileEntityAirLockController) tile1;
+                            final TileEntityAirLockController airlockController = (TileEntityAirLockController) tile1;
                             airlockController.lastHorizontalModeEnabled = airlockController.horizontalModeEnabled;
                             airlockController.horizontalModeEnabled = (Integer) this.data.get(4) == 1;
                         }
                         break;
                     case 6:
                         if (tile1 instanceof IBubbleProvider) {
-                            IBubbleProvider distributor = (IBubbleProvider) tile1;
+                            final IBubbleProvider distributor = (IBubbleProvider) tile1;
                             distributor.setBubbleVisible((Integer) this.data.get(4) == 1);
                         }
                         break;
@@ -1125,13 +1127,13 @@ public class PacketSimple extends Packet implements IPacket {
                 }
                 break;
             case S_ON_ADVANCED_GUI_CLICKED_STRING:
-                TileEntity tile2 = player.worldObj.getTileEntity(
+                final TileEntity tile2 = player.worldObj.getTileEntity(
                         (Integer) this.data.get(1), (Integer) this.data.get(2), (Integer) this.data.get(3));
 
                 switch ((Integer) this.data.get(0)) {
                     case 0:
                         if (tile2 instanceof TileEntityAirLockController) {
-                            TileEntityAirLockController airlockController = (TileEntityAirLockController) tile2;
+                            final TileEntityAirLockController airlockController = (TileEntityAirLockController) tile2;
                             airlockController.playerToOpenFor = (String) this.data.get(4);
                         }
                         break;
@@ -1140,31 +1142,31 @@ public class PacketSimple extends Packet implements IPacket {
                 }
                 break;
             case S_UPDATE_SHIP_MOTION_Y:
-                int entityID = (Integer) this.data.get(0);
-                boolean up = (Boolean) this.data.get(1);
+                final int entityID = (Integer) this.data.get(0);
+                final boolean up = (Boolean) this.data.get(1);
 
-                Entity entity2 = player.worldObj.getEntityByID(entityID);
+                final Entity entity2 = player.worldObj.getEntityByID(entityID);
 
                 if (entity2 instanceof EntityAutoRocket) {
-                    EntityAutoRocket autoRocket = (EntityAutoRocket) entity2;
+                    final EntityAutoRocket autoRocket = (EntityAutoRocket) entity2;
                     autoRocket.motionY += up ? 0.02F : -0.02F;
                 }
 
                 break;
             case S_START_NEW_SPACE_RACE:
-                Integer teamID = (Integer) this.data.get(0);
-                String teamName = (String) this.data.get(1);
-                FlagData flagData = (FlagData) this.data.get(2);
-                Vector3 teamColor = (Vector3) this.data.get(3);
-                List<String> playerList = new ArrayList<String>();
+                final Integer teamID = (Integer) this.data.get(0);
+                final String teamName = (String) this.data.get(1);
+                final FlagData flagData = (FlagData) this.data.get(2);
+                final Vector3 teamColor = (Vector3) this.data.get(3);
+                final List<String> playerList = new ArrayList<String>();
 
                 for (int i = 4; i < this.data.size(); i++) {
                     playerList.add((String) this.data.get(i));
                 }
 
-                boolean previousData = SpaceRaceManager.getSpaceRaceFromID(teamID) != null;
+                final boolean previousData = SpaceRaceManager.getSpaceRaceFromID(teamID) != null;
 
-                SpaceRace newRace = new SpaceRace(playerList, teamName, flagData, teamColor);
+                final SpaceRace newRace = new SpaceRace(playerList, teamName, flagData, teamColor);
 
                 if (teamID > 0) {
                     newRace.setSpaceRaceID(teamID);
@@ -1184,20 +1186,20 @@ public class PacketSimple extends Packet implements IPacket {
                         playerBase, SpaceRaceManager.getSpaceRaceFromPlayer((String) this.data.get(0)));
                 break;
             case S_INVITE_RACE_PLAYER:
-                EntityPlayerMP playerInvited =
+                final EntityPlayerMP playerInvited =
                         PlayerUtil.getPlayerBaseServerFromPlayerUsername((String) this.data.get(0), true);
                 if (playerInvited != null) {
-                    Integer teamInvitedTo = (Integer) this.data.get(1);
-                    SpaceRace race = SpaceRaceManager.getSpaceRaceFromID(teamInvitedTo);
+                    final Integer teamInvitedTo = (Integer) this.data.get(1);
+                    final SpaceRace race = SpaceRaceManager.getSpaceRaceFromID(teamInvitedTo);
 
                     if (race != null) {
                         GCPlayerStats.get(playerInvited).spaceRaceInviteTeamID = teamInvitedTo;
-                        String dA = EnumColor.DARK_AQUA.getCode();
-                        String bG = EnumColor.BRIGHT_GREEN.getCode();
-                        String dB = EnumColor.PURPLE.getCode();
+                        final String dA = EnumColor.DARK_AQUA.getCode();
+                        final String bG = EnumColor.BRIGHT_GREEN.getCode();
+                        final String dB = EnumColor.PURPLE.getCode();
                         String teamNameTotal = "";
-                        String[] teamNameSplit = race.getTeamName().split(" ");
-                        for (String teamNamePart : teamNameSplit) {
+                        final String[] teamNameSplit = race.getTeamName().split(" ");
+                        for (final String teamNamePart : teamNameSplit) {
                             teamNameTotal = teamNameTotal.concat(dB + teamNamePart + " ");
                         }
                         playerInvited.addChatMessage(new ChatComponentText(dA
@@ -1214,11 +1216,11 @@ public class PacketSimple extends Packet implements IPacket {
                 }
                 break;
             case S_REMOVE_RACE_PLAYER:
-                Integer teamInvitedTo = (Integer) this.data.get(1);
-                SpaceRace race = SpaceRaceManager.getSpaceRaceFromID(teamInvitedTo);
+                final Integer teamInvitedTo = (Integer) this.data.get(1);
+                final SpaceRace race = SpaceRaceManager.getSpaceRaceFromID(teamInvitedTo);
 
                 if (race != null) {
-                    String playerToRemove = (String) this.data.get(0);
+                    final String playerToRemove = (String) this.data.get(0);
 
                     if (!race.getPlayerNames().remove(playerToRemove)) {
                         player.addChatMessage(new ChatComponentText(
@@ -1229,11 +1231,11 @@ public class PacketSimple extends Packet implements IPacket {
                 }
                 break;
             case S_ADD_RACE_PLAYER:
-                Integer teamToAddPlayer = (Integer) this.data.get(1);
-                SpaceRace spaceRaceToAddPlayer = SpaceRaceManager.getSpaceRaceFromID(teamToAddPlayer);
+                final Integer teamToAddPlayer = (Integer) this.data.get(1);
+                final SpaceRace spaceRaceToAddPlayer = SpaceRaceManager.getSpaceRaceFromID(teamToAddPlayer);
 
                 if (spaceRaceToAddPlayer != null) {
-                    String playerToAdd = (String) this.data.get(0);
+                    final String playerToAdd = (String) this.data.get(0);
 
                     if (!spaceRaceToAddPlayer.getPlayerNames().contains(playerToAdd)) {
                         SpaceRace oldRace = null;
@@ -1244,8 +1246,8 @@ public class PacketSimple extends Packet implements IPacket {
                         spaceRaceToAddPlayer.getPlayerNames().add(playerToAdd);
                         SpaceRaceManager.sendSpaceRaceData(null, spaceRaceToAddPlayer);
 
-                        for (String member : spaceRaceToAddPlayer.getPlayerNames()) {
-                            EntityPlayerMP memberObj =
+                        for (final String member : spaceRaceToAddPlayer.getPlayerNames()) {
+                            final EntityPlayerMP memberObj =
                                     PlayerUtil.getPlayerForUsernameVanilla(MinecraftServer.getServer(), member);
 
                             if (memberObj != null) {
@@ -1264,30 +1266,32 @@ public class PacketSimple extends Packet implements IPacket {
                 }
                 break;
             case S_COMPLETE_CBODY_HANDSHAKE:
-                String completeList = (String) this.data.get(0);
-                List<String> clientObjects = Arrays.asList(completeList.split(";"));
-                List<String> serverObjects = Lists.newArrayList();
+                final String completeList = (String) this.data.get(0);
+                final List<String> clientObjects = Arrays.asList(completeList.split(";"));
+                final List<String> serverObjects = Lists.newArrayList();
                 String missingObjects = "";
 
-                for (CelestialBody cBody : GalaxyRegistry.getRegisteredPlanets().values()) {
+                for (final CelestialBody cBody :
+                        GalaxyRegistry.getRegisteredPlanets().values()) {
                     serverObjects.add(cBody.getUnlocalizedName());
                 }
 
-                for (CelestialBody cBody : GalaxyRegistry.getRegisteredMoons().values()) {
+                for (final CelestialBody cBody :
+                        GalaxyRegistry.getRegisteredMoons().values()) {
                     serverObjects.add(cBody.getUnlocalizedName());
                 }
 
-                for (CelestialBody cBody :
+                for (final CelestialBody cBody :
                         GalaxyRegistry.getRegisteredSatellites().values()) {
                     serverObjects.add(cBody.getUnlocalizedName());
                 }
 
-                for (SolarSystem solarSystem :
+                for (final SolarSystem solarSystem :
                         GalaxyRegistry.getRegisteredSolarSystems().values()) {
                     serverObjects.add(solarSystem.getUnlocalizedName());
                 }
 
-                for (String str : serverObjects) {
+                for (final String str : serverObjects) {
                     if (!clientObjects.contains(str)) {
                         missingObjects = missingObjects.concat(str + "\n");
                     }
@@ -1300,14 +1304,14 @@ public class PacketSimple extends Packet implements IPacket {
 
                 break;
             case S_REQUEST_GEAR_DATA:
-                String name = (String) this.data.get(0);
-                EntityPlayerMP e = PlayerUtil.getPlayerBaseServerFromPlayerUsername(name, true);
+                final String name = (String) this.data.get(0);
+                final EntityPlayerMP e = PlayerUtil.getPlayerBaseServerFromPlayerUsername(name, true);
                 if (e != null) {
                     GCPlayerHandler.checkGear(e, GCPlayerStats.get(e), true);
                 }
                 break;
             case S_REQUEST_ARCLAMP_FACING:
-                TileEntity tileAL = player.worldObj.getTileEntity(
+                final TileEntity tileAL = player.worldObj.getTileEntity(
                         (Integer) this.data.get(0), (Integer) this.data.get(1), (Integer) this.data.get(2));
                 if (tileAL instanceof TileEntityArclamp) {
                     ((TileEntityArclamp) tileAL).updateClientFlag = true;
@@ -1317,8 +1321,8 @@ public class PacketSimple extends Packet implements IPacket {
                 stats.buildFlags = (Integer) this.data.get(0);
                 break;
             case S_UPDATE_VIEWSCREEN_REQUEST:
-                int screenDim = (Integer) this.data.get(0);
-                TileEntity tile = player.worldObj.getTileEntity(
+                final int screenDim = (Integer) this.data.get(0);
+                final TileEntity tile = player.worldObj.getTileEntity(
                         (Integer) this.data.get(1), (Integer) this.data.get(2), (Integer) this.data.get(3));
                 if (tile instanceof TileEntityScreen) {
                     ((TileEntityScreen) tile).updateClients();
@@ -1384,14 +1388,14 @@ public class PacketSimple extends Packet implements IPacket {
                 // }
                 break;
             case S_REQUEST_MAP_IMAGE:
-                int dim = (Integer) this.data.get(0);
-                int cx = (Integer) this.data.get(1);
-                int cz = (Integer) this.data.get(2);
+                final int dim = (Integer) this.data.get(0);
+                final int cx = (Integer) this.data.get(1);
+                final int cz = (Integer) this.data.get(2);
                 MapUtil.sendOrCreateMap(WorldUtil.getProviderForDimensionServer(dim).worldObj, cx, cz, playerBase);
                 break;
             case S_REQUEST_PLAYERSKIN:
-                String strName = (String) this.data.get(0);
-                EntityPlayerMP playerRequested = FMLServerHandler.instance()
+                final String strName = (String) this.data.get(0);
+                final EntityPlayerMP playerRequested = FMLServerHandler.instance()
                         .getServer()
                         .getConfigurationManager()
                         .func_152612_a(strName);
@@ -1401,12 +1405,12 @@ public class PacketSimple extends Packet implements IPacket {
                     return;
                 }
 
-                GameProfile gp = playerRequested.getGameProfile();
+                final GameProfile gp = playerRequested.getGameProfile();
                 if (gp == null) {
                     return;
                 }
 
-                Property property =
+                final Property property =
                         (Property) Iterables.getFirst(gp.getProperties().get("textures"), (Object) null);
                 if (property == null) {
                     return;

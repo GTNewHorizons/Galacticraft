@@ -48,7 +48,7 @@ public class ModelNasaWorkbench extends ModelBase {
         this.textureWidth = 256;
         this.textureHeight = 128;
 
-        float halfPI = (float) (Math.PI / 2.0);
+        final float halfPI = (float) (Math.PI / 2.0);
 
         this.base1a = new ModelRenderer(this, 113, 24);
         this.base1a.addBox(-2.5F, -2F, -7.5F, 5, 2, 15);

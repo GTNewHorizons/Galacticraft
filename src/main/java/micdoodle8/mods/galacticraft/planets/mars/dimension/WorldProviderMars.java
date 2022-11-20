@@ -22,13 +22,13 @@ public class WorldProviderMars extends WorldProviderSpace implements IGalacticra
 
     @Override
     public Vector3 getFogColor() {
-        float f = 1.0F - this.getStarBrightness(1.0F);
+        final float f = 1.0F - this.getStarBrightness(1.0F);
         return new Vector3(210F / 255F * f, 120F / 255F * f, 59F / 255F * f);
     }
 
     @Override
     public Vector3 getSkyColor() {
-        float f = 1.0F - this.getStarBrightness(1.0F);
+        final float f = 1.0F - this.getStarBrightness(1.0F);
         return new Vector3(154 / 255.0F * f, 114 / 255.0F * f, 66 / 255.0F * f);
     }
 
@@ -111,7 +111,7 @@ public class WorldProviderMars extends WorldProviderSpace implements IGalacticra
     @Override
     @SideOnly(Side.CLIENT)
     public float getStarBrightness(float par1) {
-        float f1 = this.worldObj.getCelestialAngle(par1);
+        final float f1 = this.worldObj.getCelestialAngle(par1);
         float f2 = 1.0F - (MathHelper.cos(f1 * (float) Math.PI * 2.0F) * 2.0F + 0.25F);
 
         if (f2 < 0.0F) {
@@ -294,7 +294,7 @@ public class WorldProviderMars extends WorldProviderSpace implements IGalacticra
     @Override
     public double getSolarEnergyMultiplier() {
         if (this.solarMultiplier < 0D) {
-            double s = this.getSolarSize();
+            final double s = this.getSolarSize();
             this.solarMultiplier = s * s * s;
         }
         return this.solarMultiplier;

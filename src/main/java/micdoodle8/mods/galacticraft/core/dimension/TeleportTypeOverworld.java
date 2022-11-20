@@ -18,7 +18,7 @@ public class TeleportTypeOverworld implements ITeleportType {
     @Override
     public Vector3 getPlayerSpawnLocation(WorldServer world, EntityPlayerMP player) {
         if (player != null) {
-            GCPlayerStats stats = GCPlayerStats.get(player);
+            final GCPlayerStats stats = GCPlayerStats.get(player);
             return new Vector3(stats.coordsTeleportedFromX, 250.0, stats.coordsTeleportedFromZ);
         }
 

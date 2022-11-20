@@ -267,7 +267,7 @@ public class BlockUnlitTorch extends Block implements IOxygenReliantBlock {
      * for display
      */
     public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
-        boolean doSmoke = par5Random.nextInt(5) == 0;
+        final boolean doSmoke = par5Random.nextInt(5) == 0;
         if (this.lit || doSmoke) {
             final int var6 = par1World.getBlockMetadata(par2, par3, par4);
             final double var7 = par2 + 0.5F;
@@ -331,7 +331,7 @@ public class BlockUnlitTorch extends Block implements IOxygenReliantBlock {
 
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+        final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
         ret.add(new ItemStack(this.litVersion));
         return ret;
     }

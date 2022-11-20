@@ -33,11 +33,11 @@ public class TileEntityMinerBaseRenderer extends TileEntitySpecialRenderer {
         // Texture file
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(TileEntityMinerBaseRenderer.telepadTexture);
 
-        int i = tileEntity
+        final int i = tileEntity
                 .getWorldObj()
                 .getLightBrightnessForSkyBlocks(tileEntity.xCoord, tileEntity.yCoord + 1, tileEntity.zCoord, 0);
-        int j = i % 65536;
-        int k = i / 65536;
+        final int j = i % 65536;
+        final int k = i / 65536;
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
 
         GL11.glPushMatrix();

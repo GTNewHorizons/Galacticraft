@@ -24,7 +24,7 @@ public class GCMarsNEIHighlightHandler implements IHighlightHandler {
             ItemInfo.Layout layout) {
         String name = null;
         try {
-            String s = GuiContainerManager.itemDisplayNameShort(stack);
+            final String s = GuiContainerManager.itemDisplayNameShort(stack);
             if (s != null && !s.endsWith("Unnamed")) {
                 name = s;
             }
@@ -32,11 +32,11 @@ public class GCMarsNEIHighlightHandler implements IHighlightHandler {
             if (name != null) {
                 currenttip.add(name);
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
 
         if (stack.getItem() == Items.redstone) {
-            int md = world.getBlockMetadata(mop.blockX, mop.blockY, mop.blockZ);
+            final int md = world.getBlockMetadata(mop.blockX, mop.blockY, mop.blockZ);
             String s = "" + md;
             if (s.length() < 2) {
                 s = " " + s;
@@ -49,11 +49,11 @@ public class GCMarsNEIHighlightHandler implements IHighlightHandler {
 
     @Override
     public ItemStack identifyHighlight(World world, EntityPlayer player, MovingObjectPosition mop) {
-        int x = mop.blockX;
-        int y = mop.blockY;
-        int z = mop.blockZ;
-        Block b = world.getBlock(x, y, z);
-        int meta = world.getBlockMetadata(x, y, z);
+        final int x = mop.blockX;
+        final int y = mop.blockY;
+        final int z = mop.blockZ;
+        final Block b = world.getBlock(x, y, z);
+        final int meta = world.getBlockMetadata(x, y, z);
         if (b == MarsBlocks.marsBlock) {
             if (meta == 2) {
                 return new ItemStack(MarsBlocks.marsBlock, 1, 2);

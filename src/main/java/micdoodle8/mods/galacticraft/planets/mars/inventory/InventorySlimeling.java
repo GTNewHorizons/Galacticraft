@@ -10,7 +10,7 @@ import net.minecraft.nbt.NBTTagList;
 
 public class InventorySlimeling implements IInventory {
     private ItemStack[] stackList = new ItemStack[27 + 3];
-    private EntitySlimeling slimeling;
+    private final EntitySlimeling slimeling;
     public Container currentContainer;
 
     public InventorySlimeling(EntitySlimeling slimeling) {

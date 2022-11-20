@@ -81,10 +81,10 @@ public class BlockT1TreasureChest extends BlockContainer implements ITileEntityP
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         super.onBlockAdded(par1World, par2, par3, par4);
         this.unifyAdjacentChests(par1World, par2, par3, par4);
-        Block var5 = par1World.getBlock(par2, par3, par4 - 1);
-        Block var6 = par1World.getBlock(par2, par3, par4 + 1);
-        Block var7 = par1World.getBlock(par2 - 1, par3, par4);
-        Block var8 = par1World.getBlock(par2 + 1, par3, par4);
+        final Block var5 = par1World.getBlock(par2, par3, par4 - 1);
+        final Block var6 = par1World.getBlock(par2, par3, par4 + 1);
+        final Block var7 = par1World.getBlock(par2 - 1, par3, par4);
+        final Block var8 = par1World.getBlock(par2 + 1, par3, par4);
 
         if (var5 == this) {
             this.unifyAdjacentChests(par1World, par2, par3, par4 - 1);
@@ -106,12 +106,12 @@ public class BlockT1TreasureChest extends BlockContainer implements ITileEntityP
     @Override
     public void onBlockPlacedBy(
             World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack stack) {
-        Block var6 = par1World.getBlock(par2, par3, par4 - 1);
-        Block var7 = par1World.getBlock(par2, par3, par4 + 1);
-        Block var8 = par1World.getBlock(par2 - 1, par3, par4);
-        Block var9 = par1World.getBlock(par2 + 1, par3, par4);
+        final Block var6 = par1World.getBlock(par2, par3, par4 - 1);
+        final Block var7 = par1World.getBlock(par2, par3, par4 + 1);
+        final Block var8 = par1World.getBlock(par2 - 1, par3, par4);
+        final Block var9 = par1World.getBlock(par2 + 1, par3, par4);
         byte var10 = 0;
-        int var11 = MathHelper.floor_double(par5EntityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        final int var11 = MathHelper.floor_double(par5EntityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
         if (var11 == 0) {
             var10 = 2;
@@ -156,10 +156,10 @@ public class BlockT1TreasureChest extends BlockContainer implements ITileEntityP
 
     public void unifyAdjacentChests(World par1World, int par2, int par3, int par4) {
         if (!par1World.isRemote) {
-            Block var5 = par1World.getBlock(par2, par3, par4 - 1);
-            Block var6 = par1World.getBlock(par2, par3, par4 + 1);
-            Block var7 = par1World.getBlock(par2 - 1, par3, par4);
-            Block var8 = par1World.getBlock(par2 + 1, par3, par4);
+            final Block var5 = par1World.getBlock(par2, par3, par4 - 1);
+            final Block var6 = par1World.getBlock(par2, par3, par4 + 1);
+            final Block var7 = par1World.getBlock(par2 - 1, par3, par4);
+            final Block var8 = par1World.getBlock(par2 + 1, par3, par4);
             Block var10;
             Block var11;
             byte var13;

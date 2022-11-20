@@ -62,7 +62,7 @@ public class BlockGlowstoneTorch extends Block implements ItemBlockDesc.IBlockSh
         if (World.doesBlockHaveSolidTopSurface(par1World, par2, par3, par4)) {
             return true;
         } else {
-            Block l = par1World.getBlock(par2, par3, par4);
+            final Block l = par1World.getBlock(par2, par3, par4);
             return l.canPlaceTorchOnTop(par1World, par2, par3, par4);
         }
     }
@@ -135,7 +135,7 @@ public class BlockGlowstoneTorch extends Block implements ItemBlockDesc.IBlockSh
     @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block par5) {
         if (this.dropTorchIfCantStay(par1World, par2, par3, par4)) {
-            int i1 = par1World.getBlockMetadata(par2, par3, par4);
+            final int i1 = par1World.getBlockMetadata(par2, par3, par4);
             boolean flag = false;
 
             if (!BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2 - 1, par3, par4, EAST, true) && i1 == 1) {
@@ -181,7 +181,7 @@ public class BlockGlowstoneTorch extends Block implements ItemBlockDesc.IBlockSh
     @Override
     public MovingObjectPosition collisionRayTrace(
             World par1World, int par2, int par3, int par4, Vec3 par5Vec3, Vec3 par6Vec3) {
-        int l = par1World.getBlockMetadata(par2, par3, par4) & 7;
+        final int l = par1World.getBlockMetadata(par2, par3, par4) & 7;
         float f = 0.15F;
 
         if (l == 1) {

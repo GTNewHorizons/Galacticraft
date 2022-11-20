@@ -26,14 +26,14 @@ public class RenderPlanet {
 
     public static void renderPlanet(int textureId, float scale, float ticks, float relSize) {
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
-        float size = relSize / 70 * scale;
+        final float size = relSize / 70 * scale;
         ticks = (float) System.nanoTime() / 50000000F;
         RenderPlanet.drawTexturedRectUV(-size / 2, -size / 2, size, size, ticks);
     }
 
     public static void renderPlanet(ResourceLocation texture, float scale, float ticks, float relSize) {
         RenderPlanet.renderEngine.bindTexture(texture);
-        float size = relSize / 70 * scale;
+        final float size = relSize / 70 * scale;
         ticks = (float) System.nanoTime() / 50000000F;
         RenderPlanet.drawTexturedRectUV(-size / 2, -size / 2, size, size, ticks);
     }
@@ -61,7 +61,7 @@ public class RenderPlanet {
         }
         if (id == 3) // Jupiter
         {
-            float relSize = 48F;
+            final float relSize = 48F;
             float size = relSize / 70 * scale;
             RenderPlanet.renderEngine.bindTexture(texture);
             RenderPlanet.drawTexturedRectUV(-size / 2, -size / 2, size, size, ticks);
@@ -80,7 +80,7 @@ public class RenderPlanet {
             // drawTexturedRectUVSixth(x, y, width, height, (ticks / 600F) % 1F, ysect /
             // 6F);
             // - 80F * MathHelper.sin(angle)
-            float factor = 1F + MathHelper.cos((7.5F + 10F * ysect) / 62F);
+            final float factor = 1F + MathHelper.cos((7.5F + 10F * ysect) / 62F);
             drawTexturedRectUVSixth(
                     x, y, width, height, ticks / 1100F % 1F - (1F - factor) * 0.15F, ysect / 6F, 0.16F * factor);
         }
@@ -93,14 +93,14 @@ public class RenderPlanet {
             prog += 1.0F;
         }
         prog = 1.0F - prog;
-        float y1 = y0 + 1 / 12F;
-        float y2 = 1F - y1;
-        float y3 = 1F - y0;
-        float yaa = y + height * y0;
-        float yab = y + height * y1;
-        float yba = y + height * y2;
-        float ybb = y + height * y3;
-        Tessellator tessellator = Tessellator.instance;
+        final float y1 = y0 + 1 / 12F;
+        final float y2 = 1F - y1;
+        final float y3 = 1F - y0;
+        final float yaa = y + height * y0;
+        final float yab = y + height * y1;
+        final float yba = y + height * y2;
+        final float ybb = y + height * y3;
+        final Tessellator tessellator = Tessellator.instance;
         if (prog <= 1F - span) {
             tessellator.startDrawingQuads();
             tessellator.addVertexWithUV(x, yab, 0F, prog, y1);
@@ -115,7 +115,7 @@ public class RenderPlanet {
             tessellator.addVertexWithUV(x, yba, 0F, prog, y2);
             tessellator.draw();
         } else {
-            double xp = x + width * (1F - prog) / span;
+            final double xp = x + width * (1F - prog) / span;
             tessellator.startDrawingQuads();
             tessellator.addVertexWithUV(x, yab, 0F, prog, y1);
             tessellator.addVertexWithUV(xp, yab, 0F, 1.0F, y1);

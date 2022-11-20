@@ -29,7 +29,7 @@ public class MarsUtil {
     public static void openParachestInventory(EntityPlayerMP player, EntityLandingBalloons landerInv) {
         player.getNextWindowId();
         player.closeContainer();
-        int windowId = player.currentWindowId;
+        final int windowId = player.currentWindowId;
         GalacticraftCore.packetPipeline.sendTo(
                 new PacketSimple(
                         EnumSimplePacket.C_OPEN_PARACHEST_GUI, new Object[] {windowId, 1, landerInv.getEntityId()}),
@@ -42,7 +42,7 @@ public class MarsUtil {
     public static void openSlimelingInventory(EntityPlayerMP player, EntitySlimeling slimeling) {
         player.getNextWindowId();
         player.closeContainer();
-        int windowId = player.currentWindowId;
+        final int windowId = player.currentWindowId;
         GalacticraftCore.packetPipeline.sendTo(
                 new PacketSimpleMars(
                         EnumSimplePacketMars.C_OPEN_CUSTOM_GUI, new Object[] {windowId, 0, slimeling.getEntityId()}),
@@ -55,7 +55,7 @@ public class MarsUtil {
     public static void openCargoRocketInventory(EntityPlayerMP player, EntityCargoRocket rocket) {
         player.getNextWindowId();
         player.closeContainer();
-        int windowId = player.currentWindowId;
+        final int windowId = player.currentWindowId;
         GalacticraftCore.packetPipeline.sendTo(
                 new PacketSimpleMars(
                         EnumSimplePacketMars.C_OPEN_CUSTOM_GUI, new Object[] {windowId, 1, rocket.getEntityId()}),

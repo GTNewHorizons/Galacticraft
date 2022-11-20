@@ -13,7 +13,7 @@ public abstract class StructureComponentVillage extends StructureComponent {
     static {
         try {
             MapGenVillageMoon.initiateStructures();
-        } catch (Throwable e) {
+        } catch (final Throwable e) {
 
         }
     }

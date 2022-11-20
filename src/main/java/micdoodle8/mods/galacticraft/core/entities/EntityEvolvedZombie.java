@@ -28,7 +28,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
 public class EntityEvolvedZombie extends EntityZombie implements IEntityBreathable {
-    private int conversionTime = 0;
+    private final int conversionTime = 0;
 
     public EntityEvolvedZombie(World par1World) {
         super(par1World);
@@ -81,7 +81,7 @@ public class EntityEvolvedZombie extends EntityZombie implements IEntityBreathab
         }
 
         if (this.isSprinting()) {
-            float f = this.rotationYaw * 0.017453292F;
+            final float f = this.rotationYaw * 0.017453292F;
             this.motionX -= MathHelper.sin(f) * 0.2F;
             this.motionZ += MathHelper.cos(f) * 0.2F;
         }
@@ -135,7 +135,7 @@ public class EntityEvolvedZombie extends EntityZombie implements IEntityBreathab
 
     protected void dropFewItems(boolean p_70628_1_, int p_70628_2_) {
         super.dropFewItems(p_70628_1_, p_70628_2_);
-        Item item = this.getDropItem();
+        final Item item = this.getDropItem();
 
         // Less rotten flesh than vanilla
         int j = this.rand.nextInt(2);

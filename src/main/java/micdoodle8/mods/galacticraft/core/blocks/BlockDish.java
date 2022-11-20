@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockDish extends BlockTileGC implements ItemBlockDesc.IBlockShiftDesc, IPartialSealableBlock {
-    private IIcon[] icons = new IIcon[6];
+    private final IIcon[] icons = new IIcon[6];
 
     public BlockDish(String assetName) {
         super(Material.iron);
@@ -61,7 +61,7 @@ public class BlockDish extends BlockTileGC implements ItemBlockDesc.IBlockShiftD
         for (int y = 1; y <= 2; y++) {
             for (int x = -1; x <= 1; x++) {
                 for (int z = -1; z <= 1; z++) {
-                    Block block = world.getBlock(x1 + (y == 2 ? x : 0), y1 + y, z1 + (y == 2 ? z : 0));
+                    final Block block = world.getBlock(x1 + (y == 2 ? x : 0), y1 + y, z1 + (y == 2 ? z : 0));
 
                     if (block.getMaterial() != Material.air && !block.isReplaceable(world, x1 + x, y1 + y, z1 + z)) {
                         return false;
@@ -75,9 +75,9 @@ public class BlockDish extends BlockTileGC implements ItemBlockDesc.IBlockShiftD
 
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
-        int metadata = world.getBlockMetadata(x, y, z);
+        final int metadata = world.getBlockMetadata(x, y, z);
 
-        int angle = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        final int angle = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         int change = 0;
 
         switch (angle) {
@@ -97,7 +97,7 @@ public class BlockDish extends BlockTileGC implements ItemBlockDesc.IBlockShiftD
 
         world.setBlockMetadataWithNotify(x, y, z, change, 3);
 
-        TileEntity tile = world.getTileEntity(x, y, z);
+        final TileEntity tile = world.getTileEntity(x, y, z);
 
         if (tile instanceof TileEntityDish) {
             ((TileEntityDish) tile).onCreate(new BlockVec3(x, y, z));
@@ -126,8 +126,8 @@ public class BlockDish extends BlockTileGC implements ItemBlockDesc.IBlockShiftD
             float hitX,
             float hitY,
             float hitZ) {
-        int metadata = par1World.getBlockMetadata(x, y, z);
-        int original = metadata;
+        final int metadata = par1World.getBlockMetadata(x, y, z);
+        final int original = metadata;
 
         int change = 0;
 
@@ -146,7 +146,7 @@ public class BlockDish extends BlockTileGC implements ItemBlockDesc.IBlockShiftD
                 break;
         }
 
-        TileEntity te = par1World.getTileEntity(x, y, z);
+        final TileEntity te = par1World.getTileEntity(x, y, z);
         if (te instanceof TileBaseUniversalElectrical) {
             ((TileBaseUniversalElectrical) te).updateFacing();
         }
@@ -169,7 +169,7 @@ public class BlockDish extends BlockTileGC implements ItemBlockDesc.IBlockShiftD
 
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
-        int metadata = this.getDamageValue(world, x, y, z);
+        final int metadata = this.getDamageValue(world, x, y, z);
 
         return new ItemStack(this, 1, metadata);
     }

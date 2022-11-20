@@ -109,9 +109,9 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
                     --this.timeUntilPortal;
                 }
 
-                boolean flag = this.movementInput.jump;
-                float ff = 0.8F;
-                boolean flag1 = this.movementInput.moveForward >= ff;
+                final boolean flag = this.movementInput.jump;
+                final float ff = 0.8F;
+                final boolean flag1 = this.movementInput.moveForward >= ff;
                 this.movementInput.updatePlayerMoveState();
 
                 if (this.isUsingItem() && !this.isRiding()) {
@@ -121,7 +121,7 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
                 }
 
                 // CUSTOM-------------------
-                GCPlayerStatsClient stats = GCPlayerStatsClient.get(this);
+                final GCPlayerStatsClient stats = GCPlayerStatsClient.get(this);
                 if (stats.landingTicks > 0) {
                     this.ySize = stats.landingYOffset[stats.landingTicks];
                     this.movementInput.moveStrafe *= 0.5F;
@@ -153,7 +153,8 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
                         this.boundingBox.minY + 0.5D,
                         this.posZ + (double) this.width * 0.35D);
 
-                boolean flag2 = (float) this.getFoodStats().getFoodLevel() > 6.0F || this.capabilities.allowFlying;
+                final boolean flag2 =
+                        (float) this.getFoodStats().getFoodLevel() > 6.0F || this.capabilities.allowFlying;
 
                 if (this.onGround
                         && !flag1
@@ -212,10 +213,10 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
 
                 // from: EntityLivingBase
                 if (this.newPosRotationIncrements > 0) {
-                    double d0 = this.posX + (this.newPosX - this.posX) / (double) this.newPosRotationIncrements;
-                    double d1 = this.posY + (this.newPosY - this.posY) / (double) this.newPosRotationIncrements;
-                    double d2 = this.posZ + (this.newPosZ - this.posZ) / (double) this.newPosRotationIncrements;
-                    double d3 = MathHelper.wrapAngleTo180_double(this.newRotationYaw - (double) this.rotationYaw);
+                    final double d0 = this.posX + (this.newPosX - this.posX) / (double) this.newPosRotationIncrements;
+                    final double d1 = this.posY + (this.newPosY - this.posY) / (double) this.newPosRotationIncrements;
+                    final double d2 = this.posZ + (this.newPosZ - this.posZ) / (double) this.newPosRotationIncrements;
+                    final double d3 = MathHelper.wrapAngleTo180_double(this.newRotationYaw - (double) this.rotationYaw);
                     this.rotationYaw =
                             (float) ((double) this.rotationYaw + d3 / (double) this.newPosRotationIncrements);
                     this.rotationPitch = (float) ((double) this.rotationPitch
@@ -290,11 +291,11 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
                         axisalignedbb = this.boundingBox.expand(1.0D, 0.5D, 1.0D);
                     }
 
-                    List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, axisalignedbb);
+                    final List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, axisalignedbb);
 
                     if (list != null) {
-                        for (Object element : list) {
-                            Entity entity = (Entity) element;
+                        for (final Object element : list) {
+                            final Entity entity = (Entity) element;
 
                             if (!entity.isDead) {
                                 entity.onCollideWithPlayer(this);
@@ -312,7 +313,7 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
             } else {
                 super.onLivingUpdate();
             }
-        } catch (RuntimeException e) {
+        } catch (final RuntimeException e) {
             FMLLog.severe(
                     "A mod has crashed while Minecraft was doing a normal player tick update.  See details below.  GCEntityClientPlayerMP is in this because that is the player class name when Galacticraft is installed.  This is =*NOT*= a bug in Galacticraft, please report it to the mod indicated by the first lines of the crash report.");
             throw e;
@@ -335,13 +336,13 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
     @Override
     public boolean isSneaking() {
         if (this.worldObj.provider instanceof IZeroGDimension) {
-            ZeroGravityEvent zeroGEvent = new ZeroGravityEvent.SneakOverride(this);
+            final ZeroGravityEvent zeroGEvent = new ZeroGravityEvent.SneakOverride(this);
             MinecraftForge.EVENT_BUS.post(zeroGEvent);
             if (zeroGEvent.isCanceled()) {
                 return super.isSneaking();
             }
 
-            GCPlayerStatsClient stats = GCPlayerStatsClient.get(this);
+            final GCPlayerStatsClient stats = GCPlayerStatsClient.get(this);
             if (stats.landingTicks > 0) {
                 if (this.lastLandingTicks == 0) {
                     this.lastLandingTicks = stats.landingTicks;

@@ -15,8 +15,8 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class EntityFXLanderFlame extends EntityFX {
-    private float smokeParticleScale;
-    private EntityLivingBase ridingEntity;
+    private final float smokeParticleScale;
+    private final EntityLivingBase ridingEntity;
 
     public EntityFXLanderFlame(
             World world, double x, double y, double z, double mX, double mY, double mZ, EntityLivingBase ridingEntity) {

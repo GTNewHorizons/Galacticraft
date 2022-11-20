@@ -9,12 +9,12 @@ public class PersistantInventoryCrafting implements IInventory {
     /**
      * List of the stacks in the crafting matrix.
      */
-    private ItemStack[] stackList;
+    private final ItemStack[] stackList;
 
     /**
      * the width of the crafting inventory
      */
-    private int inventoryWidth;
+    private final int inventoryWidth;
 
     /**
      * Class containing the callbacks for the events on_GUIClosed and
@@ -23,7 +23,7 @@ public class PersistantInventoryCrafting implements IInventory {
     public Container eventHandler;
 
     public PersistantInventoryCrafting() {
-        int k = 9;
+        final int k = 9;
         this.stackList = new ItemStack[k];
         this.inventoryWidth = 3;
     }
@@ -50,7 +50,7 @@ public class PersistantInventoryCrafting implements IInventory {
      */
     public ItemStack getStackInRowAndColumn(int par1, int par2) {
         if (par1 >= 0 && par1 < this.inventoryWidth) {
-            int k = par1 + par2 * this.inventoryWidth;
+            final int k = par1 + par2 * this.inventoryWidth;
             return this.getStackInSlot(k);
         } else {
             return null;
@@ -82,7 +82,7 @@ public class PersistantInventoryCrafting implements IInventory {
     @Override
     public ItemStack getStackInSlotOnClosing(int par1) {
         if (this.stackList[par1] != null) {
-            ItemStack itemstack = this.stackList[par1];
+            final ItemStack itemstack = this.stackList[par1];
             this.stackList[par1] = null;
             return itemstack;
         } else {

@@ -31,7 +31,7 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
         try {
             tickCounter = VillageCollection.class.getDeclaredField(
                     GCCoreUtil.isDeobfuscated() ? "tickCounter" : "field_75553_e");
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }
@@ -91,7 +91,7 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
     @Override
     public void updateWeather() {
         if (!this.worldObj.isRemote) {
-            long newTime = worldObj.getWorldInfo().getWorldTime();
+            final long newTime = worldObj.getWorldInfo().getWorldTime();
             if (this.preTickTime == Long.MIN_VALUE) {
                 // First tick: get the timeCurrentOffset from saved ticks in villages.dat :)
                 int savedTick = 0;
@@ -101,13 +101,13 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
                     if (savedTick < 0) {
                         savedTick = 0;
                     }
-                } catch (Exception ignore) {
+                } catch (final Exception ignore) {
                 }
                 this.timeCurrentOffset = savedTick - newTime;
             } else {
                 // Detect jumps in world time (e.g. because of bed use on Overworld) and reverse
                 // them for this world
-                long diff = newTime - this.preTickTime;
+                final long diff = newTime - this.preTickTime;
                 if (diff > 1L) {
                     this.timeCurrentOffset -= diff - 1L;
                     this.saveTime();
@@ -167,7 +167,7 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
     @Override
     public float calculateCelestialAngle(long par1, float par3) {
         par1 = worldObj.getWorldInfo().getWorldTime() + this.timeCurrentOffset;
-        int j = (int) (par1 % this.getDayLength());
+        final int j = (int) (par1 % this.getDayLength());
         float f1 = (j + par3) / this.getDayLength() - 0.25F;
 
         if (f1 < 0.0F) {
@@ -178,7 +178,7 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
             --f1;
         }
 
-        float f2 = f1;
+        final float f2 = f1;
         f1 = 0.5F - MathHelper.cos(f1 * 3.1415927F) / 2.0F;
         return f2 + (f1 - f2) / 3.0F;
     }
@@ -186,13 +186,13 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
     @SideOnly(Side.CLIENT)
     @Override
     public Vec3 getFogColor(float var1, float var2) {
-        Vector3 fogColor = this.getFogColor();
+        final Vector3 fogColor = this.getFogColor();
         return Vec3.createVectorHelper(fogColor.floatX(), fogColor.floatY(), fogColor.floatZ());
     }
 
     @Override
     public Vec3 getSkyColor(Entity cameraEntity, float partialTicks) {
-        Vector3 skyColor = this.getSkyColor();
+        final Vector3 skyColor = this.getSkyColor();
         return Vec3.createVectorHelper(skyColor.floatX(), skyColor.floatY(), skyColor.floatZ());
     }
 
@@ -272,10 +272,10 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
     @Override
     public IChunkProvider createChunkGenerator() {
         try {
-            Class<? extends IChunkProvider> chunkProviderClass = this.getChunkProviderClass();
+            final Class<? extends IChunkProvider> chunkProviderClass = this.getChunkProviderClass();
 
-            Constructor<?>[] constructors = chunkProviderClass.getConstructors();
-            for (Constructor<?> constr : constructors) {
+            final Constructor<?>[] constructors = chunkProviderClass.getConstructors();
+            for (final Constructor<?> constr : constructors) {
                 if (Arrays.equals(constr.getParameterTypes(), new Object[] {World.class, long.class, boolean.class})) {
                     return (IChunkProvider) constr.newInstance(
                             this.worldObj,
@@ -285,7 +285,7 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
                     return (IChunkProvider) constr.newInstance();
                 }
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 
@@ -298,17 +298,17 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
             super.registerWorldChunkManager();
         } else {
             try {
-                Class<? extends WorldChunkManager> chunkManagerClass = this.getWorldChunkManagerClass();
+                final Class<? extends WorldChunkManager> chunkManagerClass = this.getWorldChunkManagerClass();
 
-                Constructor<?>[] constructors = chunkManagerClass.getConstructors();
-                for (Constructor<?> constr : constructors) {
+                final Constructor<?>[] constructors = chunkManagerClass.getConstructors();
+                for (final Constructor<?> constr : constructors) {
                     if (Arrays.equals(constr.getParameterTypes(), new Object[] {World.class})) {
                         this.worldChunkMgr = (WorldChunkManager) constr.newInstance(this.worldObj);
                     } else if (constr.getParameterTypes().length == 0) {
                         this.worldChunkMgr = (WorldChunkManager) constr.newInstance();
                     }
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }
@@ -378,11 +378,11 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
      */
     private void saveTime() {
         try {
-            VillageCollection vc = this.worldObj.villageCollectionObj;
+            final VillageCollection vc = this.worldObj.villageCollectionObj;
             tickCounter.setAccessible(true);
             tickCounter.setInt(vc, (int) this.getWorldTime());
             vc.markDirty();
-        } catch (Exception ignore) {
+        } catch (final Exception ignore) {
         }
     }
 }

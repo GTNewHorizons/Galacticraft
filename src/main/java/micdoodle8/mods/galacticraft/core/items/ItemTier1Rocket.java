@@ -65,7 +65,7 @@ public class ItemTier1Rocket extends Item implements IHoldableItem {
             for (int i = -1; i < 2; i++) {
                 for (int j = -1; j < 2; j++) {
                     final Block id = par3World.getBlock(par4 + i, par5, par6 + j);
-                    int meta = par3World.getBlockMetadata(par4 + i, par5, par6 + j);
+                    final int meta = par3World.getBlockMetadata(par4 + i, par5, par6 + j);
 
                     if (id == GCBlocks.landingPadFull && meta == 0) {
                         padFound = true;
@@ -145,7 +145,7 @@ public class ItemTier1Rocket extends Item implements IHoldableItem {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack par1ItemStack, EntityPlayer player, List par2List, boolean b) {
-        EnumRocketType type = EnumRocketType.values()[par1ItemStack.getItemDamage()];
+        final EnumRocketType type = EnumRocketType.values()[par1ItemStack.getItemDamage()];
 
         if (!type.getTooltip().isEmpty()) {
             par2List.add(type.getTooltip());
@@ -156,7 +156,7 @@ public class ItemTier1Rocket extends Item implements IHoldableItem {
         }
 
         if (par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("RocketFuel")) {
-            EntityTier1Rocket rocket = new EntityTier1Rocket(
+            final EntityTier1Rocket rocket = new EntityTier1Rocket(
                     FMLClientHandler.instance().getWorldClient(),
                     0,
                     0,

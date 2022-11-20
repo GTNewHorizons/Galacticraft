@@ -13,8 +13,9 @@ import net.minecraft.network.INetHandler;
 public class GalacticraftPacketHandler extends SimpleChannelInboundHandler<IPacket> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, IPacket msg) throws Exception {
-        INetHandler netHandler = ctx.channel().attr(NetworkRegistry.NET_HANDLER).get();
-        EntityPlayer player = GalacticraftCore.proxy.getPlayerFromNetHandler(netHandler);
+        final INetHandler netHandler =
+                ctx.channel().attr(NetworkRegistry.NET_HANDLER).get();
+        final EntityPlayer player = GalacticraftCore.proxy.getPlayerFromNetHandler(netHandler);
 
         switch (FMLCommonHandler.instance().getEffectiveSide()) {
             case CLIENT:

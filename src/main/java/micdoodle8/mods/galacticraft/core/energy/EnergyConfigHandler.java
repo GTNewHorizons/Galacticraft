@@ -274,7 +274,7 @@ public class EnergyConfigHandler {
                     if (Class.forName("buildcraft.api.mj.ISidedBatteryProvider") != null) {
                         count++;
                     }
-                } catch (Exception e) {
+                } catch (final Exception e) {
                 }
 
                 if (count < 6) {
@@ -282,13 +282,13 @@ public class EnergyConfigHandler {
                 }
 
                 try {
-                    Class clazz = Class.forName("buildcraft.api.core.JavaTools");
-                    Method methodz = clazz.getMethod("getAllFields", Class.class);
+                    final Class clazz = Class.forName("buildcraft.api.core.JavaTools");
+                    final Method methodz = clazz.getMethod("getAllFields", Class.class);
                     if (methodz != null && methodz.getReturnType() == List.class) {
                         cachedBCLoadedValue = true;
                         return true;
                     }
-                } catch (Exception e) {
+                } catch (final Exception e) {
                 }
 
                 GCLog.severe(
@@ -318,7 +318,7 @@ public class EnergyConfigHandler {
 
             try {
                 Class.forName("buildcraft.api.mj.MjAPI");
-            } catch (Throwable t) {
+            } catch (final Throwable t) {
                 bc6Found = false;
             }
 
@@ -369,19 +369,19 @@ public class EnergyConfigHandler {
             if (Class.forName("cofh.api.energy.IEnergyHandler") != null) {
                 count += 2;
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
         try {
             if (Class.forName("cofh.api.energy.IEnergyProvider") != null) {
                 count2++;
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
         try {
             if (Class.forName("cofh.api.energy.IEnergyReceiver") != null) {
                 count2++;
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
         }
 
         if (count + count2 == 3 && count2 != 1 || count + count2 == 5) {
@@ -430,7 +430,7 @@ public class EnergyConfigHandler {
             EnergyConfigHandler.MEKANISM_RATIO = 100F;
         }
 
-        float factor = conversionLossFactor / 100F;
+        final float factor = conversionLossFactor / 100F;
         TO_BC_RATIO = factor / EnergyConfigHandler.BC3_RATIO;
         TO_RF_RATIO = factor / EnergyConfigHandler.RF_RATIO;
         TO_IC2_RATIO = factor / EnergyConfigHandler.IC2_RATIO;

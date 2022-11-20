@@ -183,8 +183,8 @@ public class SkyProviderOrbit extends IRenderHandler {
         float deltaTick = partialTicks - this.prevPartialTicks;
         // while (deltaTick < 0F) deltaTick += 1.0F;
         this.prevPartialTicks = partialTicks;
-        long curTick = this.minecraft.theWorld.getTotalWorldTime();
-        int tickDiff = (int) (curTick - this.prevTick);
+        final long curTick = this.minecraft.theWorld.getTotalWorldTime();
+        final int tickDiff = (int) (curTick - this.prevTick);
         this.prevTick = curTick;
         if (tickDiff > 0 && tickDiff < 20) {
             deltaTick += tickDiff;
@@ -204,7 +204,7 @@ public class SkyProviderOrbit extends IRenderHandler {
         GL11.glEnable(GL11.GL_TEXTURE_2D);
 
         GL11.glPushMatrix();
-        float celestialAngle = this.minecraft.theWorld.getCelestialAngle(partialTicks);
+        final float celestialAngle = this.minecraft.theWorld.getCelestialAngle(partialTicks);
         GL11.glRotatef(celestialAngle * 360.0F, 1.0F, 0.0F, 0.0F);
         if (this.renderSun) {
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -246,7 +246,7 @@ public class SkyProviderOrbit extends IRenderHandler {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             var12 = 40.0F;
             this.minecraft.renderEngine.bindTexture(SkyProviderOrbit.moonTexture);
-            float var28 = this.minecraft.theWorld.getMoonPhase();
+            final float var28 = this.minecraft.theWorld.getMoonPhase();
             final int var30 = (int) (var28 % 4);
             final int var29 = (int) (var28 / 4 % 2);
             final float var16 = (var30 + 0) / 4.0F;

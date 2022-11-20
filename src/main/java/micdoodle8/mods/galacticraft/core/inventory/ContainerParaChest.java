@@ -7,14 +7,14 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerParaChest extends Container {
-    private IInventory parachestInventory;
+    private final IInventory parachestInventory;
     public int numRows;
 
     public ContainerParaChest(IInventory par1IInventory, IInventory par2IInventory) {
         this.parachestInventory = par2IInventory;
         this.numRows = (par2IInventory.getSizeInventory() - 3) / 9;
         par2IInventory.openInventory();
-        int i = (this.numRows - 4) * 18 + 19;
+        final int i = (this.numRows - 4) * 18 + 19;
         int j;
         int k;
 
@@ -60,11 +60,11 @@ public class ContainerParaChest extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
         ItemStack itemstack = null;
-        Slot slot = (Slot) this.inventorySlots.get(par2);
+        final Slot slot = (Slot) this.inventorySlots.get(par2);
         final int b = this.inventorySlots.size();
 
         if (slot != null && slot.getHasStack()) {
-            ItemStack itemstack1 = slot.getStack();
+            final ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
             if (par2 < this.parachestInventory.getSizeInventory()) {

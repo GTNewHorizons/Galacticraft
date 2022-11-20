@@ -33,12 +33,13 @@ import net.minecraftforge.common.util.ForgeDirection;
  * @author radfast, micdoodle8, Calclavia, Aidancbrady
  */
 public class EnergyNetwork implements IElectricityNetwork {
-    private boolean isMekLoaded = EnergyConfigHandler.isMekanismLoaded() && !EnergyConfigHandler.disableMekanismOutput;
-    private boolean isRF1Loaded = EnergyConfigHandler.isRFAPIv1Loaded() && !EnergyConfigHandler.disableRFOutput;
-    private boolean isRF2Loaded = EnergyConfigHandler.isRFAPIv2Loaded() && !EnergyConfigHandler.disableRFOutput;
-    private boolean isIC2Loaded =
+    private final boolean isMekLoaded =
+            EnergyConfigHandler.isMekanismLoaded() && !EnergyConfigHandler.disableMekanismOutput;
+    private final boolean isRF1Loaded = EnergyConfigHandler.isRFAPIv1Loaded() && !EnergyConfigHandler.disableRFOutput;
+    private final boolean isRF2Loaded = EnergyConfigHandler.isRFAPIv2Loaded() && !EnergyConfigHandler.disableRFOutput;
+    private final boolean isIC2Loaded =
             EnergyConfigHandler.isIndustrialCraft2Loaded() && !EnergyConfigHandler.disableIC2Output;
-    private boolean isBCLoaded =
+    private final boolean isBCLoaded =
             EnergyConfigHandler.isBuildcraftLoaded() && !EnergyConfigHandler.disableBuildCraftOutput;
 
     /*
@@ -72,8 +73,8 @@ public class EnergyNetwork implements IElectricityNetwork {
      * matches so, an acceptor connected on two sides will be in connectedAcceptors
      * twice
      */
-    private List<TileEntity> connectedAcceptors = new LinkedList<TileEntity>();
-    private List<ForgeDirection> connectedDirections = new LinkedList<ForgeDirection>();
+    private final List<TileEntity> connectedAcceptors = new LinkedList<TileEntity>();
+    private final List<ForgeDirection> connectedDirections = new LinkedList<ForgeDirection>();
 
     /*
      * availableAcceptors is the acceptors which can receive energy (this tick)
@@ -82,11 +83,12 @@ public class EnergyNetwork implements IElectricityNetwork {
      * each acceptor will only be included once in these collections (there is no
      * point trying to put power into a machine twice from two different sides)
      */
-    private Set<TileEntity> availableAcceptors = new HashSet<TileEntity>();
-    private Map<TileEntity, ForgeDirection> availableconnectedDirections = new HashMap<TileEntity, ForgeDirection>();
+    private final Set<TileEntity> availableAcceptors = new HashSet<TileEntity>();
+    private final Map<TileEntity, ForgeDirection> availableconnectedDirections =
+            new HashMap<TileEntity, ForgeDirection>();
 
-    private Map<TileEntity, Float> energyRequests = new HashMap<TileEntity, Float>();
-    private List<TileEntity> ignoreAcceptors = new LinkedList<TileEntity>();
+    private final Map<TileEntity, Float> energyRequests = new HashMap<TileEntity, Float>();
+    private final List<TileEntity> ignoreAcceptors = new LinkedList<TileEntity>();
 
     private final Set<IConductor> conductors = new HashSet<IConductor>();
 
@@ -155,7 +157,7 @@ public class EnergyNetwork implements IElectricityNetwork {
             // amount
             // This will return 0 if totalRequested is 0 - for example a network with no
             // acceptors
-            float totalEnergyLast = this.totalEnergy;
+            final float totalEnergyLast = this.totalEnergy;
 
             // Add the energy for distribution by this grid later this tick
             // Note: totalEnergy cannot exceed totalRequested
@@ -236,10 +238,10 @@ public class EnergyNetwork implements IElectricityNetwork {
         if (!this.connectedAcceptors.isEmpty()) {
             float e;
             final Iterator<ForgeDirection> acceptorDirection = this.connectedDirections.iterator();
-            for (TileEntity acceptor : this.connectedAcceptors) {
+            for (final TileEntity acceptor : this.connectedAcceptors) {
                 // This tries all sides of the acceptor which are connected (see
                 // refreshAcceptors())
-                ForgeDirection sideFrom = acceptorDirection.next();
+                final ForgeDirection sideFrom = acceptorDirection.next();
 
                 // But the grid will only put energy into the acceptor from one side - once it's
                 // in availableAcceptors
@@ -252,7 +254,7 @@ public class EnergyNetwork implements IElectricityNetwork {
                         double result = 0;
                         try {
                             result = (Double) EnergyUtil.demandedEnergyIC2.invoke(acceptor);
-                        } catch (Exception ex) {
+                        } catch (final Exception ex) {
                             if (ConfigManagerCore.enableDebug) {
                                 ex.printStackTrace();
                             }
@@ -295,7 +297,7 @@ public class EnergyNetwork implements IElectricityNetwork {
 
         if (!this.availableAcceptors.isEmpty()) {
             float energyNeeded = this.totalRequested;
-            float energyAvailable = this.totalEnergy;
+            final float energyAvailable = this.totalEnergy;
             float reducor = 1.0F;
             float energyStorageReducor = 1.0F;
 
@@ -318,11 +320,11 @@ public class EnergyNetwork implements IElectricityNetwork {
 
             float currentSending;
             float sentToAcceptor;
-            int tierProduced = Math.min(this.producersTierGC, this.networkTierGC);
+            final int tierProduced = Math.min(this.producersTierGC, this.networkTierGC);
 
             TileEntity debugTE = null;
             try {
-                for (TileEntity tileEntity : this.availableAcceptors) {
+                for (final TileEntity tileEntity : this.availableAcceptors) {
                     debugTE = tileEntity;
                     // Exit the loop if there is no energy left at all (should normally not happen,
                     // should be some even
@@ -348,13 +350,13 @@ public class EnergyNetwork implements IElectricityNetwork {
                         currentSending = energyAvailable - sent;
                     }
 
-                    ForgeDirection sideFrom = this.availableconnectedDirections.get(tileEntity);
+                    final ForgeDirection sideFrom = this.availableconnectedDirections.get(tileEntity);
 
                     if (tileEntity instanceof IElectrical) {
                         sentToAcceptor = ((IElectrical) tileEntity)
                                 .receiveElectricity(sideFrom, currentSending, tierProduced, true);
                     } else if (isIC2Loaded && tileEntity instanceof IEnergySink) {
-                        double energySendingIC2 = currentSending * EnergyConfigHandler.TO_IC2_RATIO;
+                        final double energySendingIC2 = currentSending * EnergyConfigHandler.TO_IC2_RATIO;
                         if (energySendingIC2 >= 1D) {
                             double result = 0;
                             try {
@@ -365,7 +367,7 @@ public class EnergyNetwork implements IElectricityNetwork {
                                     result = (Double)
                                             EnergyUtil.injectEnergyIC2.invoke(tileEntity, sideFrom, energySendingIC2);
                                 }
-                            } catch (Exception ex) {
+                            } catch (final Exception ex) {
                                 if (ConfigManagerCore.enableDebug) {
                                     ex.printStackTrace();
                                 }
@@ -408,7 +410,7 @@ public class EnergyNetwork implements IElectricityNetwork {
 
                     sent += sentToAcceptor;
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 GCLog.severe("DEBUG Energy network loop issue, please report this");
                 if (debugTE != null) {
                     GCLog.severe("Problem was likely caused by tile in dim "
@@ -438,17 +440,17 @@ public class EnergyNetwork implements IElectricityNetwork {
      */
     public void refreshWithChecks() {
         int tierfound = 2;
-        Iterator<IConductor> it = this.conductors.iterator();
+        final Iterator<IConductor> it = this.conductors.iterator();
         while (it.hasNext()) {
-            IConductor conductor = it.next();
+            final IConductor conductor = it.next();
 
             if (conductor == null) {
                 it.remove();
                 continue;
             }
 
-            TileEntity tile = (TileEntity) conductor;
-            World world = tile.getWorldObj();
+            final TileEntity tile = (TileEntity) conductor;
+            final World world = tile.getWorldObj();
             // Remove any conductors in unloaded chunks
             if (tile.isInvalid() || world == null || !world.blockExists(tile.xCoord, tile.yCoord, tile.zCoord)) {
                 it.remove();
@@ -477,17 +479,17 @@ public class EnergyNetwork implements IElectricityNetwork {
     @Override
     public void refresh() {
         int tierfound = 2;
-        Iterator<IConductor> it = this.conductors.iterator();
+        final Iterator<IConductor> it = this.conductors.iterator();
         while (it.hasNext()) {
-            IConductor conductor = it.next();
+            final IConductor conductor = it.next();
 
             if (conductor == null) {
                 it.remove();
                 continue;
             }
 
-            TileEntity tile = (TileEntity) conductor;
-            World world = tile.getWorldObj();
+            final TileEntity tile = (TileEntity) conductor;
+            final World world = tile.getWorldObj();
             // Remove any conductors in unloaded chunks
             if (tile.isInvalid() || world == null) {
                 it.remove();
@@ -518,16 +520,16 @@ public class EnergyNetwork implements IElectricityNetwork {
         this.refreshWithChecks();
 
         try {
-            LinkedList<IConductor> conductorsCopy = new LinkedList();
+            final LinkedList<IConductor> conductorsCopy = new LinkedList();
             conductorsCopy.addAll(this.conductors);
             // This prevents concurrent modifications if something in the loop causes chunk
             // loading
             // (Chunk loading can change the network if new conductors are found)
-            for (IConductor conductor : conductorsCopy) {
+            for (final IConductor conductor : conductorsCopy) {
                 EnergyUtil.setAdjacentPowerConnections(
                         (TileEntity) conductor, this.connectedAcceptors, this.connectedDirections);
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             FMLLog.severe("GC Aluminium Wire: Error when testing whether another mod's tileEntity can accept energy.");
             e.printStackTrace();
         }
@@ -542,8 +544,8 @@ public class EnergyNetwork implements IElectricityNetwork {
     @Override
     public IElectricityNetwork merge(IElectricityNetwork network) {
         if (network != null && network != this) {
-            Set<IConductor> thisNetwork = this.conductors;
-            Set<IConductor> thatNetwork = network.getTransmitters();
+            final Set<IConductor> thisNetwork = this.conductors;
+            final Set<IConductor> thatNetwork = network.getTransmitters();
             if (thisNetwork.size() >= thatNetwork.size()) {
                 thisNetwork.addAll(thatNetwork);
                 this.refresh();
@@ -569,9 +571,9 @@ public class EnergyNetwork implements IElectricityNetwork {
         this.totalEnergy = 0F;
         this.totalRequested = 0F;
         try {
-            Class<?> clazz = Class.forName("micdoodle8.mods.galacticraft.core.tick.TickHandlerServer");
+            final Class<?> clazz = Class.forName("micdoodle8.mods.galacticraft.core.tick.TickHandlerServer");
             clazz.getMethod("removeNetworkTick", this.getClass()).invoke(null, this);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }
@@ -583,16 +585,16 @@ public class EnergyNetwork implements IElectricityNetwork {
 
             // If the size of the residual network is 1, it should simply be preserved
             if (this.getTransmitters().size() > 1) {
-                World world = ((TileEntity) splitPoint).getWorldObj();
+                final World world = ((TileEntity) splitPoint).getWorldObj();
 
                 if (this.getTransmitters().size() > 0) {
-                    TileEntity[] nextToSplit = new TileEntity[6];
-                    boolean[] toDo = {true, true, true, true, true, true};
+                    final TileEntity[] nextToSplit = new TileEntity[6];
+                    final boolean[] toDo = {true, true, true, true, true, true};
                     TileEntity tileEntity;
 
-                    int xCoord = ((TileEntity) splitPoint).xCoord;
-                    int yCoord = ((TileEntity) splitPoint).yCoord;
-                    int zCoord = ((TileEntity) splitPoint).zCoord;
+                    final int xCoord = ((TileEntity) splitPoint).xCoord;
+                    final int yCoord = ((TileEntity) splitPoint).yCoord;
+                    final int zCoord = ((TileEntity) splitPoint).zCoord;
 
                     for (int j = 0; j < 6; j++) {
                         switch (j) {
@@ -629,16 +631,16 @@ public class EnergyNetwork implements IElectricityNetwork {
 
                     for (int i1 = 0; i1 < 6; i1++) {
                         if (toDo[i1]) {
-                            TileEntity connectedBlockA = nextToSplit[i1];
-                            NetworkFinder finder = new NetworkFinder(
+                            final TileEntity connectedBlockA = nextToSplit[i1];
+                            final NetworkFinder finder = new NetworkFinder(
                                     world, new BlockVec3(connectedBlockA), new BlockVec3((TileEntity) splitPoint));
-                            List<IConductor> partNetwork = finder.exploreNetwork();
+                            final List<IConductor> partNetwork = finder.exploreNetwork();
 
                             // Mark any others still to do in the nextToSplit array which are connected to
                             // this, as
                             // dealt with
                             for (int i2 = i1 + 1; i2 < 6; i2++) {
-                                TileEntity connectedBlockB = nextToSplit[i2];
+                                final TileEntity connectedBlockB = nextToSplit[i2];
 
                                 if (toDo[i2]) {
                                     if (partNetwork.contains(connectedBlockB)) {
@@ -648,7 +650,7 @@ public class EnergyNetwork implements IElectricityNetwork {
                             }
 
                             // Now make the new network from partNetwork
-                            EnergyNetwork newNetwork = new EnergyNetwork();
+                            final EnergyNetwork newNetwork = new EnergyNetwork();
                             newNetwork.getTransmitters().addAll(partNetwork);
                             newNetwork.refreshWithChecks();
                         }

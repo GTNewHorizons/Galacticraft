@@ -30,7 +30,7 @@ public class TileEntityNasaWorkbench extends TileEntityMulti implements IMultiBl
     public void onCreate(BlockVec3 placedPosition) {
         this.mainBlockPosition = placedPosition;
         this.markDirty();
-        int buildHeight = this.worldObj.getHeight() - 1;
+        final int buildHeight = this.worldObj.getHeight() - 1;
 
         for (int y = 1; y < 3; y++) {
             if (placedPosition.y + y > buildHeight) {

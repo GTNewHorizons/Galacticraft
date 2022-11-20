@@ -102,7 +102,7 @@ public class BlockFluidGC extends BlockFluidClassic {
     @Override
     public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
         if (world.getBlock(x, y, z) instanceof BlockLiquid) {
-            int meta = world.getBlockMetadata(x, y, z);
+            final int meta = world.getBlockMetadata(x, y, z);
             return meta > 1 || meta == -1;
         }
 
@@ -112,7 +112,7 @@ public class BlockFluidGC extends BlockFluidClassic {
     @Override
     public boolean displaceIfPossible(World world, int x, int y, int z) {
         if (world.getBlock(x, y, z) instanceof BlockLiquid) {
-            int meta = world.getBlockMetadata(x, y, z);
+            final int meta = world.getBlockMetadata(x, y, z);
             if (meta > 1 || meta == -1) {
                 return super.displaceIfPossible(world, x, y, z);
             }

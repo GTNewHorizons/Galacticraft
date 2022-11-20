@@ -29,7 +29,7 @@ import net.minecraftforge.fluids.FluidTank;
 
 public class NetworkUtil {
     public static void encodeData(ByteBuf buffer, Collection<Object> sendData) throws IOException {
-        for (Object dataValue : sendData) {
+        for (final Object dataValue : sendData) {
             if (dataValue instanceof Integer) {
                 buffer.writeInt((Integer) dataValue);
             } else if (dataValue instanceof Float) {
@@ -47,7 +47,7 @@ public class NetworkUtil {
             } else if (dataValue instanceof Long) {
                 buffer.writeLong((Long) dataValue);
             } else if (dataValue instanceof EnergyStorage) {
-                EnergyStorage storage = (EnergyStorage) dataValue;
+                final EnergyStorage storage = (EnergyStorage) dataValue;
                 buffer.writeFloat(storage.getCapacityGC());
                 buffer.writeFloat(storage.getMaxReceive());
                 buffer.writeFloat(storage.getMaxExtract());
@@ -82,31 +82,31 @@ public class NetworkUtil {
 
                 for (int i = 0; i < ((FlagData) dataValue).getWidth(); i++) {
                     for (int j = 0; j < ((FlagData) dataValue).getHeight(); j++) {
-                        Vector3 vec = ((FlagData) dataValue).getColorAt(i, j);
+                        final Vector3 vec = ((FlagData) dataValue).getColorAt(i, j);
                         buffer.writeByte((byte) (vec.x * 256 - 128));
                         buffer.writeByte((byte) (vec.y * 256 - 128));
                         buffer.writeByte((byte) (vec.z * 256 - 128));
                     }
                 }
             } else if (dataValue instanceof Integer[]) {
-                Integer[] array = (Integer[]) dataValue;
+                final Integer[] array = (Integer[]) dataValue;
                 buffer.writeInt(array.length);
 
-                for (Integer element : array) {
+                for (final Integer element : array) {
                     buffer.writeInt(element);
                 }
             } else if (dataValue instanceof String[]) {
-                String[] array = (String[]) dataValue;
+                final String[] array = (String[]) dataValue;
                 buffer.writeInt(array.length);
 
-                for (String element : array) {
+                for (final String element : array) {
                     ByteBufUtils.writeUTF8String(buffer, element);
                 }
             } else if (dataValue instanceof Footprint[]) {
-                Footprint[] array = (Footprint[]) dataValue;
+                final Footprint[] array = (Footprint[]) dataValue;
                 buffer.writeInt(array.length);
 
-                for (Footprint element : array) {
+                for (final Footprint element : array) {
                     buffer.writeInt(element.dimension);
                     buffer.writeFloat((float) element.position.x);
                     buffer.writeFloat((float) element.position.y + 1);
@@ -125,9 +125,9 @@ public class NetworkUtil {
     }
 
     public static ArrayList<Object> decodeData(Class<?>[] types, ByteBuf buffer) {
-        ArrayList<Object> objList = new ArrayList<Object>();
+        final ArrayList<Object> objList = new ArrayList<Object>();
 
-        for (Class clazz : types) {
+        for (final Class clazz : types) {
             if (clazz.equals(Integer.class)) {
                 objList.add(buffer.readInt());
             } else if (clazz.equals(Float.class)) {
@@ -145,19 +145,20 @@ public class NetworkUtil {
             } else if (clazz.equals(Long.class)) {
                 objList.add(buffer.readLong());
             } else if (clazz.equals(byte[].class)) {
-                byte[] bytes = new byte[buffer.readInt()];
+                final byte[] bytes = new byte[buffer.readInt()];
                 for (int i = 0; i < bytes.length; i++) {
                     bytes[i] = buffer.readByte();
                 }
                 objList.add(bytes);
             } else if (clazz.equals(EnergyStorage.class)) {
-                EnergyStorage storage = new EnergyStorage(buffer.readFloat(), buffer.readFloat(), buffer.readFloat());
+                final EnergyStorage storage =
+                        new EnergyStorage(buffer.readFloat(), buffer.readFloat(), buffer.readFloat());
                 storage.setEnergyStored(buffer.readFloat());
                 objList.add(storage);
             } else if (clazz.equals(NBTTagCompound.class)) {
                 try {
                     objList.add(NetworkUtil.readNBTTagCompound(buffer));
-                } catch (IOException e) {
+                } catch (final IOException e) {
                     e.printStackTrace();
                 }
             } else if (clazz.equals(BlockVec3.class)) {
@@ -167,9 +168,9 @@ public class NetworkUtil {
             } else if (clazz.equals(Vector3.class)) {
                 objList.add(new Vector3(buffer.readDouble(), buffer.readDouble(), buffer.readDouble()));
             } else if (clazz.equals(FlagData.class)) {
-                int width = buffer.readInt();
-                int height = buffer.readInt();
-                FlagData flagData = new FlagData(width, height);
+                final int width = buffer.readInt();
+                final int height = buffer.readInt();
+                final FlagData flagData = new FlagData(width, height);
 
                 for (int i = 0; i < width; i++) {
                     for (int j = 0; j < height; j++) {
@@ -182,19 +183,19 @@ public class NetworkUtil {
 
                 objList.add(flagData);
             } else if (clazz.equals(Integer[].class)) {
-                int size = buffer.readInt();
+                final int size = buffer.readInt();
 
                 for (int i = 0; i < size; i++) {
                     objList.add(buffer.readInt());
                 }
             } else if (clazz.equals(String[].class)) {
-                int size = buffer.readInt();
+                final int size = buffer.readInt();
 
                 for (int i = 0; i < size; i++) {
                     objList.add(ByteBufUtils.readUTF8String(buffer));
                 }
             } else if (clazz.equals(Footprint[].class)) {
-                int size = buffer.readInt();
+                final int size = buffer.readInt();
 
                 for (int i = 0; i < size; i++) {
                     objList.add(new Footprint(
@@ -211,7 +212,7 @@ public class NetworkUtil {
     }
 
     public static Object getFieldValueFromStream(Field field, ByteBuf buffer, World world) throws IOException {
-        Class<?> dataValue = field.getType();
+        final Class<?> dataValue = field.getType();
 
         if (dataValue.equals(int.class)) {
             return buffer.readInt();
@@ -240,16 +241,16 @@ public class NetworkUtil {
         } else if (dataValue.equals(UUID.class)) {
             return new UUID(buffer.readLong(), buffer.readLong());
         } else if (dataValue.equals(byte[].class)) {
-            byte[] bytes = new byte[buffer.readInt()];
+            final byte[] bytes = new byte[buffer.readInt()];
             for (int i = 0; i < bytes.length; i++) {
                 bytes[i] = buffer.readByte();
             }
             return bytes;
         } else if (dataValue.equals(EnergyStorage.class)) {
-            float capacity = buffer.readFloat();
-            float maxReceive = buffer.readFloat();
-            float maxExtract = buffer.readFloat();
-            EnergyStorage storage = new EnergyStorage(capacity, maxReceive, maxExtract);
+            final float capacity = buffer.readFloat();
+            final float maxReceive = buffer.readFloat();
+            final float maxExtract = buffer.readFloat();
+            final EnergyStorage storage = new EnergyStorage(capacity, maxReceive, maxExtract);
             storage.setEnergyStored(buffer.readFloat());
             return storage;
         } else {
@@ -270,11 +271,11 @@ public class NetworkUtil {
 
     public static ItemStack readItemStack(ByteBuf buffer) throws IOException {
         ItemStack itemstack = null;
-        short itemID = buffer.readShort();
+        final short itemID = buffer.readShort();
 
         if (itemID >= 0) {
-            byte stackSize = buffer.readByte();
-            short meta = buffer.readShort();
+            final byte stackSize = buffer.readByte();
+            final short meta = buffer.readShort();
             itemstack = new ItemStack(Item.getItemById(itemID), stackSize, meta);
             itemstack.stackTagCompound = NetworkUtil.readNBTTagCompound(buffer);
         }
@@ -300,12 +301,12 @@ public class NetworkUtil {
     }
 
     public static NBTTagCompound readNBTTagCompound(ByteBuf buffer) throws IOException {
-        short dataLength = buffer.readShort();
+        final short dataLength = buffer.readShort();
 
         if (dataLength < 0) {
             return null;
         } else {
-            byte[] compressedNBT = new byte[dataLength];
+            final byte[] compressedNBT = new byte[dataLength];
             buffer.readBytes(compressedNBT);
             return VersionUtil.decompressNBT(compressedNBT);
         }
@@ -315,7 +316,7 @@ public class NetworkUtil {
         if (nbt == null) {
             buffer.writeShort(-1);
         } else {
-            byte[] compressedNBT = CompressedStreamTools.compress(nbt);
+            final byte[] compressedNBT = CompressedStreamTools.compress(nbt);
             buffer.writeShort((short) compressedNBT.length);
             buffer.writeBytes(compressedNBT);
         }
@@ -334,15 +335,15 @@ public class NetworkUtil {
     }
 
     public static FluidTank readFluidTank(ByteBuf buffer) throws IOException {
-        int capacity = buffer.readInt();
-        int fluidID = buffer.readInt();
-        FluidTank fluidTank = new FluidTank(capacity);
-        int amount = buffer.readInt();
+        final int capacity = buffer.readInt();
+        final int fluidID = buffer.readInt();
+        final FluidTank fluidTank = new FluidTank(capacity);
+        final int amount = buffer.readInt();
 
         if (fluidID == -1) {
             fluidTank.setFluid(null);
         } else {
-            Fluid fluid = FluidRegistry.getFluid(fluidID);
+            final Fluid fluid = FluidRegistry.getFluid(fluidID);
             fluidTank.setFluid(new FluidStack(fluid, amount));
         }
 
@@ -355,31 +356,31 @@ public class NetworkUtil {
         } else if (a == null) {
             return true;
         } else if (a instanceof Float && b instanceof Float) {
-            float af = (Float) a;
-            float bf = (Float) b;
+            final float af = (Float) a;
+            final float bf = (Float) b;
             return af == bf || Math.abs(af - bf) < 0.01F;
         } else if (a instanceof Double && b instanceof Double) {
             return DoubleMath.fuzzyEquals((Double) a, (Double) b, 0.01);
         } else if (a instanceof Entity && b instanceof Entity) {
-            Entity a2 = (Entity) a;
-            Entity b2 = (Entity) b;
+            final Entity a2 = (Entity) a;
+            final Entity b2 = (Entity) b;
             return fuzzyEquals(a2.getEntityId(), b2.getEntityId());
         } else if (a instanceof Vector3 && b instanceof Vector3) {
-            Vector3 a2 = (Vector3) a;
-            Vector3 b2 = (Vector3) b;
+            final Vector3 a2 = (Vector3) a;
+            final Vector3 b2 = (Vector3) b;
             return fuzzyEquals(a2.x, b2.x) && fuzzyEquals(a2.y, b2.y) && fuzzyEquals(a2.z, b2.z);
         } else if (a instanceof EnergyStorage && b instanceof EnergyStorage) {
-            EnergyStorage a2 = (EnergyStorage) a;
-            EnergyStorage b2 = (EnergyStorage) b;
+            final EnergyStorage a2 = (EnergyStorage) a;
+            final EnergyStorage b2 = (EnergyStorage) b;
             return fuzzyEquals(a2.getEnergyStoredGC(), b2.getEnergyStoredGC())
                     && fuzzyEquals(a2.getCapacityGC(), b2.getCapacityGC())
                     && fuzzyEquals(a2.getMaxReceive(), b2.getMaxReceive())
                     && fuzzyEquals(a2.getMaxExtract(), b2.getMaxExtract());
         } else if (a instanceof FluidTank && b instanceof FluidTank) {
-            FluidTank a2 = (FluidTank) a;
-            FluidTank b2 = (FluidTank) b;
-            FluidStack fluidA = a2.getFluid();
-            FluidStack fluidB = b2.getFluid();
+            final FluidTank a2 = (FluidTank) a;
+            final FluidTank b2 = (FluidTank) b;
+            final FluidStack fluidA = a2.getFluid();
+            final FluidStack fluidB = b2.getFluid();
             return fuzzyEquals(a2.getCapacity(), b2.getCapacity())
                     && fuzzyEquals(
                             fluidA != null ? FluidUtil.getFluidID(fluidA) : -1,
@@ -393,16 +394,16 @@ public class NetworkUtil {
     public static Object cloneNetworkedObject(Object a) {
         // We only need to clone mutable objects
         if (a instanceof EnergyStorage) {
-            EnergyStorage prevStorage = (EnergyStorage) a;
-            EnergyStorage storage = new EnergyStorage(
+            final EnergyStorage prevStorage = (EnergyStorage) a;
+            final EnergyStorage storage = new EnergyStorage(
                     prevStorage.getCapacityGC(), prevStorage.getMaxReceive(), prevStorage.getMaxExtract());
             storage.setEnergyStored(prevStorage.getEnergyStoredGC());
             return storage;
         } else if (a instanceof FluidTank) {
-            FluidTank prevTank = (FluidTank) a;
+            final FluidTank prevTank = (FluidTank) a;
             FluidStack prevFluid = prevTank.getFluid();
             prevFluid = prevFluid == null ? null : prevFluid.copy();
-            FluidTank tank = new FluidTank(prevFluid, prevTank.getCapacity());
+            final FluidTank tank = new FluidTank(prevFluid, prevTank.getCapacity());
             return tank;
         } else {
             return a;

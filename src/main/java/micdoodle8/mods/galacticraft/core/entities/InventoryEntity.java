@@ -16,12 +16,12 @@ public abstract class InventoryEntity extends NetworkedEntity implements IInvent
 
     @Override
     protected void readEntityFromNBT(NBTTagCompound nbt) {
-        NBTTagList itemList = nbt.getTagList("Items", 10);
+        final NBTTagList itemList = nbt.getTagList("Items", 10);
         this.containedItems = new ItemStack[this.getSizeInventory()];
 
         for (int i = 0; i < itemList.tagCount(); ++i) {
-            NBTTagCompound itemTag = itemList.getCompoundTagAt(i);
-            int slotID = itemTag.getByte("Slot") & 255;
+            final NBTTagCompound itemTag = itemList.getCompoundTagAt(i);
+            final int slotID = itemTag.getByte("Slot") & 255;
 
             if (slotID >= 0 && slotID < this.containedItems.length) {
                 this.containedItems[slotID] = ItemStack.loadItemStackFromNBT(itemTag);
@@ -31,11 +31,11 @@ public abstract class InventoryEntity extends NetworkedEntity implements IInvent
 
     @Override
     protected void writeEntityToNBT(NBTTagCompound nbt) {
-        NBTTagList itemList = new NBTTagList();
+        final NBTTagList itemList = new NBTTagList();
 
         for (int i = 0; i < this.containedItems.length; ++i) {
             if (this.containedItems[i] != null) {
-                NBTTagCompound itemTag = new NBTTagCompound();
+                final NBTTagCompound itemTag = new NBTTagCompound();
                 itemTag.setByte("Slot", (byte) i);
                 this.containedItems[i].writeToNBT(itemTag);
                 itemList.appendTag(itemTag);
@@ -76,7 +76,7 @@ public abstract class InventoryEntity extends NetworkedEntity implements IInvent
     @Override
     public ItemStack getStackInSlotOnClosing(int slotIndex) {
         if (this.containedItems[slotIndex] != null) {
-            ItemStack stack = this.containedItems[slotIndex];
+            final ItemStack stack = this.containedItems[slotIndex];
             this.containedItems[slotIndex] = null;
             return stack;
         } else {

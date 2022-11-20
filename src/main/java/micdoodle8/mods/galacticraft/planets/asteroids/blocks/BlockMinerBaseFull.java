@@ -71,7 +71,7 @@ public class BlockMinerBaseFull extends BlockTileGC {
 
     @Override
     public void breakBlock(World world, int x, int y, int z, Block par5, int par6) {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        final TileEntity tileEntity = world.getTileEntity(x, y, z);
 
         if (tileEntity instanceof TileEntityMinerBase) {
             ((TileEntityMinerBase) tileEntity).onBlockRemoval();
@@ -91,7 +91,7 @@ public class BlockMinerBaseFull extends BlockTileGC {
             float par7,
             float par8,
             float par9) {
-        TileEntity tileEntity = par1World.getTileEntity(x, y, z);
+        final TileEntity tileEntity = par1World.getTileEntity(x, y, z);
         if (tileEntity instanceof TileEntityMinerBase) {
             return ((TileEntityMinerBase) tileEntity).onActivated(par5EntityPlayer);
         } else {
@@ -106,7 +106,7 @@ public class BlockMinerBaseFull extends BlockTileGC {
 
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+        final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
         ret.add(new ItemStack(Item.getItemFromBlock(AsteroidBlocks.blockMinerBase), 8, 0));
         return ret;
     }
@@ -127,7 +127,7 @@ public class BlockMinerBaseFull extends BlockTileGC {
             float hitX,
             float hitY,
             float hitZ) {
-        TileEntity te = par1World.getTileEntity(x, y, z);
+        final TileEntity te = par1World.getTileEntity(x, y, z);
         if (te instanceof TileEntityMinerBase) {
             ((TileEntityMinerBase) te).updateFacing();
         }
