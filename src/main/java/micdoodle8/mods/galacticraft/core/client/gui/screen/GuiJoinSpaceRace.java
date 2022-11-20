@@ -69,8 +69,6 @@ public class GuiJoinSpaceRace extends GuiScreen implements ICheckBoxCallback, IT
 
         if (this.initialized) {
             final int var5 = (this.width - this.width / 4) / 2;
-            final int var6 = (this.height - this.height / 4) / 2;
-
             final int buttonFlag_width = 81;
             this.buttonFlag_height = 58;
             this.buttonFlag_xPosition = this.width / 2 - buttonFlag_width / 2;
@@ -127,9 +125,6 @@ public class GuiJoinSpaceRace extends GuiScreen implements ICheckBoxCallback, IT
     @Override
     public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
-        final int var5 = (this.width - this.width / 4) / 2;
-        final int var6 = (this.height - this.height / 4) / 2;
-
         if (this.initialized) {
             this.drawCenteredString(
                     this.fontRendererObj,

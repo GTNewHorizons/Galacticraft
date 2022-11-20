@@ -202,7 +202,6 @@ public class FreefallHandler {
 
     @SideOnly(Side.CLIENT)
     public static void setupFreefallPre(EntityPlayerSP p) {
-        final double dY = p.motionY - pPrevMotionY;
         jetpackBoost = 0F;
         pPrevMotionX = p.motionX;
         pPrevMotionY = p.motionY;

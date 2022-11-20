@@ -42,7 +42,6 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
         GL11.glTranslatef((float) d, (float) d1, (float) d2);
 
         int meta = tileEntity.getBlockMetadata();
-        final boolean screenData = meta >= 8;
         meta &= 7;
 
         switch (meta) {

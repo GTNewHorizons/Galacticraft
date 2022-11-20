@@ -62,8 +62,6 @@ public class NEIGalacticraftAsteroidsConfig implements IConfigureNEI {
     }
 
     public void registerRecipes() {
-        final int changeY = 15;
-
         ArrayList<PositionedStack> input = new ArrayList<PositionedStack>();
 
         /*

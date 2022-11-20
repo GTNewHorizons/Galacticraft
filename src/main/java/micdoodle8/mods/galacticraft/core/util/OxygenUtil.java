@@ -15,7 +15,6 @@ import micdoodle8.mods.galacticraft.api.vector.BlockVec3Dim;
 import micdoodle8.mods.galacticraft.api.world.IAtmosphericGas;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.energy.EnergyConfigHandler;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
 import micdoodle8.mods.galacticraft.core.items.ItemOxygenGear;
 import micdoodle8.mods.galacticraft.core.items.ItemOxygenMask;
@@ -270,7 +269,6 @@ public class OxygenUtil {
         }
 
         if (block instanceof BlockPistonBase) {
-            final BlockPistonBase piston = (BlockPistonBase) block;
             final int meta = vec.getBlockMetadata(world);
             if (BlockPistonBase.isExtended(meta)) {
                 final int facing = BlockPistonBase.getPistonOrientation(meta);
@@ -393,9 +391,6 @@ public class OxygenUtil {
 
     public static TileEntity[] getAdjacentOxygenConnections(TileEntity tile) {
         final TileEntity[] adjacentConnections = new TileEntity[ForgeDirection.VALID_DIRECTIONS.length];
-
-        final boolean isMekLoaded = EnergyConfigHandler.isMekanismLoaded();
-
         final BlockVec3 thisVec = new BlockVec3(tile);
         final World world = tile.getWorldObj();
         for (final ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {

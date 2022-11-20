@@ -109,7 +109,6 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
                     --this.timeUntilPortal;
                 }
 
-                final boolean flag = this.movementInput.jump;
                 final float ff = 0.8F;
                 final boolean flag1 = this.movementInput.moveForward >= ff;
                 this.movementInput.updatePlayerMoveState();

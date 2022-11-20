@@ -353,13 +353,11 @@ public class MapUtil {
         int count = 0;
         for (int x = 0; x < overworldImage.getWidth(); x += 4) {
             for (int z = 0; z < overworldImage.getHeight(); z += 4) {
-                int r = 0;
                 int g = 0;
                 int b = 0;
                 for (int xx = 0; xx < 4; xx++) {
                     for (int zz = 0; zz < 4; zz++) {
                         final int col = overworldImage.getRGB(xx + x, zz + z);
-                        r += col >> 16;
                         g += col >> 8 & 255;
                         b += col & 255;
                     }
@@ -370,7 +368,6 @@ public class MapUtil {
                 mapColPos.put(g - b, count);
                 if (x < overworldImage.getHeight()) {
                     final int col = paletteImage.getRGB(x + 1, z + 1);
-                    r = col >> 16;
                     g = col >> 8 & 255;
                     b = col & 255;
                     while (mapColPosB.containsKey(g - b)) {
@@ -460,9 +457,6 @@ public class MapUtil {
 
             // raw is a 1536 x 384 byte array of biome types followed by heights
             final BufferedImage worldImageLarge = new BufferedImage(384 * 8, 96 * 8, BufferedImage.TYPE_INT_RGB);
-            final ArrayList<Integer> cols = new ArrayList<Integer>();
-            final int lastcol = -1;
-            final int idx = 0;
             for (int x = 0; x < 1536; x++) {
                 for (int z = 0; z < 384; z++) {
                     final int arrayIndex = (x * 384 + z) * 2;
@@ -498,9 +492,6 @@ public class MapUtil {
         } else if (raw.length == 18432) {
             // raw is a 192 x 48 byte array of biome types followed by heights
             final BufferedImage worldImage = new BufferedImage(192, 48, BufferedImage.TYPE_INT_RGB);
-            final ArrayList<Integer> cols = new ArrayList<Integer>();
-            final int lastcol = -1;
-            final int idx = 0;
             for (int x = 0; x < 192; x++) {
                 for (int z = 0; z < 48; z++) {
                     final int arrayIndex = (x * 48 + z) * 2;

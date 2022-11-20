@@ -996,7 +996,6 @@ public class ThreadFindSeal {
         }
 
         if (block instanceof BlockPistonBase) {
-            final BlockPistonBase piston = (BlockPistonBase) block;
             final int meta = vec.getBlockMetadata(this.world);
             if (BlockPistonBase.isExtended(meta)) {
                 final int facing = BlockPistonBase.getPistonOrientation(meta);

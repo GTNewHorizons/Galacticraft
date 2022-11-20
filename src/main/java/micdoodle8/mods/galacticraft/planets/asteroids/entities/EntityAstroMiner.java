@@ -313,7 +313,6 @@ public class EntityAstroMiner extends Entity
     }
 
     private boolean emptyInventory(TileEntityMinerBase minerBase) {
-        final boolean doneOne = false;
         for (int i = 0; i < this.cargoItems.length; i++) {
             final ItemStack stack = this.cargoItems[i];
             if (stack == null) {

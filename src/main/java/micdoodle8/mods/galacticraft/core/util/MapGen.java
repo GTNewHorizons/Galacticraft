@@ -309,10 +309,6 @@ public class MapGen {
     }
 
     private void func_147423_a(int cx, int cy, int cz) {
-        final double d0 = 684.412D;
-        final double d1 = 684.412D;
-        final double d2 = 512.0D;
-        final double d3 = 512.0D;
         noiseField4 = this.noiseGen4.generateNoiseOctaves(noiseField4, cx, cz, 5, 5, 200.0D, 200.0D, 0.5D);
         noiseField3 = this.noiseGen3.generateNoiseOctaves(
                 noiseField3, cx, cy, cz, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D);
@@ -320,11 +316,8 @@ public class MapGen {
                 this.noiseGen1.generateNoiseOctaves(noiseField1, cx, cy, cz, 5, 33, 5, 684.412D, 684.412D, 684.412D);
         noiseField2 =
                 this.noiseGen2.generateNoiseOctaves(noiseField2, cx, cy, cz, 5, 33, 5, 684.412D, 684.412D, 684.412D);
-        final boolean flag1 = false;
-        final boolean flag = false;
         int l = 2;
         int i1 = 0;
-        final double d4 = 8.5D;
         final boolean amplified = this.field_147435_p == WorldType.AMPLIFIED;
 
         for (int xx = 0; xx < 5; ++xx) {

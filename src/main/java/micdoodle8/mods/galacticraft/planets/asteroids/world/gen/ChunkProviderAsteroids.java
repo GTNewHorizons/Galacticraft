@@ -429,7 +429,6 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
                 final int indexBaseX = x * ChunkProviderAsteroids.CHUNK_SIZE_Y << 4;
 
                 for (int z = zMin; z < zMax; z++) {
-                    final float sizeModY = sizeYArray[indexXZ + z];
                     float sizeY = size + sizeYArray[indexXZ + z];
                     sizeY *= sizeY;
                     int distanceZ = asteroidZ - (z + chunkZ);
@@ -756,12 +755,6 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
 
     public void generateSkylightMap(Chunk chunk, int cx, int cz) {
         final World w = chunk.worldObj;
-        final boolean flagXChunk = w.getChunkProvider().chunkExists(cx - 1, cz);
-        final boolean flagZUChunk = w.getChunkProvider().chunkExists(cx, cz + 1);
-        final boolean flagZDChunk = w.getChunkProvider().chunkExists(cx, cz - 1);
-        final boolean flagXZUChunk = w.getChunkProvider().chunkExists(cx - 1, cz + 1);
-        final boolean flagXZDChunk = w.getChunkProvider().chunkExists(cx - 1, cz - 1);
-
         for (int j = 0; j < 16; j++) {
             if (chunk.getBlockStorageArray()[j] == null) {
                 chunk.getBlockStorageArray()[j] = new ExtendedBlockStorage(j << 4, false);

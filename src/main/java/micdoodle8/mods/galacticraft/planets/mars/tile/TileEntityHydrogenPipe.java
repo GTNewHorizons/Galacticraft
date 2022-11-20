@@ -8,7 +8,6 @@ import micdoodle8.mods.galacticraft.api.transmission.tile.IConnector;
 import micdoodle8.mods.galacticraft.api.transmission.tile.INetworkProvider;
 import micdoodle8.mods.galacticraft.api.transmission.tile.ITransmitter;
 import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.core.energy.EnergyConfigHandler;
 import micdoodle8.mods.galacticraft.core.tick.TickHandlerServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -104,9 +103,6 @@ public class TileEntityHydrogenPipe extends TileEntity implements ITransmitter {
 
     public static TileEntity[] getAdjacentHydrogenConnections(TileEntity tile) {
         final TileEntity[] adjacentConnections = new TileEntity[ForgeDirection.VALID_DIRECTIONS.length];
-
-        final boolean isMekLoaded = EnergyConfigHandler.isMekanismLoaded();
-
         final BlockVec3 thisVec = new BlockVec3(tile);
         for (final ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
             final TileEntity tileEntity = thisVec.getTileEntityOnSide(tile.getWorldObj(), direction);

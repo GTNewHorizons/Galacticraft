@@ -41,7 +41,6 @@ public class FootprintRenderer {
         final float f8 = 0.0F;
         final float f9 = 1.0F;
 
-        final float f10 = 0.4F;
         GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 
         for (final List<Footprint> footprintList : this.footprints.values()) {

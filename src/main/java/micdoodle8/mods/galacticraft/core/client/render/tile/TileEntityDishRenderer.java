@@ -5,7 +5,6 @@ import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityDish;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
@@ -33,7 +32,6 @@ public class TileEntityDishRenderer extends TileEntitySpecialRenderer {
     public void renderTileEntityAt(TileEntity var1, double par2, double par4, double par6, float partialTickTime) {
         final TileEntityDish dish = (TileEntityDish) var1;
         final float time = (dish.ticks + partialTickTime) % 1440F;
-        final EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 
         GL11.glPushMatrix();
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);

@@ -340,7 +340,6 @@ public class BlockEnclosed extends BlockContainer
             // and optionally: tilePipe.sendUpdateToClient();
 
             final Item pipeItem = pipeItemsBC[metadata - 7];
-            final Class<?> clazzBlockPipe = CompatibilityManager.classBCBlockGenericPipe;
             final TileEntity tilePipe = world.getTileEntity(i, j, k);
             final Class<?> clazzTilePipe = tilePipe.getClass();
 

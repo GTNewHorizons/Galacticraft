@@ -259,20 +259,14 @@ public class TileEntityScreen extends TileEntity {
                 this.imageType = 0;
             }
 
-            boolean flag = false;
-
             if (!this.connectedRight && this.canJoinRight()) {
                 this.joinRight();
-                flag = true;
             } else if (!this.connectedLeft && this.canJoinLeft()) {
                 this.joinLeft();
-                flag = true;
             } else if (!this.connectedUp && this.canJoinUp()) {
                 this.joinUp();
-                flag = true;
             } else if (!this.connectedDown && this.canJoinDown()) {
                 this.joinDown();
-                flag = true;
             }
 
             this.refreshConnections(true);
@@ -966,25 +960,11 @@ public class TileEntityScreen extends TileEntity {
     }
 
     private void log(String msg) {
-        String connections = "";
-        String strSide = "S";
-        if (this.connectedUp) {
-            connections = "U";
-        }
-        if (this.connectedDown) {
-            connections += "D";
-        }
-        if (this.connectedLeft) {
-            connections += "L";
-        }
-        if (this.connectedRight) {
-            connections += "R";
-        }
-        if (this.worldObj.isRemote) {
-            strSide = "C";
-            // System.out.println(strSide + ":" + msg + " at "+this.xCoord+","+this.zCoord+"
-            // "+connections);
-        }
+        if (this.connectedUp) {}
+        if (this.connectedDown) {}
+        if (this.connectedLeft) {}
+        if (this.connectedRight) {}
+        if (this.worldObj.isRemote) {}
     }
 
     @SideOnly(Side.CLIENT)

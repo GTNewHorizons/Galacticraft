@@ -1321,7 +1321,6 @@ public class PacketSimple extends Packet implements IPacket {
                 stats.buildFlags = (Integer) this.data.get(0);
                 break;
             case S_UPDATE_VIEWSCREEN_REQUEST:
-                final int screenDim = (Integer) this.data.get(0);
                 final TileEntity tile = player.worldObj.getTileEntity(
                         (Integer) this.data.get(1), (Integer) this.data.get(2), (Integer) this.data.get(3));
                 if (tile instanceof TileEntityScreen) {

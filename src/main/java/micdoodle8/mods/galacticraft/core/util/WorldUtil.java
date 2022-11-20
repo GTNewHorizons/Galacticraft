@@ -268,8 +268,6 @@ public class WorldUtil {
         if (world.provider.getSkyRenderer() instanceof SkyProviderOverworld) {
             float var20 = ((float) player.posY - Constants.OVERWORLD_SKYPROVIDER_STARTHEIGHT) / 1000.0F;
             var20 = MathHelper.sqrt_float(var20);
-            final float var21 = Math.max(1.0F - var20 * 40.0F, 0.0F);
-
             final Vec3 vec = world.getFogColor(1.0F);
 
             return Vec3.createVectorHelper(
@@ -964,7 +962,6 @@ public class WorldUtil {
         final int oldDimID = entity.worldObj.provider.dimensionId;
 
         if (ridingRocket != null) {
-            final ArrayList<TileEntityTelemetry> tList = ridingRocket.getTelemetry();
             final NBTTagCompound nbt = new NBTTagCompound();
             ridingRocket.isDead = false;
             ridingRocket.riddenByEntity = null;

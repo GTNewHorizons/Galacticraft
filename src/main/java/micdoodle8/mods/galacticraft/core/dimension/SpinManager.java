@@ -323,7 +323,6 @@ public class SpinManager {
         final float mass = thismass;
 
         this.massCentreX = thismassCentreX / thismass + 0.5F;
-        final float massCentreY = thismassCentreY / thismass + 0.5F;
         this.massCentreZ = thismassCentreZ / thismass + 0.5F;
         // System.out.println("(X,Z) = "+this.massCentreX+","+this.massCentreZ);
 

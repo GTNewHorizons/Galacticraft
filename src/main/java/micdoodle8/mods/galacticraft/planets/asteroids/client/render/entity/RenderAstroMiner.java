@@ -422,10 +422,6 @@ public class RenderAstroMiner extends Render {
         final float xD = mainLaserX - 0.5F;
         final float yD = mainLaserY - 0.5F;
         final float zD = mainLaserZ - 0.5F;
-        final float xDa = Math.abs(xD);
-        final float yDa = Math.abs(yD);
-        final float zDa = Math.abs(zD);
-
         float xx, yy, zz;
 
         if (entity.facing > 3) {

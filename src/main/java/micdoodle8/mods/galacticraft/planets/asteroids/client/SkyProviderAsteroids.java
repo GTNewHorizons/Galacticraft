@@ -77,8 +77,6 @@ public class SkyProviderAsteroids extends IRenderHandler {
 
     @Override
     public void render(float partialTicks, WorldClient world, Minecraft mc) {
-        final float var10;
-        final float var11;
         float var12;
         final Tessellator var23 = Tessellator.instance;
 
@@ -155,7 +153,6 @@ public class SkyProviderAsteroids extends IRenderHandler {
 
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glColor3f(0.0F, 0.0F, 0.0F);
-        final double var25 = mc.thePlayer.getPosition(partialTicks).yCoord - world.getHorizon();
 
         // if (var25 < 0.0D)
         // {

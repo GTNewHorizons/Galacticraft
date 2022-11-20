@@ -233,8 +233,6 @@ public class TileEntityBeamReceiver extends TileEntityBeamOutput implements IEne
 
     @Override
     public float getEnergyStoredGC(EnergySource from) {
-        final TileEntity tile = this.getAttachedTile();
-
         if (this.facing == ForgeDirection.UNKNOWN.ordinal()) {
             return 0;
         }
@@ -244,8 +242,6 @@ public class TileEntityBeamReceiver extends TileEntityBeamOutput implements IEne
 
     @Override
     public float getMaxEnergyStoredGC(EnergySource from) {
-        final TileEntity tile = this.getAttachedTile();
-
         if (this.facing == ForgeDirection.UNKNOWN.ordinal()) {
             return 0;
         }
@@ -255,8 +251,6 @@ public class TileEntityBeamReceiver extends TileEntityBeamOutput implements IEne
 
     @Override
     public boolean nodeAvailable(EnergySource from) {
-        final TileEntity tile = this.getAttachedTile();
-
         return this.facing != ForgeDirection.UNKNOWN.ordinal();
     }
 

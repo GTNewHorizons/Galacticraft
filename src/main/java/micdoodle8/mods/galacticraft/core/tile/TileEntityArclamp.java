@@ -227,7 +227,6 @@ public class TileEntityArclamp extends TileEntity {
     }
 
     public void lightArea() {
-        final Block air = Blocks.air;
         final Block breatheableAirID = GCBlocks.breatheableAir;
         final Block brightAir = GCBlocks.brightAir;
         final Block brightBreatheableAir = GCBlocks.brightBreatheableAir;

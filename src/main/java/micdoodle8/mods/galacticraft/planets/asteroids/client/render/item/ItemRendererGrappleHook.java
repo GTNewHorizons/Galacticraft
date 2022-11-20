@@ -5,7 +5,6 @@ import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -60,8 +59,6 @@ public class ItemRendererGrappleHook implements IItemRenderer {
     }
 
     public void transform(ItemRenderType type) {
-        final EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
-
         if (type == ItemRenderType.EQUIPPED) {
             GL11.glTranslatef(0.5F, 0.6F, 0.5F);
             GL11.glRotatef(185, 1, 0, 0);

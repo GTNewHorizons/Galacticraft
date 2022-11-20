@@ -74,8 +74,6 @@ public class BlockScreen extends BlockAdvanced implements ItemBlockDesc.IBlockSh
 
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
-        final int metadata = 0;
-
         final int angle = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         int change = 0;
 

@@ -173,7 +173,6 @@ public class MapGenCaveMars extends MapGenBaseMeta {
                         i3 = 16;
                     }
 
-                    final boolean flag2 = false;
                     int j3;
                     for (j3 = l1; j3 < i2; ++j3) {
                         for (int l3 = l2; l3 < i3; ++l3) {

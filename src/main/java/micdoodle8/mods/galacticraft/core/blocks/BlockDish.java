@@ -75,8 +75,6 @@ public class BlockDish extends BlockTileGC implements ItemBlockDesc.IBlockShiftD
 
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
-        final int metadata = world.getBlockMetadata(x, y, z);
-
         final int angle = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         int change = 0;
 

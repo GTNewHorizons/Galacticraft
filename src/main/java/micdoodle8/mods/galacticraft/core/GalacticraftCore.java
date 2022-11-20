@@ -136,8 +136,6 @@ import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import micdoodle8.mods.galacticraft.core.world.ChunkLoadingCallback;
-import micdoodle8.mods.galacticraft.core.world.gen.BiomeGenBaseMoon;
-import micdoodle8.mods.galacticraft.core.world.gen.BiomeGenBaseOrbit;
 import micdoodle8.mods.galacticraft.core.world.gen.OreGenOtherMods;
 import micdoodle8.mods.galacticraft.core.world.gen.OverworldGenerator;
 import net.minecraft.block.Block;
@@ -150,7 +148,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldProviderSurface;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
@@ -268,11 +265,6 @@ public class GalacticraftCore {
                 new FluidStack(fluidOil, 1000),
                 new ItemStack(GCItems.oilCanister, 1, 1),
                 new ItemStack(GCItems.oilCanister, 1, ItemCanisterGeneric.EMPTY)));
-
-        // Force initialisation of GC biome types in preinit (after config load) - this
-        // helps BiomeTweaker
-        final BiomeGenBase biomeOrbitPreInit = BiomeGenBaseOrbit.space;
-        final BiomeGenBase biomeMoonPreInit = BiomeGenBaseMoon.moonFlat;
     }
 
     @EventHandler

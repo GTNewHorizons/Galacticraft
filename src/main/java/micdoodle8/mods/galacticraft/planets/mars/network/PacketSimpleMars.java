@@ -8,7 +8,6 @@ import io.netty.channel.ChannelHandlerContext;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
 import micdoodle8.mods.galacticraft.core.event.EventWakePlayer;
 import micdoodle8.mods.galacticraft.core.network.IPacket;
 import micdoodle8.mods.galacticraft.core.network.NetworkUtil;
@@ -98,11 +97,7 @@ public class PacketSimpleMars implements IPacket {
     @SideOnly(Side.CLIENT)
     @Override
     public void handleClientSide(EntityPlayer player) {
-        EntityClientPlayerMP playerBaseClient = null;
-
-        if (player instanceof EntityClientPlayerMP) {
-            playerBaseClient = (EntityClientPlayerMP) player;
-        }
+        if (player instanceof EntityClientPlayerMP) {}
 
         switch (this.type) {
             case C_OPEN_CUSTOM_GUI:
@@ -152,8 +147,6 @@ public class PacketSimpleMars implements IPacket {
     @Override
     public void handleServerSide(EntityPlayer player) {
         final EntityPlayerMP playerBase = PlayerUtil.getPlayerBaseServerFromPlayer(player, false);
-        final GCPlayerStats stats = GCPlayerStats.get(playerBase);
-
         switch (this.type) {
             case S_UPDATE_SLIMELING_DATA:
                 final Entity entity = player.worldObj.getEntityByID((Integer) this.data.get(0));

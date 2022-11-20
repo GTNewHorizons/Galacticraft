@@ -157,7 +157,6 @@ public class SkyProviderMars extends IRenderHandler {
         tessellator1.startDrawing(GL11.GL_TRIANGLE_FAN);
         tessellator1.setColorRGBA_F(f6 * f18, f7 * f18, f8 * f18, afloat[3] * 2 / f18);
         tessellator1.addVertex(0.0D, 100.0D, 0.0D);
-        final byte b0 = 16;
         tessellator1.setColorRGBA_F(afloat[0] * f18, afloat[1] * f18, afloat[2] * f18, 0.0F);
 
         // Render sun aura

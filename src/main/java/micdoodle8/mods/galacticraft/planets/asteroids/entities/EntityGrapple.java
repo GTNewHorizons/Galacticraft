@@ -359,7 +359,6 @@ public class EntityGrapple extends Entity implements IProjectile {
 
             this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
             this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
-            float f3 = 0.99F;
             f1 = 0.05F;
 
             if (this.isInWater()) {
@@ -374,8 +373,6 @@ public class EntityGrapple extends Entity implements IProjectile {
                             this.motionY,
                             this.motionZ);
                 }
-
-                f3 = 0.8F;
             }
 
             if (this.isWet()) {

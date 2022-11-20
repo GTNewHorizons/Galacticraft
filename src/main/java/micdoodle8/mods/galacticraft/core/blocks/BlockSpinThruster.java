@@ -94,23 +94,13 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
     @Override
     public int onBlockPlaced(
             World par1World, int x, int y, int z, int par5, float par6, float par7, float par8, int par9) {
-        int var10 = par9;
+        if (par5 == 2 && BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z + 1, ForgeDirection.NORTH, true)) {}
 
-        if (par5 == 2 && BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z + 1, ForgeDirection.NORTH, true)) {
-            var10 = 4;
-        }
+        if (par5 == 3 && BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z - 1, ForgeDirection.SOUTH, true)) {}
 
-        if (par5 == 3 && BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z - 1, ForgeDirection.SOUTH, true)) {
-            var10 = 3;
-        }
+        if (par5 == 4 && BlockSpinThruster.isBlockSolidOnSide(par1World, x + 1, y, z, ForgeDirection.WEST, true)) {}
 
-        if (par5 == 4 && BlockSpinThruster.isBlockSolidOnSide(par1World, x + 1, y, z, ForgeDirection.WEST, true)) {
-            var10 = 2;
-        }
-
-        if (par5 == 5 && BlockSpinThruster.isBlockSolidOnSide(par1World, x - 1, y, z, ForgeDirection.EAST, true)) {
-            var10 = 1;
-        }
+        if (par5 == 5 && BlockSpinThruster.isBlockSolidOnSide(par1World, x - 1, y, z, ForgeDirection.EAST, true)) {}
 
         return 0;
     }
@@ -127,7 +117,6 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
     @Override
     public void onBlockAdded(World par1World, int x, int y, int z) {
         int metadata = par1World.getBlockMetadata(x, y, z);
-        final TileEntityThruster tile = (TileEntityThruster) par1World.getTileEntity(x, y, z);
 
         if (metadata == 0) {
             if (BlockSpinThruster.isBlockSolidOnSide(par1World, x - 1, y, z, ForgeDirection.EAST, true)) {
@@ -294,7 +283,6 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
     public boolean onUseWrench(
             World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float hitX, float hitY, float hitZ) {
         final int metadata = world.getBlockMetadata(x, y, z);
-        final int facing = metadata & 8;
         final int change = 8 + metadata & 15;
         world.setBlockMetadataWithNotify(x, y, z, change, 2);
 

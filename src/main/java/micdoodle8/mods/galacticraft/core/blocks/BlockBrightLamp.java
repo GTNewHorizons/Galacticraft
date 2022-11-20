@@ -41,10 +41,6 @@ public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlo
         if (block != this) {
             return block.getLightValue(world, x, y, z);
         }
-        /**
-         * Gets the light value of the specified block coords. Args: x, y, z
-         */
-        final int redstone = 0;
         final World w = VersionUtil.getWorld(world);
         return RedstoneUtil.isBlockReceivingRedstone(w, x, y, z) ? 0 : this.getLightValue();
     }

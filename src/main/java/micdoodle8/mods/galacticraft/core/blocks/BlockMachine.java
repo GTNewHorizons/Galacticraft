@@ -96,8 +96,6 @@ public class BlockMachine extends BlockTileGC implements ItemBlockDesc.IBlockShi
 
     @Override
     public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-        final int metadata = world.getBlockMetadata(x, y, z);
-
         return this.getIcon(side, world.getBlockMetadata(x, y, z));
     }
 

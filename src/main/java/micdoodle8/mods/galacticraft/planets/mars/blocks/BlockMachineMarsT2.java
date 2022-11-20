@@ -216,8 +216,6 @@ public class BlockMachineMarsT2 extends BlockTileGC implements ItemBlockDesc.IBl
             float hitX,
             float hitY,
             float hitZ) {
-        final int metadata = world.getBlockMetadata(x, y, z);
-
         par5EntityPlayer.openGui(GalacticraftPlanets.instance, GuiIdsPlanets.MACHINE_MARS, world, x, y, z);
         return true;
     }

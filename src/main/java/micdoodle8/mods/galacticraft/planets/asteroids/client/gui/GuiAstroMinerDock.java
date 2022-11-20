@@ -221,8 +221,6 @@ public class GuiAstroMinerDock extends GuiContainerGC {
     }
 
     public void drawColorModalRect(int x, int y, int width, int height, int color) {
-        final float f = 0.00390625F;
-        final float f1 = 0.00390625F;
         final Tessellator tessellator = Tessellator.instance;
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_TEXTURE_2D);

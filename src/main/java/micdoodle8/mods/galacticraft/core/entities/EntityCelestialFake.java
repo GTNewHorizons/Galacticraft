@@ -15,7 +15,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -132,8 +131,6 @@ public class EntityCelestialFake extends EntityAdvancedMotion implements IIgnore
 
     @Override
     protected void writeEntityToNBT(NBTTagCompound nbt) {
-        final NBTTagList nbttaglist = new NBTTagList();
-
         final UUID id = this.getOwnerUUID();
 
         if (id != null) {

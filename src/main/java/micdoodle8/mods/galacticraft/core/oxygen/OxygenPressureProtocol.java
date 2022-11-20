@@ -118,7 +118,6 @@ public class OxygenPressureProtocol {
         }
 
         if (block instanceof BlockPistonBase) {
-            final BlockPistonBase piston = (BlockPistonBase) block;
             final int meta = vec.getBlockMetadata(world);
             if (BlockPistonBase.isExtended(meta)) {
                 final int facing = BlockPistonBase.getPistonOrientation(meta);
