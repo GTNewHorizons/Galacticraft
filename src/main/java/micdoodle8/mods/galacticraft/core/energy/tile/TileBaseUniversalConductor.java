@@ -280,9 +280,7 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor
     }
 
     @Override
-    public void setEnergy(double energy) {
-        ;
-    }
+    public void setEnergy(double energy) {}
 
     @Override
     public double getMaxEnergy() {

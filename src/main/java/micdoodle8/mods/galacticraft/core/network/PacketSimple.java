@@ -878,7 +878,7 @@ public class PacketSimple extends Packet implements IPacket {
                         e.printStackTrace();
                     }
                 } catch (final Exception e) {
-                    ;
+
                 }
                 break;
             default:
