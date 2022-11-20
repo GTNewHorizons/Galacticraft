@@ -29,6 +29,9 @@ public class SpaceStationWorldData extends WorldSavedData {
         super(par1Str);
 
         this.allowedPlayers = new ArrayList<String>() {
+
+            private static final long serialVersionUID = 1079079229788066770L;
+
             // Override contains so it ignores case.
             @Override
             public boolean contains(Object o) {
