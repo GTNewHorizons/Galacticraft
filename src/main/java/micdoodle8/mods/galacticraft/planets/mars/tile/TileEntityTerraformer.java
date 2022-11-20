@@ -240,13 +240,12 @@ public class TileEntityTerraformer extends TileBaseElectricBlockWithInventory
                             // Hammer the update tick a few times to try to get it to grow - it won't always
                             for (int j = 0; j < 12; j++) {
                                 if (this.worldObj.getBlock(vecSapling.x, vecSapling.y, vecSapling.z) == b) {
-                                    ((BlockBush) b)
-                                            .updateTick(
-                                                    this.worldObj,
-                                                    vecSapling.x,
-                                                    vecSapling.y,
-                                                    vecSapling.z,
-                                                    this.worldObj.rand);
+                                    b.updateTick(
+                                            this.worldObj,
+                                            vecSapling.x,
+                                            vecSapling.y,
+                                            vecSapling.z,
+                                            this.worldObj.rand);
                                 } else {
                                     this.grownTreesList.add(vecSapling.clone());
                                     break;

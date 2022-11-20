@@ -70,7 +70,7 @@ public class BlockVec3 implements Cloneable {
      *
      * @param world
      * @return the block ID, or null if the y-coordinate is less than 0 or greater
-     *         than 256 or the x or z is outside the Minecraft worldmap.
+     * than 256 or the x or z is outside the Minecraft worldmap.
      */
     public Block getBlockID(World world) {
         if (this.y < 0
@@ -116,9 +116,9 @@ public class BlockVec3 implements Cloneable {
      *
      * @param world
      * @return the block ID, or null if the y-coordinate is less than 0 or greater
-     *         than 256 or the x or z is outside the Minecraft worldmap. Returns
-     *         Blocks.bedrock if the coordinates being checked are in an unloaded
-     *         chunk
+     * than 256 or the x or z is outside the Minecraft worldmap. Returns
+     * Blocks.bedrock if the coordinates being checked are in an unloaded
+     * chunk
      */
     public Block getBlockID_noChunkLoad(World world) {
         if (this.y < 0
@@ -174,8 +174,8 @@ public class BlockVec3 implements Cloneable {
      *
      * @param world
      * @return the block ID, or null if the y-coordinate is less than 0 or greater
-     *         than 256. Returns Blocks.bedrock if the coordinates being checked are
-     *         in an unloaded chunk
+     * than 256. Returns Blocks.bedrock if the coordinates being checked are
+     * in an unloaded chunk
      */
     public Block getBlockIDsafe_noChunkLoad(World world) {
         if (this.y < 0 || this.y >= 256) {

@@ -80,7 +80,7 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
      * It adjusts player limb positions to match Galacticraft movement, arms
      * overhead etc (the arm adjustments take effect even when Smart Moving is
      * installed)
-     *
+     * <p>
      * It also renders the Galacticraft equipment, if RenderPlayerAPI but not Smart
      * Moving is installed
      *

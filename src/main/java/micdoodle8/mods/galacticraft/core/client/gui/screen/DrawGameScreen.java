@@ -19,7 +19,7 @@ import org.lwjgl.opengl.GL11;
 
 public class DrawGameScreen extends IScreenManager {
     private final TextureManager renderEngine = FMLClientHandler.instance().getClient().renderEngine;
-    private static FloatBuffer colorBuffer = GLAllocation.createDirectFloatBuffer(16);
+    private static final FloatBuffer colorBuffer = GLAllocation.createDirectFloatBuffer(16);
     private static int texCount = 1;
 
     private float tickDrawn = -1F;

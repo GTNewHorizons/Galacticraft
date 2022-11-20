@@ -198,10 +198,10 @@ public class PacketSimple extends Packet implements IPacket {
         C_SEND_PLAYERSKIN(Side.CLIENT, String.class, String.class, String.class, String.class),
         C_SEND_OVERWORLD_IMAGE(Side.CLIENT, Integer.class, Integer.class, byte[].class);
 
-        private Side targetSide;
-        private Class<?>[] decodeAs;
+        private final Side targetSide;
+        private final Class<?>[] decodeAs;
 
-        private EnumSimplePacket(Side targetSide, Class<?>... decodeAs) {
+        EnumSimplePacket(Side targetSide, Class<?>... decodeAs) {
             this.targetSide = targetSide;
             this.decodeAs = decodeAs;
         }
@@ -304,7 +304,7 @@ public class PacketSimple extends Packet implements IPacket {
                     if (ConfigManagerCore.enableDebug) {
                         if (!dimensionList.equals(PacketSimple.spamCheckString)) {
                             GCLog.info("DEBUG info: " + dimensionList);
-                            PacketSimple.spamCheckString = new String(dimensionList);
+                            PacketSimple.spamCheckString = dimensionList;
                         }
                     }
                     final String[] destinations = dimensionList.split("\\?");
@@ -908,7 +908,7 @@ public class PacketSimple extends Packet implements IPacket {
                 try {
                     final WorldProvider provider = WorldUtil.getProviderForNameServer((String) this.data.get(0));
                     final Integer dim = provider.dimensionId;
-                    GCLog.info("Found matching world (" + dim.toString() + ") for name: " + (String) this.data.get(0));
+                    GCLog.info("Found matching world (" + dim.toString() + ") for name: " + this.data.get(0));
 
                     if (playerBase.worldObj instanceof WorldServer) {
                         final WorldServer world = (WorldServer) playerBase.worldObj;
@@ -920,8 +920,7 @@ public class PacketSimple extends Packet implements IPacket {
                     GalacticraftCore.packetPipeline.sendTo(
                             new PacketSimple(EnumSimplePacket.C_CLOSE_GUI, new Object[] {}), playerBase);
                 } catch (final Exception e) {
-                    GCLog.severe("Error occurred when attempting to transfer entity to dimension: "
-                            + (String) this.data.get(0));
+                    GCLog.severe("Error occurred when attempting to transfer entity to dimension: " + this.data.get(0));
                     e.printStackTrace();
                 }
                 break;
@@ -997,7 +996,7 @@ public class PacketSimple extends Packet implements IPacket {
                 final Entity entity = player.worldObj.getEntityByID((Integer) this.data.get(0));
 
                 if (entity instanceof EntityLivingBase) {
-                    ((EntityLivingBase) entity).setFire(3);
+                    entity.setFire(3);
                 }
                 break;
             case S_BIND_SPACE_STATION_ID:

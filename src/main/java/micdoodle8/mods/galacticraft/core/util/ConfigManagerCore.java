@@ -827,7 +827,7 @@ public class ConfigManagerCore {
 
         if (lastColon > 0) {
             try {
-                meta = Integer.parseInt(s.substring(lastColon + 1, s.length()));
+                meta = Integer.parseInt(s.substring(lastColon + 1));
             } catch (final NumberFormatException ex) {
             }
         }
@@ -930,7 +930,7 @@ public class ConfigManagerCore {
             if (dataLast instanceof String) {
                 ConfigManagerCore.detectableIDs = new String[sizeIDs];
                 for (int j = 0; j < sizeIDs; j++) {
-                    ConfigManagerCore.detectableIDs[j] = new String((String) configs.get(dataCount++));
+                    ConfigManagerCore.detectableIDs[j] = (String) configs.get(dataCount++);
                 }
             } else if (dataLast instanceof String[]) {
                 ConfigManagerCore.detectableIDs = (String[]) dataLast;

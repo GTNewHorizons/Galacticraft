@@ -51,8 +51,7 @@ public class CommandSpaceStationAddOwner extends CommandBase {
                     final GCPlayerStats stats = GCPlayerStats.get(playerBase);
 
                     if (stats.spaceStationDimensionData.isEmpty()) {
-                        throw new WrongUsageException(
-                                GCCoreUtil.translate("commands.ssinvite.notFound"), new Object[0]);
+                        throw new WrongUsageException(GCCoreUtil.translate("commands.ssinvite.notFound"));
                     } else {
                         for (final Map.Entry<Integer, Integer> ownedStations :
                                 stats.spaceStationDimensionData.entrySet()) {
@@ -88,14 +87,12 @@ public class CommandSpaceStationAddOwner extends CommandBase {
                     }
                 }
             } catch (final Exception var6) {
-                throw new CommandException(var6.getMessage(), new Object[0]);
+                throw new CommandException(var6.getMessage());
             }
 
         } else {
-            throw new WrongUsageException(
-                    GCCoreUtil.translateWithFormat(
-                            "commands.ssinvite.wrongUsage", this.getCommandUsage(icommandsender)),
-                    new Object[0]);
+            throw new WrongUsageException(GCCoreUtil.translateWithFormat(
+                    "commands.ssinvite.wrongUsage", this.getCommandUsage(icommandsender)));
         }
 
         if (playerBase != null) {

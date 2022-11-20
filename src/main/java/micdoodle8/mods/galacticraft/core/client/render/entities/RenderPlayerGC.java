@@ -33,12 +33,11 @@ import org.lwjgl.opengl.GL11;
  * thermal armor render is done after the corresponding body part of the player
  * is drawn. This ALSO patches RenderPlayer so that it uses ModelPlayerGC in
  * place of ModelPlayer to draw the player.
- *
+ * <p>
  * Finally, this also adds a hook into rotateCorpse so as to fire a
  * RotatePlayerEvent - used by the Cryogenic Chamber
  *
  * @author User
- *
  */
 public class RenderPlayerGC extends RenderPlayer {
     public static ModelBiped modelThermalPadding;

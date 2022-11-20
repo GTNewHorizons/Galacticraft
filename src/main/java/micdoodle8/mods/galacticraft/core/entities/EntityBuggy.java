@@ -45,7 +45,7 @@ import net.minecraftforge.fluids.FluidTank;
 public class EntityBuggy extends Entity
         implements IInventory, IPacketReceiver, IDockable, IControllableEntity, IEntityFullSync {
     public static final int tankCapacity = 1000;
-    public FluidTank buggyFuelTank = new FluidTank(this.tankCapacity);
+    public FluidTank buggyFuelTank = new FluidTank(tankCapacity);
     protected long ticks = 0;
     public int buggyType;
     public int currentDamage;
@@ -767,6 +767,6 @@ public class EntityBuggy extends Entity
             return null;
         }
 
-        return this.riddenByEntity != null ? ((EntityPlayer) this.riddenByEntity).getPersistentID() : null;
+        return this.riddenByEntity != null ? this.riddenByEntity.getPersistentID() : null;
     }
 }

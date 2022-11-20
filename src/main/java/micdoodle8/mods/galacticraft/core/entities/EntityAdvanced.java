@@ -48,7 +48,7 @@ public abstract class EntityAdvanced extends Entity implements IPacketReceiver {
      *
      * @param side The target side.
      * @return The amount of ticks to wait before sending another packet to this
-     *         target
+     * target
      */
     public abstract int getPacketCooldown(Side side);
 

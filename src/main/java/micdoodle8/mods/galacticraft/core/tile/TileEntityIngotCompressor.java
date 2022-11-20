@@ -43,7 +43,7 @@ public class TileEntityIngotCompressor extends TileEntityAdvanced implements IIn
     private ItemStack[] containingItems = new ItemStack[2];
     public PersistantInventoryCrafting compressingCraftMatrix = new PersistantInventoryCrafting();
     public final Set<EntityPlayer> playersUsing = new HashSet<>();
-    private static Random randnum = new Random();
+    private static final Random randnum = new Random();
 
     @Override
     public void updateEntity() {

@@ -14,7 +14,7 @@ import net.minecraft.client.settings.GameSettings;
 
 @SideOnly(Side.CLIENT)
 public class OverlayDockingRocket extends Overlay {
-    private static Minecraft minecraft = FMLClientHandler.instance().getClient();
+    private static final Minecraft minecraft = FMLClientHandler.instance().getClient();
 
     private static long screenTicks;
 
@@ -56,9 +56,9 @@ public class OverlayDockingRocket extends Overlay {
                 final int dMotionY = (int) Math.max(1, Math.min(255, dMY));
                 final int dMotionYN = (int) Math.max(1, Math.min(255, -dMY));
                 final String targetMotionYStr =
-                        GCCoreUtil.translate("gui.dockingRocket.targetVel.name") + ": " + String.valueOf(targetMotionY);
-                final String currentMotionYStr = GCCoreUtil.translate("gui.dockingRocket.currentVel.name") + ": "
-                        + String.valueOf(currentMotionY);
+                        GCCoreUtil.translate("gui.dockingRocket.targetVel.name") + ": " + targetMotionY;
+                final String currentMotionYStr =
+                        GCCoreUtil.translate("gui.dockingRocket.currentVel.name") + ": " + currentMotionY;
 
                 final int red = ColorUtil.to32BitColor(dMY > 0 ? 0 : dMotionYN, 255, 255, 255);
                 final int green = ColorUtil.to32BitColor(dMY < 0 ? 0 : dMotionY, 255, 255, 255);

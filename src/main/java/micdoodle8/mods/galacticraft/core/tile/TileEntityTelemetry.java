@@ -81,7 +81,7 @@ public class TileEntityTelemetry extends TileEntity {
                     // TODO: track players after death and respawn? or not?
                 } else {
                     if (this.linkedEntity instanceof EntityPlayerMP) {
-                        name = "$" + ((EntityPlayerMP) this.linkedEntity).getCommandSenderName();
+                        name = "$" + this.linkedEntity.getCommandSenderName();
                     } else {
                         name = (String) EntityList.classToStringMapping.get(this.linkedEntity.getClass());
                     }
@@ -131,7 +131,7 @@ public class TileEntityTelemetry extends TileEntity {
                             data[3] = ((EntityPlayerMP) eLiving).getFoodStats().getFoodLevel() * 5;
                             final GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) eLiving);
                             data[4] = stats.airRemaining * 4096 + stats.airRemaining2;
-                            final UUID uuid = ((EntityPlayerMP) eLiving).getUniqueID();
+                            final UUID uuid = eLiving.getUniqueID();
                             if (uuid != null) {
                                 strUUID = uuid.toString();
                             }
@@ -153,7 +153,7 @@ public class TileEntityTelemetry extends TileEntity {
                             data[3] = ((EntitySkeleton) eLiving).getSkeletonType();
                         } else if (eLiving instanceof EntityZombie) {
                             data[3] = ((EntityZombie) eLiving).isVillager() ? 1 : 0;
-                            data[4] = ((EntityZombie) eLiving).isChild() ? 1 : 0;
+                            data[4] = eLiving.isChild() ? 1 : 0;
                         }
                     }
                 }

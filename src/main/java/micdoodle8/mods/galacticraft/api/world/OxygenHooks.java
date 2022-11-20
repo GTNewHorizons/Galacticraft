@@ -22,9 +22,7 @@ public class OxygenHooks {
      * bubble).
      *
      * @param provider The WorldProvider for this dimension
-     *
      * @return False if fire burns normally True if fire cannot burn in this world
-     *
      */
     public static boolean noAtmosphericCombustion(WorldProvider provider) {
         try {
@@ -47,7 +45,7 @@ public class OxygenHooks {
      * inside an oxygen bubble or oxygen sealed space, on an otherwise oxygen-free
      * world. (Do not use this on the Overworld or other oxygen-rich world,, it will
      * return false negatives!!)
-     *
+     * <p>
      * NOTE: In a complex build where this block is surrounded by air-permeable
      * blocks on all sides (for example torches, ladders, signs, wires, chests etc
      * etc) then it may have to look quite far to find whether it is in oxygen or
@@ -86,7 +84,7 @@ public class OxygenHooks {
      *
      * @param entity
      * @return True if the entity's head is in an oxygen bubble or block, false
-     *         otherwise
+     * otherwise
      */
     public static boolean isAABBInBreathableAirBlock(EntityLivingBase entity) {
         try {
@@ -109,7 +107,7 @@ public class OxygenHooks {
      * Simplified (better performance) version of the block oxygen check for use
      * with torch blocks and other oxygen-requiring blocks which can access oxygen
      * on any side.
-     *
+     * <p>
      * NOTE: this does not run an inOxygenBubble() check, you will need to do that
      * also.
      *

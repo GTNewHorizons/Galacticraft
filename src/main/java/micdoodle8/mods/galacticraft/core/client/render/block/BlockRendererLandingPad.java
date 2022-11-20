@@ -2,7 +2,6 @@ package micdoodle8.mods.galacticraft.core.client.render.block;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import micdoodle8.mods.galacticraft.api.tile.IFuelDock;
-import micdoodle8.mods.galacticraft.core.blocks.BlockLandingPadFull;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHopper;
 import net.minecraft.client.renderer.EntityRenderer;
@@ -194,7 +193,7 @@ public class BlockRendererLandingPad implements ISimpleBlockRenderingHandler {
             renderBlocks.setRenderBounds(0.0D, d0, 0.0D, 1.0D, 0.9D, 1.0D);
             renderBlocks.renderStandardBlock(Blocks.hopper, par2, par3, par4);
 
-            renderBlocks.setOverrideBlockTexture(((BlockLandingPadFull) par1Block).getIcon(0, 0));
+            renderBlocks.setOverrideBlockTexture(par1Block.getIcon(0, 0));
 
             renderBlocks.setRenderBounds(-0.1D, 0.0D, -0.1D, 0.0D, 1.0D, 0.0D);
             renderBlocks.renderStandardBlock(Blocks.hopper, par2, par3, par4);

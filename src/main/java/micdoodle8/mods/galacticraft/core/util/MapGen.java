@@ -25,8 +25,8 @@ public class MapGen {
     private int biomeMapx0 = 0;
     private int biomeMapz0 = 0;
     private int biomeMapz00;
-    private int biomeMapCx;
-    private int biomeMapCz;
+    private final int biomeMapCx;
+    private final int biomeMapCz;
     private int biomeMapFactor;
     private WorldChunkManager biomeMapWCM;
     private static GenLayer biomeMapGenLayer;

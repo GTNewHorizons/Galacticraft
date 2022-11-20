@@ -46,11 +46,7 @@ public class GuiShortRangeTelepad extends GuiContainerGC implements ITextBoxCall
 
     @Override
     public void drawScreen(int par1, int par2, float par3) {
-        if (this.telepad.disableCooldown > 0) {
-            this.enableControllerButton.enabled = false;
-        } else {
-            this.enableControllerButton.enabled = true;
-        }
+        this.enableControllerButton.enabled = this.telepad.disableCooldown <= 0;
 
         this.enableControllerButton.displayString = this.telepad.getDisabled(0)
                 ? GCCoreUtil.translate("gui.button.enable.name")

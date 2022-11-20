@@ -21,9 +21,9 @@ public class BlockStairsGC extends BlockStairs {
         MARS_BRICKS("stone");
 
         private final List<String> values;
-        private String type;
+        private final String type;
 
-        private StairsCategoryGC(String type) {
+        StairsCategoryGC(String type) {
             this.type = type;
             this.values = Arrays.asList(type);
         }
@@ -92,19 +92,13 @@ public class BlockStairsGC extends BlockStairs {
     public boolean isWoodCategory(String block) {
         final String type = StairsCategoryGC.valueOf(block).type;
 
-        if (type.equals("wood")) {
-            return true;
-        }
-        return false;
+        return type.equals("wood");
     }
 
     public boolean isStoneCategory(String block) {
         final String type = StairsCategoryGC.valueOf(block).type;
 
-        if (type.equals("stone")) {
-            return true;
-        }
-        return false;
+        return type.equals("stone");
     }
 
     public static int getWoodCategoryAmount() {

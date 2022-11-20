@@ -52,11 +52,11 @@ public class MapUtil {
     public static final float[] parabolicField = new float[25];
     private static MapGen currentMap = null;
     private static MapGen slowMap = null;
-    private static Random rand = new Random();
+    private static final Random rand = new Random();
     // public static int WORLD_BORDER = 14992;
     private static final int SIZE_STD = 176;
     public static final int SIZE_STD2 = SIZE_STD * 2;
-    private static LinkedList<MapGen> queuedMaps = new LinkedList();
+    private static final LinkedList<MapGen> queuedMaps = new LinkedList();
     public static LinkedList<String> clientRequests = new LinkedList();
 
     static {

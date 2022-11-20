@@ -29,7 +29,7 @@ public interface ITeleportType {
      * @param world  The world to be spawned into
      * @param player The player to be teleported
      * @return a vector3 object containing the coordinates to be spawned into the
-     *         world with
+     * world with
      */
     Vector3 getPlayerSpawnLocation(WorldServer world, EntityPlayerMP player);
 
@@ -39,7 +39,7 @@ public interface ITeleportType {
      * @param world  The world to be spawned into
      * @param entity the non-player entity to be teleported
      * @return a vector3 object containing the coordinates to be spawned into the
-     *         world with
+     * world with
      */
     Vector3 getEntitySpawnLocation(WorldServer world, Entity entity);
 
@@ -50,7 +50,7 @@ public interface ITeleportType {
      * @param world The world to be spawned into
      * @param chest the parachest to be teleported
      * @return a vector3 object containing the coordinates to be spawned into the
-     *         world with. Return null for no spawn
+     * world with. Return null for no spawn
      */
     Vector3 getParaChestSpawnLocation(WorldServer world, EntityPlayerMP player, Random rand);
 

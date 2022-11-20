@@ -28,7 +28,7 @@ import net.minecraftforge.common.config.Configuration;
 
 public class ChunkLoadingCallback implements LoadingCallback {
     private static boolean loaded;
-    private static HashMap<String, HashMap<Integer, HashSet<ChunkCoordinates>>> chunkLoaderList = new HashMap<>();
+    private static final HashMap<String, HashMap<Integer, HashSet<ChunkCoordinates>>> chunkLoaderList = new HashMap<>();
     // private static HashMap<Integer, HashSet<IChunkLoader>> loadedChunks = new
     // HashMap<Integer, HashSet<IChunkLoader>>();
 

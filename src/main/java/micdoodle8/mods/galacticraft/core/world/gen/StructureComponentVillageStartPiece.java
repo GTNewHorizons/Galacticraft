@@ -23,7 +23,7 @@ public class StructureComponentVillageStartPiece extends StructureComponentVilla
             int par5,
             ArrayList<StructureVillagePieceWeightMoon> par6ArrayList,
             int par7) {
-        super((StructureComponentVillageStartPiece) null, 0, par3Random, par4, par5);
+        super(null, 0, par3Random, par4, par5);
         this.worldChunkMngr = par1WorldChunkManager;
         this.structureVillageWeightedPieceList = par6ArrayList;
         this.terrainType = par7;

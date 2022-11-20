@@ -46,27 +46,21 @@ public class CommandSpaceStationChangeOwner extends CommandBase {
             try {
                 stationID = Integer.parseInt(astring[0]);
             } catch (final Exception var6) {
-                throw new WrongUsageException(
-                        GCCoreUtil.translateWithFormat(
-                                "commands.ssnewowner.wrongUsage", this.getCommandUsage(icommandsender)),
-                        new Object[0]);
+                throw new WrongUsageException(GCCoreUtil.translateWithFormat(
+                        "commands.ssnewowner.wrongUsage", this.getCommandUsage(icommandsender)));
             }
 
             if (stationID < 2) {
-                throw new WrongUsageException(
-                        GCCoreUtil.translateWithFormat(
-                                "commands.ssnewowner.wrongUsage", this.getCommandUsage(icommandsender)),
-                        new Object[0]);
+                throw new WrongUsageException(GCCoreUtil.translateWithFormat(
+                        "commands.ssnewowner.wrongUsage", this.getCommandUsage(icommandsender)));
             }
 
             try {
                 final SpaceStationWorldData stationData =
                         SpaceStationWorldData.getMPSpaceStationData(null, stationID, null);
                 if (stationData == null) {
-                    throw new WrongUsageException(
-                            GCCoreUtil.translateWithFormat(
-                                    "commands.ssnewowner.wrongUsage", this.getCommandUsage(icommandsender)),
-                            new Object[0]);
+                    throw new WrongUsageException(GCCoreUtil.translateWithFormat(
+                            "commands.ssnewowner.wrongUsage", this.getCommandUsage(icommandsender)));
                 }
 
                 oldOwner = stationData.getOwner();
@@ -99,13 +93,11 @@ public class CommandSpaceStationChangeOwner extends CommandBase {
                             newPlayer);
                 }
             } catch (final Exception var6) {
-                throw new CommandException(var6.getMessage(), new Object[0]);
+                throw new CommandException(var6.getMessage());
             }
         } else {
-            throw new WrongUsageException(
-                    GCCoreUtil.translateWithFormat(
-                            "commands.ssinvite.wrongUsage", this.getCommandUsage(icommandsender)),
-                    new Object[0]);
+            throw new WrongUsageException(GCCoreUtil.translateWithFormat(
+                    "commands.ssinvite.wrongUsage", this.getCommandUsage(icommandsender)));
         }
 
         if (playerAdmin != null) {

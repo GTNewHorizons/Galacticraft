@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 public interface Annotations {
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    public @interface NetworkedField {
+    @interface NetworkedField {
         Side targetSide();
     }
 }

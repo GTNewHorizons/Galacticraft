@@ -59,7 +59,7 @@ public class GuiMissingCore extends GuiScreen {
 
     @Override
     protected void actionPerformed(GuiButton par1GuiButton) {
-        FMLClientHandler.instance().getClient().displayGuiScreen((GuiScreen) null);
+        FMLClientHandler.instance().getClient().displayGuiScreen(null);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class GuiMissingCore extends GuiScreen {
             try {
                 final Class<?> oclass = Class.forName("java.awt.Desktop");
                 final Object object =
-                        oclass.getMethod("getDesktop", new Class[0]).invoke((Object) null, new Object[0]);
+                        oclass.getMethod("getDesktop", new Class[0]).invoke(null);
                 oclass.getMethod("browse", URI.class)
                         .invoke(object, new URI("https://github.com/GTNewHorizons/Galacticraft"));
             } catch (final Throwable throwable) {

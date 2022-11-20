@@ -82,7 +82,7 @@ public class ThreadDownloadImageDataGC extends SimpleTexture {
                         this.setBufferedImage(this.imageBuffer.parseUserSkin(this.bufferedImage));
                     }
                 } catch (final IOException ioexception) {
-                    logger.error("Couldn\'t load skin " + this.field_152434_e, ioexception);
+                    logger.error("Couldn't load skin " + this.field_152434_e, ioexception);
                     this.func_152433_a();
                 }
             } else {
@@ -126,7 +126,7 @@ public class ThreadDownloadImageDataGC extends SimpleTexture {
                         return;
                     }
                 } catch (final Exception exception) {
-                    ThreadDownloadImageDataGC.logger.error("Couldn\'t download http texture", exception);
+                    ThreadDownloadImageDataGC.logger.error("Couldn't download http texture", exception);
                     return;
                 } finally {
                     if (httpurlconnection != null) {

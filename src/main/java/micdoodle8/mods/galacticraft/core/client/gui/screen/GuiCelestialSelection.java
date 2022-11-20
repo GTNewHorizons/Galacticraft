@@ -377,7 +377,7 @@ public class GuiCelestialSelection extends GuiScreen {
                 if (this.isValid(this.renamingString + pastestring)) {
                     this.renamingString = this.renamingString + pastestring;
                     this.renamingString = this.renamingString.substring(
-                            0, Math.min(String.valueOf(this.renamingString).length(), MAX_SPACE_STATION_NAME_LENGTH));
+                            0, Math.min(this.renamingString.length(), MAX_SPACE_STATION_NAME_LENGTH));
                 }
             } else if (this.isValid(this.renamingString + keyChar)) {
                 this.renamingString = this.renamingString + keyChar;
@@ -436,14 +436,9 @@ public class GuiCelestialSelection extends GuiScreen {
 
         final int resultID = ClientProxyCore.clientSpaceStationID.get(atBody.getDimensionID());
 
-        if (resultID != 0 && resultID != -1)
         // if (ClientProxyCore.clientSpaceStationID != 0 &&
         // ClientProxyCore.clientSpaceStationID != -1)
-        {
-            return false;
-        }
-
-        return true;
+        return resultID == 0 || resultID == -1;
     }
 
     protected void unselectCelestialBody() {
@@ -1998,7 +1993,7 @@ public class GuiCelestialSelection extends GuiScreen {
                             final String str0 = e.getValue().getStationName();
                             int point = 0;
                             while (this.smallFontRenderer.getStringWidth(str) < 80 && point < str0.length()) {
-                                str = str + str0.substring(point, point + 1);
+                                str = str + str0.charAt(point);
                                 point++;
                             }
                             if (this.smallFontRenderer.getStringWidth(str) >= 80) {
@@ -2601,10 +2596,9 @@ public class GuiCelestialSelection extends GuiScreen {
                                     .size()
                             > 0;
                     final boolean flag1 = this.selectedBody instanceof Planet
-                            ? GalaxyRegistry.getMoonsForPlanet((Planet) this.selectedBody)
+                            && GalaxyRegistry.getMoonsForPlanet((Planet) this.selectedBody)
                                             .size()
-                                    > 0
-                            : false;
+                                    > 0;
                     if (flag0 && flag1) {
                         this.drawSplitString(
                                 GCCoreUtil.translate("gui.message.clickAgain.0.name"),

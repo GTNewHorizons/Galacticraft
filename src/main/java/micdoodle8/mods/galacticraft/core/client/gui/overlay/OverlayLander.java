@@ -3,7 +3,6 @@ package micdoodle8.mods.galacticraft.core.client.gui.overlay;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import micdoodle8.mods.galacticraft.core.entities.EntityLander;
 import micdoodle8.mods.galacticraft.core.tick.KeyHandlerClient;
 import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
@@ -15,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class OverlayLander extends Overlay {
-    private static Minecraft minecraft = FMLClientHandler.instance().getClient();
+    private static final Minecraft minecraft = FMLClientHandler.instance().getClient();
 
     private static long screenTicks;
 
@@ -60,8 +59,7 @@ public class OverlayLander extends Overlay {
 
         if (OverlayLander.minecraft.thePlayer.ridingEntity.motionY != 0.0D) {
             final String string = GCCoreUtil.translate("gui.lander.velocity") + ": "
-                    + Math.round(((EntityLander) OverlayLander.minecraft.thePlayer.ridingEntity).motionY * 1000)
-                            / 100.0D
+                    + Math.round(OverlayLander.minecraft.thePlayer.ridingEntity.motionY * 1000) / 100.0D
                     + " " + GCCoreUtil.translate("gui.lander.velocityu");
             final int color = ColorUtil.to32BitColor(
                     255,

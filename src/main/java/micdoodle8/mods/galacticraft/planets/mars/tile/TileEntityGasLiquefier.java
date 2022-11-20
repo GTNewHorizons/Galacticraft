@@ -80,8 +80,8 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
 
         TankGases(int id, String fluidname, String outputname) {
             this.index = id;
-            this.gas = new String(fluidname);
-            this.liquid = new String(outputname);
+            this.gas = fluidname;
+            this.liquid = outputname;
         }
     }
 
@@ -337,12 +337,8 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
             return false;
         }
 
-        if (this.gasTankType == this.fluidTankType && tank1HasSpace
-                || this.gasTankType == this.fluidTank2Type && tank2HasSpace) {
-            return true;
-        }
-
-        return false;
+        return this.gasTankType == this.fluidTankType && tank1HasSpace
+                || this.gasTankType == this.fluidTank2Type && tank2HasSpace;
     }
 
     public int getAirProducts() {

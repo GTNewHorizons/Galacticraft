@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class OverlayRocket extends Overlay {
-    private static Minecraft minecraft = FMLClientHandler.instance().getClient();
+    private static final Minecraft minecraft = FMLClientHandler.instance().getClient();
 
     /**
      * Render the GUI when player is in inventory

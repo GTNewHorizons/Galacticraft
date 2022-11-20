@@ -20,11 +20,10 @@ import org.lwjgl.opengl.GL12;
 
 /**
  * SkyProviderMars.java
- *
+ * <p>
  * This file is part of the Galacticraft project
  *
  * @author micdoodle8
- *
  */
 public class SkyProviderMars extends IRenderHandler {
     private static final ResourceLocation overworldTexture =

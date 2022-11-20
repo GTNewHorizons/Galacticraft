@@ -19,8 +19,8 @@ import micdoodle8.mods.galacticraft.planets.mars.nei.NEIGalacticraftMarsConfig;
 import net.minecraft.item.ItemStack;
 
 public class NEIGalacticraftAsteroidsConfig implements IConfigureNEI {
-    private static HashMap<ArrayList<PositionedStack>, PositionedStack> rocketBenchRecipes = new HashMap<>();
-    private static HashMap<ArrayList<PositionedStack>, PositionedStack> astroMinerRecipes = new HashMap<>();
+    private static final HashMap<ArrayList<PositionedStack>, PositionedStack> rocketBenchRecipes = new HashMap<>();
+    private static final HashMap<ArrayList<PositionedStack>, PositionedStack> astroMinerRecipes = new HashMap<>();
 
     @Override
     public void loadConfig() {

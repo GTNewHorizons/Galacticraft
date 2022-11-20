@@ -897,7 +897,6 @@ public class ThreadFindSeal {
     }
 
     /**
-     *
      * @param block - the block ID, already taken from the world (can't be null or
      *              air here)
      * @param vec   - the position of the block to check: metadata might be needed

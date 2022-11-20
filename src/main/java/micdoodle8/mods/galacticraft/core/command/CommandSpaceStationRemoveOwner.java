@@ -55,8 +55,7 @@ public class CommandSpaceStationRemoveOwner extends CommandBase {
                     final GCPlayerStats stats = GCPlayerStats.get(playerBase);
 
                     if (stats.spaceStationDimensionData.isEmpty()) {
-                        throw new WrongUsageException(
-                                GCCoreUtil.translate("commands.ssinvite.notFound"), new Object[0]);
+                        throw new WrongUsageException(GCCoreUtil.translate("commands.ssinvite.notFound"));
                     } else {
                         for (final Map.Entry<Integer, Integer> e : stats.spaceStationDimensionData.entrySet()) {
                             final SpaceStationWorldData data =
@@ -74,23 +73,19 @@ public class CommandSpaceStationRemoveOwner extends CommandBase {
                                 data.getAllowedPlayers().remove(str);
                                 data.markDirty();
                             } else {
-                                throw new CommandException(
-                                        GCCoreUtil.translateWithFormat(
-                                                "commands.ssuninvite.noPlayer", "\"" + var3 + "\""),
-                                        new Object[0]);
+                                throw new CommandException(GCCoreUtil.translateWithFormat(
+                                        "commands.ssuninvite.noPlayer", "\"" + var3 + "\""));
                             }
                         }
                     }
                 }
             } catch (final Exception var6) {
-                throw new CommandException(var6.getMessage(), new Object[0]);
+                throw new CommandException(var6.getMessage());
             }
 
         } else {
-            throw new WrongUsageException(
-                    GCCoreUtil.translateWithFormat(
-                            "commands.ssinvite.wrongUsage", this.getCommandUsage(icommandsender)),
-                    new Object[0]);
+            throw new WrongUsageException(GCCoreUtil.translateWithFormat(
+                    "commands.ssinvite.wrongUsage", this.getCommandUsage(icommandsender)));
         }
 
         if (playerBase != null) {

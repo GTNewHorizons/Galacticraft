@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiParaChest extends GuiContainerGC {
-    private static ResourceLocation[] parachestTexture = new ResourceLocation[4];
+    private static final ResourceLocation[] parachestTexture = new ResourceLocation[4];
 
     static {
         for (int i = 0; i < 4; i++) {

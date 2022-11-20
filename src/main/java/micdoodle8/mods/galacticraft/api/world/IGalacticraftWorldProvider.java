@@ -27,7 +27,7 @@ public interface IGalacticraftWorldProvider {
      * (less force required to lift)
      *
      * @return multiplier of fuel usage, relative to the earth. Lower gravity =
-     *         Lower fuel usage (multiplier less than zero)
+     * Lower fuel usage (multiplier less than zero)
      */
     double getFuelUsageMultiplier();
 
@@ -52,8 +52,8 @@ public interface IGalacticraftWorldProvider {
      * for thin atmospheres and high values for dense atmospheres
      *
      * @return Sound reduction divisor. Value of 10 will make sounds ten times more
-     *         quiet. Value of 0.1 will make sounds 10 times louder. Be careful with
-     *         the values you choose!
+     * quiet. Value of 0.1 will make sounds 10 times louder. Be careful with
+     * the values you choose!
      */
     float getSoundVolReductionAmount();
 
@@ -86,7 +86,7 @@ public interface IGalacticraftWorldProvider {
      * too high or too low.
      *
      * @return Positive integer for hot celestial bodies, negative for cold. Zero
-     *         for neutral
+     * for neutral
      */
     float getThermalLevelModifier();
 

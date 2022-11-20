@@ -19,18 +19,18 @@ import net.minecraft.world.WorldProviderSurface;
 import net.minecraftforge.common.DimensionManager;
 
 public class GalacticraftRegistry {
-    private static Map<Class<? extends WorldProvider>, ITeleportType> teleportTypeMap = new HashMap<>();
-    private static List<SpaceStationType> spaceStations = new ArrayList<>();
-    private static List<INasaWorkbenchRecipe> rocketBenchT1Recipes = new ArrayList<>();
-    private static List<INasaWorkbenchRecipe> buggyBenchRecipes = new ArrayList<>();
-    private static List<INasaWorkbenchRecipe> rocketBenchT2Recipes = new ArrayList<>();
-    private static List<INasaWorkbenchRecipe> cargoRocketRecipes = new ArrayList<>();
-    private static List<INasaWorkbenchRecipe> rocketBenchT3Recipes = new ArrayList<>();
-    private static List<INasaWorkbenchRecipe> astroMinerRecipes = new ArrayList<>();
-    private static Map<Class<? extends WorldProvider>, ResourceLocation> rocketGuiMap = new HashMap<>();
-    private static Map<Integer, List<ItemStack>> dungeonLootMap = new HashMap<>();
-    private static List<Integer> worldProviderIDs = new ArrayList<>();
-    private static List<IGameScreen> gameScreens = new ArrayList<>();
+    private static final Map<Class<? extends WorldProvider>, ITeleportType> teleportTypeMap = new HashMap<>();
+    private static final List<SpaceStationType> spaceStations = new ArrayList<>();
+    private static final List<INasaWorkbenchRecipe> rocketBenchT1Recipes = new ArrayList<>();
+    private static final List<INasaWorkbenchRecipe> buggyBenchRecipes = new ArrayList<>();
+    private static final List<INasaWorkbenchRecipe> rocketBenchT2Recipes = new ArrayList<>();
+    private static final List<INasaWorkbenchRecipe> cargoRocketRecipes = new ArrayList<>();
+    private static final List<INasaWorkbenchRecipe> rocketBenchT3Recipes = new ArrayList<>();
+    private static final List<INasaWorkbenchRecipe> astroMinerRecipes = new ArrayList<>();
+    private static final Map<Class<? extends WorldProvider>, ResourceLocation> rocketGuiMap = new HashMap<>();
+    private static final Map<Integer, List<ItemStack>> dungeonLootMap = new HashMap<>();
+    private static final List<Integer> worldProviderIDs = new ArrayList<>();
+    private static final List<IGameScreen> gameScreens = new ArrayList<>();
     private static int maxScreenTypes;
 
     /**

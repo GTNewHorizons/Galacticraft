@@ -107,10 +107,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
     @Override
     public boolean hasValidFuel() {
         if (this.destinationFrequency != -1) {
-            if (this.fuelTank.getFluidAmount() < this.fuelToDrain()) {
-                return false;
-            }
-            return true;
+            return this.fuelTank.getFluidAmount() >= this.fuelToDrain();
         }
         return this.fuelTank.getFluidAmount() > 0;
     }
@@ -312,11 +309,8 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                         boolean dimensionAllowed = this.targetDimension == ConfigManagerCore.idDimensionOverworld;
 
                         if (targetDim instanceof IGalacticraftWorldProvider) {
-                            if (((IGalacticraftWorldProvider) targetDim).canSpaceshipTierPass(this.getRocketTier())) {
-                                dimensionAllowed = true;
-                            } else {
-                                dimensionAllowed = false;
-                            }
+                            dimensionAllowed =
+                                    ((IGalacticraftWorldProvider) targetDim).canSpaceshipTierPass(this.getRocketTier());
                         } else
                         // No rocket flight to non-Galacticraft dimensions other than the Overworld
                         // allowed unless

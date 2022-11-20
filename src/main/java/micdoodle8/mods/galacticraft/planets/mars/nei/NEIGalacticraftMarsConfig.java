@@ -19,10 +19,10 @@ import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 import net.minecraft.item.ItemStack;
 
 public class NEIGalacticraftMarsConfig implements IConfigureNEI {
-    private static HashMap<ArrayList<PositionedStack>, PositionedStack> rocketBenchRecipes = new HashMap<>();
-    private static HashMap<ArrayList<PositionedStack>, PositionedStack> cargoBenchRecipes = new HashMap<>();
-    private static HashMap<PositionedStack, PositionedStack> liquefierRecipes = new HashMap<>();
-    private static HashMap<PositionedStack, PositionedStack> synthesizerRecipes = new HashMap<>();
+    private static final HashMap<ArrayList<PositionedStack>, PositionedStack> rocketBenchRecipes = new HashMap<>();
+    private static final HashMap<ArrayList<PositionedStack>, PositionedStack> cargoBenchRecipes = new HashMap<>();
+    private static final HashMap<PositionedStack, PositionedStack> liquefierRecipes = new HashMap<>();
+    private static final HashMap<PositionedStack, PositionedStack> synthesizerRecipes = new HashMap<>();
     public static GCMarsNEIHighlightHandler planetsHighlightHandler = new GCMarsNEIHighlightHandler();
 
     @Override

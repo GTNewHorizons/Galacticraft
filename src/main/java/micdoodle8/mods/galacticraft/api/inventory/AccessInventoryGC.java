@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 
 /**
  * A static method for other mods to access the Galacticraft extended inventory.
- *
+ * <p>
  * Call: AccessInventoryGC.getGCInventoryForPlayer(player)
  */
 public class AccessInventoryGC {

@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class OverlayLaunchCountdown extends Overlay {
-    private static Minecraft minecraft = FMLClientHandler.instance().getClient();
+    private static final Minecraft minecraft = FMLClientHandler.instance().getClient();
 
     public static void renderCountdownOverlay() {
         GL11.glDisable(GL11.GL_LIGHTING);

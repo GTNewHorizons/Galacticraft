@@ -75,8 +75,7 @@ public class GuiElementTextBox extends GuiButton {
                 if (this.isValid(this.text + pastestring)) {
                     if (this.parentGui.canPlayerEdit(this, this.mc.thePlayer)) {
                         this.text = this.text + pastestring;
-                        this.text = this.text.substring(
-                                0, Math.min(String.valueOf(this.text).length(), this.maxLength));
+                        this.text = this.text.substring(0, Math.min(this.text.length(), this.maxLength));
                     } else {
                         this.incorrectUseTimer = 10;
                         this.parentGui.onIntruderInteraction(this);

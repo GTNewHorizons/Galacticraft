@@ -555,10 +555,7 @@ public class EventHandlerGC {
         if (b instanceof BlockSand) {
             return true;
         }
-        if (b instanceof BlockGravel) {
-            return true;
-        }
-        return false;
+        return b instanceof BlockGravel;
     }
 
     @SubscribeEvent

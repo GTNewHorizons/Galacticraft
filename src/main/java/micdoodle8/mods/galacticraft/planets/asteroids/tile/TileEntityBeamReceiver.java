@@ -64,8 +64,7 @@ public class TileEntityBeamReceiver extends TileEntityBeamOutput implements IEne
                         final float toSend = Math.min(
                                 electricalTile.storage.getMaxExtract(), electricalTile.storage.getEnergyStoredGC());
                         final float transmitted = this.getTarget()
-                                .receiveEnergyGC(
-                                        new EnergySourceWireless(Lists.newArrayList((ILaserNode) this)), toSend, false);
+                                .receiveEnergyGC(new EnergySourceWireless(Lists.newArrayList(this)), toSend, false);
                         electricalTile.extractEnergyGC(source, transmitted, false);
                     }
                 } else if (!(tile instanceof EnergyStorageTile) && !(tile instanceof TileBaseConductor))
@@ -78,9 +77,7 @@ public class TileEntityBeamReceiver extends TileEntityBeamOutput implements IEne
                     if (availableToSend > 0F) {
                         final float transmitted = this.getTarget()
                                 .receiveEnergyGC(
-                                        new EnergySourceWireless(Lists.newArrayList((ILaserNode) this)),
-                                        availableToSend,
-                                        false);
+                                        new EnergySourceWireless(Lists.newArrayList(this)), availableToSend, false);
                         EnergyUtil.otherModsEnergyExtract(tile, inputAdj, transmitted, false);
                     }
                 }

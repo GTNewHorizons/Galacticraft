@@ -61,7 +61,7 @@ public class ContainerSlimeling extends Container {
                                 slimeling.slimelingInventory, var4 + var3 * 9 + 2, 8 + var4 * 18, 54 + var3 * 18);
                         slot.slotNumber = container.inventorySlots.size();
                         container.inventorySlots.add(slot);
-                        container.inventoryItemStacks.add((Object) null);
+                        container.inventoryItemStacks.add(null);
                     }
                 }
             }
@@ -134,7 +134,7 @@ public class ContainerSlimeling extends Container {
             }
 
             if (var4.stackSize == 0) {
-                slot.putStack((ItemStack) null);
+                slot.putStack(null);
             } else {
                 slot.onSlotChanged();
             }

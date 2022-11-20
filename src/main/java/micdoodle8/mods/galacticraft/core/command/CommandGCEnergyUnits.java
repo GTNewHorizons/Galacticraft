@@ -76,15 +76,12 @@ public class CommandGCEnergyUnits extends CommandBase {
                 }
             }
 
-            throw new WrongUsageException(
-                    GCCoreUtil.translateWithFormat(
-                            "commands.gcenergyunits.invalidUnits", this.getCommandUsage(icommandsender)),
-                    new Object[0]);
+            throw new WrongUsageException(GCCoreUtil.translateWithFormat(
+                    "commands.gcenergyunits.invalidUnits", this.getCommandUsage(icommandsender)));
         }
 
         throw new WrongUsageException(
-                GCCoreUtil.translateWithFormat("commands.gcenergyunits.noUnits", this.getCommandUsage(icommandsender)),
-                new Object[0]);
+                GCCoreUtil.translateWithFormat("commands.gcenergyunits.noUnits", this.getCommandUsage(icommandsender)));
     }
 
     public static void handleParamClientside(int param) {

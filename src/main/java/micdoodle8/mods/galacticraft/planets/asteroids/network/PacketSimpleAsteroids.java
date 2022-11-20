@@ -41,10 +41,10 @@ public class PacketSimpleAsteroids implements IPacket {
                 Integer.class,
                 Integer.class);
 
-        private Side targetSide;
-        private Class<?>[] decodeAs;
+        private final Side targetSide;
+        private final Class<?>[] decodeAs;
 
-        private EnumSimplePacketAsteroids(Side targetSide, Class<?>... decodeAs) {
+        EnumSimplePacketAsteroids(Side targetSide, Class<?>... decodeAs) {
             this.targetSide = targetSide;
             this.decodeAs = decodeAs;
         }

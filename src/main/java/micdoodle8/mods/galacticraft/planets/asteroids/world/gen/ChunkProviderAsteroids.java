@@ -137,7 +137,7 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
     private static final int GLOWSTONE_CHANCE = 20;
 
     private final ArrayList<AsteroidData> largeAsteroids = new ArrayList<>();
-    private static HashSet<BlockVec3> chunksDone = new HashSet<>();
+    private static final HashSet<BlockVec3> chunksDone = new HashSet<>();
     private int largeAsteroidsLastChunkX;
     private int largeAsteroidsLastChunkZ;
 

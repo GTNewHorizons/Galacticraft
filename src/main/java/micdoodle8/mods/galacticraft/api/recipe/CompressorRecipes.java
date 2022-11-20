@@ -16,8 +16,8 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class CompressorRecipes {
-    private static List<IRecipe> recipes = new ArrayList<>();
-    private static List<IRecipe> recipesAdventure = new ArrayList<>();
+    private static final List<IRecipe> recipes = new ArrayList<>();
+    private static final List<IRecipe> recipesAdventure = new ArrayList<>();
     private static boolean adventureOnly = false;
 
     public static ShapedRecipes addRecipe(ItemStack output, Object... inputList) {

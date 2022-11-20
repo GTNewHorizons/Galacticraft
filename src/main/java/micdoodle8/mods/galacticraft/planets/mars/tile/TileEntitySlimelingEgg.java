@@ -2,9 +2,7 @@ package micdoodle8.mods.galacticraft.planets.mars.tile;
 
 import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.planets.mars.entities.EntitySlimeling;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntitySlimelingEgg extends TileEntity {
@@ -52,8 +50,8 @@ public class TileEntitySlimelingEgg extends TileEntity {
                 }
 
                 slimeling.setTamed(true);
-                slimeling.setPathToEntity((PathEntity) null);
-                slimeling.setAttackTarget((EntityLivingBase) null);
+                slimeling.setPathToEntity(null);
+                slimeling.setAttackTarget(null);
                 slimeling.setHealth(20.0F);
 
                 this.worldObj.setBlockToAir(this.xCoord, this.yCoord, this.zCoord);

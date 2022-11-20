@@ -185,7 +185,7 @@ public class WorldProviderOrbit extends WorldProviderSpaceStation
     // (with up-to-date API this makes zero difference)
     @Override
     public boolean isSurfaceWorld() {
-        return this.worldObj == null ? false : this.worldObj.isRemote;
+        return this.worldObj != null && this.worldObj.isRemote;
     }
 
     // Overriding only in case the Galacticraft API is not up-to-date

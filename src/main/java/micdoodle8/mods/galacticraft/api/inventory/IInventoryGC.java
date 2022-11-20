@@ -6,7 +6,7 @@ import net.minecraft.inventory.IInventory;
 /**
  * An interface for other mods to access the Galacticraft extended inventory
  * slots.
- *
+ * <p>
  * (All normal IInventory methods will work)
  */
 public interface IInventoryGC extends IInventory {

@@ -15,7 +15,6 @@ import micdoodle8.mods.galacticraft.planets.mars.blocks.MarsBlocks;
 import micdoodle8.mods.galacticraft.planets.mars.network.PacketSimpleMars;
 import micdoodle8.mods.galacticraft.planets.mars.network.PacketSimpleMars.EnumSimplePacketMars;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayer.EnumStatus;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -85,7 +84,7 @@ public class TileEntityCryogenicChamber extends TileEntityMulti implements IMult
         }
 
         if (entityPlayer.isRiding()) {
-            entityPlayer.mountEntity((Entity) null);
+            entityPlayer.mountEntity(null);
         }
 
         entityPlayer.setPosition(this.xCoord + 0.5F, this.yCoord + 1.9F, this.zCoord + 0.5F);

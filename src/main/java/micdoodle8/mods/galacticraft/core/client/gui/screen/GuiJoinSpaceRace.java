@@ -43,7 +43,7 @@ public class GuiJoinSpaceRace extends GuiScreen implements ICheckBoxCallback, IT
             new EntityFlag(FMLClientHandler.instance().getClient().theWorld);
     private final ModelFlag dummyModel = new ModelFlag();
 
-    private SpaceRace spaceRaceData;
+    private final SpaceRace spaceRaceData;
 
     public GuiJoinSpaceRace(EntityClientPlayerMP player) {
         this.thePlayer = player;

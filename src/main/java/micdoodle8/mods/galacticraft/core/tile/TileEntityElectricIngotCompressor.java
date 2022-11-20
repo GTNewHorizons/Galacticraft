@@ -39,7 +39,7 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
 
     private ItemStack[] containingItems = new ItemStack[3];
     public PersistantInventoryCrafting compressingCraftMatrix = new PersistantInventoryCrafting();
-    private static Random randnum = new Random();
+    private static final Random randnum = new Random();
 
     public TileEntityElectricIngotCompressor() {
         this.storage.setMaxExtract(ConfigManagerCore.hardMode ? 90 : 75);

@@ -54,11 +54,7 @@ public class FluidUtil {
             return true;
         }
 
-        if (name.equals("rc jet fuel")) {
-            return true;
-        }
-
-        return false;
+        return name.equals("rc jet fuel");
     }
 
     /**
@@ -143,7 +139,7 @@ public class FluidUtil {
      * This tries to fill the given container (at inventory[slot]) with fluid from
      * the specified tank If successful, it places the resulting filled container in
      * inventory[slot]
-     *
+     * <p>
      * Note: this deals with the issue where
      * FluidContainerRegistry.fillFluidContainer() returns null for failed fills
      *
@@ -154,7 +150,6 @@ public class FluidUtil {
      * @param slot
      * @param canisterType The type of canister to return, if it's a canister being
      *                     filled (pre-matched with the liquid type)
-     *
      */
     public static void tryFillContainer(
             FluidTank tank, FluidStack liquid, ItemStack[] inventory, int slot, Item canisterType) {
@@ -186,7 +181,6 @@ public class FluidUtil {
     }
 
     /**
-     *
      * @param tank
      * @param inventory
      * @param slot
@@ -271,11 +265,10 @@ public class FluidUtil {
     }
 
     /**
-     *
      * @param fs1 First FluidStack to compare
      * @param fs2 Second FluidStack to compare
      * @return True if the FluidStacks are both not null and the same fluid type
-     *         False otherwise
+     * False otherwise
      */
     public static boolean fluidsSame(FluidStack fs1, FluidStack fs2) {
         if (fs1 == null || fs2 == null) {

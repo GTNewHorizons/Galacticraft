@@ -109,7 +109,7 @@ public class EntityAstroMiner extends Entity
     public int facing;
     private int facingAI;
     private int lastFacing;
-    private static BlockVec3[] headings = {
+    private static final BlockVec3[] headings = {
         new BlockVec3(0, -1, 0),
         new BlockVec3(0, 1, 0),
         new BlockVec3(0, 0, -1),
@@ -117,7 +117,7 @@ public class EntityAstroMiner extends Entity
         new BlockVec3(-1, 0, 0),
         new BlockVec3(1, 0, 0)
     };
-    private static BlockVec3[] headings2 = {
+    private static final BlockVec3[] headings2 = {
         new BlockVec3(0, -3, 0),
         new BlockVec3(0, 2, 0),
         new BlockVec3(0, 0, -3),
@@ -159,7 +159,7 @@ public class EntityAstroMiner extends Entity
     private int inventoryDrops;
     public boolean stopForTurn;
 
-    private static ArrayList<Block> noMineList = new ArrayList();
+    private static final ArrayList<Block> noMineList = new ArrayList();
     public static BlockTuple blockingBlock = new BlockTuple(Blocks.air, 0);
     private int givenFailMessage = 0;
     private BlockVec3 mineLast = null;
@@ -732,7 +732,6 @@ public class EntityAstroMiner extends Entity
     }
 
     /**
-     *
      * @return True if reached a turning point
      */
     private boolean moveToTarget() {
@@ -831,7 +830,6 @@ public class EntityAstroMiner extends Entity
     }
 
     /**
-     *
      * @return True if reached a turning point
      */
     private boolean doMining() {

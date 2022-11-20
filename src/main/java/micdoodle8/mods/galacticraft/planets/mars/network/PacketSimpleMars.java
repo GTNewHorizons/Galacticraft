@@ -39,10 +39,10 @@ public class PacketSimpleMars implements IPacket {
         C_OPEN_CUSTOM_GUI(Side.CLIENT, Integer.class, Integer.class, Integer.class),
         C_BEGIN_CRYOGENIC_SLEEP(Side.CLIENT, Integer.class, Integer.class, Integer.class);
 
-        private Side targetSide;
-        private Class<?>[] decodeAs;
+        private final Side targetSide;
+        private final Class<?>[] decodeAs;
 
-        private EnumSimplePacketMars(Side targetSide, Class<?>... decodeAs) {
+        EnumSimplePacketMars(Side targetSide, Class<?>... decodeAs) {
             this.targetSide = targetSide;
             this.decodeAs = decodeAs;
         }

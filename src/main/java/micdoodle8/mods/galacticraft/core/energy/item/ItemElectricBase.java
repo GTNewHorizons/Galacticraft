@@ -176,9 +176,7 @@ public abstract class ItemElectricBase extends Item
         }
 
         if (EnergyConfigHandler.isIndustrialCraft2Loaded()) {
-            if (item instanceof ic2.api.item.ISpecialElectricItem) {
-                return true;
-            }
+            return item instanceof ISpecialElectricItem;
         }
 
         return false;

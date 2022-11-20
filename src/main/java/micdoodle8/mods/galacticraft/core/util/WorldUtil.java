@@ -376,7 +376,7 @@ public class WorldUtil {
 
     public static void initialiseDimensionNames() {
         final WorldProvider provider = WorldUtil.getProviderForDimensionServer(ConfigManagerCore.idDimensionOverworld);
-        WorldUtil.dimNames.put(ConfigManagerCore.idDimensionOverworld, new String(provider.getDimensionName()));
+        WorldUtil.dimNames.put(ConfigManagerCore.idDimensionOverworld, provider.getDimensionName());
     }
 
     /**
@@ -597,7 +597,6 @@ public class WorldUtil {
      * load + unwanted dimension loading The cache will be updated every time the
      * 'proper' version of getArrayOfPossibleDimensions is called.
      *
-     *
      * @param tier       - the rocket tier to test
      * @param playerBase - the player who will be riding the rocket (needed for
      *                   checking space station permissions)
@@ -710,12 +709,12 @@ public class WorldUtil {
      * Call this on FMLServerStartingEvent to register a planet which has a
      * dimension ID. Now returns a boolean to indicate whether registration was
      * successful.
-     *
+     * <p>
      * NOTE: Planets and Moons dimensions should normally be initialised at server
      * init If you do not do this, you must find your own way to register the
      * dimension in DimensionManager and you must find your own way to include the
      * cached provider name in WorldUtil.dimNames
-     *
+     * <p>
      * IMPORTANT: GalacticraftRegistry.registerProvider() must always be called in
      * parallel with this meaning the CelestialBodies are iterated in the same order
      * when registered there and here.
@@ -743,7 +742,7 @@ public class WorldUtil {
             }
             final World w =
                     FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(planetID);
-            WorldUtil.dimNames.put(planetID, new String(getDimensionName(w.provider)));
+            WorldUtil.dimNames.put(planetID, getDimensionName(w.provider));
             return true;
         }
 
@@ -1116,14 +1115,13 @@ public class WorldUtil {
         // Update PlayerStatsGC
         if (player != null) {
             final GCPlayerStats playerStats = GCPlayerStats.get(player);
-            if (ridingRocket == null
-                    && type.useParachute()
-                    && playerStats.extendedInventory.getStackInSlot(4) != null
-                    && playerStats.extendedInventory.getStackInSlot(4).getItem() instanceof ItemParaChute) {
-                GCPlayerHandler.setUsingParachute(player, playerStats, true);
-            } else {
-                GCPlayerHandler.setUsingParachute(player, playerStats, false);
-            }
+            GCPlayerHandler.setUsingParachute(
+                    player,
+                    playerStats,
+                    ridingRocket == null
+                            && type.useParachute()
+                            && playerStats.extendedInventory.getStackInSlot(4) != null
+                            && playerStats.extendedInventory.getStackInSlot(4).getItem() instanceof ItemParaChute);
 
             if (playerStats.rocketStacks != null && playerStats.rocketStacks.length > 0) {
                 for (int stack = 0; stack < playerStats.rocketStacks.length; stack++) {
@@ -1304,12 +1302,12 @@ public class WorldUtil {
      * What's important here is that Galacticraft and the server both register the
      * same reachable Galacticraft planets (and their provider types) in the same
      * order. See WorldUtil.registerPlanet().
-     *
+     * <p>
      * Even if there are dimension conflicts or other problems, the planets must be
      * registered in the same order on both client and server. This should happen
      * automatically if Galacticraft versions match, and if planets modules match
      * (including Galacticraft-Planets and any other sub-mods).
-     *
+     * <p>
      * It is NOT a good idea for sub-mods to make the registration order of planets
      * variable or dependent on configs.
      */
@@ -1632,7 +1630,7 @@ public class WorldUtil {
                         new Object[] {player.getGameProfile().getName(), dimensionList}),
                 player);
         stats.usingPlanetSelectionGui = true;
-        stats.savedPlanetList = new String(dimensionList);
+        stats.savedPlanetList = dimensionList;
         final Entity fakeEntity = new EntityCelestialFake(player.worldObj, player.posX, player.posY, player.posZ, 0.0F);
         player.worldObj.spawnEntityInWorld(fakeEntity);
         player.mountEntity(fakeEntity);

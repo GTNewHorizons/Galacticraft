@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class OverlayOxygenWarning extends Overlay {
-    private static Minecraft minecraft = FMLClientHandler.instance().getClient();
+    private static final Minecraft minecraft = FMLClientHandler.instance().getClient();
 
     private static long screenTicks;
 

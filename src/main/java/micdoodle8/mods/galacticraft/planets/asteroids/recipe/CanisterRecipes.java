@@ -57,11 +57,7 @@ public class CanisterRecipes extends ShapelessRecipes {
         }
 
         // Full tank
-        if (itemTank.getItemDamage() <= 0) {
-            return false;
-        }
-
-        return true;
+        return itemTank.getItemDamage() > 0;
     }
 
     /**

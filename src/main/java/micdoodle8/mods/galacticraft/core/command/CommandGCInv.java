@@ -105,7 +105,7 @@ public class CommandGCInv extends CommandBase {
                         }
                     } else {
                         throw new WrongUsageException(
-                                "Invalid GCInv command. Usage: " + this.getCommandUsage(icommandsender), new Object[0]);
+                                "Invalid GCInv command. Usage: " + this.getCommandUsage(icommandsender));
                     }
                 } else {
                     // Special rule for 'restore' command if player not found -
@@ -129,7 +129,7 @@ public class CommandGCInv extends CommandBase {
                         System.out.println("GCInv command: player " + astring[1] + " not found.");
                     } else {
                         throw new WrongUsageException(
-                                "Invalid GCInv command. Usage: " + this.getCommandUsage(icommandsender), new Object[0]);
+                                "Invalid GCInv command. Usage: " + this.getCommandUsage(icommandsender));
                     }
                 }
             } catch (final Exception e) {
@@ -138,7 +138,7 @@ public class CommandGCInv extends CommandBase {
             }
         } else {
             throw new WrongUsageException(
-                    "Not enough command arguments! Usage: " + this.getCommandUsage(icommandsender), new Object[0]);
+                    "Not enough command arguments! Usage: " + this.getCommandUsage(icommandsender));
         }
     }
 

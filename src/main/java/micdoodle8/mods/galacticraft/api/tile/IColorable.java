@@ -17,7 +17,7 @@ public interface IColorable {
      * Gets the color of this tile
      *
      * @return the color of the tile, equivalent to the dye colors in vanilla
-     *         minecraft
+     * minecraft
      */
     byte getColor();
 

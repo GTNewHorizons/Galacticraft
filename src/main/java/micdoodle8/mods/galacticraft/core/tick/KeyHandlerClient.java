@@ -52,7 +52,7 @@ public class KeyHandlerClient extends KeyHandler {
     public static KeyBinding downKey;
     public static KeyBinding spaceKey;
     public static KeyBinding leftShiftKey;
-    private static Minecraft mc = Minecraft.getMinecraft();
+    private static final Minecraft mc = Minecraft.getMinecraft();
 
     public KeyHandlerClient() {
         super(

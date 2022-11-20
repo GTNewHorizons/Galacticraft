@@ -111,7 +111,7 @@ public class ContainerMethaneSynthesizer extends Container {
             }
 
             if (var4.stackSize == 0) {
-                slot.putStack((ItemStack) null);
+                slot.putStack(null);
             } else {
                 slot.onSlotChanged();
             }

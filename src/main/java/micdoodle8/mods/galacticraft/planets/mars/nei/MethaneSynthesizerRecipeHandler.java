@@ -141,11 +141,7 @@ public class MethaneSynthesizerRecipeHandler extends TemplateRecipeHandler {
         final PositionedStack input = this.arecipes.get(recipe).getIngredients().get(0);
         final Item inputItem = input.item.getItem();
 
-        if (inputItem == AsteroidsItems.atmosphericValve) {
-            this.fillAtmos = true;
-        } else {
-            this.fillAtmos = false;
-        }
+        this.fillAtmos = inputItem == AsteroidsItems.atmosphericValve;
 
         if (this.ticksPassed % 144 > 40) {
             final ArrayList<PositionedStack> stacks = new ArrayList<>();

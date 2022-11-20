@@ -62,8 +62,7 @@ public class ItemBlockDesc extends ItemBlockGC {
                                 150));
             } else {
                 if (this.field_150939_a instanceof BlockTileGC) {
-                    final TileEntity te =
-                            ((BlockTileGC) this.field_150939_a).createTileEntity(null, stack.getItemDamage() & 12);
+                    final TileEntity te = this.field_150939_a.createTileEntity(null, stack.getItemDamage() & 12);
                     if (te instanceof TileBaseElectricBlock) {
                         final float powerDrawn = ((TileBaseElectricBlock) te).storage.getMaxExtract();
                         if (powerDrawn > 0) {
@@ -74,8 +73,8 @@ public class ItemBlockDesc extends ItemBlockGC {
                         }
                     }
                 } else if (this.field_150939_a instanceof BlockAdvancedTile) {
-                    final TileEntity te = ((BlockAdvancedTile) this.field_150939_a)
-                            .createTileEntity(player.worldObj, stack.getItemDamage() & 12);
+                    final TileEntity te =
+                            this.field_150939_a.createTileEntity(player.worldObj, stack.getItemDamage() & 12);
                     if (te instanceof TileBaseElectricBlock) {
                         final float powerDrawn = ((TileBaseElectricBlock) te).storage.getMaxExtract();
                         if (powerDrawn > 0) {

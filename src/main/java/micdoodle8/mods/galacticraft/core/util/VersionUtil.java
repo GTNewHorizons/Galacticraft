@@ -42,8 +42,8 @@ public class VersionUtil {
     public static boolean mcVersion1_7_2 = false;
     public static boolean mcVersion1_7_10 = false;
     private static boolean deobfuscated = true;
-    private static HashMap<String, ObfuscationEntry> nodemap = Maps.newHashMap();
-    private static HashMap<Integer, Object> reflectionCache = Maps.newHashMap();
+    private static final HashMap<String, ObfuscationEntry> nodemap = Maps.newHashMap();
+    private static final HashMap<Integer, Object> reflectionCache = Maps.newHashMap();
     // Note: in reflectionCache, currently positions 3, 5, 7, 11, 13, 15, 17 are
     // unused and 21 onwards are also free.
 
@@ -581,7 +581,7 @@ public class VersionUtil {
             Method m = (Method) reflectionCache.get(3);
             if (m == null) {
                 final Class c = Class.forName("net.minecraft.block.Block");
-                final Method mm[] = c.getDeclaredMethods();
+                final Method[] mm = c.getDeclaredMethods();
                 for (final Method testMethod : mm) {
                     if (testMethod.getName().equals("func_149644_j")) {
                         m = testMethod;

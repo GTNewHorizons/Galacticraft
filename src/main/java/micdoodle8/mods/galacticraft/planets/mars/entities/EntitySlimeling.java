@@ -42,7 +42,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
@@ -371,7 +370,7 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
 
                         if (itemstack.stackSize <= 0) {
                             par1EntityPlayer.inventory.setInventorySlotContents(
-                                    par1EntityPlayer.inventory.currentItem, (ItemStack) null);
+                                    par1EntityPlayer.inventory.currentItem, null);
                         }
 
                         if (this.worldObj.isRemote) {
@@ -409,15 +408,14 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
             }
 
             if (itemstack.stackSize <= 0) {
-                par1EntityPlayer.inventory.setInventorySlotContents(
-                        par1EntityPlayer.inventory.currentItem, (ItemStack) null);
+                par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, null);
             }
 
             if (!this.worldObj.isRemote) {
                 if (this.rand.nextInt(3) == 0) {
                     this.setTamed(true);
-                    this.setPathToEntity((PathEntity) null);
-                    this.setAttackTarget((EntityLivingBase) null);
+                    this.setPathToEntity(null);
+                    this.setAttackTarget(null);
                     this.setSittingAI(true);
                     this.setHealth(20.0F);
                     VersionUtil.setSlimelingOwner(
@@ -651,11 +649,9 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
             } else {
                 final EntityLivingBase entitylivingbase = this.theEntity.getOwner();
                 return entitylivingbase == null
-                        ? true
-                        : this.theEntity.getDistanceSqToEntity(entitylivingbase) < 144.0D
-                                        && entitylivingbase.getAITarget() != null
-                                ? false
-                                : this.isSitting;
+                        || (!(this.theEntity.getDistanceSqToEntity(entitylivingbase) < 144.0D)
+                                        || entitylivingbase.getAITarget() == null)
+                                && this.isSitting;
             }
         }
 

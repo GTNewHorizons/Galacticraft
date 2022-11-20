@@ -71,19 +71,17 @@ public class CommandPlanetTeleport extends CommandBase {
                             icommandsender,
                             this,
                             "commands.dimensionteleport",
-                            String.valueOf(EnumColor.GREY + "[" + playerBase.getCommandSenderName()),
+                            EnumColor.GREY + "[" + playerBase.getCommandSenderName(),
                             "]");
                 } else {
                     throw new Exception("Could not find player with name: " + astring[0]);
                 }
             } catch (final Exception var6) {
-                throw new CommandException(var6.getMessage(), new Object[0]);
+                throw new CommandException(var6.getMessage());
             }
         } else {
-            throw new WrongUsageException(
-                    GCCoreUtil.translateWithFormat(
-                            "commands.dimensiontp.tooMany", this.getCommandUsage(icommandsender)),
-                    new Object[0]);
+            throw new WrongUsageException(GCCoreUtil.translateWithFormat(
+                    "commands.dimensiontp.tooMany", this.getCommandUsage(icommandsender)));
         }
     }
 }

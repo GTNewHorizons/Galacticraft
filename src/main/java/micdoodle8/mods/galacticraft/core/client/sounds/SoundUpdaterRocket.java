@@ -11,11 +11,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 /**
- *
  * This file is part of the Galacticraft project
  *
  * @author micdoodle8
- *
  */
 public class SoundUpdaterRocket extends MovingSound {
     // private final SoundHandler soundHandler;

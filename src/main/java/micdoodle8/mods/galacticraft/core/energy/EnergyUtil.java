@@ -27,13 +27,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class EnergyUtil {
-    private static boolean isMekLoaded = EnergyConfigHandler.isMekanismLoaded();
-    private static boolean isRFLoaded = EnergyConfigHandler.isRFAPILoaded();
-    private static boolean isRF1Loaded = EnergyConfigHandler.isRFAPIv1Loaded();
-    private static boolean isRF2Loaded = EnergyConfigHandler.isRFAPIv2Loaded();
-    private static boolean isIC2Loaded = EnergyConfigHandler.isIndustrialCraft2Loaded();
-    private static boolean isBCLoaded = EnergyConfigHandler.isBuildcraftLoaded();
-    private static boolean isBC6Loaded = isBCLoaded && EnergyConfigHandler.getBuildcraftVersion() == 6;
+    private static final boolean isMekLoaded = EnergyConfigHandler.isMekanismLoaded();
+    private static final boolean isRFLoaded = EnergyConfigHandler.isRFAPILoaded();
+    private static final boolean isRF1Loaded = EnergyConfigHandler.isRFAPIv1Loaded();
+    private static final boolean isRF2Loaded = EnergyConfigHandler.isRFAPIv2Loaded();
+    private static final boolean isIC2Loaded = EnergyConfigHandler.isIndustrialCraft2Loaded();
+    private static final boolean isBCLoaded = EnergyConfigHandler.isBuildcraftLoaded();
+    private static final boolean isBC6Loaded = isBCLoaded && EnergyConfigHandler.getBuildcraftVersion() == 6;
     private static boolean isBCReallyLoaded = EnergyConfigHandler.isBuildcraftReallyLoaded();
 
     public static boolean voltageParameterIC2 = false;
@@ -318,7 +318,7 @@ public class EnergyUtil {
     /**
      * Test whether an energy connection can be made to a tile using other mods'
      * energy methods.
-     *
+     * <p>
      * Parameters:
      *
      * @param tileAdj  - the tile under test, it might be an energy tile from
@@ -344,7 +344,7 @@ public class EnergyUtil {
      * Test whether a tile can output energy using other mods' energy methods.
      * Currently restricted to IC2 and RF mods - Mekanism tiles do not provide an
      * interface to "output" energy
-     *
+     * <p>
      * Parameters:
      *
      * @param tileAdj - the tile under test, it might be an energy tile from another

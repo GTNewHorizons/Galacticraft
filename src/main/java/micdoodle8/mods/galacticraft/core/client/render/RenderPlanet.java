@@ -9,19 +9,20 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class RenderPlanet {
-    private static TextureManager renderEngine = FMLClientHandler.instance().getClient().renderEngine;
+    private static final TextureManager renderEngine =
+            FMLClientHandler.instance().getClient().renderEngine;
 
-    private static ResourceLocation textureEuropa =
+    private static final ResourceLocation textureEuropa =
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/misc/planets/europa.png");
-    private static ResourceLocation textureGanymede =
+    private static final ResourceLocation textureGanymede =
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/misc/planets/ganymede.png");
-    private static ResourceLocation textureIo =
+    private static final ResourceLocation textureIo =
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/misc/planets/io.png");
-    private static ResourceLocation textureSaturn =
+    private static final ResourceLocation textureSaturn =
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/misc/planets/saturn.png");
-    private static ResourceLocation textureJupiterInner =
+    private static final ResourceLocation textureJupiterInner =
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/misc/planets/jupiterInner.png");
-    private static ResourceLocation textureJupiterUpper =
+    private static final ResourceLocation textureJupiterUpper =
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/misc/planets/jupiterUpper.png");
 
     public static void renderPlanet(int textureId, float scale, float ticks, float relSize) {

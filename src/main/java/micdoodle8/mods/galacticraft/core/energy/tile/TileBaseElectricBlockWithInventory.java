@@ -27,7 +27,7 @@ public abstract class TileBaseElectricBlockWithInventory extends TileBaseElectri
     public void writeStandardItemsToNBT(NBTTagCompound nbt) {
         final NBTTagList list = new NBTTagList();
         final int length = this.getSizeInventory();
-        final ItemStack containingItems[] = this.getContainingItems();
+        final ItemStack[] containingItems = this.getContainingItems();
 
         for (int var3 = 0; var3 < length; ++var3) {
             if (containingItems[var3] != null) {
@@ -53,7 +53,7 @@ public abstract class TileBaseElectricBlockWithInventory extends TileBaseElectri
 
     @Override
     public ItemStack decrStackSize(int par1, int par2) {
-        final ItemStack containingItems[] = this.getContainingItems();
+        final ItemStack[] containingItems = this.getContainingItems();
         if (containingItems[par1] != null) {
             ItemStack var3;
 
@@ -79,7 +79,7 @@ public abstract class TileBaseElectricBlockWithInventory extends TileBaseElectri
 
     @Override
     public ItemStack getStackInSlotOnClosing(int par1) {
-        final ItemStack containingItems[] = this.getContainingItems();
+        final ItemStack[] containingItems = this.getContainingItems();
         if (containingItems[par1] != null) {
             final ItemStack var2 = containingItems[par1];
             containingItems[par1] = null;
@@ -92,7 +92,7 @@ public abstract class TileBaseElectricBlockWithInventory extends TileBaseElectri
 
     @Override
     public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
-        final ItemStack containingItems[] = this.getContainingItems();
+        final ItemStack[] containingItems = this.getContainingItems();
         containingItems[par1] = par2ItemStack;
 
         if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit()) {

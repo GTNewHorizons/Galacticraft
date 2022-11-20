@@ -8,11 +8,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 /**
- *
  * This file is part of the Galacticraft project
  *
  * @author micdoodle8, radfast
- *
  */
 public class SoundUpdaterMiner extends MovingSound {
     private final EntityAstroMiner theRocket;

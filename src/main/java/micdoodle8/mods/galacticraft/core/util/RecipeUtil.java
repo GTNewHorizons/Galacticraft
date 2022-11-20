@@ -44,17 +44,19 @@ public class RecipeUtil {
 
     public static void addBlockRecipe(ItemStack result, String oreDictIngot, ItemStack gcIngot) {
         if (OreDictionary.getOres(oreDictIngot).size() > 1) {
-            CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(result, new Object[] {
-                gcIngot,
-                oreDictIngot,
-                oreDictIngot,
-                oreDictIngot,
-                oreDictIngot,
-                oreDictIngot,
-                oreDictIngot,
-                oreDictIngot,
-                oreDictIngot
-            }));
+            CraftingManager.getInstance()
+                    .getRecipeList()
+                    .add(new ShapelessOreRecipe(
+                            result,
+                            gcIngot,
+                            oreDictIngot,
+                            oreDictIngot,
+                            oreDictIngot,
+                            oreDictIngot,
+                            oreDictIngot,
+                            oreDictIngot,
+                            oreDictIngot,
+                            oreDictIngot));
         } else {
             RecipeUtil.addRecipe(result, new Object[] {"XXX", "XXX", "XXX", 'X', gcIngot});
         }

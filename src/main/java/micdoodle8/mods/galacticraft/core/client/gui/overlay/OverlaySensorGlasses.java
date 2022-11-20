@@ -28,7 +28,7 @@ public class OverlaySensorGlasses extends Overlay {
     private static final ResourceLocation indicatorTexture =
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/indicator.png");
 
-    private static Minecraft minecraft = FMLClientHandler.instance().getClient();
+    private static final Minecraft minecraft = FMLClientHandler.instance().getClient();
 
     private static int zoom = 0;
 

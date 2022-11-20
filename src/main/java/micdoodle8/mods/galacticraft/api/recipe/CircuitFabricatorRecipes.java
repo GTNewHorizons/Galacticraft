@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 import net.minecraft.item.ItemStack;
 
 public class CircuitFabricatorRecipes {
-    private static HashMap<ItemStack[], ItemStack> recipes = new HashMap<>();
+    private static final HashMap<ItemStack[], ItemStack> recipes = new HashMap<>();
 
     public static ArrayList<ArrayList<ItemStack>> slotValidItems = new ArrayList<>(5);
 

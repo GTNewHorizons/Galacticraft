@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 /**
  * If Smart Moving is installed, this is used by ModelPlayerBaseGC as the
  * ModelRenderer - see ModelPlayerBaseGC.createModelRenderer()
- *
+ * <p>
  * This renders the player equipment, there is one of these renderers for each
  * type of equipment. Smart Moving will call this.doRender() when the
  * corresponding player body part is being drawn. Most GC equipment is rendered
@@ -21,7 +21,6 @@ import org.lwjgl.opengl.GL11;
  * the position will match the Smart Moving model.
  *
  * @author User
- *
  */
 public class ModelRotationRendererGC extends ModelRotationRenderer {
     private final int type;

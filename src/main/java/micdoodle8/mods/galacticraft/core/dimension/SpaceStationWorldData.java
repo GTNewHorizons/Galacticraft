@@ -18,7 +18,7 @@ import net.minecraftforge.common.DimensionManager;
 public class SpaceStationWorldData extends WorldSavedData {
     private String spaceStationName = "NoName";
     private String owner = "NoOwner";
-    private ArrayList<String> allowedPlayers;
+    private final ArrayList<String> allowedPlayers;
     private boolean allowAllPlayers;
     private int homePlanet;
     private int dimensionIdDynamic;

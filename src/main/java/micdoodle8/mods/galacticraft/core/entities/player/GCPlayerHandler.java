@@ -905,7 +905,7 @@ public class GCPlayerHandler {
                             EnumSimplePacket.C_UPDATE_DIMENSION_LIST,
                             new Object[] {player.getGameProfile().getName(), temp}),
                     player);
-            playerStats.savedPlanetList = new String(temp);
+            playerStats.savedPlanetList = temp;
             // GCLog.debug("Sending to " + player.getGameProfile().getName() + ": " + temp);
         }
     }

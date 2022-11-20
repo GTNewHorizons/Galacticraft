@@ -11,7 +11,6 @@ import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.potion.Potion;
@@ -71,7 +70,7 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
 
                 if (this.inPortal) {
                     if (this.mc.currentScreen != null) {
-                        this.mc.displayGuiScreen((GuiScreen) null);
+                        this.mc.displayGuiScreen(null);
                     }
 
                     if (this.timeInPortal == 0.0F) {

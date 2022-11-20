@@ -52,16 +52,12 @@ public class CommandGCAstroMiner extends CommandBase {
     @Override
     public void processCommand(ICommandSender icommandsender, String[] astring) {
         if (astring.length > 2) {
-            throw new WrongUsageException(
-                    GCCoreUtil.translateWithFormat(
-                            "commands.dimensiontp.tooMany", this.getCommandUsage(icommandsender)),
-                    new Object[0]);
+            throw new WrongUsageException(GCCoreUtil.translateWithFormat(
+                    "commands.dimensiontp.tooMany", this.getCommandUsage(icommandsender)));
         }
         if (astring.length < 1) {
-            throw new WrongUsageException(
-                    GCCoreUtil.translateWithFormat(
-                            "commands.ssinvite.wrongUsage", this.getCommandUsage(icommandsender)),
-                    new Object[0]);
+            throw new WrongUsageException(GCCoreUtil.translateWithFormat(
+                    "commands.ssinvite.wrongUsage", this.getCommandUsage(icommandsender)));
         }
 
         int type = 0;
@@ -120,7 +116,7 @@ public class CommandGCAstroMiner extends CommandBase {
                     throw new Exception("Could not find player with name: " + astring[1]);
                 }
             } catch (final Exception e) {
-                throw new CommandException(e.getMessage(), new Object[0]);
+                throw new CommandException(e.getMessage());
             }
             return;
         }

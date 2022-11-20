@@ -314,9 +314,7 @@ public class PlayerClient implements IPlayerClient {
             final EventWakePlayer event = new EventWakePlayer(player, c.posX, c.posY, c.posZ, par1, par2, par3, bypass);
             MinecraftForge.EVENT_BUS.post(event);
 
-            if (bypass || event.result == null || event.result == EntityPlayer.EnumStatus.OK) {
-                return false;
-            }
+            return !bypass && event.result != null && event.result != EntityPlayer.EnumStatus.OK;
         }
 
         return true;

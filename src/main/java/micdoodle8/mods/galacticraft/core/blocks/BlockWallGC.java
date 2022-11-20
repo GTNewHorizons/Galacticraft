@@ -150,9 +150,10 @@ public class BlockWallGC extends BlockWall {
         final Block block = par1IBlockAccess.getBlock(par2, par3, par4);
 
         if (block != this && block != Blocks.fence_gate) {
-            return block != null && block.getMaterial().isOpaque() && block.renderAsNormalBlock()
-                    ? block.getMaterial() != Material.gourd
-                    : false;
+            return block != null
+                    && block.getMaterial().isOpaque()
+                    && block.renderAsNormalBlock()
+                    && block.getMaterial() != Material.gourd;
         }
         return true;
     }
@@ -185,6 +186,6 @@ public class BlockWallGC extends BlockWall {
     @SideOnly(Side.CLIENT)
     @Override
     public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
-        return par5 == 0 ? super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5) : true;
+        return par5 != 0 || super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
     }
 }

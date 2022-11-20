@@ -122,9 +122,7 @@ public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventor
                 return false;
             }
 
-            if (this.containingItems[2].stackSize + 1 > 64) {
-                return false;
-            }
+            return this.containingItems[2].stackSize + 1 <= 64;
         }
 
         return true;

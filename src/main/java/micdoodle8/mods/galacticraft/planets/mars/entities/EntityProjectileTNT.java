@@ -3,7 +3,6 @@ package micdoodle8.mods.galacticraft.planets.mars.entities;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.projectile.EntityFireball;
@@ -45,7 +44,7 @@ public class EntityProjectileTNT extends EntityFireball {
             }
 
             this.worldObj.newExplosion(
-                    (Entity) null,
+                    null,
                     this.posX,
                     this.posY,
                     this.posZ,

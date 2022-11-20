@@ -27,10 +27,7 @@ public class RedstoneUtil {
         if (isBlockProvidingPowerTo_NoChunkLoad(w, x - 1, y, z, 4) > 0) {
             return true;
         }
-        if (isBlockProvidingPowerTo_NoChunkLoad(w, x + 1, y, z, 5) > 0) {
-            return true;
-        }
-        return false;
+        return isBlockProvidingPowerTo_NoChunkLoad(w, x + 1, y, z, 5) > 0;
     }
 
     /**

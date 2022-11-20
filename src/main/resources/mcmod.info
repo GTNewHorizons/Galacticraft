@@ -1,36 +1,36 @@
 [
-{
-  "modid": "${modId}",
-  "name": "${modName}",
-  "description": "An advanced space travel mod for Minecraft 1.7; Maintained by the GTNH team",
-  "version": "${modVersion}",
-  "mcversion": "${minecraftVersion}",
-  "url": "https://github.com/GTNewHorizons/Galacticraft",
-  "updateUrl": "https://github.com/GTNewHorizons/Galacticraft",
-  "authorList": [
-    "micdoodle8, radfast, fishtaco, SinTh0r4s, GTNH-Team"
-  ],
-  "credits": "",
-  "logoFile": "galacticraft_logo.png",
-  "screenshots": [
-  ],
-  "parent":""
-},
-{
-  "modid": "GalacticraftMars",
-  "name": "Galacticraft Planets",
-  "description": "Planets addon for Galacticraft; Maintained by the GTNH team.",
-  "version": "${modVersion}",
-  "mcversion": "${minecraftVersion}",
-  "url": "https://github.com/GTNewHorizons/Galacticraft",
-  "updateUrl": "https://github.com/GTNewHorizons/Galacticraft",
-  "authorList": [
-    "micdoodle8, radfast, fishtaco, GTNH-Team"
-  ],
-  "credits": "",
-  "logoFile": "galacticraft_logo.png",
-  "screenshots": [
-  ],
-  "parent":""
-}
+  {
+    "modid": "${modId}",
+    "name": "${modName}",
+    "description": "An advanced space travel mod for Minecraft 1.7; Maintained by the GTNH team",
+    "version": "${modVersion}",
+    "mcversion": "${minecraftVersion}",
+    "url": "https://github.com/GTNewHorizons/Galacticraft",
+    "updateUrl": "https://github.com/GTNewHorizons/Galacticraft",
+    "authorList": [
+      "micdoodle8, radfast, fishtaco, SinTh0r4s, GTNH-Team"
+    ],
+    "credits": "",
+    "logoFile": "galacticraft_logo.png",
+    "screenshots": [
+    ],
+    "parent": ""
+  },
+  {
+    "modid": "GalacticraftMars",
+    "name": "Galacticraft Planets",
+    "description": "Planets addon for Galacticraft; Maintained by the GTNH team.",
+    "version": "${modVersion}",
+    "mcversion": "${minecraftVersion}",
+    "url": "https://github.com/GTNewHorizons/Galacticraft",
+    "updateUrl": "https://github.com/GTNewHorizons/Galacticraft",
+    "authorList": [
+      "micdoodle8, radfast, fishtaco, GTNH-Team"
+    ],
+    "credits": "",
+    "logoFile": "galacticraft_logo.png",
+    "screenshots": [
+    ],
+    "parent": ""
+  }
 ]

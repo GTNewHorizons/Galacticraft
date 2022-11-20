@@ -30,7 +30,7 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
     public static final IModelCustom screenModel4 = AdvancedModelLoader.loadModel(
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/screen0Quarters.obj"));
     private final TextureManager renderEngine = FMLClientHandler.instance().getClient().renderEngine;
-    private static FloatBuffer colorBuffer = GLAllocation.createDirectFloatBuffer(16);
+    private static final FloatBuffer colorBuffer = GLAllocation.createDirectFloatBuffer(16);
 
     private final float yPlane = 0.91F;
     float frame = 0.098F;

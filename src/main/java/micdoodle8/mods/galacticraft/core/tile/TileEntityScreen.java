@@ -475,7 +475,7 @@ public class TileEntityScreen extends TileEntity {
     /**
      * After figuring out the screen edges (overall screen dimensions) check that
      * the screen is a whole A x B rectangle with no tiles missing
-     *
+     * <p>
      * If it is whole, set all tiles in the screen to match this screen type
      *
      * @param up    Number of blocks the screen edge is away from this in the up
@@ -681,10 +681,7 @@ public class TileEntityScreen extends TileEntity {
         if (this.connectionsLeft > 0) {
             return false;
         }
-        if (screenTile.connectionsRight > 0) {
-            return false;
-        }
-        return true;
+        return screenTile.connectionsRight <= 0;
     }
 
     private boolean canJoinLeft() {
@@ -709,10 +706,7 @@ public class TileEntityScreen extends TileEntity {
         if (this.connectionsRight > 0) {
             return false;
         }
-        if (screenTile.connectionsLeft > 0) {
-            return false;
-        }
-        return true;
+        return screenTile.connectionsLeft <= 0;
     }
 
     private boolean canJoinUp() {
@@ -737,10 +731,7 @@ public class TileEntityScreen extends TileEntity {
         if (this.connectionsDown > 0) {
             return false;
         }
-        if (screenTile.connectionsUp > 0) {
-            return false;
-        }
-        return true;
+        return screenTile.connectionsUp <= 0;
     }
 
     private boolean canJoinDown() {
@@ -765,10 +756,7 @@ public class TileEntityScreen extends TileEntity {
         if (this.connectionsUp > 0) {
             return false;
         }
-        if (screenTile.connectionsDown > 0) {
-            return false;
-        }
-        return true;
+        return screenTile.connectionsDown <= 0;
     }
 
     private void joinRight() {

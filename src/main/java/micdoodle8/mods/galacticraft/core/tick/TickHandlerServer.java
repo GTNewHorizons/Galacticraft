@@ -53,11 +53,12 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkProviderServer;
 
 public class TickHandlerServer {
-    private static Map<Integer, CopyOnWriteArrayList<ScheduledBlockChange>> scheduledBlockChanges =
+    private static final Map<Integer, CopyOnWriteArrayList<ScheduledBlockChange>> scheduledBlockChanges =
             new ConcurrentHashMap<>();
-    private static Map<Integer, CopyOnWriteArrayList<BlockVec3>> scheduledTorchUpdates = new ConcurrentHashMap<>();
-    private static Map<Integer, List<BlockVec3>> edgeChecks = new HashMap<>();
-    private static LinkedList<EnergyNetwork> networkTicks = new LinkedList<>();
+    private static final Map<Integer, CopyOnWriteArrayList<BlockVec3>> scheduledTorchUpdates =
+            new ConcurrentHashMap<>();
+    private static final Map<Integer, List<BlockVec3>> edgeChecks = new HashMap<>();
+    private static final LinkedList<EnergyNetwork> networkTicks = new LinkedList<>();
     public static Map<Integer, Map<Long, List<Footprint>>> serverFootprintMap = new HashMap<>();
     public static List<BlockVec3Dim> footprintBlockChanges = Lists.newArrayList();
     public static WorldDataSpaceRaces spaceRaceData = null;

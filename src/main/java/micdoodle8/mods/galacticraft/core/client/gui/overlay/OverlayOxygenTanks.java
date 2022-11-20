@@ -18,7 +18,7 @@ public class OverlayOxygenTanks extends Overlay {
     private static final ResourceLocation guiTexture =
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/gui.png");
 
-    private static Minecraft minecraft = FMLClientHandler.instance().getClient();
+    private static final Minecraft minecraft = FMLClientHandler.instance().getClient();
 
     /**
      * Render the GUI that displays oxygen level in tanks

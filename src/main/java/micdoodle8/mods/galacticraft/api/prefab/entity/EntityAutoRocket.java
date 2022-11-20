@@ -1186,9 +1186,9 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
         REDSTONE_SIGNAL(7, "redstoneSig");
 
         private final int index;
-        private String title;
+        private final String title;
 
-        private EnumAutoLaunch(int index, String title) {
+        EnumAutoLaunch(int index, String title) {
             this.index = index;
             this.title = title;
         }

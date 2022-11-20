@@ -24,7 +24,7 @@ public enum EnumGravity {
     private final float eyeVecZ;
     private static final EnumGravity[] GDirections = {down, up, west, east, south, north};
 
-    private EnumGravity(
+    EnumGravity(
             int value,
             float pitchX,
             float pitchY,

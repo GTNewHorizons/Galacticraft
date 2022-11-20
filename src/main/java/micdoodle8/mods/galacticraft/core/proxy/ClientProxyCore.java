@@ -216,13 +216,13 @@ public class ClientProxyCore extends CommonProxyCore {
     private static final ResourceLocation underOilTexture =
             new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/misc/underoil.png");
 
-    private static float numbers[] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
-    private static FloatBuffer scaleup = BufferUtils.createFloatBuffer(16 * Float.SIZE);
+    private static final float[] numbers = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+    private static final FloatBuffer scaleup = BufferUtils.createFloatBuffer(16 * Float.SIZE);
     public static float globalRadius = Float.MAX_VALUE;
     public static double offsetY = 0D;
     public static float terrainHeight = Float.MAX_VALUE;
     private static boolean smallMoonActive = false;
-    private static Map<String, ResourceLocation> capesMap = Maps.newHashMap();
+    private static final Map<String, ResourceLocation> capesMap = Maps.newHashMap();
 
     public static IPlayerClient playerClientHandler = new PlayerClient();
     public static Minecraft mc = FMLClientHandler.instance().getClient();

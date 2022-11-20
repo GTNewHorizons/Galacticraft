@@ -123,7 +123,7 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
     // (with up-to-date API this makes zero difference)
     @Override
     public boolean isSurfaceWorld() {
-        return this.worldObj == null ? false : this.worldObj.isRemote;
+        return this.worldObj != null && this.worldObj.isRemote;
     }
 
     // Overriding so that beds do not explode on Asteroids

@@ -464,8 +464,7 @@ public class EntityCreeperBoss extends EntityMob
     }
 
     private void func_82209_a(int par1, double par2, double par4, double par6) {
-        this.worldObj.playAuxSFXAtEntity(
-                (EntityPlayer) null, 1014, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+        this.worldObj.playAuxSFXAtEntity(null, 1014, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
         final double d3 = this.func_82214_u(par1);
         final double d4 = this.func_82208_v(par1);
         final double d5 = this.func_82213_w(par1);

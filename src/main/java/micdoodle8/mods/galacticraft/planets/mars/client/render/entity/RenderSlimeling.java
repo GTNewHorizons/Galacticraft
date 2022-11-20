@@ -89,8 +89,8 @@ public class RenderSlimeling extends RenderLiving {
                     0,
                     0,
                     0);
-            int health = (int) Math.floor(((EntitySlimeling) par1EntityLivingBase).getHealth() + 0.6D);
-            final int maxHealth = (int) ((EntitySlimeling) par1EntityLivingBase).getMaxHealth();
+            int health = (int) Math.floor(par1EntityLivingBase.getHealth() + 0.6D);
+            final int maxHealth = (int) par1EntityLivingBase.getMaxHealth();
             if (health > maxHealth) {
                 health = maxHealth;
             }

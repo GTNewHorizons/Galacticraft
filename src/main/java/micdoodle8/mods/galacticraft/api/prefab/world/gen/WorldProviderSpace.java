@@ -203,14 +203,14 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
 
     /**
      * Do not override this.
-     *
+     * <p>
      * Returns true on clients (to allow rendering of sky etc, maybe even clouds).
      * Returns false on servers (to disable Nether Portal mob spawning and sleeping
      * in beds).
      */
     @Override
     public boolean isSurfaceWorld() {
-        return this.worldObj == null ? false : this.worldObj.isRemote;
+        return this.worldObj != null && this.worldObj.isRemote;
     }
 
     /**
@@ -219,7 +219,7 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
      * permanently loaded. It is also needed to be false so that the 'Force
      * Overworld Respawn' setting in core.conf will work correctly - see also
      * WorldProviderS[ace.getRespawnDimension().
-     *
+     * <p>
      * But: returning 'false' will cause beds to explode in this dimension. If you
      * want beds NOT to explode, you can override this, like in WorldProviderMoon.
      */
@@ -230,7 +230,7 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
 
     /**
      * Do NOT override this in your add-ons.
-     *
+     * <p>
      * This controls whether the player will respawn in the space dimension or the
      * Overworld in accordance with the 'Force Overworld Respawn' setting on
      * core.conf.
@@ -242,7 +242,7 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
 
     /**
      * If true, the the player should respawn in this dimension upon death.
-     *
+     * <p>
      * Obeying the 'Force Overworld Respawn' setting from core.conf is an important
      * protection for players are endlessly dying in a space dimension: for example
      * respawning in an airless environment with no oxygen tanks and no oxygen

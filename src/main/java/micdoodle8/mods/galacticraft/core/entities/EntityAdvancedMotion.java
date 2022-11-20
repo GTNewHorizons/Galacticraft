@@ -186,8 +186,8 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
 
     /**
      * @return map of the particle vectors. Map key is the position and map value is
-     *         the motion of the particles. Each entry will be spawned as a separate
-     *         particle
+     * the motion of the particles. Each entry will be spawned as a separate
+     * particle
      */
     public abstract Map<Vector3, Vector3> getParticleMap();
 

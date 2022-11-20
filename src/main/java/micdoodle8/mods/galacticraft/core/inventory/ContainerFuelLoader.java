@@ -74,7 +74,7 @@ public class ContainerFuelLoader extends Container {
             }
 
             if (var5.stackSize == 0) {
-                slot.putStack((ItemStack) null);
+                slot.putStack(null);
             } else {
                 slot.onSlotChanged();
             }

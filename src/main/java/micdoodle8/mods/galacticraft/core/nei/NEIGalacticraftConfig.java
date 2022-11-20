@@ -28,12 +28,15 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class NEIGalacticraftConfig implements IConfigureNEI {
-    private static HashMap<HashMap<Integer, PositionedStack>, PositionedStack> rocketBenchRecipes = new HashMap<>();
-    private static HashMap<HashMap<Integer, PositionedStack>, PositionedStack> buggyBenchRecipes = new HashMap<>();
-    private static HashMap<PositionedStack, PositionedStack> refineryRecipes = new HashMap<>();
-    private static HashMap<HashMap<Integer, PositionedStack>, PositionedStack> circuitFabricatorRecipes =
+    private static final HashMap<HashMap<Integer, PositionedStack>, PositionedStack> rocketBenchRecipes =
             new HashMap<>();
-    private static HashMap<HashMap<Integer, PositionedStack>, PositionedStack> ingotCompressorRecipes = new HashMap<>();
+    private static final HashMap<HashMap<Integer, PositionedStack>, PositionedStack> buggyBenchRecipes =
+            new HashMap<>();
+    private static final HashMap<PositionedStack, PositionedStack> refineryRecipes = new HashMap<>();
+    private static final HashMap<HashMap<Integer, PositionedStack>, PositionedStack> circuitFabricatorRecipes =
+            new HashMap<>();
+    private static final HashMap<HashMap<Integer, PositionedStack>, PositionedStack> ingotCompressorRecipes =
+            new HashMap<>();
 
     @Override
     public void loadConfig() {

@@ -31,7 +31,7 @@ public class SpaceRace {
 
     public SpaceRace(List<String> playerNames, String teamName, FlagData flagData, Vector3 teamColor) {
         this.playerNames = playerNames;
-        this.teamName = new String(teamName);
+        this.teamName = teamName;
         this.ticksSpent = 0;
         this.flagData = flagData;
         this.teamColor = teamColor;

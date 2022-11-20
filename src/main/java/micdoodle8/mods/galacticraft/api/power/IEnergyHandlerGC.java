@@ -8,7 +8,7 @@ public interface IEnergyHandlerGC {
      * @param amount   Maximum amount of energy to receive
      * @param simulate If true, the transfer will only be simulated.
      * @return The amount of energy that was successfully received (or would have
-     *         been, if simulated).
+     * been, if simulated).
      */
     float receiveEnergyGC(EnergySource from, float amount, boolean simulate);
 
@@ -19,7 +19,7 @@ public interface IEnergyHandlerGC {
      * @param amount   Maximum amount of energy to extract
      * @param simulate If true, the transfer will only be simulated.
      * @return The amount of energy that was successfully extracted (or would have
-     *         been, if simulated).
+     * been, if simulated).
      */
     float extractEnergyGC(EnergySource from, float amount, boolean simulate);
 

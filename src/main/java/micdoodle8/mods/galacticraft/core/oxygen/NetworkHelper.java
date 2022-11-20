@@ -39,7 +39,7 @@ public class NetworkHelper {
      * @param tileEntity           - The TileEntity's sides.
      * @param approachingDirection - The directions that can be connected.
      * @return A list of networks from all specified sides. There will be no
-     *         repeated ElectricityNetworks and it will never return null.
+     * repeated ElectricityNetworks and it will never return null.
      */
     public static Set<IElectricityNetwork> getNetworksFromMultipleSides(
             TileEntity tileEntity, EnumSet<ForgeDirection> approachingDirection) {

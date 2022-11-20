@@ -30,8 +30,7 @@ public class CommandKeepDim extends CommandBase {
         EntityPlayerMP playerBase;
 
         if (astring.length > 1) {
-            throw new WrongUsageException(
-                    "Too many command arguments! Usage: " + this.getCommandUsage(icommandsender), new Object[0]);
+            throw new WrongUsageException("Too many command arguments! Usage: " + this.getCommandUsage(icommandsender));
         } else {
             try {
                 playerBase =
@@ -47,8 +46,7 @@ public class CommandKeepDim extends CommandBase {
                             dimID = CommandBase.parseInt(icommandsender, astring[0]);
                         } catch (final Exception e) {
                             throw new WrongUsageException(
-                                    "Needs a dimension number! Usage: " + this.getCommandUsage(icommandsender),
-                                    new Object[0]);
+                                    "Needs a dimension number! Usage: " + this.getCommandUsage(icommandsender));
                         }
                     }
 
@@ -66,7 +64,7 @@ public class CommandKeepDim extends CommandBase {
                     }
                 }
             } catch (final Exception var6) {
-                throw new CommandException(var6.getMessage(), new Object[0]);
+                throw new CommandException(var6.getMessage());
             }
         }
     }

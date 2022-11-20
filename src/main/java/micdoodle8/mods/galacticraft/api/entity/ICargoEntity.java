@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
  * Implement into entities that can be loaded with cargo
  */
 public interface ICargoEntity {
-    public enum EnumCargoLoadingState {
+    enum EnumCargoLoadingState {
         FULL,
         EMPTY,
         NOTARGET,
@@ -14,7 +14,7 @@ public interface ICargoEntity {
         SUCCESS
     }
 
-    public static class RemovalResult {
+    class RemovalResult {
         public final EnumCargoLoadingState resultState;
         public final ItemStack resultStack;
 

@@ -46,13 +46,9 @@ public class PlayerServer implements IPlayerServer {
 
     @Override
     public boolean mountEntity(EntityPlayerMP player, Entity par1Entity) {
-        if (this.updatingRidden
+        return this.updatingRidden
                 && player.ridingEntity instanceof IIgnoreShift
-                && ((IIgnoreShift) player.ridingEntity).shouldIgnoreShiftExit()) {
-            return true;
-        }
-
-        return false;
+                && ((IIgnoreShift) player.ridingEntity).shouldIgnoreShiftExit();
     }
 
     @Override
@@ -147,9 +143,7 @@ public class PlayerServer implements IPlayerServer {
             final EventWakePlayer event = new EventWakePlayer(player, c.posX, c.posY, c.posZ, par1, par2, par3, bypass);
             MinecraftForge.EVENT_BUS.post(event);
 
-            if (bypass || event.result == null || event.result == EntityPlayer.EnumStatus.OK) {
-                return false;
-            }
+            return !bypass && event.result != null && event.result != EntityPlayer.EnumStatus.OK;
         }
 
         return true;

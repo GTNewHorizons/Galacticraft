@@ -18,7 +18,7 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiRocketInventory extends GuiContainerGC {
-    private static ResourceLocation[] rocketTextures = new ResourceLocation[4];
+    private static final ResourceLocation[] rocketTextures = new ResourceLocation[4];
 
     static {
         for (int i = 0; i < 4; i++) {

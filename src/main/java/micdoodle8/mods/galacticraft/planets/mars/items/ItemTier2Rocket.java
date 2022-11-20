@@ -142,11 +142,9 @@ public class ItemTier2Rocket extends Item implements IHoldableItem {
 
                 if (((IRocketType) rocket).getType().getPreFueled()) {
                     if (rocket instanceof EntityTieredRocket) {
-                        ((EntityTieredRocket) rocket)
-                                .fuelTank.fill(new FluidStack(GalacticraftCore.fluidFuel, rocket.getMaxFuel()), true);
+                        rocket.fuelTank.fill(new FluidStack(GalacticraftCore.fluidFuel, rocket.getMaxFuel()), true);
                     } else {
-                        ((EntityCargoRocket) rocket)
-                                .fuelTank.fill(new FluidStack(GalacticraftCore.fluidFuel, rocket.getMaxFuel()), true);
+                        rocket.fuelTank.fill(new FluidStack(GalacticraftCore.fluidFuel, rocket.getMaxFuel()), true);
                     }
                 }
             } else {
