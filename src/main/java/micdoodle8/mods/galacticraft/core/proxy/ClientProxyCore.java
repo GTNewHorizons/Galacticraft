@@ -163,6 +163,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.IFluidBlock;
 import org.lwjgl.BufferUtils;
@@ -1155,6 +1156,11 @@ public class ClientProxyCore extends CommonProxyCore {
         final double var7 = 1 + (y + ClientProxyCore.offsetY) / ClientProxyCore.globalRadius;
         x += (x % 16 - 8) * var7 + 8;
         z += (z % 16 - 8) * var7 + 8;
+    }
+
+    @SubscribeEvent
+    public void onWorldUnloaded(WorldEvent.Unload event) {
+        reset();
     }
 
     @SubscribeEvent

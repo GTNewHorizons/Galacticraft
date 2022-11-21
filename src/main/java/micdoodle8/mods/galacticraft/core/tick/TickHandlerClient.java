@@ -62,7 +62,6 @@ import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiIngameMenu;
-import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -413,10 +412,6 @@ public class TickHandlerClient {
                 if (MapUtil.resetClientFlag.getAndSet(false)) {
                     MapUtil.resetClientBody();
                 }
-            }
-
-            if (minecraft.currentScreen instanceof GuiMainMenu) {
-                ClientProxyCore.reset();
             }
 
             if (world != null
