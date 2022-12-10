@@ -22,6 +22,6 @@ public class ChunkProviderServerMixin {
             require = 1)
     private boolean checkOtherModPreventGenerate(
             int chunkX, int chunkZ, World world, IChunkProvider chunkProvider, IChunkProvider chunkGenerator) {
-        return !WorldUtil.otherModPreventGenerate(chunkX, chunkZ, world, chunkGenerator, chunkProvider);
+        return !WorldUtil.otherModPreventGenerate(chunkX, chunkZ, world, chunkProvider, chunkGenerator);
     }
 }
