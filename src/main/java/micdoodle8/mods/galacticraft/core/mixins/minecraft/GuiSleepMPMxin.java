@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class GuiSleepMPMxin {
 
     @Inject(method = "func_146418_g", at = @At("RETURN"), require = 1)
-    private void onFunc_146418_g(CallbackInfo callbackInfo) {
+    private void onWakeFromSleep(CallbackInfo callbackInfo) {
         MinecraftForge.EVENT_BUS.post(new EventHandlerGC.SleepCancelledEvent());
     }
 }
