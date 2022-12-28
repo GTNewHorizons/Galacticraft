@@ -42,6 +42,7 @@ import micdoodle8.mods.galacticraft.api.world.SpaceStationType;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.client.SkyProviderOverworld;
+import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
 import micdoodle8.mods.galacticraft.core.dimension.SpaceStationWorldData;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderMoon;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderOrbit;
@@ -1617,7 +1618,8 @@ public class WorldUtil {
         return true;
     }
 
-    public static void toCelestialSelection(EntityPlayerMP player, GCPlayerStats stats, int tier) {
+    public static void toCelestialSelection(
+            EntityPlayerMP player, GCPlayerStats stats, int tier, GuiCelestialSelection.MapMode mapMode) {
         player.mountEntity(null);
         stats.spaceshipTier = tier;
 
@@ -1633,9 +1635,10 @@ public class WorldUtil {
         GalacticraftCore.packetPipeline.sendTo(
                 new PacketSimple(
                         EnumSimplePacket.C_UPDATE_DIMENSION_LIST,
-                        new Object[] {player.getGameProfile().getName(), dimensionList}),
+                        new Object[] {player.getGameProfile().getName(), dimensionList, mapMode.ordinal()}),
                 player);
         stats.usingPlanetSelectionGui = true;
+        stats.currentMapMode = mapMode;
         stats.savedPlanetList = dimensionList;
         final Entity fakeEntity = new EntityCelestialFake(player.worldObj, player.posX, player.posY, player.posZ, 0.0F);
         player.worldObj.spawnEntityInWorld(fakeEntity);

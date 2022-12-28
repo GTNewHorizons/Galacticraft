@@ -1,6 +1,7 @@
 package micdoodle8.mods.galacticraft.core.command;
 
 import micdoodle8.mods.galacticraft.api.entity.IRocketType;
+import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.util.EnumColor;
@@ -61,7 +62,8 @@ public class CommandPlanetTeleport extends CommandBase {
                     stats.coordsTeleportedFromZ = chunkcoordinates.posZ;
 
                     try {
-                        WorldUtil.toCelestialSelection(playerBase, stats, Integer.MAX_VALUE);
+                        WorldUtil.toCelestialSelection(
+                                playerBase, stats, Integer.MAX_VALUE, GuiCelestialSelection.MapMode.TELEPORTATION);
                     } catch (final Exception e) {
                         e.printStackTrace();
                         throw e;

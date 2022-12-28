@@ -60,7 +60,18 @@ public class GuiCelestialSelection extends GuiScreen {
     public enum MapMode {
         TRAVEL,
         VIEW,
-        TELEPORTATION
+        TELEPORTATION;
+
+        public static MapMode fromInteger(int val) {
+            switch (val) {
+                case 1:
+                    return VIEW;
+                case 2:
+                    return TELEPORTATION;
+                default:
+                    return TRAVEL;
+            }
+        }
     }
 
     protected enum EnumSelectionState {
@@ -409,7 +420,9 @@ public class GuiCelestialSelection extends GuiScreen {
     }
 
     protected boolean canCreateSpaceStation(CelestialBody atBody) {
-        if ((this.mapMode == MapMode.VIEW) || !atBody.getAllowSatellite() || ConfigManagerCore.disableSpaceStationCreation) {
+        if ((this.mapMode == MapMode.VIEW)
+                || !atBody.getAllowSatellite()
+                || ConfigManagerCore.disableSpaceStationCreation) {
             // If we are in map mode or the parent body doesn't allow satellites in general
             // or if space stations aren't
             // allowed at all,

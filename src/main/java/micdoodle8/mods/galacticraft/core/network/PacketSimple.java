@@ -133,7 +133,7 @@ public class PacketSimple extends Packet implements IPacket {
         S_BUILDFLAGS_UPDATE(Side.SERVER, Integer.class),
         // CLIENT
         C_AIR_REMAINING(Side.CLIENT, Integer.class, Integer.class, String.class),
-        C_UPDATE_DIMENSION_LIST(Side.CLIENT, String.class, String.class),
+        C_UPDATE_DIMENSION_LIST(Side.CLIENT, String.class, String.class, Integer.class),
         C_SPAWN_SPARK_PARTICLES(Side.CLIENT, Integer.class, Integer.class, Integer.class),
         C_UPDATE_GEAR_SLOT(Side.CLIENT, String.class, Integer.class, Integer.class),
         C_CLOSE_GUI(Side.CLIENT),
@@ -355,7 +355,8 @@ public class PacketSimple extends Packet implements IPacket {
 
                     if (FMLClientHandler.instance().getClient().theWorld != null) {
                         if (!(FMLClientHandler.instance().getClient().currentScreen instanceof GuiCelestialSelection)) {
-                            final GuiCelestialSelection gui = new GuiCelestialSelection(GuiCelestialSelection.MapMode.TRAVEL, possibleCelestialBodies);
+                            final GuiCelestialSelection gui = new GuiCelestialSelection(
+                                    GuiCelestialSelection.MapMode.fromInteger((Integer) this.data.get(2)), possibleCelestialBodies);
                             gui.spaceStationMap = spaceStationData;
                             // gui.spaceStationNames = spaceStationNames;
                             // gui.spaceStationIDs = spaceStationIDs;
