@@ -355,7 +355,7 @@ public class PacketSimple extends Packet implements IPacket {
 
                     if (FMLClientHandler.instance().getClient().theWorld != null) {
                         if (!(FMLClientHandler.instance().getClient().currentScreen instanceof GuiCelestialSelection)) {
-                            final GuiCelestialSelection gui = new GuiCelestialSelection(false, possibleCelestialBodies);
+                            final GuiCelestialSelection gui = new GuiCelestialSelection(GuiCelestialSelection.MapMode.TRAVEL, possibleCelestialBodies);
                             gui.spaceStationMap = spaceStationData;
                             // gui.spaceStationNames = spaceStationNames;
                             // gui.spaceStationIDs = spaceStationIDs;

@@ -57,6 +57,12 @@ import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
 public class GuiCelestialSelection extends GuiScreen {
+    public enum MapMode {
+        TRAVEL,
+        VIEW,
+        TELEPORTATION
+    }
+
     protected enum EnumSelectionState {
         PREVIEW,
         PROFILE
@@ -90,7 +96,7 @@ public class GuiCelestialSelection extends GuiScreen {
     protected int selectionCount = 0;
     protected int zoomTooltipPos = 0;
     protected Object selectedParent = GalacticraftCore.solarSystemSol;
-    protected final boolean mapMode;
+    protected final MapMode mapMode;
     public List<CelestialBody> possibleBodies;
 
     // Each home planet has a map of owner's names linked with their station data:
@@ -107,7 +113,7 @@ public class GuiCelestialSelection extends GuiScreen {
     protected int lastMovePosY = -1;
     protected boolean errorLogged = false;
 
-    public GuiCelestialSelection(boolean mapMode, List<CelestialBody> possibleBodies) {
+    public GuiCelestialSelection(MapMode mapMode, List<CelestialBody> possibleBodies) {
         this.translation.x = 0.0F;
         this.translation.y = 0.0F;
         this.mapMode = mapMode;
@@ -345,7 +351,7 @@ public class GuiCelestialSelection extends GuiScreen {
     @Override
     protected void keyTyped(char keyChar, int keyID) {
         // Override and do nothing, so it isn't possible to exit the GUI
-        if (this.mapMode) {
+        if (this.mapMode == MapMode.VIEW) {
             super.keyTyped(keyChar, keyID);
         }
 
@@ -403,7 +409,7 @@ public class GuiCelestialSelection extends GuiScreen {
     }
 
     protected boolean canCreateSpaceStation(CelestialBody atBody) {
-        if (this.mapMode || !atBody.getAllowSatellite() || ConfigManagerCore.disableSpaceStationCreation) {
+        if ((this.mapMode == MapMode.VIEW) || !atBody.getAllowSatellite() || ConfigManagerCore.disableSpaceStationCreation) {
             // If we are in map mode or the parent body doesn't allow satellites in general
             // or if space stations aren't
             // allowed at all,
@@ -611,7 +617,7 @@ public class GuiCelestialSelection extends GuiScreen {
             return;
         }
 
-        if (!this.mapMode) {
+        if (this.mapMode != MapMode.VIEW) {
             if (x >= this.width - GuiCelestialSelection.BORDER_WIDTH - GuiCelestialSelection.BORDER_EDGE_WIDTH - 95
                     && x < this.width - GuiCelestialSelection.BORDER_WIDTH - GuiCelestialSelection.BORDER_EDGE_WIDTH
                     && y
@@ -649,7 +655,7 @@ public class GuiCelestialSelection extends GuiScreen {
             }
         }
 
-        if (this.mapMode) {
+        if (this.mapMode == MapMode.VIEW || (this.mapMode == MapMode.TELEPORTATION && this.selectedBody == null)) {
             if (x > this.width - BORDER_WIDTH - BORDER_EDGE_WIDTH - 88
                     && x < this.width - BORDER_WIDTH - BORDER_EDGE_WIDTH
                     && y > BORDER_WIDTH + BORDER_EDGE_WIDTH
@@ -660,7 +666,7 @@ public class GuiCelestialSelection extends GuiScreen {
             }
         }
 
-        if (this.selectedBody != null && !this.mapMode) {
+        if (this.selectedBody != null && this.mapMode != MapMode.VIEW) {
             if (x > this.width - BORDER_WIDTH - BORDER_EDGE_WIDTH - 88
                     && x < this.width - BORDER_WIDTH - BORDER_EDGE_WIDTH
                     && y > BORDER_WIDTH + BORDER_EDGE_WIDTH
@@ -1818,7 +1824,7 @@ public class GuiCelestialSelection extends GuiScreen {
                 }
             }
 
-            if (this.mapMode) {
+            if (this.mapMode == MapMode.VIEW || (this.mapMode == MapMode.TELEPORTATION && this.selectedBody == null)) {
                 this.mc.renderEngine.bindTexture(GuiCelestialSelection.guiMain0);
                 GL11.glColor4f(1.0F, 0.0F, 0.0F, 1);
                 this.mc.renderEngine.bindTexture(GuiCelestialSelection.guiMain0);
@@ -2293,7 +2299,7 @@ public class GuiCelestialSelection extends GuiScreen {
 
                         this.mc.renderEngine.bindTexture(GuiCelestialSelection.guiMain1);
 
-                        if (!this.mapMode) {
+                        if (this.mapMode != MapMode.VIEW) {
                             if (mousePosX
                                             >= this.width
                                                     - GuiCelestialSelection.BORDER_WIDTH
@@ -2365,7 +2371,7 @@ public class GuiCelestialSelection extends GuiScreen {
                                 true,
                                 false);
 
-                        if (!this.mapMode) {
+                        if (this.mapMode != MapMode.VIEW) {
                             this.drawSplitString(
                                     GCCoreUtil.translate("gui.message.createSS.name")
                                             .toUpperCase(),
@@ -2527,7 +2533,7 @@ public class GuiCelestialSelection extends GuiScreen {
                         false,
                         false);
 
-                if (!this.mapMode) {
+                if (this.mapMode != MapMode.VIEW) {
                     if (!this.selectedBody.getReachable()
                             || this.possibleBodies != null && !this.possibleBodies.contains(this.selectedBody)
                             || this.selectedBody instanceof Satellite && this.selectedStationOwner.equals("")) {
