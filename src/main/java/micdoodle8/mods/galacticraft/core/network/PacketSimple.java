@@ -45,6 +45,7 @@ import micdoodle8.mods.galacticraft.core.dimension.SpaceStationWorldData;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderSpaceStation;
 import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseConductor;
 import micdoodle8.mods.galacticraft.core.entities.EntityBuggy;
+import micdoodle8.mods.galacticraft.core.entities.EntityCelestialFake;
 import micdoodle8.mods.galacticraft.core.entities.IBubbleProvider;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerHandler;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerHandler.EnumModelPacket;
@@ -100,7 +101,7 @@ public class PacketSimple extends Packet implements IPacket {
     public enum EnumSimplePacket {
         // SERVER
         S_RESPAWN_PLAYER(Side.SERVER, String.class),
-        S_TELEPORT_ENTITY(Side.SERVER, String.class),
+        S_TELEPORT_ENTITY(Side.SERVER, String.class, Boolean.class),
         S_IGNITE_ROCKET(Side.SERVER),
         S_OPEN_SCHEMATIC_PAGE(Side.SERVER, Integer.class),
         S_OPEN_FUEL_GUI(Side.SERVER, String.class),
@@ -133,7 +134,7 @@ public class PacketSimple extends Packet implements IPacket {
         S_BUILDFLAGS_UPDATE(Side.SERVER, Integer.class),
         // CLIENT
         C_AIR_REMAINING(Side.CLIENT, Integer.class, Integer.class, String.class),
-        C_UPDATE_DIMENSION_LIST(Side.CLIENT, String.class, String.class),
+        C_UPDATE_DIMENSION_LIST(Side.CLIENT, String.class, String.class, Integer.class),
         C_SPAWN_SPARK_PARTICLES(Side.CLIENT, Integer.class, Integer.class, Integer.class),
         C_UPDATE_GEAR_SLOT(Side.CLIENT, String.class, Integer.class, Integer.class),
         C_CLOSE_GUI(Side.CLIENT),
@@ -196,7 +197,8 @@ public class PacketSimple extends Packet implements IPacket {
                 Integer.class,
                 String.class),
         C_SEND_PLAYERSKIN(Side.CLIENT, String.class, String.class, String.class, String.class),
-        C_SEND_OVERWORLD_IMAGE(Side.CLIENT, Integer.class, Integer.class, byte[].class);
+        C_SEND_OVERWORLD_IMAGE(Side.CLIENT, Integer.class, Integer.class, byte[].class),
+        S_CANCEL_TELEPORTATION(Side.SERVER);
 
         private final Side targetSide;
         private final Class<?>[] decodeAs;
@@ -355,7 +357,9 @@ public class PacketSimple extends Packet implements IPacket {
 
                     if (FMLClientHandler.instance().getClient().theWorld != null) {
                         if (!(FMLClientHandler.instance().getClient().currentScreen instanceof GuiCelestialSelection)) {
-                            final GuiCelestialSelection gui = new GuiCelestialSelection(false, possibleCelestialBodies);
+                            final GuiCelestialSelection gui = new GuiCelestialSelection(
+                                    GuiCelestialSelection.MapMode.fromInteger((Integer) this.data.get(2)),
+                                    possibleCelestialBodies);
                             gui.spaceStationMap = spaceStationData;
                             // gui.spaceStationNames = spaceStationNames;
                             // gui.spaceStationIDs = spaceStationIDs;
@@ -906,6 +910,10 @@ public class PacketSimple extends Packet implements IPacket {
                 break;
             case S_TELEPORT_ENTITY:
                 try {
+                    final Entity fakeEntity =
+                            new EntityCelestialFake(player.worldObj, player.posX, player.posY, player.posZ, 0.0F);
+                    player.worldObj.spawnEntityInWorld(fakeEntity);
+                    player.mountEntity(fakeEntity);
                     final WorldProvider provider = WorldUtil.getProviderForNameServer((String) this.data.get(0));
                     final Integer dim = provider.dimensionId;
                     GCLog.info("Found matching world (" + dim.toString() + ") for name: " + this.data.get(0));
@@ -913,7 +921,7 @@ public class PacketSimple extends Packet implements IPacket {
                     if (playerBase.worldObj instanceof WorldServer) {
                         final WorldServer world = (WorldServer) playerBase.worldObj;
 
-                        WorldUtil.transferEntityToDimension(playerBase, dim, world);
+                        WorldUtil.transferEntityToDimension(playerBase, dim, world, (Boolean) data.get(1), null);
                     }
 
                     stats.teleportCooldown = 10;
@@ -1419,6 +1427,9 @@ public class PacketSimple extends Packet implements IPacket {
                             playerRequested.getUniqueID().toString()
                         }),
                         playerBase);
+                break;
+            case S_CANCEL_TELEPORTATION:
+                WorldUtil.cancelTeleportation(playerBase);
                 break;
             default:
                 break;

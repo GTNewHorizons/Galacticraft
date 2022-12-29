@@ -15,6 +15,7 @@ import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.api.world.IExitHeight;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
@@ -415,7 +416,8 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
 
                 this.onTeleport(player);
                 final GCPlayerStats stats = GCPlayerStats.get(player);
-                WorldUtil.toCelestialSelection(player, stats, this.getRocketTier());
+                WorldUtil.toCelestialSelection(
+                        player, stats, this.getRocketTier(), GuiCelestialSelection.MapMode.TRAVEL);
             }
 
             // Destroy any rocket which reached the top of the atmosphere and is not

@@ -31,6 +31,7 @@ import micdoodle8.mods.galacticraft.api.world.IZeroGDimension;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.blocks.BlockUnlitTorch;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
 import micdoodle8.mods.galacticraft.core.dimension.SpaceRace;
 import micdoodle8.mods.galacticraft.core.dimension.SpaceRaceManager;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderSpaceStation;
@@ -901,9 +902,9 @@ public class GCPlayerHandler {
 
         if (!temp.equals(playerStats.savedPlanetList) || player.ticksExisted % 100 == 0) {
             GalacticraftCore.packetPipeline.sendTo(
-                    new PacketSimple(
-                            EnumSimplePacket.C_UPDATE_DIMENSION_LIST,
-                            new Object[] {player.getGameProfile().getName(), temp}),
+                    new PacketSimple(EnumSimplePacket.C_UPDATE_DIMENSION_LIST, new Object[] {
+                        player.getGameProfile().getName(), temp, playerStats.currentMapMode.ordinal()
+                    }),
                     player);
             playerStats.savedPlanetList = temp;
             // GCLog.debug("Sending to " + player.getGameProfile().getName() + ": " + temp);
@@ -1097,7 +1098,8 @@ public class GCPlayerHandler {
             GCPlayer.openPlanetSelectionGuiCooldown--;
 
             if (GCPlayer.openPlanetSelectionGuiCooldown == 1 && !GCPlayer.hasOpenedPlanetSelectionGui) {
-                WorldUtil.toCelestialSelection(player, GCPlayer, GCPlayer.spaceshipTier);
+                WorldUtil.toCelestialSelection(
+                        player, GCPlayer, GCPlayer.spaceshipTier, GuiCelestialSelection.MapMode.TRAVEL);
                 GCPlayer.hasOpenedPlanetSelectionGui = true;
             }
         }

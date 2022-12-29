@@ -1,19 +1,15 @@
 package micdoodle8.mods.galacticraft.core.command;
 
-import micdoodle8.mods.galacticraft.api.entity.IRocketType;
+import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
-import micdoodle8.mods.galacticraft.core.items.GCItems;
-import micdoodle8.mods.galacticraft.core.util.EnumColor;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldServer;
@@ -53,26 +49,16 @@ public class CommandPlanetTeleport extends CommandBase {
                             server.worldServerForDimension(server.worldServers[0].provider.dimensionId);
                     final ChunkCoordinates chunkcoordinates = worldserver.getSpawnPoint();
                     final GCPlayerStats stats = GCPlayerStats.get(playerBase);
-                    stats.rocketStacks = new ItemStack[2];
-                    stats.rocketType = IRocketType.EnumRocketType.DEFAULT.ordinal();
-                    stats.rocketItem = GCItems.rocketTier1;
-                    stats.fuelLevel = 1000;
                     stats.coordsTeleportedFromX = chunkcoordinates.posX;
                     stats.coordsTeleportedFromZ = chunkcoordinates.posZ;
 
                     try {
-                        WorldUtil.toCelestialSelection(playerBase, stats, Integer.MAX_VALUE);
+                        WorldUtil.toCelestialSelection(
+                                playerBase, stats, Integer.MAX_VALUE, GuiCelestialSelection.MapMode.TELEPORTATION);
                     } catch (final Exception e) {
                         e.printStackTrace();
                         throw e;
                     }
-
-                    VersionUtil.notifyAdmins(
-                            icommandsender,
-                            this,
-                            "commands.dimensionteleport",
-                            EnumColor.GREY + "[" + playerBase.getCommandSenderName(),
-                            "]");
                 } else {
                     throw new Exception("Could not find player with name: " + astring[0]);
                 }

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import micdoodle8.mods.galacticraft.api.recipe.ISchematicPage;
 import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
 import micdoodle8.mods.galacticraft.core.command.CommandGCInv;
 import micdoodle8.mods.galacticraft.core.inventory.InventoryExtended;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
@@ -85,6 +86,7 @@ public class GCPlayerStats implements IExtendedEntityProperties {
     public int spaceRaceInviteTeamID;
 
     public boolean usingPlanetSelectionGui;
+    public GuiCelestialSelection.MapMode currentMapMode;
     public String savedPlanetList = "";
     public int openPlanetSelectionGuiCooldown;
     public boolean hasOpenedPlanetSelectionGui = false;
@@ -141,6 +143,7 @@ public class GCPlayerStats implements IExtendedEntityProperties {
         nbt.setBoolean("OxygenSetupValid", this.oxygenSetupValid);
         nbt.setBoolean("usingParachute2", this.usingParachute);
         nbt.setBoolean("usingPlanetSelectionGui", this.usingPlanetSelectionGui);
+        nbt.setInteger("currentMapMode", this.currentMapMode.ordinal());
         nbt.setInteger("teleportCooldown", this.teleportCooldown);
         nbt.setDouble("coordsTeleportedFromX", this.coordsTeleportedFromX);
         nbt.setDouble("coordsTeleportedFromZ", this.coordsTeleportedFromZ);
@@ -243,6 +246,7 @@ public class GCPlayerStats implements IExtendedEntityProperties {
 
         this.usingParachute = nbt.getBoolean("usingParachute2");
         this.usingPlanetSelectionGui = nbt.getBoolean("usingPlanetSelectionGui");
+        this.currentMapMode = GuiCelestialSelection.MapMode.fromInteger(nbt.getInteger("currentMapMode"));
         this.teleportCooldown = nbt.getInteger("teleportCooldown");
         this.coordsTeleportedFromX = nbt.getDouble("coordsTeleportedFromX");
         this.coordsTeleportedFromZ = nbt.getDouble("coordsTeleportedFromZ");

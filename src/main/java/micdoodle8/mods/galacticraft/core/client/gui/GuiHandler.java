@@ -169,7 +169,7 @@ public class GuiHandler implements IGuiHandler {
         final EntityClientPlayerMP playerClient = PlayerUtil.getPlayerBaseClientFromPlayer(player, false);
 
         if (ID == GuiIdsCore.GALAXY_MAP) {
-            return new GuiCelestialSelection(true, null);
+            return new GuiCelestialSelection(GuiCelestialSelection.MapMode.VIEW, null);
         } else if (ID == GuiIdsCore.ROCKET_INVENTORY && player.ridingEntity instanceof EntityTieredRocket) {
             return new GuiRocketInventory(
                     player.inventory,
