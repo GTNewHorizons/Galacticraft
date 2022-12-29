@@ -246,7 +246,7 @@ public class GCPlayerStats implements IExtendedEntityProperties {
 
         this.usingParachute = nbt.getBoolean("usingParachute2");
         this.usingPlanetSelectionGui = nbt.getBoolean("usingPlanetSelectionGui");
-        this.currentMapMode = GuiCelestialSelection.MapMode.fromInteger(nbt.getInteger("currentMapmode"));
+        this.currentMapMode = GuiCelestialSelection.MapMode.fromInteger(nbt.getInteger("currentMapMode"));
         this.teleportCooldown = nbt.getInteger("teleportCooldown");
         this.coordsTeleportedFromX = nbt.getDouble("coordsTeleportedFromX");
         this.coordsTeleportedFromZ = nbt.getDouble("coordsTeleportedFromZ");
