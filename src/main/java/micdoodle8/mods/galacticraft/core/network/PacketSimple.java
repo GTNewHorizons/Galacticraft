@@ -358,7 +358,8 @@ public class PacketSimple extends Packet implements IPacket {
                     if (FMLClientHandler.instance().getClient().theWorld != null) {
                         if (!(FMLClientHandler.instance().getClient().currentScreen instanceof GuiCelestialSelection)) {
                             final GuiCelestialSelection gui = new GuiCelestialSelection(
-                                    GuiCelestialSelection.MapMode.fromInteger((Integer) this.data.get(2)), possibleCelestialBodies);
+                                    GuiCelestialSelection.MapMode.fromInteger((Integer) this.data.get(2)),
+                                    possibleCelestialBodies);
                             gui.spaceStationMap = spaceStationData;
                             // gui.spaceStationNames = spaceStationNames;
                             // gui.spaceStationIDs = spaceStationIDs;
@@ -909,7 +910,8 @@ public class PacketSimple extends Packet implements IPacket {
                 break;
             case S_TELEPORT_ENTITY:
                 try {
-                    final Entity fakeEntity = new EntityCelestialFake(player.worldObj, player.posX, player.posY, player.posZ, 0.0F);
+                    final Entity fakeEntity =
+                            new EntityCelestialFake(player.worldObj, player.posX, player.posY, player.posZ, 0.0F);
                     player.worldObj.spawnEntityInWorld(fakeEntity);
                     player.mountEntity(fakeEntity);
                     final WorldProvider provider = WorldUtil.getProviderForNameServer((String) this.data.get(0));

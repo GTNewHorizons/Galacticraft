@@ -902,9 +902,9 @@ public class GCPlayerHandler {
 
         if (!temp.equals(playerStats.savedPlanetList) || player.ticksExisted % 100 == 0) {
             GalacticraftCore.packetPipeline.sendTo(
-                    new PacketSimple(
-                            EnumSimplePacket.C_UPDATE_DIMENSION_LIST,
-                            new Object[] {player.getGameProfile().getName(), temp, playerStats.currentMapMode.ordinal()}),
+                    new PacketSimple(EnumSimplePacket.C_UPDATE_DIMENSION_LIST, new Object[] {
+                        player.getGameProfile().getName(), temp, playerStats.currentMapMode.ordinal()
+                    }),
                     player);
             playerStats.savedPlanetList = temp;
             // GCLog.debug("Sending to " + player.getGameProfile().getName() + ": " + temp);

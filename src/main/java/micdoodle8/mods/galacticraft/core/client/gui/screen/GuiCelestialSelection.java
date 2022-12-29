@@ -562,7 +562,8 @@ public class GuiCelestialSelection extends GuiScreen {
                         this.mc.gameSettings.thirdPersonView = 0;
                     }
                     GalacticraftCore.packetPipeline.sendToServer(new PacketSimple(
-                            PacketSimple.EnumSimplePacket.S_TELEPORT_ENTITY, new Object[] {dimension, this.mapMode == MapMode.TRAVEL}));
+                            PacketSimple.EnumSimplePacket.S_TELEPORT_ENTITY,
+                            new Object[] {dimension, this.mapMode == MapMode.TRAVEL}));
                     // TODO Some type of clientside "in Space" holding screen here while waiting for
                     // the server to do
                     // the teleport
@@ -673,8 +674,8 @@ public class GuiCelestialSelection extends GuiScreen {
                     && x < this.width - BORDER_WIDTH - BORDER_EDGE_WIDTH
                     && y > BORDER_WIDTH + BORDER_EDGE_WIDTH
                     && y < BORDER_WIDTH + BORDER_EDGE_WIDTH + 13) {
-                GalacticraftCore.packetPipeline.sendToServer(new PacketSimple(
-                        EnumSimplePacket.S_CANCEL_TELEPORTATION, new Object[] {}));
+                GalacticraftCore.packetPipeline.sendToServer(
+                        new PacketSimple(EnumSimplePacket.S_CANCEL_TELEPORTATION, new Object[] {}));
                 this.mc.displayGuiScreen(null);
                 this.mc.setIngameFocus();
                 clickHandled = true;
