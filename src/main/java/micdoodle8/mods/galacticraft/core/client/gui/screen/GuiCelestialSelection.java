@@ -673,6 +673,8 @@ public class GuiCelestialSelection extends GuiScreen {
                     && x < this.width - BORDER_WIDTH - BORDER_EDGE_WIDTH
                     && y > BORDER_WIDTH + BORDER_EDGE_WIDTH
                     && y < BORDER_WIDTH + BORDER_EDGE_WIDTH + 13) {
+                GalacticraftCore.packetPipeline.sendToServer(new PacketSimple(
+                        EnumSimplePacket.S_CANCEL_TELEPORTATION, new Object[] {}));
                 this.mc.displayGuiScreen(null);
                 this.mc.setIngameFocus();
                 clickHandled = true;

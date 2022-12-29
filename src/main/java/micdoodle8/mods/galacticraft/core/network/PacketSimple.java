@@ -45,6 +45,7 @@ import micdoodle8.mods.galacticraft.core.dimension.SpaceStationWorldData;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderSpaceStation;
 import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseConductor;
 import micdoodle8.mods.galacticraft.core.entities.EntityBuggy;
+import micdoodle8.mods.galacticraft.core.entities.EntityCelestialFake;
 import micdoodle8.mods.galacticraft.core.entities.IBubbleProvider;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerHandler;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerHandler.EnumModelPacket;
@@ -196,7 +197,8 @@ public class PacketSimple extends Packet implements IPacket {
                 Integer.class,
                 String.class),
         C_SEND_PLAYERSKIN(Side.CLIENT, String.class, String.class, String.class, String.class),
-        C_SEND_OVERWORLD_IMAGE(Side.CLIENT, Integer.class, Integer.class, byte[].class);
+        C_SEND_OVERWORLD_IMAGE(Side.CLIENT, Integer.class, Integer.class, byte[].class),
+        S_CANCEL_TELEPORTATION(Side.SERVER);
 
         private final Side targetSide;
         private final Class<?>[] decodeAs;
@@ -907,6 +909,9 @@ public class PacketSimple extends Packet implements IPacket {
                 break;
             case S_TELEPORT_ENTITY:
                 try {
+                    final Entity fakeEntity = new EntityCelestialFake(player.worldObj, player.posX, player.posY, player.posZ, 0.0F);
+                    player.worldObj.spawnEntityInWorld(fakeEntity);
+                    player.mountEntity(fakeEntity);
                     final WorldProvider provider = WorldUtil.getProviderForNameServer((String) this.data.get(0));
                     final Integer dim = provider.dimensionId;
                     GCLog.info("Found matching world (" + dim.toString() + ") for name: " + this.data.get(0));
@@ -1420,6 +1425,9 @@ public class PacketSimple extends Packet implements IPacket {
                             playerRequested.getUniqueID().toString()
                         }),
                         playerBase);
+                break;
+            case S_CANCEL_TELEPORTATION:
+                WorldUtil.cancelTeleportation(playerBase);
                 break;
             default:
                 break;

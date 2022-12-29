@@ -899,6 +899,15 @@ public class WorldUtil {
         return WorldUtil.transferEntityToDimension(entity, dimensionID, world, true, null);
     }
 
+    public static Entity cancelTeleportation(Entity entity) {
+        if (entity instanceof EntityPlayerMP) {
+            EntityPlayerMP player = (EntityPlayerMP) entity;
+            final GCPlayerStats stats = GCPlayerStats.get(player);
+            stats.usingPlanetSelectionGui = false;
+        }
+        return entity;
+    }
+
     /**
      * It is not necessary to use entity.setDead() following calling this method. If
      * the entity left the old world it was in, it will now automatically be removed
@@ -1640,9 +1649,6 @@ public class WorldUtil {
         stats.usingPlanetSelectionGui = true;
         stats.currentMapMode = mapMode;
         stats.savedPlanetList = dimensionList;
-        final Entity fakeEntity = new EntityCelestialFake(player.worldObj, player.posX, player.posY, player.posZ, 0.0F);
-        player.worldObj.spawnEntityInWorld(fakeEntity);
-        player.mountEntity(fakeEntity);
     }
 
     public static Vector3 getFootprintPosition(
