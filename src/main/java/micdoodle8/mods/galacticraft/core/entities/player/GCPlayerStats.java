@@ -236,7 +236,7 @@ public class GCPlayerStats implements IExtendedEntityProperties {
         if (nbt.hasKey("FuelLevel")) {
             this.fuelLevel = nbt.getInteger("FuelLevel");
         }
-        if (nbt.hasKey("ReturnRocket")) {
+            if (nbt.hasKey("ReturnRocket")) {
             final ItemStack returnRocket = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("ReturnRocket"));
             if (returnRocket != null) {
                 this.rocketItem = returnRocket.getItem();

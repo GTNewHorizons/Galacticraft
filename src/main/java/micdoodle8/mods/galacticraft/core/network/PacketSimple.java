@@ -101,7 +101,7 @@ public class PacketSimple extends Packet implements IPacket {
     public enum EnumSimplePacket {
         // SERVER
         S_RESPAWN_PLAYER(Side.SERVER, String.class),
-        S_TELEPORT_ENTITY(Side.SERVER, String.class),
+        S_TELEPORT_ENTITY(Side.SERVER, String.class, Boolean.class),
         S_IGNITE_ROCKET(Side.SERVER),
         S_OPEN_SCHEMATIC_PAGE(Side.SERVER, Integer.class),
         S_OPEN_FUEL_GUI(Side.SERVER, String.class),
@@ -919,7 +919,7 @@ public class PacketSimple extends Packet implements IPacket {
                     if (playerBase.worldObj instanceof WorldServer) {
                         final WorldServer world = (WorldServer) playerBase.worldObj;
 
-                        WorldUtil.transferEntityToDimension(playerBase, dim, world);
+                        WorldUtil.transferEntityToDimension(playerBase, dim, world, (Boolean) data.get(1), null);
                     }
 
                     stats.teleportCooldown = 10;

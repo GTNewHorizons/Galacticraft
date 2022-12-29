@@ -54,10 +54,6 @@ public class CommandPlanetTeleport extends CommandBase {
                             server.worldServerForDimension(server.worldServers[0].provider.dimensionId);
                     final ChunkCoordinates chunkcoordinates = worldserver.getSpawnPoint();
                     final GCPlayerStats stats = GCPlayerStats.get(playerBase);
-                    stats.rocketStacks = new ItemStack[2];
-                    stats.rocketType = IRocketType.EnumRocketType.DEFAULT.ordinal();
-                    stats.rocketItem = GCItems.rocketTier1;
-                    stats.fuelLevel = 1000;
                     stats.coordsTeleportedFromX = chunkcoordinates.posX;
                     stats.coordsTeleportedFromZ = chunkcoordinates.posZ;
 
@@ -68,13 +64,6 @@ public class CommandPlanetTeleport extends CommandBase {
                         e.printStackTrace();
                         throw e;
                     }
-
-                    VersionUtil.notifyAdmins(
-                            icommandsender,
-                            this,
-                            "commands.dimensionteleport",
-                            EnumColor.GREY + "[" + playerBase.getCommandSenderName(),
-                            "]");
                 } else {
                     throw new Exception("Could not find player with name: " + astring[0]);
                 }

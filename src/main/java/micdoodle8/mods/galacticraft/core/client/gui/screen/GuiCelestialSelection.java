@@ -562,7 +562,7 @@ public class GuiCelestialSelection extends GuiScreen {
                         this.mc.gameSettings.thirdPersonView = 0;
                     }
                     GalacticraftCore.packetPipeline.sendToServer(new PacketSimple(
-                            PacketSimple.EnumSimplePacket.S_TELEPORT_ENTITY, new Object[] {dimension}));
+                            PacketSimple.EnumSimplePacket.S_TELEPORT_ENTITY, new Object[] {dimension, this.mapMode == MapMode.TRAVEL}));
                     // TODO Some type of clientside "in Space" holding screen here while waiting for
                     // the server to do
                     // the teleport
