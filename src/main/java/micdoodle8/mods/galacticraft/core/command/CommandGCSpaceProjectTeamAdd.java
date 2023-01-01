@@ -1,7 +1,7 @@
 package micdoodle8.mods.galacticraft.core.command;
 
-import micdoodle8.mods.galacticraft.api.spaceprojects.ISpaceProject;
 import java.util.List;
+import micdoodle8.mods.galacticraft.api.spaceprojects.ISpaceProject;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;

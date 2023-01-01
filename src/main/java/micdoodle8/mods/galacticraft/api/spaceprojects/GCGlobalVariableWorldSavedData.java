@@ -3,7 +3,6 @@ package micdoodle8.mods.galacticraft.api.spaceprojects;
 import static micdoodle8.mods.galacticraft.api.spaceprojects.GCGlobalVariableStorage.*;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import micdoodle8.mods.galacticraft.api.spaceprojects.ISpaceProject;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
