@@ -34,6 +34,7 @@ import micdoodle8.mods.galacticraft.api.galaxies.Satellite;
 import micdoodle8.mods.galacticraft.api.galaxies.SolarSystem;
 import micdoodle8.mods.galacticraft.api.galaxies.Star;
 import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;
+import micdoodle8.mods.galacticraft.api.spaceprojects.GCGlobalVariableWorldSavedData;
 import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.api.world.IAtmosphericGas;
@@ -47,6 +48,7 @@ import micdoodle8.mods.galacticraft.core.client.gui.screen.GameScreenText;
 import micdoodle8.mods.galacticraft.core.command.CommandGCEnergyUnits;
 import micdoodle8.mods.galacticraft.core.command.CommandGCHelp;
 import micdoodle8.mods.galacticraft.core.command.CommandGCInv;
+import micdoodle8.mods.galacticraft.core.command.CommandGCSpaceProjectTeamAdd;
 import micdoodle8.mods.galacticraft.core.command.CommandJoinSpaceRace;
 import micdoodle8.mods.galacticraft.core.command.CommandKeepDim;
 import micdoodle8.mods.galacticraft.core.command.CommandPlanetTeleport;
@@ -269,6 +271,7 @@ public class GalacticraftCore {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(new GCGlobalVariableWorldSavedData(""));
         galacticraftBlocksTab = new CreativeTabGC(
                 CreativeTabs.getNextID(), "GalacticraftBlocks", Item.getItemFromBlock(GCBlocks.machineBase2), 0);
         galacticraftItemsTab = new CreativeTabGC(CreativeTabs.getNextID(), "GalacticraftItems", GCItems.rocketTier1, 0);
@@ -634,6 +637,7 @@ public class GalacticraftCore {
         event.registerServerCommand(new CommandGCHelp());
         event.registerServerCommand(new CommandGCEnergyUnits());
         event.registerServerCommand(new CommandJoinSpaceRace());
+        event.registerServerCommand(new CommandGCSpaceProjectTeamAdd());
 
         WorldUtil.initialiseDimensionNames();
         WorldUtil.registerSpaceStations(event.getServer()

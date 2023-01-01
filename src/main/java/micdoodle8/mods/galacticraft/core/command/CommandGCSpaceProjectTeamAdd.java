@@ -12,7 +12,7 @@ public class CommandGCSpaceProjectTeamAdd extends CommandBase implements ISpaceP
 
     @Override
     public String getCommandName() {
-        return "seinvite";
+        return "spinvite";
     }
 
     @Override
