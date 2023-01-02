@@ -1,5 +1,7 @@
 package micdoodle8.mods.galacticraft.api.spaceprojects;
 
+import java.util.HashMap;
+
 import com.google.common.collect.HashBiMap;
 
 public abstract class GCGlobalVariableStorage {
@@ -8,5 +10,5 @@ public abstract class GCGlobalVariableStorage {
     public static HashBiMap<String, String> GlobalSpaceProjectName = HashBiMap.create(100);
 
     // Maps UUIDs to other UUIDs. This allows users to join a team.
-    public static HashBiMap<String, String> GlobalSpaceProjectTeam = HashBiMap.create(100);
+    public static HashMap<String, String> GlobalSpaceProjectTeam = new HashMap<>(100, 0.9f);
 }

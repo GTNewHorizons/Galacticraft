@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.HashMap;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
@@ -70,7 +72,7 @@ public class GCGlobalVariableWorldSavedData extends WorldSavedData {
             InputStream byteArrayInputStream = new ByteArrayInputStream(ba);
             ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
             Object data = objectInputStream.readObject();
-            GlobalSpaceProjectTeam = (HashBiMap<String, String>) data;
+            GlobalSpaceProjectTeam = (HashMap<String, String>) data;
         } catch (IOException | ClassNotFoundException exception) {
             System.out.println(GLOBAL_SPACE_PROJECT_TEAM_NBT_TAG + " FAILED");
             exception.printStackTrace();
