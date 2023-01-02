@@ -1,8 +1,7 @@
 package micdoodle8.mods.galacticraft.api.spaceprojects;
 
-import java.util.HashMap;
-
 import com.google.common.collect.HashBiMap;
+import java.util.HashMap;
 
 public abstract class GCGlobalVariableStorage {
     // Maps user IDs to usernames and vice versa. Seems redundant but this makes accessing this
