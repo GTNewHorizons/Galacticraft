@@ -18,12 +18,15 @@ public class SpaceProject {
     }
 
     public static void strongCheckOrAddUser(UUID user_uuid) {
-
         // Check if the user has a team. Add them if not.
         GlobalSpaceProjectTeam.putIfAbsent(user_uuid, user_uuid);
     }
 
-    public static String GetUsernameFromUUID(UUID uuid) {
+    public static boolean checkUserTeam(UUID user_uuid) {
+        return GlobalSpaceProjectTeam.containsKey(user_uuid);
+    }
+
+    public static String getUsernameFromUUID(UUID uuid) {
         return MinecraftServer.getServer().func_152358_ax().func_152652_a(uuid).getName();
     }
 
@@ -34,7 +37,10 @@ public class SpaceProject {
                 .getId();
     }
 
-    static void clearGlobalSpaceElevatorInformationMap() {
+    /**
+     * Only use this if you know what you are doing. This will clear all current Spce Project Teams
+     */
+    public static void clearGlobalSpaceProjectInformationMap() {
         GlobalSpaceProjectTeam.clear();
     }
 }

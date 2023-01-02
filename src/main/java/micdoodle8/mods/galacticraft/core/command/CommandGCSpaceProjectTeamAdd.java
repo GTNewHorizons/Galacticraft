@@ -46,8 +46,8 @@ public class CommandGCSpaceProjectTeamAdd extends CommandBase {
             UUID uuid_0 = SpaceProject.getUUIDFromUsername(username_0);
             UUID uuid_1 = SpaceProject.getUUIDFromUsername(username_1);
 
-            if (uuid_1.equals("") && uuid_0.equals("")) {
-                if (username_0.equals(username_1)) {
+            if (SpaceProject.checkUserTeam(uuid_1) && SpaceProject.checkUserTeam(uuid_0)) {
+                if (uuid_0.equals(uuid_1)) {
                     sender.addChatMessage(
                             new ChatComponentText("User " + formatted_username_0 + " has no space project network."));
                 } else {
@@ -57,13 +57,13 @@ public class CommandGCSpaceProjectTeamAdd extends CommandBase {
                 return;
             }
 
-            if (uuid_0.equals("")) {
+            if (SpaceProject.checkUserTeam(uuid_0)) {
                 sender.addChatMessage(
                         new ChatComponentText("User " + formatted_username_0 + " has no space project network."));
                 return;
             }
 
-            if (uuid_1.equals("")) {
+            if (SpaceProject.checkUserTeam(uuid_1)) {
                 sender.addChatMessage(
                         new ChatComponentText("User " + formatted_username_1 + " has no space project network."));
                 return;

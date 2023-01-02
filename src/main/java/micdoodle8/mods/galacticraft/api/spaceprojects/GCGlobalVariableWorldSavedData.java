@@ -25,7 +25,7 @@ public class GCGlobalVariableWorldSavedData extends WorldSavedData {
     private static final String GLOBAL_SPACE_PROJECT_TEAM_NBT_TAG = "Galacticraft_GlobalSpaceProjectTeam_MapNBTTag";
 
     private static void loadInstance(World world) {
-        SpaceProject.clearGlobalSpaceElevatorInformationMap();
+        SpaceProject.clearGlobalSpaceProjectInformationMap();
 
         MapStorage storage = world.mapStorage;
         INSTANCE = (GCGlobalVariableWorldSavedData) storage.loadData(GCGlobalVariableWorldSavedData.class, DATA_NAME);
