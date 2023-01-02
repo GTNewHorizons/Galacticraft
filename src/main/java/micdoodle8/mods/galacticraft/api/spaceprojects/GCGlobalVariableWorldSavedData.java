@@ -2,6 +2,7 @@ package micdoodle8.mods.galacticraft.api.spaceprojects;
 
 import static micdoodle8.mods.galacticraft.api.spaceprojects.GCGlobalVariableStorage.*;
 
+import com.google.common.collect.HashBiMap;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -9,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.HashMap;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
@@ -59,7 +59,7 @@ public class GCGlobalVariableWorldSavedData extends WorldSavedData {
             InputStream byteArrayInputStream = new ByteArrayInputStream(ba);
             ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
             Object data = objectInputStream.readObject();
-            GlobalSpaceProjectName = (HashMap<String, String>) data;
+            GlobalSpaceProjectName = (HashBiMap<String, String>) data;
         } catch (IOException | ClassNotFoundException exception) {
             System.out.println(GLOBAL_SPACE_PROJECT_NAME_NBT_TAG + " FAILED");
             exception.printStackTrace();
@@ -70,7 +70,7 @@ public class GCGlobalVariableWorldSavedData extends WorldSavedData {
             InputStream byteArrayInputStream = new ByteArrayInputStream(ba);
             ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
             Object data = objectInputStream.readObject();
-            GlobalSpaceProjectTeam = (HashMap<String, String>) data;
+            GlobalSpaceProjectTeam = (HashBiMap<String, String>) data;
         } catch (IOException | ClassNotFoundException exception) {
             System.out.println(GLOBAL_SPACE_PROJECT_TEAM_NBT_TAG + " FAILED");
             exception.printStackTrace();

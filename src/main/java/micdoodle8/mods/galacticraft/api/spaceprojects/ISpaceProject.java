@@ -31,8 +31,7 @@ public interface ISpaceProject {
             GlobalSpaceProjectName.remove(old_name);
         }
 
-        // Add UUID -> Name, Name -> UUID.
-        GlobalSpaceProjectName.put(user_name, user_uuid);
+        // Add UUID -> Name
         GlobalSpaceProjectName.put(user_uuid, user_name);
     }
 
@@ -41,7 +40,8 @@ public interface ISpaceProject {
     }
 
     default String getUUIDFromUsername(String username) {
-        return GlobalSpaceProjectTeam.getOrDefault(GlobalSpaceProjectName.getOrDefault(username, ""), "");
+        return GlobalSpaceProjectTeam.getOrDefault(
+                GlobalSpaceProjectName.inverse().getOrDefault(username, ""), "");
     }
 
     static void clearGlobalSpaceElevatorInformationMap() {
