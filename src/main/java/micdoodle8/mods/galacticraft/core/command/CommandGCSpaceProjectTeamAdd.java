@@ -27,7 +27,7 @@ public class CommandGCSpaceProjectTeamAdd extends CommandBase implements ISpaceP
 
     @Override
     public String getCommandUsage(ICommandSender var1) {
-        return "/" + this.getCommandName() + " [User joining] [User to join]";
+        return "/" + this.getCommandName() + " [User1 Joining User2] [User2's Name]";
     }
 
     @Override
@@ -80,7 +80,7 @@ public class CommandGCSpaceProjectTeamAdd extends CommandBase implements ISpaceP
             sender.addChatMessage(new ChatComponentText(
                     "Success! " + formatted_username_0 + " has joined " + formatted_username_1 + "."));
             sender.addChatMessage(
-                    new ChatComponentText("To undo this simply join your own network again with /seinvite "
+                    new ChatComponentText("To undo this simply join your own network again with /spinvite "
                             + formatted_username_0 + " " + formatted_username_0 + "."));
         }
     }

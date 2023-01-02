@@ -20,10 +20,10 @@ public class GCGlobalVariableWorldSavedData extends WorldSavedData {
 
     public static GCGlobalVariableWorldSavedData INSTANCE;
 
-    private static final String DATA_NAME = "GalaxySpace_GlobalVariableWorldSavedData";
+    private static final String DATA_NAME = "Galacticraft_GlobalVariableWorldSavedData";
 
-    private static final String GlobalSpaceElevatorNameNBTTag = "GalaxySpace_GlobalSpaceElevatorName_MapNBTTag";
-    private static final String GlobalSpaceElevatorTeamNBTTag = "GalaxySpace_GlobalSpaceElevatorTeam_MapNBTTag";
+    private static final String GLOBAL_SPACE_PROJECT_NAME_NBT_TAG = "Galacticraft_GlobalSpaceProjectName_MapNBTTag";
+    private static final String GLOBAL_SPACE_PROJECT_TEAM_NBT_TAG = "Galacticraft_GlobalSpaceProjectTeam_MapNBTTag";
 
     private static void loadInstance(World world) {
         ISpaceProject.clearGlobalSpaceElevatorInformationMap();
@@ -55,24 +55,24 @@ public class GCGlobalVariableWorldSavedData extends WorldSavedData {
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
         try {
-            byte[] ba = nbtTagCompound.getByteArray(GlobalSpaceElevatorNameNBTTag);
+            byte[] ba = nbtTagCompound.getByteArray(GLOBAL_SPACE_PROJECT_NAME_NBT_TAG);
             InputStream byteArrayInputStream = new ByteArrayInputStream(ba);
             ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
             Object data = objectInputStream.readObject();
             GlobalSpaceProjectName = (HashMap<String, String>) data;
         } catch (IOException | ClassNotFoundException exception) {
-            System.out.println(GlobalSpaceElevatorNameNBTTag + " FAILED");
+            System.out.println(GLOBAL_SPACE_PROJECT_NAME_NBT_TAG + " FAILED");
             exception.printStackTrace();
         }
 
         try {
-            byte[] ba = nbtTagCompound.getByteArray(GlobalSpaceElevatorTeamNBTTag);
+            byte[] ba = nbtTagCompound.getByteArray(GLOBAL_SPACE_PROJECT_TEAM_NBT_TAG);
             InputStream byteArrayInputStream = new ByteArrayInputStream(ba);
             ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
             Object data = objectInputStream.readObject();
             GlobalSpaceProjectTeam = (HashMap<String, String>) data;
         } catch (IOException | ClassNotFoundException exception) {
-            System.out.println(GlobalSpaceElevatorTeamNBTTag + " FAILED");
+            System.out.println(GLOBAL_SPACE_PROJECT_TEAM_NBT_TAG + " FAILED");
             exception.printStackTrace();
         }
     }
@@ -85,9 +85,9 @@ public class GCGlobalVariableWorldSavedData extends WorldSavedData {
             objectOutputStream.writeObject(GlobalSpaceProjectName);
             objectOutputStream.flush();
             byte[] data = byteArrayOutputStream.toByteArray();
-            nbtTagCompound.setByteArray(GlobalSpaceElevatorNameNBTTag, data);
+            nbtTagCompound.setByteArray(GLOBAL_SPACE_PROJECT_NAME_NBT_TAG, data);
         } catch (Exception exception) {
-            System.out.println(GlobalSpaceElevatorNameNBTTag + " SAVE FAILED");
+            System.out.println(GLOBAL_SPACE_PROJECT_NAME_NBT_TAG + " SAVE FAILED");
             exception.printStackTrace();
         }
 
@@ -97,9 +97,9 @@ public class GCGlobalVariableWorldSavedData extends WorldSavedData {
             objectOutputStream.writeObject(GlobalSpaceProjectTeam);
             objectOutputStream.flush();
             byte[] data = byteArrayOutputStream.toByteArray();
-            nbtTagCompound.setByteArray(GlobalSpaceElevatorTeamNBTTag, data);
+            nbtTagCompound.setByteArray(GLOBAL_SPACE_PROJECT_TEAM_NBT_TAG, data);
         } catch (IOException exception) {
-            System.out.println(GlobalSpaceElevatorTeamNBTTag + " SAVE FAILED");
+            System.out.println(GLOBAL_SPACE_PROJECT_TEAM_NBT_TAG + " SAVE FAILED");
             exception.printStackTrace();
         }
     }
