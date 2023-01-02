@@ -1,14 +1,15 @@
 package micdoodle8.mods.galacticraft.core.command;
 
 import java.util.List;
-import micdoodle8.mods.galacticraft.api.spaceprojects.ISpaceProject;
+import java.util.UUID;
+import micdoodle8.mods.galacticraft.api.spaceprojects.SpaceProject;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
-public class CommandGCSpaceProjectTeamAdd extends CommandBase implements ISpaceProject {
+public class CommandGCSpaceProjectTeamAdd extends CommandBase {
 
     @Override
     public String getCommandName() {
@@ -27,7 +28,7 @@ public class CommandGCSpaceProjectTeamAdd extends CommandBase implements ISpaceP
 
     @Override
     public String getCommandUsage(ICommandSender var1) {
-        return "/" + this.getCommandName() + " [User1 Joining User2] [User2's Name]";
+        return "/" + this.getCommandName() + " <User1 Joining User2> <User2's Name>";
     }
 
     @Override
@@ -42,8 +43,8 @@ public class CommandGCSpaceProjectTeamAdd extends CommandBase implements ISpaceP
             String formatted_username_0 = EnumChatFormatting.BLUE + username_0 + EnumChatFormatting.RESET;
             String formatted_username_1 = EnumChatFormatting.BLUE + username_1 + EnumChatFormatting.RESET;
 
-            String uuid_0 = getUUIDFromUsername(username_0);
-            String uuid_1 = getUUIDFromUsername(username_1);
+            UUID uuid_0 = SpaceProject.getUUIDFromUsername(username_0);
+            UUID uuid_1 = SpaceProject.getUUIDFromUsername(username_1);
 
             if (uuid_1.equals("") && uuid_0.equals("")) {
                 if (username_0.equals(username_1)) {
@@ -69,13 +70,13 @@ public class CommandGCSpaceProjectTeamAdd extends CommandBase implements ISpaceP
             }
 
             if (uuid_0.equals(uuid_1)) {
-                joinUserNetwork(uuid_0, uuid_1);
+                SpaceProject.joinUserNetwork(uuid_0, uuid_1);
                 sender.addChatMessage(new ChatComponentText(
                         "User " + formatted_username_0 + " has rejoined their own space project network."));
                 return;
             }
 
-            joinUserNetwork(uuid_0, uuid_1);
+            SpaceProject.joinUserNetwork(uuid_0, uuid_1);
 
             sender.addChatMessage(new ChatComponentText(
                     "Success! " + formatted_username_0 + " has joined " + formatted_username_1 + "."));
