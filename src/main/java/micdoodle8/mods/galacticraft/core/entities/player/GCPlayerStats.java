@@ -143,7 +143,7 @@ public class GCPlayerStats implements IExtendedEntityProperties {
         nbt.setBoolean("OxygenSetupValid", this.oxygenSetupValid);
         nbt.setBoolean("usingParachute2", this.usingParachute);
         nbt.setBoolean("usingPlanetSelectionGui", this.usingPlanetSelectionGui);
-        nbt.setInteger("currentMapMode", this.currentMapMode.ordinal());
+        nbt.setInteger("currentMapMode", this.currentMapMode != null ? this.currentMapMode.ordinal() : -1);
         nbt.setInteger("teleportCooldown", this.teleportCooldown);
         nbt.setDouble("coordsTeleportedFromX", this.coordsTeleportedFromX);
         nbt.setDouble("coordsTeleportedFromZ", this.coordsTeleportedFromZ);
@@ -246,7 +246,12 @@ public class GCPlayerStats implements IExtendedEntityProperties {
 
         this.usingParachute = nbt.getBoolean("usingParachute2");
         this.usingPlanetSelectionGui = nbt.getBoolean("usingPlanetSelectionGui");
-        this.currentMapMode = GuiCelestialSelection.MapMode.fromInteger(nbt.getInteger("currentMapMode"));
+        if (nbt.getInteger("currentMapMode") != -1) {
+            this.currentMapMode = GuiCelestialSelection.MapMode.fromInteger(nbt.getInteger("currentMapMode"));
+        } else {
+            this.currentMapMode = null;
+        }
+
         this.teleportCooldown = nbt.getInteger("teleportCooldown");
         this.coordsTeleportedFromX = nbt.getDouble("coordsTeleportedFromX");
         this.coordsTeleportedFromZ = nbt.getDouble("coordsTeleportedFromZ");
