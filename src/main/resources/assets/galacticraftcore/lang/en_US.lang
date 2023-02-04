@@ -249,9 +249,9 @@ tooltip.rocket_fuel_tier=Can be used as rocket fuel up to tier %s
 tooltip.rocket_fuel_tier_max=Can be used as rocket fuel for all tiers
 
 # KEYBINDINGS
-keybind.map.name=[GC] Galaxy Map
-keybind.spaceshipinv.name=[GC] Open Spaceship Inventory
-keybind.sensortoggle.name=[GC] Toggle Sensor Goggles Mode
+keybind.map.name=Open Galaxy Map
+keybind.spaceshipinv.name=Open Spaceship Inventory
+keybind.sensortoggle.name=Toggle Sensor Goggles Mode
 keybind.vehicleforward.name=[GC] Vehicle Forward Key
 keybind.vehiclebackward.name=[GC] Vehicle Backward Key
 keybind.vehicleleft.name=[GC] Vehicle Left Key

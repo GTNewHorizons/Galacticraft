@@ -256,9 +256,9 @@ newversion.failed.name=Galacticraft update check failed! Trying again in 15 seco
 newversion.success.name=Galacticraft remote version found:
 
 # KEYBINDINGS
-keybind.map.name=[GC] Galaxy Map
-keybind.spaceshipinv.name=[GC] Open Spaceship Inventory
-keybind.sensortoggle.name=[GC] Toggle Sensor Goggles Mode
+keybind.map.name=Open Galaxy Map
+keybind.spaceshipinv.name=Open Spaceship Inventory
+keybind.sensortoggle.name=Toggle Sensor Goggles Mode
 keybind.vehicleforward.name=[GC] Vehicle Forward Key
 keybind.vehiclebackward.name=[GC] Vehicle Backward Key
 keybind.vehicleleft.name=[GC] Vehicle Left Key
