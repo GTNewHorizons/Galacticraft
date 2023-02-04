@@ -21,7 +21,11 @@ import net.minecraft.entity.Entity;
 
 import org.lwjgl.input.Keyboard;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.InputEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Type;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class KeyHandlerClient extends KeyHandler {
 
@@ -68,41 +72,48 @@ public class KeyHandlerClient extends KeyHandler {
         return new KeyBinding[] { invKey, accelerateKey, decelerateKey, leftKey, rightKey, spaceKey, leftShiftKey };
     }
 
-    @Override
-    public void keyDown(Type types, KeyBinding kb, boolean tickEnd, boolean isRepeat) {
-        if (mc.thePlayer != null && tickEnd) {
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void onKeyPressed(InputEvent.KeyInputEvent event) {
+        if (mc.thePlayer == null) {
+            return;
+        }
+        if (galaxyMap.isPressed()) {
+            if (mc.currentScreen == null) {
+                mc.thePlayer.openGui(
+                        GalacticraftCore.instance,
+                        GuiIdsCore.GALAXY_MAP,
+                        mc.theWorld,
+                        (int) mc.thePlayer.posX,
+                        (int) mc.thePlayer.posY,
+                        (int) mc.thePlayer.posZ);
+            }
+        } else if (openFuelGui.isPressed()) {
             final EntityClientPlayerMP playerBase = PlayerUtil.getPlayerBaseClientFromPlayer(mc.thePlayer, false);
-
             if (playerBase == null) {
                 return;
             }
-
-            final GCPlayerStatsClient stats = GCPlayerStatsClient.get(playerBase);
-
-            if (kb.getKeyCode() == galaxyMap.getKeyCode()) {
-                if (mc.currentScreen == null) {
-                    mc.thePlayer.openGui(
-                            GalacticraftCore.instance,
-                            GuiIdsCore.GALAXY_MAP,
-                            mc.theWorld,
-                            (int) mc.thePlayer.posX,
-                            (int) mc.thePlayer.posY,
-                            (int) mc.thePlayer.posZ);
-                }
-            } else if (kb.getKeyCode() == openFuelGui.getKeyCode()) {
-                if (playerBase.ridingEntity instanceof EntitySpaceshipBase
-                        || playerBase.ridingEntity instanceof EntityBuggy) {
-                    GalacticraftCore.packetPipeline.sendToServer(
-                            new PacketSimple(
-                                    EnumSimplePacket.S_OPEN_FUEL_GUI,
-                                    new Object[] { playerBase.getGameProfile().getName() }));
-                }
-            } else if (kb.getKeyCode() == toggleAdvGoggles.getKeyCode()) {
-                stats.usingAdvancedGoggles = !stats.usingAdvancedGoggles;
+            if (playerBase.ridingEntity instanceof EntitySpaceshipBase
+                    || playerBase.ridingEntity instanceof EntityBuggy) {
+                GalacticraftCore.packetPipeline.sendToServer(
+                        new PacketSimple(
+                                EnumSimplePacket.S_OPEN_FUEL_GUI,
+                                new Object[] { playerBase.getGameProfile().getName() }));
             }
+        } else if (toggleAdvGoggles.isPressed()) {
+            final EntityClientPlayerMP playerBase = PlayerUtil.getPlayerBaseClientFromPlayer(mc.thePlayer, false);
+            if (playerBase == null) {
+                return;
+            }
+            final GCPlayerStatsClient stats = GCPlayerStatsClient.get(playerBase);
+            stats.usingAdvancedGoggles = !stats.usingAdvancedGoggles;
         }
+    }
 
-        if (mc.thePlayer != null && mc.currentScreen == null) {
+    @Override // TODO code something else to control buggys to avoid ontick checks
+    public void keyDown(Type types, KeyBinding kb, boolean tickEnd, boolean isRepeat) {
+
+        if (mc.thePlayer != null && mc.currentScreen == null && mc.thePlayer.ridingEntity != null) {
             int keyNum = -1;
 
             if (kb == accelerateKey) {
@@ -122,12 +133,15 @@ public class KeyHandlerClient extends KeyHandler {
             final Entity entityTest = mc.thePlayer.ridingEntity;
 
             if (entityTest instanceof IControllableEntity && keyNum != -1) {
+
                 final IControllableEntity entity = (IControllableEntity) entityTest;
                 if (kb.getKeyCode() == mc.gameSettings.keyBindInventory.getKeyCode()) {
                     KeyBinding.setKeyBindState(mc.gameSettings.keyBindInventory.getKeyCode(), false);
                 }
                 entity.pressKey(keyNum);
+
             } else if (entityTest instanceof EntityAutoRocket) {
+
                 final EntityAutoRocket autoRocket = (EntityAutoRocket) entityTest;
                 if (autoRocket.landing) {
                     if (kb == leftShiftKey) {
@@ -145,8 +159,11 @@ public class KeyHandlerClient extends KeyHandler {
                                         new Object[] { autoRocket.getEntityId(), true }));
                     }
                 }
+
             }
+
         }
+
     }
 
     @Override
