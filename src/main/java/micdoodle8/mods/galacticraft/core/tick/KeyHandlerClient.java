@@ -11,7 +11,6 @@ import micdoodle8.mods.galacticraft.core.entities.IControllableEntity;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStatsClient;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
 
@@ -26,27 +25,18 @@ import cpw.mods.fml.common.gameevent.TickEvent.Type;
 
 public class KeyHandlerClient extends KeyHandler {
 
-    public static KeyBinding galaxyMap;
-    public static KeyBinding openFuelGui;
-    public static KeyBinding toggleAdvGoggles;
-
-    static {
-        galaxyMap = new KeyBinding(
-                GCCoreUtil.translate("keybind.map.name"),
-                ConfigManagerCore.keyOverrideMapI == 0 ? Keyboard.KEY_M : ConfigManagerCore.keyOverrideMapI,
-                Constants.MOD_NAME_SIMPLE);
-        openFuelGui = new KeyBinding(
-                GCCoreUtil.translate("keybind.spaceshipinv.name"),
-                ConfigManagerCore.keyOverrideFuelLevelI == 0 ? Keyboard.KEY_F : ConfigManagerCore.keyOverrideFuelLevelI,
-                Constants.MOD_NAME_SIMPLE);
-        toggleAdvGoggles = new KeyBinding(
-                GCCoreUtil.translate("keybind.sensortoggle.name"),
-                ConfigManagerCore.keyOverrideToggleAdvGogglesI == 0 ? Keyboard.KEY_K
-                        : ConfigManagerCore.keyOverrideToggleAdvGogglesI,
-                Constants.MOD_NAME_SIMPLE);
-        // See ConfigManagerCore.class for actual defaults. These do nothing
-    }
-
+    public static KeyBinding galaxyMap = new KeyBinding(
+            GCCoreUtil.translate("keybind.map.name"),
+            Keyboard.KEY_NONE,
+            Constants.MOD_NAME_SIMPLE);
+    public static KeyBinding openFuelGui = new KeyBinding(
+            GCCoreUtil.translate("keybind.spaceshipinv.name"),
+            Keyboard.KEY_NONE,
+            Constants.MOD_NAME_SIMPLE);
+    public static KeyBinding toggleAdvGoggles = new KeyBinding(
+            GCCoreUtil.translate("keybind.sensortoggle.name"),
+            Keyboard.KEY_NONE,
+            Constants.MOD_NAME_SIMPLE);
     public static KeyBinding accelerateKey;
     public static KeyBinding decelerateKey;
     public static KeyBinding leftKey;
@@ -112,9 +102,7 @@ public class KeyHandlerClient extends KeyHandler {
                                     new Object[] { playerBase.getGameProfile().getName() }));
                 }
             } else if (kb.getKeyCode() == KeyHandlerClient.toggleAdvGoggles.getKeyCode()) {
-                if (playerBase != null) {
-                    stats.usingAdvancedGoggles = !stats.usingAdvancedGoggles;
-                }
+                stats.usingAdvancedGoggles = !stats.usingAdvancedGoggles;
             }
         }
 
@@ -136,17 +124,15 @@ public class KeyHandlerClient extends KeyHandler {
             }
 
             final Entity entityTest = KeyHandlerClient.mc.thePlayer.ridingEntity;
-            if (entityTest != null && entityTest instanceof IControllableEntity && keyNum != -1) {
-                final IControllableEntity entity = (IControllableEntity) entityTest;
 
+            if (entityTest instanceof IControllableEntity && keyNum != -1) {
+                final IControllableEntity entity = (IControllableEntity) entityTest;
                 if (kb.getKeyCode() == KeyHandlerClient.mc.gameSettings.keyBindInventory.getKeyCode()) {
                     KeyBinding.setKeyBindState(KeyHandlerClient.mc.gameSettings.keyBindInventory.getKeyCode(), false);
                 }
-
                 entity.pressKey(keyNum);
-            } else if (entityTest != null && entityTest instanceof EntityAutoRocket) {
+            } else if (entityTest instanceof EntityAutoRocket) {
                 final EntityAutoRocket autoRocket = (EntityAutoRocket) entityTest;
-
                 if (autoRocket.landing) {
                     if (kb == KeyHandlerClient.leftShiftKey) {
                         autoRocket.motionY -= 0.02D;
@@ -155,7 +141,6 @@ public class KeyHandlerClient extends KeyHandler {
                                         EnumSimplePacket.S_UPDATE_SHIP_MOTION_Y,
                                         new Object[] { autoRocket.getEntityId(), false }));
                     }
-
                     if (kb == KeyHandlerClient.spaceKey) {
                         autoRocket.motionY += 0.02D;
                         GalacticraftCore.packetPipeline.sendToServer(

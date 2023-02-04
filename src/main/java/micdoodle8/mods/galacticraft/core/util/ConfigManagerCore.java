@@ -128,12 +128,6 @@ public class ConfigManagerCore {
     public static boolean useOldFuelFluidID;
 
     // KEYBOARD AND MOUSE
-    public static String keyOverrideMap;
-    public static String keyOverrideFuelLevel;
-    public static String keyOverrideToggleAdvGoggles;
-    public static int keyOverrideMapI;
-    public static int keyOverrideFuelLevelI;
-    public static int keyOverrideToggleAdvGogglesI;
     public static float mapMouseScrollSensitivity;
     public static boolean invertMapMouseScroll;
 
@@ -569,27 +563,6 @@ public class ConfigManagerCore {
             prop.comment = "Allow the creation of Space Station at unreachable Celestial Bodies";
             prop.setRequiresMcRestart(false);
             allowSSatUnreachable = prop.getBoolean();
-            propOrder.add(prop.getName());
-
-            prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Open Galaxy Map", "KEY_M");
-            prop.comment = "Leave 'KEY_' value, adding the intended keyboard character to replace the letter. Values 0-9 and A-Z are accepted";
-            prop.setLanguageKey("gc.configgui.overrideMap").setRequiresMcRestart(true);
-            keyOverrideMap = prop.getString();
-            keyOverrideMapI = parseKeyValue(keyOverrideMap);
-            propOrder.add(prop.getName());
-
-            prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Open Fuel GUI", "KEY_F");
-            prop.comment = "Leave 'KEY_' value, adding the intended keyboard character to replace the letter. Values 0-9 and A-Z are accepted";
-            prop.setLanguageKey("gc.configgui.keyOverrideFuelLevel").setRequiresMcRestart(true);
-            keyOverrideFuelLevel = prop.getString();
-            keyOverrideFuelLevelI = parseKeyValue(keyOverrideFuelLevel);
-            propOrder.add(prop.getName());
-
-            prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Toggle Advanced Goggles", "KEY_K");
-            prop.comment = "Leave 'KEY_' value, adding the intended keyboard character to replace the letter. Values 0-9 and A-Z are accepted";
-            prop.setLanguageKey("gc.configgui.keyOverrideToggleAdvGoggles").setRequiresMcRestart(true);
-            keyOverrideToggleAdvGoggles = prop.getString();
-            keyOverrideToggleAdvGogglesI = parseKeyValue(keyOverrideToggleAdvGoggles);
             propOrder.add(prop.getName());
 
             prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Rocket fuel factor", 1);
