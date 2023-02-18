@@ -231,7 +231,7 @@ public class FreefallHandler {
         }
 
         p.motionX -= dX;
-        //p.motionY -= dY; //Enabling this will disable jetpacks
+        // p.motionY -= dY; //Enabling this will disable jetpacks
         p.motionZ -= dZ;
 
         if (p.movementInput.moveForward != 0) {
@@ -344,7 +344,6 @@ public class FreefallHandler {
             if (spinManager != null) {
                 doCentrifugal = spinManager.updatePlayerForSpin(p, 1F);
             }
-
 
             p.capabilities.isFlying = true;
             // Half the normal acceleration in Creative mode
