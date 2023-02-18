@@ -231,7 +231,7 @@ public class FreefallHandler {
         }
 
         p.motionX -= dX;
-        // p.motionY -= dY; //Enabling this will disable jetpacks
+        //p.motionY -= dY; //Enabling this will disable jetpacks
         p.motionZ -= dZ;
 
         if (p.movementInput.moveForward != 0) {
@@ -345,37 +345,33 @@ public class FreefallHandler {
                 doCentrifugal = spinManager.updatePlayerForSpin(p, 1F);
             }
 
-            // Do freefall motion
-            if (!p.capabilities.isCreativeMode) {
-                FreefallHandler.freefallMotion(p);
-            } else {
-                p.capabilities.isFlying = true;
-                // Half the normal acceleration in Creative mode
-                final double dx = p.motionX - FreefallHandler.pPrevMotionX;
-                final double dy = p.motionY - FreefallHandler.pPrevMotionY;
-                final double dz = p.motionZ - FreefallHandler.pPrevMotionZ;
-                p.motionX -= dx / 2;
-                p.motionY -= dy / 2;
-                p.motionZ -= dz / 2;
 
-                if (p.motionX > 1.2F) {
-                    p.motionX = 1.2F;
-                }
-                if (p.motionX < -1.2F) {
-                    p.motionX = -1.2F;
-                }
-                if (p.motionY > 0.7F) {
-                    p.motionY = 0.7F;
-                }
-                if (p.motionY < -0.7F) {
-                    p.motionY = -0.7F;
-                }
-                if (p.motionZ > 1.2F) {
-                    p.motionZ = 1.2F;
-                }
-                if (p.motionZ < -1.2F) {
-                    p.motionZ = -1.2F;
-                }
+            p.capabilities.isFlying = true;
+            // Half the normal acceleration in Creative mode
+            final double dx = p.motionX - FreefallHandler.pPrevMotionX;
+            final double dy = p.motionY - FreefallHandler.pPrevMotionY;
+            final double dz = p.motionZ - FreefallHandler.pPrevMotionZ;
+            p.motionX -= dx / 1.2;
+            p.motionY -= dy / 1.2;
+            p.motionZ -= dz / 1.2;
+
+            if (p.motionX > 1.2F) {
+                p.motionX = 1.2F;
+            }
+            if (p.motionX < -1.2F) {
+                p.motionX = -1.2F;
+            }
+            if (p.motionY > 0.7F) {
+                p.motionY = 0.7F;
+            }
+            if (p.motionY < -0.7F) {
+                p.motionY = -0.7F;
+            }
+            if (p.motionZ > 1.2F) {
+                p.motionZ = 1.2F;
+            }
+            if (p.motionZ < -1.2F) {
+                p.motionZ = -1.2F;
             }
             // TODO: Think about endless drift?
             // Player may run out of oxygen - that will kill the player eventually if can't
