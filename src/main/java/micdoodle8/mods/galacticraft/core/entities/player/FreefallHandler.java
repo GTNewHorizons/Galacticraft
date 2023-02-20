@@ -7,8 +7,6 @@ import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.core.dimension.SpinManager;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderSpaceStation;
 import micdoodle8.mods.galacticraft.core.entities.EntityLanderBase;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -199,93 +197,31 @@ public class FreefallHandler {
         pPrevMotionZ = p.motionZ;
     }
 
-    @SideOnly(Side.CLIENT)
-    public static void freefallMotion(EntityPlayerSP p) {
-        boolean jetpackUsed = false;
-        final double dX = p.motionX - pPrevMotionX;
-        final double dY = p.motionY - pPrevMotionY;
-        final double dZ = p.motionZ - pPrevMotionZ;
-
-        final double posOffsetX = -p.motionX;
-        double posOffsetY = -p.motionY;
-        if (posOffsetY == -WorldUtil.getGravityForEntity(p)) {
-            posOffsetY = 0;
-        }
-        final double posOffsetZ = -p.motionZ;
-        // if (p.capabilities.isFlying)
-
-        /// Undo whatever vanilla tried to do to our y motion
-        if (dY < 0D && p.motionY != 0.0D) {
-            p.motionY = pPrevMotionY;
-        } else if (dY > 0.01D && GCPlayerStatsClient.get(p).inFreefallLast) {
-            // Impulse upwards - it's probably a jetpack from another mod
-            if (dX < 0.01D && dZ < 0.01D) {
-                final float pitch = p.rotationPitch / 57.29578F;
-                jetpackBoost = (float) dY * MathHelper.cos(pitch) * 0.1F;
-                final float factor = 1 + MathHelper.sin(pitch) / 5;
-                p.motionY -= dY * factor;
-                jetpackUsed = true;
-            } else {
-                p.motionY -= dY / 2;
-            }
-        }
-
-        p.motionX -= dX;
-        // p.motionY -= dY; //Enabling this will disable jetpacks
-        p.motionZ -= dZ;
-
-        if (p.movementInput.moveForward != 0) {
-            p.motionX -= p.movementInput.moveForward * MathHelper.sin(p.rotationYaw / 57.29578F)
-                    / (ConfigManagerCore.hardMode ? 600F : 200F);
-            p.motionZ += p.movementInput.moveForward * MathHelper.cos(p.rotationYaw / 57.29578F)
-                    / (ConfigManagerCore.hardMode ? 600F : 200F);
-        }
-
-        if (jetpackBoost != 0) {
-            p.motionX -= jetpackBoost * MathHelper.sin(p.rotationYaw / 57.29578F);
-            p.motionZ += jetpackBoost * MathHelper.cos(p.rotationYaw / 57.29578F);
-        }
-
-        if (p.movementInput.sneak) {
-            if (!sneakLast) {
-                // posOffsetY += 0.0268;
-                sneakLast = true;
-            }
-            p.motionY -= ConfigManagerCore.hardMode ? 0.002D : 0.0032D;
-        } else if (sneakLast) {
-            sneakLast = false;
-            // posOffsetY -= 0.0268;
-        }
-
-        if (!jetpackUsed && p.movementInput.jump) {
-            p.motionY += ConfigManagerCore.hardMode ? 0.002D : 0.0032D;
-        }
-
-        final float speedLimit = ConfigManagerCore.hardMode ? 0.9F : 0.7F;
-
-        if (p.motionX > speedLimit) {
-            p.motionX = speedLimit;
-        }
-        if (p.motionX < -speedLimit) {
-            p.motionX = -speedLimit;
-        }
-        if (p.motionY > speedLimit) {
-            p.motionY = speedLimit;
-        }
-        if (p.motionY < -speedLimit) {
-            p.motionY = -speedLimit;
-        }
-        if (p.motionZ > speedLimit) {
-            p.motionZ = speedLimit;
-        }
-        if (p.motionZ < -speedLimit) {
-            p.motionZ = -speedLimit;
-        }
-        pPrevMotionX = p.motionX;
-        pPrevMotionY = p.motionY;
-        pPrevMotionZ = p.motionZ;
-        p.moveEntity(p.motionX + posOffsetX, p.motionY + posOffsetY, p.motionZ + posOffsetZ);
-    }
+    /*
+     * @SideOnly(Side.CLIENT) public static void freefallMotion(EntityPlayerSP p) { boolean jetpackUsed = false; final
+     * double dX = p.motionX - pPrevMotionX; final double dY = p.motionY - pPrevMotionY; final double dZ = p.motionZ -
+     * pPrevMotionZ; final double posOffsetX = -p.motionX; double posOffsetY = -p.motionY; if (posOffsetY ==
+     * -WorldUtil.getGravityForEntity(p)) { posOffsetY = 0; } final double posOffsetZ = -p.motionZ; // if
+     * (p.capabilities.isFlying) /// Undo whatever vanilla tried to do to our y motion if (dY < 0D && p.motionY != 0.0D)
+     * { p.motionY = pPrevMotionY; } else if (dY > 0.01D && GCPlayerStatsClient.get(p).inFreefallLast) { // Impulse
+     * upwards - it's probably a jetpack from another mod if (dX < 0.01D && dZ < 0.01D) { final float pitch =
+     * p.rotationPitch / 57.29578F; jetpackBoost = (float) dY * MathHelper.cos(pitch) * 0.1F; final float factor = 1 +
+     * MathHelper.sin(pitch) / 5; p.motionY -= dY * factor; jetpackUsed = true; } else { p.motionY -= dY / 2; } }
+     * p.motionX -= dX; // p.motionY -= dY; //Enabling this will disable jetpacks p.motionZ -= dZ; if
+     * (p.movementInput.moveForward != 0) { p.motionX -= p.movementInput.moveForward * MathHelper.sin(p.rotationYaw /
+     * 57.29578F) / (ConfigManagerCore.hardMode ? 600F : 200F); p.motionZ += p.movementInput.moveForward *
+     * MathHelper.cos(p.rotationYaw / 57.29578F) / (ConfigManagerCore.hardMode ? 600F : 200F); } if (jetpackBoost != 0)
+     * { p.motionX -= jetpackBoost * MathHelper.sin(p.rotationYaw / 57.29578F); p.motionZ += jetpackBoost *
+     * MathHelper.cos(p.rotationYaw / 57.29578F); } if (p.movementInput.sneak) { if (!sneakLast) { // posOffsetY +=
+     * 0.0268; sneakLast = true; } p.motionY -= ConfigManagerCore.hardMode ? 0.002D : 0.0032D; } else if (sneakLast) {
+     * sneakLast = false; // posOffsetY -= 0.0268; } if (!jetpackUsed && p.movementInput.jump) { p.motionY +=
+     * ConfigManagerCore.hardMode ? 0.002D : 0.0032D; } final float speedLimit = ConfigManagerCore.hardMode ? 0.9F :
+     * 0.7F; if (p.motionX > speedLimit) { p.motionX = speedLimit; } if (p.motionX < -speedLimit) { p.motionX =
+     * -speedLimit; } if (p.motionY > speedLimit) { p.motionY = speedLimit; } if (p.motionY < -speedLimit) { p.motionY =
+     * -speedLimit; } if (p.motionZ > speedLimit) { p.motionZ = speedLimit; } if (p.motionZ < -speedLimit) { p.motionZ =
+     * -speedLimit; } pPrevMotionX = p.motionX; pPrevMotionY = p.motionY; pPrevMotionZ = p.motionZ;
+     * p.moveEntity(p.motionX + posOffsetX, p.motionY + posOffsetY, p.motionZ + posOffsetZ); }
+     */
 
     /*
      * double dyaw = p.rotationYaw - p.prevRotationYaw; p.rotationYaw -= dyaw * 0.8D; double dyawh = p.rotationYawHead -
