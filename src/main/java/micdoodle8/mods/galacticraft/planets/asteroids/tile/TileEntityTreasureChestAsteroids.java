@@ -2,13 +2,13 @@ package micdoodle8.mods.galacticraft.planets.asteroids.tile;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import micdoodle8.mods.galacticraft.api.item.IKeyable;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityAdvanced;
-import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.BlockTier3TreasureChest;
 
@@ -16,15 +16,15 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 
-import cpw.mods.fml.relauncher.Side;
-
-public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced implements IInventory, IKeyable {
+public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced
+        implements IInventory, IKeyable, ISidedInventory {
 
     private ItemStack[] chestContents = new ItemStack[36];
 
@@ -73,7 +73,6 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
      */
     private int ticksSinceSync;
 
-    @NetworkedField(targetSide = Side.CLIENT)
     public boolean locked = true;
 
     public int tier = 3;
@@ -559,5 +558,20 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced impleme
     @Override
     public boolean isNetworkedTile() {
         return true;
+    }
+
+    @Override
+    public int[] getAccessibleSlotsFromSide(int slot) {
+        return IntStream.range(0, getSizeInventory()).toArray();
+    }
+
+    @Override
+    public boolean canInsertItem(int slot, ItemStack itemStack, int side) {
+        return !this.locked;
+    }
+
+    @Override
+    public boolean canExtractItem(int slot, ItemStack itemStack, int side) {
+        return !this.locked;
     }
 }
