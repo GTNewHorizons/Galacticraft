@@ -3,20 +3,6 @@ package micdoodle8.mods.galacticraft.planets.mars.blocks;
 import java.util.List;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.blocks.BlockTileGC;
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseUniversalElectrical;
-import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.planets.GalacticraftPlanets;
-import micdoodle8.mods.galacticraft.planets.GuiIdsPlanets;
-import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
-import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityElectrolyzer;
-import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityGasLiquefier;
-import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityMethaneSynthesizer;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -32,6 +18,19 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.blocks.BlockTileGC;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseUniversalElectrical;
+import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.planets.GalacticraftPlanets;
+import micdoodle8.mods.galacticraft.planets.GuiIdsPlanets;
+import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
+import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityElectrolyzer;
+import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityGasLiquefier;
+import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityMethaneSynthesizer;
 
 public class BlockMachineMarsT2 extends BlockTileGC implements ItemBlockDesc.IBlockShiftDesc {
 

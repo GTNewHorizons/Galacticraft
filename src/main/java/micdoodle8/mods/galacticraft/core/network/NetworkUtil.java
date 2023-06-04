@@ -6,15 +6,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.core.energy.tile.EnergyStorage;
-import micdoodle8.mods.galacticraft.core.util.FluidUtil;
-import micdoodle8.mods.galacticraft.core.util.GCLog;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
-import micdoodle8.mods.galacticraft.core.wrappers.FlagData;
-import micdoodle8.mods.galacticraft.core.wrappers.Footprint;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -30,6 +21,14 @@ import com.google.common.math.DoubleMath;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.core.energy.tile.EnergyStorage;
+import micdoodle8.mods.galacticraft.core.util.FluidUtil;
+import micdoodle8.mods.galacticraft.core.util.GCLog;
+import micdoodle8.mods.galacticraft.core.util.VersionUtil;
+import micdoodle8.mods.galacticraft.core.wrappers.FlagData;
+import micdoodle8.mods.galacticraft.core.wrappers.Footprint;
 
 public class NetworkUtil {
 
@@ -93,19 +92,19 @@ public class NetworkUtil {
                         buffer.writeByte((byte) (vec.z * 256 - 128));
                     }
                 }
-            } else if (dataValue instanceof Integer[] array) {
+            } else if (dataValue instanceof Integer[]array) {
                 buffer.writeInt(array.length);
 
                 for (final Integer element : array) {
                     buffer.writeInt(element);
                 }
-            } else if (dataValue instanceof String[] array) {
+            } else if (dataValue instanceof String[]array) {
                 buffer.writeInt(array.length);
 
                 for (final String element : array) {
                     ByteBufUtils.writeUTF8String(buffer, element);
                 }
-            } else if (dataValue instanceof Footprint[] array) {
+            } else if (dataValue instanceof Footprint[]array) {
                 buffer.writeInt(array.length);
 
                 for (final Footprint element : array) {

@@ -3,11 +3,6 @@ package micdoodle8.mods.galacticraft.core.blocks;
 import java.util.Iterator;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityTreasureChest;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
@@ -31,6 +26,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityTreasureChest;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class BlockT1TreasureChest extends BlockContainer implements ITileEntityProvider, ItemBlockDesc.IBlockShiftDesc {
 
@@ -340,25 +339,21 @@ public class BlockT1TreasureChest extends BlockContainer implements ITileEntityP
         if (par1World.getBlock(par2 - 1, par3, par4) == this
                 && (par1World.isSideSolid(par2 - 1, par3 + 1, par4, ForgeDirection.DOWN)
                         || BlockT1TreasureChest.isOcelotBlockingChest(par1World, par2 - 1, par3, par4))) {
-                            return true;
-                        }
+            return true;
+        }
         if (par1World.getBlock(par2 + 1, par3, par4) == this
                 && (par1World.isSideSolid(par2 + 1, par3 + 1, par4, ForgeDirection.DOWN)
-                        || BlockT1TreasureChest.isOcelotBlockingChest(par1World, par2 + 1, par3, par4))) {
-                        } else
+                        || BlockT1TreasureChest.isOcelotBlockingChest(par1World, par2 + 1, par3, par4))) {} else
             if (par1World.getBlock(par2, par3, par4 - 1) == this
                     && (par1World.isSideSolid(par2, par3 + 1, par4 - 1, ForgeDirection.DOWN)
-                            || BlockT1TreasureChest.isOcelotBlockingChest(par1World, par2, par3, par4 - 1))) {
-                            } else
+                            || BlockT1TreasureChest.isOcelotBlockingChest(par1World, par2, par3, par4 - 1))) {} else
                 if (par1World.getBlock(par2, par3, par4 + 1) == this
-                        && (par1World.isSideSolid(par2, par3 + 1, par4 + 1, ForgeDirection.DOWN)
-                                || BlockT1TreasureChest.isOcelotBlockingChest(par1World, par2, par3, par4 + 1))) {
-                                } else {
+                        && (par1World.isSideSolid(par2, par3 + 1, par4 + 1, ForgeDirection.DOWN) || BlockT1TreasureChest
+                                .isOcelotBlockingChest(par1World, par2, par3, par4 + 1))) {} else {
                                     if (par1World.getBlock(par2 - 1, par3, par4) == this) {
                                         var10 = new InventoryLargeChest(
                                                 "container.chestDouble",
-                                                (TileEntityTreasureChest) par1World
-                                                        .getTileEntity(par2 - 1, par3, par4),
+                                                (TileEntityTreasureChest) par1World.getTileEntity(par2 - 1, par3, par4),
                                                 (IInventory) var10);
                                     }
 
@@ -373,8 +368,7 @@ public class BlockT1TreasureChest extends BlockContainer implements ITileEntityP
                                     if (par1World.getBlock(par2, par3, par4 - 1) == this) {
                                         var10 = new InventoryLargeChest(
                                                 "container.chestDouble",
-                                                (TileEntityTreasureChest) par1World
-                                                        .getTileEntity(par2, par3, par4 - 1),
+                                                (TileEntityTreasureChest) par1World.getTileEntity(par2, par3, par4 - 1),
                                                 (IInventory) var10);
                                     }
 
@@ -386,8 +380,7 @@ public class BlockT1TreasureChest extends BlockContainer implements ITileEntityP
                                                         .getTileEntity(par2, par3, par4 + 1));
                                     }
 
-                                    if (par1World.isRemote) {
-                                    } else {
+                                    if (par1World.isRemote) {} else {
                                         par5EntityPlayer.displayGUIChest((IInventory) var10);
                                     }
                                 }

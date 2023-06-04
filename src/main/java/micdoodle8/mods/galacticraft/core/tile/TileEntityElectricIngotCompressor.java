@@ -3,14 +3,6 @@ package micdoodle8.mods.galacticraft.core.tile;
 import java.util.ArrayList;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.recipe.CompressorRecipes;
-import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
-import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseElectricBlock;
-import micdoodle8.mods.galacticraft.core.inventory.PersistantInventoryCrafting;
-import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -26,6 +18,13 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import cpw.mods.fml.relauncher.Side;
+import micdoodle8.mods.galacticraft.api.recipe.CompressorRecipes;
+import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
+import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseElectricBlock;
+import micdoodle8.mods.galacticraft.core.inventory.PersistantInventoryCrafting;
+import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock implements IInventory, ISidedInventory {
 
@@ -63,13 +62,8 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
                         / (1 + this.poweredByTierGC);
 
                 if (this.processTicks >= this.processTimeRequired) {
-                    this.worldObj.playSoundEffect(
-                            this.xCoord,
-                            this.yCoord,
-                            this.zCoord,
-                            "random.anvil_land",
-                            0.2F,
-                            0.5F);
+                    this.worldObj
+                            .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "random.anvil_land", 0.2F, 0.5F);
                     this.processTicks = 0;
                     this.compressItems();
                     updateInv = true;
@@ -137,7 +131,8 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
     private void compressIntoSlot(int slot) {
         if (this.canCompress()) {
             final ItemStack resultItemStack = this.producingStack.copy();
-            if (ConfigManagerCore.quickMode && resultItemStack.getItem().getUnlocalizedName(resultItemStack).contains("compressed")) {
+            if (ConfigManagerCore.quickMode
+                    && resultItemStack.getItem().getUnlocalizedName(resultItemStack).contains("compressed")) {
                 resultItemStack.stackSize *= 2;
             }
 

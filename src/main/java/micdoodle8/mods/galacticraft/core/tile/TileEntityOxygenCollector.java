@@ -2,12 +2,6 @@ package micdoodle8.mods.galacticraft.core.tile;
 
 import java.util.EnumSet;
 
-import micdoodle8.mods.galacticraft.api.world.IAtmosphericGas;
-import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
-import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
-import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +16,11 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
+import micdoodle8.mods.galacticraft.api.world.IAtmosphericGas;
+import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
+import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
+import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class TileEntityOxygenCollector extends TileEntityOxygen implements IInventory, ISidedInventory {
 
@@ -151,9 +150,10 @@ public class TileEntityOxygenCollector extends TileEntityOxygen implements IInve
                                         // Test for the two most common blocks (air
                                         // and breatheable air) without looking up
                                         // in the blocksList
-                                        if (!(block instanceof BlockAir) && (block.isLeaves(this.worldObj, x, y, z) || block instanceof IPlantable
-                                                && ((IPlantable) block).getPlantType(this.worldObj, x, y, z)
-                                                        == EnumPlantType.Crop)) {
+                                        if (!(block instanceof BlockAir) && (block.isLeaves(this.worldObj, x, y, z)
+                                                || block instanceof IPlantable
+                                                        && ((IPlantable) block).getPlantType(this.worldObj, x, y, z)
+                                                                == EnumPlantType.Crop)) {
                                             nearbyLeaves += 0.075F * 10F;
                                         }
                                     }

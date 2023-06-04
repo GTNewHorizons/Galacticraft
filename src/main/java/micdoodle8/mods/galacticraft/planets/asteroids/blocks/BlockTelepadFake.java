@@ -3,12 +3,6 @@ package micdoodle8.mods.galacticraft.planets.asteroids.blocks;
 import java.util.List;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.blocks.BlockAdvancedTile;
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityTelepadFake;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.ITileEntityProvider;
@@ -27,6 +21,11 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.blocks.BlockAdvancedTile;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityTelepadFake;
 
 public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityProvider {
 
@@ -58,8 +57,8 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
     }
 
     @Override
-    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list,
-            Entity entity) {
+    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb,
+            List<AxisAlignedBB> list, Entity entity) {
         final int meta = world.getBlockMetadata(x, y, z);
 
         if (meta == 0) {

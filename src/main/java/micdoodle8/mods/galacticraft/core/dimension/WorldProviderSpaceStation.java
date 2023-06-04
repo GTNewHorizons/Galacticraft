@@ -1,14 +1,13 @@
 package micdoodle8.mods.galacticraft.core.dimension;
 
-import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
-import micdoodle8.mods.galacticraft.core.world.gen.ChunkProviderOrbit;
-import micdoodle8.mods.galacticraft.core.world.gen.WorldChunkManagerOrbit;
-
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.chunk.IChunkProvider;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
+import micdoodle8.mods.galacticraft.core.world.gen.ChunkProviderOrbit;
+import micdoodle8.mods.galacticraft.core.world.gen.WorldChunkManagerOrbit;
 
 /***
  * Properties of a WorldProviderSpaceStation 1. Spinnable with Spin Thrusters (if you don't want spin, create your own

@@ -1,8 +1,8 @@
 package micdoodle8.mods.galacticraft.api.transmission.grid;
 
-import micdoodle8.mods.galacticraft.api.transmission.tile.IConductor;
-
 import net.minecraft.tileentity.TileEntity;
+
+import micdoodle8.mods.galacticraft.api.transmission.tile.IConductor;
 
 /**
  * The Electrical Network in interface form.

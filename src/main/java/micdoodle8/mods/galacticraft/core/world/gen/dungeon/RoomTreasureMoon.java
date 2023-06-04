@@ -3,13 +3,13 @@ package micdoodle8.mods.galacticraft.core.world.gen.dungeon;
 import java.util.HashSet;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityTreasureChest;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityTreasureChest;
 
 public class RoomTreasureMoon extends DungeonRoom {
 
@@ -51,10 +51,10 @@ public class RoomTreasureMoon extends DungeonRoom {
                                 this.dungeonInstance.DUNGEON_WALL_META);
                     } else if ((i == this.posX || i == this.posX + this.sizeX - 1)
                             && (k == this.posZ || k == this.posZ + this.sizeZ - 1)) {
-                        this.placeBlock(chunk, meta, i, j, k, cx, cz, Blocks.glowstone, 0);
-                    } else {
-                        this.placeBlock(chunk, meta, i, j, k, cx, cz, Blocks.air, 0);
-                    }
+                                this.placeBlock(chunk, meta, i, j, k, cx, cz, Blocks.glowstone, 0);
+                            } else {
+                                this.placeBlock(chunk, meta, i, j, k, cx, cz, Blocks.air, 0);
+                            }
                 }
             }
         }

@@ -1,17 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client.render.entities;
 
-import micdoodle8.mods.galacticraft.api.entity.ICameraZoomEntity;
-import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
-import micdoodle8.mods.galacticraft.api.world.IZeroGDimension;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.client.model.ModelPlayerGC;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityMulti;
-import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
-import micdoodle8.mods.galacticraft.planets.mars.blocks.BlockMachineMars;
-import micdoodle8.mods.galacticraft.planets.mars.blocks.MarsBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -30,6 +18,17 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.Loader;
+import micdoodle8.mods.galacticraft.api.entity.ICameraZoomEntity;
+import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
+import micdoodle8.mods.galacticraft.api.world.IZeroGDimension;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.client.model.ModelPlayerGC;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityMulti;
+import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
+import micdoodle8.mods.galacticraft.planets.mars.blocks.BlockMachineMars;
+import micdoodle8.mods.galacticraft.planets.mars.blocks.MarsBlocks;
 
 /**
  * This renders the thermal armor (unless RenderPlayerAPI is installed). The thermal armor render is done after the

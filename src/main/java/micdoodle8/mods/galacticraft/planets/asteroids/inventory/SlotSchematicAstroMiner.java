@@ -1,5 +1,13 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.inventory;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
@@ -9,15 +17,6 @@ import micdoodle8.mods.galacticraft.core.util.RecipeUtil;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
 import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
 import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class SlotSchematicAstroMiner extends Slot {
 
@@ -81,11 +80,11 @@ public class SlotSchematicAstroMiner extends Slot {
         } else {
             return switch (this.index) {
                 case 24, 25 -> itemStack.getItem() == Item.getItemFromBlock(RecipeUtil.getChestBlock())
-                                        && itemStack.getItemDamage() == 1;
+                        && itemStack.getItemDamage() == 1;
                 case 26 -> itemStack.getItem() == AsteroidsItems.basicItem && itemStack.getItemDamage() == 8;
                 case 27 -> itemStack.getItem() == Item.getItemFromBlock(AsteroidBlocks.beamReceiver);
                 case 28, 29 -> itemStack.getItem() == GameRegistry.findItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01")
-                                        && itemStack.getItemDamage() == 32603;
+                        && itemStack.getItemDamage() == 32603;
                 default -> false;
             };
         }

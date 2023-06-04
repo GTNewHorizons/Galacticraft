@@ -5,11 +5,10 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.core.util.GCLog;
-
 import net.minecraftforge.common.config.Configuration;
 
 import cpw.mods.fml.common.Loader;
+import micdoodle8.mods.galacticraft.core.util.GCLog;
 
 /**
  * The universal energy compatibility module allows Galacticraft to be compatible with most other major power systems in

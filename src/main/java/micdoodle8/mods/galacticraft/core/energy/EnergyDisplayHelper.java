@@ -41,8 +41,7 @@ public class EnergyDisplayHelper {
             }
         }
 
-        return newVal.append(" gJ")
-               .toString();
+        return newVal.append(" gJ").toString();
     }
 
     public static String getEnergyDisplayIC2(float energyVal) {
@@ -56,8 +55,7 @@ public class EnergyDisplayHelper {
             }
         }
 
-        return newVal.append(" EU")
-               .toString();
+        return newVal.append(" EU").toString();
     }
 
     public static String getEnergyDisplayBC(float energyVal) {

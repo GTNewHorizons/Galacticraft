@@ -1,13 +1,13 @@
 package micdoodle8.mods.galacticraft.core.client.gui.element;
 
-import micdoodle8.mods.galacticraft.core.util.ColorUtil;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
 
 import org.lwjgl.opengl.GL11;
+
+import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 
 public class GuiElementGradientButton extends GuiButton {
 

@@ -4,17 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
-import micdoodle8.mods.galacticraft.api.entity.ITelemetry;
-import micdoodle8.mods.galacticraft.api.prefab.entity.EntitySpaceshipBase;
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3Dim;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
-import micdoodle8.mods.galacticraft.core.util.GCLog;
-import micdoodle8.mods.galacticraft.core.util.WorldUtil;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -33,7 +22,18 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.WorldProvider;
 
 import com.mojang.authlib.GameProfile;
+
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
+import micdoodle8.mods.galacticraft.api.entity.ITelemetry;
+import micdoodle8.mods.galacticraft.api.prefab.entity.EntitySpaceshipBase;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3Dim;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
+import micdoodle8.mods.galacticraft.core.util.GCLog;
+import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 
 public class TileEntityTelemetry extends TileEntity {
 

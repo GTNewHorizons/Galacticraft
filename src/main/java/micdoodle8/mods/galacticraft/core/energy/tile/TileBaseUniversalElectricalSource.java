@@ -3,17 +3,6 @@ package micdoodle8.mods.galacticraft.core.energy.tile;
 import java.lang.reflect.Method;
 import java.util.EnumSet;
 
-import mekanism.api.energy.ICableOutputter;
-import micdoodle8.mods.galacticraft.api.item.ElectricItemHelper;
-import micdoodle8.mods.galacticraft.api.item.IItemElectric;
-import micdoodle8.mods.galacticraft.api.transmission.grid.IElectricityNetwork;
-import micdoodle8.mods.galacticraft.api.transmission.tile.IConductor;
-import micdoodle8.mods.galacticraft.api.transmission.tile.IElectrical;
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.core.energy.EnergyConfigHandler;
-import micdoodle8.mods.galacticraft.core.energy.EnergyUtil;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -24,6 +13,16 @@ import cofh.api.energy.IEnergyContainerItem;
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;
 import ic2.api.energy.tile.IEnergySource;
+import mekanism.api.energy.ICableOutputter;
+import micdoodle8.mods.galacticraft.api.item.ElectricItemHelper;
+import micdoodle8.mods.galacticraft.api.item.IItemElectric;
+import micdoodle8.mods.galacticraft.api.transmission.grid.IElectricityNetwork;
+import micdoodle8.mods.galacticraft.api.transmission.tile.IConductor;
+import micdoodle8.mods.galacticraft.api.transmission.tile.IElectrical;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.core.energy.EnergyConfigHandler;
+import micdoodle8.mods.galacticraft.core.energy.EnergyUtil;
+import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 
 @InterfaceList({ @Interface(modid = "IC2API", iface = "ic2.api.energy.tile.IEnergySource"),
         @Interface(modid = "MekanismAPI|energy", iface = "mekanism.api.energy.ICableOutputter"), })

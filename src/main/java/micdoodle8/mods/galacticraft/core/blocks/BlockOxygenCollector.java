@@ -2,13 +2,6 @@ package micdoodle8.mods.galacticraft.core.blocks;
 
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseUniversalElectrical;
-import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityOxygenCollector;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -24,6 +17,12 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseUniversalElectrical;
+import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityOxygenCollector;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class BlockOxygenCollector extends BlockAdvancedTile implements ItemBlockDesc.IBlockShiftDesc {
 
@@ -140,7 +139,8 @@ public class BlockOxygenCollector extends BlockAdvancedTile implements ItemBlock
     @SideOnly(Side.CLIENT)
     @Override
     public void randomDisplayTick(World par1World, int x, int y, int z, Random rand) {
-        if (par1World.getTileEntity(x, y, z) instanceof TileEntityOxygenCollector && ((TileEntityOxygenCollector) par1World.getTileEntity(x, y, z)).lastOxygenCollected > 1) {
+        if (par1World.getTileEntity(x, y, z) instanceof TileEntityOxygenCollector
+                && ((TileEntityOxygenCollector) par1World.getTileEntity(x, y, z)).lastOxygenCollected > 1) {
             for (int particleCount = 0; particleCount < 10; particleCount++) {
                 double x2 = x + rand.nextFloat();
                 final double y2 = y + rand.nextFloat();

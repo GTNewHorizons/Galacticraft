@@ -3,16 +3,6 @@ package micdoodle8.mods.galacticraft.planets.mars.blocks;
 import java.util.List;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.block.IDetectableResource;
-import micdoodle8.mods.galacticraft.api.block.IPlantableBlock;
-import micdoodle8.mods.galacticraft.api.block.ITerraformableBlock;
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.planets.GalacticraftPlanets;
-import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
-import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
-import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityDungeonSpawnerMars;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.MapColor;
@@ -35,6 +25,15 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.block.IDetectableResource;
+import micdoodle8.mods.galacticraft.api.block.IPlantableBlock;
+import micdoodle8.mods.galacticraft.api.block.ITerraformableBlock;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.planets.GalacticraftPlanets;
+import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
+import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
+import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityDungeonSpawnerMars;
 
 public class BlockBasicMars extends Block
         implements IDetectableResource, IPlantableBlock, ITileEntityProvider, ITerraformableBlock {

@@ -1,7 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.client.render.entity;
 
-import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
-
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
@@ -9,6 +7,8 @@ import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+
+import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 
 public class RenderEntryPod extends Render {
 

@@ -1,10 +1,10 @@
 package micdoodle8.mods.galacticraft.planets.mars.tile;
 
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
-import micdoodle8.mods.galacticraft.planets.mars.entities.EntitySlimeling;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+
+import micdoodle8.mods.galacticraft.core.util.VersionUtil;
+import micdoodle8.mods.galacticraft.planets.mars.entities.EntitySlimeling;
 
 public class TileEntitySlimelingEgg extends TileEntity {
 

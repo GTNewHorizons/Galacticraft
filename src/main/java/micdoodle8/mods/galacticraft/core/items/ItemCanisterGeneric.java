@@ -2,9 +2,6 @@ package micdoodle8.mods.galacticraft.core.items;
 
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumRarity;
@@ -21,6 +18,8 @@ import net.minecraftforge.fluids.ItemFluidContainer;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 
 public abstract class ItemCanisterGeneric extends ItemFluidContainer {
 

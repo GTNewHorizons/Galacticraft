@@ -1,10 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.client.render.item;
 
-import micdoodle8.mods.galacticraft.api.prefab.entity.EntityAutoRocket;
-import micdoodle8.mods.galacticraft.core.entities.EntityLanderBase;
-import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
-import micdoodle8.mods.galacticraft.planets.asteroids.client.render.entity.RenderAstroMiner;
-
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +12,10 @@ import org.lwjgl.Sys;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import micdoodle8.mods.galacticraft.api.prefab.entity.EntityAutoRocket;
+import micdoodle8.mods.galacticraft.core.entities.EntityLanderBase;
+import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
+import micdoodle8.mods.galacticraft.planets.asteroids.client.render.entity.RenderAstroMiner;
 
 public class ItemRendererAstroMiner implements IItemRenderer {
 

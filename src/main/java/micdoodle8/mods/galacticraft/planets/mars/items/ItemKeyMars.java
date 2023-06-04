@@ -2,11 +2,6 @@ package micdoodle8.mods.galacticraft.planets.mars.items;
 
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.item.IKeyItem;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
@@ -16,6 +11,10 @@ import net.minecraft.util.IIcon;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.item.IKeyItem;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
+import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
 
 public class ItemKeyMars extends Item implements IKeyItem {
 

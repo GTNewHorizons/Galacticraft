@@ -3,16 +3,6 @@ package micdoodle8.mods.galacticraft.core.energy;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.transmission.NetworkType;
-import micdoodle8.mods.galacticraft.api.transmission.tile.IConductor;
-import micdoodle8.mods.galacticraft.api.transmission.tile.IConnector;
-import micdoodle8.mods.galacticraft.api.transmission.tile.IElectrical;
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.core.energy.tile.EnergyStorageTile;
-import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseConductor;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.GCLog;
-
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -28,6 +18,15 @@ import ic2.api.energy.tile.IEnergyEmitter;
 import ic2.api.energy.tile.IEnergySink;
 import ic2.api.energy.tile.IEnergySource;
 import ic2.api.energy.tile.IEnergyTile;
+import micdoodle8.mods.galacticraft.api.transmission.NetworkType;
+import micdoodle8.mods.galacticraft.api.transmission.tile.IConductor;
+import micdoodle8.mods.galacticraft.api.transmission.tile.IConnector;
+import micdoodle8.mods.galacticraft.api.transmission.tile.IElectrical;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.core.energy.tile.EnergyStorageTile;
+import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseConductor;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.GCLog;
 
 public class EnergyUtil {
 
@@ -109,7 +108,8 @@ public class EnergyUtil {
                         || isRF1Loaded && tileEntity instanceof IEnergyHandler
                         || clazzRailcraftEngine != null && clazzRailcraftEngine.isInstance(tileEntity)) {
                     // Do not connect GC wires directly to power conduits
-                    if (clazzEnderIOCable != null && clazzEnderIOCable.isInstance(tileEntity) || clazzMFRRednetEnergyCable != null && clazzMFRRednetEnergyCable.isInstance(tileEntity)) {
+                    if (clazzEnderIOCable != null && clazzEnderIOCable.isInstance(tileEntity)
+                            || clazzMFRRednetEnergyCable != null && clazzMFRRednetEnergyCable.isInstance(tileEntity)) {
                         continue;
                     }
 
@@ -176,7 +176,8 @@ public class EnergyUtil {
 
             if (isRF2Loaded && tileEntity instanceof IEnergyReceiver
                     || isRF1Loaded && tileEntity instanceof IEnergyHandler) {
-                if (clazzEnderIOCable != null && clazzEnderIOCable.isInstance(tileEntity) || clazzMFRRednetEnergyCable != null && clazzMFRRednetEnergyCable.isInstance(tileEntity)) {
+                if (clazzEnderIOCable != null && clazzEnderIOCable.isInstance(tileEntity)
+                        || clazzMFRRednetEnergyCable != null && clazzMFRRednetEnergyCable.isInstance(tileEntity)) {
                     continue;
                 }
 
@@ -226,14 +227,14 @@ public class EnergyUtil {
                 return (float) result / EnergyConfigHandler.TO_IC2_RATIO;
             }
         } else if (isRF1Loaded && !EnergyConfigHandler.disableRFOutput && tileAdj instanceof IEnergyHandler) {
-            
+
             // GCLog.debug("Beam/storage offering RF1 up to " + toSend + " into pipe, it
             // accepted " + sent);
             return ((IEnergyHandler) tileAdj)
                     .receiveEnergy(inputAdj, MathHelper.floor_float(toSend * EnergyConfigHandler.TO_RF_RATIO), simulate)
                     / EnergyConfigHandler.TO_RF_RATIO;
         } else if (isRF2Loaded && !EnergyConfigHandler.disableRFOutput && tileAdj instanceof IEnergyReceiver) {
-            
+
             // GCLog.debug("Beam/storage offering RF2 up to " + toSend + " into pipe, it
             // accepted " + sent);
             return ((IEnergyReceiver) tileAdj)

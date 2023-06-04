@@ -1,11 +1,11 @@
 package micdoodle8.mods.galacticraft.planets.mars.client.model;
 
-import micdoodle8.mods.galacticraft.planets.mars.entities.EntityCreeperBoss;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+
+import micdoodle8.mods.galacticraft.planets.mars.entities.EntityCreeperBoss;
 
 public class ModelCreeperBoss extends ModelBase {
 
@@ -89,13 +89,13 @@ public class ModelCreeperBoss extends ModelBase {
         this.headLeft.setRotationPoint(3F, 6F, 0.1F);
         this.headLeft.setTextureSize(128, 64);
         this.headLeft.mirror = true;
-        this.setRotation(this.headLeft, 0F, 0F, (float)Math.PI / 4F);
+        this.setRotation(this.headLeft, 0F, 0F, (float) Math.PI / 4F);
         this.headRight = new ModelRenderer(this, 0, 0);
         this.headRight.addBox(-9F, -9F, -4F, 8, 8, 8, scale);
         this.headRight.setRotationPoint(-3F, 6F, -0.1F);
         this.headRight.setTextureSize(128, 64);
         this.headRight.mirror = true;
-        this.setRotation(this.headRight, 0F, 0F, -((float)Math.PI / 4F));
+        this.setRotation(this.headRight, 0F, 0F, -((float) Math.PI / 4F));
     }
 
     @Override

@@ -3,11 +3,6 @@ package micdoodle8.mods.galacticraft.core.command;
 import java.util.List;
 import java.util.Map;
 
-import micdoodle8.mods.galacticraft.core.dimension.SpaceStationWorldData;
-import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -15,6 +10,11 @@ import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
+
+import micdoodle8.mods.galacticraft.core.dimension.SpaceStationWorldData;
+import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
 
 public class CommandSpaceStationAddOwner extends CommandBase {
 
@@ -50,8 +50,7 @@ public class CommandSpaceStationAddOwner extends CommandBase {
         String var3 = astring[0];
 
         try {
-            playerBase = PlayerUtil
-                    .getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
+            playerBase = PlayerUtil.getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
 
             if (playerBase != null) {
                 final GCPlayerStats stats = GCPlayerStats.get(playerBase);
@@ -59,24 +58,21 @@ public class CommandSpaceStationAddOwner extends CommandBase {
                 if (stats.spaceStationDimensionData.isEmpty()) {
                     throw new WrongUsageException(GCCoreUtil.translate("commands.ssinvite.notFound"));
                 }
-                for (final Map.Entry<Integer, Integer> ownedStations : stats.spaceStationDimensionData
-                        .entrySet()) {
+                for (final Map.Entry<Integer, Integer> ownedStations : stats.spaceStationDimensionData.entrySet()) {
                     final SpaceStationWorldData data = SpaceStationWorldData
                             .getStationData(playerBase.worldObj, ownedStations.getValue(), playerBase);
 
                     if ("+all".equalsIgnoreCase(var3)) {
                         data.setAllowedAll(true);
                         playerBase.addChatMessage(
-                                new ChatComponentText(
-                                        GCCoreUtil.translateWithFormat("gui.spacestation.allowAllTrue")));
+                                new ChatComponentText(GCCoreUtil.translateWithFormat("gui.spacestation.allowAllTrue")));
                         return;
                     }
                     if ("-all".equalsIgnoreCase(var3)) {
                         data.setAllowedAll(false);
                         playerBase.addChatMessage(
                                 new ChatComponentText(
-                                        GCCoreUtil
-                                                .translateWithFormat("gui.spacestation.allowAllFalse", var3)));
+                                        GCCoreUtil.translateWithFormat("gui.spacestation.allowAllFalse", var3)));
                         return;
                     }
 

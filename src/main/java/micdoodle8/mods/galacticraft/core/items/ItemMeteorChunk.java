@@ -2,11 +2,6 @@ package micdoodle8.mods.galacticraft.core.items;
 
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.entities.EntityMeteorChunk;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +13,10 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.entities.EntityMeteorChunk;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class ItemMeteorChunk extends Item {
 
@@ -80,7 +79,8 @@ public class ItemMeteorChunk extends Item {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack itemstack, EntityPlayer par2EntityPlayer, List<String> par3List, boolean par4) {
+    public void addInformation(ItemStack itemstack, EntityPlayer par2EntityPlayer, List<String> par3List,
+            boolean par4) {
         if (itemstack.getItemDamage() > 0) {
             float burnTime = 0.0F;
 

@@ -2,12 +2,6 @@ package micdoodle8.mods.galacticraft.core.blocks;
 
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.block.IPartialSealableBlock;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.tile.IMultiBlock;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityBuggyFueler;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityLandingPad;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -23,6 +17,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.block.IPartialSealableBlock;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.tile.IMultiBlock;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityBuggyFueler;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityLandingPad;
 
 public class BlockLandingPadFull extends BlockAdvancedTile implements IPartialSealableBlock {
 
@@ -68,19 +67,19 @@ public class BlockLandingPadFull extends BlockAdvancedTile implements IPartialSe
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
         return switch (world.getBlockMetadata(x, y, z)) {
             case 0 -> AxisAlignedBB.getBoundingBox(
-                                    x + this.minX,
-                                    y + this.minY,
-                                    z + this.minZ,
-                                    x + this.maxX,
-                                    y + this.maxY,
-                                    z + this.maxZ);
+                    x + this.minX,
+                    y + this.minY,
+                    z + this.minZ,
+                    x + this.maxX,
+                    y + this.maxY,
+                    z + this.maxZ);
             case 2 -> AxisAlignedBB.getBoundingBox(
-                                    x + this.minX,
-                                    y + this.minY,
-                                    z + this.minZ,
-                                    x + this.maxX,
-                                    y + this.maxY,
-                                    z + this.maxZ);
+                    x + this.minX,
+                    y + this.minY,
+                    z + this.minZ,
+                    x + this.maxX,
+                    y + this.maxY,
+                    z + this.maxZ);
             default -> AxisAlignedBB.getBoundingBox(x + 0.0D, y + 0.0D, z + 0.0D, x + 1.0D, y + 0.2D, z + 1.0D);
         };
     }
@@ -90,19 +89,19 @@ public class BlockLandingPadFull extends BlockAdvancedTile implements IPartialSe
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
         return switch (world.getBlockMetadata(x, y, z)) {
             case 0 -> AxisAlignedBB.getBoundingBox(
-                                    x + this.minX,
-                                    y + this.minY,
-                                    z + this.minZ,
-                                    x + this.maxX,
-                                    y + this.maxY,
-                                    z + this.maxZ);
+                    x + this.minX,
+                    y + this.minY,
+                    z + this.minZ,
+                    x + this.maxX,
+                    y + this.maxY,
+                    z + this.maxZ);
             case 2 -> AxisAlignedBB.getBoundingBox(
-                                    x + this.minX,
-                                    y + this.minY,
-                                    z + this.minZ,
-                                    x + this.maxX,
-                                    y + this.maxY,
-                                    z + this.maxZ);
+                    x + this.minX,
+                    y + this.minY,
+                    z + this.minZ,
+                    x + this.maxX,
+                    y + this.maxY,
+                    z + this.maxZ);
             default -> AxisAlignedBB.getBoundingBox(x + 0.0D, y + 0.0D, z + 0.0D, x + 1.0D, y + 0.2D, z + 1.0D);
         };
     }

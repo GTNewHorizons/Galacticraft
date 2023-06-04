@@ -2,16 +2,6 @@ package micdoodle8.mods.galacticraft.planets.asteroids.blocks;
 
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.transmission.tile.IConductor;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.blocks.BlockTileGC;
-import micdoodle8.mods.galacticraft.core.energy.EnergyUtil;
-import micdoodle8.mods.galacticraft.core.energy.tile.EnergyStorageTile;
-import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
-import micdoodle8.mods.galacticraft.core.util.EnumColor;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityBeamReceiver;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -29,6 +19,15 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.transmission.tile.IConductor;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.blocks.BlockTileGC;
+import micdoodle8.mods.galacticraft.core.energy.EnergyUtil;
+import micdoodle8.mods.galacticraft.core.energy.tile.EnergyStorageTile;
+import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
+import micdoodle8.mods.galacticraft.core.util.EnumColor;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityBeamReceiver;
 
 public class BlockBeamReceiver extends BlockTileGC implements ItemBlockDesc.IBlockShiftDesc {
 
@@ -110,8 +109,8 @@ public class BlockBeamReceiver extends BlockTileGC implements ItemBlockDesc.IBlo
     }
 
     @Override
-    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list,
-            Entity entity) {
+    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb,
+            List<AxisAlignedBB> list, Entity entity) {
         this.setBlockBoundsBasedOnState(world, x, y, z);
         super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
     }
@@ -143,7 +142,8 @@ public class BlockBeamReceiver extends BlockTileGC implements ItemBlockDesc.IBlo
             }
 
             if (tileAt instanceof EnergyStorageTile
-                    && ((EnergyStorageTile) tileAt).getModeFromDirection(adjacentDir.getOpposite()) != null || EnergyUtil.otherModCanReceive(tileAt, adjacentDir.getOpposite())) {
+                    && ((EnergyStorageTile) tileAt).getModeFromDirection(adjacentDir.getOpposite()) != null
+                    || EnergyUtil.otherModCanReceive(tileAt, adjacentDir.getOpposite())) {
                 return adjacentDir.ordinal();
             }
         }

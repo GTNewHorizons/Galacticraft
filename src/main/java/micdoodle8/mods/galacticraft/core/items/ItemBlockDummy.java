@@ -1,7 +1,5 @@
 package micdoodle8.mods.galacticraft.core.items;
 
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
@@ -10,6 +8,7 @@ import net.minecraft.util.IIcon;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 
 public class ItemBlockDummy extends ItemBlock {
 
@@ -40,13 +39,13 @@ public class ItemBlockDummy extends ItemBlock {
     public String getUnlocalizedName(ItemStack itemstack) {
         final int metadata = itemstack.getItemDamage();
         String blockName = switch (metadata) {
-                    case 1 -> "spaceStationBase";
-                    case 2 -> "launchPad";
-                    case 3 -> "nasaWorkbench";
-                    case 4 -> "solar";
-                    case 5 -> "cryogenicChamber";
-                    default -> null;
-                };
+            case 1 -> "spaceStationBase";
+            case 2 -> "launchPad";
+            case 3 -> "nasaWorkbench";
+            case 4 -> "solar";
+            case 5 -> "cryogenicChamber";
+            default -> null;
+        };
 
         return this.field_150939_a.getUnlocalizedName() + "." + blockName;
     }

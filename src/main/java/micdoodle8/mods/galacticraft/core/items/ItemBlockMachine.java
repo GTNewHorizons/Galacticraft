@@ -1,11 +1,5 @@
 package micdoodle8.mods.galacticraft.core.items;
 
-import micdoodle8.mods.galacticraft.core.blocks.BlockMachine;
-import micdoodle8.mods.galacticraft.core.blocks.BlockMachine2;
-import micdoodle8.mods.galacticraft.core.blocks.BlockMachineTiered;
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +9,11 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.blocks.BlockMachine;
+import micdoodle8.mods.galacticraft.core.blocks.BlockMachine2;
+import micdoodle8.mods.galacticraft.core.blocks.BlockMachineTiered;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 
 public class ItemBlockMachine extends ItemBlockDesc {
 
@@ -43,7 +42,6 @@ public class ItemBlockMachine extends ItemBlockDesc {
         if (this.field_150939_a == GCBlocks.machineBase) {
             index = typenum / 4;
         } else if (this.field_150939_a == GCBlocks.machineTiered) {
-            
 
             // Tier 2 versions of the same
             switch (typenum) {

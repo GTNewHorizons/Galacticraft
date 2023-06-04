@@ -3,12 +3,6 @@ package micdoodle8.mods.galacticraft.planets.mars.blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.planets.GalacticraftPlanets;
-import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -32,6 +26,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.planets.GalacticraftPlanets;
+import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
 
 public class BlockCavernousVine extends Block implements IShearable, ItemBlockDesc.IBlockShiftDesc {
 
@@ -90,7 +89,8 @@ public class BlockCavernousVine extends Block implements IShearable, ItemBlockDe
             entity.motionY = 0.06F;
             entity.rotationYaw += 0.4F;
 
-            if (!((EntityLivingBase) entity).getActivePotionEffects().contains(new PotionEffect(Potion.poison.id, 5, 20, false))) {
+            if (!((EntityLivingBase) entity).getActivePotionEffects()
+                    .contains(new PotionEffect(Potion.poison.id, 5, 20, false))) {
                 ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id, 5, 20, false));
             }
         }

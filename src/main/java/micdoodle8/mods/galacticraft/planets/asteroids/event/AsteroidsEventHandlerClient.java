@@ -1,15 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.event;
 
-import micdoodle8.mods.galacticraft.api.event.client.CelestialBodyRenderEvent;
-import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
-import micdoodle8.mods.galacticraft.core.client.CloudRenderer;
-import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore.EventSpecialRender;
-import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
-import micdoodle8.mods.galacticraft.planets.asteroids.client.SkyProviderAsteroids;
-import micdoodle8.mods.galacticraft.planets.asteroids.client.render.NetworkRenderer;
-import micdoodle8.mods.galacticraft.planets.asteroids.dimension.WorldProviderAsteroids;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 
@@ -21,6 +11,15 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.event.client.CelestialBodyRenderEvent;
+import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
+import micdoodle8.mods.galacticraft.core.client.CloudRenderer;
+import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore.EventSpecialRender;
+import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
+import micdoodle8.mods.galacticraft.planets.asteroids.client.SkyProviderAsteroids;
+import micdoodle8.mods.galacticraft.planets.asteroids.client.render.NetworkRenderer;
+import micdoodle8.mods.galacticraft.planets.asteroids.dimension.WorldProviderAsteroids;
 
 public class AsteroidsEventHandlerClient {
 
@@ -32,8 +31,7 @@ public class AsteroidsEventHandlerClient {
 
         if (world != null && world.provider instanceof WorldProviderAsteroids) {
             if (world.provider.getSkyRenderer() == null) {
-                world.provider
-                        .setSkyRenderer(new SkyProviderAsteroids((IGalacticraftWorldProvider) world.provider));
+                world.provider.setSkyRenderer(new SkyProviderAsteroids((IGalacticraftWorldProvider) world.provider));
             }
 
             if (world.provider.getCloudRenderer() == null) {

@@ -3,15 +3,6 @@ package micdoodle8.mods.galacticraft.core.energy.tile;
 import java.lang.reflect.Constructor;
 import java.util.EnumSet;
 
-import mekanism.api.energy.ICableOutputter;
-import mekanism.api.energy.IStrictEnergyAcceptor;
-import micdoodle8.mods.galacticraft.api.item.ElectricItemHelper;
-import micdoodle8.mods.galacticraft.api.item.IItemElectric;
-import micdoodle8.mods.galacticraft.api.transmission.tile.IConductor;
-import micdoodle8.mods.galacticraft.api.transmission.tile.IElectrical;
-import micdoodle8.mods.galacticraft.core.energy.EnergyConfigHandler;
-import micdoodle8.mods.galacticraft.core.tile.ReceiverMode;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -27,6 +18,14 @@ import cpw.mods.fml.common.Optional.InterfaceList;
 import cpw.mods.fml.common.eventhandler.Event;
 import ic2.api.energy.tile.IEnergySink;
 import ic2.api.item.IElectricItem;
+import mekanism.api.energy.ICableOutputter;
+import mekanism.api.energy.IStrictEnergyAcceptor;
+import micdoodle8.mods.galacticraft.api.item.ElectricItemHelper;
+import micdoodle8.mods.galacticraft.api.item.IItemElectric;
+import micdoodle8.mods.galacticraft.api.transmission.tile.IConductor;
+import micdoodle8.mods.galacticraft.api.transmission.tile.IElectrical;
+import micdoodle8.mods.galacticraft.core.energy.EnergyConfigHandler;
+import micdoodle8.mods.galacticraft.core.tile.ReceiverMode;
 
 @InterfaceList({ @Interface(modid = "IC2API", iface = "ic2.api.energy.tile.IEnergySink"),
         @Interface(modid = "CoFHAPI|energy", iface = "cofh.api.energy.IEnergyHandler"),
@@ -186,14 +185,15 @@ public abstract class TileBaseUniversalElectrical extends EnergyStorageTile
                                 itemStack,
                                 (int) (energyToDischarge / EnergyConfigHandler.RF_RATIO),
                                 false) * EnergyConfigHandler.RF_RATIO);
-            } else if ((EnergyConfigHandler.isIndustrialCraft2Loaded() && item instanceof IElectricItem electricItem) && electricItem.canProvideEnergy(itemStack)) {
-                double result = 0;
-                final double energyDischargeIC2 = energyToDischarge / EnergyConfigHandler.IC2_RATIO;
-                result = ic2.api.item.ElectricItem.manager
-                        .discharge(itemStack, energyDischargeIC2, 4, false, false, false);
-                final float energyDischarged = (float) result * EnergyConfigHandler.IC2_RATIO;
-                this.storage.receiveEnergyGC(energyDischarged);
-            }
+            } else if ((EnergyConfigHandler.isIndustrialCraft2Loaded() && item instanceof IElectricItem electricItem)
+                    && electricItem.canProvideEnergy(itemStack)) {
+                        double result = 0;
+                        final double energyDischargeIC2 = energyToDischarge / EnergyConfigHandler.IC2_RATIO;
+                        result = ic2.api.item.ElectricItem.manager
+                                .discharge(itemStack, energyDischargeIC2, 4, false, false, false);
+                        final float energyDischarged = (float) result * EnergyConfigHandler.IC2_RATIO;
+                        this.storage.receiveEnergyGC(energyDischarged);
+                    }
         }
     }
 

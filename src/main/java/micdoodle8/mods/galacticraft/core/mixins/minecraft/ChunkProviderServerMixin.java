@@ -1,7 +1,5 @@
 package micdoodle8.mods.galacticraft.core.mixins.minecraft;
 
-import micdoodle8.mods.galacticraft.core.util.WorldUtil;
-
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderServer;
@@ -10,6 +8,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 import com.gtnewhorizon.mixinextras.injector.WrapWithCondition;
+
+import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 
 @Mixin(ChunkProviderServer.class)
 public class ChunkProviderServerMixin {

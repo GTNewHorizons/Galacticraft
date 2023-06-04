@@ -1,5 +1,17 @@
 package micdoodle8.mods.galacticraft.core.client.gui;
 
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.world.World;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.api.prefab.entity.EntityTieredRocket;
 import micdoodle8.mods.galacticraft.api.recipe.ISchematicPage;
 import micdoodle8.mods.galacticraft.api.recipe.ISchematicResultPage;
@@ -70,19 +82,6 @@ import micdoodle8.mods.galacticraft.core.tile.TileEntityParaChest;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityRefinery;
 import micdoodle8.mods.galacticraft.core.tile.TileEntitySolar;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
-
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.world.World;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class GuiHandler implements IGuiHandler {
 

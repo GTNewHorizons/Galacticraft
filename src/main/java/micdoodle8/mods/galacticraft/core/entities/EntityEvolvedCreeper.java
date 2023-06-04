@@ -2,12 +2,6 @@ package micdoodle8.mods.galacticraft.core.entities;
 
 import java.util.UUID;
 
-import micdoodle8.mods.galacticraft.api.entity.IEntityBreathable;
-import micdoodle8.mods.galacticraft.core.items.GCItems;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
-import micdoodle8.mods.galacticraft.core.util.WorldUtil;
-
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
@@ -32,6 +26,12 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+
+import micdoodle8.mods.galacticraft.api.entity.IEntityBreathable;
+import micdoodle8.mods.galacticraft.core.items.GCItems;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.VersionUtil;
+import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 
 public class EntityEvolvedCreeper extends EntityCreeper implements IEntityBreathable {
 

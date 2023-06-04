@@ -3,13 +3,13 @@ package micdoodle8.mods.galacticraft.core.world.gen;
 import java.util.List;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
+
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 
 public class StructureComponentVillageHouse extends StructureComponentVillage {
 
@@ -25,8 +25,8 @@ public class StructureComponentVillageHouse extends StructureComponentVillage {
     }
 
     public static StructureComponentVillageHouse func_74921_a(
-            StructureComponentVillageStartPiece par0ComponentVillageStartPiece, List<StructureComponent> par1List, Random par2Random,
-            int par3, int par4, int par5, int par6, int par7) {
+            StructureComponentVillageStartPiece par0ComponentVillageStartPiece, List<StructureComponent> par1List,
+            Random par2Random, int par3, int par4, int par5, int par6, int par7) {
         final StructureBoundingBox var8 = StructureBoundingBox
                 .getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 17, 9, 17, par6);
         return StructureComponent.findIntersecting(par1List, var8) == null

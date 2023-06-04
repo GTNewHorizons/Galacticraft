@@ -3,12 +3,6 @@ package micdoodle8.mods.galacticraft.planets.asteroids.client.render.entity;
 import java.util.ArrayList;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.core.perlin.NoiseModule;
-import micdoodle8.mods.galacticraft.core.perlin.generator.Gradient;
-import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
-import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityAstroMiner;
-
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
@@ -22,6 +16,11 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.core.perlin.NoiseModule;
+import micdoodle8.mods.galacticraft.core.perlin.generator.Gradient;
+import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
+import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityAstroMiner;
 
 public class RenderAstroMiner extends Render {
 

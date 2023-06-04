@@ -5,6 +5,36 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.ISound;
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiIngameMenu;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.settings.GameSettings;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.WorldProviderSurface;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+
+import com.google.common.collect.Lists;
+
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
 import micdoodle8.mods.galacticraft.api.block.IDetectableResource;
 import micdoodle8.mods.galacticraft.api.entity.IEntityNoisy;
 import micdoodle8.mods.galacticraft.api.entity.IIgnoreShift;
@@ -49,37 +79,6 @@ import micdoodle8.mods.galacticraft.core.util.OxygenUtil;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
 import micdoodle8.mods.galacticraft.core.wrappers.BlockMetaList;
 import micdoodle8.mods.galacticraft.core.wrappers.Footprint;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.ISound;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiIngameMenu;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.settings.GameSettings;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.WorldProviderSurface;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-
-import com.google.common.collect.Lists;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
 
 public class TickHandlerClient {
 
@@ -234,15 +233,24 @@ public class TickHandlerClient {
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             }
 
-            if (minecraft.currentScreen == null && player != null && player.ridingEntity instanceof EntitySpaceshipBase && minecraft.gameSettings.thirdPersonView != 0 && !minecraft.gameSettings.hideGUI) {
+            if (minecraft.currentScreen == null && player != null
+                    && player.ridingEntity instanceof EntitySpaceshipBase
+                    && minecraft.gameSettings.thirdPersonView != 0
+                    && !minecraft.gameSettings.hideGUI) {
                 OverlayRocket.renderSpaceshipOverlay(((EntitySpaceshipBase) player.ridingEntity).getSpaceshipGui());
             }
 
-            if (minecraft.currentScreen == null && player != null && player.ridingEntity instanceof EntityLander && minecraft.gameSettings.thirdPersonView != 0 && !minecraft.gameSettings.hideGUI) {
+            if (minecraft.currentScreen == null && player != null
+                    && player.ridingEntity instanceof EntityLander
+                    && minecraft.gameSettings.thirdPersonView != 0
+                    && !minecraft.gameSettings.hideGUI) {
                 OverlayLander.renderLanderOverlay();
             }
 
-            if (minecraft.currentScreen == null && player != null && player.ridingEntity instanceof EntityAutoRocket && minecraft.gameSettings.thirdPersonView != 0 && !minecraft.gameSettings.hideGUI) {
+            if (minecraft.currentScreen == null && player != null
+                    && player.ridingEntity instanceof EntityAutoRocket
+                    && minecraft.gameSettings.thirdPersonView != 0
+                    && !minecraft.gameSettings.hideGUI) {
                 OverlayDockingRocket.renderDockingOverlay();
             }
 
@@ -296,7 +304,9 @@ public class TickHandlerClient {
         final Minecraft minecraft = FMLClientHandler.instance().getClient();
         final EntityClientPlayerMP player = minecraft.thePlayer;
 
-        if ((event.type == RenderGameOverlayEvent.ElementType.ALL) && (player != null && player.ridingEntity instanceof IIgnoreShift && ((IIgnoreShift) player.ridingEntity).shouldIgnoreShiftExit())) {
+        if ((event.type == RenderGameOverlayEvent.ElementType.ALL)
+                && (player != null && player.ridingEntity instanceof IIgnoreShift
+                        && ((IIgnoreShift) player.ridingEntity).shouldIgnoreShiftExit())) {
             // Remove "Press shift to dismount" message when shift-exiting is disabled (not
             // ideal, but the only
             // option)
@@ -402,7 +412,8 @@ public class TickHandlerClient {
                 TickHandlerClient.spaceRaceGuiScheduled = false;
             }
 
-            if (player != null && player.ridingEntity != null && player.ridingEntity instanceof EntitySpaceshipBase rocket) {
+            if (player != null && player.ridingEntity != null
+                    && player.ridingEntity instanceof EntitySpaceshipBase rocket) {
                 if (rocket.prevRotationPitch != rocket.rotationPitch || rocket.prevRotationYaw != rocket.rotationYaw) {
                     GalacticraftCore.packetPipeline.sendToServer(new PacketRotateRocket(player.ridingEntity));
                 }
@@ -433,7 +444,8 @@ public class TickHandlerClient {
                 }
             }
 
-            if (player != null && player.ridingEntity != null && player.ridingEntity instanceof EntitySpaceshipBase ship) {
+            if (player != null && player.ridingEntity != null
+                    && player.ridingEntity instanceof EntitySpaceshipBase ship) {
                 boolean hasChanged = false;
 
                 if (minecraft.gameSettings.keyBindLeft.getIsKeyPressed()) {
@@ -465,8 +477,7 @@ public class TickHandlerClient {
                 final List<Entity> entityList = world.loadedEntityList;
                 for (final Object e : entityList) {
                     if (e instanceof IEntityNoisy vehicle && vehicle.getSoundUpdater() == null) {
-                        final ISound noise = vehicle
-                                .setSoundUpdater(FMLClientHandler.instance().getClient().thePlayer);
+                        final ISound noise = vehicle.setSoundUpdater(FMLClientHandler.instance().getClient().thePlayer);
                         FMLClientHandler.instance().getClient().getSoundHandler().playSound(noise);
                     }
                 }

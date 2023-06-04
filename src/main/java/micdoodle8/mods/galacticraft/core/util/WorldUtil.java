@@ -15,41 +15,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
 
-import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
-import micdoodle8.mods.galacticraft.api.entity.IAntiGrav;
-import micdoodle8.mods.galacticraft.api.entity.IWorldTransferCallback;
-import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
-import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
-import micdoodle8.mods.galacticraft.api.galaxies.Satellite;
-import micdoodle8.mods.galacticraft.api.item.IArmorGravity;
-import micdoodle8.mods.galacticraft.api.prefab.entity.EntityAutoRocket;
-import micdoodle8.mods.galacticraft.api.prefab.entity.EntitySpaceshipBase;
-import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
-import micdoodle8.mods.galacticraft.api.recipe.SpaceStationRecipe;
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
-import micdoodle8.mods.galacticraft.api.world.IOrbitDimension;
-import micdoodle8.mods.galacticraft.api.world.ITeleportType;
-import micdoodle8.mods.galacticraft.api.world.SpaceStationType;
-import micdoodle8.mods.galacticraft.core.Constants;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.client.SkyProviderOverworld;
-import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
-import micdoodle8.mods.galacticraft.core.dimension.SpaceStationWorldData;
-import micdoodle8.mods.galacticraft.core.dimension.WorldProviderMoon;
-import micdoodle8.mods.galacticraft.core.dimension.WorldProviderOrbit;
-import micdoodle8.mods.galacticraft.core.dimension.WorldProviderSpaceStation;
-import micdoodle8.mods.galacticraft.core.entities.EntityArrowGC;
-import micdoodle8.mods.galacticraft.core.entities.EntityCelestialFake;
-import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerHandler;
-import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
-import micdoodle8.mods.galacticraft.core.items.ItemParaChute;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityTelemetry;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
@@ -93,6 +58,40 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
+import micdoodle8.mods.galacticraft.api.entity.IAntiGrav;
+import micdoodle8.mods.galacticraft.api.entity.IWorldTransferCallback;
+import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
+import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
+import micdoodle8.mods.galacticraft.api.galaxies.Satellite;
+import micdoodle8.mods.galacticraft.api.item.IArmorGravity;
+import micdoodle8.mods.galacticraft.api.prefab.entity.EntityAutoRocket;
+import micdoodle8.mods.galacticraft.api.prefab.entity.EntitySpaceshipBase;
+import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
+import micdoodle8.mods.galacticraft.api.recipe.SpaceStationRecipe;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
+import micdoodle8.mods.galacticraft.api.world.IOrbitDimension;
+import micdoodle8.mods.galacticraft.api.world.ITeleportType;
+import micdoodle8.mods.galacticraft.api.world.SpaceStationType;
+import micdoodle8.mods.galacticraft.core.Constants;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.SkyProviderOverworld;
+import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
+import micdoodle8.mods.galacticraft.core.dimension.SpaceStationWorldData;
+import micdoodle8.mods.galacticraft.core.dimension.WorldProviderMoon;
+import micdoodle8.mods.galacticraft.core.dimension.WorldProviderOrbit;
+import micdoodle8.mods.galacticraft.core.dimension.WorldProviderSpaceStation;
+import micdoodle8.mods.galacticraft.core.entities.EntityArrowGC;
+import micdoodle8.mods.galacticraft.core.entities.EntityCelestialFake;
+import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerHandler;
+import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
+import micdoodle8.mods.galacticraft.core.items.ItemParaChute;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityTelemetry;
 
 // import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityAstroMiner;
 
@@ -769,8 +768,7 @@ public class WorldUtil {
             WorldUtil.registeredPlanets.add(dimID);
             DimensionManager.registerDimension(dimID, providerID);
         } else {
-            GCLog.severe(
-                    "Dimension already registered to another mod: unable to register planet dimension " + dimID);
+            GCLog.severe("Dimension already registered to another mod: unable to register planet dimension " + dimID);
         }
     }
 
@@ -977,16 +975,15 @@ public class WorldUtil {
                                 player.worldObj.getWorldInfo().getTerrainType(),
                                 player.theItemInWorldManager.getGameType()));
 
-                if (worldNew.provider instanceof WorldProviderOrbit && WorldUtil.registeredSpaceStations.containsKey(dimID))
+                if (worldNew.provider instanceof WorldProviderOrbit
+                        && WorldUtil.registeredSpaceStations.containsKey(dimID))
                 // TODO This has never been effective before due to the earlier bug - what does
                 // it actually do?
                 {
                     final NBTTagCompound var2 = new NBTTagCompound();
                     SpaceStationWorldData.getStationData(worldNew, dimID, player).writeToNBT(var2);
                     GalacticraftCore.packetPipeline.sendTo(
-                            new PacketSimple(
-                                    EnumSimplePacket.C_UPDATE_SPACESTATION_DATA,
-                                    new Object[] { dimID, var2 }),
+                            new PacketSimple(EnumSimplePacket.C_UPDATE_SPACESTATION_DATA, new Object[] { dimID, var2 }),
                             player);
                 }
 
@@ -1051,29 +1048,29 @@ public class WorldUtil {
                 }
             }
         } else // Same dimension player transfer
-        if (entity instanceof EntityPlayerMP) {
-            player = (EntityPlayerMP) entity;
-            player.closeScreen();
-            final GCPlayerStats stats = GCPlayerStats.get(player);
-            stats.usingPlanetSelectionGui = false;
+            if (entity instanceof EntityPlayerMP) {
+                player = (EntityPlayerMP) entity;
+                player.closeScreen();
+                final GCPlayerStats stats = GCPlayerStats.get(player);
+                stats.usingPlanetSelectionGui = false;
 
-            if (worldNew.provider instanceof WorldProviderSpaceStation) {
-                GalacticraftCore.packetPipeline
-                        .sendTo(new PacketSimple(EnumSimplePacket.C_RESET_THIRD_PERSON, new Object[] {}), player);
+                if (worldNew.provider instanceof WorldProviderSpaceStation) {
+                    GalacticraftCore.packetPipeline
+                            .sendTo(new PacketSimple(EnumSimplePacket.C_RESET_THIRD_PERSON, new Object[] {}), player);
+                }
+
+                if (ridingRocket != null) {
+                    spawnPos = new Vector3(ridingRocket);
+                } else {
+                    spawnPos = type.getPlayerSpawnLocation((WorldServer) entity.worldObj, (EntityPlayerMP) entity);
+                }
+                forceMoveEntityToPos(entity, (WorldServer) worldNew, spawnPos, false);
+
+                GCLog.info(
+                        "Server attempting to transfer player " + player.getGameProfile().getName()
+                                + " within same dimension "
+                                + worldNew.provider.dimensionId);
             }
-
-            if (ridingRocket != null) {
-                spawnPos = new Vector3(ridingRocket);
-            } else {
-                spawnPos = type.getPlayerSpawnLocation((WorldServer) entity.worldObj, (EntityPlayerMP) entity);
-            }
-            forceMoveEntityToPos(entity, (WorldServer) worldNew, spawnPos, false);
-
-            GCLog.info(
-                    "Server attempting to transfer player " + player.getGameProfile().getName()
-                            + " within same dimension "
-                            + worldNew.provider.dimensionId);
-        }
 
         // Update PlayerStatsGC
         if (player != null) {
@@ -1299,15 +1296,13 @@ public class WorldUtil {
                     for (final Object o : data) {
                         WorldUtil.registerPlanetClient((Integer) o, providerIndex);
                         providerIndex++;
-                        ids.append(((Integer) o).toString())
-                               .append(" ");
+                        ids.append(((Integer) o).toString()).append(" ");
                     }
                 } else if (data.get(0) instanceof Integer[]) {
                     for (final Object o : (Integer[]) data.get(0)) {
                         WorldUtil.registerPlanetClient((Integer) o, providerIndex);
                         providerIndex++;
-                        ids.append(((Integer) o).toString())
-                               .append(" ");
+                        ids.append(((Integer) o).toString()).append(" ");
                     }
                 }
             }

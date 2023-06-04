@@ -1,7 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client.render.entities;
 
-import micdoodle8.mods.galacticraft.api.prefab.entity.EntitySpaceshipBase;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
@@ -13,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.prefab.entity.EntitySpaceshipBase;
 
 @SideOnly(Side.CLIENT)
 public class RenderTier1Rocket extends Render {

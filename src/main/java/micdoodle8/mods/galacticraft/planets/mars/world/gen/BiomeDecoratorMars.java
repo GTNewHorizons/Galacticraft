@@ -1,13 +1,13 @@
 package micdoodle8.mods.galacticraft.planets.mars.world.gen;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
+
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.BiomeDecoratorSpace;
 import micdoodle8.mods.galacticraft.core.world.gen.WorldGenMinableMeta;
 import micdoodle8.mods.galacticraft.planets.mars.ConfigManagerMars;
 import micdoodle8.mods.galacticraft.planets.mars.blocks.MarsBlocks;
-
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeDecoratorMars extends BiomeDecoratorSpace {
 

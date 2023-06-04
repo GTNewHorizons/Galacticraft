@@ -3,6 +3,20 @@ package micdoodle8.mods.galacticraft.planets.mars.tile;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.world.ChunkCoordIntPair;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.ForgeChunkManager;
+import net.minecraftforge.common.ForgeChunkManager.Ticket;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 import micdoodle8.mods.galacticraft.api.entity.IDockable;
 import micdoodle8.mods.galacticraft.api.prefab.entity.EntityAutoRocket;
 import micdoodle8.mods.galacticraft.api.tile.IFuelDock;
@@ -20,21 +34,6 @@ import micdoodle8.mods.galacticraft.core.world.IChunkLoader;
 import micdoodle8.mods.galacticraft.planets.mars.ConfigManagerMars;
 import micdoodle8.mods.galacticraft.planets.mars.network.PacketSimpleMars;
 import micdoodle8.mods.galacticraft.planets.mars.network.PacketSimpleMars.EnumSimplePacketMars;
-
-import net.minecraft.block.Block;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.world.ChunkCoordIntPair;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.ForgeChunkManager;
-import net.minecraftforge.common.ForgeChunkManager.Ticket;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
 // import java.util.Map;
 
 public class TileEntityLaunchController extends TileBaseElectricBlockWithInventory
@@ -193,7 +192,8 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
                 for (int z = -2; z <= 2; z++) {
                     final Block blockID = this.worldObj.getBlock(this.xCoord + x, this.yCoord, this.zCoord + z);
 
-                    if (blockID instanceof BlockLandingPadFull && (this.xCoord + x >> 4 != this.xCoord >> 4 || this.zCoord + z >> 4 != this.zCoord >> 4)) {
+                    if (blockID instanceof BlockLandingPadFull
+                            && (this.xCoord + x >> 4 != this.xCoord >> 4 || this.zCoord + z >> 4 != this.zCoord >> 4)) {
                         this.connectedPads.add(new ChunkCoordinates(this.xCoord + x, this.yCoord, this.zCoord + z));
 
                         if (placed) {
@@ -362,7 +362,8 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
                             continue;
                         }
 
-                        if (tile2 instanceof TileEntityLaunchController launchController2 && launchController2.frequency == this.frequency) {
+                        if (tile2 instanceof TileEntityLaunchController launchController2
+                                && launchController2.frequency == this.frequency) {
                             this.frequencyValid = false;
                             break worldLoop;
                         }
@@ -395,7 +396,8 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
                                 continue;
                             }
 
-                            if (tile2 instanceof TileEntityLaunchController launchController2 && launchController2.frequency == this.destFrequency) {
+                            if (tile2 instanceof TileEntityLaunchController launchController2
+                                    && launchController2.frequency == this.destFrequency) {
                                 this.destFrequencyValid = true;
                                 return;
                             }

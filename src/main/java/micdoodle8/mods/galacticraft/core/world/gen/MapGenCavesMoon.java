@@ -2,13 +2,13 @@ package micdoodle8.mods.galacticraft.core.world.gen;
 
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.prefab.world.gen.MapGenBaseMeta;
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import micdoodle8.mods.galacticraft.api.prefab.world.gen.MapGenBaseMeta;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 
 public class MapGenCavesMoon extends MapGenBaseMeta {
 
@@ -183,7 +183,8 @@ public class MapGenCavesMoon extends MapGenBaseMeta {
                                     if (xfactorSq + zfactorSq < 1.0D) {
                                         final int coords = (localX * 16 + localZ) * 256 + localY;
 
-                                        if (yfactor > -0.7D && xfactorSq + yfactorSq + zfactorSq < 1.0D && blockIdArray[coords] == GCBlocks.blockMoon) {
+                                        if (yfactor > -0.7D && xfactorSq + yfactorSq + zfactorSq < 1.0D
+                                                && blockIdArray[coords] == GCBlocks.blockMoon) {
                                             if (metaArray[coords] == 3 || metaArray[coords] == 4
                                                     || metaArray[coords] == 5) {
                                                 blockIdArray[coords] = Blocks.air;

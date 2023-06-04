@@ -1,7 +1,5 @@
 package micdoodle8.mods.galacticraft.core.entities;
 
-import micdoodle8.mods.galacticraft.api.entity.IEntityBreathable;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -30,6 +28,7 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.entity.IEntityBreathable;
 
 public class EntityAlienVillager extends EntityAgeable implements IEntityBreathable {
 

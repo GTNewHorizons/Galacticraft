@@ -1,5 +1,9 @@
 package micdoodle8.mods.galacticraft.core.energy.tile;
 
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import cpw.mods.fml.relauncher.Side;
 import micdoodle8.mods.galacticraft.api.power.EnergySource;
 import micdoodle8.mods.galacticraft.api.power.EnergySource.EnergySourceAdjacent;
 import micdoodle8.mods.galacticraft.api.power.IEnergyHandlerGC;
@@ -8,11 +12,6 @@ import micdoodle8.mods.galacticraft.api.transmission.tile.IElectrical;
 import micdoodle8.mods.galacticraft.core.tile.ReceiverMode;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityAdvanced;
 import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
-
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.ForgeDirection;
-
-import cpw.mods.fml.relauncher.Side;
 
 public abstract class EnergyStorageTile extends TileEntityAdvanced implements IEnergyHandlerGC, IElectrical {
 

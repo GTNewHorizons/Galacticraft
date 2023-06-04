@@ -1,10 +1,5 @@
 package micdoodle8.mods.galacticraft.core.items;
 
-import micdoodle8.mods.galacticraft.core.blocks.BlockEnclosed;
-import micdoodle8.mods.galacticraft.core.blocks.BlockEnclosed.EnumEnclosedBlock;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.core.util.CompatibilityManager;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -16,6 +11,10 @@ import appeng.api.AEApi;
 import appeng.api.util.AEColor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.blocks.BlockEnclosed;
+import micdoodle8.mods.galacticraft.core.blocks.BlockEnclosed.EnumEnclosedBlock;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
+import micdoodle8.mods.galacticraft.core.util.CompatibilityManager;
 
 public class ItemBlockEnclosed extends ItemBlockDesc {
 
@@ -131,8 +130,7 @@ public class ItemBlockEnclosed extends ItemBlockDesc {
                     this.field_150939_a.stepSound.getPitch() * 0.8F);
             --itemstack.stackSize;
 
-            final ItemStack itemME = AEApi.instance().definitions().parts().cableGlass()
-                    .stack(AEColor.Transparent, 1);
+            final ItemStack itemME = AEApi.instance().definitions().parts().cableGlass().stack(AEColor.Transparent, 1);
             itemME.stackSize = 2; // Fool AppEng into not destroying anything in the player inventory
             return AEApi.instance().partHelper().placeBus(itemME, x, y, z, side, entityplayer, world);
             // Might be better to do appeng.parts.PartPlacement.place( is, x, y, z, side,

@@ -1,9 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client.render.entities;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.client.model.ModelEvolvedSkeleton;
-import micdoodle8.mods.galacticraft.core.items.ItemSensorGlasses;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.entity.RenderBiped;
@@ -20,6 +16,9 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.model.ModelEvolvedSkeleton;
+import micdoodle8.mods.galacticraft.core.items.ItemSensorGlasses;
 
 @SideOnly(Side.CLIENT)
 public class RenderEvolvedSkeleton extends RenderBiped {
@@ -62,7 +61,8 @@ public class RenderEvolvedSkeleton extends RenderBiped {
 
     @Override
     protected void renderEquippedItems(EntityLivingBase par1EntityLiving, float par2) {
-        if (RenderEvolvedSkeleton.isBG2Loaded > 0 && par1EntityLiving.getDataWatcher().getWatchedObject(RenderEvolvedSkeleton.isBG2Loaded) == null) {
+        if (RenderEvolvedSkeleton.isBG2Loaded > 0
+                && par1EntityLiving.getDataWatcher().getWatchedObject(RenderEvolvedSkeleton.isBG2Loaded) == null) {
             par1EntityLiving.getDataWatcher().addObject(RenderEvolvedSkeleton.isBG2Loaded, (byte) -1);
         }
 

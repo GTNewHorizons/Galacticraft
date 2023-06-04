@@ -5,29 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import micdoodle8.mods.galacticraft.api.entity.IAntiGrav;
-import micdoodle8.mods.galacticraft.api.entity.IEntityNoisy;
-import micdoodle8.mods.galacticraft.api.entity.ITelemetry;
-import micdoodle8.mods.galacticraft.api.vector.BlockTuple;
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
-import micdoodle8.mods.galacticraft.core.items.GCItems;
-import micdoodle8.mods.galacticraft.core.network.IPacketReceiver;
-import micdoodle8.mods.galacticraft.core.network.PacketDynamic;
-import micdoodle8.mods.galacticraft.core.util.CompatibilityManager;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.core.util.GCLog;
-import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
-import micdoodle8.mods.galacticraft.core.util.WorldUtil;
-import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
-import micdoodle8.mods.galacticraft.planets.asteroids.client.sounds.SoundUpdaterMiner;
-import micdoodle8.mods.galacticraft.planets.asteroids.dimension.WorldProviderAsteroids;
-import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
-import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityMinerBase;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockLiquid;
@@ -62,6 +39,28 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+import micdoodle8.mods.galacticraft.api.entity.IAntiGrav;
+import micdoodle8.mods.galacticraft.api.entity.IEntityNoisy;
+import micdoodle8.mods.galacticraft.api.entity.ITelemetry;
+import micdoodle8.mods.galacticraft.api.vector.BlockTuple;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
+import micdoodle8.mods.galacticraft.core.items.GCItems;
+import micdoodle8.mods.galacticraft.core.network.IPacketReceiver;
+import micdoodle8.mods.galacticraft.core.network.PacketDynamic;
+import micdoodle8.mods.galacticraft.core.util.CompatibilityManager;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.core.util.GCLog;
+import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
+import micdoodle8.mods.galacticraft.core.util.VersionUtil;
+import micdoodle8.mods.galacticraft.core.util.WorldUtil;
+import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
+import micdoodle8.mods.galacticraft.planets.asteroids.client.sounds.SoundUpdaterMiner;
+import micdoodle8.mods.galacticraft.planets.asteroids.dimension.WorldProviderAsteroids;
+import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
+import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityMinerBase;
 
 public class EntityAstroMiner extends Entity
         implements IInventory, IPacketReceiver, IEntityNoisy, IAntiGrav, ITelemetry {
@@ -665,8 +664,8 @@ public class EntityAstroMiner extends Entity
                 this.wayPoints.add(this.waypointBase.clone());
                 this.mineCount = 0;
             } else if (this.playerMP != null && (this.givenFailMessage & 64) == 0) {
-                this.playerMP.addChatMessage(
-                        new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner6.fail")));
+                this.playerMP
+                        .addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner6.fail")));
                 this.givenFailMessage += 64;
             }
         }

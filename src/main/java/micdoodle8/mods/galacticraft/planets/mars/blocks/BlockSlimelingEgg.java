@@ -3,15 +3,6 @@ package micdoodle8.mods.galacticraft.planets.mars.blocks;
 import java.util.List;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
-import micdoodle8.mods.galacticraft.planets.GalacticraftPlanets;
-import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
-import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
-import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntitySlimelingEgg;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -32,6 +23,14 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.core.util.VersionUtil;
+import micdoodle8.mods.galacticraft.planets.GalacticraftPlanets;
+import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
+import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
+import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntitySlimelingEgg;
 
 public class BlockSlimelingEgg extends Block implements ITileEntityProvider, ItemBlockDesc.IBlockShiftDesc {
 

@@ -1,14 +1,13 @@
 package micdoodle8.mods.galacticraft.core.client.sounds;
 
-import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.MathHelper;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 
 public class MusicTickerGC extends MusicTicker {
 

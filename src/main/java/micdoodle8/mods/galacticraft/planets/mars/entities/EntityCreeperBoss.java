@@ -4,23 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
-import micdoodle8.mods.galacticraft.api.entity.IEntityBreathable;
-import micdoodle8.mods.galacticraft.api.recipe.ISchematicPage;
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.entities.EntityAIArrowAttack;
-import micdoodle8.mods.galacticraft.core.entities.IBoss;
-import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityDungeonSpawner;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.planets.asteroids.ConfigManagerAsteroids;
-import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
-import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityTreasureChestMars;
-
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -52,6 +35,22 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
+import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
+import micdoodle8.mods.galacticraft.api.entity.IEntityBreathable;
+import micdoodle8.mods.galacticraft.api.recipe.ISchematicPage;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.entities.EntityAIArrowAttack;
+import micdoodle8.mods.galacticraft.core.entities.IBoss;
+import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityDungeonSpawner;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.planets.asteroids.ConfigManagerAsteroids;
+import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
+import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityTreasureChestMars;
 
 public class EntityCreeperBoss extends EntityMob
         implements IEntityBreathable, IBossDisplayData, IRangedAttackMob, IBoss {

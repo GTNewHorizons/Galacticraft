@@ -1,9 +1,9 @@
 package micdoodle8.mods.galacticraft.core.tile;
 
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 
 public interface IMultiBlock {
 

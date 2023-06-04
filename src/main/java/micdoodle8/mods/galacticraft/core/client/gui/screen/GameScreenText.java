@@ -2,14 +2,6 @@ package micdoodle8.mods.galacticraft.core.client.gui.screen;
 
 import java.nio.DoubleBuffer;
 
-import micdoodle8.mods.galacticraft.api.client.IGameScreen;
-import micdoodle8.mods.galacticraft.api.client.IScreenManager;
-import micdoodle8.mods.galacticraft.api.entity.ITelemetry;
-import micdoodle8.mods.galacticraft.core.client.render.entities.RenderPlayerGC;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityTelemetry;
-import micdoodle8.mods.galacticraft.core.util.ColorUtil;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -36,6 +28,13 @@ import org.lwjgl.opengl.GL12;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.client.IGameScreen;
+import micdoodle8.mods.galacticraft.api.client.IScreenManager;
+import micdoodle8.mods.galacticraft.api.entity.ITelemetry;
+import micdoodle8.mods.galacticraft.core.client.render.entities.RenderPlayerGC;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityTelemetry;
+import micdoodle8.mods.galacticraft.core.util.ColorUtil;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class GameScreenText implements IGameScreen {
 

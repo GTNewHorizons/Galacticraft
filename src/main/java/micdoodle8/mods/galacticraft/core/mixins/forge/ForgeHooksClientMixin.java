@@ -1,7 +1,5 @@
 package micdoodle8.mods.galacticraft.core.mixins.forge;
 
-import micdoodle8.mods.galacticraft.core.event.EventHandlerGC;
-
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -9,6 +7,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import micdoodle8.mods.galacticraft.core.event.EventHandlerGC;
 
 @Mixin(value = ForgeHooksClient.class, remap = false)
 public class ForgeHooksClientMixin {

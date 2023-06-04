@@ -7,12 +7,6 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.network.IPacketReceiver;
-import micdoodle8.mods.galacticraft.core.network.NetworkUtil;
-import micdoodle8.mods.galacticraft.core.network.PacketDynamic;
-import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -20,6 +14,11 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.network.IPacketReceiver;
+import micdoodle8.mods.galacticraft.core.network.NetworkUtil;
+import micdoodle8.mods.galacticraft.core.network.PacketDynamic;
+import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
 
 public abstract class EntityAdvanced extends Entity implements IPacketReceiver {
 

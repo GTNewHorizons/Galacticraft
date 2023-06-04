@@ -1,11 +1,11 @@
 package micdoodle8.mods.galacticraft.core.client.model;
 
-import micdoodle8.mods.galacticraft.core.entities.EntitySkeletonBoss;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+
+import micdoodle8.mods.galacticraft.core.entities.EntitySkeletonBoss;
 
 public class ModelEvolvedSkeletonBoss extends ModelBase {
 

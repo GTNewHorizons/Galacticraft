@@ -6,11 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
-import micdoodle8.mods.galacticraft.core.inventory.InventoryExtended;
-import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
@@ -19,6 +14,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
+
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
+import micdoodle8.mods.galacticraft.core.inventory.InventoryExtended;
+import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
 
 public class CommandGCInv extends CommandBase {
 
@@ -132,7 +132,8 @@ public class CommandGCInv extends CommandBase {
                 }
 
                 // No player found, and not a 'restore' command
-                if (!"clear".equalsIgnoreCase(astring[0]) && !"save".equalsIgnoreCase(astring[0]) && !"drop".equalsIgnoreCase(astring[0])) {
+                if (!"clear".equalsIgnoreCase(astring[0]) && !"save".equalsIgnoreCase(astring[0])
+                        && !"drop".equalsIgnoreCase(astring[0])) {
                     throw new WrongUsageException(
                             "Invalid GCInv command. Usage: " + this.getCommandUsage(icommandsender));
                 }

@@ -5,12 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import micdoodle8.mods.galacticraft.api.client.IGameScreen;
-import micdoodle8.mods.galacticraft.api.recipe.INasaWorkbenchRecipe;
-import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
-import micdoodle8.mods.galacticraft.api.world.ITeleportType;
-import micdoodle8.mods.galacticraft.api.world.SpaceStationType;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldProvider;
@@ -20,6 +14,11 @@ import net.minecraftforge.common.DimensionManager;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.client.IGameScreen;
+import micdoodle8.mods.galacticraft.api.recipe.INasaWorkbenchRecipe;
+import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
+import micdoodle8.mods.galacticraft.api.world.ITeleportType;
+import micdoodle8.mods.galacticraft.api.world.SpaceStationType;
 
 public class GalacticraftRegistry {
 
@@ -188,8 +187,7 @@ public class GalacticraftRegistry {
         // for network compatibility between GC
         // versions
         FMLLog.severe(
-                "Could not register dimension " + id
-                        + " - does it clash with another mod?  Change the ID in config.");
+                "Could not register dimension " + id + " - does it clash with another mod?  Change the ID in config.");
         return false;
     }
 

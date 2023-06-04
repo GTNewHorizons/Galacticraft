@@ -1,13 +1,13 @@
 package micdoodle8.mods.galacticraft.planets.mars.inventory;
 
-import micdoodle8.mods.galacticraft.planets.mars.entities.EntitySlimeling;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
+import micdoodle8.mods.galacticraft.planets.mars.entities.EntitySlimeling;
 
 public class InventorySlimeling implements IInventory {
 

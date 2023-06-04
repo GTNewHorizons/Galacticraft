@@ -1,5 +1,11 @@
 package micdoodle8.mods.galacticraft.planets.mars.inventory;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+
 import micdoodle8.mods.galacticraft.api.item.IItemElectric;
 import micdoodle8.mods.galacticraft.core.inventory.SlotSpecific;
 import micdoodle8.mods.galacticraft.core.util.FluidUtil;
@@ -7,12 +13,6 @@ import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
 import micdoodle8.mods.galacticraft.planets.asteroids.items.ItemAtmosphericValve;
 import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityMethaneSynthesizer;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 
 public class ContainerMethaneSynthesizer extends Container {
 

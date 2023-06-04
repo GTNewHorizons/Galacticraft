@@ -1,13 +1,12 @@
 package micdoodle8.mods.galacticraft.planets.mars.items;
 
-import micdoodle8.mods.galacticraft.core.Constants;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import micdoodle8.mods.galacticraft.core.Constants;
 
 public class MarsItems {
 

@@ -3,14 +3,6 @@ package micdoodle8.mods.galacticraft.core.client.model;
 import java.lang.reflect.Constructor;
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.item.IHoldableItem;
-import micdoodle8.mods.galacticraft.api.prefab.entity.EntityTieredRocket;
-import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
-
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.model.ModelBase;
@@ -35,6 +27,13 @@ import api.player.model.ModelPlayerAPI;
 import api.player.model.ModelPlayerBase;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Loader;
+import micdoodle8.mods.galacticraft.api.item.IHoldableItem;
+import micdoodle8.mods.galacticraft.api.prefab.entity.EntityTieredRocket;
+import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
+import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
 
 @SuppressWarnings("unchecked")
 public class ModelPlayerBaseGC extends ModelPlayerBase {
@@ -102,17 +101,17 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
             try {
                 return switch (type) {
                     case 0, 15 -> modelRotationGCSmartMovingInit.newInstance(
-                                                    player,
-                                                    texOffsetX,
-                                                    texOffsetY,
-                                                    SmartRender.getPlayerBase(this.modelPlayer).getHead(),
-                                                    type);
+                            player,
+                            texOffsetX,
+                            texOffsetY,
+                            SmartRender.getPlayerBase(this.modelPlayer).getHead(),
+                            type);
                     default -> modelRotationGCSmartMovingInit.newInstance(
-                                                    player,
-                                                    texOffsetX,
-                                                    texOffsetY,
-                                                    SmartRender.getPlayerBase(this.modelPlayer).getBody(),
-                                                    type);
+                            player,
+                            texOffsetX,
+                            texOffsetY,
+                            SmartRender.getPlayerBase(this.modelPlayer).getBody(),
+                            type);
                 };
             } catch (final Exception e) {
                 e.printStackTrace();
@@ -439,12 +438,12 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
         super.afterRender(var1, var2, var3, var4, var5, var6, var7);
 
         // Smart Moving will render through ModelRotationRendererGC instead
-        
 
         // Deal with RenderPlayerAPIEnhancer calling this for skeletons etc
         // Do not render GC equipment on top of armor - only on top of player - see
         // .init() method
-        if (ModelPlayerBaseGC.isSmartMovingLoaded || !(var1 instanceof EntityPlayer player) || this.oxygenMask == null) {
+        if (ModelPlayerBaseGC.isSmartMovingLoaded || !(var1 instanceof EntityPlayer player)
+                || this.oxygenMask == null) {
             return;
         }
 

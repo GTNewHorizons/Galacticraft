@@ -3,10 +3,6 @@ package micdoodle8.mods.galacticraft.planets.asteroids.blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
@@ -24,6 +20,9 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 
 public class BlockIceAsteroids extends BlockBreakable {
 

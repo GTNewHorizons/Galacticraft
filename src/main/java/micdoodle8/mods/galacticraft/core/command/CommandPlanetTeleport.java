@@ -1,11 +1,5 @@
 package micdoodle8.mods.galacticraft.core.command;
 
-import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
-import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
-import micdoodle8.mods.galacticraft.core.util.WorldUtil;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -14,6 +8,12 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldServer;
+
+import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
+import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
+import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 
 public class CommandPlanetTeleport extends CommandBase {
 
@@ -53,8 +53,7 @@ public class CommandPlanetTeleport extends CommandBase {
                 throw new Exception("Could not find player with name: " + astring[0]);
             }
             final MinecraftServer server = MinecraftServer.getServer();
-            final WorldServer worldserver = server
-                    .worldServerForDimension(server.worldServers[0].provider.dimensionId);
+            final WorldServer worldserver = server.worldServerForDimension(server.worldServers[0].provider.dimensionId);
             final ChunkCoordinates chunkcoordinates = worldserver.getSpawnPoint();
             final GCPlayerStats stats = GCPlayerStats.get(playerBase);
             stats.coordsTeleportedFromX = chunkcoordinates.posX;

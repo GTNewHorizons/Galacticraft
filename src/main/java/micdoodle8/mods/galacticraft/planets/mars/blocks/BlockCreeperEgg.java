@@ -1,12 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.mars.blocks;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedCreeper;
-import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
-import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
-
 import net.minecraft.block.BlockDragonEgg;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -20,11 +13,16 @@ import net.minecraftforge.common.ForgeHooks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedCreeper;
+import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
+import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 
 public class BlockCreeperEgg extends BlockDragonEgg implements ItemBlockDesc.IBlockShiftDesc {
 
-    public BlockCreeperEgg() {
-    }
+    public BlockCreeperEgg() {}
 
     @Override
     @SideOnly(Side.CLIENT)

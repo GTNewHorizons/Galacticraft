@@ -4,14 +4,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.core.Constants;
-
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
 import org.apache.logging.log4j.Level;
 
 import cpw.mods.fml.common.FMLLog;
+import micdoodle8.mods.galacticraft.core.Constants;
 
 public class ConfigManagerMars {
 

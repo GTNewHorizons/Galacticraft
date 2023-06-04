@@ -10,6 +10,36 @@ import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.server.S07PacketRespawn;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.ChunkCoordIntPair;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityEvent;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
 import micdoodle8.mods.galacticraft.api.event.oxygen.GCCoreOxygenSuffocationEvent;
 import micdoodle8.mods.galacticraft.api.item.IItemThermal;
@@ -49,37 +79,6 @@ import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import micdoodle8.mods.galacticraft.core.wrappers.Footprint;
 import micdoodle8.mods.galacticraft.planets.asteroids.dimension.WorldProviderAsteroids;
-
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.server.S07PacketRespawn;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.ChunkCoordIntPair;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.EntityEvent;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class GCPlayerHandler {
 
@@ -478,7 +477,8 @@ public class GCPlayerHandler {
                         && thermalPaddingBoots != null;
 
                 if (!playerStats.thermalLevelNormalising) {
-                    if ((player.ticksExisted - 1) % thermalLevelTickCooldown == 0 && Math.abs(playerStats.thermalLevel) >= 22) {
+                    if ((player.ticksExisted - 1) % thermalLevelTickCooldown == 0
+                            && Math.abs(playerStats.thermalLevel) >= 22) {
                         player.attackEntityFrom(DamageSourceGC.thermal, 1.5F);
                     }
 
@@ -647,7 +647,8 @@ public class GCPlayerHandler {
 
     protected void throwMeteors(EntityPlayerMP player) {
         final World world = player.worldObj;
-        if (world.provider instanceof IGalacticraftWorldProvider && !world.isRemote && ((IGalacticraftWorldProvider) world.provider).getMeteorFrequency() > 0
+        if (world.provider instanceof IGalacticraftWorldProvider && !world.isRemote
+                && ((IGalacticraftWorldProvider) world.provider).getMeteorFrequency() > 0
                 && ConfigManagerCore.meteorSpawnMod > 0.0) {
             final int f = (int) (((IGalacticraftWorldProvider) world.provider).getMeteorFrequency() * 1000D
                     * (1.0 / ConfigManagerCore.meteorSpawnMod));
@@ -733,17 +734,17 @@ public class GCPlayerHandler {
                     }
                 }
             } else // Is it a type of space torch?
-            if (this.torchItems.containsKey(theCurrentItem.getItem())) {
-                // Get overworld torch for this space torch
-                final Item torchItem = this.torchItems.get(theCurrentItem.getItem());
-                if (torchItem != null && player.inventory.currentItem >= 0
-                        && player.inventory.currentItem < player.inventory.mainInventory.length) {
-                    player.inventory.mainInventory[player.inventory.currentItem] = new ItemStack(
-                            torchItem,
-                            theCurrentItem.stackSize,
-                            0);
+                if (this.torchItems.containsKey(theCurrentItem.getItem())) {
+                    // Get overworld torch for this space torch
+                    final Item torchItem = this.torchItems.get(theCurrentItem.getItem());
+                    if (torchItem != null && player.inventory.currentItem >= 0
+                            && player.inventory.currentItem < player.inventory.mainInventory.length) {
+                        player.inventory.mainInventory[player.inventory.currentItem] = new ItemStack(
+                                torchItem,
+                                theCurrentItem.stackSize,
+                                0);
+                    }
                 }
-            }
         }
     }
 
@@ -780,7 +781,8 @@ public class GCPlayerHandler {
 
             // If the block below is the moon block
             // And is the correct metadata (moon turf)
-            if (player.worldObj.getBlock(iPosX, iPosY, iPosZ) == GCBlocks.blockMoon && player.worldObj.getBlockMetadata(iPosX, iPosY, iPosZ) == 5) {
+            if (player.worldObj.getBlock(iPosX, iPosY, iPosZ) == GCBlocks.blockMoon
+                    && player.worldObj.getBlockMetadata(iPosX, iPosY, iPosZ) == 5) {
                 final GCPlayerStats playerStats = GCPlayerStats.get(player);
                 // If it has been long enough since the last step
                 if (playerStats.distanceSinceLastStep > 0.35D) {
@@ -792,11 +794,11 @@ public class GCPlayerHandler {
                     // Adjust footprint to left or right depending on step count
                     switch (playerStats.lastStep) {
                         case 0:
-                            float a = (-player.rotationYaw + 90F) / (180F / (float)Math.PI);
+                            float a = (-player.rotationYaw + 90F) / (180F / (float) Math.PI);
                             pos.translate(new Vector3(MathHelper.sin(a) * 0.25F, 0, MathHelper.cos(a) * 0.25F));
                             break;
                         case 1:
-                            a = (-player.rotationYaw - 90F) / (180F / (float)Math.PI);
+                            a = (-player.rotationYaw - 90F) / (180F / (float) Math.PI);
                             pos.translate(new Vector3(MathHelper.sin(a) * 0.25, 0, MathHelper.cos(a) * 0.25));
                             break;
                     }

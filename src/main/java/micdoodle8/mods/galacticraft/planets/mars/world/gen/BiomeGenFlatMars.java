@@ -1,8 +1,8 @@
 package micdoodle8.mods.galacticraft.planets.mars.world.gen;
 
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-
 import net.minecraftforge.common.BiomeDictionary;
+
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 
 public class BiomeGenFlatMars extends BiomeGenBaseMars {
 

@@ -1,12 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.mars.client.gui;
 
-import micdoodle8.mods.galacticraft.api.recipe.ISchematicResultPage;
-import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
-import micdoodle8.mods.galacticraft.planets.mars.inventory.ContainerSchematicTier2Rocket;
-import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -14,6 +7,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
+
+import micdoodle8.mods.galacticraft.api.recipe.ISchematicResultPage;
+import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
+import micdoodle8.mods.galacticraft.planets.mars.inventory.ContainerSchematicTier2Rocket;
+import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 
 public class GuiSchematicTier2Rocket extends GuiContainer implements ISchematicResultPage {
 

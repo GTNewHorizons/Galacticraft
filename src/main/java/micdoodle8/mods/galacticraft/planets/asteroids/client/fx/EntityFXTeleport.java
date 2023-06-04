@@ -2,15 +2,14 @@ package micdoodle8.mods.galacticraft.planets.asteroids.client.fx;
 
 import java.lang.ref.WeakReference;
 
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityShortRangeTelepad;
-
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityShortRangeTelepad;
 
 @SideOnly(Side.CLIENT)
 public class EntityFXTeleport extends EntityFX {

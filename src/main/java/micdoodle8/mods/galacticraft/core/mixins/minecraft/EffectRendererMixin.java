@@ -1,7 +1,5 @@
 package micdoodle8.mods.galacticraft.core.mixins.minecraft;
 
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.entity.Entity;
 
@@ -10,6 +8,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 
 @Mixin(EffectRenderer.class)
 public class EffectRendererMixin {

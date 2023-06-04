@@ -1,5 +1,11 @@
 package micdoodle8.mods.galacticraft.core.energy.tile;
 
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.api.transmission.NetworkType;
 import micdoodle8.mods.galacticraft.api.transmission.grid.IElectricityNetwork;
 import micdoodle8.mods.galacticraft.api.transmission.grid.IGridNetwork;
@@ -10,13 +16,6 @@ import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 import micdoodle8.mods.galacticraft.core.energy.grid.EnergyNetwork;
 import micdoodle8.mods.galacticraft.core.tick.TickHandlerServer;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityAdvanced;
-
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraftforge.common.util.ForgeDirection;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * This tile entity pre-fabricated for all conductors.
@@ -84,7 +83,8 @@ public abstract class TileBaseConductor extends TileEntityAdvanced implements IC
             for (final ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
                 final TileEntity tileEntity = thisVec.getTileEntityOnSide(this.worldObj, side);
 
-                if (tileEntity != null && tileEntity.getClass() == this.getClass() && tileEntity instanceof INetworkProvider
+                if (tileEntity != null && tileEntity.getClass() == this.getClass()
+                        && tileEntity instanceof INetworkProvider
                         && !this.getNetwork().equals(((INetworkProvider) tileEntity).getNetwork())) {
                     ((INetworkProvider) tileEntity).getNetwork().merge(this.getNetwork());
                 }
@@ -104,7 +104,8 @@ public abstract class TileBaseConductor extends TileEntityAdvanced implements IC
             for (int i = 0; i < 6; i++) {
                 final TileEntity tileEntity = thisVec.getTileEntityOnSide(this.worldObj, i);
 
-                if (tileEntity instanceof IConnector && ((IConnector) tileEntity).canConnect(ForgeDirection.getOrientation(i ^ 1), NetworkType.POWER)) {
+                if (tileEntity instanceof IConnector && ((IConnector) tileEntity)
+                        .canConnect(ForgeDirection.getOrientation(i ^ 1), NetworkType.POWER)) {
                     this.adjacentConnections[i] = tileEntity;
                 }
             }

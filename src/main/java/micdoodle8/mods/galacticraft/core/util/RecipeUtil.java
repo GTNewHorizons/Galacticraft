@@ -2,12 +2,6 @@ package micdoodle8.mods.galacticraft.core.util;
 
 import java.util.HashMap;
 
-import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
-import micdoodle8.mods.galacticraft.api.recipe.INasaWorkbenchRecipe;
-import micdoodle8.mods.galacticraft.core.inventory.InventoryBuggyBench;
-import micdoodle8.mods.galacticraft.core.inventory.InventoryRocketBench;
-import micdoodle8.mods.galacticraft.core.recipe.NasaWorkbenchRecipe;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -18,6 +12,11 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.item.IC2Items;
+import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
+import micdoodle8.mods.galacticraft.api.recipe.INasaWorkbenchRecipe;
+import micdoodle8.mods.galacticraft.core.inventory.InventoryBuggyBench;
+import micdoodle8.mods.galacticraft.core.inventory.InventoryRocketBench;
+import micdoodle8.mods.galacticraft.core.recipe.NasaWorkbenchRecipe;
 
 public class RecipeUtil {
 

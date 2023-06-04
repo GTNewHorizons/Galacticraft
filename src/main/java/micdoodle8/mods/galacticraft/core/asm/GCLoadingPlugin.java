@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import micdoodle8.mods.galacticraft.core.Constants;
-import micdoodle8.mods.galacticraft.core.mixins.Mixins;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,6 +17,8 @@ import cpw.mods.fml.relauncher.IFMLLoadingPlugin.MCVersion;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.Name;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.SortingIndex;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
+import micdoodle8.mods.galacticraft.core.Constants;
+import micdoodle8.mods.galacticraft.core.mixins.Mixins;
 
 /**
  * Holds the rest of GC's class patching code.

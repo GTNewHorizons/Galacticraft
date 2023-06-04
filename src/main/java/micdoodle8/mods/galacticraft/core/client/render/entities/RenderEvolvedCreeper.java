@@ -1,10 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client.render.entities;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.client.model.ModelEvolvedCreeper;
-import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedCreeper;
-import micdoodle8.mods.galacticraft.core.items.ItemSensorGlasses;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelBase;
@@ -21,6 +16,10 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.model.ModelEvolvedCreeper;
+import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedCreeper;
+import micdoodle8.mods.galacticraft.core.items.ItemSensorGlasses;
 
 @SideOnly(Side.CLIENT)
 public class RenderEvolvedCreeper extends RenderCreeper {

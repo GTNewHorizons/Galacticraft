@@ -2,16 +2,6 @@ package micdoodle8.mods.galacticraft.core.blocks;
 
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.block.IPartialSealableBlock;
-import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
-import micdoodle8.mods.galacticraft.core.tile.IMultiBlock;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityNasaWorkbench;
-import micdoodle8.mods.galacticraft.core.util.EnumColor;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
@@ -36,6 +26,15 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.block.IPartialSealableBlock;
+import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
+import micdoodle8.mods.galacticraft.core.tile.IMultiBlock;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityNasaWorkbench;
+import micdoodle8.mods.galacticraft.core.util.EnumColor;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class BlockNasaWorkbench extends BlockContainer
         implements ITileEntityProvider, ItemBlockDesc.IBlockShiftDesc, IPartialSealableBlock {
@@ -102,8 +101,8 @@ public class BlockNasaWorkbench extends BlockContainer
     }
 
     @Override
-    public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> arraylist,
-            Entity par7Entity) {
+    public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB axisalignedbb,
+            List<AxisAlignedBB> arraylist, Entity par7Entity) {
         this.setBlockBounds(-0.0F, 0.0F, -0.0F, 1.0F, 1.4F, 1.0F);
         super.addCollisionBoxesToList(world, i, j, k, axisalignedbb, arraylist, par7Entity);
     }
@@ -178,9 +177,10 @@ public class BlockNasaWorkbench extends BlockContainer
                                 if (world.getBlock(x0 + x, y0 + y, z0 + z) == GCBlocks.fakeBlock) {
                                     fakeBlockCount++;
                                 }
-                            } else if (y != 0 && y != 3 && world.getBlock(x0 + x, y0 + y, z0 + z) == GCBlocks.fakeBlock) {
-                                fakeBlockCount++;
-                            }
+                            } else
+                                if (y != 0 && y != 3 && world.getBlock(x0 + x, y0 + y, z0 + z) == GCBlocks.fakeBlock) {
+                                    fakeBlockCount++;
+                                }
                         }
                     }
                 }

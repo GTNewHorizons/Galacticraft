@@ -8,14 +8,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.vector.BlockTuple;
-import micdoodle8.mods.galacticraft.core.Constants;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.energy.EnergyConfigHandler;
-import micdoodle8.mods.galacticraft.core.recipe.RecipeManagerGC;
-import micdoodle8.mods.galacticraft.core.tick.TickHandlerClient;
-import micdoodle8.mods.galacticraft.planets.asteroids.world.gen.BiomeGenBaseAsteroids;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -31,6 +23,13 @@ import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.vector.BlockTuple;
+import micdoodle8.mods.galacticraft.core.Constants;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.energy.EnergyConfigHandler;
+import micdoodle8.mods.galacticraft.core.recipe.RecipeManagerGC;
+import micdoodle8.mods.galacticraft.core.tick.TickHandlerClient;
+import micdoodle8.mods.galacticraft.planets.asteroids.world.gen.BiomeGenBaseAsteroids;
 
 public class ConfigManagerCore {
 
@@ -759,7 +758,8 @@ public class ConfigManagerCore {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static List<IConfigElement> getConfigElements() {
-        final List<IConfigElement> list = new ArrayList<>(new ConfigElement(config.getCategory(Constants.CONFIG_CATEGORY_DIMENSIONS)).getChildElements());
+        final List<IConfigElement> list = new ArrayList<>(
+                new ConfigElement(config.getCategory(Constants.CONFIG_CATEGORY_DIMENSIONS)).getChildElements());
         list.addAll(new ConfigElement(config.getCategory(Constants.CONFIG_CATEGORY_SCHEMATIC)).getChildElements());
         list.addAll(new ConfigElement(config.getCategory(Constants.CONFIG_CATEGORY_ACHIEVEMENTS)).getChildElements());
         list.addAll(new ConfigElement(config.getCategory(Constants.CONFIG_CATEGORY_ENTITIES)).getChildElements());

@@ -3,6 +3,14 @@ package micdoodle8.mods.galacticraft.planets.mars.world.gen;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import com.google.common.collect.Lists;
+
 import micdoodle8.mods.galacticraft.api.prefab.core.BlockMetaPair;
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.BiomeDecoratorSpace;
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.ChunkProviderSpace;
@@ -18,14 +26,6 @@ import micdoodle8.mods.galacticraft.planets.mars.world.gen.dungeon.RoomChestsMar
 import micdoodle8.mods.galacticraft.planets.mars.world.gen.dungeon.RoomEmptyMars;
 import micdoodle8.mods.galacticraft.planets.mars.world.gen.dungeon.RoomSpawnerMars;
 import micdoodle8.mods.galacticraft.planets.mars.world.gen.dungeon.RoomTreasureMars;
-
-import net.minecraft.block.Block;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraftforge.common.util.ForgeDirection;
-
-import com.google.common.collect.Lists;
 
 public class ChunkProviderMars extends ChunkProviderSpace {
 

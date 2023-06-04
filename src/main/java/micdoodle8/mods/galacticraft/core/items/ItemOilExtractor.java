@@ -2,12 +2,6 @@ package micdoodle8.mods.galacticraft.core.items;
 
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.core.util.EnumColor;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,6 +20,11 @@ import net.minecraftforge.fluids.IFluidBlock;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
+import micdoodle8.mods.galacticraft.core.util.EnumColor;
 
 public class ItemOilExtractor extends Item {
 
@@ -98,7 +97,8 @@ public class ItemOilExtractor extends Item {
 
     private ItemStack openCanister(EntityPlayer player) {
         for (final ItemStack stack : player.inventory.mainInventory) {
-            if (stack != null && stack.getItem() instanceof ItemOilCanister && stack.getMaxDamage() - stack.getItemDamage() >= 0
+            if (stack != null && stack.getItem() instanceof ItemOilCanister
+                    && stack.getMaxDamage() - stack.getItemDamage() >= 0
                     && stack.getMaxDamage() - stack.getItemDamage() < GCItems.oilCanister.getMaxDamage() - 1) {
                 return stack;
             }

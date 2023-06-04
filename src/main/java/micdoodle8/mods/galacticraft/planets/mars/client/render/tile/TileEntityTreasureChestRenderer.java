@@ -1,11 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.mars.client.render.tile;
 
-import micdoodle8.mods.galacticraft.core.client.model.block.ModelTreasureChest;
-import micdoodle8.mods.galacticraft.core.client.model.block.ModelTreasureChestLarge;
-import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
-import micdoodle8.mods.galacticraft.planets.mars.blocks.BlockTier2TreasureChest;
-import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityTreasureChestMars;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -16,6 +10,11 @@ import org.lwjgl.opengl.GL12;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.client.model.block.ModelTreasureChest;
+import micdoodle8.mods.galacticraft.core.client.model.block.ModelTreasureChestLarge;
+import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
+import micdoodle8.mods.galacticraft.planets.mars.blocks.BlockTier2TreasureChest;
+import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityTreasureChestMars;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityTreasureChestRenderer extends TileEntitySpecialRenderer {

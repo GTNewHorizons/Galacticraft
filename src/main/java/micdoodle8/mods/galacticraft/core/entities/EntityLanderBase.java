@@ -5,14 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
-import micdoodle8.mods.galacticraft.core.inventory.IInventorySettable;
-import micdoodle8.mods.galacticraft.core.network.PacketDynamic;
-import micdoodle8.mods.galacticraft.core.network.PacketDynamicInventory;
-import micdoodle8.mods.galacticraft.core.util.FluidUtil;
-import micdoodle8.mods.galacticraft.core.util.WorldUtil;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -28,6 +20,13 @@ import net.minecraftforge.fluids.FluidTank;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import io.netty.buffer.ByteBuf;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
+import micdoodle8.mods.galacticraft.core.inventory.IInventorySettable;
+import micdoodle8.mods.galacticraft.core.network.PacketDynamic;
+import micdoodle8.mods.galacticraft.core.network.PacketDynamicInventory;
+import micdoodle8.mods.galacticraft.core.util.FluidUtil;
+import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 
 public abstract class EntityLanderBase extends EntityAdvancedMotion implements IInventorySettable, IScaleableFuelLevel {
 

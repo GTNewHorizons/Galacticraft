@@ -1,15 +1,15 @@
 package micdoodle8.mods.galacticraft.core.inventory;
 
-import micdoodle8.mods.galacticraft.api.item.IItemElectric;
-import micdoodle8.mods.galacticraft.core.items.GCItems;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityRefinery;
-import micdoodle8.mods.galacticraft.core.util.FluidUtil;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import micdoodle8.mods.galacticraft.api.item.IItemElectric;
+import micdoodle8.mods.galacticraft.core.items.GCItems;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityRefinery;
+import micdoodle8.mods.galacticraft.core.util.FluidUtil;
 
 public class ContainerRefinery extends Container {
 

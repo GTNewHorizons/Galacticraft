@@ -2,6 +2,14 @@ package micdoodle8.mods.galacticraft.planets.mars.entities;
 
 import java.util.List;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
+
 import micdoodle8.mods.galacticraft.api.prefab.entity.EntityTieredRocket;
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
 import micdoodle8.mods.galacticraft.api.tile.IFuelDock;
@@ -13,14 +21,6 @@ import micdoodle8.mods.galacticraft.core.tile.TileEntityLandingPad;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
 import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
 
 public class EntityTier2Rocket extends EntityTieredRocket {
 
@@ -123,9 +123,11 @@ public class EntityTier2Rocket extends EntityTieredRocket {
                     this.stopRocketSound();
                 }
             }
-        } else if (!this.hasValidFuel() && this.getLaunched() && !this.worldObj.isRemote && Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 10 != 0.0) {
-            this.motionY -= Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 20;
-        }
+        } else if (!this.hasValidFuel() && this.getLaunched()
+                && !this.worldObj.isRemote
+                && Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 10 != 0.0) {
+                    this.motionY -= Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 20;
+                }
     }
 
     @Override

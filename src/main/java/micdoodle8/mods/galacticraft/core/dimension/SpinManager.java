@@ -5,15 +5,6 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.blocks.BlockSpinThruster;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.GCLog;
-import micdoodle8.mods.galacticraft.core.util.RedstoneUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockLiquid;
@@ -35,6 +26,14 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.blocks.BlockSpinThruster;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.GCLog;
+import micdoodle8.mods.galacticraft.core.util.RedstoneUtil;
 
 public class SpinManager {
 
@@ -100,7 +99,7 @@ public class SpinManager {
      */
     public void setSpinRate(float angle) {
         this.angularVelocityRadians = angle;
-        this.skyAngularVelocity = angle * 180F / (float)Math.PI;
+        this.skyAngularVelocity = angle * 180F / (float) Math.PI;
 
         if (this.clientSide) {
             this.updateSkyProviderSpinRate();
@@ -114,7 +113,7 @@ public class SpinManager {
 
     public void setSpinRate(float angle, boolean firing) {
         this.angularVelocityRadians = angle;
-        this.skyAngularVelocity = angle * 180F / (float)Math.PI;
+        this.skyAngularVelocity = angle * 180F / (float) Math.PI;
         this.worldProvider.setSpinDeltaPerTick(this.skyAngularVelocity);
         this.thrustersFiring = firing;
     }
@@ -549,12 +548,12 @@ public class SpinManager {
                                 final double zz = e.posZ - this.spinCentreZ;
                                 double arc = Math.sqrt(xx * xx + zz * zz);
                                 if (xx == 0D) {
-                                    angle = zz > 0 ? (float)Math.PI / 2 : -(float)Math.PI / 2;
+                                    angle = zz > 0 ? (float) Math.PI / 2 : -(float) Math.PI / 2;
                                 } else {
                                     angle = (float) Math.atan(zz / xx);
                                 }
                                 if (xx < 0D) {
-                                    angle += (float)Math.PI;
+                                    angle += (float) Math.PI;
                                 }
                                 angle += this.angularVelocityRadians / 3F;
                                 arc = arc * this.angularVelocityRadians;
@@ -626,12 +625,12 @@ public class SpinManager {
             final double zz = p.posZ - this.spinCentreZ;
             double arc = Math.sqrt(xx * xx + zz * zz);
             if (xx == 0D) {
-                angle = zz > 0 ? (float)Math.PI / 2 : -(float)Math.PI / 2;
+                angle = zz > 0 ? (float) Math.PI / 2 : -(float) Math.PI / 2;
             } else {
                 angle = (float) Math.atan(zz / xx);
             }
             if (xx < 0D) {
-                angle += (float)Math.PI;
+                angle += (float) Math.PI;
             }
             angle += angleDelta / 3F;
             arc = arc * angleDelta;

@@ -2,15 +2,15 @@ package micdoodle8.mods.galacticraft.core.world.gen.dungeon;
 
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityDungeonSpawner;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityDungeonSpawner;
 
 public class RoomBossMoon extends DungeonRoom {
 

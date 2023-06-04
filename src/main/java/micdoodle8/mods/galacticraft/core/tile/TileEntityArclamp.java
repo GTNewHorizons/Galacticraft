@@ -4,13 +4,6 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
-import micdoodle8.mods.galacticraft.core.util.RedstoneUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import net.minecraft.entity.Entity;
@@ -25,6 +18,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
+import micdoodle8.mods.galacticraft.core.util.RedstoneUtil;
 
 public class TileEntityArclamp extends TileEntity {
 
@@ -181,13 +181,11 @@ public class TileEntityArclamp extends TileEntity {
                         }
                         final double distanceNew = vecNewTarget.squareDistanceTo(this.xCoord, this.yCoord, this.zCoord);
 
-                        if (distanceNew > e.getDistanceSq(this.xCoord, this.yCoord, this.zCoord) && (vecOldTarget == null || distanceNew
-                                > vecOldTarget.squareDistanceTo(this.xCoord, this.yCoord, this.zCoord))) {
-                            e.getNavigator().tryMoveToXYZ(
-                                    vecNewTarget.xCoord,
-                                    vecNewTarget.yCoord,
-                                    vecNewTarget.zCoord,
-                                    0.3D);
+                        if (distanceNew > e.getDistanceSq(this.xCoord, this.yCoord, this.zCoord)
+                                && (vecOldTarget == null || distanceNew
+                                        > vecOldTarget.squareDistanceTo(this.xCoord, this.yCoord, this.zCoord))) {
+                            e.getNavigator()
+                                    .tryMoveToXYZ(vecNewTarget.xCoord, vecNewTarget.yCoord, vecNewTarget.zCoord, 0.3D);
                             // System.out.println("Debug: Arclamp repelling entity:
                             // "+e.getClass().getSimpleName());
                         }
@@ -277,7 +275,9 @@ public class TileEntityArclamp extends TileEntity {
                                 }
                             } else {
                                 allAir = false;
-                                if (b != null && b.getLightOpacity(world, sideVec.x, sideVec.y, sideVec.z) == 0 && side != sideskip1 && side != sideskip2) {
+                                if (b != null && b.getLightOpacity(world, sideVec.x, sideVec.y, sideVec.z) == 0
+                                        && side != sideskip1
+                                        && side != sideskip2) {
                                     nextLayer.add(sideVec);
                                 }
                             }

@@ -4,6 +4,9 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
+
 import micdoodle8.mods.galacticraft.api.transmission.NetworkType;
 import micdoodle8.mods.galacticraft.api.transmission.grid.IElectricityNetwork;
 import micdoodle8.mods.galacticraft.api.transmission.grid.IHydrogenNetwork;
@@ -11,9 +14,6 @@ import micdoodle8.mods.galacticraft.api.transmission.grid.IOxygenNetwork;
 import micdoodle8.mods.galacticraft.api.transmission.tile.IConnector;
 import micdoodle8.mods.galacticraft.api.transmission.tile.INetworkProvider;
 import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * A helper class that provides additional useful functions to interact with the ElectricityNetwork
@@ -75,7 +75,8 @@ public class NetworkHelper {
             ForgeDirection approachDirection) {
         if (tileEntity != null && tileEntity instanceof INetworkProvider) {
             if (tileEntity instanceof IConnector) {
-                if (((IConnector) tileEntity).canConnect(approachDirection.getOpposite(), NetworkType.POWER) && (((INetworkProvider) tileEntity).getNetwork() instanceof IElectricityNetwork)) {
+                if (((IConnector) tileEntity).canConnect(approachDirection.getOpposite(), NetworkType.POWER)
+                        && (((INetworkProvider) tileEntity).getNetwork() instanceof IElectricityNetwork)) {
                     return (IElectricityNetwork) ((INetworkProvider) tileEntity).getNetwork();
                 }
             } else if (((INetworkProvider) tileEntity).getNetwork() instanceof IElectricityNetwork) {
@@ -90,7 +91,8 @@ public class NetworkHelper {
             ForgeDirection approachDirection) {
         if (tileEntity != null && tileEntity instanceof INetworkProvider) {
             if (tileEntity instanceof IConnector) {
-                if (((IConnector) tileEntity).canConnect(approachDirection.getOpposite(), NetworkType.OXYGEN) && (((INetworkProvider) tileEntity).getNetwork() instanceof IOxygenNetwork)) {
+                if (((IConnector) tileEntity).canConnect(approachDirection.getOpposite(), NetworkType.OXYGEN)
+                        && (((INetworkProvider) tileEntity).getNetwork() instanceof IOxygenNetwork)) {
                     return (IOxygenNetwork) ((INetworkProvider) tileEntity).getNetwork();
                 }
             } else if (((INetworkProvider) tileEntity).getNetwork() instanceof IOxygenNetwork) {
@@ -105,7 +107,8 @@ public class NetworkHelper {
             ForgeDirection approachDirection) {
         if (tileEntity != null && tileEntity instanceof INetworkProvider) {
             if (tileEntity instanceof IConnector) {
-                if (((IConnector) tileEntity).canConnect(approachDirection.getOpposite(), NetworkType.HYDROGEN) && (((INetworkProvider) tileEntity).getNetwork() instanceof IHydrogenNetwork)) {
+                if (((IConnector) tileEntity).canConnect(approachDirection.getOpposite(), NetworkType.HYDROGEN)
+                        && (((INetworkProvider) tileEntity).getNetwork() instanceof IHydrogenNetwork)) {
                     return (IHydrogenNetwork) ((INetworkProvider) tileEntity).getNetwork();
                 }
             } else if (((INetworkProvider) tileEntity).getNetwork() instanceof IHydrogenNetwork) {

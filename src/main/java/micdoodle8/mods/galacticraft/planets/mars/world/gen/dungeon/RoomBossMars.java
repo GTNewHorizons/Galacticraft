@@ -2,6 +2,12 @@ package micdoodle8.mods.galacticraft.planets.mars.world.gen.dungeon;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraftforge.common.util.ForgeDirection;
+
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityDungeonSpawner;
 import micdoodle8.mods.galacticraft.core.world.gen.dungeon.DungeonBoundingBox;
@@ -9,12 +15,6 @@ import micdoodle8.mods.galacticraft.core.world.gen.dungeon.DungeonRoom;
 import micdoodle8.mods.galacticraft.core.world.gen.dungeon.MapGenDungeon;
 import micdoodle8.mods.galacticraft.planets.mars.blocks.MarsBlocks;
 import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityDungeonSpawnerMars;
-
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class RoomBossMars extends DungeonRoom {
 

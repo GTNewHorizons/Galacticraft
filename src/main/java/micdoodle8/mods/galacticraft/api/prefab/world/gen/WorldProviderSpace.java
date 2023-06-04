@@ -4,12 +4,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.api.world.IAtmosphericGas;
-import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.MathHelper;
@@ -23,6 +17,11 @@ import net.minecraft.world.chunk.IChunkProvider;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.api.world.IAtmosphericGas;
+import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public abstract class WorldProviderSpace extends WorldProvider implements IGalacticraftWorldProvider {
 
@@ -181,7 +180,7 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
         }
 
         final float f2 = f1;
-        f1 = 0.5F - MathHelper.cos(f1 * (float)Math.PI) / 2.0F;
+        f1 = 0.5F - MathHelper.cos(f1 * (float) Math.PI) / 2.0F;
         return f2 + (f1 - f2) / 3.0F;
     }
 

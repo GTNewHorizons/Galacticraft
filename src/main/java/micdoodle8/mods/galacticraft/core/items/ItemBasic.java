@@ -2,11 +2,6 @@ package micdoodle8.mods.galacticraft.core.items;
 
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.core.util.EnumColor;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -22,6 +17,10 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
+import micdoodle8.mods.galacticraft.core.util.EnumColor;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class ItemBasic extends Item {
 
@@ -95,7 +94,8 @@ public class ItemBasic extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List<String> par3List, boolean par4) {
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List<String> par3List,
+            boolean par4) {
         if (par1ItemStack.getItemDamage() > 14 && par1ItemStack.getItemDamage() < 19) {
             par3List.add(
                     EnumColor.BRIGHT_GREEN + GCCoreUtil.translate(

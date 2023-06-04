@@ -1,5 +1,11 @@
 package micdoodle8.mods.galacticraft.core.tile;
 
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.api.transmission.NetworkType;
 import micdoodle8.mods.galacticraft.api.transmission.grid.IGridNetwork;
 import micdoodle8.mods.galacticraft.api.transmission.tile.INetworkProvider;
@@ -8,13 +14,6 @@ import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 import micdoodle8.mods.galacticraft.core.oxygen.OxygenNetwork;
 import micdoodle8.mods.galacticraft.core.tick.TickHandlerServer;
 import micdoodle8.mods.galacticraft.core.util.OxygenUtil;
-
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraftforge.common.util.ForgeDirection;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class TileEntityOxygenTransmitter extends TileEntityAdvanced implements ITransmitter {
 
@@ -81,7 +80,8 @@ public abstract class TileEntityOxygenTransmitter extends TileEntityAdvanced imp
             for (final ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
                 final TileEntity tileEntity = new BlockVec3(this).getTileEntityOnSide(this.worldObj, side);
 
-                if (tileEntity != null && tileEntity.getClass() == this.getClass() && tileEntity instanceof INetworkProvider
+                if (tileEntity != null && tileEntity.getClass() == this.getClass()
+                        && tileEntity instanceof INetworkProvider
                         && !this.getNetwork().equals(((INetworkProvider) tileEntity).getNetwork())) {
                     this.setNetwork(
                             (IGridNetwork) this.getNetwork().merge(((INetworkProvider) tileEntity).getNetwork()));

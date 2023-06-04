@@ -1,14 +1,14 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.world.gen;
 
+import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
+
 import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedCreeper;
 import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedSkeleton;
 import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedSpider;
 import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedZombie;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-
-import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.BiomeDictionary;
 
 public class BiomeGenBaseAsteroids extends BiomeGenBase {
 

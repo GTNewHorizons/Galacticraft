@@ -1,13 +1,12 @@
 package micdoodle8.mods.galacticraft.core.blocks;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 
 public class BlockOreGC extends Block {
 

@@ -2,6 +2,17 @@ package micdoodle8.mods.galacticraft.core.client.gui.screen;
 
 import java.nio.DoubleBuffer;
 
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.world.WorldProvider;
+import net.minecraftforge.common.MinecraftForge;
+
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector3f;
+
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import micdoodle8.mods.galacticraft.api.client.IGameScreen;
 import micdoodle8.mods.galacticraft.api.client.IScreenManager;
 import micdoodle8.mods.galacticraft.api.event.client.CelestialBodyRenderEvent;
@@ -15,18 +26,6 @@ import micdoodle8.mods.galacticraft.api.galaxies.Star;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.client.render.RenderPlanet;
-
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.world.WorldProvider;
-import net.minecraftforge.common.MinecraftForge;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector3f;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
 
 public class GameScreenCelestial implements IGameScreen {
 
@@ -144,7 +143,8 @@ public class GameScreenCelestial implements IGameScreen {
 
         final String mainSolarSystem = solarSystem.getUnlocalizedName();
         for (final Planet planet : GalaxyRegistry.getRegisteredPlanets().values()) {
-            if (planet.getParentSolarSystem() != null && planet.getBodyIcon() != null && planet.getParentSolarSystem().getUnlocalizedName().equalsIgnoreCase(mainSolarSystem)) {
+            if (planet.getParentSolarSystem() != null && planet.getBodyIcon() != null
+                    && planet.getParentSolarSystem().getUnlocalizedName().equalsIgnoreCase(mainSolarSystem)) {
                 final Vector3f pos = this.getCelestialBodyPosition(planet, ticks);
                 this.drawCircle(planet);
                 this.drawCelestialBody(
@@ -187,7 +187,9 @@ public class GameScreenCelestial implements IGameScreen {
     }
 
     private void drawCelestialBody(CelestialBody planet, float xPos, float yPos, float relSize) {
-        if (xPos + this.centreX > this.frameBx || xPos + this.centreX < this.frameA || yPos + this.centreY > this.frameBy || yPos + this.centreY < this.frameA) {
+        if (xPos + this.centreX > this.frameBx || xPos + this.centreX < this.frameA
+                || yPos + this.centreY > this.frameBy
+                || yPos + this.centreY < this.frameA) {
             return;
         }
 

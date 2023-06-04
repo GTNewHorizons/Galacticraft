@@ -8,29 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
-import micdoodle8.mods.galacticraft.api.event.client.CelestialBodyRenderEvent;
-import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
-import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
-import micdoodle8.mods.galacticraft.api.galaxies.IChildBody;
-import micdoodle8.mods.galacticraft.api.galaxies.Moon;
-import micdoodle8.mods.galacticraft.api.galaxies.Planet;
-import micdoodle8.mods.galacticraft.api.galaxies.Satellite;
-import micdoodle8.mods.galacticraft.api.galaxies.SolarSystem;
-import micdoodle8.mods.galacticraft.api.galaxies.Star;
-import micdoodle8.mods.galacticraft.api.recipe.SpaceStationRecipe;
-import micdoodle8.mods.galacticraft.api.world.SpaceStationType;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.core.tick.KeyHandlerClient;
-import micdoodle8.mods.galacticraft.core.util.ColorUtil;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.core.util.GCLog;
-import micdoodle8.mods.galacticraft.core.util.WorldUtil;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
@@ -58,7 +35,30 @@ import com.google.common.collect.Maps;
 import com.ibm.icu.text.ArabicShaping;
 import com.ibm.icu.text.ArabicShapingException;
 import com.ibm.icu.text.Bidi;
+
 import cpw.mods.fml.client.FMLClientHandler;
+import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
+import micdoodle8.mods.galacticraft.api.event.client.CelestialBodyRenderEvent;
+import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
+import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
+import micdoodle8.mods.galacticraft.api.galaxies.IChildBody;
+import micdoodle8.mods.galacticraft.api.galaxies.Moon;
+import micdoodle8.mods.galacticraft.api.galaxies.Planet;
+import micdoodle8.mods.galacticraft.api.galaxies.Satellite;
+import micdoodle8.mods.galacticraft.api.galaxies.SolarSystem;
+import micdoodle8.mods.galacticraft.api.galaxies.Star;
+import micdoodle8.mods.galacticraft.api.recipe.SpaceStationRecipe;
+import micdoodle8.mods.galacticraft.api.world.SpaceStationType;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
+import micdoodle8.mods.galacticraft.core.tick.KeyHandlerClient;
+import micdoodle8.mods.galacticraft.core.util.ColorUtil;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.core.util.GCLog;
+import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 
 public class GuiCelestialSelection extends GuiScreen {
 
@@ -519,7 +519,8 @@ public class GuiCelestialSelection extends GuiScreen {
     }
 
     protected boolean teleportToSelectedBody() {
-        if (this.selectedBody != null && this.selectedBody.getReachable() && this.possibleBodies != null
+        if (this.selectedBody != null && this.selectedBody.getReachable()
+                && this.possibleBodies != null
                 && this.possibleBodies.contains(this.selectedBody)) {
             try {
                 String dimension;
@@ -535,8 +536,7 @@ public class GuiCelestialSelection extends GuiScreen {
                     // No need to check lowercase as selectedStationOwner is taken from keys.
                     if (mapping == null) {
                         GCLog.severe(
-                                "Problem matching player name in space station check: "
-                                        + this.selectedStationOwner);
+                                "Problem matching player name in space station check: " + this.selectedStationOwner);
                         return false;
                     }
                     final int spacestationID = mapping;
@@ -2951,8 +2951,8 @@ public class GuiCelestialSelection extends GuiScreen {
                         alpha = this.selectedBody instanceof IChildBody ? 1.0F
                                 : Math.min(Math.max((this.ticksSinceSelection - 30) / 15.0F, 0.0F), 1.0F);
 
-                        if (this.lastSelectedBody instanceof Moon && GalaxyRegistry.getMoonsForPlanet(((Moon) this.lastSelectedBody).getParentPlanet())
-                                .contains(moon)) {
+                        if (this.lastSelectedBody instanceof Moon && GalaxyRegistry
+                                .getMoonsForPlanet(((Moon) this.lastSelectedBody).getParentPlanet()).contains(moon)) {
                             alpha = 1.0F;
                         }
                     }

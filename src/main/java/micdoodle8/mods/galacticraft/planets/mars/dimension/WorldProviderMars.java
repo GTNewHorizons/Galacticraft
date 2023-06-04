@@ -1,5 +1,12 @@
 package micdoodle8.mods.galacticraft.planets.mars.dimension;
 
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.biome.WorldChunkManager;
+import net.minecraft.world.chunk.IChunkProvider;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
@@ -10,14 +17,6 @@ import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
 import micdoodle8.mods.galacticraft.planets.mars.world.gen.ChunkProviderMars;
 import micdoodle8.mods.galacticraft.planets.mars.world.gen.WorldChunkManagerMars;
-
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.biome.WorldChunkManager;
-import net.minecraft.world.chunk.IChunkProvider;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class WorldProviderMars extends WorldProviderSpace implements IGalacticraftWorldProvider, ISolarLevel {
 

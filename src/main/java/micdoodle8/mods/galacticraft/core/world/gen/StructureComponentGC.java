@@ -19,40 +19,40 @@ public abstract class StructureComponentGC extends StructureComponent {
             int heightOffset, int widthOffset, int length, int height, int width, int coordBaseMode) {
         return switch (coordBaseMode) {
             case 0 -> new StructureBoundingBox(
-                                    x + lengthOffset,
-                                    y + heightOffset,
-                                    z + widthOffset,
-                                    x + length + lengthOffset,
-                                    y + height + heightOffset,
-                                    z + width + widthOffset);
+                    x + lengthOffset,
+                    y + heightOffset,
+                    z + widthOffset,
+                    x + length + lengthOffset,
+                    y + height + heightOffset,
+                    z + width + widthOffset);
             case 1 -> new StructureBoundingBox(
-                                    x - width + widthOffset,
-                                    y + heightOffset,
-                                    z + lengthOffset,
-                                    x + widthOffset,
-                                    y + height + heightOffset,
-                                    z + length + lengthOffset);
+                    x - width + widthOffset,
+                    y + heightOffset,
+                    z + lengthOffset,
+                    x + widthOffset,
+                    y + height + heightOffset,
+                    z + length + lengthOffset);
             case 2 -> new StructureBoundingBox(
-                                    x - length - lengthOffset,
-                                    y + heightOffset,
-                                    z - width - widthOffset,
-                                    x - lengthOffset,
-                                    y + height + heightOffset,
-                                    z - widthOffset);
+                    x - length - lengthOffset,
+                    y + heightOffset,
+                    z - width - widthOffset,
+                    x - lengthOffset,
+                    y + height + heightOffset,
+                    z - widthOffset);
             case 3 -> new StructureBoundingBox(
-                                    x + widthOffset,
-                                    y + heightOffset,
-                                    z - length,
-                                    x + width + widthOffset,
-                                    y + height + heightOffset,
-                                    z + lengthOffset);
+                    x + widthOffset,
+                    y + heightOffset,
+                    z - length,
+                    x + width + widthOffset,
+                    y + height + heightOffset,
+                    z + lengthOffset);
             default -> new StructureBoundingBox(
-                                    x + lengthOffset,
-                                    y + heightOffset,
-                                    z + widthOffset,
-                                    x + length + lengthOffset,
-                                    y + height + heightOffset,
-                                    z + width + widthOffset);
+                    x + lengthOffset,
+                    y + heightOffset,
+                    z + widthOffset,
+                    x + length + lengthOffset,
+                    y + height + heightOffset,
+                    z + width + widthOffset);
         };
     }
 

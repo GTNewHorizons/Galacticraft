@@ -1,11 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.mars.entities;
 
-import micdoodle8.mods.galacticraft.api.entity.IEntityBreathable;
-import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedCreeper;
-import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedSkeleton;
-import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedSpider;
-import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedZombie;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -18,6 +12,12 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+
+import micdoodle8.mods.galacticraft.api.entity.IEntityBreathable;
+import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedCreeper;
+import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedSkeleton;
+import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedSpider;
+import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedZombie;
 
 public class EntitySludgeling extends EntityMob implements IEntityBreathable {
 

@@ -2,25 +2,6 @@ package micdoodle8.mods.galacticraft.planets.mars.tile;
 
 import java.util.ArrayList;
 
-import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
-import micdoodle8.mods.galacticraft.api.tile.IDisableableMachine;
-import micdoodle8.mods.galacticraft.api.transmission.NetworkType;
-import micdoodle8.mods.galacticraft.api.transmission.tile.IOxygenReceiver;
-import micdoodle8.mods.galacticraft.api.world.IAtmosphericGas;
-import micdoodle8.mods.galacticraft.core.Constants;
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
-import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseElectricBlockWithInventory;
-import micdoodle8.mods.galacticraft.core.items.GCItems;
-import micdoodle8.mods.galacticraft.core.items.ItemCanisterGeneric;
-import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.FluidUtil;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
-import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
-import micdoodle8.mods.galacticraft.planets.asteroids.items.ItemAtmosphericValve;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.inventory.ISidedInventory;
@@ -39,6 +20,24 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
 import cpw.mods.fml.relauncher.Side;
+import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
+import micdoodle8.mods.galacticraft.api.tile.IDisableableMachine;
+import micdoodle8.mods.galacticraft.api.transmission.NetworkType;
+import micdoodle8.mods.galacticraft.api.transmission.tile.IOxygenReceiver;
+import micdoodle8.mods.galacticraft.api.world.IAtmosphericGas;
+import micdoodle8.mods.galacticraft.core.Constants;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
+import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseElectricBlockWithInventory;
+import micdoodle8.mods.galacticraft.core.items.GCItems;
+import micdoodle8.mods.galacticraft.core.items.ItemCanisterGeneric;
+import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.FluidUtil;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
+import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
+import micdoodle8.mods.galacticraft.planets.asteroids.items.ItemAtmosphericValve;
 
 public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
         implements ISidedInventory, IDisableableMachine, IFluidHandler, IOxygenReceiver {
@@ -568,7 +567,8 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
         }
 
         // 2->5 3->4 4->2 5->3
-        if (7 - (metaside ^ (metaside > 3 ? 0 : 1)) == (side ^ 1) && resource != null && resource.isFluidEqual(this.liquidTank.getFluid())) {
+        if (7 - (metaside ^ (metaside > 3 ? 0 : 1)) == (side ^ 1) && resource != null
+                && resource.isFluidEqual(this.liquidTank.getFluid())) {
             return this.liquidTank.drain(resource.amount, doDrain);
         }
 

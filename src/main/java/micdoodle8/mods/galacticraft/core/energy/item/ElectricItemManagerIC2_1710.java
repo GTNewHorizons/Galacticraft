@@ -1,13 +1,12 @@
 package micdoodle8.mods.galacticraft.core.energy.item;
 
-import micdoodle8.mods.galacticraft.api.item.IItemElectricBase;
-import micdoodle8.mods.galacticraft.core.energy.EnergyConfigHandler;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 
 import ic2.api.item.IElectricItemManager;
 import ic2.api.item.ISpecialElectricItem;
+import micdoodle8.mods.galacticraft.api.item.IItemElectricBase;
+import micdoodle8.mods.galacticraft.core.energy.EnergyConfigHandler;
 
 /*
  * Interface between Galacticraft electric items (batteries) and IC2. Galactricraft items implemented as Tier 1 items

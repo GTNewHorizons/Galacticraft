@@ -2,14 +2,13 @@ package micdoodle8.mods.galacticraft.core.network;
 
 import java.util.UUID;
 
-import micdoodle8.mods.galacticraft.api.vector.Vector2;
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import micdoodle8.mods.galacticraft.api.vector.Vector2;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
 
 public class PacketEntityUpdate implements IPacket {
 
@@ -77,8 +76,9 @@ public class PacketEntityUpdate implements IPacket {
     private void setEntityData(EntityPlayer player) {
         final Entity entity = player.worldObj.getEntityByID(this.entityID);
 
-        if (entity instanceof IEntityFullSync controllable && (player.worldObj.isRemote || player.getUniqueID().equals(((IEntityFullSync) entity).getOwnerUUID())
-                || ((IEntityFullSync) entity).getOwnerUUID() == null)) {
+        if (entity instanceof IEntityFullSync controllable
+                && (player.worldObj.isRemote || player.getUniqueID().equals(((IEntityFullSync) entity).getOwnerUUID())
+                        || ((IEntityFullSync) entity).getOwnerUUID() == null)) {
             controllable.setPositionRotationAndMotion(
                     this.position.x,
                     this.position.y,

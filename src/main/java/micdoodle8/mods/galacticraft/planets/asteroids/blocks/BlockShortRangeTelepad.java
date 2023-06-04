@@ -3,18 +3,6 @@ package micdoodle8.mods.galacticraft.planets.asteroids.blocks;
 import java.util.List;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.blocks.BlockTileGC;
-import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
-import micdoodle8.mods.galacticraft.core.tile.IMultiBlock;
-import micdoodle8.mods.galacticraft.core.util.EnumColor;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.planets.GalacticraftPlanets;
-import micdoodle8.mods.galacticraft.planets.asteroids.dimension.ShortRangeTelepadHandler;
-import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityShortRangeTelepad;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -31,6 +19,17 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.blocks.BlockTileGC;
+import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
+import micdoodle8.mods.galacticraft.core.tile.IMultiBlock;
+import micdoodle8.mods.galacticraft.core.util.EnumColor;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.planets.GalacticraftPlanets;
+import micdoodle8.mods.galacticraft.planets.asteroids.dimension.ShortRangeTelepadHandler;
+import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityShortRangeTelepad;
 
 public class BlockShortRangeTelepad extends BlockTileGC implements ItemBlockDesc.IBlockShiftDesc {
 
@@ -74,8 +73,8 @@ public class BlockShortRangeTelepad extends BlockTileGC implements ItemBlockDesc
     }
 
     @Override
-    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list,
-            Entity entity) {
+    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb,
+            List<AxisAlignedBB> list, Entity entity) {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.45F, 1.0F);
         super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
     }
@@ -139,7 +138,8 @@ public class BlockShortRangeTelepad extends BlockTileGC implements ItemBlockDesc
         for (int x = -1; x <= 1; x++) {
             for (int y = 0; y < 3; y += 2) {
                 for (int z = -1; z <= 1; z++) {
-                    if ((x != 0 || y != 0 || z != 0) && world.getBlock(x0 + x, y0 + y, z0 + z) == AsteroidBlocks.fakeTelepad) {
+                    if ((x != 0 || y != 0 || z != 0)
+                            && world.getBlock(x0 + x, y0 + y, z0 + z) == AsteroidBlocks.fakeTelepad) {
                         fakeBlockCount++;
                     }
                 }

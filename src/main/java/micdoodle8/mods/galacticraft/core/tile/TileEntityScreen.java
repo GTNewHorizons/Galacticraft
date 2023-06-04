@@ -3,14 +3,6 @@ package micdoodle8.mods.galacticraft.core.tile;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.client.gui.screen.DrawGameScreen;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
-import micdoodle8.mods.galacticraft.core.tick.TickHandlerClient;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -18,6 +10,13 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.gui.screen.DrawGameScreen;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
+import micdoodle8.mods.galacticraft.core.tick.TickHandlerClient;
 
 public class TileEntityScreen extends TileEntity {
 
@@ -505,7 +504,8 @@ public class TileEntityScreen extends TileEntity {
                 final BlockVec3 newVec = vec.clone().modifyPositionFromSide(ForgeDirection.getOrientation(side), x)
                         .modifyPositionFromSide(ForgeDirection.DOWN, z);
                 final TileEntity tile = newVec.getTileEntity(this.worldObj);
-                if (tile instanceof TileEntityScreen screenTile && tile.getBlockMetadata() == meta && !tile.isInvalid()) {
+                if (tile instanceof TileEntityScreen screenTile && tile.getBlockMetadata() == meta
+                        && !tile.isInvalid()) {
                     screenList.add(screenTile);
 
                     if (screenTile.isMultiscreen) {
@@ -645,7 +645,9 @@ public class TileEntityScreen extends TileEntity {
     private boolean canJoinRight() {
         final int meta = this.getBlockMetadata();
         final TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, this.getRight(meta));
-        if (!(te instanceof TileEntityScreen screenTile) || screenTile.getBlockMetadata() != meta || screenTile.connectionsUp != this.connectionsUp || screenTile.connectionsDown != this.connectionsDown) {
+        if (!(te instanceof TileEntityScreen screenTile) || screenTile.getBlockMetadata() != meta
+                || screenTile.connectionsUp != this.connectionsUp
+                || screenTile.connectionsDown != this.connectionsDown) {
             return false;
         }
         if (this.connectionsUp + this.connectionsDown > 0) {
@@ -660,7 +662,9 @@ public class TileEntityScreen extends TileEntity {
     private boolean canJoinLeft() {
         final int meta = this.getBlockMetadata();
         final TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, this.getLeft(meta));
-        if (!(te instanceof TileEntityScreen screenTile) || screenTile.getBlockMetadata() != meta || screenTile.connectionsUp != this.connectionsUp || screenTile.connectionsDown != this.connectionsDown) {
+        if (!(te instanceof TileEntityScreen screenTile) || screenTile.getBlockMetadata() != meta
+                || screenTile.connectionsUp != this.connectionsUp
+                || screenTile.connectionsDown != this.connectionsDown) {
             return false;
         }
         if (this.connectionsUp + this.connectionsDown > 0) {
@@ -675,7 +679,9 @@ public class TileEntityScreen extends TileEntity {
     private boolean canJoinUp() {
         final int meta = this.getBlockMetadata();
         final TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, 1);
-        if (!(te instanceof TileEntityScreen screenTile) || screenTile.getBlockMetadata() != meta || screenTile.connectionsLeft != this.connectionsLeft || screenTile.connectionsRight != this.connectionsRight) {
+        if (!(te instanceof TileEntityScreen screenTile) || screenTile.getBlockMetadata() != meta
+                || screenTile.connectionsLeft != this.connectionsLeft
+                || screenTile.connectionsRight != this.connectionsRight) {
             return false;
         }
         if (this.connectionsLeft + this.connectionsRight > 0) {
@@ -690,7 +696,9 @@ public class TileEntityScreen extends TileEntity {
     private boolean canJoinDown() {
         final int meta = this.getBlockMetadata();
         final TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, 0);
-        if (!(te instanceof TileEntityScreen screenTile) || screenTile.getBlockMetadata() != meta || screenTile.connectionsLeft != this.connectionsLeft || screenTile.connectionsRight != this.connectionsRight) {
+        if (!(te instanceof TileEntityScreen screenTile) || screenTile.getBlockMetadata() != meta
+                || screenTile.connectionsLeft != this.connectionsLeft
+                || screenTile.connectionsRight != this.connectionsRight) {
             return false;
         }
         if (this.connectionsLeft + this.connectionsRight > 0) {

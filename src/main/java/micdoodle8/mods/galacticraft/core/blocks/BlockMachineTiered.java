@@ -2,13 +2,6 @@ package micdoodle8.mods.galacticraft.core.blocks;
 
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseUniversalElectrical;
-import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityElectricFurnace;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityEnergyStorageModule;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -22,6 +15,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseUniversalElectrical;
+import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityElectricFurnace;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityEnergyStorageModule;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBlockShiftDesc {
 
@@ -199,11 +199,11 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
         if (metaside == 2 && side == 4 || metaside == 3 && side == 5
                 || metaside == 4 && side == 3
                 || metaside == 5 && side == 2) {
-                    if (metadata >= 8) {
-                        return this.iconElectricFurnaceT2;
-                    }
-                    return this.iconElectricFurnace;
-                }
+            if (metadata >= 8) {
+                return this.iconElectricFurnaceT2;
+            }
+            return this.iconElectricFurnace;
+        }
 
         if (metadata >= 8) {
             return this.iconMachineSideT2;

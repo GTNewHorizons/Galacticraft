@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.util.OxygenUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.util.OxygenUtil;
 
 public class MapGenDungeon {
 
@@ -243,15 +243,7 @@ public class MapGenDungeon {
                             currentRoom = possibleRoom;
                             currentRoom.generate(blocks, metas, chunkX, chunkZ);
                             this.rooms.add(currentRoom);
-                            this.genCorridor(
-                                    corridor1,
-                                    possibleRoom.posY,
-                                    chunkX,
-                                    chunkZ,
-                                    dir,
-                                    blocks,
-                                    metas,
-                                    false);
+                            this.genCorridor(corridor1, possibleRoom.posY, chunkX, chunkZ, dir, blocks, metas, false);
                             break;
                         }
                     } else
@@ -381,24 +373,8 @@ public class MapGenDungeon {
                             currentRoom = possibleRoom;
                             currentRoom.generate(blocks, metas, chunkX, chunkZ);
                             this.rooms.add(currentRoom);
-                            this.genCorridor(
-                                    corridor2,
-                                    possibleRoom.posY,
-                                    chunkX,
-                                    chunkZ,
-                                    dir2,
-                                    blocks,
-                                    metas,
-                                    true);
-                            this.genCorridor(
-                                    corridor1,
-                                    possibleRoom.posY,
-                                    chunkX,
-                                    chunkZ,
-                                    dir,
-                                    blocks,
-                                    metas,
-                                    false);
+                            this.genCorridor(corridor2, possibleRoom.posY, chunkX, chunkZ, dir2, blocks, metas, true);
+                            this.genCorridor(corridor1, possibleRoom.posY, chunkX, chunkZ, dir, blocks, metas, false);
                             break;
                         }
                     }
@@ -407,8 +383,8 @@ public class MapGenDungeon {
         }
     }
 
-    private void genCorridor(DungeonBoundingBox corridor, int y, int cx, int cz, ForgeDirection dir,
-            Block[] blocks, byte[] metas, boolean doubleCorridor) {
+    private void genCorridor(DungeonBoundingBox corridor, int y, int cx, int cz, ForgeDirection dir, Block[] blocks,
+            byte[] metas, boolean doubleCorridor) {
         for (int i = corridor.minX - 1; i <= corridor.maxX + 1; i++) {
             for (int k = corridor.minZ - 1; k <= corridor.maxZ + 1; k++) {
                 loopj: for (int j = y - 1; j <= y + this.HALLWAY_HEIGHT; j++) {

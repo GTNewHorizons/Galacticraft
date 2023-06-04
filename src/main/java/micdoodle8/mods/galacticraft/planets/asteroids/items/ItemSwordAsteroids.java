@@ -1,9 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.items;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -11,6 +7,9 @@ import net.minecraft.item.ItemSword;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
+import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 
 public class ItemSwordAsteroids extends ItemSword {
 

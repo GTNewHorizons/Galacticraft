@@ -1,7 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client.model;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -11,6 +9,7 @@ import net.smart.render.ModelRotationRenderer;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 
 /**
  * If Smart Moving is installed, this is used by ModelPlayerBaseGC as the ModelRenderer - see

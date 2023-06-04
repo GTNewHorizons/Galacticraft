@@ -1,8 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client.render.tile;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityDish;
-
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -15,6 +12,8 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityDish;
 
 public class TileEntityDishRenderer extends TileEntitySpecialRenderer {
 

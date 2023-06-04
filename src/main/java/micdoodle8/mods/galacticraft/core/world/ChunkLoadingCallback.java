@@ -12,8 +12,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 
-import micdoodle8.mods.galacticraft.core.util.GCLog;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
@@ -27,6 +25,8 @@ import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.LoadingCallback;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.config.Configuration;
+
+import micdoodle8.mods.galacticraft.core.util.GCLog;
 
 public class ChunkLoadingCallback implements LoadingCallback {
 

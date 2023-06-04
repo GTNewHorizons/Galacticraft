@@ -1,11 +1,11 @@
 package micdoodle8.mods.galacticraft.core.inventory;
 
-import micdoodle8.mods.galacticraft.api.inventory.IInventoryGC;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
+import micdoodle8.mods.galacticraft.api.inventory.IInventoryGC;
 
 public class InventoryExtended implements IInventoryGC {
 

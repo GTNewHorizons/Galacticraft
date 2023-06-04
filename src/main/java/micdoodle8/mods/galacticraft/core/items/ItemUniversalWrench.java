@@ -1,8 +1,5 @@
 package micdoodle8.mods.galacticraft.core.items;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,6 +15,8 @@ import buildcraft.api.tools.IToolWrench;
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 
 @Interface(modid = "BuildCraftAPI|tools", iface = "buildcraft.api.tools.IToolWrench")
 public class ItemUniversalWrench extends Item implements IToolWrench {

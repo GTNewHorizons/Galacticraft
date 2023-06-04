@@ -5,10 +5,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.item.IItemElectric;
-import micdoodle8.mods.galacticraft.core.inventory.SlotSpecific;
-import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityTerraformer;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +14,10 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import micdoodle8.mods.galacticraft.api.item.IItemElectric;
+import micdoodle8.mods.galacticraft.core.inventory.SlotSpecific;
+import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityTerraformer;
 
 public class ContainerTerraformer extends Container {
 

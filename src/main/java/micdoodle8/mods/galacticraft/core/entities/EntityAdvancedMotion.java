@@ -6,11 +6,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.network.PacketEntityUpdate;
-import micdoodle8.mods.galacticraft.core.network.PacketEntityUpdate.IEntityFullSync;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.Entity;
@@ -27,6 +22,10 @@ import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.network.PacketEntityUpdate;
+import micdoodle8.mods.galacticraft.core.network.PacketEntityUpdate.IEntityFullSync;
 
 public abstract class EntityAdvancedMotion extends InventoryEntity implements IControllableEntity, IEntityFullSync {
 

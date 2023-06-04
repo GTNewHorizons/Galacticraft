@@ -3,13 +3,6 @@ package micdoodle8.mods.galacticraft.core.client.gui.container;
 import java.util.ArrayList;
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.client.gui.element.GuiElementInfoRegion;
-import micdoodle8.mods.galacticraft.core.inventory.ContainerIngotCompressor;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityIngotCompressor;
-import micdoodle8.mods.galacticraft.core.util.EnumColor;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -17,6 +10,12 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.gui.element.GuiElementInfoRegion;
+import micdoodle8.mods.galacticraft.core.inventory.ContainerIngotCompressor;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityIngotCompressor;
+import micdoodle8.mods.galacticraft.core.util.EnumColor;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 @SideOnly(Side.CLIENT)
 public class GuiIngotCompressor extends GuiContainerGC {

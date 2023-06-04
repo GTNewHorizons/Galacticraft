@@ -5,6 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import net.minecraft.item.ItemStack;
+
+import codechicken.nei.PositionedStack;
+import codechicken.nei.api.API;
+import codechicken.nei.api.IConfigureNEI;
+import gregtech.api.util.GT_ModHandler;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
@@ -13,13 +19,6 @@ import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
 import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
 import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 import micdoodle8.mods.galacticraft.planets.mars.nei.NEIGalacticraftMarsConfig;
-
-import net.minecraft.item.ItemStack;
-
-import codechicken.nei.PositionedStack;
-import codechicken.nei.api.API;
-import codechicken.nei.api.IConfigureNEI;
-import gregtech.api.util.GT_ModHandler;
 
 public class NEIGalacticraftAsteroidsConfig implements IConfigureNEI {
 

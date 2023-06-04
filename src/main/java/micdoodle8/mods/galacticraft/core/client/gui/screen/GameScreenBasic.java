@@ -1,12 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client.gui.screen;
 
-import micdoodle8.mods.galacticraft.api.client.IGameScreen;
-import micdoodle8.mods.galacticraft.api.client.IScreenManager;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.client.render.RenderPlanet;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
@@ -15,6 +8,12 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
+import micdoodle8.mods.galacticraft.api.client.IGameScreen;
+import micdoodle8.mods.galacticraft.api.client.IScreenManager;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.render.RenderPlanet;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 
 public class GameScreenBasic implements IGameScreen {
 

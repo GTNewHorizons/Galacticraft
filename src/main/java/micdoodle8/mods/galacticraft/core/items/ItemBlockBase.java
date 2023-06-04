@@ -1,13 +1,12 @@
 package micdoodle8.mods.galacticraft.core.items;
 
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 
 public class ItemBlockBase extends ItemBlockDesc {
 
@@ -31,18 +30,18 @@ public class ItemBlockBase extends ItemBlockDesc {
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
         String name = switch (itemstack.getItemDamage()) {
-                    case 3 -> "decoblock1";
-                    case 4 -> "decoblock2";
-                    case 5 -> "oreCopper";
-                    case 6 -> "oreTin";
-                    case 7 -> "oreAluminum";
-                    case 8 -> "oreSilicon";
-                    case 9 -> "copperBlock";
-                    case 10 -> "tinBlock";
-                    case 11 -> "aluminumBlock";
-                    case 12 -> "meteorironBlock";
-                    default -> "null";
-                };
+            case 3 -> "decoblock1";
+            case 4 -> "decoblock2";
+            case 5 -> "oreCopper";
+            case 6 -> "oreTin";
+            case 7 -> "oreAluminum";
+            case 8 -> "oreSilicon";
+            case 9 -> "copperBlock";
+            case 10 -> "tinBlock";
+            case 11 -> "aluminumBlock";
+            case 12 -> "meteorironBlock";
+            default -> "null";
+        };
 
         return this.field_150939_a.getUnlocalizedName() + "." + name;
     }

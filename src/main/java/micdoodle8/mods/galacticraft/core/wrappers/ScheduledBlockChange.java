@@ -1,8 +1,8 @@
 package micdoodle8.mods.galacticraft.core.wrappers;
 
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-
 import net.minecraft.block.Block;
+
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 
 public class ScheduledBlockChange {
 

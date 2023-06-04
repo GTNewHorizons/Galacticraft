@@ -1,8 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client.render.tile;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityScreen;
-
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -15,6 +12,8 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityScreen;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
@@ -161,7 +160,9 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
         final int totalLR = tileEntity.connectionsLeft + tileEntity.connectionsRight;
         final int totalUD = tileEntity.connectionsUp + tileEntity.connectionsDown;
         // centre block
-        if (totalLR > 1 && totalUD > 1 && !cornerblock && tileEntity.connectionsLeft == tileEntity.connectionsRight - (totalLR | 1)) {
+        if (totalLR > 1 && totalUD > 1
+                && !cornerblock
+                && tileEntity.connectionsLeft == tileEntity.connectionsRight - (totalLR | 1)) {
             if (tileEntity.connectionsUp == tileEntity.connectionsDown - (totalUD | 1)) {
                 cornerblock = true;
             }

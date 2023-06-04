@@ -2,11 +2,6 @@ package micdoodle8.mods.galacticraft.core.entities.player;
 
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.event.ZeroGravityEvent;
-import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
-import micdoodle8.mods.galacticraft.api.world.IZeroGDimension;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.entity.EntityClientPlayerMP;
@@ -25,6 +20,10 @@ import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.event.ZeroGravityEvent;
+import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
+import micdoodle8.mods.galacticraft.api.world.IZeroGDimension;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 
 public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
 

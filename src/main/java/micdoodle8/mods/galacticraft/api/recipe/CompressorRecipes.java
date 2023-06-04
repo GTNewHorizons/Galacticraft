@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.GalacticraftConfigAccess;
-
 import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -16,6 +14,8 @@ import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+
+import micdoodle8.mods.galacticraft.api.GalacticraftConfigAccess;
 
 public class CompressorRecipes {
 
@@ -169,10 +169,9 @@ public class CompressorRecipes {
         for (j = 0; j < theRecipes.size(); ++j) {
             final IRecipe irecipe = theRecipes.get(j);
 
-            if (irecipe instanceof ShapedRecipes
-                    && CompressorRecipes.matches((ShapedRecipes) irecipe, inventory)
-                    || irecipe instanceof ShapelessOreRecipe && CompressorRecipes
-                            .matchesShapeless((ShapelessOreRecipe) irecipe, inventory)) {
+            if (irecipe instanceof ShapedRecipes && CompressorRecipes.matches((ShapedRecipes) irecipe, inventory)
+                    || irecipe instanceof ShapelessOreRecipe
+                            && CompressorRecipes.matchesShapeless((ShapelessOreRecipe) irecipe, inventory)) {
                 return irecipe.getRecipeOutput().copy();
             }
         }
@@ -183,7 +182,8 @@ public class CompressorRecipes {
     private static boolean matches(ShapedRecipes recipe, IInventory inventory) {
         for (int i = 0; i <= 3 - recipe.recipeWidth; ++i) {
             for (int j = 0; j <= 3 - recipe.recipeHeight; ++j) {
-                if (CompressorRecipes.checkMatch(recipe, inventory, i, j, true) || CompressorRecipes.checkMatch(recipe, inventory, i, j, false)) {
+                if (CompressorRecipes.checkMatch(recipe, inventory, i, j, true)
+                        || CompressorRecipes.checkMatch(recipe, inventory, i, j, false)) {
                     return true;
                 }
             }
@@ -215,7 +215,9 @@ public class CompressorRecipes {
                 }
 
                 if (itemstack1 != null || itemstack != null) {
-                    if ((itemstack1 == null == (itemstack != null)) || itemstack.getItem() != itemstack1.getItem() || itemstack.getItemDamage() != 32767 && itemstack.getItemDamage() != itemstack1.getItemDamage()) {
+                    if ((itemstack1 == null == (itemstack != null)) || itemstack.getItem() != itemstack1.getItem()
+                            || itemstack.getItemDamage() != 32767
+                                    && itemstack.getItemDamage() != itemstack1.getItemDamage()) {
                         return false;
                     }
                 }

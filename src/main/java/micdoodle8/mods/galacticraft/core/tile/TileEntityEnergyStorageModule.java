@@ -4,14 +4,6 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
-import micdoodle8.mods.galacticraft.api.item.IItemElectricBase;
-import micdoodle8.mods.galacticraft.api.transmission.NetworkType;
-import micdoodle8.mods.galacticraft.api.transmission.tile.IConnector;
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
-import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseUniversalElectricalSource;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -19,6 +11,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import micdoodle8.mods.galacticraft.api.item.IItemElectricBase;
+import micdoodle8.mods.galacticraft.api.transmission.NetworkType;
+import micdoodle8.mods.galacticraft.api.transmission.tile.IConnector;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
+import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseUniversalElectricalSource;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSource
         implements ISidedInventory, IConnector {
@@ -75,7 +75,8 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
         }
 
         final float energy = this.storage.getEnergyStoredGC();
-        if (this.getTierGC() == 1 && !this.worldObj.isRemote && this.lastEnergy - energy > this.storage.getMaxExtract() - 1) {
+        if (this.getTierGC() == 1 && !this.worldObj.isRemote
+                && this.lastEnergy - energy > this.storage.getMaxExtract() - 1) {
             // Deplete faster if being drained at maximum output
             this.storage.extractEnergyGC(25, false);
         }

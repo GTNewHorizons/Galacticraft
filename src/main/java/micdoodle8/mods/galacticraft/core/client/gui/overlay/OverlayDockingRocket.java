@@ -1,11 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client.gui.overlay;
 
-import micdoodle8.mods.galacticraft.api.prefab.entity.EntityAutoRocket;
-import micdoodle8.mods.galacticraft.core.tick.KeyHandlerClient;
-import micdoodle8.mods.galacticraft.core.util.ClientUtil;
-import micdoodle8.mods.galacticraft.core.util.ColorUtil;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.settings.GameSettings;
@@ -13,6 +7,11 @@ import net.minecraft.client.settings.GameSettings;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.prefab.entity.EntityAutoRocket;
+import micdoodle8.mods.galacticraft.core.tick.KeyHandlerClient;
+import micdoodle8.mods.galacticraft.core.util.ClientUtil;
+import micdoodle8.mods.galacticraft.core.util.ColorUtil;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 @SideOnly(Side.CLIENT)
 public class OverlayDockingRocket extends Overlay {
@@ -34,7 +33,8 @@ public class OverlayDockingRocket extends Overlay {
         final int height = scaledresolution.getScaledHeight();
         OverlayDockingRocket.minecraft.entityRenderer.setupOverlayRendering();
 
-        if (OverlayDockingRocket.minecraft.thePlayer.ridingEntity instanceof EntityAutoRocket rocket && rocket.landing && rocket.targetVec != null) {
+        if (OverlayDockingRocket.minecraft.thePlayer.ridingEntity instanceof EntityAutoRocket rocket && rocket.landing
+                && rocket.targetVec != null) {
             final double dX = Math.round((rocket.posX - rocket.targetVec.x) * 100.0D) / 100.0D;
             final double dY = Math.round((rocket.posY - rocket.targetVec.y) * 100.0D) / 100.0D;
             final double dZ = Math.round((rocket.posZ - rocket.targetVec.z) * 100.0D) / 100.0D;
@@ -91,11 +91,8 @@ public class OverlayDockingRocket extends Overlay {
                     height / 3 + 35,
                     grey);
 
-            OverlayDockingRocket.minecraft.fontRenderer.drawString(
-                    GCCoreUtil.translate("gui.dockingRocket.distanceFrom.name"),
-                    50,
-                    height / 3 + 15,
-                    grey);
+            OverlayDockingRocket.minecraft.fontRenderer
+                    .drawString(GCCoreUtil.translate("gui.dockingRocket.distanceFrom.name"), 50, height / 3 + 15, grey);
             OverlayDockingRocket.minecraft.fontRenderer
                     .drawString("X: " + dXStr, 50, height / 3 + 35, Math.abs(dX) > 15 ? red : grey);
             OverlayDockingRocket.minecraft.fontRenderer.drawString(

@@ -1,8 +1,5 @@
 package micdoodle8.mods.galacticraft.core.items;
 
-import micdoodle8.mods.galacticraft.core.blocks.BlockAluminumWire;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -10,6 +7,8 @@ import net.minecraft.util.IIcon;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.blocks.BlockAluminumWire;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 
 public class ItemBlockAluminumWire extends ItemBlockDesc {
 
@@ -28,10 +27,10 @@ public class ItemBlockAluminumWire extends ItemBlockDesc {
     @Override
     public String getUnlocalizedName(ItemStack par1ItemStack) {
         String name = switch (par1ItemStack.getItemDamage()) {
-                    case 0 -> BlockAluminumWire.names[0];
-                    case 1 -> BlockAluminumWire.names[1];
-                    default -> "null";
-                };
+            case 0 -> BlockAluminumWire.names[0];
+            case 1 -> BlockAluminumWire.names[1];
+            default -> "null";
+        };
 
         return "tile." + name;
     }

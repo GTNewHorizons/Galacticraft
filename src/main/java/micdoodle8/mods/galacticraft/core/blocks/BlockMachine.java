@@ -3,15 +3,6 @@ package micdoodle8.mods.galacticraft.core.blocks;
 import java.util.List;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseUniversalElectrical;
-import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityCoalGenerator;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityElectricFurnace;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityEnergyStorageModule;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityIngotCompressor;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -25,6 +16,15 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseUniversalElectrical;
+import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityCoalGenerator;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityElectricFurnace;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityEnergyStorageModule;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityIngotCompressor;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class BlockMachine extends BlockTileGC implements ItemBlockDesc.IBlockShiftDesc {
 

@@ -4,27 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.entity.IEntityNoisy;
-import micdoodle8.mods.galacticraft.api.entity.ILandable;
-import micdoodle8.mods.galacticraft.api.tile.IFuelDock;
-import micdoodle8.mods.galacticraft.api.tile.ILandingPadAttachable;
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
-import micdoodle8.mods.galacticraft.api.world.IOrbitDimension;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.blocks.BlockLandingPadFull;
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.client.sounds.SoundUpdaterRocket;
-import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
-import micdoodle8.mods.galacticraft.core.event.EventLandingPadRemoval;
-import micdoodle8.mods.galacticraft.core.network.PacketDynamic;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityLandingPad;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.FluidUtil;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.core.util.GCLog;
-import micdoodle8.mods.galacticraft.core.util.WorldUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -51,6 +30,26 @@ import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+import micdoodle8.mods.galacticraft.api.entity.IEntityNoisy;
+import micdoodle8.mods.galacticraft.api.entity.ILandable;
+import micdoodle8.mods.galacticraft.api.tile.IFuelDock;
+import micdoodle8.mods.galacticraft.api.tile.ILandingPadAttachable;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
+import micdoodle8.mods.galacticraft.api.world.IOrbitDimension;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.blocks.BlockLandingPadFull;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.client.sounds.SoundUpdaterRocket;
+import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
+import micdoodle8.mods.galacticraft.core.event.EventLandingPadRemoval;
+import micdoodle8.mods.galacticraft.core.network.PacketDynamic;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityLandingPad;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.FluidUtil;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.core.util.GCLog;
+import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 
 /**
  * Do not include this prefab class in your released mod download.
@@ -250,7 +249,9 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
 
     @Override
     public void onUpdate() {
-        if (this.landing && this.launchPhase == EnumLaunchPhase.LAUNCHED.ordinal() && this.hasValidFuel() && this.targetVec != null) {
+        if (this.landing && this.launchPhase == EnumLaunchPhase.LAUNCHED.ordinal()
+                && this.hasValidFuel()
+                && this.targetVec != null) {
             final double yDiff = this.posY - this.getOnPadYOffset() - this.targetVec.y;
             this.motionY = Math.max(-2.0, (yDiff - 0.04) / -70.0);
 
@@ -278,8 +279,8 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                 final double angleYaw = Math.atan(motZ / motX);
                 final double signed = motX < 0 ? 50D : -50D;
                 final double anglePitch = Math.atan(Math.sqrt(motZ * motZ + motX * motX) / signed) * 100D;
-                this.rotationYaw = (float) angleYaw * (180F / (float)Math.PI);
-                this.rotationPitch = (float) anglePitch * (180F / (float)Math.PI);
+                this.rotationYaw = (float) angleYaw * (180F / (float) Math.PI);
+                this.rotationPitch = (float) anglePitch * (180F / (float) Math.PI);
             } else {
                 this.rotationPitch = 0F;
             }
@@ -296,13 +297,11 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                 }
             }
             if (yDiff < 0.04) {
-                final int yMin = MathHelper.floor_double(this.boundingBox.minY - this.getOnPadYOffset() - 0.45D)
-                        - 2;
+                final int yMin = MathHelper.floor_double(this.boundingBox.minY - this.getOnPadYOffset() - 0.45D) - 2;
                 final int yMax = MathHelper.floor_double(this.boundingBox.maxY) + 1;
                 final int zMin = MathHelper.floor_double(this.posZ) - 1;
                 final int zMax = MathHelper.floor_double(this.posZ) + 1;
-                for (int x = MathHelper.floor_double(this.posX) - 1; x
-                        <= MathHelper.floor_double(this.posX) + 1; x++) {
+                for (int x = MathHelper.floor_double(this.posX) - 1; x <= MathHelper.floor_double(this.posX) + 1; x++) {
                     for (int z = zMin; z <= zMax; z++) {
                         // Doing y as the inner loop may help with cacheing of chunks
                         for (int y = yMin; y <= yMax; y++) {
@@ -328,8 +327,8 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                 this.autoLaunch();
             }
 
-            if (this.autoLaunchCountdown > 0
-                    && (!(this instanceof EntityTieredRocket) || this.riddenByEntity != null) && --this.autoLaunchCountdown <= 0) {
+            if (this.autoLaunchCountdown > 0 && (!(this instanceof EntityTieredRocket) || this.riddenByEntity != null)
+                    && --this.autoLaunchCountdown <= 0) {
                 this.autoLaunch();
             }
 
@@ -344,10 +343,12 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                 this.autoLaunch();
             }
 
-            if ((this.autoLaunchSetting == EnumAutoLaunch.REDSTONE_SIGNAL && this.ticks % 11 == 0 && this.activeLaunchController != null) && this.worldObj.isBlockIndirectlyGettingPowered(
-                    this.activeLaunchController.x,
-                    this.activeLaunchController.y,
-                    this.activeLaunchController.z)) {
+            if ((this.autoLaunchSetting == EnumAutoLaunch.REDSTONE_SIGNAL && this.ticks % 11 == 0
+                    && this.activeLaunchController != null)
+                    && this.worldObj.isBlockIndirectlyGettingPowered(
+                            this.activeLaunchController.x,
+                            this.activeLaunchController.y,
+                            this.activeLaunchController.z)) {
                 this.autoLaunch();
             }
 
@@ -355,8 +356,8 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                 this.setPad(null);
             } else if (this.launchPhase == EnumLaunchPhase.UNIGNITED.ordinal() && this.landingPad != null
                     && this.ticks % 17 == 0) {
-                this.updateControllerSettings(this.landingPad);
-            }
+                        this.updateControllerSettings(this.landingPad);
+                    }
 
             this.lastStatusMessageCooldown = this.statusMessageCooldown;
         }
@@ -367,9 +368,9 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                 this.rocketSoundToStop = true;
             }
         } else // Not ignited - either because not yet launched, or because it has landed
-        if (this.rocketSoundToStop) {
-            this.stopRocketSound();
-        }
+            if (this.rocketSoundToStop) {
+                this.stopRocketSound();
+            }
     }
 
     @Override

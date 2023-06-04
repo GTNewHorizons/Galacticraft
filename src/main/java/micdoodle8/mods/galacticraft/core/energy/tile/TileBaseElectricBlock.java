@@ -2,14 +2,6 @@ package micdoodle8.mods.galacticraft.core.energy.tile;
 
 import java.util.EnumSet;
 
-import micdoodle8.mods.galacticraft.api.tile.IDisableableMachine;
-import micdoodle8.mods.galacticraft.api.transmission.NetworkType;
-import micdoodle8.mods.galacticraft.api.transmission.tile.IConnector;
-import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
-import micdoodle8.mods.galacticraft.core.util.EnumColor;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.core.util.RedstoneUtil;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,6 +11,13 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.relauncher.Side;
 import ic2.api.tile.IWrenchable;
+import micdoodle8.mods.galacticraft.api.tile.IDisableableMachine;
+import micdoodle8.mods.galacticraft.api.transmission.NetworkType;
+import micdoodle8.mods.galacticraft.api.transmission.tile.IConnector;
+import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
+import micdoodle8.mods.galacticraft.core.util.EnumColor;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.core.util.RedstoneUtil;
 
 @Interface(modid = "IC2API", iface = "ic2.api.tile.IWrenchable")
 public abstract class TileBaseElectricBlock extends TileBaseUniversalElectrical

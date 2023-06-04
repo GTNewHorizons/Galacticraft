@@ -2,13 +2,6 @@ package micdoodle8.mods.galacticraft.core.blocks;
 
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseUniversalElectrical;
-import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityCargoLoader;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityCargoUnloader;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -25,6 +18,12 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseUniversalElectrical;
+import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityCargoLoader;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityCargoUnloader;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class BlockCargoLoader extends BlockAdvancedTile implements ItemBlockDesc.IBlockShiftDesc {
 
@@ -242,8 +241,7 @@ public class BlockCargoLoader extends BlockAdvancedTile implements ItemBlockDesc
         if (metadata >= BlockCargoLoader.METADATA_CARGO_UNLOADER) {
             return BlockCargoLoader.METADATA_CARGO_UNLOADER;
         }
-        if (metadata >= BlockCargoLoader.METADATA_CARGO_LOADER) {
-        }
+        if (metadata >= BlockCargoLoader.METADATA_CARGO_LOADER) {}
 
         return 0;
     }

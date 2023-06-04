@@ -1,14 +1,14 @@
 package micdoodle8.mods.galacticraft.planets.mars.inventory;
 
-import micdoodle8.mods.galacticraft.core.inventory.SlotSpecific;
-import micdoodle8.mods.galacticraft.planets.mars.entities.EntitySlimeling;
-import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import micdoodle8.mods.galacticraft.core.inventory.SlotSpecific;
+import micdoodle8.mods.galacticraft.planets.mars.entities.EntitySlimeling;
+import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 
 public class ContainerSlimeling extends Container {
 
@@ -58,7 +58,9 @@ public class ContainerSlimeling extends Container {
         // Note that if NEI is installed, this can be called by
         // InventorySlimeling.setInventorySlotContents even if
         // the container already has the slots
-        if (stack != null && stack.getItem() == MarsItems.marsItemBasic && stack.getItemDamage() == 4 && container.inventorySlots.size() < 63) {
+        if (stack != null && stack.getItem() == MarsItems.marsItemBasic
+                && stack.getItemDamage() == 4
+                && container.inventorySlots.size() < 63) {
             for (int var3 = 0; var3 < 3; ++var3) {
                 for (int var4 = 0; var4 < 9; ++var4) {
                     final Slot slot = new Slot(

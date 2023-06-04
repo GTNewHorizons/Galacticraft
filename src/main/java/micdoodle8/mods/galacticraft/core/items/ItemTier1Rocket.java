@@ -2,16 +2,6 @@ package micdoodle8.mods.galacticraft.core.items;
 
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.entity.IRocketType.EnumRocketType;
-import micdoodle8.mods.galacticraft.api.item.IHoldableItem;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.entities.EntityTier1Rocket;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityLandingPad;
-import micdoodle8.mods.galacticraft.core.util.EnumColor;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.creativetab.CreativeTabs;
@@ -26,6 +16,15 @@ import net.minecraftforge.fluids.FluidStack;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.entity.IRocketType.EnumRocketType;
+import micdoodle8.mods.galacticraft.api.item.IHoldableItem;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.entities.EntityTier1Rocket;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityLandingPad;
+import micdoodle8.mods.galacticraft.core.util.EnumColor;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class ItemTier1Rocket extends Item implements IHoldableItem {
 
@@ -102,9 +101,7 @@ public class ItemTier1Rocket extends Item implements IHoldableItem {
 
         if (par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("RocketFuel")) {
             spaceship.fuelTank.fill(
-                    new FluidStack(
-                            GalacticraftCore.fluidFuel,
-                            par1ItemStack.getTagCompound().getInteger("RocketFuel")),
+                    new FluidStack(GalacticraftCore.fluidFuel, par1ItemStack.getTagCompound().getInteger("RocketFuel")),
                     true);
         }
 

@@ -1,12 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.mars.client.render.item;
 
-import micdoodle8.mods.galacticraft.api.entity.IRocketType.EnumRocketType;
-import micdoodle8.mods.galacticraft.core.client.render.item.ItemRendererTier1Rocket;
-import micdoodle8.mods.galacticraft.core.entities.EntityTier1Rocket;
-import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
-import micdoodle8.mods.galacticraft.planets.mars.client.model.ModelTier2Rocket;
-import micdoodle8.mods.galacticraft.planets.mars.entities.EntityTier2Rocket;
-
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +11,12 @@ import org.lwjgl.Sys;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import micdoodle8.mods.galacticraft.api.entity.IRocketType.EnumRocketType;
+import micdoodle8.mods.galacticraft.core.client.render.item.ItemRendererTier1Rocket;
+import micdoodle8.mods.galacticraft.core.entities.EntityTier1Rocket;
+import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
+import micdoodle8.mods.galacticraft.planets.mars.client.model.ModelTier2Rocket;
+import micdoodle8.mods.galacticraft.planets.mars.entities.EntityTier2Rocket;
 
 public class ItemRendererTier2Rocket extends ItemRendererTier1Rocket {
 

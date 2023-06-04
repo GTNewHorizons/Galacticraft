@@ -4,14 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import micdoodle8.mods.galacticraft.api.block.IPartialSealableBlock;
-import micdoodle8.mods.galacticraft.api.vector.BlockTuple;
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.core.tick.TickHandlerServer;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityOxygenSealer;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.GCLog;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEnchantmentTable;
 import net.minecraft.block.BlockFarmland;
@@ -26,6 +18,14 @@ import net.minecraft.block.BlockStainedGlass;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import micdoodle8.mods.galacticraft.api.block.IPartialSealableBlock;
+import micdoodle8.mods.galacticraft.api.vector.BlockTuple;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.core.tick.TickHandlerServer;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityOxygenSealer;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.GCLog;
 
 public class OxygenPressureProtocol {
 

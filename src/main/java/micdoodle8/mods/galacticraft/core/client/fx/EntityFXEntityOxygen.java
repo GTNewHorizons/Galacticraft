@@ -1,13 +1,12 @@
 package micdoodle8.mods.galacticraft.core.client.fx;
 
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
 
 @SideOnly(Side.CLIENT)
 public class EntityFXEntityOxygen extends EntityFX {

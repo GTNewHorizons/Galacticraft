@@ -1,16 +1,16 @@
 package micdoodle8.mods.galacticraft.planets.mars.inventory;
 
-import micdoodle8.mods.galacticraft.api.item.IItemElectric;
-import micdoodle8.mods.galacticraft.core.inventory.SlotSpecific;
-import micdoodle8.mods.galacticraft.core.util.FluidUtil;
-import micdoodle8.mods.galacticraft.planets.asteroids.items.ItemAtmosphericValve;
-import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityGasLiquefier;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import micdoodle8.mods.galacticraft.api.item.IItemElectric;
+import micdoodle8.mods.galacticraft.core.inventory.SlotSpecific;
+import micdoodle8.mods.galacticraft.core.util.FluidUtil;
+import micdoodle8.mods.galacticraft.planets.asteroids.items.ItemAtmosphericValve;
+import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityGasLiquefier;
 
 public class ContainerGasLiquefier extends Container {
 
@@ -81,11 +81,13 @@ public class ContainerGasLiquefier extends Container {
                 }
             } else {
                 boolean outputTankSlotsSuccess = false;
-                if (FluidUtil.isEmptyContainerFor(var4, this.tileEntity.liquidTank2.getFluid()) && this.mergeItemStack(var4, 3, 4, false)) {
+                if (FluidUtil.isEmptyContainerFor(var4, this.tileEntity.liquidTank2.getFluid())
+                        && this.mergeItemStack(var4, 3, 4, false)) {
                     outputTankSlotsSuccess = true;
                 }
                 if (!outputTankSlotsSuccess
-                        && FluidUtil.isEmptyContainerFor(var4, this.tileEntity.liquidTank.getFluid()) && this.mergeItemStack(var4, 2, 3, false)) {
+                        && FluidUtil.isEmptyContainerFor(var4, this.tileEntity.liquidTank.getFluid())
+                        && this.mergeItemStack(var4, 2, 3, false)) {
                     outputTankSlotsSuccess = true;
                 }
 

@@ -2,14 +2,14 @@ package micdoodle8.mods.galacticraft.core.blocks;
 
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-
 import net.minecraft.block.BlockAir;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 
 public class BlockBrightAir extends BlockAir {
 

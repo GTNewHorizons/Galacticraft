@@ -1,12 +1,12 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.client.sounds;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityAstroMiner;
-
 import net.minecraft.client.audio.MovingSound;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityAstroMiner;
 
 /**
  * This file is part of the Galacticraft project

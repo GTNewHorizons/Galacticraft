@@ -2,9 +2,9 @@ package micdoodle8.mods.galacticraft.api.galaxies;
 
 import java.util.Locale;
 
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-
 import net.minecraft.util.StatCollector;
+
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
 
 public class SolarSystem {
 

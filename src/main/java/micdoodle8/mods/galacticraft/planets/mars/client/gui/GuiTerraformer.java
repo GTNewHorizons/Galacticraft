@@ -3,6 +3,13 @@ package micdoodle8.mods.galacticraft.planets.mars.client.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.client.gui.container.GuiContainerGC;
 import micdoodle8.mods.galacticraft.core.client.gui.element.GuiElementCheckbox;
@@ -17,13 +24,6 @@ import micdoodle8.mods.galacticraft.core.util.RedstoneUtil;
 import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
 import micdoodle8.mods.galacticraft.planets.mars.inventory.ContainerTerraformer;
 import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityTerraformer;
-
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
 
 public class GuiTerraformer extends GuiContainerGC implements ICheckBoxCallback {
 

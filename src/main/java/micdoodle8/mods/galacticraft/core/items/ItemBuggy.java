@@ -2,12 +2,6 @@ package micdoodle8.mods.galacticraft.core.items;
 
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.item.IHoldableItem;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.entities.EntityBuggy;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,6 +19,11 @@ import net.minecraftforge.fluids.FluidStack;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.item.IHoldableItem;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.entities.EntityBuggy;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class ItemBuggy extends Item implements IHoldableItem {
 
@@ -83,8 +82,7 @@ public class ItemBuggy extends Item implements IHoldableItem {
         final float var27 = 1.0F;
         final List<?> var28 = par2World.getEntitiesWithinAABBExcludingEntity(
                 par3EntityPlayer,
-                par3EntityPlayer.boundingBox
-                        .addCoord(var25.xCoord * var21, var25.yCoord * var21, var25.zCoord * var21)
+                par3EntityPlayer.boundingBox.addCoord(var25.xCoord * var21, var25.yCoord * var21, var25.zCoord * var21)
                         .expand(var27, var27, var27));
         int var29;
 
@@ -117,8 +115,7 @@ public class ItemBuggy extends Item implements IHoldableItem {
                     var34 + 0.5F,
                     par1ItemStack.getItemDamage());
 
-            if (!par2World.getCollidingBoundingBoxes(var35, var35.boundingBox.expand(-0.1D, -0.1D, -0.1D))
-                    .isEmpty()) {
+            if (!par2World.getCollidingBoundingBoxes(var35, var35.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty()) {
                 return par1ItemStack;
             }
 

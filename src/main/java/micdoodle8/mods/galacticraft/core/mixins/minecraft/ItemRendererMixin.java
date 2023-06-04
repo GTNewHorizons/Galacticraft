@@ -1,13 +1,13 @@
 package micdoodle8.mods.galacticraft.core.mixins.minecraft;
 
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-
 import net.minecraft.client.renderer.ItemRenderer;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 
 @Mixin(ItemRenderer.class)
 public class ItemRendererMixin {

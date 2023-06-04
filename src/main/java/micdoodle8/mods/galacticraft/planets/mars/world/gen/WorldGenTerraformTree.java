@@ -2,14 +2,14 @@ package micdoodle8.mods.galacticraft.planets.mars.world.gen;
 
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.planets.mars.blocks.MarsBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import micdoodle8.mods.galacticraft.planets.mars.blocks.MarsBlocks;
 
 public class WorldGenTerraformTree extends WorldGenerator {
 
@@ -101,13 +101,7 @@ public class WorldGenTerraformTree extends WorldGenerator {
                         final Block block = par1World.getBlock(j2, j1, l2);
 
                         if (block == null || block.canBeReplacedByLeaves(par1World, j2, j1, l2)) {
-                            this.setBlockAndNotifyAdequately(
-                                    par1World,
-                                    j2,
-                                    j1,
-                                    l2,
-                                    Blocks.leaves,
-                                    this.metaLeaves);
+                            this.setBlockAndNotifyAdequately(par1World, j2, j1, l2, Blocks.leaves, this.metaLeaves);
                         }
                     }
                 }

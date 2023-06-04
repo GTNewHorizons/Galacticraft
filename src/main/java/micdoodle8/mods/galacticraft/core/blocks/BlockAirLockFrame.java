@@ -2,13 +2,6 @@ package micdoodle8.mods.galacticraft.core.blocks;
 
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityAirLock;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityAirLockController;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -25,6 +18,12 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityAirLock;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityAirLockController;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDesc.IBlockShiftDesc {
 
@@ -87,7 +86,8 @@ public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDes
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int par1, int par2) {
-        if (par2 < BlockAirLockFrame.METADATA_AIR_LOCK_CONTROLLER || par1 == ForgeDirection.UP.ordinal() || par1 == ForgeDirection.DOWN.ordinal()) {
+        if (par2 < BlockAirLockFrame.METADATA_AIR_LOCK_CONTROLLER || par1 == ForgeDirection.UP.ordinal()
+                || par1 == ForgeDirection.DOWN.ordinal()) {
             return this.airLockIcons[0];
         }
 

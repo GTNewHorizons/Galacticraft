@@ -1,11 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client.render.item;
 
-import micdoodle8.mods.galacticraft.core.client.model.ModelFlag;
-import micdoodle8.mods.galacticraft.core.client.render.entities.RenderFlag;
-import micdoodle8.mods.galacticraft.core.entities.EntityFlag;
-import micdoodle8.mods.galacticraft.core.util.ClientUtil;
-
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -15,6 +9,10 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import micdoodle8.mods.galacticraft.core.client.model.ModelFlag;
+import micdoodle8.mods.galacticraft.core.client.render.entities.RenderFlag;
+import micdoodle8.mods.galacticraft.core.entities.EntityFlag;
+import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 
 public class ItemRendererFlag implements IItemRenderer {
 
@@ -65,7 +63,8 @@ public class ItemRendererFlag implements IItemRenderer {
             GL11.glRotatef(-145F, 0F, 1F, 0F);
         }
 
-        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON && FMLClientHandler.instance().getClient().thePlayer.getItemInUseCount() > 0) {
+        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON
+                && FMLClientHandler.instance().getClient().thePlayer.getItemInUseCount() > 0) {
             float var13b;
             float var14b;
             var13b = item.getMaxItemUseDuration()

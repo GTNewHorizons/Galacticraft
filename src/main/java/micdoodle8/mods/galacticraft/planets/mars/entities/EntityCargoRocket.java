@@ -3,18 +3,6 @@ package micdoodle8.mods.galacticraft.planets.mars.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.entity.IRocketType;
-import micdoodle8.mods.galacticraft.api.entity.IWorldTransferCallback;
-import micdoodle8.mods.galacticraft.api.prefab.entity.EntityAutoRocket;
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.GCLog;
-import micdoodle8.mods.galacticraft.core.util.WorldUtil;
-import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
-import micdoodle8.mods.galacticraft.planets.mars.util.MarsUtil;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -28,6 +16,17 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
 
 import io.netty.buffer.ByteBuf;
+import micdoodle8.mods.galacticraft.api.entity.IRocketType;
+import micdoodle8.mods.galacticraft.api.entity.IWorldTransferCallback;
+import micdoodle8.mods.galacticraft.api.prefab.entity.EntityAutoRocket;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.GCLog;
+import micdoodle8.mods.galacticraft.core.util.WorldUtil;
+import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
+import micdoodle8.mods.galacticraft.planets.mars.util.MarsUtil;
 
 public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, IInventory, IWorldTransferCallback {
 
@@ -98,9 +97,10 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
                     this.stopRocketSound();
                 }
             }
-        } else if (!this.hasValidFuel() && this.getLaunched() && Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 10 != 0.0) {
-            this.motionY -= Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 20;
-        }
+        } else if (!this.hasValidFuel() && this.getLaunched()
+                && Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 10 != 0.0) {
+                    this.motionY -= Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 20;
+                }
 
         super.onUpdate();
 

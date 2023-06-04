@@ -9,6 +9,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyReceiver;
+import cpw.mods.fml.common.FMLLog;
+import ic2.api.energy.tile.IEnergySink;
 import micdoodle8.mods.galacticraft.api.transmission.grid.IElectricityNetwork;
 import micdoodle8.mods.galacticraft.api.transmission.tile.IConductor;
 import micdoodle8.mods.galacticraft.api.transmission.tile.IElectrical;
@@ -18,15 +26,6 @@ import micdoodle8.mods.galacticraft.core.energy.EnergyUtil;
 import micdoodle8.mods.galacticraft.core.tick.TickHandlerServer;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
-
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-
-import cofh.api.energy.IEnergyHandler;
-import cofh.api.energy.IEnergyReceiver;
-import cpw.mods.fml.common.FMLLog;
-import ic2.api.energy.tile.IEnergySink;
 
 // import buildcraft.api.power.PowerHandler.Type;
 
@@ -445,7 +444,9 @@ public class EnergyNetwork implements IElectricityNetwork {
             final TileEntity tile = (TileEntity) conductor;
             final World world = tile.getWorldObj();
             // Remove any conductors in unloaded chunks
-            if (tile.isInvalid() || world == null || !world.blockExists(tile.xCoord, tile.yCoord, tile.zCoord) || conductor != world.getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord)) {
+            if (tile.isInvalid() || world == null
+                    || !world.blockExists(tile.xCoord, tile.yCoord, tile.zCoord)
+                    || conductor != world.getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord)) {
                 it.remove();
                 continue;
             }

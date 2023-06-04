@@ -5,12 +5,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import micdoodle8.mods.galacticraft.core.items.GCItems;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
-import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
-import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.Item;
@@ -23,6 +17,11 @@ import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import micdoodle8.mods.galacticraft.core.items.GCItems;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
+import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
+import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
 
 public class GasLiquefierRecipeHandler extends TemplateRecipeHandler {
 

@@ -1,9 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client.gui.element;
 
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.core.client.gui.screen.SmallFontRenderer;
-import micdoodle8.mods.galacticraft.core.util.ColorUtil;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -12,6 +8,10 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
+
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.core.client.gui.screen.SmallFontRenderer;
+import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 
 public class GuiElementSlider extends GuiButton {
 

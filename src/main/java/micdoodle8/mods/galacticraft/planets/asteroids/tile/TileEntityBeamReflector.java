@@ -61,7 +61,8 @@ public class TileEntityBeamReflector extends TileEntityBeamOutput implements ILa
     @Override
     public float receiveEnergyGC(EnergySource from, float amount, boolean simulate) {
         if (this.getTarget() != null) {
-            if (!(from instanceof EnergySourceWireless) || ((EnergySourceWireless) from).nodes.contains(this.getTarget())) {
+            if (!(from instanceof EnergySourceWireless)
+                    || ((EnergySourceWireless) from).nodes.contains(this.getTarget())) {
                 return 0;
             }
 

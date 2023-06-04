@@ -105,9 +105,9 @@ public class StructureVillagePiecesMoon {
                 var10 -= var12.villagePieceWeight;
 
                 if (var10 < 0) {
-                    if (!var12.canSpawnMoreVillagePiecesOfType(par7) || var12
-                            == par0ComponentVillageStartPiece.structVillagePieceWeight
-                            && par0ComponentVillageStartPiece.structureVillageWeightedPieceList.size() > 1) {
+                    if (!var12.canSpawnMoreVillagePiecesOfType(par7)
+                            || var12 == par0ComponentVillageStartPiece.structVillagePieceWeight
+                                    && par0ComponentVillageStartPiece.structureVillageWeightedPieceList.size() > 1) {
                         break;
                     }
 
@@ -140,12 +140,7 @@ public class StructureVillagePiecesMoon {
                 .func_74904_a(par0ComponentVillageStartPiece, par1List, par2Random, par3, par4, par5, par6);
 
         if (var14 != null) {
-            return new StructureComponentVillageTorch(
-                    par0ComponentVillageStartPiece,
-                    par7,
-                    par2Random,
-                    var14,
-                    par6);
+            return new StructureComponentVillageTorch(par0ComponentVillageStartPiece, par7, par2Random, var14, par6);
         }
         return null;
     }
@@ -184,7 +179,7 @@ public class StructureVillagePiecesMoon {
             Random par2Random, int par3, int par4, int par5, int par6, int par7) {
         if (par7 > 3 + par0ComponentVillageStartPiece.terrainType
                 || Math.abs(par3 - par0ComponentVillageStartPiece.getBoundingBox().minX) > 112
-                        || Math.abs(par5 - par0ComponentVillageStartPiece.getBoundingBox().minZ) > 112) {
+                || Math.abs(par5 - par0ComponentVillageStartPiece.getBoundingBox().minZ) > 112) {
             return null;
         }
         final StructureBoundingBox var8 = StructureComponentVillagePathGen

@@ -3,11 +3,6 @@ package micdoodle8.mods.galacticraft.core.tile;
 import java.util.ArrayList;
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +10,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 
 import cpw.mods.fml.relauncher.Side;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
 
 public class TileEntityAirLockController extends TileEntityAirLock {
 
@@ -91,12 +90,14 @@ public class TileEntityAirLockController extends TileEntityAirLock {
                 final Vector3 maxPos = new Vector3(thisPos).translate(distance);
                 final AxisAlignedBB matchingRegion = AxisAlignedBB
                         .getBoundingBox(minPos.x, minPos.y, minPos.z, maxPos.x, maxPos.y, maxPos.z);
-                final List<EntityPlayer> playersWithin = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, matchingRegion);
+                final List<EntityPlayer> playersWithin = this.worldObj
+                        .getEntitiesWithinAABB(EntityPlayer.class, matchingRegion);
 
                 boolean foundPlayer = false;
 
                 for (final Object o : playersWithin) {
-                    if (o instanceof EntityPlayer && (!this.playerNameMatches || ((EntityPlayer) o).getGameProfile().getName().equalsIgnoreCase(this.playerToOpenFor))) {
+                    if (o instanceof EntityPlayer && (!this.playerNameMatches
+                            || ((EntityPlayer) o).getGameProfile().getName().equalsIgnoreCase(this.playerToOpenFor))) {
                         foundPlayer = true;
                         break;
                     }

@@ -6,11 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import micdoodle8.mods.galacticraft.core.dimension.SpaceStationWorldData;
-import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -20,6 +15,11 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 
 import com.google.common.collect.Sets;
+
+import micdoodle8.mods.galacticraft.core.dimension.SpaceStationWorldData;
+import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
 
 public class CommandSpaceStationRemoveOwner extends CommandBase {
 
@@ -55,8 +55,7 @@ public class CommandSpaceStationRemoveOwner extends CommandBase {
         String var3 = astring[0];
 
         try {
-            playerBase = PlayerUtil
-                    .getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), false);
+            playerBase = PlayerUtil.getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), false);
 
             if (playerBase != null) {
                 final GCPlayerStats stats = GCPlayerStats.get(playerBase);
@@ -81,9 +80,7 @@ public class CommandSpaceStationRemoveOwner extends CommandBase {
                         data.markDirty();
                     } else {
                         throw new CommandException(
-                                GCCoreUtil.translateWithFormat(
-                                        "commands.ssuninvite.noPlayer",
-                                        "\"" + var3 + "\""));
+                                GCCoreUtil.translateWithFormat("commands.ssuninvite.noPlayer", "\"" + var3 + "\""));
                     }
                 }
             }

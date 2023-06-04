@@ -1,12 +1,12 @@
 package micdoodle8.mods.galacticraft.core.inventory;
 
-import micdoodle8.mods.galacticraft.core.items.ItemOxygenTank;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import micdoodle8.mods.galacticraft.core.items.ItemOxygenTank;
 
 public class ContainerExtendedInventory extends Container {
 

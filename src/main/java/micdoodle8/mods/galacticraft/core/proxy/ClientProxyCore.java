@@ -19,6 +19,58 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.MusicTicker;
+import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.entity.EntityOtherPlayerMP;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.renderer.IImageBuffer;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Item;
+import net.minecraft.network.INetHandler;
+import net.minecraft.network.NetHandlerPlayServer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldProvider;
+import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.IFluidBlock;
+
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+
+import api.player.client.ClientPlayerAPI;
+import api.player.model.ModelPlayerAPI;
+import api.player.render.RenderPlayerAPI;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import micdoodle8.mods.galacticraft.api.entity.ICameraZoomEntity;
 import micdoodle8.mods.galacticraft.api.event.client.CelestialBodyRenderEvent;
 import micdoodle8.mods.galacticraft.api.prefab.entity.EntityAutoRocket;
@@ -120,62 +172,8 @@ import micdoodle8.mods.galacticraft.core.tile.TileEntityTreasureChest;
 import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.core.wrappers.BlockMetaList;
 import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
-
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.MusicTicker;
-import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.entity.EntityOtherPlayerMP;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.renderer.IImageBuffer;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
-import net.minecraft.network.INetHandler;
-import net.minecraft.network.NetHandlerPlayServer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldProvider;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.client.event.RenderPlayerEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.IFluidBlock;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-
 import tconstruct.client.tabs.InventoryTabVanilla;
 import tconstruct.client.tabs.TabRegistry;
-import api.player.client.ClientPlayerAPI;
-import api.player.model.ModelPlayerAPI;
-import api.player.render.RenderPlayerAPI;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class ClientProxyCore extends CommonProxyCore {
 
@@ -600,7 +598,9 @@ public class ClientProxyCore extends CommonProxyCore {
         final int k = MathHelper.floor_double(entity.posZ);
         final Block block = entity.worldObj.getBlock(i, j, k);
 
-        if (block == null || !(block instanceof IFluidBlock) || ((IFluidBlock) block).getFluid() == null || !((IFluidBlock) block).getFluid().getName().equals(fluid.getName())) {
+        if (block == null || !(block instanceof IFluidBlock)
+                || ((IFluidBlock) block).getFluid() == null
+                || !((IFluidBlock) block).getFluid().getName().equals(fluid.getName())) {
             return false;
         }
         double filled = ((IFluidBlock) block).getFilledPercentage(entity.worldObj, i, j, k);
@@ -760,7 +760,8 @@ public class ClientProxyCore extends CommonProxyCore {
                         + (player.field_71085_bR - player.field_71097_bO) * event.partialRenderTick
                         - (player.prevPosZ + (player.posZ - player.prevPosZ) * event.partialRenderTick);
                 f4 = (player.prevRenderYawOffset
-                        + (player.renderYawOffset - player.prevRenderYawOffset) * event.partialRenderTick) / (180F / (float)Math.PI);
+                        + (player.renderYawOffset - player.prevRenderYawOffset) * event.partialRenderTick)
+                        / (180F / (float) Math.PI);
                 final double d1 = MathHelper.sin(f4);
                 final double d2 = -MathHelper.cos(f4);
                 float f5 = (float) d4 * 10.0F;

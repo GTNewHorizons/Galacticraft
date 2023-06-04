@@ -4,6 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
+import com.google.common.collect.Maps;
+
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.client.gui.container.GuiContainerGC;
 import micdoodle8.mods.galacticraft.core.client.gui.element.GuiElementInfoRegion;
@@ -18,16 +28,6 @@ import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import micdoodle8.mods.galacticraft.planets.asteroids.inventory.ContainerShortRangeTelepad;
 import micdoodle8.mods.galacticraft.planets.asteroids.network.PacketSimpleAsteroids;
 import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityShortRangeTelepad;
-
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
-import com.google.common.collect.Maps;
 
 public class GuiShortRangeTelepad extends GuiContainerGC implements ITextBoxCallback {
 
@@ -63,7 +63,8 @@ public class GuiShortRangeTelepad extends GuiContainerGC implements ITextBoxCall
 
     @Override
     protected void keyTyped(char keyChar, int keyID) {
-        if (keyID != Keyboard.KEY_ESCAPE && keyID != this.mc.gameSettings.keyBindInventory.getKeyCode() && (this.address.keyTyped(keyChar, keyID) || this.targetAddress.keyTyped(keyChar, keyID))) {
+        if (keyID != Keyboard.KEY_ESCAPE && keyID != this.mc.gameSettings.keyBindInventory.getKeyCode()
+                && (this.address.keyTyped(keyChar, keyID) || this.targetAddress.keyTyped(keyChar, keyID))) {
             return;
         }
 

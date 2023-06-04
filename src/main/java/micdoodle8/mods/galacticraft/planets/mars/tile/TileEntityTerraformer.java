@@ -3,18 +3,6 @@ package micdoodle8.mods.galacticraft.planets.mars.tile;
 import java.util.ArrayList;
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.block.ITerraformableBlock;
-import micdoodle8.mods.galacticraft.api.tile.IDisableableMachine;
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
-import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseElectricBlockWithInventory;
-import micdoodle8.mods.galacticraft.core.entities.IBubbleProvider;
-import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.FluidUtil;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.planets.mars.inventory.ContainerTerraformer;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockSapling;
@@ -36,6 +24,17 @@ import net.minecraftforge.fluids.IFluidHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+import micdoodle8.mods.galacticraft.api.block.ITerraformableBlock;
+import micdoodle8.mods.galacticraft.api.tile.IDisableableMachine;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
+import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseElectricBlockWithInventory;
+import micdoodle8.mods.galacticraft.core.entities.IBubbleProvider;
+import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.FluidUtil;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.planets.mars.inventory.ContainerTerraformer;
 
 public class TileEntityTerraformer extends TileBaseElectricBlockWithInventory
         implements ISidedInventory, IDisableableMachine, IBubbleProvider, IFluidHandler {
@@ -113,8 +112,9 @@ public class TileEntityTerraformer extends TileBaseElectricBlockWithInventory
             if (this.containingItems[0] != null) {
                 final FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(this.containingItems[0]);
 
-                if (liquid != null && liquid.getFluid().getName().equals(FluidRegistry.WATER.getName()) && (this.waterTank.getFluid() == null
-                        || this.waterTank.getFluid().amount + liquid.amount <= this.waterTank.getCapacity())) {
+                if (liquid != null && liquid.getFluid().getName().equals(FluidRegistry.WATER.getName())
+                        && (this.waterTank.getFluid() == null
+                                || this.waterTank.getFluid().amount + liquid.amount <= this.waterTank.getCapacity())) {
                     this.waterTank.fill(liquid, true);
 
                     this.containingItems[0] = FluidUtil.getUsedContainer(this.containingItems[0]);
@@ -233,21 +233,22 @@ public class TileEntityTerraformer extends TileBaseElectricBlockWithInventory
                                     this.worldObj.rand);
                             this.grownTreesList.add(vecSapling.clone());
                         }
-                    } else if (b instanceof BlockBush && this.worldObj.getBlockLightValue(vecSapling.x, vecSapling.y, vecSapling.z) >= 5) {
-                        // Hammer the update tick a few times to try to get it to grow - it won't always
-                        for (int j = 0; j < 12; j++) {
-                            if (this.worldObj.getBlock(vecSapling.x, vecSapling.y, vecSapling.z) != b) {
-                                this.grownTreesList.add(vecSapling.clone());
-                                break;
+                    } else if (b instanceof BlockBush
+                            && this.worldObj.getBlockLightValue(vecSapling.x, vecSapling.y, vecSapling.z) >= 5) {
+                                // Hammer the update tick a few times to try to get it to grow - it won't always
+                                for (int j = 0; j < 12; j++) {
+                                    if (this.worldObj.getBlock(vecSapling.x, vecSapling.y, vecSapling.z) != b) {
+                                        this.grownTreesList.add(vecSapling.clone());
+                                        break;
+                                    }
+                                    b.updateTick(
+                                            this.worldObj,
+                                            vecSapling.x,
+                                            vecSapling.y,
+                                            vecSapling.z,
+                                            this.worldObj.rand);
+                                }
                             }
-                            b.updateTick(
-                                    this.worldObj,
-                                    vecSapling.x,
-                                    vecSapling.y,
-                                    vecSapling.z,
-                                    this.worldObj.rand);
-                        }
-                    }
 
                     this.useCount[1]++;
                     this.waterTank.drain(50, true);

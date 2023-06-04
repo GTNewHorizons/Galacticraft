@@ -2,12 +2,12 @@ package micdoodle8.mods.galacticraft.core.inventory;
 
 import java.lang.reflect.Field;
 
-import micdoodle8.mods.galacticraft.core.items.ItemOilCanister;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import micdoodle8.mods.galacticraft.core.items.ItemOilCanister;
 
 public class SlotRefinery extends Slot {
 

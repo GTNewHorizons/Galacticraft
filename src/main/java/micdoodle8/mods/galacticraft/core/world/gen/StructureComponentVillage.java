@@ -3,13 +3,13 @@ package micdoodle8.mods.galacticraft.core.world.gen;
 import java.util.List;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.core.entities.EntityAlienVillager;
-
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
+
+import micdoodle8.mods.galacticraft.core.entities.EntityAlienVillager;
 
 public abstract class StructureComponentVillage extends StructureComponent {
 
@@ -45,41 +45,41 @@ public abstract class StructureComponentVillage extends StructureComponent {
             List<StructureComponent> par2List, Random par3Random, int par4, int par5) {
         return switch (this.coordBaseMode) {
             case 0 -> StructureVillagePiecesMoon.getNextStructureComponent(
-                                    par1ComponentVillageStartPiece,
-                                    par2List,
-                                    par3Random,
-                                    this.boundingBox.minX - 1,
-                                    this.boundingBox.minY + par4,
-                                    this.boundingBox.minZ + par5,
-                                    1,
-                                    this.getComponentType());
+                    par1ComponentVillageStartPiece,
+                    par2List,
+                    par3Random,
+                    this.boundingBox.minX - 1,
+                    this.boundingBox.minY + par4,
+                    this.boundingBox.minZ + par5,
+                    1,
+                    this.getComponentType());
             case 1 -> StructureVillagePiecesMoon.getNextStructureComponent(
-                                    par1ComponentVillageStartPiece,
-                                    par2List,
-                                    par3Random,
-                                    this.boundingBox.minX + par5,
-                                    this.boundingBox.minY + par4,
-                                    this.boundingBox.minZ - 1,
-                                    2,
-                                    this.getComponentType());
+                    par1ComponentVillageStartPiece,
+                    par2List,
+                    par3Random,
+                    this.boundingBox.minX + par5,
+                    this.boundingBox.minY + par4,
+                    this.boundingBox.minZ - 1,
+                    2,
+                    this.getComponentType());
             case 2 -> StructureVillagePiecesMoon.getNextStructureComponent(
-                                    par1ComponentVillageStartPiece,
-                                    par2List,
-                                    par3Random,
-                                    this.boundingBox.minX - 1,
-                                    this.boundingBox.minY + par4,
-                                    this.boundingBox.minZ + par5,
-                                    1,
-                                    this.getComponentType());
+                    par1ComponentVillageStartPiece,
+                    par2List,
+                    par3Random,
+                    this.boundingBox.minX - 1,
+                    this.boundingBox.minY + par4,
+                    this.boundingBox.minZ + par5,
+                    1,
+                    this.getComponentType());
             case 3 -> StructureVillagePiecesMoon.getNextStructureComponent(
-                                    par1ComponentVillageStartPiece,
-                                    par2List,
-                                    par3Random,
-                                    this.boundingBox.minX + par5,
-                                    this.boundingBox.minY + par4,
-                                    this.boundingBox.minZ - 1,
-                                    2,
-                                    this.getComponentType());
+                    par1ComponentVillageStartPiece,
+                    par2List,
+                    par3Random,
+                    this.boundingBox.minX + par5,
+                    this.boundingBox.minY + par4,
+                    this.boundingBox.minZ - 1,
+                    2,
+                    this.getComponentType());
             default -> null;
         };
     }
@@ -88,41 +88,41 @@ public abstract class StructureComponentVillage extends StructureComponent {
             List<StructureComponent> par2List, Random par3Random, int par4, int par5) {
         return switch (this.coordBaseMode) {
             case 0 -> StructureVillagePiecesMoon.getNextStructureComponent(
-                                    par1ComponentVillageStartPiece,
-                                    par2List,
-                                    par3Random,
-                                    this.boundingBox.maxX + 1,
-                                    this.boundingBox.minY + par4,
-                                    this.boundingBox.minZ + par5,
-                                    3,
-                                    this.getComponentType());
+                    par1ComponentVillageStartPiece,
+                    par2List,
+                    par3Random,
+                    this.boundingBox.maxX + 1,
+                    this.boundingBox.minY + par4,
+                    this.boundingBox.minZ + par5,
+                    3,
+                    this.getComponentType());
             case 1 -> StructureVillagePiecesMoon.getNextStructureComponent(
-                                    par1ComponentVillageStartPiece,
-                                    par2List,
-                                    par3Random,
-                                    this.boundingBox.minX + par5,
-                                    this.boundingBox.minY + par4,
-                                    this.boundingBox.maxZ + 1,
-                                    0,
-                                    this.getComponentType());
+                    par1ComponentVillageStartPiece,
+                    par2List,
+                    par3Random,
+                    this.boundingBox.minX + par5,
+                    this.boundingBox.minY + par4,
+                    this.boundingBox.maxZ + 1,
+                    0,
+                    this.getComponentType());
             case 2 -> StructureVillagePiecesMoon.getNextStructureComponent(
-                                    par1ComponentVillageStartPiece,
-                                    par2List,
-                                    par3Random,
-                                    this.boundingBox.maxX + 1,
-                                    this.boundingBox.minY + par4,
-                                    this.boundingBox.minZ + par5,
-                                    3,
-                                    this.getComponentType());
+                    par1ComponentVillageStartPiece,
+                    par2List,
+                    par3Random,
+                    this.boundingBox.maxX + 1,
+                    this.boundingBox.minY + par4,
+                    this.boundingBox.minZ + par5,
+                    3,
+                    this.getComponentType());
             case 3 -> StructureVillagePiecesMoon.getNextStructureComponent(
-                                    par1ComponentVillageStartPiece,
-                                    par2List,
-                                    par3Random,
-                                    this.boundingBox.minX + par5,
-                                    this.boundingBox.minY + par4,
-                                    this.boundingBox.maxZ + 1,
-                                    0,
-                                    this.getComponentType());
+                    par1ComponentVillageStartPiece,
+                    par2List,
+                    par3Random,
+                    this.boundingBox.minX + par5,
+                    this.boundingBox.minY + par4,
+                    this.boundingBox.maxZ + 1,
+                    0,
+                    this.getComponentType());
             default -> null;
         };
     }

@@ -1,9 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client.render.entities;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.client.model.ModelAlienVillager;
-import micdoodle8.mods.galacticraft.core.entities.EntityAlienVillager;
-
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -14,6 +10,9 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.model.ModelAlienVillager;
+import micdoodle8.mods.galacticraft.core.entities.EntityAlienVillager;
 
 @SideOnly(Side.CLIENT)
 public class RenderAlienVillager extends RenderLiving {

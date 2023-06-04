@@ -4,14 +4,6 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import micdoodle8.mods.galacticraft.api.recipe.CompressorRecipes;
-import micdoodle8.mods.galacticraft.core.Constants;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.items.GCItems;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.RecipeUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -29,6 +21,13 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
+import micdoodle8.mods.galacticraft.api.recipe.CompressorRecipes;
+import micdoodle8.mods.galacticraft.core.Constants;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.items.GCItems;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.RecipeUtil;
 
 public class NEIGalacticraftConfig implements IConfigureNEI {
 
@@ -313,7 +312,8 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
             }
 
             final ItemStack resultItemStack = rec.getRecipeOutput();
-            if (ConfigManagerCore.quickMode && resultItemStack.getItem().getUnlocalizedName(resultItemStack).contains("compressed")) {
+            if (ConfigManagerCore.quickMode
+                    && resultItemStack.getItem().getUnlocalizedName(resultItemStack).contains("compressed")) {
                 resultItemStack.stackSize *= 2;
             }
 

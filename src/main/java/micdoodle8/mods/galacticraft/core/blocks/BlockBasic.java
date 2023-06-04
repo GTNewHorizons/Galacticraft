@@ -3,10 +3,6 @@ package micdoodle8.mods.galacticraft.core.blocks;
 import java.util.List;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.block.IDetectableResource;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.items.GCItems;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -20,6 +16,9 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.block.IDetectableResource;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.items.GCItems;
 
 /**
  * Metadata: 3 = Tin Decoration Block 1 4 = Tin Decoration Block 2 5 = Copper Ore 6 = Tin Ore 7 = Aluminium Ore 8 =
@@ -63,10 +62,10 @@ public class BlockBasic extends Block implements IDetectableResource {
     public IIcon getIcon(int side, int meta) {
         return switch (meta) {
             case 3 -> switch (side) {
-                                case 0 -> this.iconBuffer[1];
-                                case 1 -> this.iconBuffer[0];
-                                default -> this.iconBuffer[2];
-                            };
+                    case 0 -> this.iconBuffer[1];
+                    case 1 -> this.iconBuffer[0];
+                    default -> this.iconBuffer[2];
+                };
             case 4 -> this.iconBuffer[3];
             case 5 -> this.iconBuffer[4];
             case 6 -> this.iconBuffer[5];

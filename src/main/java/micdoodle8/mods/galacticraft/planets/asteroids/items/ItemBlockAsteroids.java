@@ -1,7 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.items;
 
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
@@ -9,6 +7,7 @@ import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 
 public class ItemBlockAsteroids extends ItemBlock {
 

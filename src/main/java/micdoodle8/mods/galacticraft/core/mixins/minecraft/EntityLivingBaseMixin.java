@@ -1,13 +1,13 @@
 package micdoodle8.mods.galacticraft.core.mixins.minecraft;
 
-import micdoodle8.mods.galacticraft.core.util.WorldUtil;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
+
+import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 
 @Mixin(EntityLivingBase.class)
 public abstract class EntityLivingBaseMixin extends Entity {

@@ -1,5 +1,10 @@
 package micdoodle8.mods.galacticraft.planets.mars.blocks;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 import micdoodle8.mods.galacticraft.core.blocks.BlockStairsGC;
 import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
 import micdoodle8.mods.galacticraft.core.items.ItemBlockGC;
@@ -7,12 +12,6 @@ import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
 import micdoodle8.mods.galacticraft.planets.mars.items.ItemBlockEgg;
 import micdoodle8.mods.galacticraft.planets.mars.items.ItemBlockMachine;
 import micdoodle8.mods.galacticraft.planets.mars.items.ItemBlockMars;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class MarsBlocks {
 

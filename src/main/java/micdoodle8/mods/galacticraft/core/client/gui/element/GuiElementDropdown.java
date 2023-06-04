@@ -1,9 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client.gui.element;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.client.gui.screen.SmallFontRenderer;
-import micdoodle8.mods.galacticraft.core.util.ColorUtil;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
@@ -13,6 +9,9 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.gui.screen.SmallFontRenderer;
+import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 
 public class GuiElementDropdown extends GuiButton {
 
@@ -138,17 +137,17 @@ public class GuiElementDropdown extends GuiButton {
                 && par3 >= this.yPosition
                 && par2 < this.xPosition + this.width
                 && par3 < this.yPosition + this.height * this.optionStrings.length) {
-            if (this.parentClass.canBeClickedBy(this, par1Minecraft.thePlayer)) {
-                final int optionClicked = (par3 - this.yPosition) / this.height;
-                this.selectedOption = optionClicked % this.optionStrings.length;
-                this.dropdownClicked = false;
-                this.parentClass.onSelectionChanged(this, this.selectedOption);
-                return true;
-            }
-            this.parentClass.onIntruderInteraction();
-        } else {
-            this.dropdownClicked = false;
-        }
+                    if (this.parentClass.canBeClickedBy(this, par1Minecraft.thePlayer)) {
+                        final int optionClicked = (par3 - this.yPosition) / this.height;
+                        this.selectedOption = optionClicked % this.optionStrings.length;
+                        this.dropdownClicked = false;
+                        this.parentClass.onSelectionChanged(this, this.selectedOption);
+                        return true;
+                    }
+                    this.parentClass.onIntruderInteraction();
+                } else {
+                    this.dropdownClicked = false;
+                }
 
         return false;
     }

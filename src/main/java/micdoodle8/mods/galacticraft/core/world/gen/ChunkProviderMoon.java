@@ -4,18 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.prefab.world.gen.MapGenBaseMeta;
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.perlin.NoiseModule;
-import micdoodle8.mods.galacticraft.core.perlin.generator.Gradient;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.world.gen.dungeon.MapGenDungeon;
-import micdoodle8.mods.galacticraft.core.world.gen.dungeon.RoomBossMoon;
-import micdoodle8.mods.galacticraft.core.world.gen.dungeon.RoomChestsMoon;
-import micdoodle8.mods.galacticraft.core.world.gen.dungeon.RoomEmptyMoon;
-import micdoodle8.mods.galacticraft.core.world.gen.dungeon.RoomSpawnerMoon;
-import micdoodle8.mods.galacticraft.core.world.gen.dungeon.RoomTreasureMoon;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
@@ -27,6 +15,18 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderGenerate;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import micdoodle8.mods.galacticraft.api.prefab.world.gen.MapGenBaseMeta;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.perlin.NoiseModule;
+import micdoodle8.mods.galacticraft.core.perlin.generator.Gradient;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.world.gen.dungeon.MapGenDungeon;
+import micdoodle8.mods.galacticraft.core.world.gen.dungeon.RoomBossMoon;
+import micdoodle8.mods.galacticraft.core.world.gen.dungeon.RoomChestsMoon;
+import micdoodle8.mods.galacticraft.core.world.gen.dungeon.RoomEmptyMoon;
+import micdoodle8.mods.galacticraft.core.world.gen.dungeon.RoomSpawnerMoon;
+import micdoodle8.mods.galacticraft.core.world.gen.dungeon.RoomTreasureMoon;
 
 public class ChunkProviderMoon extends ChunkProviderGenerate {
 
@@ -340,7 +340,8 @@ public class ChunkProviderMoon extends ChunkProviderGenerate {
     }
 
     @Override
-    public List<BiomeGenBase.SpawnListEntry> getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int i, int j, int k) {
+    public List<BiomeGenBase.SpawnListEntry> getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int i, int j,
+            int k) {
         if (par1EnumCreatureType == EnumCreatureType.monster) {
             return BiomeGenBaseMoon.moonFlat.getSpawnableList(par1EnumCreatureType);
         }

@@ -1,10 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client.gui.screen;
 
-import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
-import micdoodle8.mods.galacticraft.api.client.IScreenManager;
-import micdoodle8.mods.galacticraft.core.util.GCLog;
-import micdoodle8.mods.galacticraft.core.util.MapUtil;
-
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.DynamicTexture;
@@ -14,6 +9,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldProvider;
 
 import org.lwjgl.opengl.GL11;
+
+import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
+import micdoodle8.mods.galacticraft.api.client.IScreenManager;
+import micdoodle8.mods.galacticraft.core.util.GCLog;
+import micdoodle8.mods.galacticraft.core.util.MapUtil;
 
 public class DrawGameScreen extends IScreenManager {
 

@@ -1,5 +1,14 @@
 package micdoodle8.mods.galacticraft.core.network;
 
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.EnumConnectionState;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ClientDisconnectionFromServerEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ServerConnectionFromClientEvent;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.dimension.SpaceRace;
 import micdoodle8.mods.galacticraft.core.dimension.SpaceRaceManager;
@@ -12,16 +21,6 @@ import micdoodle8.mods.galacticraft.core.util.GCLog;
 import micdoodle8.mods.galacticraft.core.util.MapUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import micdoodle8.mods.galacticraft.core.world.ChunkLoadingCallback;
-
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.EnumConnectionState;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
-import cpw.mods.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
-import cpw.mods.fml.common.network.FMLNetworkEvent.ClientDisconnectionFromServerEvent;
-import cpw.mods.fml.common.network.FMLNetworkEvent.ServerConnectionFromClientEvent;
 
 @SuppressWarnings("unchecked")
 public class ConnectionEvents {
@@ -72,8 +71,7 @@ public class ConnectionEvents {
             final Integer[] idList = (Integer[]) WorldUtil.getPlanetList().get(0);
             StringBuilder ids = new StringBuilder();
             for (final Integer element : idList) {
-                ids.append(element.toString())
-                       .append(" ");
+                ids.append(element.toString()).append(" ");
             }
             GCLog.info("Galacticraft server sending dimension IDs to connecting client: " + ids.toString());
         }

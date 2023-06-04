@@ -22,40 +22,40 @@ public abstract class StructureComponentMoon extends StructureComponent {
             int var5, int var6, int var7, int var8, int var9) {
         return switch (var9) {
             case 0 -> new StructureBoundingBox(
-                                    var0 + var3,
-                                    var1 + var4,
-                                    var2 + var5,
-                                    var0 + var6 + var3,
-                                    var1 + var7 + var4,
-                                    var2 + var8 + var5);
+                    var0 + var3,
+                    var1 + var4,
+                    var2 + var5,
+                    var0 + var6 + var3,
+                    var1 + var7 + var4,
+                    var2 + var8 + var5);
             case 1 -> new StructureBoundingBox(
-                                    var0 - var8 + var5,
-                                    var1 + var4,
-                                    var2 + var3,
-                                    var0 + var5,
-                                    var1 + var7 + var4,
-                                    var2 + var6 + var3);
+                    var0 - var8 + var5,
+                    var1 + var4,
+                    var2 + var3,
+                    var0 + var5,
+                    var1 + var7 + var4,
+                    var2 + var6 + var3);
             case 2 -> new StructureBoundingBox(
-                                    var0 - var6 - var3,
-                                    var1 + var4,
-                                    var2 - var8 - var5,
-                                    var0 - var3,
-                                    var1 + var7 + var4,
-                                    var2 - var5);
+                    var0 - var6 - var3,
+                    var1 + var4,
+                    var2 - var8 - var5,
+                    var0 - var3,
+                    var1 + var7 + var4,
+                    var2 - var5);
             case 3 -> new StructureBoundingBox(
-                                    var0 + var5,
-                                    var1 + var4,
-                                    var2 - var6,
-                                    var0 + var8 + var5,
-                                    var1 + var7 + var4,
-                                    var2 + var3);
+                    var0 + var5,
+                    var1 + var4,
+                    var2 - var6,
+                    var0 + var8 + var5,
+                    var1 + var7 + var4,
+                    var2 + var3);
             default -> new StructureBoundingBox(
-                                    var0 + var3,
-                                    var1 + var4,
-                                    var2 + var5,
-                                    var0 + var6 + var3,
-                                    var1 + var7 + var4,
-                                    var2 + var8 + var5);
+                    var0 + var3,
+                    var1 + var4,
+                    var2 + var5,
+                    var0 + var6 + var3,
+                    var1 + var7 + var4,
+                    var2 + var8 + var5);
         };
     }
 

@@ -1,5 +1,15 @@
 package micdoodle8.mods.galacticraft.core.entities.player;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraftforge.common.MinecraftForge;
+
 import micdoodle8.mods.galacticraft.api.entity.IIgnoreShift;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderMoon;
@@ -10,16 +20,6 @@ import micdoodle8.mods.galacticraft.core.util.DamageSourceGC;
 import micdoodle8.mods.galacticraft.planets.asteroids.dimension.WorldProviderAsteroids;
 import micdoodle8.mods.galacticraft.planets.asteroids.items.ItemArmorAsteroids;
 import micdoodle8.mods.galacticraft.planets.mars.items.ItemArmorMars;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraftforge.common.MinecraftForge;
 
 public class PlayerServer implements IPlayerServer {
 

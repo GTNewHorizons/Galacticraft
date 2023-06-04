@@ -1,12 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.mars.items;
 
-import micdoodle8.mods.galacticraft.api.item.IHoldableItem;
-import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.planets.mars.blocks.BlockMachineMars;
-import micdoodle8.mods.galacticraft.planets.mars.blocks.BlockMachineMarsT2;
-import micdoodle8.mods.galacticraft.planets.mars.blocks.MarsBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -14,6 +7,12 @@ import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.item.IHoldableItem;
+import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
+import micdoodle8.mods.galacticraft.planets.mars.blocks.BlockMachineMars;
+import micdoodle8.mods.galacticraft.planets.mars.blocks.BlockMachineMarsT2;
+import micdoodle8.mods.galacticraft.planets.mars.blocks.MarsBlocks;
 
 public class ItemBlockMachine extends ItemBlockDesc implements IHoldableItem {
 

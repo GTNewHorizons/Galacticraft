@@ -3,11 +3,6 @@ package micdoodle8.mods.galacticraft.core.blocks;
 import java.util.List;
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.block.IPartialSealableBlock;
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityMulti;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockDirectional;
@@ -30,6 +25,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.block.IPartialSealableBlock;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityMulti;
 
 public class BlockMulti extends BlockContainer implements IPartialSealableBlock, ITileEntityProvider {
 
@@ -112,8 +111,8 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
     }
 
     @Override
-    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list,
-            Entity entity) {
+    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb,
+            List<AxisAlignedBB> list, Entity entity) {
         final int meta = world.getBlockMetadata(x, y, z);
 
         if (meta == 2 || meta == 6) {

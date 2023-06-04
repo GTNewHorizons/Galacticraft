@@ -1,16 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.items;
 
-import micdoodle8.mods.galacticraft.api.item.IHoldableItem;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.dimension.WorldProviderSpaceStation;
-import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.planets.asteroids.ConfigManagerAsteroids;
-import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
-import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityAstroMiner;
-import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityMinerBase;
-
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +13,16 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.item.IHoldableItem;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.dimension.WorldProviderSpaceStation;
+import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.planets.asteroids.ConfigManagerAsteroids;
+import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
+import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityAstroMiner;
+import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityMinerBase;
 
 public class ItemAstroMiner extends Item implements IHoldableItem {
 
@@ -62,8 +61,8 @@ public class ItemAstroMiner extends Item implements IHoldableItem {
 
         if (tile instanceof TileEntityMinerBase) {
             if (par3World.provider instanceof WorldProviderSpaceStation) {
-                par2EntityPlayer.addChatMessage(
-                        new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner7.fail")));
+                par2EntityPlayer
+                        .addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner7.fail")));
                 return false;
             }
 
@@ -81,10 +80,9 @@ public class ItemAstroMiner extends Item implements IHoldableItem {
             final EntityPlayerMP playerMP = (EntityPlayerMP) par2EntityPlayer;
 
             final int astroCount = GCPlayerStats.get(playerMP).astroMinerCount;
-            if (astroCount >= ConfigManagerAsteroids.astroMinerMax
-                    && !par2EntityPlayer.capabilities.isCreativeMode) {
-                par2EntityPlayer.addChatMessage(
-                        new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner2.fail")));
+            if (astroCount >= ConfigManagerAsteroids.astroMinerMax && !par2EntityPlayer.capabilities.isCreativeMode) {
+                par2EntityPlayer
+                        .addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner2.fail")));
                 return false;
             }
 

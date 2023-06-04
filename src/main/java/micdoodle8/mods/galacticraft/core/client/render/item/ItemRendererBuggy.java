@@ -1,9 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client.render.item;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.entities.EntityBuggy;
-
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
@@ -13,6 +9,8 @@ import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.entities.EntityBuggy;
 
 public class ItemRendererBuggy implements IItemRenderer {
 

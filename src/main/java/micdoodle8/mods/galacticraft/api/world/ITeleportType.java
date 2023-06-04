@@ -2,12 +2,12 @@ package micdoodle8.mods.galacticraft.api.world;
 
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
 
 /**
  * Implement into WorldProvider for customizing spawning players and other entities into space dimension

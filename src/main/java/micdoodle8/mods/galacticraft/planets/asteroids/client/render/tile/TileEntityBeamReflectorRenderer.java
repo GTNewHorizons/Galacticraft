@@ -1,8 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.client.render.tile;
 
-import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
-import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityBeamReflector;
-
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -14,6 +11,8 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
+import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityBeamReflector;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityBeamReflectorRenderer extends TileEntitySpecialRenderer {

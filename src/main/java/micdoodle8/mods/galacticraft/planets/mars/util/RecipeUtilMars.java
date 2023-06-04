@@ -1,13 +1,13 @@
 package micdoodle8.mods.galacticraft.planets.mars.util;
 
+import net.minecraft.item.ItemStack;
+
 import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
 import micdoodle8.mods.galacticraft.api.recipe.INasaWorkbenchRecipe;
 import micdoodle8.mods.galacticraft.planets.asteroids.inventory.InventorySchematicAstroMiner;
 import micdoodle8.mods.galacticraft.planets.asteroids.inventory.InventorySchematicTier3Rocket;
 import micdoodle8.mods.galacticraft.planets.mars.inventory.InventorySchematicCargoRocket;
 import micdoodle8.mods.galacticraft.planets.mars.inventory.InventorySchematicTier2Rocket;
-
-import net.minecraft.item.ItemStack;
 
 public class RecipeUtilMars {
 

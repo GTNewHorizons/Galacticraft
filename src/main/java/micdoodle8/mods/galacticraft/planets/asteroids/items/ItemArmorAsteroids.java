@@ -1,9 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.items;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumRarity;
@@ -12,6 +8,9 @@ import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
+import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 
 public class ItemArmorAsteroids extends ItemArmor {
 
@@ -40,8 +39,8 @@ public class ItemArmorAsteroids extends ItemArmor {
             }
             if (stack.getItem() == AsteroidsItems.titaniumChestplate
                     || stack.getItem() == AsteroidsItems.titaniumBoots) {
-                        return AsteroidsModule.TEXTURE_PREFIX + "textures/model/armor/titanium_2.png";
-                    }
+                return AsteroidsModule.TEXTURE_PREFIX + "textures/model/armor/titanium_2.png";
+            }
             if (stack.getItem() == AsteroidsItems.titaniumLeggings) {
                 return AsteroidsModule.TEXTURE_PREFIX + "textures/model/armor/titanium_3.png";
             }

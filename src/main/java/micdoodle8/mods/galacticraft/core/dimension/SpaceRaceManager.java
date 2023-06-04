@@ -5,17 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
-import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
-import micdoodle8.mods.galacticraft.core.util.EnumColor;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
-import micdoodle8.mods.galacticraft.core.wrappers.FlagData;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -27,6 +16,17 @@ import net.minecraft.util.EnumChatFormatting;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+
+import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
+import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple;
+import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
+import micdoodle8.mods.galacticraft.core.util.EnumColor;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
+import micdoodle8.mods.galacticraft.core.wrappers.FlagData;
 
 public class SpaceRaceManager {
 
@@ -47,7 +47,8 @@ public class SpaceRaceManager {
             boolean playerOnline = false;
 
             for (final Object o : MinecraftServer.getServer().getConfigurationManager().playerEntityList) {
-                if (o instanceof EntityPlayer player && race.getPlayerNames().contains(player.getGameProfile().getName())) {
+                if (o instanceof EntityPlayer player
+                        && race.getPlayerNames().contains(player.getGameProfile().getName())) {
                     final CelestialBody body = GalaxyRegistry
                             .getCelestialBodyFromDimensionID(player.worldObj.provider.dimensionId);
 

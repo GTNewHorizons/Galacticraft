@@ -1,5 +1,13 @@
 package micdoodle8.mods.galacticraft.core.command;
 
+import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
+import net.minecraft.command.ICommandSender;
+import net.minecraft.command.WrongUsageException;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentText;
+
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.dimension.SpaceStationWorldData;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
@@ -8,14 +16,6 @@ import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
-
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.command.WrongUsageException;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ChatComponentText;
 
 public class CommandSpaceStationChangeOwner extends CommandBase {
 
@@ -91,8 +91,8 @@ public class CommandSpaceStationChangeOwner extends CommandBase {
                         .sendTo(
                                 new PacketSimple(
                                         EnumSimplePacket.C_UPDATE_SPACESTATION_CLIENT_ID,
-                                        new Object[] { WorldUtil
-                                                .spaceStationDataToString(stats.spaceStationDimensionData) }),
+                                        new Object[] {
+                                                WorldUtil.spaceStationDataToString(stats.spaceStationDimensionData) }),
                                 oldPlayer);
             }
             if (newPlayer != null) {
@@ -103,8 +103,8 @@ public class CommandSpaceStationChangeOwner extends CommandBase {
                         .sendTo(
                                 new PacketSimple(
                                         EnumSimplePacket.C_UPDATE_SPACESTATION_CLIENT_ID,
-                                        new Object[] { WorldUtil
-                                                .spaceStationDataToString(stats.spaceStationDimensionData) }),
+                                        new Object[] {
+                                                WorldUtil.spaceStationDataToString(stats.spaceStationDimensionData) }),
                                 newPlayer);
             }
         } catch (final Exception var6) {

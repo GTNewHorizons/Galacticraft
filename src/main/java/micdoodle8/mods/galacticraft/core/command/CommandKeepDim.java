@@ -1,14 +1,14 @@
 package micdoodle8.mods.galacticraft.core.command;
 
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
+
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
 
 public class CommandKeepDim extends CommandBase {
 
@@ -35,8 +35,7 @@ public class CommandKeepDim extends CommandBase {
             throw new WrongUsageException("Too many command arguments! Usage: " + this.getCommandUsage(icommandsender));
         }
         try {
-            playerBase = PlayerUtil
-                    .getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
+            playerBase = PlayerUtil.getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
 
             if (playerBase != null) {
                 int dimID;
@@ -59,8 +58,7 @@ public class CommandKeepDim extends CommandBase {
                 } else if (ConfigManagerCore.setUnloaded(dimID)) {
                     playerBase.addChatMessage(
                             new ChatComponentText(
-                                    "[GCKeepLoaded] Successfully set dimension " + dimID
-                                            + " to not load staticly"));
+                                    "[GCKeepLoaded] Successfully set dimension " + dimID + " to not load staticly"));
                 } else {
                     playerBase.addChatMessage(
                             new ChatComponentText("[GCKeepLoaded] Failed to set dimension as not static"));

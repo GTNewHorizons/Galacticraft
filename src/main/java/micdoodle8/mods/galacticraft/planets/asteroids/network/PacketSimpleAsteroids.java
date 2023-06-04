@@ -5,15 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.core.network.IPacket;
-import micdoodle8.mods.galacticraft.core.network.NetworkUtil;
-import micdoodle8.mods.galacticraft.core.util.GCLog;
-import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityGrapple;
-import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityMinerBase;
-import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityShortRangeTelepad;
-
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,6 +15,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.core.network.IPacket;
+import micdoodle8.mods.galacticraft.core.network.NetworkUtil;
+import micdoodle8.mods.galacticraft.core.util.GCLog;
+import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityGrapple;
+import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityMinerBase;
+import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityShortRangeTelepad;
 
 public class PacketSimpleAsteroids implements IPacket {
 

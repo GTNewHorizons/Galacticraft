@@ -3,18 +3,16 @@ package micdoodle8.mods.galacticraft.planets.asteroids.client.render;
 import java.util.ArrayList;
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityBeamOutput;
-
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityBeamOutput;
 
 public class NetworkRenderer {
 

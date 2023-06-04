@@ -1,8 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.inventory;
 
-import micdoodle8.mods.galacticraft.core.inventory.SlotRocketBenchResult;
-import micdoodle8.mods.galacticraft.planets.mars.util.RecipeUtilMars;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
@@ -13,6 +10,9 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import micdoodle8.mods.galacticraft.core.inventory.SlotRocketBenchResult;
+import micdoodle8.mods.galacticraft.planets.mars.util.RecipeUtilMars;
 
 public class ContainerSchematicTier3Rocket extends Container {
 

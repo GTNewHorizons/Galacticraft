@@ -2,15 +2,14 @@ package micdoodle8.mods.galacticraft.planets.asteroids;
 
 import java.io.File;
 
-import micdoodle8.mods.galacticraft.core.Constants;
-import micdoodle8.mods.galacticraft.planets.mars.ConfigManagerMars;
-
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
 import org.apache.logging.log4j.Level;
 
 import cpw.mods.fml.common.FMLLog;
+import micdoodle8.mods.galacticraft.core.Constants;
+import micdoodle8.mods.galacticraft.planets.mars.ConfigManagerMars;
 
 public class ConfigManagerAsteroids {
 

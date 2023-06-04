@@ -3,8 +3,6 @@ package micdoodle8.mods.galacticraft.core.entities;
 import java.util.Iterator;
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -24,6 +22,7 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 
 public class EntityArrowGC extends Entity {
 

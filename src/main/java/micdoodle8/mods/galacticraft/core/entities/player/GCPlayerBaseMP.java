@@ -1,13 +1,12 @@
 package micdoodle8.mods.galacticraft.core.entities.player;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 
 import api.player.server.ServerPlayerAPI;
 import api.player.server.ServerPlayerBase;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 
 public class GCPlayerBaseMP extends ServerPlayerBase {
 

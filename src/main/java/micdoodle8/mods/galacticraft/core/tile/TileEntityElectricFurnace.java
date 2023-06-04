@@ -3,14 +3,6 @@ package micdoodle8.mods.galacticraft.core.tile;
 import java.util.HashSet;
 import java.util.Set;
 
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
-import micdoodle8.mods.galacticraft.core.energy.tile.EnergyStorageTile;
-import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseElectricBlockWithInventory;
-import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -19,6 +11,13 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 
 import cpw.mods.fml.relauncher.Side;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
+import micdoodle8.mods.galacticraft.core.energy.tile.EnergyStorageTile;
+import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseElectricBlockWithInventory;
+import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventory implements ISidedInventory {
     // The electric furnace is 50% faster than a vanilla Furnace
@@ -96,10 +95,11 @@ public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventor
                         this.processTicks = this.canProcess() ? this.processTimeRequired : 0;
                     }
                 } else // Apply a "cooling down" process if the electric furnace runs out of energy
-                // while smelting
-                if (this.processTicks > 0 && this.processTicks < this.processTimeRequired && this.worldObj.rand.nextInt(4) == 0) {
-                    this.processTicks++;
-                }
+                       // while smelting
+                    if (this.processTicks > 0 && this.processTicks < this.processTimeRequired
+                            && this.worldObj.rand.nextInt(4) == 0) {
+                                this.processTicks++;
+                            }
             } else {
                 this.processTicks = 0;
             }

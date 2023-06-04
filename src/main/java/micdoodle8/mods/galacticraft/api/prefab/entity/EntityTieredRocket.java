@@ -3,6 +3,18 @@ package micdoodle8.mods.galacticraft.api.prefab.entity;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldProvider;
+import net.minecraft.world.WorldServer;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import io.netty.buffer.ByteBuf;
 import micdoodle8.mods.galacticraft.api.entity.ICameraZoomEntity;
 import micdoodle8.mods.galacticraft.api.entity.IDockable;
 import micdoodle8.mods.galacticraft.api.entity.IRocketType;
@@ -21,19 +33,6 @@ import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldProvider;
-import net.minecraft.world.WorldServer;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import io.netty.buffer.ByteBuf;
 
 /**
  * Do not include this prefab class in your released mod download.
@@ -66,7 +65,8 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
     }
 
     public void igniteCheckingCooldown() {
-        if (!this.worldObj.isRemote && this.launchCooldown <= 0 && this.launchPhase != EnumLaunchPhase.IGNITED.ordinal()) {
+        if (!this.worldObj.isRemote && this.launchCooldown <= 0
+                && this.launchPhase != EnumLaunchPhase.IGNITED.ordinal()) {
             this.setFrequency();
             this.initiatePlanetsPreGen(this.chunkCoordX, this.chunkCoordZ);
             this.ignite();
@@ -359,10 +359,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                             if (this.destinationFrequency != 1) {
                                 fromSky = 0;
                             }
-                            e.setPosition(
-                                    this.targetVec.x + 0.5F,
-                                    this.targetVec.y + fromSky,
-                                    this.targetVec.z + 0.5f);
+                            e.setPosition(this.targetVec.x + 0.5F, this.targetVec.y + fromSky, this.targetVec.z + 0.5f);
                             ((EntityAutoRocket) e).landing = true;
                             ((EntityAutoRocket) e).setWaitForPlayer(false);
                         } else {

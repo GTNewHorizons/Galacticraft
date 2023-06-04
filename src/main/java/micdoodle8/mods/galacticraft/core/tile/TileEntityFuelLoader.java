@@ -1,20 +1,5 @@
 package micdoodle8.mods.galacticraft.core.tile;
 
-import micdoodle8.mods.galacticraft.api.entity.IFuelable;
-import micdoodle8.mods.galacticraft.api.entity.IFuelableTiered;
-import micdoodle8.mods.galacticraft.api.recipe.RocketFuelRecipe;
-import micdoodle8.mods.galacticraft.api.tile.ILandingPadAttachable;
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
-import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseElectricBlockWithInventory;
-import micdoodle8.mods.galacticraft.core.items.GCItems;
-import micdoodle8.mods.galacticraft.core.items.ItemCanisterGeneric;
-import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.FluidUtil;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,6 +15,20 @@ import net.minecraftforge.fluids.IFluidContainerItem;
 import net.minecraftforge.fluids.IFluidHandler;
 
 import cpw.mods.fml.relauncher.Side;
+import micdoodle8.mods.galacticraft.api.entity.IFuelable;
+import micdoodle8.mods.galacticraft.api.entity.IFuelableTiered;
+import micdoodle8.mods.galacticraft.api.recipe.RocketFuelRecipe;
+import micdoodle8.mods.galacticraft.api.tile.ILandingPadAttachable;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
+import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseElectricBlockWithInventory;
+import micdoodle8.mods.galacticraft.core.items.GCItems;
+import micdoodle8.mods.galacticraft.core.items.ItemCanisterGeneric;
+import micdoodle8.mods.galacticraft.core.util.Annotations.NetworkedField;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
+import micdoodle8.mods.galacticraft.core.util.FluidUtil;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
         implements ISidedInventory, IFluidHandler, ILandingPadAttachable {
@@ -257,7 +256,8 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
         int used = 0;
 
-        if (from.equals(ForgeDirection.getOrientation(this.getBlockMetadata() + 2).getOpposite()) && RocketFuelRecipe.isValidFuel(resource)) {
+        if (from.equals(ForgeDirection.getOrientation(this.getBlockMetadata() + 2).getOpposite())
+                && RocketFuelRecipe.isValidFuel(resource)) {
             used = this.fuelTank.fill(resource, doFill);
         }
 

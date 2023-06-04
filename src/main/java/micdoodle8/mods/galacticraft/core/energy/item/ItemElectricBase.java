@@ -2,13 +2,6 @@ package micdoodle8.mods.galacticraft.core.energy.item;
 
 import java.util.List;
 
-import mekanism.api.energy.IEnergizedItem;
-import micdoodle8.mods.galacticraft.api.item.ElectricItemHelper;
-import micdoodle8.mods.galacticraft.api.item.IItemElectricBase;
-import micdoodle8.mods.galacticraft.core.energy.EnergyConfigHandler;
-import micdoodle8.mods.galacticraft.core.energy.EnergyDisplayHelper;
-import micdoodle8.mods.galacticraft.core.items.ItemBatteryInfinite;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -25,6 +18,12 @@ import cpw.mods.fml.common.Optional.InterfaceList;
 import cpw.mods.fml.common.Optional.Method;
 import ic2.api.item.IElectricItemManager;
 import ic2.api.item.ISpecialElectricItem;
+import mekanism.api.energy.IEnergizedItem;
+import micdoodle8.mods.galacticraft.api.item.ElectricItemHelper;
+import micdoodle8.mods.galacticraft.api.item.IItemElectricBase;
+import micdoodle8.mods.galacticraft.core.energy.EnergyConfigHandler;
+import micdoodle8.mods.galacticraft.core.energy.EnergyDisplayHelper;
+import micdoodle8.mods.galacticraft.core.items.ItemBatteryInfinite;
 
 @InterfaceList({ @Interface(modid = "CoFHAPI|energy", iface = "cofh.api.energy.IEnergyContainerItem"),
         @Interface(modid = "IC2API", iface = "ic2.api.item.ISpecialElectricItem"),

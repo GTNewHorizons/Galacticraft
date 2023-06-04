@@ -7,13 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import micdoodle8.mods.galacticraft.core.Constants;
-import micdoodle8.mods.galacticraft.core.obfuscation.FieldObfuscationEntry;
-import micdoodle8.mods.galacticraft.core.obfuscation.MethodObfuscationEntry;
-import micdoodle8.mods.galacticraft.core.obfuscation.ObfuscationEntry;
-import micdoodle8.mods.galacticraft.planets.mars.entities.EntitySlimeling;
-import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntitySlimelingEgg;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -40,6 +33,12 @@ import cpw.mods.fml.common.versioning.VersionParser;
 import cpw.mods.fml.relauncher.FMLInjectionData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.Constants;
+import micdoodle8.mods.galacticraft.core.obfuscation.FieldObfuscationEntry;
+import micdoodle8.mods.galacticraft.core.obfuscation.MethodObfuscationEntry;
+import micdoodle8.mods.galacticraft.core.obfuscation.ObfuscationEntry;
+import micdoodle8.mods.galacticraft.planets.mars.entities.EntitySlimeling;
+import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntitySlimelingEgg;
 
 public class VersionUtil {
 

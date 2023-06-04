@@ -1,5 +1,17 @@
 package micdoodle8.mods.galacticraft.core.entities.player;
 
+import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.ChunkCoordIntPair;
+import net.minecraftforge.common.MinecraftForge;
+
+import cpw.mods.fml.client.FMLClientHandler;
 import micdoodle8.mods.galacticraft.api.entity.ICameraZoomEntity;
 import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
@@ -20,19 +32,6 @@ import micdoodle8.mods.galacticraft.core.util.EnumColor;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
-
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.ChunkCoordIntPair;
-import net.minecraftforge.common.MinecraftForge;
-
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class PlayerClient implements IPlayerClient {
 
@@ -136,7 +135,7 @@ public class PlayerClient implements IPlayerClient {
                 final float dYmax = 0.3F * stats.landingTicks / GCPlayerStatsClient.MAX_LANDINGTICKS;
                 float factor = 1F;
                 for (int i = 0; i <= stats.landingTicks; i++) {
-                    stats.landingYOffset[i] = dYmax * MathHelper.sin(i * (float)Math.PI / stats.landingTicks) * factor;
+                    stats.landingYOffset[i] = dYmax * MathHelper.sin(i * (float) Math.PI / stats.landingTicks) * factor;
                     factor *= 0.97F;
                 }
             }
@@ -153,7 +152,8 @@ public class PlayerClient implements IPlayerClient {
         final boolean ridingThirdPersonEntity = player.ridingEntity instanceof ICameraZoomEntity
                 && ((ICameraZoomEntity) player.ridingEntity).defaultThirdPerson();
 
-        if (ridingThirdPersonEntity && !stats.lastRidingCameraZoomEntity && !ConfigManagerCore.disableVehicleCameraChanges) {
+        if (ridingThirdPersonEntity && !stats.lastRidingCameraZoomEntity
+                && !ConfigManagerCore.disableVehicleCameraChanges) {
             FMLClientHandler.instance().getClient().gameSettings.thirdPersonView = 1;
         }
 
@@ -251,7 +251,8 @@ public class PlayerClient implements IPlayerClient {
 
             // If the block below is the moon block
             // And is the correct metadata (moon turf)
-            if (player.worldObj.getBlock(iPosX, iPosY, iPosZ) == GCBlocks.blockMoon && player.worldObj.getBlockMetadata(iPosX, iPosY, iPosZ) == 5) {
+            if (player.worldObj.getBlock(iPosX, iPosY, iPosZ) == GCBlocks.blockMoon
+                    && player.worldObj.getBlockMetadata(iPosX, iPosY, iPosZ) == 5) {
                 // If it has been long enough since the last step
                 if (stats.distanceSinceLastStep > 0.35) {
                     Vector3 pos = new Vector3(player);

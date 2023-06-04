@@ -2,13 +2,6 @@ package micdoodle8.mods.galacticraft.planets.asteroids.entities;
 
 import java.util.List;
 
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.api.world.IZeroGDimension;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.entities.player.FreefallHandler;
-import micdoodle8.mods.galacticraft.planets.asteroids.network.PacketSimpleAsteroids;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -27,6 +20,12 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.api.world.IZeroGDimension;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.entities.player.FreefallHandler;
+import micdoodle8.mods.galacticraft.planets.asteroids.network.PacketSimpleAsteroids;
 
 public class EntityGrapple extends Entity implements IProjectile {
 
@@ -174,8 +173,7 @@ public class EntityGrapple extends Entity implements IProjectile {
                         (this.posX - shootingEntity.posX) / 12.0F,
                         (this.posY - shootingEntity.posY) / 12.0F,
                         (this.posZ - shootingEntity.posZ) / 12.0F);
-                if (shootingEntity.worldObj.isRemote
-                        && shootingEntity.worldObj.provider instanceof IZeroGDimension) {
+                if (shootingEntity.worldObj.isRemote && shootingEntity.worldObj.provider instanceof IZeroGDimension) {
                     FreefallHandler.updateFreefall(shootingEntity);
                 }
             }

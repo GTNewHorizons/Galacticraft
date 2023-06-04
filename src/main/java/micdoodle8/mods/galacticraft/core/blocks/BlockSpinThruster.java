@@ -2,14 +2,6 @@ package micdoodle8.mods.galacticraft.core.blocks;
 
 import java.util.Random;
 
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.dimension.SpinManager;
-import micdoodle8.mods.galacticraft.core.dimension.WorldProviderSpaceStation;
-import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityThruster;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -25,6 +17,13 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.dimension.SpinManager;
+import micdoodle8.mods.galacticraft.core.dimension.WorldProviderSpaceStation;
+import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
+import micdoodle8.mods.galacticraft.core.tile.TileEntityThruster;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IBlockShiftDesc {
 
@@ -179,13 +178,11 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
                 var7 = true;
             }
 
-            if (!BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z - 1, ForgeDirection.SOUTH)
-                    && var6 == 3) {
+            if (!BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z - 1, ForgeDirection.SOUTH) && var6 == 3) {
                 var7 = true;
             }
 
-            if (!BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z + 1, ForgeDirection.NORTH)
-                    && var6 == 4) {
+            if (!BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z + 1, ForgeDirection.NORTH) && var6 == 4) {
                 var7 = true;
             }
 
@@ -254,8 +251,9 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
         // TODO this is torch code as a placeholder, still need to adjust positioning
         // and particle type
         // Also make small thrust sounds
-        if (par1World.provider instanceof WorldProviderSpaceStation && (((WorldProviderSpaceStation) par1World.provider).getSpinManager().thrustersFiring
-                || par5Random.nextInt(80) == 0)) {
+        if (par1World.provider instanceof WorldProviderSpaceStation
+                && (((WorldProviderSpaceStation) par1World.provider).getSpinManager().thrustersFiring
+                        || par5Random.nextInt(80) == 0)) {
             final int var6 = par1World.getBlockMetadata(x, y, z) & 7;
             final double var7 = x + 0.5F;
             final double var9 = y + 0.7F;
