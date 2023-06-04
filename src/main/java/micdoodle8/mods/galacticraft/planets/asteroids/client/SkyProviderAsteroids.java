@@ -5,7 +5,6 @@ import java.util.Random;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -26,9 +25,6 @@ public class SkyProviderAsteroids extends IRenderHandler {
     private static final ResourceLocation overworldTexture = new ResourceLocation(
             GalacticraftCore.ASSET_PREFIX,
             "textures/gui/celestialbodies/earth.png");
-    private static final ResourceLocation galaxyTexture = new ResourceLocation(
-            MarsModule.ASSET_PREFIX,
-            "textures/gui/planets/galaxy.png");
     private static final ResourceLocation sunTexture = new ResourceLocation("textures/environment/sun.png");
 
     public int starGLCallList = GLAllocation.generateDisplayLists(3);

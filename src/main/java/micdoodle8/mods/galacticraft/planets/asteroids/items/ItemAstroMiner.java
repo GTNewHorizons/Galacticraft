@@ -1,7 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.items;
 
-import java.util.List;
-
 import micdoodle8.mods.galacticraft.api.item.IHoldableItem;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderSpaceStation;
@@ -107,13 +105,6 @@ public class ItemAstroMiner extends Item implements IHoldableItem {
             }
         }
         return false;
-    }
-
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer player, List par2List, boolean b) {
-        // TODO
     }
 
     @Override

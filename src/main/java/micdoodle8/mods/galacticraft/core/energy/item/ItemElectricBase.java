@@ -23,8 +23,6 @@ import cofh.api.energy.IEnergyContainerItem;
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;
 import cpw.mods.fml.common.Optional.Method;
-import cpw.mods.fml.common.versioning.DefaultArtifactVersion;
-import cpw.mods.fml.relauncher.FMLInjectionData;
 import ic2.api.item.IElectricItemManager;
 import ic2.api.item.ISpecialElectricItem;
 
@@ -36,7 +34,6 @@ public abstract class ItemElectricBase extends Item
 
     private static Object itemManagerIC2;
     public float transferMax;
-    private final DefaultArtifactVersion mcVersion;
 
     public ItemElectricBase() {
         super();
@@ -44,8 +41,6 @@ public abstract class ItemElectricBase extends Item
         this.setMaxDamage(100);
         this.setNoRepair();
         this.setMaxTransfer();
-
-        this.mcVersion = new DefaultArtifactVersion((String) FMLInjectionData.data()[4]);
 
         if (EnergyConfigHandler.isIndustrialCraft2Loaded()) {
             itemManagerIC2 = new ElectricItemManagerIC2_1710();

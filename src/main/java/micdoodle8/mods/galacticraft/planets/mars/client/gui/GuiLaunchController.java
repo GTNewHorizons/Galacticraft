@@ -58,7 +58,6 @@ public class GuiLaunchController extends GuiContainerGC
     private GuiElementTextBox frequency;
     private GuiElementTextBox destinationFrequency;
     private final GuiElementInfoRegion electricInfoRegion = new GuiElementInfoRegion(0, 0, 52, 9, null, 0, 0, this);
-    private final GuiElementInfoRegion waterTankInfoRegion = new GuiElementInfoRegion(0, 0, 41, 28, null, 0, 0, this);
 
     private int cannotEditTimer;
 

@@ -29,7 +29,6 @@ import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.Loader;
 
 /**
  * This renders the Galacticraft equipment, if RenderPlayerAPI / Smart Moving are not installed.
@@ -63,12 +62,6 @@ public class ModelPlayerGC extends ModelBiped {
     private boolean usingParachute;
 
     private final IModelCustom frequencyModule;
-
-    private static boolean crossbowModLoaded = false;
-
-    static {
-        ModelPlayerGC.crossbowModLoaded = Loader.isModLoaded("CrossbowMod2");
-    }
 
     public ModelPlayerGC(float var1) {
         super(var1);

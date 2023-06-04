@@ -37,14 +37,10 @@ import ic2.api.energy.tile.IEnergySink;
  */
 public class EnergyNetwork implements IElectricityNetwork {
 
-    private final boolean isMekLoaded = EnergyConfigHandler.isMekanismLoaded()
-            && !EnergyConfigHandler.disableMekanismOutput;
     private final boolean isRF1Loaded = EnergyConfigHandler.isRFAPIv1Loaded() && !EnergyConfigHandler.disableRFOutput;
     private final boolean isRF2Loaded = EnergyConfigHandler.isRFAPIv2Loaded() && !EnergyConfigHandler.disableRFOutput;
     private final boolean isIC2Loaded = EnergyConfigHandler.isIndustrialCraft2Loaded()
             && !EnergyConfigHandler.disableIC2Output;
-    private final boolean isBCLoaded = EnergyConfigHandler.isBuildcraftLoaded()
-            && !EnergyConfigHandler.disableBuildCraftOutput;
 
     /*
      * Re-written by radfast for better performance Imagine a 30 producer, 80 acceptor network... Before: it would have

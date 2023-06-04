@@ -59,44 +59,10 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
     }
 
     @Override
-    protected void entityInit() {
-        super.entityInit();
-
-        // TODO reimplement once Resonant Engine comes out of alpha, bug DarkGuardsman
-        // for info
-        // if (Loader.isModLoaded("ICBM|Explosion"))
-        // {
-        // try
-        // {
-        // Class.forName("icbm.api.RadarRegistry").getMethod("register",
-        // Entity.class).invoke(null, this);
-        // }
-        // catch (Exception e)
-        // {
-        // e.printStackTrace();
-        // }
-        // }
-    }
-
-    @Override
     public void setDead() {
         if (!this.isDead) {
             super.setDead();
         }
-
-        // TODO reimplement once Resonant Engine comes out of alpha, bug Dark for info
-        // if (Loader.isModLoaded("ICBM|Explosion"))
-        // {
-        // try
-        // {
-        // Class.forName("icbm.api.RadarRegistry").getMethod("unregister",
-        // Entity.class).invoke(null, this);
-        // }
-        // catch (Exception e)
-        // {
-        // e.printStackTrace();
-        // }
-        // }
     }
 
     public void igniteCheckingCooldown() {

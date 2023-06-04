@@ -29,7 +29,6 @@ public class FreefallHandler {
     private static double pPrevMotionX;
     public static double pPrevMotionY;
     private static double pPrevMotionZ;
-    private static float jetpackBoost;
     public static boolean sneakLast;
 
     private final GCPlayerStatsClient stats;
@@ -170,7 +169,6 @@ public class FreefallHandler {
 
     @SideOnly(Side.CLIENT)
     public static void setupFreefallPre(EntityPlayerSP p) {
-        jetpackBoost = 0F;
         pPrevMotionX = p.motionX;
         pPrevMotionY = p.motionY;
         pPrevMotionZ = p.motionZ;

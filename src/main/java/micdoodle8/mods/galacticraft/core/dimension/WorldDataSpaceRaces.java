@@ -7,7 +7,6 @@ import net.minecraft.world.WorldSavedData;
 public class WorldDataSpaceRaces extends WorldSavedData {
 
     public static final String saveDataID = "GCSpaceRaceData";
-    private NBTTagCompound dataCompound;
 
     public WorldDataSpaceRaces(String id) {
         super(id);
@@ -30,7 +29,6 @@ public class WorldDataSpaceRaces extends WorldSavedData {
         if (worldData == null) {
             worldData = new WorldDataSpaceRaces(WorldDataSpaceRaces.saveDataID);
             world.setItemData(WorldDataSpaceRaces.saveDataID, worldData);
-            worldData.dataCompound = new NBTTagCompound();
             worldData.markDirty();
         }
 

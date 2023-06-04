@@ -10,7 +10,6 @@ import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityAstroMiner;
 
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
@@ -28,7 +27,6 @@ public class RenderAstroMiner extends Render {
 
     private static final float LSIZE = 0.12F;
     private static final float RETRACTIONSPEED = 0.02F;
-    private final RenderBlocks blockRenderer = new RenderBlocks();
     private float lastPartTime;
 
     public static ResourceLocation scanTexture;

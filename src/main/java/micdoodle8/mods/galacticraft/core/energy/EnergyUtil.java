@@ -31,13 +31,10 @@ import ic2.api.energy.tile.IEnergyTile;
 
 public class EnergyUtil {
 
-    private static final boolean isMekLoaded = EnergyConfigHandler.isMekanismLoaded();
     private static final boolean isRFLoaded = EnergyConfigHandler.isRFAPILoaded();
     private static final boolean isRF1Loaded = EnergyConfigHandler.isRFAPIv1Loaded();
     private static final boolean isRF2Loaded = EnergyConfigHandler.isRFAPIv2Loaded();
     private static final boolean isIC2Loaded = EnergyConfigHandler.isIndustrialCraft2Loaded();
-    private static final boolean isBCLoaded = EnergyConfigHandler.isBuildcraftLoaded();
-    private static final boolean isBC6Loaded = isBCLoaded && EnergyConfigHandler.getBuildcraftVersion() == 6;
     private static boolean isBCReallyLoaded = EnergyConfigHandler.isBuildcraftReallyLoaded();
 
     public static boolean voltageParameterIC2 = false;
@@ -45,12 +42,10 @@ public class EnergyUtil {
     public static Method injectEnergyIC2 = null;
     public static Method offeredEnergyIC2 = null;
     public static Method drawEnergyIC2 = null;
-    private static Class<?> clazzMekCable = null;
     public static Class<?> clazzEnderIOCable = null;
     public static Class<?> clazzMFRRednetEnergyCable = null;
     public static Class<?> clazzRailcraftEngine = null;
     private static Class<?> clazzPipeTile = null;
-    private static Class<?> clazzPipeWood = null;
     public static boolean initialisedIC2Methods = EnergyUtil.initialiseIC2Methods();
 
     /**
@@ -354,9 +349,6 @@ public class EnergyUtil {
     public static boolean initialiseIC2Methods() {
         // Initialise a couple of non-IC2 classes
         try {
-            clazzMekCable = Class.forName("codechicken.multipart.TileMultipart");
-        } catch (final Exception e) {}
-        try {
             clazzEnderIOCable = Class.forName("crazypants.enderio.conduit.TileConduitBundle");
         } catch (final Exception e) {}
         try {
@@ -368,9 +360,6 @@ public class EnergyUtil {
         } catch (final Exception e) {}
         try {
             clazzPipeTile = Class.forName("buildcraft.transport.TileGenericPipe");
-        } catch (final Exception e) {}
-        try {
-            clazzPipeWood = Class.forName("buildcraft.transport.pipes.PipePowerWood");
         } catch (final Exception e) {}
 
         if (isIC2Loaded) {

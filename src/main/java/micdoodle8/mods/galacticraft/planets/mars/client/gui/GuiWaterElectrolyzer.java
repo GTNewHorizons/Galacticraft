@@ -33,9 +33,6 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
     private static final ResourceLocation refineryTexture = new ResourceLocation(
             MarsModule.ASSET_PREFIX,
             "textures/gui/gasLiquefier.png");
-    private static final ResourceLocation terraformerGui = new ResourceLocation(
-            MarsModule.ASSET_PREFIX,
-            "textures/gui/terraformer.png");
 
     private static final ResourceLocation gasTextures = new ResourceLocation(
             AsteroidsModule.ASSET_PREFIX,

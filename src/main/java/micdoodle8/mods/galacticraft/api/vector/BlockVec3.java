@@ -515,18 +515,9 @@ public class BlockVec3 implements Cloneable {
     }
 
     public static BlockVec3 readFromNBT(NBTTagCompound par1NBTTagCompound, String prefix) {
-        final Integer readX = par1NBTTagCompound.getInteger(prefix + "_x");
-        if (readX == null) {
-            return null;
-        }
-        final Integer readY = par1NBTTagCompound.getInteger(prefix + "_y");
-        if (readY == null) {
-            return null;
-        }
-        final Integer readZ = par1NBTTagCompound.getInteger(prefix + "_z");
-        if (readZ == null) {
-            return null;
-        }
+        final int readX = par1NBTTagCompound.getInteger(prefix + "_x");
+        final int readY = par1NBTTagCompound.getInteger(prefix + "_y");
+        final int readZ = par1NBTTagCompound.getInteger(prefix + "_z");
         return new BlockVec3(readX, readY, readZ);
     }
 

@@ -136,7 +136,6 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
         return this.mc.thePlayer.getGameProfile().getName().equals(this.spaceRaceData.getPlayerNames().get(0));
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void initGui() {
         float sliderR = 0;

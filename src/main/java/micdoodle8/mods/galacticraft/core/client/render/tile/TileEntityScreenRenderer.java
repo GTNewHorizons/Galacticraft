@@ -1,11 +1,8 @@
 package micdoodle8.mods.galacticraft.core.client.render.tile;
 
-import java.nio.FloatBuffer;
-
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityScreen;
 
-import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -36,7 +33,6 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
     public static final IModelCustom screenModel4 = AdvancedModelLoader
             .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/screen0Quarters.obj"));
     private final TextureManager renderEngine = FMLClientHandler.instance().getClient().renderEngine;
-    private static final FloatBuffer colorBuffer = GLAllocation.createDirectFloatBuffer(16);
 
     private final float yPlane = 0.91F;
     float frame = 0.098F;
