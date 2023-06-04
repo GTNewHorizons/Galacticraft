@@ -741,17 +741,15 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
                         + ": "
                         + ((int) Math.floor(this.sliderEraserSize.getNormalizedValue() * 10) + 1);
             }
-        } else if (this.currentState == EnumSpaceRaceGui.MAIN) {
-            if (this.lastMousePressed && !Mouse.isButtonDown(0)) {
-                if (this.buttonFlag_hover) {
-                    this.currentState = EnumSpaceRaceGui.DESIGN_FLAG;
-                    this.initGui();
-                }
+        } else if ((this.currentState == EnumSpaceRaceGui.MAIN) && (this.lastMousePressed && !Mouse.isButtonDown(0))) {
+            if (this.buttonFlag_hover) {
+                this.currentState = EnumSpaceRaceGui.DESIGN_FLAG;
+                this.initGui();
+            }
 
-                if (this.buttonTeamColor_hover) {
-                    this.currentState = EnumSpaceRaceGui.CHANGE_TEAM_COLOR;
-                    this.initGui();
-                }
+            if (this.buttonTeamColor_hover) {
+                this.currentState = EnumSpaceRaceGui.CHANGE_TEAM_COLOR;
+                this.initGui();
             }
         }
 
@@ -1288,17 +1286,15 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
                     this.checkboxColorSelector.isSelected = false;
                 }
             }
-        } else if (checkbox.equals(this.checkboxColorSelector)) {
-            if (newSelected) {
-                if (this.checkboxEraser.isSelected) {
-                    this.sliderEraserSize.visible = false;
-                    this.checkboxEraser.isSelected = false;
-                } else if (this.checkboxPaintbrush.isSelected) {
-                    this.sliderBrushSize.visible = false;
-                    this.checkboxPaintbrush.isSelected = false;
-                } else if (this.checkboxSelector.isSelected) {
-                    this.checkboxSelector.isSelected = false;
-                }
+        } else if (checkbox.equals(this.checkboxColorSelector) && newSelected) {
+            if (this.checkboxEraser.isSelected) {
+                this.sliderEraserSize.visible = false;
+                this.checkboxEraser.isSelected = false;
+            } else if (this.checkboxPaintbrush.isSelected) {
+                this.sliderBrushSize.visible = false;
+                this.checkboxPaintbrush.isSelected = false;
+            } else if (this.checkboxSelector.isSelected) {
+                this.checkboxSelector.isSelected = false;
             }
         }
     }
@@ -1326,11 +1322,9 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
 
     @Override
     public void onTextChanged(GuiElementTextBox textBox, String newText) {
-        if (textBox == this.textBoxRename) {
-            if (!newText.equals(this.spaceRaceData.getTeamName())) {
-                this.spaceRaceData.setTeamName(newText);
-                this.markDirty();
-            }
+        if ((textBox == this.textBoxRename) && !newText.equals(this.spaceRaceData.getTeamName())) {
+            this.spaceRaceData.setTeamName(newText);
+            this.markDirty();
         }
     }
 

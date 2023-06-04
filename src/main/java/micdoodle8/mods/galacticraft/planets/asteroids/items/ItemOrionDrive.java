@@ -18,7 +18,6 @@ public class ItemOrionDrive extends Item {
     public IIcon[] icons;
 
     public ItemOrionDrive(String assetName) {
-        super();
         this.setMaxDamage(0);
         this.setUnlocalizedName(assetName);
         this.setTextureName(AsteroidsModule.TEXTURE_PREFIX + assetName);

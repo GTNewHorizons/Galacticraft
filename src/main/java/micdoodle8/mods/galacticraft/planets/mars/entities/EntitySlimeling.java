@@ -501,10 +501,8 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
         if ((par1EntityLivingBase instanceof EntityCreeper) || (par1EntityLivingBase instanceof EntityGhast)) {
             return false;
         }
-        if (par1EntityLivingBase instanceof EntitySlimeling slimeling) {
-            if (slimeling.isTamed() && slimeling.getOwner() == par2EntityLivingBase) {
-                return false;
-            }
+        if ((par1EntityLivingBase instanceof EntitySlimeling slimeling) && (slimeling.isTamed() && slimeling.getOwner() == par2EntityLivingBase)) {
+            return false;
         }
 
         return (!(par1EntityLivingBase instanceof EntityPlayer) || !(par2EntityLivingBase instanceof EntityPlayer)
@@ -639,7 +637,7 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
                 return false;
             }
             final EntityLivingBase entitylivingbase = this.theEntity.getOwner();
-            return entitylivingbase == null || (!(this.theEntity.getDistanceSqToEntity(entitylivingbase) < 144.0D)
+            return entitylivingbase == null || ((this.theEntity.getDistanceSqToEntity(entitylivingbase) >= 144.0D)
                     || entitylivingbase.getAITarget() == null) && this.isSitting;
         }
 

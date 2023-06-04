@@ -281,8 +281,7 @@ public class GuiCelestialSelection extends GuiScreen {
     protected float getZoomAdvanced() {
         if (this.ticksTotal < 30) {
             final float scale = Math.max(0.0F, Math.min(this.ticksTotal / 30.0F, 1.0F));
-            final float lerp = this.lerp(-0.75F, 0.0F, (float) Math.pow(scale, 0.5F));
-            return lerp;
+            return this.lerp(-0.75F, 0.0F, (float) Math.pow(scale, 0.5F));
         }
 
         if (this.selectedBody == null) {
@@ -367,10 +366,8 @@ public class GuiCelestialSelection extends GuiScreen {
             super.keyTyped(keyChar, keyID);
         }
 
-        if (keyID == 1) {
-            if (this.selectedBody != null) {
-                this.unselectCelestialBody();
-            }
+        if ((keyID == 1) && (this.selectedBody != null)) {
+            this.unselectCelestialBody();
         }
 
         if (this.renamingSpaceStation) {
@@ -522,56 +519,54 @@ public class GuiCelestialSelection extends GuiScreen {
     }
 
     protected boolean teleportToSelectedBody() {
-        if (this.selectedBody != null) {
-            if (this.selectedBody.getReachable() && this.possibleBodies != null
-                    && this.possibleBodies.contains(this.selectedBody)) {
-                try {
-                    String dimension;
+        if ((this.selectedBody != null) && (this.selectedBody.getReachable() && this.possibleBodies != null
+                && this.possibleBodies.contains(this.selectedBody))) {
+            try {
+                String dimension;
 
-                    if (this.selectedBody instanceof Satellite) {
-                        if (this.spaceStationMap == null) {
-                            GCLog.severe("Please report as a BUG: spaceStationIDs was null.");
-                            return false;
-                        }
-                        final Satellite selectedSatellite = (Satellite) this.selectedBody;
-                        final Integer mapping = this.spaceStationMap.get(this.getSatelliteParentID(selectedSatellite))
-                                .get(this.selectedStationOwner).getStationDimensionID();
-                        // No need to check lowercase as selectedStationOwner is taken from keys.
-                        if (mapping == null) {
-                            GCLog.severe(
-                                    "Problem matching player name in space station check: "
-                                            + this.selectedStationOwner);
-                            return false;
-                        }
-                        final int spacestationID = mapping;
-                        final WorldProvider spacestation = WorldUtil.getProviderForDimensionClient(spacestationID);
-                        if (spacestation == null) {
-                            GCLog.severe("Failed to find a spacestation with dimension " + spacestationID);
-                            return false;
-                        }
-                        dimension = WorldUtil.getDimensionName(spacestation);
-                    } else {
-                        dimension = WorldUtil.getDimensionName(
-                                WorldUtil.getProviderForDimensionClient(this.selectedBody.getDimensionID()));
+                if (this.selectedBody instanceof Satellite) {
+                    if (this.spaceStationMap == null) {
+                        GCLog.severe("Please report as a BUG: spaceStationIDs was null.");
+                        return false;
                     }
-
-                    if (dimension.contains("$")) {
-                        this.mc.gameSettings.thirdPersonView = 0;
+                    final Satellite selectedSatellite = (Satellite) this.selectedBody;
+                    final Integer mapping = this.spaceStationMap.get(this.getSatelliteParentID(selectedSatellite))
+                            .get(this.selectedStationOwner).getStationDimensionID();
+                    // No need to check lowercase as selectedStationOwner is taken from keys.
+                    if (mapping == null) {
+                        GCLog.severe(
+                                "Problem matching player name in space station check: "
+                                        + this.selectedStationOwner);
+                        return false;
                     }
-                    GalacticraftCore.packetPipeline.sendToServer(
-                            new PacketSimple(
-                                    PacketSimple.EnumSimplePacket.S_TELEPORT_ENTITY,
-                                    new Object[] { dimension, this.mapMode == MapMode.TRAVEL }));
-                    // TODO Some type of clientside "in Space" holding screen here while waiting for
-                    // the server to do
-                    // the teleport
-                    // (Otherwise the client will be returned to the destination he was in until
-                    // now, which looks weird)
-                    this.mc.displayGuiScreen(null);
-                    return true;
-                } catch (final Exception e) {
-                    e.printStackTrace();
+                    final int spacestationID = mapping;
+                    final WorldProvider spacestation = WorldUtil.getProviderForDimensionClient(spacestationID);
+                    if (spacestation == null) {
+                        GCLog.severe("Failed to find a spacestation with dimension " + spacestationID);
+                        return false;
+                    }
+                    dimension = WorldUtil.getDimensionName(spacestation);
+                } else {
+                    dimension = WorldUtil.getDimensionName(
+                            WorldUtil.getProviderForDimensionClient(this.selectedBody.getDimensionID()));
                 }
+
+                if (dimension.contains("$")) {
+                    this.mc.gameSettings.thirdPersonView = 0;
+                }
+                GalacticraftCore.packetPipeline.sendToServer(
+                        new PacketSimple(
+                                PacketSimple.EnumSimplePacket.S_TELEPORT_ENTITY,
+                                new Object[] { dimension, this.mapMode == MapMode.TRAVEL }));
+                // TODO Some type of clientside "in Space" holding screen here while waiting for
+                // the server to do
+                // the teleport
+                // (Otherwise the client will be returned to the destination he was in until
+                // now, which looks weird)
+                this.mc.displayGuiScreen(null);
+                return true;
+            } catch (final Exception e) {
+                e.printStackTrace();
             }
         }
         return false;
@@ -1202,13 +1197,11 @@ public class GuiCelestialSelection extends GuiScreen {
                     alpha = 1.0F - Math.min(this.ticksSinceSelection / 25.0F, 1.0F);
                 }
 
-                if (this.selectedBody != null && this.selectionCount >= 2) {
-                    if (star != this.selectedBody) {
-                        alpha = 1.0F - Math.min(this.ticksSinceSelection / 25.0F, 1.0F);
+                if ((this.selectedBody != null && this.selectionCount >= 2) && (star != this.selectedBody)) {
+                    alpha = 1.0F - Math.min(this.ticksSinceSelection / 25.0F, 1.0F);
 
-                        if (!(this.lastSelectedBody instanceof Star) && this.lastSelectedBody != null) {
-                            alpha = 0.0F;
-                        }
+                    if (!(this.lastSelectedBody instanceof Star) && this.lastSelectedBody != null) {
+                        alpha = 0.0F;
                     }
                 }
 
@@ -2707,10 +2700,8 @@ public class GuiCelestialSelection extends GuiScreen {
         for (int x = 0; x < FMLClientHandler.instance().getClientPlayerEntity().inventory.getSizeInventory(); x++) {
             final ItemStack slot = FMLClientHandler.instance().getClientPlayerEntity().inventory.getStackInSlot(x);
 
-            if (slot != null) {
-                if (SpaceStationRecipe.checkItemEquals(stack, slot)) {
-                    amountInInv += slot.stackSize;
-                }
+            if ((slot != null) && SpaceStationRecipe.checkItemEquals(stack, slot)) {
+                amountInInv += slot.stackSize;
             }
         }
 
@@ -2729,7 +2720,7 @@ public class GuiCelestialSelection extends GuiScreen {
 
             for (final Iterator<String> iterator = list.iterator(); iterator
                     .hasNext(); par3 += this.smallFontRenderer.FONT_HEIGHT) {
-                final String s1 = (String) iterator.next();
+                final String s1 = iterator.next();
                 if (!simulate) {
                     this.renderStringAligned(s1, par2, par3, par4, par6, par5, small);
                 }
@@ -2741,7 +2732,7 @@ public class GuiCelestialSelection extends GuiScreen {
 
         for (final Iterator<String> iterator = list.iterator(); iterator
                 .hasNext(); par3 += this.fontRendererObj.FONT_HEIGHT) {
-            final String s1 = (String) iterator.next();
+            final String s1 = iterator.next();
             if (!simulate) {
                 this.renderStringAligned(s1, par2, par3, par4, par6, par5, small);
             }
@@ -2960,11 +2951,9 @@ public class GuiCelestialSelection extends GuiScreen {
                         alpha = this.selectedBody instanceof IChildBody ? 1.0F
                                 : Math.min(Math.max((this.ticksSinceSelection - 30) / 15.0F, 0.0F), 1.0F);
 
-                        if (this.lastSelectedBody instanceof Moon) {
-                            if (GalaxyRegistry.getMoonsForPlanet(((Moon) this.lastSelectedBody).getParentPlanet())
-                                    .contains(moon)) {
-                                alpha = 1.0F;
-                            }
+                        if ((this.lastSelectedBody instanceof Moon) && GalaxyRegistry.getMoonsForPlanet(((Moon) this.lastSelectedBody).getParentPlanet())
+                                .contains(moon)) {
+                            alpha = 1.0F;
                         }
                     }
 
@@ -3021,13 +3010,11 @@ public class GuiCelestialSelection extends GuiScreen {
                             alpha = this.selectedBody instanceof IChildBody ? 1.0F
                                     : Math.min(Math.max((this.ticksSinceSelection - 30) / 15.0F, 0.0F), 1.0F);
 
-                            if (this.lastSelectedBody instanceof Satellite) {
-                                if (GalaxyRegistry
-                                        .getSatellitesForCelestialBody(
-                                                ((Satellite) this.lastSelectedBody).getParentPlanet())
-                                        .contains(satellite)) {
-                                    alpha = 1.0F;
-                                }
+                            if ((this.lastSelectedBody instanceof Satellite) && GalaxyRegistry
+                                    .getSatellitesForCelestialBody(
+                                            ((Satellite) this.lastSelectedBody).getParentPlanet())
+                                    .contains(satellite)) {
+                                alpha = 1.0F;
                             }
                         }
 

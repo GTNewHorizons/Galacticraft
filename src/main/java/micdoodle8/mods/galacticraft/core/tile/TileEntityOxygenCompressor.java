@@ -49,12 +49,10 @@ public class TileEntityOxygenCompressor extends TileEntityOxygen implements IInv
             if (this.storedOxygen > 0 && this.hasEnoughEnergyToRun) {
                 final ItemStack tank0 = this.containingItems[0];
 
-                if (tank0 != null) {
-                    if (tank0.getItem() instanceof ItemOxygenTank && tank0.getItemDamage() > 0) {
-                        tank0.setItemDamage(tank0.getItemDamage() - TileEntityOxygenCompressor.TANK_TRANSFER_SPEED);
-                        this.storedOxygen -= TileEntityOxygenCompressor.TANK_TRANSFER_SPEED;
-                        this.usingEnergy = true;
-                    }
+                if ((tank0 != null) && (tank0.getItem() instanceof ItemOxygenTank && tank0.getItemDamage() > 0)) {
+                    tank0.setItemDamage(tank0.getItemDamage() - TileEntityOxygenCompressor.TANK_TRANSFER_SPEED);
+                    this.storedOxygen -= TileEntityOxygenCompressor.TANK_TRANSFER_SPEED;
+                    this.usingEnergy = true;
                 }
             }
         }

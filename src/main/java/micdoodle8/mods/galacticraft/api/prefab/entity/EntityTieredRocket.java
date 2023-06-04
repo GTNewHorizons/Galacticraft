@@ -66,12 +66,10 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
     }
 
     public void igniteCheckingCooldown() {
-        if (!this.worldObj.isRemote && this.launchCooldown <= 0) {
-            if (this.launchPhase != EnumLaunchPhase.IGNITED.ordinal()) {
-                this.setFrequency();
-                this.initiatePlanetsPreGen(this.chunkCoordX, this.chunkCoordZ);
-                this.ignite();
-            }
+        if ((!this.worldObj.isRemote && this.launchCooldown <= 0) && (this.launchPhase != EnumLaunchPhase.IGNITED.ordinal())) {
+            this.setFrequency();
+            this.initiatePlanetsPreGen(this.chunkCoordX, this.chunkCoordZ);
+            this.ignite();
         }
     }
 
@@ -223,7 +221,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
             this.performHurtAnimation();
             this.rumble = (float) this.rand.nextInt(3) - 3;
 
-            if (this.destinationFrequency != -1 && this.landing == false && isLaunched) {
+            if (this.destinationFrequency != -1 && !this.landing && isLaunched) {
                 this.onReachAtmosphere();
             }
         }
@@ -434,7 +432,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
             return false;
         }
 
-        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayerMP) {
+        if (this.riddenByEntity instanceof EntityPlayerMP) {
             if (!this.worldObj.isRemote && this.riddenByEntity == par1EntityPlayer) {
                 GalacticraftCore.packetPipeline.sendTo(
                         new PacketSimple(EnumSimplePacket.C_RESET_THIRD_PERSON, new Object[] {}),

@@ -75,7 +75,6 @@ public class TileEntityShortRangeTelepad extends TileBaseElectricBlock
     public boolean teleporting;
 
     public TileEntityShortRangeTelepad() {
-        super();
         this.storage.setMaxExtract(ConfigManagerCore.hardMode ? 115 : 50);
     }
 

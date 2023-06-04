@@ -71,8 +71,7 @@ public class GuiRocketInventory extends GuiContainerGC {
         this.fontRendererObj
                 .drawString(GCCoreUtil.translate(this.upperChestInventory.getInventoryName()), 8, 34 + 2 + 3, 4210752);
 
-        if (this.mc.thePlayer != null && this.mc.thePlayer.ridingEntity != null
-                && this.mc.thePlayer.ridingEntity instanceof EntitySpaceshipBase) {
+        if (this.mc.thePlayer != null && this.mc.thePlayer.ridingEntity instanceof EntitySpaceshipBase) {
             this.fontRendererObj.drawString(GCCoreUtil.translate("gui.message.fuel.name") + ":", 125, 15, 4210752);
             final EntitySpaceshipBase spaceship = (EntitySpaceshipBase) this.mc.thePlayer.ridingEntity;
             final double percentage = spaceship.getScaledFuelLevel(100);
@@ -100,8 +99,7 @@ public class GuiRocketInventory extends GuiContainerGC {
         final int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, 176, this.ySize);
 
-        if (this.mc.thePlayer != null && this.mc.thePlayer.ridingEntity != null
-                && this.mc.thePlayer.ridingEntity instanceof EntitySpaceshipBase) {
+        if (this.mc.thePlayer != null && this.mc.thePlayer.ridingEntity instanceof EntitySpaceshipBase) {
             final int fuelLevel = ((EntitySpaceshipBase) this.mc.thePlayer.ridingEntity).getScaledFuelLevel(38);
 
             this.drawTexturedModalRect(

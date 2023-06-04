@@ -39,16 +39,14 @@ public class ItemBlockDummy extends ItemBlock {
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
         final int metadata = itemstack.getItemDamage();
-        String blockName = "";
-
-        blockName = switch (metadata) {
-            case 1 -> "spaceStationBase";
-            case 2 -> "launchPad";
-            case 3 -> "nasaWorkbench";
-            case 4 -> "solar";
-            case 5 -> "cryogenicChamber";
-            default -> null;
-        };
+        String blockName = switch (metadata) {
+                    case 1 -> "spaceStationBase";
+                    case 2 -> "launchPad";
+                    case 3 -> "nasaWorkbench";
+                    case 4 -> "solar";
+                    case 5 -> "cryogenicChamber";
+                    default -> null;
+                };
 
         return this.field_150939_a.getUnlocalizedName() + "." + blockName;
     }

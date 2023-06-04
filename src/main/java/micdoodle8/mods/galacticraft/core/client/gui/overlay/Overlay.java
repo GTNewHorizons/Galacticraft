@@ -14,7 +14,7 @@ public class Overlay {
      * @return position of player's spaceship
      */
     protected static int getPlayerPositionY(EntityPlayer player) {
-        if (player.ridingEntity != null && player.ridingEntity instanceof EntityTier1Rocket) {
+        if (player.ridingEntity instanceof EntityTier1Rocket) {
             return (int) Math.floor(player.ridingEntity.posY);
         }
 

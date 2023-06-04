@@ -24,7 +24,6 @@ public class ItemBuggyMaterial extends Item {
     protected IIcon[] icons = new IIcon[256];
 
     public ItemBuggyMaterial(String assetName) {
-        super();
         this.setMaxStackSize(1);
         this.setMaxDamage(0);
         this.setHasSubtypes(true);

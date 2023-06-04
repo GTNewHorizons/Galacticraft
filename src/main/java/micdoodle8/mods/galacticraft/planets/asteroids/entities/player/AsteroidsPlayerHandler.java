@@ -18,21 +18,21 @@ public class AsteroidsPlayerHandler {
     @SubscribeEvent
     public void onPlayerLogin(PlayerLoggedInEvent event) {
         if (event.player instanceof EntityPlayerMP) {
-            this.onPlayerLogin((EntityPlayerMP) event.player);
+            this.onPlayerLogin();
         }
     }
 
     @SubscribeEvent
     public void onPlayerLogout(PlayerLoggedOutEvent event) {
         if (event.player instanceof EntityPlayerMP) {
-            this.onPlayerLogout((EntityPlayerMP) event.player);
+            this.onPlayerLogout();
         }
     }
 
     @SubscribeEvent
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         if (event.player instanceof EntityPlayerMP) {
-            this.onPlayerRespawn((EntityPlayerMP) event.player);
+            this.onPlayerRespawn();
         }
     }
 
@@ -43,11 +43,11 @@ public class AsteroidsPlayerHandler {
         }
     }
 
-    private void onPlayerLogin(EntityPlayerMP player) {}
+    private void onPlayerLogin() {}
 
-    private void onPlayerLogout(EntityPlayerMP player) {}
+    private void onPlayerLogout() {}
 
-    private void onPlayerRespawn(EntityPlayerMP player) {}
+    private void onPlayerRespawn() {}
 
     public void onPlayerUpdate(EntityPlayerMP player) {
         if (!player.worldObj.isRemote && player.worldObj.provider instanceof WorldProviderAsteroids) {

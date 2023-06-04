@@ -56,10 +56,8 @@ public class TileEntityDish extends TileBaseUniversalElectrical
 
         super.updateEntity();
 
-        if (!this.worldObj.isRemote) {
-            if (this.disableCooldown > 0) {
-                this.disableCooldown--;
-            }
+        if (!this.worldObj.isRemote && (this.disableCooldown > 0)) {
+            this.disableCooldown--;
         }
 
         final float angle = this.worldObj.getCelestialAngle(1.0F) - 0.7845194F < 0 ? 1.0F - 0.7845194F : -0.7845194F;

@@ -98,17 +98,15 @@ public class StructureComponentVillageField extends StructureComponentVillage {
 
         for (var4 = 1; var4 <= 7; ++var4) {
             for (int i = 1; i < 12; i++) {
-                if (i % 3 != 0) {
-                    if (par2Random.nextInt(3) == 0) {
-                        this.placeBlockAtCurrentPosition(
-                                par1World,
-                                Blocks.sapling,
-                                MathHelper.getRandomIntegerInRange(par2Random, 0, 2),
-                                i,
-                                1,
-                                var4,
-                                par3StructureBoundingBox);
-                    }
+                if ((i % 3 != 0) && (par2Random.nextInt(3) == 0)) {
+                    this.placeBlockAtCurrentPosition(
+                            par1World,
+                            Blocks.sapling,
+                            MathHelper.getRandomIntegerInRange(par2Random, 0, 2),
+                            i,
+                            1,
+                            var4,
+                            par3StructureBoundingBox);
                 }
             }
         }

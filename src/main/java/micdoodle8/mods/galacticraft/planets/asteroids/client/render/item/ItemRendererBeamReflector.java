@@ -13,8 +13,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 
 public class ItemRendererBeamReflector implements IItemRenderer {
 
-    private void renderBeamReflector(ItemRenderType type, RenderBlocks render, ItemStack item, float translateX,
-            float translateY, float translateZ) {
+    private void renderBeamReflector(ItemRenderType type) {
         GL11.glPushMatrix();
         this.transform(type);
         FMLClientHandler.instance().getClient().renderEngine
@@ -78,16 +77,16 @@ public class ItemRendererBeamReflector implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         switch (type) {
             case EQUIPPED:
-                this.renderBeamReflector(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderBeamReflector(type);
                 break;
             case EQUIPPED_FIRST_PERSON:
-                this.renderBeamReflector(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderBeamReflector(type);
                 break;
             case INVENTORY:
-                this.renderBeamReflector(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderBeamReflector(type);
                 break;
             case ENTITY:
-                this.renderBeamReflector(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderBeamReflector(type);
                 break;
             default:
                 break;

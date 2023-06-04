@@ -90,15 +90,13 @@ public class BlockFluidGC extends BlockFluidClassic {
                     0.00001F + rand.nextFloat() * 0.5F,
                     false);
         }
-        if ("oil".equals(this.fluidName) && rand.nextInt(10) == 0) {
-            if (World.doesBlockHaveSolidTopSurface(world, x, y - 1, z)
-                    && !world.getBlock(x, y - 2, z).getMaterial().blocksMovement()) {
-                GalacticraftCore.proxy.spawnParticle(
-                        "oilDrip",
-                        new Vector3(x + rand.nextFloat(), y - 1.05D, z + rand.nextFloat()),
-                        new Vector3(0, 0, 0),
-                        new Object[] {});
-            }
+        if (("oil".equals(this.fluidName) && rand.nextInt(10) == 0) && (World.doesBlockHaveSolidTopSurface(world, x, y - 1, z)
+                && !world.getBlock(x, y - 2, z).getMaterial().blocksMovement())) {
+            GalacticraftCore.proxy.spawnParticle(
+                    "oilDrip",
+                    new Vector3(x + rand.nextFloat(), y - 1.05D, z + rand.nextFloat()),
+                    new Vector3(0, 0, 0),
+                    new Object[] {});
         }
     }
 
@@ -138,12 +136,10 @@ public class BlockFluidGC extends BlockFluidClassic {
         if (!(world instanceof World)) {
             return false;
         }
-        if (OxygenUtil.noAtmosphericCombustion(((World) world).provider)) {
-            if (!OxygenUtil.isAABBInBreathableAirBlock(
-                    (World) world,
-                    AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 2, z + 1))) {
-                return false;
-            }
+        if (OxygenUtil.noAtmosphericCombustion(((World) world).provider) && !OxygenUtil.isAABBInBreathableAirBlock(
+                (World) world,
+                AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 2, z + 1))) {
+            return false;
         }
 
         if (this.fluidName.startsWith("fuel")) {

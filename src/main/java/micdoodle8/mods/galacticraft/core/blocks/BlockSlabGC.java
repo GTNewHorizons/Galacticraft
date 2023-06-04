@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 public class BlockSlabGC extends BlockSlab {
 
-    private static final String[] woodTypes = new String[] { "tin", "tin", "moon", "moonBricks", "mars", "marsBricks" };
+    private static final String[] woodTypes = { "tin", "tin", "moon", "moonBricks", "mars", "marsBricks" };
 
     private IIcon[] textures;
     private IIcon[] tinSideIcon;
@@ -106,10 +106,8 @@ public class BlockSlabGC extends BlockSlab {
 
     @Override
     public Item getItemDropped(int meta, Random par2Random, int par3) {
-        if (this.isDoubleSlab) {
-            if (this == GCBlocks.slabGCDouble) {
-                return Item.getItemFromBlock(GCBlocks.slabGCHalf);
-            }
+        if (this.isDoubleSlab && (this == GCBlocks.slabGCDouble)) {
+            return Item.getItemFromBlock(GCBlocks.slabGCHalf);
         }
         return Item.getItemFromBlock(this);
     }
@@ -127,12 +125,10 @@ public class BlockSlabGC extends BlockSlab {
         final int meta = world.getBlockMetadata(x, y, z);
         float hardness = this.blockHardness;
 
-        hardness = switch (getTypeFromMeta(meta)) {
+        return switch (getTypeFromMeta(meta)) {
             case 2, 3 -> 1.5F;
             default -> 2.0F;
         };
-
-        return hardness;
     }
 
     @Override

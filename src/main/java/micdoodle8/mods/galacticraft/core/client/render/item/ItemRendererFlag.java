@@ -21,8 +21,7 @@ public class ItemRendererFlag implements IItemRenderer {
     private final EntityFlag entityFlagDummy = new EntityFlag(FMLClientHandler.instance().getClient().theWorld);
     private final ModelFlag modelFlag = new ModelFlag();
 
-    private void renderFlag(ItemRenderType type, RenderBlocks render, ItemStack item, float translateX,
-            float translateY, float translateZ, Object... data) {
+    private void renderFlag(ItemRenderType type, ItemStack item, Object... data) {
         GL11.glPushMatrix();
         long var10 = this.entityFlagDummy.getEntityId() * 493286711L;
         var10 = var10 * var10 * 4392167121L + var10 * 98761L;
@@ -66,24 +65,22 @@ public class ItemRendererFlag implements IItemRenderer {
             GL11.glRotatef(-145F, 0F, 1F, 0F);
         }
 
-        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
-            if (FMLClientHandler.instance().getClient().thePlayer.getItemInUseCount() > 0) {
-                float var13b;
-                float var14b;
-                var13b = item.getMaxItemUseDuration()
-                        - (FMLClientHandler.instance().getClient().thePlayer.getItemInUseCount() + 1.0F);
-                var14b = var13b / 20.0F;
-                var14b = (var14b * var14b + var14b * 2.0F) / 3.0F;
+        if ((type == ItemRenderType.EQUIPPED_FIRST_PERSON) && (FMLClientHandler.instance().getClient().thePlayer.getItemInUseCount() > 0)) {
+            float var13b;
+            float var14b;
+            var13b = item.getMaxItemUseDuration()
+                    - (FMLClientHandler.instance().getClient().thePlayer.getItemInUseCount() + 1.0F);
+            var14b = var13b / 20.0F;
+            var14b = (var14b * var14b + var14b * 2.0F) / 3.0F;
 
-                if (var14b > 1.0F) {
-                    var14b = 1.0F;
-                }
-
-                GL11.glRotatef(MathHelper.sin((var13b - 0.1F) * 0.3F) * 0.01F * (var14b - 0.1F) * 60, 1F, 0F, 0F);
-
-                GL11.glRotatef(var14b * 60F, 1F, 0F, 1F);
-                GL11.glTranslatef(0F, -(var14b * 0.2F), 0F);
+            if (var14b > 1.0F) {
+                var14b = 1.0F;
             }
+
+            GL11.glRotatef(MathHelper.sin((var13b - 0.1F) * 0.3F) * 0.01F * (var14b - 0.1F) * 60, 1F, 0F, 0F);
+
+            GL11.glRotatef(var14b * 60F, 1F, 0F, 1F);
+            GL11.glTranslatef(0F, -(var14b * 0.2F), 0F);
         }
 
         GL11.glTranslatef(var12, var13 - 0.1F, var14);
@@ -132,16 +129,16 @@ public class ItemRendererFlag implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         switch (type) {
             case EQUIPPED:
-                this.renderFlag(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f, data);
+                this.renderFlag(type, item, data);
                 break;
             case EQUIPPED_FIRST_PERSON:
-                this.renderFlag(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f, data);
+                this.renderFlag(type, item, data);
                 break;
             case INVENTORY:
-                this.renderFlag(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f, data);
+                this.renderFlag(type, item, data);
                 break;
             case ENTITY:
-                this.renderFlag(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f, data);
+                this.renderFlag(type, item, data);
                 break;
             default:
         }

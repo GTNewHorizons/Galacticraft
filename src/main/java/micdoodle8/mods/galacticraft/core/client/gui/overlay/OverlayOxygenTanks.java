@@ -54,7 +54,6 @@ public class OverlayOxygenTanks extends Overlay {
         int maxLeftX = 0;
         int minRightX = 0;
         int maxRightX = 0;
-        double bottomY = 0;
         double topY = 0;
         final double zLevel = -190.0D;
 
@@ -76,7 +75,7 @@ public class OverlayOxygenTanks extends Overlay {
             topY = j - 57;
         }
 
-        bottomY = topY + 46.5;
+        double bottomY = topY + 46.5;
 
         final float texMod = 0.00390625F;
         tessellator.startDrawingQuads();

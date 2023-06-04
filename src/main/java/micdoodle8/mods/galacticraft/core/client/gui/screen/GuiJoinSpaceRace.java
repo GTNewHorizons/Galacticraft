@@ -144,7 +144,7 @@ public class GuiJoinSpaceRace extends GuiScreen implements ICheckBoxCallback, IT
                     this.width / 2,
                     this.height / 2 - this.height / 3 - 15,
                     16777215);
-            this.drawFlagButton(par1, par2);
+            this.drawFlagButton();
             this.drawCenteredString(
                     this.fontRendererObj,
                     GCCoreUtil.translate("gui.spaceRace.join.owner.name") + ": "
@@ -185,7 +185,7 @@ public class GuiJoinSpaceRace extends GuiScreen implements ICheckBoxCallback, IT
         super.drawScreen(par1, par2, par3);
     }
 
-    private void drawFlagButton(int mouseX, int mouseY) {
+    private void drawFlagButton() {
         GL11.glPushMatrix();
         GL11.glTranslatef(
                 this.buttonFlag_xPosition + 2.9F,

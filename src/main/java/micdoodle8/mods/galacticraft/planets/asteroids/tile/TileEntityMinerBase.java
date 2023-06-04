@@ -107,23 +107,19 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
 
     public boolean spawnMiner(EntityPlayerMP player) {
         if (this.isMaster) {
-            if (this.linkedMiner != null) {
-                if (this.linkedMiner.isDead) {
-                    this.unlinkMiner();
-                }
+            if ((this.linkedMiner != null) && this.linkedMiner.isDead) {
+                this.unlinkMiner();
             }
-            if (this.linkedMinerID == null) {
-                if (EntityAstroMiner.spawnMinerAtBase(
-                        this.worldObj,
-                        this.xCoord + 1,
-                        this.yCoord + 1,
-                        this.zCoord + 1,
-                        this.facing + 2 ^ 1,
-                        new BlockVec3(this),
-                        player)) {
-                    this.findTargetPoints();
-                    return true;
-                }
+            if ((this.linkedMinerID == null) && EntityAstroMiner.spawnMinerAtBase(
+                    this.worldObj,
+                    this.xCoord + 1,
+                    this.yCoord + 1,
+                    this.zCoord + 1,
+                    this.facing + 2 ^ 1,
+                    new BlockVec3(this),
+                    player)) {
+                this.findTargetPoints();
+                return true;
             }
             return false;
         }
@@ -142,10 +138,8 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
         if (this.masterTile == null) {
             final TileEntity tileEntity = this.mainBlockPosition.getTileEntity(this.worldObj);
 
-            if (tileEntity != null) {
-                if (tileEntity instanceof TileEntityMinerBase) {
-                    this.masterTile = new WeakReference<>((TileEntityMinerBase) tileEntity);
-                }
+            if ((tileEntity != null) && (tileEntity instanceof TileEntityMinerBase)) {
+                this.masterTile = new WeakReference<>((TileEntityMinerBase) tileEntity);
             }
         }
 
@@ -604,8 +598,6 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
         if (master != null) {
             master.setInventorySlotContents(par1, par2ItemStack);
         }
-
-        return;
     }
 
     @Override
@@ -703,7 +695,6 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
         }
 
         this.markDirty();
-        return;
     }
 
     @Override

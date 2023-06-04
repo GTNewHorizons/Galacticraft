@@ -29,7 +29,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemBuggy extends Item implements IHoldableItem {
 
     public ItemBuggy(String assetName) {
-        super();
         this.setUnlocalizedName(assetName);
         this.setTextureName("arrow");
         this.setMaxStackSize(1);
@@ -102,42 +101,40 @@ public class ItemBuggy extends Item implements IHoldableItem {
             }
         }
 
-        if (!var26) {
-            if (var24.typeOfHit == MovingObjectType.BLOCK) {
-                var29 = var24.blockX;
-                int var33 = var24.blockY;
-                final int var34 = var24.blockZ;
+        if (!var26 && (var24.typeOfHit == MovingObjectType.BLOCK)) {
+            var29 = var24.blockX;
+            int var33 = var24.blockY;
+            final int var34 = var24.blockZ;
 
-                if (par2World.getBlock(var29, var33, var34) == Blocks.snow) {
-                    --var33;
-                }
+            if (par2World.getBlock(var29, var33, var34) == Blocks.snow) {
+                --var33;
+            }
 
-                final EntityBuggy var35 = new EntityBuggy(
-                        par2World,
-                        var29 + 0.5F,
-                        var33 + 1.0F,
-                        var34 + 0.5F,
-                        par1ItemStack.getItemDamage());
+            final EntityBuggy var35 = new EntityBuggy(
+                    par2World,
+                    var29 + 0.5F,
+                    var33 + 1.0F,
+                    var34 + 0.5F,
+                    par1ItemStack.getItemDamage());
 
-                if (!par2World.getCollidingBoundingBoxes(var35, var35.boundingBox.expand(-0.1D, -0.1D, -0.1D))
-                        .isEmpty()) {
-                    return par1ItemStack;
-                }
+            if (!par2World.getCollidingBoundingBoxes(var35, var35.boundingBox.expand(-0.1D, -0.1D, -0.1D))
+                    .isEmpty()) {
+                return par1ItemStack;
+            }
 
-                if (par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("BuggyFuel")) {
-                    var35.buggyFuelTank.setFluid(
-                            new FluidStack(
-                                    GalacticraftCore.fluidFuel,
-                                    par1ItemStack.getTagCompound().getInteger("BuggyFuel")));
-                }
+            if (par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("BuggyFuel")) {
+                var35.buggyFuelTank.setFluid(
+                        new FluidStack(
+                                GalacticraftCore.fluidFuel,
+                                par1ItemStack.getTagCompound().getInteger("BuggyFuel")));
+            }
 
-                if (!par2World.isRemote) {
-                    par2World.spawnEntityInWorld(var35);
-                }
+            if (!par2World.isRemote) {
+                par2World.spawnEntityInWorld(var35);
+            }
 
-                if (!par3EntityPlayer.capabilities.isCreativeMode) {
-                    --par1ItemStack.stackSize;
-                }
+            if (!par3EntityPlayer.capabilities.isCreativeMode) {
+                --par1ItemStack.stackSize;
             }
         }
         return par1ItemStack;

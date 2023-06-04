@@ -119,34 +119,32 @@ public class WorldUtil {
             }
 
             final IGalacticraftWorldProvider customProvider = (IGalacticraftWorldProvider) entity.worldObj.provider;
-            if (entity instanceof EntityPlayer player) {
-                if (player.inventory != null) {
-                    int armorModLowGrav = 100;
-                    int armorModHighGrav = 100;
-                    for (int i = 0; i < 4; i++) {
-                        final ItemStack armorPiece = player.getCurrentArmor(i);
-                        if (armorPiece != null && armorPiece.getItem() instanceof IArmorGravity) {
-                            armorModLowGrav -= ((IArmorGravity) armorPiece.getItem()).gravityOverrideIfLow(player);
-                            armorModHighGrav -= ((IArmorGravity) armorPiece.getItem()).gravityOverrideIfHigh(player);
-                        }
+            if ((entity instanceof EntityPlayer player) && (player.inventory != null)) {
+                int armorModLowGrav = 100;
+                int armorModHighGrav = 100;
+                for (int i = 0; i < 4; i++) {
+                    final ItemStack armorPiece = player.getCurrentArmor(i);
+                    if (armorPiece != null && armorPiece.getItem() instanceof IArmorGravity) {
+                        armorModLowGrav -= ((IArmorGravity) armorPiece.getItem()).gravityOverrideIfLow(player);
+                        armorModHighGrav -= ((IArmorGravity) armorPiece.getItem()).gravityOverrideIfHigh(player);
                     }
-                    if (armorModLowGrav > 100) {
-                        armorModLowGrav = 100;
-                    }
-                    if (armorModHighGrav > 100) {
-                        armorModHighGrav = 100;
-                    }
-                    if (armorModLowGrav < 0) {
-                        armorModLowGrav = 0;
-                    }
-                    if (armorModHighGrav < 0) {
-                        armorModHighGrav = 0;
-                    }
-                    if (customProvider.getGravity() > 0) {
-                        return 0.08D - customProvider.getGravity() * armorModLowGrav / 100;
-                    }
-                    return 0.08D - customProvider.getGravity() * armorModHighGrav / 100;
                 }
+                if (armorModLowGrav > 100) {
+                    armorModLowGrav = 100;
+                }
+                if (armorModHighGrav > 100) {
+                    armorModHighGrav = 100;
+                }
+                if (armorModLowGrav < 0) {
+                    armorModLowGrav = 0;
+                }
+                if (armorModHighGrav < 0) {
+                    armorModHighGrav = 0;
+                }
+                if (customProvider.getGravity() > 0) {
+                    return 0.08D - customProvider.getGravity() * armorModLowGrav / 100;
+                }
+                return 0.08D - customProvider.getGravity() * armorModHighGrav / 100;
             }
             return 0.08D - customProvider.getGravity();
         }
@@ -189,10 +187,8 @@ public class WorldUtil {
     }
 
     public static float getRainStrength(World world, float partialTicks) {
-        if (world.isRemote) {
-            if (world.provider.getSkyRenderer() instanceof SkyProviderOverworld) {
-                return 0.0F;
-            }
+        if (world.isRemote && (world.provider.getSkyRenderer() instanceof SkyProviderOverworld)) {
+            return 0.0F;
         }
 
         return world.prevRainingStrength + (world.rainingStrength - world.prevRainingStrength) * partialTicks;
@@ -462,10 +458,8 @@ public class WorldUtil {
         celestialBodyList.addAll(GalaxyRegistry.getRegisteredSatellites().values());
 
         for (final CelestialBody cBody : celestialBodyList) {
-            if (cBody.getReachable()) {
-                if (cBody.getDimensionID() == id) {
-                    return cBody;
-                }
+            if (cBody.getReachable() && (cBody.getDimensionID() == id)) {
+                return cBody;
             }
         }
 
@@ -479,10 +473,8 @@ public class WorldUtil {
         celestialBodyList.addAll(GalaxyRegistry.getRegisteredSatellites().values());
 
         for (final CelestialBody cBody : celestialBodyList) {
-            if (cBody.getReachable()) {
-                if (cBody.getName().equals(name)) {
-                    return cBody;
-                }
+            if (cBody.getReachable() && cBody.getName().equals(name)) {
+                return cBody;
             }
         }
 
@@ -985,19 +977,17 @@ public class WorldUtil {
                                 player.worldObj.getWorldInfo().getTerrainType(),
                                 player.theItemInWorldManager.getGameType()));
 
-                if (worldNew.provider instanceof WorldProviderOrbit) {
-                    if (WorldUtil.registeredSpaceStations.containsKey(dimID))
-                    // TODO This has never been effective before due to the earlier bug - what does
-                    // it actually do?
-                    {
-                        final NBTTagCompound var2 = new NBTTagCompound();
-                        SpaceStationWorldData.getStationData(worldNew, dimID, player).writeToNBT(var2);
-                        GalacticraftCore.packetPipeline.sendTo(
-                                new PacketSimple(
-                                        EnumSimplePacket.C_UPDATE_SPACESTATION_DATA,
-                                        new Object[] { dimID, var2 }),
-                                player);
-                    }
+                if ((worldNew.provider instanceof WorldProviderOrbit) && WorldUtil.registeredSpaceStations.containsKey(dimID))
+                // TODO This has never been effective before due to the earlier bug - what does
+                // it actually do?
+                {
+                    final NBTTagCompound var2 = new NBTTagCompound();
+                    SpaceStationWorldData.getStationData(worldNew, dimID, player).writeToNBT(var2);
+                    GalacticraftCore.packetPipeline.sendTo(
+                            new PacketSimple(
+                                    EnumSimplePacket.C_UPDATE_SPACESTATION_DATA,
+                                    new Object[] { dimID, var2 }),
+                            player);
                 }
 
                 removeEntityFromWorld(worldOld, player, true);

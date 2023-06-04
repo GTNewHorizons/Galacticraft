@@ -149,10 +149,8 @@ public class TileEntityLandingPad extends TileEntityMulti
 
     @Override
     public int getRocketTier() {
-        if (this.dockedEntity != null) {
-            if (this.dockedEntity instanceof EntityTieredRocket) {
-                return ((EntityTieredRocket) this.dockedEntity).getRocketTier();
-            }
+        if ((this.dockedEntity != null) && (this.dockedEntity instanceof EntityTieredRocket)) {
+            return ((EntityTieredRocket) this.dockedEntity).getRocketTier();
         }
         return 0;
     }
@@ -224,7 +222,7 @@ public class TileEntityLandingPad extends TileEntityMulti
     public boolean isBlockAttachable(IBlockAccess world, int x, int y, int z) {
         final TileEntity tile = world.getTileEntity(x, y, z);
 
-        if (tile != null && tile instanceof ILandingPadAttachable) {
+        if (tile instanceof ILandingPadAttachable) {
             return ((ILandingPadAttachable) tile).canAttachToLandingPad(world, this.xCoord, this.yCoord, this.zCoord);
         }
 

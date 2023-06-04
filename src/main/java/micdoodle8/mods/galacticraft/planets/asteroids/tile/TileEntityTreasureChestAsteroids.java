@@ -307,7 +307,7 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced
 
     private boolean func_94044_a(int par1, int par2, int par3) {
         final Block block = this.worldObj.getBlock(par1, par2, par3);
-        return block != null && block instanceof BlockTier3TreasureChest;
+        return block instanceof BlockTier3TreasureChest;
     }
 
     /**

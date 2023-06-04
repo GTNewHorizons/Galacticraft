@@ -30,16 +30,14 @@ public class AsteroidsEventHandlerClient {
         final Minecraft minecraft = Minecraft.getMinecraft();
         final WorldClient world = minecraft.theWorld;
 
-        if (world != null) {
-            if (world.provider instanceof WorldProviderAsteroids) {
-                if (world.provider.getSkyRenderer() == null) {
-                    world.provider
-                            .setSkyRenderer(new SkyProviderAsteroids((IGalacticraftWorldProvider) world.provider));
-                }
+        if ((world != null) && (world.provider instanceof WorldProviderAsteroids)) {
+            if (world.provider.getSkyRenderer() == null) {
+                world.provider
+                        .setSkyRenderer(new SkyProviderAsteroids((IGalacticraftWorldProvider) world.provider));
+            }
 
-                if (world.provider.getCloudRenderer() == null) {
-                    world.provider.setCloudRenderer(new CloudRenderer());
-                }
+            if (world.provider.getCloudRenderer() == null) {
+                world.provider.setCloudRenderer(new CloudRenderer());
             }
         }
     }

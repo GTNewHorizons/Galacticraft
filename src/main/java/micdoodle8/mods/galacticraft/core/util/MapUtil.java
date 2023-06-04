@@ -418,7 +418,7 @@ public class MapUtil {
 
         ImageTypeSpecifier typeToUse = null;
         for (final Iterator<ImageTypeSpecifier> i = reader.getImageTypes(0); i.hasNext();) {
-            final ImageTypeSpecifier type = (ImageTypeSpecifier) i.next();
+            final ImageTypeSpecifier type = i.next();
             if (type.getColorModel().getColorSpace().isCS_sRGB()) {
                 typeToUse = type;
             }

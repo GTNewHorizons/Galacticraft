@@ -17,7 +17,6 @@ public class ItemMeteoricIron extends Item {
     private final String iconName;
 
     public ItemMeteoricIron(String assetName) {
-        super();
         this.iconName = assetName;
         this.setUnlocalizedName(assetName);
     }

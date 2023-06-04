@@ -35,7 +35,6 @@ public class RenderEvolvedCreeper extends RenderCreeper {
     private final ModelBase creeperModel = new ModelEvolvedCreeper(0.2F);
 
     public RenderEvolvedCreeper() {
-        super();
         this.mainModel = new ModelEvolvedCreeper();
     }
 

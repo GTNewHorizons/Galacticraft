@@ -101,13 +101,13 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
         if (isSmartMovingLoaded) {
             try {
                 return switch (type) {
-                    case 0, 15 -> (ModelRenderer) modelRotationGCSmartMovingInit.newInstance(
+                    case 0, 15 -> modelRotationGCSmartMovingInit.newInstance(
                                                     player,
                                                     texOffsetX,
                                                     texOffsetY,
                                                     SmartRender.getPlayerBase(this.modelPlayer).getHead(),
                                                     type);
-                    default -> (ModelRenderer) modelRotationGCSmartMovingInit.newInstance(
+                    default -> modelRotationGCSmartMovingInit.newInstance(
                                                     player,
                                                     texOffsetX,
                                                     texOffsetY,

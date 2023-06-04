@@ -124,7 +124,6 @@ public class GameScreenCelestial implements IGameScreen {
     }
 
     private void drawCelestialBodies(CelestialBody body, float ticks) {
-        Star star = null;
         SolarSystem solarSystem = null;
         if (body instanceof Planet) {
             solarSystem = ((Planet) body).getParentSolarSystem();
@@ -137,37 +136,34 @@ public class GameScreenCelestial implements IGameScreen {
         if (solarSystem == null) {
             solarSystem = GalacticraftCore.solarSystemSol;
         }
-        star = solarSystem.getMainStar();
+        Star star = solarSystem.getMainStar();
 
         if (star != null && star.getBodyIcon() != null) {
-            this.drawCelestialBody(star, 0F, 0F, ticks, 6F);
+            this.drawCelestialBody(star, 0F, 0F, 6F);
         }
 
         final String mainSolarSystem = solarSystem.getUnlocalizedName();
         for (final Planet planet : GalaxyRegistry.getRegisteredPlanets().values()) {
-            if (planet.getParentSolarSystem() != null && planet.getBodyIcon() != null) {
-                if (planet.getParentSolarSystem().getUnlocalizedName().equalsIgnoreCase(mainSolarSystem)) {
-                    final Vector3f pos = this.getCelestialBodyPosition(planet, ticks);
-                    this.drawCircle(planet);
-                    this.drawCelestialBody(
-                            planet,
-                            pos.x,
-                            pos.y,
-                            ticks,
-                            planet.getRelativeDistanceFromCenter().unScaledDistance < 1.5F ? 2F : 2.8F);
-                }
+            if ((planet.getParentSolarSystem() != null && planet.getBodyIcon() != null) && planet.getParentSolarSystem().getUnlocalizedName().equalsIgnoreCase(mainSolarSystem)) {
+                final Vector3f pos = this.getCelestialBodyPosition(planet, ticks);
+                this.drawCircle(planet);
+                this.drawCelestialBody(
+                        planet,
+                        pos.x,
+                        pos.y,
+                        planet.getRelativeDistanceFromCenter().unScaledDistance < 1.5F ? 2F : 2.8F);
             }
         }
     }
 
     private void drawCelestialBodiesZ(CelestialBody planet, float ticks) {
-        this.drawCelestialBody(planet, 0F, 0F, ticks, 11F);
+        this.drawCelestialBody(planet, 0F, 0F, 11F);
 
         for (final Moon moon : GalaxyRegistry.getRegisteredMoons().values()) {
             if (moon.getParentPlanet() == planet && moon.getBodyIcon() != null) {
                 final Vector3f pos = this.getCelestialBodyPosition(moon, ticks);
                 this.drawCircle(moon);
-                this.drawCelestialBody(moon, pos.x, pos.y, ticks, 4F);
+                this.drawCelestialBody(moon, pos.x, pos.y, 4F);
             }
         }
 
@@ -175,7 +171,7 @@ public class GameScreenCelestial implements IGameScreen {
             if (satellite.getParentPlanet() == planet) {
                 final Vector3f pos = this.getCelestialBodyPosition(satellite, ticks);
                 this.drawCircle(satellite);
-                this.drawCelestialBody(satellite, pos.x, pos.y, ticks, 3F);
+                this.drawCelestialBody(satellite, pos.x, pos.y, 3F);
             }
         }
     }
@@ -190,7 +186,7 @@ public class GameScreenCelestial implements IGameScreen {
         tessellator.draw();
     }
 
-    private void drawCelestialBody(CelestialBody planet, float xPos, float yPos, float ticks, float relSize) {
+    private void drawCelestialBody(CelestialBody planet, float xPos, float yPos, float relSize) {
         if (xPos + this.centreX > this.frameBx || xPos + this.centreX < this.frameA || yPos + this.centreY > this.frameBy || yPos + this.centreY < this.frameA) {
             return;
         }

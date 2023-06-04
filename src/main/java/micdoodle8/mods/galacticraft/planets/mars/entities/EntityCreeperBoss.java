@@ -90,10 +90,8 @@ public class EntityCreeperBoss extends EntityMob
             }
             final Entity entity = damageSource.getEntity();
 
-            if (this.riddenByEntity != entity && this.ridingEntity != entity) {
-                if (entity != this) {
-                    this.entityToAttack = entity;
-                }
+            if ((this.riddenByEntity != entity && this.ridingEntity != entity) && (entity != this)) {
+                this.entityToAttack = entity;
             }
             return true;
         }
@@ -214,7 +212,7 @@ public class EntityCreeperBoss extends EntityMob
                 this.worldObj.spawnEntityInWorld(new EntityXPOrb(this.worldObj, this.posX, this.posY, this.posZ, j));
             }
 
-            for (final TileEntity tile : (List<TileEntity>) this.worldObj.loadedTileEntityList) {
+            for (final TileEntity tile : this.worldObj.loadedTileEntityList) {
                 if (tile instanceof TileEntityTreasureChestMars) {
                     final double d3 = tile.xCoord + 0.5D - this.posX;
                     final double d4 = tile.yCoord + 0.5D - this.posY;
@@ -397,8 +395,7 @@ public class EntityCreeperBoss extends EntityMob
     }
 
     public ItemStack getGuaranteedLoot(Random rand) {
-        final List<ItemStack> stackList = new LinkedList<>();
-        stackList.addAll(GalacticraftRegistry.getDungeonLoot(2));
+        final List<ItemStack> stackList = new LinkedList<>(GalacticraftRegistry.getDungeonLoot(2));
         boolean hasT3Rocket = false;
         boolean hasAstroMiner = false;
         // Check if player seems to have Tier 3 rocket or Astro Miner already - in that

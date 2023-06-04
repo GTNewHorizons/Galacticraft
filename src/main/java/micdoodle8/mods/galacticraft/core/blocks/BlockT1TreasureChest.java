@@ -413,7 +413,7 @@ public class BlockT1TreasureChest extends BlockContainer implements ITileEntityP
                 return false;
             }
 
-            var6 = (EntityOcelot) var4.next();
+            var6 = var4.next();
         } while (!var6.isSitting());
 
         return true;

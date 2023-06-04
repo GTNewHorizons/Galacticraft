@@ -139,25 +139,21 @@ public class KeyHandlerClient extends KeyHandler {
                 }
                 entity.pressKey(keyNum);
 
-            } else if (entityTest instanceof EntityAutoRocket autoRocket) {
-
-                if (autoRocket.landing) {
-                    if (kb == leftShiftKey) {
-                        autoRocket.motionY -= 0.02D;
-                        GalacticraftCore.packetPipeline.sendToServer(
-                                new PacketSimple(
-                                        EnumSimplePacket.S_UPDATE_SHIP_MOTION_Y,
-                                        new Object[] { autoRocket.getEntityId(), false }));
-                    }
-                    if (kb == spaceKey) {
-                        autoRocket.motionY += 0.02D;
-                        GalacticraftCore.packetPipeline.sendToServer(
-                                new PacketSimple(
-                                        EnumSimplePacket.S_UPDATE_SHIP_MOTION_Y,
-                                        new Object[] { autoRocket.getEntityId(), true }));
-                    }
+            } else if ((entityTest instanceof EntityAutoRocket autoRocket) && autoRocket.landing) {
+                if (kb == leftShiftKey) {
+                    autoRocket.motionY -= 0.02D;
+                    GalacticraftCore.packetPipeline.sendToServer(
+                            new PacketSimple(
+                                    EnumSimplePacket.S_UPDATE_SHIP_MOTION_Y,
+                                    new Object[] { autoRocket.getEntityId(), false }));
                 }
-
+                if (kb == spaceKey) {
+                    autoRocket.motionY += 0.02D;
+                    GalacticraftCore.packetPipeline.sendToServer(
+                            new PacketSimple(
+                                    EnumSimplePacket.S_UPDATE_SHIP_MOTION_Y,
+                                    new Object[] { autoRocket.getEntityId(), true }));
+                }
             }
 
         }

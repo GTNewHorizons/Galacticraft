@@ -123,7 +123,6 @@ public class CompressorRecipes {
         adventureOnly = true;
         CompressorRecipes.addShapelessRecipe(par1ItemStack, par2ArrayOfObj);
         adventureOnly = false;
-        return;
     }
 
     public static ItemStack findMatchingRecipe(IInventory inventory, World par2World) {
@@ -169,9 +168,9 @@ public class CompressorRecipes {
             final IRecipe irecipe = theRecipes.get(j);
 
             if (irecipe instanceof ShapedRecipes
-                    && CompressorRecipes.matches((ShapedRecipes) irecipe, inventory, par2World)
+                    && CompressorRecipes.matches((ShapedRecipes) irecipe, inventory)
                     || irecipe instanceof ShapelessOreRecipe && CompressorRecipes
-                            .matchesShapeless((ShapelessOreRecipe) irecipe, inventory, par2World)) {
+                            .matchesShapeless((ShapelessOreRecipe) irecipe, inventory)) {
                 return irecipe.getRecipeOutput().copy();
             }
         }
@@ -179,7 +178,7 @@ public class CompressorRecipes {
         return null;
     }
 
-    private static boolean matches(ShapedRecipes recipe, IInventory inventory, World par2World) {
+    private static boolean matches(ShapedRecipes recipe, IInventory inventory) {
         for (int i = 0; i <= 3 - recipe.recipeWidth; ++i) {
             for (int j = 0; j <= 3 - recipe.recipeHeight; ++j) {
                 if (CompressorRecipes.checkMatch(recipe, inventory, i, j, true) || CompressorRecipes.checkMatch(recipe, inventory, i, j, false)) {
@@ -228,7 +227,7 @@ public class CompressorRecipes {
         return true;
     }
 
-    private static boolean matchesShapeless(ShapelessOreRecipe recipe, IInventory var1, World par2World) {
+    private static boolean matchesShapeless(ShapelessOreRecipe recipe, IInventory var1) {
         final ArrayList<Object> required = new ArrayList<>(recipe.getInput());
 
         for (int x = 0; x < var1.getSizeInventory(); x++) {

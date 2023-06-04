@@ -12,8 +12,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 
 public class ItemRendererScreen implements IItemRenderer {
 
-    private void renderScreen(ItemRenderType type, RenderBlocks render, ItemStack item, float translateX,
-            float translateY, float translateZ) {
+    private void renderScreen(ItemRenderType type) {
         GL11.glPushMatrix();
 
         FMLClientHandler.instance().getClient().getTextureManager().bindTexture(TileEntityScreenRenderer.blockTexture);
@@ -69,16 +68,16 @@ public class ItemRendererScreen implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         switch (type) {
             case EQUIPPED:
-                this.renderScreen(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderScreen(type);
                 break;
             case EQUIPPED_FIRST_PERSON:
-                this.renderScreen(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderScreen(type);
                 break;
             case INVENTORY:
-                this.renderScreen(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderScreen(type);
                 break;
             case ENTITY:
-                this.renderScreen(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderScreen(type);
                 break;
             default:
         }

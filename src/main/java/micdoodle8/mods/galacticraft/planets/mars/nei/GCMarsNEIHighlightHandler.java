@@ -60,10 +60,8 @@ public class GCMarsNEIHighlightHandler implements IHighlightHandler {
             if (meta == 9) {
                 return new ItemStack(MarsBlocks.marsBlock, 1, 9);
             }
-        } else if (b == AsteroidBlocks.blockBasic) {
-            if (meta == 4) {
-                return new ItemStack(AsteroidBlocks.blockBasic, 1, 4);
-            }
+        } else if ((b == AsteroidBlocks.blockBasic) && (meta == 4)) {
+            return new ItemStack(AsteroidBlocks.blockBasic, 1, 4);
         }
         return null;
     }

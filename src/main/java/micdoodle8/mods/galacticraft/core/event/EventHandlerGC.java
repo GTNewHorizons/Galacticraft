@@ -180,40 +180,36 @@ public class EventHandlerGC {
 
     @SubscribeEvent
     public void onEntityDamaged(LivingHurtEvent event) {
-        if (event.source.damageType.equals(DamageSource.onFire.damageType)) {
-            if (OxygenUtil.noAtmosphericCombustion(event.entityLiving.worldObj.provider)) {
-                if (OxygenUtil
-                        .isAABBInBreathableAirBlock(event.entityLiving.worldObj, event.entityLiving.boundingBox)) {
-                    return;
-                }
-
-                if (event.entityLiving.worldObj instanceof WorldServer) {
-                    ((WorldServer) event.entityLiving.worldObj).func_147487_a(
-                            "smoke",
-                            event.entityLiving.posX,
-                            event.entityLiving.posY + event.entityLiving.boundingBox.maxY
-                                    - event.entityLiving.boundingBox.minY,
-                            event.entityLiving.posZ,
-                            50,
-                            0.0,
-                            0.05,
-                            0.0,
-                            0.001);
-                }
-
-                event.entityLiving.extinguish();
+        if (event.source.damageType.equals(DamageSource.onFire.damageType) && OxygenUtil.noAtmosphericCombustion(event.entityLiving.worldObj.provider)) {
+            if (OxygenUtil
+                    .isAABBInBreathableAirBlock(event.entityLiving.worldObj, event.entityLiving.boundingBox)) {
+                return;
             }
+
+            if (event.entityLiving.worldObj instanceof WorldServer) {
+                ((WorldServer) event.entityLiving.worldObj).func_147487_a(
+                        "smoke",
+                        event.entityLiving.posX,
+                        event.entityLiving.posY + event.entityLiving.boundingBox.maxY
+                                - event.entityLiving.boundingBox.minY,
+                        event.entityLiving.posZ,
+                        50,
+                        0.0,
+                        0.05,
+                        0.0,
+                        0.001);
+            }
+
+            event.entityLiving.extinguish();
         }
     }
 
     @SubscribeEvent
     public void onEntityFall(LivingFallEvent event) {
-        if (event.entityLiving instanceof EntityPlayer player) {
-            if (player.ridingEntity instanceof EntityAutoRocket || player.ridingEntity instanceof EntityLanderBase) {
-                event.distance = 0.0F;
-                event.setCanceled(true);
-                return;
-            }
+        if ((event.entityLiving instanceof EntityPlayer player) && (player.ridingEntity instanceof EntityAutoRocket || player.ridingEntity instanceof EntityLanderBase)) {
+            event.distance = 0.0F;
+            event.setCanceled(true);
+            return;
         }
 
         if (event.entityLiving.worldObj.provider instanceof IGalacticraftWorldProvider) {
@@ -268,7 +264,7 @@ public class EventHandlerGC {
         final TileEntity tileClicked = worldObj.getTileEntity(event.x, event.y, event.z);
 
         if (heldStack != null) {
-            if (tileClicked != null && tileClicked instanceof IKeyable) {
+            if (tileClicked instanceof IKeyable) {
                 if (PlayerInteractEvent.Action.LEFT_CLICK_BLOCK.equals(event.action)) {
                     event.setCanceled(
                             !((IKeyable) tileClicked).canBreak() && !event.entityPlayer.capabilities.isCreativeMode);
@@ -289,23 +285,21 @@ public class EventHandlerGC {
                 }
             }
 
-            if (heldStack.getItem() instanceof ItemFlintAndSteel || heldStack.getItem() instanceof ItemFireball) {
-                if (!worldObj.isRemote && PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK.equals(event.action)) {
-                    if (idClicked != Blocks.tnt && OxygenUtil.noAtmosphericCombustion(worldObj.provider)
-                            && !OxygenUtil.isAABBInBreathableAirBlock(
-                                    worldObj,
-                                    AxisAlignedBB.getBoundingBox(
-                                            event.x,
-                                            event.y,
-                                            event.z,
-                                            event.x + 1,
-                                            event.y + 2,
-                                            event.z + 1))) {
-                        event.setCanceled(true);
-                    }
+            if ((heldStack.getItem() instanceof ItemFlintAndSteel || heldStack.getItem() instanceof ItemFireball) && (!worldObj.isRemote && PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK.equals(event.action))) {
+                if (idClicked != Blocks.tnt && OxygenUtil.noAtmosphericCombustion(worldObj.provider)
+                        && !OxygenUtil.isAABBInBreathableAirBlock(
+                                worldObj,
+                                AxisAlignedBB.getBoundingBox(
+                                        event.x,
+                                        event.y,
+                                        event.z,
+                                        event.x + 1,
+                                        event.y + 2,
+                                        event.z + 1))) {
+                    event.setCanceled(true);
                 }
             }
-        } else if (tileClicked != null && tileClicked instanceof IKeyable) {
+        } else if (tileClicked instanceof IKeyable) {
             if (PlayerInteractEvent.Action.LEFT_CLICK_BLOCK.equals(event.action)) {
                 event.setCanceled(
                         !((IKeyable) tileClicked).canBreak() && !event.entityPlayer.capabilities.isCreativeMode);
@@ -327,31 +321,29 @@ public class EventHandlerGC {
             return;
         }
 
-        if (entityLiving.ticksExisted % 100 == 0) {
-            if (entityLiving.worldObj.provider instanceof IGalacticraftWorldProvider) {
-                if (!(entityLiving instanceof EntityPlayer)
-                        && (!(entityLiving instanceof IEntityBreathable)
-                                || !((IEntityBreathable) entityLiving).canBreath())
-                        && !((IGalacticraftWorldProvider) entityLiving.worldObj.provider).hasBreathableAtmosphere()) {
-                    if (ConfigManagerCore.challengeMobDropsAndSpawning && entityLiving instanceof EntityEnderman) {
+        if ((entityLiving.ticksExisted % 100 == 0) && (entityLiving.worldObj.provider instanceof IGalacticraftWorldProvider)) {
+            if (!(entityLiving instanceof EntityPlayer)
+                    && (!(entityLiving instanceof IEntityBreathable)
+                            || !((IEntityBreathable) entityLiving).canBreath())
+                    && !((IGalacticraftWorldProvider) entityLiving.worldObj.provider).hasBreathableAtmosphere()) {
+                if (ConfigManagerCore.challengeMobDropsAndSpawning && entityLiving instanceof EntityEnderman) {
+                    return;
+                }
+
+                if (!OxygenUtil.isAABBInBreathableAirBlock(entityLiving)) {
+                    final GCCoreOxygenSuffocationEvent suffocationEvent = new GCCoreOxygenSuffocationEvent.Pre(
+                            entityLiving);
+                    MinecraftForge.EVENT_BUS.post(suffocationEvent);
+
+                    if (suffocationEvent.isCanceled()) {
                         return;
                     }
 
-                    if (!OxygenUtil.isAABBInBreathableAirBlock(entityLiving)) {
-                        final GCCoreOxygenSuffocationEvent suffocationEvent = new GCCoreOxygenSuffocationEvent.Pre(
-                                entityLiving);
-                        MinecraftForge.EVENT_BUS.post(suffocationEvent);
+                    entityLiving.attackEntityFrom(DamageSourceGC.oxygenSuffocation, 1);
 
-                        if (suffocationEvent.isCanceled()) {
-                            return;
-                        }
-
-                        entityLiving.attackEntityFrom(DamageSourceGC.oxygenSuffocation, 1);
-
-                        final GCCoreOxygenSuffocationEvent suffocationEventPost = new GCCoreOxygenSuffocationEvent.Post(
-                                entityLiving);
-                        MinecraftForge.EVENT_BUS.post(suffocationEventPost);
-                    }
+                    final GCCoreOxygenSuffocationEvent suffocationEventPost = new GCCoreOxygenSuffocationEvent.Post(
+                            entityLiving);
+                    MinecraftForge.EVENT_BUS.post(suffocationEventPost);
                 }
             }
         }
@@ -825,7 +817,6 @@ public class EventHandlerGC {
                 event.red = (float) vec.xCoord;
                 event.green = (float) vec.yCoord;
                 event.blue = (float) vec.zCoord;
-                return;
             }
         }
     }
@@ -902,7 +893,6 @@ public class EventHandlerGC {
                                 z);
                         event.manager.playSound(newSound);
                         event.result = null;
-                        return;
                     }
                 }
             }

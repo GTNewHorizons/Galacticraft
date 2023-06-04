@@ -12,8 +12,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 
 public class ItemRendererShortRangeTelepad implements IItemRenderer {
 
-    private void renderBeamReceiver(ItemRenderType type, RenderBlocks render, ItemStack item, float translateX,
-            float translateY, float translateZ) {
+    private void renderBeamReceiver(ItemRenderType type) {
         GL11.glPushMatrix();
         this.transform(type);
 
@@ -103,16 +102,16 @@ public class ItemRendererShortRangeTelepad implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         switch (type) {
             case EQUIPPED:
-                this.renderBeamReceiver(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderBeamReceiver(type);
                 break;
             case EQUIPPED_FIRST_PERSON:
-                this.renderBeamReceiver(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderBeamReceiver(type);
                 break;
             case INVENTORY:
-                this.renderBeamReceiver(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderBeamReceiver(type);
                 break;
             case ENTITY:
-                this.renderBeamReceiver(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderBeamReceiver(type);
                 break;
             default:
                 break;

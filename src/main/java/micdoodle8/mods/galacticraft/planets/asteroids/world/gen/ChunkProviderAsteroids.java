@@ -394,12 +394,10 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
 
                     if (isHollow && distance <= hollowSize) {
                         distanceAbove += this.asteroidTurbulance.getNoise(xx, y + 1, zz);
-                        if (distanceAbove <= 1) {
-                            if (y - 1 == terrainYY) {
-                                final int index = indexBase | y + 1;
-                                blockArray[index] = this.LIGHT;
-                                metaArray[index] = this.LIGHT_META;
-                            }
+                        if ((distanceAbove <= 1) && (y - 1 == terrainYY)) {
+                            final int index = indexBase | y + 1;
+                            blockArray[index] = this.LIGHT;
+                            metaArray[index] = this.LIGHT_META;
                         }
                     }
 
@@ -468,12 +466,10 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
                         if (distance <= 1) {
                             final int index = indexBase | y;
                             final int indexAbove = indexBase | y + 1;
-                            if (Blocks.air == blockArray[indexAbove]
-                                    && (blockArray[index] == this.ASTEROID_STONE || blockArray[index] == this.GRASS)) {
-                                if (this.rand.nextInt(GLOWSTONE_CHANCE) == 0) {
-                                    blockArray[index] = this.LIGHT;
-                                    metaArray[index] = this.LIGHT_META;
-                                }
+                            if ((Blocks.air == blockArray[indexAbove]
+                                    && (blockArray[index] == this.ASTEROID_STONE || blockArray[index] == this.GRASS)) && (this.rand.nextInt(GLOWSTONE_CHANCE) == 0)) {
+                                blockArray[index] = this.LIGHT;
+                                metaArray[index] = this.LIGHT_META;
                             }
                         }
                     }
@@ -515,7 +511,7 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
         return (int) (asteroidY - asteroidSize / 4 + yMod * 1.5F);
     }
 
-    private final int getTerrainHeightAt(int x, int z, float[] yModArray, int xMin, int zMin, int zSize, int asteroidY,
+    private final int getTerrainHeightAt(int x, float[] yModArray, int xMin, int zMin, int zSize, int asteroidY,
             int asteroidSize) {
         final int index = (x - xMin) * zSize - zMin;
         if (index < yModArray.length && index >= 0) {
@@ -701,7 +697,6 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
                                 i,
                                 this.getTerrainHeightAt(
                                         i - x,
-                                        k - z,
                                         sizeYArray,
                                         xMin,
                                         zMin,
@@ -723,7 +718,6 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
                             i,
                             this.getTerrainHeightAt(
                                     i - x,
-                                    k - z,
                                     sizeYArray,
                                     xMin,
                                     zMin,
@@ -741,7 +735,6 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
                             i,
                             this.getTerrainHeightAt(
                                     i - x,
-                                    k - z,
                                     sizeYArray,
                                     xMin,
                                     zMin,
@@ -759,7 +752,6 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
                             i,
                             this.getTerrainHeightAt(
                                     i - x,
-                                    k - z,
                                     sizeYArray,
                                     xMin,
                                     zMin,
@@ -777,7 +769,6 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
                             i,
                             this.getTerrainHeightAt(
                                     i - x,
-                                    k - z,
                                     sizeYArray,
                                     xMin,
                                     zMin,
@@ -860,10 +851,8 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
                                 && !(chunk.getBlock(x, y, z) instanceof BlockAir)) {
                             int count = 2;
 
-                            if (x > 1) {
-                                if (chunk.getBlock(x - 2, y, z) instanceof BlockAir) {
-                                    count += 2;
-                                }
+                            if ((x > 1) && (chunk.getBlock(x - 2, y, z) instanceof BlockAir)) {
+                                count += 2;
                             }
                             if (x > 2) {
                                 if (chunk.getBlock(x - 3, y, z) instanceof BlockAir) {

@@ -71,34 +71,32 @@ public class BlockRefinery extends BlockAdvancedTile implements ItemBlockDesc.IB
     public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         final TileEntity te = par1World.getTileEntity(par2, par3, par4);
 
-        if (te instanceof TileEntityRefinery refinery) {
-            if (refinery.processTicks > 0) {
-                par1World.getBlockMetadata(par2, par3, par4);
-                final float var7 = par2 + 0.5F;
-                final float var8 = par3 + 1.1F;
-                final float var9 = par4 + 0.5F;
-                final float var10 = 0.0F;
-                final float var11 = 0.0F;
+        if ((te instanceof TileEntityRefinery refinery) && (refinery.processTicks > 0)) {
+            par1World.getBlockMetadata(par2, par3, par4);
+            final float var7 = par2 + 0.5F;
+            final float var8 = par3 + 1.1F;
+            final float var9 = par4 + 0.5F;
+            final float var10 = 0.0F;
+            final float var11 = 0.0F;
 
-                for (int i = -1; i <= 1; i++) {
-                    for (int j = -1; j <= 1; j++) {
-                        par1World.spawnParticle(
-                                "smoke",
-                                var7 + var11 + i * 0.2,
-                                var8,
-                                var9 + var10 + j * 0.2,
-                                0.0D,
-                                0.01D,
-                                0.0D);
-                        par1World.spawnParticle(
-                                "flame",
-                                var7 + var11 + i * 0.1,
-                                var8 - 0.2,
-                                var9 + var10 + j * 0.1,
-                                0.0D,
-                                0.0001D,
-                                0.0D);
-                    }
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    par1World.spawnParticle(
+                            "smoke",
+                            var7 + var11 + i * 0.2,
+                            var8,
+                            var9 + var10 + j * 0.2,
+                            0.0D,
+                            0.01D,
+                            0.0D);
+                    par1World.spawnParticle(
+                            "flame",
+                            var7 + var11 + i * 0.1,
+                            var8 - 0.2,
+                            var9 + var10 + j * 0.1,
+                            0.0D,
+                            0.0001D,
+                            0.0D);
                 }
             }
         }

@@ -117,10 +117,8 @@ public abstract class TileBaseElectricBlock extends TileBaseUniversalElectrical
 
         super.updateEntity();
 
-        if (!this.worldObj.isRemote) {
-            if (this.disableCooldown > 0) {
-                this.disableCooldown--;
-            }
+        if (!this.worldObj.isRemote && (this.disableCooldown > 0)) {
+            this.disableCooldown--;
         }
     }
 

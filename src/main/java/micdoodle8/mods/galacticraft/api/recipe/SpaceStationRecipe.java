@@ -49,9 +49,7 @@ public class SpaceStationRecipe {
 
     @SuppressWarnings("unchecked")
     public boolean matches(EntityPlayer player, boolean remove) {
-        final HashMap<Object, Integer> required = new HashMap<>();
-        required.putAll(this.input);
-
+        final HashMap<Object, Integer> required = new HashMap<>(this.input);
         for (Object next : this.input.keySet()) {
             final int amountRequired = required.get(next);
             int amountInInv = 0;

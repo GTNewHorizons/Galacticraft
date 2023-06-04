@@ -59,7 +59,7 @@ public class ContainerElectricFurnace extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par1) {
         ItemStack var2 = null;
-        final Slot var3 = (Slot) this.inventorySlots.get(par1);
+        final Slot var3 = this.inventorySlots.get(par1);
 
         if (var3 != null && var3.getHasStack()) {
             final ItemStack var4 = var3.getStack();

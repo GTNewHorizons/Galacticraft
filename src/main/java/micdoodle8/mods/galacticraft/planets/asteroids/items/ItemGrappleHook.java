@@ -25,7 +25,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemGrappleHook extends ItemBow {
 
     public ItemGrappleHook(String assetName) {
-        super();
         this.setUnlocalizedName(assetName);
         this.setMaxStackSize(1);
         this.setTextureName("arrow");

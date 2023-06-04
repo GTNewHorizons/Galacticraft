@@ -35,7 +35,6 @@ public class ItemBasic extends Item {
     protected IIcon[] icons = new IIcon[ItemBasic.names.length];
 
     public ItemBasic(String assetName) {
-        super();
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
         this.setUnlocalizedName(assetName);

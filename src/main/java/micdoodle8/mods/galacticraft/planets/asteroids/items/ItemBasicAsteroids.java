@@ -25,7 +25,6 @@ public class ItemBasicAsteroids extends Item {
     protected IIcon[] icons = new IIcon[ItemBasicAsteroids.names.length];
 
     public ItemBasicAsteroids() {
-        super();
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
         this.setUnlocalizedName("itemBasicAsteroids");

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
@@ -179,9 +180,7 @@ public class MapGen {
         this.getHeightMap(x0, z0);
         final int halfFactor = limit * limit / 2;
         final ArrayList<Integer> cols = new ArrayList<>();
-        for (int j = 0; j < this.biomeCount.length; j++) {
-            this.biomeCount[j] = 0;
-        }
+        Arrays.fill(this.biomeCount, 0);
         for (int x = 0; x < 16; x += factor) {
             final int izstore = iz;
             for (int z = 0; z < 16; z += factor) {

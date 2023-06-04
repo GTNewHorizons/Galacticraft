@@ -25,7 +25,6 @@ public class ItemBasicMars extends Item {
     protected IIcon[] icons = new IIcon[ItemBasicMars.names.length];
 
     public ItemBasicMars() {
-        super();
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
     }

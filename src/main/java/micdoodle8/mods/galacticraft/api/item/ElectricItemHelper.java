@@ -17,13 +17,11 @@ public class ElectricItemHelper {
      * @return The total amount of joules provided by the provider.
      */
     public static float chargeItem(ItemStack itemStack, float joules) {
-        if (itemStack != null) {
-            if (itemStack.getItem() instanceof IItemElectric) {
-                return ((IItemElectric) itemStack.getItem()).recharge(
-                        itemStack,
-                        Math.min(((IItemElectric) itemStack.getItem()).getTransfer(itemStack), joules),
-                        true);
-            }
+        if ((itemStack != null) && (itemStack.getItem() instanceof IItemElectric)) {
+            return ((IItemElectric) itemStack.getItem()).recharge(
+                    itemStack,
+                    Math.min(((IItemElectric) itemStack.getItem()).getTransfer(itemStack), joules),
+                    true);
         }
 
         return 0;
@@ -36,13 +34,11 @@ public class ElectricItemHelper {
      * @return The total amount of joules the provider received.
      */
     public static float dischargeItem(ItemStack itemStack, float joules) {
-        if (itemStack != null) {
-            if (itemStack.getItem() instanceof IItemElectric) {
-                return ((IItemElectric) itemStack.getItem()).discharge(
-                        itemStack,
-                        Math.min(((IItemElectric) itemStack.getItem()).getMaxElectricityStored(itemStack), joules),
-                        true);
-            }
+        if ((itemStack != null) && (itemStack.getItem() instanceof IItemElectric)) {
+            return ((IItemElectric) itemStack.getItem()).discharge(
+                    itemStack,
+                    Math.min(((IItemElectric) itemStack.getItem()).getMaxElectricityStored(itemStack), joules),
+                    true);
         }
 
         return 0;
@@ -55,10 +51,8 @@ public class ElectricItemHelper {
      * @return An electrical ItemStack with a specific charge.
      */
     public static ItemStack getWithCharge(ItemStack itemStack, float joules) {
-        if (itemStack != null) {
-            if (itemStack.getItem() instanceof IItemElectric) {
-                ((IItemElectric) itemStack.getItem()).setElectricity(itemStack, joules);
-            }
+        if ((itemStack != null) && (itemStack.getItem() instanceof IItemElectric)) {
+            ((IItemElectric) itemStack.getItem()).setElectricity(itemStack, joules);
         }
 
         return itemStack;

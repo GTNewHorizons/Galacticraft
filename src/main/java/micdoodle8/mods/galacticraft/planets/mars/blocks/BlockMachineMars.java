@@ -160,7 +160,7 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
 
             world.setBlockMetadataWithNotify(x, y, z, BlockMachineMars.LAUNCH_CONTROLLER_METADATA + change, 3);
         } else if (metadata >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) {
-            if (!this.canPlaceChamberAt(world, x, y, z, entityLiving)) {
+            if (!this.canPlaceChamberAt(world, x, y, z)) {
                 if (entityLiving instanceof EntityPlayer) {
                     if (!world.isRemote) {
                         ((EntityPlayer) entityLiving).addChatMessage(
@@ -347,7 +347,7 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
         par3List.add(this.getLaunchController());
     }
 
-    private boolean canPlaceChamberAt(World world, int x0, int y0, int z0, EntityLivingBase player) {
+    private boolean canPlaceChamberAt(World world, int x0, int y0, int z0) {
         for (int y = 0; y < 3; y++) {
             final Block blockAt = world.getBlock(x0, y0 + y, z0);
             final int metaAt = world.getBlockMetadata(x0, y0 + y, z0);

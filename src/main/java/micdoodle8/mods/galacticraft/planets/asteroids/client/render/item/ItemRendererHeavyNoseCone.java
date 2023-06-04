@@ -19,8 +19,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 
 public class ItemRendererHeavyNoseCone implements IItemRenderer {
 
-    private void renderHeavyNoseCone(ItemRenderType type, RenderBlocks render, ItemStack item, float translateX,
-            float translateY, float translateZ) {
+    private void renderHeavyNoseCone(ItemStack item) {
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
 
@@ -100,7 +99,7 @@ public class ItemRendererHeavyNoseCone implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         switch (type) {
             case INVENTORY:
-                this.renderHeavyNoseCone(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderHeavyNoseCone(item);
                 break;
             default:
                 break;

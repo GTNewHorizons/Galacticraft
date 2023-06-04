@@ -181,17 +181,15 @@ public class TileEntityArclamp extends TileEntity {
                         }
                         final double distanceNew = vecNewTarget.squareDistanceTo(this.xCoord, this.yCoord, this.zCoord);
 
-                        if (distanceNew > e.getDistanceSq(this.xCoord, this.yCoord, this.zCoord)) {
-                            if (vecOldTarget == null || distanceNew
-                                    > vecOldTarget.squareDistanceTo(this.xCoord, this.yCoord, this.zCoord)) {
-                                e.getNavigator().tryMoveToXYZ(
-                                        vecNewTarget.xCoord,
-                                        vecNewTarget.yCoord,
-                                        vecNewTarget.zCoord,
-                                        0.3D);
-                                // System.out.println("Debug: Arclamp repelling entity:
-                                // "+e.getClass().getSimpleName());
-                            }
+                        if ((distanceNew > e.getDistanceSq(this.xCoord, this.yCoord, this.zCoord)) && (vecOldTarget == null || distanceNew
+                                > vecOldTarget.squareDistanceTo(this.xCoord, this.yCoord, this.zCoord))) {
+                            e.getNavigator().tryMoveToXYZ(
+                                    vecNewTarget.xCoord,
+                                    vecNewTarget.yCoord,
+                                    vecNewTarget.zCoord,
+                                    0.3D);
+                            // System.out.println("Debug: Arclamp repelling entity:
+                            // "+e.getClass().getSimpleName());
                         }
                     }
                 }
@@ -279,10 +277,8 @@ public class TileEntityArclamp extends TileEntity {
                                 }
                             } else {
                                 allAir = false;
-                                if (b != null && b.getLightOpacity(world, sideVec.x, sideVec.y, sideVec.z) == 0) {
-                                    if (side != sideskip1 && side != sideskip2) {
-                                        nextLayer.add(sideVec);
-                                    }
+                                if ((b != null && b.getLightOpacity(world, sideVec.x, sideVec.y, sideVec.z) == 0) && (side != sideskip1 && side != sideskip2)) {
+                                    nextLayer.add(sideVec);
                                 }
                             }
                         }

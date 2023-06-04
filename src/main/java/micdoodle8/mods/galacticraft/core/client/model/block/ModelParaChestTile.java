@@ -8,7 +8,6 @@ public class ModelParaChestTile extends ModelChest {
     public ModelRenderer[] keyParts = new ModelRenderer[3];
 
     public ModelParaChestTile() {
-        super();
         this.keyParts[0] = new ModelRenderer(this, 60, 61);
         this.keyParts[0].setTextureSize(64, 64);
         this.keyParts[0].addBox(-1.0F, -6.0F, 0.0F, 1, 1, 1);

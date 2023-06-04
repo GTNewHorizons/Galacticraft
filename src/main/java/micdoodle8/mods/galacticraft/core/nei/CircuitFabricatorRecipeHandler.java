@@ -142,7 +142,6 @@ public class CircuitFabricatorRecipeHandler extends TemplateRecipeHandler {
         }
 
         public CachedCircuitRecipe(ArrayList<PositionedStack> pstack1, PositionedStack pstack2) {
-            super();
             this.input = pstack1;
             this.output = pstack2;
         }

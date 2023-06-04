@@ -171,7 +171,7 @@ public class EntityMeteor extends Entity {
     }
 
     public static DamageSource causeMeteorDamage(EntityMeteor par0EntityMeteor, Entity par1Entity) {
-        if (par1Entity != null && par1Entity instanceof EntityPlayer) {
+        if (par1Entity instanceof EntityPlayer) {
             StatCollector.translateToLocalFormatted(
                     "death." + "meteor",
                     ((EntityPlayer) par1Entity).getGameProfile().getName()

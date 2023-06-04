@@ -107,14 +107,14 @@ public class PacketSimpleAsteroids implements IPacket {
             case C_TELEPAD_SEND:
                 Entity entity = playerBaseClient.worldObj.getEntityByID((Integer) this.data.get(1));
 
-                if (entity != null && entity instanceof EntityLivingBase) {
+                if (entity instanceof EntityLivingBase) {
                     final BlockVec3 pos = (BlockVec3) this.data.get(0);
                     entity.setPosition(pos.x + 0.5, pos.y + 2.2, pos.z + 0.5);
                 }
                 break;
             case C_UPDATE_GRAPPLE_POS:
                 entity = playerBaseClient.worldObj.getEntityByID((Integer) this.data.get(0));
-                if (entity != null && entity instanceof EntityGrapple) {
+                if (entity instanceof EntityGrapple) {
                     final Vector3 vec = (Vector3) this.data.get(1);
                     entity.setPosition(vec.x, vec.y, vec.z);
                 }

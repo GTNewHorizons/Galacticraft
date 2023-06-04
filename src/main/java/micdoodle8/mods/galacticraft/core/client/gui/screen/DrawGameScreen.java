@@ -77,12 +77,10 @@ public class DrawGameScreen extends IScreenManager {
         }
 
         if (cornerBlock) {
-            if ((this.mapFirstTick || (int) ticks % 400 == 0) && !this.mapDone) {
-                if (this.tickMapDone != (int) ticks) {
-                    this.tickMapDone = (int) ticks;
-                    this.makeMap();
-                    this.mapFirstTick = false;
-                }
+            if (((this.mapFirstTick || (int) ticks % 400 == 0) && !this.mapDone) && (this.tickMapDone != (int) ticks)) {
+                this.tickMapDone = (int) ticks;
+                this.makeMap();
+                this.mapFirstTick = false;
             }
             this.doDraw(type, ticks);
             this.initialise = true;
@@ -102,10 +100,8 @@ public class DrawGameScreen extends IScreenManager {
                 return;
             }
 
-            if (!this.readyToInitialise) {
-                if (ticks == this.tickDrawn) {
-                    return;
-                }
+            if (!this.readyToInitialise && (ticks == this.tickDrawn)) {
+                return;
             }
 
             if (!this.readyToInitialise) {

@@ -34,7 +34,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemTier2Rocket extends Item implements IHoldableItem {
 
     public ItemTier2Rocket() {
-        super();
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
         this.setMaxStackSize(1);

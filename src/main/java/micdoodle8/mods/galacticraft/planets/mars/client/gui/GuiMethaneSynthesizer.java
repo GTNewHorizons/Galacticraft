@@ -162,8 +162,7 @@ public class GuiMethaneSynthesizer extends GuiContainerGC {
                         this.height,
                         this));
 
-        fuelSlotDesc = new ArrayList<>();
-        fuelSlotDesc.addAll(GCCoreUtil.translateWithSplit("gui.hydrogenInput.desc.0"));
+        fuelSlotDesc = new ArrayList<>(GCCoreUtil.translateWithSplit("gui.hydrogenInput.desc.0"));
         fuelSlotDesc.addAll(GCCoreUtil.translateWithSplit("gui.hydrogenInput.desc.1"));
         fuelSlotDesc.add("(" + GCCoreUtil.translate("gui.message.withAtmosphere0.name"));
         fuelSlotDesc.add(GCCoreUtil.lowerCaseNoun("fluid.hydrogen"));

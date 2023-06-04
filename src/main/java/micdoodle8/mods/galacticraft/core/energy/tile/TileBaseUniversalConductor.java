@@ -88,7 +88,7 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor
                 final Constructor<?> constr = tileLoadEvent.getConstructor(energyTile);
                 final Object o = constr.newInstance(this);
 
-                if (o != null && o instanceof Event) {
+                if (o instanceof Event) {
                     MinecraftForge.EVENT_BUS.post((Event) o);
                 }
             } catch (final Exception e) {
@@ -106,7 +106,7 @@ public abstract class TileBaseUniversalConductor extends TileBaseConductor
                     final Constructor<?> constr = tileLoadEvent.getConstructor(energyTile);
                     final Object o = constr.newInstance(this);
 
-                    if (o != null && o instanceof Event) {
+                    if (o instanceof Event) {
                         MinecraftForge.EVENT_BUS.post((Event) o);
                     }
                 } catch (final Exception e) {

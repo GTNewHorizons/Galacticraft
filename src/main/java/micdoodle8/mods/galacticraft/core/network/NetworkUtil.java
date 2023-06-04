@@ -405,8 +405,7 @@ public class NetworkUtil {
         if (a instanceof FluidTank prevTank) {
             FluidStack prevFluid = prevTank.getFluid();
             prevFluid = prevFluid == null ? null : prevFluid.copy();
-            final FluidTank tank = new FluidTank(prevFluid, prevTank.getCapacity());
-            return tank;
+            return new FluidTank(prevFluid, prevTank.getCapacity());
         } else {
             return a;
         }

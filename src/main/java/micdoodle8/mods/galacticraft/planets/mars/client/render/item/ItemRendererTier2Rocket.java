@@ -109,7 +109,7 @@ public class ItemRendererTier2Rocket extends ItemRendererTier1Rocket {
                 GL11.glScalef(0.45F, 0.45F, 0.45F);
             }
 
-            if (player != null && player.ridingEntity != null && player.ridingEntity instanceof EntityTier1Rocket) {
+            if (player != null && player.ridingEntity instanceof EntityTier1Rocket) {
                 GL11.glScalef(0.0F, 0.0F, 0.0F);
             }
         }
@@ -126,7 +126,7 @@ public class ItemRendererTier2Rocket extends ItemRendererTier1Rocket {
             GL11.glRotatef(73, 1.0F, 0, 0);
             GL11.glScalef(5.2F, 5.2F, 5.2F);
 
-            if (player != null && player.ridingEntity != null && player.ridingEntity instanceof EntityTier1Rocket) {
+            if (player != null && player.ridingEntity instanceof EntityTier1Rocket) {
                 GL11.glScalef(0.0F, 0.0F, 0.0F);
             }
         }

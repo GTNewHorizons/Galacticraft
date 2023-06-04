@@ -45,7 +45,7 @@ public abstract class GuiStarBackground extends GuiScreen {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    private void drawPanorama2(float par1) {
+    private void drawPanorama2() {
         final Tessellator var4 = Tessellator.instance;
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glPushMatrix();
@@ -242,7 +242,7 @@ public abstract class GuiStarBackground extends GuiScreen {
         GL11.glPushMatrix();
         GL11.glScalef(1.0F, 0.0F, 1.0F);
         this.drawPanorama(1);
-        this.drawPanorama2(1);
+        this.drawPanorama2();
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         this.rotateAndBlurSkybox();

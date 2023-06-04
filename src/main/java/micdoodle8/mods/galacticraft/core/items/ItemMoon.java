@@ -21,7 +21,6 @@ public class ItemMoon extends Item {
     protected IIcon[] icons = new IIcon[ItemMoon.names.length];
 
     public ItemMoon(String str) {
-        super();
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
         this.setUnlocalizedName(str);

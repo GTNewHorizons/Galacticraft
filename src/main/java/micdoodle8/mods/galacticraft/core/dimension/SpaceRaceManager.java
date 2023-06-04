@@ -47,19 +47,17 @@ public class SpaceRaceManager {
             boolean playerOnline = false;
 
             for (final Object o : MinecraftServer.getServer().getConfigurationManager().playerEntityList) {
-                if (o instanceof EntityPlayer player) {
-                    if (race.getPlayerNames().contains(player.getGameProfile().getName())) {
-                        final CelestialBody body = GalaxyRegistry
-                                .getCelestialBodyFromDimensionID(player.worldObj.provider.dimensionId);
+                if ((o instanceof EntityPlayer player) && race.getPlayerNames().contains(player.getGameProfile().getName())) {
+                    final CelestialBody body = GalaxyRegistry
+                            .getCelestialBodyFromDimensionID(player.worldObj.provider.dimensionId);
 
-                        if (body != null) {
-                            if (!race.getCelestialBodyStatusList().containsKey(body)) {
-                                race.setCelestialBodyReached(body);
-                            }
+                    if (body != null) {
+                        if (!race.getCelestialBodyStatusList().containsKey(body)) {
+                            race.setCelestialBodyReached(body);
                         }
-
-                        playerOnline = true;
                     }
+
+                    playerOnline = true;
                 }
             }
 

@@ -56,8 +56,7 @@ public class BlockUnlitTorch extends Block implements IOxygenReliantBlock {
         return this.unlitVersion;
     }
 
-    private static boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection direction,
-            boolean nope) {
+    private static boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection direction) {
         return world.getBlock(x, y, z).isSideSolid(world, x, y, z, direction);
     }
 
@@ -91,10 +90,10 @@ public class BlockUnlitTorch extends Block implements IOxygenReliantBlock {
 
     @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
-        return BlockUnlitTorch.isBlockSolidOnSide(par1World, par2 - 1, par3, par4, ForgeDirection.EAST, true)
-                || BlockUnlitTorch.isBlockSolidOnSide(par1World, par2 + 1, par3, par4, ForgeDirection.WEST, true)
-                || BlockUnlitTorch.isBlockSolidOnSide(par1World, par2, par3, par4 - 1, ForgeDirection.SOUTH, true)
-                || BlockUnlitTorch.isBlockSolidOnSide(par1World, par2, par3, par4 + 1, ForgeDirection.NORTH, true)
+        return BlockUnlitTorch.isBlockSolidOnSide(par1World, par2 - 1, par3, par4, ForgeDirection.EAST)
+                || BlockUnlitTorch.isBlockSolidOnSide(par1World, par2 + 1, par3, par4, ForgeDirection.WEST)
+                || BlockUnlitTorch.isBlockSolidOnSide(par1World, par2, par3, par4 - 1, ForgeDirection.SOUTH)
+                || BlockUnlitTorch.isBlockSolidOnSide(par1World, par2, par3, par4 + 1, ForgeDirection.NORTH)
                 || this.canPlaceTorchOn(par1World, par2, par3 - 1, par4);
     }
 
@@ -108,22 +107,22 @@ public class BlockUnlitTorch extends Block implements IOxygenReliantBlock {
         }
 
         if (par5 == 2
-                && BlockUnlitTorch.isBlockSolidOnSide(par1World, par2, par3, par4 + 1, ForgeDirection.NORTH, true)) {
+                && BlockUnlitTorch.isBlockSolidOnSide(par1World, par2, par3, par4 + 1, ForgeDirection.NORTH)) {
             var10 = 4;
         }
 
         if (par5 == 3
-                && BlockUnlitTorch.isBlockSolidOnSide(par1World, par2, par3, par4 - 1, ForgeDirection.SOUTH, true)) {
+                && BlockUnlitTorch.isBlockSolidOnSide(par1World, par2, par3, par4 - 1, ForgeDirection.SOUTH)) {
             var10 = 3;
         }
 
         if (par5 == 4
-                && BlockUnlitTorch.isBlockSolidOnSide(par1World, par2 + 1, par3, par4, ForgeDirection.WEST, true)) {
+                && BlockUnlitTorch.isBlockSolidOnSide(par1World, par2 + 1, par3, par4, ForgeDirection.WEST)) {
             var10 = 2;
         }
 
         if (par5 == 5
-                && BlockUnlitTorch.isBlockSolidOnSide(par1World, par2 - 1, par3, par4, ForgeDirection.EAST, true)) {
+                && BlockUnlitTorch.isBlockSolidOnSide(par1World, par2 - 1, par3, par4, ForgeDirection.EAST)) {
             var10 = 1;
         }
 
@@ -142,15 +141,15 @@ public class BlockUnlitTorch extends Block implements IOxygenReliantBlock {
     @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         if (par1World.getBlockMetadata(par2, par3, par4) == 0) {
-            if (BlockUnlitTorch.isBlockSolidOnSide(par1World, par2 - 1, par3, par4, ForgeDirection.EAST, true)) {
+            if (BlockUnlitTorch.isBlockSolidOnSide(par1World, par2 - 1, par3, par4, ForgeDirection.EAST)) {
                 par1World.setBlockMetadataWithNotify(par2, par3, par4, 1, 2);
-            } else if (BlockUnlitTorch.isBlockSolidOnSide(par1World, par2 + 1, par3, par4, ForgeDirection.WEST, true)) {
+            } else if (BlockUnlitTorch.isBlockSolidOnSide(par1World, par2 + 1, par3, par4, ForgeDirection.WEST)) {
                 par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
             } else
-                if (BlockUnlitTorch.isBlockSolidOnSide(par1World, par2, par3, par4 - 1, ForgeDirection.SOUTH, true)) {
+                if (BlockUnlitTorch.isBlockSolidOnSide(par1World, par2, par3, par4 - 1, ForgeDirection.SOUTH)) {
                     par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
                 } else if (BlockUnlitTorch
-                        .isBlockSolidOnSide(par1World, par2, par3, par4 + 1, ForgeDirection.NORTH, true)) {
+                        .isBlockSolidOnSide(par1World, par2, par3, par4 + 1, ForgeDirection.NORTH)) {
                             par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
                         } else
                     if (this.canPlaceTorchOn(par1World, par2, par3 - 1, par4)) {
@@ -173,22 +172,22 @@ public class BlockUnlitTorch extends Block implements IOxygenReliantBlock {
             final int var6 = par1World.getBlockMetadata(par2, par3, par4);
             boolean var7 = false;
 
-            if (!BlockUnlitTorch.isBlockSolidOnSide(par1World, par2 - 1, par3, par4, ForgeDirection.EAST, true)
+            if (!BlockUnlitTorch.isBlockSolidOnSide(par1World, par2 - 1, par3, par4, ForgeDirection.EAST)
                     && var6 == 1) {
                 var7 = true;
             }
 
-            if (!BlockUnlitTorch.isBlockSolidOnSide(par1World, par2 + 1, par3, par4, ForgeDirection.WEST, true)
+            if (!BlockUnlitTorch.isBlockSolidOnSide(par1World, par2 + 1, par3, par4, ForgeDirection.WEST)
                     && var6 == 2) {
                 var7 = true;
             }
 
-            if (!BlockUnlitTorch.isBlockSolidOnSide(par1World, par2, par3, par4 - 1, ForgeDirection.SOUTH, true)
+            if (!BlockUnlitTorch.isBlockSolidOnSide(par1World, par2, par3, par4 - 1, ForgeDirection.SOUTH)
                     && var6 == 3) {
                 var7 = true;
             }
 
-            if (!BlockUnlitTorch.isBlockSolidOnSide(par1World, par2, par3, par4 + 1, ForgeDirection.NORTH, true)
+            if (!BlockUnlitTorch.isBlockSolidOnSide(par1World, par2, par3, par4 + 1, ForgeDirection.NORTH)
                     && var6 == 4) {
                 var7 = true;
             }

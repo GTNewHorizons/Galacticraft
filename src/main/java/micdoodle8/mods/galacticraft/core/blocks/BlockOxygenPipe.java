@@ -98,49 +98,47 @@ public class BlockOxygenPipe extends BlockTransmitter implements ITileEntityProv
         if (!par1World.isRemote) {
             final ItemStack stack = par5EntityPlayer.inventory.getCurrentItem();
 
-            if (stack != null) {
-                if (stack.getItem() instanceof ItemDye) {
-                    final int dyeColor = par5EntityPlayer.inventory.getCurrentItem().getItemDamageForDisplay();
+            if ((stack != null) && (stack.getItem() instanceof ItemDye)) {
+                final int dyeColor = par5EntityPlayer.inventory.getCurrentItem().getItemDamageForDisplay();
 
-                    final byte colorBefore = tileEntity.getColor();
+                final byte colorBefore = tileEntity.getColor();
 
-                    tileEntity.setColor((byte) dyeColor);
+                tileEntity.setColor((byte) dyeColor);
 
-                    if (colorBefore != (byte) dyeColor && !par5EntityPlayer.capabilities.isCreativeMode
-                            && --par5EntityPlayer.inventory.getCurrentItem().stackSize == 0) {
-                        par5EntityPlayer.inventory.mainInventory[par5EntityPlayer.inventory.currentItem] = null;
-                    }
-
-                    if (colorBefore != (byte) dyeColor && colorBefore != 15) {
-                        final float f = 0.7F;
-                        final double d0 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-                        final double d1 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.2D + 0.6D;
-                        final double d2 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-                        final EntityItem entityitem = new EntityItem(
-                                par1World,
-                                x + d0,
-                                y + d1,
-                                z + d2,
-                                new ItemStack(Items.dye, 1, colorBefore));
-                        entityitem.delayBeforeCanPickup = 10;
-                        par1World.spawnEntityInWorld(entityitem);
-                    }
-
-                    //
-                    // GCCorePacketManager.sendPacketToClients(GCCorePacketManager.getPacket(GalacticraftCore.CHANNELENTITIES,
-                    // tileEntity, tileEntity.getColor(), (byte) -1)); TODO Fix pipe color
-
-                    final BlockVec3 tileVec = new BlockVec3(tileEntity);
-                    for (final ForgeDirection dir : ForgeDirection.values()) {
-                        final TileEntity tileAt = tileVec.getTileEntityOnSide(tileEntity.getWorldObj(), dir);
-
-                        if (tileAt != null && tileAt instanceof IColorable) {
-                            ((IColorable) tileAt).onAdjacentColorChanged(dir);
-                        }
-                    }
-
-                    return true;
+                if (colorBefore != (byte) dyeColor && !par5EntityPlayer.capabilities.isCreativeMode
+                        && --par5EntityPlayer.inventory.getCurrentItem().stackSize == 0) {
+                    par5EntityPlayer.inventory.mainInventory[par5EntityPlayer.inventory.currentItem] = null;
                 }
+
+                if (colorBefore != (byte) dyeColor && colorBefore != 15) {
+                    final float f = 0.7F;
+                    final double d0 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
+                    final double d1 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.2D + 0.6D;
+                    final double d2 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
+                    final EntityItem entityitem = new EntityItem(
+                            par1World,
+                            x + d0,
+                            y + d1,
+                            z + d2,
+                            new ItemStack(Items.dye, 1, colorBefore));
+                    entityitem.delayBeforeCanPickup = 10;
+                    par1World.spawnEntityInWorld(entityitem);
+                }
+
+                //
+                // GCCorePacketManager.sendPacketToClients(GCCorePacketManager.getPacket(GalacticraftCore.CHANNELENTITIES,
+                // tileEntity, tileEntity.getColor(), (byte) -1)); TODO Fix pipe color
+
+                final BlockVec3 tileVec = new BlockVec3(tileEntity);
+                for (final ForgeDirection dir : ForgeDirection.values()) {
+                    final TileEntity tileAt = tileVec.getTileEntityOnSide(tileEntity.getWorldObj(), dir);
+
+                    if (tileAt instanceof IColorable) {
+                        ((IColorable) tileAt).onAdjacentColorChanged(dir);
+                    }
+                }
+
+                return true;
             }
         }
 

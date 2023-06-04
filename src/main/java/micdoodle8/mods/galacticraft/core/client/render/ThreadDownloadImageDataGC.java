@@ -44,15 +44,13 @@ public class ThreadDownloadImageDataGC extends SimpleTexture {
     }
 
     private void checkTextureUploaded() {
-        if (!this.textureUploaded) {
-            if (this.bufferedImage != null) {
-                if (this.textureLocation != null) {
-                    this.deleteGlTexture();
-                }
-
-                TextureUtil.uploadTextureImage(super.getGlTextureId(), this.bufferedImage);
-                this.textureUploaded = true;
+        if (!this.textureUploaded && (this.bufferedImage != null)) {
+            if (this.textureLocation != null) {
+                this.deleteGlTexture();
             }
+
+            TextureUtil.uploadTextureImage(super.getGlTextureId(), this.bufferedImage);
+            this.textureUploaded = true;
         }
     }
 
@@ -131,7 +129,6 @@ public class ThreadDownloadImageDataGC extends SimpleTexture {
                         }
 
                         ThreadDownloadImageDataGC.this.setBufferedImage(bufferedimage);
-                        return;
                     }
                 } catch (final Exception exception) {
                     ThreadDownloadImageDataGC.logger.error("Couldn't download http texture", exception);

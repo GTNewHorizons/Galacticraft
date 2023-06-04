@@ -61,7 +61,7 @@ public class ContainerGasLiquefier extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par1) {
         ItemStack var2 = null;
-        final Slot slot = (Slot) this.inventorySlots.get(par1);
+        final Slot slot = this.inventorySlots.get(par1);
 
         if (slot != null && slot.getHasStack()) {
             final ItemStack var4 = slot.getStack();
@@ -81,16 +81,12 @@ public class ContainerGasLiquefier extends Container {
                 }
             } else {
                 boolean outputTankSlotsSuccess = false;
-                if (FluidUtil.isEmptyContainerFor(var4, this.tileEntity.liquidTank2.getFluid())) {
-                    if (this.mergeItemStack(var4, 3, 4, false)) {
-                        outputTankSlotsSuccess = true;
-                    }
+                if (FluidUtil.isEmptyContainerFor(var4, this.tileEntity.liquidTank2.getFluid()) && this.mergeItemStack(var4, 3, 4, false)) {
+                    outputTankSlotsSuccess = true;
                 }
-                if (!outputTankSlotsSuccess
-                        && FluidUtil.isEmptyContainerFor(var4, this.tileEntity.liquidTank.getFluid())) {
-                    if (this.mergeItemStack(var4, 2, 3, false)) {
-                        outputTankSlotsSuccess = true;
-                    }
+                if ((!outputTankSlotsSuccess
+                        && FluidUtil.isEmptyContainerFor(var4, this.tileEntity.liquidTank.getFluid())) && this.mergeItemStack(var4, 2, 3, false)) {
+                    outputTankSlotsSuccess = true;
                 }
 
                 if (!outputTankSlotsSuccess) {

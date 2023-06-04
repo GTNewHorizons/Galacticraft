@@ -422,7 +422,7 @@ public class BlockTier2TreasureChest extends BlockContainer
                 return false;
             }
 
-            final EntityOcelot var5 = (EntityOcelot) var4.next();
+            final EntityOcelot var5 = var4.next();
             var6 = var5;
         } while (!var6.isSitting());
 

@@ -91,7 +91,7 @@ public class ItemRendererTier1Rocket implements IItemRenderer {
             GL11.glTranslatef(0F, 2.0F, 0F);
             GL11.glScalef(5.2F, 5.2F, 5.2F);
 
-            if (player != null && player.ridingEntity != null && player.ridingEntity instanceof EntityTier1Rocket) {
+            if (player != null && player.ridingEntity instanceof EntityTier1Rocket) {
                 GL11.glScalef(0.0F, 0.0F, 0.0F);
             }
         }
@@ -103,7 +103,7 @@ public class ItemRendererTier1Rocket implements IItemRenderer {
             GL11.glRotatef(73, 1.0F, 0, 0);
             GL11.glScalef(5.2F, 5.2F, 5.2F);
 
-            if (player != null && player.ridingEntity != null && player.ridingEntity instanceof EntityTier1Rocket) {
+            if (player != null && player.ridingEntity instanceof EntityTier1Rocket) {
                 GL11.glScalef(0.0F, 0.0F, 0.0F);
             }
         }

@@ -24,7 +24,6 @@ public class ItemThermalPadding extends Item implements IItemThermal {
     protected IIcon[] icons = new IIcon[ItemThermalPadding.names.length];
 
     public ItemThermalPadding(String assetName) {
-        super();
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
         this.setMaxStackSize(1);
@@ -34,10 +33,8 @@ public class ItemThermalPadding extends Item implements IItemThermal {
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIconFromDamageForRenderPass(int damage, int pass) {
-        if (pass == 1) {
-            if (this.icons.length > damage + 4) {
-                return this.icons[damage + 4];
-            }
+        if ((pass == 1) && (this.icons.length > damage + 4)) {
+            return this.icons[damage + 4];
         }
 
         return this.getIconFromDamage(damage);

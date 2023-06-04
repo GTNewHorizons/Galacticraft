@@ -12,8 +12,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 
 public class ItemRendererThruster implements IItemRenderer {
 
-    private void renderThruster(ItemRenderType type, RenderBlocks render, ItemStack item, float translateX,
-            float translateY, float translateZ) {
+    private void renderThruster(ItemRenderType type) {
         GL11.glPushMatrix();
 
         FMLClientHandler.instance().getClient().getTextureManager()
@@ -66,16 +65,16 @@ public class ItemRendererThruster implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         switch (type) {
             case EQUIPPED:
-                this.renderThruster(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderThruster(type);
                 break;
             case EQUIPPED_FIRST_PERSON:
-                this.renderThruster(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderThruster(type);
                 break;
             case INVENTORY:
-                this.renderThruster(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderThruster(type);
                 break;
             case ENTITY:
-                this.renderThruster(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderThruster(type);
                 break;
             default:
         }

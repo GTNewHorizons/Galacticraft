@@ -487,8 +487,6 @@ public class VersionUtil {
         } catch (final Throwable t) {
             t.printStackTrace();
         }
-
-        return;
     }
 
     public static int getClassToIDMapping(Class<?> mobClazz) {
@@ -500,7 +498,7 @@ public class VersionUtil {
             f.setAccessible(true);
             @SuppressWarnings("unchecked")
             final Map<Class<?>, Integer> classToIDMapping = (Map<Class<?>, Integer>) f.get(null);
-            final Integer i = (Integer) classToIDMapping.get(mobClazz);
+            final Integer i = classToIDMapping.get(mobClazz);
 
             return i != null ? i : 0;
         } catch (final Throwable t) {

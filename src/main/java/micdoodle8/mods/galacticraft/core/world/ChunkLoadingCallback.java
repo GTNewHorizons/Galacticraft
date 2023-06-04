@@ -192,10 +192,8 @@ public class ChunkLoadingCallback implements LoadingCallback {
         if (DimensionManager.getWorld(0) != null) {
             final File saveDir = new File(DimensionManager.getCurrentSaveRootDirectory(), "galacticraft");
 
-            if (!saveDir.exists()) {
-                if (!saveDir.mkdirs()) {
-                    GCLog.severe("Could not create chunk loader save data folder: " + saveDir.getAbsolutePath());
-                }
+            if (!saveDir.exists() && !saveDir.mkdirs()) {
+                GCLog.severe("Could not create chunk loader save data folder: " + saveDir.getAbsolutePath());
             }
 
             return saveDir;
@@ -215,10 +213,8 @@ public class ChunkLoadingCallback implements LoadingCallback {
             final File saveDir = ChunkLoadingCallback.getSaveDir();
 
             if (saveDir != null) {
-                if (!saveDir.exists()) {
-                    if (!saveDir.mkdirs()) {
-                        GCLog.severe("Could not create chunk loader save data folder: " + saveDir.getAbsolutePath());
-                    }
+                if (!saveDir.exists() && !saveDir.mkdirs()) {
+                    GCLog.severe("Could not create chunk loader save data folder: " + saveDir.getAbsolutePath());
                 }
 
                 final File saveFile = new File(saveDir, "chunkloaders.dat");

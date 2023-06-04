@@ -24,7 +24,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockCreeperEgg extends BlockDragonEgg implements ItemBlockDesc.IBlockShiftDesc {
 
     public BlockCreeperEgg() {
-        super();
     }
 
     @Override

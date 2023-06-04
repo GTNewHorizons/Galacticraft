@@ -102,7 +102,7 @@ public class GameScreenText implements IGameScreen {
                     if (telemeter.clientClass == EntityPlayerMP.class) {
                         strName = telemeter.clientName;
                         entity = new EntityOtherPlayerMP(screen.driver.getWorldObj(), telemeter.clientGameProfile);
-                        renderEntity = (Render) RenderManager.instance.entityRenderMap.get(EntityPlayer.class);
+                        renderEntity = RenderManager.instance.entityRenderMap.get(EntityPlayer.class);
                     } else {
                         try {
                             entity = telemeter.clientClass.getConstructor(World.class)
@@ -111,7 +111,7 @@ public class GameScreenText implements IGameScreen {
                         if (entity != null) {
                             strName = entity.getCommandSenderName();
                         }
-                        renderEntity = (Render) RenderManager.instance.entityRenderMap.get(telemeter.clientClass);
+                        renderEntity = RenderManager.instance.entityRenderMap.get(telemeter.clientClass);
                     }
                 }
 

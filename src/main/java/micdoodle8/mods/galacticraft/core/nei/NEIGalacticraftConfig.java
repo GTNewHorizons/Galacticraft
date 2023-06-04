@@ -313,10 +313,8 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
             }
 
             final ItemStack resultItemStack = rec.getRecipeOutput();
-            if (ConfigManagerCore.quickMode) {
-                if (resultItemStack.getItem().getUnlocalizedName(resultItemStack).contains("compressed")) {
-                    resultItemStack.stackSize *= 2;
-                }
+            if (ConfigManagerCore.quickMode && resultItemStack.getItem().getUnlocalizedName(resultItemStack).contains("compressed")) {
+                resultItemStack.stackSize *= 2;
             }
 
             this.registerIngotCompressorRecipe(input1, new PositionedStack(resultItemStack, 140, 46));

@@ -55,7 +55,6 @@ public class RenderPlayerGC extends RenderPlayer {
     }
 
     public RenderPlayerGC() {
-        super();
         this.mainModel = new ModelPlayerGC(0.0F);
         this.modelBipedMain = (ModelPlayerGC) this.mainModel;
         this.modelArmorChestplate = new ModelPlayerGC(1.0F);

@@ -106,26 +106,22 @@ public class TileEntityDungeonSpawner extends TileEntityAdvanced {
                             this.roomCoords.intY() + this.roomSize.intY(),
                             this.roomCoords.intZ() + this.roomSize.intZ()));
 
-            if (this.playerCheated) {
-                if (!playersWithin.isEmpty()) {
-                    this.isBossDefeated = false;
-                    this.spawned = false;
-                    this.lastPlayerInRange = false;
-                    this.playerCheated = false;
-                }
+            if (this.playerCheated && !playersWithin.isEmpty()) {
+                this.isBossDefeated = false;
+                this.spawned = false;
+                this.lastPlayerInRange = false;
+                this.playerCheated = false;
             }
 
             this.playerInRange = !playersWithin.isEmpty();
 
-            if (this.playerInRange && !this.lastPlayerInRange) {
-                if (this.boss != null && !this.spawned) {
-                    if (this.boss instanceof Entity) {
-                        this.worldObj.spawnEntityInWorld((EntityLiving) this.boss);
-                        this.playSpawnSound((Entity) this.boss);
-                        this.spawned = true;
-                        this.boss.onBossSpawned(this);
-                        this.boss.setRoom(this.roomCoords, this.roomSize);
-                    }
+            if ((this.playerInRange && !this.lastPlayerInRange) && (this.boss != null && !this.spawned)) {
+                if (this.boss instanceof Entity) {
+                    this.worldObj.spawnEntityInWorld((EntityLiving) this.boss);
+                    this.playSpawnSound((Entity) this.boss);
+                    this.spawned = true;
+                    this.boss.onBossSpawned(this);
+                    this.boss.setRoom(this.roomCoords, this.roomSize);
                 }
             }
 

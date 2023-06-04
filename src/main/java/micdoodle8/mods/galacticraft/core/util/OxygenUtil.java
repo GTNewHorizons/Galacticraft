@@ -308,10 +308,8 @@ public class OxygenUtil {
                 if (armorStack != null && armorStack.getItem() instanceof IBreathableArmor) {
                     final IBreathableArmor breathableArmor = (IBreathableArmor) armorStack.getItem();
 
-                    if (breathableArmor.handleGearType(EnumGearType.HELMET)) {
-                        if (breathableArmor.canBreathe(armorStack, player, EnumGearType.HELMET)) {
-                            handled = true;
-                        }
+                    if (breathableArmor.handleGearType(EnumGearType.HELMET) && breathableArmor.canBreathe(armorStack, player, EnumGearType.HELMET)) {
+                        handled = true;
                     }
                 }
             }
@@ -329,10 +327,8 @@ public class OxygenUtil {
                 if (armorStack != null && armorStack.getItem() instanceof IBreathableArmor) {
                     final IBreathableArmor breathableArmor = (IBreathableArmor) armorStack.getItem();
 
-                    if (breathableArmor.handleGearType(EnumGearType.GEAR)) {
-                        if (breathableArmor.canBreathe(armorStack, player, EnumGearType.GEAR)) {
-                            handled = true;
-                        }
+                    if (breathableArmor.handleGearType(EnumGearType.GEAR) && breathableArmor.canBreathe(armorStack, player, EnumGearType.GEAR)) {
+                        handled = true;
                     }
                 }
             }
@@ -352,16 +348,12 @@ public class OxygenUtil {
                 if (armorStack != null && armorStack.getItem() instanceof IBreathableArmor) {
                     final IBreathableArmor breathableArmor = (IBreathableArmor) armorStack.getItem();
 
-                    if (breathableArmor.handleGearType(EnumGearType.TANK1)) {
-                        if (breathableArmor.canBreathe(armorStack, player, EnumGearType.TANK1)) {
-                            handled = true;
-                        }
+                    if (breathableArmor.handleGearType(EnumGearType.TANK1) && breathableArmor.canBreathe(armorStack, player, EnumGearType.TANK1)) {
+                        handled = true;
                     }
 
-                    if (breathableArmor.handleGearType(EnumGearType.TANK2)) {
-                        if (breathableArmor.canBreathe(armorStack, player, EnumGearType.TANK2)) {
-                            handled = true;
-                        }
+                    if (breathableArmor.handleGearType(EnumGearType.TANK2) && breathableArmor.canBreathe(armorStack, player, EnumGearType.TANK2)) {
+                        handled = true;
                     }
                 }
             }
@@ -396,10 +388,8 @@ public class OxygenUtil {
         for (final ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
             final TileEntity tileEntity = thisVec.getTileEntityOnSide(world, direction);
 
-            if (tileEntity instanceof IConnector) {
-                if (((IConnector) tileEntity).canConnect(direction.getOpposite(), NetworkType.OXYGEN)) {
-                    adjacentConnections[direction.ordinal()] = tileEntity;
-                }
+            if ((tileEntity instanceof IConnector) && ((IConnector) tileEntity).canConnect(direction.getOpposite(), NetworkType.OXYGEN)) {
+                adjacentConnections[direction.ordinal()] = tileEntity;
             }
         }
 
@@ -419,10 +409,8 @@ public class OxygenUtil {
         for (final BlockVec3Dim blockVec : TileEntityOxygenDistributor.loadedTiles) {
             if (blockVec != null && blockVec.dim == worldObj.provider.dimensionId) {
                 final TileEntity tile = worldObj.getTileEntity(blockVec.x, blockVec.y, blockVec.z);
-                if (tile instanceof TileEntityOxygenDistributor) {
-                    if (((TileEntityOxygenDistributor) tile).inBubble(avgX, avgY, avgZ)) {
-                        return true;
-                    }
+                if ((tile instanceof TileEntityOxygenDistributor) && ((TileEntityOxygenDistributor) tile).inBubble(avgX, avgY, avgZ)) {
+                    return true;
                 }
             }
         }

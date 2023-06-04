@@ -100,8 +100,7 @@ public class BlockVec3Dim implements Cloneable {
                     && BlockVec3Dim.chunkCached.isChunkLoaded) {
                 return BlockVec3Dim.chunkCached.getBlock(this.x & 15, this.y, this.z & 15);
             }
-            Chunk chunk = null;
-            chunk = world.getChunkFromChunkCoords(chunkx, chunkz);
+            Chunk chunk = world.getChunkFromChunkCoords(chunkx, chunkz);
             BlockVec3Dim.chunkCached = chunk;
             BlockVec3Dim.chunkCacheDim = world.provider.dimensionId;
             BlockVec3Dim.chunkCacheX = chunkx;
@@ -148,8 +147,7 @@ public class BlockVec3Dim implements Cloneable {
                         && BlockVec3Dim.chunkCached.isChunkLoaded) {
                     return BlockVec3Dim.chunkCached.getBlock(this.x & 15, this.y, this.z & 15);
                 }
-                Chunk chunk = null;
-                chunk = world.getChunkFromChunkCoords(chunkx, chunkz);
+                Chunk chunk = world.getChunkFromChunkCoords(chunkx, chunkz);
                 BlockVec3Dim.chunkCached = chunk;
                 BlockVec3Dim.chunkCacheDim = world.provider.dimensionId;
                 BlockVec3Dim.chunkCacheX = chunkx;

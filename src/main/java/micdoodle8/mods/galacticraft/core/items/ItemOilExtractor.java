@@ -32,7 +32,6 @@ public class ItemOilExtractor extends Item {
     protected IIcon[] icons = new IIcon[5];
 
     public ItemOilExtractor(String assetName) {
-        super();
         this.setMaxStackSize(1);
         this.setUnlocalizedName(assetName);
         this.setTextureName(GalacticraftCore.TEXTURE_PREFIX + assetName);
@@ -58,10 +57,8 @@ public class ItemOilExtractor extends Item {
 
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer player) {
-        if (this.getNearestOilBlock(player) != null) {
-            if (this.openCanister(player) != null) {
-                player.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
-            }
+        if ((this.getNearestOilBlock(player) != null) && (this.openCanister(player) != null)) {
+            player.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
         }
 
         return par1ItemStack;
@@ -88,14 +85,12 @@ public class ItemOilExtractor extends Item {
             final int y = MathHelper.floor_double(blockHit.y);
             final int z = MathHelper.floor_double(blockHit.z);
 
-            if (this.isOilBlock(player, player.worldObj, x, y, z, false)) {
-                if (this.openCanister(player) != null) {
-                    final ItemStack canister = this.openCanister(player);
+            if (this.isOilBlock(player.worldObj, x, y, z, false) && (this.openCanister(player) != null)) {
+                final ItemStack canister = this.openCanister(player);
 
-                    if (canister != null && count % 5 == 0 && canister.getItemDamage() > 1) {
-                        this.isOilBlock(player, player.worldObj, x, y, z, true);
-                        canister.setItemDamage(Math.max(canister.getItemDamage() - 200, 1));
-                    }
+                if (canister != null && count % 5 == 0 && canister.getItemDamage() > 1) {
+                    this.isOilBlock(player.worldObj, x, y, z, true);
+                    canister.setItemDamage(Math.max(canister.getItemDamage() - 200, 1));
                 }
             }
         }
@@ -103,11 +98,9 @@ public class ItemOilExtractor extends Item {
 
     private ItemStack openCanister(EntityPlayer player) {
         for (final ItemStack stack : player.inventory.mainInventory) {
-            if (stack != null && stack.getItem() instanceof ItemOilCanister) {
-                if (stack.getMaxDamage() - stack.getItemDamage() >= 0
-                        && stack.getMaxDamage() - stack.getItemDamage() < GCItems.oilCanister.getMaxDamage() - 1) {
-                    return stack;
-                }
+            if ((stack != null && stack.getItem() instanceof ItemOilCanister) && (stack.getMaxDamage() - stack.getItemDamage() >= 0
+                    && stack.getMaxDamage() - stack.getItemDamage() < GCItems.oilCanister.getMaxDamage() - 1)) {
+                return stack;
             }
         }
 
@@ -154,7 +147,7 @@ public class ItemOilExtractor extends Item {
         }
     }
 
-    private boolean isOilBlock(EntityPlayer player, World world, int x, int y, int z, boolean doDrain) {
+    private boolean isOilBlock(World world, int x, int y, int z, boolean doDrain) {
         final Block block = world.getBlock(x, y, z);
 
         if (block instanceof IFluidBlock fluidBlockHit) {
@@ -164,10 +157,8 @@ public class ItemOilExtractor extends Item {
             } else {
                 final Fluid fluidHit = FluidRegistry.lookupFluidForBlock(block);
 
-                if (fluidHit != null) {
-                    if (fluidHit.getName().startsWith("oil")) {
-                        flag = true;
-                    }
+                if ((fluidHit != null) && fluidHit.getName().startsWith("oil")) {
+                    flag = true;
                 }
             }
 
@@ -208,7 +199,6 @@ public class ItemOilExtractor extends Item {
             final Vector3 var23 = var13.translate(new Vector3(var18 * dist, var17 * dist, var20 * dist));
 
             if (this.isOilBlock(
-                    par1EntityPlayer,
                     par1EntityPlayer.worldObj,
                     MathHelper.floor_double(var23.x),
                     MathHelper.floor_double(var23.y),

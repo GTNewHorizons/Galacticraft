@@ -151,12 +151,10 @@ public class TileEntityOxygenCollector extends TileEntityOxygen implements IInve
                                         // Test for the two most common blocks (air
                                         // and breatheable air) without looking up
                                         // in the blocksList
-                                        if (!(block instanceof BlockAir)) {
-                                            if (block.isLeaves(this.worldObj, x, y, z) || block instanceof IPlantable
-                                                    && ((IPlantable) block).getPlantType(this.worldObj, x, y, z)
-                                                            == EnumPlantType.Crop) {
-                                                nearbyLeaves += 0.075F * 10F;
-                                            }
+                                        if (!(block instanceof BlockAir) && (block.isLeaves(this.worldObj, x, y, z) || block instanceof IPlantable
+                                                && ((IPlantable) block).getPlantType(this.worldObj, x, y, z)
+                                                        == EnumPlantType.Crop)) {
+                                            nearbyLeaves += 0.075F * 10F;
                                         }
                                     }
                                 }

@@ -78,13 +78,11 @@ public class EntityCelestialFake extends EntityAdvancedMotion implements IIgnore
     public void onUpdate() {
         super.onUpdate();
 
-        if (this.ticks < 40 && this.posY > 150) {
-            if (this.riddenByEntity == null) {
-                final EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 5);
+        if ((this.ticks < 40 && this.posY > 150) && (this.riddenByEntity == null)) {
+            final EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 5);
 
-                if (player != null && player.ridingEntity == null) {
-                    player.mountEntity(this);
-                }
+            if (player != null && player.ridingEntity == null) {
+                player.mountEntity(this);
             }
         }
 

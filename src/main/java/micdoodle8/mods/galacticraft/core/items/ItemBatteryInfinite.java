@@ -19,7 +19,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemBatteryInfinite extends ItemElectricBase {
 
     public ItemBatteryInfinite(String assetName) {
-        super();
         this.setUnlocalizedName(assetName);
         this.setTextureName(GalacticraftCore.TEXTURE_PREFIX + assetName);
     }

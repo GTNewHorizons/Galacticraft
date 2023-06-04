@@ -114,7 +114,7 @@ public class ContainerSchematicAstroMiner extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
         ItemStack stack = null;
-        final Slot currentSlot = (Slot) this.inventorySlots.get(slotIndex);
+        final Slot currentSlot = this.inventorySlots.get(slotIndex);
 
         if (currentSlot != null && currentSlot.getHasStack()) {
             final ItemStack currentStack = currentSlot.getStack();
@@ -146,7 +146,7 @@ public class ContainerSchematicAstroMiner extends Container {
         boolean nothingLeft = false;
         if (itemStack.stackSize > 0) {
             for (int i = 1; i <= 29; ++i) {
-                final Slot slot = (Slot) this.inventorySlots.get(i);
+                final Slot slot = this.inventorySlots.get(i);
                 final ItemStack slotStack = slot.getStack();
                 if (slotStack == null && slot.isItemValid(itemStack)) {
                     final ItemStack stackOneItem = itemStack.copy();

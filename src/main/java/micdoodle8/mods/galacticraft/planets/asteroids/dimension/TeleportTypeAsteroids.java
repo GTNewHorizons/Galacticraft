@@ -177,7 +177,6 @@ public class TeleportTypeAsteroids implements ITeleportType {
         }
 
         this.makePlatform(world, x, 48 + world.rand.nextInt(128), z);
-        return;
     }
 
     private void loadChunksAround(int x, int z, int i, ChunkProviderServer cp) {

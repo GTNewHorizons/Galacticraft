@@ -12,7 +12,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemBlockWallGC extends ItemBlock {
 
-    private static final String[] types = new String[] { "tin", "tin", "moon", "moonBricks", "mars", "marsBricks" };
+    private static final String[] types = { "tin", "tin", "moon", "moonBricks", "mars", "marsBricks" };
 
     public ItemBlockWallGC(Block block) {
         super(block);

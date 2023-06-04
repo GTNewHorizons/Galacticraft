@@ -69,28 +69,26 @@ public class TileEntityRefinery extends TileBaseElectricBlockWithInventory imple
                     if (liquid != null) {
                         final boolean isOil = FluidRegistry.getFluidName(liquid).startsWith("oil");
 
-                        if (isOil) {
-                            if (this.oilTank.getFluid() == null
-                                    || this.oilTank.getFluid().amount + liquid.amount <= this.oilTank.getCapacity()) {
-                                this.oilTank.fill(new FluidStack(GalacticraftCore.fluidOil, liquid.amount), true);
+                        if (isOil && (this.oilTank.getFluid() == null
+                                || this.oilTank.getFluid().amount + liquid.amount <= this.oilTank.getCapacity())) {
+                            this.oilTank.fill(new FluidStack(GalacticraftCore.fluidOil, liquid.amount), true);
 
-                                if (FluidContainerRegistry.isBucket(this.containingItems[1])
-                                        && FluidContainerRegistry.isFilledContainer(this.containingItems[1])) {
-                                    final int amount = this.containingItems[1].stackSize;
-                                    if (amount > 1) {
-                                        this.oilTank.fill(
-                                                new FluidStack(
-                                                        GalacticraftCore.fluidOil,
-                                                        (amount - 1) * FluidContainerRegistry.BUCKET_VOLUME),
-                                                true);
-                                    }
-                                    this.containingItems[1] = new ItemStack(Items.bucket, amount);
-                                } else {
-                                    this.containingItems[1].stackSize--;
+                            if (FluidContainerRegistry.isBucket(this.containingItems[1])
+                                    && FluidContainerRegistry.isFilledContainer(this.containingItems[1])) {
+                                final int amount = this.containingItems[1].stackSize;
+                                if (amount > 1) {
+                                    this.oilTank.fill(
+                                            new FluidStack(
+                                                    GalacticraftCore.fluidOil,
+                                                    (amount - 1) * FluidContainerRegistry.BUCKET_VOLUME),
+                                            true);
+                                }
+                                this.containingItems[1] = new ItemStack(Items.bucket, amount);
+                            } else {
+                                this.containingItems[1].stackSize--;
 
-                                    if (this.containingItems[1].stackSize == 0) {
-                                        this.containingItems[1] = null;
-                                    }
+                                if (this.containingItems[1].stackSize == 0) {
+                                    this.containingItems[1] = null;
                                 }
                             }
                         }
@@ -317,7 +315,7 @@ public class TileEntityRefinery extends TileBaseElectricBlockWithInventory imple
 
     @Override
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-        FluidTankInfo[] tankInfo = new FluidTankInfo[] {};
+        FluidTankInfo[] tankInfo = {};
 
         if (from == ForgeDirection.getOrientation(this.getBlockMetadata() + 2)) {
             tankInfo = new FluidTankInfo[] { new FluidTankInfo(this.oilTank) };

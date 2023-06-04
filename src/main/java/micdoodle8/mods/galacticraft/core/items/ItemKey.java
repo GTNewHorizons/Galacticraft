@@ -16,10 +16,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemKey extends Item implements IKeyItem {
 
-    public static String[] keyTypes = new String[] { "T1" };
+    public static String[] keyTypes = { "T1" };
 
     public ItemKey(String assetName) {
-        super();
         this.setMaxStackSize(1);
         this.setMaxDamage(0);
         this.setHasSubtypes(true);

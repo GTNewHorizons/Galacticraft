@@ -146,8 +146,7 @@ public class GuiGasLiquefier extends GuiContainerGC {
                         this.height,
                         this));
 
-        fuelSlotDesc = new ArrayList<>();
-        fuelSlotDesc.addAll(GCCoreUtil.translateWithSplit("gui.gasInput.desc.0"));
+        fuelSlotDesc = new ArrayList<>(GCCoreUtil.translateWithSplit("gui.gasInput.desc.0"));
         fuelSlotDesc.addAll(GCCoreUtil.translateWithSplit("gui.gasInput.desc.1"));
         this.infoRegions.add(
                 new GuiElementInfoRegion(

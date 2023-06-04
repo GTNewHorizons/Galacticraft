@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 public abstract class InventoryEntity extends NetworkedEntity implements IInventory {
 
-    public ItemStack[] containedItems = new ItemStack[0];
+    public ItemStack[] containedItems = {};
 
     public InventoryEntity(World par1World) {
         super(par1World);

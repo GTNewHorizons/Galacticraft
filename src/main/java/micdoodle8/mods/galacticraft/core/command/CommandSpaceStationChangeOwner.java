@@ -37,7 +37,6 @@ public class CommandSpaceStationChangeOwner extends CommandBase {
     @Override
     public void processCommand(ICommandSender icommandsender, String[] astring) {
         String oldOwner = null;
-        String newOwner = "ERROR";
         int stationID = -1;
         final EntityPlayerMP playerAdmin = PlayerUtil
                 .getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
@@ -47,7 +46,7 @@ public class CommandSpaceStationChangeOwner extends CommandBase {
                     GCCoreUtil
                             .translateWithFormat("commands.ssinvite.wrongUsage", this.getCommandUsage(icommandsender)));
         }
-        newOwner = astring[1];
+        String newOwner = astring[1];
 
         try {
             stationID = Integer.parseInt(astring[0]);

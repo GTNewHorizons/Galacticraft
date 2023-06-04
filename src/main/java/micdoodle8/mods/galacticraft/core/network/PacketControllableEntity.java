@@ -38,7 +38,7 @@ public class PacketControllableEntity implements IPacket {
     }
 
     private void handleKeyPress(EntityPlayer player) {
-        if (player.ridingEntity != null && player.ridingEntity instanceof IControllableEntity) {
+        if (player.ridingEntity instanceof IControllableEntity) {
             ((IControllableEntity) player.ridingEntity).pressKey(this.keyPressed);
         }
     }

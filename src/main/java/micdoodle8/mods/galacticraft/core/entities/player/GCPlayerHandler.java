@@ -103,7 +103,7 @@ public class GCPlayerHandler {
     @SubscribeEvent
     public void onPlayerLogout(PlayerLoggedOutEvent event) {
         if (event.player instanceof EntityPlayerMP) {
-            this.onPlayerLogout((EntityPlayerMP) event.player);
+            this.onPlayerLogout();
         }
     }
 
@@ -154,7 +154,7 @@ public class GCPlayerHandler {
                 .sendTo(new PacketSimple(EnumSimplePacket.C_UPDATE_STATS, new Object[] { stats.buildFlags }), player);
     }
 
-    private void onPlayerLogout(EntityPlayerMP player) {}
+    private void onPlayerLogout() {}
 
     private void onPlayerRespawn(EntityPlayerMP player) {
         final GCPlayerStats oldData = this.playerStatsMap.remove(player.getPersistentID());
@@ -478,10 +478,8 @@ public class GCPlayerHandler {
                         && thermalPaddingBoots != null;
 
                 if (!playerStats.thermalLevelNormalising) {
-                    if ((player.ticksExisted - 1) % thermalLevelTickCooldown == 0) {
-                        if (Math.abs(playerStats.thermalLevel) >= 22) {
-                            player.attackEntityFrom(DamageSourceGC.thermal, 1.5F);
-                        }
+                    if (((player.ticksExisted - 1) % thermalLevelTickCooldown == 0) && (Math.abs(playerStats.thermalLevel) >= 22)) {
+                        player.attackEntityFrom(DamageSourceGC.thermal, 1.5F);
                     }
 
                     if (playerStats.thermalLevel < -15) {
@@ -649,65 +647,63 @@ public class GCPlayerHandler {
 
     protected void throwMeteors(EntityPlayerMP player) {
         final World world = player.worldObj;
-        if (world.provider instanceof IGalacticraftWorldProvider && !world.isRemote) {
-            if (((IGalacticraftWorldProvider) world.provider).getMeteorFrequency() > 0
-                    && ConfigManagerCore.meteorSpawnMod > 0.0) {
-                final int f = (int) (((IGalacticraftWorldProvider) world.provider).getMeteorFrequency() * 1000D
-                        * (1.0 / ConfigManagerCore.meteorSpawnMod));
+        if ((world.provider instanceof IGalacticraftWorldProvider && !world.isRemote) && (((IGalacticraftWorldProvider) world.provider).getMeteorFrequency() > 0
+                && ConfigManagerCore.meteorSpawnMod > 0.0)) {
+            final int f = (int) (((IGalacticraftWorldProvider) world.provider).getMeteorFrequency() * 1000D
+                    * (1.0 / ConfigManagerCore.meteorSpawnMod));
 
-                if (world.rand.nextInt(f) == 0) {
-                    final EntityPlayer closestPlayer = world.getClosestPlayerToEntity(player, 100);
+            if (world.rand.nextInt(f) == 0) {
+                final EntityPlayer closestPlayer = world.getClosestPlayerToEntity(player, 100);
 
-                    if (closestPlayer == null || closestPlayer.getEntityId() <= player.getEntityId()) {
-                        int x, y, z;
-                        double motX, motZ;
-                        x = world.rand.nextInt(20) - 10;
-                        y = world.rand.nextInt(20) + 200;
-                        z = world.rand.nextInt(20) - 10;
-                        motX = world.rand.nextDouble() * 5;
-                        motZ = world.rand.nextDouble() * 5;
+                if (closestPlayer == null || closestPlayer.getEntityId() <= player.getEntityId()) {
+                    int x, y, z;
+                    double motX, motZ;
+                    x = world.rand.nextInt(20) - 10;
+                    y = world.rand.nextInt(20) + 200;
+                    z = world.rand.nextInt(20) - 10;
+                    motX = world.rand.nextDouble() * 5;
+                    motZ = world.rand.nextDouble() * 5;
 
-                        final EntityMeteor meteor = new EntityMeteor(
-                                world,
-                                player.posX + x,
-                                player.posY + y,
-                                player.posZ + z,
-                                motX - 2.5D,
-                                0,
-                                motZ - 2.5D,
-                                1);
+                    final EntityMeteor meteor = new EntityMeteor(
+                            world,
+                            player.posX + x,
+                            player.posY + y,
+                            player.posZ + z,
+                            motX - 2.5D,
+                            0,
+                            motZ - 2.5D,
+                            1);
 
-                        if (!world.isRemote) {
-                            world.spawnEntityInWorld(meteor);
-                        }
+                    if (!world.isRemote) {
+                        world.spawnEntityInWorld(meteor);
                     }
                 }
+            }
 
-                if (world.rand.nextInt(f * 3) == 0) {
-                    final EntityPlayer closestPlayer = world.getClosestPlayerToEntity(player, 100);
+            if (world.rand.nextInt(f * 3) == 0) {
+                final EntityPlayer closestPlayer = world.getClosestPlayerToEntity(player, 100);
 
-                    if (closestPlayer == null || closestPlayer.getEntityId() <= player.getEntityId()) {
-                        int x, y, z;
-                        double motX, motZ;
-                        x = world.rand.nextInt(20) - 10;
-                        y = world.rand.nextInt(20) + 200;
-                        z = world.rand.nextInt(20) - 10;
-                        motX = world.rand.nextDouble() * 5;
-                        motZ = world.rand.nextDouble() * 5;
+                if (closestPlayer == null || closestPlayer.getEntityId() <= player.getEntityId()) {
+                    int x, y, z;
+                    double motX, motZ;
+                    x = world.rand.nextInt(20) - 10;
+                    y = world.rand.nextInt(20) + 200;
+                    z = world.rand.nextInt(20) - 10;
+                    motX = world.rand.nextDouble() * 5;
+                    motZ = world.rand.nextDouble() * 5;
 
-                        final EntityMeteor meteor = new EntityMeteor(
-                                world,
-                                player.posX + x,
-                                player.posY + y,
-                                player.posZ + z,
-                                motX - 2.5D,
-                                0,
-                                motZ - 2.5D,
-                                6);
+                    final EntityMeteor meteor = new EntityMeteor(
+                            world,
+                            player.posX + x,
+                            player.posY + y,
+                            player.posZ + z,
+                            motX - 2.5D,
+                            0,
+                            motZ - 2.5D,
+                            6);
 
-                        if (!world.isRemote) {
-                            world.spawnEntityInWorld(meteor);
-                        }
+                    if (!world.isRemote) {
+                        world.spawnEntityInWorld(meteor);
                     }
                 }
             }
@@ -783,49 +779,47 @@ public class GCPlayerHandler {
             final int iPosZ = MathHelper.floor_double(player.posZ);
 
             // If the block below is the moon block
-            if (player.worldObj.getBlock(iPosX, iPosY, iPosZ) == GCBlocks.blockMoon) {
-                // And is the correct metadata (moon turf)
-                if (player.worldObj.getBlockMetadata(iPosX, iPosY, iPosZ) == 5) {
-                    final GCPlayerStats playerStats = GCPlayerStats.get(player);
-                    // If it has been long enough since the last step
-                    if (playerStats.distanceSinceLastStep > 0.35D) {
-                        Vector3 pos = new Vector3(player);
-                        // Set the footprint position to the block below and add random number to stop
-                        // z-fighting
-                        pos.y = MathHelper.floor_double(player.posY - 1D) + player.worldObj.rand.nextFloat() / 100.0F;
+            // And is the correct metadata (moon turf)
+            if ((player.worldObj.getBlock(iPosX, iPosY, iPosZ) == GCBlocks.blockMoon) && (player.worldObj.getBlockMetadata(iPosX, iPosY, iPosZ) == 5)) {
+                final GCPlayerStats playerStats = GCPlayerStats.get(player);
+                // If it has been long enough since the last step
+                if (playerStats.distanceSinceLastStep > 0.35D) {
+                    Vector3 pos = new Vector3(player);
+                    // Set the footprint position to the block below and add random number to stop
+                    // z-fighting
+                    pos.y = MathHelper.floor_double(player.posY - 1D) + player.worldObj.rand.nextFloat() / 100.0F;
 
-                        // Adjust footprint to left or right depending on step count
-                        switch (playerStats.lastStep) {
-                            case 0:
-                                float a = (-player.rotationYaw + 90F) / (180F / (float)Math.PI);
-                                pos.translate(new Vector3(MathHelper.sin(a) * 0.25F, 0, MathHelper.cos(a) * 0.25F));
-                                break;
-                            case 1:
-                                a = (-player.rotationYaw - 90F) / (180F / (float)Math.PI);
-                                pos.translate(new Vector3(MathHelper.sin(a) * 0.25, 0, MathHelper.cos(a) * 0.25));
-                                break;
-                        }
-
-                        final float rotation = player.rotationYaw - 180;
-                        pos = WorldUtil.getFootprintPosition(player.worldObj, rotation, pos, new BlockVec3(player));
-
-                        final long chunkKey = ChunkCoordIntPair.chunkXZ2Int(pos.intX() >> 4, pos.intZ() >> 4);
-                        TickHandlerServer.addFootprint(
-                                chunkKey,
-                                new Footprint(
-                                        player.worldObj.provider.dimensionId,
-                                        pos,
-                                        rotation,
-                                        player.getCommandSenderName()),
-                                player.worldObj.provider.dimensionId);
-
-                        // Increment and cap step counter at 1
-                        playerStats.lastStep++;
-                        playerStats.lastStep %= 2;
-                        playerStats.distanceSinceLastStep = 0;
-                    } else {
-                        playerStats.distanceSinceLastStep += motionSqrd;
+                    // Adjust footprint to left or right depending on step count
+                    switch (playerStats.lastStep) {
+                        case 0:
+                            float a = (-player.rotationYaw + 90F) / (180F / (float)Math.PI);
+                            pos.translate(new Vector3(MathHelper.sin(a) * 0.25F, 0, MathHelper.cos(a) * 0.25F));
+                            break;
+                        case 1:
+                            a = (-player.rotationYaw - 90F) / (180F / (float)Math.PI);
+                            pos.translate(new Vector3(MathHelper.sin(a) * 0.25, 0, MathHelper.cos(a) * 0.25));
+                            break;
                     }
+
+                    final float rotation = player.rotationYaw - 180;
+                    pos = WorldUtil.getFootprintPosition(player.worldObj, rotation, pos, new BlockVec3(player));
+
+                    final long chunkKey = ChunkCoordIntPair.chunkXZ2Int(pos.intX() >> 4, pos.intZ() >> 4);
+                    TickHandlerServer.addFootprint(
+                            chunkKey,
+                            new Footprint(
+                                    player.worldObj.provider.dimensionId,
+                                    pos,
+                                    rotation,
+                                    player.getCommandSenderName()),
+                            player.worldObj.provider.dimensionId);
+
+                    // Increment and cap step counter at 1
+                    playerStats.lastStep++;
+                    playerStats.lastStep %= 2;
+                    playerStats.distanceSinceLastStep = 0;
+                } else {
+                    playerStats.distanceSinceLastStep += motionSqrd;
                 }
             }
         }
@@ -1193,34 +1187,32 @@ public class GCPlayerHandler {
         if (GCPlayer.chestSpawnCooldown > 0) {
             GCPlayer.chestSpawnCooldown--;
 
-            if (GCPlayer.chestSpawnCooldown == 180) {
-                if (GCPlayer.chestSpawnVector != null) {
-                    final EntityParachest chest = new EntityParachest(
-                            player.worldObj,
-                            GCPlayer.rocketStacks,
-                            GCPlayer.fuelLevel);
+            if ((GCPlayer.chestSpawnCooldown == 180) && (GCPlayer.chestSpawnVector != null)) {
+                final EntityParachest chest = new EntityParachest(
+                        player.worldObj,
+                        GCPlayer.rocketStacks,
+                        GCPlayer.fuelLevel);
 
-                    chest.setPosition(
-                            GCPlayer.chestSpawnVector.x,
-                            GCPlayer.chestSpawnVector.y,
-                            GCPlayer.chestSpawnVector.z);
+                chest.setPosition(
+                        GCPlayer.chestSpawnVector.x,
+                        GCPlayer.chestSpawnVector.y,
+                        GCPlayer.chestSpawnVector.z);
 
-                    if (!player.worldObj.isRemote) {
-                        if (player.worldObj.isAirBlock(
-                                (int) GCPlayer.chestSpawnVector.x,
-                                (int) GCPlayer.chestSpawnVector.y,
-                                (int) GCPlayer.chestSpawnVector.z)) {
-                            player.worldObj.spawnEntityInWorld(chest);
-                        } else {
-                            for (final ItemStack stacks : GCPlayer.rocketStacks) {
-                                final EntityItem entityitem = new EntityItem(
-                                        player.worldObj,
-                                        GCPlayer.chestSpawnVector.x,
-                                        GCPlayer.chestSpawnVector.y + 1.0D,
-                                        GCPlayer.chestSpawnVector.z,
-                                        stacks);
-                                player.worldObj.spawnEntityInWorld(entityitem);
-                            }
+                if (!player.worldObj.isRemote) {
+                    if (player.worldObj.isAirBlock(
+                            (int) GCPlayer.chestSpawnVector.x,
+                            (int) GCPlayer.chestSpawnVector.y,
+                            (int) GCPlayer.chestSpawnVector.z)) {
+                        player.worldObj.spawnEntityInWorld(chest);
+                    } else {
+                        for (final ItemStack stacks : GCPlayer.rocketStacks) {
+                            final EntityItem entityitem = new EntityItem(
+                                    player.worldObj,
+                                    GCPlayer.chestSpawnVector.x,
+                                    GCPlayer.chestSpawnVector.y + 1.0D,
+                                    GCPlayer.chestSpawnVector.z,
+                                    stacks);
+                            player.worldObj.spawnEntityInWorld(entityitem);
                         }
                     }
                 }

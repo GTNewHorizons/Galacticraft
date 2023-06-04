@@ -19,7 +19,7 @@ import net.minecraft.item.ItemStack;
  */
 public class SlotSpecific extends Slot {
 
-    public ItemStack[] validItemStacks = new ItemStack[0];
+    public ItemStack[] validItemStacks = {};
 
     public Class<?>[] validClasses = new Class[0];
 

@@ -186,15 +186,13 @@ public class AsteroidsModuleClient implements IPlanetsModuleClient {
             EntityFX particle = null;
             final double viewDistance = 64.0D;
 
-            if (dX * dX + dY * dY + dZ * dZ < viewDistance * viewDistance) {
-                if ("portalBlue".equals(particleID)) {
-                    particle = new EntityFXTeleport(
-                            mc.theWorld,
-                            position,
-                            motion,
-                            (TileEntityShortRangeTelepad) extraData[0],
-                            (Boolean) extraData[1]);
-                }
+            if ((dX * dX + dY * dY + dZ * dZ < viewDistance * viewDistance) && "portalBlue".equals(particleID)) {
+                particle = new EntityFXTeleport(
+                        mc.theWorld,
+                        position,
+                        motion,
+                        (TileEntityShortRangeTelepad) extraData[0],
+                        (Boolean) extraData[1]);
             }
 
             if (particle != null) {

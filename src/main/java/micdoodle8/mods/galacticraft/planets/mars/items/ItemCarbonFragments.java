@@ -16,7 +16,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemCarbonFragments extends Item {
 
     public ItemCarbonFragments() {
-        super();
         this.setMaxStackSize(64);
         this.setMaxDamage(0);
     }

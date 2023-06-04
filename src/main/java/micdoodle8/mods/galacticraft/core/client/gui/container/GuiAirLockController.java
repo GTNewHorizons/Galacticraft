@@ -107,10 +107,8 @@ public class GuiAirLockController extends GuiScreen implements ICheckBoxCallback
 
     @Override
     protected void keyTyped(char keyChar, int keyID) {
-        if (keyID != Keyboard.KEY_ESCAPE) {
-            if (this.textBoxPlayerToOpenFor.keyTyped(keyChar, keyID)) {
-                return;
-            }
+        if ((keyID != Keyboard.KEY_ESCAPE) && this.textBoxPlayerToOpenFor.keyTyped(keyChar, keyID)) {
+            return;
         }
 
         super.keyTyped(keyChar, keyID);

@@ -26,7 +26,6 @@ public class ItemSchematic extends Item implements ISchematicItem {
     protected IIcon[] icons = new IIcon[ItemSchematic.names.length];
 
     public ItemSchematic(String assetName) {
-        super();
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
         this.setMaxStackSize(1);

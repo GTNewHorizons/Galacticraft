@@ -25,8 +25,7 @@ public class ItemRendererMeteorChunk implements IItemRenderer {
     private final IModelCustom meteorChunkModel = AdvancedModelLoader
             .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/meteorChunk.obj"));
 
-    private void renderMeteorChunk(ItemRenderType type, RenderBlocks render, ItemStack item, float translateX,
-            float translateY, float translateZ) {
+    private void renderMeteorChunk(ItemRenderType type, ItemStack item) {
         GL11.glPushMatrix();
 
         GL11.glScalef(0.7F, 0.7F, 0.7F);
@@ -75,16 +74,16 @@ public class ItemRendererMeteorChunk implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         switch (type) {
             case EQUIPPED:
-                this.renderMeteorChunk(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderMeteorChunk(type, item);
                 break;
             case EQUIPPED_FIRST_PERSON:
-                this.renderMeteorChunk(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderMeteorChunk(type, item);
                 break;
             case INVENTORY:
-                this.renderMeteorChunk(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderMeteorChunk(type, item);
                 break;
             case ENTITY:
-                this.renderMeteorChunk(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderMeteorChunk(type, item);
                 break;
             default:
         }

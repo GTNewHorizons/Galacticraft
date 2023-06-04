@@ -25,8 +25,7 @@ public class ItemRendererMachine implements IItemRenderer {
         this.model = model;
     }
 
-    private void renderCryogenicChamber(ItemRenderType type, RenderBlocks render, ItemStack item, float translateX,
-            float translateY, float translateZ) {
+    private void renderCryogenicChamber(ItemRenderType type) {
         GL11.glPushMatrix();
 
         this.transform(type);
@@ -109,16 +108,16 @@ public class ItemRendererMachine implements IItemRenderer {
                 && item.getItemDamage() < BlockMachineMars.LAUNCH_CONTROLLER_METADATA) {
             switch (type) {
                 case EQUIPPED:
-                    this.renderCryogenicChamber(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                    this.renderCryogenicChamber(type);
                     break;
                 case EQUIPPED_FIRST_PERSON:
-                    this.renderCryogenicChamber(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                    this.renderCryogenicChamber(type);
                     break;
                 case INVENTORY:
-                    this.renderCryogenicChamber(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                    this.renderCryogenicChamber(type);
                     break;
                 case ENTITY:
-                    this.renderCryogenicChamber(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                    this.renderCryogenicChamber(type);
                     break;
                 default:
                     break;

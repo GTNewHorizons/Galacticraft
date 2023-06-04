@@ -146,10 +146,8 @@ public class ConfigManagerCore {
         try {
             Property prop;
 
-            if (!config.isChild) {
-                if (load) {
-                    config.load();
-                }
+            if (!config.isChild && load) {
+                config.load();
             }
 
             prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Enable Debug Messages", false);
@@ -761,8 +759,7 @@ public class ConfigManagerCore {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static List<IConfigElement> getConfigElements() {
-        final List<IConfigElement> list = new ArrayList<>();
-        list.addAll(new ConfigElement(config.getCategory(Constants.CONFIG_CATEGORY_DIMENSIONS)).getChildElements());
+        final List<IConfigElement> list = new ArrayList<>(new ConfigElement(config.getCategory(Constants.CONFIG_CATEGORY_DIMENSIONS)).getChildElements());
         list.addAll(new ConfigElement(config.getCategory(Constants.CONFIG_CATEGORY_SCHEMATIC)).getChildElements());
         list.addAll(new ConfigElement(config.getCategory(Constants.CONFIG_CATEGORY_ACHIEVEMENTS)).getChildElements());
         list.addAll(new ConfigElement(config.getCategory(Constants.CONFIG_CATEGORY_ENTITIES)).getChildElements());

@@ -252,15 +252,13 @@ public class MarsModuleClient implements IPlanetsModuleClient {
 
             final WorldClient world = minecraft.theWorld;
 
-            if (world != null) {
-                if (world.provider instanceof WorldProviderMars) {
-                    if (world.provider.getSkyRenderer() == null) {
-                        world.provider.setSkyRenderer(new SkyProviderMars((IGalacticraftWorldProvider) world.provider));
-                    }
+            if ((world != null) && (world.provider instanceof WorldProviderMars)) {
+                if (world.provider.getSkyRenderer() == null) {
+                    world.provider.setSkyRenderer(new SkyProviderMars((IGalacticraftWorldProvider) world.provider));
+                }
 
-                    if (world.provider.getCloudRenderer() == null) {
-                        world.provider.setCloudRenderer(new CloudRenderer());
-                    }
+                if (world.provider.getCloudRenderer() == null) {
+                    world.provider.setCloudRenderer(new CloudRenderer());
                 }
             }
         }

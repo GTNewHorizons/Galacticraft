@@ -149,8 +149,6 @@ public class ElectricIngotCompressorRecipeHandler extends TemplateRecipeHandler 
         }
 
         public ElectricCompressorRecipe(ArrayList<PositionedStack> pstack1, PositionedStack pstack2) {
-            super();
-
             final ArrayList<PositionedStack> ingred = new ArrayList<>();
 
             for (final PositionedStack stack : pstack1) {

@@ -17,8 +17,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 
 public class ItemRendererThermalArmor implements IItemRenderer {
 
-    private void renderThermalArmor(ItemRenderType type, RenderBlocks render, ItemStack item, float translateX,
-            float translateY, float translateZ) {
+    private void renderThermalArmor(ItemStack item) {
         GL11.glPushMatrix();
         OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
         GL11.glEnable(GL11.GL_BLEND);
@@ -97,7 +96,7 @@ public class ItemRendererThermalArmor implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         switch (type) {
             case INVENTORY:
-                this.renderThermalArmor(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderThermalArmor(item);
                 break;
             default:
                 break;

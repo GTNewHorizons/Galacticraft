@@ -19,11 +19,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemKeyMars extends Item implements IKeyItem {
 
-    public static String[] keyTypes = new String[] { "T2" };
+    public static String[] keyTypes = { "T2" };
     public IIcon[] keyIcons = new IIcon[1];
 
     public ItemKeyMars() {
-        super();
         this.setMaxStackSize(1);
         this.setMaxDamage(0);
         this.setHasSubtypes(true);

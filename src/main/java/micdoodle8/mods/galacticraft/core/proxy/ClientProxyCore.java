@@ -726,8 +726,7 @@ public class ClientProxyCore extends CommonProxyCore {
                                             final Graphics graphics = bufferedimage1.getGraphics();
                                             graphics.drawImage(p_78432_1_, 0, 0, null);
                                             graphics.dispose();
-                                            p_78432_1_ = bufferedimage1;
-                                            return p_78432_1_;
+                                            return bufferedimage1;
                                         }
 
                                         @Override
@@ -882,68 +881,66 @@ public class ClientProxyCore extends CommonProxyCore {
         if (ClientProxyCore.smallMoonActive && (offsetX != 0.0D || offsetY != 0.0D || offsetZ != 0.0D)) {
             final EntityPlayerSP player = ClientProxyCore.mc.thePlayer;
             final WorldProvider provider = ClientProxyCore.mc.theWorld.provider;
-            if (provider instanceof WorldProviderMoon) {
-                if (player.posY > ClientProxyCore.terrainHeight + 8F) {
-                    final double globalArc = ClientProxyCore.globalRadius / (180D / Math.PI);
+            if ((provider instanceof WorldProviderMoon) && (player.posY > ClientProxyCore.terrainHeight + 8F)) {
+                final double globalArc = ClientProxyCore.globalRadius / (180D / Math.PI);
 
-                    final int pX = MathHelper.floor_double(player.posX / 16D) << 4;
-                    final int pZ = MathHelper.floor_double(player.posZ / 16D) << 4;
+                final int pX = MathHelper.floor_double(player.posX / 16D) << 4;
+                final int pZ = MathHelper.floor_double(player.posZ / 16D) << 4;
 
-                    final int eX = tile.xCoord / 16 << 4;
-                    final int eY = tile.yCoord / 16 << 4;
-                    final int eZ = tile.zCoord / 16 << 4;
+                final int eX = tile.xCoord / 16 << 4;
+                final int eY = tile.yCoord / 16 << 4;
+                final int eZ = tile.zCoord / 16 << 4;
 
-                    float dX = eX - pX;
-                    float dZ = eZ - pZ;
+                float dX = eX - pX;
+                float dZ = eZ - pZ;
 
-                    final float floatPX = (float) player.posX;
-                    final float floatPZ = (float) player.posZ;
+                final float floatPX = (float) player.posX;
+                final float floatPZ = (float) player.posZ;
 
+                if (dX > 0) {
+                    dX -= 16F;
                     if (dX > 0) {
-                        dX -= 16F;
-                        if (dX > 0) {
-                            dX -= floatPX - pX;
-                        }
-                    } else if (dX < 0) {
-                        dX += 16F;
-                        if (dX < 0) {
-                            dX += 16F - floatPX + pX;
-                        }
+                        dX -= floatPX - pX;
                     }
-
-                    if (dZ > 0) {
-                        dZ -= 16F;
-                        if (dZ > 0) {
-                            dZ -= floatPZ - pZ;
-                        }
-                    } else if (dZ < 0) {
-                        dZ += 16F;
-                        if (dZ < 0) {
-                            dZ += 16F - floatPZ + pZ;
-                        }
+                } else if (dX < 0) {
+                    dX += 16F;
+                    if (dX < 0) {
+                        dX += 16F - floatPX + pX;
                     }
-
-                    float theta = (float) MathHelper.wrapAngleTo180_double(dX / globalArc);
-                    float phi = (float) MathHelper.wrapAngleTo180_double(dZ / globalArc);
-                    if (theta < 0) {
-                        theta += 360F;
-                    }
-                    if (phi < 0) {
-                        phi += 360F;
-                    }
-                    final float ytranslate = ClientProxyCore.globalRadius + (float) player.posY
-                            - tile.yCoord
-                            + eY
-                            - ClientProxyCore.terrainHeight;
-                    GL11.glTranslatef(-dX - floatPX + eX + 8F, -ytranslate, -dZ - floatPZ + eZ + 8F);
-                    if (theta > 0) {
-                        GL11.glRotatef(theta, 0, 0, -1);
-                    }
-                    if (phi > 0) {
-                        GL11.glRotatef(phi, 1, 0, 0);
-                    }
-                    GL11.glTranslatef(floatPX - eX - 8F, ytranslate, floatPZ - eZ - 8F);
                 }
+
+                if (dZ > 0) {
+                    dZ -= 16F;
+                    if (dZ > 0) {
+                        dZ -= floatPZ - pZ;
+                    }
+                } else if (dZ < 0) {
+                    dZ += 16F;
+                    if (dZ < 0) {
+                        dZ += 16F - floatPZ + pZ;
+                    }
+                }
+
+                float theta = (float) MathHelper.wrapAngleTo180_double(dX / globalArc);
+                float phi = (float) MathHelper.wrapAngleTo180_double(dZ / globalArc);
+                if (theta < 0) {
+                    theta += 360F;
+                }
+                if (phi < 0) {
+                    phi += 360F;
+                }
+                final float ytranslate = ClientProxyCore.globalRadius + (float) player.posY
+                        - tile.yCoord
+                        + eY
+                        - ClientProxyCore.terrainHeight;
+                GL11.glTranslatef(-dX - floatPX + eX + 8F, -ytranslate, -dZ - floatPZ + eZ + 8F);
+                if (theta > 0) {
+                    GL11.glRotatef(theta, 0, 0, -1);
+                }
+                if (phi > 0) {
+                    GL11.glRotatef(phi, 1, 0, 0);
+                }
+                GL11.glTranslatef(floatPX - eX - 8F, ytranslate, floatPZ - eZ - 8F);
             }
         }
     }

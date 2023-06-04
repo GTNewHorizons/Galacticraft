@@ -276,7 +276,7 @@ public class EntityGrapple extends Entity implements IProjectile {
             float f1;
 
             for (i = 0; i < list.size(); ++i) {
-                final Entity entity1 = (Entity) list.get(i);
+                final Entity entity1 = list.get(i);
 
                 if (entity1.canBeCollidedWith() && (entity1 != this.shootingEntity || this.ticksInAir >= 5)) {
                     f1 = 0.3F;
@@ -308,34 +308,32 @@ public class EntityGrapple extends Entity implements IProjectile {
 
             float motion;
 
-            if (movingobjectposition != null) {
-                if (movingobjectposition.entityHit == null) {
-                    this.hitVec = new BlockVec3(
-                            movingobjectposition.blockX,
-                            movingobjectposition.blockY,
-                            movingobjectposition.blockZ);
-                    this.hitBlock = this.worldObj.getBlock(this.hitVec.x, this.hitVec.y, this.hitVec.z);
-                    this.inData = this.worldObj.getBlockMetadata(this.hitVec.x, this.hitVec.y, this.hitVec.z);
-                    this.motionX = (float) (movingobjectposition.hitVec.xCoord - this.posX);
-                    this.motionY = (float) (movingobjectposition.hitVec.yCoord - this.posY);
-                    this.motionZ = (float) (movingobjectposition.hitVec.zCoord - this.posZ);
-                    motion = MathHelper.sqrt_double(
-                            this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-                    this.posX -= this.motionX / motion * 0.05000000074505806D;
-                    this.posY -= this.motionY / motion * 0.05000000074505806D;
-                    this.posZ -= this.motionZ / motion * 0.05000000074505806D;
-                    this.playSound("random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
-                    this.inGround = true;
-                    this.arrowShake = 7;
+            if ((movingobjectposition != null) && (movingobjectposition.entityHit == null)) {
+                this.hitVec = new BlockVec3(
+                        movingobjectposition.blockX,
+                        movingobjectposition.blockY,
+                        movingobjectposition.blockZ);
+                this.hitBlock = this.worldObj.getBlock(this.hitVec.x, this.hitVec.y, this.hitVec.z);
+                this.inData = this.worldObj.getBlockMetadata(this.hitVec.x, this.hitVec.y, this.hitVec.z);
+                this.motionX = (float) (movingobjectposition.hitVec.xCoord - this.posX);
+                this.motionY = (float) (movingobjectposition.hitVec.yCoord - this.posY);
+                this.motionZ = (float) (movingobjectposition.hitVec.zCoord - this.posZ);
+                motion = MathHelper.sqrt_double(
+                        this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
+                this.posX -= this.motionX / motion * 0.05000000074505806D;
+                this.posY -= this.motionY / motion * 0.05000000074505806D;
+                this.posZ -= this.motionZ / motion * 0.05000000074505806D;
+                this.playSound("random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+                this.inGround = true;
+                this.arrowShake = 7;
 
-                    if (this.hitBlock.getMaterial() != Material.air) {
-                        this.hitBlock.onEntityCollidedWithBlock(
-                                this.worldObj,
-                                this.hitVec.x,
-                                this.hitVec.y,
-                                this.hitVec.z,
-                                this);
-                    }
+                if (this.hitBlock.getMaterial() != Material.air) {
+                    this.hitBlock.onEntityCollidedWithBlock(
+                            this.worldObj,
+                            this.hitVec.x,
+                            this.hitVec.y,
+                            this.hitVec.z,
+                            this);
                 }
             }
 

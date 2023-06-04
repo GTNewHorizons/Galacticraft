@@ -348,7 +348,7 @@ public class TileEntityOxygenStorageModule extends TileEntityOxygen implements I
 
     @Override
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-        FluidTankInfo[] tankInfo = new FluidTankInfo[] {};
+        FluidTankInfo[] tankInfo = {};
         final int metaside = this.getBlockMetadata() - BlockMachine2.OXYGEN_STORAGE_MODULE_METADATA + 2;
         final int side = from.ordinal();
 

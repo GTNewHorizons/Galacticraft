@@ -26,7 +26,6 @@ public class ItemMeteorChunk extends Item {
     public static final int METEOR_BURN_TIME = 45 * 20;
 
     public ItemMeteorChunk(String assetName) {
-        super();
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
         this.maxStackSize = 16;

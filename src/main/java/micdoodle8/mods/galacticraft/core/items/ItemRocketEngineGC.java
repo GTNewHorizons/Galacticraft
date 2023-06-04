@@ -23,7 +23,6 @@ public class ItemRocketEngineGC extends Item {
     protected IIcon[] icons = new IIcon[ItemRocketEngineGC.names.length];
 
     public ItemRocketEngineGC(String assetName) {
-        super();
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
         this.setUnlocalizedName(assetName);

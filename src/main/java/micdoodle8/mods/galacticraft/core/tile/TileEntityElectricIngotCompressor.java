@@ -137,10 +137,8 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
     private void compressIntoSlot(int slot) {
         if (this.canCompress()) {
             final ItemStack resultItemStack = this.producingStack.copy();
-            if (ConfigManagerCore.quickMode) {
-                if (resultItemStack.getItem().getUnlocalizedName(resultItemStack).contains("compressed")) {
-                    resultItemStack.stackSize *= 2;
-                }
+            if (ConfigManagerCore.quickMode && resultItemStack.getItem().getUnlocalizedName(resultItemStack).contains("compressed")) {
+                resultItemStack.stackSize *= 2;
             }
 
             if (this.containingItems[slot] == null) {
@@ -416,7 +414,7 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
         if (side == 0) {
             return new int[] { 1, 2 };
         }
-        final int[] slots = new int[] { 0, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+        final int[] slots = { 0, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
         final ArrayList<Integer> removeSlots = new ArrayList<>();
 
         for (int i = 3; i < 12; i++) {

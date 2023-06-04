@@ -14,7 +14,7 @@ public class TileEntityOxygenDetector extends TileEntityAdvanced {
         if (this.worldObj != null && !this.worldObj.isRemote && this.ticks % 50 == 0) {
             this.blockType = this.getBlockType();
 
-            if (this.blockType != null && this.blockType instanceof BlockOxygenDetector) {
+            if (this.blockType instanceof BlockOxygenDetector) {
                 ((BlockOxygenDetector) this.blockType).updateOxygenState(
                         this.worldObj,
                         this.xCoord,

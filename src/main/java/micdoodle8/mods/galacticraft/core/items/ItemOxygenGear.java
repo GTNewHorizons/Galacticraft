@@ -15,7 +15,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemOxygenGear extends Item {
 
     public ItemOxygenGear(String assetName) {
-        super();
         this.setUnlocalizedName(assetName);
         this.setTextureName(GalacticraftCore.TEXTURE_PREFIX + assetName);
     }

@@ -168,18 +168,16 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
 
     @Override
     public Vector3 getMotionVec() {
-        if (this.onGround) {
-            if (this.groundHitCount < 14) {
-                this.groundHitCount++;
-                final double mag = 1.0D / this.groundHitCount * 4.0D;
-                double mX = this.rand.nextDouble() - 0.5;
-                double mY = 1.0D;
-                double mZ = this.rand.nextDouble() - 0.5;
-                mX *= mag / 3.0D;
-                mY *= mag;
-                mZ *= mag / 3.0D;
-                return new Vector3(mX, mY, mZ);
-            }
+        if (this.onGround && (this.groundHitCount < 14)) {
+            this.groundHitCount++;
+            final double mag = 1.0D / this.groundHitCount * 4.0D;
+            double mX = this.rand.nextDouble() - 0.5;
+            double mY = 1.0D;
+            double mZ = this.rand.nextDouble() - 0.5;
+            mX *= mag / 3.0D;
+            mY *= mag;
+            mZ *= mag / 3.0D;
+            return new Vector3(mX, mY, mZ);
         }
 
         if (this.ticks >= 40 && this.ticks < 45) {
@@ -195,8 +193,7 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
 
     @Override
     public ArrayList<Object> getNetworkedData() {
-        final ArrayList<Object> objList = new ArrayList<>();
-        objList.addAll(super.getNetworkedData());
+        final ArrayList<Object> objList = new ArrayList<>(super.getNetworkedData());
         if (this.worldObj.isRemote && this.hasReceivedPacket && this.groundHitCount <= 14
                 || !this.worldObj.isRemote && this.groundHitCount == 14) {
             objList.add(this.groundHitCount);

@@ -128,8 +128,7 @@ public class GuiWaterElectrolyzer extends GuiContainerGC {
         // 131, (this.height - this.ySize)
         // / 2 + 6, 18, 18, fuelSlotDesc, this.width, this.height, this));
 
-        final List<String> fuelSlotDesc = new ArrayList<>();
-        fuelSlotDesc.addAll(GCCoreUtil.translateWithSplit("gui.waterBucketSlot.desc"));
+        final List<String> fuelSlotDesc = new ArrayList<>(GCCoreUtil.translateWithSplit("gui.waterBucketSlot.desc"));
         this.infoRegions.add(
                 new GuiElementInfoRegion(
                         (this.width - this.xSize) / 2 + 6,

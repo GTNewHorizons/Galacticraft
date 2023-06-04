@@ -122,10 +122,8 @@ public class SpinManager {
     public void setSpinCentre(double x, double z) {
         this.spinCentreX = x;
         this.spinCentreZ = z;
-        if (this.clientSide) {
-            if (ConfigManagerCore.enableDebug) {
-                GCLog.info("Clientside update to spin centre: " + x + "," + z);
-            }
+        if (this.clientSide && ConfigManagerCore.enableDebug) {
+            GCLog.info("Clientside update to spin centre: " + x + "," + z);
         }
     }
 

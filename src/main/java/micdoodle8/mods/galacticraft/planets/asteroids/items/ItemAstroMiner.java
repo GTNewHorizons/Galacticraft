@@ -28,7 +28,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemAstroMiner extends Item implements IHoldableItem {
 
     public ItemAstroMiner(String assetName) {
-        super();
         this.setMaxDamage(0);
         this.setMaxStackSize(1);
         this.setUnlocalizedName(assetName);

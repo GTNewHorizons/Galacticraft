@@ -190,15 +190,13 @@ public class MapGenCavernMars extends MapGenBaseMeta {
                                 for (int var50 = caveMaxY - 1; var50 >= caveMinY; --var50) {
                                     final double var51 = (var50 + 0.5D - yPos) / caveHeight;
 
-                                    if (var59 * var59 + var51 * var51 + var46 * var46 < 1.0D) {
-                                        if (var51 > -0.7D) {
-                                            final int coords = (var42 * 16 + var45) * 256 + var50;
+                                    if ((var59 * var59 + var51 * var51 + var46 * var46 < 1.0D) && (var51 > -0.7D)) {
+                                        final int coords = (var42 * 16 + var45) * 256 + var50;
 
-                                            if (arrayOfIDs[coords] == MarsBlocks.marsBlock
-                                                    || arrayOfIDs[coords] == MarsBlocks.blockSludge
-                                                    || arrayOfIDs[coords] == MarsBlocks.vine) {
-                                                arrayOfIDs[coords] = Blocks.air;
-                                            }
+                                        if (arrayOfIDs[coords] == MarsBlocks.marsBlock
+                                                || arrayOfIDs[coords] == MarsBlocks.blockSludge
+                                                || arrayOfIDs[coords] == MarsBlocks.vine) {
+                                            arrayOfIDs[coords] = Blocks.air;
                                         }
                                     }
                                 }
@@ -216,29 +214,27 @@ public class MapGenCavernMars extends MapGenBaseMeta {
                                 for (int var50 = caveMaxY - 1; var50 >= caveMinY; --var50) {
                                     final double var51 = (var50 + 0.5D - yPos) / caveHeight;
 
-                                    if (var59 * var59 + var51 * var51 + var46 * var46 < 1.0D) {
-                                        if (var51 > -0.7D) {
-                                            final int coords = (var42 * 16 + var45) * 256 + var50;
-                                            final int coordsAbove = (var42 * 16 + var45) * 256 + var50 + 1;
-                                            int coordsBelow = (var42 * 16 + var45) * 256 + var50 - 1;
+                                    if ((var59 * var59 + var51 * var51 + var46 * var46 < 1.0D) && (var51 > -0.7D)) {
+                                        final int coords = (var42 * 16 + var45) * 256 + var50;
+                                        final int coordsAbove = (var42 * 16 + var45) * 256 + var50 + 1;
+                                        int coordsBelow = (var42 * 16 + var45) * 256 + var50 - 1;
 
-                                            if (Blocks.air == arrayOfIDs[coords]) {
-                                                if (arrayOfIDs[coordsAbove] == MarsBlocks.marsBlock
-                                                        && this.rand.nextInt(200) == 0) {
-                                                    int modifier = 0;
+                                        if (Blocks.air == arrayOfIDs[coords]) {
+                                            if (arrayOfIDs[coordsAbove] == MarsBlocks.marsBlock
+                                                    && this.rand.nextInt(200) == 0) {
+                                                int modifier = 0;
 
-                                                    while (Blocks.air == arrayOfIDs[coordsBelow]) {
-                                                        arrayOfIDs[coordsBelow] = MarsBlocks.vine;
-                                                        arrayOfMeta[coordsBelow] = (byte) (Math.abs(modifier) % 3);
-                                                        modifier--;
-                                                        coordsBelow = (var42 * 16 + var45) * 256 + var50 - 1 + modifier;
+                                                while (Blocks.air == arrayOfIDs[coordsBelow]) {
+                                                    arrayOfIDs[coordsBelow] = MarsBlocks.vine;
+                                                    arrayOfMeta[coordsBelow] = (byte) (Math.abs(modifier) % 3);
+                                                    modifier--;
+                                                    coordsBelow = (var42 * 16 + var45) * 256 + var50 - 1 + modifier;
+                                                }
+                                            } else if (arrayOfIDs[coordsBelow] == MarsBlocks.marsBlock
+                                                    && this.rand.nextInt(200) == 0) {
+                                                        arrayOfIDs[coords] = MarsBlocks.blockSludge;
+                                                        arrayOfMeta[coords] = 0;
                                                     }
-                                                } else if (arrayOfIDs[coordsBelow] == MarsBlocks.marsBlock
-                                                        && this.rand.nextInt(200) == 0) {
-                                                            arrayOfIDs[coords] = MarsBlocks.blockSludge;
-                                                            arrayOfMeta[coords] = 0;
-                                                        }
-                                            }
                                         }
                                     }
                                 }

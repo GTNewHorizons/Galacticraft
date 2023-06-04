@@ -40,10 +40,8 @@ public abstract class BlockAdvanced extends BlockContainer {
         if (this.isUsableWrench(entityPlayer, entityPlayer.inventory.getCurrentItem(), x, y, z)) {
             this.damageWrench(entityPlayer, entityPlayer.inventory.getCurrentItem(), x, y, z);
 
-            if (entityPlayer.isSneaking()) {
-                if (this.onSneakUseWrench(world, x, y, z, entityPlayer, side, hitX, hitY, hitZ)) {
-                    return true;
-                }
+            if (entityPlayer.isSneaking() && this.onSneakUseWrench(world, x, y, z, entityPlayer, side, hitX, hitY, hitZ)) {
+                return true;
             }
 
             if (this.onUseWrench(world, x, y, z, entityPlayer, side, hitX, hitY, hitZ)) {
@@ -51,10 +49,8 @@ public abstract class BlockAdvanced extends BlockContainer {
             }
         }
 
-        if (entityPlayer.isSneaking()) {
-            if (this.onSneakMachineActivated(world, x, y, z, entityPlayer, side, hitX, hitY, hitZ)) {
-                return true;
-            }
+        if (entityPlayer.isSneaking() && this.onSneakMachineActivated(world, x, y, z, entityPlayer, side, hitX, hitY, hitZ)) {
+            return true;
         }
 
         return this.onMachineActivated(world, x, y, z, entityPlayer, side, hitX, hitY, hitZ);

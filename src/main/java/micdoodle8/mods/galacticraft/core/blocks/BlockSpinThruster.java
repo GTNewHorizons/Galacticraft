@@ -38,8 +38,7 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
         this.setBlockName(assetName);
     }
 
-    private static boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection direction,
-            boolean nope) {
+    private static boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection direction) {
         return world.getBlock(x, y, z).isSideSolid(world, x, y, z, direction);
     }
 
@@ -89,22 +88,22 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
 
     @Override
     public boolean canPlaceBlockAt(World par1World, int x, int y, int z) {
-        return BlockSpinThruster.isBlockSolidOnSide(par1World, x - 1, y, z, ForgeDirection.EAST, true)
-                || BlockSpinThruster.isBlockSolidOnSide(par1World, x + 1, y, z, ForgeDirection.WEST, true)
-                || BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z - 1, ForgeDirection.SOUTH, true)
-                || BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z + 1, ForgeDirection.NORTH, true);
+        return BlockSpinThruster.isBlockSolidOnSide(par1World, x - 1, y, z, ForgeDirection.EAST)
+                || BlockSpinThruster.isBlockSolidOnSide(par1World, x + 1, y, z, ForgeDirection.WEST)
+                || BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z - 1, ForgeDirection.SOUTH)
+                || BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z + 1, ForgeDirection.NORTH);
     }
 
     @Override
     public int onBlockPlaced(World par1World, int x, int y, int z, int par5, float par6, float par7, float par8,
             int par9) {
-        if (par5 == 2 && BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z + 1, ForgeDirection.NORTH, true)) {}
+        if (par5 == 2 && BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z + 1, ForgeDirection.NORTH)) {}
 
-        if (par5 == 3 && BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z - 1, ForgeDirection.SOUTH, true)) {}
+        if (par5 == 3 && BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z - 1, ForgeDirection.SOUTH)) {}
 
-        if (par5 == 4 && BlockSpinThruster.isBlockSolidOnSide(par1World, x + 1, y, z, ForgeDirection.WEST, true)) {}
+        if (par5 == 4 && BlockSpinThruster.isBlockSolidOnSide(par1World, x + 1, y, z, ForgeDirection.WEST)) {}
 
-        if (par5 == 5 && BlockSpinThruster.isBlockSolidOnSide(par1World, x - 1, y, z, ForgeDirection.EAST, true)) {}
+        if (par5 == 5 && BlockSpinThruster.isBlockSolidOnSide(par1World, x - 1, y, z, ForgeDirection.EAST)) {}
 
         return 0;
     }
@@ -123,16 +122,16 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
         int metadata = par1World.getBlockMetadata(x, y, z);
 
         if (metadata == 0) {
-            if (BlockSpinThruster.isBlockSolidOnSide(par1World, x - 1, y, z, ForgeDirection.EAST, true)) {
+            if (BlockSpinThruster.isBlockSolidOnSide(par1World, x - 1, y, z, ForgeDirection.EAST)) {
                 metadata = 1;
                 par1World.setBlockMetadataWithNotify(x, y, z, metadata, 3);
-            } else if (BlockSpinThruster.isBlockSolidOnSide(par1World, x + 1, y, z, ForgeDirection.WEST, true)) {
+            } else if (BlockSpinThruster.isBlockSolidOnSide(par1World, x + 1, y, z, ForgeDirection.WEST)) {
                 metadata = 2;
                 par1World.setBlockMetadataWithNotify(x, y, z, metadata, 3);
-            } else if (BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z - 1, ForgeDirection.SOUTH, true)) {
+            } else if (BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z - 1, ForgeDirection.SOUTH)) {
                 metadata = 3;
                 par1World.setBlockMetadataWithNotify(x, y, z, metadata, 3);
-            } else if (BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z + 1, ForgeDirection.NORTH, true)) {
+            } else if (BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z + 1, ForgeDirection.NORTH)) {
                 metadata = 4;
                 par1World.setBlockMetadataWithNotify(x, y, z, metadata, 3);
             }
@@ -157,10 +156,8 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
                 return;
         }
 
-        if (!par1World.isRemote) {
-            if (par1World.provider instanceof WorldProviderSpaceStation) {
-                ((WorldProviderSpaceStation) par1World.provider).getSpinManager().checkSS(baseBlock, true);
-            }
+        if (!par1World.isRemote && (par1World.provider instanceof WorldProviderSpaceStation)) {
+            ((WorldProviderSpaceStation) par1World.provider).getSpinManager().checkSS(baseBlock, true);
         }
     }
 
@@ -174,20 +171,20 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
             final int var6 = par1World.getBlockMetadata(x, y, z) & 7;
             boolean var7 = false;
 
-            if (!BlockSpinThruster.isBlockSolidOnSide(par1World, x - 1, y, z, ForgeDirection.EAST, true) && var6 == 1) {
+            if (!BlockSpinThruster.isBlockSolidOnSide(par1World, x - 1, y, z, ForgeDirection.EAST) && var6 == 1) {
                 var7 = true;
             }
 
-            if (!BlockSpinThruster.isBlockSolidOnSide(par1World, x + 1, y, z, ForgeDirection.WEST, true) && var6 == 2) {
+            if (!BlockSpinThruster.isBlockSolidOnSide(par1World, x + 1, y, z, ForgeDirection.WEST) && var6 == 2) {
                 var7 = true;
             }
 
-            if (!BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z - 1, ForgeDirection.SOUTH, true)
+            if (!BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z - 1, ForgeDirection.SOUTH)
                     && var6 == 3) {
                 var7 = true;
             }
 
-            if (!BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z + 1, ForgeDirection.NORTH, true)
+            if (!BlockSpinThruster.isBlockSolidOnSide(par1World, x, y, z + 1, ForgeDirection.NORTH)
                     && var6 == 4) {
                 var7 = true;
             }
@@ -198,10 +195,8 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
             }
         }
 
-        if (!par1World.isRemote) {
-            if (par1World.provider instanceof WorldProviderSpaceStation) {
-                ((WorldProviderSpaceStation) par1World.provider).getSpinManager().checkSS(new BlockVec3(x, y, z), true);
-            }
+        if (!par1World.isRemote && (par1World.provider instanceof WorldProviderSpaceStation)) {
+            ((WorldProviderSpaceStation) par1World.provider).getSpinManager().checkSS(new BlockVec3(x, y, z), true);
         }
     }
 
@@ -259,32 +254,30 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
         // TODO this is torch code as a placeholder, still need to adjust positioning
         // and particle type
         // Also make small thrust sounds
-        if (par1World.provider instanceof WorldProviderSpaceStation) {
-            if (((WorldProviderSpaceStation) par1World.provider).getSpinManager().thrustersFiring
-                    || par5Random.nextInt(80) == 0) {
-                final int var6 = par1World.getBlockMetadata(x, y, z) & 7;
-                final double var7 = x + 0.5F;
-                final double var9 = y + 0.7F;
-                final double var11 = z + 0.5F;
-                final double var13 = 0.2199999988079071D;
-                final double var15 = 0.27000001072883606D;
+        if ((par1World.provider instanceof WorldProviderSpaceStation) && (((WorldProviderSpaceStation) par1World.provider).getSpinManager().thrustersFiring
+                || par5Random.nextInt(80) == 0)) {
+            final int var6 = par1World.getBlockMetadata(x, y, z) & 7;
+            final double var7 = x + 0.5F;
+            final double var9 = y + 0.7F;
+            final double var11 = z + 0.5F;
+            final double var13 = 0.2199999988079071D;
+            final double var15 = 0.27000001072883606D;
 
-                switch (var6) {
-                    case 1:
-                        par1World.spawnParticle("smoke", var7 - var15, var9 + var13, var11, 0.0D, 0.0D, 0.0D);
-                        break;
-                    case 2:
-                        par1World.spawnParticle("smoke", var7 + var15, var9 + var13, var11, 0.0D, 0.0D, 0.0D);
-                        break;
-                    case 3:
-                        par1World.spawnParticle("smoke", var7, var9 + var13, var11 - var15, 0.0D, 0.0D, 0.0D);
-                        break;
-                    case 4:
-                        par1World.spawnParticle("smoke", var7, var9 + var13, var11 + var15, 0.0D, 0.0D, 0.0D);
-                        break;
-                    default:
-                        break;
-                }
+            switch (var6) {
+                case 1:
+                    par1World.spawnParticle("smoke", var7 - var15, var9 + var13, var11, 0.0D, 0.0D, 0.0D);
+                    break;
+                case 2:
+                    par1World.spawnParticle("smoke", var7 + var15, var9 + var13, var11, 0.0D, 0.0D, 0.0D);
+                    break;
+                case 3:
+                    par1World.spawnParticle("smoke", var7, var9 + var13, var11 - var15, 0.0D, 0.0D, 0.0D);
+                    break;
+                case 4:
+                    par1World.spawnParticle("smoke", var7, var9 + var13, var11 + var15, 0.0D, 0.0D, 0.0D);
+                    break;
+                default:
+                    break;
             }
         }
     }

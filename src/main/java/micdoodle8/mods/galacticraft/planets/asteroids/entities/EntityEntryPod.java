@@ -67,10 +67,8 @@ public class EntityEntryPod extends EntityLanderBase implements IScaleableFuelLe
     public void tickInAir() {
         super.tickInAir();
 
-        if (this.worldObj.isRemote) {
-            if (!this.onGround) {
-                this.motionY -= 0.002D;
-            }
+        if (this.worldObj.isRemote && !this.onGround) {
+            this.motionY -= 0.002D;
         }
     }
 

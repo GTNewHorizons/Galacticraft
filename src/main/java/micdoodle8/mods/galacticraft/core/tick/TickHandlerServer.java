@@ -310,27 +310,25 @@ public class TickHandlerServer {
                 footprintBlockChanges.clear();
             }
 
-            if (tickCount % 20 == 0) {
-                if (!playersRequestingMapData.isEmpty()) {
-                    final File baseFolder = new File(
-                            MinecraftServer.getServer().worldServerForDimension(0).getChunkSaveLocation(),
-                            "galacticraft/overworldMap");
-                    if (!baseFolder.exists() && !baseFolder.mkdirs()) {
-                        GCLog.severe("Base folder(s) could not be created: " + baseFolder.getAbsolutePath());
-                    } else {
-                        final ArrayList<EntityPlayerMP> copy = new ArrayList<>(playersRequestingMapData);
-                        final BufferedImage reusable = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
-                        for (final EntityPlayerMP playerMP : copy) {
-                            final GCPlayerStats stats = GCPlayerStats.get(playerMP);
-                            MapUtil.makeVanillaMap(
-                                    playerMP.dimension,
-                                    (int) Math.floor(stats.coordsTeleportedFromX) >> 4,
-                                    (int) Math.floor(stats.coordsTeleportedFromZ) >> 4,
-                                    baseFolder,
-                                    reusable);
-                        }
-                        playersRequestingMapData.removeAll(copy);
+            if ((tickCount % 20 == 0) && !playersRequestingMapData.isEmpty()) {
+                final File baseFolder = new File(
+                        MinecraftServer.getServer().worldServerForDimension(0).getChunkSaveLocation(),
+                        "galacticraft/overworldMap");
+                if (!baseFolder.exists() && !baseFolder.mkdirs()) {
+                    GCLog.severe("Base folder(s) could not be created: " + baseFolder.getAbsolutePath());
+                } else {
+                    final ArrayList<EntityPlayerMP> copy = new ArrayList<>(playersRequestingMapData);
+                    final BufferedImage reusable = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
+                    for (final EntityPlayerMP playerMP : copy) {
+                        final GCPlayerStats stats = GCPlayerStats.get(playerMP);
+                        MapUtil.makeVanillaMap(
+                                playerMP.dimension,
+                                (int) Math.floor(stats.coordsTeleportedFromX) >> 4,
+                                (int) Math.floor(stats.coordsTeleportedFromZ) >> 4,
+                                baseFolder,
+                                reusable);
                     }
+                    playersRequestingMapData.removeAll(copy);
                 }
             }
 
@@ -344,8 +342,7 @@ public class TickHandlerServer {
         } else if (event.phase == Phase.END) {
             int maxPasses = 10;
             while (!TickHandlerServer.networkTicks.isEmpty()) {
-                final LinkedList<EnergyNetwork> pass = new LinkedList<>();
-                pass.addAll(TickHandlerServer.networkTicks);
+                final LinkedList<EnergyNetwork> pass = new LinkedList<>(TickHandlerServer.networkTicks);
                 TickHandlerServer.networkTicks.clear();
                 for (final EnergyNetwork grid : pass) {
                     grid.tickEnd();
@@ -358,8 +355,7 @@ public class TickHandlerServer {
 
             maxPasses = 10;
             while (!TickHandlerServer.oxygenTransmitterUpdates.isEmpty()) {
-                final LinkedList<TileEntityOxygenTransmitter> pass = new LinkedList<>();
-                pass.addAll(TickHandlerServer.oxygenTransmitterUpdates);
+                final LinkedList<TileEntityOxygenTransmitter> pass = new LinkedList<>(TickHandlerServer.oxygenTransmitterUpdates);
                 TickHandlerServer.oxygenTransmitterUpdates.clear();
                 for (final TileEntityOxygenTransmitter newTile : pass) {
                     if (!newTile.isInvalid()) {
@@ -374,8 +370,7 @@ public class TickHandlerServer {
 
             maxPasses = 10;
             while (!TickHandlerServer.hydrogenTransmitterUpdates.isEmpty()) {
-                final LinkedList<TileEntityHydrogenPipe> pass = new LinkedList<>();
-                pass.addAll(TickHandlerServer.hydrogenTransmitterUpdates);
+                final LinkedList<TileEntityHydrogenPipe> pass = new LinkedList<>(TickHandlerServer.hydrogenTransmitterUpdates);
                 TickHandlerServer.hydrogenTransmitterUpdates.clear();
                 for (final TileEntityHydrogenPipe newTile : pass) {
                     if (!newTile.isInvalid()) {
@@ -390,8 +385,7 @@ public class TickHandlerServer {
 
             maxPasses = 10;
             while (!TickHandlerServer.energyTransmitterUpdates.isEmpty()) {
-                final LinkedList<TileBaseConductor> pass = new LinkedList<>();
-                pass.addAll(TickHandlerServer.energyTransmitterUpdates);
+                final LinkedList<TileBaseConductor> pass = new LinkedList<>(TickHandlerServer.energyTransmitterUpdates);
                 TickHandlerServer.energyTransmitterUpdates.clear();
                 for (final TileBaseConductor newTile : pass) {
                     if (!newTile.isInvalid()) {
@@ -476,16 +470,14 @@ public class TickHandlerServer {
                 final Object[] entityList = world.loadedEntityList.toArray();
 
                 for (final Object o : entityList) {
-                    if (o instanceof Entity e) {
-                        if (e.worldObj.provider instanceof IOrbitDimension dimension) {
-                            if (e.posY <= dimension.getYCoordToTeleportToPlanet()) {
-                                int dim = 0;
-                                try {
-                                    dim = WorldUtil.getProviderForNameServer(dimension.getPlanetToOrbit()).dimensionId;
-                                } catch (final Exception ex) {}
+                    if ((o instanceof Entity e) && (e.worldObj.provider instanceof IOrbitDimension dimension)) {
+                        if (e.posY <= dimension.getYCoordToTeleportToPlanet()) {
+                            int dim = 0;
+                            try {
+                                dim = WorldUtil.getProviderForNameServer(dimension.getPlanetToOrbit()).dimensionId;
+                            } catch (final Exception ex) {}
 
-                                WorldUtil.transferEntityToDimension(e, dim, world, false, null);
-                            }
+                            WorldUtil.transferEntityToDimension(e, dim, world, false, null);
                         }
                     }
                 }
@@ -497,8 +489,7 @@ public class TickHandlerServer {
             final HashSet<BlockVec3> checkedThisTick = new HashSet<>();
 
             if (edgesList != null && !edgesList.isEmpty()) {
-                final List<BlockVec3> edgesListCopy = new ArrayList<>();
-                edgesListCopy.addAll(edgesList);
+                final List<BlockVec3> edgesListCopy = new ArrayList<>(edgesList);
                 for (final BlockVec3 edgeBlock : edgesListCopy) {
                     if (edgeBlock != null && !checkedThisTick.contains(edgeBlock)) {
                         if (TickHandlerServer.scheduledForChange(world.provider.dimensionId, edgeBlock)) {

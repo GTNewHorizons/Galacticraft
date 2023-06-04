@@ -34,8 +34,7 @@ public class ItemRendererWalkway implements IItemRenderer {
                 .loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/walkway.obj"));
     }
 
-    private void renderWalkway(ItemRenderType type, RenderBlocks render, ItemStack item, float translateX,
-            float translateY, float translateZ) {
+    private void renderWalkway(ItemRenderType type, ItemStack item) {
         GL11.glPushMatrix();
         this.transform(type);
 
@@ -112,16 +111,16 @@ public class ItemRendererWalkway implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         switch (type) {
             case EQUIPPED:
-                this.renderWalkway(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderWalkway(type, item);
                 break;
             case EQUIPPED_FIRST_PERSON:
-                this.renderWalkway(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderWalkway(type, item);
                 break;
             case INVENTORY:
-                this.renderWalkway(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderWalkway(type, item);
                 break;
             case ENTITY:
-                this.renderWalkway(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderWalkway(type, item);
                 break;
             default:
                 break;

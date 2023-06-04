@@ -156,10 +156,8 @@ public class TickHandlerClient {
                 if (i > minecraft.currentScreen.width - 100 && j > minecraft.currentScreen.height - 35) {
                     deltaColor = 20;
 
-                    if (k == 0) {
-                        if (Mouse.getEventButtonState()) {
-                            minecraft.displayGuiScreen(new GuiNewSpaceRace(playerBaseClient));
-                        }
+                    if ((k == 0) && Mouse.getEventButtonState()) {
+                        minecraft.displayGuiScreen(new GuiNewSpaceRace(playerBaseClient));
                     }
                 }
 
@@ -208,7 +206,7 @@ public class TickHandlerClient {
                         + (player.rotationPitch - player.prevRotationPitch) * event.renderTickTime;
             }
 
-            if (player != null && player.ridingEntity != null && player.ridingEntity instanceof EntityTier1Rocket) {
+            if (player != null && player.ridingEntity instanceof EntityTier1Rocket) {
                 float f = (((EntityTier1Rocket) player.ridingEntity).timeSinceLaunch - 250F) / 175F;
 
                 if (f < 0) {
@@ -236,32 +234,19 @@ public class TickHandlerClient {
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             }
 
-            if (minecraft.currentScreen == null && player != null
-                    && player.ridingEntity != null
-                    && player.ridingEntity instanceof EntitySpaceshipBase
-                    && minecraft.gameSettings.thirdPersonView != 0
-                    && !minecraft.gameSettings.hideGUI) {
+            if (minecraft.currentScreen == null && player != null && player.ridingEntity instanceof EntitySpaceshipBase && minecraft.gameSettings.thirdPersonView != 0 && !minecraft.gameSettings.hideGUI) {
                 OverlayRocket.renderSpaceshipOverlay(((EntitySpaceshipBase) player.ridingEntity).getSpaceshipGui());
             }
 
-            if (minecraft.currentScreen == null && player != null
-                    && player.ridingEntity != null
-                    && player.ridingEntity instanceof EntityLander
-                    && minecraft.gameSettings.thirdPersonView != 0
-                    && !minecraft.gameSettings.hideGUI) {
+            if (minecraft.currentScreen == null && player != null && player.ridingEntity instanceof EntityLander && minecraft.gameSettings.thirdPersonView != 0 && !minecraft.gameSettings.hideGUI) {
                 OverlayLander.renderLanderOverlay();
             }
 
-            if (minecraft.currentScreen == null && player != null
-                    && player.ridingEntity != null
-                    && player.ridingEntity instanceof EntityAutoRocket
-                    && minecraft.gameSettings.thirdPersonView != 0
-                    && !minecraft.gameSettings.hideGUI) {
+            if (minecraft.currentScreen == null && player != null && player.ridingEntity instanceof EntityAutoRocket && minecraft.gameSettings.thirdPersonView != 0 && !minecraft.gameSettings.hideGUI) {
                 OverlayDockingRocket.renderDockingOverlay();
             }
 
             if (minecraft.currentScreen == null && player != null
-                    && player.ridingEntity != null
                     && player.ridingEntity instanceof EntitySpaceshipBase
                     && minecraft.gameSettings.thirdPersonView != 0
                     && !minecraft.gameSettings.hideGUI
@@ -312,9 +297,7 @@ public class TickHandlerClient {
         final EntityClientPlayerMP player = minecraft.thePlayer;
 
         if (event.type == RenderGameOverlayEvent.ElementType.ALL) {
-            if (player != null && player.ridingEntity != null
-                    && player.ridingEntity instanceof IIgnoreShift
-                    && ((IIgnoreShift) player.ridingEntity).shouldIgnoreShiftExit()) {
+            if (player != null && player.ridingEntity instanceof IIgnoreShift && ((IIgnoreShift) player.ridingEntity).shouldIgnoreShiftExit()) {
                 // Remove "Press shift to dismount" message when shift-exiting is disabled (not
                 // ideal, but the only
                 // option)
@@ -465,18 +448,14 @@ public class TickHandlerClient {
                     hasChanged = true;
                 }
 
-                if (minecraft.gameSettings.keyBindForward.getIsKeyPressed()) {
-                    if (ship.getLaunched()) {
-                        ship.turnPitch(-0.7F);
-                        hasChanged = true;
-                    }
+                if (minecraft.gameSettings.keyBindForward.getIsKeyPressed() && ship.getLaunched()) {
+                    ship.turnPitch(-0.7F);
+                    hasChanged = true;
                 }
 
-                if (minecraft.gameSettings.keyBindBack.getIsKeyPressed()) {
-                    if (ship.getLaunched()) {
-                        ship.turnPitch(0.7F);
-                        hasChanged = true;
-                    }
+                if (minecraft.gameSettings.keyBindBack.getIsKeyPressed() && ship.getLaunched()) {
+                    ship.turnPitch(0.7F);
+                    hasChanged = true;
                 }
 
                 if (hasChanged) {
@@ -487,12 +466,10 @@ public class TickHandlerClient {
             if (world != null) {
                 final List<Entity> entityList = world.loadedEntityList;
                 for (final Object e : entityList) {
-                    if (e instanceof IEntityNoisy vehicle) {
-                        if (vehicle.getSoundUpdater() == null) {
-                            final ISound noise = vehicle
-                                    .setSoundUpdater(FMLClientHandler.instance().getClient().thePlayer);
-                            FMLClientHandler.instance().getClient().getSoundHandler().playSound(noise);
-                        }
+                    if ((e instanceof IEntityNoisy vehicle) && (vehicle.getSoundUpdater() == null)) {
+                        final ISound noise = vehicle
+                                .setSoundUpdater(FMLClientHandler.instance().getClient().thePlayer);
+                        FMLClientHandler.instance().getClient().getSoundHandler().playSound(noise);
                     }
                 }
             }

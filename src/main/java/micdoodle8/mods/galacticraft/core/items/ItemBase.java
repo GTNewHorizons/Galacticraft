@@ -18,7 +18,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemBase extends Item {
 
     public ItemBase(String assetName) {
-        super();
         this.setUnlocalizedName(assetName);
         this.setTextureName(GalacticraftCore.TEXTURE_PREFIX + assetName);
     }

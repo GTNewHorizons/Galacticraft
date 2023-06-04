@@ -36,7 +36,6 @@ public abstract class ItemElectricBase extends Item
     public float transferMax;
 
     public ItemElectricBase() {
-        super();
         this.setMaxStackSize(1);
         this.setMaxDamage(100);
         this.setNoRepair();
@@ -190,10 +189,8 @@ public abstract class ItemElectricBase extends Item
             return ((IItemElectricBase) item).getElectricityStored(itemstack) <= 0;
         }
 
-        if (EnergyConfigHandler.isIndustrialCraft2Loaded()) {
-            if (item instanceof ic2.api.item.ISpecialElectricItem) {
-                return !((ic2.api.item.ISpecialElectricItem) item).canProvideEnergy(itemstack);
-            }
+        if (EnergyConfigHandler.isIndustrialCraft2Loaded() && (item instanceof ic2.api.item.ISpecialElectricItem)) {
+            return !((ic2.api.item.ISpecialElectricItem) item).canProvideEnergy(itemstack);
         }
 
         return false;
@@ -209,10 +206,8 @@ public abstract class ItemElectricBase extends Item
             return ((IItemElectricBase) item).getElectricityStored(itemstack) > 0;
         }
 
-        if (EnergyConfigHandler.isIndustrialCraft2Loaded()) {
-            if (item instanceof ic2.api.item.ISpecialElectricItem) {
-                return ((ic2.api.item.ISpecialElectricItem) item).canProvideEnergy(itemstack);
-            }
+        if (EnergyConfigHandler.isIndustrialCraft2Loaded() && (item instanceof ic2.api.item.ISpecialElectricItem)) {
+            return ((ic2.api.item.ISpecialElectricItem) item).canProvideEnergy(itemstack);
         }
 
         return false;

@@ -79,7 +79,7 @@ public class BlockRendererBreathableAir implements ISimpleBlockRenderingHandler 
         final float var9 = (var6 & 255) / 255.0F;
         final boolean var10 = par1Block.shouldSideBeRendered(var1, par2, par3 + 1, par4, 1);
         final boolean var11 = par1Block.shouldSideBeRendered(var1, par2, par3 - 1, par4, 0);
-        final boolean[] var12 = new boolean[] { par1Block.shouldSideBeRendered(var1, par2, par3, par4 - 1, 2),
+        final boolean[] var12 = { par1Block.shouldSideBeRendered(var1, par2, par3, par4 - 1, 2),
                 par1Block.shouldSideBeRendered(var1, par2, par3, par4 + 1, 3),
                 par1Block.shouldSideBeRendered(var1, par2 - 1, par3, par4, 4),
                 par1Block.shouldSideBeRendered(var1, par2 + 1, par3, par4, 5) };

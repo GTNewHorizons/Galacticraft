@@ -181,7 +181,7 @@ public class TileEntityScreen extends TileEntity {
      * @param doScreen If true, build a new multi-screen if connections are found
      */
     public void refreshConnections(boolean doScreen) {
-        this.log("Starting connection check");
+        this.log();
 
         final int meta = this.getBlockMetadata() & 7;
         if (meta < 2) {
@@ -239,7 +239,7 @@ public class TileEntityScreen extends TileEntity {
         if (this.connectedRight) {
             this.connectedRight = this.tryConnectRight((TileEntityScreen) tileRight);
         }
-        this.log("Ending connection check");
+        this.log();
         if (doScreen) {
             this.checkScreenSize();
             this.markDirty();
@@ -304,7 +304,7 @@ public class TileEntityScreen extends TileEntity {
     }
 
     public void checkScreenSize() {
-        this.log("Checking screen size");
+        this.log();
         int up = 0;
         int down = 0;
         int left = 0;
@@ -393,7 +393,7 @@ public class TileEntityScreen extends TileEntity {
             }
         }
 
-        this.log("Screen size check midpoint " + up + " " + down + " " + left + " " + right + " ");
+        this.log();
 
         vec = new BlockVec3(this);
         TileEntity newtile = vec.getTileEntityOnSide(this.worldObj, 1);
@@ -464,7 +464,7 @@ public class TileEntityScreen extends TileEntity {
             }
         }
 
-        this.log("Finished screen size check");
+        this.log();
 
         this.checkWholeScreen(up, down, left, right);
     }
@@ -902,7 +902,7 @@ public class TileEntityScreen extends TileEntity {
         return true;
     }
 
-    private void log(String msg) {
+    private void log() {
         if (this.connectedUp) {}
         if (this.connectedDown) {}
         if (this.connectedLeft) {}

@@ -45,7 +45,6 @@ public class CommandSpaceStationRemoveOwner extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender icommandsender, String[] astring) {
-        String var3 = null;
         EntityPlayerMP playerBase = null;
 
         if (astring.length <= 0) {
@@ -53,7 +52,7 @@ public class CommandSpaceStationRemoveOwner extends CommandBase {
                     GCCoreUtil
                             .translateWithFormat("commands.ssinvite.wrongUsage", this.getCommandUsage(icommandsender)));
         }
-        var3 = astring[0];
+        String var3 = astring[0];
 
         try {
             playerBase = PlayerUtil
@@ -142,8 +141,7 @@ public class CommandSpaceStationRemoveOwner extends CommandBase {
             }
         }
 
-        final String[] returnvalue = { "" };
-        return returnvalue;
+        return new String[] { "" };
     }
 
     @Override

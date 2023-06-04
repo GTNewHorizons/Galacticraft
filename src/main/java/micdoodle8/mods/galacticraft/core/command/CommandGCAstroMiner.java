@@ -126,7 +126,6 @@ public class CommandGCAstroMiner extends CommandBase {
             } catch (final Exception e) {
                 throw new CommandException(e.getMessage());
             }
-            return;
         }
     }
 }

@@ -508,8 +508,7 @@ public class EnergyNetwork implements IElectricityNetwork {
         this.refreshWithChecks();
 
         try {
-            final LinkedList<IConductor> conductorsCopy = new LinkedList<>();
-            conductorsCopy.addAll(this.conductors);
+            final LinkedList<IConductor> conductorsCopy = new LinkedList<>(this.conductors);
             // This prevents concurrent modifications if something in the loop causes chunk
             // loading
             // (Chunk loading can change the network if new conductors are found)
@@ -618,10 +617,8 @@ public class EnergyNetwork implements IElectricityNetwork {
                             for (int i2 = i1 + 1; i2 < 6; i2++) {
                                 final TileEntity connectedBlockB = nextToSplit[i2];
 
-                                if (toDo[i2]) {
-                                    if (partNetwork.contains((IConductor) connectedBlockB)) {
-                                        toDo[i2] = false;
-                                    }
+                                if (toDo[i2] && partNetwork.contains(connectedBlockB)) {
+                                    toDo[i2] = false;
                                 }
                             }
 

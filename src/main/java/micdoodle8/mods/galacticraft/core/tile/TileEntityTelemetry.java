@@ -87,7 +87,7 @@ public class TileEntityTelemetry extends TileEntity {
                     if (this.linkedEntity instanceof EntityPlayerMP) {
                         name = "$" + this.linkedEntity.getCommandSenderName();
                     } else {
-                        name = (String) EntityList.classToStringMapping.get(this.linkedEntity.getClass());
+                        name = EntityList.classToStringMapping.get(this.linkedEntity.getClass());
                     }
 
                     if (name == null) {
@@ -287,10 +287,8 @@ public class TileEntityTelemetry extends TileEntity {
     public static void updateLinkedPlayer(EntityPlayerMP playerOld, EntityPlayerMP playerNew) {
         for (final BlockVec3Dim telemeter : loadedList) {
             final TileEntity te = telemeter.getTileEntityNoLoad();
-            if (te instanceof TileEntityTelemetry) {
-                if (((TileEntityTelemetry) te).linkedEntity == playerOld) {
-                    ((TileEntityTelemetry) te).linkedEntity = playerNew;
-                }
+            if ((te instanceof TileEntityTelemetry) && (((TileEntityTelemetry) te).linkedEntity == playerOld)) {
+                ((TileEntityTelemetry) te).linkedEntity = playerNew;
             }
         }
     }

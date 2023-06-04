@@ -212,21 +212,18 @@ public class BlockEnclosed extends BlockContainer
             if (CompatibilityManager.isIc2Loaded() && tileEntity != null) {
                 try {
                     onBlockNeighbourChangeIC2.invoke(tileEntity);
-                    return;
                 } catch (final Exception e) {
                     e.printStackTrace();
                 }
             }
         } else if (metadata <= 12) {
-            if (CompatibilityManager.isBCraftTransportLoaded()) {
-                if (blockPipeBC != null) {
-                    try {
-                        blockPipeBC.onNeighborBlockChange(world, x, y, z, block);
-                    } catch (final Exception e) {
-                        e.printStackTrace();
-                    }
-                    return;
+            if (CompatibilityManager.isBCraftTransportLoaded() && (blockPipeBC != null)) {
+                try {
+                    blockPipeBC.onNeighborBlockChange(world, x, y, z, block);
+                } catch (final Exception e) {
+                    e.printStackTrace();
                 }
+                return;
             }
 
             super.onNeighborBlockChange(world, x, y, z, block);

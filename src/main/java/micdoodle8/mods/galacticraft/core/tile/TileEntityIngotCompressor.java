@@ -183,10 +183,8 @@ public class TileEntityIngotCompressor extends TileEntityAdvanced implements IIn
     public void smeltItem() {
         if (this.canSmelt()) {
             final ItemStack resultItemStack = this.producingStack;
-            if (ConfigManagerCore.quickMode) {
-                if (resultItemStack.getItem().getUnlocalizedName(resultItemStack).contains("compressed")) {
-                    resultItemStack.stackSize *= 2;
-                }
+            if (ConfigManagerCore.quickMode && resultItemStack.getItem().getUnlocalizedName(resultItemStack).contains("compressed")) {
+                resultItemStack.stackSize *= 2;
             }
 
             if (this.containingItems[1] == null) {
@@ -391,7 +389,7 @@ public class TileEntityIngotCompressor extends TileEntityAdvanced implements IIn
         if (side == 0) {
             return new int[] { 1 };
         }
-        final int[] slots = new int[] { 0, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        final int[] slots = { 0, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         final ArrayList<Integer> removeSlots = new ArrayList<>();
 
         for (int i = 2; i < 11; i++) {

@@ -104,7 +104,6 @@ public class AstroMinerRecipeHandler extends TemplateRecipeHandler {
         }
 
         public CachedRocketRecipe(ArrayList<PositionedStack> pstack1, PositionedStack pstack2) {
-            super();
             this.input = pstack1;
             this.output = pstack2;
         }

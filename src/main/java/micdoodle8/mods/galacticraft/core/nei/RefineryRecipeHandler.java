@@ -136,7 +136,6 @@ public class RefineryRecipeHandler extends TemplateRecipeHandler {
         }
 
         public CachedRefineryRecipe(PositionedStack pstack1, PositionedStack pstack2) {
-            super();
             this.input = pstack1;
             this.output = pstack2;
         }

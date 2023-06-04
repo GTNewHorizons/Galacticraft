@@ -633,10 +633,8 @@ public class GalacticraftCore {
         cBodyList.addAll(GalaxyRegistry.getRegisteredMoons().values());
 
         for (final CelestialBody body : cBodyList) {
-            if (body.shouldAutoRegister()) {
-                if (!WorldUtil.registerPlanet(body.getDimensionID(), body.getReachable(), 0)) {
-                    body.setUnreachable();
-                }
+            if (body.shouldAutoRegister() && !WorldUtil.registerPlanet(body.getDimensionID(), body.getReachable(), 0)) {
+                body.setUnreachable();
             }
         }
 
@@ -779,10 +777,8 @@ public class GalacticraftCore {
         final ArrayList<CelestialBody> cBodyList = new ArrayList<>();
         cBodyList.addAll(GalaxyRegistry.getRegisteredPlanets().values());
         for (final CelestialBody body : cBodyList) {
-            if (body instanceof Planet && name.equals(body.getName())) {
-                if (((Planet) body).getParentSolarSystem() == system) {
-                    return null;
-                }
+            if ((body instanceof Planet && name.equals(body.getName())) && (((Planet) body).getParentSolarSystem() == system)) {
+                return null;
             }
         }
 

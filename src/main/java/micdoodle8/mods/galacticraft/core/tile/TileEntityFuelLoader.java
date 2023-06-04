@@ -83,14 +83,12 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
                     if (liquid != null && this.containingItems[1].stackSize == 1) {
                         // boolean isFuel = FluidUtil.testFuel(FluidRegistry.getFluidName(liquid));
                         final boolean isFuel = RocketFuelRecipe.isValidFuel(liquid);
-                        if (isFuel) {
-                            if (this.fuelTank.getFluid() == null || this.fuelTank.getFluid().isFluidEqual(liquid)
-                                    && this.fuelTank.getFluidAmount() + liquid.amount <= this.fuelTank.getCapacity()) {
-                                this.fuelTank.fill(liquid, true);
-                                this.containingItems[1] = FluidContainerRegistry
-                                        .drainFluidContainer(this.containingItems[1]);
-                                this.markDirty();
-                            }
+                        if (isFuel && (this.fuelTank.getFluid() == null || this.fuelTank.getFluid().isFluidEqual(liquid)
+                                && this.fuelTank.getFluidAmount() + liquid.amount <= this.fuelTank.getCapacity())) {
+                            this.fuelTank.fill(liquid, true);
+                            this.containingItems[1] = FluidContainerRegistry
+                                    .drainFluidContainer(this.containingItems[1]);
+                            this.markDirty();
                         }
                     }
                 } else if (this.containingItems[1].getItem() instanceof IFluidContainerItem
@@ -160,11 +158,9 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
         }
         if (fuelable instanceof IFuelableTiered) {
             final int tier = ((IFuelableTiered) fuelable).getRocketTier();
-            if (tier > 0) {
-                if (tier > RocketFuelRecipe.getfuelMaxTier(this.fuelTank.getFluid())) {
-                    this.coorectTier = false;
-                    return false;
-                }
+            if ((tier > 0) && (tier > RocketFuelRecipe.getfuelMaxTier(this.fuelTank.getFluid()))) {
+                this.coorectTier = false;
+                return false;
             }
         }
         this.coorectTier = true;
@@ -261,10 +257,8 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
         int used = 0;
 
-        if (from.equals(ForgeDirection.getOrientation(this.getBlockMetadata() + 2).getOpposite())) {
-            if (RocketFuelRecipe.isValidFuel(resource)) {
-                used = this.fuelTank.fill(resource, doFill);
-            }
+        if (from.equals(ForgeDirection.getOrientation(this.getBlockMetadata() + 2).getOpposite()) && RocketFuelRecipe.isValidFuel(resource)) {
+            used = this.fuelTank.fill(resource, doFill);
         }
 
         return used;

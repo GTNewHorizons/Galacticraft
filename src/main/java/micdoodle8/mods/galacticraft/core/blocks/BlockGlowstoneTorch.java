@@ -31,8 +31,7 @@ public class BlockGlowstoneTorch extends Block implements ItemBlockDesc.IBlockSh
         this.setStepSound(Block.soundTypeWood);
     }
 
-    private static boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection direction,
-            boolean nope) {
+    private static boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection direction) {
         return world.getBlock(x, y, z).isSideSolid(world, x, y, z, direction);
     }
 
@@ -71,10 +70,10 @@ public class BlockGlowstoneTorch extends Block implements ItemBlockDesc.IBlockSh
 
     @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
-        return BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2 - 1, par3, par4, EAST, true)
-                || BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2 + 1, par3, par4, WEST, true)
-                || BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2, par3, par4 - 1, SOUTH, true)
-                || BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2, par3, par4 + 1, NORTH, true)
+        return BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2 - 1, par3, par4, EAST)
+                || BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2 + 1, par3, par4, WEST)
+                || BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2, par3, par4 - 1, SOUTH)
+                || BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2, par3, par4 + 1, NORTH)
                 || this.canPlaceTorchOn(par1World, par2, par3 - 1, par4);
     }
 
@@ -87,19 +86,19 @@ public class BlockGlowstoneTorch extends Block implements ItemBlockDesc.IBlockSh
             j1 = 5;
         }
 
-        if (par5 == 2 && BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2, par3, par4 + 1, NORTH, true)) {
+        if (par5 == 2 && BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2, par3, par4 + 1, NORTH)) {
             j1 = 4;
         }
 
-        if (par5 == 3 && BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2, par3, par4 - 1, SOUTH, true)) {
+        if (par5 == 3 && BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2, par3, par4 - 1, SOUTH)) {
             j1 = 3;
         }
 
-        if (par5 == 4 && BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2 + 1, par3, par4, WEST, true)) {
+        if (par5 == 4 && BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2 + 1, par3, par4, WEST)) {
             j1 = 2;
         }
 
-        if (par5 == 5 && BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2 - 1, par3, par4, EAST, true)) {
+        if (par5 == 5 && BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2 - 1, par3, par4, EAST)) {
             j1 = 1;
         }
 
@@ -118,13 +117,13 @@ public class BlockGlowstoneTorch extends Block implements ItemBlockDesc.IBlockSh
     @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         if (par1World.getBlockMetadata(par2, par3, par4) == 0) {
-            if (BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2 - 1, par3, par4, EAST, true)) {
+            if (BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2 - 1, par3, par4, EAST)) {
                 par1World.setBlockMetadataWithNotify(par2, par3, par4, 1, 2);
-            } else if (BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2 + 1, par3, par4, WEST, true)) {
+            } else if (BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2 + 1, par3, par4, WEST)) {
                 par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
-            } else if (BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2, par3, par4 - 1, SOUTH, true)) {
+            } else if (BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2, par3, par4 - 1, SOUTH)) {
                 par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
-            } else if (BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2, par3, par4 + 1, NORTH, true)) {
+            } else if (BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2, par3, par4 + 1, NORTH)) {
                 par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
             } else if (this.canPlaceTorchOn(par1World, par2, par3 - 1, par4)) {
                 par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
@@ -140,19 +139,19 @@ public class BlockGlowstoneTorch extends Block implements ItemBlockDesc.IBlockSh
             final int i1 = par1World.getBlockMetadata(par2, par3, par4);
             boolean flag = false;
 
-            if (!BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2 - 1, par3, par4, EAST, true) && i1 == 1) {
+            if (!BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2 - 1, par3, par4, EAST) && i1 == 1) {
                 flag = true;
             }
 
-            if (!BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2 + 1, par3, par4, WEST, true) && i1 == 2) {
+            if (!BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2 + 1, par3, par4, WEST) && i1 == 2) {
                 flag = true;
             }
 
-            if (!BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2, par3, par4 - 1, SOUTH, true) && i1 == 3) {
+            if (!BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2, par3, par4 - 1, SOUTH) && i1 == 3) {
                 flag = true;
             }
 
-            if (!BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2, par3, par4 + 1, NORTH, true) && i1 == 4) {
+            if (!BlockGlowstoneTorch.isBlockSolidOnSide(par1World, par2, par3, par4 + 1, NORTH) && i1 == 4) {
                 flag = true;
             }
 

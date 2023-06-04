@@ -225,10 +225,8 @@ public class EntityBuggy extends Entity
                     this.riddenByEntity.mountEntity(this);
                 }
 
-                if (!this.worldObj.isRemote) {
-                    if (this.riddenByEntity != null) {
-                        this.riddenByEntity.mountEntity(this);
-                    }
+                if (!this.worldObj.isRemote && (this.riddenByEntity != null)) {
+                    this.riddenByEntity.mountEntity(this);
                 }
                 if (flag) {
                     this.setDead();

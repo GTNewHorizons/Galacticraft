@@ -368,10 +368,8 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
     public void spawnParticle(EntityFX fx) {
         final Minecraft mc = FMLClientHandler.instance().getClient();
 
-        if (mc != null && mc.renderViewEntity != null && mc.effectRenderer != null) {
-            if (fx != null) {
-                mc.effectRenderer.addEffect(fx);
-            }
+        if ((mc != null && mc.renderViewEntity != null && mc.effectRenderer != null) && (fx != null)) {
+            mc.effectRenderer.addEffect(fx);
         }
     }
 }

@@ -37,7 +37,6 @@ public class ItemParaChute extends Item {
     protected IIcon[] icons;
 
     public ItemParaChute(String assetName) {
-        super();
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
         this.setMaxStackSize(1);

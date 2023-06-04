@@ -14,7 +14,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemFuel extends Item {
 
     public ItemFuel(String assetName) {
-        super();
         this.setUnlocalizedName(assetName);
     }
 

@@ -279,11 +279,9 @@ public class PacketSimple extends Packet implements IPacket {
                 if (String.valueOf(this.data.get(0))
                         .equals(FMLClientHandler.instance().getClient().thePlayer.getGameProfile().getName())) {
                     final String dimensionList = (String) this.data.get(1);
-                    if (ConfigManagerCore.enableDebug) {
-                        if (!dimensionList.equals(PacketSimple.spamCheckString)) {
-                            GCLog.info("DEBUG info: " + dimensionList);
-                            PacketSimple.spamCheckString = dimensionList;
-                        }
+                    if (ConfigManagerCore.enableDebug && !dimensionList.equals(PacketSimple.spamCheckString)) {
+                        GCLog.info("DEBUG info: " + dimensionList);
+                        PacketSimple.spamCheckString = dimensionList;
                     }
                     final String[] destinations = dimensionList.split("\\?");
                     final List<CelestialBody> possibleCelestialBodies = Lists.newArrayList();
@@ -586,7 +584,7 @@ public class PacketSimple extends Packet implements IPacket {
                         final int entityID = (Integer) this.data.get(2);
                         final Entity entity = player.worldObj.getEntityByID(entityID);
 
-                        if (entity != null && entity instanceof IInventorySettable) {
+                        if (entity instanceof IInventorySettable) {
                             FMLClientHandler.instance().getClient()
                                     .displayGuiScreen(new GuiParaChest(player.inventory, (IInventorySettable) entity));
                         }
@@ -823,7 +821,7 @@ public class PacketSimple extends Packet implements IPacket {
                         }
                         ((TileEntityTelemetry) tile).clientGameProfile = profile;
                     } else {
-                        ((TileEntityTelemetry) tile).clientClass = (Class<? extends Entity>) EntityList.stringToClassMapping.get(name);
+                        ((TileEntityTelemetry) tile).clientClass = EntityList.stringToClassMapping.get(name);
                     }
                     ((TileEntityTelemetry) tile).clientData = new int[5];
                     for (int i = 4; i < 9; i++) {
@@ -960,17 +958,13 @@ public class PacketSimple extends Packet implements IPacket {
                 }
                 break;
             case S_UPDATE_SHIP_YAW:
-                if (player.ridingEntity instanceof EntitySpaceshipBase ship) {
-                    if (ship != null) {
-                        ship.rotationYaw = (Float) this.data.get(0);
-                    }
+                if ((player.ridingEntity instanceof EntitySpaceshipBase ship) && (ship != null)) {
+                    ship.rotationYaw = (Float) this.data.get(0);
                 }
                 break;
             case S_UPDATE_SHIP_PITCH:
-                if (player.ridingEntity instanceof EntitySpaceshipBase ship) {
-                    if (ship != null) {
-                        ship.rotationPitch = (Float) this.data.get(0);
-                    }
+                if ((player.ridingEntity instanceof EntitySpaceshipBase ship) && (ship != null)) {
+                    ship.rotationPitch = (Float) this.data.get(0);
                 }
                 break;
             case S_SET_ENTITY_FIRE:

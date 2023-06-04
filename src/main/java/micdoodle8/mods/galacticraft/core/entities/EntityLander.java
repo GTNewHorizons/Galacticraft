@@ -196,16 +196,14 @@ public class EntityLander extends EntityLanderBase implements IIgnoreShift, ICam
 
     @Override
     public void onGroundHit() {
-        if (!this.worldObj.isRemote) {
-            if (Math.abs(this.lastMotionY) > 2.0D) {
-                if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayerMP) {
-                    this.riddenByEntity.mountEntity(this);
-                }
-
-                this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 12, true);
-
-                this.setDead();
+        if (!this.worldObj.isRemote && (Math.abs(this.lastMotionY) > 2.0D)) {
+            if (this.riddenByEntity instanceof EntityPlayerMP) {
+                this.riddenByEntity.mountEntity(this);
             }
+
+            this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 12, true);
+
+            this.setDead();
         }
     }
 

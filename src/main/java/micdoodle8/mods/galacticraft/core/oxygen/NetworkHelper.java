@@ -73,17 +73,15 @@ public class NetworkHelper {
      */
     public static IElectricityNetwork getElectricalNetworkFromTileEntity(TileEntity tileEntity,
             ForgeDirection approachDirection) {
-        if (tileEntity != null) {
-            if (tileEntity instanceof INetworkProvider) {
-                if (tileEntity instanceof IConnector) {
-                    if (((IConnector) tileEntity).canConnect(approachDirection.getOpposite(), NetworkType.POWER)) {
-                        if (((INetworkProvider) tileEntity).getNetwork() instanceof IElectricityNetwork) {
-                            return (IElectricityNetwork) ((INetworkProvider) tileEntity).getNetwork();
-                        }
+        if ((tileEntity != null) && (tileEntity instanceof INetworkProvider)) {
+            if (tileEntity instanceof IConnector) {
+                if (((IConnector) tileEntity).canConnect(approachDirection.getOpposite(), NetworkType.POWER)) {
+                    if (((INetworkProvider) tileEntity).getNetwork() instanceof IElectricityNetwork) {
+                        return (IElectricityNetwork) ((INetworkProvider) tileEntity).getNetwork();
                     }
-                } else if (((INetworkProvider) tileEntity).getNetwork() instanceof IElectricityNetwork) {
-                    return (IElectricityNetwork) ((INetworkProvider) tileEntity).getNetwork();
                 }
+            } else if (((INetworkProvider) tileEntity).getNetwork() instanceof IElectricityNetwork) {
+                return (IElectricityNetwork) ((INetworkProvider) tileEntity).getNetwork();
             }
         }
 
@@ -92,17 +90,15 @@ public class NetworkHelper {
 
     public static IOxygenNetwork getOxygenNetworkFromTileEntity(TileEntity tileEntity,
             ForgeDirection approachDirection) {
-        if (tileEntity != null) {
-            if (tileEntity instanceof INetworkProvider) {
-                if (tileEntity instanceof IConnector) {
-                    if (((IConnector) tileEntity).canConnect(approachDirection.getOpposite(), NetworkType.OXYGEN)) {
-                        if (((INetworkProvider) tileEntity).getNetwork() instanceof IOxygenNetwork) {
-                            return (IOxygenNetwork) ((INetworkProvider) tileEntity).getNetwork();
-                        }
+        if ((tileEntity != null) && (tileEntity instanceof INetworkProvider)) {
+            if (tileEntity instanceof IConnector) {
+                if (((IConnector) tileEntity).canConnect(approachDirection.getOpposite(), NetworkType.OXYGEN)) {
+                    if (((INetworkProvider) tileEntity).getNetwork() instanceof IOxygenNetwork) {
+                        return (IOxygenNetwork) ((INetworkProvider) tileEntity).getNetwork();
                     }
-                } else if (((INetworkProvider) tileEntity).getNetwork() instanceof IOxygenNetwork) {
-                    return (IOxygenNetwork) ((INetworkProvider) tileEntity).getNetwork();
                 }
+            } else if (((INetworkProvider) tileEntity).getNetwork() instanceof IOxygenNetwork) {
+                return (IOxygenNetwork) ((INetworkProvider) tileEntity).getNetwork();
             }
         }
 
@@ -111,17 +107,15 @@ public class NetworkHelper {
 
     public static IHydrogenNetwork getHydrogenNetworkFromTileEntity(TileEntity tileEntity,
             ForgeDirection approachDirection) {
-        if (tileEntity != null) {
-            if (tileEntity instanceof INetworkProvider) {
-                if (tileEntity instanceof IConnector) {
-                    if (((IConnector) tileEntity).canConnect(approachDirection.getOpposite(), NetworkType.HYDROGEN)) {
-                        if (((INetworkProvider) tileEntity).getNetwork() instanceof IHydrogenNetwork) {
-                            return (IHydrogenNetwork) ((INetworkProvider) tileEntity).getNetwork();
-                        }
+        if ((tileEntity != null) && (tileEntity instanceof INetworkProvider)) {
+            if (tileEntity instanceof IConnector) {
+                if (((IConnector) tileEntity).canConnect(approachDirection.getOpposite(), NetworkType.HYDROGEN)) {
+                    if (((INetworkProvider) tileEntity).getNetwork() instanceof IHydrogenNetwork) {
+                        return (IHydrogenNetwork) ((INetworkProvider) tileEntity).getNetwork();
                     }
-                } else if (((INetworkProvider) tileEntity).getNetwork() instanceof IHydrogenNetwork) {
-                    return (IHydrogenNetwork) ((INetworkProvider) tileEntity).getNetwork();
                 }
+            } else if (((INetworkProvider) tileEntity).getNetwork() instanceof IHydrogenNetwork) {
+                return (IHydrogenNetwork) ((INetworkProvider) tileEntity).getNetwork();
             }
         }
 

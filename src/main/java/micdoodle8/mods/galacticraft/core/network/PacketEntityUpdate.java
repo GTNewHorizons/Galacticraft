@@ -77,21 +77,19 @@ public class PacketEntityUpdate implements IPacket {
     private void setEntityData(EntityPlayer player) {
         final Entity entity = player.worldObj.getEntityByID(this.entityID);
 
-        if (entity instanceof IEntityFullSync) {
-            if (player.worldObj.isRemote || player.getUniqueID().equals(((IEntityFullSync) entity).getOwnerUUID())
-                    || ((IEntityFullSync) entity).getOwnerUUID() == null) {
-                final IEntityFullSync controllable = (IEntityFullSync) entity;
-                controllable.setPositionRotationAndMotion(
-                        this.position.x,
-                        this.position.y,
-                        this.position.z,
-                        this.rotationYaw,
-                        this.rotationPitch,
-                        this.motion.x,
-                        this.motion.y,
-                        this.motion.z,
-                        this.onGround);
-            }
+        if ((entity instanceof IEntityFullSync) && (player.worldObj.isRemote || player.getUniqueID().equals(((IEntityFullSync) entity).getOwnerUUID())
+                || ((IEntityFullSync) entity).getOwnerUUID() == null)) {
+            final IEntityFullSync controllable = (IEntityFullSync) entity;
+            controllable.setPositionRotationAndMotion(
+                    this.position.x,
+                    this.position.y,
+                    this.position.z,
+                    this.rotationYaw,
+                    this.rotationPitch,
+                    this.motion.x,
+                    this.motion.y,
+                    this.motion.z,
+                    this.onGround);
         }
     }
 

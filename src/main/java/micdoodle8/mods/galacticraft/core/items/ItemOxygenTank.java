@@ -18,7 +18,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemOxygenTank extends Item {
 
     public ItemOxygenTank(int tier, String assetName) {
-        super();
         this.setMaxStackSize(1);
         final double factor = 2.0;
         // Config modifier goes here if anyone wants it.

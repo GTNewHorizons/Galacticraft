@@ -46,7 +46,7 @@ public class OverlayRocket extends Overlay {
         float var1 = 0F;
         float var2 = height / 2 - 170 / 2;
         float var3 = 0.0F;
-        float var3b = 0.0F;
+        float var3b = 40;
         float var4 = 0.0F;
         float var5 = 1.0F;
         float var6 = 1.0F;
@@ -69,7 +69,7 @@ public class OverlayRocket extends Overlay {
 
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
-        final Render spaceshipRender = (Render) RenderManager.instance.entityRenderMap
+        final Render spaceshipRender = RenderManager.instance.entityRenderMap
                 .get(OverlayRocket.minecraft.thePlayer.ridingEntity.getClass());
 
         final int y1 = height / 2 + 60
@@ -77,7 +77,6 @@ public class OverlayRocket extends Overlay {
         var1 = 2.5F;
         var2 = y1;
         var3 = 8;
-        var3b = 40;
         var4 = 8;
         var5 = 8;
         var6 = 8;
@@ -111,9 +110,8 @@ public class OverlayRocket extends Overlay {
 
         GL11.glPopMatrix();
 
-        ResourceLocation resourcelocation = AbstractClientPlayer.locationStevePng;
-        resourcelocation = AbstractClientPlayer
-                .getLocationSkin(OverlayRocket.minecraft.thePlayer.getGameProfile().getName());
+        ResourceLocation resourcelocation = AbstractClientPlayer
+                        .getLocationSkin(OverlayRocket.minecraft.thePlayer.getGameProfile().getName());
         AbstractClientPlayer
                 .getDownloadImageSkin(resourcelocation, OverlayRocket.minecraft.thePlayer.getGameProfile().getName());
 

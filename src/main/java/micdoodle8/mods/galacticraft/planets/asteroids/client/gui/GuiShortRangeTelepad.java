@@ -63,10 +63,8 @@ public class GuiShortRangeTelepad extends GuiContainerGC implements ITextBoxCall
 
     @Override
     protected void keyTyped(char keyChar, int keyID) {
-        if (keyID != Keyboard.KEY_ESCAPE && keyID != this.mc.gameSettings.keyBindInventory.getKeyCode()) {
-            if (this.address.keyTyped(keyChar, keyID) || this.targetAddress.keyTyped(keyChar, keyID)) {
-                return;
-            }
+        if ((keyID != Keyboard.KEY_ESCAPE && keyID != this.mc.gameSettings.keyBindInventory.getKeyCode()) && (this.address.keyTyped(keyChar, keyID) || this.targetAddress.keyTyped(keyChar, keyID))) {
+            return;
         }
 
         super.keyTyped(keyChar, keyID);
@@ -109,8 +107,7 @@ public class GuiShortRangeTelepad extends GuiContainerGC implements ITextBoxCall
                         this.width,
                         this.height,
                         this));
-        batterySlotDesc = new ArrayList<>();
-        batterySlotDesc.addAll(GCCoreUtil.translateWithSplit("gui.telepad.desc.0"));
+        batterySlotDesc = new ArrayList<>(GCCoreUtil.translateWithSplit("gui.telepad.desc.0"));
         this.infoRegions.add(
                 new GuiElementInfoRegion(
                         (this.width - this.xSize) / 2 + 5,

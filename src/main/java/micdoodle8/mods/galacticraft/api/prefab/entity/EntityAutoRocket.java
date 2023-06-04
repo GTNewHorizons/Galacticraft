@@ -251,68 +251,66 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
 
     @Override
     public void onUpdate() {
-        if (this.landing && this.launchPhase == EnumLaunchPhase.LAUNCHED.ordinal() && this.hasValidFuel()) {
-            if (this.targetVec != null) {
-                final double yDiff = this.posY - this.getOnPadYOffset() - this.targetVec.y;
-                this.motionY = Math.max(-2.0, (yDiff - 0.04) / -70.0);
+        if ((this.landing && this.launchPhase == EnumLaunchPhase.LAUNCHED.ordinal() && this.hasValidFuel()) && (this.targetVec != null)) {
+            final double yDiff = this.posY - this.getOnPadYOffset() - this.targetVec.y;
+            this.motionY = Math.max(-2.0, (yDiff - 0.04) / -70.0);
 
-                // Some lateral motion in case not exactly on target (happens if rocket was
-                // moving laterally during
-                // launch)
-                double diff = this.posX - this.targetVec.x - 0.5D;
-                double motX, motZ;
-                if (diff > 0D) {
-                    motX = Math.max(-0.1, diff / -100.0D);
-                } else if (diff < 0D) {
-                    motX = Math.min(0.1, diff / -100.0D);
-                } else {
-                    motX = 0D;
-                }
-                diff = this.posZ - this.targetVec.z - 0.5D;
-                if (diff > 0D) {
-                    motZ = Math.max(-0.1, diff / -100.0D);
-                } else if (diff < 0D) {
-                    motZ = Math.min(0.1, diff / -100.0D);
-                } else {
-                    motZ = 0D;
-                }
-                if (motZ != 0D || motX != 0D) {
-                    final double angleYaw = Math.atan(motZ / motX);
-                    final double signed = motX < 0 ? 50D : -50D;
-                    final double anglePitch = Math.atan(Math.sqrt(motZ * motZ + motX * motX) / signed) * 100D;
-                    this.rotationYaw = (float) angleYaw * (180F / (float)Math.PI);
-                    this.rotationPitch = (float) anglePitch * (180F / (float)Math.PI);
-                } else {
-                    this.rotationPitch = 0F;
-                }
+            // Some lateral motion in case not exactly on target (happens if rocket was
+            // moving laterally during
+            // launch)
+            double diff = this.posX - this.targetVec.x - 0.5D;
+            double motX, motZ;
+            if (diff > 0D) {
+                motX = Math.max(-0.1, diff / -100.0D);
+            } else if (diff < 0D) {
+                motX = Math.min(0.1, diff / -100.0D);
+            } else {
+                motX = 0D;
+            }
+            diff = this.posZ - this.targetVec.z - 0.5D;
+            if (diff > 0D) {
+                motZ = Math.max(-0.1, diff / -100.0D);
+            } else if (diff < 0D) {
+                motZ = Math.min(0.1, diff / -100.0D);
+            } else {
+                motZ = 0D;
+            }
+            if (motZ != 0D || motX != 0D) {
+                final double angleYaw = Math.atan(motZ / motX);
+                final double signed = motX < 0 ? 50D : -50D;
+                final double anglePitch = Math.atan(Math.sqrt(motZ * motZ + motX * motX) / signed) * 100D;
+                this.rotationYaw = (float) angleYaw * (180F / (float)Math.PI);
+                this.rotationPitch = (float) anglePitch * (180F / (float)Math.PI);
+            } else {
+                this.rotationPitch = 0F;
+            }
 
-                if (yDiff > 1D && yDiff < 4D) {
-                    for (final Object o : this.worldObj.getEntitiesWithinAABBExcludingEntity(
-                            this,
-                            this.boundingBox.copy().offset(0D, -3D, 0D),
-                            EntitySpaceshipBase.rocketSelector)) {
-                        if (o instanceof EntitySpaceshipBase) {
-                            ((EntitySpaceshipBase) o).dropShipAsItem();
-                            ((EntitySpaceshipBase) o).setDead();
-                        }
+            if (yDiff > 1D && yDiff < 4D) {
+                for (final Object o : this.worldObj.getEntitiesWithinAABBExcludingEntity(
+                        this,
+                        this.boundingBox.copy().offset(0D, -3D, 0D),
+                        EntitySpaceshipBase.rocketSelector)) {
+                    if (o instanceof EntitySpaceshipBase) {
+                        ((EntitySpaceshipBase) o).dropShipAsItem();
+                        ((EntitySpaceshipBase) o).setDead();
                     }
                 }
-                if (yDiff < 0.04) {
-                    final int yMin = MathHelper.floor_double(this.boundingBox.minY - this.getOnPadYOffset() - 0.45D)
-                            - 2;
-                    final int yMax = MathHelper.floor_double(this.boundingBox.maxY) + 1;
-                    final int zMin = MathHelper.floor_double(this.posZ) - 1;
-                    final int zMax = MathHelper.floor_double(this.posZ) + 1;
-                    for (int x = MathHelper.floor_double(this.posX) - 1; x
-                            <= MathHelper.floor_double(this.posX) + 1; x++) {
-                        for (int z = zMin; z <= zMax; z++) {
-                            // Doing y as the inner loop may help with cacheing of chunks
-                            for (int y = yMin; y <= yMax; y++) {
-                                if (this.worldObj.getTileEntity(x, y, z) instanceof IFuelDock) {
-                                    // Land the rocket on the pad found
-                                    this.rotationPitch = 0F;
-                                    this.failRocket();
-                                }
+            }
+            if (yDiff < 0.04) {
+                final int yMin = MathHelper.floor_double(this.boundingBox.minY - this.getOnPadYOffset() - 0.45D)
+                        - 2;
+                final int yMax = MathHelper.floor_double(this.boundingBox.maxY) + 1;
+                final int zMin = MathHelper.floor_double(this.posZ) - 1;
+                final int zMax = MathHelper.floor_double(this.posZ) + 1;
+                for (int x = MathHelper.floor_double(this.posX) - 1; x
+                        <= MathHelper.floor_double(this.posX) + 1; x++) {
+                    for (int z = zMin; z <= zMax; z++) {
+                        // Doing y as the inner loop may help with cacheing of chunks
+                        for (int y = yMin; y <= yMax; y++) {
+                            if (this.worldObj.getTileEntity(x, y, z) instanceof IFuelDock) {
+                                // Land the rocket on the pad found
+                                this.rotationPitch = 0F;
+                                this.failRocket();
                             }
                         }
                     }
@@ -331,11 +329,9 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                 this.autoLaunch();
             }
 
-            if (this.autoLaunchCountdown > 0
-                    && (!(this instanceof EntityTieredRocket) || this.riddenByEntity != null)) {
-                if (--this.autoLaunchCountdown <= 0) {
-                    this.autoLaunch();
-                }
+            if ((this.autoLaunchCountdown > 0
+                    && (!(this instanceof EntityTieredRocket) || this.riddenByEntity != null)) && (--this.autoLaunchCountdown <= 0)) {
+                this.autoLaunch();
             }
 
             if (this.autoLaunchSetting == EnumAutoLaunch.ROCKET_IS_FUELED
@@ -344,21 +340,17 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                 this.autoLaunch();
             }
 
-            if (this.autoLaunchSetting == EnumAutoLaunch.INSTANT) {
-                if (this.autoLaunchCountdown == 0
-                        && (!(this instanceof EntityTieredRocket) || this.riddenByEntity != null)) {
-                    this.autoLaunch();
-                }
+            if ((this.autoLaunchSetting == EnumAutoLaunch.INSTANT) && (this.autoLaunchCountdown == 0
+                    && (!(this instanceof EntityTieredRocket) || this.riddenByEntity != null))) {
+                this.autoLaunch();
             }
 
-            if (this.autoLaunchSetting == EnumAutoLaunch.REDSTONE_SIGNAL) {
-                if (this.ticks % 11 == 0 && this.activeLaunchController != null) {
-                    if (this.worldObj.isBlockIndirectlyGettingPowered(
-                            this.activeLaunchController.x,
-                            this.activeLaunchController.y,
-                            this.activeLaunchController.z)) {
-                        this.autoLaunch();
-                    }
+            if ((this.autoLaunchSetting == EnumAutoLaunch.REDSTONE_SIGNAL) && (this.ticks % 11 == 0 && this.activeLaunchController != null)) {
+                if (this.worldObj.isBlockIndirectlyGettingPowered(
+                        this.activeLaunchController.x,
+                        this.activeLaunchController.y,
+                        this.activeLaunchController.z)) {
+                    this.autoLaunch();
                 }
             }
 
@@ -452,20 +444,18 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
     public void landEntity(int x, int y, int z) {
         final TileEntity tile = this.worldObj.getTileEntity(x, y, z);
 
-        if (tile instanceof IFuelDock dock) {
-            if (this.isDockValid(dock)) {
-                if (!this.worldObj.isRemote) {
-                    // Drop any existing rocket on the landing pad
-                    if (dock.getDockedEntity() instanceof EntitySpaceshipBase && dock.getDockedEntity() != this) {
-                        ((EntitySpaceshipBase) dock.getDockedEntity()).dropShipAsItem();
-                        ((EntitySpaceshipBase) dock.getDockedEntity()).setDead();
-                    }
-
-                    this.setPad(dock);
+        if ((tile instanceof IFuelDock dock) && this.isDockValid(dock)) {
+            if (!this.worldObj.isRemote) {
+                // Drop any existing rocket on the landing pad
+                if (dock.getDockedEntity() instanceof EntitySpaceshipBase && dock.getDockedEntity() != this) {
+                    ((EntitySpaceshipBase) dock.getDockedEntity()).dropShipAsItem();
+                    ((EntitySpaceshipBase) dock.getDockedEntity()).setDead();
                 }
 
-                this.onRocketLand(x, y, z);
+                this.setPad(dock);
             }
+
+            this.onRocketLand(x, y, z);
         }
     }
 
@@ -764,7 +754,7 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
         if (!this.worldObj.isRemote) {
             GCPlayerStats stats = null;
 
-            if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayerMP) {
+            if (this.riddenByEntity instanceof EntityPlayerMP) {
                 stats = GCPlayerStats.get((EntityPlayerMP) this.riddenByEntity);
 
                 if (!(this.worldObj.provider instanceof IOrbitDimension)) {
@@ -782,17 +772,15 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                             <= MathHelper.floor_double(this.posZ) + 1; z++) {
                         final Block block = this.worldObj.getBlock(x, y, z);
 
-                        if (block != null && block instanceof BlockLandingPadFull) {
-                            if (amountRemoved < 9) {
-                                final EventLandingPadRemoval event = new EventLandingPadRemoval(this.worldObj, x, y, z);
-                                MinecraftForge.EVENT_BUS.post(event);
+                        if ((block instanceof BlockLandingPadFull) && (amountRemoved < 9)) {
+                            final EventLandingPadRemoval event = new EventLandingPadRemoval(this.worldObj, x, y, z);
+                            MinecraftForge.EVENT_BUS.post(event);
 
-                                if (event.allow) {
-                                    this.worldObj.setBlockToAir(x, y, z);
-                                    amountRemoved = 9;
-                                }
-                                break PADSEARCH;
+                            if (event.allow) {
+                                this.worldObj.setBlockToAir(x, y, z);
+                                amountRemoved = 9;
                             }
+                            break PADSEARCH;
                         }
                     }
                 }

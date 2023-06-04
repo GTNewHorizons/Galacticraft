@@ -83,7 +83,7 @@ public class TileEntityCargoLoader extends TileBaseElectricBlockWithInventory
             if (dir != ForgeDirection.UNKNOWN) {
                 final TileEntity pad = new BlockVec3(this).getTileEntityOnSide(this.worldObj, dir);
 
-                if (pad != null && pad instanceof TileEntityMulti) {
+                if (pad instanceof TileEntityMulti) {
                     final TileEntity mainTile = ((TileEntityMulti) pad).getMainBlockTile();
 
                     if (mainTile instanceof ICargoEntity) {
@@ -91,7 +91,7 @@ public class TileEntityCargoLoader extends TileBaseElectricBlockWithInventory
                         foundFuelable = true;
                         break;
                     }
-                } else if (pad != null && pad instanceof ICargoEntity) {
+                } else if (pad instanceof ICargoEntity) {
                     this.attachedFuelable = (ICargoEntity) pad;
                     foundFuelable = true;
                     break;

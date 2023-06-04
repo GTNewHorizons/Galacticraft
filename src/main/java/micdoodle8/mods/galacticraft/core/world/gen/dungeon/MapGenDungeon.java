@@ -245,7 +245,6 @@ public class MapGenDungeon {
                             this.rooms.add(currentRoom);
                             this.genCorridor(
                                     corridor1,
-                                    rand,
                                     possibleRoom.posY,
                                     chunkX,
                                     chunkZ,
@@ -384,7 +383,6 @@ public class MapGenDungeon {
                             this.rooms.add(currentRoom);
                             this.genCorridor(
                                     corridor2,
-                                    rand,
                                     possibleRoom.posY,
                                     chunkX,
                                     chunkZ,
@@ -394,7 +392,6 @@ public class MapGenDungeon {
                                     true);
                             this.genCorridor(
                                     corridor1,
-                                    rand,
                                     possibleRoom.posY,
                                     chunkX,
                                     chunkZ,
@@ -410,7 +407,7 @@ public class MapGenDungeon {
         }
     }
 
-    private void genCorridor(DungeonBoundingBox corridor, Random rand, int y, int cx, int cz, ForgeDirection dir,
+    private void genCorridor(DungeonBoundingBox corridor, int y, int cx, int cz, ForgeDirection dir,
             Block[] blocks, byte[] metas, boolean doubleCorridor) {
         for (int i = corridor.minX - 1; i <= corridor.maxX + 1; i++) {
             for (int k = corridor.minZ - 1; k <= corridor.maxZ + 1; k++) {
@@ -508,8 +505,7 @@ public class MapGenDungeon {
     }
 
     public void handleTileEntities(Random rand) {
-        final ArrayList<DungeonRoom> rooms = new ArrayList<>();
-        rooms.addAll(this.rooms);
+        final ArrayList<DungeonRoom> rooms = new ArrayList<>(this.rooms);
         this.rooms.clear();
         for (final DungeonRoom room : rooms) {
             room.handleTileEntities(rand);

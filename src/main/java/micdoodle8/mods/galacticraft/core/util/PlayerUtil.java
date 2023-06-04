@@ -40,7 +40,7 @@ public class PlayerUtil {
                     return null;
                 }
 
-                entityplayermp = (EntityPlayerMP) iterator.next();
+                entityplayermp = iterator.next();
             } while (!entityplayermp.getCommandSenderName().equalsIgnoreCase(username));
 
             return entityplayermp;
@@ -113,7 +113,7 @@ public class PlayerUtil {
         final List<EntityPlayerMP> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
         EntityPlayerMP entityplayermp;
         for (int i = players.size() - 1; i >= 0; --i) {
-            entityplayermp = (EntityPlayerMP) players.get(i);
+            entityplayermp = players.get(i);
 
             if (entityplayermp.getUniqueID().equals(theUUID)) {
                 return entityplayermp;

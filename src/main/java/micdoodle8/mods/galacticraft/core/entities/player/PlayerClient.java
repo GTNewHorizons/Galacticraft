@@ -153,22 +153,18 @@ public class PlayerClient implements IPlayerClient {
         final boolean ridingThirdPersonEntity = player.ridingEntity instanceof ICameraZoomEntity
                 && ((ICameraZoomEntity) player.ridingEntity).defaultThirdPerson();
 
-        if (ridingThirdPersonEntity && !stats.lastRidingCameraZoomEntity) {
-            if (!ConfigManagerCore.disableVehicleCameraChanges) {
-                FMLClientHandler.instance().getClient().gameSettings.thirdPersonView = 1;
-            }
+        if ((ridingThirdPersonEntity && !stats.lastRidingCameraZoomEntity) && !ConfigManagerCore.disableVehicleCameraChanges) {
+            FMLClientHandler.instance().getClient().gameSettings.thirdPersonView = 1;
         }
 
-        if (player.ridingEntity != null && player.ridingEntity instanceof ICameraZoomEntity) {
+        if (player.ridingEntity instanceof ICameraZoomEntity) {
             if (!ConfigManagerCore.disableVehicleCameraChanges) {
                 stats.lastZoomed = true;
                 TickHandlerClient.zoom(((ICameraZoomEntity) player.ridingEntity).getCameraZoom());
             }
-        } else if (stats.lastZoomed) {
-            if (!ConfigManagerCore.disableVehicleCameraChanges) {
-                stats.lastZoomed = false;
-                TickHandlerClient.zoom(4.0F);
-            }
+        } else if (stats.lastZoomed && !ConfigManagerCore.disableVehicleCameraChanges) {
+            stats.lastZoomed = false;
+            TickHandlerClient.zoom(4.0F);
         }
 
         stats.lastRidingCameraZoomEntity = ridingThirdPersonEntity;
@@ -254,55 +250,53 @@ public class PlayerClient implements IPlayerClient {
             final int iPosZ = (int) Math.floor(player.posZ);
 
             // If the block below is the moon block
-            if (player.worldObj.getBlock(iPosX, iPosY, iPosZ) == GCBlocks.blockMoon) {
-                // And is the correct metadata (moon turf)
-                if (player.worldObj.getBlockMetadata(iPosX, iPosY, iPosZ) == 5) {
-                    // If it has been long enough since the last step
-                    if (stats.distanceSinceLastStep > 0.35) {
-                        Vector3 pos = new Vector3(player);
-                        // Set the footprint position to the block below and add random number to stop
-                        // z-fighting
-                        pos.y = MathHelper.floor_double(player.posY - 1) + player.getRNG().nextFloat() / 100.0F;
+            // And is the correct metadata (moon turf)
+            if ((player.worldObj.getBlock(iPosX, iPosY, iPosZ) == GCBlocks.blockMoon) && (player.worldObj.getBlockMetadata(iPosX, iPosY, iPosZ) == 5)) {
+                // If it has been long enough since the last step
+                if (stats.distanceSinceLastStep > 0.35) {
+                    Vector3 pos = new Vector3(player);
+                    // Set the footprint position to the block below and add random number to stop
+                    // z-fighting
+                    pos.y = MathHelper.floor_double(player.posY - 1) + player.getRNG().nextFloat() / 100.0F;
 
-                        // Adjust footprint to left or right depending on step count
-                        switch (stats.lastStep) {
-                            case 0:
-                                pos.translate(
-                                        new Vector3(
-                                                Math.sin(Math.toRadians(-player.rotationYaw + 90)) * 0.25,
-                                                0,
-                                                Math.cos(Math.toRadians(-player.rotationYaw + 90)) * 0.25));
-                                break;
-                            case 1:
-                                pos.translate(
-                                        new Vector3(
-                                                Math.sin(Math.toRadians(-player.rotationYaw - 90)) * 0.25,
-                                                0,
-                                                Math.cos(Math.toRadians(-player.rotationYaw - 90)) * 0.25));
-                                break;
-                        }
-
-                        pos = WorldUtil.getFootprintPosition(
-                                player.worldObj,
-                                player.rotationYaw - 180,
-                                pos,
-                                new BlockVec3(player));
-
-                        final long chunkKey = ChunkCoordIntPair.chunkXZ2Int(pos.intX() >> 4, pos.intZ() >> 4);
-                        ClientProxyCore.footprintRenderer.addFootprint(
-                                chunkKey,
-                                player.worldObj.provider.dimensionId,
-                                pos,
-                                player.rotationYaw,
-                                player.getCommandSenderName());
-
-                        // Increment and cap step counter at 1
-                        stats.lastStep++;
-                        stats.lastStep %= 2;
-                        stats.distanceSinceLastStep = 0;
-                    } else {
-                        stats.distanceSinceLastStep += motionSqrd;
+                    // Adjust footprint to left or right depending on step count
+                    switch (stats.lastStep) {
+                        case 0:
+                            pos.translate(
+                                    new Vector3(
+                                            Math.sin(Math.toRadians(-player.rotationYaw + 90)) * 0.25,
+                                            0,
+                                            Math.cos(Math.toRadians(-player.rotationYaw + 90)) * 0.25));
+                            break;
+                        case 1:
+                            pos.translate(
+                                    new Vector3(
+                                            Math.sin(Math.toRadians(-player.rotationYaw - 90)) * 0.25,
+                                            0,
+                                            Math.cos(Math.toRadians(-player.rotationYaw - 90)) * 0.25));
+                            break;
                     }
+
+                    pos = WorldUtil.getFootprintPosition(
+                            player.worldObj,
+                            player.rotationYaw - 180,
+                            pos,
+                            new BlockVec3(player));
+
+                    final long chunkKey = ChunkCoordIntPair.chunkXZ2Int(pos.intX() >> 4, pos.intZ() >> 4);
+                    ClientProxyCore.footprintRenderer.addFootprint(
+                            chunkKey,
+                            player.worldObj.provider.dimensionId,
+                            pos,
+                            player.rotationYaw,
+                            player.getCommandSenderName());
+
+                    // Increment and cap step counter at 1
+                    stats.lastStep++;
+                    stats.lastStep %= 2;
+                    stats.distanceSinceLastStep = 0;
+                } else {
+                    stats.distanceSinceLastStep += motionSqrd;
                 }
             }
         }

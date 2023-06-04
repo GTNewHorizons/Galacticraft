@@ -35,8 +35,7 @@ public class ItemRendererBuggy implements IItemRenderer {
     private final IModelCustom modelBuggyWheelLeft = AdvancedModelLoader
             .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/buggyWheelLeft.obj"));
 
-    private void renderPipeItem(ItemRenderType type, RenderBlocks render, ItemStack item, float translateX,
-            float translateY, float translateZ) {
+    private void renderPipeItem(ItemRenderType type, ItemStack item) {
         GL11.glPushMatrix();
         long var10 = this.spaceship.getEntityId() * 493286711L;
         var10 = var10 * var10 * 4392167121L + var10 * 98761L;
@@ -158,16 +157,16 @@ public class ItemRendererBuggy implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         switch (type) {
             case EQUIPPED:
-                this.renderPipeItem(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderPipeItem(type, item);
                 break;
             case EQUIPPED_FIRST_PERSON:
-                this.renderPipeItem(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderPipeItem(type, item);
                 break;
             case INVENTORY:
-                this.renderPipeItem(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderPipeItem(type, item);
                 break;
             case ENTITY:
-                this.renderPipeItem(type, (RenderBlocks) data[0], item, -0.5f, -0.5f, -0.5f);
+                this.renderPipeItem(type, item);
                 break;
             default:
         }

@@ -53,10 +53,8 @@ public class ConfigManagerAsteroids {
             Property prop;
             Property propCopy;
 
-            if (!config.isChild) {
-                if (update) {
-                    config.load();
-                }
+            if (!config.isChild && update) {
+                config.load();
             }
 
             prop = config.get(Constants.CONFIG_CATEGORY_DIMENSIONS, "dimensionIDAsteroids", -30);

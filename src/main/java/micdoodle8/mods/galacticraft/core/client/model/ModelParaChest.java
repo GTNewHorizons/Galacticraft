@@ -22,8 +22,6 @@ public class ModelParaChest extends ModelChest {
     }
 
     public ModelParaChest(float par1) {
-        super();
-
         this.parachute[0] = new ModelRenderer(this, 0, 0).setTextureSize(512, 256);
         this.parachute[0].addBox(-20.0F, -45.0F, -20.0F, 10, 2, 40, par1);
         this.parachute[0].setRotationPoint(15.0F, 4.0F, 0.0F);

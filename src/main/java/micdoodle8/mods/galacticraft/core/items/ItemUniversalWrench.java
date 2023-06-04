@@ -23,7 +23,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemUniversalWrench extends Item implements IToolWrench {
 
     public ItemUniversalWrench(String assetName) {
-        super();
         this.setUnlocalizedName(assetName);
         this.setMaxStackSize(1);
         this.setMaxDamage(256);

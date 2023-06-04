@@ -75,11 +75,9 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
         }
 
         final float energy = this.storage.getEnergyStoredGC();
-        if (this.getTierGC() == 1 && !this.worldObj.isRemote) {
-            if (this.lastEnergy - energy > this.storage.getMaxExtract() - 1) {
-                // Deplete faster if being drained at maximum output
-                this.storage.extractEnergyGC(25, false);
-            }
+        if ((this.getTierGC() == 1 && !this.worldObj.isRemote) && (this.lastEnergy - energy > this.storage.getMaxExtract() - 1)) {
+            // Deplete faster if being drained at maximum output
+            this.storage.extractEnergyGC(25, false);
         }
         this.lastEnergy = energy;
 

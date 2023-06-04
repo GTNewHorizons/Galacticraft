@@ -104,11 +104,11 @@ public class GuiLaunchController extends GuiContainerGC
 
         int k;
         for (k = 0; k < buttonList.size(); ++k) {
-            ((GuiButton) buttonList.get(k)).drawButton(this.mc, par1, par2);
+            buttonList.get(k).drawButton(this.mc, par1, par2);
         }
 
         for (k = 0; k < labelList.size(); ++k) {
-            ((GuiLabel) labelList.get(k)).func_146159_a(this.mc, par1, par2);
+            labelList.get(k).func_146159_a(this.mc, par1, par2);
         }
 
         for (k = 0; k < infoRegions.size(); ++k) {
@@ -144,10 +144,8 @@ public class GuiLaunchController extends GuiContainerGC
 
     @Override
     protected void keyTyped(char keyChar, int keyID) {
-        if (keyID != Keyboard.KEY_ESCAPE && keyID != this.mc.gameSettings.keyBindInventory.getKeyCode()) {
-            if (this.frequency.keyTyped(keyChar, keyID) || this.destinationFrequency.keyTyped(keyChar, keyID)) {
-                return;
-            }
+        if ((keyID != Keyboard.KEY_ESCAPE && keyID != this.mc.gameSettings.keyBindInventory.getKeyCode()) && (this.frequency.keyTyped(keyChar, keyID) || this.destinationFrequency.keyTyped(keyChar, keyID))) {
+            return;
         }
 
         super.keyTyped(keyChar, keyID);
@@ -248,8 +246,7 @@ public class GuiLaunchController extends GuiContainerGC
                         this.width,
                         this.height,
                         this));
-        batterySlotDesc = new ArrayList<>();
-        batterySlotDesc.addAll(GCCoreUtil.translateWithSplit("gui.launchController.desc.0"));
+        batterySlotDesc = new ArrayList<>(GCCoreUtil.translateWithSplit("gui.launchController.desc.0"));
         this.infoRegions.add(
                 new GuiElementInfoRegion(
                         (this.width - this.xSize) / 2 + 5,

@@ -47,10 +47,8 @@ public class TileEntityNasaWorkbench extends TileEntityMulti implements IMultiBl
                             placedPosition.y + y,
                             placedPosition.z + z);
 
-                    if (!vecToAdd.equals(placedPosition)) {
-                        if (Math.abs(x) != 1 || Math.abs(z) != 1) {
-                            ((BlockMulti) GCBlocks.fakeBlock).makeFakeBlock(this.worldObj, vecToAdd, placedPosition, 3);
-                        }
+                    if (!vecToAdd.equals(placedPosition) && (Math.abs(x) != 1 || Math.abs(z) != 1)) {
+                        ((BlockMulti) GCBlocks.fakeBlock).makeFakeBlock(this.worldObj, vecToAdd, placedPosition, 3);
                     }
                 }
             }

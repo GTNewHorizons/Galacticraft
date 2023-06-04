@@ -52,7 +52,7 @@ public class ContainerEnergyStorageModule extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slotID) {
         ItemStack returnStack = null;
-        final Slot slot = (Slot) this.inventorySlots.get(slotID);
+        final Slot slot = this.inventorySlots.get(slotID);
         final int b = this.inventorySlots.size();
 
         if (slot != null && slot.getHasStack()) {
@@ -62,12 +62,10 @@ public class ContainerEnergyStorageModule extends Container {
             if (slotID != 0 && slotID != 1) {
                 if (itemStack.getItem() instanceof IItemElectric) {
                     if (((IItemElectric) itemStack.getItem()).getElectricityStored(itemStack) > 0) {
-                        if (!this.mergeItemStack(itemStack, 1, 2, false)) {
-                            if (((IItemElectric) itemStack.getItem()).getElectricityStored(itemStack)
-                                    < ((IItemElectric) itemStack.getItem()).getMaxElectricityStored(itemStack)
-                                    && !this.mergeItemStack(itemStack, 0, 1, false)) {
-                                return null;
-                            }
+                        if (!this.mergeItemStack(itemStack, 1, 2, false) && (((IItemElectric) itemStack.getItem()).getElectricityStored(itemStack)
+                                < ((IItemElectric) itemStack.getItem()).getMaxElectricityStored(itemStack)
+                                && !this.mergeItemStack(itemStack, 0, 1, false))) {
+                            return null;
                         }
                     } else {
                         if (!this.mergeItemStack(itemStack, 0, 1, false)) {

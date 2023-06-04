@@ -34,7 +34,7 @@ public abstract class TileEntityBeamOutput extends TileEntityAdvanced implements
             final TileEntity tileAtTarget = this.worldObj
                     .getTileEntity(this.preLoadTarget.x, this.preLoadTarget.y, this.preLoadTarget.z);
 
-            if (tileAtTarget != null && tileAtTarget instanceof ILaserNode) {
+            if (tileAtTarget instanceof ILaserNode) {
                 this.setTarget((ILaserNode) tileAtTarget);
                 this.preLoadTarget = null;
             }
@@ -250,7 +250,7 @@ public abstract class TileEntityBeamOutput extends TileEntityAdvanced implements
             final TileEntity tileAtTarget = this.worldObj
                     .getTileEntity(this.targetVec.x, this.targetVec.y, this.targetVec.z);
 
-            if (tileAtTarget != null && tileAtTarget instanceof ILaserNode) {
+            if (tileAtTarget instanceof ILaserNode) {
                 return (ILaserNode) tileAtTarget;
             }
         }

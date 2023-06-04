@@ -71,10 +71,8 @@ public class TileEntityOxygenSealer extends TileEntityOxygen implements IInvento
     @Override
     public void validate() {
         super.validate();
-        if (!this.worldObj.isRemote) {
-            if (!TileEntityOxygenSealer.loadedTiles.contains(this)) {
-                TileEntityOxygenSealer.loadedTiles.add(this);
-            }
+        if (!this.worldObj.isRemote && !TileEntityOxygenSealer.loadedTiles.contains(this)) {
+            TileEntityOxygenSealer.loadedTiles.add(this);
         }
         this.stopSealThreadCooldown = 126 + countEntities;
     }

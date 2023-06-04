@@ -71,7 +71,7 @@ public class ItemCanisterLiquidNitrogen extends ItemCanisterGeneric {
         }
     }
 
-    private Block canFreeze(Block b, int meta) {
+    private Block canFreeze(Block b) {
         if (b == Blocks.water) {
             return Blocks.ice;
         }
@@ -107,7 +107,7 @@ public class ItemCanisterLiquidNitrogen extends ItemCanisterGeneric {
             final Block b = par2World.getBlock(x, y, z);
             final int meta = par2World.getBlockMetadata(x, y, z);
 
-            final Block result = this.canFreeze(b, meta);
+            final Block result = this.canFreeze(b);
             if (result != null) {
                 this.setNewDamage(itemStack, damage);
                 par2World.playSoundEffect(

@@ -14,7 +14,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemBattery extends ItemElectricBase {
 
     public ItemBattery(String assetName) {
-        super();
         this.setUnlocalizedName(assetName);
         this.setTextureName(GalacticraftCore.TEXTURE_PREFIX + assetName);
     }

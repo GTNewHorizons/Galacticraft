@@ -83,7 +83,7 @@ public class GuiMissingCore extends GuiScreen {
         if (x > this.urlX && x < this.urlX + this.urlWidth && y > this.urlY && y < this.urlY + this.urlHeight) {
             try {
                 final Class<?> oclass = Class.forName("java.awt.Desktop");
-                final Object object = oclass.getMethod("getDesktop", new Class[0]).invoke(null);
+                final Object object = oclass.getMethod("getDesktop").invoke(null);
                 oclass.getMethod("browse", URI.class)
                         .invoke(object, new URI("https://github.com/GTNewHorizons/Galacticraft"));
             } catch (final Throwable throwable) {

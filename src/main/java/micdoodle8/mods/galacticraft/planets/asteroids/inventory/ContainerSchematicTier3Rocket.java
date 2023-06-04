@@ -208,7 +208,7 @@ public class ContainerSchematicTier3Rocket extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par1) {
         ItemStack var2 = null;
-        final Slot var3 = (Slot) this.inventorySlots.get(par1);
+        final Slot var3 = this.inventorySlots.get(par1);
 
         if (var3 != null && var3.getHasStack()) {
             final ItemStack var4 = var3.getStack();
@@ -223,7 +223,7 @@ public class ContainerSchematicTier3Rocket extends Container {
             } else {
                 boolean valid = false;
                 for (int i = 1; i < 19; i++) {
-                    final Slot testSlot = (Slot) this.inventorySlots.get(i);
+                    final Slot testSlot = this.inventorySlots.get(i);
                     if (!testSlot.getHasStack() && testSlot.isItemValid(var2)) {
                         valid = true;
                         break;
@@ -273,7 +273,7 @@ public class ContainerSchematicTier3Rocket extends Container {
             ItemStack slotStack;
 
             for (int k = par2; k < par3; k++) {
-                slot = (Slot) this.inventorySlots.get(k);
+                slot = this.inventorySlots.get(k);
                 slotStack = slot.getStack();
 
                 if (slotStack == null && slot.isItemValid(par1ItemStack)) {

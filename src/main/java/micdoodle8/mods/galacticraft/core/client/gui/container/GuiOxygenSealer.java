@@ -200,10 +200,8 @@ public class GuiOxygenSealer extends GuiContainerGC {
         final int metadata = this.sealer.getWorldObj()
                 .getBlockMetadata(this.sealer.xCoord, this.sealer.yCoord + 1, this.sealer.zCoord);
 
-        if (blockAbove == GCBlocks.breatheableAir || blockAbove == GCBlocks.brightBreatheableAir) {
-            if (metadata == 1) {
-                return EnumColor.DARK_GREEN + GCCoreUtil.translate("gui.status.on.name");
-            }
+        if ((blockAbove == GCBlocks.breatheableAir || blockAbove == GCBlocks.brightBreatheableAir) && (metadata == 1)) {
+            return EnumColor.DARK_GREEN + GCCoreUtil.translate("gui.status.on.name");
         }
 
         if (this.sealer.thermalControlEnabled()) {

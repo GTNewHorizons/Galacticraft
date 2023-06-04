@@ -196,7 +196,6 @@ public class MethaneSynthesizerRecipeHandler extends TemplateRecipeHandler {
         }
 
         public CachedSynthesizerRecipe(PositionedStack pstack1, PositionedStack pstack2) {
-            super();
             this.input = pstack1;
             this.output = pstack2;
         }

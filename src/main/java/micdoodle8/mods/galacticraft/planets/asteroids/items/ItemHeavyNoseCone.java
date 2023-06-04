@@ -19,7 +19,6 @@ public class ItemHeavyNoseCone extends Item {
     public IIcon[] icons;
 
     public ItemHeavyNoseCone(String assetName) {
-        super();
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
         this.setUnlocalizedName(assetName);

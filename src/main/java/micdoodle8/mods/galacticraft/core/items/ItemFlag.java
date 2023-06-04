@@ -28,7 +28,6 @@ public class ItemFlag extends Item implements IHoldableItem {
     public int placeProgress;
 
     public ItemFlag(String assetName) {
-        super();
         this.setMaxDamage(0);
         this.setMaxStackSize(1);
         this.setUnlocalizedName(assetName);
@@ -92,10 +91,8 @@ public class ItemFlag extends Item implements IHoldableItem {
             if (placed) {
                 final int var2 = this.getInventorySlotContainItem(par3EntityPlayer, par1ItemStack);
 
-                if (var2 >= 0 && !par3EntityPlayer.capabilities.isCreativeMode) {
-                    if (--par3EntityPlayer.inventory.mainInventory[var2].stackSize <= 0) {
-                        par3EntityPlayer.inventory.mainInventory[var2] = null;
-                    }
+                if ((var2 >= 0 && !par3EntityPlayer.capabilities.isCreativeMode) && (--par3EntityPlayer.inventory.mainInventory[var2].stackSize <= 0)) {
+                    par3EntityPlayer.inventory.mainInventory[var2] = null;
                 }
             }
         }

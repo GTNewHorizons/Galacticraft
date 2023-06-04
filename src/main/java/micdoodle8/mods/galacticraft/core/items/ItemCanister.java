@@ -23,7 +23,6 @@ public class ItemCanister extends Item {
     protected IIcon[] icons;
 
     public ItemCanister(String assetName) {
-        super();
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
         this.setUnlocalizedName(assetName);

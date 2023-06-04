@@ -75,11 +75,9 @@ public class EnergyUtil {
                 continue;
             }
 
-            if (isBCReallyLoaded) {
-                // Do not connect GC wires directly to BC pipes of any type
-                if (clazzPipeTile.isInstance(tileEntity)) {
-                    continue;
-                }
+            // Do not connect GC wires directly to BC pipes of any type
+            if (isBCReallyLoaded && clazzPipeTile.isInstance(tileEntity)) {
+                continue;
             }
 
             if (isIC2Loaded && tileEntity instanceof IEnergyTile) {
@@ -189,7 +187,6 @@ public class EnergyUtil {
                 continue;
             }
         }
-        return;
     }
 
     public static float otherModsEnergyTransfer(TileEntity tileAdj, ForgeDirection inputAdj, float toSend,
@@ -230,19 +227,19 @@ public class EnergyUtil {
                 return (float) result / EnergyConfigHandler.TO_IC2_RATIO;
             }
         } else if (isRF1Loaded && !EnergyConfigHandler.disableRFOutput && tileAdj instanceof IEnergyHandler) {
-            final float sent = ((IEnergyHandler) tileAdj)
-                    .receiveEnergy(inputAdj, MathHelper.floor_float(toSend * EnergyConfigHandler.TO_RF_RATIO), simulate)
-                    / EnergyConfigHandler.TO_RF_RATIO;
+            
             // GCLog.debug("Beam/storage offering RF1 up to " + toSend + " into pipe, it
             // accepted " + sent);
-            return sent;
-        } else if (isRF2Loaded && !EnergyConfigHandler.disableRFOutput && tileAdj instanceof IEnergyReceiver) {
-            final float sent = ((IEnergyReceiver) tileAdj)
+            return ((IEnergyHandler) tileAdj)
                     .receiveEnergy(inputAdj, MathHelper.floor_float(toSend * EnergyConfigHandler.TO_RF_RATIO), simulate)
                     / EnergyConfigHandler.TO_RF_RATIO;
+        } else if (isRF2Loaded && !EnergyConfigHandler.disableRFOutput && tileAdj instanceof IEnergyReceiver) {
+            
             // GCLog.debug("Beam/storage offering RF2 up to " + toSend + " into pipe, it
             // accepted " + sent);
-            return sent;
+            return ((IEnergyReceiver) tileAdj)
+                    .receiveEnergy(inputAdj, MathHelper.floor_float(toSend * EnergyConfigHandler.TO_RF_RATIO), simulate)
+                    / EnergyConfigHandler.TO_RF_RATIO;
         }
         return 0F;
     }
@@ -279,15 +276,13 @@ public class EnergyUtil {
                 return (float) resultIC2 / EnergyConfigHandler.TO_IC2_RATIO;
             }
         } else if (isRF2Loaded && !EnergyConfigHandler.disableRFInput && tileAdj instanceof IEnergyProvider) {
-            final float sent = ((IEnergyProvider) tileAdj)
+            return ((IEnergyProvider) tileAdj)
                     .extractEnergy(inputAdj, MathHelper.floor_float(toPull * EnergyConfigHandler.TO_RF_RATIO), simulate)
                     / EnergyConfigHandler.TO_RF_RATIO;
-            return sent;
         } else if (isRF1Loaded && !EnergyConfigHandler.disableRFInput && tileAdj instanceof IEnergyHandler) {
-            final float sent = ((IEnergyHandler) tileAdj)
+            return ((IEnergyHandler) tileAdj)
                     .extractEnergy(inputAdj, MathHelper.floor_float(toPull * EnergyConfigHandler.TO_RF_RATIO), simulate)
                     / EnergyConfigHandler.TO_RF_RATIO;
-            return sent;
         }
 
         return 0F;

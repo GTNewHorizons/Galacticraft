@@ -565,17 +565,13 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
     public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
         final int metaside = this.getBlockMetadata() + 2;
         final int side = from.ordinal();
-        if (side == (metaside ^ 1)) {
-            if (resource != null && resource.isFluidEqual(this.liquidTank2.getFluid())) {
-                return this.liquidTank2.drain(resource.amount, doDrain);
-            }
+        if ((side == (metaside ^ 1)) && (resource != null && resource.isFluidEqual(this.liquidTank2.getFluid()))) {
+            return this.liquidTank2.drain(resource.amount, doDrain);
         }
 
         // 2->5 3->4 4->2 5->3
-        if (7 - (metaside ^ (metaside > 3 ? 0 : 1)) == (side ^ 1)) {
-            if (resource != null && resource.isFluidEqual(this.liquidTank.getFluid())) {
-                return this.liquidTank.drain(resource.amount, doDrain);
-            }
+        if ((7 - (metaside ^ (metaside > 3 ? 0 : 1)) == (side ^ 1)) && (resource != null && resource.isFluidEqual(this.liquidTank.getFluid()))) {
+            return this.liquidTank.drain(resource.amount, doDrain);
         }
 
         return null;
@@ -633,7 +629,7 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
 
     @Override
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-        FluidTankInfo[] tankInfo = new FluidTankInfo[] {};
+        FluidTankInfo[] tankInfo = {};
         final int metaside = this.getBlockMetadata() + 2;
         final int side = from.ordinal();
 
@@ -668,8 +664,7 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
         if (from.ordinal() == this.getBlockMetadata() + 2 && this.shouldPullOxygen()) {
             final float conversion = 2F * Constants.LOX_GAS_RATIO;
             final FluidStack fluidToFill = new FluidStack(AsteroidsModule.fluidOxygenGas, (int) (receive * conversion));
-            final int used = MathHelper.ceiling_float_int(this.gasTank.fill(fluidToFill, doReceive) / conversion);
-            return used;
+            return MathHelper.ceiling_float_int(this.gasTank.fill(fluidToFill, doReceive) / conversion);
         }
 
         return 0;

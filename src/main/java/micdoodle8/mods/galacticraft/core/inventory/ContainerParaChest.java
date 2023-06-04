@@ -68,7 +68,7 @@ public class ContainerParaChest extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
         ItemStack itemstack = null;
-        final Slot slot = (Slot) this.inventorySlots.get(par2);
+        final Slot slot = this.inventorySlots.get(par2);
         final int b = this.inventorySlots.size();
 
         if (slot != null && slot.getHasStack()) {

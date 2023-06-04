@@ -212,7 +212,6 @@ public class GasLiquefierRecipeHandler extends TemplateRecipeHandler {
         }
 
         public CachedLiquefierRecipe(PositionedStack pstack1, PositionedStack pstack2) {
-            super();
             this.input = pstack1;
             this.output = pstack2;
         }

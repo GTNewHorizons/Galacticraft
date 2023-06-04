@@ -81,12 +81,10 @@ public abstract class TileEntityOxygenTransmitter extends TileEntityAdvanced imp
             for (final ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
                 final TileEntity tileEntity = new BlockVec3(this).getTileEntityOnSide(this.worldObj, side);
 
-                if (tileEntity != null) {
-                    if (tileEntity.getClass() == this.getClass() && tileEntity instanceof INetworkProvider
-                            && !this.getNetwork().equals(((INetworkProvider) tileEntity).getNetwork())) {
-                        this.setNetwork(
-                                (IGridNetwork) this.getNetwork().merge(((INetworkProvider) tileEntity).getNetwork()));
-                    }
+                if ((tileEntity != null) && (tileEntity.getClass() == this.getClass() && tileEntity instanceof INetworkProvider
+                        && !this.getNetwork().equals(((INetworkProvider) tileEntity).getNetwork()))) {
+                    this.setNetwork(
+                            (IGridNetwork) this.getNetwork().merge(((INetworkProvider) tileEntity).getNetwork()));
                 }
             }
 

@@ -127,7 +127,6 @@ public class CommandGCEnergyUnits extends CommandBase {
             EnergyConfigHandler.displayEnergyUnitsIC2 = false;
             EnergyConfigHandler.displayEnergyUnitsMek = false;
             EnergyConfigHandler.displayEnergyUnitsRF = true;
-            return;
         }
     }
 }

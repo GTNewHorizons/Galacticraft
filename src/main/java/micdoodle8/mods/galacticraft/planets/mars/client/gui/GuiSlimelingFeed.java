@@ -92,7 +92,6 @@ public class GuiSlimelingFeed extends GuiScreen {
                 && !this.buttonHealSlimeling.enabled) {
             super.keyTyped(keyChar, keyID);
         }
-        return;
     }
 
     @Override

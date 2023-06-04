@@ -8,7 +8,6 @@ public class ModelTreasureChest extends ModelChest {
     public ModelRenderer[] keyParts = new ModelRenderer[6];
 
     public ModelTreasureChest() {
-        super();
         this.textureWidth = 64;
         this.textureHeight = 64;
         this.keyParts[4] = new ModelRenderer(this, 50, 43);

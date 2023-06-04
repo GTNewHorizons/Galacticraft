@@ -114,7 +114,7 @@ public class PacketSimpleMars implements IPacket {
                         entityID = (Integer) this.data.get(2);
                         entity = player.worldObj.getEntityByID(entityID);
 
-                        if (entity != null && entity instanceof EntitySlimeling) {
+                        if (entity instanceof EntitySlimeling) {
                             FMLClientHandler.instance().getClient()
                                     .displayGuiScreen(new GuiSlimelingInventory(player, (EntitySlimeling) entity));
                         }
@@ -125,7 +125,7 @@ public class PacketSimpleMars implements IPacket {
                         entityID = (Integer) this.data.get(2);
                         entity = player.worldObj.getEntityByID(entityID);
 
-                        if (entity != null && entity instanceof EntityCargoRocket) {
+                        if (entity instanceof EntityCargoRocket) {
                             FMLClientHandler.instance().getClient()
                                     .displayGuiScreen(new GuiCargoRocket(player.inventory, (EntityCargoRocket) entity));
                         }
