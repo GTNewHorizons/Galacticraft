@@ -261,12 +261,10 @@ public class PacketSimple extends Packet implements IPacket {
         if (player instanceof EntityClientPlayerMP) {
             playerBaseClient = (EntityClientPlayerMP) player;
             stats = GCPlayerStatsClient.get(playerBaseClient);
-        } else {
-            if (this.type != EnumSimplePacket.C_UPDATE_SPACESTATION_LIST
-                    && this.type != EnumSimplePacket.C_UPDATE_PLANETS_LIST
-                    && this.type != EnumSimplePacket.C_UPDATE_CONFIGS) {
-                return;
-            }
+        } else if (this.type != EnumSimplePacket.C_UPDATE_SPACESTATION_LIST
+                && this.type != EnumSimplePacket.C_UPDATE_PLANETS_LIST
+                && this.type != EnumSimplePacket.C_UPDATE_CONFIGS) {
+            return;
         }
 
         switch (this.type) {

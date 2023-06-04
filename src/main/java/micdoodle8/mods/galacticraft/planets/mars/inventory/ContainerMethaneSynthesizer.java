@@ -83,31 +83,29 @@ public class ContainerMethaneSynthesizer extends Container {
                 if (par1 == 2) {
                     slot.onSlotChange(var4, var2);
                 }
+            } else if (var4.getItem() instanceof IItemElectric) {
+                if (!this.mergeItemStack(var4, 0, 1, false)) {
+                    return null;
+                }
             } else {
-                if (var4.getItem() instanceof IItemElectric) {
-                    if (!this.mergeItemStack(var4, 0, 1, false)) {
+                if (var4.getItem() instanceof ItemAtmosphericValve) {
+                    if (!this.mergeItemStack(var4, 2, 3, false)) {
                         return null;
                     }
-                } else {
-                    if (var4.getItem() instanceof ItemAtmosphericValve) {
-                        if (!this.mergeItemStack(var4, 2, 3, false)) {
-                            return null;
-                        }
-                    } else if (var4.getItem() == MarsItems.carbonFragments) {
-                        if (!this.mergeItemStack(var4, 3, 4, false)) {
-                            return null;
-                        }
-                    } else if (FluidUtil.isEmptyContainer(var4, AsteroidsItems.methaneCanister)) {
-                        if (!this.mergeItemStack(var4, 4, 5, false)) {
-                            return null;
-                        }
-                    } else if (par1 < 32) {
-                        if (!this.mergeItemStack(var4, 32, 41, false)) {
-                            return null;
-                        }
-                    } else if (!this.mergeItemStack(var4, 5, 32, false)) {
+                } else if (var4.getItem() == MarsItems.carbonFragments) {
+                    if (!this.mergeItemStack(var4, 3, 4, false)) {
                         return null;
                     }
+                } else if (FluidUtil.isEmptyContainer(var4, AsteroidsItems.methaneCanister)) {
+                    if (!this.mergeItemStack(var4, 4, 5, false)) {
+                        return null;
+                    }
+                } else if (par1 < 32) {
+                    if (!this.mergeItemStack(var4, 32, 41, false)) {
+                        return null;
+                    }
+                } else if (!this.mergeItemStack(var4, 5, 32, false)) {
+                    return null;
                 }
             }
 

@@ -70,23 +70,22 @@ public class BlockSlimelingEgg extends Block implements ITileEntityProvider, Ite
     private boolean beginHatch(World world, int x, int y, int z, EntityPlayer player) {
         final int l = world.getBlockMetadata(x, y, z);
 
-        if (l < 3) {
-            world.setBlockMetadataWithNotify(x, y, z, l + 3, 2);
-
-            final TileEntity tile = world.getTileEntity(x, y, z);
-
-            if (tile instanceof TileEntitySlimelingEgg) {
-                ((TileEntitySlimelingEgg) tile).timeToHatch = world.rand.nextInt(50) + 20;
-                ((TileEntitySlimelingEgg) tile).lastTouchedPlayerUUID = VersionUtil.mcVersion1_7_2
-                        ? player.getCommandSenderName()
-                        : player.getUniqueID().toString();
-                ((TileEntitySlimelingEgg) tile).lastTouchedPlayerName = player.getCommandSenderName();
-            }
-
-            return true;
-        } else {
+        if (l >= 3) {
             return false;
         }
+        world.setBlockMetadataWithNotify(x, y, z, l + 3, 2);
+
+        final TileEntity tile = world.getTileEntity(x, y, z);
+
+        if (tile instanceof TileEntitySlimelingEgg) {
+            ((TileEntitySlimelingEgg) tile).timeToHatch = world.rand.nextInt(50) + 20;
+            ((TileEntitySlimelingEgg) tile).lastTouchedPlayerUUID = VersionUtil.mcVersion1_7_2
+                    ? player.getCommandSenderName()
+                    : player.getUniqueID().toString();
+            ((TileEntitySlimelingEgg) tile).lastTouchedPlayerName = player.getCommandSenderName();
+        }
+
+        return true;
     }
 
     @Override
@@ -95,10 +94,9 @@ public class BlockSlimelingEgg extends Block implements ITileEntityProvider, Ite
         if (currentStack != null && currentStack.getItem() instanceof ItemPickaxe
                 || player.capabilities.isCreativeMode) {
             return world.setBlockToAir(x, y, z);
-        } else {
-            this.beginHatch(world, x, y, z, player);
-            return false;
         }
+        this.beginHatch(world, x, y, z, player);
+        return false;
     }
 
     @Override
@@ -181,14 +179,15 @@ public class BlockSlimelingEgg extends Block implements ITileEntityProvider, Ite
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
         final int metadata = world.getBlockMetadata(x, y, z);
 
-        if (metadata == 3) {
-            return new ItemStack(Item.getItemFromBlock(this), 1, 0);
-        }
-        if (metadata == 4) {
-            return new ItemStack(Item.getItemFromBlock(this), 1, 1);
-        }
-        if (metadata == 5) {
-            return new ItemStack(Item.getItemFromBlock(this), 1, 2);
+        switch (metadata) {
+            case 3:
+                return new ItemStack(Item.getItemFromBlock(this), 1, 0);
+            case 4:
+                return new ItemStack(Item.getItemFromBlock(this), 1, 1);
+            case 5:
+                return new ItemStack(Item.getItemFromBlock(this), 1, 2);
+            default:
+                break;
         }
         return super.getPickBlock(target, world, x, y, z);
     }

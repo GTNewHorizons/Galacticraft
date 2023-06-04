@@ -64,10 +64,9 @@ public class BlockGlowstoneTorch extends Block implements ItemBlockDesc.IBlockSh
     private boolean canPlaceTorchOn(World par1World, int par2, int par3, int par4) {
         if (World.doesBlockHaveSolidTopSurface(par1World, par2, par3, par4)) {
             return true;
-        } else {
-            final Block l = par1World.getBlock(par2, par3, par4);
-            return l.canPlaceTorchOnTop(par1World, par2, par3, par4);
         }
+        final Block l = par1World.getBlock(par2, par3, par4);
+        return l.canPlaceTorchOnTop(par1World, par2, par3, par4);
     }
 
     @Override
@@ -169,16 +168,15 @@ public class BlockGlowstoneTorch extends Block implements ItemBlockDesc.IBlockSh
     }
 
     protected boolean dropTorchIfCantStay(World par1World, int par2, int par3, int par4) {
-        if (!this.canPlaceBlockAt(par1World, par2, par3, par4)) {
-            if (par1World.getBlock(par2, par3, par4) == this) {
-                this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-                par1World.setBlockToAir(par2, par3, par4);
-            }
-
-            return false;
-        } else {
+        if (this.canPlaceBlockAt(par1World, par2, par3, par4)) {
             return true;
         }
+        if (par1World.getBlock(par2, par3, par4) == this) {
+            this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
+            par1World.setBlockToAir(par2, par3, par4);
+        }
+
+        return false;
     }
 
     @Override
@@ -187,17 +185,23 @@ public class BlockGlowstoneTorch extends Block implements ItemBlockDesc.IBlockSh
         final int l = par1World.getBlockMetadata(par2, par3, par4) & 7;
         float f = 0.15F;
 
-        if (l == 1) {
-            this.setBlockBounds(0.0F, 0.2F, 0.5F - f, f * 2.0F, 0.8F, 0.5F + f);
-        } else if (l == 2) {
-            this.setBlockBounds(1.0F - f * 2.0F, 0.2F, 0.5F - f, 1.0F, 0.8F, 0.5F + f);
-        } else if (l == 3) {
-            this.setBlockBounds(0.5F - f, 0.2F, 0.0F, 0.5F + f, 0.8F, f * 2.0F);
-        } else if (l == 4) {
-            this.setBlockBounds(0.5F - f, 0.2F, 1.0F - f * 2.0F, 0.5F + f, 0.8F, 1.0F);
-        } else {
-            f = 0.1F;
-            this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.6F, 0.5F + f);
+        switch (l) {
+            case 1:
+                this.setBlockBounds(0.0F, 0.2F, 0.5F - f, f * 2.0F, 0.8F, 0.5F + f);
+                break;
+            case 2:
+                this.setBlockBounds(1.0F - f * 2.0F, 0.2F, 0.5F - f, 1.0F, 0.8F, 0.5F + f);
+                break;
+            case 3:
+                this.setBlockBounds(0.5F - f, 0.2F, 0.0F, 0.5F + f, 0.8F, f * 2.0F);
+                break;
+            case 4:
+                this.setBlockBounds(0.5F - f, 0.2F, 1.0F - f * 2.0F, 0.5F + f, 0.8F, 1.0F);
+                break;
+            default:
+                f = 0.1F;
+                this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.6F, 0.5F + f);
+                break;
         }
 
         return super.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);

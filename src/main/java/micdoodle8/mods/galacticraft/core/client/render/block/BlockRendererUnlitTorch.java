@@ -81,20 +81,26 @@ public class BlockRendererUnlitTorch implements ISimpleBlockRenderingHandler {
         final double var9 = 0.5D - var7;
         final double var11 = 0.20000000298023224D;
 
-        if (var5 == 1) {
-            BlockRendererUnlitTorch
-                    .renderTorchAtAngle(renderBlocks, par1Block, par2 - var9, par3 + var11, par4, -var7, 0.0D);
-        } else if (var5 == 2) {
-            BlockRendererUnlitTorch
-                    .renderTorchAtAngle(renderBlocks, par1Block, par2 + var9, par3 + var11, par4, var7, 0.0D);
-        } else if (var5 == 3) {
-            BlockRendererUnlitTorch
-                    .renderTorchAtAngle(renderBlocks, par1Block, par2, par3 + var11, par4 - var9, 0.0D, -var7);
-        } else if (var5 == 4) {
-            BlockRendererUnlitTorch
-                    .renderTorchAtAngle(renderBlocks, par1Block, par2, par3 + var11, par4 + var9, 0.0D, var7);
-        } else {
-            BlockRendererUnlitTorch.renderTorchAtAngle(renderBlocks, par1Block, par2, par3, par4, 0.0D, 0.0D);
+        switch (var5) {
+            case 1:
+                BlockRendererUnlitTorch
+                        .renderTorchAtAngle(renderBlocks, par1Block, par2 - var9, par3 + var11, par4, -var7, 0.0D);
+                break;
+            case 2:
+                BlockRendererUnlitTorch
+                        .renderTorchAtAngle(renderBlocks, par1Block, par2 + var9, par3 + var11, par4, var7, 0.0D);
+                break;
+            case 3:
+                BlockRendererUnlitTorch
+                        .renderTorchAtAngle(renderBlocks, par1Block, par2, par3 + var11, par4 - var9, 0.0D, -var7);
+                break;
+            case 4:
+                BlockRendererUnlitTorch
+                        .renderTorchAtAngle(renderBlocks, par1Block, par2, par3 + var11, par4 + var9, 0.0D, var7);
+                break;
+            default:
+                BlockRendererUnlitTorch.renderTorchAtAngle(renderBlocks, par1Block, par2, par3, par4, 0.0D, 0.0D);
+                break;
         }
     }
 

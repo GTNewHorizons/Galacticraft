@@ -210,16 +210,15 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
      * True if it can stay and False if it drops. Args: world, x, y, z
      */
     private boolean dropTorchIfCantStay(World par1World, int x, int y, int z) {
-        if (!this.canPlaceBlockAt(par1World, x, y, z)) {
-            if (par1World.getBlock(x, y, z) == this) {
-                this.dropBlockAsItem(par1World, x, y, z, par1World.getBlockMetadata(x, y, z), 0);
-                par1World.setBlock(x, y, z, Blocks.air);
-            }
-
-            return false;
-        } else {
+        if (this.canPlaceBlockAt(par1World, x, y, z)) {
             return true;
         }
+        if (par1World.getBlock(x, y, z) == this) {
+            this.dropBlockAsItem(par1World, x, y, z, par1World.getBlockMetadata(x, y, z), 0);
+            par1World.setBlock(x, y, z, Blocks.air);
+        }
+
+        return false;
     }
 
     /**
@@ -231,14 +230,21 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
         final int var7 = par1World.getBlockMetadata(x, y, z) & 7;
         final float var8 = 0.3F;
 
-        if (var7 == 1) {
-            this.setBlockBounds(0.0F, 0.2F, 0.5F - var8, var8 * 2.0F, 0.8F, 0.5F + var8);
-        } else if (var7 == 2) {
-            this.setBlockBounds(1.0F - var8 * 2.0F, 0.2F, 0.5F - var8, 1.0F, 0.8F, 0.5F + var8);
-        } else if (var7 == 3) {
-            this.setBlockBounds(0.5F - var8, 0.2F, 0.0F, 0.5F + var8, 0.8F, var8 * 2.0F);
-        } else if (var7 == 4) {
-            this.setBlockBounds(0.5F - var8, 0.2F, 1.0F - var8 * 2.0F, 0.5F + var8, 0.8F, 1.0F);
+        switch (var7) {
+            case 1:
+                this.setBlockBounds(0.0F, 0.2F, 0.5F - var8, var8 * 2.0F, 0.8F, 0.5F + var8);
+                break;
+            case 2:
+                this.setBlockBounds(1.0F - var8 * 2.0F, 0.2F, 0.5F - var8, 1.0F, 0.8F, 0.5F + var8);
+                break;
+            case 3:
+                this.setBlockBounds(0.5F - var8, 0.2F, 0.0F, 0.5F + var8, 0.8F, var8 * 2.0F);
+                break;
+            case 4:
+                this.setBlockBounds(0.5F - var8, 0.2F, 1.0F - var8 * 2.0F, 0.5F + var8, 0.8F, 1.0F);
+                break;
+            default:
+                break;
         }
 
         return super.collisionRayTrace(par1World, x, y, z, par5Vec3, par6Vec3);
@@ -263,14 +269,21 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
                 final double var13 = 0.2199999988079071D;
                 final double var15 = 0.27000001072883606D;
 
-                if (var6 == 1) {
-                    par1World.spawnParticle("smoke", var7 - var15, var9 + var13, var11, 0.0D, 0.0D, 0.0D);
-                } else if (var6 == 2) {
-                    par1World.spawnParticle("smoke", var7 + var15, var9 + var13, var11, 0.0D, 0.0D, 0.0D);
-                } else if (var6 == 3) {
-                    par1World.spawnParticle("smoke", var7, var9 + var13, var11 - var15, 0.0D, 0.0D, 0.0D);
-                } else if (var6 == 4) {
-                    par1World.spawnParticle("smoke", var7, var9 + var13, var11 + var15, 0.0D, 0.0D, 0.0D);
+                switch (var6) {
+                    case 1:
+                        par1World.spawnParticle("smoke", var7 - var15, var9 + var13, var11, 0.0D, 0.0D, 0.0D);
+                        break;
+                    case 2:
+                        par1World.spawnParticle("smoke", var7 + var15, var9 + var13, var11, 0.0D, 0.0D, 0.0D);
+                        break;
+                    case 3:
+                        par1World.spawnParticle("smoke", var7, var9 + var13, var11 - var15, 0.0D, 0.0D, 0.0D);
+                        break;
+                    case 4:
+                        par1World.spawnParticle("smoke", var7, var9 + var13, var11 + var15, 0.0D, 0.0D, 0.0D);
+                        break;
+                    default:
+                        break;
                 }
             }
         }

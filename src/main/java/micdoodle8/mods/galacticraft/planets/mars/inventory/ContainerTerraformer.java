@@ -44,16 +44,21 @@ public class ContainerTerraformer extends Container {
         for (var6 = 0; var6 < 3; ++var6) {
             final List<ItemStack> stacks = new ArrayList<>();
 
-            if (var6 == 0) {
-                stacks.add(new ItemStack(Items.dye, 1, 15));
-            } else if (var6 == 1) {
-                if (ContainerTerraformer.saplingList == null) {
-                    initSaplingList();
-                }
-
-                stacks.addAll(ContainerTerraformer.saplingList);
-            } else if (var6 == 2) {
-                stacks.add(new ItemStack(Items.wheat_seeds));
+            switch (var6) {
+                case 0:
+                    stacks.add(new ItemStack(Items.dye, 1, 15));
+                    break;
+                case 1:
+                    if (ContainerTerraformer.saplingList == null) {
+                        initSaplingList();
+                    }
+                    stacks.addAll(ContainerTerraformer.saplingList);
+                    break;
+                case 2:
+                    stacks.add(new ItemStack(Items.wheat_seeds));
+                    break;
+                default:
+                    break;
             }
 
             for (var7 = 0; var7 < 4; ++var7) {
@@ -106,34 +111,32 @@ public class ContainerTerraformer extends Container {
                 if (!this.mergeItemStack(var4, b - 36, b, true)) {
                     return null;
                 }
-            } else {
-                if (var4.getItem() instanceof IItemElectric) {
-                    if (!this.mergeItemStack(var4, 1, 2, false)) {
-                        return null;
-                    }
-                } else if (var4.getItem() == Items.water_bucket) {
-                    if (!this.mergeItemStack(var4, 0, 1, false)) {
-                        return null;
-                    }
-                } else if (var4.getItem() == Items.dye && var4.getItemDamage() == 15) {
-                    if (!this.mergeItemStack(var4, 2, 6, false)) {
-                        return null;
-                    }
-                } else if (this.getSlot(6).isItemValid(var4)) {
-                    if (!this.mergeItemStack(var4, 6, 10, false)) {
-                        return null;
-                    }
-                } else if (var4.getItem() == Items.wheat_seeds) {
-                    if (!this.mergeItemStack(var4, 10, 14, false)) {
-                        return null;
-                    }
-                } else if (par1 < b - 9) {
-                    if (!this.mergeItemStack(var4, b - 9, b, false)) {
-                        return null;
-                    }
-                } else if (!this.mergeItemStack(var4, b - 36, b - 9, false)) {
+            } else if (var4.getItem() instanceof IItemElectric) {
+                if (!this.mergeItemStack(var4, 1, 2, false)) {
                     return null;
                 }
+            } else if (var4.getItem() == Items.water_bucket) {
+                if (!this.mergeItemStack(var4, 0, 1, false)) {
+                    return null;
+                }
+            } else if (var4.getItem() == Items.dye && var4.getItemDamage() == 15) {
+                if (!this.mergeItemStack(var4, 2, 6, false)) {
+                    return null;
+                }
+            } else if (this.getSlot(6).isItemValid(var4)) {
+                if (!this.mergeItemStack(var4, 6, 10, false)) {
+                    return null;
+                }
+            } else if (var4.getItem() == Items.wheat_seeds) {
+                if (!this.mergeItemStack(var4, 10, 14, false)) {
+                    return null;
+                }
+            } else if (par1 < b - 9) {
+                if (!this.mergeItemStack(var4, b - 9, b, false)) {
+                    return null;
+                }
+            } else if (!this.mergeItemStack(var4, b - 36, b - 9, false)) {
+                return null;
             }
 
             if (var4.stackSize == 0) {

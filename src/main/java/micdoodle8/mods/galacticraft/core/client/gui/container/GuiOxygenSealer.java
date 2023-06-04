@@ -267,12 +267,11 @@ public class GuiOxygenSealer extends GuiContainerGC {
             } else {
                 return EnumColor.ORANGE + GCCoreUtil.translate("gui.status.checkPending.name");
             }
+        }
+        if (!this.sealer.sealed) {
+            return EnumColor.DARK_RED + GCCoreUtil.translate("gui.status.unsealed.name");
         } else {
-            if (!this.sealer.sealed) {
-                return EnumColor.DARK_RED + GCCoreUtil.translate("gui.status.unsealed.name");
-            } else {
-                return EnumColor.DARK_GREEN + GCCoreUtil.translate("gui.status.sealed.name");
-            }
+            return EnumColor.DARK_GREEN + GCCoreUtil.translate("gui.status.sealed.name");
         }
     }
 

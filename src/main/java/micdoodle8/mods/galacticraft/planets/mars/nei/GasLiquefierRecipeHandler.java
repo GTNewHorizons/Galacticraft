@@ -170,9 +170,8 @@ public class GasLiquefierRecipeHandler extends TemplateRecipeHandler {
             stacks.add(
                     new PositionedStack(new ItemStack(inputItem, 1, inputItem.getMaxDamage()), input.relx, input.rely));
             return stacks;
-        } else {
-            return (ArrayList<PositionedStack>) this.arecipes.get(recipe).getIngredients();
         }
+        return (ArrayList<PositionedStack>) this.arecipes.get(recipe).getIngredients();
     }
 
     @Override
@@ -193,9 +192,8 @@ public class GasLiquefierRecipeHandler extends TemplateRecipeHandler {
                     new ItemStack(outputItem, 1, outputItem.getMaxDamage()),
                     output.relx,
                     output.rely);
-        } else {
-            return this.arecipes.get(recipe).getResult();
         }
+        return this.arecipes.get(recipe).getResult();
     }
 
     public class CachedLiquefierRecipe extends TemplateRecipeHandler.CachedRecipe {

@@ -91,11 +91,9 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
 
                 if (this.processTicks == 0) {
                     this.processTicks = this.processTimeRequired;
-                } else {
-                    if (--this.processTicks <= 0) {
-                        this.doElectrolysis();
-                        this.processTicks = this.canProcess() ? this.processTimeRequired : 0;
-                    }
+                } else if (--this.processTicks <= 0) {
+                    this.doElectrolysis();
+                    this.processTicks = this.canProcess() ? this.processTimeRequired : 0;
                 }
             } else {
                 this.processTicks = 0;

@@ -93,18 +93,25 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
                 final float var10 = 0.52F;
                 final float var11 = par5Random.nextFloat() * 0.6F - 0.3F;
 
-                if (metadata == 3) {
-                    par1World.spawnParticle("smoke", var7 - var10, var8, var9 + var11, 0.0D, 0.0D, 0.0D);
-                    par1World.spawnParticle("flame", var7 - var10, var8, var9 + var11, 0.0D, 0.0D, 0.0D);
-                } else if (metadata == 2) {
-                    par1World.spawnParticle("smoke", var7 + var10, var8, var9 + var11, 0.0D, 0.0D, 0.0D);
-                    par1World.spawnParticle("flame", var7 + var10, var8, var9 + var11, 0.0D, 0.0D, 0.0D);
-                } else if (metadata == 1) {
-                    par1World.spawnParticle("smoke", var7 + var11, var8, var9 - var10, 0.0D, 0.0D, 0.0D);
-                    par1World.spawnParticle("flame", var7 + var11, var8, var9 - var10, 0.0D, 0.0D, 0.0D);
-                } else if (metadata == 0) {
-                    par1World.spawnParticle("smoke", var7 + var11, var8, var9 + var10, 0.0D, 0.0D, 0.0D);
-                    par1World.spawnParticle("flame", var7 + var11, var8, var9 + var10, 0.0D, 0.0D, 0.0D);
+                switch (metadata) {
+                    case 3:
+                        par1World.spawnParticle("smoke", var7 - var10, var8, var9 + var11, 0.0D, 0.0D, 0.0D);
+                        par1World.spawnParticle("flame", var7 - var10, var8, var9 + var11, 0.0D, 0.0D, 0.0D);
+                        break;
+                    case 2:
+                        par1World.spawnParticle("smoke", var7 + var10, var8, var9 + var11, 0.0D, 0.0D, 0.0D);
+                        par1World.spawnParticle("flame", var7 + var10, var8, var9 + var11, 0.0D, 0.0D, 0.0D);
+                        break;
+                    case 1:
+                        par1World.spawnParticle("smoke", var7 + var11, var8, var9 - var10, 0.0D, 0.0D, 0.0D);
+                        par1World.spawnParticle("flame", var7 + var11, var8, var9 - var10, 0.0D, 0.0D, 0.0D);
+                        break;
+                    case 0:
+                        par1World.spawnParticle("smoke", var7 + var11, var8, var9 + var10, 0.0D, 0.0D, 0.0D);
+                        par1World.spawnParticle("flame", var7 + var11, var8, var9 + var10, 0.0D, 0.0D, 0.0D);
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -125,8 +132,7 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
             if (side == metadata + 2) {
                 return this.iconOxygenInput;
             }
-            // If it is the back side
-            else if (side == ForgeDirection.getOrientation(metadata + 2).getOpposite().ordinal()) {
+            if (side == ForgeDirection.getOrientation(metadata + 2).getOpposite().ordinal()) {
                 return this.iconOxygenOutput;
             }
 
@@ -165,7 +171,8 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
             }
 
             return this.iconOxygenStorageModule[16];
-        } else if (metadata >= BlockMachine2.CIRCUIT_FABRICATOR_METADATA) {
+        }
+        if (metadata >= BlockMachine2.CIRCUIT_FABRICATOR_METADATA) {
             metadata -= BlockMachine2.CIRCUIT_FABRICATOR_METADATA;
 
             if (metadata == 0 && side == 4 || metadata == 1 && side == 5
@@ -295,7 +302,8 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
     public TileEntity createTileEntity(World world, int metadata) {
         if (metadata >= BlockMachine2.OXYGEN_STORAGE_MODULE_METADATA) {
             return new TileEntityOxygenStorageModule();
-        } else if (metadata >= BlockMachine2.CIRCUIT_FABRICATOR_METADATA) {
+        }
+        if (metadata >= BlockMachine2.CIRCUIT_FABRICATOR_METADATA) {
             return new TileEntityCircuitFabricator();
         } else if (metadata >= BlockMachine2.ELECTRIC_COMPRESSOR_METADATA) {
             return new TileEntityElectricIngotCompressor();
@@ -327,7 +335,8 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
     public int damageDropped(int metadata) {
         if (metadata >= BlockMachine2.OXYGEN_STORAGE_MODULE_METADATA) {
             return BlockMachine2.OXYGEN_STORAGE_MODULE_METADATA;
-        } else if (metadata >= BlockMachine2.CIRCUIT_FABRICATOR_METADATA) {
+        }
+        if (metadata >= BlockMachine2.CIRCUIT_FABRICATOR_METADATA) {
             return BlockMachine2.CIRCUIT_FABRICATOR_METADATA;
         } else if (metadata >= BlockMachine2.ELECTRIC_COMPRESSOR_METADATA) {
             return BlockMachine2.ELECTRIC_COMPRESSOR_METADATA;

@@ -150,22 +150,21 @@ public class MethaneSynthesizerRecipeHandler extends TemplateRecipeHandler {
 
         this.fillAtmos = inputItem == AsteroidsItems.atmosphericValve;
 
-        if (this.ticksPassed % 144 > 40) {
-            final ArrayList<PositionedStack> stacks = new ArrayList<>();
-            if (inputItem != MarsItems.carbonFragments) {
-                stacks.add(
-                        new PositionedStack(
-                                new ItemStack(inputItem, 1, inputItem.getMaxDamage()),
-                                input.relx,
-                                input.rely));
-            } else if (this.ticksPassed % 144 < 104) {
-                final int number = 24 - (this.ticksPassed % 144 - 40) * 3 / 8;
-                stacks.add(new PositionedStack(new ItemStack(inputItem, number, 0), input.relx, input.rely));
-            }
-            return stacks;
-        } else {
+        if (this.ticksPassed % 144 <= 40) {
             return (ArrayList<PositionedStack>) this.arecipes.get(recipe).getIngredients();
         }
+        final ArrayList<PositionedStack> stacks = new ArrayList<>();
+        if (inputItem != MarsItems.carbonFragments) {
+            stacks.add(
+                    new PositionedStack(
+                            new ItemStack(inputItem, 1, inputItem.getMaxDamage()),
+                            input.relx,
+                            input.rely));
+        } else if (this.ticksPassed % 144 < 104) {
+            final int number = 24 - (this.ticksPassed % 144 - 40) * 3 / 8;
+            stacks.add(new PositionedStack(new ItemStack(inputItem, number, 0), input.relx, input.rely));
+        }
+        return stacks;
     }
 
     @Override
@@ -177,9 +176,8 @@ public class MethaneSynthesizerRecipeHandler extends TemplateRecipeHandler {
                     new ItemStack(outputItem, 1, outputItem.getMaxDamage()),
                     output.relx,
                     output.rely);
-        } else {
-            return this.arecipes.get(recipe).getResult();
         }
+        return this.arecipes.get(recipe).getResult();
     }
 
     public class CachedSynthesizerRecipe extends TemplateRecipeHandler.CachedRecipe {

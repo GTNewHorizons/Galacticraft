@@ -340,9 +340,8 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
                 }
 
                 return stats.landingTicks < this.lastLandingTicks;
-            } else {
-                this.lastLandingTicks = 0;
             }
+            this.lastLandingTicks = 0;
             if (stats.pjumpticks > 0) {
                 return true;
             }

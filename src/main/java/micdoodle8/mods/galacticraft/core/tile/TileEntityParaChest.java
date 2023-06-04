@@ -76,26 +76,25 @@ public class TileEntityParaChest extends TileEntityAdvanced implements IInventor
 
     @Override
     public ItemStack decrStackSize(int par1, int par2) {
-        if (this.chestContents[par1] != null) {
-            ItemStack itemstack;
-
-            if (this.chestContents[par1].stackSize <= par2) {
-                itemstack = this.chestContents[par1];
-                this.chestContents[par1] = null;
-                this.markDirty();
-                return itemstack;
-            } else {
-                itemstack = this.chestContents[par1].splitStack(par2);
-
-                if (this.chestContents[par1].stackSize == 0) {
-                    this.chestContents[par1] = null;
-                }
-
-                this.markDirty();
-                return itemstack;
-            }
-        } else {
+        if (this.chestContents[par1] == null) {
             return null;
+        }
+        ItemStack itemstack;
+
+        if (this.chestContents[par1].stackSize <= par2) {
+            itemstack = this.chestContents[par1];
+            this.chestContents[par1] = null;
+            this.markDirty();
+            return itemstack;
+        } else {
+            itemstack = this.chestContents[par1].splitStack(par2);
+
+            if (this.chestContents[par1].stackSize == 0) {
+                this.chestContents[par1] = null;
+            }
+
+            this.markDirty();
+            return itemstack;
         }
     }
 
@@ -105,9 +104,8 @@ public class TileEntityParaChest extends TileEntityAdvanced implements IInventor
             final ItemStack itemstack = this.chestContents[par1];
             this.chestContents[par1] = null;
             return itemstack;
-        } else {
-            return null;
         }
+        return null;
     }
 
     @Override
@@ -290,9 +288,8 @@ public class TileEntityParaChest extends TileEntityAdvanced implements IInventor
         if (par1 == 1) {
             this.numUsingPlayers = par2;
             return true;
-        } else {
-            return super.receiveClientEvent(par1, par2);
         }
+        return super.receiveClientEvent(par1, par2);
     }
 
     @Override

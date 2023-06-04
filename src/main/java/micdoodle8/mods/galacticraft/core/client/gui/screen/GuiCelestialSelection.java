@@ -424,7 +424,7 @@ public class GuiCelestialSelection extends GuiScreen {
     }
 
     protected boolean canCreateSpaceStation(CelestialBody atBody) {
-        if ((this.mapMode == MapMode.VIEW) || !atBody.getAllowSatellite()
+        if (this.mapMode == MapMode.VIEW || !atBody.getAllowSatellite()
                 || ConfigManagerCore.disableSpaceStationCreation) {
             // If we are in map mode or the parent body doesn't allow satellites in general
             // or if space stations aren't
@@ -548,12 +548,11 @@ public class GuiCelestialSelection extends GuiScreen {
                         }
                         final int spacestationID = mapping;
                         final WorldProvider spacestation = WorldUtil.getProviderForDimensionClient(spacestationID);
-                        if (spacestation != null) {
-                            dimension = WorldUtil.getDimensionName(spacestation);
-                        } else {
+                        if (spacestation == null) {
                             GCLog.severe("Failed to find a spacestation with dimension " + spacestationID);
                             return false;
                         }
+                        dimension = WorldUtil.getDimensionName(spacestation);
                     } else {
                         dimension = WorldUtil.getDimensionName(
                                 WorldUtil.getProviderForDimensionClient(this.selectedBody.getDimensionID()));
@@ -665,7 +664,7 @@ public class GuiCelestialSelection extends GuiScreen {
             }
         }
 
-        if (this.mapMode == MapMode.VIEW || (this.mapMode == MapMode.TELEPORTATION && this.selectedBody == null)) {
+        if (this.mapMode == MapMode.VIEW || this.mapMode == MapMode.TELEPORTATION && this.selectedBody == null) {
             if (x > this.width - BORDER_WIDTH - BORDER_EDGE_WIDTH - 88
                     && x < this.width - BORDER_WIDTH - BORDER_EDGE_WIDTH
                     && y > BORDER_WIDTH + BORDER_EDGE_WIDTH
@@ -1806,7 +1805,7 @@ public class GuiCelestialSelection extends GuiScreen {
                 }
             }
 
-            if (this.mapMode == MapMode.VIEW || (this.mapMode == MapMode.TELEPORTATION && this.selectedBody == null)) {
+            if (this.mapMode == MapMode.VIEW || this.mapMode == MapMode.TELEPORTATION && this.selectedBody == null) {
                 this.mc.renderEngine.bindTexture(GuiCelestialSelection.guiMain0);
                 GL11.glColor4f(1.0F, 0.0F, 0.0F, 1);
                 this.mc.renderEngine.bindTexture(GuiCelestialSelection.guiMain0);
@@ -2753,19 +2752,18 @@ public class GuiCelestialSelection extends GuiScreen {
             }
 
             return list.size();
-        } else {
-            final List<String> list = this.fontRendererObj.listFormattedStringToWidth(par1Str, par4);
-
-            for (final Iterator<String> iterator = list.iterator(); iterator
-                    .hasNext(); par3 += this.fontRendererObj.FONT_HEIGHT) {
-                final String s1 = (String) iterator.next();
-                if (!simulate) {
-                    this.renderStringAligned(s1, par2, par3, par4, par6, par5, small);
-                }
-            }
-
-            return list.size();
         }
+        final List<String> list = this.fontRendererObj.listFormattedStringToWidth(par1Str, par4);
+
+        for (final Iterator<String> iterator = list.iterator(); iterator
+                .hasNext(); par3 += this.fontRendererObj.FONT_HEIGHT) {
+            final String s1 = (String) iterator.next();
+            if (!simulate) {
+                this.renderStringAligned(s1, par2, par3, par4, par6, par5, small);
+            }
+        }
+
+        return list.size();
     }
 
     protected int renderStringAligned(String par1Str, int par2, int par3, int par4, int par5, boolean par6,
@@ -2778,15 +2776,14 @@ public class GuiCelestialSelection extends GuiScreen {
 
             return this.smallFontRenderer
                     .drawString(par1Str, par2 - this.smallFontRenderer.getStringWidth(par1Str) / 2, par3, par5, par6);
-        } else {
-            if (this.fontRendererObj.getBidiFlag()) {
-                final int i1 = this.fontRendererObj.getStringWidth(this.bidiReorder(par1Str));
-                par2 = par2 + par4 - i1;
-            }
-
-            return this.fontRendererObj
-                    .drawString(par1Str, par2 - this.fontRendererObj.getStringWidth(par1Str) / 2, par3, par5, par6);
         }
+        if (this.fontRendererObj.getBidiFlag()) {
+            final int i1 = this.fontRendererObj.getStringWidth(this.bidiReorder(par1Str));
+            par2 = par2 + par4 - i1;
+        }
+
+        return this.fontRendererObj
+                .drawString(par1Str, par2 - this.fontRendererObj.getStringWidth(par1Str) / 2, par3, par5, par6);
     }
 
     protected String bidiReorder(String p_147647_1_) {

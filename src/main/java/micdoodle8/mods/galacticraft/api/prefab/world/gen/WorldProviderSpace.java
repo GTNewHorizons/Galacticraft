@@ -278,7 +278,8 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
                             this.worldObj,
                             this.worldObj.getSeed(),
                             this.worldObj.getWorldInfo().isMapFeaturesEnabled());
-                } else if (constr.getParameterTypes().length == 0) {
+                }
+                if (constr.getParameterTypes().length == 0) {
                     return (IChunkProvider) constr.newInstance();
                 }
             }

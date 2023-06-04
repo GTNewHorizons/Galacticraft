@@ -314,20 +314,19 @@ public class TileEntityScreen extends TileEntity {
         BlockVec3 vec = new BlockVec3(this);
         TileEntityScreen tile = this;
         while (up < 8) {
-            if (tile.connectedUp) {
-                up++;
-                final TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, 1);
-                if (newTile instanceof TileEntityScreen) {
-                    tile = (TileEntityScreen) newTile;
-                    vec.translate(0, 1, 0);
-                } else {
-                    System.out.println("Debug - connected up to a non-screen tile");
-                    tile.connectedUp = false;
-                    tile.markDirty();
-                    up--;
-                    break;
-                }
+            if (!tile.connectedUp) {
+                break;
+            }
+            up++;
+            final TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, 1);
+            if (newTile instanceof TileEntityScreen) {
+                tile = (TileEntityScreen) newTile;
+                vec.translate(0, 1, 0);
             } else {
+                System.out.println("Debug - connected up to a non-screen tile");
+                tile.connectedUp = false;
+                tile.markDirty();
+                up--;
                 break;
             }
         }
@@ -335,20 +334,19 @@ public class TileEntityScreen extends TileEntity {
         vec = new BlockVec3(this);
         tile = this;
         while (down < 8 - up) {
-            if (tile.connectedDown) {
-                down++;
-                final TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, 0);
-                if (newTile instanceof TileEntityScreen) {
-                    tile = (TileEntityScreen) newTile;
-                    vec.translate(0, -1, 0);
-                } else {
-                    System.out.println("Debug - connected down to a non-screen tile");
-                    tile.connectedDown = false;
-                    tile.markDirty();
-                    down--;
-                    break;
-                }
+            if (!tile.connectedDown) {
+                break;
+            }
+            down++;
+            final TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, 0);
+            if (newTile instanceof TileEntityScreen) {
+                tile = (TileEntityScreen) newTile;
+                vec.translate(0, -1, 0);
             } else {
+                System.out.println("Debug - connected down to a non-screen tile");
+                tile.connectedDown = false;
+                tile.markDirty();
+                down--;
                 break;
             }
         }
@@ -357,20 +355,19 @@ public class TileEntityScreen extends TileEntity {
         tile = this;
         final int leftside = this.getLeft(meta);
         while (left < (up + down == 0 ? 1 : 8)) {
-            if (tile.connectedLeft) {
-                left++;
-                final TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, leftside);
-                if (newTile instanceof TileEntityScreen) {
-                    tile = (TileEntityScreen) newTile;
-                    vec = vec.newVecSide(leftside);
-                } else {
-                    System.out.println("Debug - connected left to a non-screen tile");
-                    tile.connectedLeft = false;
-                    tile.markDirty();
-                    left--;
-                    break;
-                }
+            if (!tile.connectedLeft) {
+                break;
+            }
+            left++;
+            final TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, leftside);
+            if (newTile instanceof TileEntityScreen) {
+                tile = (TileEntityScreen) newTile;
+                vec = vec.newVecSide(leftside);
             } else {
+                System.out.println("Debug - connected left to a non-screen tile");
+                tile.connectedLeft = false;
+                tile.markDirty();
+                left--;
                 break;
             }
         }
@@ -379,20 +376,19 @@ public class TileEntityScreen extends TileEntity {
         tile = this;
         final int rightside = this.getRight(meta);
         while (right < (up + down == 0 ? 1 : 8) - left) {
-            if (tile.connectedRight) {
-                right++;
-                final TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, rightside);
-                if (newTile instanceof TileEntityScreen) {
-                    tile = (TileEntityScreen) newTile;
-                    vec = vec.newVecSide(rightside);
-                } else {
-                    System.out.println("Debug - connected right to a non-screen tile");
-                    tile.connectedRight = false;
-                    tile.markDirty();
-                    right--;
-                    break;
-                }
+            if (!tile.connectedRight) {
+                break;
+            }
+            right++;
+            final TileEntity newTile = vec.getTileEntityOnSide(this.worldObj, rightside);
+            if (newTile instanceof TileEntityScreen) {
+                tile = (TileEntityScreen) newTile;
+                vec = vec.newVecSide(rightside);
             } else {
+                System.out.println("Debug - connected right to a non-screen tile");
+                tile.connectedRight = false;
+                tile.markDirty();
+                right--;
                 break;
             }
         }

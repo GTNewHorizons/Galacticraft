@@ -133,9 +133,8 @@ public class EntitySludgeling extends EntityMob implements IEntityBreathable {
         if (super.getCanSpawnHere()) {
             final EntityPlayer var1 = this.worldObj.getClosestPlayerToEntity(this, 5.0D);
             return var1 == null;
-        } else {
-            return false;
         }
+        return false;
     }
 
     @Override

@@ -42,75 +42,74 @@ public class CommandSpaceStationChangeOwner extends CommandBase {
         final EntityPlayerMP playerAdmin = PlayerUtil
                 .getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
 
-        if (astring.length > 1) {
-            newOwner = astring[1];
-
-            try {
-                stationID = Integer.parseInt(astring[0]);
-            } catch (final Exception var6) {
-                throw new WrongUsageException(
-                        GCCoreUtil.translateWithFormat(
-                                "commands.ssnewowner.wrongUsage",
-                                this.getCommandUsage(icommandsender)));
-            }
-
-            if (stationID < 2) {
-                throw new WrongUsageException(
-                        GCCoreUtil.translateWithFormat(
-                                "commands.ssnewowner.wrongUsage",
-                                this.getCommandUsage(icommandsender)));
-            }
-
-            try {
-                final SpaceStationWorldData stationData = SpaceStationWorldData
-                        .getMPSpaceStationData(null, stationID, null);
-                if (stationData == null) {
-                    throw new WrongUsageException(
-                            GCCoreUtil.translateWithFormat(
-                                    "commands.ssnewowner.wrongUsage",
-                                    this.getCommandUsage(icommandsender)));
-                }
-
-                oldOwner = stationData.getOwner();
-                stationData.getAllowedPlayers().remove(oldOwner);
-                if (stationData.getSpaceStationName().equals("Station: " + oldOwner)) {
-                    stationData.setSpaceStationName("Station: " + newOwner);
-                }
-                stationData.getAllowedPlayers().add(newOwner);
-                stationData.setOwner(newOwner);
-
-                final EntityPlayerMP oldPlayer = PlayerUtil.getPlayerBaseServerFromPlayerUsername(oldOwner, true);
-                final EntityPlayerMP newPlayer = PlayerUtil.getPlayerBaseServerFromPlayerUsername(newOwner, true);
-                if (oldPlayer != null) {
-                    final GCPlayerStats stats = GCPlayerStats.get(oldPlayer);
-                    SpaceStationWorldData.updateSSOwnership(oldPlayer, oldOwner, stats, stationID, stationData);
-                    GalacticraftCore.packetPipeline
-                            .sendTo(
-                                    new PacketSimple(
-                                            EnumSimplePacket.C_UPDATE_SPACESTATION_CLIENT_ID,
-                                            new Object[] { WorldUtil
-                                                    .spaceStationDataToString(stats.spaceStationDimensionData) }),
-                                    oldPlayer);
-                }
-                if (newPlayer != null) {
-                    final GCPlayerStats stats = GCPlayerStats.get(newPlayer);
-                    SpaceStationWorldData
-                            .updateSSOwnership(newPlayer, newOwner.replace(".", ""), stats, stationID, stationData);
-                    GalacticraftCore.packetPipeline
-                            .sendTo(
-                                    new PacketSimple(
-                                            EnumSimplePacket.C_UPDATE_SPACESTATION_CLIENT_ID,
-                                            new Object[] { WorldUtil
-                                                    .spaceStationDataToString(stats.spaceStationDimensionData) }),
-                                    newPlayer);
-                }
-            } catch (final Exception var6) {
-                throw new CommandException(var6.getMessage());
-            }
-        } else {
+        if (astring.length <= 1) {
             throw new WrongUsageException(
                     GCCoreUtil
                             .translateWithFormat("commands.ssinvite.wrongUsage", this.getCommandUsage(icommandsender)));
+        }
+        newOwner = astring[1];
+
+        try {
+            stationID = Integer.parseInt(astring[0]);
+        } catch (final Exception var6) {
+            throw new WrongUsageException(
+                    GCCoreUtil.translateWithFormat(
+                            "commands.ssnewowner.wrongUsage",
+                            this.getCommandUsage(icommandsender)));
+        }
+
+        if (stationID < 2) {
+            throw new WrongUsageException(
+                    GCCoreUtil.translateWithFormat(
+                            "commands.ssnewowner.wrongUsage",
+                            this.getCommandUsage(icommandsender)));
+        }
+
+        try {
+            final SpaceStationWorldData stationData = SpaceStationWorldData
+                    .getMPSpaceStationData(null, stationID, null);
+            if (stationData == null) {
+                throw new WrongUsageException(
+                        GCCoreUtil.translateWithFormat(
+                                "commands.ssnewowner.wrongUsage",
+                                this.getCommandUsage(icommandsender)));
+            }
+
+            oldOwner = stationData.getOwner();
+            stationData.getAllowedPlayers().remove(oldOwner);
+            if (stationData.getSpaceStationName().equals("Station: " + oldOwner)) {
+                stationData.setSpaceStationName("Station: " + newOwner);
+            }
+            stationData.getAllowedPlayers().add(newOwner);
+            stationData.setOwner(newOwner);
+
+            final EntityPlayerMP oldPlayer = PlayerUtil.getPlayerBaseServerFromPlayerUsername(oldOwner, true);
+            final EntityPlayerMP newPlayer = PlayerUtil.getPlayerBaseServerFromPlayerUsername(newOwner, true);
+            if (oldPlayer != null) {
+                final GCPlayerStats stats = GCPlayerStats.get(oldPlayer);
+                SpaceStationWorldData.updateSSOwnership(oldPlayer, oldOwner, stats, stationID, stationData);
+                GalacticraftCore.packetPipeline
+                        .sendTo(
+                                new PacketSimple(
+                                        EnumSimplePacket.C_UPDATE_SPACESTATION_CLIENT_ID,
+                                        new Object[] { WorldUtil
+                                                .spaceStationDataToString(stats.spaceStationDimensionData) }),
+                                oldPlayer);
+            }
+            if (newPlayer != null) {
+                final GCPlayerStats stats = GCPlayerStats.get(newPlayer);
+                SpaceStationWorldData
+                        .updateSSOwnership(newPlayer, newOwner.replace(".", ""), stats, stationID, stationData);
+                GalacticraftCore.packetPipeline
+                        .sendTo(
+                                new PacketSimple(
+                                        EnumSimplePacket.C_UPDATE_SPACESTATION_CLIENT_ID,
+                                        new Object[] { WorldUtil
+                                                .spaceStationDataToString(stats.spaceStationDimensionData) }),
+                                newPlayer);
+            }
+        } catch (final Exception var6) {
+            throw new CommandException(var6.getMessage());
         }
 
         if (playerAdmin != null) {

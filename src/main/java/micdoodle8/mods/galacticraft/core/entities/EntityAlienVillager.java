@@ -270,14 +270,19 @@ public class EntityAlienVillager extends EntityAgeable implements IEntityBreatha
     @Override
     @SideOnly(Side.CLIENT)
     public void handleHealthUpdate(byte par1) {
-        if (par1 == 12) {
-            this.generateRandomParticles("heart");
-        } else if (par1 == 13) {
-            this.generateRandomParticles("angryVillager");
-        } else if (par1 == 14) {
-            this.generateRandomParticles("happyVillager");
-        } else {
-            super.handleHealthUpdate(par1);
+        switch (par1) {
+            case 12:
+                this.generateRandomParticles("heart");
+                break;
+            case 13:
+                this.generateRandomParticles("angryVillager");
+                break;
+            case 14:
+                this.generateRandomParticles("happyVillager");
+                break;
+            default:
+                super.handleHealthUpdate(par1);
+                break;
         }
     }
 

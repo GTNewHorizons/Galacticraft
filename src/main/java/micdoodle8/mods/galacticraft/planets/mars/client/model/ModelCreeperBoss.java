@@ -89,7 +89,7 @@ public class ModelCreeperBoss extends ModelBase {
         this.headLeft.setRotationPoint(3F, 6F, 0.1F);
         this.headLeft.setTextureSize(128, 64);
         this.headLeft.mirror = true;
-        this.setRotation(this.headLeft, 0F, 0F, ((float)Math.PI / 4F));
+        this.setRotation(this.headLeft, 0F, 0F, (float)Math.PI / 4F);
         this.headRight = new ModelRenderer(this, 0, 0);
         this.headRight.addBox(-9F, -9F, -4F, 8, 8, 8, scale);
         this.headRight.setRotationPoint(-3F, 6F, -0.1F);

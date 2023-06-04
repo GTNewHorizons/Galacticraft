@@ -281,7 +281,8 @@ public class MapGen {
                             double d15 = d10 - d16;
 
                             for (int z = 0; z < 4; ++z) {
-                                if ((d15 += d16) > 0.0D) {
+                                d15 += d16;
+                                if (d15 > 0.0D) {
                                     this.heights[idx + z] = truey;
                                 }
                             }

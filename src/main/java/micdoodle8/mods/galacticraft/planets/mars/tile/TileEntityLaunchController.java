@@ -148,13 +148,11 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
                     }
                 }
             }
-        } else {
-            if (this.frequency == -1 && this.destFrequency == -1) {
-                GalacticraftCore.packetPipeline.sendToServer(
-                        new PacketSimpleMars(
-                                EnumSimplePacketMars.S_UPDATE_ADVANCED_GUI,
-                                new Object[] { 5, this.xCoord, this.yCoord, this.zCoord, 0 }));
-            }
+        } else if (this.frequency == -1 && this.destFrequency == -1) {
+            GalacticraftCore.packetPipeline.sendToServer(
+                    new PacketSimpleMars(
+                            EnumSimplePacketMars.S_UPDATE_ADVANCED_GUI,
+                            new Object[] { 5, this.xCoord, this.yCoord, this.zCoord, 0 }));
         }
     }
 

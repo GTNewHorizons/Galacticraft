@@ -30,16 +30,15 @@ public class EntityAIArrowAttack extends EntityAIBase {
 
         if (!(par1IRangedAttackMob instanceof EntityLivingBase)) {
             throw new IllegalArgumentException("ArrowAttackGoal requires Mob implements RangedAttackMob");
-        } else {
-            this.rangedAttackEntityHost = par1IRangedAttackMob;
-            this.entityHost = (EntityLiving) par1IRangedAttackMob;
-            this.entityMoveSpeed = par2;
-            this.field_96561_g = par4;
-            this.maxRangedAttackTime = par5;
-            this.field_96562_i = par6;
-            this.field_82642_h = par6 * par6;
-            this.setMutexBits(3);
         }
+        this.rangedAttackEntityHost = par1IRangedAttackMob;
+        this.entityHost = (EntityLiving) par1IRangedAttackMob;
+        this.entityMoveSpeed = par2;
+        this.field_96561_g = par4;
+        this.maxRangedAttackTime = par5;
+        this.field_96562_i = par6;
+        this.field_82642_h = par6 * par6;
+        this.setMutexBits(3);
     }
 
     /**
@@ -51,10 +50,9 @@ public class EntityAIArrowAttack extends EntityAIBase {
 
         if (entitylivingbase == null) {
             return false;
-        } else {
-            this.attackTarget = entitylivingbase;
-            return true;
         }
+        this.attackTarget = entitylivingbase;
+        return true;
     }
 
     /**

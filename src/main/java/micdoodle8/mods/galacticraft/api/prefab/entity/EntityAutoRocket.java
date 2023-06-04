@@ -114,26 +114,25 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
     public boolean checkLaunchValidity() {
         this.statusMessageCooldown = 40;
 
-        if (this.hasValidFuel()) {
-            if (this.launchPhase == EnumLaunchPhase.UNIGNITED.ordinal() && !this.worldObj.isRemote) {
-                if (!this.setFrequency()) {
-                    this.destinationFrequency = -1;
-                    this.statusMessage = StatCollector.translateToLocal("gui.message.frequency.name") + "#"
-                            + StatCollector.translateToLocal("gui.message.notSet.name");
-                    this.statusColour = "\u00a7c";
-                    return false;
-                } else {
-                    this.statusMessage = StatCollector.translateToLocal("gui.message.success.name");
-                    this.statusColour = "\u00a7a";
-                    return true;
-                }
-            }
-        } else {
+        if (!this.hasValidFuel()) {
             this.destinationFrequency = -1;
             this.statusMessage = StatCollector.translateToLocal("gui.message.notEnough.name") + "#"
                     + StatCollector.translateToLocal("gui.message.fuel.name");
             this.statusColour = "\u00a7c";
             return false;
+        }
+        if (this.launchPhase == EnumLaunchPhase.UNIGNITED.ordinal() && !this.worldObj.isRemote) {
+            if (!this.setFrequency()) {
+                this.destinationFrequency = -1;
+                this.statusMessage = StatCollector.translateToLocal("gui.message.frequency.name") + "#"
+                        + StatCollector.translateToLocal("gui.message.notSet.name");
+                this.statusColour = "\u00a7c";
+                return false;
+            } else {
+                this.statusMessage = StatCollector.translateToLocal("gui.message.success.name");
+                this.statusColour = "\u00a7a";
+                return true;
+            }
         }
 
         this.destinationFrequency = -1;
@@ -223,15 +222,14 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                             this.targetDimension = tile.getWorldObj().provider.dimensionId;
                         }
 
-                        if (!targetSet) {
-                            if (doSet) {
-                                this.targetVec = null;
-                            }
-
-                            return false;
-                        } else {
+                        if (targetSet) {
                             return true;
                         }
+                        if (doSet) {
+                            this.targetVec = null;
+                        }
+
+                        return false;
                     }
                 }
             } catch (final Exception e) {
@@ -366,11 +364,9 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
 
             if (this.launchPhase == EnumLaunchPhase.LAUNCHED.ordinal()) {
                 this.setPad(null);
-            } else {
-                if (this.launchPhase == EnumLaunchPhase.UNIGNITED.ordinal() && this.landingPad != null
-                        && this.ticks % 17 == 0) {
-                    this.updateControllerSettings(this.landingPad);
-                }
+            } else if (this.launchPhase == EnumLaunchPhase.UNIGNITED.ordinal() && this.landingPad != null
+                    && this.ticks % 17 == 0) {
+                this.updateControllerSettings(this.landingPad);
             }
 
             this.lastStatusMessageCooldown = this.statusMessageCooldown;
@@ -381,11 +377,9 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                 this.rocketSoundUpdater.update();
                 this.rocketSoundToStop = true;
             }
-        } else {
-            // Not ignited - either because not yet launched, or because it has landed
-            if (this.rocketSoundToStop) {
-                this.stopRocketSound();
-            }
+        } else // Not ignited - either because not yet launched, or because it has landed
+        if (this.rocketSoundToStop) {
+            this.stopRocketSound();
         }
     }
 
@@ -425,9 +419,8 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
             this.autoLaunchSetting = null;
 
             return;
-        } else {
-            this.ignite();
         }
+        this.ignite();
     }
 
     public boolean igniteWithResult() {
@@ -437,16 +430,15 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
             super.ignite();
             this.activeLaunchController = null;
             return true;
-        } else {
-            if (this.isPlayerRocket()) {
-                super.ignite();
-                this.activeLaunchController = null;
-                return true;
-            }
-
-            this.activeLaunchController = null;
-            return false;
         }
+        if (this.isPlayerRocket()) {
+            super.ignite();
+            this.activeLaunchController = null;
+            return true;
+        }
+
+        this.activeLaunchController = null;
+        return false;
     }
 
     @Override
@@ -968,27 +960,26 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                     }
 
                     return EnumCargoLoadingState.SUCCESS;
-                } else {
-                    // Part of the stack can fill this slot but there will be some left over
-                    final int origSize = stackAt.stackSize;
-                    final int surplus = origSize + stack.stackSize - stackAt.getMaxStackSize();
-
-                    if (doAdd) {
-                        this.cargoItems[count].stackSize = stackAt.getMaxStackSize();
-                        this.markDirty();
-                    }
-
-                    stack.stackSize = surplus;
-                    if (this.addCargo(stack, doAdd) == EnumCargoLoadingState.SUCCESS) {
-                        return EnumCargoLoadingState.SUCCESS;
-                    }
-
-                    this.cargoItems[count].stackSize = origSize;
-                    if (this.autoLaunchSetting == EnumAutoLaunch.CARGO_IS_FULL) {
-                        this.autoLaunch();
-                    }
-                    return EnumCargoLoadingState.FULL;
                 }
+                // Part of the stack can fill this slot but there will be some left over
+                final int origSize = stackAt.stackSize;
+                final int surplus = origSize + stack.stackSize - stackAt.getMaxStackSize();
+
+                if (doAdd) {
+                    this.cargoItems[count].stackSize = stackAt.getMaxStackSize();
+                    this.markDirty();
+                }
+
+                stack.stackSize = surplus;
+                if (this.addCargo(stack, doAdd) == EnumCargoLoadingState.SUCCESS) {
+                    return EnumCargoLoadingState.SUCCESS;
+                }
+
+                this.cargoItems[count].stackSize = origSize;
+                if (this.autoLaunchSetting == EnumAutoLaunch.CARGO_IS_FULL) {
+                    this.autoLaunch();
+                }
+                return EnumCargoLoadingState.FULL;
             }
         }
 
@@ -1050,24 +1041,23 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
 
     @Override
     public ItemStack decrStackSize(int par1, int par2) {
-        if (this.cargoItems[par1] != null) {
-            ItemStack var3;
-
-            if (this.cargoItems[par1].stackSize <= par2) {
-                var3 = this.cargoItems[par1];
-                this.cargoItems[par1] = null;
-                return var3;
-            } else {
-                var3 = this.cargoItems[par1].splitStack(par2);
-
-                if (this.cargoItems[par1].stackSize == 0) {
-                    this.cargoItems[par1] = null;
-                }
-
-                return var3;
-            }
-        } else {
+        if (this.cargoItems[par1] == null) {
             return null;
+        }
+        ItemStack var3;
+
+        if (this.cargoItems[par1].stackSize <= par2) {
+            var3 = this.cargoItems[par1];
+            this.cargoItems[par1] = null;
+            return var3;
+        } else {
+            var3 = this.cargoItems[par1].splitStack(par2);
+
+            if (this.cargoItems[par1].stackSize == 0) {
+                this.cargoItems[par1] = null;
+            }
+
+            return var3;
         }
     }
 
@@ -1077,9 +1067,8 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
             final ItemStack var2 = this.cargoItems[par1];
             this.cargoItems[par1] = null;
             return var2;
-        } else {
-            return null;
         }
+        return null;
     }
 
     @Override

@@ -87,15 +87,14 @@ public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDes
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int par1, int par2) {
-        if (par2 >= BlockAirLockFrame.METADATA_AIR_LOCK_CONTROLLER) {
-            if (par1 == ForgeDirection.UP.ordinal() || par1 == ForgeDirection.DOWN.ordinal()) {
-                return this.airLockIcons[0];
-            }
-
-            return this.airLockIcons[7];
-        } else {
+        if (par2 < BlockAirLockFrame.METADATA_AIR_LOCK_CONTROLLER) {
             return this.airLockIcons[0];
         }
+        if (par1 == ForgeDirection.UP.ordinal() || par1 == ForgeDirection.DOWN.ordinal()) {
+            return this.airLockIcons[0];
+        }
+
+        return this.airLockIcons[7];
     }
 
     @Override
@@ -118,67 +117,74 @@ public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDes
             } else {
                 return this.airLockIcons[6];
             }
-        } else {
-            for (final ForgeDirection orientation : ForgeDirection.values()) {
-                if (orientation != ForgeDirection.UNKNOWN) {
-                    final Vector3 vector = new Vector3(par2, par3, par4);
-                    Vector3 blockVec = this.modifyPositionFromSide(vector.clone(), orientation, 1);
-                    Block connection = blockVec.getBlock(world);
+        }
+        for (final ForgeDirection orientation : ForgeDirection.values()) {
+            if (orientation != ForgeDirection.UNKNOWN) {
+                final Vector3 vector = new Vector3(par2, par3, par4);
+                Vector3 blockVec = this.modifyPositionFromSide(vector.clone(), orientation, 1);
+                Block connection = blockVec.getBlock(world);
+
+                if (connection != null && connection.equals(GCBlocks.airLockSeal)) {
+                    if (orientation.offsetY == -1) {
+                        if (side == 0) {
+                            return this.airLockIcons[1];
+                        } else if (side == 1) {
+                            return this.airLockIcons[0];
+                        } else {
+                            return this.airLockIcons[2];
+                        }
+                    } else if (orientation.offsetY == 1 || orientation.ordinal() == side) {
+                        if (side == 0) {
+                            return this.airLockIcons[0];
+                        } else if (side == 1) {
+                            return this.airLockIcons[1];
+                        } else {
+                            return this.airLockIcons[3];
+                        }
+                    } else if (orientation.getOpposite().ordinal() == side) {
+                        return this.airLockIcons[0];
+                    }
+
+                    blockVec = vector.clone()
+                            .translate(new Vector3(orientation.offsetX, orientation.offsetY, orientation.offsetZ));
+                    connection = blockVec.getBlock(world);
 
                     if (connection != null && connection.equals(GCBlocks.airLockSeal)) {
-                        if (orientation.offsetY == -1) {
-                            if (side == 0) {
-                                return this.airLockIcons[1];
-                            } else if (side == 1) {
-                                return this.airLockIcons[0];
-                            } else {
-                                return this.airLockIcons[2];
+                        if (orientation.offsetX == 1) {
+                            if (side == 0 || side == 1 || side == 3) {
+                                return this.airLockIcons[4];
+                            } else if (side == 2) {
+                                return this.airLockIcons[5];
                             }
-                        } else if (orientation.offsetY == 1 || orientation.ordinal() == side) {
-                            if (side == 0) {
-                                return this.airLockIcons[0];
-                            } else if (side == 1) {
-                                return this.airLockIcons[1];
-                            } else {
-                                return this.airLockIcons[3];
+                        } else if (orientation.offsetX == -1) {
+                            if (side == 0 || side == 1 || side == 3) {
+                                return this.airLockIcons[5];
+                            } else if (side == 2) {
+                                return this.airLockIcons[4];
                             }
-                        } else if (orientation.getOpposite().ordinal() == side) {
-                            return this.airLockIcons[0];
-                        }
-
-                        blockVec = vector.clone()
-                                .translate(new Vector3(orientation.offsetX, orientation.offsetY, orientation.offsetZ));
-                        connection = blockVec.getBlock(world);
-
-                        if (connection != null && connection.equals(GCBlocks.airLockSeal)) {
-                            if (orientation.offsetX == 1) {
-                                if (side == 0 || side == 1 || side == 3) {
-                                    return this.airLockIcons[4];
-                                } else if (side == 2) {
-                                    return this.airLockIcons[5];
-                                }
-                            } else if (orientation.offsetX == -1) {
-                                if (side == 0 || side == 1 || side == 3) {
-                                    return this.airLockIcons[5];
-                                } else if (side == 2) {
-                                    return this.airLockIcons[4];
-                                }
-                            } else if (orientation.offsetZ == 1) {
-                                if (side == 0 || side == 1) {
+                        } else if (orientation.offsetZ == 1) {
+                            switch (side) {
+                                case 0:
+                                case 1:
                                     return this.airLockIcons[2];
-                                } else if (side == 4) {
+                                case 4:
                                     return this.airLockIcons[4];
-                                } else if (side == 5) {
+                                case 5:
                                     return this.airLockIcons[5];
-                                }
-                            } else if (orientation.offsetZ == -1) {
-                                if (side == 0 || side == 1) {
+                                default:
+                                    break;
+                            }
+                        } else if (orientation.offsetZ == -1) {
+                            switch (side) {
+                                case 0:
+                                case 1:
                                     return this.airLockIcons[3];
-                                } else if (side == 4) {
+                                case 4:
                                     return this.airLockIcons[5];
-                                } else if (side == 5) {
+                                case 5:
                                     return this.airLockIcons[4];
-                                }
+                                default:
+                                    break;
                             }
                         }
                     }
@@ -217,9 +223,8 @@ public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDes
     public TileEntity createTileEntity(World world, int metadata) {
         if (metadata < BlockAirLockFrame.METADATA_AIR_LOCK_CONTROLLER) {
             return new TileEntityAirLock();
-        } else {
-            return new TileEntityAirLockController();
         }
+        return new TileEntityAirLockController();
     }
 
     @Override
@@ -256,7 +261,8 @@ public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDes
     public int damageDropped(int metadata) {
         if (metadata >= BlockAirLockFrame.METADATA_AIR_LOCK_CONTROLLER) {
             return BlockAirLockFrame.METADATA_AIR_LOCK_CONTROLLER;
-        } else if (metadata >= BlockAirLockFrame.METADATA_AIR_LOCK_FRAME) {
+        }
+        if (metadata >= BlockAirLockFrame.METADATA_AIR_LOCK_FRAME) {
             return BlockAirLockFrame.METADATA_AIR_LOCK_FRAME;
         }
 

@@ -171,23 +171,22 @@ public class GuiElementTextBox extends GuiButton {
     }
 
     public boolean isValid(String string) {
-        if (this.numericOnly) {
-            if (string.length() > 0 && ChatAllowedCharacters.isAllowedCharacter(string.charAt(string.length() - 1))) {
-                try {
-                    Integer.parseInt(string);
-                    return true;
-                } catch (final Exception e) {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        } else {
+        if (!this.numericOnly) {
             if (string.length() <= 0) {
                 return false;
             }
 
             return ChatAllowedCharacters.isAllowedCharacter(string.charAt(string.length() - 1));
+        }
+        if (string.length() > 0 && ChatAllowedCharacters.isAllowedCharacter(string.charAt(string.length() - 1))) {
+            try {
+                Integer.parseInt(string);
+                return true;
+            } catch (final Exception e) {
+                return false;
+            }
+        } else {
+            return false;
         }
     }
 
@@ -204,10 +203,9 @@ public class GuiElementTextBox extends GuiButton {
             this.text = this.parentGui.getInitialText(this);
             this.parentGui.onTextChanged(this, this.text);
             return true;
-        } else {
-            this.isTextFocused = false;
-            return false;
         }
+        this.isTextFocused = false;
+        return false;
     }
 
     public int getMaxLength() {

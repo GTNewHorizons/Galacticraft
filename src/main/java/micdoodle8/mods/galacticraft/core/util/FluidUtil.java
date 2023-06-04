@@ -342,33 +342,19 @@ public class FluidUtil {
     public static ItemStack getUsedContainer(ItemStack container) {
         if (FluidContainerRegistry.isBucket(container) && FluidContainerRegistry.isFilledContainer(container)) {
             return new ItemStack(Items.bucket, container.stackSize);
-        } else {
-            container.stackSize--;
-
-            if (container.stackSize == 0) {
-                return null;
-            }
-
-            return container;
         }
+        container.stackSize--;
+
+        if (container.stackSize == 0) {
+            return null;
+        }
+
+        return container;
     }
 
     public static int getFluidID(FluidStack stack) {
         try {
-            if (oldFluidIDMethod) {
-                try {
-                    if (getFluidMethod == null) {
-                        if (fluidStackClass == null) {
-                            fluidStackClass = Class.forName("net.minecraftforge.fluids.FluidStack");
-                        }
-                        getFluidMethod = fluidStackClass.getDeclaredMethod("getFluidID");
-                    }
-                    return (Integer) getFluidMethod.invoke(stack);
-                } catch (final NoSuchMethodException error) {
-                    oldFluidIDMethod = false;
-                    getFluidID(stack);
-                }
-            } else {
+            if (!oldFluidIDMethod) {
                 if (fluidIdField == null) {
                     if (fluidStackClass == null) {
                         fluidStackClass = Class.forName("net.minecraftforge.fluids.FluidStack");
@@ -376,6 +362,18 @@ public class FluidUtil {
                     fluidIdField = fluidStackClass.getDeclaredField("fluidID");
                 }
                 return fluidIdField.getInt(stack);
+            }
+            try {
+                if (getFluidMethod == null) {
+                    if (fluidStackClass == null) {
+                        fluidStackClass = Class.forName("net.minecraftforge.fluids.FluidStack");
+                    }
+                    getFluidMethod = fluidStackClass.getDeclaredMethod("getFluidID");
+                }
+                return (Integer) getFluidMethod.invoke(stack);
+            } catch (final NoSuchMethodException error) {
+                oldFluidIDMethod = false;
+                getFluidID(stack);
             }
         } catch (final Exception e) {
             e.printStackTrace();

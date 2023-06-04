@@ -423,9 +423,8 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
         public int hashCode() {
             if (this.centre != null) {
                 return this.centre.hashCode();
-            } else {
-                return 0;
             }
+            return 0;
         }
 
         @Override

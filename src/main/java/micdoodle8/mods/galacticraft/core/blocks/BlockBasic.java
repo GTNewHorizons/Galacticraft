@@ -121,17 +121,16 @@ public class BlockBasic extends Block implements IDetectableResource {
 
     @Override
     public int quantityDropped(int meta, int fortune, Random random) {
-        if (fortune > 0 && Item.getItemFromBlock(this) != this.getItemDropped(meta, random, fortune)) {
-            int j = random.nextInt(fortune + 2) - 1;
-
-            if (j < 0) {
-                j = 0;
-            }
-
-            return this.quantityDropped(random) * (j + 1);
-        } else {
+        if ((fortune <= 0) || (Item.getItemFromBlock(this) == this.getItemDropped(meta, random, fortune))) {
             return this.quantityDropped(random);
         }
+        int j = random.nextInt(fortune + 2) - 1;
+
+        if (j < 0) {
+            j = 0;
+        }
+
+        return this.quantityDropped(random) * (j + 1);
     }
 
     @Override
@@ -142,7 +141,8 @@ public class BlockBasic extends Block implements IDetectableResource {
         if (metadata < 5) {
             return 2.0F;
             // Decoration blocks are soft, like cauldrons or wood
-        } else if (metadata == 12) {
+        }
+        if (metadata == 12) {
             return 8.0F;
             // Meteoric Iron is tougher than diamond
         } else if (metadata > 8) {
@@ -157,16 +157,16 @@ public class BlockBasic extends Block implements IDetectableResource {
     public float getBlockHardness(World par1World, int par2, int par3, int par4) {
         final int meta = par1World.getBlockMetadata(par2, par3, par4);
 
-        if (meta == 5 || meta == 6) {
-            return 5.0F;
-        }
-
-        if (meta == 7) {
-            return 6.0F;
-        }
-
-        if (meta == 8) {
-            return 3.0F;
+        switch (meta) {
+            case 5:
+            case 6:
+                return 5.0F;
+            case 7:
+                return 6.0F;
+            case 8:
+                return 3.0F;
+            default:
+                break;
         }
 
         return this.blockHardness;

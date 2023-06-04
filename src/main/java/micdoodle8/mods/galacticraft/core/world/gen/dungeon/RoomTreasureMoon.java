@@ -49,13 +49,11 @@ public class RoomTreasureMoon extends DungeonRoom {
                                 cz,
                                 this.dungeonInstance.DUNGEON_WALL_ID,
                                 this.dungeonInstance.DUNGEON_WALL_META);
+                    } else if ((i == this.posX || i == this.posX + this.sizeX - 1)
+                            && (k == this.posZ || k == this.posZ + this.sizeZ - 1)) {
+                        this.placeBlock(chunk, meta, i, j, k, cx, cz, Blocks.glowstone, 0);
                     } else {
-                        if ((i == this.posX || i == this.posX + this.sizeX - 1)
-                                && (k == this.posZ || k == this.posZ + this.sizeZ - 1)) {
-                            this.placeBlock(chunk, meta, i, j, k, cx, cz, Blocks.glowstone, 0);
-                        } else {
-                            this.placeBlock(chunk, meta, i, j, k, cx, cz, Blocks.air, 0);
-                        }
+                        this.placeBlock(chunk, meta, i, j, k, cx, cz, Blocks.air, 0);
                     }
                 }
             }

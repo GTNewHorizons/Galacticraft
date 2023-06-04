@@ -261,9 +261,8 @@ public class ThreadFindSeal {
                             otherSealer.stopSealThreadCooldown = 75 + TileEntityOxygenSealer.countEntities;
                             checkedSave += this.checkedSize;
                             break;
-                        } else {
-                            sealersDone.addAll(this.sealers);
                         }
+                        sealersDone.addAll(this.sealers);
                         checkedSave += this.checkedSize;
                     }
                 }
@@ -439,18 +438,16 @@ public class ThreadFindSeal {
                                 } else {
                                     this.checkedAdd(sideVec);
                                 }
+                            } else if (id != null && id != airBlock && id != airBlockBright) {
+                                // This test applies any necessary checkedAdd();
+                                if (this.canBlockPassAirCheck(id, sideVec, side)) {
+                                    // Look outbound through partially sealable blocks in case there is
+                                    // breatheableAir to clear beyond
+                                    nextLayer.add(sideVec);
+                                }
                             } else {
-                                if (id != null && id != airBlock && id != airBlockBright) {
-                                    // This test applies any necessary checkedAdd();
-                                    if (this.canBlockPassAirCheck(id, sideVec, side)) {
-                                        // Look outbound through partially sealable blocks in case there is
-                                        // breatheableAir to clear beyond
-                                        nextLayer.add(sideVec);
-                                    }
-                                } else {
-                                    if (id != null) {
-                                        this.checkedAdd(sideVec);
-                                    }
+                                if (id != null) {
+                                    this.checkedAdd(sideVec);
                                 }
                             }
                         }
@@ -511,19 +508,17 @@ public class ThreadFindSeal {
                             } else {
                                 this.checkedAdd(sideVec);
                             }
+                        } else if (id != null && Blocks.air != id && id != GCBlocks.brightAir) {
+                            // This test applies any necessary checkedAdd();
+                            if (this.canBlockPassAirCheck(id, sideVec, side)) {
+                                // Look outbound through partially sealable blocks in case there is
+                                // breatheableAir
+                                // to clear beyond
+                                nextLayer.add(sideVec);
+                            }
                         } else {
-                            if (id != null && Blocks.air != id && id != GCBlocks.brightAir) {
-                                // This test applies any necessary checkedAdd();
-                                if (this.canBlockPassAirCheck(id, sideVec, side)) {
-                                    // Look outbound through partially sealable blocks in case there is
-                                    // breatheableAir
-                                    // to clear beyond
-                                    nextLayer.add(sideVec);
-                                }
-                            } else {
-                                if (id != null) {
-                                    this.checkedAdd(sideVec);
-                                }
+                            if (id != null) {
+                                this.checkedAdd(sideVec);
                             }
                         }
                     }

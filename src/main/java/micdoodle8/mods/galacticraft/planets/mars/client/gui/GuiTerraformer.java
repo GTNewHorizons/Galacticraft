@@ -215,7 +215,8 @@ public class GuiTerraformer extends GuiContainerGC implements ICheckBoxCallback 
             return EnumColor.RED + GCCoreUtil.translate("gui.message.trees.name")
                     + ": "
                     + GCCoreUtil.translate("gui.message.noValidBlocks.name");
-        } else if (!this.terraformer.grassDisabled && this.terraformer.terraformableBlocksListSize <= 0) {
+        }
+        if (!this.terraformer.grassDisabled && this.terraformer.terraformableBlocksListSize <= 0) {
             return EnumColor.RED + GCCoreUtil.translate("gui.message.grass.name")
                     + ": "
                     + GCCoreUtil.translate("gui.message.noValidBlocks.name");

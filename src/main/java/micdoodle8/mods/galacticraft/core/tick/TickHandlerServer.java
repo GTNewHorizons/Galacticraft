@@ -427,22 +427,20 @@ public class TickHandlerServer {
                 for (final ScheduledBlockChange change : changeList) {
                     if (++blockCount > blockCountMax) {
                         newList.add(change);
-                    } else {
-                        if (change != null) {
-                            final BlockVec3 changePosition = change.getChangePosition();
-                            final Block block = world.getBlock(changePosition.x, changePosition.y, changePosition.z);
-                            // Only replace blocks of type BlockAir or fire - this is to prevent accidents
-                            // where other
-                            // mods have moved blocks
-                            if (changePosition != null && (block instanceof BlockAir || block == Blocks.fire)) {
-                                world.setBlock(
-                                        changePosition.x,
-                                        changePosition.y,
-                                        changePosition.z,
-                                        change.getChangeID(),
-                                        change.getChangeMeta(),
-                                        change.getChangeUpdateFlag());
-                            }
+                    } else if (change != null) {
+                        final BlockVec3 changePosition = change.getChangePosition();
+                        final Block block = world.getBlock(changePosition.x, changePosition.y, changePosition.z);
+                        // Only replace blocks of type BlockAir or fire - this is to prevent accidents
+                        // where other
+                        // mods have moved blocks
+                        if (changePosition != null && (block instanceof BlockAir || block == Blocks.fire)) {
+                            world.setBlock(
+                                    changePosition.x,
+                                    changePosition.y,
+                                    changePosition.z,
+                                    change.getChangeID(),
+                                    change.getChangeMeta(),
+                                    change.getChangeUpdateFlag());
                         }
                     }
                 }

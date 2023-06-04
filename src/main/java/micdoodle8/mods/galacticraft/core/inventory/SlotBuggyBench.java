@@ -59,7 +59,8 @@ public class SlotBuggyBench extends Slot {
     public boolean isItemValid(ItemStack itemStack) {
         if (this.index == 1) {
             return itemStack.getItem() == GCItems.basicItem && itemStack.getItemDamage() == 19;
-        } else if (this.index == 2) {
+        }
+        if (this.index == 2) {
             return itemStack.getItem() == GCItems.partBuggy && itemStack.getItemDamage() == 1;
         } else if (this.index == 3 && GalacticraftCore.isGalaxySpaceLoaded) {
             return itemStack.getItem()

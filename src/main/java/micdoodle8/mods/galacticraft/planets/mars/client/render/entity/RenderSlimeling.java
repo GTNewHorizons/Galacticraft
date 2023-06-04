@@ -58,7 +58,8 @@ public class RenderSlimeling extends RenderLiving {
     protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3) {
         if (par1EntityLivingBase.isInvisible()) {
             return 0;
-        } else if (par2 == 0) {
+        }
+        if (par2 == 0) {
             this.setRenderPassModel(this.renderPassModel);
             GL11.glEnable(GL11.GL_NORMALIZE);
             GL11.glEnable(GL11.GL_BLEND);

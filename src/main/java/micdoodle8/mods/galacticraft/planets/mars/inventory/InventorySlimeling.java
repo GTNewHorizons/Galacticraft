@@ -40,9 +40,8 @@ public class InventorySlimeling implements IInventory {
             final ItemStack var2 = this.stackList[par1];
             this.stackList[par1] = null;
             return var2;
-        } else {
-            return null;
         }
+        return null;
     }
 
     private void removeInventoryBagContents() {
@@ -63,33 +62,32 @@ public class InventorySlimeling implements IInventory {
 
     @Override
     public ItemStack decrStackSize(int par1, int par2) {
-        if (this.stackList[par1] != null) {
-            ItemStack var3;
+        if (this.stackList[par1] == null) {
+            return null;
+        }
+        ItemStack var3;
 
-            // It's a removal of the Slimeling Inventory Bag
-            if (par1 == 1 && this.stackList[par1].stackSize <= par2) {
-                this.removeInventoryBagContents();
-                var3 = this.stackList[par1];
-                this.stackList[par1] = null;
-                return var3;
-            } else
-            // Normal case of decrStackSize for a slot
-            {
-                var3 = this.stackList[par1].splitStack(par2);
+        // It's a removal of the Slimeling Inventory Bag
+        if (par1 == 1 && this.stackList[par1].stackSize <= par2) {
+            this.removeInventoryBagContents();
+            var3 = this.stackList[par1];
+            this.stackList[par1] = null;
+            return var3;
+        } else
+        // Normal case of decrStackSize for a slot
+        {
+            var3 = this.stackList[par1].splitStack(par2);
 
-                if (this.stackList[par1].stackSize == 0) {
-                    // Not sure if this is necessary again, given the above?
-                    if (par1 == 1) {
-                        this.removeInventoryBagContents();
-                    }
-
-                    this.stackList[par1] = null;
+            if (this.stackList[par1].stackSize == 0) {
+                // Not sure if this is necessary again, given the above?
+                if (par1 == 1) {
+                    this.removeInventoryBagContents();
                 }
 
-                return var3;
+                this.stackList[par1] = null;
             }
-        } else {
-            return null;
+
+            return var3;
         }
     }
 

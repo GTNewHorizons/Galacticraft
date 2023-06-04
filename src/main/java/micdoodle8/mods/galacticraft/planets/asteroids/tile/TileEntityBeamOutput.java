@@ -208,7 +208,8 @@ public abstract class TileEntityBeamOutput extends TileEntityAdvanced implements
 
         if (thisDistance < otherDistance) {
             return 1;
-        } else if (thisDistance > otherDistance) {
+        }
+        if (thisDistance > otherDistance) {
             return -1;
         }
 
@@ -230,15 +231,14 @@ public abstract class TileEntityBeamOutput extends TileEntityAdvanced implements
                 }
             }
 
-            if (index == -1) {
-                // This shouldn't happen, but just in case...
-                this.initiateReflector();
-            } else {
+            if (index != -1) {
                 index++;
                 index %= this.nodeList.size();
                 this.setTarget(this.nodeList.get(index));
                 return true;
             }
+            // This shouldn't happen, but just in case...
+            this.initiateReflector();
         }
 
         return false;

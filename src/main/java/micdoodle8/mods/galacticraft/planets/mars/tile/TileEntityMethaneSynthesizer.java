@@ -122,12 +122,10 @@ public class TileEntityMethaneSynthesizer extends TileBaseElectricBlockWithInven
                         this.processTicks = this.canProcess() ? this.processTimeRequired : 0;
                     }
                 }
-            } else {
-                if (this.processTicks > 0) {
-                    this.processTicks = 0;
-                } else if (--this.processTicks <= -8) {
-                    this.processTicks = -8;
-                }
+            } else if (this.processTicks > 0) {
+                this.processTicks = 0;
+            } else if (--this.processTicks <= -8) {
+                this.processTicks = -8;
             }
         }
     }

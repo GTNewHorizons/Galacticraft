@@ -113,7 +113,8 @@ public class DrawGameScreen extends IScreenManager {
                 this.tickDrawn = ticks;
                 this.tileCount = 1;
                 return;
-            } else if (ticks == this.tickDrawn) {
+            }
+            if (ticks == this.tickDrawn) {
                 this.tileCount++;
                 return;
             } else {
@@ -129,12 +130,9 @@ public class DrawGameScreen extends IScreenManager {
             if (this.callCount == 1 || this.tickDrawn == ticks) {
                 this.tickDrawn = ticks;
                 return;
-            } else
-            // The callCount last tick was less than the tileCount, reinitialise
-            {
-                this.initialise = true;
-                // but draw this tick [probably a tileEntity moved out of the frustum]
             }
+            this.initialise = true;
+            // but draw this tick [probably a tileEntity moved out of the frustum]
         }
 
         if (this.callCount == this.tileCount) {

@@ -97,7 +97,8 @@ public class BlockOxygenSealer extends BlockAdvancedTile implements ItemBlockDes
     public IIcon getIcon(int side, int metadata) {
         if (side == 1) {
             return this.iconSealer;
-        } else if (side == metadata + 2) {
+        }
+        if (side == metadata + 2) {
             return this.iconOutput;
         } else if (side == ForgeDirection.getOrientation(metadata + 2).getOpposite().ordinal()) {
             return this.iconInput;

@@ -316,7 +316,8 @@ public class MarsModule implements IPlanetsModule {
             if (ID == GuiIdsPlanets.MACHINE_MARS) {
                 if (tile instanceof TileEntityTerraformer) {
                     return new ContainerTerraformer(player.inventory, (TileEntityTerraformer) tile);
-                } else if (tile instanceof TileEntityLaunchController) {
+                }
+                if (tile instanceof TileEntityLaunchController) {
                     return new ContainerLaunchController(player.inventory, (TileEntityLaunchController) tile);
                 } else if (tile instanceof TileEntityElectrolyzer) {
                     return new ContainerElectrolyzer(player.inventory, (TileEntityElectrolyzer) tile);

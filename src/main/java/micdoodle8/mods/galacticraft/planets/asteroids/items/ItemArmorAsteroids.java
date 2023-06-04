@@ -37,7 +37,8 @@ public class ItemArmorAsteroids extends ItemArmor {
         if (this.getArmorMaterial() == AsteroidsItems.ARMOR_TITANIUM) {
             if (stack.getItem() == AsteroidsItems.titaniumHelmet) {
                 return AsteroidsModule.TEXTURE_PREFIX + "textures/model/armor/titanium_1.png";
-            } else if (stack.getItem() == AsteroidsItems.titaniumChestplate
+            }
+            if (stack.getItem() == AsteroidsItems.titaniumChestplate
                     || stack.getItem() == AsteroidsItems.titaniumBoots) {
                         return AsteroidsModule.TEXTURE_PREFIX + "textures/model/armor/titanium_2.png";
                     } else

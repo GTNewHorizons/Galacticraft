@@ -184,15 +184,14 @@ public class GalacticraftRegistry {
         if (flag) {
             GalacticraftRegistry.worldProviderIDs.add(id);
             return true;
-        } else {
-            GalacticraftRegistry.worldProviderIDs.add(defaultID); // Adding the 0 here preserves the order, important
-            // for network compatibility between GC
-            // versions
-            FMLLog.severe(
-                    "Could not register dimension " + id
-                            + " - does it clash with another mod?  Change the ID in config.");
-            return false;
         }
+        GalacticraftRegistry.worldProviderIDs.add(defaultID); // Adding the 0 here preserves the order, important
+        // for network compatibility between GC
+        // versions
+        FMLLog.severe(
+                "Could not register dimension " + id
+                        + " - does it clash with another mod?  Change the ID in config.");
+        return false;
     }
 
     /**

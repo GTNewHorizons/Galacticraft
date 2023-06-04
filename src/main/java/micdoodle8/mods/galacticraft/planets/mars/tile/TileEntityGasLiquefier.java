@@ -253,12 +253,10 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
                         this.processTicks = this.canProcess() ? this.processTimeRequired : 0;
                     }
                 }
-            } else {
-                if (this.processTicks > 0) {
-                    this.processTicks = 0;
-                } else if (--this.processTicks <= -10) {
-                    this.processTicks = -10;
-                }
+            } else if (this.processTicks > 0) {
+                this.processTicks = 0;
+            } else if (--this.processTicks <= -10) {
+                this.processTicks = -10;
             }
         }
     }
@@ -395,12 +393,10 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
                     amountToDrain = 1;
                 }
             } while (airProducts > 0);
+        } else if (gasAmount == 1) {
+            this.gasTank.drain(this.placeIntoFluidTanks(this.gasTankType, 1), true);
         } else {
-            if (gasAmount == 1) {
-                this.gasTank.drain(this.placeIntoFluidTanks(this.gasTankType, 1), true);
-            } else {
-                this.gasTank.drain(this.placeIntoFluidTanks(this.gasTankType, Math.min(gasAmount / 2, 3)) * 2, true);
-            }
+            this.gasTank.drain(this.placeIntoFluidTanks(this.gasTankType, Math.min(gasAmount / 2, 3)) * 2, true);
         }
     }
 

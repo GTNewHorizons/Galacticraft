@@ -95,64 +95,63 @@ public class StructureVillagePiecesMoon {
 
         if (var8 <= 0) {
             return null;
-        } else {
-            int var9 = 0;
+        }
+        int var9 = 0;
 
-            while (var9 < 5) {
-                ++var9;
-                int var10 = par2Random.nextInt(var8);
-                final Iterator<StructureVillagePieceWeightMoon> var11 = par0ComponentVillageStartPiece.structureVillageWeightedPieceList
-                        .iterator();
+        while (var9 < 5) {
+            ++var9;
+            int var10 = par2Random.nextInt(var8);
+            final Iterator<StructureVillagePieceWeightMoon> var11 = par0ComponentVillageStartPiece.structureVillageWeightedPieceList
+                    .iterator();
 
-                while (var11.hasNext()) {
-                    final StructureVillagePieceWeightMoon var12 = var11.next();
-                    var10 -= var12.villagePieceWeight;
+            while (var11.hasNext()) {
+                final StructureVillagePieceWeightMoon var12 = var11.next();
+                var10 -= var12.villagePieceWeight;
 
-                    if (var10 < 0) {
-                        if (!var12.canSpawnMoreVillagePiecesOfType(par7) || var12
-                                == par0ComponentVillageStartPiece.structVillagePieceWeight
-                                && par0ComponentVillageStartPiece.structureVillageWeightedPieceList.size() > 1) {
-                            break;
+                if (var10 < 0) {
+                    if (!var12.canSpawnMoreVillagePiecesOfType(par7) || var12
+                            == par0ComponentVillageStartPiece.structVillagePieceWeight
+                            && par0ComponentVillageStartPiece.structureVillageWeightedPieceList.size() > 1) {
+                        break;
+                    }
+
+                    final StructureComponentVillage var13 = StructureVillagePiecesMoon.func_75083_a(
+                            par0ComponentVillageStartPiece,
+                            var12,
+                            par1List,
+                            par2Random,
+                            par3,
+                            par4,
+                            par5,
+                            par6,
+                            par7);
+
+                    if (var13 != null) {
+                        ++var12.villagePiecesSpawned;
+                        par0ComponentVillageStartPiece.structVillagePieceWeight = var12;
+
+                        if (!var12.canSpawnMoreVillagePieces()) {
+                            par0ComponentVillageStartPiece.structureVillageWeightedPieceList.remove(var12);
                         }
 
-                        final StructureComponentVillage var13 = StructureVillagePiecesMoon.func_75083_a(
-                                par0ComponentVillageStartPiece,
-                                var12,
-                                par1List,
-                                par2Random,
-                                par3,
-                                par4,
-                                par5,
-                                par6,
-                                par7);
-
-                        if (var13 != null) {
-                            ++var12.villagePiecesSpawned;
-                            par0ComponentVillageStartPiece.structVillagePieceWeight = var12;
-
-                            if (!var12.canSpawnMoreVillagePieces()) {
-                                par0ComponentVillageStartPiece.structureVillageWeightedPieceList.remove(var12);
-                            }
-
-                            return var13;
-                        }
+                        return var13;
                     }
                 }
             }
+        }
 
-            final StructureBoundingBox var14 = StructureComponentVillageTorch
-                    .func_74904_a(par0ComponentVillageStartPiece, par1List, par2Random, par3, par4, par5, par6);
+        final StructureBoundingBox var14 = StructureComponentVillageTorch
+                .func_74904_a(par0ComponentVillageStartPiece, par1List, par2Random, par3, par4, par5, par6);
 
-            if (var14 != null) {
-                return new StructureComponentVillageTorch(
-                        par0ComponentVillageStartPiece,
-                        par7,
-                        par2Random,
-                        var14,
-                        par6);
-            } else {
-                return null;
-            }
+        if (var14 != null) {
+            return new StructureComponentVillageTorch(
+                    par0ComponentVillageStartPiece,
+                    par7,
+                    par2Random,
+                    var14,
+                    par6);
+        } else {
+            return null;
         }
     }
 
@@ -162,56 +161,54 @@ public class StructureVillagePiecesMoon {
     private static StructureComponent getNextVillageStructureComponent(
             StructureComponentVillageStartPiece par0ComponentVillageStartPiece, List<StructureComponent> par1List,
             Random par2Random, int par3, int par4, int par5, int par6, int par7) {
-        if (par7 > 50 || ((Math.abs(par3 - par0ComponentVillageStartPiece.getBoundingBox().minX) > 112)
-                || (Math.abs(par5 - par0ComponentVillageStartPiece.getBoundingBox().minZ) > 112))) {
-            return null;
-        } else {
-            final StructureComponentVillage var8 = StructureVillagePiecesMoon.getNextVillageComponent(
-                    par0ComponentVillageStartPiece,
-                    par1List,
-                    par2Random,
-                    par3,
-                    par4,
-                    par5,
-                    par6,
-                    par7 + 1);
-
-            if (var8 != null) {
-                par1List.add(var8);
-                par0ComponentVillageStartPiece.field_74932_i.add(var8);
-                return var8;
-            }
-
+        if (par7 > 50 || Math.abs(par3 - par0ComponentVillageStartPiece.getBoundingBox().minX) > 112
+                || Math.abs(par5 - par0ComponentVillageStartPiece.getBoundingBox().minZ) > 112) {
             return null;
         }
+        final StructureComponentVillage var8 = StructureVillagePiecesMoon.getNextVillageComponent(
+                par0ComponentVillageStartPiece,
+                par1List,
+                par2Random,
+                par3,
+                par4,
+                par5,
+                par6,
+                par7 + 1);
+
+        if (var8 != null) {
+            par1List.add(var8);
+            par0ComponentVillageStartPiece.field_74932_i.add(var8);
+            return var8;
+        }
+
+        return null;
     }
 
     private static StructureComponent getNextComponentVillagePath(
             StructureComponentVillageStartPiece par0ComponentVillageStartPiece, List<StructureComponent> par1List,
             Random par2Random, int par3, int par4, int par5, int par6, int par7) {
         if (par7 > 3 + par0ComponentVillageStartPiece.terrainType
-                || ((Math.abs(par3 - par0ComponentVillageStartPiece.getBoundingBox().minX) > 112)
-                        || (Math.abs(par5 - par0ComponentVillageStartPiece.getBoundingBox().minZ) > 112))) {
-            return null;
-        } else {
-            final StructureBoundingBox var8 = StructureComponentVillagePathGen
-                    .func_74933_a(par0ComponentVillageStartPiece, par1List, par2Random, par3, par4, par5, par6);
-
-            if (var8 != null && var8.minY > 10) {
-                final StructureComponentVillagePathGen var9 = new StructureComponentVillagePathGen(
-                        par0ComponentVillageStartPiece,
-                        par7,
-                        par2Random,
-                        var8,
-                        par6);
-
-                par1List.add(var9);
-                par0ComponentVillageStartPiece.field_74930_j.add(var9);
-                return var9;
-            }
-
+                || Math.abs(par3 - par0ComponentVillageStartPiece.getBoundingBox().minX) > 112
+                        || Math.abs(par5 - par0ComponentVillageStartPiece.getBoundingBox().minZ) > 112) {
             return null;
         }
+        final StructureBoundingBox var8 = StructureComponentVillagePathGen
+                .func_74933_a(par0ComponentVillageStartPiece, par1List, par2Random, par3, par4, par5, par6);
+
+        if (var8 != null && var8.minY > 10) {
+            final StructureComponentVillagePathGen var9 = new StructureComponentVillagePathGen(
+                    par0ComponentVillageStartPiece,
+                    par7,
+                    par2Random,
+                    var8,
+                    par6);
+
+            par1List.add(var9);
+            par0ComponentVillageStartPiece.field_74930_j.add(var9);
+            return var9;
+        }
+
+        return null;
     }
 
     /**

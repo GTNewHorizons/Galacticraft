@@ -508,7 +508,8 @@ public class ClientProxyCore extends CommonProxyCore {
     public int getBlockRender(Block blockID) {
         if (blockID == GCBlocks.breatheableAir || blockID == GCBlocks.brightBreatheableAir) {
             return ClientProxyCore.renderIdBreathableAir;
-        } else if (blockID == GCBlocks.oxygenPipe) {
+        }
+        if (blockID == GCBlocks.oxygenPipe) {
             return ClientProxyCore.renderIdOxygenPipe;
         } else if (blockID == GCBlocks.fallenMeteor) {
             return ClientProxyCore.renderIdMeteor;
@@ -561,11 +562,10 @@ public class ClientProxyCore extends CommonProxyCore {
     }
 
     public static void renderLiquidOverlays(float partialTicks) {
-        if (ClientProxyCore.isInsideOfFluid(ClientProxyCore.mc.thePlayer, GalacticraftCore.fluidOil)) {
-            ClientProxyCore.mc.getTextureManager().bindTexture(ClientProxyCore.underOilTexture);
-        } else {
+        if (!ClientProxyCore.isInsideOfFluid(ClientProxyCore.mc.thePlayer, GalacticraftCore.fluidOil)) {
             return;
         }
+        ClientProxyCore.mc.getTextureManager().bindTexture(ClientProxyCore.underOilTexture);
 
         final Tessellator tessellator = Tessellator.instance;
         final float f1 = ClientProxyCore.mc.thePlayer.getBrightness(partialTicks) / 3.0F;
@@ -599,18 +599,15 @@ public class ClientProxyCore extends CommonProxyCore {
         final int k = MathHelper.floor_double(entity.posZ);
         final Block block = entity.worldObj.getBlock(i, j, k);
 
-        if (block != null && block instanceof IFluidBlock
-                && ((IFluidBlock) block).getFluid() != null
-                && ((IFluidBlock) block).getFluid().getName().equals(fluid.getName())) {
-            double filled = ((IFluidBlock) block).getFilledPercentage(entity.worldObj, i, j, k);
-            if (filled < 0) {
-                filled *= -1;
-                return d0 > j + (1 - filled);
-            } else {
-                return d0 < j + filled;
-            }
-        } else {
+        if ((block == null) || !(block instanceof IFluidBlock) || (((IFluidBlock) block).getFluid() == null) || !((IFluidBlock) block).getFluid().getName().equals(fluid.getName())) {
             return false;
+        }
+        double filled = ((IFluidBlock) block).getFilledPercentage(entity.worldObj, i, j, k);
+        if (filled < 0) {
+            filled *= -1;
+            return d0 > j + (1 - filled);
+        } else {
+            return d0 < j + filled;
         }
     }
 
@@ -724,13 +721,12 @@ public class ClientProxyCore extends CommonProxyCore {
                                         public BufferedImage parseUserSkin(BufferedImage p_78432_1_) {
                                             if (p_78432_1_ == null) {
                                                 return null;
-                                            } else {
-                                                final BufferedImage bufferedimage1 = new BufferedImage(512, 256, 2);
-                                                final Graphics graphics = bufferedimage1.getGraphics();
-                                                graphics.drawImage(p_78432_1_, 0, 0, null);
-                                                graphics.dispose();
-                                                p_78432_1_ = bufferedimage1;
                                             }
+                                            final BufferedImage bufferedimage1 = new BufferedImage(512, 256, 2);
+                                            final Graphics graphics = bufferedimage1.getGraphics();
+                                            graphics.drawImage(p_78432_1_, 0, 0, null);
+                                            graphics.dispose();
+                                            p_78432_1_ = bufferedimage1;
                                             return p_78432_1_;
                                         }
 
@@ -1155,9 +1151,8 @@ public class ClientProxyCore extends CommonProxyCore {
     public EntityPlayer getPlayerFromNetHandler(INetHandler handler) {
         if (handler instanceof NetHandlerPlayServer) {
             return ((NetHandlerPlayServer) handler).playerEntity;
-        } else {
-            return FMLClientHandler.instance().getClientPlayerEntity();
         }
+        return FMLClientHandler.instance().getClientPlayerEntity();
     }
 
     // For testing purposes only

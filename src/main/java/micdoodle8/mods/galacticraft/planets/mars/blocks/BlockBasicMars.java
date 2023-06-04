@@ -195,7 +195,8 @@ public class BlockBasicMars extends Block
     public Item getItemDropped(int meta, Random random, int par3) {
         if (meta == 2) {
             return MarsItems.marsItemBasic;
-        } else if (meta == 10) {
+        }
+        if (meta == 10) {
             return Item.getItemFromBlock(Blocks.air);
         }
 
@@ -206,7 +207,8 @@ public class BlockBasicMars extends Block
     public int damageDropped(int meta) {
         if (meta == 9) {
             return 4;
-        } else if (meta == 2) {
+        }
+        if (meta == 2) {
             return 0;
         } else {
             return meta;
@@ -222,7 +224,8 @@ public class BlockBasicMars extends Block
     public int quantityDropped(int meta, int fortune, Random random) {
         if (meta == 10) {
             return 0;
-        } else if (meta == 2 && fortune >= 1) {
+        }
+        if (meta == 2 && fortune >= 1) {
             return random.nextFloat() < fortune * 0.29F - 0.25F ? 2 : 1;
         }
 
@@ -312,14 +315,15 @@ public class BlockBasicMars extends Block
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
         final int metadata = world.getBlockMetadata(x, y, z);
-        if (metadata == 2) {
-            return new ItemStack(Item.getItemFromBlock(this), 1, metadata);
-        }
-        if (metadata == 9) {
-            return new ItemStack(Item.getItemFromBlock(this), 1, metadata);
-        }
-        if (metadata == 10) {
-            return null;
+        switch (metadata) {
+            case 2:
+                return new ItemStack(Item.getItemFromBlock(this), 1, metadata);
+            case 9:
+                return new ItemStack(Item.getItemFromBlock(this), 1, metadata);
+            case 10:
+                return null;
+            default:
+                break;
         }
 
         return super.getPickBlock(target, world, x, y, z);

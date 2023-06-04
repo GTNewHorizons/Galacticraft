@@ -167,18 +167,16 @@ public class EntityGrapple extends Entity implements IProjectile {
                     this.pullingPlayer = true;
                 }
             }
-        } else {
-            if (this.getPullingEntity()) {
-                final EntityPlayer shootingEntity = this.getShootingEntity();
-                if (shootingEntity != null) {
-                    shootingEntity.setVelocity(
-                            (this.posX - shootingEntity.posX) / 12.0F,
-                            (this.posY - shootingEntity.posY) / 12.0F,
-                            (this.posZ - shootingEntity.posZ) / 12.0F);
-                    if (shootingEntity.worldObj.isRemote
-                            && shootingEntity.worldObj.provider instanceof IZeroGDimension) {
-                        FreefallHandler.updateFreefall(shootingEntity);
-                    }
+        } else if (this.getPullingEntity()) {
+            final EntityPlayer shootingEntity = this.getShootingEntity();
+            if (shootingEntity != null) {
+                shootingEntity.setVelocity(
+                        (this.posX - shootingEntity.posX) / 12.0F,
+                        (this.posY - shootingEntity.posY) / 12.0F,
+                        (this.posZ - shootingEntity.posZ) / 12.0F);
+                if (shootingEntity.worldObj.isRemote
+                        && shootingEntity.worldObj.provider instanceof IZeroGDimension) {
+                    FreefallHandler.updateFreefall(shootingEntity);
                 }
             }
         }

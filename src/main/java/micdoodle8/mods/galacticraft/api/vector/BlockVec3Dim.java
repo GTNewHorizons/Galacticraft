@@ -99,15 +99,14 @@ public class BlockVec3Dim implements Cloneable {
                     && BlockVec3Dim.chunkCacheDim == world.provider.dimensionId
                     && BlockVec3Dim.chunkCached.isChunkLoaded) {
                 return BlockVec3Dim.chunkCached.getBlock(this.x & 15, this.y, this.z & 15);
-            } else {
-                Chunk chunk = null;
-                chunk = world.getChunkFromChunkCoords(chunkx, chunkz);
-                BlockVec3Dim.chunkCached = chunk;
-                BlockVec3Dim.chunkCacheDim = world.provider.dimensionId;
-                BlockVec3Dim.chunkCacheX = chunkx;
-                BlockVec3Dim.chunkCacheZ = chunkz;
-                return chunk.getBlock(this.x & 15, this.y, this.z & 15);
             }
+            Chunk chunk = null;
+            chunk = world.getChunkFromChunkCoords(chunkx, chunkz);
+            BlockVec3Dim.chunkCached = chunk;
+            BlockVec3Dim.chunkCacheDim = world.provider.dimensionId;
+            BlockVec3Dim.chunkCacheX = chunkx;
+            BlockVec3Dim.chunkCacheZ = chunkz;
+            return chunk.getBlock(this.x & 15, this.y, this.z & 15);
         } catch (final Throwable throwable) {
             final CrashReport crashreport = CrashReport
                     .makeCrashReport(throwable, "Oxygen Sealer thread: Exception getting block type in world");
@@ -148,15 +147,14 @@ public class BlockVec3Dim implements Cloneable {
                         && BlockVec3Dim.chunkCacheDim == world.provider.dimensionId
                         && BlockVec3Dim.chunkCached.isChunkLoaded) {
                     return BlockVec3Dim.chunkCached.getBlock(this.x & 15, this.y, this.z & 15);
-                } else {
-                    Chunk chunk = null;
-                    chunk = world.getChunkFromChunkCoords(chunkx, chunkz);
-                    BlockVec3Dim.chunkCached = chunk;
-                    BlockVec3Dim.chunkCacheDim = world.provider.dimensionId;
-                    BlockVec3Dim.chunkCacheX = chunkx;
-                    BlockVec3Dim.chunkCacheZ = chunkz;
-                    return chunk.getBlock(this.x & 15, this.y, this.z & 15);
                 }
+                Chunk chunk = null;
+                chunk = world.getChunkFromChunkCoords(chunkx, chunkz);
+                BlockVec3Dim.chunkCached = chunk;
+                BlockVec3Dim.chunkCacheDim = world.provider.dimensionId;
+                BlockVec3Dim.chunkCacheX = chunkx;
+                BlockVec3Dim.chunkCacheZ = chunkz;
+                return chunk.getBlock(this.x & 15, this.y, this.z & 15);
             }
             // Chunk doesn't exist - meaning, it is not loaded
             return Blocks.bedrock;
@@ -343,15 +341,14 @@ public class BlockVec3Dim implements Cloneable {
     }
 
     private World getWorldForId(int dimensionID) {
-        if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
-            final MinecraftServer theServer = FMLCommonHandler.instance().getMinecraftServerInstance();
-            if (theServer == null) {
-                return null;
-            }
-            return theServer.worldServerForDimension(dimensionID);
-        } else {
+        if (FMLCommonHandler.instance().getEffectiveSide() != Side.SERVER) {
             return this.getWorldForIdClient(dimensionID);
         }
+        final MinecraftServer theServer = FMLCommonHandler.instance().getMinecraftServerInstance();
+        if (theServer == null) {
+            return null;
+        }
+        return theServer.worldServerForDimension(dimensionID);
     }
 
     @SideOnly(Side.CLIENT)

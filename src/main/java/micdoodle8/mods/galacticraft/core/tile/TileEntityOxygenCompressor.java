@@ -107,24 +107,23 @@ public class TileEntityOxygenCompressor extends TileEntityOxygen implements IInv
 
     @Override
     public ItemStack decrStackSize(int par1, int par2) {
-        if (this.containingItems[par1] != null) {
-            ItemStack var3;
-
-            if (this.containingItems[par1].stackSize <= par2) {
-                var3 = this.containingItems[par1];
-                this.containingItems[par1] = null;
-                return var3;
-            } else {
-                var3 = this.containingItems[par1].splitStack(par2);
-
-                if (this.containingItems[par1].stackSize == 0) {
-                    this.containingItems[par1] = null;
-                }
-
-                return var3;
-            }
-        } else {
+        if (this.containingItems[par1] == null) {
             return null;
+        }
+        ItemStack var3;
+
+        if (this.containingItems[par1].stackSize <= par2) {
+            var3 = this.containingItems[par1];
+            this.containingItems[par1] = null;
+            return var3;
+        } else {
+            var3 = this.containingItems[par1].splitStack(par2);
+
+            if (this.containingItems[par1].stackSize == 0) {
+                this.containingItems[par1] = null;
+            }
+
+            return var3;
         }
     }
 
@@ -134,9 +133,8 @@ public class TileEntityOxygenCompressor extends TileEntityOxygen implements IInv
             final ItemStack var2 = this.containingItems[par1];
             this.containingItems[par1] = null;
             return var2;
-        } else {
-            return null;
         }
+        return null;
     }
 
     @Override

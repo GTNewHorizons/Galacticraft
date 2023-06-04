@@ -81,10 +81,8 @@ public class NetworkHelper {
                             return (IElectricityNetwork) ((INetworkProvider) tileEntity).getNetwork();
                         }
                     }
-                } else {
-                    if (((INetworkProvider) tileEntity).getNetwork() instanceof IElectricityNetwork) {
-                        return (IElectricityNetwork) ((INetworkProvider) tileEntity).getNetwork();
-                    }
+                } else if (((INetworkProvider) tileEntity).getNetwork() instanceof IElectricityNetwork) {
+                    return (IElectricityNetwork) ((INetworkProvider) tileEntity).getNetwork();
                 }
             }
         }
@@ -102,10 +100,8 @@ public class NetworkHelper {
                             return (IOxygenNetwork) ((INetworkProvider) tileEntity).getNetwork();
                         }
                     }
-                } else {
-                    if (((INetworkProvider) tileEntity).getNetwork() instanceof IOxygenNetwork) {
-                        return (IOxygenNetwork) ((INetworkProvider) tileEntity).getNetwork();
-                    }
+                } else if (((INetworkProvider) tileEntity).getNetwork() instanceof IOxygenNetwork) {
+                    return (IOxygenNetwork) ((INetworkProvider) tileEntity).getNetwork();
                 }
             }
         }
@@ -123,10 +119,8 @@ public class NetworkHelper {
                             return (IHydrogenNetwork) ((INetworkProvider) tileEntity).getNetwork();
                         }
                     }
-                } else {
-                    if (((INetworkProvider) tileEntity).getNetwork() instanceof IHydrogenNetwork) {
-                        return (IHydrogenNetwork) ((INetworkProvider) tileEntity).getNetwork();
-                    }
+                } else if (((INetworkProvider) tileEntity).getNetwork() instanceof IHydrogenNetwork) {
+                    return (IHydrogenNetwork) ((INetworkProvider) tileEntity).getNetwork();
                 }
             }
         }

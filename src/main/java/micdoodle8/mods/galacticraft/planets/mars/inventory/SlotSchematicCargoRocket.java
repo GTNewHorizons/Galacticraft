@@ -60,7 +60,8 @@ public class SlotSchematicCargoRocket extends Slot {
     public boolean isItemValid(ItemStack itemStack) {
         if (this.index == 1) {
             return itemStack.getItem() == GCItems.basicItem && itemStack.getItemDamage() == 14;
-        } else if (this.index == 2 && GalacticraftCore.isGalaxySpaceLoaded) {
+        }
+        if (this.index == 2 && GalacticraftCore.isGalaxySpaceLoaded) {
             return itemStack.getItem()
                     == GameRegistry.findItem(Constants.MOD_ID_GALAXYSPACE, "item.RocketControlComputer")
                     && itemStack.getItemDamage() == 101;

@@ -146,9 +146,8 @@ public class HydrogenNetwork implements IHydrogenNetwork {
                 if (((TileEntity) transmitter).isInvalid() || ((TileEntity) transmitter).getWorldObj() == null) {
                     it.remove();
                     continue;
-                } else {
-                    transmitter.setNetwork(this);
                 }
+                transmitter.setNetwork(this);
             }
         } catch (final Exception e) {
             FMLLog.severe("Failed to refresh hydrogen pipe network.");

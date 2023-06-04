@@ -94,7 +94,8 @@ public class EntityParachest extends Entity {
                         if (this.placeChest(x, y + i, z)) {
                             this.setDead();
                             return;
-                        } else if (this.cargo != null) {
+                        }
+                        if (this.cargo != null) {
                             for (final ItemStack stack : this.cargo) {
                                 final EntityItem e = new EntityItem(
                                         this.worldObj,

@@ -84,18 +84,16 @@ public class ContainerIngotCompressor extends Container {
                 if (par1 == 1) {
                     slot.onSlotChange(var4, var2);
                 }
-            } else {
-                if (TileEntityFurnace.getItemBurnTime(var4) > 0) {
-                    if (!this.mergeItemStack(var4, 9, 10, false)) {
-                        return null;
-                    }
-                } else if (par1 < 38) {
-                    if (!this.mergeItemStack(var4, 0, 9, false) && !this.mergeItemStack(var4, 38, 47, false)) {
-                        return null;
-                    }
-                } else if (!this.mergeItemStack(var4, 0, 9, false) && !this.mergeItemStack(var4, 11, 38, false)) {
+            } else if (TileEntityFurnace.getItemBurnTime(var4) > 0) {
+                if (!this.mergeItemStack(var4, 9, 10, false)) {
                     return null;
                 }
+            } else if (par1 < 38) {
+                if (!this.mergeItemStack(var4, 0, 9, false) && !this.mergeItemStack(var4, 38, 47, false)) {
+                    return null;
+                }
+            } else if (!this.mergeItemStack(var4, 0, 9, false) && !this.mergeItemStack(var4, 11, 38, false)) {
+                return null;
             }
 
             if (var4.stackSize == 0) {

@@ -55,8 +55,7 @@ public class CommonProxyCore {
     public EntityPlayer getPlayerFromNetHandler(INetHandler handler) {
         if (handler instanceof NetHandlerPlayServer) {
             return ((NetHandlerPlayServer) handler).playerEntity;
-        } else {
-            return null;
         }
+        return null;
     }
 }

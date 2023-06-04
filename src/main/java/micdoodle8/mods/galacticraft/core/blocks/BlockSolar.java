@@ -83,7 +83,8 @@ public class BlockSolar extends BlockTileGC implements ItemBlockDesc.IBlockShift
             } else {
                 return this.icons[3];
             }
-        } else if (meta >= BlockSolar.BASIC_METADATA) {
+        }
+        if (meta >= BlockSolar.BASIC_METADATA) {
             final int shiftedMeta = meta -= BlockSolar.BASIC_METADATA;
 
             if (side == ForgeDirection.getOrientation(shiftedMeta + 2).getOpposite().ordinal()) {
@@ -214,9 +215,8 @@ public class BlockSolar extends BlockTileGC implements ItemBlockDesc.IBlockShift
     public int damageDropped(int metadata) {
         if (metadata >= BlockSolar.ADVANCED_METADATA) {
             return BlockSolar.ADVANCED_METADATA;
-        } else {
-            return BlockSolar.BASIC_METADATA;
         }
+        return BlockSolar.BASIC_METADATA;
     }
 
     @Override
@@ -230,9 +230,8 @@ public class BlockSolar extends BlockTileGC implements ItemBlockDesc.IBlockShift
     public TileEntity createTileEntity(World world, int metadata) {
         if (metadata >= BlockSolar.ADVANCED_METADATA) {
             return new TileEntitySolar(2);
-        } else {
-            return new TileEntitySolar(1);
         }
+        return new TileEntitySolar(1);
     }
 
     @Override

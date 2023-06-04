@@ -96,43 +96,42 @@ public class BlockMachineMarsT2 extends BlockTileGC implements ItemBlockDesc.IBl
         final int metaside = (metadata & 3) + 2;
         metadata &= 12;
 
-        if (metadata == BlockMachineMarsT2.GAS_LIQUEFIER) {
-            if (side == metaside) {
-                return this.iconGasInput;
-            }
-
-            // 2->5 3->4 4->2 5->3
-            if (7 - (metaside ^ (metaside > 3 ? 0 : 1)) == side) {
-                return this.iconGasLiquefier;
-            }
-        } else if (metadata == BlockMachineMarsT2.METHANE_SYNTHESIZER) {
-            if (side == metaside) {
-                return this.iconGasInput;
-            }
-
-            if (side == (metaside ^ 1)) {
+        switch (metadata) {
+            case BlockMachineMarsT2.GAS_LIQUEFIER:
+                if (side == metaside) {
+                    return this.iconGasInput;
+                }
+                // 2->5 3->4 4->2 5->3
+                if (7 - (metaside ^ (metaside > 3 ? 0 : 1)) == side) {
+                    return this.iconGasLiquefier;
+                }
+                break;
+            case BlockMachineMarsT2.METHANE_SYNTHESIZER:
+                if (side == metaside) {
+                    return this.iconGasInput;
+                }
+                if (side == (metaside ^ 1)) {
+                    return this.iconGasOutput;
+                }
+                // 2->5 3->4 4->2 5->3
+                if (7 - (metaside ^ (metaside > 3 ? 0 : 1)) == side) {
+                    return this.iconMethaneSynthesizer;
+                }
+                break;
+            case BlockMachineMarsT2.ELECTROLYZER:
+                if (side == (metaside ^ 1)) {
+                    return this.iconGasOutput;
+                }
+                // 2->5 3->4 4->2 5->3
+                if (7 - (metaside ^ (metaside > 3 ? 0 : 1)) == side) {
+                    return this.iconElectrolyzer;
+                }
+                if (side == metaside) {
+                    return this.iconWaterInput;
+                }
                 return this.iconGasOutput;
-            }
-
-            // 2->5 3->4 4->2 5->3
-            if (7 - (metaside ^ (metaside > 3 ? 0 : 1)) == side) {
-                return this.iconMethaneSynthesizer;
-            }
-        } else if (metadata == BlockMachineMarsT2.ELECTROLYZER) {
-            if (side == (metaside ^ 1)) {
-                return this.iconGasOutput;
-            }
-
-            // 2->5 3->4 4->2 5->3
-            if (7 - (metaside ^ (metaside > 3 ? 0 : 1)) == side) {
-                return this.iconElectrolyzer;
-            }
-
-            if (side == metaside) {
-                return this.iconWaterInput;
-            }
-
-            return this.iconGasOutput;
+            default:
+                break;
         }
 
         return this.iconMachineSide;
@@ -212,12 +211,15 @@ public class BlockMachineMarsT2 extends BlockTileGC implements ItemBlockDesc.IBl
     public TileEntity createTileEntity(World world, int metadata) {
         metadata &= 12;
 
-        if (metadata == BlockMachineMarsT2.GAS_LIQUEFIER) {
-            return new TileEntityGasLiquefier();
-        } else if (metadata == BlockMachineMarsT2.METHANE_SYNTHESIZER) {
-            return new TileEntityMethaneSynthesizer();
-        } else if (metadata == BlockMachineMarsT2.ELECTROLYZER) {
-            return new TileEntityElectrolyzer();
+        switch (metadata) {
+            case BlockMachineMarsT2.GAS_LIQUEFIER:
+                return new TileEntityGasLiquefier();
+            case BlockMachineMarsT2.METHANE_SYNTHESIZER:
+                return new TileEntityMethaneSynthesizer();
+            case BlockMachineMarsT2.ELECTROLYZER:
+                return new TileEntityElectrolyzer();
+            default:
+                break;
         }
 
         return null;

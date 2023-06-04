@@ -58,27 +58,25 @@ public class ContainerOxygenSealer extends Container {
                 if (!this.mergeItemStack(stack, b - 36, b, true)) {
                     return null;
                 }
+            } else if (stack.getItem() instanceof IItemElectric) {
+                if (!this.mergeItemStack(stack, 0, 1, false)) {
+                    return null;
+                }
+            } else if (stack.getItem() instanceof IItemOxygenSupply) {
+                if (!this.mergeItemStack(stack, 1, 2, false)) {
+                    return null;
+                }
+            } else if (stack.getItem() == GCItems.basicItem && stack.getItemDamage() == 20) {
+                if (!this.mergeItemStack(stack, 2, 3, false)) {
+                    return null;
+                }
             } else {
-                if (stack.getItem() instanceof IItemElectric) {
-                    if (!this.mergeItemStack(stack, 0, 1, false)) {
+                if (par1 < b - 9) {
+                    if (!this.mergeItemStack(stack, b - 9, b, false)) {
                         return null;
                     }
-                } else if (stack.getItem() instanceof IItemOxygenSupply) {
-                    if (!this.mergeItemStack(stack, 1, 2, false)) {
-                        return null;
-                    }
-                } else if (stack.getItem() == GCItems.basicItem && stack.getItemDamage() == 20) {
-                    if (!this.mergeItemStack(stack, 2, 3, false)) {
-                        return null;
-                    }
-                } else {
-                    if (par1 < b - 9) {
-                        if (!this.mergeItemStack(stack, b - 9, b, false)) {
-                            return null;
-                        }
-                    } else if (!this.mergeItemStack(stack, b - 36, b - 9, false)) {
-                        return null;
-                    }
+                } else if (!this.mergeItemStack(stack, b - 36, b - 9, false)) {
+                    return null;
                 }
             }
 

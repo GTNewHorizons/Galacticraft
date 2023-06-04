@@ -318,9 +318,8 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
     private double getMaxHealthSlimeling() {
         if (this.isTamed()) {
             return 20.001D + 30.0 * ((double) this.age / (double) this.MAX_AGE);
-        } else {
-            return 8.0D;
         }
+        return 8.0D;
     }
 
     @Override
@@ -332,16 +331,15 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
         if (this.isEntityInvulnerable()) {
             return false;
-        } else {
-            final Entity entity = par1DamageSource.getEntity();
-            this.setSittingAI(false);
-
-            if (entity != null && !(entity instanceof EntityPlayer) && !(entity instanceof EntityArrow)) {
-                par2 = (par2 + 1.0F) / 2.0F;
-            }
-
-            return super.attackEntityFrom(par1DamageSource, par2);
         }
+        final Entity entity = par1DamageSource.getEntity();
+        this.setSittingAI(false);
+
+        if (entity != null && !(entity instanceof EntityPlayer) && !(entity instanceof EntityArrow)) {
+            par2 = (par2 + 1.0F) / 2.0F;
+        }
+
+        return super.attackEntityFrom(par1DamageSource, par2);
     }
 
     @Override
@@ -397,14 +395,13 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
                         MarsModuleClient.openSlimelingGui(this, 0);
                     }
                 }
-            } else {
-                if (this.worldObj.isRemote) {
-                    MarsModuleClient.openSlimelingGui(this, 0);
-                }
+            } else if (this.worldObj.isRemote) {
+                MarsModuleClient.openSlimelingGui(this, 0);
             }
 
             return true;
-        } else if (itemstack != null && itemstack.getItem() == Items.slime_ball) {
+        }
+        if (itemstack != null && itemstack.getItem() == Items.slime_ball) {
             if (!par1EntityPlayer.capabilities.isCreativeMode) {
                 --itemstack.stackSize;
             }
@@ -501,30 +498,28 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
     public boolean canMateWith(EntityAnimal par1EntityAnimal) {
         if (par1EntityAnimal == this || !this.isTamed() || !(par1EntityAnimal instanceof EntitySlimeling)) {
             return false;
-        } else {
-            final EntitySlimeling slimeling = (EntitySlimeling) par1EntityAnimal;
-            return slimeling.isTamed() && !slimeling.isSitting() && this.isInLove() && slimeling.isInLove();
         }
+        final EntitySlimeling slimeling = (EntitySlimeling) par1EntityAnimal;
+        return slimeling.isTamed() && !slimeling.isSitting() && this.isInLove() && slimeling.isInLove();
     }
 
     @Override
     public boolean func_142018_a(EntityLivingBase par1EntityLivingBase, EntityLivingBase par2EntityLivingBase) {
-        if (!(par1EntityLivingBase instanceof EntityCreeper) && !(par1EntityLivingBase instanceof EntityGhast)) {
-            if (par1EntityLivingBase instanceof EntitySlimeling) {
-                final EntitySlimeling slimeling = (EntitySlimeling) par1EntityLivingBase;
-
-                if (slimeling.isTamed() && slimeling.getOwner() == par2EntityLivingBase) {
-                    return false;
-                }
-            }
-
-            return (!(par1EntityLivingBase instanceof EntityPlayer) || !(par2EntityLivingBase instanceof EntityPlayer)
-                    || ((EntityPlayer) par2EntityLivingBase).canAttackPlayer((EntityPlayer) par1EntityLivingBase))
-                    && (!(par1EntityLivingBase instanceof EntityHorse)
-                            || !((EntityHorse) par1EntityLivingBase).isTame());
-        } else {
+        if ((par1EntityLivingBase instanceof EntityCreeper) || (par1EntityLivingBase instanceof EntityGhast)) {
             return false;
         }
+        if (par1EntityLivingBase instanceof EntitySlimeling) {
+            final EntitySlimeling slimeling = (EntitySlimeling) par1EntityLivingBase;
+
+            if (slimeling.isTamed() && slimeling.getOwner() == par2EntityLivingBase) {
+                return false;
+            }
+        }
+
+        return (!(par1EntityLivingBase instanceof EntityPlayer) || !(par2EntityLivingBase instanceof EntityPlayer)
+                || ((EntityPlayer) par2EntityLivingBase).canAttackPlayer((EntityPlayer) par1EntityLivingBase))
+                && (!(par1EntityLivingBase instanceof EntityHorse)
+                        || !((EntityHorse) par1EntityLivingBase).isTame());
     }
 
     @Override
@@ -651,11 +646,10 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
         public boolean shouldExecute() {
             if (!this.theEntity.isTamed() || this.theEntity.isInWater()) {
                 return false;
-            } else {
-                final EntityLivingBase entitylivingbase = this.theEntity.getOwner();
-                return entitylivingbase == null || (!(this.theEntity.getDistanceSqToEntity(entitylivingbase) < 144.0D)
-                        || entitylivingbase.getAITarget() == null) && this.isSitting;
             }
+            final EntityLivingBase entitylivingbase = this.theEntity.getOwner();
+            return entitylivingbase == null || (!(this.theEntity.getDistanceSqToEntity(entitylivingbase) < 144.0D)
+                    || entitylivingbase.getAITarget() == null) && this.isSitting;
         }
 
         @Override

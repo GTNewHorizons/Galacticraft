@@ -54,9 +54,8 @@ public class BlockBreathableAir extends BlockAir {
         final Block block = par1IBlockAccess.getBlock(par2, par3, par4);
         if (block == this || block == GCBlocks.brightBreatheableAir) {
             return false;
-        } else {
-            return (block == null || block.isAir(par1IBlockAccess, par2, par3, par4)) && par5 >= 0 && par5 <= 5;
         }
+        return (block == null || block.isAir(par1IBlockAccess, par2, par3, par4)) && par5 >= 0 && par5 <= 5;
     }
 
     @Override

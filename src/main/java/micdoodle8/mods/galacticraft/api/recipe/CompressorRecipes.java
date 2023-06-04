@@ -162,22 +162,21 @@ public class CompressorRecipes {
             }
 
             return new ItemStack(itemstack.getItem(), 1, j1);
-        } else {
-            final List<IRecipe> theRecipes = CompressorRecipes.getRecipeList();
-
-            for (j = 0; j < theRecipes.size(); ++j) {
-                final IRecipe irecipe = theRecipes.get(j);
-
-                if (irecipe instanceof ShapedRecipes
-                        && CompressorRecipes.matches((ShapedRecipes) irecipe, inventory, par2World)
-                        || irecipe instanceof ShapelessOreRecipe && CompressorRecipes
-                                .matchesShapeless((ShapelessOreRecipe) irecipe, inventory, par2World)) {
-                    return irecipe.getRecipeOutput().copy();
-                }
-            }
-
-            return null;
         }
+        final List<IRecipe> theRecipes = CompressorRecipes.getRecipeList();
+
+        for (j = 0; j < theRecipes.size(); ++j) {
+            final IRecipe irecipe = theRecipes.get(j);
+
+            if (irecipe instanceof ShapedRecipes
+                    && CompressorRecipes.matches((ShapedRecipes) irecipe, inventory, par2World)
+                    || irecipe instanceof ShapelessOreRecipe && CompressorRecipes
+                            .matchesShapeless((ShapelessOreRecipe) irecipe, inventory, par2World)) {
+                return irecipe.getRecipeOutput().copy();
+            }
+        }
+
+        return null;
     }
 
     private static boolean matches(ShapedRecipes recipe, IInventory inventory, World par2World) {

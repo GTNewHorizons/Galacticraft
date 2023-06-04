@@ -46,41 +46,40 @@ public class EntityFlag extends Entity {
         final boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer
                 && ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode;
 
-        if (!this.worldObj.isRemote && !this.isDead && !this.indestructable) {
-            if (this.isEntityInvulnerable()) {
-                return false;
-            } else {
-                this.setBeenAttacked();
-                this.setDamage(this.getDamage() + par2 * 10);
-                this.worldObj.playSoundEffect(
-                        this.posX,
-                        this.posY,
-                        this.posZ,
-                        Block.soundTypeMetal.getBreakSound(),
-                        Block.soundTypeMetal.getVolume(),
-                        Block.soundTypeMetal.getPitch() + 1.0F);
-
-                if (par1DamageSource.getEntity() instanceof EntityPlayer
-                        && ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode) {
-                    this.setDamage(100.0F);
-                }
-
-                if (flag || this.getDamage() > 40) {
-                    if (this.riddenByEntity != null) {
-                        this.riddenByEntity.mountEntity(this);
-                    }
-
-                    if (flag) {
-                        this.setDead();
-                    } else {
-                        this.setDead();
-                        this.dropItemStack();
-                    }
-                }
-
-                return true;
-            }
+        if (this.worldObj.isRemote || this.isDead || this.indestructable) {
+            return true;
+        }
+        if (this.isEntityInvulnerable()) {
+            return false;
         } else {
+            this.setBeenAttacked();
+            this.setDamage(this.getDamage() + par2 * 10);
+            this.worldObj.playSoundEffect(
+                    this.posX,
+                    this.posY,
+                    this.posZ,
+                    Block.soundTypeMetal.getBreakSound(),
+                    Block.soundTypeMetal.getVolume(),
+                    Block.soundTypeMetal.getPitch() + 1.0F);
+
+            if (par1DamageSource.getEntity() instanceof EntityPlayer
+                    && ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode) {
+                this.setDamage(100.0F);
+            }
+
+            if (flag || this.getDamage() > 40) {
+                if (this.riddenByEntity != null) {
+                    this.riddenByEntity.mountEntity(this);
+                }
+
+                if (flag) {
+                    this.setDead();
+                } else {
+                    this.setDead();
+                    this.dropItemStack();
+                }
+            }
+
             return true;
         }
     }

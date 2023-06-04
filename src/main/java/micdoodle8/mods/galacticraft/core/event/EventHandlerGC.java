@@ -274,7 +274,8 @@ public class EventHandlerGC {
                     event.setCanceled(
                             !((IKeyable) tileClicked).canBreak() && !event.entityPlayer.capabilities.isCreativeMode);
                     return;
-                } else if (event.action.equals(PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)) {
+                }
+                if (event.action.equals(PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)) {
                     if (heldStack.getItem() instanceof IKeyItem) {
                         if (((IKeyItem) heldStack.getItem()).getTier(heldStack) == -1
                                 || ((IKeyable) tileClicked).getTierOfKeyRequired() == -1
@@ -648,9 +649,8 @@ public class EventHandlerGC {
             if (page.getPageID() == currentIndex) {
                 if (count + 1 < stats.unlockedSchematics.size()) {
                     return stats.unlockedSchematics.get(count + 1);
-                } else {
-                    return null;
                 }
+                return null;
             }
         }
 
@@ -679,9 +679,8 @@ public class EventHandlerGC {
             if (page.getPageID() == currentIndex) {
                 if (count - 1 >= 0) {
                     return stats.unlockedSchematics.get(count - 1);
-                } else {
-                    return null;
                 }
+                return null;
             }
         }
 

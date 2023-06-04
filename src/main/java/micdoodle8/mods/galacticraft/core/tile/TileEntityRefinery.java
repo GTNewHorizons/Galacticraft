@@ -103,11 +103,9 @@ public class TileEntityRefinery extends TileBaseElectricBlockWithInventory imple
             if (this.canProcess() && this.hasEnoughEnergyToRun) {
                 if (this.processTicks == 0) {
                     this.processTicks = TileEntityRefinery.PROCESS_TIME_REQUIRED;
-                } else {
-                    if (--this.processTicks <= 0) {
-                        this.smeltItem();
-                        this.processTicks = this.canProcess() ? TileEntityRefinery.PROCESS_TIME_REQUIRED : 0;
-                    }
+                } else if (--this.processTicks <= 0) {
+                    this.smeltItem();
+                    this.processTicks = this.canProcess() ? TileEntityRefinery.PROCESS_TIME_REQUIRED : 0;
                 }
             } else {
                 this.processTicks = 0;

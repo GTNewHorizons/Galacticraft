@@ -160,10 +160,9 @@ public class BlockFallenMeteor extends Block implements ITileEntityProvider, Ite
 
         if (var4.getMaterial() == Material.air || var4 == Blocks.fire) {
             return true;
-        } else {
-            final Material var5 = var4.getMaterial();
-            return var5 == Material.water || var5 == Material.lava;
         }
+        final Material var5 = var4.getMaterial();
+        return var5 == Material.water || var5 == Material.lava;
     }
 
     @Override
@@ -206,9 +205,8 @@ public class BlockFallenMeteor extends Block implements ITileEntityProvider, Ite
         final int power = this.canHarvestBlock(this, player, metadata);
         if (power > 0) {
             return power * player.getBreakSpeed(this, true, metadata, x, y, z) / hardness / 30F;
-        } else {
-            return player.getBreakSpeed(this, false, metadata, x, y, z) / hardness / 30F;
         }
+        return player.getBreakSpeed(this, false, metadata, x, y, z) / hardness / 30F;
     }
 
     public int canHarvestBlock(Block block, EntityPlayer player, int metadata) {

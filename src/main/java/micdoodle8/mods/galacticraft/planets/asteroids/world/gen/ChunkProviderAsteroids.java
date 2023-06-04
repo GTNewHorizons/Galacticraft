@@ -937,9 +937,8 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
     public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int i, int j, int k) {
         if (par1EnumCreatureType == EnumCreatureType.monster) {
             return BiomeGenBaseAsteroids.asteroid.getSpawnableList(par1EnumCreatureType);
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**

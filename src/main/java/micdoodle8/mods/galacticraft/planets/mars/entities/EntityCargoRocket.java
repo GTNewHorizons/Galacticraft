@@ -291,10 +291,9 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
                 this.landing = true;
                 return;
             }
-        } else {
-            GCLog.info("Error: the cargo rocket failed to find a valid landing spot when it reached space.");
-            this.setDead();
         }
+        GCLog.info("Error: the cargo rocket failed to find a valid landing spot when it reached space.");
+        this.setDead();
     }
 
     @Override

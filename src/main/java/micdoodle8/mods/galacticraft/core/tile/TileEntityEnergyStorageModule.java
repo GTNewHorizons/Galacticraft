@@ -171,24 +171,23 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
 
     @Override
     public ItemStack decrStackSize(int par1, int par2) {
-        if (this.containingItems[par1] != null) {
-            ItemStack var3;
-
-            if (this.containingItems[par1].stackSize <= par2) {
-                var3 = this.containingItems[par1];
-                this.containingItems[par1] = null;
-                return var3;
-            } else {
-                var3 = this.containingItems[par1].splitStack(par2);
-
-                if (this.containingItems[par1].stackSize == 0) {
-                    this.containingItems[par1] = null;
-                }
-
-                return var3;
-            }
-        } else {
+        if (this.containingItems[par1] == null) {
             return null;
+        }
+        ItemStack var3;
+
+        if (this.containingItems[par1].stackSize <= par2) {
+            var3 = this.containingItems[par1];
+            this.containingItems[par1] = null;
+            return var3;
+        } else {
+            var3 = this.containingItems[par1].splitStack(par2);
+
+            if (this.containingItems[par1].stackSize == 0) {
+                this.containingItems[par1] = null;
+            }
+
+            return var3;
         }
     }
 
@@ -198,9 +197,8 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
             final ItemStack var2 = this.containingItems[par1];
             this.containingItems[par1] = null;
             return var2;
-        } else {
-            return null;
         }
+        return null;
     }
 
     @Override
@@ -248,7 +246,8 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
         if (itemstack.getItem() instanceof IItemElectricBase) {
             if (slotID == 0) {
                 return ((IItemElectricBase) itemstack.getItem()).getTransfer(itemstack) > 0;
-            } else if (slotID == 1) {
+            }
+            if (slotID == 1) {
                 return ((IItemElectricBase) itemstack.getItem()).getElectricityStored(itemstack) > 0;
             }
         }
@@ -260,7 +259,8 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
         if (itemstack.getItem() instanceof IItemElectricBase) {
             if (slotID == 0) {
                 return ((IItemElectricBase) itemstack.getItem()).getTransfer(itemstack) <= 0;
-            } else if (slotID == 1) {
+            }
+            if (slotID == 1) {
                 return ((IItemElectricBase) itemstack.getItem()).getElectricityStored(itemstack) <= 0
                         || this.getEnergyStoredGC() >= this.getMaxEnergyStoredGC();
             }

@@ -157,7 +157,8 @@ public class EntityEntryPod extends EntityLanderBase implements IScaleableFuelLe
         if (this.riddenByEntity == null && var1 instanceof EntityPlayerMP) {
             GCCoreUtil.openParachestInv((EntityPlayerMP) var1, this);
             return true;
-        } else if (var1 instanceof EntityPlayerMP) {
+        }
+        if (var1 instanceof EntityPlayerMP) {
             if (!this.onGround) {
                 return false;
             }

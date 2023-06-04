@@ -207,49 +207,48 @@ public class SpaceStationWorldData extends WorldSavedData {
 
         if (!foundMatch) {
             return null;
-        } else {
-            final String stationIdentifier = SpaceStationWorldData.getSpaceStationID(stationID);
-            SpaceStationWorldData stationData = (SpaceStationWorldData) world
-                    .loadItemData(SpaceStationWorldData.class, stationIdentifier);
-
-            if (stationData == null) {
-                stationData = new SpaceStationWorldData(stationIdentifier);
-                world.setItemData(stationIdentifier, stationData);
-                stationData.dataCompound = new NBTTagCompound();
-
-                if (owner != null) {
-                    stationData.owner = owner.getGameProfile().getName().replace(".", "");
-                }
-
-                stationData.spaceStationName = "Station: " + stationData.owner;
-
-                if (owner != null) {
-                    stationData.allowedPlayers.add(owner.getGameProfile().getName());
-                }
-
-                if (homeID == -1) {
-                    throw new RuntimeException("Space station being created on bad home planet ID!");
-                } else {
-                    stationData.homePlanet = homeID;
-                }
-
-                if (providerIdDynamic == -1 || providerIdStatic == -1) {
-                    throw new RuntimeException("Space station being created on bad provider IDs!");
-                } else {
-                    stationData.dimensionIdDynamic = providerIdDynamic;
-                    stationData.dimensionIdStatic = providerIdStatic;
-                }
-
-                stationData.markDirty();
-            }
-
-            if (stationData.getSpaceStationName().replace(" ", "").isEmpty()) {
-                stationData.setSpaceStationName("Station: " + stationData.owner);
-                stationData.markDirty();
-            }
-
-            return stationData;
         }
+        final String stationIdentifier = SpaceStationWorldData.getSpaceStationID(stationID);
+        SpaceStationWorldData stationData = (SpaceStationWorldData) world
+                .loadItemData(SpaceStationWorldData.class, stationIdentifier);
+
+        if (stationData == null) {
+            stationData = new SpaceStationWorldData(stationIdentifier);
+            world.setItemData(stationIdentifier, stationData);
+            stationData.dataCompound = new NBTTagCompound();
+
+            if (owner != null) {
+                stationData.owner = owner.getGameProfile().getName().replace(".", "");
+            }
+
+            stationData.spaceStationName = "Station: " + stationData.owner;
+
+            if (owner != null) {
+                stationData.allowedPlayers.add(owner.getGameProfile().getName());
+            }
+
+            if (homeID == -1) {
+                throw new RuntimeException("Space station being created on bad home planet ID!");
+            } else {
+                stationData.homePlanet = homeID;
+            }
+
+            if (providerIdDynamic == -1 || providerIdStatic == -1) {
+                throw new RuntimeException("Space station being created on bad provider IDs!");
+            } else {
+                stationData.dimensionIdDynamic = providerIdDynamic;
+                stationData.dimensionIdStatic = providerIdStatic;
+            }
+
+            stationData.markDirty();
+        }
+
+        if (stationData.getSpaceStationName().replace(" ", "").isEmpty()) {
+            stationData.setSpaceStationName("Station: " + stationData.owner);
+            stationData.markDirty();
+        }
+
+        return stationData;
     }
 
     public static SpaceStationWorldData getMPSpaceStationData(World var0, int var1, EntityPlayer player) {

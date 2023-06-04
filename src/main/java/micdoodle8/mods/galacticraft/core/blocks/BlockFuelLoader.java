@@ -72,7 +72,8 @@ public class BlockFuelLoader extends BlockAdvancedTile implements ItemBlockDesc.
     public IIcon getIcon(int side, int metadata) {
         if (side == 0 || side == 1) {
             return this.iconMachineSide;
-        } else if (side == metadata + 2) {
+        }
+        if (side == metadata + 2) {
             return this.iconInput;
         } else if (side == ForgeDirection.getOrientation(metadata + 2).getOpposite().ordinal()) {
             return this.iconFuelInput;

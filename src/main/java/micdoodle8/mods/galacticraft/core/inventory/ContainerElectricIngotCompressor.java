@@ -84,18 +84,16 @@ public class ContainerElectricIngotCompressor extends Container {
                 if (par1 == 1 || par1 == 2) {
                     var3.onSlotChange(var4, var2);
                 }
-            } else {
-                if (var4.getItem() instanceof IItemElectric) {
-                    if (!this.mergeItemStack(var4, 9, 10, false)) {
-                        return null;
-                    }
-                } else if (par1 < 39) {
-                    if (!this.mergeItemStack(var4, 0, 9, false) && !this.mergeItemStack(var4, 39, 48, false)) {
-                        return null;
-                    }
-                } else if (!this.mergeItemStack(var4, 0, 9, false) && !this.mergeItemStack(var4, 12, 39, false)) {
+            } else if (var4.getItem() instanceof IItemElectric) {
+                if (!this.mergeItemStack(var4, 9, 10, false)) {
                     return null;
                 }
+            } else if (par1 < 39) {
+                if (!this.mergeItemStack(var4, 0, 9, false) && !this.mergeItemStack(var4, 39, 48, false)) {
+                    return null;
+                }
+            } else if (!this.mergeItemStack(var4, 0, 9, false) && !this.mergeItemStack(var4, 12, 39, false)) {
+                return null;
             }
 
             if (var4.stackSize == 0) {

@@ -93,40 +93,39 @@ public class ItemCanisterLiquidNitrogen extends ItemCanisterGeneric {
 
         if (movingobjectposition == null) {
             return itemStack;
-        } else {
-            if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-                final int x = movingobjectposition.blockX;
-                final int y = movingobjectposition.blockY;
-                final int z = movingobjectposition.blockZ;
+        }
+        if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
+            final int x = movingobjectposition.blockX;
+            final int y = movingobjectposition.blockY;
+            final int z = movingobjectposition.blockZ;
 
-                if (!par2World.canMineBlock(par3EntityPlayer, x, y, z)) {
-                    return itemStack;
-                }
-
-                if (!par3EntityPlayer.canPlayerEdit(x, y, z, movingobjectposition.sideHit, itemStack)) {
-                    return itemStack;
-                }
-
-                // Material material = par2World.getBlock(i, j, k).getMaterial();
-                final Block b = par2World.getBlock(x, y, z);
-                final int meta = par2World.getBlockMetadata(x, y, z);
-
-                final Block result = this.canFreeze(b, meta);
-                if (result != null) {
-                    this.setNewDamage(itemStack, damage);
-                    par2World.playSoundEffect(
-                            x + 0.5D,
-                            y + 0.5D,
-                            z + 0.5D,
-                            "fire.ignite",
-                            1.0F,
-                            Item.itemRand.nextFloat() * 0.4F + 0.8F);
-                    par2World.setBlock(x, y, z, result, 0, 3);
-                    return itemStack;
-                }
+            if (!par2World.canMineBlock(par3EntityPlayer, x, y, z)) {
+                return itemStack;
             }
 
-            return itemStack;
+            if (!par3EntityPlayer.canPlayerEdit(x, y, z, movingobjectposition.sideHit, itemStack)) {
+                return itemStack;
+            }
+
+            // Material material = par2World.getBlock(i, j, k).getMaterial();
+            final Block b = par2World.getBlock(x, y, z);
+            final int meta = par2World.getBlockMetadata(x, y, z);
+
+            final Block result = this.canFreeze(b, meta);
+            if (result != null) {
+                this.setNewDamage(itemStack, damage);
+                par2World.playSoundEffect(
+                        x + 0.5D,
+                        y + 0.5D,
+                        z + 0.5D,
+                        "fire.ignite",
+                        1.0F,
+                        Item.itemRand.nextFloat() * 0.4F + 0.8F);
+                par2World.setBlock(x, y, z, result, 0, 3);
+                return itemStack;
+            }
         }
+
+        return itemStack;
     }
 }

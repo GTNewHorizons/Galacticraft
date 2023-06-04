@@ -68,13 +68,12 @@ public class GCTransformer implements IClassTransformer {
             }
         }
         if (transformedBytes == null || transformedBytes.length == 0) {
-            if (DEBUG) {
-                catching(new RuntimeException("Null or empty byte array created. This will not work well!"));
-            } else {
+            if (!DEBUG) {
                 GCLoadingPlugin.LOGGER.fatal(
                         "Null or empty byte array created. Transforming will rollback as a last effort attempt to make things work! However features will not function!");
                 return basicClass;
             }
+            catching(new RuntimeException("Null or empty byte array created. This will not work well!"));
         }
         return transformedBytes;
     }

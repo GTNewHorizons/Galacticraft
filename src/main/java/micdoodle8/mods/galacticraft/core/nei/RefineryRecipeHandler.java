@@ -105,9 +105,8 @@ public class RefineryRecipeHandler extends TemplateRecipeHandler {
                             this.arecipes.get(recipe).getIngredients().get(0).relx,
                             this.arecipes.get(recipe).getIngredients().get(0).rely));
             return stacks;
-        } else {
-            return (ArrayList<PositionedStack>) this.arecipes.get(recipe).getIngredients();
         }
+        return (ArrayList<PositionedStack>) this.arecipes.get(recipe).getIngredients();
     }
 
     @Override
@@ -117,9 +116,8 @@ public class RefineryRecipeHandler extends TemplateRecipeHandler {
                     new ItemStack(GCItems.oilCanister, 1, GCItems.oilCanister.getMaxDamage()),
                     this.arecipes.get(recipe).getResult().relx,
                     this.arecipes.get(recipe).getResult().rely);
-        } else {
-            return this.arecipes.get(recipe).getResult();
         }
+        return this.arecipes.get(recipe).getResult();
     }
 
     public class CachedRefineryRecipe extends TemplateRecipeHandler.CachedRecipe {

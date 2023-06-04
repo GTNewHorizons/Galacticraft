@@ -27,7 +27,8 @@ public class ClientUtil {
 
         if (race != null) {
             return race.getFlagData();
-        } else if (!ClientProxyCore.flagRequestsSent.contains(playerName) && sendPacket) {
+        }
+        if (!ClientProxyCore.flagRequestsSent.contains(playerName) && sendPacket) {
             GalacticraftCore.packetPipeline
                     .sendToServer(new PacketSimple(EnumSimplePacket.S_REQUEST_FLAG_DATA, new Object[] { playerName }));
             ClientProxyCore.flagRequestsSent.add(playerName);
@@ -41,7 +42,8 @@ public class ClientUtil {
 
         if (race != null) {
             return race.getTeamColor();
-        } else if (!ClientProxyCore.flagRequestsSent.contains(playerName) && sendPacket) {
+        }
+        if (!ClientProxyCore.flagRequestsSent.contains(playerName) && sendPacket) {
             GalacticraftCore.packetPipeline
                     .sendToServer(new PacketSimple(EnumSimplePacket.S_REQUEST_FLAG_DATA, new Object[] { playerName }));
             ClientProxyCore.flagRequestsSent.add(playerName);

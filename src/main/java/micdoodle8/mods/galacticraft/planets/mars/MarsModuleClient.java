@@ -160,7 +160,8 @@ public class MarsModuleClient implements IPlanetsModuleClient {
             if (ID == GuiIdsPlanets.MACHINE_MARS) {
                 if (tile instanceof TileEntityTerraformer) {
                     return new GuiTerraformer(player.inventory, (TileEntityTerraformer) tile);
-                } else if (tile instanceof TileEntityLaunchController) {
+                }
+                if (tile instanceof TileEntityLaunchController) {
                     return new GuiLaunchController(player.inventory, (TileEntityLaunchController) tile);
                 } else if (tile instanceof TileEntityElectrolyzer) {
                     return new GuiWaterElectrolyzer(player.inventory, (TileEntityElectrolyzer) tile);
@@ -179,7 +180,8 @@ public class MarsModuleClient implements IPlanetsModuleClient {
     public int getBlockRenderID(Block block) {
         if (block == MarsBlocks.vine) {
             return MarsModuleClient.vineRenderID;
-        } else if (block == MarsBlocks.hydrogenPipe) {
+        }
+        if (block == MarsBlocks.hydrogenPipe) {
             return MarsModuleClient.renderIdHydrogenPipe;
         } else if (block == MarsBlocks.rock) {
             return MarsModuleClient.eggRenderID;

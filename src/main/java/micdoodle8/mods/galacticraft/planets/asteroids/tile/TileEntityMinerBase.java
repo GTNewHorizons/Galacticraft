@@ -156,9 +156,8 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
 
             if (master != null) {
                 return master;
-            } else {
-                this.worldObj.removeTileEntity(this.xCoord, this.yCoord, this.zCoord);
             }
+            this.worldObj.removeTileEntity(this.xCoord, this.yCoord, this.zCoord);
         }
 
         return null;
@@ -369,24 +368,23 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
 
     @Override
     public boolean onActivated(EntityPlayer entityPlayer) {
-        if (this.isMaster) {
-            final ItemStack holding = entityPlayer.getCurrentEquippedItem();
-            if (holding != null && holding.getItem() == AsteroidsItems.astroMiner) {
-                return false;
-            }
-
-            entityPlayer.openGui(
-                    GalacticraftPlanets.instance,
-                    GuiIdsPlanets.MACHINE_ASTEROIDS,
-                    this.worldObj,
-                    this.xCoord,
-                    this.yCoord,
-                    this.zCoord);
-            return true;
-        } else {
+        if (!this.isMaster) {
             final TileEntityMinerBase master = this.getMaster();
             return master != null && master.onActivated(entityPlayer);
         }
+        final ItemStack holding = entityPlayer.getCurrentEquippedItem();
+        if (holding != null && holding.getItem() == AsteroidsItems.astroMiner) {
+            return false;
+        }
+
+        entityPlayer.openGui(
+                GalacticraftPlanets.instance,
+                GuiIdsPlanets.MACHINE_ASTEROIDS,
+                this.worldObj,
+                this.xCoord,
+                this.yCoord,
+                this.zCoord);
+        return true;
     }
 
     @Override

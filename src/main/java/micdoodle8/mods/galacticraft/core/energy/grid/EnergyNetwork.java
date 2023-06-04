@@ -541,19 +541,18 @@ public class EnergyNetwork implements IElectricityNetwork {
         if (network != null && network != this) {
             final Set<IConductor> thisNetwork = this.conductors;
             final Set<IConductor> thatNetwork = network.getTransmitters();
-            if (thisNetwork.size() >= thatNetwork.size()) {
-                thisNetwork.addAll(thatNetwork);
-                this.refresh();
-                if (network instanceof EnergyNetwork) {
-                    ((EnergyNetwork) network).destroy();
-                }
-                return this;
-            } else {
+            if (thisNetwork.size() < thatNetwork.size()) {
                 thatNetwork.addAll(thisNetwork);
                 network.refresh();
                 this.destroy();
                 return network;
             }
+            thisNetwork.addAll(thatNetwork);
+            this.refresh();
+            if (network instanceof EnergyNetwork) {
+                ((EnergyNetwork) network).destroy();
+            }
+            return this;
         }
 
         return this;

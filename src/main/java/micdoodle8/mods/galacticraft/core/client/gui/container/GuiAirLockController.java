@@ -253,7 +253,8 @@ public class GuiAirLockController extends GuiScreen implements ICheckBoxCallback
     public boolean getInitiallySelected(GuiElementCheckbox checkbox) {
         if (checkbox.equals(this.checkboxRedstoneSignal)) {
             return this.controller.redstoneActivation;
-        } else if (checkbox.equals(this.checkboxPlayerDistance)) {
+        }
+        if (checkbox.equals(this.checkboxPlayerDistance)) {
             return this.controller.playerDistanceActivation;
         } else if (checkbox.equals(this.checkboxOpenForPlayer)) {
             return this.controller.playerNameMatches;

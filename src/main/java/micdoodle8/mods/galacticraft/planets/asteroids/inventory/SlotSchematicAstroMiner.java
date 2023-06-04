@@ -62,7 +62,8 @@ public class SlotSchematicAstroMiner extends Slot {
     public boolean isItemValid(ItemStack itemStack) {
         if (this.index >= 1 && this.index <= 8) {
             return itemStack.getItem() == MarsItems.marsItemBasic && itemStack.getItemDamage() == 3;
-        } else if (this.index == 9 || this.index == 10) {
+        }
+        if (this.index == 9 || this.index == 10) {
             return itemStack.getItem() == GCItems.flagPole;
         } else if (this.index >= 11 && this.index <= 13) {
             return itemStack.getItem() == AsteroidsItems.basicItem && itemStack.getItemDamage() == 0;
@@ -76,18 +77,21 @@ public class SlotSchematicAstroMiner extends Slot {
             return itemStack.getItem() == GCItems.basicItem && itemStack.getItemDamage() == 14;
         } else if (this.index >= 21 && this.index <= 23) {
             return itemStack.getItem() == GCItems.heavyPlatingTier1;
-        } else if (this.index == 24 || this.index == 25) {
-            return itemStack.getItem() == Item.getItemFromBlock(RecipeUtil.getChestBlock())
-                    && itemStack.getItemDamage() == 1;
-        } else if (this.index == 26) {
-            return itemStack.getItem() == AsteroidsItems.basicItem && itemStack.getItemDamage() == 8;
-        } else if (this.index == 27) {
-            return itemStack.getItem() == Item.getItemFromBlock(AsteroidBlocks.beamReceiver);
-        } else if (this.index == 28 || this.index == 29) {
-            return itemStack.getItem() == GameRegistry.findItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01")
-                    && itemStack.getItemDamage() == 32603;
-        } else {
-            return false;
+        } else switch (this.index) {
+            case 24:
+            case 25:
+                return itemStack.getItem() == Item.getItemFromBlock(RecipeUtil.getChestBlock())
+                        && itemStack.getItemDamage() == 1;
+            case 26:
+                return itemStack.getItem() == AsteroidsItems.basicItem && itemStack.getItemDamage() == 8;
+            case 27:
+                return itemStack.getItem() == Item.getItemFromBlock(AsteroidBlocks.beamReceiver);
+            case 28:
+            case 29:
+                return itemStack.getItem() == GameRegistry.findItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01")
+                        && itemStack.getItemDamage() == 32603;
+            default:
+                return false;
         }
     }
 

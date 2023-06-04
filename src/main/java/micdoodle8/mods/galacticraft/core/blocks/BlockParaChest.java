@@ -73,15 +73,14 @@ public class BlockParaChest extends BlockContainer implements ITileEntityProvide
             int par6, float par7, float par8, float par9) {
         if (par1World.isRemote) {
             return true;
-        } else {
-            final IInventory iinventory = this.getInventory(par1World, par2, par3, par4);
-
-            if (iinventory != null && par5EntityPlayer instanceof EntityPlayerMP) {
-                par5EntityPlayer.openGui(GalacticraftCore.instance, -1, par1World, par2, par3, par4);
-            }
-
-            return true;
         }
+        final IInventory iinventory = this.getInventory(par1World, par2, par3, par4);
+
+        if (iinventory != null && par5EntityPlayer instanceof EntityPlayerMP) {
+            par5EntityPlayer.openGui(GalacticraftCore.instance, -1, par1World, par2, par3, par4);
+        }
+
+        return true;
     }
 
     @Override
@@ -157,9 +156,8 @@ public class BlockParaChest extends BlockContainer implements ITileEntityProvide
         if (object == null || par1World.isSideSolid(par2, par3 + 1, par4, ForgeDirection.DOWN)
                 || BlockParaChest.isOcelotBlockingChest(par1World, par2, par3, par4)) {
             return null;
-        } else {
-            return (IInventory) object;
         }
+        return (IInventory) object;
     }
 
     public static boolean isOcelotBlockingChest(World par0World, int par1, int par2, int par3) {

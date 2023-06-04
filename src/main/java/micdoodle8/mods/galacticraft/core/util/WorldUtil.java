@@ -150,7 +150,8 @@ public class WorldUtil {
                 }
             }
             return 0.08D - customProvider.getGravity();
-        } else if (entity instanceof IAntiGrav) {
+        }
+        if (entity instanceof IAntiGrav) {
             return 0;
         } else {
             return 0.08D;
@@ -168,7 +169,8 @@ public class WorldUtil {
                 returnValue = 0.75F;
             }
             return returnValue;
-        } else if (entity instanceof IAntiGrav) {
+        }
+        if (entity instanceof IAntiGrav) {
             return 1F;
         } else {
             return 1F;
@@ -182,17 +184,15 @@ public class WorldUtil {
                     0.002D,
                     0.03999999910593033D - (customProvider instanceof IOrbitDimension ? 0.05999999910593033D
                             : customProvider.getGravity()) / 1.75D);
-        } else {
-            return 0.03999999910593033D;
         }
+        return 0.03999999910593033D;
     }
 
     public static float getArrowGravity(EntityArrow e) {
         if (e.worldObj.provider instanceof IGalacticraftWorldProvider) {
             return 0.005F;
-        } else {
-            return 0.05F;
         }
+        return 0.05F;
     }
 
     public static float getRainStrength(World world, float partialTicks) {
@@ -218,10 +218,9 @@ public class WorldUtil {
         if (entity.isBurning()) {
             if (OxygenUtil.noAtmosphericCombustion(entity.worldObj.provider)) {
                 return OxygenUtil.isAABBInBreathableAirBlock(entity.worldObj, entity.boundingBox);
-            } else {
-                return true;
-                // Disable fire on Galacticraft worlds with no oxygen
             }
+            return true;
+            // Disable fire on Galacticraft worlds with no oxygen
         }
 
         return false;
@@ -316,20 +315,19 @@ public class WorldUtil {
                         f4 * blend + vec.xCoord * ablend,
                         f5 * blend + vec.yCoord * ablend,
                         f6 * blend + vec.zCoord * ablend);
-            } else {
-                // float blackness = ((float) (player.posY) -
-                // Constants.OVERWORLD_SKYPROVIDER_STARTHEIGHT) /
-                // 1000.0F;
-                // final float var21 = Math.max(1.0F - blackness * blackness * 4.0F, 0.0F);
-                // return Vec3.createVectorHelper(f4 * var21, f5 * var21, f6 * var21);
-                double blend = Math.min(1.0D, (player.posY - Constants.OVERWORLD_SKYPROVIDER_STARTHEIGHT) / 300.0D);
-                final double ablend = 1.0D - blend;
-                blend /= 255.0D;
-                return Vec3.createVectorHelper(
-                        f4 * ablend + blend * 31.0D,
-                        f5 * ablend + blend * 8.0D,
-                        f6 * ablend + blend * 99.0D);
             }
+            // float blackness = ((float) (player.posY) -
+            // Constants.OVERWORLD_SKYPROVIDER_STARTHEIGHT) /
+            // 1000.0F;
+            // final float var21 = Math.max(1.0F - blackness * blackness * 4.0F, 0.0F);
+            // return Vec3.createVectorHelper(f4 * var21, f5 * var21, f6 * var21);
+            double blend = Math.min(1.0D, (player.posY - Constants.OVERWORLD_SKYPROVIDER_STARTHEIGHT) / 300.0D);
+            final double ablend = 1.0D - blend;
+            blend /= 255.0D;
+            return Vec3.createVectorHelper(
+                    f4 * ablend + blend * 31.0D,
+                    f5 * ablend + blend * 8.0D,
+                    f6 * ablend + blend * 99.0D);
         }
 
         return world.getSkyColor(FMLClientHandler.instance().getClient().renderViewEntity, 1.0F);
@@ -563,18 +561,14 @@ public class WorldUtil {
                                     + data.getHomePlanet(),
                             id);
                 }
-            } else
-            // It's a planet or moon
-            {
-                if (celestialBody == GalacticraftCore.planetOverworld) {
-                    map.put(celestialBody.getName(), id);
-                } else {
-                    final WorldProvider provider = WorldUtil.getProviderForDimensionServer(id);
-                    if (celestialBody != null && provider != null) {
-                        if (provider instanceof IGalacticraftWorldProvider && !(provider instanceof IOrbitDimension)
-                                || provider.dimensionId == 0) {
-                            map.put(celestialBody.getName(), provider.dimensionId);
-                        }
+            } else if (celestialBody == GalacticraftCore.planetOverworld) {
+                map.put(celestialBody.getName(), id);
+            } else {
+                final WorldProvider provider = WorldUtil.getProviderForDimensionServer(id);
+                if (celestialBody != null && provider != null) {
+                    if (provider instanceof IGalacticraftWorldProvider && !(provider instanceof IOrbitDimension)
+                            || provider.dimensionId == 0) {
+                        map.put(celestialBody.getName(), provider.dimensionId);
                     }
                 }
             }
@@ -724,11 +718,7 @@ public class WorldUtil {
         }
 
         if (initialiseDimensionAtServerInit) {
-            if (!DimensionManager.isDimensionRegistered(planetID)) {
-                DimensionManager.registerDimension(planetID, planetID);
-                GCLog.info("Registered Dimension: " + planetID);
-                WorldUtil.registeredPlanets.add(planetID);
-            } else {
+            if (DimensionManager.isDimensionRegistered(planetID)) {
                 GCLog.severe(
                         "Dimension already registered to another mod: unable to register planet dimension " + planetID);
                 // Add 0 to the list to preserve the correct order of the other planets (e.g. if
@@ -739,6 +729,9 @@ public class WorldUtil {
                 WorldUtil.registeredPlanets.add(defaultID);
                 return false;
             }
+            DimensionManager.registerDimension(planetID, planetID);
+            GCLog.info("Registered Dimension: " + planetID);
+            WorldUtil.registeredPlanets.add(planetID);
             final World w = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(planetID);
             WorldUtil.dimNames.put(planetID, getDimensionName(w.provider));
             return true;
@@ -788,14 +781,12 @@ public class WorldUtil {
             GCLog.severe(
                     "Client dimension " + providerID
                             + " has no match on server - probably a server dimension ID conflict problem.");
+        } else if (!WorldUtil.registeredPlanets.contains(dimID)) {
+            WorldUtil.registeredPlanets.add(dimID);
+            DimensionManager.registerDimension(dimID, providerID);
         } else {
-            if (!WorldUtil.registeredPlanets.contains(dimID)) {
-                WorldUtil.registeredPlanets.add(dimID);
-                DimensionManager.registerDimension(dimID, providerID);
-            } else {
-                GCLog.severe(
-                        "Dimension already registered to another mod: unable to register planet dimension " + dimID);
-            }
+            GCLog.severe(
+                    "Dimension already registered to another mod: unable to register planet dimension " + dimID);
         }
     }
 
@@ -808,14 +799,10 @@ public class WorldUtil {
 
         temp.add(ConfigManagerCore.idDimensionOverworld);
 
-        for (final Integer i : WorldUtil.registeredPlanets) {
-            temp.add(i);
-        }
+        temp.addAll(WorldUtil.registeredPlanets);
 
         if (WorldUtil.registeredSpaceStations != null) {
-            for (final Integer i : WorldUtil.registeredSpaceStations.keySet()) {
-                temp.add(i);
-            }
+            temp.addAll(WorldUtil.registeredSpaceStations.keySet());
         }
 
         final Integer[] finalArray = new Integer[temp.size()];
@@ -1080,33 +1067,29 @@ public class WorldUtil {
                     }
                 }
             }
-        } else {
-            // Same dimension player transfer
-            if (entity instanceof EntityPlayerMP) {
-                player = (EntityPlayerMP) entity;
-                player.closeScreen();
-                final GCPlayerStats stats = GCPlayerStats.get(player);
-                stats.usingPlanetSelectionGui = false;
+        } else // Same dimension player transfer
+        if (entity instanceof EntityPlayerMP) {
+            player = (EntityPlayerMP) entity;
+            player.closeScreen();
+            final GCPlayerStats stats = GCPlayerStats.get(player);
+            stats.usingPlanetSelectionGui = false;
 
-                if (worldNew.provider instanceof WorldProviderSpaceStation) {
-                    GalacticraftCore.packetPipeline
-                            .sendTo(new PacketSimple(EnumSimplePacket.C_RESET_THIRD_PERSON, new Object[] {}), player);
-                }
-
-                if (ridingRocket != null) {
-                    spawnPos = new Vector3(ridingRocket);
-                } else {
-                    spawnPos = type.getPlayerSpawnLocation((WorldServer) entity.worldObj, (EntityPlayerMP) entity);
-                }
-                forceMoveEntityToPos(entity, (WorldServer) worldNew, spawnPos, false);
-
-                GCLog.info(
-                        "Server attempting to transfer player " + player.getGameProfile().getName()
-                                + " within same dimension "
-                                + worldNew.provider.dimensionId);
+            if (worldNew.provider instanceof WorldProviderSpaceStation) {
+                GalacticraftCore.packetPipeline
+                        .sendTo(new PacketSimple(EnumSimplePacket.C_RESET_THIRD_PERSON, new Object[] {}), player);
             }
 
-            // Cargo rocket does not needs its location setting here, it will do that itself
+            if (ridingRocket != null) {
+                spawnPos = new Vector3(ridingRocket);
+            } else {
+                spawnPos = type.getPlayerSpawnLocation((WorldServer) entity.worldObj, (EntityPlayerMP) entity);
+            }
+            forceMoveEntityToPos(entity, (WorldServer) worldNew, spawnPos, false);
+
+            GCLog.info(
+                    "Server attempting to transfer player " + player.getGameProfile().getName()
+                            + " within same dimension "
+                            + worldNew.provider.dimensionId);
         }
 
         // Update PlayerStatsGC

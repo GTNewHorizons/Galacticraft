@@ -101,18 +101,16 @@ public class ContainerSlimeling extends Container {
                     if (!this.mergeItemStack(var4, b - 36, b, true)) {
                         return null;
                     }
-                } else {
-                    if (var4.getItem() == MarsItems.marsItemBasic && var4.getItemDamage() == 4) {
-                        if (!this.mergeItemStack(var4, 0, 1, false)) {
-                            return null;
-                        }
-                    } else if (par1 < b - 9) {
-                        if (!this.mergeItemStack(var4, b - 9, b, false)) {
-                            return null;
-                        }
-                    } else if (!this.mergeItemStack(var4, b - 36, b - 9, false)) {
+                } else if (var4.getItem() == MarsItems.marsItemBasic && var4.getItemDamage() == 4) {
+                    if (!this.mergeItemStack(var4, 0, 1, false)) {
                         return null;
                     }
+                } else if (par1 < b - 9) {
+                    if (!this.mergeItemStack(var4, b - 9, b, false)) {
+                        return null;
+                    }
+                } else if (!this.mergeItemStack(var4, b - 36, b - 9, false)) {
+                    return null;
                 }
             } else {
                 // With inventory bag, slot 0 is a bag slot
@@ -126,17 +124,15 @@ public class ContainerSlimeling extends Container {
                     if (!this.mergeItemStack(var4, 1, 37, true)) {
                         return null;
                     }
-                } else {
-                    if (par1 < 28) {
-                        if (!this.mergeItemStack(var4, 37, 64, false)) {
-                            if (!this.mergeItemStack(var4, 28, 37, false)) {
-                                return null;
-                            }
-                        }
-                    } else if (!this.mergeItemStack(var4, 37, 64, false)) {
-                        if (!this.mergeItemStack(var4, 1, 28, false)) {
+                } else if (par1 < 28) {
+                    if (!this.mergeItemStack(var4, 37, 64, false)) {
+                        if (!this.mergeItemStack(var4, 28, 37, false)) {
                             return null;
                         }
+                    }
+                } else if (!this.mergeItemStack(var4, 37, 64, false)) {
+                    if (!this.mergeItemStack(var4, 1, 28, false)) {
+                        return null;
                     }
                 }
             }

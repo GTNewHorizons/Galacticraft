@@ -41,32 +41,31 @@ public class CommandJoinSpaceRace extends CommandBase {
         final EntityPlayerMP playerBase = PlayerUtil
                 .getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
 
-        if (astring.length == 0) {
-            try {
-                if (playerBase != null) {
-                    final GCPlayerStats stats = GCPlayerStats.get(playerBase);
-
-                    if (stats.spaceRaceInviteTeamID > 0) {
-                        SpaceRaceManager.sendSpaceRaceData(
-                                playerBase,
-                                SpaceRaceManager.getSpaceRaceFromID(stats.spaceRaceInviteTeamID));
-                        GalacticraftCore.packetPipeline.sendTo(
-                                new PacketSimple(
-                                        EnumSimplePacket.C_OPEN_JOIN_RACE_GUI,
-                                        new Object[] { stats.spaceRaceInviteTeamID }),
-                                playerBase);
-                    } else {
-                        throw new Exception("You haven't been invited to a space race team!");
-                    }
-                } else {
-                    throw new Exception("Could not find player with name: " + astring[0]);
-                }
-            } catch (final Exception var6) {
-                throw new CommandException(var6.getMessage());
-            }
-        } else {
+        if (astring.length != 0) {
             throw new WrongUsageException(
                     GCCoreUtil.translateWithFormat("commands.joinrace.noTeam", this.getCommandUsage(icommandsender)));
+        }
+        try {
+            if (playerBase != null) {
+                final GCPlayerStats stats = GCPlayerStats.get(playerBase);
+
+                if (stats.spaceRaceInviteTeamID > 0) {
+                    SpaceRaceManager.sendSpaceRaceData(
+                            playerBase,
+                            SpaceRaceManager.getSpaceRaceFromID(stats.spaceRaceInviteTeamID));
+                    GalacticraftCore.packetPipeline.sendTo(
+                            new PacketSimple(
+                                    EnumSimplePacket.C_OPEN_JOIN_RACE_GUI,
+                                    new Object[] { stats.spaceRaceInviteTeamID }),
+                            playerBase);
+                } else {
+                    throw new Exception("You haven't been invited to a space race team!");
+                }
+            } else {
+                throw new Exception("Could not find player with name: " + astring[0]);
+            }
+        } catch (final Exception var6) {
+            throw new CommandException(var6.getMessage());
         }
     }
 }

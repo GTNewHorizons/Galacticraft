@@ -53,24 +53,23 @@ public abstract class InventoryEntity extends NetworkedEntity implements IInvent
 
     @Override
     public ItemStack decrStackSize(int slotIndex, int amount) {
-        if (this.containedItems[slotIndex] != null) {
-            ItemStack var3;
-
-            if (this.containedItems[slotIndex].stackSize <= amount) {
-                var3 = this.containedItems[slotIndex];
-                this.containedItems[slotIndex] = null;
-                return var3;
-            } else {
-                var3 = this.containedItems[slotIndex].splitStack(amount);
-
-                if (this.containedItems[slotIndex].stackSize == 0) {
-                    this.containedItems[slotIndex] = null;
-                }
-
-                return var3;
-            }
-        } else {
+        if (this.containedItems[slotIndex] == null) {
             return null;
+        }
+        ItemStack var3;
+
+        if (this.containedItems[slotIndex].stackSize <= amount) {
+            var3 = this.containedItems[slotIndex];
+            this.containedItems[slotIndex] = null;
+            return var3;
+        } else {
+            var3 = this.containedItems[slotIndex].splitStack(amount);
+
+            if (this.containedItems[slotIndex].stackSize == 0) {
+                this.containedItems[slotIndex] = null;
+            }
+
+            return var3;
         }
     }
 
@@ -80,9 +79,8 @@ public abstract class InventoryEntity extends NetworkedEntity implements IInvent
             final ItemStack stack = this.containedItems[slotIndex];
             this.containedItems[slotIndex] = null;
             return stack;
-        } else {
-            return null;
         }
+        return null;
     }
 
     @Override

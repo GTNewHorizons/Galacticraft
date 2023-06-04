@@ -20,10 +20,9 @@ public class EntityAIThrowPlayer extends EntityAIBase {
 
         if (player == null) {
             return false;
-        } else {
-            this.targetPlayer = player;
-            return true;
         }
+        this.targetPlayer = player;
+        return true;
     }
 
     @Override

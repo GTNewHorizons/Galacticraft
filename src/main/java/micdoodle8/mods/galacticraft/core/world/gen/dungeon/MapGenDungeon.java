@@ -403,7 +403,7 @@ public class MapGenDungeon {
                                     metas,
                                     false);
                             break;
-                        } else {}
+                        }
                     }
                 } else {}
             }
@@ -620,18 +620,17 @@ public class MapGenDungeon {
     }
 
     private Block getBlock(Block[] blocks, int x, int y, int z, int cx, int cz) {
-        if (MapGenDungeon.useArrays) {
-            cx *= 16;
-            cz *= 16;
-            x -= cx;
-            z -= cz;
-            if (x < 0 || x >= 16 || z < 0 || z >= 16) {
-                return Blocks.air;
-            }
-            return blocks[this.getIndex(x, y, z)];
-        } else {
+        if (!MapGenDungeon.useArrays) {
             return this.worldObj.getBlock(x, y, z);
         }
+        cx *= 16;
+        cz *= 16;
+        x -= cx;
+        z -= cz;
+        if (x < 0 || x >= 16 || z < 0 || z >= 16) {
+            return Blocks.air;
+        }
+        return blocks[this.getIndex(x, y, z)];
     }
 
     private int getIndex(int x, int y, int z) {
@@ -654,7 +653,8 @@ public class MapGenDungeon {
     private int clamp(int x, int min, int max) {
         if (x < min) {
             return min;
-        } else if (x > max) {
+        }
+        if (x > max) {
             return max;
         } else {
             return x;

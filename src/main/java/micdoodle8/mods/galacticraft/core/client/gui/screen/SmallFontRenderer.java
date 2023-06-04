@@ -286,28 +286,27 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     private float renderUnicodeChar(char par1, boolean par2) {
         if (this.glyphWidth[par1] == 0) {
             return 0.0F;
-        } else {
-            final int i = par1 / 256;
-            this.loadGlyphTexture(i);
-            final int j = this.glyphWidth[par1] >>> 4;
-            final int k = this.glyphWidth[par1] & 15;
-            final float f1 = k + 1;
-            final float f2 = par1 % 16 * 16 + j;
-            final float f3 = (par1 & 255) / 16 * 16;
-            final float f4 = f1 - j - 0.02F;
-            final float f5 = par2 ? 1.0F : 0.0F;
-            GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
-            GL11.glTexCoord2f(f2 / 256.0F, f3 / 256.0F);
-            GL11.glVertex3f(this.posX + f5, this.posY, 0.0F);
-            GL11.glTexCoord2f(f2 / 256.0F, (f3 + 15.98F) / 256.0F);
-            GL11.glVertex3f(this.posX - f5, this.posY + 7.99F, 0.0F);
-            GL11.glTexCoord2f((f2 + f4) / 256.0F, f3 / 256.0F);
-            GL11.glVertex3f(this.posX + f4 / 2.0F + f5, this.posY, 0.0F);
-            GL11.glTexCoord2f((f2 + f4) / 256.0F, (f3 + 15.98F) / 256.0F);
-            GL11.glVertex3f(this.posX + f4 / 2.0F - f5, this.posY + 7.99F, 0.0F);
-            GL11.glEnd();
-            return (f1 - j) / 2.0F + 1.0F;
         }
+        final int i = par1 / 256;
+        this.loadGlyphTexture(i);
+        final int j = this.glyphWidth[par1] >>> 4;
+        final int k = this.glyphWidth[par1] & 15;
+        final float f1 = k + 1;
+        final float f2 = par1 % 16 * 16 + j;
+        final float f3 = (par1 & 255) / 16 * 16;
+        final float f4 = f1 - j - 0.02F;
+        final float f5 = par2 ? 1.0F : 0.0F;
+        GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
+        GL11.glTexCoord2f(f2 / 256.0F, f3 / 256.0F);
+        GL11.glVertex3f(this.posX + f5, this.posY, 0.0F);
+        GL11.glTexCoord2f(f2 / 256.0F, (f3 + 15.98F) / 256.0F);
+        GL11.glVertex3f(this.posX - f5, this.posY + 7.99F, 0.0F);
+        GL11.glTexCoord2f((f2 + f4) / 256.0F, f3 / 256.0F);
+        GL11.glVertex3f(this.posX + f4 / 2.0F + f5, this.posY, 0.0F);
+        GL11.glTexCoord2f((f2 + f4) / 256.0F, (f3 + 15.98F) / 256.0F);
+        GL11.glVertex3f(this.posX + f4 / 2.0F - f5, this.posY + 7.99F, 0.0F);
+        GL11.glEnd();
+        return (f1 - j) / 2.0F + 1.0F;
     }
 
     /**
@@ -350,65 +349,64 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
      * Apply Unicode Bidirectional Algorithm to string and return a new possibly reordered string for visual rendering.
      */
     private String bidiReorder(String par1Str) {
-        if (par1Str != null && Bidi.requiresBidi(par1Str.toCharArray(), 0, par1Str.length())) {
-            final Bidi bidi = new Bidi(par1Str, -2);
-            final byte[] abyte = new byte[bidi.getRunCount()];
-            final String[] astring = new String[abyte.length];
-            int i;
-
-            for (int j = 0; j < abyte.length; ++j) {
-                final int k = bidi.getRunStart(j);
-                i = bidi.getRunLimit(j);
-                final int l = bidi.getRunLevel(j);
-                final String s1 = par1Str.substring(k, i);
-                abyte[j] = (byte) l;
-                astring[j] = s1;
-            }
-
-            final String[] astring1 = astring.clone();
-            Bidi.reorderVisually(abyte, 0, astring, 0, abyte.length);
-            final StringBuilder stringbuilder = new StringBuilder();
-            i = 0;
-
-            while (i < astring.length) {
-                byte b0 = abyte[i];
-                int i1 = 0;
-
-                while (true) {
-                    if (i1 < astring1.length) {
-                        if (!astring1[i1].equals(astring[i])) {
-                            ++i1;
-                            continue;
-                        }
-
-                        b0 = abyte[i1];
-                    }
-
-                    if ((b0 & 1) == 0) {
-                        stringbuilder.append(astring[i]);
-                    } else {
-                        for (i1 = astring[i].length() - 1; i1 >= 0; --i1) {
-                            char c0 = astring[i].charAt(i1);
-
-                            if (c0 == 40) {
-                                c0 = 41;
-                            } else if (c0 == 41) {
-                                c0 = 40;
-                            }
-
-                            stringbuilder.append(c0);
-                        }
-                    }
-
-                    ++i;
-                    break;
-                }
-            }
-
-            return stringbuilder.toString();
-        } else {
+        if ((par1Str == null) || !Bidi.requiresBidi(par1Str.toCharArray(), 0, par1Str.length())) {
             return par1Str;
         }
+        final Bidi bidi = new Bidi(par1Str, -2);
+        final byte[] abyte = new byte[bidi.getRunCount()];
+        final String[] astring = new String[abyte.length];
+        int i;
+
+        for (int j = 0; j < abyte.length; ++j) {
+            final int k = bidi.getRunStart(j);
+            i = bidi.getRunLimit(j);
+            final int l = bidi.getRunLevel(j);
+            final String s1 = par1Str.substring(k, i);
+            abyte[j] = (byte) l;
+            astring[j] = s1;
+        }
+
+        final String[] astring1 = astring.clone();
+        Bidi.reorderVisually(abyte, 0, astring, 0, abyte.length);
+        final StringBuilder stringbuilder = new StringBuilder();
+        i = 0;
+
+        while (i < astring.length) {
+            byte b0 = abyte[i];
+            int i1 = 0;
+
+            while (true) {
+                if (i1 < astring1.length) {
+                    if (!astring1[i1].equals(astring[i])) {
+                        ++i1;
+                        continue;
+                    }
+
+                    b0 = abyte[i1];
+                }
+
+                if ((b0 & 1) == 0) {
+                    stringbuilder.append(astring[i]);
+                } else {
+                    for (i1 = astring[i].length() - 1; i1 >= 0; --i1) {
+                        char c0 = astring[i].charAt(i1);
+
+                        if (c0 == 40) {
+                            c0 = 41;
+                        } else if (c0 == 41) {
+                            c0 = 40;
+                        }
+
+                        stringbuilder.append(c0);
+                    }
+                }
+
+                ++i;
+                break;
+            }
+        }
+
+        return stringbuilder.toString();
     }
 
     /**
@@ -452,23 +450,32 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
                     k = this.colorCode[j];
                     this.textColor = k;
                     GL11.glColor4f((k >> 16) / 255.0F, (k >> 8 & 255) / 255.0F, (k & 255) / 255.0F, this.alpha);
-                } else if (j == 16) {
-                    this.randomStyle = true;
-                } else if (j == 17) {
-                    this.boldStyle = true;
-                } else if (j == 18) {
-                    this.strikethroughStyle = true;
-                } else if (j == 19) {
-                    this.underlineStyle = true;
-                } else if (j == 20) {
-                    this.italicStyle = true;
-                } else if (j == 21) {
-                    this.randomStyle = false;
-                    this.boldStyle = false;
-                    this.strikethroughStyle = false;
-                    this.underlineStyle = false;
-                    this.italicStyle = false;
-                    GL11.glColor4f(this.red, this.blue, this.green, this.alpha);
+                } else switch (j) {
+                    case 16:
+                        this.randomStyle = true;
+                        break;
+                    case 17:
+                        this.boldStyle = true;
+                        break;
+                    case 18:
+                        this.strikethroughStyle = true;
+                        break;
+                    case 19:
+                        this.underlineStyle = true;
+                        break;
+                    case 20:
+                        this.italicStyle = true;
+                        break;
+                    case 21:
+                        this.randomStyle = false;
+                        this.boldStyle = false;
+                        this.strikethroughStyle = false;
+                        this.underlineStyle = false;
+                        this.italicStyle = false;
+                        GL11.glColor4f(this.red, this.blue, this.green, this.alpha);
+                        break;
+                    default:
+                        break;
                 }
 
                 ++i;
@@ -569,25 +576,24 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     private int renderString(String par1Str, int par2, int par3, int par4, boolean par5) {
         if (par1Str == null) {
             return 0;
-        } else {
-            if ((par4 & -67108864) == 0) {
-                par4 |= -16777216;
-            }
-
-            if (par5) {
-                par4 = (par4 & 16579836) >> 2 | par4 & -16777216;
-            }
-
-            this.red = (par4 >> 16 & 255) / 255.0F;
-            this.blue = (par4 >> 8 & 255) / 255.0F;
-            this.green = (par4 & 255) / 255.0F;
-            this.alpha = (par4 >> 24 & 255) / 255.0F;
-            GL11.glColor4f(this.red, this.blue, this.green, this.alpha);
-            this.posX = par2;
-            this.posY = par3;
-            this.renderStringAtPos(par1Str, par5);
-            return (int) this.posX;
         }
+        if ((par4 & -67108864) == 0) {
+            par4 |= -16777216;
+        }
+
+        if (par5) {
+            par4 = (par4 & 16579836) >> 2 | par4 & -16777216;
+        }
+
+        this.red = (par4 >> 16 & 255) / 255.0F;
+        this.blue = (par4 >> 8 & 255) / 255.0F;
+        this.green = (par4 & 255) / 255.0F;
+        this.alpha = (par4 >> 24 & 255) / 255.0F;
+        GL11.glColor4f(this.red, this.blue, this.green, this.alpha);
+        this.posX = par2;
+        this.posY = par3;
+        this.renderStringAtPos(par1Str, par5);
+        return (int) this.posX;
     }
 
     /**
@@ -596,38 +602,37 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     public int getStringWidth(String par1Str) {
         if (par1Str == null) {
             return 0;
-        } else {
-            int i = 0;
-            boolean flag = false;
+        }
+        int i = 0;
+        boolean flag = false;
 
-            for (int j = 0; j < par1Str.length(); ++j) {
-                char c0 = par1Str.charAt(j);
-                int k = this.getCharWidth(c0);
+        for (int j = 0; j < par1Str.length(); ++j) {
+            char c0 = par1Str.charAt(j);
+            int k = this.getCharWidth(c0);
 
-                if (k < 0 && j < par1Str.length() - 1) {
-                    ++j;
-                    c0 = par1Str.charAt(j);
+            if (k < 0 && j < par1Str.length() - 1) {
+                ++j;
+                c0 = par1Str.charAt(j);
 
-                    if (c0 != 108 && c0 != 76) {
-                        if (c0 == 114 || c0 == 82) {
-                            flag = false;
-                        }
-                    } else {
-                        flag = true;
+                if (c0 != 108 && c0 != 76) {
+                    if (c0 == 114 || c0 == 82) {
+                        flag = false;
                     }
-
-                    k = 0;
+                } else {
+                    flag = true;
                 }
 
-                i += k;
-
-                if (flag) {
-                    ++i;
-                }
+                k = 0;
             }
 
-            return i;
+            i += k;
+
+            if (flag) {
+                ++i;
+            }
         }
+
+        return i;
     }
 
     /**
@@ -636,7 +641,8 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
     public int getCharWidth(char par1) {
         if (par1 == 167) {
             return -1;
-        } else if (par1 == 32) {
+        }
+        if (par1 == 32) {
             return 4;
         } else {
             final int i = "\u00c0\u00c1\u00c2\u00c8\u00ca\u00cb\u00cd\u00d3\u00d4\u00d5\u00da\u00df\u00e3\u00f5\u011f\u0130\u0131\u0152\u0153\u015e\u015f\u0174\u0175\u017e\u0207\u0000\u0000\u0000\u0000\u0000\u0000\u0000 !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u0000\u00c7\u00fc\u00e9\u00e2\u00e4\u00e0\u00e5\u00e7\u00ea\u00eb\u00e8\u00ef\u00ee\u00ec\u00c4\u00c5\u00c9\u00e6\u00c6\u00f4\u00f6\u00f2\u00fb\u00f9\u00ff\u00d6\u00dc\u00f8\u00a3\u00d8\u00d7\u0192\u00e1\u00ed\u00f3\u00fa\u00f1\u00d1\u00aa\u00ba\u00bf\u00ae\u00ac\u00bd\u00bc\u00a1\u00ab\u00bb\u2591\u2592\u2593\u2502\u2524\u2561\u2562\u2556\u2555\u2563\u2551\u2557\u255d\u255c\u255b\u2510\u2514\u2534\u252c\u251c\u2500\u253c\u255e\u255f\u255a\u2554\u2569\u2566\u2560\u2550\u256c\u2567\u2568\u2564\u2565\u2559\u2558\u2552\u2553\u256b\u256a\u2518\u250c\u2588\u2584\u258c\u2590\u2580\u03b1\u03b2\u0393\u03c0\u03a3\u03c3\u03bc\u03c4\u03a6\u0398\u03a9\u03b4\u221e\u2205\u2208\u2229\u2261\u00b1\u2265\u2264\u2320\u2321\u00f7\u2248\u00b0\u2219\u00b7\u221a\u207f\u00b2\u25a0\u0000"
@@ -796,13 +802,12 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
 
         if (par1Str.length() <= j) {
             return par1Str;
-        } else {
-            final String s1 = par1Str.substring(0, j);
-            final char c0 = par1Str.charAt(j);
-            final boolean flag = c0 == 32 || c0 == 10;
-            final String s2 = SmallFontRenderer.getFormatFromString(s1) + par1Str.substring(j + (flag ? 1 : 0));
-            return s1 + "\n" + this.wrapFormattedStringToWidth(s2, par2);
         }
+        final String s1 = par1Str.substring(0, j);
+        final char c0 = par1Str.charAt(j);
+        final boolean flag = c0 == 32 || c0 == 10;
+        final String s2 = SmallFontRenderer.getFormatFromString(s1) + par1Str.substring(j + (flag ? 1 : 0));
+        return s1 + "\n" + this.wrapFormattedStringToWidth(s2, par2);
     }
 
     /**

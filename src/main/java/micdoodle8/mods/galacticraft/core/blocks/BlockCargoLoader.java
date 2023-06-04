@@ -115,7 +115,8 @@ public class BlockCargoLoader extends BlockAdvancedTile implements ItemBlockDesc
             } else {
                 return metadata < 4 ? this.iconFrontLoader : this.iconFrontUnloader;
             }
-        } else if (metadata >= BlockCargoLoader.METADATA_CARGO_LOADER) {
+        }
+        if (metadata >= BlockCargoLoader.METADATA_CARGO_LOADER) {
             shiftedMeta -= BlockCargoLoader.METADATA_CARGO_LOADER;
 
             if (side == shiftedMeta + 2) {
@@ -134,9 +135,8 @@ public class BlockCargoLoader extends BlockAdvancedTile implements ItemBlockDesc
     public TileEntity createTileEntity(World world, int metadata) {
         if (metadata < BlockCargoLoader.METADATA_CARGO_UNLOADER) {
             return new TileEntityCargoLoader();
-        } else {
-            return new TileEntityCargoUnloader();
         }
+        return new TileEntityCargoUnloader();
     }
 
     @Override
@@ -239,7 +239,8 @@ public class BlockCargoLoader extends BlockAdvancedTile implements ItemBlockDesc
     public int damageDropped(int metadata) {
         if (metadata >= BlockCargoLoader.METADATA_CARGO_UNLOADER) {
             return BlockCargoLoader.METADATA_CARGO_UNLOADER;
-        } else if (metadata >= BlockCargoLoader.METADATA_CARGO_LOADER) {
+        }
+        if (metadata >= BlockCargoLoader.METADATA_CARGO_LOADER) {
             return BlockCargoLoader.METADATA_CARGO_LOADER;
         }
 

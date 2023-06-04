@@ -463,32 +463,31 @@ public class TileEntityShortRangeTelepad extends TileBaseElectricBlock
     }
 
     public boolean updateTarget() {
-        if (this.targetAddress >= 0 && !this.worldObj.isRemote) {
+        if ((this.targetAddress < 0) || this.worldObj.isRemote) {
             this.targetAddressResult = EnumTelepadSearchResult.NOT_FOUND;
+            return false;
+        }
+        this.targetAddressResult = EnumTelepadSearchResult.NOT_FOUND;
 
-            final ShortRangeTelepadHandler.TelepadEntry addressResult = ShortRangeTelepadHandler
-                    .getLocationFromAddress(this.targetAddress);
+        final ShortRangeTelepadHandler.TelepadEntry addressResult = ShortRangeTelepadHandler
+                .getLocationFromAddress(this.targetAddress);
 
-            if (addressResult != null) {
-                if (this.worldObj.provider.dimensionId == addressResult.dimensionID) {
-                    final double distance = this.getDistanceFrom(
-                            addressResult.position.x + 0.5F,
-                            addressResult.position.y + 0.5F,
-                            addressResult.position.z + 0.5F);
+        if (addressResult != null) {
+            if (this.worldObj.provider.dimensionId == addressResult.dimensionID) {
+                final double distance = this.getDistanceFrom(
+                        addressResult.position.x + 0.5F,
+                        addressResult.position.y + 0.5F,
+                        addressResult.position.z + 0.5F);
 
-                    if (distance < TELEPORTER_RANGE * TELEPORTER_RANGE) {
-                        this.targetAddressResult = EnumTelepadSearchResult.VALID;
-                        return true;
-                    } else {
-                        this.targetAddressResult = EnumTelepadSearchResult.TOO_FAR;
-                        return false;
-                    }
+                if (distance < TELEPORTER_RANGE * TELEPORTER_RANGE) {
+                    this.targetAddressResult = EnumTelepadSearchResult.VALID;
+                    return true;
                 } else {
-                    this.targetAddressResult = EnumTelepadSearchResult.WRONG_DIM;
+                    this.targetAddressResult = EnumTelepadSearchResult.TOO_FAR;
                     return false;
                 }
             } else {
-                this.targetAddressResult = EnumTelepadSearchResult.NOT_FOUND;
+                this.targetAddressResult = EnumTelepadSearchResult.WRONG_DIM;
                 return false;
             }
         } else {
@@ -520,24 +519,23 @@ public class TileEntityShortRangeTelepad extends TileBaseElectricBlock
 
     @Override
     public ItemStack decrStackSize(int par1, int par2) {
-        if (this.containingItems[par1] != null) {
-            ItemStack var3;
-
-            if (this.containingItems[par1].stackSize <= par2) {
-                var3 = this.containingItems[par1];
-                this.containingItems[par1] = null;
-                return var3;
-            } else {
-                var3 = this.containingItems[par1].splitStack(par2);
-
-                if (this.containingItems[par1].stackSize == 0) {
-                    this.containingItems[par1] = null;
-                }
-
-                return var3;
-            }
-        } else {
+        if (this.containingItems[par1] == null) {
             return null;
+        }
+        ItemStack var3;
+
+        if (this.containingItems[par1].stackSize <= par2) {
+            var3 = this.containingItems[par1];
+            this.containingItems[par1] = null;
+            return var3;
+        } else {
+            var3 = this.containingItems[par1].splitStack(par2);
+
+            if (this.containingItems[par1].stackSize == 0) {
+                this.containingItems[par1] = null;
+            }
+
+            return var3;
         }
     }
 
@@ -547,9 +545,8 @@ public class TileEntityShortRangeTelepad extends TileBaseElectricBlock
             final ItemStack var2 = this.containingItems[par1];
             this.containingItems[par1] = null;
             return var2;
-        } else {
-            return null;
         }
+        return null;
     }
 
     @Override

@@ -104,12 +104,18 @@ public class BlockRendererMeteor implements ISimpleBlockRenderingHandler {
         final int var5 = var1.getBlockMetadata(par2, par3, par4);
         final int var6 = var5 & 3;
 
-        if (var6 == 0) {
-            renderBlocks.uvRotateTop = 3;
-        } else if (var6 == 3) {
-            renderBlocks.uvRotateTop = 1;
-        } else if (var6 == 1) {
-            renderBlocks.uvRotateTop = 2;
+        switch (var6) {
+            case 0:
+                renderBlocks.uvRotateTop = 3;
+                break;
+            case 3:
+                renderBlocks.uvRotateTop = 1;
+                break;
+            case 1:
+                renderBlocks.uvRotateTop = 2;
+                break;
+            default:
+                break;
         }
 
         renderBlocks.setRenderBounds(0.2F, 0.2F, 0.2F, 0.8F, 0.8F, 0.8F);

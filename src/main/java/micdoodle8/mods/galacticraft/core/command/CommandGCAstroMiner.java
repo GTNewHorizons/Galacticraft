@@ -91,38 +91,37 @@ public class CommandGCAstroMiner extends CommandBase {
                             .getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
                 }
 
-                if (playerBase != null) {
-                    final GCPlayerStats stats = GCPlayerStats.get(playerBase);
-                    switch (type) {
-                        case 1:
-                            icommandsender.addChatMessage(
-                                    new ChatComponentText(
-                                            GCCoreUtil.translateWithFormat(
-                                                    "command.gcastrominer.count",
-                                                    playerBase.getGameProfile().getName(),
-                                                    "" + stats.astroMinerCount)));
-                            break;
-                        case 2:
-                            stats.astroMinerCount = 0;
-                            icommandsender.addChatMessage(
-                                    new ChatComponentText(
-                                            GCCoreUtil.translateWithFormat(
-                                                    "command.gcastrominer.count",
-                                                    playerBase.getGameProfile().getName(),
-                                                    "" + 0)));
-                            break;
-                        case 3:
-                            stats.astroMinerCount = newvalue;
-                            icommandsender.addChatMessage(
-                                    new ChatComponentText(
-                                            GCCoreUtil.translateWithFormat(
-                                                    "command.gcastrominer.count",
-                                                    playerBase.getGameProfile().getName(),
-                                                    "" + newvalue)));
-                            break;
-                    }
-                } else {
+                if (playerBase == null) {
                     throw new Exception("Could not find player with name: " + astring[1]);
+                }
+                final GCPlayerStats stats = GCPlayerStats.get(playerBase);
+                switch (type) {
+                    case 1:
+                        icommandsender.addChatMessage(
+                                new ChatComponentText(
+                                        GCCoreUtil.translateWithFormat(
+                                                "command.gcastrominer.count",
+                                                playerBase.getGameProfile().getName(),
+                                                "" + stats.astroMinerCount)));
+                        break;
+                    case 2:
+                        stats.astroMinerCount = 0;
+                        icommandsender.addChatMessage(
+                                new ChatComponentText(
+                                        GCCoreUtil.translateWithFormat(
+                                                "command.gcastrominer.count",
+                                                playerBase.getGameProfile().getName(),
+                                                "" + 0)));
+                        break;
+                    case 3:
+                        stats.astroMinerCount = newvalue;
+                        icommandsender.addChatMessage(
+                                new ChatComponentText(
+                                        GCCoreUtil.translateWithFormat(
+                                                "command.gcastrominer.count",
+                                                playerBase.getGameProfile().getName(),
+                                                "" + newvalue)));
+                        break;
                 }
             } catch (final Exception e) {
                 throw new CommandException(e.getMessage());

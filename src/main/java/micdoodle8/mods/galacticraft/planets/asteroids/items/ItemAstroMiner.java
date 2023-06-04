@@ -54,55 +54,54 @@ public class ItemAstroMiner extends Item implements IHoldableItem {
 
         if (par3World.isRemote || par2EntityPlayer == null) {
             return false;
-        } else {
-            final Block id = par3World.getBlock(par4, par5, par6);
+        }
+        final Block id = par3World.getBlock(par4, par5, par6);
 
-            if (id == AsteroidBlocks.minerBaseFull) {
-                tile = par3World.getTileEntity(par4, par5, par6);
+        if (id == AsteroidBlocks.minerBaseFull) {
+            tile = par3World.getTileEntity(par4, par5, par6);
+        }
+
+        if (tile instanceof TileEntityMinerBase) {
+            if (par3World.provider instanceof WorldProviderSpaceStation) {
+                par2EntityPlayer.addChatMessage(
+                        new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner7.fail")));
+                return false;
             }
 
-            if (tile instanceof TileEntityMinerBase) {
-                if (par3World.provider instanceof WorldProviderSpaceStation) {
-                    par2EntityPlayer.addChatMessage(
-                            new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner7.fail")));
-                    return false;
-                }
-
-                if (((TileEntityMinerBase) tile).getLinkedMiner() != null) {
-                    par2EntityPlayer
-                            .addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner.fail")));
-                    return false;
-                }
-
-                // Gives a chance for any loaded Astro Miner to link itself
-                if (((TileEntityMinerBase) tile).ticks < 15) {
-                    return false;
-                }
-
-                final EntityPlayerMP playerMP = (EntityPlayerMP) par2EntityPlayer;
-
-                final int astroCount = GCPlayerStats.get(playerMP).astroMinerCount;
-                if (astroCount >= ConfigManagerAsteroids.astroMinerMax
-                        && !par2EntityPlayer.capabilities.isCreativeMode) {
-                    par2EntityPlayer.addChatMessage(
-                            new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner2.fail")));
-                    return false;
-                }
-
-                if (!((TileEntityMinerBase) tile).spawnMiner(playerMP)) {
-                    par2EntityPlayer.addChatMessage(
-                            new ChatComponentText(
-                                    GCCoreUtil.translate("gui.message.astroMiner1.fail") + " "
-                                            + GCCoreUtil.translate(EntityAstroMiner.blockingBlock.toString())));
-                    return false;
-                }
-
-                if (!par2EntityPlayer.capabilities.isCreativeMode) {
-                    GCPlayerStats.get(playerMP).astroMinerCount++;
-                    --par1ItemStack.stackSize;
-                }
-                return true;
+            if (((TileEntityMinerBase) tile).getLinkedMiner() != null) {
+                par2EntityPlayer
+                        .addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner.fail")));
+                return false;
             }
+
+            // Gives a chance for any loaded Astro Miner to link itself
+            if (((TileEntityMinerBase) tile).ticks < 15) {
+                return false;
+            }
+
+            final EntityPlayerMP playerMP = (EntityPlayerMP) par2EntityPlayer;
+
+            final int astroCount = GCPlayerStats.get(playerMP).astroMinerCount;
+            if (astroCount >= ConfigManagerAsteroids.astroMinerMax
+                    && !par2EntityPlayer.capabilities.isCreativeMode) {
+                par2EntityPlayer.addChatMessage(
+                        new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner2.fail")));
+                return false;
+            }
+
+            if (!((TileEntityMinerBase) tile).spawnMiner(playerMP)) {
+                par2EntityPlayer.addChatMessage(
+                        new ChatComponentText(
+                                GCCoreUtil.translate("gui.message.astroMiner1.fail") + " "
+                                        + GCCoreUtil.translate(EntityAstroMiner.blockingBlock.toString())));
+                return false;
+            }
+
+            if (!par2EntityPlayer.capabilities.isCreativeMode) {
+                GCPlayerStats.get(playerMP).astroMinerCount++;
+                --par1ItemStack.stackSize;
+            }
+            return true;
         }
         return false;
     }

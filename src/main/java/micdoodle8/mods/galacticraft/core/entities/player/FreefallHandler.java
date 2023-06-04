@@ -103,61 +103,60 @@ public class FreefallHandler {
         // This is an "on the ground" check
         if (!flag) {
             return false;
-        } else {
-            final float rY = p.rotationYaw % 360F;
-            double zreach = 0D;
-            double xreach = 0D;
-            if (rY < 80F || rY > 280F) {
-                zreach = 0.2D;
-            }
-            if (rY < 170F && rY > 10F) {
-                xreach = 0.2D;
-            }
-            if (rY < 260F && rY > 100F) {
-                zreach = -0.2D;
-            }
-            if (rY < 350F && rY > 190F) {
-                xreach = -0.2D;
-            }
-            final AxisAlignedBB playerReach = p.boundingBox.addCoord(xreach, 0, zreach);
+        }
+        final float rY = p.rotationYaw % 360F;
+        double zreach = 0D;
+        double xreach = 0D;
+        if (rY < 80F || rY > 280F) {
+            zreach = 0.2D;
+        }
+        if (rY < 170F && rY > 10F) {
+            xreach = 0.2D;
+        }
+        if (rY < 260F && rY > 100F) {
+            zreach = -0.2D;
+        }
+        if (rY < 350F && rY > 190F) {
+            xreach = -0.2D;
+        }
+        final AxisAlignedBB playerReach = p.boundingBox.addCoord(xreach, 0, zreach);
 
-            boolean checkBlockWithinReach;
-            if (worldProvider instanceof WorldProviderSpaceStation) {
-                final SpinManager spinManager = ((WorldProviderSpaceStation) worldProvider).getSpinManager();
-                checkBlockWithinReach = playerReach.maxX >= spinManager.ssBoundsMinX
-                        && playerReach.minX <= spinManager.ssBoundsMaxX
-                        && playerReach.maxY >= spinManager.ssBoundsMinY
-                        && playerReach.minY <= spinManager.ssBoundsMaxY
-                        && playerReach.maxZ >= spinManager.ssBoundsMinZ
-                        && playerReach.minZ <= spinManager.ssBoundsMaxZ;
-                // Player is somewhere within the space station boundaries
-            } else {
-                checkBlockWithinReach = true;
-            }
-
-            if (checkBlockWithinReach)
+        boolean checkBlockWithinReach;
+        if (worldProvider instanceof WorldProviderSpaceStation) {
+            final SpinManager spinManager = ((WorldProviderSpaceStation) worldProvider).getSpinManager();
+            checkBlockWithinReach = playerReach.maxX >= spinManager.ssBoundsMinX
+                    && playerReach.minX <= spinManager.ssBoundsMaxX
+                    && playerReach.maxY >= spinManager.ssBoundsMinY
+                    && playerReach.minY <= spinManager.ssBoundsMaxY
+                    && playerReach.maxZ >= spinManager.ssBoundsMinZ
+                    && playerReach.minZ <= spinManager.ssBoundsMaxZ;
             // Player is somewhere within the space station boundaries
-            {
-                // Check if the player's bounding box is in the same block coordinates as any
-                // non-vacuum block
-                // (including torches etc)
-                // If so, it's assumed the player has something close enough to grab onto, so is
-                // not in freefall
-                // Note: breatheable air here means the player is definitely not in freefall
-                final int xm = MathHelper.floor_double(playerReach.minX);
-                final int xx = MathHelper.floor_double(playerReach.maxX);
-                final int ym = MathHelper.floor_double(playerReach.minY);
-                final int yy = MathHelper.floor_double(playerReach.maxY);
-                final int zm = MathHelper.floor_double(playerReach.minZ);
-                final int zz = MathHelper.floor_double(playerReach.maxZ);
-                for (int x = xm; x <= xx; x++) {
-                    for (int y = ym; y <= yy; y++) {
-                        for (int z = zm; z <= zz; z++) {
-                            // Blocks.air is hard vacuum - we want to check for that, here
-                            final Block b = world.getBlock(x, y, z);
-                            if (Blocks.air != b && GCBlocks.brightAir != b) {
-                                return false;
-                            }
+        } else {
+            checkBlockWithinReach = true;
+        }
+
+        if (checkBlockWithinReach)
+        // Player is somewhere within the space station boundaries
+        {
+            // Check if the player's bounding box is in the same block coordinates as any
+            // non-vacuum block
+            // (including torches etc)
+            // If so, it's assumed the player has something close enough to grab onto, so is
+            // not in freefall
+            // Note: breatheable air here means the player is definitely not in freefall
+            final int xm = MathHelper.floor_double(playerReach.minX);
+            final int xx = MathHelper.floor_double(playerReach.maxX);
+            final int ym = MathHelper.floor_double(playerReach.minY);
+            final int yy = MathHelper.floor_double(playerReach.maxY);
+            final int zm = MathHelper.floor_double(playerReach.minZ);
+            final int zz = MathHelper.floor_double(playerReach.maxZ);
+            for (int x = xm; x <= xx; x++) {
+                for (int y = ym; y <= yy; y++) {
+                    for (int z = zm; z <= zz; z++) {
+                        // Blocks.air is hard vacuum - we want to check for that, here
+                        final Block b = world.getBlock(x, y, z);
+                        if (Blocks.air != b && GCBlocks.brightAir != b) {
+                            return false;
                         }
                     }
                 }

@@ -62,7 +62,7 @@ public class ModelNasaWorkbench extends ModelBase {
         this.baseAux1.setRotationPoint(0F, 20F, 0F);
         this.baseAux1.setTextureSize(256, 128);
         this.baseAux1.mirror = true;
-        this.setRotation(this.baseAux1, 0F, ((float)Math.PI / 4F), 0F);
+        this.setRotation(this.baseAux1, 0F, (float)Math.PI / 4F, 0F);
         this.base1b = new ModelRenderer(this, 113, 24);
         this.base1b.addBox(-2.5F, -2F, -7.5F, 5, 2, 15);
         this.base1b.setRotationPoint(0F, 24F, 0F);
@@ -80,7 +80,7 @@ public class ModelNasaWorkbench extends ModelBase {
         this.base2b.setRotationPoint(0F, 23F, 0F);
         this.base2b.setTextureSize(256, 128);
         this.base2b.mirror = true;
-        this.setRotation(this.base2b, 0F, ((float)Math.PI / 4F), 0F);
+        this.setRotation(this.base2b, 0F, (float)Math.PI / 4F, 0F);
         this.baseAux3 = new ModelRenderer(this, 50, 62);
         this.baseAux3.addBox(-8.5F, 0F, -0.5F, 17, 4, 1);
         this.baseAux3.setRotationPoint(0F, 20.5F, 0F);
@@ -92,7 +92,7 @@ public class ModelNasaWorkbench extends ModelBase {
         this.baseAux2.setRotationPoint(0F, 20.5F, 0F);
         this.baseAux2.setTextureSize(256, 128);
         this.baseAux2.mirror = true;
-        this.setRotation(this.baseAux2, 0F, ((float)Math.PI / 4F), 0F);
+        this.setRotation(this.baseAux2, 0F, (float)Math.PI / 4F, 0F);
         this.clawL1 = new ModelRenderer(this, 7, 57);
         this.clawL1.addBox(-0.5F, -1F, -3F, 1, 2, 3);
         this.clawL1.setRotationPoint(-1F, -0.2F, 4F);

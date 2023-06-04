@@ -49,9 +49,8 @@ public class BlockOxygenDetector extends BlockContainer implements ITileEntityPr
     public IIcon getIcon(int side, int metadata) {
         if (side == 0 || side == 1) {
             return this.iconTop;
-        } else {
-            return this.iconSide;
         }
+        return this.iconSide;
     }
 
     @Override

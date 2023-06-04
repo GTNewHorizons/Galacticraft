@@ -28,15 +28,14 @@ public class InventorySchematicTier2Rocket implements IInventory {
     }
 
     public ItemStack getStackInRowAndColumn(int par1, int par2) {
-        if (par1 >= 0 && par1 < this.inventoryWidth) {
-            final int var3 = par1 + par2 * this.inventoryWidth;
-            if (var3 >= 22) {
-                return null;
-            }
-            return this.getStackInSlot(var3);
-        } else {
+        if ((par1 < 0) || (par1 >= this.inventoryWidth)) {
             return null;
         }
+        final int var3 = par1 + par2 * this.inventoryWidth;
+        if (var3 >= 22) {
+            return null;
+        }
+        return this.getStackInSlot(var3);
     }
 
     @Override
@@ -50,33 +49,31 @@ public class InventorySchematicTier2Rocket implements IInventory {
             final ItemStack var2 = this.stackList[par1];
             this.stackList[par1] = null;
             return var2;
-        } else {
-            return null;
         }
+        return null;
     }
 
     @Override
     public ItemStack decrStackSize(int par1, int par2) {
-        if (this.stackList[par1] != null) {
-            ItemStack var3;
-
-            if (this.stackList[par1].stackSize <= par2) {
-                var3 = this.stackList[par1];
-                this.stackList[par1] = null;
-                this.eventHandler.onCraftMatrixChanged(this);
-                return var3;
-            } else {
-                var3 = this.stackList[par1].splitStack(par2);
-
-                if (this.stackList[par1].stackSize == 0) {
-                    this.stackList[par1] = null;
-                }
-
-                this.eventHandler.onCraftMatrixChanged(this);
-                return var3;
-            }
-        } else {
+        if (this.stackList[par1] == null) {
             return null;
+        }
+        ItemStack var3;
+
+        if (this.stackList[par1].stackSize <= par2) {
+            var3 = this.stackList[par1];
+            this.stackList[par1] = null;
+            this.eventHandler.onCraftMatrixChanged(this);
+            return var3;
+        } else {
+            var3 = this.stackList[par1].splitStack(par2);
+
+            if (this.stackList[par1].stackSize == 0) {
+                this.stackList[par1] = null;
+            }
+
+            this.eventHandler.onCraftMatrixChanged(this);
+            return var3;
         }
     }
 

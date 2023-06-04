@@ -22,7 +22,8 @@ public class EnergyDisplayHelper {
     public static String getEnergyDisplayS(float energyVal) {
         if (EnergyConfigHandler.displayEnergyUnitsIC2) {
             return getEnergyDisplayIC2(energyVal * EnergyConfigHandler.TO_IC2_RATIOdisp);
-        } else if (EnergyConfigHandler.displayEnergyUnitsBC) {
+        }
+        if (EnergyConfigHandler.displayEnergyUnitsBC) {
             return getEnergyDisplayBC(energyVal * EnergyConfigHandler.TO_BC_RATIOdisp);
         } else if (EnergyConfigHandler.displayEnergyUnitsMek) {
             return getEnergyDisplayMek(energyVal * EnergyConfigHandler.TO_MEKANISM_RATIOdisp);
@@ -66,7 +67,8 @@ public class EnergyDisplayHelper {
         if (energyVal < 1000) {
             final String val = String.valueOf(getEnergyDisplayI(energyVal));
             return val + " J";
-        } else if (energyVal < 1000000) {
+        }
+        if (energyVal < 1000000) {
             final String val = getEnergyDisplay1DP(energyVal / 1000);
             return val + " kJ";
         } else {

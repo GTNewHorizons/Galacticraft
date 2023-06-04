@@ -87,18 +87,17 @@ public class EntityCreeperBoss extends EntityMob
         if (damageSource.getDamageType().equals("fireball")) {
             if (this.isEntityInvulnerable() || !super.attackEntityFrom(damageSource, damage)) {
                 return false;
-            } else {
-                final Entity entity = damageSource.getEntity();
+            }
+            final Entity entity = damageSource.getEntity();
 
-                if (this.riddenByEntity != entity && this.ridingEntity != entity) {
-                    if (entity != this) {
-                        this.entityToAttack = entity;
-                    }
-
-                    return true;
-                } else {
-                    return true;
+            if (this.riddenByEntity != entity && this.ridingEntity != entity) {
+                if (entity != this) {
+                    this.entityToAttack = entity;
                 }
+
+                return true;
+            } else {
+                return true;
             }
         }
 
@@ -508,11 +507,10 @@ public class EntityCreeperBoss extends EntityMob
     private double func_82214_u(int par1) {
         if (par1 <= 0) {
             return this.posX;
-        } else {
-            final float f = (this.renderYawOffset + 180 * (par1 - 1)) / 180.0F * (float) Math.PI;
-            final float f1 = MathHelper.cos(f);
-            return this.posX + f1 * 1.3D;
         }
+        final float f = (this.renderYawOffset + 180 * (par1 - 1)) / 180.0F * (float) Math.PI;
+        final float f1 = MathHelper.cos(f);
+        return this.posX + f1 * 1.3D;
     }
 
     private double func_82208_v(int par1) {
@@ -522,11 +520,10 @@ public class EntityCreeperBoss extends EntityMob
     private double func_82213_w(int par1) {
         if (par1 <= 0) {
             return this.posZ;
-        } else {
-            final float f = (this.renderYawOffset + 180 * (par1 - 1)) / 180.0F * (float) Math.PI;
-            final float f1 = MathHelper.sin(f);
-            return this.posZ + f1 * 1.3D;
         }
+        final float f = (this.renderYawOffset + 180 * (par1 - 1)) / 180.0F * (float) Math.PI;
+        final float f1 = MathHelper.sin(f);
+        return this.posZ + f1 * 1.3D;
     }
 
     @Override

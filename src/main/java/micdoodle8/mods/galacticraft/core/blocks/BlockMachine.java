@@ -80,18 +80,25 @@ public class BlockMachine extends BlockTileGC implements ItemBlockDesc.IBlockShi
                 final float var10 = 0.52F;
                 final float var11 = par5Random.nextFloat() * 0.6F - 0.3F;
 
-                if (metadata == 0) {
-                    par1World.spawnParticle("smoke", var7 - var10, var8, var9 + var11, 0.0D, 0.0D, 0.0D);
-                    par1World.spawnParticle("flame", var7 - var10, var8, var9 + var11, 0.0D, 0.0D, 0.0D);
-                } else if (metadata == 1) {
-                    par1World.spawnParticle("smoke", var7 + var10, var8, var9 + var11, 0.0D, 0.0D, 0.0D);
-                    par1World.spawnParticle("flame", var7 + var10, var8, var9 + var11, 0.0D, 0.0D, 0.0D);
-                } else if (metadata == 2) {
-                    par1World.spawnParticle("smoke", var7 + var11, var8, var9 + var10, 0.0D, 0.0D, 0.0D);
-                    par1World.spawnParticle("flame", var7 + var11, var8, var9 + var10, 0.0D, 0.0D, 0.0D);
-                } else if (metadata == 3) {
-                    par1World.spawnParticle("smoke", var7 + var11, var8, var9 - var10, 0.0D, 0.0D, 0.0D);
-                    par1World.spawnParticle("flame", var7 + var11, var8, var9 - var10, 0.0D, 0.0D, 0.0D);
+                switch (metadata) {
+                    case 0:
+                        par1World.spawnParticle("smoke", var7 - var10, var8, var9 + var11, 0.0D, 0.0D, 0.0D);
+                        par1World.spawnParticle("flame", var7 - var10, var8, var9 + var11, 0.0D, 0.0D, 0.0D);
+                        break;
+                    case 1:
+                        par1World.spawnParticle("smoke", var7 + var10, var8, var9 + var11, 0.0D, 0.0D, 0.0D);
+                        par1World.spawnParticle("flame", var7 + var10, var8, var9 + var11, 0.0D, 0.0D, 0.0D);
+                        break;
+                    case 2:
+                        par1World.spawnParticle("smoke", var7 + var11, var8, var9 + var10, 0.0D, 0.0D, 0.0D);
+                        par1World.spawnParticle("flame", var7 + var11, var8, var9 + var10, 0.0D, 0.0D, 0.0D);
+                        break;
+                    case 3:
+                        par1World.spawnParticle("smoke", var7 + var11, var8, var9 - var10, 0.0D, 0.0D, 0.0D);
+                        par1World.spawnParticle("flame", var7 + var11, var8, var9 - var10, 0.0D, 0.0D, 0.0D);
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -206,10 +213,9 @@ public class BlockMachine extends BlockTileGC implements ItemBlockDesc.IBlockShi
             if (metadata >= BlockMachine.COMPRESSOR_METADATA) {
                 par5EntityPlayer.openGui(GalacticraftCore.instance, -1, par1World, x, y, z);
                 return true;
-            } else {
-                par5EntityPlayer.openGui(GalacticraftCore.instance, -1, par1World, x, y, z);
-                return true;
             }
+            par5EntityPlayer.openGui(GalacticraftCore.instance, -1, par1World, x, y, z);
+            return true;
         }
 
         return true;
@@ -218,14 +224,15 @@ public class BlockMachine extends BlockTileGC implements ItemBlockDesc.IBlockShi
     @Override
     public TileEntity createTileEntity(World world, int metadata) {
         metadata &= 12;
-        if (metadata == BlockMachine.COMPRESSOR_METADATA) {
-            return new TileEntityIngotCompressor();
-        } else if (metadata == 4) {
-            return new TileEntityEnergyStorageModule();
-        } else if (metadata == 8) {
-            return new TileEntityElectricFurnace();
-        } else {
-            return new TileEntityCoalGenerator();
+        switch (metadata) {
+            case BlockMachine.COMPRESSOR_METADATA:
+                return new TileEntityIngotCompressor();
+            case 4:
+                return new TileEntityEnergyStorageModule();
+            case 8:
+                return new TileEntityElectricFurnace();
+            default:
+                return new TileEntityCoalGenerator();
         }
     }
 

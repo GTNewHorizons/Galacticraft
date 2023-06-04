@@ -723,12 +723,10 @@ public class MapUtil {
             final BlockVec3 bv = MapUtil.biomeColours.get(in);
             if (bv == null) {
                 rv = BiomeGenBase.getBiome(in).color;
+            } else if (bv.z > 0 && MapUtil.rand.nextInt(100) < bv.z) {
+                rv = bv.y;
             } else {
-                if (bv.z > 0 && MapUtil.rand.nextInt(100) < bv.z) {
-                    rv = bv.y;
-                } else {
-                    rv = bv.x;
-                }
+                rv = bv.x;
             }
         }
         if (rv == 0x9c2424 && MapUtil.rand.nextInt(2) == 0) {

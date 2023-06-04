@@ -105,16 +105,15 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
             } else {
                 return this.iconLaunchController;
             }
-        } else if (metadata >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) {
+        }
+        if (metadata >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) {
             return this.iconCryochamber;
+        } else if (side == ForgeDirection.UP.ordinal() || side == ForgeDirection.DOWN.ordinal()) {
+            return this.iconMachineSide;
+        } else if (side == ForgeDirection.getOrientation(metadata + 2).ordinal()) {
+            return this.iconInput;
         } else {
-            if (side == ForgeDirection.UP.ordinal() || side == ForgeDirection.DOWN.ordinal()) {
-                return this.iconMachineSide;
-            } else if (side == ForgeDirection.getOrientation(metadata + 2).ordinal()) {
-                return this.iconInput;
-            } else {
-                return this.iconTerraformer;
-            }
+            return this.iconTerraformer;
         }
     }
 
@@ -283,13 +282,12 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
         final int metadata = world.getBlockMetadata(x, y, z);
 
         if (metadata >= BlockMachineMars.LAUNCH_CONTROLLER_METADATA
-                || (metadata < BlockMachineMars.CRYOGENIC_CHAMBER_METADATA)) {
+                || metadata < BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) {
             par5EntityPlayer.openGui(GalacticraftPlanets.instance, GuiIdsPlanets.MACHINE_MARS, world, x, y, z);
             return true;
-        } else {
-            ((IMultiBlock) world.getTileEntity(x, y, z)).onActivated(par5EntityPlayer);
-            return true;
         }
+        ((IMultiBlock) world.getTileEntity(x, y, z)).onActivated(par5EntityPlayer);
+        return true;
     }
 
     @Override
@@ -309,9 +307,8 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
         }
         if (metadata >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) {
             return new TileEntityCryogenicChamber();
-        } else {
-            return new TileEntityTerraformer();
         }
+        return new TileEntityTerraformer();
     }
 
     @Override
@@ -371,7 +368,8 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
     public int damageDropped(int metadata) {
         if (metadata >= BlockMachineMars.LAUNCH_CONTROLLER_METADATA) {
             return BlockMachineMars.LAUNCH_CONTROLLER_METADATA;
-        } else if (metadata >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) {
+        }
+        if (metadata >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) {
             return BlockMachineMars.CRYOGENIC_CHAMBER_METADATA;
         } else {
             return BlockMachineMars.TERRAFORMER_METADATA;

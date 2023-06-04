@@ -104,38 +104,37 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
 
     @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-        if (!this.worldObj.isRemote && !this.isDead) {
-            final boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer
-                    && ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode;
-            final Entity e = par1DamageSource.getEntity();
-            if (this.isEntityInvulnerable() || this.posY > 255 || !(e instanceof EntityPlayer)) {
-                return false;
-            } else {
-                this.rollAmplitude = 10;
-                this.setBeenAttacked();
-                this.shipDamage += par2 * 10;
+        if (this.worldObj.isRemote || this.isDead) {
+            return true;
+        }
+        final boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer
+                && ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode;
+        final Entity e = par1DamageSource.getEntity();
+        if (this.isEntityInvulnerable() || this.posY > 255 || !(e instanceof EntityPlayer)) {
+            return false;
+        } else {
+            this.rollAmplitude = 10;
+            this.setBeenAttacked();
+            this.shipDamage += par2 * 10;
 
-                if (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode) {
-                    this.shipDamage = 100;
+            if (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode) {
+                this.shipDamage = 100;
+            }
+
+            if (flag || this.shipDamage > 90 && !this.worldObj.isRemote) {
+                if (this.riddenByEntity != null) {
+                    this.riddenByEntity.mountEntity(null);
                 }
 
-                if (flag || this.shipDamage > 90 && !this.worldObj.isRemote) {
-                    if (this.riddenByEntity != null) {
-                        this.riddenByEntity.mountEntity(null);
-                    }
-
-                    if (flag) {
-                        this.setDead();
-                    } else {
-                        this.setDead();
-                        this.dropShipAsItem();
-                    }
-                    return true;
+                if (flag) {
+                    this.setDead();
+                } else {
+                    this.setDead();
+                    this.dropShipAsItem();
                 }
-
                 return true;
             }
-        } else {
+
             return true;
         }
     }

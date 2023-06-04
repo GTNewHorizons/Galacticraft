@@ -125,21 +125,19 @@ public class PlayerClient implements IPlayerClient {
                     player.limbSwing -= adjust;
                 }
                 player.limbSwingAmount *= 0.9F;
-            } else {
-                if (stats.inFreefallLast && this.downMot2 < -0.008D) {
-                    stats.landingTicks = 5 - (int) (Math.min(this.downMot2, stats.downMotionLast) * 40);
-                    if (stats.landingTicks > GCPlayerStatsClient.MAX_LANDINGTICKS) {
-                        if (stats.landingTicks > GCPlayerStatsClient.MAX_LANDINGTICKS + 4) {
-                            stats.pjumpticks = stats.landingTicks - GCPlayerStatsClient.MAX_LANDINGTICKS - 5;
-                        }
-                        stats.landingTicks = GCPlayerStatsClient.MAX_LANDINGTICKS;
+            } else if (stats.inFreefallLast && this.downMot2 < -0.008D) {
+                stats.landingTicks = 5 - (int) (Math.min(this.downMot2, stats.downMotionLast) * 40);
+                if (stats.landingTicks > GCPlayerStatsClient.MAX_LANDINGTICKS) {
+                    if (stats.landingTicks > GCPlayerStatsClient.MAX_LANDINGTICKS + 4) {
+                        stats.pjumpticks = stats.landingTicks - GCPlayerStatsClient.MAX_LANDINGTICKS - 5;
                     }
-                    final float dYmax = 0.3F * stats.landingTicks / GCPlayerStatsClient.MAX_LANDINGTICKS;
-                    float factor = 1F;
-                    for (int i = 0; i <= stats.landingTicks; i++) {
-                        stats.landingYOffset[i] = dYmax * MathHelper.sin(i * (float)Math.PI / stats.landingTicks) * factor;
-                        factor *= 0.97F;
-                    }
+                    stats.landingTicks = GCPlayerStatsClient.MAX_LANDINGTICKS;
+                }
+                final float dYmax = 0.3F * stats.landingTicks / GCPlayerStatsClient.MAX_LANDINGTICKS;
+                float factor = 1F;
+                for (int i = 0; i <= stats.landingTicks; i++) {
+                    stats.landingYOffset[i] = dYmax * MathHelper.sin(i * (float)Math.PI / stats.landingTicks) * factor;
+                    factor *= 0.97F;
                 }
             }
 
@@ -222,21 +220,20 @@ public class PlayerClient implements IPlayerClient {
             final int y = player.playerLocation.posY;
             final int z = player.playerLocation.posZ;
 
-            if (player.worldObj.getTileEntity(x, y, z) instanceof TileEntityAdvanced) {
-                // int j = player.worldObj.getBlock(x, y, z).getBedDirection(player.worldObj, x,
-                // y, z);
-                switch (player.worldObj.getBlockMetadata(x, y, z) - 4) {
-                    case 0:
-                        return 90.0F;
-                    case 1:
-                        return 270.0F;
-                    case 2:
-                        return 180.0F;
-                    case 3:
-                        return 0.0F;
-                }
-            } else {
+            if (!(player.worldObj.getTileEntity(x, y, z) instanceof TileEntityAdvanced)) {
                 return vanillaDegrees;
+            }
+            // int j = player.worldObj.getBlock(x, y, z).getBedDirection(player.worldObj, x,
+            // y, z);
+            switch (player.worldObj.getBlockMetadata(x, y, z) - 4) {
+                case 0:
+                    return 90.0F;
+                case 1:
+                    return 270.0F;
+                case 2:
+                    return 180.0F;
+                case 3:
+                    return 0.0F;
             }
         }
 

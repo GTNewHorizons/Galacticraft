@@ -74,27 +74,25 @@ public class ContainerElectrolyzer extends Container {
                 if (par1 == 2) {
                     slot.onSlotChange(var4, var2);
                 }
+            } else if (var4.getItem() instanceof IItemElectric) {
+                if (!this.mergeItemStack(var4, 0, 1, false)) {
+                    return null;
+                }
             } else {
-                if (var4.getItem() instanceof IItemElectric) {
-                    if (!this.mergeItemStack(var4, 0, 1, false)) {
+                if (FluidUtil.isWaterContainer(var4)) {
+                    if (!this.mergeItemStack(var4, 1, 2, false)) {
                         return null;
                     }
-                } else {
-                    if (FluidUtil.isWaterContainer(var4)) {
-                        if (!this.mergeItemStack(var4, 1, 2, false)) {
-                            return null;
-                        }
-                    } else if (FluidUtil.isEmptyGasContainer(var4)) {
-                        if (!this.mergeItemStack(var4, 2, 4, false)) {
-                            return null;
-                        }
-                    } else if (par1 < 31) {
-                        if (!this.mergeItemStack(var4, 31, 40, false)) {
-                            return null;
-                        }
-                    } else if (!this.mergeItemStack(var4, 4, 31, false)) {
+                } else if (FluidUtil.isEmptyGasContainer(var4)) {
+                    if (!this.mergeItemStack(var4, 2, 4, false)) {
                         return null;
                     }
+                } else if (par1 < 31) {
+                    if (!this.mergeItemStack(var4, 31, 40, false)) {
+                        return null;
+                    }
+                } else if (!this.mergeItemStack(var4, 4, 31, false)) {
+                    return null;
                 }
             }
 

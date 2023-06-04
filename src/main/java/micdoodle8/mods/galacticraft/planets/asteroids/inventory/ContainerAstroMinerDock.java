@@ -60,18 +60,16 @@ public class ContainerAstroMinerDock extends Container {
                 if (!this.mergeItemStack(var5, b, b + 36, true)) {
                     return null;
                 }
-            } else {
-                if (var5.getItem() instanceof IItemElectric) {
-                    if (!this.mergeItemStack(var5, 0, 1, false)) {
-                        return null;
-                    }
-                } else if (par2 < b + 27) {
-                    if (!this.mergeItemStack(var5, 1, b, false) && !this.mergeItemStack(var5, b + 27, b + 36, false)) {
-                        return null;
-                    }
-                } else if (!this.mergeItemStack(var5, 1, b, false) && !this.mergeItemStack(var5, b, b + 27, false)) {
+            } else if (var5.getItem() instanceof IItemElectric) {
+                if (!this.mergeItemStack(var5, 0, 1, false)) {
                     return null;
                 }
+            } else if (par2 < b + 27) {
+                if (!this.mergeItemStack(var5, 1, b, false) && !this.mergeItemStack(var5, b + 27, b + 36, false)) {
+                    return null;
+                }
+            } else if (!this.mergeItemStack(var5, 1, b, false) && !this.mergeItemStack(var5, b, b + 27, false)) {
+                return null;
             }
 
             if (var5.stackSize == 0) {

@@ -264,10 +264,10 @@ public class BlockTier2TreasureChest extends BlockContainer
             ++var5;
         }
 
-        return var5 <= 1 && (!this.isThereANeighborChest(par1World, par2 - 1, par3, par4)
+        return var5 <= 1 && !this.isThereANeighborChest(par1World, par2 - 1, par3, par4)
                 && !this.isThereANeighborChest(par1World, par2 + 1, par3, par4)
                 && !this.isThereANeighborChest(par1World, par2, par3, par4 - 1)
-                && !this.isThereANeighborChest(par1World, par2, par3, par4 + 1));
+                && !this.isThereANeighborChest(par1World, par2, par3, par4 + 1);
     }
 
     /**
@@ -347,7 +347,8 @@ public class BlockTier2TreasureChest extends BlockContainer
         if (var10 == null || par1World.isSideSolid(par2, par3 + 1, par4, ForgeDirection.DOWN)
                 || BlockTier2TreasureChest.isOcelotBlockingChest(par1World, par2, par3, par4)) {
             return true;
-        } else if (par1World.getBlock(par2 - 1, par3, par4) == this
+        }
+        if (par1World.getBlock(par2 - 1, par3, par4) == this
                 && (par1World.isSideSolid(par2 - 1, par3 + 1, par4, ForgeDirection.DOWN)
                         || BlockTier2TreasureChest.isOcelotBlockingChest(par1World, par2 - 1, par3, par4))) {
                             return true;

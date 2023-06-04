@@ -441,7 +441,8 @@ public abstract class TileBaseUniversalElectrical extends EnergyStorageTile
     public ReceiverMode getModeFromDirection(ForgeDirection direction) {
         if (this.getElectricalInputDirections().contains(direction)) {
             return ReceiverMode.RECEIVE;
-        } else if (this.getElectricalOutputDirections().contains(direction)) {
+        }
+        if (this.getElectricalOutputDirections().contains(direction)) {
             return ReceiverMode.EXTRACT;
         }
 

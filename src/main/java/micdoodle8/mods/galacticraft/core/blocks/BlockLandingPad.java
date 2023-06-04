@@ -94,9 +94,8 @@ public class BlockLandingPad extends BlockAdvancedTile implements IPartialSealab
 
         if (par1World.getBlock(par2, par3 - 1, par4) == GCBlocks.landingPad && par5 == 1) {
             return false;
-        } else {
-            return this.canPlaceBlockAt(par1World, par2, par3, par4);
         }
+        return this.canPlaceBlockAt(par1World, par2, par3, par4);
     }
 
     @Override

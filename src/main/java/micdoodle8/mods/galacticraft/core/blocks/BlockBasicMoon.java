@@ -77,9 +77,8 @@ public class BlockBasicMoon extends BlockAdvancedTile
     public boolean isNormalCube(IBlockAccess world, int x, int y, int z) {
         if (world.getBlockMetadata(x, y, z) == 15) {
             return false;
-        } else {
-            return super.isNormalCube(world, x, y, z);
         }
+        return super.isNormalCube(world, x, y, z);
     }
 
     @Override
@@ -118,14 +117,18 @@ public class BlockBasicMoon extends BlockAdvancedTile
             double explosionY, double explosionZ) {
         final int metadata = world.getBlockMetadata(x, y, z);
 
-        if (metadata == 15) {
-            return 10000.0F;
-        } else if (metadata == 14) {
-            return 40.0F;
-        } else if (metadata == 4) {
-            return 6.0F;
-        } else if (metadata < 3) {
-            return 3.0F;
+        switch (metadata) {
+            case 15:
+                return 10000.0F;
+            case 14:
+                return 40.0F;
+            case 4:
+                return 6.0F;
+            default:
+                if (metadata < 3) {
+                    return 3.0F;
+                }
+                break;
         }
 
         return this.blockResistance / 5.0F;
@@ -237,7 +240,8 @@ public class BlockBasicMoon extends BlockAdvancedTile
     public int damageDropped(int meta) {
         if (meta >= 5 && meta <= 13) {
             return 5;
-        } else if (meta == 2) {
+        }
+        if (meta == 2) {
             return 0;
         } else {
             return meta;

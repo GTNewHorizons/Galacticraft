@@ -225,7 +225,8 @@ public class NetworkUtil {
 
         if (dataValue.equals(int.class)) {
             return buffer.readInt();
-        } else if (dataValue.equals(float.class)) {
+        }
+        if (dataValue.equals(float.class)) {
             return buffer.readFloat();
         } else if (dataValue.equals(double.class)) {
             return buffer.readDouble();
@@ -313,11 +314,10 @@ public class NetworkUtil {
 
         if (dataLength < 0) {
             return null;
-        } else {
-            final byte[] compressedNBT = new byte[dataLength];
-            buffer.readBytes(compressedNBT);
-            return VersionUtil.decompressNBT(compressedNBT);
         }
+        final byte[] compressedNBT = new byte[dataLength];
+        buffer.readBytes(compressedNBT);
+        return VersionUtil.decompressNBT(compressedNBT);
     }
 
     public static void writeNBTTagCompound(NBTTagCompound nbt, ByteBuf buffer) throws IOException {
@@ -361,7 +361,8 @@ public class NetworkUtil {
     public static boolean fuzzyEquals(Object a, Object b) {
         if (a == null != (b == null)) {
             return false;
-        } else if (a == null) {
+        }
+        if (a == null) {
             return true;
         } else if (a instanceof Float && b instanceof Float) {
             final float af = (Float) a;
@@ -409,7 +410,8 @@ public class NetworkUtil {
                     prevStorage.getMaxExtract());
             storage.setEnergyStored(prevStorage.getEnergyStoredGC());
             return storage;
-        } else if (a instanceof FluidTank) {
+        }
+        if (a instanceof FluidTank) {
             final FluidTank prevTank = (FluidTank) a;
             FluidStack prevFluid = prevTank.getFluid();
             prevFluid = prevFluid == null ? null : prevFluid.copy();

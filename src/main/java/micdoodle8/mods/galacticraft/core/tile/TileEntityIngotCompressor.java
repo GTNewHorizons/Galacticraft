@@ -310,24 +310,23 @@ public class TileEntityIngotCompressor extends TileEntityAdvanced implements IIn
             return result;
         }
 
-        if (this.containingItems[par1] != null) {
-            ItemStack var3;
-
-            if (this.containingItems[par1].stackSize <= par2) {
-                var3 = this.containingItems[par1];
-                this.containingItems[par1] = null;
-                return var3;
-            } else {
-                var3 = this.containingItems[par1].splitStack(par2);
-
-                if (this.containingItems[par1].stackSize == 0) {
-                    this.containingItems[par1] = null;
-                }
-
-                return var3;
-            }
-        } else {
+        if (this.containingItems[par1] == null) {
             return null;
+        }
+        ItemStack var3;
+
+        if (this.containingItems[par1].stackSize <= par2) {
+            var3 = this.containingItems[par1];
+            this.containingItems[par1] = null;
+            return var3;
+        } else {
+            var3 = this.containingItems[par1].splitStack(par2);
+
+            if (this.containingItems[par1].stackSize == 0) {
+                this.containingItems[par1] = null;
+            }
+
+            return var3;
         }
     }
 
@@ -341,9 +340,8 @@ public class TileEntityIngotCompressor extends TileEntityAdvanced implements IIn
             final ItemStack var2 = this.containingItems[par1];
             this.containingItems[par1] = null;
             return var2;
-        } else {
-            return null;
         }
+        return null;
     }
 
     @Override
@@ -385,7 +383,8 @@ public class TileEntityIngotCompressor extends TileEntityAdvanced implements IIn
     public boolean isItemValidForSlot(int slotID, ItemStack itemStack) {
         if (slotID == 0) {
             return TileEntityFurnace.getItemBurnTime(itemStack) > 0;
-        } else if (slotID >= 2) {
+        }
+        if (slotID >= 2) {
             if (this.producingStack != null) {
                 final ItemStack stackInSlot = this.getStackInSlot(slotID);
                 return stackInSlot != null && stackInSlot.isItemEqual(itemStack);

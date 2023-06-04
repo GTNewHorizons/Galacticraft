@@ -158,14 +158,13 @@ public class GuiLaunchController extends GuiContainerGC
     }
 
     public boolean isValid(String string) {
-        if (string.length() > 0 && ChatAllowedCharacters.isAllowedCharacter(string.charAt(string.length() - 1))) {
-            try {
-                Integer.parseInt(string);
-                return true;
-            } catch (final Exception e) {
-                return false;
-            }
-        } else {
+        if ((string.length() <= 0) || !ChatAllowedCharacters.isAllowedCharacter(string.charAt(string.length() - 1))) {
+            return false;
+        }
+        try {
+            Integer.parseInt(string);
+            return true;
+        } catch (final Exception e) {
             return false;
         }
     }
@@ -494,7 +493,8 @@ public class GuiLaunchController extends GuiContainerGC
     public String getInitialText(GuiElementTextBox textBox) {
         if (textBox.equals(this.frequency)) {
             return String.valueOf(this.launchController.frequency);
-        } else if (textBox.equals(this.destinationFrequency)) {
+        }
+        if (textBox.equals(this.destinationFrequency)) {
             if (Minecraft.getMinecraft().thePlayer.getGameProfile().getName()
                     .equals(this.launchController.getOwnerName()) || this.launchController.getDisabled(2)) {
                 return String.valueOf(this.launchController.destFrequency);
@@ -519,7 +519,8 @@ public class GuiLaunchController extends GuiContainerGC
         if (textBox.equals(this.frequency)) {
             return this.launchController.frequencyValid ? ColorUtil.to32BitColor(255, 20, 255, 20)
                     : ColorUtil.to32BitColor(255, 255, 25, 25);
-        } else if (textBox.equals(this.destinationFrequency)) {
+        }
+        if (textBox.equals(this.destinationFrequency)) {
             return this.launchController.destFrequencyValid ? ColorUtil.to32BitColor(255, 20, 255, 20)
                     : ColorUtil.to32BitColor(255, 255, 25, 25);
         }
@@ -557,7 +558,8 @@ public class GuiLaunchController extends GuiContainerGC
     public boolean getInitiallySelected(GuiElementCheckbox checkbox) {
         if (checkbox.equals(this.enablePadRemovalButton)) {
             return !this.launchController.launchPadRemovalDisabled;
-        } else if (checkbox.equals(this.launchWhenCheckbox)) {
+        }
+        if (checkbox.equals(this.launchWhenCheckbox)) {
             return this.launchController.launchSchedulingEnabled;
         }
 

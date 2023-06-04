@@ -103,7 +103,8 @@ public class GuiHandler implements IGuiHandler {
                     player.inventory,
                     (EntityTieredRocket) player.ridingEntity,
                     ((EntityTieredRocket) player.ridingEntity).getType());
-        } else if (ID == GuiIdsCore.EXTENDED_INVENTORY) {
+        }
+        if (ID == GuiIdsCore.EXTENDED_INVENTORY) {
             return new ContainerExtendedInventory(player, stats.extendedInventory);
         }
 
@@ -112,7 +113,8 @@ public class GuiHandler implements IGuiHandler {
         if (tile != null) {
             if (tile instanceof TileEntityRefinery) {
                 return new ContainerRefinery(player.inventory, (TileEntityRefinery) tile);
-            } else if (tile instanceof TileEntityOxygenCollector) {
+            }
+            if (tile instanceof TileEntityOxygenCollector) {
                 return new ContainerOxygenCollector(player.inventory, (TileEntityOxygenCollector) tile);
             } else if (tile instanceof TileEntityOxygenDistributor) {
                 return new ContainerOxygenDistributor(player.inventory, (TileEntityOxygenDistributor) tile);
@@ -173,17 +175,21 @@ public class GuiHandler implements IGuiHandler {
 
         if (ID == GuiIdsCore.GALAXY_MAP) {
             return new GuiCelestialSelection(GuiCelestialSelection.MapMode.VIEW, null);
-        } else if (ID == GuiIdsCore.ROCKET_INVENTORY && player.ridingEntity instanceof EntityTieredRocket) {
+        }
+        if (ID == GuiIdsCore.ROCKET_INVENTORY && player.ridingEntity instanceof EntityTieredRocket) {
             return new GuiRocketInventory(
                     player.inventory,
                     (EntityTieredRocket) player.ridingEntity,
                     ((EntityTieredRocket) player.ridingEntity).getType());
-        } else if (ID == GuiIdsCore.EXTENDED_INVENTORY) {
-            return new GuiExtendedInventory(player, ClientProxyCore.dummyInventory);
-        } else if (ID == GuiIdsCore.SPACE_RACE_START) {
-            return new GuiNewSpaceRace(player);
-        } else if (ID == GuiIdsCore.SPACE_RACE_JOIN) {
-            return new GuiJoinSpaceRace(playerClient);
+        } else switch (ID) {
+            case GuiIdsCore.EXTENDED_INVENTORY:
+                return new GuiExtendedInventory(player, ClientProxyCore.dummyInventory);
+            case GuiIdsCore.SPACE_RACE_START:
+                return new GuiNewSpaceRace(player);
+            case GuiIdsCore.SPACE_RACE_JOIN:
+                return new GuiJoinSpaceRace(playerClient);
+            default:
+                break;
         }
 
         final TileEntity tile = world.getTileEntity(position.intX(), position.intY(), position.intZ());
@@ -193,7 +199,8 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiRefinery(
                         player.inventory,
                         (TileEntityRefinery) world.getTileEntity(position.intX(), position.intY(), position.intZ()));
-            } else if (tile instanceof TileEntityOxygenCollector) {
+            }
+            if (tile instanceof TileEntityOxygenCollector) {
                 return new GuiOxygenCollector(player.inventory, (TileEntityOxygenCollector) tile);
             } else if (tile instanceof TileEntityOxygenDistributor) {
                 return new GuiOxygenDistributor(player.inventory, (TileEntityOxygenDistributor) tile);

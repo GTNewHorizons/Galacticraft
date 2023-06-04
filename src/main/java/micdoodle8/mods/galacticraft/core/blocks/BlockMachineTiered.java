@@ -135,8 +135,7 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
                 }
                 return this.iconOutput;
             }
-            // If it is the back side
-            else if (side == (metaside ^ 1)) {
+            if (side == (metaside ^ 1)) {
                 if (metadata >= 8) {
                     return this.iconInputT2;
                 }
@@ -170,24 +169,7 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
             return this.blockIcon;
         }
 
-        if ((metadata & 4) == BlockMachineTiered.ELECTRIC_FURNACE_METADATA) {
-            // If it is the front side
-            if (side == metaside) {
-                if (metadata >= 8) {
-                    return this.iconInputT2;
-                }
-                return this.iconInput;
-            }
-            // If it is the back side
-            else if (metaside == 2 && side == 4 || metaside == 3 && side == 5
-                    || metaside == 4 && side == 3
-                    || metaside == 5 && side == 2) {
-                        if (metadata >= 8) {
-                            return this.iconElectricFurnaceT2;
-                        }
-                        return this.iconElectricFurnace;
-                    }
-        } else {
+        if ((metadata & 4) != BlockMachineTiered.ELECTRIC_FURNACE_METADATA) {
             // If it is the front side
             if (side == metaside) {
                 if (metadata >= 8) {
@@ -208,6 +190,22 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
             }
             return this.iconEnergyStorageModule[16];
         }
+        // If it is the front side
+        if (side == metaside) {
+            if (metadata >= 8) {
+                return this.iconInputT2;
+            }
+            return this.iconInput;
+        }
+        // If it is the back side
+        else if (metaside == 2 && side == 4 || metaside == 3 && side == 5
+                || metaside == 4 && side == 3
+                || metaside == 5 && side == 2) {
+                    if (metadata >= 8) {
+                        return this.iconElectricFurnaceT2;
+                    }
+                    return this.iconElectricFurnace;
+                }
 
         if (metadata >= 8) {
             return this.iconMachineSideT2;
@@ -294,9 +292,8 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
 
         if ((metadata & 4) == BlockMachineTiered.ELECTRIC_FURNACE_METADATA) {
             return new TileEntityElectricFurnace(tier);
-        } else {
-            return new TileEntityEnergyStorageModule(tier);
         }
+        return new TileEntityEnergyStorageModule(tier);
     }
 
     public ItemStack getEnergyStorageModule() {

@@ -80,9 +80,8 @@ public class TileEntityTelepadFake extends TileBaseElectricBlock {
 
             if (telepad != null) {
                 return telepad;
-            } else {
-                this.worldObj.removeTileEntity(this.xCoord, this.yCoord, this.zCoord);
             }
+            this.worldObj.removeTileEntity(this.xCoord, this.yCoord, this.zCoord);
         }
 
         return null;

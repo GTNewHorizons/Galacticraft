@@ -97,12 +97,11 @@ public class TileEntityAirLockController extends TileEntityAirLock {
 
                 for (final Object o : playersWithin) {
                     if (o instanceof EntityPlayer) {
-                        if (this.playerNameMatches) {
-                            if (((EntityPlayer) o).getGameProfile().getName().equalsIgnoreCase(this.playerToOpenFor)) {
-                                foundPlayer = true;
-                                break;
-                            }
-                        } else {
+                        if (!this.playerNameMatches) {
+                            foundPlayer = true;
+                            break;
+                        }
+                        if (((EntityPlayer) o).getGameProfile().getName().equalsIgnoreCase(this.playerToOpenFor)) {
                             foundPlayer = true;
                             break;
                         }
@@ -171,25 +170,23 @@ public class TileEntityAirLockController extends TileEntityAirLock {
                     }
                 }
             }
-        } else {
-            if (this.protocol.minX != this.protocol.maxX) {
-                for (x = this.protocol.minX + 1; x <= this.protocol.maxX - 1; x++) {
-                    for (y = this.protocol.minY + 1; y <= this.protocol.maxY - 1; y++) {
-                        final Block blockAt = this.worldObj.getBlock(x, y, z);
+        } else if (this.protocol.minX != this.protocol.maxX) {
+            for (x = this.protocol.minX + 1; x <= this.protocol.maxX - 1; x++) {
+                for (y = this.protocol.minY + 1; y <= this.protocol.maxY - 1; y++) {
+                    final Block blockAt = this.worldObj.getBlock(x, y, z);
 
-                        if (blockAt != null && blockAt.isAir(this.worldObj, x, y, z)) {
-                            this.worldObj.setBlock(x, y, this.protocol.minZ, GCBlocks.airLockSeal, 0, 3);
-                        }
+                    if (blockAt != null && blockAt.isAir(this.worldObj, x, y, z)) {
+                        this.worldObj.setBlock(x, y, this.protocol.minZ, GCBlocks.airLockSeal, 0, 3);
                     }
                 }
-            } else if (this.protocol.minZ != this.protocol.maxZ) {
-                for (z = this.protocol.minZ + 1; z <= this.protocol.maxZ - 1; z++) {
-                    for (y = this.protocol.minY + 1; y <= this.protocol.maxY - 1; y++) {
-                        final Block block = this.worldObj.getBlock(x, y, z);
+            }
+        } else if (this.protocol.minZ != this.protocol.maxZ) {
+            for (z = this.protocol.minZ + 1; z <= this.protocol.maxZ - 1; z++) {
+                for (y = this.protocol.minY + 1; y <= this.protocol.maxY - 1; y++) {
+                    final Block block = this.worldObj.getBlock(x, y, z);
 
-                        if (block != null && block.isAir(this.worldObj, x, y, z)) {
-                            this.worldObj.setBlock(this.protocol.minX, y, z, GCBlocks.airLockSeal, 0, 3);
-                        }
+                    if (block != null && block.isAir(this.worldObj, x, y, z)) {
+                        this.worldObj.setBlock(this.protocol.minX, y, z, GCBlocks.airLockSeal, 0, 3);
                     }
                 }
             }
@@ -222,25 +219,23 @@ public class TileEntityAirLockController extends TileEntityAirLock {
                     }
                 }
             }
-        } else {
-            if (this.lastProtocol.minX != this.lastProtocol.maxX) {
-                for (x = this.lastProtocol.minX + 1; x <= this.lastProtocol.maxX - 1; x++) {
-                    for (y = this.lastProtocol.minY + 1; y <= this.lastProtocol.maxY - 1; y++) {
-                        final Block blockAt = this.worldObj.getBlock(x, y, z);
+        } else if (this.lastProtocol.minX != this.lastProtocol.maxX) {
+            for (x = this.lastProtocol.minX + 1; x <= this.lastProtocol.maxX - 1; x++) {
+                for (y = this.lastProtocol.minY + 1; y <= this.lastProtocol.maxY - 1; y++) {
+                    final Block blockAt = this.worldObj.getBlock(x, y, z);
 
-                        if (blockAt == GCBlocks.airLockSeal) {
-                            this.worldObj.setBlockToAir(x, y, this.lastProtocol.minZ);
-                        }
+                    if (blockAt == GCBlocks.airLockSeal) {
+                        this.worldObj.setBlockToAir(x, y, this.lastProtocol.minZ);
                     }
                 }
-            } else if (this.lastProtocol.minZ != this.lastProtocol.maxZ) {
-                for (z = this.lastProtocol.minZ + 1; z <= this.lastProtocol.maxZ - 1; z++) {
-                    for (y = this.lastProtocol.minY + 1; y <= this.lastProtocol.maxY - 1; y++) {
-                        final Block blockAt = this.worldObj.getBlock(x, y, z);
+            }
+        } else if (this.lastProtocol.minZ != this.lastProtocol.maxZ) {
+            for (z = this.lastProtocol.minZ + 1; z <= this.lastProtocol.maxZ - 1; z++) {
+                for (y = this.lastProtocol.minY + 1; y <= this.lastProtocol.maxY - 1; y++) {
+                    final Block blockAt = this.worldObj.getBlock(x, y, z);
 
-                        if (blockAt == GCBlocks.airLockSeal) {
-                            this.worldObj.setBlockToAir(this.lastProtocol.minX, y, z);
-                        }
+                    if (blockAt == GCBlocks.airLockSeal) {
+                        this.worldObj.setBlockToAir(this.lastProtocol.minX, y, z);
                     }
                 }
             }

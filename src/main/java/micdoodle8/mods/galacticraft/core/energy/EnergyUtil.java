@@ -314,10 +314,10 @@ public class EnergyUtil {
 
         if (isIC2Loaded && tileAdj instanceof IEnergyAcceptor) {
             return ((IEnergyAcceptor) tileAdj).acceptsEnergyFrom(null, inputAdj);
-        } else
-            if (isRF1Loaded && tileAdj instanceof IEnergyHandler || isRF2Loaded && tileAdj instanceof IEnergyReceiver) {
-                return ((IEnergyConnection) tileAdj).canConnectEnergy(inputAdj);
-            }
+        }
+        if (isRF1Loaded && tileAdj instanceof IEnergyHandler || isRF2Loaded && tileAdj instanceof IEnergyReceiver) {
+            return ((IEnergyConnection) tileAdj).canConnectEnergy(inputAdj);
+        }
 
         return false;
     }
@@ -338,10 +338,10 @@ public class EnergyUtil {
 
         if (isIC2Loaded && tileAdj instanceof IEnergyEmitter) {
             return ((IEnergyEmitter) tileAdj).emitsEnergyTo(null, side);
-        } else
-            if (isRF1Loaded && tileAdj instanceof IEnergyHandler || isRF2Loaded && tileAdj instanceof IEnergyProvider) {
-                return ((IEnergyConnection) tileAdj).canConnectEnergy(side);
-            }
+        }
+        if (isRF1Loaded && tileAdj instanceof IEnergyHandler || isRF2Loaded && tileAdj instanceof IEnergyProvider) {
+            return ((IEnergyConnection) tileAdj).canConnectEnergy(side);
+        }
 
         return false;
     }

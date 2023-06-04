@@ -130,7 +130,8 @@ public enum Mixins {
             if (!loadedCoreMods.isEmpty() && target.coreModClass != null
                     && !loadedCoreMods.contains(target.coreModClass)) {
                 return false;
-            } else if (!loadedMods.isEmpty() && target.modId != null && !loadedMods.contains(target.modId)) {
+            }
+            if (!loadedMods.isEmpty() && target.modId != null && !loadedMods.contains(target.modId)) {
                 return false;
             }
         }
@@ -152,7 +153,8 @@ public enum Mixins {
             if (!loadedCoreMods.isEmpty() && target.coreModClass != null
                     && loadedCoreMods.contains(target.coreModClass)) {
                 return false;
-            } else if (!loadedMods.isEmpty() && target.modId != null && loadedMods.contains(target.modId)) {
+            }
+            if (!loadedMods.isEmpty() && target.modId != null && loadedMods.contains(target.modId)) {
                 return false;
             }
         }

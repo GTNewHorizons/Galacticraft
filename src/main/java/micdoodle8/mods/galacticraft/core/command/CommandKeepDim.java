@@ -33,44 +33,41 @@ public class CommandKeepDim extends CommandBase {
 
         if (astring.length > 1) {
             throw new WrongUsageException("Too many command arguments! Usage: " + this.getCommandUsage(icommandsender));
-        } else {
-            try {
-                playerBase = PlayerUtil
-                        .getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
+        }
+        try {
+            playerBase = PlayerUtil
+                    .getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
 
-                if (playerBase != null) {
-                    int dimID;
+            if (playerBase != null) {
+                int dimID;
 
-                    if (astring.length == 0) {
-                        dimID = playerBase.dimension;
-                    } else {
-                        try {
-                            dimID = CommandBase.parseInt(icommandsender, astring[0]);
-                        } catch (final Exception e) {
-                            throw new WrongUsageException(
-                                    "Needs a dimension number! Usage: " + this.getCommandUsage(icommandsender));
-                        }
-                    }
-
-                    if (ConfigManagerCore.setLoaded(dimID)) {
-                        playerBase.addChatMessage(
-                                new ChatComponentText(
-                                        "[GCKeepLoaded] Successfully set dimension " + dimID + " to load staticly"));
-                    } else {
-                        if (ConfigManagerCore.setUnloaded(dimID)) {
-                            playerBase.addChatMessage(
-                                    new ChatComponentText(
-                                            "[GCKeepLoaded] Successfully set dimension " + dimID
-                                                    + " to not load staticly"));
-                        } else {
-                            playerBase.addChatMessage(
-                                    new ChatComponentText("[GCKeepLoaded] Failed to set dimension as not static"));
-                        }
+                if (astring.length == 0) {
+                    dimID = playerBase.dimension;
+                } else {
+                    try {
+                        dimID = CommandBase.parseInt(icommandsender, astring[0]);
+                    } catch (final Exception e) {
+                        throw new WrongUsageException(
+                                "Needs a dimension number! Usage: " + this.getCommandUsage(icommandsender));
                     }
                 }
-            } catch (final Exception var6) {
-                throw new CommandException(var6.getMessage());
+
+                if (ConfigManagerCore.setLoaded(dimID)) {
+                    playerBase.addChatMessage(
+                            new ChatComponentText(
+                                    "[GCKeepLoaded] Successfully set dimension " + dimID + " to load staticly"));
+                } else if (ConfigManagerCore.setUnloaded(dimID)) {
+                    playerBase.addChatMessage(
+                            new ChatComponentText(
+                                    "[GCKeepLoaded] Successfully set dimension " + dimID
+                                            + " to not load staticly"));
+                } else {
+                    playerBase.addChatMessage(
+                            new ChatComponentText("[GCKeepLoaded] Failed to set dimension as not static"));
+                }
             }
+        } catch (final Exception var6) {
+            throw new CommandException(var6.getMessage());
         }
     }
 }

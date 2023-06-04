@@ -230,24 +230,23 @@ public class EntityAstroMiner extends Entity
 
     @Override
     public ItemStack decrStackSize(int var1, int var2) {
-        if (this.cargoItems[var1] != null) {
-            ItemStack var3;
-
-            if (this.cargoItems[var1].stackSize <= var2) {
-                var3 = this.cargoItems[var1];
-                this.cargoItems[var1] = null;
-                return var3;
-            } else {
-                var3 = this.cargoItems[var1].splitStack(var2);
-
-                if (this.cargoItems[var1].stackSize == 0) {
-                    this.cargoItems[var1] = null;
-                }
-
-                return var3;
-            }
-        } else {
+        if (this.cargoItems[var1] == null) {
             return null;
+        }
+        ItemStack var3;
+
+        if (this.cargoItems[var1].stackSize <= var2) {
+            var3 = this.cargoItems[var1];
+            this.cargoItems[var1] = null;
+            return var3;
+        } else {
+            var3 = this.cargoItems[var1].splitStack(var2);
+
+            if (this.cargoItems[var1].stackSize == 0) {
+                this.cargoItems[var1] = null;
+            }
+
+            return var3;
         }
     }
 
@@ -257,9 +256,8 @@ public class EntityAstroMiner extends Entity
             final ItemStack var2 = this.cargoItems[var1];
             this.cargoItems[var1] = null;
             return var2;
-        } else {
-            return null;
         }
+        return null;
     }
 
     @Override
@@ -321,7 +319,8 @@ public class EntityAstroMiner extends Entity
                 this.cargoItems[i] = null;
                 this.markDirty();
                 return true;
-            } else if (stack.stackSize < sizeprev) {
+            }
+            if (stack.stackSize < sizeprev) {
                 this.cargoItems[i] = stack;
                 this.markDirty();
                 // Something was transferred although some stacks remaining
@@ -410,23 +409,20 @@ public class EntityAstroMiner extends Entity
                 // Create link with base on loading the EntityAstroMiner
                 final UUID linker = ((TileEntityMinerBase) tileEntity).getLinkedMiner();
                 if (!this.getUniqueID().equals(linker)) {
-                    if (linker == null) {
-                        ((TileEntityMinerBase) tileEntity).linkMiner(this);
-                    } else {
+                    if (linker != null) {
                         this.freeze(FAIL_ANOTHERWASLINKED);
                         return;
                     }
+                    ((TileEntityMinerBase) tileEntity).linkMiner(this);
                 } else if (((TileEntityMinerBase) tileEntity).linkedMiner != this) {
                     ((TileEntityMinerBase) tileEntity).linkMiner(this);
                 }
-            } else {
-                if (this.playerMP != null && (this.givenFailMessage & 1 << FAIL_BASEDESTROYED) == 0) {
-                    this.playerMP.addChatMessage(
-                            new ChatComponentText(
-                                    GCCoreUtil.translate("gui.message.astroMiner" + FAIL_BASEDESTROYED + ".fail")));
-                    this.givenFailMessage += 1 << FAIL_BASEDESTROYED;
-                    // Continue mining even though base was destroyed - maybe it will be replaced
-                }
+            } else if (this.playerMP != null && (this.givenFailMessage & 1 << FAIL_BASEDESTROYED) == 0) {
+                this.playerMP.addChatMessage(
+                        new ChatComponentText(
+                                GCCoreUtil.translate("gui.message.astroMiner" + FAIL_BASEDESTROYED + ".fail")));
+                this.givenFailMessage += 1 << FAIL_BASEDESTROYED;
+                // Continue mining even though base was destroyed - maybe it will be replaced
             }
         } else if (this.flagCheckPlayer) {
             this.checkPlayer();
@@ -553,10 +549,8 @@ public class EntityAstroMiner extends Entity
             if (this.playerUUID != null) {
                 this.playerMP = PlayerUtil.getPlayerByUUID(this.playerUUID);
             }
-        } else {
-            if (!PlayerUtil.isPlayerOnline(this.playerMP)) {
-                this.playerMP = null;
-            }
+        } else if (!PlayerUtil.isPlayerOnline(this.playerMP)) {
+            this.playerMP = null;
         }
     }
 
@@ -673,12 +667,10 @@ public class EntityAstroMiner extends Entity
                 this.AIstate = AISTATE_TRAVELLING;
                 this.wayPoints.add(this.waypointBase.clone());
                 this.mineCount = 0;
-            } else {
-                if (this.playerMP != null && (this.givenFailMessage & 64) == 0) {
-                    this.playerMP.addChatMessage(
-                            new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner6.fail")));
-                    this.givenFailMessage += 64;
-                }
+            } else if (this.playerMP != null && (this.givenFailMessage & 64) == 0) {
+                this.playerMP.addChatMessage(
+                        new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner6.fail")));
+                this.givenFailMessage += 64;
             }
         }
     }
@@ -1051,15 +1043,20 @@ public class EntityAstroMiner extends Entity
             this.motionY = 0;
             this.motionZ = 0;
             this.tryBlockLimit = 0;
-            if (this.AIstate == AISTATE_TRAVELLING) {
-                this.AIstate = AISTATE_RETURNING;
-            } else if (this.AIstate == AISTATE_MINING) {
-                this.pathBlockedCount++;
-                this.AIstate = AISTATE_RETURNING;
-            } else if (this.AIstate == AISTATE_RETURNING) {
-                this.tryBackIn();
-            } else {
-                this.freeze(FAIL_RETURNPATHBLOCKED);
+            switch (this.AIstate) {
+                case AISTATE_TRAVELLING:
+                    this.AIstate = AISTATE_RETURNING;
+                    break;
+                case AISTATE_MINING:
+                    this.pathBlockedCount++;
+                    this.AIstate = AISTATE_RETURNING;
+                    break;
+                case AISTATE_RETURNING:
+                    this.tryBackIn();
+                    break;
+                default:
+                    this.freeze(FAIL_RETURNPATHBLOCKED);
+                    break;
             }
         }
 
@@ -1271,13 +1268,12 @@ public class EntityAstroMiner extends Entity
                 return true;
             }
             if (b.hasTileEntity(meta)) {
-                if (CompatibilityManager.isGTLoaded() && this.gregTechCheck(b)) {
-                    gtFlag = true;
-                } else {
+                if (!CompatibilityManager.isGTLoaded() || !this.gregTechCheck(b)) {
                     blockingBlock.block = b;
                     blockingBlock.meta = meta;
                     return true;
                 }
+                gtFlag = true;
             }
         }
 
@@ -1518,74 +1514,72 @@ public class EntityAstroMiner extends Entity
                 return true;
                 // got there
             }
-        } else {
-            if (this.posX > pos.x + 0.0001D || this.posX < pos.x - 0.0001D) {
-                this.moveToPosX(pos.x, this.stopForTurn);
-                if (this.TEMPDEBUG) {
-                    GCLog.debug(
-                            "At " + this.posX
-                                    + ","
-                                    + this.posY
-                                    + ","
-                                    + this.posZ
-                                    + "Moving X to "
-                                    + pos.toString()
-                                    + (this.stopForTurn
-                                            ? " : Stop for turn " + this.rotationPitch
-                                                    + ","
-                                                    + this.rotationYaw
-                                                    + " | "
-                                                    + this.targetPitch
-                                                    + ","
-                                                    + this.targetYaw
-                                            : ""));
-                }
-            } else if (this.posY > pos.y - 0.9999D || this.posY < pos.y - 1.0001D) {
-                this.moveToPosY(pos.y - 1, this.stopForTurn);
-                if (this.TEMPDEBUG) {
-                    GCLog.debug(
-                            "At " + this.posX
-                                    + ","
-                                    + this.posY
-                                    + ","
-                                    + this.posZ
-                                    + "Moving Y to "
-                                    + pos.toString()
-                                    + (this.stopForTurn
-                                            ? " : Stop for turn " + this.rotationPitch
-                                                    + ","
-                                                    + this.rotationYaw
-                                                    + " | "
-                                                    + this.targetPitch
-                                                    + ","
-                                                    + this.targetYaw
-                                            : ""));
-                }
-            } else if (this.posZ > pos.z + 0.0001D || this.posZ < pos.z - 0.0001D) {
-                this.moveToPosZ(pos.z, this.stopForTurn);
-                if (this.TEMPDEBUG) {
-                    GCLog.debug(
-                            "At " + this.posX
-                                    + ","
-                                    + this.posY
-                                    + ","
-                                    + this.posZ
-                                    + "Moving Z to "
-                                    + pos.toString()
-                                    + (this.stopForTurn
-                                            ? " : Stop for turn " + this.rotationPitch
-                                                    + ","
-                                                    + this.rotationYaw
-                                                    + " | "
-                                                    + this.targetPitch
-                                                    + ","
-                                                    + this.targetYaw
-                                            : ""));
-                }
-            } else {
-                return true;
-                // got there
+        } else if (this.posX > pos.x + 0.0001D || this.posX < pos.x - 0.0001D) {
+            this.moveToPosX(pos.x, this.stopForTurn);
+            if (this.TEMPDEBUG) {
+                GCLog.debug(
+                        "At " + this.posX
+                                + ","
+                                + this.posY
+                                + ","
+                                + this.posZ
+                                + "Moving X to "
+                                + pos.toString()
+                                + (this.stopForTurn
+                                        ? " : Stop for turn " + this.rotationPitch
+                                                + ","
+                                                + this.rotationYaw
+                                                + " | "
+                                                + this.targetPitch
+                                                + ","
+                                                + this.targetYaw
+                                        : ""));
             }
+        } else if (this.posY > pos.y - 0.9999D || this.posY < pos.y - 1.0001D) {
+            this.moveToPosY(pos.y - 1, this.stopForTurn);
+            if (this.TEMPDEBUG) {
+                GCLog.debug(
+                        "At " + this.posX
+                                + ","
+                                + this.posY
+                                + ","
+                                + this.posZ
+                                + "Moving Y to "
+                                + pos.toString()
+                                + (this.stopForTurn
+                                        ? " : Stop for turn " + this.rotationPitch
+                                                + ","
+                                                + this.rotationYaw
+                                                + " | "
+                                                + this.targetPitch
+                                                + ","
+                                                + this.targetYaw
+                                        : ""));
+            }
+        } else if (this.posZ > pos.z + 0.0001D || this.posZ < pos.z - 0.0001D) {
+            this.moveToPosZ(pos.z, this.stopForTurn);
+            if (this.TEMPDEBUG) {
+                GCLog.debug(
+                        "At " + this.posX
+                                + ","
+                                + this.posY
+                                + ","
+                                + this.posZ
+                                + "Moving Z to "
+                                + pos.toString()
+                                + (this.stopForTurn
+                                        ? " : Stop for turn " + this.rotationPitch
+                                                + ","
+                                                + this.rotationYaw
+                                                + " | "
+                                                + this.targetPitch
+                                                + ","
+                                                + this.targetYaw
+                                        : ""));
+            }
+        } else {
+            return true;
+            // got there
         }
 
         return false;
@@ -1847,45 +1841,44 @@ public class EntityAstroMiner extends Entity
             return true;
         }
 
-        if (!this.worldObj.isRemote) {
-            final Entity e = par1DamageSource.getEntity();
+        if (this.worldObj.isRemote) {
+            return true;
+        }
+        final Entity e = par1DamageSource.getEntity();
 
-            // If creative mode player, kill the entity (even if player owner is offline)
-            // and drop nothing
-            if (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode) {
-                if (this.playerMP == null && !this.spawnedInCreative) {
-                    ((EntityPlayer) e).addChatMessage(
-                            new ChatComponentText(
-                                    "WARNING: that Astro Miner belonged to an offline player, cannot reset player's Astro Miner count."));
-                }
-                this.kill();
-                return true;
+        // If creative mode player, kill the entity (even if player owner is offline)
+        // and drop nothing
+        if (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode) {
+            if (this.playerMP == null && !this.spawnedInCreative) {
+                ((EntityPlayer) e).addChatMessage(
+                        new ChatComponentText(
+                                "WARNING: that Astro Miner belonged to an offline player, cannot reset player's Astro Miner count."));
             }
+            this.kill();
+            return true;
+        }
 
-            // Invulnerable to mobs
-            if (this.isEntityInvulnerable() || e instanceof EntityLivingBase && !(e instanceof EntityPlayer)) {
-                return false;
-            } else {
-                this.setBeenAttacked();
-                // this.dataWatcher.updateObject(this.timeSinceHit, Integer.valueOf(10));
-                // this.dataWatcher.updateObject(this.currentDamage, Integer.valueOf((int)
-                // (this.dataWatcher.getWatchableObjectInt(this.currentDamage) + par2 * 10)));
-                this.shipDamage += par2 * 10;
-
-                if (e instanceof EntityPlayer) {
-                    this.shipDamage += par2 * 21;
-                    // this.dataWatcher.updateObject(this.currentDamage, 100);
-                }
-
-                if (this.shipDamage > 90) {
-                    this.kill();
-                    this.dropShipAsItem();
-                    return true;
-                }
-
-                return true;
-            }
+        // Invulnerable to mobs
+        if (this.isEntityInvulnerable() || e instanceof EntityLivingBase && !(e instanceof EntityPlayer)) {
+            return false;
         } else {
+            this.setBeenAttacked();
+            // this.dataWatcher.updateObject(this.timeSinceHit, Integer.valueOf(10));
+            // this.dataWatcher.updateObject(this.currentDamage, Integer.valueOf((int)
+            // (this.dataWatcher.getWatchableObjectInt(this.currentDamage) + par2 * 10)));
+            this.shipDamage += par2 * 10;
+
+            if (e instanceof EntityPlayer) {
+                this.shipDamage += par2 * 21;
+                // this.dataWatcher.updateObject(this.currentDamage, 100);
+            }
+
+            if (this.shipDamage > 90) {
+                this.kill();
+                this.dropShipAsItem();
+                return true;
+            }
+
             return true;
         }
     }

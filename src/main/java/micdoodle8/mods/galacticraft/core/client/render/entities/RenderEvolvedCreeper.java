@@ -72,22 +72,21 @@ public class RenderEvolvedCreeper extends RenderCreeper {
 
         if ((int) (var5 * 10.0F) % 2 == 0) {
             return 0;
-        } else {
-            int var6 = (int) (var5 * 0.2F * 255.0F);
-
-            if (var6 < 0) {
-                var6 = 0;
-            }
-
-            if (var6 > 255) {
-                var6 = 255;
-            }
-
-            final short var7 = 255;
-            final short var8 = 255;
-            final short var9 = 255;
-            return var6 << 24 | var7 << 16 | var8 << 8 | var9;
         }
+        int var6 = (int) (var5 * 0.2F * 255.0F);
+
+        if (var6 < 0) {
+            var6 = 0;
+        }
+
+        if (var6 > 255) {
+            var6 = 255;
+        }
+
+        final short var7 = 255;
+        final short var8 = 255;
+        final short var9 = 255;
+        return var6 << 24 | var7 << 16 | var8 << 8 | var9;
     }
 
     protected int func_77061_b(EntityCreeper par1GCEntityCreeper, int par2, float par3) {

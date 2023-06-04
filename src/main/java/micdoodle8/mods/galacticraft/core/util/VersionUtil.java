@@ -246,19 +246,17 @@ public class VersionUtil {
             String s = "";
             if (nbt.hasKey("OwnerUUID", 8)) {
                 s = nbt.getString("OwnerUUID");
-            } else {
-                if (mcVersion1_7_10) {
-                    Method m = (Method) reflectionCache.get(2);
+            } else if (mcVersion1_7_10) {
+                Method m = (Method) reflectionCache.get(2);
 
-                    if (m == null) {
-                        final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_YGG_CONVERTER).replace('/', '.'));
-                        m = c.getMethod(getNameDynamic(KEY_METHOD_CONVERT_UUID), String.class);
-                        reflectionCache.put(2, m);
-                    }
-
-                    final String s1 = nbt.getString("Owner");
-                    s = (String) m.invoke(null, s1);
+                if (m == null) {
+                    final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_YGG_CONVERTER).replace('/', '.'));
+                    m = c.getMethod(getNameDynamic(KEY_METHOD_CONVERT_UUID), String.class);
+                    reflectionCache.put(2, m);
                 }
+
+                final String s1 = nbt.getString("Owner");
+                s = (String) m.invoke(null, s1);
             }
 
             if (s.length() > 0) {
@@ -289,7 +287,8 @@ public class VersionUtil {
 
                 final Object nbtSizeTracker = c0.getConstructor(long.class).newInstance(2097152L);
                 return (NBTTagCompound) m.invoke(null, compressedNBT, nbtSizeTracker);
-            } else if (mcVersion1_7_2) {
+            }
+            if (mcVersion1_7_2) {
                 Method m = (Method) reflectionCache.get(6);
 
                 if (m == null) {
@@ -403,7 +402,8 @@ public class VersionUtil {
                 }
 
                 return (Boolean) m.invoke(player.mcServer.getConfigurationManager(), player.getGameProfile());
-            } else if (mcVersion1_7_2) {
+            }
+            if (mcVersion1_7_2) {
                 Method m = (Method) reflectionCache.get(14);
 
                 if (m == null) {
@@ -434,7 +434,8 @@ public class VersionUtil {
                 }
 
                 return (ScaledResolution) m.newInstance(mc, width, height);
-            } else if (mcVersion1_7_2) {
+            }
+            if (mcVersion1_7_2) {
                 Constructor<?> m = (Constructor<?>) reflectionCache.get(16);
 
                 if (m == null) {
@@ -521,9 +522,8 @@ public class VersionUtil {
         try {
             if (deobfuscated) {
                 return getName(keyName);
-            } else {
-                return getObfName(keyName);
             }
+            return getObfName(keyName);
         } catch (final NullPointerException e) {
             System.err.println("Could not find key: " + keyName);
             throw e;

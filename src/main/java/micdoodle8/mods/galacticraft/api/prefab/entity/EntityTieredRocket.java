@@ -277,99 +277,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
 
             this.setTarget(true, this.destinationFrequency);
 
-            if (this.targetVec != null) {
-                if (this.targetDimension != this.worldObj.provider.dimensionId) {
-                    final WorldProvider targetDim = WorldUtil.getProviderForDimensionServer(this.targetDimension);
-                    if (targetDim != null && targetDim.worldObj instanceof WorldServer) {
-                        boolean dimensionAllowed = this.targetDimension == ConfigManagerCore.idDimensionOverworld;
-
-                        if (targetDim instanceof IGalacticraftWorldProvider) {
-                            dimensionAllowed = ((IGalacticraftWorldProvider) targetDim)
-                                    .canSpaceshipTierPass(this.getRocketTier());
-                        } else
-                            // No rocket flight to non-Galacticraft dimensions other than the Overworld
-                            // allowed unless
-                            // config
-                            if (this.targetDimension > 1 || this.targetDimension < -1) {
-                                try {
-                                    final Class<?> marsConfig = Class
-                                            .forName("micdoodle8.mods.galacticraft.planets.mars.ConfigManagerMars");
-                                    if (marsConfig.getField("launchControllerAllDims").getBoolean(null)) {
-                                        dimensionAllowed = true;
-                                    }
-                                } catch (final Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
-                        if (dimensionAllowed) {
-                            if (this.riddenByEntity != null) {
-                                WorldUtil.transferEntityToDimension(
-                                        this.riddenByEntity,
-                                        this.targetDimension,
-                                        (WorldServer) targetDim.worldObj,
-                                        false,
-                                        this);
-                            } else {
-                                final Entity e = WorldUtil.transferEntityToDimension(
-                                        this,
-                                        this.targetDimension,
-                                        (WorldServer) targetDim.worldObj,
-                                        false,
-                                        null);
-                                if (e instanceof EntityAutoRocket) {
-                                    int fromSky = 800;
-                                    if (this.destinationFrequency != 1) {
-                                        fromSky = 0;
-                                    }
-                                    e.setPosition(
-                                            this.targetVec.x + 0.5F,
-                                            this.targetVec.y + fromSky,
-                                            this.targetVec.z + 0.5f);
-                                    ((EntityAutoRocket) e).landing = true;
-                                    ((EntityAutoRocket) e).setWaitForPlayer(false);
-                                } else {
-                                    GCLog.info(
-                                            "Error: failed to recreate the unmanned rocket in landing mode on target planet.");
-                                    e.setDead();
-                                    this.setDead();
-                                }
-                            }
-                            return;
-                        }
-                    }
-                    // No destination world found - in this situation continue into regular take-off
-                    // (as if Not launch
-                    // controlled)
-                } else {
-                    // Same dimension controlled rocket flight
-                    int fromSky = 800;
-                    if (this.destinationFrequency != 1) {
-                        fromSky = 0;
-                    }
-                    this.setPosition(this.targetVec.x + 0.5F, this.targetVec.y + fromSky, this.targetVec.z + 0.5F);
-                    // Stop any lateral motion, otherwise it will update to an incorrect x,z
-                    // position first tick after
-                    // spawning above target
-                    this.motionX = this.motionZ = 0.0D;
-                    // Small upward motion initially, to keep clear of own flame trail from launch
-                    this.motionY = 0.1D;
-                    if (this.riddenByEntity != null) {
-                        WorldUtil.forceMoveEntityToPos(
-                                this.riddenByEntity,
-                                (WorldServer) this.worldObj,
-                                new Vector3(this.targetVec.x + 0.5F, this.targetVec.y + 800, this.targetVec.z + 0.5F),
-                                false);
-                        this.setWaitForPlayer(true);
-                        if (ConfigManagerCore.enableDebug) {
-                            GCLog.info("Rocket repositioned, waiting for player");
-                        }
-                    }
-                    this.landing = true;
-                    // Do not destroy the rocket, we still need it!
-                    return;
-                }
-            } else {
+            if (this.targetVec == null) {
                 // Launch controlled launch but no valid target frequency = rocket loss
                 // [INVESTIGATE]
                 GCLog.info(
@@ -380,6 +288,97 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                         (this.worldObj.provider instanceof IExitHeight
                                 ? ((IExitHeight) this.worldObj.provider).getYCoordinateToTeleport()
                                 : 1200) - 200);
+                return;
+            }
+            if (this.targetDimension != this.worldObj.provider.dimensionId) {
+                final WorldProvider targetDim = WorldUtil.getProviderForDimensionServer(this.targetDimension);
+                if (targetDim != null && targetDim.worldObj instanceof WorldServer) {
+                    boolean dimensionAllowed = this.targetDimension == ConfigManagerCore.idDimensionOverworld;
+
+                    if (targetDim instanceof IGalacticraftWorldProvider) {
+                        dimensionAllowed = ((IGalacticraftWorldProvider) targetDim)
+                                .canSpaceshipTierPass(this.getRocketTier());
+                    } else
+                        // No rocket flight to non-Galacticraft dimensions other than the Overworld
+                        // allowed unless
+                        // config
+                        if (this.targetDimension > 1 || this.targetDimension < -1) {
+                            try {
+                                final Class<?> marsConfig = Class
+                                        .forName("micdoodle8.mods.galacticraft.planets.mars.ConfigManagerMars");
+                                if (marsConfig.getField("launchControllerAllDims").getBoolean(null)) {
+                                    dimensionAllowed = true;
+                                }
+                            } catch (final Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    if (dimensionAllowed) {
+                        if (this.riddenByEntity != null) {
+                            WorldUtil.transferEntityToDimension(
+                                    this.riddenByEntity,
+                                    this.targetDimension,
+                                    (WorldServer) targetDim.worldObj,
+                                    false,
+                                    this);
+                        } else {
+                            final Entity e = WorldUtil.transferEntityToDimension(
+                                    this,
+                                    this.targetDimension,
+                                    (WorldServer) targetDim.worldObj,
+                                    false,
+                                    null);
+                            if (e instanceof EntityAutoRocket) {
+                                int fromSky = 800;
+                                if (this.destinationFrequency != 1) {
+                                    fromSky = 0;
+                                }
+                                e.setPosition(
+                                        this.targetVec.x + 0.5F,
+                                        this.targetVec.y + fromSky,
+                                        this.targetVec.z + 0.5f);
+                                ((EntityAutoRocket) e).landing = true;
+                                ((EntityAutoRocket) e).setWaitForPlayer(false);
+                            } else {
+                                GCLog.info(
+                                        "Error: failed to recreate the unmanned rocket in landing mode on target planet.");
+                                e.setDead();
+                                this.setDead();
+                            }
+                        }
+                        return;
+                    }
+                }
+                // No destination world found - in this situation continue into regular take-off
+                // (as if Not launch
+                // controlled)
+            } else {
+                // Same dimension controlled rocket flight
+                int fromSky = 800;
+                if (this.destinationFrequency != 1) {
+                    fromSky = 0;
+                }
+                this.setPosition(this.targetVec.x + 0.5F, this.targetVec.y + fromSky, this.targetVec.z + 0.5F);
+                // Stop any lateral motion, otherwise it will update to an incorrect x,z
+                // position first tick after
+                // spawning above target
+                this.motionX = this.motionZ = 0.0D;
+                // Small upward motion initially, to keep clear of own flame trail from launch
+                this.motionY = 0.1D;
+                if (this.riddenByEntity != null) {
+                    WorldUtil.forceMoveEntityToPos(
+                            this.riddenByEntity,
+                            (WorldServer) this.worldObj,
+                            new Vector3(this.targetVec.x + 0.5F, this.targetVec.y + 800, this.targetVec.z + 0.5F),
+                            false);
+                    this.setWaitForPlayer(true);
+                    if (ConfigManagerCore.enableDebug) {
+                        GCLog.info("Rocket repositioned, waiting for player");
+                    }
+                }
+                this.landing = true;
+                // Do not destroy the rocket, we still need it!
                 return;
             }
         }
@@ -448,7 +447,8 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
             }
 
             return true;
-        } else if (par1EntityPlayer instanceof EntityPlayerMP) {
+        }
+        if (par1EntityPlayer instanceof EntityPlayerMP) {
             if (!this.worldObj.isRemote) {
                 GalacticraftCore.packetPipeline.sendTo(
                         new PacketSimple(EnumSimplePacket.C_DISPLAY_ROCKET_CONTROLS, new Object[] {}),

@@ -237,45 +237,44 @@ public class EnergyConfigHandler {
 
             if (disableMJinterface) {
                 return false;
-            } else {
-                int count = 0;
-                try {
-                    if (Class.forName("buildcraft.api.mj.MjAPI") != null) {
-                        count++;
-                    }
-                    if (Class.forName("buildcraft.api.power.IPowerReceptor") != null) {
-                        count++;
-                    }
-                    if (Class.forName("buildcraft.api.power.PowerHandler") != null) {
-                        count++;
-                    }
-                    if (Class.forName("buildcraft.api.power.IPowerEmitter") != null) {
-                        count++;
-                    }
-                    if (Class.forName("buildcraft.api.mj.IBatteryObject") != null) {
-                        count++;
-                    }
-                    if (Class.forName("buildcraft.api.mj.ISidedBatteryProvider") != null) {
-                        count++;
-                    }
-                } catch (final Exception e) {}
-
-                if (count < 6) {
-                    return false;
-                }
-
-                try {
-                    final Class<?> clazz = Class.forName("buildcraft.api.core.JavaTools");
-                    final Method methodz = clazz.getMethod("getAllFields", Class.class);
-                    if (methodz != null && methodz.getReturnType() == List.class) {
-                        cachedBCLoadedValue = true;
-                        return true;
-                    }
-                } catch (final Exception e) {}
-
-                GCLog.severe(
-                        "Other mods with two different versions of Buildcraft API detected.  Galacticraft cannot use MJ until this is fixed.  You may have more serious problems with other mods.  More info at: http://wiki.micdoodle8.com/wiki/Compatibility.");
             }
+            int count = 0;
+            try {
+                if (Class.forName("buildcraft.api.mj.MjAPI") != null) {
+                    count++;
+                }
+                if (Class.forName("buildcraft.api.power.IPowerReceptor") != null) {
+                    count++;
+                }
+                if (Class.forName("buildcraft.api.power.PowerHandler") != null) {
+                    count++;
+                }
+                if (Class.forName("buildcraft.api.power.IPowerEmitter") != null) {
+                    count++;
+                }
+                if (Class.forName("buildcraft.api.mj.IBatteryObject") != null) {
+                    count++;
+                }
+                if (Class.forName("buildcraft.api.mj.ISidedBatteryProvider") != null) {
+                    count++;
+                }
+            } catch (final Exception e) {}
+
+            if (count < 6) {
+                return false;
+            }
+
+            try {
+                final Class<?> clazz = Class.forName("buildcraft.api.core.JavaTools");
+                final Method methodz = clazz.getMethod("getAllFields", Class.class);
+                if (methodz != null && methodz.getReturnType() == List.class) {
+                    cachedBCLoadedValue = true;
+                    return true;
+                }
+            } catch (final Exception e) {}
+
+            GCLog.severe(
+                    "Other mods with two different versions of Buildcraft API detected.  Galacticraft cannot use MJ until this is fixed.  You may have more serious problems with other mods.  More info at: http://wiki.micdoodle8.com/wiki/Compatibility.");
         }
 
         return cachedBCLoadedValue;

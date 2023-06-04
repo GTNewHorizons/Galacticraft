@@ -107,26 +107,25 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced
      */
     @Override
     public ItemStack decrStackSize(int par1, int par2) {
-        if (this.chestContents[par1] != null) {
-            ItemStack itemstack;
-
-            if (this.chestContents[par1].stackSize <= par2) {
-                itemstack = this.chestContents[par1];
-                this.chestContents[par1] = null;
-                this.markDirty();
-                return itemstack;
-            } else {
-                itemstack = this.chestContents[par1].splitStack(par2);
-
-                if (this.chestContents[par1].stackSize == 0) {
-                    this.chestContents[par1] = null;
-                }
-
-                this.markDirty();
-                return itemstack;
-            }
-        } else {
+        if (this.chestContents[par1] == null) {
             return null;
+        }
+        ItemStack itemstack;
+
+        if (this.chestContents[par1].stackSize <= par2) {
+            itemstack = this.chestContents[par1];
+            this.chestContents[par1] = null;
+            this.markDirty();
+            return itemstack;
+        } else {
+            itemstack = this.chestContents[par1].splitStack(par2);
+
+            if (this.chestContents[par1].stackSize == 0) {
+                this.chestContents[par1] = null;
+            }
+
+            this.markDirty();
+            return itemstack;
         }
     }
 
@@ -140,9 +139,8 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced
             final ItemStack itemstack = this.chestContents[par1];
             this.chestContents[par1] = null;
             return itemstack;
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**
@@ -433,9 +431,8 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced
         if (par1 == 1) {
             this.numUsingPlayers = par2;
             return true;
-        } else {
-            return super.receiveClientEvent(par1, par2);
         }
+        return super.receiveClientEvent(par1, par2);
     }
 
     @Override
@@ -497,10 +494,7 @@ public class TileEntityTreasureChestAsteroids extends TileEntityAdvanced
         if (this.locked) {
             this.locked = false;
 
-            if (this.worldObj.isRemote) {
-                // player.playSound("galacticraft.player.unlockchest", 1.0F,
-                // 1.0F);
-            } else {
+            if (!this.worldObj.isRemote) {
                 if (this.adjacentChestXNeg != null) {
                     this.adjacentChestXNeg.locked = false;
                 }

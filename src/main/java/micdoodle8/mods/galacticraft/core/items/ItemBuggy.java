@@ -78,72 +78,71 @@ public class ItemBuggy extends Item implements IHoldableItem {
 
         if (var24 == null) {
             return par1ItemStack;
+        }
+        final Vec3 var25 = par3EntityPlayer.getLook(var4);
+        boolean var26 = false;
+        final float var27 = 1.0F;
+        final List<?> var28 = par2World.getEntitiesWithinAABBExcludingEntity(
+                par3EntityPlayer,
+                par3EntityPlayer.boundingBox
+                        .addCoord(var25.xCoord * var21, var25.yCoord * var21, var25.zCoord * var21)
+                        .expand(var27, var27, var27));
+        int var29;
+
+        for (var29 = 0; var29 < var28.size(); ++var29) {
+            final Entity var30 = (Entity) var28.get(var29);
+
+            if (var30.canBeCollidedWith()) {
+                final float var31 = var30.getCollisionBorderSize();
+                final AxisAlignedBB var32 = var30.boundingBox.expand(var31, var31, var31);
+
+                if (var32.isVecInside(var13)) {
+                    var26 = true;
+                }
+            }
+        }
+
+        if (var26) {
+            return par1ItemStack;
         } else {
-            final Vec3 var25 = par3EntityPlayer.getLook(var4);
-            boolean var26 = false;
-            final float var27 = 1.0F;
-            final List<?> var28 = par2World.getEntitiesWithinAABBExcludingEntity(
-                    par3EntityPlayer,
-                    par3EntityPlayer.boundingBox
-                            .addCoord(var25.xCoord * var21, var25.yCoord * var21, var25.zCoord * var21)
-                            .expand(var27, var27, var27));
-            int var29;
+            if (var24.typeOfHit == MovingObjectType.BLOCK) {
+                var29 = var24.blockX;
+                int var33 = var24.blockY;
+                final int var34 = var24.blockZ;
 
-            for (var29 = 0; var29 < var28.size(); ++var29) {
-                final Entity var30 = (Entity) var28.get(var29);
+                if (par2World.getBlock(var29, var33, var34) == Blocks.snow) {
+                    --var33;
+                }
 
-                if (var30.canBeCollidedWith()) {
-                    final float var31 = var30.getCollisionBorderSize();
-                    final AxisAlignedBB var32 = var30.boundingBox.expand(var31, var31, var31);
+                final EntityBuggy var35 = new EntityBuggy(
+                        par2World,
+                        var29 + 0.5F,
+                        var33 + 1.0F,
+                        var34 + 0.5F,
+                        par1ItemStack.getItemDamage());
 
-                    if (var32.isVecInside(var13)) {
-                        var26 = true;
-                    }
+                if (!par2World.getCollidingBoundingBoxes(var35, var35.boundingBox.expand(-0.1D, -0.1D, -0.1D))
+                        .isEmpty()) {
+                    return par1ItemStack;
+                }
+
+                if (par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("BuggyFuel")) {
+                    var35.buggyFuelTank.setFluid(
+                            new FluidStack(
+                                    GalacticraftCore.fluidFuel,
+                                    par1ItemStack.getTagCompound().getInteger("BuggyFuel")));
+                }
+
+                if (!par2World.isRemote) {
+                    par2World.spawnEntityInWorld(var35);
+                }
+
+                if (!par3EntityPlayer.capabilities.isCreativeMode) {
+                    --par1ItemStack.stackSize;
                 }
             }
 
-            if (var26) {
-                return par1ItemStack;
-            } else {
-                if (var24.typeOfHit == MovingObjectType.BLOCK) {
-                    var29 = var24.blockX;
-                    int var33 = var24.blockY;
-                    final int var34 = var24.blockZ;
-
-                    if (par2World.getBlock(var29, var33, var34) == Blocks.snow) {
-                        --var33;
-                    }
-
-                    final EntityBuggy var35 = new EntityBuggy(
-                            par2World,
-                            var29 + 0.5F,
-                            var33 + 1.0F,
-                            var34 + 0.5F,
-                            par1ItemStack.getItemDamage());
-
-                    if (!par2World.getCollidingBoundingBoxes(var35, var35.boundingBox.expand(-0.1D, -0.1D, -0.1D))
-                            .isEmpty()) {
-                        return par1ItemStack;
-                    }
-
-                    if (par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("BuggyFuel")) {
-                        var35.buggyFuelTank.setFluid(
-                                new FluidStack(
-                                        GalacticraftCore.fluidFuel,
-                                        par1ItemStack.getTagCompound().getInteger("BuggyFuel")));
-                    }
-
-                    if (!par2World.isRemote) {
-                        par2World.spawnEntityInWorld(var35);
-                    }
-
-                    if (!par3EntityPlayer.capabilities.isCreativeMode) {
-                        --par1ItemStack.stackSize;
-                    }
-                }
-
-                return par1ItemStack;
-            }
+            return par1ItemStack;
         }
     }
 

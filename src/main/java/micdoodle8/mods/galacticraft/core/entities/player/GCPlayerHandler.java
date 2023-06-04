@@ -574,28 +574,26 @@ public class GCPlayerHandler {
                         toTake = 0;
                     }
                 }
-            } else {
-                if ((player.ticksExisted - 1) % 60 == 0) {
-                    if (OxygenUtil.isAABBInBreathableAirBlock(player)) {
-                        if (playerStats.airRemaining < 90 && tankInSlot != null) {
-                            playerStats.airRemaining = Math.min(
-                                    playerStats.airRemaining + 1,
-                                    tankInSlot.getMaxDamage() - tankInSlot.getItemDamage());
-                        }
+            } else if ((player.ticksExisted - 1) % 60 == 0) {
+                if (OxygenUtil.isAABBInBreathableAirBlock(player)) {
+                    if (playerStats.airRemaining < 90 && tankInSlot != null) {
+                        playerStats.airRemaining = Math.min(
+                                playerStats.airRemaining + 1,
+                                tankInSlot.getMaxDamage() - tankInSlot.getItemDamage());
+                    }
 
-                        if (playerStats.airRemaining2 < 90 && tankInSlot2 != null) {
-                            playerStats.airRemaining2 = Math.min(
-                                    playerStats.airRemaining2 + 1,
-                                    tankInSlot2.getMaxDamage() - tankInSlot2.getItemDamage());
-                        }
-                    } else {
-                        if (playerStats.airRemaining > 0) {
-                            playerStats.airRemaining--;
-                        }
+                    if (playerStats.airRemaining2 < 90 && tankInSlot2 != null) {
+                        playerStats.airRemaining2 = Math.min(
+                                playerStats.airRemaining2 + 1,
+                                tankInSlot2.getMaxDamage() - tankInSlot2.getItemDamage());
+                    }
+                } else {
+                    if (playerStats.airRemaining > 0) {
+                        playerStats.airRemaining--;
+                    }
 
-                        if (playerStats.airRemaining2 > 0) {
-                            playerStats.airRemaining2--;
-                        }
+                    if (playerStats.airRemaining2 > 0) {
+                        playerStats.airRemaining2--;
                     }
                 }
             }
@@ -738,18 +736,16 @@ public class GCPlayerHandler {
                                 0);
                     }
                 }
-            } else {
-                // Is it a type of space torch?
-                if (this.torchItems.containsKey(theCurrentItem.getItem())) {
-                    // Get overworld torch for this space torch
-                    final Item torchItem = this.torchItems.get(theCurrentItem.getItem());
-                    if (torchItem != null && player.inventory.currentItem >= 0
-                            && player.inventory.currentItem < player.inventory.mainInventory.length) {
-                        player.inventory.mainInventory[player.inventory.currentItem] = new ItemStack(
-                                torchItem,
-                                theCurrentItem.stackSize,
-                                0);
-                    }
+            } else // Is it a type of space torch?
+            if (this.torchItems.containsKey(theCurrentItem.getItem())) {
+                // Get overworld torch for this space torch
+                final Item torchItem = this.torchItems.get(theCurrentItem.getItem());
+                if (torchItem != null && player.inventory.currentItem >= 0
+                        && player.inventory.currentItem < player.inventory.mainInventory.length) {
+                    player.inventory.mainInventory[player.inventory.currentItem] = new ItemStack(
+                            torchItem,
+                            theCurrentItem.stackSize,
+                            0);
                 }
             }
         }

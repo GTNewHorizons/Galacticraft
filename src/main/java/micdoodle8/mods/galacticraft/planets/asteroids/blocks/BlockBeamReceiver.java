@@ -125,9 +125,8 @@ public class BlockBeamReceiver extends BlockTileGC implements ItemBlockDesc.IBlo
         if (tileAt instanceof EnergyStorageTile) {
             if (((EnergyStorageTile) tileAt).getModeFromDirection(direction.getOpposite()) != null) {
                 return direction.ordinal();
-            } else {
-                return -1;
             }
+            return -1;
         }
 
         if (EnergyUtil.otherModCanReceive(tileAt, direction.getOpposite())) {

@@ -157,46 +157,44 @@ public abstract class StructureComponentMoon extends StructureComponent {
     protected int getXWithOffsetAsIfRotated(int var1, int var2, int var3) {
         if (this.coordBaseMode < 0) {
             return var1;
-        } else {
-            switch ((this.coordBaseMode + var3) % 4) {
-                case 0:
-                    return this.boundingBox.minX + var1;
+        }
+        switch ((this.coordBaseMode + var3) % 4) {
+            case 0:
+                return this.boundingBox.minX + var1;
 
-                case 1:
-                    return this.boundingBox.maxX - var2;
+            case 1:
+                return this.boundingBox.maxX - var2;
 
-                case 2:
-                    return this.boundingBox.maxX - var1;
+            case 2:
+                return this.boundingBox.maxX - var1;
 
-                case 3:
-                    return this.boundingBox.minX + var2;
+            case 3:
+                return this.boundingBox.minX + var2;
 
-                default:
-                    return var1;
-            }
+            default:
+                return var1;
         }
     }
 
     protected int getZWithOffsetAsIfRotated(int var1, int var2, int var3) {
         if (this.coordBaseMode < 0) {
             return var1;
-        } else {
-            switch ((this.coordBaseMode + var3) % 4) {
-                case 0:
-                    return this.boundingBox.minZ + var2;
+        }
+        switch ((this.coordBaseMode + var3) % 4) {
+            case 0:
+                return this.boundingBox.minZ + var2;
 
-                case 1:
-                    return this.boundingBox.minZ + var1;
+            case 1:
+                return this.boundingBox.minZ + var1;
 
-                case 2:
-                    return this.boundingBox.maxZ - var2;
+            case 2:
+                return this.boundingBox.maxZ - var2;
 
-                case 3:
-                    return this.boundingBox.maxZ - var1;
+            case 3:
+                return this.boundingBox.maxZ - var1;
 
-                default:
-                    return var2;
-            }
+            default:
+                return var2;
         }
     }
 

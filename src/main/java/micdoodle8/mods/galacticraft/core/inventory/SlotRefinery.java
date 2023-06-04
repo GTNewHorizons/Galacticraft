@@ -20,7 +20,8 @@ public class SlotRefinery extends Slot {
         Class<?> buildCraftClass = null;
 
         try {
-            if ((buildCraftClass = Class.forName("buildcraft.BuildCraftEnergy")) != null) {
+            buildCraftClass = Class.forName("buildcraft.BuildCraftEnergy");
+            if (buildCraftClass != null) {
                 for (final Field f : buildCraftClass.getFields()) {
                     if (f.getName().equals("bucketOil")) {
                         final Item item = (Item) f.get(null);

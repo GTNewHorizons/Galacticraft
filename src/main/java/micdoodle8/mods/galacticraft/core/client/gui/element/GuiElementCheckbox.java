@@ -107,9 +107,8 @@ public class GuiElementCheckbox extends GuiButton {
                 this.isSelected = !this.isSelected;
                 this.parentGui.onSelectionChanged(this, this.isSelected);
                 return true;
-            } else {
-                this.parentGui.onIntruderInteraction();
             }
+            this.parentGui.onIntruderInteraction();
         }
 
         return false;

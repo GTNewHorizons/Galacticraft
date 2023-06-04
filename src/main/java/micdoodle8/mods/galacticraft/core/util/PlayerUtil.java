@@ -31,20 +31,19 @@ public class PlayerUtil {
         if (server != null) {
             if (ignoreCase) {
                 return getPlayerForUsernameVanilla(server, username);
-            } else {
-                final Iterator<EntityPlayerMP> iterator = server.getConfigurationManager().playerEntityList.iterator();
-                EntityPlayerMP entityplayermp;
-
-                do {
-                    if (!iterator.hasNext()) {
-                        return null;
-                    }
-
-                    entityplayermp = (EntityPlayerMP) iterator.next();
-                } while (!entityplayermp.getCommandSenderName().equalsIgnoreCase(username));
-
-                return entityplayermp;
             }
+            final Iterator<EntityPlayerMP> iterator = server.getConfigurationManager().playerEntityList.iterator();
+            EntityPlayerMP entityplayermp;
+
+            do {
+                if (!iterator.hasNext()) {
+                    return null;
+                }
+
+                entityplayermp = (EntityPlayerMP) iterator.next();
+            } while (!entityplayermp.getCommandSenderName().equalsIgnoreCase(username));
+
+            return entityplayermp;
         }
 
         GCLog.severe("Warning: Could not find player base server instance for player " + username);

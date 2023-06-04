@@ -241,24 +241,23 @@ public class TileEntityOxygenSealer extends TileEntityOxygen implements IInvento
 
     @Override
     public ItemStack decrStackSize(int par1, int par2) {
-        if (this.containingItems[par1] != null) {
-            ItemStack var3;
-
-            if (this.containingItems[par1].stackSize <= par2) {
-                var3 = this.containingItems[par1];
-                this.containingItems[par1] = null;
-                return var3;
-            } else {
-                var3 = this.containingItems[par1].splitStack(par2);
-
-                if (this.containingItems[par1].stackSize == 0) {
-                    this.containingItems[par1] = null;
-                }
-
-                return var3;
-            }
-        } else {
+        if (this.containingItems[par1] == null) {
             return null;
+        }
+        ItemStack var3;
+
+        if (this.containingItems[par1].stackSize <= par2) {
+            var3 = this.containingItems[par1];
+            this.containingItems[par1] = null;
+            return var3;
+        } else {
+            var3 = this.containingItems[par1].splitStack(par2);
+
+            if (this.containingItems[par1].stackSize == 0) {
+                this.containingItems[par1] = null;
+            }
+
+            return var3;
         }
     }
 
@@ -268,9 +267,8 @@ public class TileEntityOxygenSealer extends TileEntityOxygen implements IInvento
             final ItemStack var2 = this.containingItems[par1];
             this.containingItems[par1] = null;
             return var2;
-        } else {
-            return null;
         }
+        return null;
     }
 
     @Override
@@ -350,14 +348,15 @@ public class TileEntityOxygenSealer extends TileEntityOxygen implements IInvento
         if (itemstack == null) {
             return false;
         }
-        if (slotID == 0) {
-            return ItemElectricBase.isElectricItem(itemstack.getItem());
-        }
-        if (slotID == 1) {
-            return itemstack.getItem() instanceof IItemOxygenSupply;
-        }
-        if (slotID == 2) {
-            return itemstack.getItem() == GCItems.basicItem && itemstack.getItemDamage() == 20;
+        switch (slotID) {
+            case 0:
+                return ItemElectricBase.isElectricItem(itemstack.getItem());
+            case 1:
+                return itemstack.getItem() instanceof IItemOxygenSupply;
+            case 2:
+                return itemstack.getItem() == GCItems.basicItem && itemstack.getItemDamage() == 20;
+            default:
+                break;
         }
         return false;
     }

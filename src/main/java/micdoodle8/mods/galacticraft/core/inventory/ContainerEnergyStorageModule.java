@@ -74,14 +74,12 @@ public class ContainerEnergyStorageModule extends Container {
                             return null;
                         }
                     }
-                } else {
-                    if (slotID < b - 9) {
-                        if (!this.mergeItemStack(itemStack, b - 9, b, false)) {
-                            return null;
-                        }
-                    } else if (!this.mergeItemStack(itemStack, b - 36, b - 9, false)) {
+                } else if (slotID < b - 9) {
+                    if (!this.mergeItemStack(itemStack, b - 9, b, false)) {
                         return null;
                     }
+                } else if (!this.mergeItemStack(itemStack, b - 36, b - 9, false)) {
+                    return null;
                 }
             } else if (!this.mergeItemStack(itemStack, 2, 38, false)) {
                 return null;

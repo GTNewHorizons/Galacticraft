@@ -91,7 +91,8 @@ public class EntityLander extends EntityLanderBase implements IIgnoreShift, ICam
         if (this.riddenByEntity == null && var1 instanceof EntityPlayerMP) {
             GCCoreUtil.openParachestInv((EntityPlayerMP) var1, this);
             return true;
-        } else if (var1 instanceof EntityPlayerMP) {
+        }
+        if (var1 instanceof EntityPlayerMP) {
             if (!this.onGround) {
                 return false;
             }

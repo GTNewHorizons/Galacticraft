@@ -219,9 +219,8 @@ public abstract class TileEntityOxygen extends TileBaseElectricBlock implements 
     public float getOxygenRequest(ForgeDirection direction) {
         if (this.shouldPullOxygen()) {
             return this.oxygenPerTick * 2;
-        } else {
-            return 0;
         }
+        return 0;
     }
 
     @Override

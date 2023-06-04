@@ -128,7 +128,8 @@ public class BlockOxygenCompressor extends BlockAdvancedTile implements ItemBloc
     public TileEntity createTileEntity(World world, int metadata) {
         if (metadata >= BlockOxygenCompressor.OXYGEN_DECOMPRESSOR_METADATA) {
             return new TileEntityOxygenDecompressor();
-        } else if (metadata >= BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA) {
+        }
+        if (metadata >= BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA) {
             return new TileEntityOxygenCompressor();
         } else {
             return null;
@@ -155,7 +156,8 @@ public class BlockOxygenCompressor extends BlockAdvancedTile implements ItemBloc
                     } else {
                         return this.iconDecompressor;
                     }
-        } else if (metadata >= BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA) {
+        }
+        if (metadata >= BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA) {
             metadata -= BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA;
 
             if (side == metadata + 2) {
@@ -213,7 +215,8 @@ public class BlockOxygenCompressor extends BlockAdvancedTile implements ItemBloc
     public int damageDropped(int metadata) {
         if (metadata >= BlockOxygenCompressor.OXYGEN_DECOMPRESSOR_METADATA) {
             return BlockOxygenCompressor.OXYGEN_DECOMPRESSOR_METADATA;
-        } else if (metadata >= BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA) {
+        }
+        if (metadata >= BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA) {
             return BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA;
         } else {
             return 0;

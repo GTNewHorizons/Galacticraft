@@ -207,12 +207,10 @@ public class OxygenUtil {
         boolean permeableFlag = false;
         if (!(block instanceof BlockLeavesBase)) {
             if (block.isOpaqueCube()) {
-                if (block instanceof BlockGravel || block.getMaterial() == Material.cloth
-                        || block instanceof BlockSponge) {
-                    permeableFlag = true;
-                } else {
+                if (!(block instanceof BlockGravel) && (block.getMaterial() != Material.cloth) && !(block instanceof BlockSponge)) {
                     return -1;
                 }
+                permeableFlag = true;
             } else
                 if (block instanceof BlockGlass || block instanceof BlockStainedGlass || block instanceof BlockLiquid) {
                     return -1;

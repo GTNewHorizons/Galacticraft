@@ -148,9 +148,8 @@ public class TileEntityCargoUnloader extends TileBaseElectricBlockWithInventory
         if (side != this.getBlockMetadata() - 2) {
             if (slotID == 0) {
                 return ItemElectricBase.isElectricItemEmpty(itemstack);
-            } else {
-                return true;
             }
+            return true;
         }
 
         return false;
@@ -160,9 +159,8 @@ public class TileEntityCargoUnloader extends TileBaseElectricBlockWithInventory
     public boolean isItemValidForSlot(int slotID, ItemStack itemstack) {
         if (slotID == 0) {
             return ItemElectricBase.isElectricItem(itemstack.getItem());
-        } else {
-            return true;
         }
+        return true;
     }
 
     @Override
@@ -186,24 +184,23 @@ public class TileEntityCargoUnloader extends TileBaseElectricBlockWithInventory
                     }
 
                     return EnumCargoLoadingState.SUCCESS;
-                } else {
-                    // Part of the stack can fill this slot but there will be some left over
-                    final int origSize = stackAt.stackSize;
-                    final int surplus = origSize + stack.stackSize - stackAt.getMaxStackSize();
-
-                    if (doAdd) {
-                        this.containingItems[count].stackSize = stackAt.getMaxStackSize();
-                        this.markDirty();
-                    }
-
-                    stack.stackSize = surplus;
-                    if (this.addCargo(stack, doAdd) == EnumCargoLoadingState.SUCCESS) {
-                        return EnumCargoLoadingState.SUCCESS;
-                    }
-
-                    this.containingItems[count].stackSize = origSize;
-                    return EnumCargoLoadingState.FULL;
                 }
+                // Part of the stack can fill this slot but there will be some left over
+                final int origSize = stackAt.stackSize;
+                final int surplus = origSize + stack.stackSize - stackAt.getMaxStackSize();
+
+                if (doAdd) {
+                    this.containingItems[count].stackSize = stackAt.getMaxStackSize();
+                    this.markDirty();
+                }
+
+                stack.stackSize = surplus;
+                if (this.addCargo(stack, doAdd) == EnumCargoLoadingState.SUCCESS) {
+                    return EnumCargoLoadingState.SUCCESS;
+                }
+
+                this.containingItems[count].stackSize = origSize;
+                return EnumCargoLoadingState.FULL;
             }
         }
 

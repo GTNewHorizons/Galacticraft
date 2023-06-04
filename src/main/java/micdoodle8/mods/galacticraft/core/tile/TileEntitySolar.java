@@ -161,18 +161,16 @@ public class TileEntitySolar extends TileBaseUniversalElectricalSource
             } else {
                 this.targetAngle = 77.5F;
             }
-        } else {
-            if (celestialAngle > 30 && celestialAngle < 150) {
-                final float difference = this.targetAngle - celestialAngle;
+        } else if (celestialAngle > 30 && celestialAngle < 150) {
+            final float difference = this.targetAngle - celestialAngle;
 
-                this.targetAngle -= difference / 20.0F;
-            } else if (!this.worldObj.isDaytime() || this.worldObj.isRaining() || this.worldObj.isThundering()) {
-                this.targetAngle = 77.5F + 180.0F;
-            } else if (celestialAngle < 50) {
-                this.targetAngle = 50;
-            } else if (celestialAngle > 150) {
-                this.targetAngle = 150;
-            }
+            this.targetAngle -= difference / 20.0F;
+        } else if (!this.worldObj.isDaytime() || this.worldObj.isRaining() || this.worldObj.isThundering()) {
+            this.targetAngle = 77.5F + 180.0F;
+        } else if (celestialAngle < 50) {
+            this.targetAngle = 50;
+        } else if (celestialAngle > 150) {
+            this.targetAngle = 150;
         }
 
         final float difference = this.targetAngle - this.currentAngle;
@@ -409,24 +407,23 @@ public class TileEntitySolar extends TileBaseUniversalElectricalSource
 
     @Override
     public ItemStack decrStackSize(int par1, int par2) {
-        if (this.containingItems[par1] != null) {
-            ItemStack var3;
-
-            if (this.containingItems[par1].stackSize <= par2) {
-                var3 = this.containingItems[par1];
-                this.containingItems[par1] = null;
-                return var3;
-            } else {
-                var3 = this.containingItems[par1].splitStack(par2);
-
-                if (this.containingItems[par1].stackSize == 0) {
-                    this.containingItems[par1] = null;
-                }
-
-                return var3;
-            }
-        } else {
+        if (this.containingItems[par1] == null) {
             return null;
+        }
+        ItemStack var3;
+
+        if (this.containingItems[par1].stackSize <= par2) {
+            var3 = this.containingItems[par1];
+            this.containingItems[par1] = null;
+            return var3;
+        } else {
+            var3 = this.containingItems[par1].splitStack(par2);
+
+            if (this.containingItems[par1].stackSize == 0) {
+                this.containingItems[par1] = null;
+            }
+
+            return var3;
         }
     }
 
@@ -436,9 +433,8 @@ public class TileEntitySolar extends TileBaseUniversalElectricalSource
             final ItemStack var2 = this.containingItems[par1];
             this.containingItems[par1] = null;
             return var2;
-        } else {
-            return null;
         }
+        return null;
     }
 
     @Override

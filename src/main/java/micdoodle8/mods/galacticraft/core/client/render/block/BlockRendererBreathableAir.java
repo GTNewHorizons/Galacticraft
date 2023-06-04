@@ -133,34 +133,39 @@ public class BlockRendererBreathableAir implements ISimpleBlockRenderingHandler 
                     double var51;
                     double var49;
 
-                    if (var34 == 0) {
-                        var41 = var24;
-                        var43 = var30;
-                        var45 = par2;
-                        var49 = par2 + 1;
-                        var47 = par4 + var32;
-                        var51 = par4 + var32;
-                    } else if (var34 == 1) {
-                        var41 = var28;
-                        var43 = var26;
-                        var45 = par2 + 1;
-                        var49 = par2;
-                        var47 = par4 + 1 - var32;
-                        var51 = par4 + 1 - var32;
-                    } else if (var34 == 2) {
-                        var41 = var26;
-                        var43 = var24;
-                        var45 = par2 + var32;
-                        var49 = par2 + var32;
-                        var47 = par4 + 1;
-                        var51 = par4;
-                    } else {
-                        var41 = var30;
-                        var43 = var28;
-                        var45 = par2 + 1 - var32;
-                        var49 = par2 + 1 - var32;
-                        var47 = par4;
-                        var51 = par4 + 1;
+                    switch (var34) {
+                        case 0:
+                            var41 = var24;
+                            var43 = var30;
+                            var45 = par2;
+                            var49 = par2 + 1;
+                            var47 = par4 + var32;
+                            var51 = par4 + var32;
+                            break;
+                        case 1:
+                            var41 = var28;
+                            var43 = var26;
+                            var45 = par2 + 1;
+                            var49 = par2;
+                            var47 = par4 + 1 - var32;
+                            var51 = par4 + 1 - var32;
+                            break;
+                        case 2:
+                            var41 = var26;
+                            var43 = var24;
+                            var45 = par2 + var32;
+                            var49 = par2 + var32;
+                            var47 = par4 + 1;
+                            var51 = par4;
+                            break;
+                        default:
+                            var41 = var30;
+                            var43 = var28;
+                            var45 = par2 + 1 - var32;
+                            var49 = par2 + 1 - var32;
+                            var47 = par4;
+                            var51 = par4 + 1;
+                            break;
                     }
 
                     final double var53 = 0 / 256.0F;

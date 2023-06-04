@@ -52,9 +52,8 @@ public class BlockUnlitTorch extends Block implements IOxygenReliantBlock {
     public Block changeState() {
         if (this.lit) {
             return this.litVersion;
-        } else {
-            return this.unlitVersion;
         }
+        return this.unlitVersion;
     }
 
     private static boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection direction,
@@ -85,10 +84,9 @@ public class BlockUnlitTorch extends Block implements IOxygenReliantBlock {
     private boolean canPlaceTorchOn(World par1World, int par2, int par3, int par4) {
         if (World.doesBlockHaveSolidTopSurface(par1World, par2, par3, par4)) {
             return true;
-        } else {
-            final Block var5 = par1World.getBlock(par2, par3, par4);
-            return var5.canPlaceTorchOnTop(par1World, par2, par3, par4);
         }
+        final Block var5 = par1World.getBlock(par2, par3, par4);
+        return var5.canPlaceTorchOnTop(par1World, par2, par3, par4);
     }
 
     @Override
@@ -225,16 +223,15 @@ public class BlockUnlitTorch extends Block implements IOxygenReliantBlock {
      * True if it can stay and False if it drops. Args: world, x, y, z
      */
     private boolean dropTorchIfCantStay(World par1World, int par2, int par3, int par4) {
-        if (!this.canPlaceBlockAt(par1World, par2, par3, par4)) {
-            if (par1World.getBlock(par2, par3, par4) == this) {
-                this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-                par1World.setBlock(par2, par3, par4, Blocks.air);
-            }
-
-            return false;
-        } else {
+        if (this.canPlaceBlockAt(par1World, par2, par3, par4)) {
             return true;
         }
+        if (par1World.getBlock(par2, par3, par4) == this) {
+            this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
+            par1World.setBlock(par2, par3, par4, Blocks.air);
+        }
+
+        return false;
     }
 
     /**
@@ -247,17 +244,23 @@ public class BlockUnlitTorch extends Block implements IOxygenReliantBlock {
         final int var7 = par1World.getBlockMetadata(par2, par3, par4) & 7;
         float var8 = 0.15F;
 
-        if (var7 == 1) {
-            this.setBlockBounds(0.0F, 0.2F, 0.5F - var8, var8 * 2.0F, 0.8F, 0.5F + var8);
-        } else if (var7 == 2) {
-            this.setBlockBounds(1.0F - var8 * 2.0F, 0.2F, 0.5F - var8, 1.0F, 0.8F, 0.5F + var8);
-        } else if (var7 == 3) {
-            this.setBlockBounds(0.5F - var8, 0.2F, 0.0F, 0.5F + var8, 0.8F, var8 * 2.0F);
-        } else if (var7 == 4) {
-            this.setBlockBounds(0.5F - var8, 0.2F, 1.0F - var8 * 2.0F, 0.5F + var8, 0.8F, 1.0F);
-        } else {
-            var8 = 0.1F;
-            this.setBlockBounds(0.5F - var8, 0.0F, 0.5F - var8, 0.5F + var8, 0.6F, 0.5F + var8);
+        switch (var7) {
+            case 1:
+                this.setBlockBounds(0.0F, 0.2F, 0.5F - var8, var8 * 2.0F, 0.8F, 0.5F + var8);
+                break;
+            case 2:
+                this.setBlockBounds(1.0F - var8 * 2.0F, 0.2F, 0.5F - var8, 1.0F, 0.8F, 0.5F + var8);
+                break;
+            case 3:
+                this.setBlockBounds(0.5F - var8, 0.2F, 0.0F, 0.5F + var8, 0.8F, var8 * 2.0F);
+                break;
+            case 4:
+                this.setBlockBounds(0.5F - var8, 0.2F, 1.0F - var8 * 2.0F, 0.5F + var8, 0.8F, 1.0F);
+                break;
+            default:
+                var8 = 0.1F;
+                this.setBlockBounds(0.5F - var8, 0.0F, 0.5F - var8, 0.5F + var8, 0.6F, 0.5F + var8);
+                break;
         }
 
         return super.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);
@@ -278,41 +281,47 @@ public class BlockUnlitTorch extends Block implements IOxygenReliantBlock {
             final double var13 = 0.2199999988079071D;
             final double var15 = 0.27000001072883606D;
 
-            if (var6 == 1) {
-                if (doSmoke) {
-                    par1World.spawnParticle("smoke", var7 - var15, var9 + var13, var11, 0.0D, 0.0D, 0.0D);
-                }
-                if (this.lit) {
-                    par1World.spawnParticle("flame", var7 - var15, var9 + var13, var11, 0.0D, 0.0D, 0.0D);
-                }
-            } else if (var6 == 2) {
-                if (doSmoke) {
-                    par1World.spawnParticle("smoke", var7 + var15, var9 + var13, var11, 0.0D, 0.0D, 0.0D);
-                }
-                if (this.lit) {
-                    par1World.spawnParticle("flame", var7 + var15, var9 + var13, var11, 0.0D, 0.0D, 0.0D);
-                }
-            } else if (var6 == 3) {
-                if (doSmoke) {
-                    par1World.spawnParticle("smoke", var7, var9 + var13, var11 - var15, 0.0D, 0.0D, 0.0D);
-                }
-                if (this.lit) {
-                    par1World.spawnParticle("flame", var7, var9 + var13, var11 - var15, 0.0D, 0.0D, 0.0D);
-                }
-            } else if (var6 == 4) {
-                if (doSmoke) {
-                    par1World.spawnParticle("smoke", var7, var9 + var13, var11 + var15, 0.0D, 0.0D, 0.0D);
-                }
-                if (this.lit) {
-                    par1World.spawnParticle("flame", var7, var9 + var13, var11 + var15, 0.0D, 0.0D, 0.0D);
-                }
-            } else {
-                if (doSmoke) {
-                    par1World.spawnParticle("smoke", var7, var9, var11, 0.0D, 0.0D, 0.0D);
-                }
-                if (this.lit) {
-                    par1World.spawnParticle("flame", var7, var9, var11, 0.0D, 0.0D, 0.0D);
-                }
+            switch (var6) {
+                case 1:
+                    if (doSmoke) {
+                        par1World.spawnParticle("smoke", var7 - var15, var9 + var13, var11, 0.0D, 0.0D, 0.0D);
+                    }
+                    if (this.lit) {
+                        par1World.spawnParticle("flame", var7 - var15, var9 + var13, var11, 0.0D, 0.0D, 0.0D);
+                    }
+                    break;
+                case 2:
+                    if (doSmoke) {
+                        par1World.spawnParticle("smoke", var7 + var15, var9 + var13, var11, 0.0D, 0.0D, 0.0D);
+                    }
+                    if (this.lit) {
+                        par1World.spawnParticle("flame", var7 + var15, var9 + var13, var11, 0.0D, 0.0D, 0.0D);
+                    }
+                    break;
+                case 3:
+                    if (doSmoke) {
+                        par1World.spawnParticle("smoke", var7, var9 + var13, var11 - var15, 0.0D, 0.0D, 0.0D);
+                    }
+                    if (this.lit) {
+                        par1World.spawnParticle("flame", var7, var9 + var13, var11 - var15, 0.0D, 0.0D, 0.0D);
+                    }
+                    break;
+                case 4:
+                    if (doSmoke) {
+                        par1World.spawnParticle("smoke", var7, var9 + var13, var11 + var15, 0.0D, 0.0D, 0.0D);
+                    }
+                    if (this.lit) {
+                        par1World.spawnParticle("flame", var7, var9 + var13, var11 + var15, 0.0D, 0.0D, 0.0D);
+                    }
+                    break;
+                default:
+                    if (doSmoke) {
+                        par1World.spawnParticle("smoke", var7, var9, var11, 0.0D, 0.0D, 0.0D);
+                    }
+                    if (this.lit) {
+                        par1World.spawnParticle("flame", var7, var9, var11, 0.0D, 0.0D, 0.0D);
+                    }
+                    break;
             }
         }
     }

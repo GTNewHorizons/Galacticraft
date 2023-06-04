@@ -139,37 +139,36 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
     public boolean attackEntityFrom(DamageSource var1, float var2) {
         if (this.isDead || var1.equals(DamageSource.cactus) || !this.allowDamageSource(var1)) {
             return true;
+        }
+        final Entity e = var1.getEntity();
+        if (this.isEntityInvulnerable() || this.posY > 300
+                || e instanceof EntityLivingBase && !(e instanceof EntityPlayer)) {
+            return false;
         } else {
-            final Entity e = var1.getEntity();
-            if (this.isEntityInvulnerable() || this.posY > 300
-                    || e instanceof EntityLivingBase && !(e instanceof EntityPlayer)) {
-                return false;
-            } else {
-                this.rockDirection = -this.rockDirection;
-                this.timeSinceHit = 10;
-                this.currentDamage = this.currentDamage + var2 * 10;
-                this.setBeenAttacked();
+            this.rockDirection = -this.rockDirection;
+            this.timeSinceHit = 10;
+            this.currentDamage = this.currentDamage + var2 * 10;
+            this.setBeenAttacked();
 
-                if (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode) {
-                    this.currentDamage = 100;
-                }
-
-                if (this.currentDamage > 70) {
-                    if (this.riddenByEntity != null) {
-                        this.riddenByEntity.mountEntity(this);
-
-                        return false;
-                    }
-
-                    if (!this.worldObj.isRemote) {
-                        this.dropItems();
-
-                        this.setDead();
-                    }
-                }
-
-                return true;
+            if (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode) {
+                this.currentDamage = 100;
             }
+
+            if (this.currentDamage > 70) {
+                if (this.riddenByEntity != null) {
+                    this.riddenByEntity.mountEntity(this);
+
+                    return false;
+                }
+
+                if (!this.worldObj.isRemote) {
+                    this.dropItems();
+
+                    this.setDead();
+                }
+            }
+
+            return true;
         }
     }
 

@@ -154,9 +154,8 @@ public abstract class StructureComponentVillage extends StructureComponent {
 
         if (var4 == 0) {
             return -1;
-        } else {
-            return var3 / var4;
         }
+        return var3 / var4;
     }
 
     protected static boolean canVillageGoDeeper(StructureBoundingBox par0StructureBoundingBox) {

@@ -3,6 +3,7 @@ package micdoodle8.mods.galacticraft.core.network;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
@@ -72,17 +73,13 @@ public class ConnectionPacket {
 
     public static FMLProxyPacket createDimPacket(Integer[] dims) {
         final ArrayList<Integer> data = new ArrayList<>();
-        for (final Integer dim : dims) {
-            data.add(dim);
-        }
+        Collections.addAll(data, dims);
         return createPacket((byte) 101, data);
     }
 
     public static FMLProxyPacket createSSPacket(Integer[] dims) {
         final ArrayList<Integer> data = new ArrayList<>();
-        for (final Integer dim : dims) {
-            data.add(dim);
-        }
+        Collections.addAll(data, dims);
         return createPacket((byte) 102, data);
     }
 

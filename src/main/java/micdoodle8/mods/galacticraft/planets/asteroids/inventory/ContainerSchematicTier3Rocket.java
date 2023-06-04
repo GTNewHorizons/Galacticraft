@@ -233,22 +233,20 @@ public class ContainerSchematicTier3Rocket extends Container {
                     if (!this.mergeOneItemTestValid(var4, 1, 19, false)) {
                         return null;
                     }
-                } else {
-                    if (var2.getItem() == Item.getItemFromBlock(Blocks.chest)) {
-                        if (!this.mergeOneItemTestValid(var4, 19, 22, false)) {
-                            return null;
-                        }
-                    } else if (par1 >= 22 && par1 < 49) {
-                        if (!this.mergeItemStack(var4, 49, 58, false)) {
-                            return null;
-                        }
-                    } else if (par1 >= 49 && par1 < 58) {
-                        if (!this.mergeItemStack(var4, 22, 49, false)) {
-                            return null;
-                        }
-                    } else if (!this.mergeItemStack(var4, 22, 58, false)) {
+                } else if (var2.getItem() == Item.getItemFromBlock(Blocks.chest)) {
+                    if (!this.mergeOneItemTestValid(var4, 19, 22, false)) {
                         return null;
                     }
+                } else if (par1 >= 22 && par1 < 49) {
+                    if (!this.mergeItemStack(var4, 49, 58, false)) {
+                        return null;
+                    }
+                } else if (par1 >= 49 && par1 < 58) {
+                    if (!this.mergeItemStack(var4, 22, 49, false)) {
+                        return null;
+                    }
+                } else if (!this.mergeItemStack(var4, 22, 58, false)) {
+                    return null;
                 }
             }
 

@@ -85,9 +85,8 @@ public class BlockMinerBaseFull extends BlockTileGC {
         final TileEntity tileEntity = par1World.getTileEntity(x, y, z);
         if (tileEntity instanceof TileEntityMinerBase) {
             return ((TileEntityMinerBase) tileEntity).onActivated(par5EntityPlayer);
-        } else {
-            return false;
         }
+        return false;
     }
 
     @Override

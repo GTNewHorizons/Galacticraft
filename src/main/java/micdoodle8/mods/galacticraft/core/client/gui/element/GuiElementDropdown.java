@@ -130,28 +130,24 @@ public class GuiElementDropdown extends GuiButton {
                 if (this.parentClass.canBeClickedBy(this, par1Minecraft.thePlayer)) {
                     this.dropdownClicked = true;
                     return true;
-                } else {
-                    this.parentClass.onIntruderInteraction();
                 }
+                this.parentClass.onIntruderInteraction();
             }
-        } else {
-            if (this.enabled && this.visible
-                    && par2 >= this.xPosition
-                    && par3 >= this.yPosition
-                    && par2 < this.xPosition + this.width
-                    && par3 < this.yPosition + this.height * this.optionStrings.length) {
-                if (this.parentClass.canBeClickedBy(this, par1Minecraft.thePlayer)) {
-                    final int optionClicked = (par3 - this.yPosition) / this.height;
-                    this.selectedOption = optionClicked % this.optionStrings.length;
-                    this.dropdownClicked = false;
-                    this.parentClass.onSelectionChanged(this, this.selectedOption);
-                    return true;
-                } else {
-                    this.parentClass.onIntruderInteraction();
-                }
-            } else {
+        } else if (this.enabled && this.visible
+                && par2 >= this.xPosition
+                && par3 >= this.yPosition
+                && par2 < this.xPosition + this.width
+                && par3 < this.yPosition + this.height * this.optionStrings.length) {
+            if (this.parentClass.canBeClickedBy(this, par1Minecraft.thePlayer)) {
+                final int optionClicked = (par3 - this.yPosition) / this.height;
+                this.selectedOption = optionClicked % this.optionStrings.length;
                 this.dropdownClicked = false;
+                this.parentClass.onSelectionChanged(this, this.selectedOption);
+                return true;
             }
+            this.parentClass.onIntruderInteraction();
+        } else {
+            this.dropdownClicked = false;
         }
 
         return false;
