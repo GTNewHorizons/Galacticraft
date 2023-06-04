@@ -100,7 +100,7 @@ public class SpinManager {
      */
     public void setSpinRate(float angle) {
         this.angularVelocityRadians = angle;
-        this.skyAngularVelocity = angle * 180F / 3.1415927F;
+        this.skyAngularVelocity = angle * 180F / (float)Math.PI;
 
         if (this.clientSide) {
             this.updateSkyProviderSpinRate();
@@ -114,7 +114,7 @@ public class SpinManager {
 
     public void setSpinRate(float angle, boolean firing) {
         this.angularVelocityRadians = angle;
-        this.skyAngularVelocity = angle * 180F / 3.1415927F;
+        this.skyAngularVelocity = angle * 180F / (float)Math.PI;
         this.worldProvider.setSpinDeltaPerTick(this.skyAngularVelocity);
         this.thrustersFiring = firing;
     }
@@ -551,12 +551,12 @@ public class SpinManager {
                                 final double zz = e.posZ - this.spinCentreZ;
                                 double arc = Math.sqrt(xx * xx + zz * zz);
                                 if (xx == 0D) {
-                                    angle = zz > 0 ? 3.1415926535F / 2 : -3.1415926535F / 2;
+                                    angle = zz > 0 ? (float)Math.PI / 2 : -(float)Math.PI / 2;
                                 } else {
                                     angle = (float) Math.atan(zz / xx);
                                 }
                                 if (xx < 0D) {
-                                    angle += 3.1415926535F;
+                                    angle += (float)Math.PI;
                                 }
                                 angle += this.angularVelocityRadians / 3F;
                                 arc = arc * this.angularVelocityRadians;
@@ -628,12 +628,12 @@ public class SpinManager {
             final double zz = p.posZ - this.spinCentreZ;
             double arc = Math.sqrt(xx * xx + zz * zz);
             if (xx == 0D) {
-                angle = zz > 0 ? 3.1415926535F / 2 : -3.1415926535F / 2;
+                angle = zz > 0 ? (float)Math.PI / 2 : -(float)Math.PI / 2;
             } else {
                 angle = (float) Math.atan(zz / xx);
             }
             if (xx < 0D) {
-                angle += 3.1415926535F;
+                angle += (float)Math.PI;
             }
             angle += angleDelta / 3F;
             arc = arc * angleDelta;

@@ -181,7 +181,7 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
         }
 
         final float f2 = f1;
-        f1 = 0.5F - MathHelper.cos(f1 * 3.1415927F) / 2.0F;
+        f1 = 0.5F - MathHelper.cos(f1 * (float)Math.PI) / 2.0F;
         return f2 + (f1 - f2) / 3.0F;
     }
 

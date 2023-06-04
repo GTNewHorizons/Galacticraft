@@ -801,11 +801,11 @@ public class GCPlayerHandler {
                         // Adjust footprint to left or right depending on step count
                         switch (playerStats.lastStep) {
                             case 0:
-                                float a = (-player.rotationYaw + 90F) / 57.295779513F;
+                                float a = (-player.rotationYaw + 90F) / (180F / (float)Math.PI);
                                 pos.translate(new Vector3(MathHelper.sin(a) * 0.25F, 0, MathHelper.cos(a) * 0.25F));
                                 break;
                             case 1:
-                                a = (-player.rotationYaw - 90F) / 57.295779513F;
+                                a = (-player.rotationYaw - 90F) / (180F / (float)Math.PI);
                                 pos.translate(new Vector3(MathHelper.sin(a) * 0.25, 0, MathHelper.cos(a) * 0.25));
                                 break;
                         }

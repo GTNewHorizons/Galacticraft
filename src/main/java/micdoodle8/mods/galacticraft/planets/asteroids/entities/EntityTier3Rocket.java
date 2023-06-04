@@ -98,7 +98,7 @@ public class EntityTier3Rocket extends EntityTieredRocket {
                 }
 
                 if (d != 0.0) {
-                    this.motionY = -d * 2.5D * Math.cos((this.rotationPitch - 180) / 57.2957795D);
+                    this.motionY = -d * 2.5D * Math.cos((this.rotationPitch - 180) / (180D / Math.PI));
                 }
             } else {
                 this.motionY -= 0.008D;
@@ -148,9 +148,9 @@ public class EntityTier3Rocket extends EntityTieredRocket {
 
     protected void spawnParticles(boolean launched) {
         if (!this.isDead) {
-            double x1 = 3.2 * Math.cos(this.rotationYaw / 57.2957795D) * Math.sin(this.rotationPitch / 57.2957795D);
-            double z1 = 3.2 * Math.sin(this.rotationYaw / 57.2957795D) * Math.sin(this.rotationPitch / 57.2957795D);
-            double y1 = 3.2 * Math.cos((this.rotationPitch - 180) / 57.2957795D);
+            double x1 = 3.2 * Math.cos(this.rotationYaw / (180D / Math.PI)) * Math.sin(this.rotationPitch / (180D / Math.PI));
+            double z1 = 3.2 * Math.sin(this.rotationYaw / (180D / Math.PI)) * Math.sin(this.rotationPitch / (180D / Math.PI));
+            double y1 = 3.2 * Math.cos((this.rotationPitch - 180) / (180D / Math.PI));
             if (this.landing && this.targetVec != null) {
                 double modifier = this.posY - this.targetVec.y;
                 modifier = Math.max(modifier, 180.0);

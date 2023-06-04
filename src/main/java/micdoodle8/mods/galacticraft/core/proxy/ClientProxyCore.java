@@ -765,7 +765,7 @@ public class ClientProxyCore extends CommonProxyCore {
                         + (player.field_71085_bR - player.field_71097_bO) * event.partialRenderTick
                         - (player.prevPosZ + (player.posZ - player.prevPosZ) * event.partialRenderTick);
                 f4 = (player.prevRenderYawOffset
-                        + (player.renderYawOffset - player.prevRenderYawOffset) * event.partialRenderTick) / 57.29578F;
+                        + (player.renderYawOffset - player.prevRenderYawOffset) * event.partialRenderTick) / (180F / (float)Math.PI);
                 final double d1 = MathHelper.sin(f4);
                 final double d2 = -MathHelper.cos(f4);
                 float f5 = (float) d4 * 10.0F;
@@ -818,7 +818,7 @@ public class ClientProxyCore extends CommonProxyCore {
         if (ClientProxyCore.smallMoonActive && (offsetX != 0.0D || offsetY != 0.0D || offsetZ != 0.0D)) {
             final EntityPlayerSP player = ClientProxyCore.mc.thePlayer;
             if (player.posY > ClientProxyCore.terrainHeight + 8F && player.ridingEntity != entity && player != entity) {
-                final double globalArc = ClientProxyCore.globalRadius / 57.2957795D;
+                final double globalArc = ClientProxyCore.globalRadius / (180D / Math.PI);
 
                 final int pX = MathHelper.floor_double(player.posX / 16D) << 4;
                 final int pZ = MathHelper.floor_double(player.posZ / 16D) << 4;
@@ -888,7 +888,7 @@ public class ClientProxyCore extends CommonProxyCore {
             final WorldProvider provider = ClientProxyCore.mc.theWorld.provider;
             if (provider instanceof WorldProviderMoon) {
                 if (player.posY > ClientProxyCore.terrainHeight + 8F) {
-                    final double globalArc = ClientProxyCore.globalRadius / 57.2957795D;
+                    final double globalArc = ClientProxyCore.globalRadius / (180D / Math.PI);
 
                     final int pX = MathHelper.floor_double(player.posX / 16D) << 4;
                     final int pZ = MathHelper.floor_double(player.posZ / 16D) << 4;
@@ -1045,7 +1045,7 @@ public class ClientProxyCore extends CommonProxyCore {
 
                 if (entitylivingbase.posY > ClientProxyCore.terrainHeight + 8F) {
                     ClientProxyCore.smallMoonActive = true;
-                    final double globalArc = ClientProxyCore.globalRadius / 57.2957795D;
+                    final double globalArc = ClientProxyCore.globalRadius / (180D / Math.PI);
                     final float globeRadius = ClientProxyCore.globalRadius - ClientProxyCore.terrainHeight;
 
                     final int pX = MathHelper.floor_double(entitylivingbase.posX / 16D) << 4;

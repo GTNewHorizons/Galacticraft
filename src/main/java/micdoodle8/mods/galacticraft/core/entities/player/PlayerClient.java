@@ -137,7 +137,7 @@ public class PlayerClient implements IPlayerClient {
                     final float dYmax = 0.3F * stats.landingTicks / GCPlayerStatsClient.MAX_LANDINGTICKS;
                     float factor = 1F;
                     for (int i = 0; i <= stats.landingTicks; i++) {
-                        stats.landingYOffset[i] = dYmax * MathHelper.sin(i * 3.1415926F / stats.landingTicks) * factor;
+                        stats.landingYOffset[i] = dYmax * MathHelper.sin(i * (float)Math.PI / stats.landingTicks) * factor;
                         factor *= 0.97F;
                     }
                 }
