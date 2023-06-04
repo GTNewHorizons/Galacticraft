@@ -199,15 +199,15 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(18, new Float(this.getHealth()));
-        this.dataWatcher.addObject(19, new Float(this.colorRed));
-        this.dataWatcher.addObject(20, new Float(this.colorGreen));
-        this.dataWatcher.addObject(21, new Float(this.colorBlue));
-        this.dataWatcher.addObject(22, new Integer(this.age));
+        this.dataWatcher.addObject(18, this.getHealth());
+        this.dataWatcher.addObject(19, this.colorRed);
+        this.dataWatcher.addObject(20, this.colorGreen);
+        this.dataWatcher.addObject(21, this.colorBlue);
+        this.dataWatcher.addObject(22, this.age);
         this.dataWatcher.addObject(23, "");
-        this.dataWatcher.addObject(24, new Integer(this.favFoodID));
-        this.dataWatcher.addObject(25, new Float(this.attackDamage));
-        this.dataWatcher.addObject(26, new Integer(this.kills));
+        this.dataWatcher.addObject(24, this.favFoodID);
+        this.dataWatcher.addObject(25, this.attackDamage);
+        this.dataWatcher.addObject(26, this.kills);
         this.dataWatcher.addObject(27, new ItemStack(Blocks.stone));
         this.dataWatcher.addObject(28, "");
         this.setName(GCCoreUtil.translate("gui.message.unnamed.name"));

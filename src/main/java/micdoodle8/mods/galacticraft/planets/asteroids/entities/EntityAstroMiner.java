@@ -215,7 +215,7 @@ public class EntityAstroMiner extends Entity
 
     @Override
     protected void entityInit() {
-        this.dataWatcher.addObject(19, new Float(0.0F));
+        this.dataWatcher.addObject(19, 0.0F);
     }
 
     @Override

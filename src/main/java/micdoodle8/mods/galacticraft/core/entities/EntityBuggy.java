@@ -82,9 +82,9 @@ public class EntityBuggy extends Entity
         this.rockDirection = 20;
         this.speed = 0.0D;
         this.preventEntitySpawning = true;
-        this.dataWatcher.addObject(this.currentDamage, new Integer(0));
-        this.dataWatcher.addObject(this.timeSinceHit, new Integer(0));
-        this.dataWatcher.addObject(this.rockDirection, new Integer(1));
+        this.dataWatcher.addObject(this.currentDamage, 0);
+        this.dataWatcher.addObject(this.timeSinceHit, 0);
+        this.dataWatcher.addObject(this.rockDirection, 0);
         this.ignoreFrustumCheck = true;
         this.isImmuneToFire = true;
 

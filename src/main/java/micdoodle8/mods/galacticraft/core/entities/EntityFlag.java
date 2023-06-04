@@ -126,9 +126,9 @@ public class EntityFlag extends Entity {
     @Override
     protected void entityInit() {
         this.dataWatcher.addObject(17, "");
-        this.dataWatcher.addObject(18, new Float(0.0F));
-        this.dataWatcher.addObject(19, new Integer(-1));
-        this.dataWatcher.addObject(20, new Integer(-1));
+        this.dataWatcher.addObject(18, 0.0F);
+        this.dataWatcher.addObject(19, -1);
+        this.dataWatcher.addObject(20, -1);
     }
 
     @Override
