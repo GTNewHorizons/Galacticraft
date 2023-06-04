@@ -90,7 +90,7 @@ public class BlockCavernousVine extends Block implements IShearable, ItemBlockDe
             entity.motionY = 0.06F;
             entity.rotationYaw += 0.4F;
 
-            if (!((EntityLivingBase) entity).getActivePotionEffects().contains(Potion.poison)) {
+            if (!((EntityLivingBase) entity).getActivePotionEffects().contains(new PotionEffect(Potion.poison.id, 5, 20, false))) {
                 ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id, 5, 20, false));
             }
         }

@@ -21,6 +21,9 @@ public class Satellite extends CelestialBody implements IChildBody {
         return this;
     }
 
+    /**
+     * @deprecated Use {@link #setDimensionInfo(int, int, Class)} instead.
+     */
     @Override
     @Deprecated
     public CelestialBody setDimensionInfo(int providerId, Class<? extends WorldProvider> providerClass,

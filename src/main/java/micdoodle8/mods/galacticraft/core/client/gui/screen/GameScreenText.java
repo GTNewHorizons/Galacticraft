@@ -105,7 +105,7 @@ public class GameScreenText implements IGameScreen {
                         renderEntity = (Render) RenderManager.instance.entityRenderMap.get(EntityPlayer.class);
                     } else {
                         try {
-                            entity = (Entity) telemeter.clientClass.getConstructor(World.class)
+                            entity = telemeter.clientClass.getConstructor(World.class)
                                     .newInstance(screen.driver.getWorldObj());
                         } catch (final Exception ex) {}
                         if (entity != null) {

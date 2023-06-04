@@ -641,7 +641,7 @@ public class EnergyNetwork implements IElectricityNetwork {
                                 final TileEntity connectedBlockB = nextToSplit[i2];
 
                                 if (toDo[i2]) {
-                                    if (partNetwork.contains(connectedBlockB)) {
+                                    if (partNetwork.contains((IConductor) connectedBlockB)) {
                                         toDo[i2] = false;
                                     }
                                 }

@@ -285,7 +285,7 @@ public class GalacticraftCore {
 
         packetPipeline = GalacticraftChannelHandler.init();
 
-        solarSystemSol = new SolarSystem("sol", "milkyWay").setMapPosition(new Vector3(0.0F, 0.0F));
+        solarSystemSol = new SolarSystem("sol", "milkyWay").setMapPosition(new Vector3(0.0, 0.0, 0.0));
         final Star starSol = (Star) new Star("sol").setParentSolarSystem(solarSystemSol).setTierRequired(-1);
         starSol.setBodyIcon(new ResourceLocation(ASSET_PREFIX, "textures/gui/celestialbodies/sun.png"));
         solarSystemSol.setMainStar(starSol);
