@@ -205,42 +205,41 @@ public class EntityBuggy extends Entity
 
         if (this.isEntityInvulnerable() || e instanceof EntityLivingBase && !(e instanceof EntityPlayer)) {
             return false;
-        } else {
-            this.dataWatcher.updateObject(
-                    this.rockDirection,
-                    Integer.valueOf(-this.dataWatcher.getWatchableObjectInt(this.rockDirection)));
-            this.dataWatcher.updateObject(this.timeSinceHit, Integer.valueOf(10));
-            this.dataWatcher.updateObject(
-                    this.currentDamage,
-                    Integer.valueOf(
-                            (int) (this.dataWatcher.getWatchableObjectInt(this.currentDamage) + var2 * 10)));
-            this.setBeenAttacked();
-
-            if (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode) {
-                this.dataWatcher.updateObject(this.currentDamage, 100);
-            }
-
-            if (flag || this.dataWatcher.getWatchableObjectInt(this.currentDamage) > 2) {
-                if (this.riddenByEntity != null) {
-                    this.riddenByEntity.mountEntity(this);
-                }
-
-                if (!this.worldObj.isRemote && (this.riddenByEntity != null)) {
-                    this.riddenByEntity.mountEntity(this);
-                }
-                if (flag) {
-                    this.setDead();
-                } else {
-                    this.setDead();
-                    if (!this.worldObj.isRemote) {
-                        this.dropBuggyAsItem();
-                    }
-                }
-                this.setDead();
-            }
-
-            return true;
         }
+        this.dataWatcher.updateObject(
+                this.rockDirection,
+                Integer.valueOf(-this.dataWatcher.getWatchableObjectInt(this.rockDirection)));
+        this.dataWatcher.updateObject(this.timeSinceHit, Integer.valueOf(10));
+        this.dataWatcher.updateObject(
+                this.currentDamage,
+                Integer.valueOf(
+                        (int) (this.dataWatcher.getWatchableObjectInt(this.currentDamage) + var2 * 10)));
+        this.setBeenAttacked();
+
+        if (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode) {
+            this.dataWatcher.updateObject(this.currentDamage, 100);
+        }
+
+        if (flag || this.dataWatcher.getWatchableObjectInt(this.currentDamage) > 2) {
+            if (this.riddenByEntity != null) {
+                this.riddenByEntity.mountEntity(this);
+            }
+
+            if (!this.worldObj.isRemote && this.riddenByEntity != null) {
+                this.riddenByEntity.mountEntity(this);
+            }
+            if (flag) {
+                this.setDead();
+            } else {
+                this.setDead();
+                if (!this.worldObj.isRemote) {
+                    this.dropBuggyAsItem();
+                }
+            }
+            this.setDead();
+        }
+
+        return true;
     }
 
     public void dropBuggyAsItem() {

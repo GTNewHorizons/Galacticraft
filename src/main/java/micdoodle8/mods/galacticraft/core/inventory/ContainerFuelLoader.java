@@ -59,18 +59,16 @@ public class ContainerFuelLoader extends Container {
                 if (!this.mergeItemStack(var5, 0, 1, false)) {
                     return null;
                 }
-            } else {
-                if (FluidUtil.isFuelContainerAny(var5)) {
-                    if (!this.mergeItemStack(var5, 1, 2, false)) {
-                        return null;
-                    }
-                } else if (par2 < 29) {
-                    if (!this.mergeItemStack(var5, 29, 38, false)) {
-                        return null;
-                    }
-                } else if (!this.mergeItemStack(var5, 2, 29, false)) {
+            } else if (FluidUtil.isFuelContainerAny(var5)) {
+                if (!this.mergeItemStack(var5, 1, 2, false)) {
                     return null;
                 }
+            } else if (par2 < 29) {
+                if (!this.mergeItemStack(var5, 29, 38, false)) {
+                    return null;
+                }
+            } else if (!this.mergeItemStack(var5, 2, 29, false)) {
+                return null;
             }
 
             if (var5.stackSize == 0) {

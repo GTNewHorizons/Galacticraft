@@ -144,7 +144,7 @@ public class GuiLaunchController extends GuiContainerGC
 
     @Override
     protected void keyTyped(char keyChar, int keyID) {
-        if ((keyID != Keyboard.KEY_ESCAPE && keyID != this.mc.gameSettings.keyBindInventory.getKeyCode()) && (this.frequency.keyTyped(keyChar, keyID) || this.destinationFrequency.keyTyped(keyChar, keyID))) {
+        if (keyID != Keyboard.KEY_ESCAPE && keyID != this.mc.gameSettings.keyBindInventory.getKeyCode() && (this.frequency.keyTyped(keyChar, keyID) || this.destinationFrequency.keyTyped(keyChar, keyID))) {
             return;
         }
 
@@ -152,7 +152,7 @@ public class GuiLaunchController extends GuiContainerGC
     }
 
     public boolean isValid(String string) {
-        if ((string.length() <= 0) || !ChatAllowedCharacters.isAllowedCharacter(string.charAt(string.length() - 1))) {
+        if (string.length() <= 0 || !ChatAllowedCharacters.isAllowedCharacter(string.charAt(string.length() - 1))) {
             return false;
         }
         try {
@@ -257,8 +257,7 @@ public class GuiLaunchController extends GuiContainerGC
                         this.width,
                         this.height,
                         this));
-        batterySlotDesc = new ArrayList<>();
-        batterySlotDesc.addAll(GCCoreUtil.translateWithSplit("gui.launchController.desc.1"));
+        batterySlotDesc = new ArrayList<>(GCCoreUtil.translateWithSplit("gui.launchController.desc.1"));
         this.infoRegions.add(
                 new GuiElementInfoRegion(
                         (this.width - this.xSize) / 2 + 5,
@@ -491,17 +490,16 @@ public class GuiLaunchController extends GuiContainerGC
             if (Minecraft.getMinecraft().thePlayer.getGameProfile().getName()
                     .equals(this.launchController.getOwnerName()) || this.launchController.getDisabled(2)) {
                 return String.valueOf(this.launchController.destFrequency);
-            } else {
-                // in case the player is not equal to the owner of the controller,
-                // scramble the destination number such that other players can't
-                // fly to it directly
-                final Random r = new Random();
-                StringBuilder fakefrequency = new StringBuilder();
-                for (int i = 0; i < this.destinationFrequency.getMaxLength(); i++) {
-                    fakefrequency.append((char) (r.nextInt(126 - 33) + 33));
-                }
-                return fakefrequency.toString();
             }
+            // in case the player is not equal to the owner of the controller,
+            // scramble the destination number such that other players can't
+            // fly to it directly
+            final Random r = new Random();
+            StringBuilder fakefrequency = new StringBuilder();
+            for (int i = 0; i < this.destinationFrequency.getMaxLength(); i++) {
+                fakefrequency.append((char) (r.nextInt(126 - 33) + 33));
+            }
+            return fakefrequency.toString();
         }
 
         return "";

@@ -33,7 +33,7 @@ public class NasaWorkbenchRecipe implements INasaWorkbenchRecipe {
     }
 
     private boolean checkItemEquals(ItemStack target, ItemStack input) {
-        if ((input == null) == (target != null)) {
+        if (input == null == (target != null)) {
             return false;
         }
         return target == null && input == null

@@ -106,7 +106,7 @@ public class BlockSlabGC extends BlockSlab {
 
     @Override
     public Item getItemDropped(int meta, Random par2Random, int par3) {
-        if (this.isDoubleSlab && (this == GCBlocks.slabGCDouble)) {
+        if (this.isDoubleSlab && this == GCBlocks.slabGCDouble) {
             return Item.getItemFromBlock(GCBlocks.slabGCHalf);
         }
         return Item.getItemFromBlock(this);
@@ -123,8 +123,6 @@ public class BlockSlabGC extends BlockSlab {
     @Override
     public float getBlockHardness(World world, int x, int y, int z) {
         final int meta = world.getBlockMetadata(x, y, z);
-        float hardness = this.blockHardness;
-
         return switch (getTypeFromMeta(meta)) {
             case 2, 3 -> 1.5F;
             default -> 2.0F;

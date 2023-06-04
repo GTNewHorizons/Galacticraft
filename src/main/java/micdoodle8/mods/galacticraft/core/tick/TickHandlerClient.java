@@ -156,7 +156,7 @@ public class TickHandlerClient {
                 if (i > minecraft.currentScreen.width - 100 && j > minecraft.currentScreen.height - 35) {
                     deltaColor = 20;
 
-                    if ((k == 0) && Mouse.getEventButtonState()) {
+                    if (k == 0 && Mouse.getEventButtonState()) {
                         minecraft.displayGuiScreen(new GuiNewSpaceRace(playerBaseClient));
                     }
                 }
@@ -296,17 +296,15 @@ public class TickHandlerClient {
         final Minecraft minecraft = FMLClientHandler.instance().getClient();
         final EntityClientPlayerMP player = minecraft.thePlayer;
 
-        if (event.type == RenderGameOverlayEvent.ElementType.ALL) {
-            if (player != null && player.ridingEntity instanceof IIgnoreShift && ((IIgnoreShift) player.ridingEntity).shouldIgnoreShiftExit()) {
-                // Remove "Press shift to dismount" message when shift-exiting is disabled (not
-                // ideal, but the only
-                // option)
-                final String str = I18n.format(
-                        "mount.onboard",
-                        GameSettings.getKeyDisplayString(minecraft.gameSettings.keyBindSneak.getKeyCode()));
-                if (minecraft.ingameGUI.recordPlaying.equals(str)) {
-                    minecraft.ingameGUI.recordPlaying = "";
-                }
+        if ((event.type == RenderGameOverlayEvent.ElementType.ALL) && (player != null && player.ridingEntity instanceof IIgnoreShift && ((IIgnoreShift) player.ridingEntity).shouldIgnoreShiftExit())) {
+            // Remove "Press shift to dismount" message when shift-exiting is disabled (not
+            // ideal, but the only
+            // option)
+            final String str = I18n.format(
+                    "mount.onboard",
+                    GameSettings.getKeyDisplayString(minecraft.gameSettings.keyBindSneak.getKeyCode()));
+            if (minecraft.ingameGUI.recordPlaying.equals(str)) {
+                minecraft.ingameGUI.recordPlaying = "";
             }
         }
     }
@@ -466,7 +464,7 @@ public class TickHandlerClient {
             if (world != null) {
                 final List<Entity> entityList = world.loadedEntityList;
                 for (final Object e : entityList) {
-                    if ((e instanceof IEntityNoisy vehicle) && (vehicle.getSoundUpdater() == null)) {
+                    if (e instanceof IEntityNoisy vehicle && vehicle.getSoundUpdater() == null) {
                         final ISound noise = vehicle
                                 .setSoundUpdater(FMLClientHandler.instance().getClient().thePlayer);
                         FMLClientHandler.instance().getClient().getSoundHandler().playSound(noise);

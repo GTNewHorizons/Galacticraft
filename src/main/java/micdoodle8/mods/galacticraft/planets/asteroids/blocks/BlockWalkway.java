@@ -274,7 +274,8 @@ public class BlockWalkway extends BlockTransmitter implements ITileEntityProvide
         }
         if (this == AsteroidBlocks.blockWalkwayWire) {
             return GCCoreUtil.translate("tile.walkwayAluminumWire.description");
-        } else if (this == AsteroidBlocks.blockWalkwayOxygenPipe) {
+        }
+        if (this == AsteroidBlocks.blockWalkwayOxygenPipe) {
             return GCCoreUtil.translate("tile.walkwayOxygenPipe.description");
         }
 

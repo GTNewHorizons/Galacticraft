@@ -190,7 +190,7 @@ public class MapGenCavernMars extends MapGenBaseMeta {
                                 for (int var50 = caveMaxY - 1; var50 >= caveMinY; --var50) {
                                     final double var51 = (var50 + 0.5D - yPos) / caveHeight;
 
-                                    if ((var59 * var59 + var51 * var51 + var46 * var46 < 1.0D) && (var51 > -0.7D)) {
+                                    if (var59 * var59 + var51 * var51 + var46 * var46 < 1.0D && var51 > -0.7D) {
                                         final int coords = (var42 * 16 + var45) * 256 + var50;
 
                                         if (arrayOfIDs[coords] == MarsBlocks.marsBlock
@@ -214,7 +214,7 @@ public class MapGenCavernMars extends MapGenBaseMeta {
                                 for (int var50 = caveMaxY - 1; var50 >= caveMinY; --var50) {
                                     final double var51 = (var50 + 0.5D - yPos) / caveHeight;
 
-                                    if ((var59 * var59 + var51 * var51 + var46 * var46 < 1.0D) && (var51 > -0.7D)) {
+                                    if (var59 * var59 + var51 * var51 + var46 * var46 < 1.0D && var51 > -0.7D) {
                                         final int coords = (var42 * 16 + var45) * 256 + var50;
                                         final int coordsAbove = (var42 * 16 + var45) * 256 + var50 + 1;
                                         int coordsBelow = (var42 * 16 + var45) * 256 + var50 - 1;

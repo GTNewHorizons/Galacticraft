@@ -86,58 +86,57 @@ public class ItemTier2Rocket extends Item implements IHoldableItem {
             }
         }
 
-        if (padFound) {
-            // Check whether there is already a rocket on the pad
-            if (tile instanceof TileEntityLandingPad) {
-                if (((TileEntityLandingPad) tile).getDockedEntity() != null) {
-                    return false;
-                }
-            } else {
+        if (!padFound) {
+            return false;
+        }
+        // Check whether there is already a rocket on the pad
+        if (tile instanceof TileEntityLandingPad) {
+            if (((TileEntityLandingPad) tile).getDockedEntity() != null) {
                 return false;
-            }
-
-            EntityAutoRocket rocket;
-
-            if (par1ItemStack.getItemDamage() < 10) {
-                rocket = new EntityTier2Rocket(
-                        par3World,
-                        centerX,
-                        centerY,
-                        centerZ,
-                        EnumRocketType.values()[par1ItemStack.getItemDamage()]);
-            } else {
-                rocket = new EntityCargoRocket(
-                        par3World,
-                        centerX,
-                        centerY,
-                        centerZ,
-                        EnumRocketType.values()[par1ItemStack.getItemDamage() - 10]);
-            }
-
-            rocket.setPosition(rocket.posX, rocket.posY + rocket.getOnPadYOffset(), rocket.posZ);
-            par3World.spawnEntityInWorld(rocket);
-
-            if (par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("RocketFuel")) {
-                rocket.fuelTank.fill(
-                        new FluidStack(
-                                GalacticraftCore.fluidFuel,
-                                par1ItemStack.getTagCompound().getInteger("RocketFuel")),
-                        true);
-            }
-
-            if (!par2EntityPlayer.capabilities.isCreativeMode) {
-                par1ItemStack.stackSize--;
-
-                if (par1ItemStack.stackSize <= 0) {
-                    par1ItemStack = null;
-                }
-            }
-
-            if (((IRocketType) rocket).getType().getPreFueled()) {
-                rocket.fuelTank.fill(new FluidStack(GalacticraftCore.fluidFuel, rocket.getMaxFuel()), true);
             }
         } else {
             return false;
+        }
+
+        EntityAutoRocket rocket;
+
+        if (par1ItemStack.getItemDamage() < 10) {
+            rocket = new EntityTier2Rocket(
+                    par3World,
+                    centerX,
+                    centerY,
+                    centerZ,
+                    EnumRocketType.values()[par1ItemStack.getItemDamage()]);
+        } else {
+            rocket = new EntityCargoRocket(
+                    par3World,
+                    centerX,
+                    centerY,
+                    centerZ,
+                    EnumRocketType.values()[par1ItemStack.getItemDamage() - 10]);
+        }
+
+        rocket.setPosition(rocket.posX, rocket.posY + rocket.getOnPadYOffset(), rocket.posZ);
+        par3World.spawnEntityInWorld(rocket);
+
+        if (par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("RocketFuel")) {
+            rocket.fuelTank.fill(
+                    new FluidStack(
+                            GalacticraftCore.fluidFuel,
+                            par1ItemStack.getTagCompound().getInteger("RocketFuel")),
+                    true);
+        }
+
+        if (!par2EntityPlayer.capabilities.isCreativeMode) {
+            par1ItemStack.stackSize--;
+
+            if (par1ItemStack.stackSize <= 0) {
+                par1ItemStack = null;
+            }
+        }
+
+        if (((IRocketType) rocket).getType().getPreFueled()) {
+            rocket.fuelTank.fill(new FluidStack(GalacticraftCore.fluidFuel, rocket.getMaxFuel()), true);
         }
         return true;
     }

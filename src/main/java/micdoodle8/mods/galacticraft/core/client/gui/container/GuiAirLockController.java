@@ -107,7 +107,7 @@ public class GuiAirLockController extends GuiScreen implements ICheckBoxCallback
 
     @Override
     protected void keyTyped(char keyChar, int keyID) {
-        if ((keyID != Keyboard.KEY_ESCAPE) && this.textBoxPlayerToOpenFor.keyTyped(keyChar, keyID)) {
+        if (keyID != Keyboard.KEY_ESCAPE && this.textBoxPlayerToOpenFor.keyTyped(keyChar, keyID)) {
             return;
         }
 
@@ -254,7 +254,8 @@ public class GuiAirLockController extends GuiScreen implements ICheckBoxCallback
         }
         if (checkbox.equals(this.checkboxPlayerDistance)) {
             return this.controller.playerDistanceActivation;
-        } else if (checkbox.equals(this.checkboxOpenForPlayer)) {
+        }
+        if (checkbox.equals(this.checkboxOpenForPlayer)) {
             return this.controller.playerNameMatches;
         } else if (checkbox.equals(this.checkboxInvertSelection)) {
             return this.controller.invertSelection;

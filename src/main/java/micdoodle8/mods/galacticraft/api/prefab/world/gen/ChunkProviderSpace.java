@@ -123,9 +123,8 @@ public abstract class ChunkProviderSpace extends ChunkProviderGenerate {
         }
         if (t > 1.0) {
             return d2;
-        } else {
-            return d1 + (d2 - d1) * t;
         }
+        return d1 + (d2 - d1) * t;
     }
 
     private double fade(double n) {
@@ -358,9 +357,8 @@ public abstract class ChunkProviderSpace extends ChunkProviderGenerate {
             Collections.addAll(creatures, this.getCreatures());
 
             return creatures;
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**

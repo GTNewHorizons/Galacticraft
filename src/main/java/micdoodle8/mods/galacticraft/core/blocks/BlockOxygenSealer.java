@@ -100,7 +100,8 @@ public class BlockOxygenSealer extends BlockAdvancedTile implements ItemBlockDes
         }
         if (side == metadata + 2) {
             return this.iconOutput;
-        } else if (side == ForgeDirection.getOrientation(metadata + 2).getOpposite().ordinal()) {
+        }
+        if (side == ForgeDirection.getOrientation(metadata + 2).getOpposite().ordinal()) {
             return this.iconInput;
         } else {
             return this.iconMachineSide;

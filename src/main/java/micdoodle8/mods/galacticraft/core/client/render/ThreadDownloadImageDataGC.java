@@ -44,7 +44,7 @@ public class ThreadDownloadImageDataGC extends SimpleTexture {
     }
 
     private void checkTextureUploaded() {
-        if (!this.textureUploaded && (this.bufferedImage != null)) {
+        if (!this.textureUploaded && this.bufferedImage != null) {
             if (this.textureLocation != null) {
                 this.deleteGlTexture();
             }

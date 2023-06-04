@@ -181,7 +181,7 @@ public class TileEntityArclamp extends TileEntity {
                         }
                         final double distanceNew = vecNewTarget.squareDistanceTo(this.xCoord, this.yCoord, this.zCoord);
 
-                        if ((distanceNew > e.getDistanceSq(this.xCoord, this.yCoord, this.zCoord)) && (vecOldTarget == null || distanceNew
+                        if (distanceNew > e.getDistanceSq(this.xCoord, this.yCoord, this.zCoord) && (vecOldTarget == null || distanceNew
                                 > vecOldTarget.squareDistanceTo(this.xCoord, this.yCoord, this.zCoord))) {
                             e.getNavigator().tryMoveToXYZ(
                                     vecNewTarget.xCoord,
@@ -277,7 +277,7 @@ public class TileEntityArclamp extends TileEntity {
                                 }
                             } else {
                                 allAir = false;
-                                if ((b != null && b.getLightOpacity(world, sideVec.x, sideVec.y, sideVec.z) == 0) && (side != sideskip1 && side != sideskip2)) {
+                                if (b != null && b.getLightOpacity(world, sideVec.x, sideVec.y, sideVec.z) == 0 && side != sideskip1 && side != sideskip2) {
                                     nextLayer.add(sideVec);
                                 }
                             }

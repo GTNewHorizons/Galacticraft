@@ -113,7 +113,7 @@ public class TileEntityTerraformer extends TileBaseElectricBlockWithInventory
             if (this.containingItems[0] != null) {
                 final FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(this.containingItems[0]);
 
-                if ((liquid != null && liquid.getFluid().getName().equals(FluidRegistry.WATER.getName())) && (this.waterTank.getFluid() == null
+                if (liquid != null && liquid.getFluid().getName().equals(FluidRegistry.WATER.getName()) && (this.waterTank.getFluid() == null
                         || this.waterTank.getFluid().amount + liquid.amount <= this.waterTank.getCapacity())) {
                     this.waterTank.fill(liquid, true);
 
@@ -233,7 +233,7 @@ public class TileEntityTerraformer extends TileBaseElectricBlockWithInventory
                                     this.worldObj.rand);
                             this.grownTreesList.add(vecSapling.clone());
                         }
-                    } else if ((b instanceof BlockBush) && (this.worldObj.getBlockLightValue(vecSapling.x, vecSapling.y, vecSapling.z) >= 5)) {
+                    } else if (b instanceof BlockBush && this.worldObj.getBlockLightValue(vecSapling.x, vecSapling.y, vecSapling.z) >= 5) {
                         // Hammer the update tick a few times to try to get it to grow - it won't always
                         for (int j = 0; j < 12; j++) {
                             if (this.worldObj.getBlock(vecSapling.x, vecSapling.y, vecSapling.z) != b) {

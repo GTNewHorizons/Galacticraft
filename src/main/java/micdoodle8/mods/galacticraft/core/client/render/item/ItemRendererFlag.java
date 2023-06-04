@@ -65,7 +65,7 @@ public class ItemRendererFlag implements IItemRenderer {
             GL11.glRotatef(-145F, 0F, 1F, 0F);
         }
 
-        if ((type == ItemRenderType.EQUIPPED_FIRST_PERSON) && (FMLClientHandler.instance().getClient().thePlayer.getItemInUseCount() > 0)) {
+        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON && FMLClientHandler.instance().getClient().thePlayer.getItemInUseCount() > 0) {
             float var13b;
             float var14b;
             var13b = item.getMaxItemUseDuration()

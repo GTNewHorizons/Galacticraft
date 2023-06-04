@@ -78,47 +78,46 @@ public class ItemTier1Rocket extends Item implements IHoldableItem {
             }
         }
 
-        if (padFound) {
-            // Check whether there is already a rocket on the pad
-            if (tile instanceof TileEntityLandingPad) {
-                if (((TileEntityLandingPad) tile).getDockedEntity() != null) {
-                    return false;
-                }
-            } else {
+        if (!padFound) {
+            return false;
+        }
+        // Check whether there is already a rocket on the pad
+        if (tile instanceof TileEntityLandingPad) {
+            if (((TileEntityLandingPad) tile).getDockedEntity() != null) {
                 return false;
-            }
-
-            final EntityTier1Rocket spaceship = new EntityTier1Rocket(
-                    par3World,
-                    centerX,
-                    centerY,
-                    centerZ,
-                    EnumRocketType.values()[par1ItemStack.getItemDamage()]);
-
-            spaceship.setPosition(spaceship.posX, spaceship.posY + spaceship.getOnPadYOffset(), spaceship.posZ);
-            par3World.spawnEntityInWorld(spaceship);
-
-            if (par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("RocketFuel")) {
-                spaceship.fuelTank.fill(
-                        new FluidStack(
-                                GalacticraftCore.fluidFuel,
-                                par1ItemStack.getTagCompound().getInteger("RocketFuel")),
-                        true);
-            }
-
-            if (!par2EntityPlayer.capabilities.isCreativeMode) {
-                par1ItemStack.stackSize--;
-
-                if (par1ItemStack.stackSize <= 0) {
-                    par1ItemStack = null;
-                }
-            }
-
-            if (spaceship.rocketType.getPreFueled()) {
-                spaceship.fuelTank.fill(new FluidStack(GalacticraftCore.fluidFuel, spaceship.getMaxFuel()), true);
             }
         } else {
             return false;
+        }
+
+        final EntityTier1Rocket spaceship = new EntityTier1Rocket(
+                par3World,
+                centerX,
+                centerY,
+                centerZ,
+                EnumRocketType.values()[par1ItemStack.getItemDamage()]);
+
+        spaceship.setPosition(spaceship.posX, spaceship.posY + spaceship.getOnPadYOffset(), spaceship.posZ);
+        par3World.spawnEntityInWorld(spaceship);
+
+        if (par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("RocketFuel")) {
+            spaceship.fuelTank.fill(
+                    new FluidStack(
+                            GalacticraftCore.fluidFuel,
+                            par1ItemStack.getTagCompound().getInteger("RocketFuel")),
+                    true);
+        }
+
+        if (!par2EntityPlayer.capabilities.isCreativeMode) {
+            par1ItemStack.stackSize--;
+
+            if (par1ItemStack.stackSize <= 0) {
+                par1ItemStack = null;
+            }
+        }
+
+        if (spaceship.rocketType.getPreFueled()) {
+            spaceship.fuelTank.fill(new FluidStack(GalacticraftCore.fluidFuel, spaceship.getMaxFuel()), true);
         }
         return true;
     }

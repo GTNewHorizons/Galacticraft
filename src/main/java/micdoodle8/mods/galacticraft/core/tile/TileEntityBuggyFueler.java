@@ -44,7 +44,7 @@ public class TileEntityBuggyFueler extends TileEntityMulti implements IMultiBloc
             boolean changed = false;
 
             for (final Object o : list) {
-                if ((o != null && o instanceof IDockable fuelable && !this.worldObj.isRemote) && fuelable.isDockValid(this)) {
+                if (o != null && o instanceof IDockable fuelable && !this.worldObj.isRemote && fuelable.isDockValid(this)) {
                     this.dockedEntity = fuelable;
 
                     this.dockedEntity.setPad(this);

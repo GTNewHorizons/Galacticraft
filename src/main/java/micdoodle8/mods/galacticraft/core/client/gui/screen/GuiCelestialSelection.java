@@ -366,7 +366,7 @@ public class GuiCelestialSelection extends GuiScreen {
             super.keyTyped(keyChar, keyID);
         }
 
-        if ((keyID == 1) && (this.selectedBody != null)) {
+        if (keyID == 1 && this.selectedBody != null) {
             this.unselectCelestialBody();
         }
 
@@ -519,8 +519,8 @@ public class GuiCelestialSelection extends GuiScreen {
     }
 
     protected boolean teleportToSelectedBody() {
-        if ((this.selectedBody != null) && (this.selectedBody.getReachable() && this.possibleBodies != null
-                && this.possibleBodies.contains(this.selectedBody))) {
+        if (this.selectedBody != null && this.selectedBody.getReachable() && this.possibleBodies != null
+                && this.possibleBodies.contains(this.selectedBody)) {
             try {
                 String dimension;
 
@@ -1197,7 +1197,7 @@ public class GuiCelestialSelection extends GuiScreen {
                     alpha = 1.0F - Math.min(this.ticksSinceSelection / 25.0F, 1.0F);
                 }
 
-                if ((this.selectedBody != null && this.selectionCount >= 2) && (star != this.selectedBody)) {
+                if (this.selectedBody != null && this.selectionCount >= 2 && star != this.selectedBody) {
                     alpha = 1.0F - Math.min(this.ticksSinceSelection / 25.0F, 1.0F);
 
                     if (!(this.lastSelectedBody instanceof Star) && this.lastSelectedBody != null) {
@@ -2700,7 +2700,7 @@ public class GuiCelestialSelection extends GuiScreen {
         for (int x = 0; x < FMLClientHandler.instance().getClientPlayerEntity().inventory.getSizeInventory(); x++) {
             final ItemStack slot = FMLClientHandler.instance().getClientPlayerEntity().inventory.getStackInSlot(x);
 
-            if ((slot != null) && SpaceStationRecipe.checkItemEquals(stack, slot)) {
+            if (slot != null && SpaceStationRecipe.checkItemEquals(stack, slot)) {
                 amountInInv += slot.stackSize;
             }
         }
@@ -2951,7 +2951,7 @@ public class GuiCelestialSelection extends GuiScreen {
                         alpha = this.selectedBody instanceof IChildBody ? 1.0F
                                 : Math.min(Math.max((this.ticksSinceSelection - 30) / 15.0F, 0.0F), 1.0F);
 
-                        if ((this.lastSelectedBody instanceof Moon) && GalaxyRegistry.getMoonsForPlanet(((Moon) this.lastSelectedBody).getParentPlanet())
+                        if (this.lastSelectedBody instanceof Moon && GalaxyRegistry.getMoonsForPlanet(((Moon) this.lastSelectedBody).getParentPlanet())
                                 .contains(moon)) {
                             alpha = 1.0F;
                         }
@@ -3010,7 +3010,7 @@ public class GuiCelestialSelection extends GuiScreen {
                             alpha = this.selectedBody instanceof IChildBody ? 1.0F
                                     : Math.min(Math.max((this.ticksSinceSelection - 30) / 15.0F, 0.0F), 1.0F);
 
-                            if ((this.lastSelectedBody instanceof Satellite) && GalaxyRegistry
+                            if (this.lastSelectedBody instanceof Satellite && GalaxyRegistry
                                     .getSatellitesForCelestialBody(
                                             ((Satellite) this.lastSelectedBody).getParentPlanet())
                                     .contains(satellite)) {

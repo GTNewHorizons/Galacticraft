@@ -1240,7 +1240,7 @@ public class EntityAstroMiner extends Entity
             blockingBlock.meta = this.worldObj.getBlockMetadata(x, y, z);
             return true;
         }
-        if ((b instanceof BlockLiquid) || (b instanceof IFluidBlock)) {
+        if (b instanceof BlockLiquid || b instanceof IFluidBlock) {
             return false;
         }
 
@@ -1336,7 +1336,7 @@ public class EntityAstroMiner extends Entity
         if (noMineList.contains(b)) {
             return true;
         }
-        if ((b instanceof BlockLiquid) || (b instanceof IFluidBlock)) {
+        if (b instanceof BlockLiquid || b instanceof IFluidBlock) {
             return false;
         }
         if (b instanceof IPlantable) {
@@ -1840,25 +1840,24 @@ public class EntityAstroMiner extends Entity
         // Invulnerable to mobs
         if (this.isEntityInvulnerable() || e instanceof EntityLivingBase && !(e instanceof EntityPlayer)) {
             return false;
-        } else {
-            this.setBeenAttacked();
-            // this.dataWatcher.updateObject(this.timeSinceHit, Integer.valueOf(10));
-            // this.dataWatcher.updateObject(this.currentDamage, Integer.valueOf((int)
-            // (this.dataWatcher.getWatchableObjectInt(this.currentDamage) + par2 * 10)));
-            this.shipDamage += par2 * 10;
-
-            if (e instanceof EntityPlayer) {
-                this.shipDamage += par2 * 21;
-                // this.dataWatcher.updateObject(this.currentDamage, 100);
-            }
-
-            if (this.shipDamage > 90) {
-                this.kill();
-                this.dropShipAsItem();
-            }
-
-            return true;
         }
+        this.setBeenAttacked();
+        // this.dataWatcher.updateObject(this.timeSinceHit, Integer.valueOf(10));
+        // this.dataWatcher.updateObject(this.currentDamage, Integer.valueOf((int)
+        // (this.dataWatcher.getWatchableObjectInt(this.currentDamage) + par2 * 10)));
+        this.shipDamage += par2 * 10;
+
+        if (e instanceof EntityPlayer) {
+            this.shipDamage += par2 * 21;
+            // this.dataWatcher.updateObject(this.currentDamage, 100);
+        }
+
+        if (this.shipDamage > 90) {
+            this.kill();
+            this.dropShipAsItem();
+        }
+
+        return true;
     }
 
     @Override

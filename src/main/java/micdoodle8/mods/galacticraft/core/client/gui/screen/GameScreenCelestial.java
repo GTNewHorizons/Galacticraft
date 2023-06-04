@@ -144,7 +144,7 @@ public class GameScreenCelestial implements IGameScreen {
 
         final String mainSolarSystem = solarSystem.getUnlocalizedName();
         for (final Planet planet : GalaxyRegistry.getRegisteredPlanets().values()) {
-            if ((planet.getParentSolarSystem() != null && planet.getBodyIcon() != null) && planet.getParentSolarSystem().getUnlocalizedName().equalsIgnoreCase(mainSolarSystem)) {
+            if (planet.getParentSolarSystem() != null && planet.getBodyIcon() != null && planet.getParentSolarSystem().getUnlocalizedName().equalsIgnoreCase(mainSolarSystem)) {
                 final Vector3f pos = this.getCelestialBodyPosition(planet, ticks);
                 this.drawCircle(planet);
                 this.drawCelestialBody(

@@ -39,7 +39,8 @@ public class ItemArmorGC extends ItemArmor {
             }
             if (stack.getItem() == GCItems.steelChestplate || stack.getItem() == GCItems.steelBoots) {
                 return GalacticraftCore.TEXTURE_PREFIX + "textures/model/armor/steel_2.png";
-            } else if (stack.getItem() == GCItems.steelLeggings) {
+            }
+            if (stack.getItem() == GCItems.steelLeggings) {
                 return GalacticraftCore.TEXTURE_PREFIX + "textures/model/armor/steel_3.png";
             }
         }

@@ -511,7 +511,8 @@ public class ClientProxyCore extends CommonProxyCore {
         }
         if (blockID == GCBlocks.oxygenPipe) {
             return ClientProxyCore.renderIdOxygenPipe;
-        } else if (blockID == GCBlocks.fallenMeteor) {
+        }
+        if (blockID == GCBlocks.fallenMeteor) {
             return ClientProxyCore.renderIdMeteor;
         } else if (blockID == GCBlocks.nasaWorkbench) {
             return ClientProxyCore.renderIdCraftingTable;
@@ -599,16 +600,15 @@ public class ClientProxyCore extends CommonProxyCore {
         final int k = MathHelper.floor_double(entity.posZ);
         final Block block = entity.worldObj.getBlock(i, j, k);
 
-        if ((block == null) || !(block instanceof IFluidBlock) || (((IFluidBlock) block).getFluid() == null) || !((IFluidBlock) block).getFluid().getName().equals(fluid.getName())) {
+        if (block == null || !(block instanceof IFluidBlock) || ((IFluidBlock) block).getFluid() == null || !((IFluidBlock) block).getFluid().getName().equals(fluid.getName())) {
             return false;
         }
         double filled = ((IFluidBlock) block).getFilledPercentage(entity.worldObj, i, j, k);
         if (filled < 0) {
             filled *= -1;
             return d0 > j + (1 - filled);
-        } else {
-            return d0 < j + filled;
         }
+        return d0 < j + filled;
     }
 
     public static void renderFootprints(float partialTicks) {
@@ -881,7 +881,7 @@ public class ClientProxyCore extends CommonProxyCore {
         if (ClientProxyCore.smallMoonActive && (offsetX != 0.0D || offsetY != 0.0D || offsetZ != 0.0D)) {
             final EntityPlayerSP player = ClientProxyCore.mc.thePlayer;
             final WorldProvider provider = ClientProxyCore.mc.theWorld.provider;
-            if ((provider instanceof WorldProviderMoon) && (player.posY > ClientProxyCore.terrainHeight + 8F)) {
+            if (provider instanceof WorldProviderMoon && player.posY > ClientProxyCore.terrainHeight + 8F) {
                 final double globalArc = ClientProxyCore.globalRadius / (180D / Math.PI);
 
                 final int pX = MathHelper.floor_double(player.posX / 16D) << 4;

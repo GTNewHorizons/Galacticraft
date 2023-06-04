@@ -99,7 +99,7 @@ public class TileEntityCircuitFabricator extends TileBaseElectricBlockWithInvent
     public void compressItems() {
         if (this.canCompress()) {
             final ItemStack resultItemStack = this.producingStack.copy();
-            if (ConfigManagerCore.quickMode && (resultItemStack.getItem() == GCItems.basicItem)) {
+            if (ConfigManagerCore.quickMode && resultItemStack.getItem() == GCItems.basicItem) {
                 if (resultItemStack.getItemDamage() == ItemBasic.WAFER_BASIC) {
                     resultItemStack.stackSize = 5;
                 } else if (resultItemStack.getItemDamage() == ItemBasic.WAFER_ADVANCED) {

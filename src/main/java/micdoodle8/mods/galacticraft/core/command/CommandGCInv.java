@@ -132,13 +132,11 @@ public class CommandGCInv extends CommandBase {
                 }
 
                 // No player found, and not a 'restore' command
-                if ("clear".equalsIgnoreCase(astring[0]) || "save".equalsIgnoreCase(astring[0])
-                        || "drop".equalsIgnoreCase(astring[0])) {
-                    System.out.println("GCInv command: player " + astring[1] + " not found.");
-                } else {
+                if (!"clear".equalsIgnoreCase(astring[0]) && !"save".equalsIgnoreCase(astring[0]) && !"drop".equalsIgnoreCase(astring[0])) {
                     throw new WrongUsageException(
                             "Invalid GCInv command. Usage: " + this.getCommandUsage(icommandsender));
                 }
+                System.out.println("GCInv command: player " + astring[1] + " not found.");
             }
         } catch (final Exception e) {
             System.out.println(e.toString());

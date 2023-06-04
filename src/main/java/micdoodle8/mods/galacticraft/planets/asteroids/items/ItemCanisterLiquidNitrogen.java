@@ -105,7 +105,7 @@ public class ItemCanisterLiquidNitrogen extends ItemCanisterGeneric {
 
             // Material material = par2World.getBlock(i, j, k).getMaterial();
             final Block b = par2World.getBlock(x, y, z);
-            final int meta = par2World.getBlockMetadata(x, y, z);
+            par2World.getBlockMetadata(x, y, z);
 
             final Block result = this.canFreeze(b);
             if (result != null) {

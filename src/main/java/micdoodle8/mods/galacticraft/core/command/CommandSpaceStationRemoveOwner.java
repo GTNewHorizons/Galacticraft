@@ -63,28 +63,27 @@ public class CommandSpaceStationRemoveOwner extends CommandBase {
 
                 if (stats.spaceStationDimensionData.isEmpty()) {
                     throw new WrongUsageException(GCCoreUtil.translate("commands.ssinvite.notFound"));
-                } else {
-                    for (final Map.Entry<Integer, Integer> e : stats.spaceStationDimensionData.entrySet()) {
-                        final SpaceStationWorldData data = SpaceStationWorldData
-                                .getStationData(playerBase.worldObj, e.getValue(), playerBase);
+                }
+                for (final Map.Entry<Integer, Integer> e : stats.spaceStationDimensionData.entrySet()) {
+                    final SpaceStationWorldData data = SpaceStationWorldData
+                            .getStationData(playerBase.worldObj, e.getValue(), playerBase);
 
-                        String str = null;
-                        for (final String name : data.getAllowedPlayers()) {
-                            if (name.equalsIgnoreCase(var3)) {
-                                str = name;
-                                break;
-                            }
+                    String str = null;
+                    for (final String name : data.getAllowedPlayers()) {
+                        if (name.equalsIgnoreCase(var3)) {
+                            str = name;
+                            break;
                         }
+                    }
 
-                        if (str != null) {
-                            data.getAllowedPlayers().remove(str);
-                            data.markDirty();
-                        } else {
-                            throw new CommandException(
-                                    GCCoreUtil.translateWithFormat(
-                                            "commands.ssuninvite.noPlayer",
-                                            "\"" + var3 + "\""));
-                        }
+                    if (str != null) {
+                        data.getAllowedPlayers().remove(str);
+                        data.markDirty();
+                    } else {
+                        throw new CommandException(
+                                GCCoreUtil.translateWithFormat(
+                                        "commands.ssuninvite.noPlayer",
+                                        "\"" + var3 + "\""));
                     }
                 }
             }

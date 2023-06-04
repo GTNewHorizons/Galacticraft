@@ -47,7 +47,8 @@ public class ItemCanister extends Item {
         this.icons = new IIcon[ItemCanister.names.length];
 
         for (final String name : ItemCanister.names) {
-            this.icons[i++] = iconRegister.registerIcon(this.getIconString() + "." + name);
+            this.icons[i] = iconRegister.registerIcon(this.getIconString() + "." + name);
+            i++;
         }
     }
 

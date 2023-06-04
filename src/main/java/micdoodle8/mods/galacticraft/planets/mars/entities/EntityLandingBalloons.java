@@ -168,7 +168,7 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
 
     @Override
     public Vector3 getMotionVec() {
-        if (this.onGround && (this.groundHitCount < 14)) {
+        if (this.onGround && this.groundHitCount < 14) {
             this.groundHitCount++;
             final double mag = 1.0D / this.groundHitCount * 4.0D;
             double mX = this.rand.nextDouble() - 0.5;

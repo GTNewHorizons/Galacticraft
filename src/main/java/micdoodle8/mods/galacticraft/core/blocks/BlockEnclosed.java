@@ -217,7 +217,7 @@ public class BlockEnclosed extends BlockContainer
                 }
             }
         } else if (metadata <= 12) {
-            if (CompatibilityManager.isBCraftTransportLoaded() && (blockPipeBC != null)) {
+            if (CompatibilityManager.isBCraftTransportLoaded() && blockPipeBC != null) {
                 try {
                     blockPipeBC.onNeighborBlockChange(world, x, y, z, block);
                 } catch (final Exception e) {

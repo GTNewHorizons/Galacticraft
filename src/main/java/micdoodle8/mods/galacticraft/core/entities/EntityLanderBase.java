@@ -112,7 +112,7 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
     public void onUpdate() {
         super.onUpdate();
 
-        if ((this.ticks < 40 && this.posY > 150) && (this.riddenByEntity == null)) {
+        if (this.ticks < 40 && this.posY > 150 && this.riddenByEntity == null) {
             final EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 5);
 
             if (player != null && player.ridingEntity == null) {
@@ -227,7 +227,7 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
 
     @Override
     public boolean shouldMove() {
-        if (this.shouldMoveClient == null || this.shouldMoveServer == null || (this.ticks < 40)) {
+        if (this.shouldMoveClient == null || this.shouldMoveServer == null || this.ticks < 40) {
             return false;
         }
 

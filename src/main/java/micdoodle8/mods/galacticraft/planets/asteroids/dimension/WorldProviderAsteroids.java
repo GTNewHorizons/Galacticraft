@@ -366,7 +366,8 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
                     break;
             }
             returnValues.add(coords);
-            if (++i >= count) {
+            i++;
+            if (i >= count) {
                 break;
             }
         }

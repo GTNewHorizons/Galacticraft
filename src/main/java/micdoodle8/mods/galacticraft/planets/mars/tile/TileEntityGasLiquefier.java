@@ -247,11 +247,9 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
 
                 if (this.processTicks <= 0) {
                     this.processTicks = this.processTimeRequired;
-                } else {
-                    if (--this.processTicks <= 0) {
-                        this.doLiquefaction();
-                        this.processTicks = this.canProcess() ? this.processTimeRequired : 0;
-                    }
+                } else if (--this.processTicks <= 0) {
+                    this.doLiquefaction();
+                    this.processTicks = this.canProcess() ? this.processTimeRequired : 0;
                 }
             } else if (this.processTicks > 0) {
                 this.processTicks = 0;
@@ -565,12 +563,12 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
     public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
         final int metaside = this.getBlockMetadata() + 2;
         final int side = from.ordinal();
-        if ((side == (metaside ^ 1)) && (resource != null && resource.isFluidEqual(this.liquidTank2.getFluid()))) {
+        if (side == (metaside ^ 1) && resource != null && resource.isFluidEqual(this.liquidTank2.getFluid())) {
             return this.liquidTank2.drain(resource.amount, doDrain);
         }
 
         // 2->5 3->4 4->2 5->3
-        if ((7 - (metaside ^ (metaside > 3 ? 0 : 1)) == (side ^ 1)) && (resource != null && resource.isFluidEqual(this.liquidTank.getFluid()))) {
+        if (7 - (metaside ^ (metaside > 3 ? 0 : 1)) == (side ^ 1) && resource != null && resource.isFluidEqual(this.liquidTank.getFluid())) {
             return this.liquidTank.drain(resource.amount, doDrain);
         }
 

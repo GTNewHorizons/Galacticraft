@@ -91,7 +91,7 @@ public class ItemFlag extends Item implements IHoldableItem {
             if (placed) {
                 final int var2 = this.getInventorySlotContainItem(par3EntityPlayer, par1ItemStack);
 
-                if ((var2 >= 0 && !par3EntityPlayer.capabilities.isCreativeMode) && (--par3EntityPlayer.inventory.mainInventory[var2].stackSize <= 0)) {
+                if (var2 >= 0 && !par3EntityPlayer.capabilities.isCreativeMode && --par3EntityPlayer.inventory.mainInventory[var2].stackSize <= 0) {
                     par3EntityPlayer.inventory.mainInventory[var2] = null;
                 }
             }

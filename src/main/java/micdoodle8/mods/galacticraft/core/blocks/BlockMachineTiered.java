@@ -177,8 +177,7 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
                 }
                 return this.iconOutput;
             }
-            // If it is the back side
-            else if (side == (metaside ^ 1)) {
+            if (side == (metaside ^ 1)) {
                 if (metadata >= 8) {
                     return this.iconInputT2;
                 }
@@ -197,8 +196,7 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
             }
             return this.iconInput;
         }
-        // If it is the back side
-        else if (metaside == 2 && side == 4 || metaside == 3 && side == 5
+        if (metaside == 2 && side == 4 || metaside == 3 && side == 5
                 || metaside == 4 && side == 3
                 || metaside == 5 && side == 2) {
                     if (metadata >= 8) {

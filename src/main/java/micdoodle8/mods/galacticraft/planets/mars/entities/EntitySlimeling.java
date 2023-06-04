@@ -363,7 +363,7 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
         final ItemStack itemstack = par1EntityPlayer.inventory.getCurrentItem();
 
         if (this.isTamed()) {
-            if ((itemstack != null) && (itemstack.getItem() == this.getFavoriteFood())) {
+            if (itemstack != null && itemstack.getItem() == this.getFavoriteFood()) {
                 if (this.isOwner(par1EntityPlayer)) {
                     --itemstack.stackSize;
 
@@ -389,10 +389,8 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
                         }
                     }
                 }
-            } else {
-                if (this.worldObj.isRemote) {
-                    MarsModuleClient.openSlimelingGui(this, 0);
-                }
+            } else if (this.worldObj.isRemote) {
+                MarsModuleClient.openSlimelingGui(this, 0);
             }
 
             return true;
@@ -498,10 +496,10 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
 
     @Override
     public boolean func_142018_a(EntityLivingBase par1EntityLivingBase, EntityLivingBase par2EntityLivingBase) {
-        if ((par1EntityLivingBase instanceof EntityCreeper) || (par1EntityLivingBase instanceof EntityGhast)) {
+        if (par1EntityLivingBase instanceof EntityCreeper || par1EntityLivingBase instanceof EntityGhast) {
             return false;
         }
-        if ((par1EntityLivingBase instanceof EntitySlimeling slimeling) && (slimeling.isTamed() && slimeling.getOwner() == par2EntityLivingBase)) {
+        if (par1EntityLivingBase instanceof EntitySlimeling slimeling && slimeling.isTamed() && slimeling.getOwner() == par2EntityLivingBase) {
             return false;
         }
 
@@ -637,7 +635,7 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
                 return false;
             }
             final EntityLivingBase entitylivingbase = this.theEntity.getOwner();
-            return entitylivingbase == null || ((this.theEntity.getDistanceSqToEntity(entitylivingbase) >= 144.0D)
+            return entitylivingbase == null || (this.theEntity.getDistanceSqToEntity(entitylivingbase) >= 144.0D
                     || entitylivingbase.getAITarget() == null) && this.isSitting;
         }
 

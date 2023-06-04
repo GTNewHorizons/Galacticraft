@@ -97,7 +97,7 @@ public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventor
                     }
                 } else // Apply a "cooling down" process if the electric furnace runs out of energy
                 // while smelting
-                if ((this.processTicks > 0 && this.processTicks < this.processTimeRequired) && (this.worldObj.rand.nextInt(4) == 0)) {
+                if (this.processTicks > 0 && this.processTicks < this.processTimeRequired && this.worldObj.rand.nextInt(4) == 0) {
                     this.processTicks++;
                 }
             } else {

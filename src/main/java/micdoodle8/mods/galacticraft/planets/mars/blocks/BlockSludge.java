@@ -113,8 +113,8 @@ public class BlockSludge extends BlockFluidClassic {
                     0.00001F + rand.nextFloat() * 0.5F,
                     false);
         }
-        if ((rand.nextInt(10) == 0) && (World.doesBlockHaveSolidTopSurface(world, x, y - 1, z)
-                && !world.getBlock(x, y - 2, z).getMaterial().blocksMovement())) {
+        if (rand.nextInt(10) == 0 && World.doesBlockHaveSolidTopSurface(world, x, y - 1, z)
+                && !world.getBlock(x, y - 2, z).getMaterial().blocksMovement()) {
             GalacticraftPlanets.spawnParticle(
                     "bacterialDrip",
                     new Vector3(x + rand.nextFloat(), y - 1.05D, z + rand.nextFloat()),

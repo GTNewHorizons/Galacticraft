@@ -51,7 +51,7 @@ public class CanisterRecipes extends ShapelessRecipes {
 
         // Need one canister + one tank
         // Empty canister
-        if (itemCanister == null || itemTank == null || (itemCanister.getItemDamage() >= itemCanister.getMaxDamage())) {
+        if (itemCanister == null || itemTank == null || itemCanister.getItemDamage() >= itemCanister.getMaxDamage()) {
             return false;
         }
 
@@ -95,7 +95,7 @@ public class CanisterRecipes extends ShapelessRecipes {
 
         // Empty canister
         // Full tank
-        if (itemCanister == null || itemTank == null || (itemCanister.getItemDamage() >= itemCanister.getMaxDamage()) || (itemTank.getItemDamage() <= 0)) {
+        if (itemCanister == null || itemTank == null || itemCanister.getItemDamage() >= itemCanister.getMaxDamage() || itemTank.getItemDamage() <= 0) {
             return null;
         }
 

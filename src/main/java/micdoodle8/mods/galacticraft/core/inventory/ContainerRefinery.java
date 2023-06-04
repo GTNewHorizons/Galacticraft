@@ -77,22 +77,20 @@ public class ContainerRefinery extends Container {
                 if (!this.mergeItemStack(var4, 0, 1, false)) {
                     return null;
                 }
-            } else {
-                if (FluidUtil.isOilContainerAny(var4)) {
-                    if (!this.mergeItemStack(var4, 1, 2, false)) {
-                        return null;
-                    }
-                } else if (FluidUtil.isEmptyContainer(var4, GCItems.fuelCanister)) {
-                    if (!this.mergeItemStack(var4, 2, 3, false)) {
-                        return null;
-                    }
-                } else if (par1 < 30) {
-                    if (!this.mergeItemStack(var4, 30, 39, false)) {
-                        return null;
-                    }
-                } else if (!this.mergeItemStack(var4, 3, 30, false)) {
+            } else if (FluidUtil.isOilContainerAny(var4)) {
+                if (!this.mergeItemStack(var4, 1, 2, false)) {
                     return null;
                 }
+            } else if (FluidUtil.isEmptyContainer(var4, GCItems.fuelCanister)) {
+                if (!this.mergeItemStack(var4, 2, 3, false)) {
+                    return null;
+                }
+            } else if (par1 < 30) {
+                if (!this.mergeItemStack(var4, 30, 39, false)) {
+                    return null;
+                }
+            } else if (!this.mergeItemStack(var4, 3, 30, false)) {
+                return null;
             }
 
             if (var4.stackSize == 0) {

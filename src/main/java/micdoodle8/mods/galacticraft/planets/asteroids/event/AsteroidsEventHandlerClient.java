@@ -30,7 +30,7 @@ public class AsteroidsEventHandlerClient {
         final Minecraft minecraft = Minecraft.getMinecraft();
         final WorldClient world = minecraft.theWorld;
 
-        if ((world != null) && (world.provider instanceof WorldProviderAsteroids)) {
+        if (world != null && world.provider instanceof WorldProviderAsteroids) {
             if (world.provider.getSkyRenderer() == null) {
                 world.provider
                         .setSkyRenderer(new SkyProviderAsteroids((IGalacticraftWorldProvider) world.provider));

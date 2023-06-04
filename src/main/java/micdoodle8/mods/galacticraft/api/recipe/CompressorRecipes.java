@@ -30,7 +30,8 @@ public class CompressorRecipes {
         int k = 0;
 
         if (inputList[i] instanceof String[]) {
-            final String[] astring = (String[]) inputList[i++];
+            final String[] astring = (String[]) inputList[i];
+            i++;
 
             for (final String s1 : astring) {
                 ++k;
@@ -39,7 +40,8 @@ public class CompressorRecipes {
             }
         } else {
             while (inputList[i] instanceof String) {
-                final String s2 = (String) inputList[i++];
+                final String s2 = (String) inputList[i];
+                i++;
                 ++k;
                 j = s2.length();
                 s = s + s2;
@@ -213,11 +215,7 @@ public class CompressorRecipes {
                 }
 
                 if (itemstack1 != null || itemstack != null) {
-                    if ((itemstack1 == null) == (itemstack != null)) {
-                        return false;
-                    }
-
-                    if ((itemstack.getItem() != itemstack1.getItem()) || (itemstack.getItemDamage() != 32767 && itemstack.getItemDamage() != itemstack1.getItemDamage())) {
+                    if ((itemstack1 == null == (itemstack != null)) || itemstack.getItem() != itemstack1.getItem() || itemstack.getItemDamage() != 32767 && itemstack.getItemDamage() != itemstack1.getItemDamage()) {
                         return false;
                     }
                 }

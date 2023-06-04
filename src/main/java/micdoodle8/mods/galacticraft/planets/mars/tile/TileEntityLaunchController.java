@@ -133,7 +133,7 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
                 this.setDestinationFrequency(this.destFrequency);
             }
 
-            if ((this.ticks % 20 == 0) && (this.chunkLoadTicket != null)) {
+            if (this.ticks % 20 == 0 && this.chunkLoadTicket != null) {
                 for (int i = 0; i < this.connectedPads.size(); i++) {
                     final ChunkCoordinates coords = this.connectedPads.get(i);
                     final Block block = this.worldObj.getBlock(coords.posX, coords.posY, coords.posZ);
@@ -193,7 +193,7 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
                 for (int z = -2; z <= 2; z++) {
                     final Block blockID = this.worldObj.getBlock(this.xCoord + x, this.yCoord, this.zCoord + z);
 
-                    if ((blockID instanceof BlockLandingPadFull) && (this.xCoord + x >> 4 != this.xCoord >> 4 || this.zCoord + z >> 4 != this.zCoord >> 4)) {
+                    if (blockID instanceof BlockLandingPadFull && (this.xCoord + x >> 4 != this.xCoord >> 4 || this.zCoord + z >> 4 != this.zCoord >> 4)) {
                         this.connectedPads.add(new ChunkCoordinates(this.xCoord + x, this.yCoord, this.zCoord + z));
 
                         if (placed) {
@@ -362,7 +362,7 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
                             continue;
                         }
 
-                        if ((tile2 instanceof TileEntityLaunchController launchController2) && (launchController2.frequency == this.frequency)) {
+                        if (tile2 instanceof TileEntityLaunchController launchController2 && launchController2.frequency == this.frequency) {
                             this.frequencyValid = false;
                             break worldLoop;
                         }
@@ -395,7 +395,7 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
                                 continue;
                             }
 
-                            if ((tile2 instanceof TileEntityLaunchController launchController2) && (launchController2.frequency == this.destFrequency)) {
+                            if (tile2 instanceof TileEntityLaunchController launchController2 && launchController2.frequency == this.destFrequency) {
                                 this.destFrequencyValid = true;
                                 return;
                             }

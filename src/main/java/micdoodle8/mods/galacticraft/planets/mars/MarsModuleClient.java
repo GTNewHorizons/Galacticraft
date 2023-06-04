@@ -163,7 +163,8 @@ public class MarsModuleClient implements IPlanetsModuleClient {
                 }
                 if (tile instanceof TileEntityLaunchController) {
                     return new GuiLaunchController(player.inventory, (TileEntityLaunchController) tile);
-                } else if (tile instanceof TileEntityElectrolyzer) {
+                }
+                if (tile instanceof TileEntityElectrolyzer) {
                     return new GuiWaterElectrolyzer(player.inventory, (TileEntityElectrolyzer) tile);
                 } else if (tile instanceof TileEntityGasLiquefier) {
                     return new GuiGasLiquefier(player.inventory, (TileEntityGasLiquefier) tile);
@@ -183,7 +184,8 @@ public class MarsModuleClient implements IPlanetsModuleClient {
         }
         if (block == MarsBlocks.hydrogenPipe) {
             return MarsModuleClient.renderIdHydrogenPipe;
-        } else if (block == MarsBlocks.rock) {
+        }
+        if (block == MarsBlocks.rock) {
             return MarsModuleClient.eggRenderID;
         } else if (block == MarsBlocks.machine || block == MarsBlocks.machineT2) {
             return MarsModuleClient.machineRenderID;
@@ -252,7 +254,7 @@ public class MarsModuleClient implements IPlanetsModuleClient {
 
             final WorldClient world = minecraft.theWorld;
 
-            if ((world != null) && (world.provider instanceof WorldProviderMars)) {
+            if (world != null && world.provider instanceof WorldProviderMars) {
                 if (world.provider.getSkyRenderer() == null) {
                     world.provider.setSkyRenderer(new SkyProviderMars((IGalacticraftWorldProvider) world.provider));
                 }

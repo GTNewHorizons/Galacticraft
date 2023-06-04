@@ -57,7 +57,7 @@ public class ItemOilExtractor extends Item {
 
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer player) {
-        if ((this.getNearestOilBlock(player) != null) && (this.openCanister(player) != null)) {
+        if (this.getNearestOilBlock(player) != null && this.openCanister(player) != null) {
             player.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
         }
 
@@ -85,7 +85,7 @@ public class ItemOilExtractor extends Item {
             final int y = MathHelper.floor_double(blockHit.y);
             final int z = MathHelper.floor_double(blockHit.z);
 
-            if (this.isOilBlock(player.worldObj, x, y, z, false) && (this.openCanister(player) != null)) {
+            if (this.isOilBlock(player.worldObj, x, y, z, false) && this.openCanister(player) != null) {
                 final ItemStack canister = this.openCanister(player);
 
                 if (canister != null && count % 5 == 0 && canister.getItemDamage() > 1) {
@@ -98,8 +98,8 @@ public class ItemOilExtractor extends Item {
 
     private ItemStack openCanister(EntityPlayer player) {
         for (final ItemStack stack : player.inventory.mainInventory) {
-            if ((stack != null && stack.getItem() instanceof ItemOilCanister) && (stack.getMaxDamage() - stack.getItemDamage() >= 0
-                    && stack.getMaxDamage() - stack.getItemDamage() < GCItems.oilCanister.getMaxDamage() - 1)) {
+            if (stack != null && stack.getItem() instanceof ItemOilCanister && stack.getMaxDamage() - stack.getItemDamage() >= 0
+                    && stack.getMaxDamage() - stack.getItemDamage() < GCItems.oilCanister.getMaxDamage() - 1) {
                 return stack;
             }
         }
@@ -157,7 +157,7 @@ public class ItemOilExtractor extends Item {
             } else {
                 final Fluid fluidHit = FluidRegistry.lookupFluidForBlock(block);
 
-                if ((fluidHit != null) && fluidHit.getName().startsWith("oil")) {
+                if (fluidHit != null && fluidHit.getName().startsWith("oil")) {
                     flag = true;
                 }
             }

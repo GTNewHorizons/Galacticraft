@@ -150,7 +150,7 @@ public class FlagData {
 
         final FlagData flagData = (FlagData) o;
 
-        if ((this.height != flagData.height) || (this.width != flagData.width)) {
+        if (this.height != flagData.height || this.width != flagData.width) {
             return false;
         }
         return Arrays.deepEquals(this.color, flagData.color);

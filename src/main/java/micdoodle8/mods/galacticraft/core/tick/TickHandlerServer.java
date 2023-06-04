@@ -310,7 +310,7 @@ public class TickHandlerServer {
                 footprintBlockChanges.clear();
             }
 
-            if ((tickCount % 20 == 0) && !playersRequestingMapData.isEmpty()) {
+            if (tickCount % 20 == 0 && !playersRequestingMapData.isEmpty()) {
                 final File baseFolder = new File(
                         MinecraftServer.getServer().worldServerForDimension(0).getChunkSaveLocation(),
                         "galacticraft/overworldMap");
@@ -348,7 +348,8 @@ public class TickHandlerServer {
                     grid.tickEnd();
                 }
 
-                if (--maxPasses <= 0) {
+                maxPasses--;
+                if (maxPasses <= 0) {
                     break;
                 }
             }
@@ -363,7 +364,8 @@ public class TickHandlerServer {
                     }
                 }
 
-                if (--maxPasses <= 0) {
+                maxPasses--;
+                if (maxPasses <= 0) {
                     break;
                 }
             }
@@ -378,7 +380,8 @@ public class TickHandlerServer {
                     }
                 }
 
-                if (--maxPasses <= 0) {
+                maxPasses--;
+                if (maxPasses <= 0) {
                     break;
                 }
             }
@@ -393,7 +396,8 @@ public class TickHandlerServer {
                     }
                 }
 
-                if (--maxPasses <= 0) {
+                maxPasses--;
+                if (maxPasses <= 0) {
                     break;
                 }
             }
@@ -415,7 +419,8 @@ public class TickHandlerServer {
                         Math.max(0, changeList.size() - blockCountMax));
 
                 for (final ScheduledBlockChange change : changeList) {
-                    if (++blockCount > blockCountMax) {
+                    blockCount++;
+                    if (blockCount > blockCountMax) {
                         newList.add(change);
                     } else if (change != null) {
                         final BlockVec3 changePosition = change.getChangePosition();
@@ -470,15 +475,13 @@ public class TickHandlerServer {
                 final Object[] entityList = world.loadedEntityList.toArray();
 
                 for (final Object o : entityList) {
-                    if ((o instanceof Entity e) && (e.worldObj.provider instanceof IOrbitDimension dimension)) {
-                        if (e.posY <= dimension.getYCoordToTeleportToPlanet()) {
-                            int dim = 0;
-                            try {
-                                dim = WorldUtil.getProviderForNameServer(dimension.getPlanetToOrbit()).dimensionId;
-                            } catch (final Exception ex) {}
+                    if ((o instanceof Entity e && e.worldObj.provider instanceof IOrbitDimension dimension) && (e.posY <= dimension.getYCoordToTeleportToPlanet())) {
+                        int dim = 0;
+                        try {
+                            dim = WorldUtil.getProviderForNameServer(dimension.getPlanetToOrbit()).dimensionId;
+                        } catch (final Exception ex) {}
 
-                            WorldUtil.transferEntityToDimension(e, dim, world, false, null);
-                        }
+                        WorldUtil.transferEntityToDimension(e, dim, world, false, null);
                     }
                 }
             }

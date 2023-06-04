@@ -107,10 +107,10 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
 
     public boolean spawnMiner(EntityPlayerMP player) {
         if (this.isMaster) {
-            if ((this.linkedMiner != null) && this.linkedMiner.isDead) {
+            if (this.linkedMiner != null && this.linkedMiner.isDead) {
                 this.unlinkMiner();
             }
-            if ((this.linkedMinerID == null) && EntityAstroMiner.spawnMinerAtBase(
+            if (this.linkedMinerID == null && EntityAstroMiner.spawnMinerAtBase(
                     this.worldObj,
                     this.xCoord + 1,
                     this.yCoord + 1,
@@ -138,7 +138,7 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
         if (this.masterTile == null) {
             final TileEntity tileEntity = this.mainBlockPosition.getTileEntity(this.worldObj);
 
-            if ((tileEntity != null) && (tileEntity instanceof TileEntityMinerBase)) {
+            if (tileEntity != null && tileEntity instanceof TileEntityMinerBase) {
                 this.masterTile = new WeakReference<>((TileEntityMinerBase) tileEntity);
             }
         }

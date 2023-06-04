@@ -87,7 +87,7 @@ public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDes
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int par1, int par2) {
-        if ((par2 < BlockAirLockFrame.METADATA_AIR_LOCK_CONTROLLER) || par1 == ForgeDirection.UP.ordinal() || par1 == ForgeDirection.DOWN.ordinal()) {
+        if (par2 < BlockAirLockFrame.METADATA_AIR_LOCK_CONTROLLER || par1 == ForgeDirection.UP.ordinal() || par1 == ForgeDirection.DOWN.ordinal()) {
             return this.airLockIcons[0];
         }
 
@@ -103,14 +103,13 @@ public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDes
 
             final TileEntity tile = world.getTileEntity(par2, par3, par4);
 
-            if (tile instanceof TileEntityAirLockController controller) {
-                if (controller.active) {
-                    return this.airLockIcons[6];
-                } else {
-                    return this.airLockIcons[7];
-                }
-            } else {
+            if (!(tile instanceof TileEntityAirLockController controller)) {
                 return this.airLockIcons[6];
+            }
+            if (controller.active) {
+                return this.airLockIcons[6];
+            } else {
+                return this.airLockIcons[7];
             }
         }
         for (final ForgeDirection orientation : ForgeDirection.values()) {
@@ -128,7 +127,8 @@ public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDes
                         } else {
                             return this.airLockIcons[2];
                         }
-                    } else if (orientation.offsetY == 1 || orientation.ordinal() == side) {
+                    }
+                    if (orientation.offsetY == 1 || orientation.ordinal() == side) {
                         if (side == 0) {
                             return this.airLockIcons[0];
                         } else if (side == 1) {
@@ -148,13 +148,15 @@ public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDes
                         if (orientation.offsetX == 1) {
                             if (side == 0 || side == 1 || side == 3) {
                                 return this.airLockIcons[4];
-                            } else if (side == 2) {
+                            }
+                            if (side == 2) {
                                 return this.airLockIcons[5];
                             }
                         } else if (orientation.offsetX == -1) {
                             if (side == 0 || side == 1 || side == 3) {
                                 return this.airLockIcons[5];
-                            } else if (side == 2) {
+                            }
+                            if (side == 2) {
                                 return this.airLockIcons[4];
                             }
                         } else if (orientation.offsetZ == 1) {

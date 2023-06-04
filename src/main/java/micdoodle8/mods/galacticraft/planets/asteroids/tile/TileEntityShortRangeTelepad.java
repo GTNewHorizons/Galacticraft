@@ -461,7 +461,7 @@ public class TileEntityShortRangeTelepad extends TileBaseElectricBlock
     }
 
     public boolean updateTarget() {
-        if ((this.targetAddress < 0) || this.worldObj.isRemote) {
+        if (this.targetAddress < 0 || this.worldObj.isRemote) {
             this.targetAddressResult = EnumTelepadSearchResult.NOT_FOUND;
             return false;
         }
@@ -470,26 +470,25 @@ public class TileEntityShortRangeTelepad extends TileBaseElectricBlock
         final ShortRangeTelepadHandler.TelepadEntry addressResult = ShortRangeTelepadHandler
                 .getLocationFromAddress(this.targetAddress);
 
-        if (addressResult != null) {
-            if (this.worldObj.provider.dimensionId == addressResult.dimensionID) {
-                final double distance = this.getDistanceFrom(
-                        addressResult.position.x + 0.5F,
-                        addressResult.position.y + 0.5F,
-                        addressResult.position.z + 0.5F);
+        if (addressResult == null) {
+            this.targetAddressResult = EnumTelepadSearchResult.NOT_FOUND;
+            return false;
+        }
+        if (this.worldObj.provider.dimensionId == addressResult.dimensionID) {
+            final double distance = this.getDistanceFrom(
+                    addressResult.position.x + 0.5F,
+                    addressResult.position.y + 0.5F,
+                    addressResult.position.z + 0.5F);
 
-                if (distance < TELEPORTER_RANGE * TELEPORTER_RANGE) {
-                    this.targetAddressResult = EnumTelepadSearchResult.VALID;
-                    return true;
-                } else {
-                    this.targetAddressResult = EnumTelepadSearchResult.TOO_FAR;
-                    return false;
-                }
+            if (distance < TELEPORTER_RANGE * TELEPORTER_RANGE) {
+                this.targetAddressResult = EnumTelepadSearchResult.VALID;
+                return true;
             } else {
-                this.targetAddressResult = EnumTelepadSearchResult.WRONG_DIM;
+                this.targetAddressResult = EnumTelepadSearchResult.TOO_FAR;
                 return false;
             }
         } else {
-            this.targetAddressResult = EnumTelepadSearchResult.NOT_FOUND;
+            this.targetAddressResult = EnumTelepadSearchResult.WRONG_DIM;
             return false;
         }
     }
@@ -623,7 +622,7 @@ public class TileEntityShortRangeTelepad extends TileBaseElectricBlock
         float f;
         f = rand.nextFloat() * 0.6F + 0.4F;
 
-        if ((sending && this.targetAddressResult != EnumTelepadSearchResult.VALID) || (!sending && !this.addressValid)) {
+        if ((sending ? this.targetAddressResult != EnumTelepadSearchResult.VALID : !this.addressValid)) {
             return new Vector3(f, f * 0.3F, f * 0.3F);
         }
 

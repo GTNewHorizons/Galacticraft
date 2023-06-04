@@ -178,14 +178,13 @@ public class GuiElementTextBox extends GuiButton {
 
             return ChatAllowedCharacters.isAllowedCharacter(string.charAt(string.length() - 1));
         }
-        if (string.length() > 0 && ChatAllowedCharacters.isAllowedCharacter(string.charAt(string.length() - 1))) {
-            try {
-                Integer.parseInt(string);
-                return true;
-            } catch (final Exception e) {
-                return false;
-            }
-        } else {
+        if ((string.length() <= 0) || !ChatAllowedCharacters.isAllowedCharacter(string.charAt(string.length() - 1))) {
+            return false;
+        }
+        try {
+            Integer.parseInt(string);
+            return true;
+        } catch (final Exception e) {
             return false;
         }
     }

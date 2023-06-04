@@ -66,7 +66,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
     }
 
     public void igniteCheckingCooldown() {
-        if ((!this.worldObj.isRemote && this.launchCooldown <= 0) && (this.launchPhase != EnumLaunchPhase.IGNITED.ordinal())) {
+        if (!this.worldObj.isRemote && this.launchCooldown <= 0 && this.launchPhase != EnumLaunchPhase.IGNITED.ordinal()) {
             this.setFrequency();
             this.initiatePlanetsPreGen(this.chunkCoordX, this.chunkCoordZ);
             this.ignite();
@@ -288,70 +288,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                                 : 1200) - 200);
                 return;
             }
-            if (this.targetDimension != this.worldObj.provider.dimensionId) {
-                final WorldProvider targetDim = WorldUtil.getProviderForDimensionServer(this.targetDimension);
-                if (targetDim != null && targetDim.worldObj instanceof WorldServer) {
-                    boolean dimensionAllowed = this.targetDimension == ConfigManagerCore.idDimensionOverworld;
-
-                    if (targetDim instanceof IGalacticraftWorldProvider) {
-                        dimensionAllowed = ((IGalacticraftWorldProvider) targetDim)
-                                .canSpaceshipTierPass(this.getRocketTier());
-                    } else
-                        // No rocket flight to non-Galacticraft dimensions other than the Overworld
-                        // allowed unless
-                        // config
-                        if (this.targetDimension > 1 || this.targetDimension < -1) {
-                            try {
-                                final Class<?> marsConfig = Class
-                                        .forName("micdoodle8.mods.galacticraft.planets.mars.ConfigManagerMars");
-                                if (marsConfig.getField("launchControllerAllDims").getBoolean(null)) {
-                                    dimensionAllowed = true;
-                                }
-                            } catch (final Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                    if (dimensionAllowed) {
-                        if (this.riddenByEntity != null) {
-                            WorldUtil.transferEntityToDimension(
-                                    this.riddenByEntity,
-                                    this.targetDimension,
-                                    (WorldServer) targetDim.worldObj,
-                                    false,
-                                    this);
-                        } else {
-                            final Entity e = WorldUtil.transferEntityToDimension(
-                                    this,
-                                    this.targetDimension,
-                                    (WorldServer) targetDim.worldObj,
-                                    false,
-                                    null);
-                            if (e instanceof EntityAutoRocket) {
-                                int fromSky = 800;
-                                if (this.destinationFrequency != 1) {
-                                    fromSky = 0;
-                                }
-                                e.setPosition(
-                                        this.targetVec.x + 0.5F,
-                                        this.targetVec.y + fromSky,
-                                        this.targetVec.z + 0.5f);
-                                ((EntityAutoRocket) e).landing = true;
-                                ((EntityAutoRocket) e).setWaitForPlayer(false);
-                            } else {
-                                GCLog.info(
-                                        "Error: failed to recreate the unmanned rocket in landing mode on target planet.");
-                                e.setDead();
-                                this.setDead();
-                            }
-                        }
-                        return;
-                    }
-                }
-                // No destination world found - in this situation continue into regular take-off
-                // (as if Not launch
-                // controlled)
-            } else {
+            if (this.targetDimension == this.worldObj.provider.dimensionId) {
                 // Same dimension controlled rocket flight
                 int fromSky = 800;
                 if (this.destinationFrequency != 1) {
@@ -379,6 +316,68 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
                 // Do not destroy the rocket, we still need it!
                 return;
             }
+            final WorldProvider targetDim = WorldUtil.getProviderForDimensionServer(this.targetDimension);
+            if (targetDim != null && targetDim.worldObj instanceof WorldServer) {
+                boolean dimensionAllowed = this.targetDimension == ConfigManagerCore.idDimensionOverworld;
+
+                if (targetDim instanceof IGalacticraftWorldProvider) {
+                    dimensionAllowed = ((IGalacticraftWorldProvider) targetDim)
+                            .canSpaceshipTierPass(this.getRocketTier());
+                } else
+                    // No rocket flight to non-Galacticraft dimensions other than the Overworld
+                    // allowed unless
+                    // config
+                    if (this.targetDimension > 1 || this.targetDimension < -1) {
+                        try {
+                            final Class<?> marsConfig = Class
+                                    .forName("micdoodle8.mods.galacticraft.planets.mars.ConfigManagerMars");
+                            if (marsConfig.getField("launchControllerAllDims").getBoolean(null)) {
+                                dimensionAllowed = true;
+                            }
+                        } catch (final Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                if (dimensionAllowed) {
+                    if (this.riddenByEntity != null) {
+                        WorldUtil.transferEntityToDimension(
+                                this.riddenByEntity,
+                                this.targetDimension,
+                                (WorldServer) targetDim.worldObj,
+                                false,
+                                this);
+                    } else {
+                        final Entity e = WorldUtil.transferEntityToDimension(
+                                this,
+                                this.targetDimension,
+                                (WorldServer) targetDim.worldObj,
+                                false,
+                                null);
+                        if (e instanceof EntityAutoRocket) {
+                            int fromSky = 800;
+                            if (this.destinationFrequency != 1) {
+                                fromSky = 0;
+                            }
+                            e.setPosition(
+                                    this.targetVec.x + 0.5F,
+                                    this.targetVec.y + fromSky,
+                                    this.targetVec.z + 0.5f);
+                            ((EntityAutoRocket) e).landing = true;
+                            ((EntityAutoRocket) e).setWaitForPlayer(false);
+                        } else {
+                            GCLog.info(
+                                    "Error: failed to recreate the unmanned rocket in landing mode on target planet.");
+                            e.setDead();
+                            this.setDead();
+                        }
+                    }
+                    return;
+                }
+            }
+            // No destination world found - in this situation continue into regular take-off
+            // (as if Not launch
+            // controlled)
         }
 
         // Not launch controlled

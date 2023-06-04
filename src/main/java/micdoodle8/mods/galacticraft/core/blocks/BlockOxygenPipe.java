@@ -98,7 +98,7 @@ public class BlockOxygenPipe extends BlockTransmitter implements ITileEntityProv
         if (!par1World.isRemote) {
             final ItemStack stack = par5EntityPlayer.inventory.getCurrentItem();
 
-            if ((stack != null) && (stack.getItem() instanceof ItemDye)) {
+            if (stack != null && stack.getItem() instanceof ItemDye) {
                 final int dyeColor = par5EntityPlayer.inventory.getCurrentItem().getItemDamageForDisplay();
 
                 final byte colorBefore = tileEntity.getColor();

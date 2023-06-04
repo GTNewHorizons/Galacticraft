@@ -124,7 +124,7 @@ public class TileEntityRefinery extends TileBaseElectricBlockWithInventory imple
     }
 
     public boolean canProcess() {
-        if ((this.oilTank.getFluidAmount() <= 0) || (this.fuelTank.getFluidAmount() >= this.fuelTank.getCapacity())) {
+        if (this.oilTank.getFluidAmount() <= 0 || this.fuelTank.getFluidAmount() >= this.fuelTank.getCapacity()) {
             return false;
         }
 

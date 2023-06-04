@@ -44,7 +44,7 @@ public class EventHandlerMars {
 
     @SubscribeEvent
     public void onLivingDeath(LivingDeathEvent event) {
-        if (("slimeling".equals(event.source.damageType) && event.source instanceof EntityDamageSource source) && (source.getEntity() instanceof EntitySlimeling && !source.getEntity().worldObj.isRemote)) {
+        if ("slimeling".equals(event.source.damageType) && event.source instanceof EntityDamageSource source && source.getEntity() instanceof EntitySlimeling && !source.getEntity().worldObj.isRemote) {
             ((EntitySlimeling) source.getEntity()).kills++;
         }
     }
@@ -56,7 +56,7 @@ public class EventHandlerMars {
                 && (!event.source.isFireDamage() || !event.entityLiving.isPotionActive(Potion.fireResistance))) {
             final Entity entity = event.source.getEntity();
 
-            if ((entity instanceof EntitySlimeling entitywolf) && entitywolf.isTamed()) {
+            if (entity instanceof EntitySlimeling entitywolf && entitywolf.isTamed()) {
                 event.entityLiving.recentlyHit = 100;
                 event.entityLiving.attackingPlayer = null;
             }
@@ -72,7 +72,7 @@ public class EventHandlerMars {
         if (blockID == MarsBlocks.machine && metadata >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) {
             if (!event.flag1 && event.flag2 && event.flag3) {
                 event.result = EnumStatus.NOT_POSSIBLE_HERE;
-            } else if ((!event.flag1 && !event.flag2 && event.flag3) && !event.entityPlayer.worldObj.isRemote) {
+            } else if (!event.flag1 && !event.flag2 && event.flag3 && !event.entityPlayer.worldObj.isRemote) {
                 event.entityPlayer.heal(5.0F);
                 GCPlayerStats.get((EntityPlayerMP) event.entityPlayer).cryogenicChamberCooldown = 6000;
 

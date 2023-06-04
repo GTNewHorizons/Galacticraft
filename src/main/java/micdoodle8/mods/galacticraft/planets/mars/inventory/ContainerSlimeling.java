@@ -58,7 +58,7 @@ public class ContainerSlimeling extends Container {
         // Note that if NEI is installed, this can be called by
         // InventorySlimeling.setInventorySlotContents even if
         // the container already has the slots
-        if ((stack != null && stack.getItem() == MarsItems.marsItemBasic && stack.getItemDamage() == 4) && (container.inventorySlots.size() < 63)) {
+        if (stack != null && stack.getItem() == MarsItems.marsItemBasic && stack.getItemDamage() == 4 && container.inventorySlots.size() < 63) {
             for (int var3 = 0; var3 < 3; ++var3) {
                 for (int var4 = 0; var4 < 9; ++var4) {
                     final Slot slot = new Slot(

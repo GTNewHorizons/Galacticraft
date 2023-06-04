@@ -69,7 +69,7 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
             if (this.containingItems[1] != null) {
                 final FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(this.containingItems[1]);
 
-                if ((liquid != null && liquid.getFluid().getName().equals(FluidRegistry.WATER.getName())) && (this.waterTank.getFluid() == null
+                if (liquid != null && liquid.getFluid().getName().equals(FluidRegistry.WATER.getName()) && (this.waterTank.getFluid() == null
                         || this.waterTank.getFluid().amount + liquid.amount <= this.waterTank.getCapacity())) {
                     this.waterTank.fill(liquid, true);
 
@@ -296,12 +296,12 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
     public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
         final int metaside = this.getBlockMetadata() + 2;
         final int side = from.ordinal();
-        if ((side == (metaside ^ 1)) && (resource != null && resource.isFluidEqual(this.liquidTank2.getFluid()))) {
+        if (side == (metaside ^ 1) && resource != null && resource.isFluidEqual(this.liquidTank2.getFluid())) {
             return this.liquidTank2.drain(resource.amount, doDrain);
         }
 
         // 2->5 3->4 4->2 5->3
-        if ((7 - (metaside ^ (metaside > 3 ? 0 : 1)) == (side ^ 1)) && (resource != null && resource.isFluidEqual(this.liquidTank.getFluid()))) {
+        if (7 - (metaside ^ (metaside > 3 ? 0 : 1)) == (side ^ 1) && resource != null && resource.isFluidEqual(this.liquidTank.getFluid())) {
             return this.liquidTank.drain(resource.amount, doDrain);
         }
 

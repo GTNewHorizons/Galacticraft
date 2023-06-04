@@ -90,7 +90,7 @@ public class EntityCreeperBoss extends EntityMob
             }
             final Entity entity = damageSource.getEntity();
 
-            if ((this.riddenByEntity != entity && this.ridingEntity != entity) && (entity != this)) {
+            if (this.riddenByEntity != entity && this.ridingEntity != entity && entity != this) {
                 this.entityToAttack = entity;
             }
             return true;

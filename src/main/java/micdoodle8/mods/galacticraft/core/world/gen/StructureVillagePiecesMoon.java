@@ -146,9 +146,8 @@ public class StructureVillagePiecesMoon {
                     par2Random,
                     var14,
                     par6);
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**

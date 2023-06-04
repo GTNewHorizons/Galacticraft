@@ -207,7 +207,7 @@ public class OxygenUtil {
         boolean permeableFlag = false;
         if (!(block instanceof BlockLeavesBase)) {
             if (block.isOpaqueCube()) {
-                if (!(block instanceof BlockGravel) && (block.getMaterial() != Material.cloth) && !(block instanceof BlockSponge)) {
+                if (!(block instanceof BlockGravel) && block.getMaterial() != Material.cloth && !(block instanceof BlockSponge)) {
                     return -1;
                 }
                 permeableFlag = true;
@@ -388,7 +388,7 @@ public class OxygenUtil {
         for (final ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
             final TileEntity tileEntity = thisVec.getTileEntityOnSide(world, direction);
 
-            if ((tileEntity instanceof IConnector) && ((IConnector) tileEntity).canConnect(direction.getOpposite(), NetworkType.OXYGEN)) {
+            if (tileEntity instanceof IConnector && ((IConnector) tileEntity).canConnect(direction.getOpposite(), NetworkType.OXYGEN)) {
                 adjacentConnections[direction.ordinal()] = tileEntity;
             }
         }
@@ -409,7 +409,7 @@ public class OxygenUtil {
         for (final BlockVec3Dim blockVec : TileEntityOxygenDistributor.loadedTiles) {
             if (blockVec != null && blockVec.dim == worldObj.provider.dimensionId) {
                 final TileEntity tile = worldObj.getTileEntity(blockVec.x, blockVec.y, blockVec.z);
-                if ((tile instanceof TileEntityOxygenDistributor) && ((TileEntityOxygenDistributor) tile).inBubble(avgX, avgY, avgZ)) {
+                if (tile instanceof TileEntityOxygenDistributor && ((TileEntityOxygenDistributor) tile).inBubble(avgX, avgY, avgZ)) {
                     return true;
                 }
             }

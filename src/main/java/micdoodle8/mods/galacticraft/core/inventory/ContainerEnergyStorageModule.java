@@ -62,15 +62,13 @@ public class ContainerEnergyStorageModule extends Container {
             if (slotID != 0 && slotID != 1) {
                 if (itemStack.getItem() instanceof IItemElectric) {
                     if (((IItemElectric) itemStack.getItem()).getElectricityStored(itemStack) > 0) {
-                        if (!this.mergeItemStack(itemStack, 1, 2, false) && (((IItemElectric) itemStack.getItem()).getElectricityStored(itemStack)
+                        if (!this.mergeItemStack(itemStack, 1, 2, false) && ((IItemElectric) itemStack.getItem()).getElectricityStored(itemStack)
                                 < ((IItemElectric) itemStack.getItem()).getMaxElectricityStored(itemStack)
-                                && !this.mergeItemStack(itemStack, 0, 1, false))) {
+                                && !this.mergeItemStack(itemStack, 0, 1, false)) {
                             return null;
                         }
-                    } else {
-                        if (!this.mergeItemStack(itemStack, 0, 1, false)) {
-                            return null;
-                        }
+                    } else if (!this.mergeItemStack(itemStack, 0, 1, false)) {
+                        return null;
                     }
                 } else if (slotID < b - 9) {
                     if (!this.mergeItemStack(itemStack, b - 9, b, false)) {

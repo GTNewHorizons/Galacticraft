@@ -83,21 +83,19 @@ public class TileEntityMethaneSynthesizer extends TileBaseElectricBlockWithInven
 
             // Now check the CO2 storage
             final ItemStack inputCanister = this.containingItems[2];
-            if ((inputCanister != null) && (inputCanister.getItem() instanceof ItemAtmosphericValve && this.hasCO2 > 0)) {
-                // CO2 -> CO2 tank
-                if (this.gasTank2.getFluidAmount() < this.gasTank2.getCapacity()) {
-                    final Block blockAbove = this.worldObj.getBlock(this.xCoord, this.yCoord + 1, this.zCoord);
-                    if (blockAbove != null && blockAbove.getMaterial() == Material.air
-                            && blockAbove != GCBlocks.breatheableAir
-                            && blockAbove != GCBlocks.brightBreatheableAir) {
-                        if (!OxygenUtil.inOxygenBubble(
-                                this.worldObj,
-                                this.xCoord + 0.5D,
-                                this.yCoord + 1D,
-                                this.zCoord + 0.5D)) {
-                            final FluidStack gcAtmosphere = FluidRegistry.getFluidStack("carbondioxide", 4);
-                            this.gasTank2.fill(gcAtmosphere, true);
-                        }
+            // CO2 -> CO2 tank
+            if ((inputCanister != null && inputCanister.getItem() instanceof ItemAtmosphericValve && this.hasCO2 > 0) && (this.gasTank2.getFluidAmount() < this.gasTank2.getCapacity())) {
+                final Block blockAbove = this.worldObj.getBlock(this.xCoord, this.yCoord + 1, this.zCoord);
+                if (blockAbove != null && blockAbove.getMaterial() == Material.air
+                        && blockAbove != GCBlocks.breatheableAir
+                        && blockAbove != GCBlocks.brightBreatheableAir) {
+                    if (!OxygenUtil.inOxygenBubble(
+                            this.worldObj,
+                            this.xCoord + 0.5D,
+                            this.yCoord + 1D,
+                            this.zCoord + 0.5D)) {
+                        final FluidStack gcAtmosphere = FluidRegistry.getFluidStack("carbondioxide", 4);
+                        this.gasTank2.fill(gcAtmosphere, true);
                     }
                 }
             }
@@ -114,11 +112,9 @@ public class TileEntityMethaneSynthesizer extends TileBaseElectricBlockWithInven
 
                 if (this.processTicks <= 0) {
                     this.processTicks = this.processTimeRequired;
-                } else {
-                    if (--this.processTicks <= 0) {
-                        this.doLiquefaction();
-                        this.processTicks = this.canProcess() ? this.processTimeRequired : 0;
-                    }
+                } else if (--this.processTicks <= 0) {
+                    this.doLiquefaction();
+                    this.processTicks = this.canProcess() ? this.processTimeRequired : 0;
                 }
             } else if (this.processTicks > 0) {
                 this.processTicks = 0;
@@ -175,13 +171,10 @@ public class TileEntityMethaneSynthesizer extends TileBaseElectricBlockWithInven
         final WorldProvider WP = this.worldObj.provider;
         if (WP instanceof WorldProviderSpace) {
             final ArrayList<IAtmosphericGas> atmos = ((WorldProviderSpace) WP).getCelestialBody().atmosphere;
-            if ((atmos.size() > 0) && (atmos.get(0) == IAtmosphericGas.CO2)) {
+            if ((atmos.size() > 0 && atmos.get(0) == IAtmosphericGas.CO2) || (atmos.size() > 1 && atmos.get(1) == IAtmosphericGas.CO2)) {
                 return 1;
             }
-            if ((atmos.size() > 1) && (atmos.get(1) == IAtmosphericGas.CO2)) {
-                return 1;
-            }
-            if ((atmos.size() > 2) && (atmos.get(2) == IAtmosphericGas.CO2)) {
+            if (atmos.size() > 2 && atmos.get(2) == IAtmosphericGas.CO2) {
                 return 1;
             }
         }
@@ -354,7 +347,7 @@ public class TileEntityMethaneSynthesizer extends TileBaseElectricBlockWithInven
     public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
         final int metaside = this.getBlockMetadata() + 2;
         final int side = from.ordinal();
-        if ((side == (metaside ^ 1)) && (resource != null && resource.isFluidEqual(this.liquidTank.getFluid()))) {
+        if (side == (metaside ^ 1) && resource != null && resource.isFluidEqual(this.liquidTank.getFluid())) {
             return this.liquidTank.drain(resource.amount, doDrain);
         }
 
@@ -385,7 +378,7 @@ public class TileEntityMethaneSynthesizer extends TileBaseElectricBlockWithInven
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
         int used = 0;
 
-        if ((resource != null && this.canFill(from, resource.getFluid())) && (this.gasTank.getFluidAmount() < this.gasTank.getCapacity())) {
+        if (resource != null && this.canFill(from, resource.getFluid()) && this.gasTank.getFluidAmount() < this.gasTank.getCapacity()) {
             used = this.gasTank.fill(resource, doFill);
         }
 

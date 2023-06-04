@@ -39,7 +39,8 @@ public class ItemArmorMars extends ItemArmor {
             }
             if (stack.getItem() == MarsItems.deshChestplate || stack.getItem() == MarsItems.deshBoots) {
                 return MarsModule.TEXTURE_PREFIX + "textures/model/armor/desh_2.png";
-            } else if (stack.getItem() == MarsItems.deshLeggings) {
+            }
+            if (stack.getItem() == MarsItems.deshLeggings) {
                 return MarsModule.TEXTURE_PREFIX + "textures/model/armor/desh_3.png";
             }
         }

@@ -48,7 +48,7 @@ public class FluidUtil {
      * @return true if a type of recognised fuel, false if not
      */
     public static boolean testFuel(String name) {
-        if (name.startsWith("fuel") || (name.contains("rocket") && name.contains("fuel"))) {
+        if (name.startsWith("fuel") || name.contains("rocket") && name.contains("fuel")) {
             return true;
         }
 

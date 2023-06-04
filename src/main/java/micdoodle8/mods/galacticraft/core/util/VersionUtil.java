@@ -482,8 +482,6 @@ public class VersionUtil {
             @SuppressWarnings("unchecked")
             final Map<Class<?>, Integer> classToIDMapping = (Map<Class<?>, Integer>) f.get(null);
             classToIDMapping.put(mobClazz, id);
-
-            return;
         } catch (final Throwable t) {
             t.printStackTrace();
         }

@@ -121,7 +121,7 @@ public class EntityFXLaunchFlame extends EntityFX {
             for (Object element : var3) {
                 final Entity var5 = (Entity) element;
 
-                if ((var5 instanceof EntityLivingBase) && (!var5.isDead && !var5.isBurning() && !var5.equals(this.ridingEntity))) {
+                if (var5 instanceof EntityLivingBase && !var5.isDead && !var5.isBurning() && !var5.equals(this.ridingEntity)) {
                     var5.setFire(3);
                     GalacticraftCore.packetPipeline.sendToServer(
                             new PacketSimple(

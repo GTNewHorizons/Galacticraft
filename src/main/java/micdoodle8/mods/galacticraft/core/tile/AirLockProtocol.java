@@ -12,7 +12,6 @@ class AirLockProtocol {
     private final TileEntity head;
     private final int maxLoops;
 
-    private int airLocksVerticalMax = 0;
     private int airLocksHorizontalMin = 0;
     private int airLocksHorizontalMax = 0;
     private boolean horizontal;
@@ -57,7 +56,7 @@ class AirLockProtocol {
             for (int y = -1; y <= 1; y++) {
                 for (int x = -1; x <= 1; x++) {
                     for (int z = -1; z <= 1; z++) {
-                        if ((x != 0 || y != 0 || z != 0) && (tile2.yCoord + y == this.head.yCoord)) {
+                        if ((x != 0 || y != 0 || z != 0) && tile2.yCoord + y == this.head.yCoord) {
                             final TileEntity tile = this.worldObj
                                     .getTileEntity(tile2.xCoord + x, tile2.yCoord + y, tile2.zCoord + z);
                             if (tile instanceof TileEntityAirLock && !this.adjacentAirLocks.contains(tile)) {
@@ -129,7 +128,7 @@ class AirLockProtocol {
         }
 
         int airLocksVerticalMin = 0;
-        this.airLocksVerticalMax = 0;
+        int airLocksVerticalMax = 0;
         this.airLocksHorizontalMin = 0;
         this.airLocksHorizontalMax = 0;
 
@@ -145,7 +144,7 @@ class AirLockProtocol {
             final TileEntity tileAt = this.worldObj.getTileEntity(this.maxX, y, this.maxZ);
 
             if (tileAt instanceof TileEntityAirLock) {
-                this.airLocksVerticalMax++;
+                airLocksVerticalMax++;
             }
         }
 
@@ -184,9 +183,9 @@ class AirLockProtocol {
         }
 
         if (this.airLocksHorizontalMax == 0 || this.airLocksHorizontalMin == 0
-                || !this.horizontal && (airLocksVerticalMin == 0 || this.airLocksVerticalMax == 0)
+                || !this.horizontal && (airLocksVerticalMin == 0 || airLocksVerticalMax == 0)
                 || this.airLocksHorizontalMax != this.airLocksHorizontalMin
-                || this.airLocksVerticalMax != airLocksVerticalMin) {
+                || airLocksVerticalMax != airLocksVerticalMin) {
             return null;
         }
 

@@ -224,7 +224,8 @@ public class NetworkUtil {
         }
         if (dataValue.equals(float.class)) {
             return buffer.readFloat();
-        } else if (dataValue.equals(double.class)) {
+        }
+        if (dataValue.equals(double.class)) {
             return buffer.readDouble();
         } else if (dataValue.equals(byte.class)) {
             return buffer.readByte();
@@ -360,26 +361,23 @@ public class NetworkUtil {
         }
         if (a == null) {
             return true;
-        } else if (a instanceof Float && b instanceof Float) {
+        }
+        if (a instanceof Float && b instanceof Float) {
             final float af = (Float) a;
             final float bf = (Float) b;
             return af == bf || Math.abs(af - bf) < 0.01F;
         } else if (a instanceof Double && b instanceof Double) {
             return DoubleMath.fuzzyEquals((Double) a, (Double) b, 0.01);
-        } else if (a instanceof Entity a2 && b instanceof Entity) {
-            final Entity b2 = (Entity) b;
+        } else if (a instanceof Entity a2 && b instanceof Entity b2) {
             return fuzzyEquals(a2.getEntityId(), b2.getEntityId());
-        } else if (a instanceof Vector3 a2 && b instanceof Vector3) {
-            final Vector3 b2 = (Vector3) b;
+        } else if (a instanceof Vector3 a2 && b instanceof Vector3 b2) {
             return fuzzyEquals(a2.x, b2.x) && fuzzyEquals(a2.y, b2.y) && fuzzyEquals(a2.z, b2.z);
-        } else if (a instanceof EnergyStorage a2 && b instanceof EnergyStorage) {
-            final EnergyStorage b2 = (EnergyStorage) b;
+        } else if (a instanceof EnergyStorage a2 && b instanceof EnergyStorage b2) {
             return fuzzyEquals(a2.getEnergyStoredGC(), b2.getEnergyStoredGC())
                     && fuzzyEquals(a2.getCapacityGC(), b2.getCapacityGC())
                     && fuzzyEquals(a2.getMaxReceive(), b2.getMaxReceive())
                     && fuzzyEquals(a2.getMaxExtract(), b2.getMaxExtract());
-        } else if (a instanceof FluidTank a2 && b instanceof FluidTank) {
-            final FluidTank b2 = (FluidTank) b;
+        } else if (a instanceof FluidTank a2 && b instanceof FluidTank b2) {
             final FluidStack fluidA = a2.getFluid();
             final FluidStack fluidB = b2.getFluid();
             return fuzzyEquals(a2.getCapacity(), b2.getCapacity())
@@ -406,8 +404,7 @@ public class NetworkUtil {
             FluidStack prevFluid = prevTank.getFluid();
             prevFluid = prevFluid == null ? null : prevFluid.copy();
             return new FluidTank(prevFluid, prevTank.getCapacity());
-        } else {
-            return a;
         }
+        return a;
     }
 }

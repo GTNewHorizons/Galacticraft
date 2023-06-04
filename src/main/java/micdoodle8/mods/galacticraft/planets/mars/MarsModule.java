@@ -319,7 +319,8 @@ public class MarsModule implements IPlanetsModule {
                 }
                 if (tile instanceof TileEntityLaunchController) {
                     return new ContainerLaunchController(player.inventory, (TileEntityLaunchController) tile);
-                } else if (tile instanceof TileEntityElectrolyzer) {
+                }
+                if (tile instanceof TileEntityElectrolyzer) {
                     return new ContainerElectrolyzer(player.inventory, (TileEntityElectrolyzer) tile);
                 } else if (tile instanceof TileEntityGasLiquefier) {
                     return new ContainerGasLiquefier(player.inventory, (TileEntityGasLiquefier) tile);

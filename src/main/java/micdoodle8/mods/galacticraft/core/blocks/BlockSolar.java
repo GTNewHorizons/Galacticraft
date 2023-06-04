@@ -76,7 +76,8 @@ public class BlockSolar extends BlockTileGC implements ItemBlockDesc.IBlockShift
 
             if (side == ForgeDirection.getOrientation(shiftedMeta + 2).getOpposite().ordinal()) {
                 return this.icons[5];
-            } else if (side == ForgeDirection.UP.ordinal()) {
+            }
+            if (side == ForgeDirection.UP.ordinal()) {
                 return this.icons[2];
             } else if (side == ForgeDirection.DOWN.ordinal()) {
                 return this.icons[4];
@@ -89,7 +90,8 @@ public class BlockSolar extends BlockTileGC implements ItemBlockDesc.IBlockShift
 
             if (side == ForgeDirection.getOrientation(shiftedMeta + 2).getOpposite().ordinal()) {
                 return this.icons[5];
-            } else if (side == ForgeDirection.UP.ordinal()) {
+            }
+            if (side == ForgeDirection.UP.ordinal()) {
                 return this.icons[0];
             } else if (side == ForgeDirection.DOWN.ordinal()) {
                 return this.icons[4];

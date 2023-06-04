@@ -207,9 +207,8 @@ public class BlockBasicMars extends Block
         }
         if (meta == 2) {
             return 0;
-        } else {
-            return meta;
         }
+        return meta;
     }
 
     @Override

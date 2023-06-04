@@ -100,7 +100,8 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
             // If it is the front side
             if (side == metadata + 2) {
                 return this.iconInput;
-            } else if (side == ForgeDirection.UP.ordinal() || side == ForgeDirection.DOWN.ordinal()) {
+            }
+            if (side == ForgeDirection.UP.ordinal() || side == ForgeDirection.DOWN.ordinal()) {
                 return this.iconMachineSide;
             } else {
                 return this.iconLaunchController;
@@ -108,7 +109,8 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
         }
         if (metadata >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) {
             return this.iconCryochamber;
-        } else if (side == ForgeDirection.UP.ordinal() || side == ForgeDirection.DOWN.ordinal()) {
+        }
+        if (side == ForgeDirection.UP.ordinal() || side == ForgeDirection.DOWN.ordinal()) {
             return this.iconMachineSide;
         } else if (side == ForgeDirection.getOrientation(metadata + 2).ordinal()) {
             return this.iconInput;
@@ -371,9 +373,8 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
         }
         if (metadata >= BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) {
             return BlockMachineMars.CRYOGENIC_CHAMBER_METADATA;
-        } else {
-            return BlockMachineMars.TERRAFORMER_METADATA;
         }
+        return BlockMachineMars.TERRAFORMER_METADATA;
     }
 
     @Override

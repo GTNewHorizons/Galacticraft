@@ -284,7 +284,8 @@ public class TeleportTypeAsteroids implements ITeleportType {
         stats.rocketStacks = new ItemStack[20];
         stats.fuelLevel = 1000;
         int i = 0;
-        stats.rocketStacks[i++] = new ItemStack(GCItems.oxMask);
+        stats.rocketStacks[i] = new ItemStack(GCItems.oxMask);
+        i++;
         stats.rocketStacks[i++] = new ItemStack(GCItems.oxygenGear);
         stats.rocketStacks[i++] = new ItemStack(GCItems.oxTankMedium);
         stats.rocketStacks[i++] = new ItemStack(GCItems.oxTankHeavy);

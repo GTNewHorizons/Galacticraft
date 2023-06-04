@@ -62,7 +62,8 @@ public class SlotBuggyBench extends Slot {
         }
         if (this.index == 2) {
             return itemStack.getItem() == GCItems.partBuggy && itemStack.getItemDamage() == 1;
-        } else if (this.index == 3 && GalacticraftCore.isGalaxySpaceLoaded) {
+        }
+        if (this.index == 3 && GalacticraftCore.isGalaxySpaceLoaded) {
             return itemStack.getItem()
                     == GameRegistry.findItem(Constants.MOD_ID_GALAXYSPACE, "item.RocketControlComputer")
                     && itemStack.getItemDamage() == 100;

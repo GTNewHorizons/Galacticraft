@@ -68,7 +68,8 @@ public class ItemParaChute extends Item {
         this.icons = new IIcon[ItemParaChute.names.length];
 
         for (final String name : ItemParaChute.names) {
-            this.icons[i++] = iconRegister.registerIcon(this.getIconString() + "_" + name);
+            this.icons[i] = iconRegister.registerIcon(this.getIconString() + "_" + name);
+            i++;
         }
     }
 

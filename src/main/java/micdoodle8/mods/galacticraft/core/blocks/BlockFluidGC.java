@@ -90,8 +90,8 @@ public class BlockFluidGC extends BlockFluidClassic {
                     0.00001F + rand.nextFloat() * 0.5F,
                     false);
         }
-        if (("oil".equals(this.fluidName) && rand.nextInt(10) == 0) && (World.doesBlockHaveSolidTopSurface(world, x, y - 1, z)
-                && !world.getBlock(x, y - 2, z).getMaterial().blocksMovement())) {
+        if ("oil".equals(this.fluidName) && rand.nextInt(10) == 0 && World.doesBlockHaveSolidTopSurface(world, x, y - 1, z)
+                && !world.getBlock(x, y - 2, z).getMaterial().blocksMovement()) {
             GalacticraftCore.proxy.spawnParticle(
                     "oilDrip",
                     new Vector3(x + rand.nextFloat(), y - 1.05D, z + rand.nextFloat()),
@@ -133,12 +133,9 @@ public class BlockFluidGC extends BlockFluidClassic {
 
     @Override
     public boolean isFlammable(IBlockAccess world, int x, int y, int z, ForgeDirection face) {
-        if (!(world instanceof World)) {
-            return false;
-        }
-        if (OxygenUtil.noAtmosphericCombustion(((World) world).provider) && !OxygenUtil.isAABBInBreathableAirBlock(
+        if (!(world instanceof World) || (OxygenUtil.noAtmosphericCombustion(((World) world).provider) && !OxygenUtil.isAABBInBreathableAirBlock(
                 (World) world,
-                AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 2, z + 1))) {
+                AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 2, z + 1)))) {
             return false;
         }
 

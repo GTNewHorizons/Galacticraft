@@ -139,7 +139,7 @@ public class KeyHandlerClient extends KeyHandler {
                 }
                 entity.pressKey(keyNum);
 
-            } else if ((entityTest instanceof EntityAutoRocket autoRocket) && autoRocket.landing) {
+            } else if (entityTest instanceof EntityAutoRocket autoRocket && autoRocket.landing) {
                 if (kb == leftShiftKey) {
                     autoRocket.motionY -= 0.02D;
                     GalacticraftCore.packetPipeline.sendToServer(

@@ -196,7 +196,7 @@ public class EntityLander extends EntityLanderBase implements IIgnoreShift, ICam
 
     @Override
     public void onGroundHit() {
-        if (!this.worldObj.isRemote && (Math.abs(this.lastMotionY) > 2.0D)) {
+        if (!this.worldObj.isRemote && Math.abs(this.lastMotionY) > 2.0D) {
             if (this.riddenByEntity instanceof EntityPlayerMP) {
                 this.riddenByEntity.mountEntity(this);
             }

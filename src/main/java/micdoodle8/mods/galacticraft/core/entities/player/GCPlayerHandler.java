@@ -478,7 +478,7 @@ public class GCPlayerHandler {
                         && thermalPaddingBoots != null;
 
                 if (!playerStats.thermalLevelNormalising) {
-                    if (((player.ticksExisted - 1) % thermalLevelTickCooldown == 0) && (Math.abs(playerStats.thermalLevel) >= 22)) {
+                    if ((player.ticksExisted - 1) % thermalLevelTickCooldown == 0 && Math.abs(playerStats.thermalLevel) >= 22) {
                         player.attackEntityFrom(DamageSourceGC.thermal, 1.5F);
                     }
 
@@ -647,8 +647,8 @@ public class GCPlayerHandler {
 
     protected void throwMeteors(EntityPlayerMP player) {
         final World world = player.worldObj;
-        if ((world.provider instanceof IGalacticraftWorldProvider && !world.isRemote) && (((IGalacticraftWorldProvider) world.provider).getMeteorFrequency() > 0
-                && ConfigManagerCore.meteorSpawnMod > 0.0)) {
+        if (world.provider instanceof IGalacticraftWorldProvider && !world.isRemote && ((IGalacticraftWorldProvider) world.provider).getMeteorFrequency() > 0
+                && ConfigManagerCore.meteorSpawnMod > 0.0) {
             final int f = (int) (((IGalacticraftWorldProvider) world.provider).getMeteorFrequency() * 1000D
                     * (1.0 / ConfigManagerCore.meteorSpawnMod));
 
@@ -780,7 +780,7 @@ public class GCPlayerHandler {
 
             // If the block below is the moon block
             // And is the correct metadata (moon turf)
-            if ((player.worldObj.getBlock(iPosX, iPosY, iPosZ) == GCBlocks.blockMoon) && (player.worldObj.getBlockMetadata(iPosX, iPosY, iPosZ) == 5)) {
+            if (player.worldObj.getBlock(iPosX, iPosY, iPosZ) == GCBlocks.blockMoon && player.worldObj.getBlockMetadata(iPosX, iPosY, iPosZ) == 5) {
                 final GCPlayerStats playerStats = GCPlayerStats.get(player);
                 // If it has been long enough since the last step
                 if (playerStats.distanceSinceLastStep > 0.35D) {
@@ -1187,7 +1187,7 @@ public class GCPlayerHandler {
         if (GCPlayer.chestSpawnCooldown > 0) {
             GCPlayer.chestSpawnCooldown--;
 
-            if ((GCPlayer.chestSpawnCooldown == 180) && (GCPlayer.chestSpawnVector != null)) {
+            if (GCPlayer.chestSpawnCooldown == 180 && GCPlayer.chestSpawnVector != null) {
                 final EntityParachest chest = new EntityParachest(
                         player.worldObj,
                         GCPlayer.rocketStacks,

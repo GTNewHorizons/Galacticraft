@@ -40,11 +40,7 @@ public abstract class BlockAdvanced extends BlockContainer {
         if (this.isUsableWrench(entityPlayer, entityPlayer.inventory.getCurrentItem(), x, y, z)) {
             this.damageWrench(entityPlayer, entityPlayer.inventory.getCurrentItem(), x, y, z);
 
-            if (entityPlayer.isSneaking() && this.onSneakUseWrench(world, x, y, z, entityPlayer, side, hitX, hitY, hitZ)) {
-                return true;
-            }
-
-            if (this.onUseWrench(world, x, y, z, entityPlayer, side, hitX, hitY, hitZ)) {
+            if ((entityPlayer.isSneaking() && this.onSneakUseWrench(world, x, y, z, entityPlayer, side, hitX, hitY, hitZ)) || this.onUseWrench(world, x, y, z, entityPlayer, side, hitX, hitY, hitZ)) {
                 return true;
             }
         }

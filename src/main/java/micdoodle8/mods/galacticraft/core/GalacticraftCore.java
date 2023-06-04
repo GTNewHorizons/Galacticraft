@@ -777,7 +777,7 @@ public class GalacticraftCore {
         final ArrayList<CelestialBody> cBodyList = new ArrayList<>();
         cBodyList.addAll(GalaxyRegistry.getRegisteredPlanets().values());
         for (final CelestialBody body : cBodyList) {
-            if ((body instanceof Planet && name.equals(body.getName())) && (((Planet) body).getParentSolarSystem() == system)) {
+            if (body instanceof Planet && name.equals(body.getName()) && ((Planet) body).getParentSolarSystem() == system) {
                 return null;
             }
         }

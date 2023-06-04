@@ -65,7 +65,8 @@ public class SlotSchematicCargoRocket extends Slot {
             return itemStack.getItem()
                     == GameRegistry.findItem(Constants.MOD_ID_GALAXYSPACE, "item.RocketControlComputer")
                     && itemStack.getItemDamage() == 101;
-        } else if (this.index >= 3 && this.index <= 5 && GalacticraftCore.isGalaxySpaceLoaded) {
+        }
+        if (this.index >= 3 && this.index <= 5 && GalacticraftCore.isGalaxySpaceLoaded) {
             return itemStack.getItem()
                     == GameRegistry.findItem(Constants.MOD_ID_GALAXYSPACE, "item.ModuleSmallFuelCanister");
         } else if (this.index == 7) {

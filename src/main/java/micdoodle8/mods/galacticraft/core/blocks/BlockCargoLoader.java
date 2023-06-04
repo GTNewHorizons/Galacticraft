@@ -110,7 +110,8 @@ public class BlockCargoLoader extends BlockAdvancedTile implements ItemBlockDesc
 
             if (side == shiftedMeta + 2) {
                 return this.iconInput;
-            } else if (side == ForgeDirection.getOrientation(shiftedMeta + 2).getOpposite().ordinal()) {
+            }
+            if (side == ForgeDirection.getOrientation(shiftedMeta + 2).getOpposite().ordinal()) {
                 return metadata < 4 ? this.iconItemInput : this.iconItemOutput;
             } else {
                 return metadata < 4 ? this.iconFrontLoader : this.iconFrontUnloader;
@@ -121,7 +122,8 @@ public class BlockCargoLoader extends BlockAdvancedTile implements ItemBlockDesc
 
             if (side == shiftedMeta + 2) {
                 return this.iconInput;
-            } else if (side == ForgeDirection.getOrientation(shiftedMeta + 2).getOpposite().ordinal()) {
+            }
+            if (side == ForgeDirection.getOrientation(shiftedMeta + 2).getOpposite().ordinal()) {
                 return metadata < 4 ? this.iconItemInput : this.iconItemOutput;
             } else {
                 return metadata < 4 ? this.iconFrontLoader : this.iconFrontUnloader;

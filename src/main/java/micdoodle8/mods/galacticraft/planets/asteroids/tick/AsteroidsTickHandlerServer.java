@@ -25,7 +25,7 @@ public class AsteroidsTickHandlerServer {
             return;
         }
 
-        if ((event.phase == TickEvent.Phase.START) && (AsteroidsTickHandlerServer.spaceRaceData == null)) {
+        if (event.phase == TickEvent.Phase.START && AsteroidsTickHandlerServer.spaceRaceData == null) {
             final World world = server.worldServerForDimension(0);
             AsteroidsTickHandlerServer.spaceRaceData = (ShortRangeTelepadHandler) world.mapStorage
                     .loadData(ShortRangeTelepadHandler.class, ShortRangeTelepadHandler.saveDataID);

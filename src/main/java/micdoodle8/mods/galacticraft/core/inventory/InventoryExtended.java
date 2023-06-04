@@ -111,7 +111,7 @@ public class InventoryExtended implements IInventoryGC {
             final int j = nbttagcompound.getByte("Slot") & 255;
             final ItemStack itemstack = ItemStack.loadItemStackFromNBT(nbttagcompound);
 
-            if ((itemstack != null) && (j >= 200 && j < this.inventoryStacks.length + 200 - 1)) {
+            if (itemstack != null && j >= 200 && j < this.inventoryStacks.length + 200 - 1) {
                 this.inventoryStacks[j - 200] = itemstack;
             }
         }

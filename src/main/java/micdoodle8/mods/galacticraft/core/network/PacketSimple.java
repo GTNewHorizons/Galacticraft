@@ -958,12 +958,12 @@ public class PacketSimple extends Packet implements IPacket {
                 }
                 break;
             case S_UPDATE_SHIP_YAW:
-                if ((player.ridingEntity instanceof EntitySpaceshipBase ship) && (ship != null)) {
+                if (player.ridingEntity instanceof EntitySpaceshipBase ship && ship != null) {
                     ship.rotationYaw = (Float) this.data.get(0);
                 }
                 break;
             case S_UPDATE_SHIP_PITCH:
-                if ((player.ridingEntity instanceof EntitySpaceshipBase ship) && (ship != null)) {
+                if (player.ridingEntity instanceof EntitySpaceshipBase ship && ship != null) {
                     ship.rotationPitch = (Float) this.data.get(0);
                 }
                 break;

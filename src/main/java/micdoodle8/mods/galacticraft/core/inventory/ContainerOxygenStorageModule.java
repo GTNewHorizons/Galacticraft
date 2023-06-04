@@ -66,14 +66,12 @@ public class ContainerOxygenStorageModule extends Container {
                 if (!this.mergeItemStack(stack, 0, 1, false)) {
                     return null;
                 }
-            } else {
-                if (par1 < b - 9) {
-                    if (!this.mergeItemStack(stack, b - 9, b, false)) {
-                        return null;
-                    }
-                } else if (!this.mergeItemStack(stack, b - 36, b - 9, false)) {
+            } else if (par1 < b - 9) {
+                if (!this.mergeItemStack(stack, b - 9, b, false)) {
                     return null;
                 }
+            } else if (!this.mergeItemStack(stack, b - 36, b - 9, false)) {
+                return null;
             }
 
             if (stack.stackSize == 0) {

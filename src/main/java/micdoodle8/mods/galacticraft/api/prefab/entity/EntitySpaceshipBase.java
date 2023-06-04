@@ -112,30 +112,29 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
         final Entity e = par1DamageSource.getEntity();
         if (this.isEntityInvulnerable() || this.posY > 255 || !(e instanceof EntityPlayer)) {
             return false;
-        } else {
-            this.rollAmplitude = 10;
-            this.setBeenAttacked();
-            this.shipDamage += par2 * 10;
-
-            if (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode) {
-                this.shipDamage = 100;
-            }
-
-            if (flag || this.shipDamage > 90 && !this.worldObj.isRemote) {
-                if (this.riddenByEntity != null) {
-                    this.riddenByEntity.mountEntity(null);
-                }
-
-                if (flag) {
-                    this.setDead();
-                } else {
-                    this.setDead();
-                    this.dropShipAsItem();
-                }
-            }
-
-            return true;
         }
+        this.rollAmplitude = 10;
+        this.setBeenAttacked();
+        this.shipDamage += par2 * 10;
+
+        if (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode) {
+            this.shipDamage = 100;
+        }
+
+        if (flag || this.shipDamage > 90 && !this.worldObj.isRemote) {
+            if (this.riddenByEntity != null) {
+                this.riddenByEntity.mountEntity(null);
+            }
+
+            if (flag) {
+                this.setDead();
+            } else {
+                this.setDead();
+                this.dropShipAsItem();
+            }
+        }
+
+        return true;
     }
 
     public void dropShipAsItem() {
@@ -184,7 +183,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
             this.addToTelemetry = false;
             for (final BlockVec3Dim vec : new ArrayList<>(this.telemetryList)) {
                 final TileEntity t1 = vec.getTileEntityNoLoad();
-                if ((t1 instanceof TileEntityTelemetry tileTelemetry && !t1.isInvalid()) && (tileTelemetry.linkedEntity == this)) {
+                if (t1 instanceof TileEntityTelemetry tileTelemetry && !t1.isInvalid() && tileTelemetry.linkedEntity == this) {
                     tileTelemetry.addTrackedEntity(this);
                 }
             }
@@ -498,7 +497,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
         final ArrayList<TileEntityTelemetry> returnList = new ArrayList<>();
         for (final BlockVec3Dim vec : new ArrayList<>(this.telemetryList)) {
             final TileEntity t1 = vec.getTileEntity();
-            if ((t1 instanceof TileEntityTelemetry && !t1.isInvalid()) && (((TileEntityTelemetry) t1).linkedEntity == this)) {
+            if (t1 instanceof TileEntityTelemetry && !t1.isInvalid() && ((TileEntityTelemetry) t1).linkedEntity == this) {
                 returnList.add((TileEntityTelemetry) t1);
             }
         }

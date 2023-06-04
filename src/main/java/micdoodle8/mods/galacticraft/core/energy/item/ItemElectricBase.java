@@ -189,7 +189,7 @@ public abstract class ItemElectricBase extends Item
             return ((IItemElectricBase) item).getElectricityStored(itemstack) <= 0;
         }
 
-        if (EnergyConfigHandler.isIndustrialCraft2Loaded() && (item instanceof ic2.api.item.ISpecialElectricItem)) {
+        if (EnergyConfigHandler.isIndustrialCraft2Loaded() && item instanceof ic2.api.item.ISpecialElectricItem) {
             return !((ic2.api.item.ISpecialElectricItem) item).canProvideEnergy(itemstack);
         }
 
@@ -206,7 +206,7 @@ public abstract class ItemElectricBase extends Item
             return ((IItemElectricBase) item).getElectricityStored(itemstack) > 0;
         }
 
-        if (EnergyConfigHandler.isIndustrialCraft2Loaded() && (item instanceof ic2.api.item.ISpecialElectricItem)) {
+        if (EnergyConfigHandler.isIndustrialCraft2Loaded() && item instanceof ic2.api.item.ISpecialElectricItem) {
             return ((ic2.api.item.ISpecialElectricItem) item).canProvideEnergy(itemstack);
         }
 

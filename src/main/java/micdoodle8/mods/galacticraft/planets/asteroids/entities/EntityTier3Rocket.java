@@ -120,7 +120,7 @@ public class EntityTier3Rocket extends EntityTieredRocket {
                     this.stopRocketSound();
                 }
             }
-        } else if ((!this.hasValidFuel() && this.getLaunched() && !this.worldObj.isRemote) && (Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 10 != 0.0)) {
+        } else if (!this.hasValidFuel() && this.getLaunched() && !this.worldObj.isRemote && Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 10 != 0.0) {
             this.motionY -= Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 20;
         }
     }

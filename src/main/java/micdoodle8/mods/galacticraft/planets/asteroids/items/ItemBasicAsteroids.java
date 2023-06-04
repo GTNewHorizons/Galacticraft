@@ -48,7 +48,8 @@ public class ItemBasicAsteroids extends Item {
         int i = 0;
 
         for (final String name : ItemBasicAsteroids.names) {
-            this.icons[i++] = iconRegister.registerIcon(AsteroidsModule.TEXTURE_PREFIX + name);
+            this.icons[i] = iconRegister.registerIcon(AsteroidsModule.TEXTURE_PREFIX + name);
+            i++;
         }
     }
 

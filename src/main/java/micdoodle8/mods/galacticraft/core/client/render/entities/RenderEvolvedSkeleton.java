@@ -62,7 +62,7 @@ public class RenderEvolvedSkeleton extends RenderBiped {
 
     @Override
     protected void renderEquippedItems(EntityLivingBase par1EntityLiving, float par2) {
-        if ((RenderEvolvedSkeleton.isBG2Loaded > 0) && (par1EntityLiving.getDataWatcher().getWatchedObject(RenderEvolvedSkeleton.isBG2Loaded) == null)) {
+        if (RenderEvolvedSkeleton.isBG2Loaded > 0 && par1EntityLiving.getDataWatcher().getWatchedObject(RenderEvolvedSkeleton.isBG2Loaded) == null) {
             par1EntityLiving.getDataWatcher().addObject(RenderEvolvedSkeleton.isBG2Loaded, (byte) -1);
         }
 

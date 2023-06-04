@@ -227,16 +227,14 @@ public class SpaceStationWorldData extends WorldSavedData {
 
             if (homeID == -1) {
                 throw new RuntimeException("Space station being created on bad home planet ID!");
-            } else {
-                stationData.homePlanet = homeID;
             }
+            stationData.homePlanet = homeID;
 
             if (providerIdDynamic == -1 || providerIdStatic == -1) {
                 throw new RuntimeException("Space station being created on bad provider IDs!");
-            } else {
-                stationData.dimensionIdDynamic = providerIdDynamic;
-                stationData.dimensionIdStatic = providerIdStatic;
             }
+            stationData.dimensionIdDynamic = providerIdDynamic;
+            stationData.dimensionIdStatic = providerIdStatic;
 
             stationData.markDirty();
         }

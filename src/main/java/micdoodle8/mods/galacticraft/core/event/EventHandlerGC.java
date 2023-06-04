@@ -206,7 +206,7 @@ public class EventHandlerGC {
 
     @SubscribeEvent
     public void onEntityFall(LivingFallEvent event) {
-        if ((event.entityLiving instanceof EntityPlayer player) && (player.ridingEntity instanceof EntityAutoRocket || player.ridingEntity instanceof EntityLanderBase)) {
+        if (event.entityLiving instanceof EntityPlayer player && (player.ridingEntity instanceof EntityAutoRocket || player.ridingEntity instanceof EntityLanderBase)) {
             event.distance = 0.0F;
             event.setCanceled(true);
             return;
@@ -271,7 +271,7 @@ public class EventHandlerGC {
                     return;
                 }
                 if (PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK.equals(event.action)) {
-                    if ((heldStack.getItem() instanceof IKeyItem) && (((IKeyItem) heldStack.getItem()).getTier(heldStack) == -1
+                    if (heldStack.getItem() instanceof IKeyItem && (((IKeyItem) heldStack.getItem()).getTier(heldStack) == -1
                             || ((IKeyable) tileClicked).getTierOfKeyRequired() == -1
                             || ((IKeyItem) heldStack.getItem()).getTier(heldStack)
                                     == ((IKeyable) tileClicked).getTierOfKeyRequired())) {
@@ -285,7 +285,7 @@ public class EventHandlerGC {
                 }
             }
 
-            if ((heldStack.getItem() instanceof ItemFlintAndSteel || heldStack.getItem() instanceof ItemFireball) && (!worldObj.isRemote && PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK.equals(event.action))) {
+            if ((heldStack.getItem() instanceof ItemFlintAndSteel || heldStack.getItem() instanceof ItemFireball) && !worldObj.isRemote && PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK.equals(event.action)) {
                 if (idClicked != Blocks.tnt && OxygenUtil.noAtmosphericCombustion(worldObj.provider)
                         && !OxygenUtil.isAABBInBreathableAirBlock(
                                 worldObj,
@@ -321,7 +321,7 @@ public class EventHandlerGC {
             return;
         }
 
-        if ((entityLiving.ticksExisted % 100 == 0) && (entityLiving.worldObj.provider instanceof IGalacticraftWorldProvider)) {
+        if (entityLiving.ticksExisted % 100 == 0 && entityLiving.worldObj.provider instanceof IGalacticraftWorldProvider) {
             if (!(entityLiving instanceof EntityPlayer)
                     && (!(entityLiving instanceof IEntityBreathable)
                             || !((IEntityBreathable) entityLiving).canBreath())
@@ -475,10 +475,7 @@ public class EventHandlerGC {
                             if (EventHandlerGC.checkBlock(world, bx + x - 1, by + cy, bz + z) || EventHandlerGC.checkBlock(world, bx + x + 1, by + cy, bz + z) || EventHandlerGC.checkBlock(world, bx + x, by + cy - 1, bz + z) || EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z - 1)) {
                                 continue;
                             }
-                            if (EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z + 1)) {
-                                continue;
-                            }
-                            if (EventHandlerGC.checkBlockAbove(world, bx + x, by + cy + 1, bz + z)) {
+                            if (EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z + 1) || EventHandlerGC.checkBlockAbove(world, bx + x, by + cy + 1, bz + z)) {
                                 continue;
                             }
 
@@ -502,10 +499,7 @@ public class EventHandlerGC {
                         if (EventHandlerGC.checkBlock(world, bx + x - 1, by + cy, bz + z) || EventHandlerGC.checkBlock(world, bx + x + 1, by + cy, bz + z) || EventHandlerGC.checkBlock(world, bx + x, by + cy - 1, bz + z) || EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z - 1)) {
                             continue;
                         }
-                        if (EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z + 1)) {
-                            continue;
-                        }
-                        if (EventHandlerGC.checkBlockAbove(world, bx + x, by + cy + 1, bz + z)) {
+                        if (EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z + 1) || EventHandlerGC.checkBlockAbove(world, bx + x, by + cy + 1, bz + z)) {
                             continue;
                         }
 

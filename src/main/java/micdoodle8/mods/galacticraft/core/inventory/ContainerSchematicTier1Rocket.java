@@ -181,7 +181,7 @@ public class ContainerSchematicTier1Rocket extends Container {
                 if (!this.mergeItemStack(var4, 45, 54, false)) {
                     return null;
                 }
-            } else if ((par1 >= 45 && par1 < 54) && !this.mergeItemStack(var4, 18, 45, false)) {
+            } else if (par1 >= 45 && par1 < 54 && !this.mergeItemStack(var4, 18, 45, false)) {
                 return null;
             }
 

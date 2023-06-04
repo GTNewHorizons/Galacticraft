@@ -130,7 +130,7 @@ public class BlockNasaWorkbench extends BlockContainer
                                 if (!blockAt.getMaterial().isReplaceable()) {
                                     validSpot = false;
                                 }
-                            } else if ((y != 0 && y != 3) && !blockAt.getMaterial().isReplaceable()) {
+                            } else if (y != 0 && y != 3 && !blockAt.getMaterial().isReplaceable()) {
                                 validSpot = false;
                             }
                         }
@@ -178,7 +178,7 @@ public class BlockNasaWorkbench extends BlockContainer
                                 if (world.getBlock(x0 + x, y0 + y, z0 + z) == GCBlocks.fakeBlock) {
                                     fakeBlockCount++;
                                 }
-                            } else if ((y != 0 && y != 3) && (world.getBlock(x0 + x, y0 + y, z0 + z) == GCBlocks.fakeBlock)) {
+                            } else if (y != 0 && y != 3 && world.getBlock(x0 + x, y0 + y, z0 + z) == GCBlocks.fakeBlock) {
                                 fakeBlockCount++;
                             }
                         }

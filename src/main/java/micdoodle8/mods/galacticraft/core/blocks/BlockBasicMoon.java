@@ -173,34 +173,7 @@ public class BlockBasicMoon extends BlockAdvancedTile
     @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int side, int meta) {
-        if (meta >= 5 && meta <= 13) {
-            if (side == 1) {
-                switch (meta - 5) {
-                    case 0:
-                        return this.moonBlockIcons[0];
-                    case 1:
-                        return this.moonBlockIcons[4];
-                    case 2:
-                        return this.moonBlockIcons[5];
-                    case 3:
-                        return this.moonBlockIcons[6];
-                    case 4:
-                        return this.moonBlockIcons[7];
-                    case 5:
-                        return this.moonBlockIcons[8];
-                    case 6:
-                        return this.moonBlockIcons[9];
-                    case 7:
-                        return this.moonBlockIcons[10];
-                    case 8:
-                        return this.moonBlockIcons[11];
-                }
-            } else if (side == 0) {
-                return this.moonBlockIcons[2];
-            } else {
-                return this.moonBlockIcons[3];
-            }
-        } else {
+        if ((meta < 5) || (meta > 13)) {
             return switch (meta) {
                 case 0 -> this.moonBlockIcons[12];
                 case 1 -> this.moonBlockIcons[13];
@@ -211,6 +184,32 @@ public class BlockBasicMoon extends BlockAdvancedTile
                 case 15 -> this.moonBlockIcons[16];
                 default -> this.moonBlockIcons[16];
             };
+        }
+        if (side == 1) {
+            switch (meta - 5) {
+                case 0:
+                    return this.moonBlockIcons[0];
+                case 1:
+                    return this.moonBlockIcons[4];
+                case 2:
+                    return this.moonBlockIcons[5];
+                case 3:
+                    return this.moonBlockIcons[6];
+                case 4:
+                    return this.moonBlockIcons[7];
+                case 5:
+                    return this.moonBlockIcons[8];
+                case 6:
+                    return this.moonBlockIcons[9];
+                case 7:
+                    return this.moonBlockIcons[10];
+                case 8:
+                    return this.moonBlockIcons[11];
+            }
+        } else if (side == 0) {
+            return this.moonBlockIcons[2];
+        } else {
+            return this.moonBlockIcons[3];
         }
 
         return null;
@@ -232,9 +231,8 @@ public class BlockBasicMoon extends BlockAdvancedTile
         }
         if (meta == 2) {
             return 0;
-        } else {
-            return meta;
         }
+        return meta;
     }
 
     @Override

@@ -444,7 +444,7 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
         // Deal with RenderPlayerAPIEnhancer calling this for skeletons etc
         // Do not render GC equipment on top of armor - only on top of player - see
         // .init() method
-        if (ModelPlayerBaseGC.isSmartMovingLoaded || !(var1 instanceof EntityPlayer player) || (this.oxygenMask == null)) {
+        if (ModelPlayerBaseGC.isSmartMovingLoaded || !(var1 instanceof EntityPlayer player) || this.oxygenMask == null) {
             return;
         }
 

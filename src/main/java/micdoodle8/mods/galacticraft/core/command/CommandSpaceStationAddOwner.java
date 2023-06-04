@@ -58,32 +58,31 @@ public class CommandSpaceStationAddOwner extends CommandBase {
 
                 if (stats.spaceStationDimensionData.isEmpty()) {
                     throw new WrongUsageException(GCCoreUtil.translate("commands.ssinvite.notFound"));
-                } else {
-                    for (final Map.Entry<Integer, Integer> ownedStations : stats.spaceStationDimensionData
-                            .entrySet()) {
-                        final SpaceStationWorldData data = SpaceStationWorldData
-                                .getStationData(playerBase.worldObj, ownedStations.getValue(), playerBase);
+                }
+                for (final Map.Entry<Integer, Integer> ownedStations : stats.spaceStationDimensionData
+                        .entrySet()) {
+                    final SpaceStationWorldData data = SpaceStationWorldData
+                            .getStationData(playerBase.worldObj, ownedStations.getValue(), playerBase);
 
-                        if ("+all".equalsIgnoreCase(var3)) {
-                            data.setAllowedAll(true);
-                            playerBase.addChatMessage(
-                                    new ChatComponentText(
-                                            GCCoreUtil.translateWithFormat("gui.spacestation.allowAllTrue")));
-                            return;
-                        }
-                        if ("-all".equalsIgnoreCase(var3)) {
-                            data.setAllowedAll(false);
-                            playerBase.addChatMessage(
-                                    new ChatComponentText(
-                                            GCCoreUtil
-                                                    .translateWithFormat("gui.spacestation.allowAllFalse", var3)));
-                            return;
-                        }
+                    if ("+all".equalsIgnoreCase(var3)) {
+                        data.setAllowedAll(true);
+                        playerBase.addChatMessage(
+                                new ChatComponentText(
+                                        GCCoreUtil.translateWithFormat("gui.spacestation.allowAllTrue")));
+                        return;
+                    }
+                    if ("-all".equalsIgnoreCase(var3)) {
+                        data.setAllowedAll(false);
+                        playerBase.addChatMessage(
+                                new ChatComponentText(
+                                        GCCoreUtil
+                                                .translateWithFormat("gui.spacestation.allowAllFalse", var3)));
+                        return;
+                    }
 
-                        if (!data.getAllowedPlayers().contains(var3)) {
-                            data.getAllowedPlayers().add(var3);
-                            data.markDirty();
-                        }
+                    if (!data.getAllowedPlayers().contains(var3)) {
+                        data.getAllowedPlayers().add(var3);
+                        data.markDirty();
                     }
                 }
 

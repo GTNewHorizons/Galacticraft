@@ -161,7 +161,7 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
         final int totalLR = tileEntity.connectionsLeft + tileEntity.connectionsRight;
         final int totalUD = tileEntity.connectionsUp + tileEntity.connectionsDown;
         // centre block
-        if ((totalLR > 1 && totalUD > 1 && !cornerblock) && (tileEntity.connectionsLeft == tileEntity.connectionsRight - (totalLR | 1))) {
+        if (totalLR > 1 && totalUD > 1 && !cornerblock && tileEntity.connectionsLeft == tileEntity.connectionsRight - (totalLR | 1)) {
             if (tileEntity.connectionsUp == tileEntity.connectionsDown - (totalUD | 1)) {
                 cornerblock = true;
             }

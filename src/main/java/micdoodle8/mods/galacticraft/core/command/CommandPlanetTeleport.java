@@ -49,27 +49,26 @@ public class CommandPlanetTeleport extends CommandBase {
                         .getPlayerBaseServerFromPlayerUsername(icommandsender.getCommandSenderName(), true);
             }
 
-            if (playerBase != null) {
-                final MinecraftServer server = MinecraftServer.getServer();
-                final WorldServer worldserver = server
-                        .worldServerForDimension(server.worldServers[0].provider.dimensionId);
-                final ChunkCoordinates chunkcoordinates = worldserver.getSpawnPoint();
-                final GCPlayerStats stats = GCPlayerStats.get(playerBase);
-                stats.coordsTeleportedFromX = chunkcoordinates.posX;
-                stats.coordsTeleportedFromZ = chunkcoordinates.posZ;
-
-                try {
-                    WorldUtil.toCelestialSelection(
-                            playerBase,
-                            stats,
-                            Integer.MAX_VALUE,
-                            GuiCelestialSelection.MapMode.TELEPORTATION);
-                } catch (final Exception e) {
-                    e.printStackTrace();
-                    throw e;
-                }
-            } else {
+            if (playerBase == null) {
                 throw new Exception("Could not find player with name: " + astring[0]);
+            }
+            final MinecraftServer server = MinecraftServer.getServer();
+            final WorldServer worldserver = server
+                    .worldServerForDimension(server.worldServers[0].provider.dimensionId);
+            final ChunkCoordinates chunkcoordinates = worldserver.getSpawnPoint();
+            final GCPlayerStats stats = GCPlayerStats.get(playerBase);
+            stats.coordsTeleportedFromX = chunkcoordinates.posX;
+            stats.coordsTeleportedFromZ = chunkcoordinates.posZ;
+
+            try {
+                WorldUtil.toCelestialSelection(
+                        playerBase,
+                        stats,
+                        Integer.MAX_VALUE,
+                        GuiCelestialSelection.MapMode.TELEPORTATION);
+            } catch (final Exception e) {
+                e.printStackTrace();
+                throw e;
             }
         } catch (final Exception var6) {
             throw new CommandException(var6.getMessage());

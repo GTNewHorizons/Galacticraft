@@ -140,7 +140,7 @@ public class BlockOxygenCollector extends BlockAdvancedTile implements ItemBlock
     @SideOnly(Side.CLIENT)
     @Override
     public void randomDisplayTick(World par1World, int x, int y, int z, Random rand) {
-        if ((par1World.getTileEntity(x, y, z) instanceof TileEntityOxygenCollector) && (((TileEntityOxygenCollector) par1World.getTileEntity(x, y, z)).lastOxygenCollected > 1)) {
+        if (par1World.getTileEntity(x, y, z) instanceof TileEntityOxygenCollector && ((TileEntityOxygenCollector) par1World.getTileEntity(x, y, z)).lastOxygenCollected > 1) {
             for (int particleCount = 0; particleCount < 10; particleCount++) {
                 double x2 = x + rand.nextFloat();
                 final double y2 = y + rand.nextFloat();

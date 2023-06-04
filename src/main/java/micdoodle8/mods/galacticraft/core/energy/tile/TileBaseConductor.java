@@ -84,8 +84,8 @@ public abstract class TileBaseConductor extends TileEntityAdvanced implements IC
             for (final ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
                 final TileEntity tileEntity = thisVec.getTileEntityOnSide(this.worldObj, side);
 
-                if ((tileEntity != null) && (tileEntity.getClass() == this.getClass() && tileEntity instanceof INetworkProvider
-                        && !this.getNetwork().equals(((INetworkProvider) tileEntity).getNetwork()))) {
+                if (tileEntity != null && tileEntity.getClass() == this.getClass() && tileEntity instanceof INetworkProvider
+                        && !this.getNetwork().equals(((INetworkProvider) tileEntity).getNetwork())) {
                     ((INetworkProvider) tileEntity).getNetwork().merge(this.getNetwork());
                 }
             }
@@ -104,7 +104,7 @@ public abstract class TileBaseConductor extends TileEntityAdvanced implements IC
             for (int i = 0; i < 6; i++) {
                 final TileEntity tileEntity = thisVec.getTileEntityOnSide(this.worldObj, i);
 
-                if ((tileEntity instanceof IConnector) && ((IConnector) tileEntity).canConnect(ForgeDirection.getOrientation(i ^ 1), NetworkType.POWER)) {
+                if (tileEntity instanceof IConnector && ((IConnector) tileEntity).canConnect(ForgeDirection.getOrientation(i ^ 1), NetworkType.POWER)) {
                     this.adjacentConnections[i] = tileEntity;
                 }
             }

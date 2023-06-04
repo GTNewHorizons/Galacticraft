@@ -41,10 +41,10 @@ public class ItemArmorAsteroids extends ItemArmor {
             if (stack.getItem() == AsteroidsItems.titaniumChestplate
                     || stack.getItem() == AsteroidsItems.titaniumBoots) {
                         return AsteroidsModule.TEXTURE_PREFIX + "textures/model/armor/titanium_2.png";
-                    } else
-                if (stack.getItem() == AsteroidsItems.titaniumLeggings) {
-                    return AsteroidsModule.TEXTURE_PREFIX + "textures/model/armor/titanium_3.png";
-                }
+                    }
+            if (stack.getItem() == AsteroidsItems.titaniumLeggings) {
+                return AsteroidsModule.TEXTURE_PREFIX + "textures/model/armor/titanium_3.png";
+            }
         }
 
         return null;

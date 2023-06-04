@@ -29,7 +29,7 @@ public class InventoryRocketBench implements IInventory {
     }
 
     public ItemStack getStackInRowAndColumn(int par1, int par2) {
-        if ((par1 < 0) || (par1 >= this.inventoryWidth)) {
+        if (par1 < 0 || par1 >= this.inventoryWidth) {
             return null;
         }
         final int var3 = par1 + par2 * this.inventoryWidth;

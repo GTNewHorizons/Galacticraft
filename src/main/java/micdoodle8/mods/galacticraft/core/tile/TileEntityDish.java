@@ -56,7 +56,7 @@ public class TileEntityDish extends TileBaseUniversalElectrical
 
         super.updateEntity();
 
-        if (!this.worldObj.isRemote && (this.disableCooldown > 0)) {
+        if (!this.worldObj.isRemote && this.disableCooldown > 0) {
             this.disableCooldown--;
         }
 

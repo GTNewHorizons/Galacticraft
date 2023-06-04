@@ -25,7 +25,8 @@ public class EnergyDisplayHelper {
         }
         if (EnergyConfigHandler.displayEnergyUnitsBC) {
             return getEnergyDisplayBC(energyVal * EnergyConfigHandler.TO_BC_RATIOdisp);
-        } else if (EnergyConfigHandler.displayEnergyUnitsMek) {
+        }
+        if (EnergyConfigHandler.displayEnergyUnitsMek) {
             return getEnergyDisplayMek(energyVal * EnergyConfigHandler.TO_MEKANISM_RATIOdisp);
         } else if (EnergyConfigHandler.displayEnergyUnitsRF) {
             return getEnergyDisplayRF(energyVal * EnergyConfigHandler.TO_RF_RATIOdisp);
@@ -73,10 +74,9 @@ public class EnergyDisplayHelper {
         if (energyVal < 1000000) {
             final String val = getEnergyDisplay1DP(energyVal / 1000);
             return val + " kJ";
-        } else {
-            final String val = getEnergyDisplay1DP(energyVal / 1000000);
-            return val + " MJ";
         }
+        final String val = getEnergyDisplay1DP(energyVal / 1000000);
+        return val + " MJ";
     }
 
     public static String getEnergyDisplayRF(float energyVal) {

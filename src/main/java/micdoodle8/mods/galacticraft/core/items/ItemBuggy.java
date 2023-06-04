@@ -101,7 +101,7 @@ public class ItemBuggy extends Item implements IHoldableItem {
             }
         }
 
-        if (!var26 && (var24.typeOfHit == MovingObjectType.BLOCK)) {
+        if (!var26 && var24.typeOfHit == MovingObjectType.BLOCK) {
             var29 = var24.blockX;
             int var33 = var24.blockY;
             final int var34 = var24.blockZ;

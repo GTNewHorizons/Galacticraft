@@ -153,7 +153,7 @@ public class PlayerClient implements IPlayerClient {
         final boolean ridingThirdPersonEntity = player.ridingEntity instanceof ICameraZoomEntity
                 && ((ICameraZoomEntity) player.ridingEntity).defaultThirdPerson();
 
-        if ((ridingThirdPersonEntity && !stats.lastRidingCameraZoomEntity) && !ConfigManagerCore.disableVehicleCameraChanges) {
+        if (ridingThirdPersonEntity && !stats.lastRidingCameraZoomEntity && !ConfigManagerCore.disableVehicleCameraChanges) {
             FMLClientHandler.instance().getClient().gameSettings.thirdPersonView = 1;
         }
 
@@ -251,7 +251,7 @@ public class PlayerClient implements IPlayerClient {
 
             // If the block below is the moon block
             // And is the correct metadata (moon turf)
-            if ((player.worldObj.getBlock(iPosX, iPosY, iPosZ) == GCBlocks.blockMoon) && (player.worldObj.getBlockMetadata(iPosX, iPosY, iPosZ) == 5)) {
+            if (player.worldObj.getBlock(iPosX, iPosY, iPosZ) == GCBlocks.blockMoon && player.worldObj.getBlockMetadata(iPosX, iPosY, iPosZ) == 5) {
                 // If it has been long enough since the last step
                 if (stats.distanceSinceLastStep > 0.35) {
                     Vector3 pos = new Vector3(player);

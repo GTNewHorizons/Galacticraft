@@ -263,12 +263,10 @@ public class RenderAstroMiner extends Render {
                         astroMiner.retraction = 0F;
                     }
                 }
-            } else {
-                if (astroMiner.retraction < 1F) {
-                    astroMiner.retraction += RETRACTIONSPEED * partTime;
-                    if (astroMiner.retraction > 1F) {
-                        astroMiner.retraction = 1F;
-                    }
+            } else if (astroMiner.retraction < 1F) {
+                astroMiner.retraction += RETRACTIONSPEED * partTime;
+                if (astroMiner.retraction > 1F) {
+                    astroMiner.retraction = 1F;
                 }
             }
             GL11.glPopMatrix();

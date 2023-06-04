@@ -51,37 +51,36 @@ public class EntityFlag extends Entity {
         }
         if (this.isEntityInvulnerable()) {
             return false;
-        } else {
-            this.setBeenAttacked();
-            this.setDamage(this.getDamage() + par2 * 10);
-            this.worldObj.playSoundEffect(
-                    this.posX,
-                    this.posY,
-                    this.posZ,
-                    Block.soundTypeMetal.getBreakSound(),
-                    Block.soundTypeMetal.getVolume(),
-                    Block.soundTypeMetal.getPitch() + 1.0F);
-
-            if (par1DamageSource.getEntity() instanceof EntityPlayer
-                    && ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode) {
-                this.setDamage(100.0F);
-            }
-
-            if (flag || this.getDamage() > 40) {
-                if (this.riddenByEntity != null) {
-                    this.riddenByEntity.mountEntity(this);
-                }
-
-                if (flag) {
-                    this.setDead();
-                } else {
-                    this.setDead();
-                    this.dropItemStack();
-                }
-            }
-
-            return true;
         }
+        this.setBeenAttacked();
+        this.setDamage(this.getDamage() + par2 * 10);
+        this.worldObj.playSoundEffect(
+                this.posX,
+                this.posY,
+                this.posZ,
+                Block.soundTypeMetal.getBreakSound(),
+                Block.soundTypeMetal.getVolume(),
+                Block.soundTypeMetal.getPitch() + 1.0F);
+
+        if (par1DamageSource.getEntity() instanceof EntityPlayer
+                && ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode) {
+            this.setDamage(100.0F);
+        }
+
+        if (flag || this.getDamage() > 40) {
+            if (this.riddenByEntity != null) {
+                this.riddenByEntity.mountEntity(this);
+            }
+
+            if (flag) {
+                this.setDead();
+            } else {
+                this.setDead();
+                this.dropItemStack();
+            }
+        }
+
+        return true;
     }
 
     @Override

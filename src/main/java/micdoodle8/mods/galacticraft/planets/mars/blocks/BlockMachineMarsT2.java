@@ -249,7 +249,7 @@ public class BlockMachineMarsT2 extends BlockTileGC implements ItemBlockDesc.IBl
     public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random rand) {
         final TileEntity te = par1World.getTileEntity(par2, par3, par4);
 
-        if ((te instanceof TileEntityGasLiquefier tileEntity) && (tileEntity.processTicks > 0)) {
+        if (te instanceof TileEntityGasLiquefier tileEntity && tileEntity.processTicks > 0) {
             final float x = par2 + 0.5F;
             final float y = par3 + 0.8F + 0.05F * rand.nextInt(3);
             final float z = par4 + 0.5F;

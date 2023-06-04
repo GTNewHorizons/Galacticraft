@@ -846,7 +846,8 @@ public class ConfigManagerCore {
     @SideOnly(Side.CLIENT)
     public static void setConfigOverride(List<Object> configs) {
         int dataCount = 0;
-        final int modeFlag = (Integer) configs.get(dataCount++);
+        final int modeFlag = (Integer) configs.get(dataCount);
+        dataCount++;
         ConfigManagerCore.hardMode = (modeFlag & 1) != 0;
         ConfigManagerCore.quickMode = (modeFlag & 2) != 0;
         ConfigManagerCore.challengeMode = (modeFlag & 4) != 0;

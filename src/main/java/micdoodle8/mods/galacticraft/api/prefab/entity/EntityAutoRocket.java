@@ -128,11 +128,10 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                         + StatCollector.translateToLocal("gui.message.notSet.name");
                 this.statusColour = "\u00a7c";
                 return false;
-            } else {
-                this.statusMessage = StatCollector.translateToLocal("gui.message.success.name");
-                this.statusColour = "\u00a7a";
-                return true;
             }
+            this.statusMessage = StatCollector.translateToLocal("gui.message.success.name");
+            this.statusColour = "\u00a7a";
+            return true;
         }
 
         this.destinationFrequency = -1;
@@ -251,7 +250,7 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
 
     @Override
     public void onUpdate() {
-        if ((this.landing && this.launchPhase == EnumLaunchPhase.LAUNCHED.ordinal() && this.hasValidFuel()) && (this.targetVec != null)) {
+        if (this.landing && this.launchPhase == EnumLaunchPhase.LAUNCHED.ordinal() && this.hasValidFuel() && this.targetVec != null) {
             final double yDiff = this.posY - this.getOnPadYOffset() - this.targetVec.y;
             this.motionY = Math.max(-2.0, (yDiff - 0.04) / -70.0);
 
@@ -329,8 +328,8 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                 this.autoLaunch();
             }
 
-            if ((this.autoLaunchCountdown > 0
-                    && (!(this instanceof EntityTieredRocket) || this.riddenByEntity != null)) && (--this.autoLaunchCountdown <= 0)) {
+            if (this.autoLaunchCountdown > 0
+                    && (!(this instanceof EntityTieredRocket) || this.riddenByEntity != null) && --this.autoLaunchCountdown <= 0) {
                 this.autoLaunch();
             }
 
@@ -340,18 +339,16 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                 this.autoLaunch();
             }
 
-            if ((this.autoLaunchSetting == EnumAutoLaunch.INSTANT) && (this.autoLaunchCountdown == 0
-                    && (!(this instanceof EntityTieredRocket) || this.riddenByEntity != null))) {
+            if (this.autoLaunchSetting == EnumAutoLaunch.INSTANT && this.autoLaunchCountdown == 0
+                    && (!(this instanceof EntityTieredRocket) || this.riddenByEntity != null)) {
                 this.autoLaunch();
             }
 
-            if ((this.autoLaunchSetting == EnumAutoLaunch.REDSTONE_SIGNAL) && (this.ticks % 11 == 0 && this.activeLaunchController != null)) {
-                if (this.worldObj.isBlockIndirectlyGettingPowered(
-                        this.activeLaunchController.x,
-                        this.activeLaunchController.y,
-                        this.activeLaunchController.z)) {
-                    this.autoLaunch();
-                }
+            if ((this.autoLaunchSetting == EnumAutoLaunch.REDSTONE_SIGNAL && this.ticks % 11 == 0 && this.activeLaunchController != null) && this.worldObj.isBlockIndirectlyGettingPowered(
+                    this.activeLaunchController.x,
+                    this.activeLaunchController.y,
+                    this.activeLaunchController.z)) {
+                this.autoLaunch();
             }
 
             if (this.launchPhase == EnumLaunchPhase.LAUNCHED.ordinal()) {
@@ -444,7 +441,7 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
     public void landEntity(int x, int y, int z) {
         final TileEntity tile = this.worldObj.getTileEntity(x, y, z);
 
-        if ((tile instanceof IFuelDock dock) && this.isDockValid(dock)) {
+        if (tile instanceof IFuelDock dock && this.isDockValid(dock)) {
             if (!this.worldObj.isRemote) {
                 // Drop any existing rocket on the landing pad
                 if (dock.getDockedEntity() instanceof EntitySpaceshipBase && dock.getDockedEntity() != this) {
@@ -772,7 +769,7 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                             <= MathHelper.floor_double(this.posZ) + 1; z++) {
                         final Block block = this.worldObj.getBlock(x, y, z);
 
-                        if ((block instanceof BlockLandingPadFull) && (amountRemoved < 9)) {
+                        if (block instanceof BlockLandingPadFull && amountRemoved < 9) {
                             final EventLandingPadRemoval event = new EventLandingPadRemoval(this.worldObj, x, y, z);
                             MinecraftForge.EVENT_BUS.post(event);
 

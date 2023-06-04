@@ -84,8 +84,8 @@ public class ContainerGasLiquefier extends Container {
                 if (FluidUtil.isEmptyContainerFor(var4, this.tileEntity.liquidTank2.getFluid()) && this.mergeItemStack(var4, 3, 4, false)) {
                     outputTankSlotsSuccess = true;
                 }
-                if ((!outputTankSlotsSuccess
-                        && FluidUtil.isEmptyContainerFor(var4, this.tileEntity.liquidTank.getFluid())) && this.mergeItemStack(var4, 2, 3, false)) {
+                if (!outputTankSlotsSuccess
+                        && FluidUtil.isEmptyContainerFor(var4, this.tileEntity.liquidTank.getFluid()) && this.mergeItemStack(var4, 2, 3, false)) {
                     outputTankSlotsSuccess = true;
                 }
 

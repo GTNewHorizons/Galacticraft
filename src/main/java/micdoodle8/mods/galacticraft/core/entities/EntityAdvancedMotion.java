@@ -144,32 +144,31 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
         if (this.isEntityInvulnerable() || this.posY > 300
                 || e instanceof EntityLivingBase && !(e instanceof EntityPlayer)) {
             return false;
-        } else {
-            this.rockDirection = -this.rockDirection;
-            this.timeSinceHit = 10;
-            this.currentDamage = this.currentDamage + var2 * 10;
-            this.setBeenAttacked();
-
-            if (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode) {
-                this.currentDamage = 100;
-            }
-
-            if (this.currentDamage > 70) {
-                if (this.riddenByEntity != null) {
-                    this.riddenByEntity.mountEntity(this);
-
-                    return false;
-                }
-
-                if (!this.worldObj.isRemote) {
-                    this.dropItems();
-
-                    this.setDead();
-                }
-            }
-
-            return true;
         }
+        this.rockDirection = -this.rockDirection;
+        this.timeSinceHit = 10;
+        this.currentDamage = this.currentDamage + var2 * 10;
+        this.setBeenAttacked();
+
+        if (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode) {
+            this.currentDamage = 100;
+        }
+
+        if (this.currentDamage > 70) {
+            if (this.riddenByEntity != null) {
+                this.riddenByEntity.mountEntity(this);
+
+                return false;
+            }
+
+            if (!this.worldObj.isRemote) {
+                this.dropItems();
+
+                this.setDead();
+            }
+        }
+
+        return true;
     }
 
     public abstract List<ItemStack> getItemsDropped();
@@ -368,7 +367,7 @@ public abstract class EntityAdvancedMotion extends InventoryEntity implements IC
     public void spawnParticle(EntityFX fx) {
         final Minecraft mc = FMLClientHandler.instance().getClient();
 
-        if ((mc != null && mc.renderViewEntity != null && mc.effectRenderer != null) && (fx != null)) {
+        if (mc != null && mc.renderViewEntity != null && mc.effectRenderer != null && fx != null) {
             mc.effectRenderer.addEffect(fx);
         }
     }

@@ -78,8 +78,8 @@ public class TileEntityHydrogenPipe extends TileEntity implements ITransmitter {
             for (final ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
                 final TileEntity tileEntity = new BlockVec3(this).getTileEntityOnSide(this.worldObj, side);
 
-                if ((tileEntity != null) && (tileEntity.getClass() == this.getClass() && tileEntity instanceof INetworkProvider
-                        && !this.getNetwork().equals(((INetworkProvider) tileEntity).getNetwork()))) {
+                if (tileEntity != null && tileEntity.getClass() == this.getClass() && tileEntity instanceof INetworkProvider
+                        && !this.getNetwork().equals(((INetworkProvider) tileEntity).getNetwork())) {
                     this.setNetwork(
                             (IGridNetwork) this.getNetwork().merge(((INetworkProvider) tileEntity).getNetwork()));
                 }
@@ -107,7 +107,7 @@ public class TileEntityHydrogenPipe extends TileEntity implements ITransmitter {
         for (final ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
             final TileEntity tileEntity = thisVec.getTileEntityOnSide(tile.getWorldObj(), direction);
 
-            if ((tileEntity instanceof IConnector) && ((IConnector) tileEntity).canConnect(direction.getOpposite(), NetworkType.HYDROGEN)) {
+            if (tileEntity instanceof IConnector && ((IConnector) tileEntity).canConnect(direction.getOpposite(), NetworkType.HYDROGEN)) {
                 adjacentConnections[direction.ordinal()] = tileEntity;
             }
         }

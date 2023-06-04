@@ -131,9 +131,8 @@ public class BlockOxygenCompressor extends BlockAdvancedTile implements ItemBloc
         }
         if (metadata >= BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA) {
             return new TileEntityOxygenCompressor();
-        } else {
-            return null;
         }
+        return null;
     }
 
     @Override
@@ -147,7 +146,8 @@ public class BlockOxygenCompressor extends BlockAdvancedTile implements ItemBloc
 
             if (side == metadata + 2) {
                 return this.iconInput;
-            } else if (side == ForgeDirection.getOrientation(metadata + 2).getOpposite().ordinal()) {
+            }
+            if (side == ForgeDirection.getOrientation(metadata + 2).getOpposite().ordinal()) {
                 return this.iconOxygenOutput;
             } else if (metadata == 0 && side == 5 || metadata == 3 && side == 3
                     || metadata == 1 && side == 4
@@ -157,23 +157,22 @@ public class BlockOxygenCompressor extends BlockAdvancedTile implements ItemBloc
                         return this.iconDecompressor;
                     }
         }
-        if (metadata >= BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA) {
-            metadata -= BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA;
-
-            if (side == metadata + 2) {
-                return this.iconInput;
-            } else if (side == ForgeDirection.getOrientation(metadata + 2).getOpposite().ordinal()) {
-                return this.iconOxygenInput;
-            } else if (metadata == 0 && side == 5 || metadata == 3 && side == 3
-                    || metadata == 1 && side == 4
-                    || metadata == 2 && side == 2) {
-                        return this.iconCompressor2;
-                    } else {
-                        return this.iconCompressor1;
-                    }
-        } else {
+        if (metadata < BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA) {
             return this.iconMachineSide;
         }
+        metadata -= BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA;
+
+        if (side == metadata + 2) {
+            return this.iconInput;
+        } else if (side == ForgeDirection.getOrientation(metadata + 2).getOpposite().ordinal()) {
+            return this.iconOxygenInput;
+        } else if (metadata == 0 && side == 5 || metadata == 3 && side == 3
+                || metadata == 1 && side == 4
+                || metadata == 2 && side == 2) {
+                    return this.iconCompressor2;
+                } else {
+                    return this.iconCompressor1;
+                }
     }
 
     @Override
@@ -218,9 +217,8 @@ public class BlockOxygenCompressor extends BlockAdvancedTile implements ItemBloc
         }
         if (metadata >= BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA) {
             return BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA;
-        } else {
-            return 0;
         }
+        return 0;
     }
 
     @Override

@@ -119,7 +119,7 @@ public class WorldUtil {
             }
 
             final IGalacticraftWorldProvider customProvider = (IGalacticraftWorldProvider) entity.worldObj.provider;
-            if ((entity instanceof EntityPlayer player) && (player.inventory != null)) {
+            if (entity instanceof EntityPlayer player && player.inventory != null) {
                 int armorModLowGrav = 100;
                 int armorModHighGrav = 100;
                 for (int i = 0; i < 4; i++) {
@@ -150,9 +150,8 @@ public class WorldUtil {
         }
         if (entity instanceof IAntiGrav) {
             return 0;
-        } else {
-            return 0.08D;
         }
+        return 0.08D;
     }
 
     public static float getGravityFactor(Entity entity) {
@@ -187,7 +186,7 @@ public class WorldUtil {
     }
 
     public static float getRainStrength(World world, float partialTicks) {
-        if (world.isRemote && (world.provider.getSkyRenderer() instanceof SkyProviderOverworld)) {
+        if (world.isRemote && world.provider.getSkyRenderer() instanceof SkyProviderOverworld) {
             return 0.0F;
         }
 
@@ -458,7 +457,7 @@ public class WorldUtil {
         celestialBodyList.addAll(GalaxyRegistry.getRegisteredSatellites().values());
 
         for (final CelestialBody cBody : celestialBodyList) {
-            if (cBody.getReachable() && (cBody.getDimensionID() == id)) {
+            if (cBody.getReachable() && cBody.getDimensionID() == id) {
                 return cBody;
             }
         }
@@ -795,7 +794,8 @@ public class WorldUtil {
         int count = 0;
 
         for (final Integer integ : temp) {
-            finalArray[count++] = integ;
+            finalArray[count] = integ;
+            count++;
         }
 
         return finalArray;
@@ -977,7 +977,7 @@ public class WorldUtil {
                                 player.worldObj.getWorldInfo().getTerrainType(),
                                 player.theItemInWorldManager.getGameType()));
 
-                if ((worldNew.provider instanceof WorldProviderOrbit) && WorldUtil.registeredSpaceStations.containsKey(dimID))
+                if (worldNew.provider instanceof WorldProviderOrbit && WorldUtil.registeredSpaceStations.containsKey(dimID))
                 // TODO This has never been effective before due to the earlier bug - what does
                 // it actually do?
                 {

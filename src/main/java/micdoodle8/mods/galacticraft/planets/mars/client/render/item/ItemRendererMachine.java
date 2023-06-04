@@ -85,7 +85,7 @@ public class ItemRendererMachine implements IItemRenderer {
      */
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-        if ((item.getItemDamage() < BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) || (item.getItemDamage() >= BlockMachineMars.LAUNCH_CONTROLLER_METADATA)) {
+        if (item.getItemDamage() < BlockMachineMars.CRYOGENIC_CHAMBER_METADATA || item.getItemDamage() >= BlockMachineMars.LAUNCH_CONTROLLER_METADATA) {
             return false;
         }
         return switch (type) {

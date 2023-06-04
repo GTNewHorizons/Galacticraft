@@ -61,34 +61,23 @@ public class BlockBasic extends Block implements IDetectableResource {
 
     @Override
     public IIcon getIcon(int side, int meta) {
-        switch (meta) {
-            case 3:
-                return switch (side) {
-                    case 0 -> this.iconBuffer[1];
-                    case 1 -> this.iconBuffer[0];
-                    default -> this.iconBuffer[2];
-                };
-            case 4:
-                return this.iconBuffer[3];
-            case 5:
-                return this.iconBuffer[4];
-            case 6:
-                return this.iconBuffer[5];
-            case 7:
-                return this.iconBuffer[6];
-            case 8:
-                return this.iconBuffer[7];
-            case 9:
-                return this.iconBuffer[8];
-            case 10:
-                return this.iconBuffer[9];
-            case 11:
-                return this.iconBuffer[10];
-            case 12:
-                return this.iconBuffer[11];
-            default:
-                return meta < this.iconBuffer.length ? this.iconBuffer[meta] : this.iconBuffer[0];
-        }
+        return switch (meta) {
+            case 3 -> switch (side) {
+                                case 0 -> this.iconBuffer[1];
+                                case 1 -> this.iconBuffer[0];
+                                default -> this.iconBuffer[2];
+                            };
+            case 4 -> this.iconBuffer[3];
+            case 5 -> this.iconBuffer[4];
+            case 6 -> this.iconBuffer[5];
+            case 7 -> this.iconBuffer[6];
+            case 8 -> this.iconBuffer[7];
+            case 9 -> this.iconBuffer[8];
+            case 10 -> this.iconBuffer[9];
+            case 11 -> this.iconBuffer[10];
+            case 12 -> this.iconBuffer[11];
+            default -> meta < this.iconBuffer.length ? this.iconBuffer[meta] : this.iconBuffer[0];
+        };
     }
 
     @Override
@@ -114,7 +103,7 @@ public class BlockBasic extends Block implements IDetectableResource {
 
     @Override
     public int quantityDropped(int meta, int fortune, Random random) {
-        if ((fortune <= 0) || (Item.getItemFromBlock(this) == this.getItemDropped(meta, random, fortune))) {
+        if (fortune <= 0 || Item.getItemFromBlock(this) == this.getItemDropped(meta, random, fortune)) {
             return this.quantityDropped(random);
         }
         int j = random.nextInt(fortune + 2) - 1;
@@ -138,7 +127,8 @@ public class BlockBasic extends Block implements IDetectableResource {
         if (metadata == 12) {
             return 8.0F;
             // Meteoric Iron is tougher than diamond
-        } else if (metadata > 8) {
+        }
+        if (metadata > 8) {
             return 6.0F;
             // Blocks of metal are tough - like diamond blocks in vanilla
         }

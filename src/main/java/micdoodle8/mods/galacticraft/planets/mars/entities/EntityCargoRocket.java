@@ -78,7 +78,7 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
             final double modifier = this.getCargoFilledAmount();
             motionScalar *= 5.0D / modifier;
 
-            if (!this.landing && (motionScalar != 0.0)) {
+            if (!this.landing && motionScalar != 0.0) {
                 this.motionY = -motionScalar * Math.cos((this.rotationPitch - 180) * Math.PI / 180.0D);
             }
 
@@ -98,7 +98,7 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
                     this.stopRocketSound();
                 }
             }
-        } else if ((!this.hasValidFuel() && this.getLaunched()) && (Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 10 != 0.0)) {
+        } else if (!this.hasValidFuel() && this.getLaunched() && Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 10 != 0.0) {
             this.motionY -= Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 20;
         }
 

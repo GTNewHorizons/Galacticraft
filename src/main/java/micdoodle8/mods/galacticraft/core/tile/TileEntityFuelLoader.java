@@ -158,7 +158,7 @@ public class TileEntityFuelLoader extends TileBaseElectricBlockWithInventory
         }
         if (fuelable instanceof IFuelableTiered) {
             final int tier = ((IFuelableTiered) fuelable).getRocketTier();
-            if ((tier > 0) && (tier > RocketFuelRecipe.getfuelMaxTier(this.fuelTank.getFluid()))) {
+            if (tier > 0 && tier > RocketFuelRecipe.getfuelMaxTier(this.fuelTank.getFluid())) {
                 this.coorectTier = false;
                 return false;
             }

@@ -83,7 +83,7 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
     public void randomDisplayTick(World par1World, int x, int y, int z, Random par5Random) {
         final TileEntity tile = par1World.getTileEntity(x, y, z);
 
-        if ((tile instanceof TileEntityCoalGenerator tileEntity) && (tileEntity.heatGJperTick > 0)) {
+        if (tile instanceof TileEntityCoalGenerator tileEntity && tileEntity.heatGJperTick > 0) {
             final int metadata = par1World.getBlockMetadata(x, y, z);
             final float var7 = x + 0.5F;
             final float var8 = y + 0.0F + par5Random.nextFloat() * 6.0F / 16.0F;
@@ -162,8 +162,7 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
             if (side == metadata + 2) {
                 return this.iconOxygenInput;
             }
-            // If it is the back side
-            else if (side == ForgeDirection.getOrientation(metadata + 2).getOpposite().ordinal()) {
+            if (side == ForgeDirection.getOrientation(metadata + 2).getOpposite().ordinal()) {
                 return this.iconOxygenOutput;
             }
 
@@ -301,7 +300,8 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
         }
         if (metadata >= BlockMachine2.CIRCUIT_FABRICATOR_METADATA) {
             return new TileEntityCircuitFabricator();
-        } else if (metadata >= BlockMachine2.ELECTRIC_COMPRESSOR_METADATA) {
+        }
+        if (metadata >= BlockMachine2.ELECTRIC_COMPRESSOR_METADATA) {
             return new TileEntityElectricIngotCompressor();
         } else {
             return null;
@@ -334,7 +334,8 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
         }
         if (metadata >= BlockMachine2.CIRCUIT_FABRICATOR_METADATA) {
             return BlockMachine2.CIRCUIT_FABRICATOR_METADATA;
-        } else if (metadata >= BlockMachine2.ELECTRIC_COMPRESSOR_METADATA) {
+        }
+        if (metadata >= BlockMachine2.ELECTRIC_COMPRESSOR_METADATA) {
             return BlockMachine2.ELECTRIC_COMPRESSOR_METADATA;
         } else {
             return 0;

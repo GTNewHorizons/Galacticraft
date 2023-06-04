@@ -156,7 +156,7 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
                 return;
         }
 
-        if (!par1World.isRemote && (par1World.provider instanceof WorldProviderSpaceStation)) {
+        if (!par1World.isRemote && par1World.provider instanceof WorldProviderSpaceStation) {
             ((WorldProviderSpaceStation) par1World.provider).getSpinManager().checkSS(baseBlock, true);
         }
     }
@@ -195,7 +195,7 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
             }
         }
 
-        if (!par1World.isRemote && (par1World.provider instanceof WorldProviderSpaceStation)) {
+        if (!par1World.isRemote && par1World.provider instanceof WorldProviderSpaceStation) {
             ((WorldProviderSpaceStation) par1World.provider).getSpinManager().checkSS(new BlockVec3(x, y, z), true);
         }
     }
@@ -254,7 +254,7 @@ public class BlockSpinThruster extends BlockAdvanced implements ItemBlockDesc.IB
         // TODO this is torch code as a placeholder, still need to adjust positioning
         // and particle type
         // Also make small thrust sounds
-        if ((par1World.provider instanceof WorldProviderSpaceStation) && (((WorldProviderSpaceStation) par1World.provider).getSpinManager().thrustersFiring
+        if (par1World.provider instanceof WorldProviderSpaceStation && (((WorldProviderSpaceStation) par1World.provider).getSpinManager().thrustersFiring
                 || par5Random.nextInt(80) == 0)) {
             final int var6 = par1World.getBlockMetadata(x, y, z) & 7;
             final double var7 = x + 0.5F;

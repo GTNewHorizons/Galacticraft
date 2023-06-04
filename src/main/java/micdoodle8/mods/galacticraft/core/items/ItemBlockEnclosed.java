@@ -77,7 +77,7 @@ public class ItemBlockEnclosed extends ItemBlockDesc {
     public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int side,
             float par8, float par9, float par10) {
         final int metadata = this.getMetadata(itemstack.getItemDamage());
-        if ((metadata != EnumEnclosedBlock.ME_CABLE.getMetadata()) || !CompatibilityManager.isAppEngLoaded()) {
+        if (metadata != EnumEnclosedBlock.ME_CABLE.getMetadata() || !CompatibilityManager.isAppEngLoaded()) {
             return super.onItemUse(itemstack, entityplayer, world, i, j, k, side, par8, par9, par10);
         }
         final int x = i;
@@ -118,29 +118,28 @@ public class ItemBlockEnclosed extends ItemBlockDesc {
                 || j == 255 && this.field_150939_a.getMaterial().isSolid()
                 || !world.canPlaceEntityOnSide(block, i, j, k, false, side, entityplayer, itemstack)) {
             return false;
-        } else {
-            final int j1 = this.field_150939_a.onBlockPlaced(world, i, j, k, side, par8, par9, par10, metadata);
-
-            if (this.placeBlockAt(itemstack, entityplayer, world, i, j, k, side, par8, par9, par10, j1)) {
-                world.playSoundEffect(
-                        i + 0.5F,
-                        j + 0.5F,
-                        k + 0.5F,
-                        this.field_150939_a.stepSound.func_150496_b(),
-                        (this.field_150939_a.stepSound.getVolume() + 1.0F) / 2.0F,
-                        this.field_150939_a.stepSound.getPitch() * 0.8F);
-                --itemstack.stackSize;
-
-                final ItemStack itemME = AEApi.instance().definitions().parts().cableGlass()
-                        .stack(AEColor.Transparent, 1);
-                itemME.stackSize = 2; // Fool AppEng into not destroying anything in the player inventory
-                return AEApi.instance().partHelper().placeBus(itemME, x, y, z, side, entityplayer, world);
-                // Might be better to do appeng.parts.PartPlacement.place( is, x, y, z, side,
-                // player, w,
-                // PartPlacement.PlaceType.INTERACT_SECOND_PASS, 0 );
-            }
-            return true;
         }
+        final int j1 = this.field_150939_a.onBlockPlaced(world, i, j, k, side, par8, par9, par10, metadata);
+
+        if (this.placeBlockAt(itemstack, entityplayer, world, i, j, k, side, par8, par9, par10, j1)) {
+            world.playSoundEffect(
+                    i + 0.5F,
+                    j + 0.5F,
+                    k + 0.5F,
+                    this.field_150939_a.stepSound.func_150496_b(),
+                    (this.field_150939_a.stepSound.getVolume() + 1.0F) / 2.0F,
+                    this.field_150939_a.stepSound.getPitch() * 0.8F);
+            --itemstack.stackSize;
+
+            final ItemStack itemME = AEApi.instance().definitions().parts().cableGlass()
+                    .stack(AEColor.Transparent, 1);
+            itemME.stackSize = 2; // Fool AppEng into not destroying anything in the player inventory
+            return AEApi.instance().partHelper().placeBus(itemME, x, y, z, side, entityplayer, world);
+            // Might be better to do appeng.parts.PartPlacement.place( is, x, y, z, side,
+            // player, w,
+            // PartPlacement.PlaceType.INTERACT_SECOND_PASS, 0 );
+        }
+        return true;
     }
 
     @Override

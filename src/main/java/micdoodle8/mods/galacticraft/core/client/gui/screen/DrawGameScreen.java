@@ -77,7 +77,7 @@ public class DrawGameScreen extends IScreenManager {
         }
 
         if (cornerBlock) {
-            if (((this.mapFirstTick || (int) ticks % 400 == 0) && !this.mapDone) && (this.tickMapDone != (int) ticks)) {
+            if ((this.mapFirstTick || (int) ticks % 400 == 0) && !this.mapDone && this.tickMapDone != (int) ticks) {
                 this.tickMapDone = (int) ticks;
                 this.makeMap();
                 this.mapFirstTick = false;
@@ -100,7 +100,7 @@ public class DrawGameScreen extends IScreenManager {
                 return;
             }
 
-            if (!this.readyToInitialise && (ticks == this.tickDrawn)) {
+            if (!this.readyToInitialise && ticks == this.tickDrawn) {
                 return;
             }
 
@@ -113,12 +113,11 @@ public class DrawGameScreen extends IScreenManager {
             if (ticks == this.tickDrawn) {
                 this.tileCount++;
                 return;
-            } else {
-                // Start normal operations
-                this.initialise = false;
-                this.initialiseLast = false;
-                this.readyToInitialise = false;
             }
+            // Start normal operations
+            this.initialise = false;
+            this.initialiseLast = false;
+            this.readyToInitialise = false;
         }
 
         if (++this.callCount < this.tileCount) {

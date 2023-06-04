@@ -65,7 +65,8 @@ public class SlotSchematicAstroMiner extends Slot {
         }
         if (this.index == 9 || this.index == 10) {
             return itemStack.getItem() == GCItems.flagPole;
-        } else if (this.index >= 11 && this.index <= 13) {
+        }
+        if (this.index >= 11 && this.index <= 13) {
             return itemStack.getItem() == AsteroidsItems.basicItem && itemStack.getItemDamage() == 0;
         } else if (this.index >= 14 && this.index <= 17) {
             return itemStack.getItem() == AsteroidsItems.orionDrive;
@@ -77,15 +78,17 @@ public class SlotSchematicAstroMiner extends Slot {
             return itemStack.getItem() == GCItems.basicItem && itemStack.getItemDamage() == 14;
         } else if (this.index >= 21 && this.index <= 23) {
             return itemStack.getItem() == GCItems.heavyPlatingTier1;
-        } else return switch (this.index) {
-            case 24, 25 -> itemStack.getItem() == Item.getItemFromBlock(RecipeUtil.getChestBlock())
-                                    && itemStack.getItemDamage() == 1;
-            case 26 -> itemStack.getItem() == AsteroidsItems.basicItem && itemStack.getItemDamage() == 8;
-            case 27 -> itemStack.getItem() == Item.getItemFromBlock(AsteroidBlocks.beamReceiver);
-            case 28, 29 -> itemStack.getItem() == GameRegistry.findItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01")
-                                    && itemStack.getItemDamage() == 32603;
-            default -> false;
-        };
+        } else {
+            return switch (this.index) {
+                case 24, 25 -> itemStack.getItem() == Item.getItemFromBlock(RecipeUtil.getChestBlock())
+                                        && itemStack.getItemDamage() == 1;
+                case 26 -> itemStack.getItem() == AsteroidsItems.basicItem && itemStack.getItemDamage() == 8;
+                case 27 -> itemStack.getItem() == Item.getItemFromBlock(AsteroidBlocks.beamReceiver);
+                case 28, 29 -> itemStack.getItem() == GameRegistry.findItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01")
+                                        && itemStack.getItemDamage() == 32603;
+                default -> false;
+            };
+        }
     }
 
     /**

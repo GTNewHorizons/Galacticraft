@@ -652,8 +652,7 @@ public class MapGenDungeon {
         }
         if (x > max) {
             return max;
-        } else {
-            return x;
         }
+        return x;
     }
 }

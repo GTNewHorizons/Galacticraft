@@ -64,7 +64,7 @@ public class EffectHandler {
                     particle = new EntityFXOilDrip(mc.theWorld, position.x, position.y, position.z);
                 }
 
-            if ((dX * dX + dY * dY + dZ * dZ < viewDistance * viewDistance) && "oxygen".equals(particleID)) {
+            if (dX * dX + dY * dY + dZ * dZ < viewDistance * viewDistance && "oxygen".equals(particleID)) {
                 particle = new EntityFXEntityOxygen(mc.theWorld, position, motion, (Vector3) otherInfo[0]);
             }
 

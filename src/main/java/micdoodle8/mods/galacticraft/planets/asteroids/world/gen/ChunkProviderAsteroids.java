@@ -394,7 +394,7 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
 
                     if (isHollow && distance <= hollowSize) {
                         distanceAbove += this.asteroidTurbulance.getNoise(xx, y + 1, zz);
-                        if ((distanceAbove <= 1) && (y - 1 == terrainYY)) {
+                        if (distanceAbove <= 1 && y - 1 == terrainYY) {
                             final int index = indexBase | y + 1;
                             blockArray[index] = this.LIGHT;
                             metaArray[index] = this.LIGHT_META;
@@ -466,8 +466,8 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
                         if (distance <= 1) {
                             final int index = indexBase | y;
                             final int indexAbove = indexBase | y + 1;
-                            if ((Blocks.air == blockArray[indexAbove]
-                                    && (blockArray[index] == this.ASTEROID_STONE || blockArray[index] == this.GRASS)) && (this.rand.nextInt(GLOWSTONE_CHANCE) == 0)) {
+                            if (Blocks.air == blockArray[indexAbove]
+                                    && (blockArray[index] == this.ASTEROID_STONE || blockArray[index] == this.GRASS) && this.rand.nextInt(GLOWSTONE_CHANCE) == 0) {
                                 blockArray[index] = this.LIGHT;
                                 metaArray[index] = this.LIGHT_META;
                             }
@@ -851,7 +851,7 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
                                 && !(chunk.getBlock(x, y, z) instanceof BlockAir)) {
                             int count = 2;
 
-                            if ((x > 1) && (chunk.getBlock(x - 2, y, z) instanceof BlockAir)) {
+                            if (x > 1 && chunk.getBlock(x - 2, y, z) instanceof BlockAir) {
                                 count += 2;
                             }
                             if (x > 2) {

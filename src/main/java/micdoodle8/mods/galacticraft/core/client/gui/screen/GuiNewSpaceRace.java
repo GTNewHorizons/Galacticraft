@@ -741,7 +741,7 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
                         + ": "
                         + ((int) Math.floor(this.sliderEraserSize.getNormalizedValue() * 10) + 1);
             }
-        } else if ((this.currentState == EnumSpaceRaceGui.MAIN) && (this.lastMousePressed && !Mouse.isButtonDown(0))) {
+        } else if (this.currentState == EnumSpaceRaceGui.MAIN && this.lastMousePressed && !Mouse.isButtonDown(0)) {
             if (this.buttonFlag_hover) {
                 this.currentState = EnumSpaceRaceGui.DESIGN_FLAG;
                 this.initGui();
@@ -1322,7 +1322,7 @@ public class GuiNewSpaceRace extends GuiScreen implements ICheckBoxCallback, ITe
 
     @Override
     public void onTextChanged(GuiElementTextBox textBox, String newText) {
-        if ((textBox == this.textBoxRename) && !newText.equals(this.spaceRaceData.getTeamName())) {
+        if (textBox == this.textBoxRename && !newText.equals(this.spaceRaceData.getTeamName())) {
             this.spaceRaceData.setTeamName(newText);
             this.markDirty();
         }

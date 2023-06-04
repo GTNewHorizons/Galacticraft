@@ -149,7 +149,7 @@ public class TileEntityLandingPad extends TileEntityMulti
 
     @Override
     public int getRocketTier() {
-        if ((this.dockedEntity != null) && (this.dockedEntity instanceof EntityTieredRocket)) {
+        if (this.dockedEntity != null && this.dockedEntity instanceof EntityTieredRocket) {
             return ((EntityTieredRocket) this.dockedEntity).getRocketTier();
         }
         return 0;

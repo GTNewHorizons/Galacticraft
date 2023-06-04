@@ -51,7 +51,8 @@ public class ItemKeyMars extends Item implements IKeyItem {
         int i = 0;
 
         for (final String name : ItemKeyMars.keyTypes) {
-            this.keyIcons[i++] = iconRegister.registerIcon(MarsModule.TEXTURE_PREFIX + "key_" + name);
+            this.keyIcons[i] = iconRegister.registerIcon(MarsModule.TEXTURE_PREFIX + "key_" + name);
+            i++;
         }
     }
 

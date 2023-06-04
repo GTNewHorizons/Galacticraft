@@ -200,7 +200,7 @@ public class GuiOxygenSealer extends GuiContainerGC {
         final int metadata = this.sealer.getWorldObj()
                 .getBlockMetadata(this.sealer.xCoord, this.sealer.yCoord + 1, this.sealer.zCoord);
 
-        if ((blockAbove == GCBlocks.breatheableAir || blockAbove == GCBlocks.brightBreatheableAir) && (metadata == 1)) {
+        if ((blockAbove == GCBlocks.breatheableAir || blockAbove == GCBlocks.brightBreatheableAir) && metadata == 1) {
             return EnumColor.DARK_GREEN + GCCoreUtil.translate("gui.status.on.name");
         }
 
@@ -255,22 +255,20 @@ public class GuiOxygenSealer extends GuiContainerGC {
         final int threadCooldown = this.sealer.getScaledThreadCooldown(25);
 
         if (threadCooldown < 15) {
-            if (threadCooldown < 4) {
-                StringBuilder elipsis = new StringBuilder();
-                for (int i = 0; i < (23 - threadCooldown) % 4; i++) {
-                    elipsis.append(".");
-                }
-
-                return EnumColor.ORANGE + GCCoreUtil.translate("gui.status.checkStarting.name") + elipsis.toString();
-            } else {
+            if (threadCooldown >= 4) {
                 return EnumColor.ORANGE + GCCoreUtil.translate("gui.status.checkPending.name");
             }
+            StringBuilder elipsis = new StringBuilder();
+            for (int i = 0; i < (23 - threadCooldown) % 4; i++) {
+                elipsis.append(".");
+            }
+
+            return EnumColor.ORANGE + GCCoreUtil.translate("gui.status.checkStarting.name") + elipsis.toString();
         }
         if (!this.sealer.sealed) {
             return EnumColor.DARK_RED + GCCoreUtil.translate("gui.status.unsealed.name");
-        } else {
-            return EnumColor.DARK_GREEN + GCCoreUtil.translate("gui.status.sealed.name");
         }
+        return EnumColor.DARK_GREEN + GCCoreUtil.translate("gui.status.sealed.name");
     }
 
     @Override

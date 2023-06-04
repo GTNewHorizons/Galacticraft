@@ -116,7 +116,8 @@ public class GuiHandler implements IGuiHandler {
             }
             if (tile instanceof TileEntityOxygenCollector) {
                 return new ContainerOxygenCollector(player.inventory, (TileEntityOxygenCollector) tile);
-            } else if (tile instanceof TileEntityOxygenDistributor) {
+            }
+            if (tile instanceof TileEntityOxygenDistributor) {
                 return new ContainerOxygenDistributor(player.inventory, (TileEntityOxygenDistributor) tile);
             } else if (tile instanceof TileEntityFuelLoader) {
                 return new ContainerFuelLoader(player.inventory, (TileEntityFuelLoader) tile);
@@ -181,7 +182,8 @@ public class GuiHandler implements IGuiHandler {
                     player.inventory,
                     (EntityTieredRocket) player.ridingEntity,
                     ((EntityTieredRocket) player.ridingEntity).getType());
-        } else switch (ID) {
+        }
+        switch (ID) {
             case GuiIdsCore.EXTENDED_INVENTORY:
                 return new GuiExtendedInventory(player, ClientProxyCore.dummyInventory);
             case GuiIdsCore.SPACE_RACE_START:
@@ -202,7 +204,8 @@ public class GuiHandler implements IGuiHandler {
             }
             if (tile instanceof TileEntityOxygenCollector) {
                 return new GuiOxygenCollector(player.inventory, (TileEntityOxygenCollector) tile);
-            } else if (tile instanceof TileEntityOxygenDistributor) {
+            }
+            if (tile instanceof TileEntityOxygenDistributor) {
                 return new GuiOxygenDistributor(player.inventory, (TileEntityOxygenDistributor) tile);
             } else if (tile instanceof TileEntityFuelLoader) {
                 return new GuiFuelLoader(player.inventory, (TileEntityFuelLoader) tile);

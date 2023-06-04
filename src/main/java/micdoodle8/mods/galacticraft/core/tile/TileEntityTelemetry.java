@@ -287,7 +287,7 @@ public class TileEntityTelemetry extends TileEntity {
     public static void updateLinkedPlayer(EntityPlayerMP playerOld, EntityPlayerMP playerNew) {
         for (final BlockVec3Dim telemeter : loadedList) {
             final TileEntity te = telemeter.getTileEntityNoLoad();
-            if ((te instanceof TileEntityTelemetry) && (((TileEntityTelemetry) te).linkedEntity == playerOld)) {
+            if (te instanceof TileEntityTelemetry && ((TileEntityTelemetry) te).linkedEntity == playerOld) {
                 ((TileEntityTelemetry) te).linkedEntity = playerNew;
             }
         }

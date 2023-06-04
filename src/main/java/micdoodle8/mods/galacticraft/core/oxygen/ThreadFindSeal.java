@@ -401,7 +401,7 @@ public class ThreadFindSeal {
                 side = 0;
                 bits = vec.sideDoneBits;
                 do {
-                    if (((bits & 1 << side) == 0) && !this.checkedContains(vec, side)) {
+                    if ((bits & 1 << side) == 0 && !this.checkedContains(vec, side)) {
                         final BlockVec3 sideVec = vec.newVecSide(side);
                         final Block id = sideVec.getBlockIDsafe_noChunkLoad(world);
 
@@ -437,10 +437,8 @@ public class ThreadFindSeal {
                                 // breatheableAir to clear beyond
                                 nextLayer.add(sideVec);
                             }
-                        } else {
-                            if (id != null) {
-                                this.checkedAdd(sideVec);
-                            }
+                        } else if (id != null) {
+                            this.checkedAdd(sideVec);
                         }
                     }
                     side++;
@@ -507,10 +505,8 @@ public class ThreadFindSeal {
                                 // to clear beyond
                                 nextLayer.add(sideVec);
                             }
-                        } else {
-                            if (id != null) {
-                                this.checkedAdd(sideVec);
-                            }
+                        } else if (id != null) {
+                            this.checkedAdd(sideVec);
                         }
                     }
                     side++;
@@ -545,7 +541,7 @@ public class ThreadFindSeal {
                     // blocks
                     // The sides 0 to 5 correspond with the ForgeDirections
                     // but saves a bit of time not to call ForgeDirection
-                    if (((bits & 1 << side) == 0) && !this.checkedContains(vec, side)) {
+                    if ((bits & 1 << side) == 0 && !this.checkedContains(vec, side)) {
                         final BlockVec3 sideVec = vec.newVecSide(side);
                         if (this.checkCount > 0) {
                             this.checkCount--;
@@ -652,7 +648,7 @@ public class ThreadFindSeal {
                     // blocks
                     // The sides 0 to 5 correspond with the ForgeDirections
                     // but saves a bit of time not to call ForgeDirection
-                    if (((bits & 1 << side) == 0) && !this.checkedContains(vec, side)) {
+                    if ((bits & 1 << side) == 0 && !this.checkedContains(vec, side)) {
                         final BlockVec3 sideVec = vec.newVecSide(side);
                         if (this.checkCount > 0) {
                             this.checkCount--;
@@ -949,7 +945,7 @@ public class ThreadFindSeal {
         if (block instanceof BlockSlab) {
             final boolean isTopSlab = (vec.getBlockMetadata(this.world) & 8) == 8;
             // Looking down onto a top slab or looking up onto a bottom slab
-            if ((isTopSlab ? side == 0 : side == 1)) {
+            if (isTopSlab ? side == 0 : side == 1) {
                 // Sealed from that solid side but allow other sides still to be checked
                 this.checkCount--;
                 return false;

@@ -115,7 +115,7 @@ public class TileEntityDungeonSpawner extends TileEntityAdvanced {
 
             this.playerInRange = !playersWithin.isEmpty();
 
-            if ((this.playerInRange && !this.lastPlayerInRange) && (this.boss != null && !this.spawned)) {
+            if (this.playerInRange && !this.lastPlayerInRange && this.boss != null && !this.spawned) {
                 if (this.boss instanceof Entity) {
                     this.worldObj.spawnEntityInWorld((EntityLiving) this.boss);
                     this.playSpawnSound((Entity) this.boss);

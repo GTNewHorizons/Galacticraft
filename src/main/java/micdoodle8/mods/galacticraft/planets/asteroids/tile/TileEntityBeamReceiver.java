@@ -219,7 +219,7 @@ public class TileEntityBeamReceiver extends TileEntityBeamOutput implements IEne
 
         float extracted = this.storage.extractEnergyGC(amount, simulate);
 
-        if ((extracted < amount) && (tile instanceof EnergyStorageTile)) {
+        if (extracted < amount && tile instanceof EnergyStorageTile) {
             extracted += ((EnergyStorageTile) tile).storage.extractEnergyGC(amount - extracted, simulate);
         }
 

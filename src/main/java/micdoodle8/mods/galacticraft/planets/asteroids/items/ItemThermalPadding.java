@@ -33,7 +33,7 @@ public class ItemThermalPadding extends Item implements IItemThermal {
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIconFromDamageForRenderPass(int damage, int pass) {
-        if ((pass == 1) && (this.icons.length > damage + 4)) {
+        if (pass == 1 && this.icons.length > damage + 4) {
             return this.icons[damage + 4];
         }
 
@@ -64,7 +64,8 @@ public class ItemThermalPadding extends Item implements IItemThermal {
         int i = 0;
 
         for (final String name : ItemThermalPadding.names) {
-            this.icons[i++] = iconRegister.registerIcon(AsteroidsModule.TEXTURE_PREFIX + name);
+            this.icons[i] = iconRegister.registerIcon(AsteroidsModule.TEXTURE_PREFIX + name);
+            i++;
         }
     }
 

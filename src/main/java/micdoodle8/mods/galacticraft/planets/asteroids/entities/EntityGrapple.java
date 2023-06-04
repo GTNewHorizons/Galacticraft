@@ -308,7 +308,7 @@ public class EntityGrapple extends Entity implements IProjectile {
 
             float motion;
 
-            if ((movingobjectposition != null) && (movingobjectposition.entityHit == null)) {
+            if (movingobjectposition != null && movingobjectposition.entityHit == null) {
                 this.hitVec = new BlockVec3(
                         movingobjectposition.blockX,
                         movingobjectposition.blockY,
