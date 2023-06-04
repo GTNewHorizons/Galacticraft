@@ -163,15 +163,9 @@ public class TileEntityArclamp extends TileEntity {
 
                 if (!moblist.isEmpty()) {
                     for (final Entity entry : moblist) {
-                        if (!(entry instanceof EntityCreature)) {
+                        if (!(entry instanceof EntityCreature e)) {
                             continue;
                         }
-                        final EntityCreature e = (EntityCreature) entry;
-                        // Check whether the mob can actually *see* the arclamp tile
-                        // if (this.worldObj.func_147447_a(thisPos, Vec3.createVectorHelper(e.posX,
-                        // e.posY, e.posZ),
-                        // true, true, false) != null) continue;
-
                         final Vec3 vecNewTarget = RandomPositionGenerator
                                 .findRandomTargetBlockAwayFrom(e, 16, 7, this.thisPos);
                         if (vecNewTarget == null) {

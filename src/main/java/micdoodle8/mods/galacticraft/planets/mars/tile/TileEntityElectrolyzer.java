@@ -229,14 +229,11 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
     @Override
     public boolean canInsertItem(int slotID, ItemStack itemstack, int side) {
         if (this.isItemValidForSlot(slotID, itemstack)) {
-            switch (slotID) {
-                case 0:
-                    return ItemElectricBase.isElectricItemCharged(itemstack);
-                case 1:
-                    return itemstack.getItem() == Items.water_bucket;
-                default:
-                    return false;
-            }
+            return switch (slotID) {
+                case 0 -> ItemElectricBase.isElectricItemCharged(itemstack);
+                case 1 -> itemstack.getItem() == Items.water_bucket;
+                default -> false;
+            };
         }
         return false;
     }
@@ -244,14 +241,11 @@ public class TileEntityElectrolyzer extends TileBaseElectricBlockWithInventory
     @Override
     public boolean canExtractItem(int slotID, ItemStack itemstack, int side) {
         if (this.isItemValidForSlot(slotID, itemstack)) {
-            switch (slotID) {
-                case 0:
-                    return ItemElectricBase.isElectricItemEmpty(itemstack);
-                case 1:
-                    return itemstack.getItem() == Items.bucket;
-                default:
-                    return false;
-            }
+            return switch (slotID) {
+                case 0 -> ItemElectricBase.isElectricItemEmpty(itemstack);
+                case 1 -> itemstack.getItem() == Items.bucket;
+                default -> false;
+            };
         }
         return false;
     }

@@ -70,8 +70,7 @@ public class BlockMachine extends BlockTileGC implements ItemBlockDesc.IBlockShi
     public void randomDisplayTick(World par1World, int x, int y, int z, Random par5Random) {
         final TileEntity tile = par1World.getTileEntity(x, y, z);
 
-        if (tile instanceof TileEntityCoalGenerator) {
-            final TileEntityCoalGenerator tileEntity = (TileEntityCoalGenerator) tile;
+        if (tile instanceof TileEntityCoalGenerator tileEntity) {
             if (tileEntity.heatGJperTick > 0) {
                 final int metadata = par1World.getBlockMetadata(x, y, z);
                 final float var7 = x + 0.5F;
@@ -223,16 +222,12 @@ public class BlockMachine extends BlockTileGC implements ItemBlockDesc.IBlockShi
     @Override
     public TileEntity createTileEntity(World world, int metadata) {
         metadata &= 12;
-        switch (metadata) {
-            case BlockMachine.COMPRESSOR_METADATA:
-                return new TileEntityIngotCompressor();
-            case 4:
-                return new TileEntityEnergyStorageModule();
-            case 8:
-                return new TileEntityElectricFurnace();
-            default:
-                return new TileEntityCoalGenerator();
-        }
+        return switch (metadata) {
+            case BlockMachine.COMPRESSOR_METADATA -> new TileEntityIngotCompressor();
+            case 4 -> new TileEntityEnergyStorageModule();
+            case 8 -> new TileEntityElectricFurnace();
+            default -> new TileEntityCoalGenerator();
+        };
     }
 
     public ItemStack getCompressor() {

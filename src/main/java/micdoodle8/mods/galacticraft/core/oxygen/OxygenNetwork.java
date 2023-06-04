@@ -49,9 +49,7 @@ public class OxygenNetwork implements IOxygenNetwork {
                 final List<TileEntity> ignoreTilesList = Arrays.asList(ignoreTiles);
                 for (final TileEntity tileEntity : new HashSet<>(this.oxygenTiles.keySet())) {
                     if (!ignoreTilesList.contains(tileEntity)) {
-                        if (tileEntity instanceof IOxygenReceiver) {
-                            final IOxygenReceiver oxygenTile = (IOxygenReceiver) tileEntity;
-
+                        if (tileEntity instanceof IOxygenReceiver oxygenTile) {
                             if (oxygenTile.shouldPullOxygen()) {
                                 for (final ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
                                     if (oxygenTile.canConnect(direction, NetworkType.OXYGEN)) {
@@ -98,9 +96,7 @@ public class OxygenNetwork implements IOxygenNetwork {
                 continue;
             }
 
-            if (tileEntity instanceof IOxygenReceiver && !tileEntity.isInvalid()) {
-                final IOxygenReceiver oxygenTile = (IOxygenReceiver) tileEntity;
-
+            if (tileEntity instanceof IOxygenReceiver oxygenTile && !tileEntity.isInvalid()) {
                 if (oxygenTile.shouldPullOxygen()) {
                     if (tileEntity.getWorldObj().getTileEntity(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord)
                             == tileEntity) {

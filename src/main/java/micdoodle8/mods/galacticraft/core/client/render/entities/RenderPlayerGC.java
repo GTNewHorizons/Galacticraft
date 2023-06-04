@@ -76,9 +76,7 @@ public class RenderPlayerGC extends RenderPlayer {
 
     public static void renderModelS(RendererLivingEntity inst, EntityLivingBase par1EntityLivingBase, float par2,
             float par3, float par4, float par5, float par6, float par7) {
-        if (inst instanceof RenderPlayer) {
-            final RenderPlayer thisInst = (RenderPlayer) inst;
-
+        if (inst instanceof RenderPlayer thisInst) {
             if (isSmartRenderLoaded == null) {
                 isSmartRenderLoaded = Loader.isModLoaded("SmartRender");
             }

@@ -79,28 +79,21 @@ public class ItemRendererHeavyNoseCone implements IItemRenderer {
      */
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-        switch (type) {
-            case ENTITY:
-                return false;
-            case EQUIPPED:
-                return false;
-            case EQUIPPED_FIRST_PERSON:
-                return false;
-            case INVENTORY:
-                return true;
-            default:
-                return false;
-        }
+        return switch (type) {
+            case ENTITY -> false;
+            case EQUIPPED -> false;
+            case EQUIPPED_FIRST_PERSON -> false;
+            case INVENTORY -> true;
+            default -> false;
+        };
     }
 
     @Override
     public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
-        switch (helper) {
-            case INVENTORY_BLOCK:
-                return false;
-            default:
-                return false;
-        }
+        return switch (helper) {
+            case INVENTORY_BLOCK -> false;
+            default -> false;
+        };
     }
 
     @Override

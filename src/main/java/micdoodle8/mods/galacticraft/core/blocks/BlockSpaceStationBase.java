@@ -51,12 +51,10 @@ public class BlockSpaceStationBase extends BlockContainer implements ITileEntity
 
     @Override
     public IIcon getIcon(int par1, int par2) {
-        switch (par1) {
-            case 1:
-                return this.spaceStationIcons[0];
-            default:
-                return this.spaceStationIcons[1];
-        }
+        return switch (par1) {
+            case 1 -> this.spaceStationIcons[0];
+            default -> this.spaceStationIcons[1];
+        };
     }
 
     @Override

@@ -58,8 +58,7 @@ public class BlockBeamReceiver extends BlockTileGC implements ItemBlockDesc.IBlo
         if (meta != oldMeta) {
             world.setBlockMetadataWithNotify(x, y, z, meta, 3);
             final TileEntity thisTile = world.getTileEntity(x, y, z);
-            if (thisTile instanceof TileEntityBeamReceiver) {
-                final TileEntityBeamReceiver thisReceiver = (TileEntityBeamReceiver) thisTile;
+            if (thisTile instanceof TileEntityBeamReceiver thisReceiver) {
                 thisReceiver.setFacing(ForgeDirection.getOrientation(meta));
                 thisReceiver.invalidateReflector();
                 thisReceiver.initiateReflector();

@@ -119,8 +119,7 @@ public class WorldUtil {
             }
 
             final IGalacticraftWorldProvider customProvider = (IGalacticraftWorldProvider) entity.worldObj.provider;
-            if (entity instanceof EntityPlayer) {
-                final EntityPlayer player = (EntityPlayer) entity;
+            if (entity instanceof EntityPlayer player) {
                 if (player.inventory != null) {
                     int armorModLowGrav = 100;
                     int armorModHighGrav = 100;
@@ -159,8 +158,7 @@ public class WorldUtil {
     }
 
     public static float getGravityFactor(Entity entity) {
-        if (entity.worldObj.provider instanceof IGalacticraftWorldProvider) {
-            final IGalacticraftWorldProvider customProvider = (IGalacticraftWorldProvider) entity.worldObj.provider;
+        if (entity.worldObj.provider instanceof IGalacticraftWorldProvider customProvider) {
             float returnValue = MathHelper.sqrt_float(0.08F / (0.08F - customProvider.getGravity()));
             if (returnValue > 2.5F) {
                 returnValue = 2.5F;
@@ -174,8 +172,7 @@ public class WorldUtil {
     }
 
     public static double getItemGravity(EntityItem e) {
-        if (e.worldObj.provider instanceof IGalacticraftWorldProvider) {
-            final IGalacticraftWorldProvider customProvider = (IGalacticraftWorldProvider) e.worldObj.provider;
+        if (e.worldObj.provider instanceof IGalacticraftWorldProvider customProvider) {
             return Math.max(
                     0.002D,
                     0.03999999910593033D - (customProvider instanceof IOrbitDimension ? 0.05999999910593033D
@@ -871,8 +868,7 @@ public class WorldUtil {
     }
 
     public static Entity cancelTeleportation(Entity entity) {
-        if (entity instanceof EntityPlayerMP) {
-            EntityPlayerMP player = (EntityPlayerMP) entity;
+        if (entity instanceof EntityPlayerMP player) {
             final GCPlayerStats stats = GCPlayerStats.get(player);
             stats.usingPlanetSelectionGui = false;
         }
@@ -1226,15 +1222,14 @@ public class WorldUtil {
     }
 
     private static void removeEntityFromWorld(World var0, Entity var1, boolean directlyRemove) {
-        if (var1 instanceof EntityPlayer) {
-            final EntityPlayer var2 = (EntityPlayer) var1;
+        if (var1 instanceof EntityPlayer var2) {
             var2.closeScreen();
             var0.playerEntities.remove(var2);
             var0.updateAllPlayersSleepingFlag();
         }
 
         if (directlyRemove) {
-            final List<Entity> l = new ArrayList<Entity>();
+            final List<Entity> l = new ArrayList<>();
             l.add(var1);
             var0.unloadEntities(l);
             // This will automatically remove the entity from the world and the chunk prior

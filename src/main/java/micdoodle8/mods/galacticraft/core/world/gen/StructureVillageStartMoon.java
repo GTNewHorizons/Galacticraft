@@ -1,7 +1,6 @@
 package micdoodle8.mods.galacticraft.core.world.gen;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 import net.minecraft.world.World;
@@ -46,11 +45,7 @@ public class StructureVillageStartMoon extends StructureStart {
 
         this.updateBoundingBox();
         var10 = 0;
-        final Iterator<StructureComponent> var13 = this.components.iterator();
-
-        while (var13.hasNext()) {
-            final StructureComponent var12 = var13.next();
-
+        for (StructureComponent var12 : this.components) {
             if (!(var12 instanceof StructureComponentVillageRoadPiece)) {
                 ++var10;
             }

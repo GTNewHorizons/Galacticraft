@@ -176,32 +176,24 @@ public class TileEntityOxygenCompressor extends TileEntityOxygen implements IInv
     @Override
     public boolean canInsertItem(int slotID, ItemStack itemstack, int side) {
         if (this.isItemValidForSlot(slotID, itemstack)) {
-            switch (slotID) {
-                case 0:
-                    return itemstack.getItemDamage() > 1;
-                case 1:
-                    return ItemElectricBase.isElectricItemCharged(itemstack);
-                case 2:
-                    return itemstack.getItemDamage() < itemstack.getItem().getMaxDamage();
-                default:
-                    return false;
-            }
+            return switch (slotID) {
+                case 0 -> itemstack.getItemDamage() > 1;
+                case 1 -> ItemElectricBase.isElectricItemCharged(itemstack);
+                case 2 -> itemstack.getItemDamage() < itemstack.getItem().getMaxDamage();
+                default -> false;
+            };
         }
         return false;
     }
 
     @Override
     public boolean canExtractItem(int slotID, ItemStack itemstack, int side) {
-        switch (slotID) {
-            case 0:
-                return itemstack.getItem() instanceof ItemOxygenTank && itemstack.getItemDamage() == 0;
-            case 1:
-                return ItemElectricBase.isElectricItemEmpty(itemstack);
-            case 2:
-                return FluidUtil.isEmptyContainer(itemstack);
-            default:
-                return false;
-        }
+        return switch (slotID) {
+            case 0 -> itemstack.getItem() instanceof ItemOxygenTank && itemstack.getItemDamage() == 0;
+            case 1 -> ItemElectricBase.isElectricItemEmpty(itemstack);
+            case 2 -> FluidUtil.isEmptyContainer(itemstack);
+            default -> false;
+        };
     }
 
     @Override

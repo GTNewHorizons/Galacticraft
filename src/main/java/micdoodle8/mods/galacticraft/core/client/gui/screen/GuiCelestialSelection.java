@@ -69,14 +69,11 @@ public class GuiCelestialSelection extends GuiScreen {
         TELEPORTATION;
 
         public static MapMode fromInteger(int val) {
-            switch (val) {
-                case 1:
-                    return VIEW;
-                case 2:
-                    return TELEPORTATION;
-                default:
-                    return TRAVEL;
-            }
+            return switch (val) {
+                case 1 -> VIEW;
+                case 2 -> TELEPORTATION;
+                default -> TRAVEL;
+            };
         }
     }
 
@@ -1836,8 +1833,7 @@ public class GuiCelestialSelection extends GuiScreen {
                 this.mc.renderEngine.bindTexture(GuiCelestialSelection.guiMain1);
                 GL11.glColor4f(0.0F, 0.6F, 1.0F, 1);
 
-                if (this.selectedBody instanceof Satellite) {
-                    final Satellite selectedSatellite = (Satellite) this.selectedBody;
+                if (this.selectedBody instanceof Satellite selectedSatellite) {
                     final int stationListSize = this.spaceStationMap.get(this.getSatelliteParentID(selectedSatellite))
                             .size();
 

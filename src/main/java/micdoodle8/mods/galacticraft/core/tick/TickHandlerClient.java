@@ -421,8 +421,7 @@ public class TickHandlerClient {
                 TickHandlerClient.spaceRaceGuiScheduled = false;
             }
 
-            if (player != null && player.ridingEntity != null && player.ridingEntity instanceof EntitySpaceshipBase) {
-                final EntitySpaceshipBase rocket = (EntitySpaceshipBase) player.ridingEntity;
+            if (player != null && player.ridingEntity != null && player.ridingEntity instanceof EntitySpaceshipBase rocket) {
                 if (rocket.prevRotationPitch != rocket.rotationPitch || rocket.prevRotationYaw != rocket.rotationYaw) {
                     GalacticraftCore.packetPipeline.sendToServer(new PacketRotateRocket(player.ridingEntity));
                 }
@@ -453,8 +452,7 @@ public class TickHandlerClient {
                 }
             }
 
-            if (player != null && player.ridingEntity != null && player.ridingEntity instanceof EntitySpaceshipBase) {
-                final EntitySpaceshipBase ship = (EntitySpaceshipBase) player.ridingEntity;
+            if (player != null && player.ridingEntity != null && player.ridingEntity instanceof EntitySpaceshipBase ship) {
                 boolean hasChanged = false;
 
                 if (minecraft.gameSettings.keyBindLeft.getIsKeyPressed()) {
@@ -489,8 +487,7 @@ public class TickHandlerClient {
             if (world != null) {
                 final List<Entity> entityList = world.loadedEntityList;
                 for (final Object e : entityList) {
-                    if (e instanceof IEntityNoisy) {
-                        final IEntityNoisy vehicle = (IEntityNoisy) e;
+                    if (e instanceof IEntityNoisy vehicle) {
                         if (vehicle.getSoundUpdater() == null) {
                             final ISound noise = vehicle
                                     .setSoundUpdater(FMLClientHandler.instance().getClient().thePlayer);

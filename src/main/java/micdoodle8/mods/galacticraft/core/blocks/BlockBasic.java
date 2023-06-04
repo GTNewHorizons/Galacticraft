@@ -63,14 +63,11 @@ public class BlockBasic extends Block implements IDetectableResource {
     public IIcon getIcon(int side, int meta) {
         switch (meta) {
             case 3:
-                switch (side) {
-                    case 0:
-                        return this.iconBuffer[1];
-                    case 1:
-                        return this.iconBuffer[0];
-                    default:
-                        return this.iconBuffer[2];
-                }
+                return switch (side) {
+                    case 0 -> this.iconBuffer[1];
+                    case 1 -> this.iconBuffer[0];
+                    default -> this.iconBuffer[2];
+                };
             case 4:
                 return this.iconBuffer[3];
             case 5:
@@ -96,22 +93,18 @@ public class BlockBasic extends Block implements IDetectableResource {
 
     @Override
     public Item getItemDropped(int meta, Random random, int par3) {
-        switch (meta) {
-            case 8:
-                return GCItems.basicItem;
-            default:
-                return Item.getItemFromBlock(this);
-        }
+        return switch (meta) {
+            case 8 -> GCItems.basicItem;
+            default -> Item.getItemFromBlock(this);
+        };
     }
 
     @Override
     public int damageDropped(int meta) {
-        switch (meta) {
-            case 8:
-                return 2;
-            default:
-                return meta;
-        }
+        return switch (meta) {
+            case 8 -> 2;
+            default -> meta;
+        };
     }
 
     @Override

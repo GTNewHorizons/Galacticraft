@@ -93,8 +93,8 @@ public class EntityFXLanderFlame extends EntityFX {
                 .getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(1.0D, 0.5D, 1.0D));
 
         if (var3 != null) {
-            for (int var4 = 0; var4 < var3.size(); ++var4) {
-                final Entity var5 = (Entity) var3.get(var4);
+            for (Object element : var3) {
+                final Entity var5 = (Entity) element;
 
                 if (var5 instanceof EntityLivingBase) {
                     if (!var5.isDead && !var5.isBurning() && !var5.equals(this.ridingEntity)) {

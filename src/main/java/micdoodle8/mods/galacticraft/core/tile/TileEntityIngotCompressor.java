@@ -2,7 +2,6 @@ package micdoodle8.mods.galacticraft.core.tile;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
@@ -149,22 +148,16 @@ public class TileEntityIngotCompressor extends TileEntityAdvanced implements IIn
             } else if (recipe instanceof ShapelessOreRecipe) {
                 final ArrayList<Object> required = new ArrayList<>(((ShapelessOreRecipe) recipe).getInput());
 
-                final Iterator<Object> req = required.iterator();
-
                 int match = 0;
 
-                while (req.hasNext()) {
-                    final Object next = req.next();
-
+                for (Object next : required) {
                     if (next instanceof ItemStack) {
                         if (OreDictionary.itemMatches((ItemStack) next, stack, false)) {
                             match++;
                         }
                     } else if (next instanceof ArrayList) {
-                        @SuppressWarnings("unchecked")
-                        final Iterator<ItemStack> itr = ((ArrayList<ItemStack>) next).iterator();
-                        while (itr.hasNext()) {
-                            if (OreDictionary.itemMatches(itr.next(), stack, false)) {
+                        for (ItemStack element : ((ArrayList<ItemStack>) next)) {
+                            if (OreDictionary.itemMatches(element, stack, false)) {
                                 match++;
                                 break;
                             }

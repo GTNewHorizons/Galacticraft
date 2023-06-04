@@ -45,9 +45,7 @@ public class HydrogenNetwork implements IHydrogenNetwork {
                 final List<TileEntity> ignoreTilesList = Arrays.asList(ignoreTiles);
                 for (final TileEntity tileEntity : new HashSet<>(this.hydrogenTiles.keySet())) {
                     if (!ignoreTilesList.contains(tileEntity)) {
-                        if (tileEntity instanceof TileEntityMethaneSynthesizer) {
-                            final TileEntityMethaneSynthesizer hydrogenTile = (TileEntityMethaneSynthesizer) tileEntity;
-
+                        if (tileEntity instanceof TileEntityMethaneSynthesizer hydrogenTile) {
                             if (hydrogenTile.shouldPullHydrogen()) {
                                 for (final ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
                                     final TileEntity tile = new BlockVec3(tileEntity)

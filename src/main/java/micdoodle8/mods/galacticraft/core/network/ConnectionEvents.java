@@ -42,8 +42,7 @@ public class ConnectionEvents {
     public void onPlayerLogin(PlayerLoggedInEvent event) {
         ChunkLoadingCallback.onPlayerLogin(event.player);
 
-        if (event.player instanceof EntityPlayerMP) {
-            final EntityPlayerMP thePlayer = (EntityPlayerMP) event.player;
+        if (event.player instanceof EntityPlayerMP thePlayer) {
             final GCPlayerStats stats = GCPlayerStats.get(thePlayer);
             SpaceStationWorldData.checkAllStations(thePlayer, stats);
             GalacticraftCore.packetPipeline

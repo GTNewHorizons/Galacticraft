@@ -434,8 +434,7 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
                 return this.centre.x == vector.x && this.centre.y == vector.y && this.centre.z == vector.z;
             }
 
-            if (o instanceof BlockVec3) {
-                final BlockVec3 vector = (BlockVec3) o;
+            if (o instanceof BlockVec3 vector) {
                 return this.centre.x == vector.x && this.centre.y == vector.y && this.centre.z == vector.z;
             }
 

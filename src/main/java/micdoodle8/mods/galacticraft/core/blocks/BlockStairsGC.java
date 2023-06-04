@@ -130,148 +130,92 @@ public class BlockStairsGC extends BlockStairs {
         if (this.category == StairsCategoryGC.TIN2) // Tin Decoration
         {
             if (meta == 0 || meta == 8) {
-                switch (side) {
-                    case 0:
-                        return this.tinSideIcon[1]; // BOTTOM
-                    case 1:
-                        return this.blockIcon; // TOP
-                    case 2:
-                        return this.tinSideIcon[0]; // Z-
-                    case 3:
-                        return this.tinSideIcon[0]; // Z+
-                    case 4:
-                        return this.blockIcon; // X-
-                    case 5:
-                        return this.tinSideIcon[0]; // X+
-                    default:
-                        return this.blockIcon;
-                }
+                return switch (side) {
+                    case 0 -> this.tinSideIcon[1]; // BOTTOM
+                    case 1 -> this.blockIcon; // TOP
+                    case 2 -> this.tinSideIcon[0]; // Z-
+                    case 3 -> this.tinSideIcon[0]; // Z+
+                    case 4 -> this.blockIcon; // X-
+                    case 5 -> this.tinSideIcon[0]; // X+
+                    default -> this.blockIcon;
+                };
             }
             if (meta == 1 || meta == 9) {
-                switch (side) {
-                    case 0:
-                        return this.tinSideIcon[1]; // BOTTOM
-                    case 1:
-                        return this.blockIcon; // TOP
-                    case 2:
-                        return this.tinSideIcon[0]; // Z-
-                    case 3:
-                        return this.tinSideIcon[0]; // Z+
-                    case 4:
-                        return this.tinSideIcon[0]; // X-
-                    case 5:
-                        return this.blockIcon; // X+
-                    default:
-                        return this.blockIcon;
-                }
+                return switch (side) {
+                    case 0 -> this.tinSideIcon[1]; // BOTTOM
+                    case 1 -> this.blockIcon; // TOP
+                    case 2 -> this.tinSideIcon[0]; // Z-
+                    case 3 -> this.tinSideIcon[0]; // Z+
+                    case 4 -> this.tinSideIcon[0]; // X-
+                    case 5 -> this.blockIcon; // X+
+                    default -> this.blockIcon;
+                };
             }
             if (meta == 2 || meta == 10) {
-                switch (side) {
-                    case 0:
-                        return this.tinSideIcon[1]; // BOTTOM
-                    case 1:
-                        return this.blockIcon; // TOP
-                    case 2:
-                        return this.blockIcon; // Z-
-                    case 3:
-                        return this.tinSideIcon[0]; // Z+
-                    case 4:
-                        return this.tinSideIcon[0]; // X-
-                    case 5:
-                        return this.tinSideIcon[0]; // X+
-                    default:
-                        return this.blockIcon;
-                }
+                return switch (side) {
+                    case 0 -> this.tinSideIcon[1]; // BOTTOM
+                    case 1 -> this.blockIcon; // TOP
+                    case 2 -> this.blockIcon; // Z-
+                    case 3 -> this.tinSideIcon[0]; // Z+
+                    case 4 -> this.tinSideIcon[0]; // X-
+                    case 5 -> this.tinSideIcon[0]; // X+
+                    default -> this.blockIcon;
+                };
             }
             if (meta == 3 || meta == 11) {
-                switch (side) {
-                    case 0:
-                        return this.tinSideIcon[1]; // BOTTOM
-                    case 1:
-                        return this.blockIcon; // TOP
-                    case 2:
-                        return this.tinSideIcon[0]; // Z-
-                    case 3:
-                        return this.blockIcon; // Z+
-                    case 4:
-                        return this.tinSideIcon[0]; // X-
-                    case 5:
-                        return this.tinSideIcon[0]; // X+
-                    default:
-                        return this.blockIcon;
-                }
+                return switch (side) {
+                    case 0 -> this.tinSideIcon[1]; // BOTTOM
+                    case 1 -> this.blockIcon; // TOP
+                    case 2 -> this.tinSideIcon[0]; // Z-
+                    case 3 -> this.blockIcon; // Z+
+                    case 4 -> this.tinSideIcon[0]; // X-
+                    case 5 -> this.tinSideIcon[0]; // X+
+                    default -> this.blockIcon;
+                };
             }
             if (meta == 4 || meta == 12) {
-                switch (side) {
-                    case 0:
-                        return this.blockIcon; // BOTTOM
-                    case 1:
-                        return this.tinSideIcon[1]; // TOP
-                    case 2:
-                        return this.tinSideIcon[0]; // Z-
-                    case 3:
-                        return this.tinSideIcon[0]; // Z+
-                    case 4:
-                        return this.blockIcon; // X-
-                    case 5:
-                        return this.tinSideIcon[0]; // X+
-                    default:
-                        return this.blockIcon;
-                }
+                return switch (side) {
+                    case 0 -> this.blockIcon; // BOTTOM
+                    case 1 -> this.tinSideIcon[1]; // TOP
+                    case 2 -> this.tinSideIcon[0]; // Z-
+                    case 3 -> this.tinSideIcon[0]; // Z+
+                    case 4 -> this.blockIcon; // X-
+                    case 5 -> this.tinSideIcon[0]; // X+
+                    default -> this.blockIcon;
+                };
             }
             if (meta == 5 || meta == 13) {
-                switch (side) {
-                    case 0:
-                        return this.blockIcon; // BOTTOM
-                    case 1:
-                        return this.tinSideIcon[1]; // TOP
-                    case 2:
-                        return this.tinSideIcon[0]; // Z-
-                    case 3:
-                        return this.tinSideIcon[0]; // Z+
-                    case 4:
-                        return this.tinSideIcon[0]; // X-
-                    case 5:
-                        return this.blockIcon; // X+
-                    default:
-                        return this.blockIcon;
-                }
+                return switch (side) {
+                    case 0 -> this.blockIcon; // BOTTOM
+                    case 1 -> this.tinSideIcon[1]; // TOP
+                    case 2 -> this.tinSideIcon[0]; // Z-
+                    case 3 -> this.tinSideIcon[0]; // Z+
+                    case 4 -> this.tinSideIcon[0]; // X-
+                    case 5 -> this.blockIcon; // X+
+                    default -> this.blockIcon;
+                };
             }
             if (meta == 6 || meta == 14) {
-                switch (side) {
-                    case 0:
-                        return this.blockIcon; // BOTTOM
-                    case 1:
-                        return this.tinSideIcon[1]; // TOP
-                    case 2:
-                        return this.blockIcon; // Z-
-                    case 3:
-                        return this.tinSideIcon[0]; // Z+
-                    case 4:
-                        return this.tinSideIcon[0]; // X-
-                    case 5:
-                        return this.tinSideIcon[0]; // X+
-                    default:
-                        return this.blockIcon;
-                }
+                return switch (side) {
+                    case 0 -> this.blockIcon; // BOTTOM
+                    case 1 -> this.tinSideIcon[1]; // TOP
+                    case 2 -> this.blockIcon; // Z-
+                    case 3 -> this.tinSideIcon[0]; // Z+
+                    case 4 -> this.tinSideIcon[0]; // X-
+                    case 5 -> this.tinSideIcon[0]; // X+
+                    default -> this.blockIcon;
+                };
             }
             if (meta == 7 || meta == 15) {
-                switch (side) {
-                    case 0:
-                        return this.blockIcon; // BOTTOM
-                    case 1:
-                        return this.tinSideIcon[1]; // TOP
-                    case 2:
-                        return this.tinSideIcon[0]; // Z-
-                    case 3:
-                        return this.blockIcon; // Z+
-                    case 4:
-                        return this.tinSideIcon[0]; // X-
-                    case 5:
-                        return this.tinSideIcon[0]; // X+
-                    default:
-                        return this.blockIcon;
-                }
+                return switch (side) {
+                    case 0 -> this.blockIcon; // BOTTOM
+                    case 1 -> this.tinSideIcon[1]; // TOP
+                    case 2 -> this.tinSideIcon[0]; // Z-
+                    case 3 -> this.blockIcon; // Z+
+                    case 4 -> this.tinSideIcon[0]; // X-
+                    case 5 -> this.tinSideIcon[0]; // X+
+                    default -> this.blockIcon;
+                };
             }
         }
         return this.blockIcon;

@@ -71,9 +71,7 @@ public class BlockRefinery extends BlockAdvancedTile implements ItemBlockDesc.IB
     public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         final TileEntity te = par1World.getTileEntity(par2, par3, par4);
 
-        if (te instanceof TileEntityRefinery) {
-            final TileEntityRefinery refinery = (TileEntityRefinery) te;
-
+        if (te instanceof TileEntityRefinery refinery) {
             if (refinery.processTicks > 0) {
                 par1World.getBlockMetadata(par2, par3, par4);
                 final float var7 = par2 + 0.5F;

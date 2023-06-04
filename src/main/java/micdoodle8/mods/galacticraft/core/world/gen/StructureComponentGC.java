@@ -17,52 +17,43 @@ public abstract class StructureComponentGC extends StructureComponent {
 
     public static StructureBoundingBox getComponentToAddBoundingBox(int x, int y, int z, int lengthOffset,
             int heightOffset, int widthOffset, int length, int height, int width, int coordBaseMode) {
-        switch (coordBaseMode) {
-            case 0:
-                return new StructureBoundingBox(
-                        x + lengthOffset,
-                        y + heightOffset,
-                        z + widthOffset,
-                        x + length + lengthOffset,
-                        y + height + heightOffset,
-                        z + width + widthOffset);
-
-            case 1:
-                return new StructureBoundingBox(
-                        x - width + widthOffset,
-                        y + heightOffset,
-                        z + lengthOffset,
-                        x + widthOffset,
-                        y + height + heightOffset,
-                        z + length + lengthOffset);
-
-            case 2:
-                return new StructureBoundingBox(
-                        x - length - lengthOffset,
-                        y + heightOffset,
-                        z - width - widthOffset,
-                        x - lengthOffset,
-                        y + height + heightOffset,
-                        z - widthOffset);
-
-            case 3:
-                return new StructureBoundingBox(
-                        x + widthOffset,
-                        y + heightOffset,
-                        z - length,
-                        x + width + widthOffset,
-                        y + height + heightOffset,
-                        z + lengthOffset);
-
-            default:
-                return new StructureBoundingBox(
-                        x + lengthOffset,
-                        y + heightOffset,
-                        z + widthOffset,
-                        x + length + lengthOffset,
-                        y + height + heightOffset,
-                        z + width + widthOffset);
-        }
+        return switch (coordBaseMode) {
+            case 0 -> new StructureBoundingBox(
+                                    x + lengthOffset,
+                                    y + heightOffset,
+                                    z + widthOffset,
+                                    x + length + lengthOffset,
+                                    y + height + heightOffset,
+                                    z + width + widthOffset);
+            case 1 -> new StructureBoundingBox(
+                                    x - width + widthOffset,
+                                    y + heightOffset,
+                                    z + lengthOffset,
+                                    x + widthOffset,
+                                    y + height + heightOffset,
+                                    z + length + lengthOffset);
+            case 2 -> new StructureBoundingBox(
+                                    x - length - lengthOffset,
+                                    y + heightOffset,
+                                    z - width - widthOffset,
+                                    x - lengthOffset,
+                                    y + height + heightOffset,
+                                    z - widthOffset);
+            case 3 -> new StructureBoundingBox(
+                                    x + widthOffset,
+                                    y + heightOffset,
+                                    z - length,
+                                    x + width + widthOffset,
+                                    y + height + heightOffset,
+                                    z + lengthOffset);
+            default -> new StructureBoundingBox(
+                                    x + lengthOffset,
+                                    y + heightOffset,
+                                    z + widthOffset,
+                                    x + length + lengthOffset,
+                                    y + height + heightOffset,
+                                    z + width + widthOffset);
+        };
     }
 
     protected void placeSpawnerAtCurrentPosition(World var1, Random var2, int var3, int var4, int var5, String var6,
@@ -105,42 +96,24 @@ public abstract class StructureComponentGC extends StructureComponent {
 
     @Override
     protected int getXWithOffset(int var1, int var2) {
-        switch (this.getCoordBaseMode()) {
-            case 0:
-                return this.boundingBox.minX + var1;
-
-            case 1:
-                return this.boundingBox.maxX - var2;
-
-            case 2:
-                return this.boundingBox.maxX - var1;
-
-            case 3:
-                return this.boundingBox.minX + var2;
-
-            default:
-                return var1;
-        }
+        return switch (this.getCoordBaseMode()) {
+            case 0 -> this.boundingBox.minX + var1;
+            case 1 -> this.boundingBox.maxX - var2;
+            case 2 -> this.boundingBox.maxX - var1;
+            case 3 -> this.boundingBox.minX + var2;
+            default -> var1;
+        };
     }
 
     @Override
     protected int getZWithOffset(int var1, int var2) {
-        switch (this.getCoordBaseMode()) {
-            case 0:
-                return this.boundingBox.minZ + var2;
-
-            case 1:
-                return this.boundingBox.minZ + var1;
-
-            case 2:
-                return this.boundingBox.maxZ - var2;
-
-            case 3:
-                return this.boundingBox.maxZ - var1;
-
-            default:
-                return var2;
-        }
+        return switch (this.getCoordBaseMode()) {
+            case 0 -> this.boundingBox.minZ + var2;
+            case 1 -> this.boundingBox.minZ + var1;
+            case 2 -> this.boundingBox.maxZ - var2;
+            case 3 -> this.boundingBox.maxZ - var1;
+            default -> var2;
+        };
     }
 
     @Override

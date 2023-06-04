@@ -451,9 +451,7 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
     }
 
     public EntitySlimeling spawnBabyAnimal(EntityAgeable par1EntityAgeable) {
-        if (par1EntityAgeable instanceof EntitySlimeling) {
-            final EntitySlimeling otherSlimeling = (EntitySlimeling) par1EntityAgeable;
-
+        if (par1EntityAgeable instanceof EntitySlimeling otherSlimeling) {
             final Vector3 colorParentA = new Vector3(this.getColorRed(), this.getColorGreen(), this.getColorBlue());
             final Vector3 colorParentB = new Vector3(
                     otherSlimeling.getColorRed(),
@@ -492,10 +490,9 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
 
     @Override
     public boolean canMateWith(EntityAnimal par1EntityAnimal) {
-        if (par1EntityAnimal == this || !this.isTamed() || !(par1EntityAnimal instanceof EntitySlimeling)) {
+        if (par1EntityAnimal == this || !this.isTamed() || !(par1EntityAnimal instanceof EntitySlimeling slimeling)) {
             return false;
         }
-        final EntitySlimeling slimeling = (EntitySlimeling) par1EntityAnimal;
         return slimeling.isTamed() && !slimeling.isSitting() && this.isInLove() && slimeling.isInLove();
     }
 
@@ -504,9 +501,7 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
         if ((par1EntityLivingBase instanceof EntityCreeper) || (par1EntityLivingBase instanceof EntityGhast)) {
             return false;
         }
-        if (par1EntityLivingBase instanceof EntitySlimeling) {
-            final EntitySlimeling slimeling = (EntitySlimeling) par1EntityLivingBase;
-
+        if (par1EntityLivingBase instanceof EntitySlimeling slimeling) {
             if (slimeling.isTamed() && slimeling.getOwner() == par2EntityLivingBase) {
                 return false;
             }

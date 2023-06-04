@@ -31,16 +31,14 @@ public class SpaceStationWorldData extends WorldSavedData {
     public SpaceStationWorldData(String par1Str) {
         super(par1Str);
 
-        this.allowedPlayers = new ArrayList<String>() {
+        this.allowedPlayers = new ArrayList<>() {
 
             private static final long serialVersionUID = 1079079229788066770L;
 
             // Override contains so it ignores case.
             @Override
             public boolean contains(Object o) {
-                if (o instanceof String) {
-                    final String paramStr = (String) o;
-
+                if (o instanceof String paramStr) {
                     for (final String s : this) {
                         if (paramStr.equalsIgnoreCase(s)) {
                             return true;

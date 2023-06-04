@@ -362,28 +362,22 @@ public class TileEntityOxygenDistributor extends TileEntityOxygen
     @Override
     public boolean canInsertItem(int slotID, ItemStack itemstack, int side) {
         if (this.isItemValidForSlot(slotID, itemstack)) {
-            switch (slotID) {
-                case 0:
-                    return ItemElectricBase.isElectricItemCharged(itemstack);
-                case 1:
-                    return itemstack.getItemDamage() < itemstack.getItem().getMaxDamage();
-                default:
-                    return false;
-            }
+            return switch (slotID) {
+                case 0 -> ItemElectricBase.isElectricItemCharged(itemstack);
+                case 1 -> itemstack.getItemDamage() < itemstack.getItem().getMaxDamage();
+                default -> false;
+            };
         }
         return false;
     }
 
     @Override
     public boolean canExtractItem(int slotID, ItemStack itemstack, int side) {
-        switch (slotID) {
-            case 0:
-                return ItemElectricBase.isElectricItemEmpty(itemstack);
-            case 1:
-                return FluidUtil.isEmptyContainer(itemstack);
-            default:
-                return false;
-        }
+        return switch (slotID) {
+            case 0 -> ItemElectricBase.isElectricItemEmpty(itemstack);
+            case 1 -> FluidUtil.isEmptyContainer(itemstack);
+            default -> false;
+        };
     }
 
     @Override

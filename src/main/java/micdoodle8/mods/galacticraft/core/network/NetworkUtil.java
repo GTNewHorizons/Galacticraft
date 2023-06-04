@@ -52,8 +52,7 @@ public class NetworkUtil {
                 buffer.writeShort((Short) dataValue);
             } else if (dataValue instanceof Long) {
                 buffer.writeLong((Long) dataValue);
-            } else if (dataValue instanceof EnergyStorage) {
-                final EnergyStorage storage = (EnergyStorage) dataValue;
+            } else if (dataValue instanceof EnergyStorage storage) {
                 buffer.writeFloat(storage.getCapacityGC());
                 buffer.writeFloat(storage.getMaxReceive());
                 buffer.writeFloat(storage.getMaxExtract());
@@ -94,22 +93,19 @@ public class NetworkUtil {
                         buffer.writeByte((byte) (vec.z * 256 - 128));
                     }
                 }
-            } else if (dataValue instanceof Integer[]) {
-                final Integer[] array = (Integer[]) dataValue;
+            } else if (dataValue instanceof Integer[] array) {
                 buffer.writeInt(array.length);
 
                 for (final Integer element : array) {
                     buffer.writeInt(element);
                 }
-            } else if (dataValue instanceof String[]) {
-                final String[] array = (String[]) dataValue;
+            } else if (dataValue instanceof String[] array) {
                 buffer.writeInt(array.length);
 
                 for (final String element : array) {
                     ByteBufUtils.writeUTF8String(buffer, element);
                 }
-            } else if (dataValue instanceof Footprint[]) {
-                final Footprint[] array = (Footprint[]) dataValue;
+            } else if (dataValue instanceof Footprint[] array) {
                 buffer.writeInt(array.length);
 
                 for (final Footprint element : array) {
@@ -370,23 +366,19 @@ public class NetworkUtil {
             return af == bf || Math.abs(af - bf) < 0.01F;
         } else if (a instanceof Double && b instanceof Double) {
             return DoubleMath.fuzzyEquals((Double) a, (Double) b, 0.01);
-        } else if (a instanceof Entity && b instanceof Entity) {
-            final Entity a2 = (Entity) a;
+        } else if (a instanceof Entity a2 && b instanceof Entity) {
             final Entity b2 = (Entity) b;
             return fuzzyEquals(a2.getEntityId(), b2.getEntityId());
-        } else if (a instanceof Vector3 && b instanceof Vector3) {
-            final Vector3 a2 = (Vector3) a;
+        } else if (a instanceof Vector3 a2 && b instanceof Vector3) {
             final Vector3 b2 = (Vector3) b;
             return fuzzyEquals(a2.x, b2.x) && fuzzyEquals(a2.y, b2.y) && fuzzyEquals(a2.z, b2.z);
-        } else if (a instanceof EnergyStorage && b instanceof EnergyStorage) {
-            final EnergyStorage a2 = (EnergyStorage) a;
+        } else if (a instanceof EnergyStorage a2 && b instanceof EnergyStorage) {
             final EnergyStorage b2 = (EnergyStorage) b;
             return fuzzyEquals(a2.getEnergyStoredGC(), b2.getEnergyStoredGC())
                     && fuzzyEquals(a2.getCapacityGC(), b2.getCapacityGC())
                     && fuzzyEquals(a2.getMaxReceive(), b2.getMaxReceive())
                     && fuzzyEquals(a2.getMaxExtract(), b2.getMaxExtract());
-        } else if (a instanceof FluidTank && b instanceof FluidTank) {
-            final FluidTank a2 = (FluidTank) a;
+        } else if (a instanceof FluidTank a2 && b instanceof FluidTank) {
             final FluidTank b2 = (FluidTank) b;
             final FluidStack fluidA = a2.getFluid();
             final FluidStack fluidB = b2.getFluid();
@@ -402,8 +394,7 @@ public class NetworkUtil {
 
     public static Object cloneNetworkedObject(Object a) {
         // We only need to clone mutable objects
-        if (a instanceof EnergyStorage) {
-            final EnergyStorage prevStorage = (EnergyStorage) a;
+        if (a instanceof EnergyStorage prevStorage) {
             final EnergyStorage storage = new EnergyStorage(
                     prevStorage.getCapacityGC(),
                     prevStorage.getMaxReceive(),
@@ -411,8 +402,7 @@ public class NetworkUtil {
             storage.setEnergyStored(prevStorage.getEnergyStoredGC());
             return storage;
         }
-        if (a instanceof FluidTank) {
-            final FluidTank prevTank = (FluidTank) a;
+        if (a instanceof FluidTank prevTank) {
             FluidStack prevFluid = prevTank.getFluid();
             prevFluid = prevFluid == null ? null : prevFluid.copy();
             final FluidTank tank = new FluidTank(prevFluid, prevTank.getCapacity());

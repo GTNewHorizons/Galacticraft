@@ -67,14 +67,11 @@ public class BlockAluminumWire extends BlockTransmitter implements ITileEntityPr
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
-        switch (meta) {
-            case 0:
-                return BlockAluminumWire.blockIcons[0];
-            case 1:
-                return BlockAluminumWire.blockIcons[1];
-            default:
-                return BlockAluminumWire.blockIcons[0];
-        }
+        return switch (meta) {
+            case 0 -> BlockAluminumWire.blockIcons[0];
+            case 1 -> BlockAluminumWire.blockIcons[1];
+            default -> BlockAluminumWire.blockIcons[0];
+        };
     }
 
     @Override

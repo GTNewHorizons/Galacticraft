@@ -25,7 +25,7 @@ public class NetworkRenderer {
         if (System.currentTimeMillis() > t + 1000) {
             t = System.currentTimeMillis();
             nodes.clear();
-            for (final Object o : new ArrayList<TileEntity>(world.loadedTileEntityList)) {
+            for (final Object o : new ArrayList<>(world.loadedTileEntityList)) {
                 if (o instanceof TileEntityBeamOutput) {
                     nodes.add((TileEntityBeamOutput) o);
                 }

@@ -509,8 +509,7 @@ public class TileEntityScreen extends TileEntity {
                 final BlockVec3 newVec = vec.clone().modifyPositionFromSide(ForgeDirection.getOrientation(side), x)
                         .modifyPositionFromSide(ForgeDirection.DOWN, z);
                 final TileEntity tile = newVec.getTileEntity(this.worldObj);
-                if (tile instanceof TileEntityScreen && tile.getBlockMetadata() == meta && !tile.isInvalid()) {
-                    final TileEntityScreen screenTile = (TileEntityScreen) tile;
+                if (tile instanceof TileEntityScreen screenTile && tile.getBlockMetadata() == meta && !tile.isInvalid()) {
                     screenList.add(screenTile);
 
                     if (screenTile.isMultiscreen) {
@@ -650,10 +649,9 @@ public class TileEntityScreen extends TileEntity {
     private boolean canJoinRight() {
         final int meta = this.getBlockMetadata();
         final TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, this.getRight(meta));
-        if (!(te instanceof TileEntityScreen)) {
+        if (!(te instanceof TileEntityScreen screenTile)) {
             return false;
         }
-        final TileEntityScreen screenTile = (TileEntityScreen) te;
         if ((screenTile.getBlockMetadata() != meta) || (screenTile.connectionsUp != this.connectionsUp) || (screenTile.connectionsDown != this.connectionsDown)) {
             return false;
         }
@@ -669,10 +667,9 @@ public class TileEntityScreen extends TileEntity {
     private boolean canJoinLeft() {
         final int meta = this.getBlockMetadata();
         final TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, this.getLeft(meta));
-        if (!(te instanceof TileEntityScreen)) {
+        if (!(te instanceof TileEntityScreen screenTile)) {
             return false;
         }
-        final TileEntityScreen screenTile = (TileEntityScreen) te;
         if ((screenTile.getBlockMetadata() != meta) || (screenTile.connectionsUp != this.connectionsUp) || (screenTile.connectionsDown != this.connectionsDown)) {
             return false;
         }
@@ -688,10 +685,9 @@ public class TileEntityScreen extends TileEntity {
     private boolean canJoinUp() {
         final int meta = this.getBlockMetadata();
         final TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, 1);
-        if (!(te instanceof TileEntityScreen)) {
+        if (!(te instanceof TileEntityScreen screenTile)) {
             return false;
         }
-        final TileEntityScreen screenTile = (TileEntityScreen) te;
         if ((screenTile.getBlockMetadata() != meta) || (screenTile.connectionsLeft != this.connectionsLeft) || (screenTile.connectionsRight != this.connectionsRight)) {
             return false;
         }
@@ -707,10 +703,9 @@ public class TileEntityScreen extends TileEntity {
     private boolean canJoinDown() {
         final int meta = this.getBlockMetadata();
         final TileEntity te = new BlockVec3(this).getTileEntityOnSide(this.worldObj, 0);
-        if (!(te instanceof TileEntityScreen)) {
+        if (!(te instanceof TileEntityScreen screenTile)) {
             return false;
         }
-        final TileEntityScreen screenTile = (TileEntityScreen) te;
         if ((screenTile.getBlockMetadata() != meta) || (screenTile.connectionsLeft != this.connectionsLeft) || (screenTile.connectionsRight != this.connectionsRight)) {
             return false;
         }
@@ -735,8 +730,7 @@ public class TileEntityScreen extends TileEntity {
             } else {
                 tile = newVec.getTileEntity(this.worldObj);
             }
-            if (tile instanceof TileEntityScreen && tile.getBlockMetadata() == meta && !tile.isInvalid()) {
-                final TileEntityScreen screenTile = (TileEntityScreen) tile;
+            if (tile instanceof TileEntityScreen screenTile && tile.getBlockMetadata() == meta && !tile.isInvalid()) {
                 screenTile.connectedRight = true;
                 final TileEntity te2 = newVec.getTileEntityOnSide(this.worldObj, side);
                 if (te2 instanceof TileEntityScreen && te2.getBlockMetadata() == meta && !te2.isInvalid()) {
@@ -758,8 +752,7 @@ public class TileEntityScreen extends TileEntity {
             } else {
                 tile = newVec.getTileEntity(this.worldObj);
             }
-            if (tile instanceof TileEntityScreen && tile.getBlockMetadata() == meta && !tile.isInvalid()) {
-                final TileEntityScreen screenTile = (TileEntityScreen) tile;
+            if (tile instanceof TileEntityScreen screenTile && tile.getBlockMetadata() == meta && !tile.isInvalid()) {
                 screenTile.connectedLeft = true;
                 final TileEntity te2 = newVec.getTileEntityOnSide(this.worldObj, side);
                 if (te2 instanceof TileEntityScreen && te2.getBlockMetadata() == meta && !te2.isInvalid()) {
@@ -781,8 +774,7 @@ public class TileEntityScreen extends TileEntity {
             } else {
                 tile = newVec.getTileEntity(this.worldObj);
             }
-            if (tile instanceof TileEntityScreen && tile.getBlockMetadata() == meta && !tile.isInvalid()) {
-                final TileEntityScreen screenTile = (TileEntityScreen) tile;
+            if (tile instanceof TileEntityScreen screenTile && tile.getBlockMetadata() == meta && !tile.isInvalid()) {
                 screenTile.connectedUp = true;
                 final TileEntity te2 = newVec.getTileEntityOnSide(this.worldObj, 1);
                 if (te2 instanceof TileEntityScreen && te2.getBlockMetadata() == meta && !te2.isInvalid()) {
@@ -804,8 +796,7 @@ public class TileEntityScreen extends TileEntity {
             } else {
                 tile = newVec.getTileEntity(this.worldObj);
             }
-            if (tile instanceof TileEntityScreen && tile.getBlockMetadata() == meta && !tile.isInvalid()) {
-                final TileEntityScreen screenTile = (TileEntityScreen) tile;
+            if (tile instanceof TileEntityScreen screenTile && tile.getBlockMetadata() == meta && !tile.isInvalid()) {
                 screenTile.connectedDown = true;
                 final TileEntity te2 = newVec.getTileEntityOnSide(this.worldObj, 0);
                 if (te2 instanceof TileEntityScreen && te2.getBlockMetadata() == meta && !te2.isInvalid()) {

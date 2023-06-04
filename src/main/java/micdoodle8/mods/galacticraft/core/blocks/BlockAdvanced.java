@@ -77,7 +77,7 @@ public abstract class BlockAdvanced extends BlockContainer {
                 final Method methodCanWrench = wrenchClass
                         .getMethod("canWrench", EntityPlayer.class, Integer.TYPE, Integer.TYPE, Integer.TYPE);
                 return (Boolean) methodCanWrench.invoke(itemStack.getItem(), entityPlayer, x, y, z);
-            } catch (final NoClassDefFoundError e) {} catch (final Exception e) {}
+            } catch (final NoClassDefFoundError | Exception e) {}
 
             /**
              * Industrialcraft

@@ -5,7 +5,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -228,10 +227,7 @@ public class TickHandlerServer {
                         boolean mapChanged = false;
 
                         if (chunkProviderServer != null) {
-                            final Iterator<Chunk> iterator = chunkProviderServer.loadedChunks.iterator();
-
-                            while (iterator.hasNext()) {
-                                final Chunk chunk = (Chunk) iterator.next();
+                            for (Chunk chunk : chunkProviderServer.loadedChunks) {
                                 final long chunkKey = ChunkCoordIntPair.chunkXZ2Int(chunk.xPosition, chunk.zPosition);
 
                                 final List<Footprint> footprints = footprintMap.get(chunkKey);
@@ -480,12 +476,8 @@ public class TickHandlerServer {
                 final Object[] entityList = world.loadedEntityList.toArray();
 
                 for (final Object o : entityList) {
-                    if (o instanceof Entity) {
-                        final Entity e = (Entity) o;
-
-                        if (e.worldObj.provider instanceof IOrbitDimension) {
-                            final IOrbitDimension dimension = (IOrbitDimension) e.worldObj.provider;
-
+                    if (o instanceof Entity e) {
+                        if (e.worldObj.provider instanceof IOrbitDimension dimension) {
                             if (e.posY <= dimension.getYCoordToTeleportToPlanet()) {
                                 int dim = 0;
                                 try {

@@ -305,8 +305,7 @@ public class BlockVec3 implements Cloneable {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof BlockVec3) {
-            final BlockVec3 vector = (BlockVec3) o;
+        if (o instanceof BlockVec3 vector) {
             return this.x == vector.x && this.y == vector.y && this.z == vector.z;
         }
 

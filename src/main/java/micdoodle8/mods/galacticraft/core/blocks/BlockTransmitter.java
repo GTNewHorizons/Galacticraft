@@ -139,21 +139,12 @@ public abstract class BlockTransmitter extends BlockContainer {
 
         final TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity instanceof ITransmitter) {
-            TileEntity[] connectable;
-            switch (this.getNetworkType()) {
-                case OXYGEN:
-                    connectable = OxygenUtil.getAdjacentOxygenConnections(tileEntity);
-                    break;
-                case HYDROGEN:
-                    connectable = TileEntityHydrogenPipe.getAdjacentHydrogenConnections(tileEntity);
-                    break;
-                case POWER:
-                    connectable = EnergyUtil.getAdjacentPowerConnections(tileEntity);
-                    break;
-                default:
-                    connectable = new TileEntity[6];
-            }
-
+            TileEntity[] connectable = switch (this.getNetworkType()) {
+                case OXYGEN -> OxygenUtil.getAdjacentOxygenConnections(tileEntity);
+                case HYDROGEN -> TileEntityHydrogenPipe.getAdjacentHydrogenConnections(tileEntity);
+                case POWER -> EnergyUtil.getAdjacentPowerConnections(tileEntity);
+                default -> new TileEntity[6];
+            };
             if (connectable[4] != null) {
                 this.setBlockBounds(
                         0,

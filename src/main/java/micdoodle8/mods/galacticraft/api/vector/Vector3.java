@@ -702,8 +702,7 @@ public class Vector3 implements Cloneable {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Vector3) {
-            final Vector3 vector3 = (Vector3) o;
+        if (o instanceof Vector3 vector3) {
             return new EqualsBuilder().append(this.x, vector3.x).append(this.y, vector3.y).append(this.z, vector3.z)
                     .isEquals();
         }

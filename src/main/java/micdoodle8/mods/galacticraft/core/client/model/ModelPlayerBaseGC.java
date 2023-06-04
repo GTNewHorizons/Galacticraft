@@ -100,25 +100,20 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
     private ModelRenderer createModelRenderer(ModelPlayer player, int texOffsetX, int texOffsetY, int type) {
         if (isSmartMovingLoaded) {
             try {
-                switch (type) {
-                    // Helmet and Frequency Module are head modules
-                    case 0:
-                    case 15:
-                        return (ModelRenderer) modelRotationGCSmartMovingInit.newInstance(
-                                player,
-                                texOffsetX,
-                                texOffsetY,
-                                SmartRender.getPlayerBase(this.modelPlayer).getHead(),
-                                type);
-                    // Oxygen gear etc are body
-                    default:
-                        return (ModelRenderer) modelRotationGCSmartMovingInit.newInstance(
-                                player,
-                                texOffsetX,
-                                texOffsetY,
-                                SmartRender.getPlayerBase(this.modelPlayer).getBody(),
-                                type);
-                }
+                return switch (type) {
+                    case 0, 15 -> (ModelRenderer) modelRotationGCSmartMovingInit.newInstance(
+                                                    player,
+                                                    texOffsetX,
+                                                    texOffsetY,
+                                                    SmartRender.getPlayerBase(this.modelPlayer).getHead(),
+                                                    type);
+                    default -> (ModelRenderer) modelRotationGCSmartMovingInit.newInstance(
+                                                    player,
+                                                    texOffsetX,
+                                                    texOffsetY,
+                                                    SmartRender.getPlayerBase(this.modelPlayer).getBody(),
+                                                    type);
+                };
             } catch (final Exception e) {
                 e.printStackTrace();
             }
@@ -344,11 +339,10 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
     public void afterSetRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6,
             Entity par7Entity) {
         super.afterSetRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
-        if (!(par7Entity instanceof EntityPlayer)) {
+        if (!(par7Entity instanceof EntityPlayer player)) {
             return; // Deal with RenderPlayerAPIEnhancer calling this for skeletons etc
         }
 
-        final EntityPlayer player = (EntityPlayer) par7Entity;
         final ItemStack currentItemStack = player.inventory.getCurrentItem();
 
         if (!par7Entity.onGround && par7Entity.worldObj.provider instanceof IGalacticraftWorldProvider
@@ -425,12 +419,10 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
                         200,
                         player.posZ + 20));
 
-        for (int i = 0; i < l.size(); i++) {
-            final Entity e = (Entity) l.get(i);
+        for (Object element : l) {
+            final Entity e = (Entity) element;
 
-            if (e instanceof EntityTieredRocket) {
-                final EntityTieredRocket ship = (EntityTieredRocket) e;
-
+            if (e instanceof EntityTieredRocket ship) {
                 if (ship.riddenByEntity != null && !ship.riddenByEntity.equals(player)
                         && (ship.getLaunched() || ship.timeUntilLaunch < 390)) {
                     this.modelPlayer.bipedRightArm.rotateAngleZ -= (float) (Math.PI / 8)
@@ -452,11 +444,10 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
         // Deal with RenderPlayerAPIEnhancer calling this for skeletons etc
         // Do not render GC equipment on top of armor - only on top of player - see
         // .init() method
-        if (ModelPlayerBaseGC.isSmartMovingLoaded || !(var1 instanceof EntityPlayer) || (this.oxygenMask == null)) {
+        if (ModelPlayerBaseGC.isSmartMovingLoaded || !(var1 instanceof EntityPlayer player) || (this.oxygenMask == null)) {
             return;
         }
 
-        final EntityPlayer player = (EntityPlayer) var1;
         final PlayerGearData gearData = ClientProxyCore.playerItemData.get(player.getCommandSenderName());
 
         if (var1 instanceof AbstractClientPlayer && gearData != null) {

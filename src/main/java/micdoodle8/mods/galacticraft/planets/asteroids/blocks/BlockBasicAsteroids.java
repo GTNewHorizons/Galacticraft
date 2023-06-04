@@ -69,10 +69,9 @@ public class BlockBasicAsteroids extends Block implements IDetectableResource, I
 
     @Override
     public Item getItemDropped(int meta, Random random, int par3) {
-        switch (meta) {
-            default:
-                return super.getItemDropped(meta, random, par3);
-        }
+        return switch (meta) {
+            default -> super.getItemDropped(meta, random, par3);
+        };
     }
 
     @Override
@@ -97,12 +96,10 @@ public class BlockBasicAsteroids extends Block implements IDetectableResource, I
 
     @Override
     public int damageDropped(int meta) {
-        switch (meta) {
-            case 4:
-                return 0;
-            default:
-                return meta;
-        }
+        return switch (meta) {
+            case 4 -> 0;
+            default -> meta;
+        };
     }
 
     @Override
@@ -134,14 +131,10 @@ public class BlockBasicAsteroids extends Block implements IDetectableResource, I
 
     @Override
     public boolean isValueable(int metadata) {
-        switch (metadata) {
-            case 3:
-            case 4:
-            case 5:
-                return true;
-            default:
-                return false;
-        }
+        return switch (metadata) {
+            case 3, 4, 5 -> true;
+            default -> false;
+        };
     }
 
     @Override

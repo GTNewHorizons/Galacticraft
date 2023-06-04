@@ -237,7 +237,7 @@ public class EntitySkeletonBoss extends EntityMob
             }
 
             if (!this.worldObj.isRemote) {
-                for (final TileEntity tile : new ArrayList<TileEntity>(this.worldObj.loadedTileEntityList)) {
+                for (final TileEntity tile : new ArrayList<>(this.worldObj.loadedTileEntityList)) {
                     if (tile instanceof TileEntityTreasureChest) {
                         final double d3 = tile.xCoord + 0.5D - this.posX;
                         final double d4 = tile.yCoord + 0.5D - this.posY;

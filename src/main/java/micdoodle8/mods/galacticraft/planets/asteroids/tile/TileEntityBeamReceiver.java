@@ -55,10 +55,7 @@ public class TileEntityBeamReceiver extends TileEntityBeamOutput implements IEne
                     && this.facing != ForgeDirection.UNKNOWN.ordinal()) {
                 final TileEntity tile = this.getAttachedTile();
 
-                if (tile instanceof TileBaseUniversalElectricalSource) {
-                    // GC energy source
-                    final TileBaseUniversalElectricalSource electricalTile = (TileBaseUniversalElectricalSource) tile;
-
+                if (tile instanceof TileBaseUniversalElectricalSource electricalTile) {
                     if (electricalTile.storage.getEnergyStoredGC() > 0) {
                         final EnergySourceAdjacent source = new EnergySourceAdjacent(
                                 ForgeDirection.getOrientation(this.facing ^ 1));
@@ -96,8 +93,7 @@ public class TileEntityBeamReceiver extends TileEntityBeamOutput implements IEne
                 } else {
                     final TileEntity tileAdj = this.getAttachedTile();
 
-                    if (tileAdj instanceof TileBaseUniversalElectrical) {
-                        final TileBaseUniversalElectrical electricalTile = (TileBaseUniversalElectrical) tileAdj;
+                    if (tileAdj instanceof TileBaseUniversalElectrical electricalTile) {
                         final EnergySourceAdjacent source = new EnergySourceAdjacent(
                                 ForgeDirection.getOrientation(this.facing ^ 1));
                         this.storage.extractEnergyGCnoMax(

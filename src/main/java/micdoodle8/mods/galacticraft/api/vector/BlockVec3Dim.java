@@ -236,8 +236,7 @@ public class BlockVec3Dim implements Cloneable {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof BlockVec3Dim) {
-            final BlockVec3Dim vector = (BlockVec3Dim) o;
+        if (o instanceof BlockVec3Dim vector) {
             return this.x == vector.x && this.y == vector.y && this.z == vector.z && this.dim == vector.dim;
         }
 

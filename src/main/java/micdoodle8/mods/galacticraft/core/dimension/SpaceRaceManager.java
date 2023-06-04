@@ -47,9 +47,7 @@ public class SpaceRaceManager {
             boolean playerOnline = false;
 
             for (final Object o : MinecraftServer.getServer().getConfigurationManager().playerEntityList) {
-                if (o instanceof EntityPlayer) {
-                    final EntityPlayer player = (EntityPlayer) o;
-
+                if (o instanceof EntityPlayer player) {
                     if (race.getPlayerNames().contains(player.getGameProfile().getName())) {
                         final CelestialBody body = GalaxyRegistry
                                 .getCelestialBodyFromDimensionID(player.worldObj.provider.dimensionId);

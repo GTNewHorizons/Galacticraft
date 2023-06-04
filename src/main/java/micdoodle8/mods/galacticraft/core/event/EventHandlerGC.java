@@ -208,8 +208,7 @@ public class EventHandlerGC {
 
     @SubscribeEvent
     public void onEntityFall(LivingFallEvent event) {
-        if (event.entityLiving instanceof EntityPlayer) {
-            final EntityPlayer player = (EntityPlayer) event.entityLiving;
+        if (event.entityLiving instanceof EntityPlayer player) {
             if (player.ridingEntity instanceof EntityAutoRocket || player.ridingEntity instanceof EntityLanderBase) {
                 event.distance = 0.0F;
                 event.setCanceled(true);

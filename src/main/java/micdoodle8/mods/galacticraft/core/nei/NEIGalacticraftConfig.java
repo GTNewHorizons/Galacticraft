@@ -298,17 +298,13 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
     private void addIngotCompressorRecipes() {
         for (final IRecipe rec : CompressorRecipes.getRecipeList()) {
             final HashMap<Integer, PositionedStack> input1 = new HashMap<>();
-            if (rec instanceof ShapedRecipes) {
-                final ShapedRecipes recipe = (ShapedRecipes) rec;
-
+            if (rec instanceof ShapedRecipes recipe) {
                 for (int j = 0; j < recipe.recipeItems.length; j++) {
                     final ItemStack stack = recipe.recipeItems[j];
 
                     input1.put(j, new PositionedStack(stack, 21 + j % 3 * 18, 26 + j / 3 * 18));
                 }
-            } else if (rec instanceof ShapelessOreRecipe) {
-                final ShapelessOreRecipe recipe = (ShapelessOreRecipe) rec;
-
+            } else if (rec instanceof ShapelessOreRecipe recipe) {
                 for (int j = 0; j < recipe.getInput().size(); j++) {
                     final Object obj = recipe.getInput().get(j);
 

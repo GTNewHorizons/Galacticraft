@@ -151,8 +151,7 @@ public class TileEntityShortRangeTelepad extends TileBaseElectricBlock
                                         this.yCoord + 2,
                                         this.zCoord + 1));
 
-                        if (tileAt != null && tileAt instanceof TileEntityShortRangeTelepad) {
-                            final TileEntityShortRangeTelepad destTelepad = (TileEntityShortRangeTelepad) tileAt;
+                        if (tileAt != null && tileAt instanceof TileEntityShortRangeTelepad destTelepad) {
                             final int teleportResult = destTelepad.canTeleportHere();
                             if (teleportResult == 0) {
                                 for (final EntityLivingBase e : containedEntities) {

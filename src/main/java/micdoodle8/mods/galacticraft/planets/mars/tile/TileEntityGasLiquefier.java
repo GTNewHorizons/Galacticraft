@@ -494,36 +494,26 @@ public class TileEntityGasLiquefier extends TileBaseElectricBlockWithInventory
     @Override
     public boolean canInsertItem(int slotID, ItemStack itemstack, int side) {
         if (this.isItemValidForSlot(slotID, itemstack)) {
-            switch (slotID) {
-                case 0:
-                    return ItemElectricBase.isElectricItemCharged(itemstack);
-                case 1:
-                    return FluidUtil.isMethaneContainerAny(itemstack);
-                case 2:
-                    return FluidUtil.isEmptyContainerFor(itemstack, this.liquidTank.getFluid());
-                case 3:
-                    return FluidUtil.isEmptyContainerFor(itemstack, this.liquidTank2.getFluid());
-                default:
-                    return false;
-            }
+            return switch (slotID) {
+                case 0 -> ItemElectricBase.isElectricItemCharged(itemstack);
+                case 1 -> FluidUtil.isMethaneContainerAny(itemstack);
+                case 2 -> FluidUtil.isEmptyContainerFor(itemstack, this.liquidTank.getFluid());
+                case 3 -> FluidUtil.isEmptyContainerFor(itemstack, this.liquidTank2.getFluid());
+                default -> false;
+            };
         }
         return false;
     }
 
     @Override
     public boolean canExtractItem(int slotID, ItemStack itemstack, int side) {
-        switch (slotID) {
-            case 0:
-                return ItemElectricBase.isElectricItemEmpty(itemstack);
-            case 1:
-                return FluidUtil.isEmptyContainer(itemstack);
-            case 2:
-                return FluidUtil.isFullContainer(itemstack);
-            case 3:
-                return FluidUtil.isFullContainer(itemstack);
-            default:
-                return false;
-        }
+        return switch (slotID) {
+            case 0 -> ItemElectricBase.isElectricItemEmpty(itemstack);
+            case 1 -> FluidUtil.isEmptyContainer(itemstack);
+            case 2 -> FluidUtil.isFullContainer(itemstack);
+            case 3 -> FluidUtil.isFullContainer(itemstack);
+            default -> false;
+        };
     }
 
     @Override

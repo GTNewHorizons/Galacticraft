@@ -1,6 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client.gui.element;
 
-import java.util.Iterator;
 import java.util.List;
 
 import micdoodle8.mods.galacticraft.core.client.gui.container.GuiContainerGC;
@@ -83,10 +82,7 @@ public class GuiElementInfoRegion extends Gui {
 
         if (this.tooltipStrings != null && !this.tooltipStrings.isEmpty() && this.withinRegion) {
             int k = 0;
-            final Iterator<String> iterator = this.tooltipStrings.iterator();
-
-            while (iterator.hasNext()) {
-                final String s = iterator.next();
+            for (String s : this.tooltipStrings) {
                 final int l = FMLClientHandler.instance().getClient().fontRenderer.getStringWidth(s);
 
                 if (l > k) {

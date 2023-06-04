@@ -208,16 +208,12 @@ public class TileEntityRefinery extends TileBaseElectricBlockWithInventory imple
     @Override
     public boolean canInsertItem(int slotID, ItemStack itemstack, int side) {
         if (itemstack != null && this.isItemValidForSlot(slotID, itemstack)) {
-            switch (slotID) {
-                case 0:
-                    return ItemElectricBase.isElectricItemCharged(itemstack);
-                case 1:
-                    return FluidUtil.isOilContainerAny(itemstack);
-                case 2:
-                    return FluidUtil.isEmptyContainer(itemstack, GCItems.fuelCanister);
-                default:
-                    return false;
-            }
+            return switch (slotID) {
+                case 0 -> ItemElectricBase.isElectricItemCharged(itemstack);
+                case 1 -> FluidUtil.isOilContainerAny(itemstack);
+                case 2 -> FluidUtil.isEmptyContainer(itemstack, GCItems.fuelCanister);
+                default -> false;
+            };
         }
         return false;
     }
@@ -225,16 +221,12 @@ public class TileEntityRefinery extends TileBaseElectricBlockWithInventory imple
     @Override
     public boolean canExtractItem(int slotID, ItemStack itemstack, int side) {
         if (itemstack != null && this.isItemValidForSlot(slotID, itemstack)) {
-            switch (slotID) {
-                case 0:
-                    return ItemElectricBase.isElectricItemEmpty(itemstack) || !this.shouldPullEnergy();
-                case 1:
-                    return FluidUtil.isEmptyContainer(itemstack);
-                case 2:
-                    return FluidUtil.isFullContainer(itemstack);
-                default:
-                    return false;
-            }
+            return switch (slotID) {
+                case 0 -> ItemElectricBase.isElectricItemEmpty(itemstack) || !this.shouldPullEnergy();
+                case 1 -> FluidUtil.isEmptyContainer(itemstack);
+                case 2 -> FluidUtil.isFullContainer(itemstack);
+                default -> false;
+            };
         }
         return false;
     }

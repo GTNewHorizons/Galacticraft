@@ -75,16 +75,12 @@ public class BlockFallenMeteor extends Block implements ITileEntityProvider, Ite
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
         final TileEntity tile = par1World.getTileEntity(par2, par3, par4);
 
-        if (tile instanceof TileEntityFallenMeteor) {
-            final TileEntityFallenMeteor meteor = (TileEntityFallenMeteor) tile;
-
+        if (tile instanceof TileEntityFallenMeteor meteor) {
             if (meteor.getHeatLevel() <= 0) {
                 return;
             }
 
-            if (par5Entity instanceof EntityLivingBase) {
-                final EntityLivingBase livingEntity = (EntityLivingBase) par5Entity;
-
+            if (par5Entity instanceof EntityLivingBase livingEntity) {
                 par1World.playSoundEffect(
                         par2 + 0.5F,
                         par3 + 0.5F,
@@ -169,9 +165,7 @@ public class BlockFallenMeteor extends Block implements ITileEntityProvider, Ite
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         final TileEntity tile = par1IBlockAccess.getTileEntity(par2, par3, par4);
 
-        if (tile instanceof TileEntityFallenMeteor) {
-            final TileEntityFallenMeteor meteor = (TileEntityFallenMeteor) tile;
-
+        if (tile instanceof TileEntityFallenMeteor meteor) {
             final Vector3 col = new Vector3(198, 108, 58);
             col.translate(200 - meteor.getScaledHeatLevel() * 200);
             col.x = Math.min(255, col.x);

@@ -101,11 +101,7 @@ public class StructureVillagePiecesMoon {
         while (var9 < 5) {
             ++var9;
             int var10 = par2Random.nextInt(var8);
-            final Iterator<StructureVillagePieceWeightMoon> var11 = par0ComponentVillageStartPiece.structureVillageWeightedPieceList
-                    .iterator();
-
-            while (var11.hasNext()) {
-                final StructureVillagePieceWeightMoon var12 = var11.next();
+            for (StructureVillagePieceWeightMoon var12 : par0ComponentVillageStartPiece.structureVillageWeightedPieceList) {
                 var10 -= var12.villagePieceWeight;
 
                 if (var10 < 0) {

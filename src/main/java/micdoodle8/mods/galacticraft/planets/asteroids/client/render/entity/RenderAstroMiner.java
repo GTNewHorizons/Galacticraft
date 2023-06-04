@@ -121,29 +121,15 @@ public class RenderAstroMiner extends Render {
         final float rotYaw = entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTickTime;
 
         GL11.glTranslatef((float) x, (float) y + 1.4F, (float) z);
-        float partBlock;
-        switch (astroMiner.facing) {
-            case 0:
-                partBlock = (float) (astroMiner.posY % 1D);
-                break;
-            case 1:
-                partBlock = 1F - (float) (astroMiner.posY % 1D);
-                break;
-            case 2:
-                partBlock = (float) (astroMiner.posZ % 1D);
-                break;
-            case 3:
-                partBlock = 1F - (float) (astroMiner.posZ % 1D);
-                break;
-            case 4:
-                partBlock = (float) (astroMiner.posX % 1D);
-                break;
-            case 5:
-                partBlock = 1F - (float) (astroMiner.posX % 1D);
-                break;
-            default:
-                partBlock = 0F;
-        }
+        float partBlock = switch (astroMiner.facing) {
+            case 0 -> (float) (astroMiner.posY % 1D);
+            case 1 -> 1F - (float) (astroMiner.posY % 1D);
+            case 2 -> (float) (astroMiner.posZ % 1D);
+            case 3 -> 1F - (float) (astroMiner.posZ % 1D);
+            case 4 -> (float) (astroMiner.posX % 1D);
+            case 5 -> 1F - (float) (astroMiner.posX % 1D);
+            default -> 0F;
+        };
         partBlock /= 0.06F;
 
         // else if (rotPitch > 0F)

@@ -14,12 +14,10 @@ public class ItemRendererUnlitTorch implements IItemRenderer {
 
     @Override
     public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
-        switch (helper) {
-            case INVENTORY_BLOCK:
-                return true;
-            default:
-                return false;
-        }
+        return switch (helper) {
+            case INVENTORY_BLOCK -> true;
+            default -> false;
+        };
     }
 
     @Override

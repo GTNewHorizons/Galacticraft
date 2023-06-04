@@ -359,16 +359,14 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
             worldLoop: for (int i = 0; i < servers.length; i++) {
                 final WorldServer world = servers[i];
 
-                for (TileEntity tile2 : new ArrayList<TileEntity>(world.loadedTileEntityList)) {
+                for (TileEntity tile2 : new ArrayList<>(world.loadedTileEntityList)) {
                     if (this != tile2) {
                         tile2 = world.getTileEntity(tile2.xCoord, tile2.yCoord, tile2.zCoord);
                         if (tile2 == null) {
                             continue;
                         }
 
-                        if (tile2 instanceof TileEntityLaunchController) {
-                            final TileEntityLaunchController launchController2 = (TileEntityLaunchController) tile2;
-
+                        if (tile2 instanceof TileEntityLaunchController launchController2) {
                             if (launchController2.frequency == this.frequency) {
                                 this.frequencyValid = false;
                                 break worldLoop;
@@ -396,16 +394,14 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
             if (this.destFrequency >= 0) {
                 final WorldServer[] servers = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
                 for (final WorldServer world : servers) {
-                    for (TileEntity tile2 : new ArrayList<TileEntity>(world.loadedTileEntityList)) {
+                    for (TileEntity tile2 : new ArrayList<>(world.loadedTileEntityList)) {
                         if (this != tile2) {
                             tile2 = world.getTileEntity(tile2.xCoord, tile2.yCoord, tile2.zCoord);
                             if (tile2 == null) {
                                 continue;
                             }
 
-                            if (tile2 instanceof TileEntityLaunchController) {
-                                final TileEntityLaunchController launchController2 = (TileEntityLaunchController) tile2;
-
+                            if (tile2 instanceof TileEntityLaunchController launchController2) {
                                 if (launchController2.frequency == this.destFrequency) {
                                     this.destFrequencyValid = true;
                                     return;
@@ -440,8 +436,7 @@ public class TileEntityLaunchController extends TileBaseElectricBlockWithInvento
     }
 
     public void updateRocketOnDockSettings() {
-        if (this.attachedDock instanceof TileEntityLandingPad) {
-            final TileEntityLandingPad pad = (TileEntityLandingPad) this.attachedDock;
+        if (this.attachedDock instanceof TileEntityLandingPad pad) {
             final IDockable rocket = pad.getDockedEntity();
             if (rocket instanceof EntityAutoRocket) {
                 ((EntityAutoRocket) rocket).updateControllerSettings(pad);

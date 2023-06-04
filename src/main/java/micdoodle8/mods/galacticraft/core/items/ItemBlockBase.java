@@ -32,40 +32,19 @@ public class ItemBlockBase extends ItemBlockDesc {
     public String getUnlocalizedName(ItemStack itemstack) {
         String name = "";
 
-        switch (itemstack.getItemDamage()) {
-            case 3:
-                name = "decoblock1";
-                break;
-            case 4:
-                name = "decoblock2";
-                break;
-            case 5:
-                name = "oreCopper";
-                break;
-            case 6:
-                name = "oreTin";
-                break;
-            case 7:
-                name = "oreAluminum";
-                break;
-            case 8:
-                name = "oreSilicon";
-                break;
-            case 9:
-                name = "copperBlock";
-                break;
-            case 10:
-                name = "tinBlock";
-                break;
-            case 11:
-                name = "aluminumBlock";
-                break;
-            case 12:
-                name = "meteorironBlock";
-                break;
-            default:
-                name = "null";
-        }
+        name = switch (itemstack.getItemDamage()) {
+            case 3 -> "decoblock1";
+            case 4 -> "decoblock2";
+            case 5 -> "oreCopper";
+            case 6 -> "oreTin";
+            case 7 -> "oreAluminum";
+            case 8 -> "oreSilicon";
+            case 9 -> "copperBlock";
+            case 10 -> "tinBlock";
+            case 11 -> "aluminumBlock";
+            case 12 -> "meteorironBlock";
+            default -> "null";
+        };
 
         return this.field_150939_a.getUnlocalizedName() + "." + name;
     }

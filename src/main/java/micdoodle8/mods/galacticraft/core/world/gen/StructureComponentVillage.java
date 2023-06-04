@@ -43,98 +43,88 @@ public abstract class StructureComponentVillage extends StructureComponent {
 
     protected StructureComponent getNextComponentNN(StructureComponentVillageStartPiece par1ComponentVillageStartPiece,
             List<StructureComponent> par2List, Random par3Random, int par4, int par5) {
-        switch (this.coordBaseMode) {
-            case 0:
-                return StructureVillagePiecesMoon.getNextStructureComponent(
-                        par1ComponentVillageStartPiece,
-                        par2List,
-                        par3Random,
-                        this.boundingBox.minX - 1,
-                        this.boundingBox.minY + par4,
-                        this.boundingBox.minZ + par5,
-                        1,
-                        this.getComponentType());
-            case 1:
-                return StructureVillagePiecesMoon.getNextStructureComponent(
-                        par1ComponentVillageStartPiece,
-                        par2List,
-                        par3Random,
-                        this.boundingBox.minX + par5,
-                        this.boundingBox.minY + par4,
-                        this.boundingBox.minZ - 1,
-                        2,
-                        this.getComponentType());
-            case 2:
-                return StructureVillagePiecesMoon.getNextStructureComponent(
-                        par1ComponentVillageStartPiece,
-                        par2List,
-                        par3Random,
-                        this.boundingBox.minX - 1,
-                        this.boundingBox.minY + par4,
-                        this.boundingBox.minZ + par5,
-                        1,
-                        this.getComponentType());
-            case 3:
-                return StructureVillagePiecesMoon.getNextStructureComponent(
-                        par1ComponentVillageStartPiece,
-                        par2List,
-                        par3Random,
-                        this.boundingBox.minX + par5,
-                        this.boundingBox.minY + par4,
-                        this.boundingBox.minZ - 1,
-                        2,
-                        this.getComponentType());
-            default:
-                return null;
-        }
+        return switch (this.coordBaseMode) {
+            case 0 -> StructureVillagePiecesMoon.getNextStructureComponent(
+                                    par1ComponentVillageStartPiece,
+                                    par2List,
+                                    par3Random,
+                                    this.boundingBox.minX - 1,
+                                    this.boundingBox.minY + par4,
+                                    this.boundingBox.minZ + par5,
+                                    1,
+                                    this.getComponentType());
+            case 1 -> StructureVillagePiecesMoon.getNextStructureComponent(
+                                    par1ComponentVillageStartPiece,
+                                    par2List,
+                                    par3Random,
+                                    this.boundingBox.minX + par5,
+                                    this.boundingBox.minY + par4,
+                                    this.boundingBox.minZ - 1,
+                                    2,
+                                    this.getComponentType());
+            case 2 -> StructureVillagePiecesMoon.getNextStructureComponent(
+                                    par1ComponentVillageStartPiece,
+                                    par2List,
+                                    par3Random,
+                                    this.boundingBox.minX - 1,
+                                    this.boundingBox.minY + par4,
+                                    this.boundingBox.minZ + par5,
+                                    1,
+                                    this.getComponentType());
+            case 3 -> StructureVillagePiecesMoon.getNextStructureComponent(
+                                    par1ComponentVillageStartPiece,
+                                    par2List,
+                                    par3Random,
+                                    this.boundingBox.minX + par5,
+                                    this.boundingBox.minY + par4,
+                                    this.boundingBox.minZ - 1,
+                                    2,
+                                    this.getComponentType());
+            default -> null;
+        };
     }
 
     protected StructureComponent getNextComponentPP(StructureComponentVillageStartPiece par1ComponentVillageStartPiece,
             List<StructureComponent> par2List, Random par3Random, int par4, int par5) {
-        switch (this.coordBaseMode) {
-            case 0:
-                return StructureVillagePiecesMoon.getNextStructureComponent(
-                        par1ComponentVillageStartPiece,
-                        par2List,
-                        par3Random,
-                        this.boundingBox.maxX + 1,
-                        this.boundingBox.minY + par4,
-                        this.boundingBox.minZ + par5,
-                        3,
-                        this.getComponentType());
-            case 1:
-                return StructureVillagePiecesMoon.getNextStructureComponent(
-                        par1ComponentVillageStartPiece,
-                        par2List,
-                        par3Random,
-                        this.boundingBox.minX + par5,
-                        this.boundingBox.minY + par4,
-                        this.boundingBox.maxZ + 1,
-                        0,
-                        this.getComponentType());
-            case 2:
-                return StructureVillagePiecesMoon.getNextStructureComponent(
-                        par1ComponentVillageStartPiece,
-                        par2List,
-                        par3Random,
-                        this.boundingBox.maxX + 1,
-                        this.boundingBox.minY + par4,
-                        this.boundingBox.minZ + par5,
-                        3,
-                        this.getComponentType());
-            case 3:
-                return StructureVillagePiecesMoon.getNextStructureComponent(
-                        par1ComponentVillageStartPiece,
-                        par2List,
-                        par3Random,
-                        this.boundingBox.minX + par5,
-                        this.boundingBox.minY + par4,
-                        this.boundingBox.maxZ + 1,
-                        0,
-                        this.getComponentType());
-            default:
-                return null;
-        }
+        return switch (this.coordBaseMode) {
+            case 0 -> StructureVillagePiecesMoon.getNextStructureComponent(
+                                    par1ComponentVillageStartPiece,
+                                    par2List,
+                                    par3Random,
+                                    this.boundingBox.maxX + 1,
+                                    this.boundingBox.minY + par4,
+                                    this.boundingBox.minZ + par5,
+                                    3,
+                                    this.getComponentType());
+            case 1 -> StructureVillagePiecesMoon.getNextStructureComponent(
+                                    par1ComponentVillageStartPiece,
+                                    par2List,
+                                    par3Random,
+                                    this.boundingBox.minX + par5,
+                                    this.boundingBox.minY + par4,
+                                    this.boundingBox.maxZ + 1,
+                                    0,
+                                    this.getComponentType());
+            case 2 -> StructureVillagePiecesMoon.getNextStructureComponent(
+                                    par1ComponentVillageStartPiece,
+                                    par2List,
+                                    par3Random,
+                                    this.boundingBox.maxX + 1,
+                                    this.boundingBox.minY + par4,
+                                    this.boundingBox.minZ + par5,
+                                    3,
+                                    this.getComponentType());
+            case 3 -> StructureVillagePiecesMoon.getNextStructureComponent(
+                                    par1ComponentVillageStartPiece,
+                                    par2List,
+                                    par3Random,
+                                    this.boundingBox.minX + par5,
+                                    this.boundingBox.minY + par4,
+                                    this.boundingBox.maxZ + 1,
+                                    0,
+                                    this.getComponentType());
+            default -> null;
+        };
     }
 
     protected int getAverageGroundLevel(World par1World, StructureBoundingBox par2StructureBoundingBox) {

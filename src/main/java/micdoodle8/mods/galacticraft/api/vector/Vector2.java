@@ -100,8 +100,7 @@ public class Vector2 implements Cloneable {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Vector2) {
-            final Vector2 vector = (Vector2) o;
+        if (o instanceof Vector2 vector) {
             return this.x == vector.x && this.y == vector.y;
         }
 

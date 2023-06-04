@@ -144,8 +144,7 @@ public class BlockNasaWorkbench extends BlockContainer
         if (!validSpot) {
             world.setBlockToAir(x0, y0, z0);
 
-            if (!world.isRemote && entity instanceof EntityPlayerMP) {
-                final EntityPlayerMP player = (EntityPlayerMP) entity;
+            if (!world.isRemote && entity instanceof EntityPlayerMP player) {
                 player.addChatMessage(
                         new ChatComponentText(EnumColor.RED + GCCoreUtil.translate("gui.warning.noroom")));
                 if (!player.capabilities.isCreativeMode) {

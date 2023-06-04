@@ -66,51 +66,45 @@ public class BlockLandingPadFull extends BlockAdvancedTile implements IPartialSe
 
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-        switch (world.getBlockMetadata(x, y, z)) {
-            case 0:
-                return AxisAlignedBB.getBoundingBox(
-                        x + this.minX,
-                        y + this.minY,
-                        z + this.minZ,
-                        x + this.maxX,
-                        y + this.maxY,
-                        z + this.maxZ);
-            case 2:
-                return AxisAlignedBB.getBoundingBox(
-                        x + this.minX,
-                        y + this.minY,
-                        z + this.minZ,
-                        x + this.maxX,
-                        y + this.maxY,
-                        z + this.maxZ);
-            default:
-                return AxisAlignedBB.getBoundingBox(x + 0.0D, y + 0.0D, z + 0.0D, x + 1.0D, y + 0.2D, z + 1.0D);
-        }
+        return switch (world.getBlockMetadata(x, y, z)) {
+            case 0 -> AxisAlignedBB.getBoundingBox(
+                                    x + this.minX,
+                                    y + this.minY,
+                                    z + this.minZ,
+                                    x + this.maxX,
+                                    y + this.maxY,
+                                    z + this.maxZ);
+            case 2 -> AxisAlignedBB.getBoundingBox(
+                                    x + this.minX,
+                                    y + this.minY,
+                                    z + this.minZ,
+                                    x + this.maxX,
+                                    y + this.maxY,
+                                    z + this.maxZ);
+            default -> AxisAlignedBB.getBoundingBox(x + 0.0D, y + 0.0D, z + 0.0D, x + 1.0D, y + 0.2D, z + 1.0D);
+        };
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
-        switch (world.getBlockMetadata(x, y, z)) {
-            case 0:
-                return AxisAlignedBB.getBoundingBox(
-                        x + this.minX,
-                        y + this.minY,
-                        z + this.minZ,
-                        x + this.maxX,
-                        y + this.maxY,
-                        z + this.maxZ);
-            case 2:
-                return AxisAlignedBB.getBoundingBox(
-                        x + this.minX,
-                        y + this.minY,
-                        z + this.minZ,
-                        x + this.maxX,
-                        y + this.maxY,
-                        z + this.maxZ);
-            default:
-                return AxisAlignedBB.getBoundingBox(x + 0.0D, y + 0.0D, z + 0.0D, x + 1.0D, y + 0.2D, z + 1.0D);
-        }
+        return switch (world.getBlockMetadata(x, y, z)) {
+            case 0 -> AxisAlignedBB.getBoundingBox(
+                                    x + this.minX,
+                                    y + this.minY,
+                                    z + this.minZ,
+                                    x + this.maxX,
+                                    y + this.maxY,
+                                    z + this.maxZ);
+            case 2 -> AxisAlignedBB.getBoundingBox(
+                                    x + this.minX,
+                                    y + this.minY,
+                                    z + this.minZ,
+                                    x + this.maxX,
+                                    y + this.maxY,
+                                    z + this.maxZ);
+            default -> AxisAlignedBB.getBoundingBox(x + 0.0D, y + 0.0D, z + 0.0D, x + 1.0D, y + 0.2D, z + 1.0D);
+        };
     }
 
     @Override
@@ -161,16 +155,11 @@ public class BlockLandingPadFull extends BlockAdvancedTile implements IPartialSe
 
     @Override
     public TileEntity createTileEntity(World world, int metadata) {
-        switch (metadata) {
-            case 0:
-                return new TileEntityLandingPad();
-            case 1:
-                return new TileEntityBuggyFueler();
-            // case 2:
-            // return new GCCoreTileEntityCargoPad();
-            default:
-                return null;
-        }
+        return switch (metadata) {
+            case 0 -> new TileEntityLandingPad();
+            case 1 -> new TileEntityBuggyFueler();
+            default -> null;
+        };
     }
 
     @Override

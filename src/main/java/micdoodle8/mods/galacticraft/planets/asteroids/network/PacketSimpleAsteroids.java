@@ -155,14 +155,12 @@ public class PacketSimpleAsteroids implements IPacket {
 
                 switch ((Integer) this.data.get(0)) {
                     case 0:
-                        if (tile instanceof TileEntityShortRangeTelepad) {
-                            final TileEntityShortRangeTelepad launchController = (TileEntityShortRangeTelepad) tile;
+                        if (tile instanceof TileEntityShortRangeTelepad launchController) {
                             launchController.setAddress((Integer) this.data.get(4));
                         }
                         break;
                     case 1:
-                        if (tile instanceof TileEntityShortRangeTelepad) {
-                            final TileEntityShortRangeTelepad launchController = (TileEntityShortRangeTelepad) tile;
+                        if (tile instanceof TileEntityShortRangeTelepad launchController) {
                             launchController.setTargetAddress((Integer) this.data.get(4));
                         }
                         break;

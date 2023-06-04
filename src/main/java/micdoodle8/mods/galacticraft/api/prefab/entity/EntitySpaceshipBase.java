@@ -256,8 +256,8 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
         final List<?> var15 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, box);
 
         if (var15 != null && !var15.isEmpty()) {
-            for (int var52 = 0; var52 < var15.size(); ++var52) {
-                final Entity var17 = (Entity) var15.get(var52);
+            for (Object element : var15) {
+                final Entity var17 = (Entity) element;
 
                 if (var17 != this.riddenByEntity) {
                     var17.applyEntityCollision(this);

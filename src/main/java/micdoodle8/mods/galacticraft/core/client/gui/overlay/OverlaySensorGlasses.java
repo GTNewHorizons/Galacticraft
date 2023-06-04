@@ -1,7 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client.gui.overlay;
 
-import java.util.Iterator;
-
 import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStatsClient;
@@ -79,7 +77,6 @@ public class OverlaySensorGlasses extends Overlay {
 
     public static void renderSensorGlassesValueableBlocks(ItemStack stack, EntityPlayer player,
             ScaledResolution resolution, float partialTicks, boolean hasScreen, int mouseX, int mouseY) {
-        final Iterator<BlockVec3> var51 = ClientProxyCore.valueableBlocks.iterator();
         double var52;
         double var58;
         double var59;
@@ -87,9 +84,7 @@ public class OverlaySensorGlasses extends Overlay {
         double var21;
         float var60;
 
-        while (var51.hasNext()) {
-            final BlockVec3 coords = var51.next();
-
+        for (BlockVec3 coords : ClientProxyCore.valueableBlocks) {
             var52 = ClientProxyCore.playerPosX - coords.x - 0.5D;
             var58 = ClientProxyCore.playerPosY - coords.y - 0.5D;
             var59 = ClientProxyCore.playerPosZ - coords.z - 0.5D;

@@ -133,40 +133,40 @@ public class BlockRendererBreathableAir implements ISimpleBlockRenderingHandler 
                     double var51;
                     double var49;
 
-                    switch (var34) {
-                        case 0:
+                    var51 = switch (var34) {
+                        case 0 -> {
                             var41 = var24;
                             var43 = var30;
                             var45 = par2;
                             var49 = par2 + 1;
                             var47 = par4 + var32;
-                            var51 = par4 + var32;
-                            break;
-                        case 1:
+                            yield par4 + var32;
+                        }
+                        case 1 -> {
                             var41 = var28;
                             var43 = var26;
                             var45 = par2 + 1;
                             var49 = par2;
                             var47 = par4 + 1 - var32;
-                            var51 = par4 + 1 - var32;
-                            break;
-                        case 2:
+                            yield par4 + 1 - var32;
+                        }
+                        case 2 -> {
                             var41 = var26;
                             var43 = var24;
                             var45 = par2 + var32;
                             var49 = par2 + var32;
                             var47 = par4 + 1;
-                            var51 = par4;
-                            break;
-                        default:
+                            yield par4;
+                        }
+                        default -> {
                             var41 = var30;
                             var43 = var28;
                             var45 = par2 + 1 - var32;
                             var49 = par2 + 1 - var32;
                             var47 = par4;
-                            var51 = par4 + 1;
-                            break;
-                    }
+                            yield par4 + 1;
+                        }
+                    };
 
                     final double var53 = 0 / 256.0F;
                     final double var55 = (16 - 0.01D) / 256.0D;

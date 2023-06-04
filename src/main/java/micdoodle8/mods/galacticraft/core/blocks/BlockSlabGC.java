@@ -127,15 +127,10 @@ public class BlockSlabGC extends BlockSlab {
         final int meta = world.getBlockMetadata(x, y, z);
         float hardness = this.blockHardness;
 
-        switch (getTypeFromMeta(meta)) {
-            case 2:
-            case 3:
-                hardness = 1.5F;
-                break;
-            default:
-                hardness = 2.0F;
-                break;
-        }
+        hardness = switch (getTypeFromMeta(meta)) {
+            case 2, 3 -> 1.5F;
+            default -> 2.0F;
+        };
 
         return hardness;
     }

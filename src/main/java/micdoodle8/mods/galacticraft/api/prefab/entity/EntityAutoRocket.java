@@ -188,7 +188,7 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
             final WorldServer world = servers[i];
 
             try {
-                for (TileEntity tile : new ArrayList<TileEntity>(world.loadedTileEntityList)) {
+                for (TileEntity tile : new ArrayList<>(world.loadedTileEntityList)) {
                     if (!controllerClass.isInstance(tile)) {
                         continue;
                     }
@@ -452,9 +452,7 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
     public void landEntity(int x, int y, int z) {
         final TileEntity tile = this.worldObj.getTileEntity(x, y, z);
 
-        if (tile instanceof IFuelDock) {
-            final IFuelDock dock = (IFuelDock) tile;
-
+        if (tile instanceof IFuelDock dock) {
             if (this.isDockValid(dock)) {
                 if (!this.worldObj.isRemote) {
                     // Drop any existing rocket on the landing pad

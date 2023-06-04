@@ -157,8 +157,7 @@ public class ItemOilExtractor extends Item {
     private boolean isOilBlock(EntityPlayer player, World world, int x, int y, int z, boolean doDrain) {
         final Block block = world.getBlock(x, y, z);
 
-        if (block instanceof IFluidBlock) {
-            final IFluidBlock fluidBlockHit = (IFluidBlock) block;
+        if (block instanceof IFluidBlock fluidBlockHit) {
             boolean flag = false;
             if (block == GCBlocks.crudeOil) {
                 flag = true;

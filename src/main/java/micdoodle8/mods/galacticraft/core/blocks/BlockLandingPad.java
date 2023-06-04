@@ -104,16 +104,11 @@ public class BlockLandingPad extends BlockAdvancedTile implements IPartialSealab
             return null;
         }
 
-        switch (metadata) {
-            case 0:
-                return new TileEntityLandingPadSingle();
-            case 1:
-                return new TileEntityBuggyFuelerSingle();
-            // case 2:
-            // return new GCCoreTileEntityCargoPadSingle();
-            default:
-                return null;
-        }
+        return switch (metadata) {
+            case 0 -> new TileEntityLandingPadSingle();
+            case 1 -> new TileEntityBuggyFuelerSingle();
+            default -> null;
+        };
     }
 
     @Override

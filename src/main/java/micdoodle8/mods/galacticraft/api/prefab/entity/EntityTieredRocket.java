@@ -385,9 +385,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
 
         // Not launch controlled
         if (!this.worldObj.isRemote) {
-            if (this.riddenByEntity instanceof EntityPlayerMP) {
-                final EntityPlayerMP player = (EntityPlayerMP) this.riddenByEntity;
-
+            if (this.riddenByEntity instanceof EntityPlayerMP player) {
                 this.onTeleport(player);
                 final GCPlayerStats stats = GCPlayerStats.get(player);
                 WorldUtil.toCelestialSelection(

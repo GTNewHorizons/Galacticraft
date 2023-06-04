@@ -452,7 +452,7 @@ public class ThreadFindSeal {
 
             // Set up the next layer as current layer for the while loop
             this.currentLayer = nextLayer;
-            nextLayer = new LinkedList<BlockVec3>();
+            nextLayer = new LinkedList<>();
         }
     }
 
@@ -522,7 +522,7 @@ public class ThreadFindSeal {
 
             // Set up the next layer as current layer for the while loop
             this.currentLayer = nextLayer;
-            nextLayer = new LinkedList<BlockVec3>();
+            nextLayer = new LinkedList<>();
         }
     }
 
@@ -630,7 +630,7 @@ public class ThreadFindSeal {
 
             // Is there a further layer of air/permeable blocks to test?
             this.currentLayer = nextLayer;
-            nextLayer = new LinkedList<BlockVec3>();
+            nextLayer = new LinkedList<>();
         }
     }
 
@@ -736,7 +736,7 @@ public class ThreadFindSeal {
 
             // Is there a further layer of air/permeable blocks to test?
             this.currentLayer = nextLayer;
-            nextLayer = new LinkedList<BlockVec3>();
+            nextLayer = new LinkedList<>();
         }
     }
 
@@ -893,8 +893,7 @@ public class ThreadFindSeal {
      * @return
      */
     private boolean canBlockPassAirCheck(Block block, BlockVec3 vec, int side) {
-        if (block instanceof IPartialSealableBlock) {
-            final IPartialSealableBlock blockPartial = (IPartialSealableBlock) block;
+        if (block instanceof IPartialSealableBlock blockPartial) {
             if (blockPartial.isSealed(this.world, vec.x, vec.y, vec.z, ForgeDirection.getOrientation(side))) {
                 // If a partial block checks as solid, no checkedAdd() so allowing
                 // it to be tested again from other directions

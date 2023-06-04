@@ -586,30 +586,15 @@ public class EnergyNetwork implements IElectricityNetwork {
                     final int zCoord = ((TileEntity) splitPoint).zCoord;
 
                     for (int j = 0; j < 6; j++) {
-                        switch (j) {
-                            case 0:
-                                tileEntity = world.getTileEntity(xCoord, yCoord - 1, zCoord);
-                                break;
-                            case 1:
-                                tileEntity = world.getTileEntity(xCoord, yCoord + 1, zCoord);
-                                break;
-                            case 2:
-                                tileEntity = world.getTileEntity(xCoord, yCoord, zCoord - 1);
-                                break;
-                            case 3:
-                                tileEntity = world.getTileEntity(xCoord, yCoord, zCoord + 1);
-                                break;
-                            case 4:
-                                tileEntity = world.getTileEntity(xCoord - 1, yCoord, zCoord);
-                                break;
-                            case 5:
-                                tileEntity = world.getTileEntity(xCoord + 1, yCoord, zCoord);
-                                break;
-                            default:
-                                // Not reachable, only to prevent uninitiated compile errors
-                                tileEntity = null;
-                                break;
-                        }
+                        tileEntity = switch (j) {
+                            case 0 -> world.getTileEntity(xCoord, yCoord - 1, zCoord);
+                            case 1 -> world.getTileEntity(xCoord, yCoord + 1, zCoord);
+                            case 2 -> world.getTileEntity(xCoord, yCoord, zCoord - 1);
+                            case 3 -> world.getTileEntity(xCoord, yCoord, zCoord + 1);
+                            case 4 -> world.getTileEntity(xCoord - 1, yCoord, zCoord);
+                            case 5 -> world.getTileEntity(xCoord + 1, yCoord, zCoord);
+                            default -> /* Not reachable, only to prevent uninitiated compile errors */ null;
+                        };
 
                         if (tileEntity instanceof IConductor) {
                             nextToSplit[j] = tileEntity;

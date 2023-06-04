@@ -163,8 +163,7 @@ public class BlockShortRangeTelepad extends BlockTileGC implements ItemBlockDesc
     public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
         final TileEntity tileAt = world.getTileEntity(x, y, z);
 
-        if (tileAt instanceof TileEntityShortRangeTelepad) {
-            final TileEntityShortRangeTelepad telepad = (TileEntityShortRangeTelepad) tileAt;
+        if (tileAt instanceof TileEntityShortRangeTelepad telepad) {
             Math.min(1.0F, telepad.teleportTime / (float) TileEntityShortRangeTelepad.MAX_TELEPORT_TIME);
             for (int i = 0; i < 6; i++) {
                 for (int j = 0; j < 4; j++) {

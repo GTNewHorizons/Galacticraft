@@ -129,9 +129,7 @@ public class EntityParachest extends Entity {
         this.worldObj.setBlock(x, y, z, GCBlocks.parachest, 0, 3);
         final TileEntity te = this.worldObj.getTileEntity(x, y, z);
 
-        if (te instanceof TileEntityParaChest && this.cargo != null) {
-            final TileEntityParaChest chest = (TileEntityParaChest) te;
-
+        if (te instanceof TileEntityParaChest chest && this.cargo != null) {
             chest.chestContents = new ItemStack[this.cargo.length + 1];
 
             for (int i = 0; i < this.cargo.length; i++) {

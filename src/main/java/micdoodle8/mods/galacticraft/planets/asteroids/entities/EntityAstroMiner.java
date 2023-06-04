@@ -633,13 +633,12 @@ public class EntityAstroMiner extends Entity
     private void atBase() {
         final TileEntity tileEntity = this.posBase.getTileEntity(this.worldObj);
 
-        if (!(tileEntity instanceof TileEntityMinerBase) || tileEntity.isInvalid()
+        if (!(tileEntity instanceof TileEntityMinerBase minerBase) || tileEntity.isInvalid()
                 || !((TileEntityMinerBase) tileEntity).isMaster) {
             this.freeze(FAIL_BASEDESTROYED);
             return;
         }
 
-        final TileEntityMinerBase minerBase = (TileEntityMinerBase) tileEntity;
         // If it's successfully reached its base, clear all fail messages except number
         // 6, which is that all mining
         // areas are finished (see below)

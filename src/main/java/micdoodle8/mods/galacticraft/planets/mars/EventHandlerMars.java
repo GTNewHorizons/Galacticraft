@@ -44,9 +44,7 @@ public class EventHandlerMars {
 
     @SubscribeEvent
     public void onLivingDeath(LivingDeathEvent event) {
-        if (event.source.damageType.equals("slimeling") && event.source instanceof EntityDamageSource) {
-            final EntityDamageSource source = (EntityDamageSource) event.source;
-
+        if (event.source.damageType.equals("slimeling") && event.source instanceof EntityDamageSource source) {
             if (source.getEntity() instanceof EntitySlimeling && !source.getEntity().worldObj.isRemote) {
                 ((EntitySlimeling) source.getEntity()).kills++;
             }
@@ -60,9 +58,7 @@ public class EventHandlerMars {
                 && (!event.source.isFireDamage() || !event.entityLiving.isPotionActive(Potion.fireResistance))) {
             final Entity entity = event.source.getEntity();
 
-            if (entity instanceof EntitySlimeling) {
-                final EntitySlimeling entitywolf = (EntitySlimeling) entity;
-
+            if (entity instanceof EntitySlimeling entitywolf) {
                 if (entitywolf.isTamed()) {
                     event.entityLiving.recentlyHit = 100;
                     event.entityLiving.attackingPlayer = null;
@@ -195,9 +191,7 @@ public class EventHandlerMars {
     public void onLandingPadRemoved(EventLandingPadRemoval event) {
         final TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
 
-        if (tile instanceof IFuelDock) {
-            final IFuelDock dock = (IFuelDock) tile;
-
+        if (tile instanceof IFuelDock dock) {
             for (final ILandingPadAttachable connectedTile : dock.getConnectedTiles()) {
                 if (connectedTile instanceof TileEntityLaunchController) {
                     final TileEntityLaunchController launchController = (TileEntityLaunchController) event.world

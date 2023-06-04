@@ -201,24 +201,16 @@ public class BlockBasicMoon extends BlockAdvancedTile
                 return this.moonBlockIcons[3];
             }
         } else {
-            switch (meta) {
-                case 0:
-                    return this.moonBlockIcons[12];
-                case 1:
-                    return this.moonBlockIcons[13];
-                case 2:
-                    return this.moonBlockIcons[14];
-                case 3:
-                    return this.moonBlockIcons[2];
-                case 4:
-                    return this.moonBlockIcons[15];
-                case 14:
-                    return this.moonBlockIcons[1];
-                case 15:
-                    return this.moonBlockIcons[16];
-                default:
-                    return this.moonBlockIcons[16];
-            }
+            return switch (meta) {
+                case 0 -> this.moonBlockIcons[12];
+                case 1 -> this.moonBlockIcons[13];
+                case 2 -> this.moonBlockIcons[14];
+                case 3 -> this.moonBlockIcons[2];
+                case 4 -> this.moonBlockIcons[15];
+                case 14 -> this.moonBlockIcons[1];
+                case 15 -> this.moonBlockIcons[16];
+                default -> this.moonBlockIcons[16];
+            };
         }
 
         return null;
@@ -226,14 +218,11 @@ public class BlockBasicMoon extends BlockAdvancedTile
 
     @Override
     public Item getItemDropped(int meta, Random random, int par3) {
-        switch (meta) {
-            case 2:
-                return GCItems.cheeseCurd;
-            case 15:
-                return Item.getItemFromBlock(Blocks.air);
-            default:
-                return Item.getItemFromBlock(this);
-        }
+        return switch (meta) {
+            case 2 -> GCItems.cheeseCurd;
+            case 15 -> Item.getItemFromBlock(Blocks.air);
+            default -> Item.getItemFromBlock(this);
+        };
     }
 
     @Override
@@ -298,16 +287,12 @@ public class BlockBasicMoon extends BlockAdvancedTile
 
     @Override
     public boolean isValueable(int metadata) {
-        switch (metadata) {
-            case 0:
-                return true;
-            case 1:
-                return true;
-            case 2:
-                return true;
-            default:
-                return false;
-        }
+        return switch (metadata) {
+            case 0 -> true;
+            case 1 -> true;
+            case 2 -> true;
+            default -> false;
+        };
     }
 
     @Override

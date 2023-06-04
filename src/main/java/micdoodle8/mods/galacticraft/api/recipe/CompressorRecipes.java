@@ -236,12 +236,8 @@ public class CompressorRecipes {
 
             if (slot != null) {
                 boolean inRecipe = false;
-                final Iterator<Object> req = required.iterator();
-
-                while (req.hasNext()) {
+                for (Object next : required) {
                     boolean match = false;
-
-                    final Object next = req.next();
 
                     if (next instanceof ItemStack) {
                         match = OreDictionary.itemMatches((ItemStack) next, slot, false);

@@ -83,8 +83,7 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
     public void randomDisplayTick(World par1World, int x, int y, int z, Random par5Random) {
         final TileEntity tile = par1World.getTileEntity(x, y, z);
 
-        if (tile instanceof TileEntityCoalGenerator) {
-            final TileEntityCoalGenerator tileEntity = (TileEntityCoalGenerator) tile;
+        if (tile instanceof TileEntityCoalGenerator tileEntity) {
             if (tileEntity.heatGJperTick > 0) {
                 final int metadata = par1World.getBlockMetadata(x, y, z);
                 final float var7 = x + 0.5F;

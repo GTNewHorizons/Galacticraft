@@ -133,8 +133,7 @@ public class EnergyStorage implements IEnergyStorageGC {
         if (obj == null) {
             return false;
         }
-        if (obj instanceof EnergyStorage) {
-            final EnergyStorage storage = (EnergyStorage) obj;
+        if (obj instanceof EnergyStorage storage) {
             return storage.getEnergyStoredGC() == this.energy && storage.getCapacityGC() == this.capacity
                     && storage.getMaxReceive() == this.maxReceive
                     && storage.getMaxExtract() == this.maxExtract;

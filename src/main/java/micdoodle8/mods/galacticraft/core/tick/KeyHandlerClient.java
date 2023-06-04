@@ -132,17 +132,15 @@ public class KeyHandlerClient extends KeyHandler {
 
             final Entity entityTest = mc.thePlayer.ridingEntity;
 
-            if (entityTest instanceof IControllableEntity && keyNum != -1) {
+            if (entityTest instanceof IControllableEntity entity && keyNum != -1) {
 
-                final IControllableEntity entity = (IControllableEntity) entityTest;
                 if (kb.getKeyCode() == mc.gameSettings.keyBindInventory.getKeyCode()) {
                     KeyBinding.setKeyBindState(mc.gameSettings.keyBindInventory.getKeyCode(), false);
                 }
                 entity.pressKey(keyNum);
 
-            } else if (entityTest instanceof EntityAutoRocket) {
+            } else if (entityTest instanceof EntityAutoRocket autoRocket) {
 
-                final EntityAutoRocket autoRocket = (EntityAutoRocket) entityTest;
                 if (autoRocket.landing) {
                     if (kb == leftShiftKey) {
                         autoRocket.motionY -= 0.02D;

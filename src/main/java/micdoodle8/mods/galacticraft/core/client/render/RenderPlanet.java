@@ -49,26 +49,14 @@ public class RenderPlanet {
     }
 
     public static void renderID(int id, float scale, float ticks) {
-        ResourceLocation texture;
-        switch (id) {
-            case 0:
-                texture = textureEuropa;
-                break;
-            case 1:
-                texture = textureGanymede;
-                break;
-            case 2:
-                texture = textureIo;
-                break;
-            case 3:
-                texture = textureJupiterInner;
-                break;
-            case 4:
-                texture = textureSaturn;
-                break;
-            default:
-                texture = textureGanymede;
-        }
+        ResourceLocation texture = switch (id) {
+            case 0 -> textureEuropa;
+            case 1 -> textureGanymede;
+            case 2 -> textureIo;
+            case 3 -> textureJupiterInner;
+            case 4 -> textureSaturn;
+            default -> textureGanymede;
+        };
         if (id == 3) // Jupiter
         {
             final float relSize = 48F;

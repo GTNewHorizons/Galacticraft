@@ -2,7 +2,6 @@ package micdoodle8.mods.galacticraft.api.recipe;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -53,11 +52,7 @@ public class SpaceStationRecipe {
         final HashMap<Object, Integer> required = new HashMap<>();
         required.putAll(this.input);
 
-        final Iterator<Object> req = this.input.keySet().iterator();
-
-        while (req.hasNext()) {
-            final Object next = req.next();
-
+        for (Object next : this.input.keySet()) {
             final int amountRequired = required.get(next);
             int amountInInv = 0;
 
@@ -95,11 +90,7 @@ public class SpaceStationRecipe {
     public void removeItems(EntityPlayer player) {
         final HashMap<Object, Integer> required = new HashMap<>(this.input);
 
-        final Iterator<Object> req = required.keySet().iterator();
-
-        while (req.hasNext()) {
-            final Object next = req.next();
-
+        for (Object next : required.keySet()) {
             final int amountRequired = required.get(next);
             int amountRemoved = 0;
 
