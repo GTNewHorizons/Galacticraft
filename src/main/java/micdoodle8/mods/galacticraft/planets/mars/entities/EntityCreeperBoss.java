@@ -84,7 +84,7 @@ public class EntityCreeperBoss extends EntityMob
 
     @Override
     public boolean attackEntityFrom(DamageSource damageSource, float damage) {
-        if (damageSource.getDamageType().equals("fireball")) {
+        if ("fireball".equals(damageSource.getDamageType())) {
             if (this.isEntityInvulnerable() || !super.attackEntityFrom(damageSource, damage)) {
                 return false;
             }

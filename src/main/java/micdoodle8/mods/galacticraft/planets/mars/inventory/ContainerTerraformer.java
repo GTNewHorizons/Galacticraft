@@ -186,7 +186,7 @@ public class ContainerTerraformer extends Container {
                         for (int i = 1; i < 16; i++) {
                             final ItemStack testStack = new ItemStack(item, 1, i);
                             final String testName = item.getUnlocalizedName(testStack);
-                            if (testName == null || testName.equals("") || testName.equals(basicName)) {
+                            if (testName == null || "".equals(testName) || testName.equals(basicName)) {
                                 break;
                             }
                             ContainerTerraformer.saplingList.add(testStack);

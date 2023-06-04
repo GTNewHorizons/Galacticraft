@@ -103,7 +103,7 @@ public abstract class TileEntityOxygen extends TileBaseElectricBlock implements 
 
     @Override
     public boolean canConnect(ForgeDirection direction, NetworkType type) {
-        if (direction == null || direction.equals(ForgeDirection.UNKNOWN)) {
+        if (direction == null || ForgeDirection.UNKNOWN.equals(direction)) {
             return false;
         }
 

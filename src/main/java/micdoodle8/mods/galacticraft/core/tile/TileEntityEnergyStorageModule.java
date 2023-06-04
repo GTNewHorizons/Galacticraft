@@ -286,7 +286,7 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
 
     @Override
     public boolean canConnect(ForgeDirection direction, NetworkType type) {
-        if (direction == null || direction.equals(ForgeDirection.UNKNOWN) || type != NetworkType.POWER) {
+        if (direction == null || ForgeDirection.UNKNOWN.equals(direction) || type != NetworkType.POWER) {
             return false;
         }
 

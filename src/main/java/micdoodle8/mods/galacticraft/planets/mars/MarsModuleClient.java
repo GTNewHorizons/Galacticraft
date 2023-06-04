@@ -206,14 +206,14 @@ public class MarsModuleClient implements IPlanetsModuleClient {
             final double maxDistSqrd = 64.0D;
 
             if (dPosX * dPosX + dPosY * dPosY + dPosZ * dPosZ < maxDistSqrd * maxDistSqrd) {
-                if (particleID.equals("sludgeDrip")) {
+                if ("sludgeDrip".equals(particleID)) {
                     particle = new EntityDropParticleFX(
                             mc.theWorld,
                             position.x,
                             position.y,
                             position.z,
                             Material.water);
-                } else if (particleID.equals("bacterialDrip")) {
+                } else if ("bacterialDrip".equals(particleID)) {
                     particle = new EntityBacterialDripFX(mc.theWorld, position.x, position.y, position.z);
                 }
             }

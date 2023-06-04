@@ -24,31 +24,31 @@ public class EffectHandler {
             EntityFX particle = null;
             final double viewDistance = 64.0D;
 
-            if (particleID.equals("whiteSmokeIdle")) {
+            if ("whiteSmokeIdle".equals(particleID)) {
                 particle = new EntityFXLaunchSmoke(mc.theWorld, position, motion, 1.0F, false);
-            } else if (particleID.equals("whiteSmokeLaunched")) {
+            } else if ("whiteSmokeLaunched".equals(particleID)) {
                 particle = new EntityFXLaunchSmoke(mc.theWorld, position, motion, 1.0F, true);
-            } else if (particleID.equals("whiteSmokeLargeIdle")) {
+            } else if ("whiteSmokeLargeIdle".equals(particleID)) {
                 particle = new EntityFXLaunchSmoke(mc.theWorld, position, motion, 2.5F, false);
-            } else if (particleID.equals("whiteSmokeLargeLaunched")) {
+            } else if ("whiteSmokeLargeLaunched".equals(particleID)) {
                 particle = new EntityFXLaunchSmoke(mc.theWorld, position, motion, 2.5F, true);
-            } else if (particleID.equals("launchFlameIdle")) {
+            } else if ("launchFlameIdle".equals(particleID)) {
                 particle = new EntityFXLaunchFlame(
                         mc.theWorld,
                         position,
                         motion,
                         false,
                         (EntityLivingBase) otherInfo[0]);
-            } else if (particleID.equals("launchFlameLaunched")) {
+            } else if ("launchFlameLaunched".equals(particleID)) {
                 particle = new EntityFXLaunchFlame(
                         mc.theWorld,
                         position,
                         motion,
                         true,
                         (EntityLivingBase) otherInfo[0]);
-            } else if (particleID.equals("whiteSmokeTiny")) {
+            } else if ("whiteSmokeTiny".equals(particleID)) {
                 particle = new EntityFXSmokeSmall(mc.theWorld, position, motion);
-            } else if (particleID.equals("distanceSmoke")
+            } else if ("distanceSmoke".equals(particleID)
                     && dX * dX + dY * dY + dZ * dZ < viewDistance * viewDistance * 1.7) {
                         particle = new EntitySmokeFX(
                                 mc.theWorld,
@@ -60,12 +60,12 @@ public class EffectHandler {
                                 motion.z,
                                 2.5F);
                     } else
-                if (particleID.equals("oilDrip")) {
+                if ("oilDrip".equals(particleID)) {
                     particle = new EntityFXOilDrip(mc.theWorld, position.x, position.y, position.z);
                 }
 
             if (dX * dX + dY * dY + dZ * dZ < viewDistance * viewDistance) {
-                if (particleID.equals("oxygen")) {
+                if ("oxygen".equals(particleID)) {
                     particle = new EntityFXEntityOxygen(mc.theWorld, position, motion, (Vector3) otherInfo[0]);
                 }
             }

@@ -274,7 +274,7 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
         int lowestDistance = Integer.MAX_VALUE;
 
         for (final AsteroidData test : this.asteroids) {
-            if ((test.sizeAndLandedFlag & 128) > 0) {
+            if ((test.sizeAndLandedFlag & 128) != 0) {
                 continue;
             }
 

@@ -65,14 +65,14 @@ public class CommandSpaceStationAddOwner extends CommandBase {
                         final SpaceStationWorldData data = SpaceStationWorldData
                                 .getStationData(playerBase.worldObj, ownedStations.getValue(), playerBase);
 
-                        if (var3.equalsIgnoreCase("+all")) {
+                        if ("+all".equalsIgnoreCase(var3)) {
                             data.setAllowedAll(true);
                             playerBase.addChatMessage(
                                     new ChatComponentText(
                                             GCCoreUtil.translateWithFormat("gui.spacestation.allowAllTrue")));
                             return;
                         }
-                        if (var3.equalsIgnoreCase("-all")) {
+                        if ("-all".equalsIgnoreCase(var3)) {
                             data.setAllowedAll(false);
                             playerBase.addChatMessage(
                                     new ChatComponentText(

@@ -470,7 +470,7 @@ public class EntityAstroMiner extends Entity
                 // TODO blinking distress light or something?
                 // Attempt to re-start every 30 seconds or so
                 if (this.ticksExisted % 600 == 0) {
-                    if ((this.givenFailMessage & 8) > 0) {
+                    if ((this.givenFailMessage & 8) != 0) {
                         // The base was destroyed - see if it has been replaced?
                         this.atBase();
                     } else {

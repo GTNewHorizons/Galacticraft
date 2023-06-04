@@ -578,7 +578,7 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
         this.setWaitForPlayer(buffer.readBoolean());
 
         this.statusMessage = ByteBufUtils.readUTF8String(buffer);
-        this.statusMessage = this.statusMessage.equals("") ? null : this.statusMessage;
+        this.statusMessage = "".equals(this.statusMessage) ? null : this.statusMessage;
         this.statusMessageCooldown = buffer.readInt();
         this.lastStatusMessageCooldown = buffer.readInt();
         this.statusValid = buffer.readBoolean();
@@ -627,7 +627,7 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
             }
         }
         this.statusColour = ByteBufUtils.readUTF8String(buffer);
-        if (this.statusColour.equals("")) {
+        if ("".equals(this.statusColour)) {
             this.statusColour = null;
         }
     }

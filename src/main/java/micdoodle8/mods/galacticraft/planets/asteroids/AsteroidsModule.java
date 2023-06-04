@@ -347,7 +347,7 @@ public class AsteroidsModule implements IPlanetsModule {
                 Method registerMethod = null;
                 final Method[] methodz = clazz.getMethods();
                 for (final Method m : methodz) {
-                    if (m.getName().equals("registerMaterial")) {
+                    if ("registerMaterial".equals(m.getName())) {
                         registerMethod = m;
                         break;
                     }

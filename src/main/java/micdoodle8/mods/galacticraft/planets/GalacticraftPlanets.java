@@ -139,7 +139,7 @@ public class GalacticraftPlanets {
 
     @SubscribeEvent
     public void onConfigChanged(ConfigChangedEvent event) {
-        if (event.modID.equals(Constants.MOD_ID_PLANETS)) {
+        if (Constants.MOD_ID_PLANETS.equals(event.modID)) {
             for (final IPlanetsModule module : GalacticraftPlanets.commonModules.values()) {
                 module.syncConfig();
             }

@@ -337,7 +337,7 @@ public class PlayerClient implements IPlayerClient {
         if (repeatCount <= 3) {
             repeatCount++;
         }
-        if ((flag & 1 << i) > 0) {
+        if ((flag & 1 << i) != 0) {
             return;
         }
         flag |= 1 << i;

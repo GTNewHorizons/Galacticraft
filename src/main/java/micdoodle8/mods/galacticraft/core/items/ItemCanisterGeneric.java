@@ -62,7 +62,7 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer {
             final int imax = Math.max(st.length, 5);
             for (int i = 1; i < imax; i++) {
                 final String ste = st[i].getClassName();
-                if (ste.equals("thermalexpansion.block.machine.TileTransposer")) {
+                if ("thermalexpansion.block.machine.TileTransposer".equals(ste)) {
                     return null;
                 }
             }

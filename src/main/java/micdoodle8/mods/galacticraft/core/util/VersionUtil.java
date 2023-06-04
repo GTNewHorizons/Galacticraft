@@ -584,7 +584,7 @@ public class VersionUtil {
                 final Class<?> c = Class.forName("net.minecraft.block.Block");
                 final Method[] mm = c.getDeclaredMethods();
                 for (final Method testMethod : mm) {
-                    if (testMethod.getName().equals("func_149644_j")) {
+                    if ("func_149644_j".equals(testMethod.getName())) {
                         m = testMethod;
                         break;
                     }

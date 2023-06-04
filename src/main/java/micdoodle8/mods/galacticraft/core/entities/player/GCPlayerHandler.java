@@ -1065,7 +1065,7 @@ public class GCPlayerHandler {
             if (ConfigManagerCore.enableSpaceRaceManagerPopup && !GCPlayer.openedSpaceRaceManager) {
                 final SpaceRace race = SpaceRaceManager.getSpaceRaceFromPlayer(player.getGameProfile().getName());
 
-                if (race == null || race.teamName.equals(SpaceRace.DEFAULT_NAME)) {
+                if (race == null || SpaceRace.DEFAULT_NAME.equals(race.teamName)) {
                     GalacticraftCore.packetPipeline
                             .sendTo(new PacketSimple(EnumSimplePacket.C_OPEN_SPACE_RACE_GUI, new Object[] {}), player);
                 }

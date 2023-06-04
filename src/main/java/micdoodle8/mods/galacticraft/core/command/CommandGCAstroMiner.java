@@ -66,11 +66,11 @@ public class CommandGCAstroMiner extends CommandBase {
 
         int type = 0;
         int newvalue = 0;
-        if (astring[0].equalsIgnoreCase("show")) {
+        if ("show".equalsIgnoreCase(astring[0])) {
             type = 1;
-        } else if (astring[0].equalsIgnoreCase("reset")) {
+        } else if ("reset".equalsIgnoreCase(astring[0])) {
             type = 2;
-        } else if (astring[0].length() > 3 && astring[0].substring(0, 3).equalsIgnoreCase("set")) {
+        } else if (astring[0].length() > 3 && "set".equalsIgnoreCase(astring[0].substring(0, 3))) {
             final String number = astring[0].substring(3);
             try {
                 newvalue = Integer.parseInt(number);

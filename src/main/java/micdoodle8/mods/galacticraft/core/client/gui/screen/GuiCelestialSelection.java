@@ -679,7 +679,7 @@ public class GuiCelestialSelection extends GuiScreen {
                     && x < this.width - BORDER_WIDTH - BORDER_EDGE_WIDTH
                     && y > BORDER_WIDTH + BORDER_EDGE_WIDTH
                     && y < BORDER_WIDTH + BORDER_EDGE_WIDTH + 13) {
-                if (!(this.selectedBody instanceof Satellite) || !this.selectedStationOwner.equals("")) {
+                if (!(this.selectedBody instanceof Satellite) || !"".equals(this.selectedStationOwner)) {
                     this.teleportToSelectedBody();
                 }
 
@@ -1121,7 +1121,7 @@ public class GuiCelestialSelection extends GuiScreen {
 
     protected Vector3f getCelestialBodyPosition(CelestialBody cBody) {
         if (cBody instanceof Star) {
-            if (cBody.getUnlocalizedName().equalsIgnoreCase("star.sol")) {
+            if ("star.sol".equalsIgnoreCase(cBody.getUnlocalizedName())) {
                 // Return zero vector for Sol, different location for other solar systems
                 return new Vector3f();
             }
@@ -2460,7 +2460,7 @@ public class GuiCelestialSelection extends GuiScreen {
                 if (this.mapMode != MapMode.VIEW) {
                     if (!this.selectedBody.getReachable()
                             || this.possibleBodies != null && !this.possibleBodies.contains(this.selectedBody)
-                            || this.selectedBody instanceof Satellite && this.selectedStationOwner.equals("")) {
+                            || this.selectedBody instanceof Satellite && "".equals(this.selectedStationOwner)) {
                         GL11.glColor4f(1.0F, 0.0F, 0.0F, 1);
                     } else {
                         GL11.glColor4f(0.0F, 1.0F, 0.0F, 1);

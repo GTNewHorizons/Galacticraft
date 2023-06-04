@@ -164,7 +164,7 @@ public class RenderSlimeling extends RenderLiving {
             final Tessellator tessellator = Tessellator.instance;
             byte b0 = 0;
 
-            if (par2Str.equals("deadmau5")) {
+            if ("deadmau5".equals(par2Str)) {
                 b0 = -10;
             }
 

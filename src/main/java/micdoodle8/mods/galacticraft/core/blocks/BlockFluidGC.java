@@ -90,7 +90,7 @@ public class BlockFluidGC extends BlockFluidClassic {
                     0.00001F + rand.nextFloat() * 0.5F,
                     false);
         }
-        if (this.fluidName.equals("oil") && rand.nextInt(10) == 0) {
+        if ("oil".equals(this.fluidName) && rand.nextInt(10) == 0) {
             if (World.doesBlockHaveSolidTopSurface(world, x, y - 1, z)
                     && !world.getBlock(x, y - 2, z).getMaterial().blocksMovement()) {
                 GalacticraftCore.proxy.spawnParticle(

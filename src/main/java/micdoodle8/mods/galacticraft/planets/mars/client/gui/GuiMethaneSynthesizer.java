@@ -320,7 +320,7 @@ public class GuiMethaneSynthesizer extends GuiContainerGC {
         FluidStack gasTankContents = this.tileEntity.gasTank != null ? this.tileEntity.gasTank.getFluid() : null;
         if (gasTankContents != null) {
             String gasname = FluidRegistry.getFluid("hydrogen").getUnlocalizedName();
-            if (gasname == null || gasname.equals("fluid.hydrogen")) {
+            if (gasname == null || "fluid.hydrogen".equals(gasname)) {
                 gasname = GCCoreUtil.translate(gasTankContents.getFluid().getUnlocalizedName());
             }
             gasTankDesc.add("(" + gasname + ")");
@@ -338,7 +338,7 @@ public class GuiMethaneSynthesizer extends GuiContainerGC {
         gasTankContents = this.tileEntity.gasTank2 != null ? this.tileEntity.gasTank2.getFluid() : null;
         if (gasTankContents != null) {
             String gasname = FluidRegistry.getFluid("carbondioxide").getUnlocalizedName();
-            if (gasname == null || gasname.equals("fluid.carbondioxide")) {
+            if (gasname == null || "fluid.carbondioxide".equals(gasname)) {
                 gasname = GCCoreUtil.translate(gasTankContents.getFluid().getUnlocalizedName());
             }
             gasTankDesc.add("(" + gasname + ")");
@@ -355,7 +355,7 @@ public class GuiMethaneSynthesizer extends GuiContainerGC {
         gasTankContents = this.tileEntity.liquidTank != null ? this.tileEntity.liquidTank.getFluid() : null;
         if (gasTankContents != null) {
             String gasname = FluidRegistry.getFluid("methane").getUnlocalizedName();
-            if (gasname == null || gasname.equals("fluid.methane")) {
+            if (gasname == null || "fluid.methane".equals(gasname)) {
                 gasname = GCCoreUtil.translate(gasTankContents.getFluid().getUnlocalizedName());
             }
             fuelTankDesc.add("(" + gasname + ")");

@@ -164,7 +164,7 @@ public class GuiElementTextBox extends GuiButton {
 
     public int getIntegerValue() {
         try {
-            return Integer.parseInt(this.text.equals("") ? "0" : this.text);
+            return Integer.parseInt("".equals(this.text) ? "0" : this.text);
         } catch (final Exception e) {
             return -1;
         }

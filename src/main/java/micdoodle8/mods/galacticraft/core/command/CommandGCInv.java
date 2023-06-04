@@ -78,10 +78,10 @@ public class CommandGCInv extends CommandBase {
             if (thePlayer != null && !thePlayer.isDead && thePlayer.worldObj != null) {
                 final GCPlayerStats stats = GCPlayerStats.get(thePlayer);
 
-                if (astring[0].equalsIgnoreCase("drop")) {
+                if ("drop".equalsIgnoreCase(astring[0])) {
                     final InventoryExtended gcInventory = stats.extendedInventory;
                     gcInventory.dropExtendedItems(thePlayer);
-                } else if (astring[0].equalsIgnoreCase("save")) {
+                } else if ("save".equalsIgnoreCase(astring[0])) {
                     final InventoryExtended gcInventory = stats.extendedInventory;
                     final ItemStack[] saveinv = new ItemStack[gcInventory.getSizeInventory()];
                     for (int i = 0; i < gcInventory.getSizeInventory(); i++) {
@@ -95,7 +95,7 @@ public class CommandGCInv extends CommandBase {
                     System.out.println(
                             "[GCInv] Saving and clearing GC inventory slots of "
                                     + thePlayer.getGameProfile().getName());
-                } else if (astring[0].equalsIgnoreCase("restore")) {
+                } else if ("restore".equalsIgnoreCase(astring[0])) {
                     final ItemStack[] saveinv = CommandGCInv.savedata.get(astring[1].toLowerCase());
                     CommandGCInv.dontload.remove(astring[1].toLowerCase());
                     if (saveinv == null) {
@@ -106,7 +106,7 @@ public class CommandGCInv extends CommandBase {
                     }
 
                     CommandGCInv.doLoad(thePlayer);
-                } else if (astring[0].equalsIgnoreCase("clear")) {
+                } else if ("clear".equalsIgnoreCase(astring[0])) {
                     final InventoryExtended gcInventory = stats.extendedInventory;
                     for (int i = 0; i < gcInventory.getSizeInventory(); i++) {
                         gcInventory.setInventorySlotContents(i, null);
@@ -119,7 +119,7 @@ public class CommandGCInv extends CommandBase {
                 // Special rule for 'restore' command if player not found -
                 // look to see if the player is offline (i.e. had a saved
                 // inventory already)
-                if (astring[0].equalsIgnoreCase("restore")) {
+                if ("restore".equalsIgnoreCase(astring[0])) {
                     final ItemStack[] saveinv = CommandGCInv.savedata.get(astring[1].toLowerCase());
                     if (saveinv != null) {
                         System.out.println(
@@ -132,8 +132,8 @@ public class CommandGCInv extends CommandBase {
                 }
 
                 // No player found, and not a 'restore' command
-                if (astring[0].equalsIgnoreCase("clear") || astring[0].equalsIgnoreCase("save")
-                        || astring[0].equalsIgnoreCase("drop")) {
+                if ("clear".equalsIgnoreCase(astring[0]) || "save".equalsIgnoreCase(astring[0])
+                        || "drop".equalsIgnoreCase(astring[0])) {
                     System.out.println("GCInv command: player " + astring[1] + " not found.");
                 } else {
                     throw new WrongUsageException(

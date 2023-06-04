@@ -725,10 +725,10 @@ public class ConfigManagerCore {
 
     private static void challengeModeUpdate() {
         if (challengeMode) {
-            challengeRecipes = (challengeFlags & 1) > 0;
-            challengeMobDropsAndSpawning = (challengeFlags & 2) > 0;
-            challengeAsteroidPopulation = (challengeFlags & 4) > 0;
-            challengeSpawnHandling = (challengeFlags & 8) > 0;
+            challengeRecipes = (challengeFlags & 1) != 0;
+            challengeMobDropsAndSpawning = (challengeFlags & 2) != 0;
+            challengeAsteroidPopulation = (challengeFlags & 4) != 0;
+            challengeSpawnHandling = (challengeFlags & 8) != 0;
         } else {
             challengeRecipes = false;
             challengeMobDropsAndSpawning = false;

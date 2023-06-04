@@ -44,7 +44,7 @@ public class EventHandlerMars {
 
     @SubscribeEvent
     public void onLivingDeath(LivingDeathEvent event) {
-        if (event.source.damageType.equals("slimeling") && event.source instanceof EntityDamageSource source) {
+        if ("slimeling".equals(event.source.damageType) && event.source instanceof EntityDamageSource source) {
             if (source.getEntity() instanceof EntitySlimeling && !source.getEntity().worldObj.isRemote) {
                 ((EntitySlimeling) source.getEntity()).kills++;
             }

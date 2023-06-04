@@ -347,7 +347,7 @@ public class BlockEnclosed extends BlockContainer
                 final Object pipe = CompatibilityManager.methodBCBlockPipe_createPipe.invoke(null, pipeItem);
                 Method initializePipe = null;
                 for (final Method m : clazzTilePipe.getMethods()) {
-                    if (m.getName().equals("initialize") && m.getParameterTypes().length == 1) {
+                    if ("initialize".equals(m.getName()) && m.getParameterTypes().length == 1) {
                         initializePipe = m;
                         break;
                     }

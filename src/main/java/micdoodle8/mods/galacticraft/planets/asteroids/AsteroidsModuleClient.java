@@ -187,7 +187,7 @@ public class AsteroidsModuleClient implements IPlanetsModuleClient {
             final double viewDistance = 64.0D;
 
             if (dX * dX + dY * dY + dZ * dZ < viewDistance * viewDistance) {
-                if (particleID.equals("portalBlue")) {
+                if ("portalBlue".equals(particleID)) {
                     particle = new EntityFXTeleport(
                             mc.theWorld,
                             position,

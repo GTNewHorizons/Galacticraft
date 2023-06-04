@@ -110,7 +110,7 @@ public class GuiOxygenCollector extends GuiContainerGC {
     private String getStatus() {
         final String returnValue = this.collector.getGUIstatus();
 
-        if (returnValue.equals(EnumColor.DARK_GREEN + GCCoreUtil.translate("gui.status.active.name"))
+        if ((EnumColor.DARK_GREEN + GCCoreUtil.translate("gui.status.active.name")).equals(returnValue)
                 && this.collector.lastOxygenCollected <= 0.0F) {
             return EnumColor.DARK_RED + GCCoreUtil.translate("gui.status.missingleaves.name");
         }

@@ -52,7 +52,7 @@ public class FluidUtil {
             return true;
         }
 
-        return name.equals("rc jet fuel");
+        return "rc jet fuel".equals(name);
     }
 
     /**
@@ -315,7 +315,7 @@ public class FluidUtil {
      */
     public static boolean isWaterContainer(ItemStack var4) {
         final FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(var4);
-        return liquid != null && liquid.getFluid() != null && liquid.getFluid().getName().equals("water");
+        return liquid != null && liquid.getFluid() != null && "water".equals(liquid.getFluid().getName());
     }
 
     /**

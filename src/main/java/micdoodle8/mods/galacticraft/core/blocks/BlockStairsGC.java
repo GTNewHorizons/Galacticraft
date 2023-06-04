@@ -94,13 +94,13 @@ public class BlockStairsGC extends BlockStairs {
     public boolean isWoodCategory(String block) {
         final String type = StairsCategoryGC.valueOf(block).type;
 
-        return type.equals("wood");
+        return "wood".equals(type);
     }
 
     public boolean isStoneCategory(String block) {
         final String type = StairsCategoryGC.valueOf(block).type;
 
-        return type.equals("stone");
+        return "stone".equals(type);
     }
 
     public static int getWoodCategoryAmount() {

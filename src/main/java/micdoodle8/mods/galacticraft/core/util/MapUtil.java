@@ -322,7 +322,7 @@ public class MapUtil {
             if (map.BiomeMapOneTick()) {
                 // Finished
                 map.writeOutputFile(true);
-                if (map.biomeMapFile.getName().equals("Overworld192.bin")) {
+                if ("Overworld192.bin".equals(map.biomeMapFile.getName())) {
                     doneOverworldTexture = true;
                 }
                 if (doingSlow) {

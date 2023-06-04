@@ -77,7 +77,7 @@ public class CommandSpaceStationChangeOwner extends CommandBase {
 
             oldOwner = stationData.getOwner();
             stationData.getAllowedPlayers().remove(oldOwner);
-            if (stationData.getSpaceStationName().equals("Station: " + oldOwner)) {
+            if (("Station: " + oldOwner).equals(stationData.getSpaceStationName())) {
                 stationData.setSpaceStationName("Station: " + newOwner);
             }
             stationData.getAllowedPlayers().add(newOwner);

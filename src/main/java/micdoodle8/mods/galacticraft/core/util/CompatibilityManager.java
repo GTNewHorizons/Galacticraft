@@ -71,7 +71,7 @@ public class CompatibilityManager {
                 classBCBlockGenericPipe = BlockEnclosed.blockPipeBC.getClass();
 
                 for (final Method m : classBCBlockGenericPipe.getMethods()) {
-                    if (m.getName().equals("createPipe") && m.getParameterTypes().length == 1) {
+                    if ("createPipe".equals(m.getName()) && m.getParameterTypes().length == 1) {
                         methodBCBlockPipe_createPipe = m;
                         break;
                     }

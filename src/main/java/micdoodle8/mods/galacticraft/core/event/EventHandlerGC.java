@@ -126,7 +126,7 @@ public class EventHandlerGC {
 
     @SubscribeEvent
     public void onConfigChanged(ConfigChangedEvent event) {
-        if (event.modID.equals(Constants.MOD_ID_CORE)) {
+        if (Constants.MOD_ID_CORE.equals(event.modID)) {
             ConfigManagerCore.syncConfig(false);
         }
     }
@@ -237,7 +237,7 @@ public class EventHandlerGC {
         final Block idClicked = worldObj.getBlock(event.x, event.y, event.z);
 
         if (idClicked == Blocks.bed && worldObj.provider instanceof IGalacticraftWorldProvider
-                && event.action.equals(PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
+                && PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK.equals(event.action)
                 && !worldObj.isRemote
                 && !((IGalacticraftWorldProvider) worldObj.provider).hasBreathableAtmosphere()) {
             if (GalacticraftCore.isPlanetsLoaded) {
@@ -269,12 +269,12 @@ public class EventHandlerGC {
 
         if (heldStack != null) {
             if (tileClicked != null && tileClicked instanceof IKeyable) {
-                if (event.action.equals(PlayerInteractEvent.Action.LEFT_CLICK_BLOCK)) {
+                if (PlayerInteractEvent.Action.LEFT_CLICK_BLOCK.equals(event.action)) {
                     event.setCanceled(
                             !((IKeyable) tileClicked).canBreak() && !event.entityPlayer.capabilities.isCreativeMode);
                     return;
                 }
-                if (event.action.equals(PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)) {
+                if (PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK.equals(event.action)) {
                     if ((heldStack.getItem() instanceof IKeyItem) && (((IKeyItem) heldStack.getItem()).getTier(heldStack) == -1
                             || ((IKeyable) tileClicked).getTierOfKeyRequired() == -1
                             || ((IKeyItem) heldStack.getItem()).getTier(heldStack)
@@ -290,7 +290,7 @@ public class EventHandlerGC {
             }
 
             if (heldStack.getItem() instanceof ItemFlintAndSteel || heldStack.getItem() instanceof ItemFireball) {
-                if (!worldObj.isRemote && event.action.equals(PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)) {
+                if (!worldObj.isRemote && PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK.equals(event.action)) {
                     if (idClicked != Blocks.tnt && OxygenUtil.noAtmosphericCombustion(worldObj.provider)
                             && !OxygenUtil.isAABBInBreathableAirBlock(
                                     worldObj,
@@ -306,7 +306,7 @@ public class EventHandlerGC {
                 }
             }
         } else if (tileClicked != null && tileClicked instanceof IKeyable) {
-            if (event.action.equals(PlayerInteractEvent.Action.LEFT_CLICK_BLOCK)) {
+            if (PlayerInteractEvent.Action.LEFT_CLICK_BLOCK.equals(event.action)) {
                 event.setCanceled(
                         !((IKeyable) tileClicked).canBreak() && !event.entityPlayer.capabilities.isCreativeMode);
                 return;
