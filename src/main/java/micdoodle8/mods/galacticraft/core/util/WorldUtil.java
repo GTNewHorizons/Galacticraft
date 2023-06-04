@@ -100,7 +100,7 @@ public class WorldUtil {
 
     public static HashMap<Integer, Integer> registeredSpaceStations; // Dimension IDs and providers (providers are -26
     // or -27 by default)
-    public static Map<Integer, String> dimNames = new TreeMap(); // Dimension IDs and provider names
+    public static Map<Integer, String> dimNames = new TreeMap<>(); // Dimension IDs and provider names
     public static Map<EntityPlayerMP, HashMap<String, Integer>> celestialMapCache = new MapMaker().weakKeys().makeMap();
     public static List<Integer> registeredPlanets;
     private static IWorldGenerator generatorGCGreg = null;
@@ -1254,7 +1254,7 @@ public class WorldUtil {
         }
 
         if (directlyRemove) {
-            final List l = new ArrayList<Entity>();
+            final List<Entity> l = new ArrayList<Entity>();
             l.add(var1);
             var0.unloadEntities(l);
             // This will automatically remove the entity from the world and the chunk prior
@@ -1452,7 +1452,7 @@ public class WorldUtil {
             generatorsInitialised = true;
 
             try {
-                final Class GCGreg = Class.forName("bloodasp.galacticgreg.GT_Worldgenerator_Space");
+                final Class<?> GCGreg = Class.forName("bloodasp.galacticgreg.GT_Worldgenerator_Space");
                 if (GCGreg != null) {
                     final Field regField = Class.forName("cpw.mods.fml.common.registry.GameRegistry")
                             .getDeclaredField("worldGenerators");
@@ -1468,7 +1468,7 @@ public class WorldUtil {
             } catch (final Exception e) {}
 
             try {
-                final Class cofh = Class.forName("cofh.core.world.WorldHandler");
+                final Class<?> cofh = Class.forName("cofh.core.world.WorldHandler");
                 if (cofh != null && ConfigManagerCore.whitelistCoFHCoreGen) {
                     final Field regField = Class.forName("cpw.mods.fml.common.registry.GameRegistry")
                             .getDeclaredField("worldGenerators");
@@ -1484,7 +1484,7 @@ public class WorldUtil {
             } catch (final Exception e) {}
 
             try {
-                final Class denseOres = Class.forName("com.rwtema.denseores.WorldGenOres");
+                final Class<?> denseOres = Class.forName("com.rwtema.denseores.WorldGenOres");
                 if (denseOres != null) {
                     final Field regField = Class.forName("cpw.mods.fml.common.registry.GameRegistry")
                             .getDeclaredField("worldGenerators");
@@ -1500,7 +1500,7 @@ public class WorldUtil {
             } catch (final Exception e) {}
 
             try {
-                Class ae2meteorPlace = null;
+                Class<?> ae2meteorPlace = null;
                 try {
                     ae2meteorPlace = Class.forName("appeng.hooks.MeteoriteWorldGen");
                 } catch (final ClassNotFoundException e) {}
@@ -1526,7 +1526,7 @@ public class WorldUtil {
             } catch (final Exception e) {}
 
             try {
-                final Class genThaumCraft = Class.forName("thaumcraft.common.lib.world.ThaumcraftWorldGenerator");
+                final Class<?> genThaumCraft = Class.forName("thaumcraft.common.lib.world.ThaumcraftWorldGenerator");
                 if (genThaumCraft != null) {
                     final Field regField = Class.forName("cpw.mods.fml.common.registry.GameRegistry")
                             .getDeclaredField("worldGenerators");

@@ -425,7 +425,7 @@ public class VersionUtil {
     public static ScaledResolution getScaledRes(Minecraft mc, int width, int height) {
         try {
             if (mcVersion1_7_10) {
-                Constructor m = (Constructor) reflectionCache.get(16);
+                Constructor<?> m = (Constructor<?>) reflectionCache.get(16);
 
                 if (m == null) {
                     final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_SCALED_RES).replace('/', '.'));
@@ -435,7 +435,7 @@ public class VersionUtil {
 
                 return (ScaledResolution) m.newInstance(mc, width, height);
             } else if (mcVersion1_7_2) {
-                Constructor m = (Constructor) reflectionCache.get(16);
+                Constructor<?> m = (Constructor<?>) reflectionCache.get(16);
 
                 if (m == null) {
                     final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_SCALED_RES).replace('/', '.'));
@@ -471,14 +471,14 @@ public class VersionUtil {
         return null;
     }
 
-    public static void putClassToIDMapping(Class mobClazz, int id) {
+    public static void putClassToIDMapping(Class<?> mobClazz, int id) {
         // Achieves this, with private field:
         // EntityList.classToIDMapping.put(mobClazz, id);
         try {
             final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_ENTITYLIST).replace('/', '.'));
             final Field f = c.getDeclaredField(getNameDynamic(KEY_FIELD_CLASSTOIDMAPPING));
             f.setAccessible(true);
-            final Map classToIDMapping = (Map) f.get(null);
+            final Map<Class<?>, Integer> classToIDMapping = (Map<Class<?>, Integer>) f.get(null);
             classToIDMapping.put(mobClazz, id);
 
             return;
@@ -489,14 +489,14 @@ public class VersionUtil {
         return;
     }
 
-    public static int getClassToIDMapping(Class mobClazz) {
+    public static int getClassToIDMapping(Class<?> mobClazz) {
         // Achieves this, with private field:
         // EntityList.classToIDMapping.put(mobClazz, id);
         try {
             final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_ENTITYLIST).replace('/', '.'));
             final Field f = c.getDeclaredField(getNameDynamic(KEY_FIELD_CLASSTOIDMAPPING));
             f.setAccessible(true);
-            final Map classToIDMapping = (Map) f.get(null);
+            final Map<Class<?>, Integer> classToIDMapping = (Map<Class<?>, Integer>) f.get(null);
             final Integer i = (Integer) classToIDMapping.get(mobClazz);
 
             return i != null ? i : 0;
@@ -560,7 +560,7 @@ public class VersionUtil {
             try {
                 Field f = (Field) reflectionCache.get(20);
                 if (f == null) {
-                    final Class c = Class.forName("net.minecraft.world.ChunkCache");
+                    final Class<?> c = Class.forName("net.minecraft.world.ChunkCache");
                     f = c.getDeclaredField(getNameDynamic(KEY_FIELD_CHUNKCACHE_WORLDOBJ));
                     f.setAccessible(true);
                     reflectionCache.put(20, f);
@@ -579,7 +579,7 @@ public class VersionUtil {
         try {
             Method m = (Method) reflectionCache.get(3);
             if (m == null) {
-                final Class c = Class.forName("net.minecraft.block.Block");
+                final Class<?> c = Class.forName("net.minecraft.block.Block");
                 final Method[] mm = c.getDeclaredMethods();
                 for (final Method testMethod : mm) {
                     if (testMethod.getName().equals("func_149644_j")) {

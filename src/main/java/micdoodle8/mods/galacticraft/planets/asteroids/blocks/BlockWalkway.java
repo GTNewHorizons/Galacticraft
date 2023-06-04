@@ -159,7 +159,7 @@ public class BlockWalkway extends BlockTransmitter implements ITileEntityProvide
         }
     }
 
-    private void addCollisionBox(World world, int x, int y, int z, AxisAlignedBB aabb, List list) {
+    private void addCollisionBox(World world, int x, int y, int z, AxisAlignedBB aabb, List<AxisAlignedBB> list) {
         final AxisAlignedBB axisalignedbb1 = this.getCollisionBoundingBoxFromPool(world, x, y, z);
 
         if (axisalignedbb1 != null && aabb.intersectsWith(axisalignedbb1)) {
@@ -169,7 +169,7 @@ public class BlockWalkway extends BlockTransmitter implements ITileEntityProvide
 
     @SuppressWarnings("rawtypes")
     @Override
-    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List list,
+    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list,
             Entity entity) {
         final TileEntity tileEntity = world.getTileEntity(x, y, z);
         TileEntity[] connectable = new TileEntity[6];

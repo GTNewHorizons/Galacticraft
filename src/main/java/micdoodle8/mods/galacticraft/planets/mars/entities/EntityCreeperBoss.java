@@ -318,7 +318,7 @@ public class EntityCreeperBoss extends EntityMob
 
         if (this.roomCoords != null && this.roomSize != null) {
             @SuppressWarnings("unchecked")
-            final List<Entity> entitiesWithin = this.worldObj.getEntitiesWithinAABB(
+            final List<EntityPlayer> entitiesWithin = this.worldObj.getEntitiesWithinAABB(
                     EntityPlayer.class,
                     AxisAlignedBB.getBoundingBox(
                             this.roomCoords.intX() - 1,

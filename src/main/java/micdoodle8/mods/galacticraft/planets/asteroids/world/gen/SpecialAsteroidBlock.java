@@ -11,7 +11,7 @@ public class SpecialAsteroidBlock {
     public int probability;
     public double thickness; // Arbitrary scale from 0 to 1;
     public int index;
-    public static ArrayList<SpecialAsteroidBlock> register = new ArrayList();
+    public static ArrayList<SpecialAsteroidBlock> register = new ArrayList<>();
 
     public SpecialAsteroidBlock(Block block, byte meta, int probability, double thickness) {
         this.block = block;

@@ -20,7 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemCanisterLiquidOxygen extends ItemCanisterGeneric implements IItemOxygenSupply {
 
     protected IIcon[] icons = new IIcon[7];
-    private static final HashMap<ItemStack, Integer> craftingvalues = new HashMap();
+    private static final HashMap<ItemStack, Integer> craftingvalues = new HashMap<>();
 
     public ItemCanisterLiquidOxygen(String assetName) {
         super(assetName);

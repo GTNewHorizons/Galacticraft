@@ -29,7 +29,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class WorldProviderAsteroids extends WorldProviderSpace implements ISolarLevel {
 
     // Used to list asteroid centres to external code that needs to know them
-    private final HashSet<AsteroidData> asteroids = new HashSet();
+    private final HashSet<AsteroidData> asteroids = new HashSet<>();
     private boolean dataNotLoaded = true;
     private AsteroidSaveData datafile;
     private double solarMultiplier = -1D;
@@ -306,7 +306,7 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
             return null;
         }
 
-        final TreeMap<Integer, BlockVec3> targets = new TreeMap();
+        final TreeMap<Integer, BlockVec3> targets = new TreeMap<>();
 
         for (final AsteroidData roid : this.asteroids) {
             final BlockVec3 test = roid.centre;
@@ -345,7 +345,7 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
             return null;
         }
 
-        final ArrayList<BlockVec3> returnValues = new ArrayList();
+        final ArrayList<BlockVec3> returnValues = new ArrayList<>();
         int i = 0;
         final int offset = EntityAstroMiner.MINE_LENGTH_AST / 2;
         for (final BlockVec3 target : targets.values()) {

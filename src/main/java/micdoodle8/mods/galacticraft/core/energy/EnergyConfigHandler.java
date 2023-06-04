@@ -265,7 +265,7 @@ public class EnergyConfigHandler {
                 }
 
                 try {
-                    final Class clazz = Class.forName("buildcraft.api.core.JavaTools");
+                    final Class<?> clazz = Class.forName("buildcraft.api.core.JavaTools");
                     final Method methodz = clazz.getMethod("getAllFields", Class.class);
                     if (methodz != null && methodz.getReturnType() == List.class) {
                         cachedBCLoadedValue = true;

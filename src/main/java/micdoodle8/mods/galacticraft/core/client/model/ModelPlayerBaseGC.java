@@ -66,14 +66,14 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
             "textures/model/frequencyModule.png");
 
     public static boolean isSmartMovingLoaded;
-    private static Class modelRotationGCSmartMoving;
-    private static Constructor modelRotationGCSmartMovingInit;
+    private static Class<? extends ModelRenderer> modelRotationGCSmartMoving;
+    private static Constructor<? extends ModelRenderer> modelRotationGCSmartMovingInit;
 
     static {
         isSmartMovingLoaded = Loader.isModLoaded("SmartRender");
         if (isSmartMovingLoaded) {
             try {
-                modelRotationGCSmartMoving = Class
+                modelRotationGCSmartMoving = (Class<? extends ModelRenderer>) Class
                         .forName("micdoodle8.mods.galacticraft.core.client.model.ModelRotationRendererGC");
                 modelRotationGCSmartMovingInit = modelRotationGCSmartMoving
                         .getConstructor(ModelBase.class, int.class, int.class, ModelRenderer.class, int.class);

@@ -8,7 +8,7 @@ import net.minecraft.util.StatCollector;
 
 public class EnergyDisplayHelper {
 
-    public static void getEnergyDisplayTooltip(float energyVal, float maxEnergy, List strList) {
+    public static void getEnergyDisplayTooltip(float energyVal, float maxEnergy, List<String> strList) {
         strList.add(
                 EnumChatFormatting.GREEN + StatCollector.translateToLocal("gui.message.energy")
                         + ": "

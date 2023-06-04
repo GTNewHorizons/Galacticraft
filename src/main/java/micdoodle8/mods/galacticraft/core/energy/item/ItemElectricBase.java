@@ -63,7 +63,7 @@ public abstract class ItemElectricBase extends Item
 
     @SuppressWarnings({ "unchecked" })
     @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean par4) {
+    public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List<String> list, boolean par4) {
         String color;
         final float joules = this.getElectricityStored(itemStack);
 
@@ -168,7 +168,7 @@ public abstract class ItemElectricBase extends Item
 
     @SuppressWarnings({ "unchecked" })
     @Override
-    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
         par3List.add(ElectricItemHelper.getUncharged(new ItemStack(this)));
         par3List.add(
                 ElectricItemHelper

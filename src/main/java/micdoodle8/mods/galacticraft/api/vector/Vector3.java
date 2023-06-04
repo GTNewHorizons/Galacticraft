@@ -378,7 +378,7 @@ public class Vector3 implements Cloneable {
      * Gets all entities inside of this position in block space.
      */
     @SuppressWarnings("unchecked")
-    public List<Entity> getEntitiesWithin(World worldObj, Class<? extends Entity> par1Class) {
+    public <T extends Entity> List<T> getEntitiesWithin(World worldObj, Class<T> par1Class) {
         return worldObj.getEntitiesWithinAABB(
                 par1Class,
                 AxisAlignedBB.getBoundingBox(

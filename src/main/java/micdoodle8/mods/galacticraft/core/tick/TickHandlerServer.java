@@ -228,7 +228,7 @@ public class TickHandlerServer {
                         boolean mapChanged = false;
 
                         if (chunkProviderServer != null) {
-                            final Iterator iterator = chunkProviderServer.loadedChunks.iterator();
+                            final Iterator<Chunk> iterator = chunkProviderServer.loadedChunks.iterator();
 
                             while (iterator.hasNext()) {
                                 final Chunk chunk = (Chunk) iterator.next();
@@ -348,7 +348,7 @@ public class TickHandlerServer {
         } else if (event.phase == Phase.END) {
             int maxPasses = 10;
             while (!TickHandlerServer.networkTicks.isEmpty()) {
-                final LinkedList<EnergyNetwork> pass = new LinkedList();
+                final LinkedList<EnergyNetwork> pass = new LinkedList<>();
                 pass.addAll(TickHandlerServer.networkTicks);
                 TickHandlerServer.networkTicks.clear();
                 for (final EnergyNetwork grid : pass) {
@@ -362,7 +362,7 @@ public class TickHandlerServer {
 
             maxPasses = 10;
             while (!TickHandlerServer.oxygenTransmitterUpdates.isEmpty()) {
-                final LinkedList<TileEntityOxygenTransmitter> pass = new LinkedList();
+                final LinkedList<TileEntityOxygenTransmitter> pass = new LinkedList<>();
                 pass.addAll(TickHandlerServer.oxygenTransmitterUpdates);
                 TickHandlerServer.oxygenTransmitterUpdates.clear();
                 for (final TileEntityOxygenTransmitter newTile : pass) {
@@ -378,7 +378,7 @@ public class TickHandlerServer {
 
             maxPasses = 10;
             while (!TickHandlerServer.hydrogenTransmitterUpdates.isEmpty()) {
-                final LinkedList<TileEntityHydrogenPipe> pass = new LinkedList();
+                final LinkedList<TileEntityHydrogenPipe> pass = new LinkedList<>();
                 pass.addAll(TickHandlerServer.hydrogenTransmitterUpdates);
                 TickHandlerServer.hydrogenTransmitterUpdates.clear();
                 for (final TileEntityHydrogenPipe newTile : pass) {
@@ -394,7 +394,7 @@ public class TickHandlerServer {
 
             maxPasses = 10;
             while (!TickHandlerServer.energyTransmitterUpdates.isEmpty()) {
-                final LinkedList<TileBaseConductor> pass = new LinkedList();
+                final LinkedList<TileBaseConductor> pass = new LinkedList<>();
                 pass.addAll(TickHandlerServer.energyTransmitterUpdates);
                 TickHandlerServer.energyTransmitterUpdates.clear();
                 for (final TileBaseConductor newTile : pass) {
@@ -504,10 +504,10 @@ public class TickHandlerServer {
             final WorldServer world = (WorldServer) event.world;
 
             final List<BlockVec3> edgesList = TickHandlerServer.edgeChecks.get(world.provider.dimensionId);
-            final HashSet<BlockVec3> checkedThisTick = new HashSet();
+            final HashSet<BlockVec3> checkedThisTick = new HashSet<>();
 
             if (edgesList != null && !edgesList.isEmpty()) {
-                final List<BlockVec3> edgesListCopy = new ArrayList();
+                final List<BlockVec3> edgesListCopy = new ArrayList<>();
                 edgesListCopy.addAll(edgesList);
                 for (final BlockVec3 edgeBlock : edgesListCopy) {
                     if (edgeBlock != null && !checkedThisTick.contains(edgeBlock)) {

@@ -62,8 +62,8 @@ public class MapUtil {
     // public static int WORLD_BORDER = 14992;
     private static final int SIZE_STD = 176;
     public static final int SIZE_STD2 = SIZE_STD * 2;
-    private static final LinkedList<MapGen> queuedMaps = new LinkedList();
-    public static LinkedList<String> clientRequests = new LinkedList();
+    private static final LinkedList<MapGen> queuedMaps = new LinkedList<>();
+    public static LinkedList<String> clientRequests = new LinkedList<>();
 
     static {
         // TODO: Deal with mods like ExtraBiomes
@@ -352,8 +352,8 @@ public class MapUtil {
                 overworldImage.getWidth(),
                 overworldImage.getHeight(),
                 BufferedImage.TYPE_INT_RGB);
-        final TreeMap<Integer, Integer> mapColPos = new TreeMap();
-        final TreeMap<Integer, Integer> mapColPosB = new TreeMap();
+        final TreeMap<Integer, Integer> mapColPos = new TreeMap<>();
+        final TreeMap<Integer, Integer> mapColPosB = new TreeMap<>();
         int count = 0;
         for (int x = 0; x < overworldImage.getWidth(); x += 4) {
             for (int z = 0; z < overworldImage.getHeight(); z += 4) {
@@ -417,7 +417,7 @@ public class MapUtil {
         final ImageReadParam param = reader.getDefaultReadParam();
 
         ImageTypeSpecifier typeToUse = null;
-        for (final Iterator i = reader.getImageTypes(0); i.hasNext();) {
+        for (final Iterator<ImageTypeSpecifier> i = reader.getImageTypes(0); i.hasNext();) {
             final ImageTypeSpecifier type = (ImageTypeSpecifier) i.next();
             if (type.getColorModel().getColorSpace().isCS_sRGB()) {
                 typeToUse = type;

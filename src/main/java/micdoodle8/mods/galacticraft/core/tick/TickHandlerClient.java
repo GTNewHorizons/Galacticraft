@@ -394,7 +394,7 @@ public class TickHandlerClient {
                     // TODO: revert. Correct code is temporarily commented out for testing render
                     if (nearestSealer != null) // && nearestSealer.threadSeal != null)
                     {
-                        ClientProxyCore.leakTrace = new ArrayList(); // nearestSealer.threadSeal.leakTrace;
+                        ClientProxyCore.leakTrace = new ArrayList<>(); // nearestSealer.threadSeal.leakTrace;
                         // TODO: revert. Temporarily for testing purposes any sealer should show a leak
                         // block directly
                         // above itself
@@ -486,7 +486,7 @@ public class TickHandlerClient {
             }
 
             if (world != null) {
-                final List entityList = world.loadedEntityList;
+                final List<Entity> entityList = world.loadedEntityList;
                 for (final Object e : entityList) {
                     if (e instanceof IEntityNoisy) {
                         final IEntityNoisy vehicle = (IEntityNoisy) e;

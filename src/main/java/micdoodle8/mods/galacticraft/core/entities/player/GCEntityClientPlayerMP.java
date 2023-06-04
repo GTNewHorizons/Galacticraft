@@ -282,7 +282,7 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
                         axisalignedbb = this.boundingBox.expand(1.0D, 0.5D, 1.0D);
                     }
 
-                    final List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, axisalignedbb);
+                    final List<Entity> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, axisalignedbb);
 
                     if (list != null) {
                         for (final Object element : list) {

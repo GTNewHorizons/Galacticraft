@@ -2741,9 +2741,9 @@ public class GuiCelestialSelection extends GuiScreen {
     protected int renderSplitString(String par1Str, int par2, int par3, int par4, boolean par5, int par6, boolean small,
             boolean simulate) {
         if (small) {
-            final List list = this.smallFontRenderer.listFormattedStringToWidth(par1Str, par4);
+            final List<String> list = this.smallFontRenderer.listFormattedStringToWidth(par1Str, par4);
 
-            for (final Iterator iterator = list.iterator(); iterator
+            for (final Iterator<String> iterator = list.iterator(); iterator
                     .hasNext(); par3 += this.smallFontRenderer.FONT_HEIGHT) {
                 final String s1 = (String) iterator.next();
                 if (!simulate) {
@@ -2753,9 +2753,9 @@ public class GuiCelestialSelection extends GuiScreen {
 
             return list.size();
         } else {
-            final List list = this.fontRendererObj.listFormattedStringToWidth(par1Str, par4);
+            final List<String> list = this.fontRendererObj.listFormattedStringToWidth(par1Str, par4);
 
-            for (final Iterator iterator = list.iterator(); iterator
+            for (final Iterator<String> iterator = list.iterator(); iterator
                     .hasNext(); par3 += this.fontRendererObj.FONT_HEIGHT) {
                 final String s1 = (String) iterator.next();
                 if (!simulate) {

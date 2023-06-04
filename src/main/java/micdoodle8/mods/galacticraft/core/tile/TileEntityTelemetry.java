@@ -37,7 +37,7 @@ import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 
 public class TileEntityTelemetry extends TileEntity {
 
-    public Class clientClass;
+    public Class<? extends Entity> clientClass;
     public int[] clientData = { -1 };
     public String clientName;
     public GameProfile clientGameProfile = null;

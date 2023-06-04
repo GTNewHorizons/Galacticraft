@@ -75,7 +75,7 @@ public class BlockShortRangeTelepad extends BlockTileGC implements ItemBlockDesc
 
     @SuppressWarnings("rawtypes")
     @Override
-    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List list,
+    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list,
             Entity entity) {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.45F, 1.0F);
         super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);

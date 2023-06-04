@@ -175,7 +175,7 @@ public class StructureComponentVillagePathGen extends StructureComponentVillageR
 
     @SuppressWarnings("rawtypes")
     public static StructureBoundingBox func_74933_a(StructureComponentVillageStartPiece par0ComponentVillageStartPiece,
-            List par1List, Random par2Random, int par3, int par4, int par5, int par6) {
+            List<StructureComponent> par1List, Random par2Random, int par3, int par4, int par5, int par6) {
         for (int var7 = 7 * MathHelper.getRandomIntegerInRange(par2Random, 3, 5); var7 >= 7; var7 -= 7) {
             final StructureBoundingBox var8 = StructureBoundingBox
                     .getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 3, 3, var7, par6);

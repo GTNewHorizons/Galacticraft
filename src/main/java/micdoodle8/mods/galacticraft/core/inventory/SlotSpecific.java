@@ -39,7 +39,7 @@ public class SlotSpecific extends Slot {
             if (EnergyConfigHandler.isRFAPILoaded()) {
                 try {
                     final Class<?> itemElectricRF = Class.forName("cofh.api.energy.IEnergyContainerItem");
-                    final ArrayList<Class> existing = new ArrayList(Arrays.asList(validClasses));
+                    final ArrayList<Class> existing = new ArrayList<>(Arrays.asList(validClasses));
                     existing.add(itemElectricRF);
                     validClasses = existing.toArray(new Class[existing.size()]);
                 } catch (final Exception e) {
@@ -50,7 +50,7 @@ public class SlotSpecific extends Slot {
                 try {
                     final Class<?> itemElectricIC2a = Class.forName("ic2.api.item.IElectricItem");
                     final Class<?> itemElectricIC2b = Class.forName("ic2.api.item.ISpecialElectricItem");
-                    final ArrayList<Class> existing = new ArrayList(Arrays.asList(validClasses));
+                    final ArrayList<Class> existing = new ArrayList<>(Arrays.asList(validClasses));
                     existing.add(itemElectricIC2a);
                     existing.add(itemElectricIC2b);
                     validClasses = existing.toArray(new Class[existing.size()]);
@@ -61,7 +61,7 @@ public class SlotSpecific extends Slot {
             if (EnergyConfigHandler.isMekanismLoaded()) {
                 try {
                     final Class<?> itemElectricMek = Class.forName("mekanism.api.energy.IEnergizedItem");
-                    final ArrayList<Class> existing = new ArrayList(Arrays.asList(validClasses));
+                    final ArrayList<Class> existing = new ArrayList<>(Arrays.asList(validClasses));
                     existing.add(itemElectricMek);
                     validClasses = existing.toArray(new Class[existing.size()]);
                 } catch (final Exception e) {

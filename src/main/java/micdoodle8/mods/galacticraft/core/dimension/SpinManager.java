@@ -58,8 +58,8 @@ public class SpinManager {
     public int ssBoundsMaxZ;
     public int ssBoundsMinZ;
 
-    private final LinkedList<BlockVec3> thrustersPlus = new LinkedList();
-    private final LinkedList<BlockVec3> thrustersMinus = new LinkedList();
+    private final LinkedList<BlockVec3> thrustersPlus = new LinkedList<>();
+    private final LinkedList<BlockVec3> thrustersMinus = new LinkedList<>();
     private BlockVec3 oneSSBlock;
     // private HashSet<BlockVec3> stationBlocks = new HashSet();
 
@@ -72,7 +72,7 @@ public class SpinManager {
     // see: BlockSpinThruster.randomDisplayTick()
     public boolean thrustersFiring = false;
     private boolean dataNotLoaded = true;
-    private final List<Entity> loadedEntities = new LinkedList();
+    private final List<Entity> loadedEntities = new LinkedList<>();
     public double pPrevMotionY = 0D;
     private final WorldProviderSpaceStation worldProvider;
     private boolean clientSide = true;

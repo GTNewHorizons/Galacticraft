@@ -44,7 +44,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
     public EnumRocketType rocketType;
     public float rumble;
     public int launchCooldown;
-    private final ArrayList<BlockVec3> preGenList = new ArrayList();
+    private final ArrayList<BlockVec3> preGenList = new ArrayList<>();
     private Iterator<BlockVec3> preGenIterator = null;
     static boolean preGenInProgress = false;
 
@@ -138,7 +138,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
         // won't be pre-generated but that's
         // probably OK
         if (this.destinationFrequency == -1 && !EntityTieredRocket.preGenInProgress) {
-            final ArrayList<Integer> toPreGen = new ArrayList();
+            final ArrayList<Integer> toPreGen = new ArrayList<>();
             for (final Planet planet : GalaxyRegistry.getRegisteredPlanets().values()) {
                 if (planet.getDimensionID() == this.dimension) {
                     continue;

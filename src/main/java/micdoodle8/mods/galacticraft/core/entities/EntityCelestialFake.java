@@ -28,7 +28,7 @@ public class EntityCelestialFake extends EntityAdvancedMotion implements IIgnore
     private UUID persistantRiderUUID;
     private Boolean shouldMoveClient;
     private Boolean shouldMoveServer;
-    private ArrayList prevData;
+    private ArrayList<Object> prevData;
     private boolean networkDataChanged;
 
     public EntityCelestialFake(World var1) {

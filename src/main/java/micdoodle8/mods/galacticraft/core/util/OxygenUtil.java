@@ -123,7 +123,7 @@ public class OxygenUtil {
         final int i1 = MathHelper.floor_double(bb.minZ);
         final int j1 = MathHelper.floor_double(bb.maxZ);
 
-        OxygenUtil.checked = new HashSet();
+        OxygenUtil.checked = new HashSet<>();
         if (world.checkChunksExist(i, k, i1, j, l, j1)) {
             for (int x = i; x <= j; ++x) {
                 for (int y = k; y <= l; ++y) {
@@ -148,7 +148,7 @@ public class OxygenUtil {
         final int i1 = MathHelper.floor_double(bb.minZ);
         final int j1 = MathHelper.floor_double(bb.maxZ);
 
-        OxygenUtil.checked = new HashSet();
+        OxygenUtil.checked = new HashSet<>();
         if (world.checkChunksExist(i, k, i1, j, l, j1)) {
             for (int x = i; x <= j; ++x) {
                 for (int y = k; y <= l; ++y) {
@@ -175,7 +175,7 @@ public class OxygenUtil {
         if (OxygenUtil.inOxygenBubble(world, x + 0.5D, y + 0.6D, z + 0.5D)) {
             return true;
         }
-        OxygenUtil.checked = new HashSet();
+        OxygenUtil.checked = new HashSet<>();
         final BlockVec3 vec = new BlockVec3(x, y, z);
         for (int side = 0; side < 6; side++) {
             final BlockVec3 sidevec = vec.newVecSide(side);

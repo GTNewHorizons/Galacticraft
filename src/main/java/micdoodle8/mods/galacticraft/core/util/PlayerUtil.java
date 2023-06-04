@@ -19,7 +19,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class PlayerUtil {
 
-    public static HashMap<String, GameProfile> knownSkins = new HashMap();
+    public static HashMap<String, GameProfile> knownSkins = new HashMap<>();
 
     public static EntityPlayerMP getPlayerForUsernameVanilla(MinecraftServer server, String username) {
         return VersionUtil.getPlayerForUsername(server, username);
@@ -32,7 +32,7 @@ public class PlayerUtil {
             if (ignoreCase) {
                 return getPlayerForUsernameVanilla(server, username);
             } else {
-                final Iterator iterator = server.getConfigurationManager().playerEntityList.iterator();
+                final Iterator<EntityPlayerMP> iterator = server.getConfigurationManager().playerEntityList.iterator();
                 EntityPlayerMP entityplayermp;
 
                 do {
@@ -111,7 +111,7 @@ public class PlayerUtil {
     }
 
     public static EntityPlayerMP getPlayerByUUID(UUID theUUID) {
-        final List players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+        final List<EntityPlayerMP> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
         EntityPlayerMP entityplayermp;
         for (int i = players.size() - 1; i >= 0; --i) {
             entityplayermp = (EntityPlayerMP) players.get(i);

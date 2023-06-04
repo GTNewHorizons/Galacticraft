@@ -270,7 +270,7 @@ public class EntityGrapple extends Entity implements IProjectile {
             }
 
             Entity entity = null;
-            final List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(
+            final List<Entity> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(
                     this,
                     this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
             double d0 = 0.0D;

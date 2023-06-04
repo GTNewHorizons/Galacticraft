@@ -41,7 +41,7 @@ public class TileEntityMinerBase extends TileBaseElectricBlockWithInventory impl
     public boolean isMaster = false;
     public int facing;
     private BlockVec3 mainBlockPosition;
-    private final LinkedList<BlockVec3> targetPoints = new LinkedList();
+    private final LinkedList<BlockVec3> targetPoints = new LinkedList<>();
     private WeakReference<TileEntityMinerBase> masterTile = null;
     public boolean updateClientFlag;
     public boolean findTargetPointsFlag;

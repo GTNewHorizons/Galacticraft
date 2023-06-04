@@ -39,7 +39,7 @@ public class DrawGameScreen extends IScreenManager {
     private final float scaleZ;
 
     public TileEntity driver;
-    public Class telemetryLastClass;
+    public Class<?> telemetryLastClass;
     public String telemetryLastName;
     public Entity telemetryLastEntity;
     public Render telemetryLastRender;

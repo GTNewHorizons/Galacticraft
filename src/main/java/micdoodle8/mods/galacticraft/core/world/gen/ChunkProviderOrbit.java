@@ -15,6 +15,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IProgressUpdate;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderGenerate;
@@ -103,7 +104,7 @@ public class ChunkProviderOrbit extends ChunkProviderGenerate {
     }
 
     @Override
-    public List<?> getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int i, int j, int k) {
+    public List<SpawnListEntry> getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int i, int j, int k) {
         return null;
     }
 }

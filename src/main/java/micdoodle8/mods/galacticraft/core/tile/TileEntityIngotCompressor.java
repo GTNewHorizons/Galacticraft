@@ -402,7 +402,7 @@ public class TileEntityIngotCompressor extends TileEntityAdvanced implements IIn
             return new int[] { 1 };
         }
         final int[] slots = new int[] { 0, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-        final ArrayList<Integer> removeSlots = new ArrayList();
+        final ArrayList<Integer> removeSlots = new ArrayList<>();
 
         for (int i = 2; i < 11; i++) {
             if (removeSlots.contains(i)) {

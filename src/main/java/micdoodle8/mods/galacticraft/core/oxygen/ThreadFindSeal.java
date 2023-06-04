@@ -207,7 +207,7 @@ public class ThreadFindSeal {
                 // unbreathable actually still has an unchecked sealer in it
                 final List<TileEntityOxygenSealer> sealersSave = this.sealers;
                 final List<BlockVec3> torchesSave = this.torchesToUpdate;
-                final List<TileEntityOxygenSealer> sealersDone = new ArrayList();
+                final List<TileEntityOxygenSealer> sealersDone = new ArrayList<>();
                 sealersDone.addAll(this.sealers);
                 for (final TileEntityOxygenSealer otherSealer : this.otherSealers) {
                     // If it hasn't already been counted, need to check the
@@ -401,7 +401,7 @@ public class ThreadFindSeal {
         final Block airBlock = Blocks.air;
         final Block airBlockBright = GCBlocks.brightAir;
         final List<BlockVec3> toReplaceLocal = this.breatheableToReplace;
-        LinkedList nextLayer = new LinkedList<BlockVec3>();
+        LinkedList<BlockVec3> nextLayer = new LinkedList<>();
         final World world = this.world;
         int side, bits;
 
@@ -472,7 +472,7 @@ public class ThreadFindSeal {
         final Block breatheableAirIDBright = GCBlocks.brightBreatheableAir;
         final Block oxygenSealerID = GCBlocks.oxygenSealer;
         final Block fireBlock = Blocks.fire;
-        LinkedList nextLayer = new LinkedList<BlockVec3>();
+        LinkedList<BlockVec3> nextLayer = new LinkedList<>();
         int side, bits;
 
         while (this.currentLayer.size() > 0) {
@@ -545,7 +545,7 @@ public class ThreadFindSeal {
         final Block breatheableAirIDBright = GCBlocks.brightBreatheableAir;
         final Block airIDBright = GCBlocks.brightAir;
         final Block oxygenSealerID = GCBlocks.oxygenSealer;
-        LinkedList nextLayer = new LinkedList<BlockVec3>();
+        LinkedList<BlockVec3> nextLayer = new LinkedList<>();
         final World world = this.world;
         int side, bits;
 
@@ -653,7 +653,7 @@ public class ThreadFindSeal {
         final Block breatheableAirIDBright = GCBlocks.brightBreatheableAir;
         final Block airIDBright = GCBlocks.brightAir;
         final Block oxygenSealerID = GCBlocks.oxygenSealer;
-        LinkedList nextLayer = new LinkedList<BlockVec3>();
+        LinkedList<BlockVec3> nextLayer = new LinkedList<>();
         int side;
         int bits;
 
@@ -865,7 +865,7 @@ public class ThreadFindSeal {
 
     private void traceLeak(BlockVec3 tracer) {
         GCLog.debug("Leak tracing test length = " + this.checkedSize);
-        final ArrayList<BlockVec3> route = new ArrayList();
+        final ArrayList<BlockVec3> route = new ArrayList<>();
         final BlockVec3 start = this.head.clone().translate(0, 1, 0);
         int count = 0;
         int x = tracer.x;
@@ -900,7 +900,7 @@ public class ThreadFindSeal {
             count++;
         }
 
-        this.leakTrace = new ArrayList();
+        this.leakTrace = new ArrayList<>();
         this.leakTrace.add(start);
         for (int j = route.size() - 1; j >= 0; j--) {
             this.leakTrace.add(route.get(j));

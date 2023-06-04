@@ -273,7 +273,7 @@ public class ClientProxyCore extends CommonProxyCore {
 
     @Override
     public void init(FMLInitializationEvent event) {
-        final Class[][] commonTypes = {
+        final Class<?>[][] commonTypes = {
                 { MusicTicker.MusicType.class, ResourceLocation.class, int.class, int.class }, };
         MUSIC_TYPE_MARS = EnumHelper.addEnum(
                 commonTypes,

@@ -1013,7 +1013,7 @@ public class RecipeManagerGC {
 
     private static void addExNihiloRecipes() {
         try {
-            final Class registry = Class.forName("exnihilo.registries.HeatRegistry");
+            final Class<?> registry = Class.forName("exnihilo.registries.HeatRegistry");
             final Method m = registry.getMethod("register", Block.class, float.class);
             m.invoke(null, GCBlocks.unlitTorchLit, 0.1F);
             for (final Block torch : GCBlocks.otherModTorchesLit) {

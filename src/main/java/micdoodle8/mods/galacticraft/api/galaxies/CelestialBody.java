@@ -28,7 +28,7 @@ public abstract class CelestialBody implements Comparable<CelestialBody> {
     protected int tierRequired = 0;
     protected boolean allowSatellite = false;
 
-    public ArrayList<IAtmosphericGas> atmosphere = new ArrayList();
+    public ArrayList<IAtmosphericGas> atmosphere = new ArrayList<>();
 
     protected ResourceLocation celestialBodyIcon;
 

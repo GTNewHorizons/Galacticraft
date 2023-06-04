@@ -51,7 +51,7 @@ public class TileEntityDungeonSpawner extends TileEntityAdvanced {
 
         if (!this.worldObj.isRemote) {
             final Vector3 thisVec = new Vector3(this);
-            final List<Entity> l = this.worldObj.getEntitiesWithinAABB(
+            final List<? extends IBoss> l = this.worldObj.getEntitiesWithinAABB(
                     this.bossClass,
                     AxisAlignedBB.getBoundingBox(
                             thisVec.x - 15,
@@ -61,16 +61,16 @@ public class TileEntityDungeonSpawner extends TileEntityAdvanced {
                             thisVec.y + 15,
                             thisVec.z + 15));
 
-            for (final Entity e : l) {
-                if (!e.isDead) {
-                    this.boss = (IBoss) e;
+            for (final IBoss e : l) {
+                if (!((Entity) e).isDead) {
+                    this.boss = e;
                     this.boss.setRoom(this.roomCoords, this.roomSize);
                     this.spawned = true;
                     this.isBossDefeated = false;
                 }
             }
 
-            List<Entity> entitiesWithin = this.worldObj.getEntitiesWithinAABB(
+            List<EntityMob> entitiesWithin = this.worldObj.getEntitiesWithinAABB(
                     EntityMob.class,
                     AxisAlignedBB.getBoundingBox(
                             this.roomCoords.intX() - 4,
@@ -97,7 +97,7 @@ public class TileEntityDungeonSpawner extends TileEntityAdvanced {
                 }
             }
 
-            entitiesWithin = this.worldObj.getEntitiesWithinAABB(
+            List<EntityPlayer> playersWithin = this.worldObj.getEntitiesWithinAABB(
                     EntityPlayer.class,
                     AxisAlignedBB.getBoundingBox(
                             this.roomCoords.intX() - 1,
@@ -108,7 +108,7 @@ public class TileEntityDungeonSpawner extends TileEntityAdvanced {
                             this.roomCoords.intZ() + this.roomSize.intZ()));
 
             if (this.playerCheated) {
-                if (!entitiesWithin.isEmpty()) {
+                if (!playersWithin.isEmpty()) {
                     this.isBossDefeated = false;
                     this.spawned = false;
                     this.lastPlayerInRange = false;
@@ -116,7 +116,7 @@ public class TileEntityDungeonSpawner extends TileEntityAdvanced {
                 }
             }
 
-            this.playerInRange = !entitiesWithin.isEmpty();
+            this.playerInRange = !playersWithin.isEmpty();
 
             if (this.playerInRange && !this.lastPlayerInRange) {
                 if (this.boss != null && !this.spawned) {

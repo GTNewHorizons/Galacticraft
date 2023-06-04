@@ -38,7 +38,7 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
     private UUID persistantRiderUUID;
     private Boolean shouldMoveClient;
     private Boolean shouldMoveServer;
-    private ArrayList prevData;
+    private ArrayList<Object> prevData;
     private boolean networkDataChanged;
 
     public EntityLanderBase(World var1, float yOffset) {

@@ -84,7 +84,7 @@ public class CompressorRecipes {
     }
 
     public static void addShapelessRecipe(ItemStack par1ItemStack, Object... par2ArrayOfObj) {
-        final ArrayList arraylist = new ArrayList();
+        final List<Object> arraylist = new ArrayList<>();
         final int i = par2ArrayOfObj.length;
 
         for (int j = 0; j < i; ++j) {

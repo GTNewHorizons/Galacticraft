@@ -318,7 +318,7 @@ public class GuiSlimeling extends GuiScreen {
         GL11.glPopMatrix();
 
         try {
-            final Class clazz = Class.forName("micdoodle8.mods.galacticraft.core.atoolkit.ProcessGraphic");
+            final Class<?> clazz = Class.forName("micdoodle8.mods.galacticraft.core.atoolkit.ProcessGraphic");
             clazz.getMethod("go").invoke(null);
         } catch (final Exception e) {}
     }

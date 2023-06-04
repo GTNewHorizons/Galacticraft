@@ -127,7 +127,7 @@ public abstract class BlockTransmitter extends BlockContainer {
 
     @SuppressWarnings("rawtypes")
     @Override
-    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List list,
+    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list,
             Entity entity) {
         this.setBlockBounds(
                 (float) this.minVector.x,

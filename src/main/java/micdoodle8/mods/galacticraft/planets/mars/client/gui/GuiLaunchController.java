@@ -89,9 +89,9 @@ public class GuiLaunchController extends GuiContainerGC
                 ? GCCoreUtil.translate("gui.button.unhideDest.name")
                 : GCCoreUtil.translate("gui.button.hideDest.name");
         // Hacky way of rendering buttons properly, possibly bugs here:
-        final List buttonList = new ArrayList(this.buttonList);
-        final List labelList = new ArrayList(this.labelList);
-        final List<GuiElementInfoRegion> infoRegions = new ArrayList(this.infoRegions);
+        final List<GuiButton> buttonList = new ArrayList<>(this.buttonList);
+        final List<GuiLabel> labelList = new ArrayList<>(this.labelList);
+        final List<GuiElementInfoRegion> infoRegions = new ArrayList<>(this.infoRegions);
         this.buttonList.clear();
         this.labelList.clear();
         this.infoRegions.clear();

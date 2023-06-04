@@ -651,7 +651,7 @@ public class GalacticraftCore {
 
     private void registerMicroBlocks() {
         try {
-            final Class clazz = Class.forName("codechicken.microblock.MicroMaterialRegistry");
+            final Class<?> clazz = Class.forName("codechicken.microblock.MicroMaterialRegistry");
             if (clazz != null) {
                 Method registerMethod = null;
                 final Method[] methodz = clazz.getMethods();
@@ -661,7 +661,7 @@ public class GalacticraftCore {
                         break;
                     }
                 }
-                final Class clazzbm = Class.forName("codechicken.microblock.BlockMicroMaterial");
+                final Class<?> clazzbm = Class.forName("codechicken.microblock.BlockMicroMaterial");
                 registerMethod.invoke(
                         null,
                         clazzbm.getConstructor(Block.class, int.class).newInstance(GCBlocks.basicBlock, 3),

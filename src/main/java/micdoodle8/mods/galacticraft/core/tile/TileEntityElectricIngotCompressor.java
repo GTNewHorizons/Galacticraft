@@ -431,7 +431,7 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
             return new int[] { 1, 2 };
         }
         final int[] slots = new int[] { 0, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
-        final ArrayList<Integer> removeSlots = new ArrayList();
+        final ArrayList<Integer> removeSlots = new ArrayList<>();
 
         for (int i = 3; i < 12; i++) {
             if (removeSlots.contains(i)) {

@@ -39,7 +39,7 @@ public class ItemOilExtractor extends Item {
     }
 
     @Override
-    public void addInformation(ItemStack item, EntityPlayer player, List info, boolean advanced) {
+    public void addInformation(ItemStack item, EntityPlayer player, List<String> info, boolean advanced) {
         super.addInformation(item, player, info, advanced);
         info.add(EnumColor.RED + "[deprecated]");
         info.add(EnumColor.RED + "Use regular buckets instead!");

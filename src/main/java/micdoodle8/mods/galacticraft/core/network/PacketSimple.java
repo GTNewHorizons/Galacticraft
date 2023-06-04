@@ -826,7 +826,7 @@ public class PacketSimple extends Packet implements IPacket {
                         }
                         ((TileEntityTelemetry) tile).clientGameProfile = profile;
                     } else {
-                        ((TileEntityTelemetry) tile).clientClass = (Class) EntityList.stringToClassMapping.get(name);
+                        ((TileEntityTelemetry) tile).clientClass = (Class<? extends Entity>) EntityList.stringToClassMapping.get(name);
                     }
                     ((TileEntityTelemetry) tile).clientData = new int[5];
                     for (int i = 4; i < 9; i++) {

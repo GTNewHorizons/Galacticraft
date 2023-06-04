@@ -288,10 +288,10 @@ public class BlockEnclosed extends BlockContainer
                 try {
                     final IPartHelper apiPart = AEApi.instance().partHelper();
                     final Class<?> clazzApiPart = Class.forName("appeng.core.api.ApiPart");
-                    final Class clazz = (Class) clazzApiPart.getDeclaredMethod("getCombinedInstance", String.class)
+                    final Class<? extends TileEntity> clazz = (Class<? extends TileEntity>) clazzApiPart.getDeclaredMethod("getCombinedInstance", String.class)
                             .invoke(apiPart, "appeng.tile.networking.TileCableBus");
                     // Needs to be: appeng.parts.layers.LayerITileStorageMonitorable_TileCableBus
-                    return (TileEntity) clazz.newInstance();
+                    return clazz.getConstructor().newInstance();
                 } catch (final Exception e) {
                     e.printStackTrace();
                 }

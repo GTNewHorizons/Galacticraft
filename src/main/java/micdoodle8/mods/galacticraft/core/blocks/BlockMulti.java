@@ -120,7 +120,7 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
 
     @SuppressWarnings("rawtypes")
     @Override
-    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List list,
+    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list,
             Entity entity) {
         final int meta = world.getBlockMetadata(x, y, z);
 

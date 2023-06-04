@@ -824,7 +824,7 @@ public class ConfigManagerCore {
     }
 
     public static List<Object> getServerConfigOverride() {
-        final ArrayList<Object> returnList = new ArrayList();
+        final ArrayList<Object> returnList = new ArrayList<>();
         int modeFlags = ConfigManagerCore.hardMode ? 1 : 0;
         modeFlags += ConfigManagerCore.quickMode ? 2 : 0;
         modeFlags += ConfigManagerCore.challengeMode ? 4 : 0;

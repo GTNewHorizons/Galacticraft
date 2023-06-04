@@ -45,7 +45,7 @@ public abstract class GuiContainerGC extends GuiContainer {
                 final ItemStack itemStack = slot.getStack();
 
                 if (itemStack != null) {
-                    final List list = itemStack
+                    final List<String> list = itemStack
                             .getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
                     int size = list.size();
 

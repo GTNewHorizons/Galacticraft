@@ -31,7 +31,7 @@ public class TileEntityArclamp extends TileEntity {
     private int ticks = 0;
     private int sideRear = 0;
     public int facing = 0;
-    private final HashSet<BlockVec3> airToRestore = new HashSet();
+    private final HashSet<BlockVec3> airToRestore = new HashSet<>();
     private boolean isActive = false;
     private AxisAlignedBB thisAABB;
     private Vec3 thisPos;
@@ -236,9 +236,9 @@ public class TileEntityArclamp extends TileEntity {
         final Block breatheableAirID = GCBlocks.breatheableAir;
         final Block brightAir = GCBlocks.brightAir;
         final Block brightBreatheableAir = GCBlocks.brightBreatheableAir;
-        final HashSet<BlockVec3> checked = new HashSet();
-        LinkedList<BlockVec3> currentLayer = new LinkedList();
-        LinkedList<BlockVec3> nextLayer = new LinkedList();
+        final HashSet<BlockVec3> checked = new HashSet<>();
+        LinkedList<BlockVec3> currentLayer = new LinkedList<>();
+        LinkedList<BlockVec3> nextLayer = new LinkedList<>();
         final BlockVec3 thisvec = new BlockVec3(this);
         currentLayer.add(thisvec);
         final World world = this.worldObj;

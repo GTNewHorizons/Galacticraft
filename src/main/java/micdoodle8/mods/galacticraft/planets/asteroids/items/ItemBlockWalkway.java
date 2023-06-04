@@ -23,7 +23,7 @@ public class ItemBlockWalkway extends ItemBlockDesc {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean advanced) {
+    public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List<String> list, boolean advanced) {
         if (itemStack.getItem() == Item.getItemFromBlock(AsteroidBlocks.blockWalkwayWire)) {
             list.add(EnumColor.AQUA + GCBlocks.aluminumWire.getLocalizedName());
         } else if (itemStack.getItem() == Item.getItemFromBlock(AsteroidBlocks.blockWalkwayOxygenPipe)) {

@@ -32,7 +32,7 @@ public class CommandGCAstroMiner extends CommandBase {
     }
 
     @Override
-    public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
+    public List<String> addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
         if (par2ArrayOfStr.length == 1) {
             return getListOfStringsMatchingLastWord(par2ArrayOfStr, "show", "set", "reset");
         }

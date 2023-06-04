@@ -232,7 +232,7 @@ public class ModelPlayerGC extends ModelBiped {
 
     @Override
     public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7) {
-        final Class<?> entityClass = EntityClientPlayerMP.class;
+        final Class<EntityClientPlayerMP> entityClass = EntityClientPlayerMP.class;
         final Render render = RenderManager.instance.getEntityClassRenderObject(entityClass);
         final ModelBiped modelBipedMain = ((RenderPlayer) render).modelBipedMain;
 

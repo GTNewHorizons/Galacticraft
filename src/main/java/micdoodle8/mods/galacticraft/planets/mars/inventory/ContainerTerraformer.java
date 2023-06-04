@@ -167,8 +167,8 @@ public class ContainerTerraformer extends Container {
     }
 
     private static void initSaplingList() {
-        ContainerTerraformer.saplingList = new LinkedList();
-        final Iterator iterator = Block.blockRegistry.getKeys().iterator();
+        ContainerTerraformer.saplingList = new LinkedList<>();
+        final Iterator<?> iterator = Block.blockRegistry.getKeys().iterator();
 
         while (iterator.hasNext()) {
             final Block b = (Block) Block.blockRegistry.getObject((String) iterator.next());

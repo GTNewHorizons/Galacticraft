@@ -55,7 +55,7 @@ public class ItemBlockDesc extends ItemBlockGC {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer player, List info, boolean advanced) {
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> info, boolean advanced) {
         if (this.field_150939_a instanceof IBlockShiftDesc
                 && ((IBlockShiftDesc) this.field_150939_a).showDescription(stack.getItemDamage())) {
             if (GameSettings.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak)) {
