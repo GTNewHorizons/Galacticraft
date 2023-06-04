@@ -44,13 +44,12 @@ public class ItemRendererTier2Rocket extends ItemRendererTier1Rocket {
         if (item.getItemDamage() < 10) {
             FMLClientHandler.instance().getClient().renderEngine.bindTexture(this.texture);
             this.modelSpaceship.render(this.spaceship, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-            GL11.glPopMatrix();
         } else {
             FMLClientHandler.instance().getClient().renderEngine
                     .bindTexture(ItemRendererTier2Rocket.cargoRocketTexture);
             this.cargoRocketModel.renderAll();
-            GL11.glPopMatrix();
         }
+        GL11.glPopMatrix();
 
         if (type == ItemRenderType.INVENTORY) {
             final int index = Math.min(

@@ -445,12 +445,7 @@ public class EnergyNetwork implements IElectricityNetwork {
             final TileEntity tile = (TileEntity) conductor;
             final World world = tile.getWorldObj();
             // Remove any conductors in unloaded chunks
-            if (tile.isInvalid() || world == null || !world.blockExists(tile.xCoord, tile.yCoord, tile.zCoord)) {
-                it.remove();
-                continue;
-            }
-
-            if (conductor != world.getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord)) {
+            if (tile.isInvalid() || world == null || !world.blockExists(tile.xCoord, tile.yCoord, tile.zCoord) || (conductor != world.getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord))) {
                 it.remove();
                 continue;
             }
@@ -552,7 +547,6 @@ public class EnergyNetwork implements IElectricityNetwork {
             if (network instanceof EnergyNetwork) {
                 ((EnergyNetwork) network).destroy();
             }
-            return this;
         }
 
         return this;

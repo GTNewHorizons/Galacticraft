@@ -63,18 +63,15 @@ public abstract class TileBaseElectricBlockWithInventory extends TileBaseElectri
         if (containingItems[par1].stackSize <= par2) {
             var3 = containingItems[par1];
             containingItems[par1] = null;
-            this.markDirty();
-            return var3;
         } else {
             var3 = containingItems[par1].splitStack(par2);
 
             if (containingItems[par1].stackSize == 0) {
                 containingItems[par1] = null;
             }
-
-            this.markDirty();
-            return var3;
         }
+        this.markDirty();
+        return var3;
     }
 
     @Override

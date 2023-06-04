@@ -87,10 +87,7 @@ public class BlockAirLockFrame extends BlockAdvancedTile implements ItemBlockDes
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int par1, int par2) {
-        if (par2 < BlockAirLockFrame.METADATA_AIR_LOCK_CONTROLLER) {
-            return this.airLockIcons[0];
-        }
-        if (par1 == ForgeDirection.UP.ordinal() || par1 == ForgeDirection.DOWN.ordinal()) {
+        if ((par2 < BlockAirLockFrame.METADATA_AIR_LOCK_CONTROLLER) || par1 == ForgeDirection.UP.ordinal() || par1 == ForgeDirection.DOWN.ordinal()) {
             return this.airLockIcons[0];
         }
 

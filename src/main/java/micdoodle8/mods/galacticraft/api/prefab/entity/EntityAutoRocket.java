@@ -1049,16 +1049,14 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
         if (this.cargoItems[par1].stackSize <= par2) {
             var3 = this.cargoItems[par1];
             this.cargoItems[par1] = null;
-            return var3;
         } else {
             var3 = this.cargoItems[par1].splitStack(par2);
 
             if (this.cargoItems[par1].stackSize == 0) {
                 this.cargoItems[par1] = null;
             }
-
-            return var3;
         }
+        return var3;
     }
 
     @Override

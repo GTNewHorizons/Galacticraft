@@ -292,7 +292,6 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
             float hitX, float hitY, float hitZ) {
         if (!par1World.isRemote) {
             par5EntityPlayer.openGui(GalacticraftCore.instance, -1, par1World, x, y, z);
-            return true;
         }
 
         return true;

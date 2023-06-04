@@ -241,7 +241,6 @@ public class BlockCargoLoader extends BlockAdvancedTile implements ItemBlockDesc
             return BlockCargoLoader.METADATA_CARGO_UNLOADER;
         }
         if (metadata >= BlockCargoLoader.METADATA_CARGO_LOADER) {
-            return BlockCargoLoader.METADATA_CARGO_LOADER;
         }
 
         return 0;

@@ -94,11 +94,8 @@ public class EntityCreeperBoss extends EntityMob
                 if (entity != this) {
                     this.entityToAttack = entity;
                 }
-
-                return true;
-            } else {
-                return true;
             }
+            return true;
         }
 
         return false;

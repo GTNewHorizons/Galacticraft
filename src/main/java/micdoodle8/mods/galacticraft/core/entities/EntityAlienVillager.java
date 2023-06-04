@@ -235,7 +235,7 @@ public class EntityAlienVillager extends EntityAgeable implements IEntityBreatha
                 } else if (entity instanceof IMob) {
                     this.villageObj.endMatingSeason();
                 }
-            } else if (entity == null) {
+            } else {
                 final EntityPlayer entityplayer = this.worldObj.getClosestPlayerToEntity(this, 16.0D);
 
                 if (entityplayer != null) {

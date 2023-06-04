@@ -57,27 +57,23 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
         if (!this.worldObj.isRemote) {
             boolean updateInv = false;
 
-            if (this.hasEnoughEnergyToRun) {
-                if (this.canCompress()) {
-                    ++this.processTicks;
+            if (this.hasEnoughEnergyToRun && this.canCompress()) {
+                ++this.processTicks;
 
-                    this.processTimeRequired = TileEntityElectricIngotCompressor.PROCESS_TIME_REQUIRED_BASE * 2
-                            / (1 + this.poweredByTierGC);
+                this.processTimeRequired = TileEntityElectricIngotCompressor.PROCESS_TIME_REQUIRED_BASE * 2
+                        / (1 + this.poweredByTierGC);
 
-                    if (this.processTicks >= this.processTimeRequired) {
-                        this.worldObj.playSoundEffect(
-                                this.xCoord,
-                                this.yCoord,
-                                this.zCoord,
-                                "random.anvil_land",
-                                0.2F,
-                                0.5F);
-                        this.processTicks = 0;
-                        this.compressItems();
-                        updateInv = true;
-                    }
-                } else {
+                if (this.processTicks >= this.processTimeRequired) {
+                    this.worldObj.playSoundEffect(
+                            this.xCoord,
+                            this.yCoord,
+                            this.zCoord,
+                            "random.anvil_land",
+                            0.2F,
+                            0.5F);
                     this.processTicks = 0;
+                    this.compressItems();
+                    updateInv = true;
                 }
             } else {
                 this.processTicks = 0;
@@ -271,16 +267,14 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
         if (this.containingItems[par1].stackSize <= par2) {
             var3 = this.containingItems[par1];
             this.containingItems[par1] = null;
-            return var3;
         } else {
             var3 = this.containingItems[par1].splitStack(par2);
 
             if (this.containingItems[par1].stackSize == 0) {
                 this.containingItems[par1] = null;
             }
-
-            return var3;
         }
+        return var3;
     }
 
     @Override

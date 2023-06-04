@@ -170,11 +170,7 @@ public class WorldUtil {
             }
             return returnValue;
         }
-        if (entity instanceof IAntiGrav) {
-            return 1F;
-        } else {
-            return 1F;
-        }
+        return 1F;
     }
 
     public static double getItemGravity(EntityItem e) {
@@ -923,11 +919,12 @@ public class WorldUtil {
         if (entity.ridingEntity != null) {
             if (entity.ridingEntity instanceof EntitySpaceshipBase) {
                 entity.mountEntity(entity.ridingEntity);
-            } else if (entity.ridingEntity instanceof EntityCelestialFake) {
-                entity.ridingEntity.setDead();
-                entity.mountEntity(null);
             } else {
-                otherRiddenEntity = entity.ridingEntity;
+                if (entity.ridingEntity instanceof EntityCelestialFake) {
+                    entity.ridingEntity.setDead();
+                } else {
+                    otherRiddenEntity = entity.ridingEntity;
+                }
                 entity.mountEntity(null);
             }
         }

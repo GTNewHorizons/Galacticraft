@@ -292,11 +292,7 @@ public class TileBaseUniversalElectricalSource extends TileBaseUniversalElectric
 
     @Override
     public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-        if (EnergyConfigHandler.disableRFOutput) {
-            return 0;
-        }
-
-        if (!this.getElectricalOutputDirections().contains(from)) {
+        if (EnergyConfigHandler.disableRFOutput || !this.getElectricalOutputDirections().contains(from)) {
             return 0;
         }
 

@@ -79,11 +79,7 @@ public class FreefallHandler {
         }
         final ZeroGravityEvent zeroGEvent = new ZeroGravityEvent.InFreefall(p);
         MinecraftForge.EVENT_BUS.post(zeroGEvent);
-        if (zeroGEvent.isCanceled()) {
-            return false;
-        }
-
-        if (this.stats.pjumpticks > 0 || this.stats.pWasOnGround && p.movementInput.jump) {
+        if (zeroGEvent.isCanceled() || this.stats.pjumpticks > 0 || this.stats.pWasOnGround && p.movementInput.jump) {
             return false;
         }
 

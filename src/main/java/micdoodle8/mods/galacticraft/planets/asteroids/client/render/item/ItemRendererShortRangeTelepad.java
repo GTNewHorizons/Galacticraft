@@ -24,42 +24,22 @@ public class ItemRendererShortRangeTelepad implements IItemRenderer {
         FMLClientHandler.instance().getClient().renderEngine
                 .bindTexture(TileEntityShortRangeTelepadRenderer.telepadTexture);
 
-        if (type == ItemRenderType.INVENTORY) {
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("Base");
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("Top");
+        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("Base");
+        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("Top");
 
-            FMLClientHandler.instance().getClient().renderEngine
-                    .bindTexture(TileEntityShortRangeTelepadRenderer.telepadTexture0);
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopMidxNegz");
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopPosxNegz");
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopNegxNegz");
+        FMLClientHandler.instance().getClient().renderEngine
+                .bindTexture(TileEntityShortRangeTelepadRenderer.telepadTexture0);
+        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopMidxNegz");
+        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopPosxNegz");
+        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopNegxNegz");
 
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopMidxMidz");
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopPosxMidz");
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopNegxMidz");
+        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopMidxMidz");
+        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopPosxMidz");
+        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopNegxMidz");
 
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopMidxPosz");
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopPosxPosz");
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopNegxPosz");
-        } else {
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("Base");
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("Top");
-
-            FMLClientHandler.instance().getClient().renderEngine
-                    .bindTexture(TileEntityShortRangeTelepadRenderer.telepadTexture0);
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopMidxNegz");
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopPosxNegz");
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopNegxNegz");
-
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopMidxMidz");
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopPosxMidz");
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopNegxMidz");
-
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopMidxPosz");
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopPosxPosz");
-            TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopNegxPosz");
-        }
-
+        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopMidxPosz");
+        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopPosxPosz");
+        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopNegxPosz");
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glPopMatrix();
     }

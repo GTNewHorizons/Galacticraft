@@ -59,7 +59,6 @@ public class BlockHydrogenPipe extends BlockTransmitter implements ITileEntityPr
         final Block blockAt = thisVec.getBlock(par1IBlockAccess);
 
         if (blockAt == MarsBlocks.hydrogenPipe) {
-            return this.pipeIcon;
         }
 
         return this.pipeIcon;

@@ -447,18 +447,12 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
         super.afterRender(var1, var2, var3, var4, var5, var6, var7);
 
         // Smart Moving will render through ModelRotationRendererGC instead
-        if (ModelPlayerBaseGC.isSmartMovingLoaded) {
-            return;
-        }
+        
 
         // Deal with RenderPlayerAPIEnhancer calling this for skeletons etc
-        if (!(var1 instanceof EntityPlayer)) {
-            return;
-        }
-
         // Do not render GC equipment on top of armor - only on top of player - see
         // .init() method
-        if (this.oxygenMask == null) {
+        if (ModelPlayerBaseGC.isSmartMovingLoaded || !(var1 instanceof EntityPlayer) || (this.oxygenMask == null)) {
             return;
         }
 

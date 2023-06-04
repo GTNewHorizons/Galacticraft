@@ -229,11 +229,7 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
 
     @Override
     public boolean shouldMove() {
-        if (this.shouldMoveClient == null || this.shouldMoveServer == null) {
-            return false;
-        }
-
-        if (this.ticks < 40) {
+        if (this.shouldMoveClient == null || this.shouldMoveServer == null || (this.ticks < 40)) {
             return false;
         }
 

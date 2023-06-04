@@ -73,10 +73,8 @@ public abstract class GuiStarBackground extends GuiScreen {
             float mX;
 
             if (Mouse.getY() < this.height) {
-                mY = (-this.height + Mouse.getY()) / 100F;
-            } else {
-                mY = (-this.height + Mouse.getY()) / 100F;
             }
+            mY = (-this.height + Mouse.getY()) / 100F;
 
             mX = (this.width - Mouse.getX()) / 100F;
 
@@ -170,10 +168,8 @@ public abstract class GuiStarBackground extends GuiScreen {
             float mX;
 
             if (Mouse.getY() < this.height) {
-                mY = (-this.height + Mouse.getY()) / 100F;
-            } else {
-                mY = (-this.height + Mouse.getY()) / 100F;
             }
+            mY = (-this.height + Mouse.getY()) / 100F;
 
             mX = (this.width - Mouse.getX()) / 100F;
 

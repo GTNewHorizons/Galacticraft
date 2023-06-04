@@ -98,10 +98,8 @@ public class EntityLander extends EntityLanderBase implements IIgnoreShift, ICam
             }
 
             var1.mountEntity(null);
-            return true;
-        } else {
-            return true;
         }
+        return true;
     }
 
     @Override

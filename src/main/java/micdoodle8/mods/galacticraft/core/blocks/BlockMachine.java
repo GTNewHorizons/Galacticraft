@@ -215,7 +215,6 @@ public class BlockMachine extends BlockTileGC implements ItemBlockDesc.IBlockShi
                 return true;
             }
             par5EntityPlayer.openGui(GalacticraftCore.instance, -1, par1World, x, y, z);
-            return true;
         }
 
         return true;

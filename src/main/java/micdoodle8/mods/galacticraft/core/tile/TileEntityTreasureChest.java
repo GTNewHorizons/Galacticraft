@@ -113,18 +113,15 @@ public class TileEntityTreasureChest extends TileEntityAdvanced implements IInve
         if (this.chestContents[par1].stackSize <= par2) {
             itemstack = this.chestContents[par1];
             this.chestContents[par1] = null;
-            this.markDirty();
-            return itemstack;
         } else {
             itemstack = this.chestContents[par1].splitStack(par2);
 
             if (this.chestContents[par1].stackSize == 0) {
                 this.chestContents[par1] = null;
             }
-
-            this.markDirty();
-            return itemstack;
         }
+        this.markDirty();
+        return itemstack;
     }
 
     /**

@@ -238,16 +238,14 @@ public class EntityAstroMiner extends Entity
         if (this.cargoItems[var1].stackSize <= var2) {
             var3 = this.cargoItems[var1];
             this.cargoItems[var1] = null;
-            return var3;
         } else {
             var3 = this.cargoItems[var1].splitStack(var2);
 
             if (this.cargoItems[var1].stackSize == 0) {
                 this.cargoItems[var1] = null;
             }
-
-            return var3;
         }
+        return var3;
     }
 
     @Override
@@ -1243,10 +1241,7 @@ public class EntityAstroMiner extends Entity
             blockingBlock.meta = this.worldObj.getBlockMetadata(x, y, z);
             return true;
         }
-        if (b instanceof BlockLiquid) {
-            return false;
-        }
-        if (b instanceof IFluidBlock) {
+        if ((b instanceof BlockLiquid) || (b instanceof IFluidBlock)) {
             return false;
         }
 
@@ -1342,10 +1337,7 @@ public class EntityAstroMiner extends Entity
         if (noMineList.contains(b)) {
             return true;
         }
-        if (b instanceof BlockLiquid) {
-            return false;
-        }
-        if (b instanceof IFluidBlock) {
+        if ((b instanceof BlockLiquid) || (b instanceof IFluidBlock)) {
             return false;
         }
         if (b instanceof IPlantable) {
@@ -1782,15 +1774,7 @@ public class EntityAstroMiner extends Entity
 
         // Clear blocks, and test to see if its movement area in front of the base is
         // blocked
-        if (miner.prepareMove(12, 0)) {
-            miner.isDead = true;
-            return false;
-        }
-        if (miner.prepareMove(12, 1)) {
-            miner.isDead = true;
-            return false;
-        }
-        if (miner.prepareMove(12, 2)) {
+        if (miner.prepareMove(12, 0) || miner.prepareMove(12, 1) || miner.prepareMove(12, 2)) {
             miner.isDead = true;
             return false;
         }
@@ -1837,11 +1821,7 @@ public class EntityAstroMiner extends Entity
 
     @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-        if (this.isDead || par1DamageSource.equals(DamageSource.cactus)) {
-            return true;
-        }
-
-        if (this.worldObj.isRemote) {
+        if (this.isDead || par1DamageSource.equals(DamageSource.cactus) || this.worldObj.isRemote) {
             return true;
         }
         final Entity e = par1DamageSource.getEntity();
@@ -1876,7 +1856,6 @@ public class EntityAstroMiner extends Entity
             if (this.shipDamage > 90) {
                 this.kill();
                 this.dropShipAsItem();
-                return true;
             }
 
             return true;

@@ -50,18 +50,15 @@ public class InventorySchematicCargoRocket implements IInventory {
         if (this.stackList[par1].stackSize <= par2) {
             var3 = this.stackList[par1];
             this.stackList[par1] = null;
-            this.eventHandler.onCraftMatrixChanged(this);
-            return var3;
         } else {
             var3 = this.stackList[par1].splitStack(par2);
 
             if (this.stackList[par1].stackSize == 0) {
                 this.stackList[par1] = null;
             }
-
-            this.eventHandler.onCraftMatrixChanged(this);
-            return var3;
         }
+        this.eventHandler.onCraftMatrixChanged(this);
+        return var3;
     }
 
     @Override

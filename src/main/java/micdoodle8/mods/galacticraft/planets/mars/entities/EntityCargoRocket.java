@@ -284,13 +284,12 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
                 GCLog.info(
                         "Error: the server failed to load the dimension the cargo rocket is supposed to land in. Destroying rocket!");
                 this.setDead();
-                return;
             } else {
                 GCLog.debug("Cargo rocket going into landing mode in same destination.");
                 this.setPosition(this.targetVec.x + 0.5F, this.targetVec.y + 800, this.targetVec.z + 0.5F);
                 this.landing = true;
-                return;
             }
+            return;
         }
         GCLog.info("Error: the cargo rocket failed to find a valid landing spot when it reached space.");
         this.setDead();

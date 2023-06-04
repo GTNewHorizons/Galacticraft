@@ -352,11 +352,7 @@ public abstract class TileBaseUniversalElectrical extends EnergyStorageTile
 
     @Override
     public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-        if (EnergyConfigHandler.disableRFInput) {
-            return 0;
-        }
-
-        if (!this.getElectricalInputDirections().contains(from)) {
+        if (EnergyConfigHandler.disableRFInput || !this.getElectricalInputDirections().contains(from)) {
             return 0;
         }
 
@@ -388,11 +384,7 @@ public abstract class TileBaseUniversalElectrical extends EnergyStorageTile
 
     @Override
     public double transferEnergyToAcceptor(ForgeDirection from, double amount) {
-        if (EnergyConfigHandler.disableMekanismInput) {
-            return 0;
-        }
-
-        if (!this.getElectricalInputDirections().contains(from)) {
+        if (EnergyConfigHandler.disableMekanismInput || !this.getElectricalInputDirections().contains(from)) {
             return 0;
         }
 

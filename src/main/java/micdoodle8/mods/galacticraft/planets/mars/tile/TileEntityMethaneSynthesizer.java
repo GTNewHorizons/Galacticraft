@@ -192,8 +192,6 @@ public class TileEntityMethaneSynthesizer extends TileBaseElectricBlockWithInven
                     return 1;
                 }
             }
-
-            return 0;
         }
 
         return 0;

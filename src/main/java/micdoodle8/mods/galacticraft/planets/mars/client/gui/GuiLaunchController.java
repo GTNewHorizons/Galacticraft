@@ -145,11 +145,7 @@ public class GuiLaunchController extends GuiContainerGC
     @Override
     protected void keyTyped(char keyChar, int keyID) {
         if (keyID != Keyboard.KEY_ESCAPE && keyID != this.mc.gameSettings.keyBindInventory.getKeyCode()) {
-            if (this.frequency.keyTyped(keyChar, keyID)) {
-                return;
-            }
-
-            if (this.destinationFrequency.keyTyped(keyChar, keyID)) {
+            if (this.frequency.keyTyped(keyChar, keyID) || this.destinationFrequency.keyTyped(keyChar, keyID)) {
                 return;
             }
         }

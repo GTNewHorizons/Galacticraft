@@ -511,16 +511,14 @@ public class EntityBuggy extends Entity
         if (this.cargoItems[var1].stackSize <= var2) {
             var3 = this.cargoItems[var1];
             this.cargoItems[var1] = null;
-            return var3;
         } else {
             var3 = this.cargoItems[var1].splitStack(var2);
 
             if (this.cargoItems[var1].stackSize == 0) {
                 this.cargoItems[var1] = null;
             }
-
-            return var3;
         }
+        return var3;
     }
 
     @Override
@@ -599,11 +597,10 @@ public class EntityBuggy extends Entity
             if (this.riddenByEntity == var1) {
                 var1.mountEntity(null);
             }
-            return true;
         } else {
             var1.mountEntity(this);
-            return true;
         }
+        return true;
     }
 
     @Override

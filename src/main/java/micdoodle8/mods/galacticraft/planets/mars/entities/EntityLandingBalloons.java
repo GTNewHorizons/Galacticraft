@@ -106,17 +106,14 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
         }
         if (this.riddenByEntity == null && this.onGround && var1 instanceof EntityPlayerMP) {
             MarsUtil.openParachestInventory((EntityPlayerMP) var1, this);
-            return true;
         } else if (var1 instanceof EntityPlayerMP) {
             if (!this.onGround) {
                 return false;
             }
 
             var1.mountEntity(null);
-            return true;
-        } else {
-            return true;
         }
+        return true;
     }
 
     @Override

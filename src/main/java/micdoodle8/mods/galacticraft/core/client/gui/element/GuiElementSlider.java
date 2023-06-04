@@ -108,7 +108,6 @@ public class GuiElementSlider extends GuiButton {
                         (double) this.xPosition + this.width,
                         (double) this.yPosition + this.sliderPos + 1,
                         this.zLevel);
-                tessellator.draw();
             } else {
                 tessellator.startDrawingQuads();
                 tessellator.setColorRGBA_F(0, 0, 0, 1.0F);
@@ -189,8 +188,8 @@ public class GuiElementSlider extends GuiButton {
                         (double) this.xPosition + this.sliderPos + 1,
                         (double) this.yPosition + this.height,
                         this.zLevel);
-                tessellator.draw();
             }
+            tessellator.draw();
 
             GL11.glShadeModel(GL11.GL_FLAT);
             GL11.glDisable(GL11.GL_BLEND);

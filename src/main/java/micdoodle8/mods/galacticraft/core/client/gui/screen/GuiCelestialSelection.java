@@ -2379,30 +2379,18 @@ public class GuiCelestialSelection extends GuiScreen {
                     } else {
                         GL11.glColor4f(0.0F, 1.0F, 0.0F, 1);
                     }
-                    this.drawTexturedModalRect(
-                            this.width / 2 - 47,
-                            GuiCelestialSelection.BORDER_WIDTH + GuiCelestialSelection.BORDER_EDGE_WIDTH,
-                            94,
-                            11,
-                            0,
-                            414,
-                            188,
-                            22,
-                            false,
-                            false);
-                } else {
-                    this.drawTexturedModalRect(
-                            this.width / 2 - 47,
-                            GuiCelestialSelection.BORDER_WIDTH + GuiCelestialSelection.BORDER_EDGE_WIDTH,
-                            94,
-                            11,
-                            0,
-                            414,
-                            188,
-                            22,
-                            false,
-                            false);
                 }
+                this.drawTexturedModalRect(
+                        this.width / 2 - 47,
+                        GuiCelestialSelection.BORDER_WIDTH + GuiCelestialSelection.BORDER_EDGE_WIDTH,
+                        94,
+                        11,
+                        0,
+                        414,
+                        188,
+                        22,
+                        false,
+                        false);
                 if (this.selectedBody.getTierRequirement() >= 0 && !(this.selectedBody instanceof Satellite)) {
                     boolean canReach;
                     if (!this.selectedBody.getReachable()

@@ -72,7 +72,6 @@ public class InventorySlimeling implements IInventory {
             this.removeInventoryBagContents();
             var3 = this.stackList[par1];
             this.stackList[par1] = null;
-            return var3;
         } else
         // Normal case of decrStackSize for a slot
         {
@@ -86,9 +85,8 @@ public class InventorySlimeling implements IInventory {
 
                 this.stackList[par1] = null;
             }
-
-            return var3;
         }
+        return var3;
     }
 
     @Override

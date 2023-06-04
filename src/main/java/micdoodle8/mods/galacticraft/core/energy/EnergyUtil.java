@@ -111,10 +111,7 @@ public class EnergyUtil {
                         || isRF1Loaded && tileEntity instanceof IEnergyHandler
                         || clazzRailcraftEngine != null && clazzRailcraftEngine.isInstance(tileEntity)) {
                     // Do not connect GC wires directly to power conduits
-                    if (clazzEnderIOCable != null && clazzEnderIOCable.isInstance(tileEntity)) {
-                        continue;
-                    }
-                    if (clazzMFRRednetEnergyCable != null && clazzMFRRednetEnergyCable.isInstance(tileEntity)) {
+                    if ((clazzEnderIOCable != null && clazzEnderIOCable.isInstance(tileEntity)) || (clazzMFRRednetEnergyCable != null && clazzMFRRednetEnergyCable.isInstance(tileEntity))) {
                         continue;
                     }
 
@@ -181,10 +178,7 @@ public class EnergyUtil {
 
             if (isRF2Loaded && tileEntity instanceof IEnergyReceiver
                     || isRF1Loaded && tileEntity instanceof IEnergyHandler) {
-                if (clazzEnderIOCable != null && clazzEnderIOCable.isInstance(tileEntity)) {
-                    continue;
-                }
-                if (clazzMFRRednetEnergyCable != null && clazzMFRRednetEnergyCable.isInstance(tileEntity)) {
+                if ((clazzEnderIOCable != null && clazzEnderIOCable.isInstance(tileEntity)) || (clazzMFRRednetEnergyCable != null && clazzMFRRednetEnergyCable.isInstance(tileEntity))) {
                     continue;
                 }
 

@@ -401,11 +401,10 @@ public class BlockTier3TreasureChest extends BlockContainer
                                 }
 
                                 if (par1World.isRemote) {
-                                    return true;
                                 } else {
                                     par5EntityPlayer.displayGUIChest((IInventory) var10);
-                                    return true;
                                 }
+                                return true;
                             }
     }
 

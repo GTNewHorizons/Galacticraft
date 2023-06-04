@@ -129,7 +129,6 @@ public class RenderPlanet {
             tessellator.addVertexWithUV(x + width, ybb, 0F, prog + span, y3);
             tessellator.addVertexWithUV(x + width, yba, 0F, prog + span, y2);
             tessellator.addVertexWithUV(x, yba, 0F, prog, y2);
-            tessellator.draw();
         } else {
             final double xp = x + width * (1F - prog) / span;
             tessellator.startDrawingQuads();
@@ -155,7 +154,7 @@ public class RenderPlanet {
             tessellator.addVertexWithUV(x + width, ybb, 0F, prog - 1F + span, y3);
             tessellator.addVertexWithUV(x + width, yba, 0F, prog - 1F + span, y2);
             tessellator.addVertexWithUV(xp, yba, 0F, 0F, y2);
-            tessellator.draw();
         }
+        tessellator.draw();
     }
 }

@@ -94,21 +94,15 @@ public class ThreadFindSeal {
             for (final TileEntityOxygenSealer eachSealer : sealers) {
                 eachSealer.threadSeal = this;
             }
-
-            // if (ConfigManagerCore.enableSealerMultithreading)
-            // {
-            // new ThreadedFindSeal();
-            // }
-            // else
-            // {
-            this.check();
-            // }
-        } else
-        // If not called by a sealer, it's a breathable air edge check
-        {
-            // Run this in the main thread
-            this.check();
         }
+        // if (ConfigManagerCore.enableSealerMultithreading)
+        // {
+        // new ThreadedFindSeal();
+        // }
+        // else
+        // {
+        this.check();
+        // }
     }
 
     // Multi-threaded version of the code for sealer updates (not for edge checks).
@@ -749,10 +743,7 @@ public class ThreadFindSeal {
     private void checkedAdd(BlockVec3 vec) {
         final int dx = this.head.x - vec.x;
         final int dz = this.head.z - vec.z;
-        if (dx < -8191 || dx > 8192) {
-            return;
-        }
-        if (dz < -8191 || dz > 8192) {
+        if (dx < -8191 || dx > 8192 || dz < -8191 || dz > 8192) {
             return;
         }
         final intBucket bucket = this.buckets[((dx & 15) << 4) + (dz & 15)];
@@ -788,10 +779,7 @@ public class ThreadFindSeal {
             case 5:
                 dx--;
         }
-        if (dx < -8191 || dx > 8192) {
-            return true;
-        }
-        if (dz < -8191 || dz > 8192) {
+        if (dx < -8191 || dx > 8192 || dz < -8191 || dz > 8192) {
             return true;
         }
         final intBucket bucket = this.buckets[((dx & 15) << 4) + (dz & 15)];
@@ -801,10 +789,7 @@ public class ThreadFindSeal {
     private BlockVec3 checkedContainsTrace(int x, int y, int z) {
         final int dx = this.head.x - x;
         final int dz = this.head.z - z;
-        if (dx < -8191 || dx > 8192) {
-            return null;
-        }
-        if (dz < -8191 || dz > 8192) {
+        if (dx < -8191 || dx > 8192 || dz < -8191 || dz > 8192) {
             return null;
         }
         final intBucket bucket = this.buckets[((dx & 15) << 4) + (dz & 15)];
@@ -972,7 +957,7 @@ public class ThreadFindSeal {
         if (block instanceof BlockSlab) {
             final boolean isTopSlab = (vec.getBlockMetadata(this.world) & 8) == 8;
             // Looking down onto a top slab or looking up onto a bottom slab
-            if (side == 0 && isTopSlab || side == 1 && !isTopSlab) {
+            if ((isTopSlab ? side == 0 : side == 1)) {
                 // Sealed from that solid side but allow other sides still to be checked
                 this.checkCount--;
                 return false;

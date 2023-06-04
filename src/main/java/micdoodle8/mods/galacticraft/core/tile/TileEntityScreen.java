@@ -654,13 +654,7 @@ public class TileEntityScreen extends TileEntity {
             return false;
         }
         final TileEntityScreen screenTile = (TileEntityScreen) te;
-        if (screenTile.getBlockMetadata() != meta) {
-            return false;
-        }
-        if (screenTile.connectionsUp != this.connectionsUp) {
-            return false;
-        }
-        if (screenTile.connectionsDown != this.connectionsDown) {
+        if ((screenTile.getBlockMetadata() != meta) || (screenTile.connectionsUp != this.connectionsUp) || (screenTile.connectionsDown != this.connectionsDown)) {
             return false;
         }
         if (this.connectionsUp + this.connectionsDown > 0) {
@@ -679,13 +673,7 @@ public class TileEntityScreen extends TileEntity {
             return false;
         }
         final TileEntityScreen screenTile = (TileEntityScreen) te;
-        if (screenTile.getBlockMetadata() != meta) {
-            return false;
-        }
-        if (screenTile.connectionsUp != this.connectionsUp) {
-            return false;
-        }
-        if (screenTile.connectionsDown != this.connectionsDown) {
+        if ((screenTile.getBlockMetadata() != meta) || (screenTile.connectionsUp != this.connectionsUp) || (screenTile.connectionsDown != this.connectionsDown)) {
             return false;
         }
         if (this.connectionsUp + this.connectionsDown > 0) {
@@ -704,13 +692,7 @@ public class TileEntityScreen extends TileEntity {
             return false;
         }
         final TileEntityScreen screenTile = (TileEntityScreen) te;
-        if (screenTile.getBlockMetadata() != meta) {
-            return false;
-        }
-        if (screenTile.connectionsLeft != this.connectionsLeft) {
-            return false;
-        }
-        if (screenTile.connectionsRight != this.connectionsRight) {
+        if ((screenTile.getBlockMetadata() != meta) || (screenTile.connectionsLeft != this.connectionsLeft) || (screenTile.connectionsRight != this.connectionsRight)) {
             return false;
         }
         if (this.connectionsLeft + this.connectionsRight > 0) {
@@ -729,13 +711,7 @@ public class TileEntityScreen extends TileEntity {
             return false;
         }
         final TileEntityScreen screenTile = (TileEntityScreen) te;
-        if (screenTile.getBlockMetadata() != meta) {
-            return false;
-        }
-        if (screenTile.connectionsLeft != this.connectionsLeft) {
-            return false;
-        }
-        if (screenTile.connectionsRight != this.connectionsRight) {
+        if ((screenTile.getBlockMetadata() != meta) || (screenTile.connectionsLeft != this.connectionsLeft) || (screenTile.connectionsRight != this.connectionsRight)) {
             return false;
         }
         if (this.connectionsLeft + this.connectionsRight > 0) {

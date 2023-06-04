@@ -132,7 +132,6 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
                     this.setDead();
                     this.dropShipAsItem();
                 }
-                return true;
             }
 
             return true;

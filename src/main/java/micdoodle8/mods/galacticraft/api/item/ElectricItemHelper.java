@@ -58,7 +58,6 @@ public class ElectricItemHelper {
         if (itemStack != null) {
             if (itemStack.getItem() instanceof IItemElectric) {
                 ((IItemElectric) itemStack.getItem()).setElectricity(itemStack, joules);
-                return itemStack;
             }
         }
 

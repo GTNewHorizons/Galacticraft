@@ -61,16 +61,14 @@ public abstract class InventoryEntity extends NetworkedEntity implements IInvent
         if (this.containedItems[slotIndex].stackSize <= amount) {
             var3 = this.containedItems[slotIndex];
             this.containedItems[slotIndex] = null;
-            return var3;
         } else {
             var3 = this.containedItems[slotIndex].splitStack(amount);
 
             if (this.containedItems[slotIndex].stackSize == 0) {
                 this.containedItems[slotIndex] = null;
             }
-
-            return var3;
         }
+        return var3;
     }
 
     @Override

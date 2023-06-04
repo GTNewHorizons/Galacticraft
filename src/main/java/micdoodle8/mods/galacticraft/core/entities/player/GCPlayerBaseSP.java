@@ -110,10 +110,7 @@ public class GCPlayerBaseSP extends ClientPlayerBase {
                 return true;
             }
             if (ClientProxyCore.sneakRenderOverride) {
-                if (FreefallHandler.testFreefall(this.player)) {
-                    return false;
-                }
-                if (stats.inFreefall) {
+                if (FreefallHandler.testFreefall(this.player) || stats.inFreefall) {
                     return false;
                 }
             }

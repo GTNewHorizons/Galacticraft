@@ -253,8 +253,6 @@ public abstract class TileEntityBeamOutput extends TileEntityAdvanced implements
             if (tileAtTarget != null && tileAtTarget instanceof ILaserNode) {
                 return (ILaserNode) tileAtTarget;
             }
-
-            return null;
         }
 
         return null;

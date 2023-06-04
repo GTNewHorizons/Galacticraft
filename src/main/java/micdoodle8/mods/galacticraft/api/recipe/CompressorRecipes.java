@@ -182,11 +182,7 @@ public class CompressorRecipes {
     private static boolean matches(ShapedRecipes recipe, IInventory inventory, World par2World) {
         for (int i = 0; i <= 3 - recipe.recipeWidth; ++i) {
             for (int j = 0; j <= 3 - recipe.recipeHeight; ++j) {
-                if (CompressorRecipes.checkMatch(recipe, inventory, i, j, true)) {
-                    return true;
-                }
-
-                if (CompressorRecipes.checkMatch(recipe, inventory, i, j, false)) {
+                if (CompressorRecipes.checkMatch(recipe, inventory, i, j, true) || CompressorRecipes.checkMatch(recipe, inventory, i, j, false)) {
                     return true;
                 }
             }
@@ -218,15 +214,11 @@ public class CompressorRecipes {
                 }
 
                 if (itemstack1 != null || itemstack != null) {
-                    if (itemstack1 == null && itemstack != null || itemstack1 != null && itemstack == null) {
+                    if ((itemstack1 == null) == (itemstack != null)) {
                         return false;
                     }
 
-                    if (itemstack.getItem() != itemstack1.getItem()) {
-                        return false;
-                    }
-
-                    if (itemstack.getItemDamage() != 32767 && itemstack.getItemDamage() != itemstack1.getItemDamage()) {
+                    if ((itemstack.getItem() != itemstack1.getItem()) || (itemstack.getItemDamage() != 32767 && itemstack.getItemDamage() != itemstack1.getItemDamage())) {
                         return false;
                     }
                 }

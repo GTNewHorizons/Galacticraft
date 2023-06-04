@@ -44,24 +44,20 @@ public class TileEntityCircuitFabricator extends TileBaseElectricBlockWithInvent
         if (!this.worldObj.isRemote) {
             boolean updateInv = false;
 
-            if (this.hasEnoughEnergyToRun) {
-                if (this.canCompress()) {
-                    ++this.processTicks;
+            if (this.hasEnoughEnergyToRun && this.canCompress()) {
+                ++this.processTicks;
 
-                    if (this.processTicks == TileEntityCircuitFabricator.PROCESS_TIME_REQUIRED) {
-                        this.worldObj.playSoundEffect(
-                                this.xCoord,
-                                this.yCoord,
-                                this.zCoord,
-                                "random.anvil_land",
-                                0.2F,
-                                0.5F);
-                        this.processTicks = 0;
-                        this.compressItems();
-                        updateInv = true;
-                    }
-                } else {
+                if (this.processTicks == TileEntityCircuitFabricator.PROCESS_TIME_REQUIRED) {
+                    this.worldObj.playSoundEffect(
+                            this.xCoord,
+                            this.yCoord,
+                            this.zCoord,
+                            "random.anvil_land",
+                            0.2F,
+                            0.5F);
                     this.processTicks = 0;
+                    this.compressItems();
+                    updateInv = true;
                 }
             } else {
                 this.processTicks = 0;

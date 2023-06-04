@@ -276,18 +276,13 @@ public class EventHandlerGC {
                     return;
                 }
                 if (event.action.equals(PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)) {
-                    if (heldStack.getItem() instanceof IKeyItem) {
-                        if (((IKeyItem) heldStack.getItem()).getTier(heldStack) == -1
-                                || ((IKeyable) tileClicked).getTierOfKeyRequired() == -1
-                                || ((IKeyItem) heldStack.getItem()).getTier(heldStack)
-                                        == ((IKeyable) tileClicked).getTierOfKeyRequired()) {
-                            event.setCanceled(
-                                    ((IKeyable) tileClicked)
-                                            .onValidKeyActivated(event.entityPlayer, heldStack, event.face));
-                        } else {
-                            event.setCanceled(
-                                    ((IKeyable) tileClicked).onActivatedWithoutKey(event.entityPlayer, event.face));
-                        }
+                    if ((heldStack.getItem() instanceof IKeyItem) && (((IKeyItem) heldStack.getItem()).getTier(heldStack) == -1
+                            || ((IKeyable) tileClicked).getTierOfKeyRequired() == -1
+                            || ((IKeyItem) heldStack.getItem()).getTier(heldStack)
+                                    == ((IKeyable) tileClicked).getTierOfKeyRequired())) {
+                        event.setCanceled(
+                                ((IKeyable) tileClicked)
+                                        .onValidKeyActivated(event.entityPlayer, heldStack, event.face));
                     } else {
                         event.setCanceled(
                                 ((IKeyable) tileClicked).onActivatedWithoutKey(event.entityPlayer, event.face));
@@ -486,16 +481,7 @@ public class EventHandlerGC {
                         final int d2 = bx * bx + by * by * 3 + bz * bz;
 
                         if (d2 <= r2) {
-                            if (EventHandlerGC.checkBlock(world, bx + x - 1, by + cy, bz + z)) {
-                                continue;
-                            }
-                            if (EventHandlerGC.checkBlock(world, bx + x + 1, by + cy, bz + z)) {
-                                continue;
-                            }
-                            if (EventHandlerGC.checkBlock(world, bx + x, by + cy - 1, bz + z)) {
-                                continue;
-                            }
-                            if (EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z - 1)) {
+                            if (EventHandlerGC.checkBlock(world, bx + x - 1, by + cy, bz + z) || EventHandlerGC.checkBlock(world, bx + x + 1, by + cy, bz + z) || EventHandlerGC.checkBlock(world, bx + x, by + cy - 1, bz + z) || EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z - 1)) {
                                 continue;
                             }
                             if (EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z + 1)) {
@@ -522,16 +508,7 @@ public class EventHandlerGC {
                     final int d2 = bx * bx + by * by * 3 + bz * bz;
 
                     if (d2 <= r2) {
-                        if (EventHandlerGC.checkBlock(world, bx + x - 1, by + cy, bz + z)) {
-                            continue;
-                        }
-                        if (EventHandlerGC.checkBlock(world, bx + x + 1, by + cy, bz + z)) {
-                            continue;
-                        }
-                        if (EventHandlerGC.checkBlock(world, bx + x, by + cy - 1, bz + z)) {
-                            continue;
-                        }
-                        if (EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z - 1)) {
+                        if (EventHandlerGC.checkBlock(world, bx + x - 1, by + cy, bz + z) || EventHandlerGC.checkBlock(world, bx + x + 1, by + cy, bz + z) || EventHandlerGC.checkBlock(world, bx + x, by + cy - 1, bz + z) || EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z - 1)) {
                             continue;
                         }
                         if (EventHandlerGC.checkBlock(world, bx + x, by + cy, bz + z + 1)) {

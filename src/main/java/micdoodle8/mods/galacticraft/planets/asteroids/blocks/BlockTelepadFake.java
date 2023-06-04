@@ -64,13 +64,10 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
 
         if (meta == 0) {
             this.setBlockBounds(0.0F, 0.55F, 0.0F, 1.0F, 1.0F, 1.0F);
-            super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
         } else if (meta == 1) {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.38F, 1.0F);
-            super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
-        } else {
-            super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
         }
+        super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
     }
 
     @Override

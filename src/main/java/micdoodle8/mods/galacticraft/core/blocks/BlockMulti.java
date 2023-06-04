@@ -125,15 +125,8 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
 
         if (meta == 2 || meta == 6) {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.2F, 1.0F);
-            super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
         }
-        /*
-         * else if (meta == 7) { this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.38F, 1.0F);
-         * super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity); }
-         */
-        else {
-            super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
-        }
+        super.addCollisionBoxesToList(world, x, y, z, axisalignedbb, list, entity);
     }
 
     @Override

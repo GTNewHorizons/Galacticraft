@@ -99,11 +99,7 @@ public class ItemCanisterLiquidNitrogen extends ItemCanisterGeneric {
             final int y = movingobjectposition.blockY;
             final int z = movingobjectposition.blockZ;
 
-            if (!par2World.canMineBlock(par3EntityPlayer, x, y, z)) {
-                return itemStack;
-            }
-
-            if (!par3EntityPlayer.canPlayerEdit(x, y, z, movingobjectposition.sideHit, itemStack)) {
+            if (!par2World.canMineBlock(par3EntityPlayer, x, y, z) || !par3EntityPlayer.canPlayerEdit(x, y, z, movingobjectposition.sideHit, itemStack)) {
                 return itemStack;
             }
 
@@ -122,7 +118,6 @@ public class ItemCanisterLiquidNitrogen extends ItemCanisterGeneric {
                         1.0F,
                         Item.itemRand.nextFloat() * 0.4F + 0.8F);
                 par2World.setBlock(x, y, z, result, 0, 3);
-                return itemStack;
             }
         }
 

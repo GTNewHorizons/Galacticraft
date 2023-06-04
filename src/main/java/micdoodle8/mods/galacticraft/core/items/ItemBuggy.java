@@ -102,9 +102,7 @@ public class ItemBuggy extends Item implements IHoldableItem {
             }
         }
 
-        if (var26) {
-            return par1ItemStack;
-        } else {
+        if (!var26) {
             if (var24.typeOfHit == MovingObjectType.BLOCK) {
                 var29 = var24.blockX;
                 int var33 = var24.blockY;
@@ -141,9 +139,8 @@ public class ItemBuggy extends Item implements IHoldableItem {
                     --par1ItemStack.stackSize;
                 }
             }
-
-            return par1ItemStack;
         }
+        return par1ItemStack;
     }
 
     @Override

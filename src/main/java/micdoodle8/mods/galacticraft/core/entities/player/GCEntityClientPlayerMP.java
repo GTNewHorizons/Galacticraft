@@ -346,10 +346,7 @@ public class GCEntityClientPlayerMP extends EntityClientPlayerMP {
                 return true;
             }
             if (ClientProxyCore.sneakRenderOverride) {
-                if (FreefallHandler.testFreefall(this)) {
-                    return false;
-                }
-                if (stats.inFreefall) {
+                if (FreefallHandler.testFreefall(this) || stats.inFreefall) {
                     return false;
                 }
             }

@@ -191,10 +191,7 @@ public class GameScreenCelestial implements IGameScreen {
     }
 
     private void drawCelestialBody(CelestialBody planet, float xPos, float yPos, float ticks, float relSize) {
-        if (xPos + this.centreX > this.frameBx || xPos + this.centreX < this.frameA) {
-            return;
-        }
-        if (yPos + this.centreY > this.frameBy || yPos + this.centreY < this.frameA) {
+        if (xPos + this.centreX > this.frameBx || xPos + this.centreX < this.frameA || yPos + this.centreY > this.frameBy || yPos + this.centreY < this.frameA) {
             return;
         }
 

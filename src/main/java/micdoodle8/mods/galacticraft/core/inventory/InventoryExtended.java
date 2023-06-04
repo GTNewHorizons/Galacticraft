@@ -31,16 +31,14 @@ public class InventoryExtended implements IInventoryGC {
         if (this.inventoryStacks[i].stackSize <= j) {
             var3 = this.inventoryStacks[i];
             this.inventoryStacks[i] = null;
-            return var3;
         } else {
             var3 = this.inventoryStacks[i].splitStack(j);
 
             if (this.inventoryStacks[i].stackSize == 0) {
                 this.inventoryStacks[i] = null;
             }
-
-            return var3;
         }
+        return var3;
     }
 
     @Override

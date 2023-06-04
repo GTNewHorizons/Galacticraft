@@ -11,16 +11,7 @@ public class RedstoneUtil {
         if (w == null) {
             return false;
         }
-        if (isBlockProvidingPowerTo(w, x, y - 1, z, 0) > 0) {
-            return true;
-        }
-        if (isBlockProvidingPowerTo(w, x, y + 1, z, 1) > 0) {
-            return true;
-        }
-        if (isBlockProvidingPowerTo_NoChunkLoad(w, x, y, z - 1, 2) > 0) {
-            return true;
-        }
-        if (isBlockProvidingPowerTo_NoChunkLoad(w, x, y, z + 1, 3) > 0) {
+        if ((isBlockProvidingPowerTo(w, x, y - 1, z, 0) > 0) || (isBlockProvidingPowerTo(w, x, y + 1, z, 1) > 0) || (isBlockProvidingPowerTo_NoChunkLoad(w, x, y, z - 1, 2) > 0) || (isBlockProvidingPowerTo_NoChunkLoad(w, x, y, z + 1, 3) > 0)) {
             return true;
         }
         if (isBlockProvidingPowerTo_NoChunkLoad(w, x - 1, y, z, 4) > 0) {

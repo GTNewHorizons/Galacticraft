@@ -233,16 +233,14 @@ public class TileEntityOxygenCollector extends TileEntityOxygen implements IInve
         if (this.containingItems[par1].stackSize <= par2) {
             var3 = this.containingItems[par1];
             this.containingItems[par1] = null;
-            return var3;
         } else {
             var3 = this.containingItems[par1].splitStack(par2);
 
             if (this.containingItems[par1].stackSize == 0) {
                 this.containingItems[par1] = null;
             }
-
-            return var3;
         }
+        return var3;
     }
 
     @Override

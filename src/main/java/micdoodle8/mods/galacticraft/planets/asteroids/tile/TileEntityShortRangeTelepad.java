@@ -527,16 +527,14 @@ public class TileEntityShortRangeTelepad extends TileBaseElectricBlock
         if (this.containingItems[par1].stackSize <= par2) {
             var3 = this.containingItems[par1];
             this.containingItems[par1] = null;
-            return var3;
         } else {
             var3 = this.containingItems[par1].splitStack(par2);
 
             if (this.containingItems[par1].stackSize == 0) {
                 this.containingItems[par1] = null;
             }
-
-            return var3;
         }
+        return var3;
     }
 
     @Override
@@ -627,11 +625,7 @@ public class TileEntityShortRangeTelepad extends TileBaseElectricBlock
         float f;
         f = rand.nextFloat() * 0.6F + 0.4F;
 
-        if (sending && this.targetAddressResult != EnumTelepadSearchResult.VALID) {
-            return new Vector3(f, f * 0.3F, f * 0.3F);
-        }
-
-        if (!sending && !this.addressValid) {
+        if ((sending && this.targetAddressResult != EnumTelepadSearchResult.VALID) || (!sending && !this.addressValid)) {
             return new Vector3(f, f * 0.3F, f * 0.3F);
         }
 

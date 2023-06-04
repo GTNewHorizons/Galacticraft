@@ -64,11 +64,7 @@ public class GuiShortRangeTelepad extends GuiContainerGC implements ITextBoxCall
     @Override
     protected void keyTyped(char keyChar, int keyID) {
         if (keyID != Keyboard.KEY_ESCAPE && keyID != this.mc.gameSettings.keyBindInventory.getKeyCode()) {
-            if (this.address.keyTyped(keyChar, keyID)) {
-                return;
-            }
-
-            if (this.targetAddress.keyTyped(keyChar, keyID)) {
+            if (this.address.keyTyped(keyChar, keyID) || this.targetAddress.keyTyped(keyChar, keyID)) {
                 return;
             }
         }

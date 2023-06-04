@@ -74,11 +74,10 @@ public class GalacticraftRegistry {
 
         if (GalacticraftRegistry.dungeonLootMap.containsKey(tier)) {
             dungeonStacks = GalacticraftRegistry.dungeonLootMap.get(tier);
-            dungeonStacks.add(loot);
         } else {
             dungeonStacks = new ArrayList<>();
-            dungeonStacks.add(loot);
         }
+        dungeonStacks.add(loot);
 
         GalacticraftRegistry.dungeonLootMap.put(tier, dungeonStacks);
     }

@@ -37,12 +37,11 @@ public class StructureVillageStartMoon extends StructureStart {
             if (var8.isEmpty()) {
                 var10 = par2Random.nextInt(var9.size());
                 var11 = (StructureComponent) var9.remove(var10);
-                var11.buildComponent(var7, this.components, par2Random);
             } else {
                 var10 = par2Random.nextInt(var8.size());
                 var11 = (StructureComponent) var8.remove(var10);
-                var11.buildComponent(var7, this.components, par2Random);
             }
+            var11.buildComponent(var7, this.components, par2Random);
         }
 
         this.updateBoundingBox();
