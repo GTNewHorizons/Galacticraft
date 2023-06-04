@@ -69,7 +69,6 @@ public class GuiOxygenSealer extends GuiContainerGC {
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void initGui() {
         super.initGui();

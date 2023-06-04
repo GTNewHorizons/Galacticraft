@@ -316,9 +316,8 @@ public class BlockMachine2 extends BlockTileGC implements ItemBlockDesc.IBlockSh
         return new ItemStack(this, 1, BlockMachine2.OXYGEN_STORAGE_MODULE_METADATA);
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
         par3List.add(this.getElectricCompressor());
         par3List.add(this.getCircuitFabricator());
         par3List.add(this.getOxygenStorageModule());

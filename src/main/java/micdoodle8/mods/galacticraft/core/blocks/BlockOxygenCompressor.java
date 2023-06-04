@@ -203,9 +203,8 @@ public class BlockOxygenCompressor extends BlockAdvancedTile implements ItemBloc
         world.setBlockMetadataWithNotify(x, y, z, change, 3);
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
         par3List.add(new ItemStack(this, 1, BlockOxygenCompressor.OXYGEN_COMPRESSOR_METADATA));
         par3List.add(new ItemStack(this, 1, BlockOxygenCompressor.OXYGEN_DECOMPRESSOR_METADATA));
     }

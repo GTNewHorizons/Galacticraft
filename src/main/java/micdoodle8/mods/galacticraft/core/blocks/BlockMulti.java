@@ -118,7 +118,6 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
         }
     }
 
-    @SuppressWarnings("rawtypes")
     @Override
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list,
             Entity entity) {
@@ -243,6 +242,7 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
         return new TileEntityMulti();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
         final TileEntity tileEntity = world.getTileEntity(x, y, z);

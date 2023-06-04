@@ -98,7 +98,6 @@ public class OxygenUtil {
         return isAABBInBreathableAirBlock(world, bb, false);
     }
 
-    @SuppressWarnings("rawtypes")
     public static boolean isAABBInBreathableAirBlock(World world, AxisAlignedBB bb, boolean testThermal) {
         final double avgX = (bb.minX + bb.maxX) / 2.0D;
         final double avgY = (bb.minY + bb.maxY) / 2.0D;

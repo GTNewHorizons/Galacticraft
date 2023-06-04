@@ -229,10 +229,9 @@ public class BlockBasicMars extends Block
         return 1;
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
         int var4;
 
         for (var4 = 0; var4 < 11; ++var4) {
@@ -309,6 +308,7 @@ public class BlockBasicMars extends Block
         return metadata < 10;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
         final int metadata = world.getBlockMetadata(x, y, z);

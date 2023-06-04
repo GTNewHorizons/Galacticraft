@@ -761,6 +761,7 @@ public class ConfigManagerCore {
         return false;
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public static List<IConfigElement> getConfigElements() {
         final List<IConfigElement> list = new ArrayList<>();
         list.addAll(new ConfigElement(config.getCategory(Constants.CONFIG_CATEGORY_DIMENSIONS)).getChildElements());

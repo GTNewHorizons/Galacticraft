@@ -147,7 +147,6 @@ public class TileEntityIngotCompressor extends TileEntityAdvanced implements IIn
                     }
                 }
             } else if (recipe instanceof ShapelessOreRecipe) {
-                @SuppressWarnings("unchecked")
                 final ArrayList<Object> required = new ArrayList<>(((ShapelessOreRecipe) recipe).getInput());
 
                 final Iterator<Object> req = required.iterator();
@@ -162,6 +161,7 @@ public class TileEntityIngotCompressor extends TileEntityAdvanced implements IIn
                             match++;
                         }
                     } else if (next instanceof ArrayList) {
+                        @SuppressWarnings("unchecked")
                         final Iterator<ItemStack> itr = ((ArrayList<ItemStack>) next).iterator();
                         while (itr.hasNext()) {
                             if (OreDictionary.itemMatches(itr.next(), stack, false)) {

@@ -66,7 +66,6 @@ public class EntityTier3Rocket extends EntityTieredRocket {
         return 1.75D;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public void onUpdate() {
         super.onUpdate();

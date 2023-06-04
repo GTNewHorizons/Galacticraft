@@ -11,7 +11,6 @@ public class BiomeGenBaseOrbit extends BiomeGenBase {
     public static final BiomeGenBase space = new BiomeGenBaseOrbit(ConfigManagerCore.biomeIDbase + 3)
             .setBiomeName("space");
 
-    @SuppressWarnings("unchecked")
     private BiomeGenBaseOrbit(int var1) {
         super(var1);
         this.spawnableMonsterList.clear();

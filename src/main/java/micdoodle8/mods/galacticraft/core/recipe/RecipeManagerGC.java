@@ -63,7 +63,6 @@ public class RecipeManagerGC {
         RecipeManagerGC.addExNihiloRecipes();
     }
 
-    @SuppressWarnings("unchecked")
     private static void addUniversalRecipes() {
 
         if (Loader.isModLoaded("miscutils")) {

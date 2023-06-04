@@ -57,7 +57,6 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
         }
     }
 
-    @SuppressWarnings("rawtypes")
     @Override
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list,
             Entity entity) {
@@ -155,6 +154,7 @@ public class BlockTelepadFake extends BlockAdvancedTile implements ITileEntityPr
         return new TileEntityTelepadFake();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
         final TileEntity tileEntity = world.getTileEntity(x, y, z);

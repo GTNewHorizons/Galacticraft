@@ -163,10 +163,9 @@ public class BlockSlimelingEgg extends Block implements ITileEntityProvider, Ite
         return 1;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
         for (int var4 = 0; var4 < BlockSlimelingEgg.names.length; ++var4) {
             par3List.add(new ItemStack(par1, 1, var4));
         }
@@ -177,6 +176,7 @@ public class BlockSlimelingEgg extends Block implements ITileEntityProvider, Ite
         return new TileEntitySlimelingEgg();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
         final int metadata = world.getBlockMetadata(x, y, z);

@@ -56,10 +56,9 @@ public class ItemCanisterMethane extends ItemCanisterGeneric {
         return super.getIconFromDamage(damage);
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List<String> par3List, boolean par4) {
         if (par1ItemStack.getMaxDamage() - par1ItemStack.getItemDamage() > 0) {
             par3List.add(
                     GCCoreUtil.translate("item.canister.gas.name") + ": "

@@ -46,9 +46,8 @@ public class ItemBuggy extends Item implements IHoldableItem {
         return ClientProxyCore.galacticraftItem;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
         for (int i = 0; i < 4; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }
@@ -148,10 +147,9 @@ public class ItemBuggy extends Item implements IHoldableItem {
         }
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer player, List par2List, boolean b) {
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer player, List<String> par2List, boolean b) {
         if (par1ItemStack.getItemDamage() != 0) {
             par2List.add(GCCoreUtil.translate("gui.buggy.storageSpace") + ": " + par1ItemStack.getItemDamage() * 18);
         }

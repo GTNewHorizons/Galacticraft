@@ -339,9 +339,8 @@ public class ChunkProviderMoon extends ChunkProviderGenerate {
         return "MoonLevelSource";
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int i, int j, int k) {
+    public List<BiomeGenBase.SpawnListEntry> getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int i, int j, int k) {
         if (par1EnumCreatureType == EnumCreatureType.monster) {
             return BiomeGenBaseMoon.moonFlat.getSpawnableList(par1EnumCreatureType);
         } else {

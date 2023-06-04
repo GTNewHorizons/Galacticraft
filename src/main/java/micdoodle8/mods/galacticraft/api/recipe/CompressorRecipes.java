@@ -255,6 +255,7 @@ public class CompressorRecipes {
                     if (next instanceof ItemStack) {
                         match = OreDictionary.itemMatches((ItemStack) next, slot, false);
                     } else if (next instanceof ArrayList) {
+                        @SuppressWarnings("unchecked")
                         final Iterator<ItemStack> itr = ((ArrayList<ItemStack>) next).iterator();
                         while (itr.hasNext() && !match) {
                             match = OreDictionary.itemMatches(itr.next(), slot, false);

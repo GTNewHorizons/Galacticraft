@@ -34,10 +34,9 @@ public class ItemBase extends Item {
         return ClientProxyCore.galacticraftItem;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List<String> par3List, boolean par4) {
         if (par1ItemStack != null && this == GCItems.heavyPlatingTier1) {
             par3List.add(GCCoreUtil.translate("item.tier1.desc"));
         }

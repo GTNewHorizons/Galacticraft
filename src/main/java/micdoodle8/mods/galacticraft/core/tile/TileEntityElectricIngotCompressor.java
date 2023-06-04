@@ -373,7 +373,6 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
                     return true;
                 }
             } else if (recipe instanceof ShapelessOreRecipe) {
-                @SuppressWarnings("unchecked")
                 final ArrayList<Object> required = new ArrayList<>(((ShapelessOreRecipe) recipe).getInput());
 
                 final Iterator<Object> req = required.iterator();
@@ -388,6 +387,7 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
                             match++;
                         }
                     } else if (next instanceof ArrayList) {
+                        @SuppressWarnings("unchecked")
                         final Iterator<ItemStack> itr = ((ArrayList<ItemStack>) next).iterator();
                         while (itr.hasNext()) {
                             if (OreDictionary.itemMatches(itr.next(), stack, false)) {

@@ -167,7 +167,6 @@ public class BlockWalkway extends BlockTransmitter implements ITileEntityProvide
         }
     }
 
-    @SuppressWarnings("rawtypes")
     @Override
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list,
             Entity entity) {

@@ -81,8 +81,7 @@ public class BlockSlabGC extends BlockSlab {
     }
 
     @Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) {
+    public void getSubBlocks(Item block, CreativeTabs creativeTabs, List<ItemStack> list) {
         int max = 0;
 
         if (GalacticraftCore.isPlanetsLoaded) {

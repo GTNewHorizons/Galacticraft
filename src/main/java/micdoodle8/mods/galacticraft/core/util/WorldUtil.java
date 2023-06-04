@@ -1457,6 +1457,7 @@ public class WorldUtil {
                     final Field regField = Class.forName("cpw.mods.fml.common.registry.GameRegistry")
                             .getDeclaredField("worldGenerators");
                     regField.setAccessible(true);
+                    @SuppressWarnings("unchecked")
                     final Set<IWorldGenerator> registeredGenerators = (Set<IWorldGenerator>) regField.get(null);
                     for (final IWorldGenerator gen : registeredGenerators) {
                         if (GCGreg.isInstance(gen)) {
@@ -1473,6 +1474,7 @@ public class WorldUtil {
                     final Field regField = Class.forName("cpw.mods.fml.common.registry.GameRegistry")
                             .getDeclaredField("worldGenerators");
                     regField.setAccessible(true);
+                    @SuppressWarnings("unchecked")
                     final Set<IWorldGenerator> registeredGenerators = (Set<IWorldGenerator>) regField.get(null);
                     for (final IWorldGenerator gen : registeredGenerators) {
                         if (cofh.isInstance(gen)) {
@@ -1489,6 +1491,7 @@ public class WorldUtil {
                     final Field regField = Class.forName("cpw.mods.fml.common.registry.GameRegistry")
                             .getDeclaredField("worldGenerators");
                     regField.setAccessible(true);
+                    @SuppressWarnings("unchecked")
                     final Set<IWorldGenerator> registeredGenerators = (Set<IWorldGenerator>) regField.get(null);
                     for (final IWorldGenerator gen : registeredGenerators) {
                         if (denseOres.isInstance(gen)) {
@@ -1515,6 +1518,7 @@ public class WorldUtil {
                     final Field regField = Class.forName("cpw.mods.fml.common.registry.GameRegistry")
                             .getDeclaredField("worldGenerators");
                     regField.setAccessible(true);
+                    @SuppressWarnings("unchecked")
                     final Set<IWorldGenerator> registeredGenerators = (Set<IWorldGenerator>) regField.get(null);
                     for (final IWorldGenerator gen : registeredGenerators) {
                         if (ae2meteorPlace.isInstance(gen)) {
@@ -1531,6 +1535,7 @@ public class WorldUtil {
                     final Field regField = Class.forName("cpw.mods.fml.common.registry.GameRegistry")
                             .getDeclaredField("worldGenerators");
                     regField.setAccessible(true);
+                    @SuppressWarnings("unchecked")
                     final Set<IWorldGenerator> registeredGenerators = (Set<IWorldGenerator>) regField.get(null);
                     for (final IWorldGenerator gen : registeredGenerators) {
                         if (genThaumCraft.isInstance(gen)) {

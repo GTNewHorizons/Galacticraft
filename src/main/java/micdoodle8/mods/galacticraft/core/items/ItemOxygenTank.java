@@ -28,10 +28,9 @@ public class ItemOxygenTank extends Item {
         this.setNoRepair();
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item item, CreativeTabs tabs, List list) {
+    public void getSubItems(Item item, CreativeTabs tabs, List<ItemStack> list) {
         list.add(new ItemStack(item, 1, 0));
         list.add(new ItemStack(item, 1, this.getMaxDamage()));
     }
@@ -47,9 +46,8 @@ public class ItemOxygenTank extends Item {
         return ClientProxyCore.galacticraftItem;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean advancedItemTooltips) {
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advancedItemTooltips) {
         tooltip.add(
                 GCCoreUtil.translate("gui.tank.oxygenRemaining") + ": "
                         + (stack.getMaxDamage() - stack.getItemDamage()));

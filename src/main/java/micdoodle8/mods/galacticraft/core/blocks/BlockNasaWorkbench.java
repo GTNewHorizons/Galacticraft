@@ -101,7 +101,6 @@ public class BlockNasaWorkbench extends BlockContainer
         return r;
     }
 
-    @SuppressWarnings("rawtypes")
     @Override
     public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> arraylist,
             Entity par7Entity) {

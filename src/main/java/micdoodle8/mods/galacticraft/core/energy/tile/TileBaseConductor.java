@@ -23,7 +23,6 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  * @author Calclavia
  */
-@SuppressWarnings({ "unchecked", "rawtypes" })
 public abstract class TileBaseConductor extends TileEntityAdvanced implements IConductor {
 
     private IGridNetwork network;

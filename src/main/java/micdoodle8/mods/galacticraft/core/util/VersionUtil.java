@@ -478,6 +478,7 @@ public class VersionUtil {
             final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_ENTITYLIST).replace('/', '.'));
             final Field f = c.getDeclaredField(getNameDynamic(KEY_FIELD_CLASSTOIDMAPPING));
             f.setAccessible(true);
+            @SuppressWarnings("unchecked")
             final Map<Class<?>, Integer> classToIDMapping = (Map<Class<?>, Integer>) f.get(null);
             classToIDMapping.put(mobClazz, id);
 
@@ -496,6 +497,7 @@ public class VersionUtil {
             final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_ENTITYLIST).replace('/', '.'));
             final Field f = c.getDeclaredField(getNameDynamic(KEY_FIELD_CLASSTOIDMAPPING));
             f.setAccessible(true);
+            @SuppressWarnings("unchecked")
             final Map<Class<?>, Integer> classToIDMapping = (Map<Class<?>, Integer>) f.get(null);
             final Integer i = (Integer) classToIDMapping.get(mobClazz);
 

@@ -48,7 +48,6 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer {
         return GalacticraftCore.galacticraftItemsTab;
     }
 
-    @SuppressWarnings({ "unchecked" })
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {

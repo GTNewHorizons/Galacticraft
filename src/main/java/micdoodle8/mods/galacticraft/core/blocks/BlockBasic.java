@@ -172,10 +172,9 @@ public class BlockBasic extends Block implements IDetectableResource {
         return this.blockHardness;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
         for (int var4 = 3; var4 < 13; ++var4) {
             par3List.add(new ItemStack(par1, 1, var4));
         }
@@ -186,6 +185,7 @@ public class BlockBasic extends Block implements IDetectableResource {
         return metadata >= 5 && metadata <= 8;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
         final int metadata = world.getBlockMetadata(x, y, z);

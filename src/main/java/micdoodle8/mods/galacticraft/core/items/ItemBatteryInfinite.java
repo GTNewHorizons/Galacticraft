@@ -45,9 +45,8 @@ public class ItemBatteryInfinite extends ItemElectricBase {
         return ClientProxyCore.galacticraftItem;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List<String> par3List, boolean par4) {
         par3List.add("\u00a72" + GCCoreUtil.translate("gui.infiniteBattery.desc"));
     }
 

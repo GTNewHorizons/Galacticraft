@@ -24,7 +24,6 @@ public class StructureComponentVillageHouse extends StructureComponentVillage {
         this.boundingBox = par4StructureBoundingBox;
     }
 
-    @SuppressWarnings("rawtypes")
     public static StructureComponentVillageHouse func_74921_a(
             StructureComponentVillageStartPiece par0ComponentVillageStartPiece, List<StructureComponent> par1List, Random par2Random,
             int par3, int par4, int par5, int par6, int par7) {

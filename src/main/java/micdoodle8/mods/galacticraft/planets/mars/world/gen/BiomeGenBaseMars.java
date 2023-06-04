@@ -11,7 +11,6 @@ public class BiomeGenBaseMars extends BiomeGenBase {
     public static final BiomeGenBase marsFlat = new BiomeGenFlatMars(ConfigManagerCore.biomeIDbase + 1)
             .setBiomeName("marsFlat");
 
-    @SuppressWarnings("unchecked")
     BiomeGenBaseMars(int var1) {
         super(var1);
         this.spawnableMonsterList.clear();

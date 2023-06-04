@@ -99,6 +99,7 @@ public class GCCoreUtil {
         return eggID;
     }
 
+    @SuppressWarnings("deprecation")
     public static void registerGalacticraftNonMobEntity(Class<? extends Entity> var0, String var1, int trackingDistance,
             int updateFreq, boolean sendVel) {
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {

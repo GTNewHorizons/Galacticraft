@@ -2167,6 +2167,7 @@ public class GuiCelestialSelection extends GuiScreen {
                                                 + this.canCreateOffset,
                                         color);
                             } else if (next instanceof ArrayList) {
+                                @SuppressWarnings("unchecked")
                                 final ArrayList<ItemStack> items = (ArrayList<ItemStack>) next;
 
                                 int amount = 0;

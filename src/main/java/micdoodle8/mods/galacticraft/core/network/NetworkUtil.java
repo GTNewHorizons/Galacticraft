@@ -33,6 +33,7 @@ import io.netty.buffer.ByteBuf;
 
 public class NetworkUtil {
 
+    @SuppressWarnings("unchecked")
     public static void encodeData(ByteBuf buffer, Collection<Object> sendData) throws IOException {
         for (final Object dataValue : sendData) {
             if (dataValue instanceof Integer) {

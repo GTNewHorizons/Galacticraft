@@ -86,7 +86,6 @@ public class GuiMethaneSynthesizer extends GuiContainerGC {
         this.ySize = 168;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void initGui() {
         super.initGui();

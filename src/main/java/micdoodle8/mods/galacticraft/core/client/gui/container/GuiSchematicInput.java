@@ -30,7 +30,6 @@ public class GuiSchematicInput extends GuiContainerGC implements ISchematicResul
         super(new ContainerSchematic(par1InventoryPlayer, x, y, z));
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void initGui() {
         super.initGui();

@@ -78,10 +78,9 @@ public class BlockMachineFrame extends Block {
         return false;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
         int var4;
 
         for (var4 = 0; var4 < this.blockIcons.length; ++var4) {

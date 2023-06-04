@@ -61,7 +61,6 @@ public abstract class ItemElectricBase extends Item
         return this.transferMax;
     }
 
-    @SuppressWarnings({ "unchecked" })
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List<String> list, boolean par4) {
         String color;
@@ -166,7 +165,6 @@ public abstract class ItemElectricBase extends Item
         return energyStored;
     }
 
-    @SuppressWarnings({ "unchecked" })
     @Override
     public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
         par3List.add(ElectricItemHelper.getUncharged(new ItemStack(this)));

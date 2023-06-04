@@ -80,9 +80,8 @@ public class ItemThermalPadding extends Item implements IItemThermal {
         return super.getIconFromDamage(damage);
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
         for (int i = 0; i < ItemThermalPadding.names.length / 2; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }

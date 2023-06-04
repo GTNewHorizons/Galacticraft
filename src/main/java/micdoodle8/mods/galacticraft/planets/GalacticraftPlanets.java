@@ -111,6 +111,7 @@ public class GalacticraftPlanets {
         }
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public static List<IConfigElement> getConfigElements() {
         final List<IConfigElement> list = new ArrayList<>();
 

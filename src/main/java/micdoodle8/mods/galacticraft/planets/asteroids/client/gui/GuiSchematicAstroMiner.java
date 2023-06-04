@@ -29,7 +29,6 @@ public class GuiSchematicAstroMiner extends GuiContainer implements ISchematicRe
         this.ySize = 203;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void initGui() {
         super.initGui();

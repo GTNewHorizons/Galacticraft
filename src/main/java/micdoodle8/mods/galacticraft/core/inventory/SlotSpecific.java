@@ -21,8 +21,7 @@ public class SlotSpecific extends Slot {
 
     public ItemStack[] validItemStacks = new ItemStack[0];
 
-    @SuppressWarnings("rawtypes")
-    public Class[] validClasses = new Class[0];
+    public Class<?>[] validClasses = new Class[0];
 
     public boolean isInverted = false;
     public boolean isMetadataSensitive = false;
@@ -32,14 +31,13 @@ public class SlotSpecific extends Slot {
         this.setItemStacks(itemStacks);
     }
 
-    @SuppressWarnings("rawtypes")
-    public SlotSpecific(IInventory par2IInventory, int par3, int par4, int par5, Class... validClasses) {
+    public SlotSpecific(IInventory par2IInventory, int par3, int par4, int par5, Class<?>... validClasses) {
         super(par2IInventory, par3, par4, par5);
         if (validClasses != null && Arrays.asList(validClasses).contains(IItemElectric.class)) {
             if (EnergyConfigHandler.isRFAPILoaded()) {
                 try {
                     final Class<?> itemElectricRF = Class.forName("cofh.api.energy.IEnergyContainerItem");
-                    final ArrayList<Class> existing = new ArrayList<>(Arrays.asList(validClasses));
+                    final ArrayList<Class<?>> existing = new ArrayList<>(Arrays.asList(validClasses));
                     existing.add(itemElectricRF);
                     validClasses = existing.toArray(new Class[existing.size()]);
                 } catch (final Exception e) {
@@ -50,7 +48,7 @@ public class SlotSpecific extends Slot {
                 try {
                     final Class<?> itemElectricIC2a = Class.forName("ic2.api.item.IElectricItem");
                     final Class<?> itemElectricIC2b = Class.forName("ic2.api.item.ISpecialElectricItem");
-                    final ArrayList<Class> existing = new ArrayList<>(Arrays.asList(validClasses));
+                    final ArrayList<Class<?>> existing = new ArrayList<>(Arrays.asList(validClasses));
                     existing.add(itemElectricIC2a);
                     existing.add(itemElectricIC2b);
                     validClasses = existing.toArray(new Class[existing.size()]);
@@ -61,7 +59,7 @@ public class SlotSpecific extends Slot {
             if (EnergyConfigHandler.isMekanismLoaded()) {
                 try {
                     final Class<?> itemElectricMek = Class.forName("mekanism.api.energy.IEnergizedItem");
-                    final ArrayList<Class> existing = new ArrayList<>(Arrays.asList(validClasses));
+                    final ArrayList<Class<?>> existing = new ArrayList<>(Arrays.asList(validClasses));
                     existing.add(itemElectricMek);
                     validClasses = existing.toArray(new Class[existing.size()]);
                 } catch (final Exception e) {
@@ -82,8 +80,7 @@ public class SlotSpecific extends Slot {
         return this;
     }
 
-    @SuppressWarnings("rawtypes")
-    public SlotSpecific setClasses(Class... validClasses) {
+    public SlotSpecific setClasses(Class<?>... validClasses) {
         this.validClasses = validClasses;
         return this;
     }
@@ -96,7 +93,6 @@ public class SlotSpecific extends Slot {
     /**
      * Check if the stack is a valid item for this slot. Always true beside for the armor slots.
      */
-    @SuppressWarnings("rawtypes")
     @Override
     public boolean isItemValid(ItemStack compareStack) {
         boolean returnValue = false;
@@ -109,7 +105,7 @@ public class SlotSpecific extends Slot {
         }
 
         if (!returnValue) {
-            for (final Class clazz : this.validClasses) {
+            for (final Class<?> clazz : this.validClasses) {
                 if (clazz.isInstance(compareStack.getItem())) {
                     returnValue = true;
                     break;

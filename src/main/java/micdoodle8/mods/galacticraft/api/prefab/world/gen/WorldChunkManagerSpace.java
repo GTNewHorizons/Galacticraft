@@ -96,15 +96,13 @@ public abstract class WorldChunkManagerSpace extends WorldChunkManager {
         }
     }
 
-    @SuppressWarnings("rawtypes")
     @Override
-    public boolean areBiomesViable(int par1, int par2, int par3, List par4List) {
+    public boolean areBiomesViable(int par1, int par2, int par3, List<BiomeGenBase> par4List) {
         return par4List.contains(this.getBiome());
     }
 
-    @SuppressWarnings("rawtypes")
     @Override
-    public ChunkPosition findBiomePosition(int par1, int par2, int par3, List par4List, Random par5Random) {
+    public ChunkPosition findBiomePosition(int par1, int par2, int par3, List<BiomeGenBase> par4List, Random par5Random) {
         final int var6 = par1 - par3 >> 2;
         final int var7 = par2 - par3 >> 2;
         final int var8 = par1 + par3 >> 2;

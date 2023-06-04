@@ -67,7 +67,6 @@ public class ThreadFindSeal {
                 new ArrayList<>(Arrays.asList(sealer)));
     }
 
-    @SuppressWarnings("unchecked")
     public ThreadFindSeal(World world, BlockVec3 head, int checkCount, List<TileEntityOxygenSealer> sealers) {
         this.world = world;
         this.head = head;

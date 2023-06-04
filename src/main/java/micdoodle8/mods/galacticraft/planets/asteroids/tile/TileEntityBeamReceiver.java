@@ -24,7 +24,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 import com.google.common.collect.Lists;
 import cpw.mods.fml.relauncher.Side;
 
-@SuppressWarnings("unused")
 public class TileEntityBeamReceiver extends TileEntityBeamOutput implements IEnergyHandlerGC, ILaserNode {
 
     @NetworkedField(targetSide = Side.CLIENT)

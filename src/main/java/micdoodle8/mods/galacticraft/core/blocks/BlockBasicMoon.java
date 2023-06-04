@@ -264,10 +264,9 @@ public class BlockBasicMoon extends BlockAdvancedTile
         }
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
         int var4;
 
         for (var4 = 0; var4 < 6; ++var4) {
@@ -342,6 +341,7 @@ public class BlockBasicMoon extends BlockAdvancedTile
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
         final int metadata = world.getBlockMetadata(x, y, z);

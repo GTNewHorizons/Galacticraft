@@ -66,7 +66,6 @@ public class StructureComponentVillageField2 extends StructureComponentVillage {
         }
     }
 
-    @SuppressWarnings("rawtypes")
     public static StructureComponentVillageField2 func_74900_a(
             StructureComponentVillageStartPiece par0ComponentVillageStartPiece, List<StructureComponent> par1List, Random par2Random,
             int par3, int par4, int par5, int par6, int par7) {

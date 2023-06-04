@@ -20,7 +20,6 @@ import net.minecraft.world.gen.layer.GenLayer;
 
 import org.apache.commons.io.FileUtils;
 
-@SuppressWarnings("unused")
 public class MapGen {
 
     public boolean calculatingMap = false;

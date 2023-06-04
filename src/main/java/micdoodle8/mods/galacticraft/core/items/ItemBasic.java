@@ -81,9 +81,8 @@ public class ItemBasic extends Item {
         return super.getIconFromDamage(damage);
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
-    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
         for (int i = 0; i < ItemBasic.names.length; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }
@@ -95,9 +94,8 @@ public class ItemBasic extends Item {
     }
 
     @Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List<String> par3List, boolean par4) {
         if (par1ItemStack.getItemDamage() > 14 && par1ItemStack.getItemDamage() < 19) {
             par3List.add(
                     EnumColor.BRIGHT_GREEN + GCCoreUtil.translate(

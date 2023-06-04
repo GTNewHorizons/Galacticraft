@@ -64,6 +64,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.WorldProviderSurface;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -521,6 +522,7 @@ public class TickHandlerClient {
             }
 
             if (!TickHandlerClient.screenConnectionsUpdateList.isEmpty()) {
+                @SuppressWarnings("unchecked")
                 final HashSet<TileEntityScreen> updateListCopy = (HashSet<TileEntityScreen>) screenConnectionsUpdateList
                         .clone();
                 screenConnectionsUpdateList.clear();

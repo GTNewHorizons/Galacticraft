@@ -125,7 +125,6 @@ public abstract class BlockTransmitter extends BlockContainer {
 
     public abstract NetworkType getNetworkType();
 
-    @SuppressWarnings("rawtypes")
     @Override
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list,
             Entity entity) {

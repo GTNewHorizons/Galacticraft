@@ -77,7 +77,6 @@ public class TileEntityOxygenPipe extends TileEntityOxygenTransmitter implements
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void setColor(byte col) {
         this.pipeColor = col;

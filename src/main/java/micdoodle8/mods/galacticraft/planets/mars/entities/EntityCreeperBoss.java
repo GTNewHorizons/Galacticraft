@@ -150,7 +150,6 @@ public class EntityCreeperBoss extends EntityMob
         return null;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected void onDeathUpdate() {
         ++this.deathTicks;
@@ -317,7 +316,6 @@ public class EntityCreeperBoss extends EntityMob
         new Vector3(this);
 
         if (this.roomCoords != null && this.roomSize != null) {
-            @SuppressWarnings("unchecked")
             final List<EntityPlayer> entitiesWithin = this.worldObj.getEntitiesWithinAABB(
                     EntityPlayer.class,
                     AxisAlignedBB.getBoundingBox(
@@ -331,7 +329,6 @@ public class EntityCreeperBoss extends EntityMob
             this.entitiesWithin = entitiesWithin.size();
 
             if (this.entitiesWithin == 0 && this.entitiesWithinLast != 0) {
-                @SuppressWarnings("unchecked")
                 final List<EntityPlayer> entitiesWithin2 = this.worldObj.getEntitiesWithinAABB(
                         EntityPlayer.class,
                         AxisAlignedBB.getBoundingBox(

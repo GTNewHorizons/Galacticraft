@@ -110,7 +110,6 @@ public class BlockBeamReceiver extends BlockTileGC implements ItemBlockDesc.IBlo
         }
     }
 
-    @SuppressWarnings("rawtypes")
     @Override
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axisalignedbb, List<AxisAlignedBB> list,
             Entity entity) {
@@ -207,10 +206,9 @@ public class BlockBeamReceiver extends BlockTileGC implements ItemBlockDesc.IBlo
         return new TileEntityBeamReceiver();
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
         par3List.add(new ItemStack(par1, 1, 0));
     }
 

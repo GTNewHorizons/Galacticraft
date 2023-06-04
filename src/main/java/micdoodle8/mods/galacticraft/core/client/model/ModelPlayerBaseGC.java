@@ -36,6 +36,7 @@ import api.player.model.ModelPlayerBase;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Loader;
 
+@SuppressWarnings("unchecked")
 public class ModelPlayerBaseGC extends ModelPlayerBase {
 
     public ModelRenderer[] parachute = new ModelRenderer[3];

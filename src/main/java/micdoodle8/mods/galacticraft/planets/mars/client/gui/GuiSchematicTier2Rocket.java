@@ -28,7 +28,6 @@ public class GuiSchematicTier2Rocket extends GuiContainer implements ISchematicR
         this.ySize = 238;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void initGui() {
         super.initGui();

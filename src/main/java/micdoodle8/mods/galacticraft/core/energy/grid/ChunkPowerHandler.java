@@ -24,7 +24,6 @@ public class ChunkPowerHandler {
         }
     }
 
-    @SuppressWarnings("unchecked")
     @SubscribeEvent
     public void onChunkLoad(ChunkEvent.Load event) {
         if (!event.world.isRemote && event.getChunk() != null) {

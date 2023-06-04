@@ -41,7 +41,6 @@ public class GuiSlimelingFeed extends GuiScreen {
         this.ySize = 51;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void initGui() {
         super.initGui();

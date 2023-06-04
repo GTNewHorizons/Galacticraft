@@ -341,11 +341,10 @@ public abstract class ChunkProviderSpace extends ChunkProviderGenerate {
         return "RandomLevelSource";
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int i, int j, int k) {
+    public List<SpawnListEntry> getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int i, int j, int k) {
         if (par1EnumCreatureType == EnumCreatureType.monster) {
-            final List monsters = new ArrayList();
+            final List<SpawnListEntry> monsters = new ArrayList<>();
 
             for (final SpawnListEntry monster : this.getMonsters()) {
                 monsters.add(monster);
@@ -353,7 +352,7 @@ public abstract class ChunkProviderSpace extends ChunkProviderGenerate {
 
             return monsters;
         } else if (par1EnumCreatureType == EnumCreatureType.creature) {
-            final List creatures = new ArrayList();
+            final List<SpawnListEntry> creatures = new ArrayList<>();
 
             for (final SpawnListEntry creature : this.getCreatures()) {
                 creatures.add(creature);

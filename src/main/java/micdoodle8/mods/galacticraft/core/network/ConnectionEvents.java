@@ -23,6 +23,7 @@ import cpw.mods.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ClientDisconnectionFromServerEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ServerConnectionFromClientEvent;
 
+@SuppressWarnings("unchecked")
 public class ConnectionEvents {
 
     private static boolean clientConnected = false;

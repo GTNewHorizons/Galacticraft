@@ -17,7 +17,6 @@ import appeng.api.util.AEColor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@SuppressWarnings("unused")
 public class ItemBlockEnclosed extends ItemBlockDesc {
 
     public ItemBlockEnclosed(Block block) {

@@ -34,9 +34,8 @@ public class ItemSchematicTier2 extends ItemSchematic implements ISchematicItem 
         return GalacticraftCore.galacticraftItemsTab;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
         for (int i = 0; i < ItemSchematicTier2.names.length; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }
@@ -61,10 +60,9 @@ public class ItemSchematicTier2 extends ItemSchematic implements ISchematicItem 
         return super.getIconFromDamage(damage);
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List<String> par3List, boolean par4) {
         if (par2EntityPlayer.worldObj.isRemote) {
             switch (par1ItemStack.getItemDamage()) {
                 case 0:

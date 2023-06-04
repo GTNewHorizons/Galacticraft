@@ -57,7 +57,6 @@ public class TileEntityAirLockController extends TileEntityAirLock {
         this.lastProtocol = this.protocol;
     }
 
-    @SuppressWarnings("rawtypes")
     @Override
     public void updateEntity() {
         super.updateEntity();
@@ -92,7 +91,7 @@ public class TileEntityAirLockController extends TileEntityAirLock {
                 final Vector3 maxPos = new Vector3(thisPos).translate(distance);
                 final AxisAlignedBB matchingRegion = AxisAlignedBB
                         .getBoundingBox(minPos.x, minPos.y, minPos.z, maxPos.x, maxPos.y, maxPos.z);
-                final List playersWithin = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, matchingRegion);
+                final List<EntityPlayer> playersWithin = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, matchingRegion);
 
                 boolean foundPlayer = false;
 

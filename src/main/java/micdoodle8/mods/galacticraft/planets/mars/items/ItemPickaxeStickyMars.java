@@ -40,9 +40,8 @@ public class ItemPickaxeStickyMars extends ItemPickaxe {
         this.itemIcon = par1IconRegister.registerIcon(MarsModule.TEXTURE_PREFIX + "deshPick_slime");
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
         par3List.add(new ItemStack(par1, 1, 0));
     }
 
