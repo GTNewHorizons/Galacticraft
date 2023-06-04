@@ -551,7 +551,7 @@ public class TileEntityTreasureChest extends TileEntityAdvanced implements IInve
 
     @Override
     public int[] getAccessibleSlotsFromSide(int slot) {
-        return IntStream.range(0, getSizeInventory()).toArray();
+        return IntStream.range(0, this.getSizeInventory()).toArray();
     }
 
     @Override

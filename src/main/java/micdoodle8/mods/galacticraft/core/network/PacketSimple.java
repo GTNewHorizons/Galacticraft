@@ -901,7 +901,7 @@ public class PacketSimple extends Packet implements IPacket {
                     GCLog.info("Found matching world (" + dim.toString() + ") for name: " + this.data.get(0));
 
                     if (playerBase.worldObj instanceof WorldServer world) {
-                        WorldUtil.transferEntityToDimension(playerBase, dim, world, (Boolean) data.get(1), null);
+                        WorldUtil.transferEntityToDimension(playerBase, dim, world, (Boolean) this.data.get(1), null);
                     }
 
                     stats.teleportCooldown = 10;

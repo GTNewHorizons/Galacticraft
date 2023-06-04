@@ -552,7 +552,7 @@ public class TileEntityTreasureChestMars extends TileEntityAdvanced implements I
 
     @Override
     public int[] getAccessibleSlotsFromSide(int slot) {
-        return IntStream.range(0, getSizeInventory()).toArray();
+        return IntStream.range(0, this.getSizeInventory()).toArray();
     }
 
     @Override
