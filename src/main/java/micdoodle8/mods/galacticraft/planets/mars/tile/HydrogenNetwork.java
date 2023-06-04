@@ -55,7 +55,7 @@ public class HydrogenNetwork implements IHydrogenNetwork {
                                             .getTileEntity(tileEntity.getWorldObj());
 
                                     if (hydrogenTile.canConnect(direction, NetworkType.HYDROGEN)
-                                            && this.pipes.contains(tile)) {
+                                            && tile instanceof ITransmitter transmitter && this.pipes.contains(transmitter)) {
                                         final float hydrogenToSend = Math.max(
                                                 totalHydrogen,
                                                 totalHydrogen * (hydrogenTile.getHydrogenRequest(direction)
@@ -105,7 +105,7 @@ public class HydrogenNetwork implements IHydrogenNetwork {
                                     .getTileEntity(tileEntity.getWorldObj());
 
                             if (((TileEntityMethaneSynthesizer) tileEntity).canConnect(direction, NetworkType.HYDROGEN)
-                                    && this.pipes.contains(tile)) {
+                                    && tile instanceof ITransmitter transmitter && this.pipes.contains(transmitter)) {
                                 requests.add(((TileEntityMethaneSynthesizer) tileEntity).getHydrogenRequest(direction));
                             }
                         }

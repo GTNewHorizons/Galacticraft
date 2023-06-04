@@ -58,7 +58,7 @@ public class OxygenNetwork implements IOxygenNetwork {
                                         final TileEntity tile = new BlockVec3(tileEntity)
                                                 .getTileEntityOnSide(tileEntity.getWorldObj(), direction);
 
-                                        if (this.pipes.contains(tile)) {
+                                        if (tile instanceof ITransmitter transmitter && this.pipes.contains(transmitter)) {
                                             final float oxygenToSend = Math.min(
                                                     remainingUsableOxygen,
                                                     totalOxygen * (oxygenTile.getOxygenRequest(direction)
@@ -109,7 +109,7 @@ public class OxygenNetwork implements IOxygenNetwork {
                                 final TileEntity tile = new BlockVec3(tileEntity)
                                         .getTileEntityOnSide(tileEntity.getWorldObj(), direction);
 
-                                if (this.pipes.contains(tile)) {
+                                if (tile instanceof ITransmitter transmitter && this.pipes.contains(transmitter)) {
                                     requests.add(((IOxygenReceiver) tileEntity).getOxygenRequest(direction));
                                 }
                             }

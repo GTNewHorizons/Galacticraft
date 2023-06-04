@@ -186,9 +186,9 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
             this.addToTelemetry = false;
             for (final BlockVec3Dim vec : new ArrayList<>(this.telemetryList)) {
                 final TileEntity t1 = vec.getTileEntityNoLoad();
-                if (t1 instanceof TileEntityTelemetry && !t1.isInvalid()) {
-                    if (((TileEntityTelemetry) t1).linkedEntity == this) {
-                        ((TileEntityTelemetry) t1).addTrackedEntity(this);
+                if (t1 instanceof TileEntityTelemetry tileTelemetry && !t1.isInvalid()) {
+                    if (tileTelemetry.linkedEntity == this) {
+                        tileTelemetry.addTrackedEntity(this);
                     }
                 }
             }
@@ -198,8 +198,8 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
             this.riddenByEntity.fallDistance = 0.0F;
         }
 
-        if (this.posY > (this.worldObj.provider instanceof IExitHeight
-                ? ((IExitHeight) this.worldObj.provider).getYCoordinateToTeleport()
+        if (this.posY > (this.worldObj.provider instanceof IExitHeight exitHeight
+                ? exitHeight.getYCoordinateToTeleport()
                 : 1200)) {
             this.onReachAtmosphere();
             // if (this.worldObj.isRemote)
@@ -219,11 +219,11 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
         if (!this.worldObj.isRemote) {
             if (this.posY < 0.0D) {
                 this.kill();
-            } else if (this.posY > (this.worldObj.provider instanceof IExitHeight
-                    ? ((IExitHeight) this.worldObj.provider).getYCoordinateToTeleport()
+            } else if (this.posY > (this.worldObj.provider instanceof IExitHeight exitHeight
+                    ? exitHeight.getYCoordinateToTeleport()
                     : 1200) + 100) {
-                        if (this.riddenByEntity instanceof EntityPlayerMP) {
-                            final GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) this.riddenByEntity);
+                        if (this.riddenByEntity instanceof EntityPlayerMP playerMP) {
+                            final GCPlayerStats stats = GCPlayerStats.get(playerMP);
                             if (stats.usingPlanetSelectionGui) {
                                 this.kill();
                             }
