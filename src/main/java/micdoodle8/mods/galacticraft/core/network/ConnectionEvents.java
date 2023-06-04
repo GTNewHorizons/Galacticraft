@@ -70,11 +70,12 @@ public class ConnectionEvents {
     public void onConnectionReceived(ServerConnectionFromClientEvent event) {
         if (ConfigManagerCore.enableDebug) {
             final Integer[] idList = (Integer[]) WorldUtil.getPlanetList().get(0);
-            String ids = "";
+            StringBuilder ids = new StringBuilder();
             for (final Integer element : idList) {
-                ids += element.toString() + " ";
+                ids.append(element.toString())
+                       .append(" ");
             }
-            GCLog.info("Galacticraft server sending dimension IDs to connecting client: " + ids);
+            GCLog.info("Galacticraft server sending dimension IDs to connecting client: " + ids.toString());
         }
         event.manager.scheduleOutboundPacket(ConnectionPacket.createDimPacket(WorldUtil.getPlanetListInts()));
         event.manager.scheduleOutboundPacket(ConnectionPacket.createSSPacket(WorldUtil.getSpaceStationListInts()));

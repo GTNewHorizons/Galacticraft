@@ -258,12 +258,12 @@ public class GuiOxygenSealer extends GuiContainerGC {
 
         if (threadCooldown < 15) {
             if (threadCooldown < 4) {
-                String elipsis = "";
+                StringBuilder elipsis = new StringBuilder();
                 for (int i = 0; i < (23 - threadCooldown) % 4; i++) {
-                    elipsis += ".";
+                    elipsis.append(".");
                 }
 
-                return EnumColor.ORANGE + GCCoreUtil.translate("gui.status.checkStarting.name") + elipsis;
+                return EnumColor.ORANGE + GCCoreUtil.translate("gui.status.checkStarting.name") + elipsis.toString();
             } else {
                 return EnumColor.ORANGE + GCCoreUtil.translate("gui.status.checkPending.name");
             }

@@ -1003,7 +1003,7 @@ public class ChunkProviderAsteroids extends ChunkProviderGenerate {
         chunksDone.clear();
     }
 
-    private class AsteroidData {
+    private static class AsteroidData {
 
         public boolean isHollow;
         public float[] sizeYArray;

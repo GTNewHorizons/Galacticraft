@@ -544,7 +544,7 @@ public class VersionUtil {
 
             if (mcVersion1_7_2) {
                 return (GameProfile) c.getConstructor(String.class, String.class)
-                        .newInstance(uuid.toString().replaceAll("-", ""), strName);
+                        .newInstance(uuid.toString().replace("-", ""), strName);
             }
         } catch (final Throwable t) {
             t.printStackTrace();

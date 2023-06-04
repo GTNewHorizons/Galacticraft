@@ -1299,7 +1299,7 @@ public class WorldUtil {
             }
             WorldUtil.registeredPlanets = new ArrayList<>();
 
-            String ids = "";
+            StringBuilder ids = new StringBuilder();
             if (data.size() > 0) {
                 // Start the provider index at offset 2 to skip the two Overworld Orbit
                 // dimensions
@@ -1309,18 +1309,20 @@ public class WorldUtil {
                     for (final Object o : data) {
                         WorldUtil.registerPlanetClient((Integer) o, providerIndex);
                         providerIndex++;
-                        ids += ((Integer) o).toString() + " ";
+                        ids.append(((Integer) o).toString())
+                               .append(" ");
                     }
                 } else if (data.get(0) instanceof Integer[]) {
                     for (final Object o : (Integer[]) data.get(0)) {
                         WorldUtil.registerPlanetClient((Integer) o, providerIndex);
                         providerIndex++;
-                        ids += ((Integer) o).toString() + " ";
+                        ids.append(((Integer) o).toString())
+                               .append(" ");
                     }
                 }
             }
             if (ConfigManagerCore.enableDebug) {
-                GCLog.debug("GC clientside planet dimensions registered: " + ids);
+                GCLog.debug("GC clientside planet dimensions registered: " + ids.toString());
                 final WorldProvider dimMoon = WorldUtil.getProviderForNameClient("moon.moon");
                 if (dimMoon != null) {
                     GCLog.debug("Crosscheck: Moon is " + dimMoon.dimensionId);

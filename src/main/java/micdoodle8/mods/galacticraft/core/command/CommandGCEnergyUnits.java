@@ -16,18 +16,20 @@ public class CommandGCEnergyUnits extends CommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender var1) {
-        String options = " [gJ";
+        StringBuilder options = new StringBuilder(" [gJ");
         if (EnergyConfigHandler.isBuildcraftLoaded()) {
-            options = options + "|MJ";
+            options.append("|MJ");
         }
         if (EnergyConfigHandler.isIndustrialCraft2Loaded()) {
-            options = options + "|EU";
+            options.append("|EU");
         }
         if (EnergyConfigHandler.isMekanismLoaded()) {
-            options = options + "|J";
+            options.append("|J");
         }
-        options = options + "|RF";
-        return "/" + this.getCommandName() + options + "]";
+        options.append("|RF");
+        return "/" + this.getCommandName()
+                + options.append("]")
+                         .toString();
     }
 
     @Override

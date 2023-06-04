@@ -31,30 +31,32 @@ public class EnergyDisplayHelper {
             return getEnergyDisplayRF(energyVal * EnergyConfigHandler.TO_RF_RATIOdisp);
         }
         final String val = String.valueOf(getEnergyDisplayI(energyVal));
-        String newVal = "";
+        StringBuilder newVal = new StringBuilder();
 
         for (int i = val.length() - 1; i >= 0; i--) {
-            newVal += val.charAt(val.length() - 1 - i);
+            newVal.append(val.charAt(val.length() - 1 - i));
             if (i % 3 == 0 && i != 0) {
-                newVal += ',';
+                newVal.append(',');
             }
         }
 
-        return newVal + " gJ";
+        return newVal.append(" gJ")
+               .toString();
     }
 
     public static String getEnergyDisplayIC2(float energyVal) {
         final String val = String.valueOf(getEnergyDisplayI(energyVal));
-        String newVal = "";
+        StringBuilder newVal = new StringBuilder();
 
         for (int i = val.length() - 1; i >= 0; i--) {
-            newVal += val.charAt(val.length() - 1 - i);
+            newVal.append(val.charAt(val.length() - 1 - i));
             if (i % 3 == 0 && i != 0) {
-                newVal += ',';
+                newVal.append(',');
             }
         }
 
-        return newVal + " EU";
+        return newVal.append(" EU")
+               .toString();
     }
 
     public static String getEnergyDisplayBC(float energyVal) {

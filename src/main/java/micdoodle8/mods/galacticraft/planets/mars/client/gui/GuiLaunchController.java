@@ -131,11 +131,11 @@ public class GuiLaunchController extends GuiContainerGC
                 // scramble the destination number such that other players can't
                 // fly to it directly
                 final Random r = new Random();
-                String fakefrequency = "";
+                StringBuilder fakefrequency = new StringBuilder();
                 for (int i = 0; i < this.destinationFrequency.getMaxLength(); i++) {
-                    fakefrequency += (char) (r.nextInt(126 - 33) + 33);
+                    fakefrequency.append((char) (r.nextInt(126 - 33) + 33));
                 }
-                this.destinationFrequency.text = fakefrequency;
+                this.destinationFrequency.text = fakefrequency.toString();
             } else {
                 this.destinationFrequency.text = String.valueOf(this.launchController.destFrequency);
             }
@@ -499,11 +499,11 @@ public class GuiLaunchController extends GuiContainerGC
                 // scramble the destination number such that other players can't
                 // fly to it directly
                 final Random r = new Random();
-                String fakefrequency = "";
+                StringBuilder fakefrequency = new StringBuilder();
                 for (int i = 0; i < this.destinationFrequency.getMaxLength(); i++) {
-                    fakefrequency += (char) (r.nextInt(126 - 33) + 33);
+                    fakefrequency.append((char) (r.nextInt(126 - 33) + 33));
                 }
-                return fakefrequency;
+                return fakefrequency.toString();
             }
         }
 

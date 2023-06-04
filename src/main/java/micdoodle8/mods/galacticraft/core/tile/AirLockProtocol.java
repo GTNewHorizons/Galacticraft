@@ -12,7 +12,6 @@ class AirLockProtocol {
     private final TileEntity head;
     private final int maxLoops;
 
-    private int airLocksVerticalMin = 0;
     private int airLocksVerticalMax = 0;
     private int airLocksHorizontalMin = 0;
     private int airLocksHorizontalMax = 0;
@@ -131,7 +130,7 @@ class AirLockProtocol {
             return null;
         }
 
-        this.airLocksVerticalMin = 0;
+        int airLocksVerticalMin = 0;
         this.airLocksVerticalMax = 0;
         this.airLocksHorizontalMin = 0;
         this.airLocksHorizontalMax = 0;
@@ -140,7 +139,7 @@ class AirLockProtocol {
             final TileEntity tileAt = this.worldObj.getTileEntity(this.minX, y, this.minZ);
 
             if (tileAt instanceof TileEntityAirLock) {
-                this.airLocksVerticalMin++;
+                airLocksVerticalMin++;
             }
         }
 
@@ -187,9 +186,9 @@ class AirLockProtocol {
         }
 
         if (this.airLocksHorizontalMax == 0 || this.airLocksHorizontalMin == 0
-                || !this.horizontal && (this.airLocksVerticalMin == 0 || this.airLocksVerticalMax == 0)
+                || !this.horizontal && (airLocksVerticalMin == 0 || this.airLocksVerticalMax == 0)
                 || this.airLocksHorizontalMax != this.airLocksHorizontalMin
-                || this.airLocksVerticalMax != this.airLocksVerticalMin) {
+                || this.airLocksVerticalMax != airLocksVerticalMin) {
             return null;
         }
 

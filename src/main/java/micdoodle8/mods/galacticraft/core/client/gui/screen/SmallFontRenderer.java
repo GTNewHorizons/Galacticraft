@@ -206,6 +206,7 @@ public class SmallFontRenderer implements IResourceManagerReloadListener {
 
                         if ((aint[i2 + k2] >> 24 & 255) != 0) {
                             flag = false;
+                            break;
                         }
                     }
 
