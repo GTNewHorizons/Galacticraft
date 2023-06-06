@@ -408,7 +408,7 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
             }
         }
 
-        final List<?> l = player.worldObj.getEntitiesWithinAABBExcludingEntity(
+        final List<Entity> entitiesInAABB = player.worldObj.getEntitiesWithinAABBExcludingEntity(
                 player,
                 AxisAlignedBB.getBoundingBox(
                         player.posX - 20,
@@ -418,10 +418,8 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
                         200,
                         player.posZ + 20));
 
-        for (Object element : l) {
-            final Entity e = (Entity) element;
-
-            if (e instanceof EntityTieredRocket ship) {
+        for (Entity entity : entitiesInAABB) {
+            if (entity instanceof EntityTieredRocket ship) {
                 if (ship.riddenByEntity != null && !ship.riddenByEntity.equals(player)
                         && (ship.getLaunched() || ship.timeUntilLaunch < 390)) {
                     this.modelPlayer.bipedRightArm.rotateAngleZ -= (float) (Math.PI / 8)

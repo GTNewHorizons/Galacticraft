@@ -248,15 +248,11 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
 
         AxisAlignedBB box = this.boundingBox.expand(0.2D, 0.2D, 0.2D);
 
-        final List<?> var15 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, box);
+        final List<Entity> entitiesInAABB = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, box);
 
-        if (var15 != null && !var15.isEmpty()) {
-            for (Object element : var15) {
-                final Entity var17 = (Entity) element;
-
-                if (var17 != this.riddenByEntity) {
-                    var17.applyEntityCollision(this);
-                }
+        for (Entity entity : entitiesInAABB) {
+            if (entity != this.riddenByEntity) {
+                entity.applyEntityCollision(this);
             }
         }
 

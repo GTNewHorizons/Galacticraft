@@ -113,20 +113,16 @@ public class EntityFXLaunchFlame extends EntityFX {
         this.motionY *= 0.9599999785423279D;
         this.motionZ *= 0.9599999785423279D;
 
-        final List<?> var3 = this.worldObj
+        final List<Entity> entitiesInAABB = this.worldObj
                 .getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(1.0D, 0.5D, 1.0D));
 
-        if (var3 != null) {
-            for (Object element : var3) {
-                final Entity var5 = (Entity) element;
-
-                if (var5 instanceof EntityLivingBase && !var5.isDead
-                        && !var5.isBurning()
-                        && !var5.equals(this.ridingEntity)) {
-                    var5.setFire(3);
-                    GalacticraftCore.packetPipeline.sendToServer(
-                            new PacketSimple(EnumSimplePacket.S_SET_ENTITY_FIRE, new Object[] { var5.getEntityId() }));
-                }
+        for (Entity entity : entitiesInAABB) {
+            if (entity instanceof EntityLivingBase && !entity.isDead
+                    && !entity.isBurning()
+                    && !entity.equals(this.ridingEntity)) {
+                entity.setFire(3);
+                GalacticraftCore.packetPipeline.sendToServer(
+                        new PacketSimple(EnumSimplePacket.S_SET_ENTITY_FIRE, new Object[] { entity.getEntityId() }));
             }
         }
     }
