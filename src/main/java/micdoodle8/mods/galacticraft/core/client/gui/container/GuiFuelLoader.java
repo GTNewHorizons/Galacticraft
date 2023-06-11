@@ -137,8 +137,8 @@ public class GuiFuelLoader extends GuiContainerGC {
         if (this.fuelLoader.fuelTank.getFluid() == null || this.fuelLoader.fuelTank.getFluid().amount == 0) {
             return EnumColor.DARK_RED + GCCoreUtil.translate("gui.status.nofuel.name");
         }
-        if (!this.fuelLoader.coorectTier) {
-            return EnumColor.DARK_RED + GCCoreUtil.translate("gui.status.lowtier.name");
+        if (!this.fuelLoader.correctFuel) {
+            return EnumColor.DARK_RED + GCCoreUtil.translate("gui.status.wrongfuel.name");
         }
         return this.fuelLoader.getGUIstatus();
     }

@@ -77,7 +77,6 @@ import micdoodle8.mods.galacticraft.api.item.IKeyable;
 import micdoodle8.mods.galacticraft.api.prefab.entity.EntityAutoRocket;
 import micdoodle8.mods.galacticraft.api.prefab.entity.EntitySpaceshipBase;
 import micdoodle8.mods.galacticraft.api.recipe.ISchematicPage;
-import micdoodle8.mods.galacticraft.api.recipe.RocketFuelRecipe;
 import micdoodle8.mods.galacticraft.api.recipe.SchematicEvent.FlipPage;
 import micdoodle8.mods.galacticraft.api.recipe.SchematicEvent.Unlock;
 import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;
@@ -907,11 +906,18 @@ public class EventHandlerGC {
     @SubscribeEvent
     public void onItemTooltipEvent(ItemTooltipEvent event) {
         FluidStack fluidStack = StackInfo.getFluid(event.itemStack);
-        int fuelTier = RocketFuelRecipe.getfuelMaxTier(fluidStack);
-        if (fuelTier >= 8) {
-            event.toolTip.add(StatCollector.translateToLocal("tooltip.rocket_fuel_tier_max"));
-        } else if (fuelTier != 0) {
-            event.toolTip.add(StatCollector.translateToLocalFormatted("tooltip.rocket_fuel_tier", fuelTier));
+        if (fluidStack == null) {
+            return;
+        }
+        switch (fluidStack.getFluid().getName()) {
+            case "fluid.rocketfuelmixb", "nitrofuel" -> event.toolTip
+                    .add(StatCollector.translateToLocalFormatted("tooltip.rocket_fuel_tier", 2));
+            case "fluid.rocketfuelmixd" -> event.toolTip
+                    .add(StatCollector.translateToLocalFormatted("tooltip.rocket_fuel_tier", 4));
+            case "fluid.rocketfuelmixc" -> event.toolTip
+                    .add(StatCollector.translateToLocalFormatted("tooltip.rocket_fuel_tier", 6));
+            case "fluid.rocketfuelmixa", "rocket_fuel" -> event.toolTip
+                    .add(StatCollector.translateToLocal("tooltip.rocket_fuel_tier_max"));
         }
     }
 

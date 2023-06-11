@@ -22,15 +22,17 @@ import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
 import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
+import micdoodle8.mods.galacticraft.api.entity.IFuelable;
 import micdoodle8.mods.galacticraft.api.recipe.CircuitFabricatorRecipes;
 import micdoodle8.mods.galacticraft.api.recipe.CompressorRecipes;
-import micdoodle8.mods.galacticraft.api.recipe.RocketFuelRecipe;
+import micdoodle8.mods.galacticraft.api.recipe.RocketFuels;
 import micdoodle8.mods.galacticraft.api.recipe.SpaceStationRecipe;
 import micdoodle8.mods.galacticraft.api.world.SpaceStationType;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.blocks.BlockEnclosed.EnumEnclosedBlock;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.entities.EntityTier1Rocket;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.items.ItemBasic;
 import micdoodle8.mods.galacticraft.core.items.ItemParaChute;
@@ -38,6 +40,8 @@ import micdoodle8.mods.galacticraft.core.util.CompatibilityManager;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
 import micdoodle8.mods.galacticraft.core.util.RecipeUtil;
+import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityTier3Rocket;
+import micdoodle8.mods.galacticraft.planets.mars.entities.EntityTier2Rocket;
 import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 
 public class RecipeManagerGC {
@@ -62,17 +66,68 @@ public class RecipeManagerGC {
         RecipeManagerGC.addExNihiloRecipes();
     }
 
+    @SuppressWarnings("unchecked")
     private static void addUniversalRecipes() {
 
-        if (Loader.isModLoaded("miscutils")) {
-            RocketFuelRecipe.addFuel("fluid.rocketfuelmixa", 8);
-            RocketFuelRecipe.addFuel("fluid.rocketfuelmixb", 2);
-            RocketFuelRecipe.addFuel("fluid.rocketfuelmixc", 6);
-            RocketFuelRecipe.addFuel("fluid.rocketfuelmixd", 4);
+        // If you change these, please change EventHandlerGC#onItemTooltipEvent too!
+        final String[] t2Fuels = { "fluid.rocketfuelmixa", "fluid.rocketfuelmixb", "fluid.rocketfuelmixc",
+                "fluid.rocketfuelmixd", "nitrofuel", "rocket_fuel" };
+        final String[] t4Fuels = { "fluid.rocketfuelmixa", "fluid.rocketfuelmixc", "fluid.rocketfuelmixd",
+                "rocket_fuel" };
+        final String[] t6Fuels = { "fluid.rocketfuelmixa", "fluid.rocketfuelmixc", "rocket_fuel" };
+        final String[] t8Fuels = { "fluid.rocketfuelmixa", "rocket_fuel" };
+
+        for (String fluidName : t2Fuels) {
+            RocketFuels.addFuel(EntityTier1Rocket.class, fluidName);
+            RocketFuels.addFuel(EntityTier2Rocket.class, fluidName);
         }
-        // eio rocket fuel
-        RocketFuelRecipe.addFuel("rocket_fuel", 8);
-        RocketFuelRecipe.addFuel("nitrofuel", 2);
+        for (String fluidName : t4Fuels) {
+            RocketFuels.addFuel(EntityTier3Rocket.class, fluidName);
+        }
+
+        if (Loader.isModLoaded("GalaxySpace")) {
+            try {
+                Class<? extends IFuelable> rocketT4 = (Class<? extends IFuelable>) Class
+                        .forName("galaxyspace.core.entity.rocket.EntityTier4Rocket");
+                Class<? extends IFuelable> rocketT5 = (Class<? extends IFuelable>) Class
+                        .forName("galaxyspace.core.entity.rocket.EntityTier5Rocket");
+                Class<? extends IFuelable> rocketT6 = (Class<? extends IFuelable>) Class
+                        .forName("galaxyspace.core.entity.rocket.EntityTier6Rocket");
+                Class<? extends IFuelable> rocketT7 = (Class<? extends IFuelable>) Class
+                        .forName("galaxyspace.core.entity.rocket.EntityTier7Rocket");
+                Class<? extends IFuelable> rocketT8 = (Class<? extends IFuelable>) Class
+                        .forName("galaxyspace.core.entity.rocket.EntityTier8Rocket");
+
+                for (String fluidName : t4Fuels) {
+                    RocketFuels.addFuel(rocketT4, fluidName);
+                }
+                for (String fluidName : t6Fuels) {
+                    RocketFuels.addFuel(rocketT5, fluidName);
+                    RocketFuels.addFuel(rocketT6, fluidName);
+                }
+                for (String fluidName : t8Fuels) {
+                    RocketFuels.addFuel(rocketT7, fluidName);
+                    RocketFuels.addFuel(rocketT8, fluidName);
+                }
+            } catch (ClassNotFoundException e) {
+                GCLog.severe("A GalaxySpace rocket class wasn't found although the mod is installed!");
+                GCLog.exception(e);
+            }
+        }
+
+        if (Loader.isModLoaded("GalacticraftAmunRa")) {
+            try {
+                Class<? extends IFuelable> shuttleRocket = (Class<? extends IFuelable>) Class
+                        .forName("de.katzenpapst.amunra.entity.spaceship.EntityShuttle");
+
+                for (String fluidName : t8Fuels) {
+                    RocketFuels.addFuel(shuttleRocket, fluidName);
+                }
+            } catch (ClassNotFoundException e) {
+                GCLog.severe("The Amun-Ra shuttle rocket class wasn't found although the mod is installed!");
+                GCLog.exception(e);
+            }
+        }
 
         final Object meteoricIronIngot = ConfigManagerCore.recipesRequireGCAdvancedMetals ? GCItems.meteoricIronIngot
                 : "ingotMeteoricIron";

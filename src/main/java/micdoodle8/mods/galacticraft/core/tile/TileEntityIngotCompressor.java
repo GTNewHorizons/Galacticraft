@@ -135,6 +135,7 @@ public class TileEntityIngotCompressor extends TileEntityAdvanced implements IIn
         return result <= this.getInventoryStackLimit() && result <= itemstack.getMaxStackSize();
     }
 
+    @SuppressWarnings("unchecked")
     public static boolean isItemCompressorInput(ItemStack stack) {
         for (final IRecipe recipe : CompressorRecipes.getRecipeList()) {
             if (recipe instanceof ShapedRecipes) {

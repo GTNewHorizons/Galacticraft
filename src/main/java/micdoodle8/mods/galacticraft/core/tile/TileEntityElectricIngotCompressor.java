@@ -334,6 +334,7 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
         return false;
     }
 
+    @SuppressWarnings("unchecked")
     public boolean isItemCompressorInput(ItemStack stack, int id) {
         for (final IRecipe recipe : CompressorRecipes.getRecipeList()) {
             if (recipe instanceof ShapedRecipes) {
