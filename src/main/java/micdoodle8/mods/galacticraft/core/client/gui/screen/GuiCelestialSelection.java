@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatAllowedCharacters;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldProvider;
 import net.minecraftforge.common.MinecraftForge;
@@ -55,6 +56,7 @@ import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.tick.KeyHandlerClient;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
+import micdoodle8.mods.galacticraft.core.util.CompatibilityManager;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
@@ -941,22 +943,28 @@ public class GuiCelestialSelection extends GuiScreen {
     }
 
     @Override
-    public void drawScreen(int mousePosX, int mousePosY, float partialTicks) {
-        if (Mouse.hasWheel()) {
-            final float wheel = Mouse.getDWheel() / (this.selectedBody == null ? 500.0F : 250.0F);
+    public void handleMouseInput() {
+        super.handleMouseInput();
 
-            if (wheel != 0) {
-                if (this.selectedBody == null
-                        || this.selectionState == EnumSelectionState.PREVIEW && this.selectionCount < 2) {
-                    // Minimum zoom increased from 0.55F to 1F to allow zoom out to see other solar
-                    // systems
-                    this.zoom = Math.min(Math.max(this.zoom + wheel * (this.zoom + 2.0F) / 10.0F, -1.0F), 3);
-                } else {
-                    this.planetZoom = Math.min(Math.max(this.planetZoom + wheel, -4.9F), 5);
-                }
-            }
+        int wheel = Mouse.getEventDWheel();
+        if (!CompatibilityManager.isLwjgl3Loaded()) {
+            wheel = MathHelper.clamp_int(wheel, -1, 1);
         }
 
+        if (wheel != 0) {
+            if (this.selectedBody == null
+                    || this.selectionState == EnumSelectionState.PREVIEW && this.selectionCount < 2) {
+                // Minimum zoom increased from 0.55F to 1F to allow zoom out to see other solar
+                // systems
+                this.zoom = Math.min(Math.max(this.zoom + wheel * (this.zoom + 2.0F) / 10.0F, -1.0F), 3);
+            } else {
+                this.planetZoom = Math.min(Math.max(this.planetZoom + wheel, -4.9F), 5);
+            }
+        }
+    }
+
+    @Override
+    public void drawScreen(int mousePosX, int mousePosY, float partialTicks) {
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
 

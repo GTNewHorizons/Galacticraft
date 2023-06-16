@@ -21,6 +21,7 @@ public class CompatibilityManager {
     private static boolean modAppEngLoaded;
     private static boolean modPneumaticCraftLoaded;
     private static boolean modMatterOverdriveLoaded;
+    private static boolean lwjgl3Loaded;
     private static Method androidPlayerGet;
     private static Method androidPlayerIsAndroid;
     public static Class<? extends BlockContainer> classBCBlockGenericPipe = null;
@@ -112,6 +113,10 @@ public class CompatibilityManager {
                 e.printStackTrace();
             }
         }
+
+        if (Loader.isModLoaded("lwjgl3ify")) {
+            lwjgl3Loaded = true;
+        }
     }
 
     public static boolean isIc2Loaded() {
@@ -163,5 +168,9 @@ public class CompatibilityManager {
             } catch (final Exception ignore) {}
         }
         return false;
+    }
+
+    public static boolean isLwjgl3Loaded() {
+        return lwjgl3Loaded;
     }
 }
