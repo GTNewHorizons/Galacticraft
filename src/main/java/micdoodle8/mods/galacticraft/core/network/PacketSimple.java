@@ -15,7 +15,6 @@ import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
@@ -112,7 +111,6 @@ public class PacketSimple extends Packet implements IPacket {
         S_OPEN_FUEL_GUI(Side.SERVER, String.class),
         S_UPDATE_SHIP_YAW(Side.SERVER, Float.class),
         S_UPDATE_SHIP_PITCH(Side.SERVER, Float.class),
-        S_SET_ENTITY_FIRE(Side.SERVER, Integer.class),
         S_BIND_SPACE_STATION_ID(Side.SERVER, Integer.class),
         S_UNLOCK_NEW_SCHEMATIC(Side.SERVER),
         S_UPDATE_DISABLEABLE_BUTTON(Side.SERVER, Integer.class, Integer.class, Integer.class, Integer.class),
@@ -964,13 +962,6 @@ public class PacketSimple extends Packet implements IPacket {
             case S_UPDATE_SHIP_PITCH:
                 if (player.ridingEntity instanceof EntitySpaceshipBase ship && ship != null) {
                     ship.rotationPitch = (Float) this.data.get(0);
-                }
-                break;
-            case S_SET_ENTITY_FIRE:
-                final Entity entity = player.worldObj.getEntityByID((Integer) this.data.get(0));
-
-                if (entity instanceof EntityLivingBase) {
-                    entity.setFire(3);
                 }
                 break;
             case S_BIND_SPACE_STATION_ID:

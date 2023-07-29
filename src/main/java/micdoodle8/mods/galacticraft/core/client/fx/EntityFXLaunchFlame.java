@@ -1,10 +1,7 @@
 package micdoodle8.mods.galacticraft.core.client.fx;
 
-import java.util.List;
-
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
 
@@ -14,8 +11,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple;
-import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
 
 @SideOnly(Side.CLIENT)
 public class EntityFXLaunchFlame extends EntityFX {
@@ -112,19 +107,6 @@ public class EntityFXLaunchFlame extends EntityFX {
         this.motionX *= 0.9599999785423279D;
         this.motionY *= 0.9599999785423279D;
         this.motionZ *= 0.9599999785423279D;
-
-        final List<Entity> entitiesInAABB = this.worldObj
-                .getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(1.0D, 0.5D, 1.0D));
-
-        for (Entity entity : entitiesInAABB) {
-            if (entity instanceof EntityLivingBase && !entity.isDead
-                    && !entity.isBurning()
-                    && !entity.equals(this.ridingEntity)) {
-                entity.setFire(3);
-                GalacticraftCore.packetPipeline.sendToServer(
-                        new PacketSimple(EnumSimplePacket.S_SET_ENTITY_FIRE, new Object[] { entity.getEntityId() }));
-            }
-        }
     }
 
     @Override
