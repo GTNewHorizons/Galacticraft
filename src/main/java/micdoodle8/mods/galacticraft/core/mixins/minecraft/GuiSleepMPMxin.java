@@ -14,7 +14,7 @@ import micdoodle8.mods.galacticraft.core.event.EventHandlerGC;
 public class GuiSleepMPMxin {
 
     @Inject(method = "func_146418_g", at = @At("RETURN"), require = 1)
-    private void onWakeFromSleep(CallbackInfo callbackInfo) {
+    private void galacticraft$onWakeFromSleep(CallbackInfo callbackInfo) {
         MinecraftForge.EVENT_BUS.post(new EventHandlerGC.SleepCancelledEvent());
     }
 }

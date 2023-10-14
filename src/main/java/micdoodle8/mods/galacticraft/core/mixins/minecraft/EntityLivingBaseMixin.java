@@ -12,12 +12,12 @@ import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 @Mixin(EntityLivingBase.class)
 public abstract class EntityLivingBaseMixin extends Entity {
 
-    public EntityLivingBaseMixin() {
+    private EntityLivingBaseMixin() {
         super(null);
     }
 
     @ModifyConstant(method = "moveEntityWithHeading(FF)V", constant = @Constant(doubleValue = 0.08D), require = 1)
-    private double onMoveEntityWithHeading(double value) {
+    private double galacticraft$onMoveEntityWithHeading(double value) {
         return WorldUtil.getGravityForEntity(this);
     }
 }

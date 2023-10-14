@@ -12,7 +12,7 @@ import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 public abstract class EntityItemMixin {
 
     @ModifyConstant(method = "onUpdate", constant = @Constant(doubleValue = 0.03999999910593033D), require = 1)
-    private double onOnUpdate(double value) {
+    private double galacticraft$onOnUpdate(double value) {
         return WorldUtil.getItemGravity((EntityItem) (Object) this);
     }
 }

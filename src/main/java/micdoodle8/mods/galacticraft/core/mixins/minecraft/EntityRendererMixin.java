@@ -25,7 +25,7 @@ public class EntityRendererMixin {
     private Minecraft mc;
 
     @Inject(method = "orientCamera", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILEXCEPTION, require = 1)
-    private void onOrientCamera(float partialTicks, CallbackInfo callbackInfo) {
+    private void galacticraft$onOrientCamera(float partialTicks, CallbackInfo callbackInfo) {
         ClientProxyCore.orientCamera(partialTicks);
     }
 
@@ -36,7 +36,7 @@ public class EntityRendererMixin {
                     target = "Lnet/minecraft/client/multiplayer/WorldClient;getSunBrightness(F)F",
                     ordinal = 0),
             require = 1)
-    private float onUpdateLightmap(WorldClient world, float constOne) {
+    private float galacticraft$onUpdateLightmap(WorldClient world, float constOne) {
         return WorldUtil.getWorldBrightness(world);
     }
 
@@ -46,7 +46,7 @@ public class EntityRendererMixin {
                     value = "INVOKE",
                     target = "Lnet/minecraft/client/multiplayer/WorldClient;getSkyColor(Lnet/minecraft/entity/Entity;F)Lnet/minecraft/util/Vec3;"),
             require = 1)
-    private Vec3 onUpdateSkyColor(WorldClient world, Entity entity, float v) {
+    private Vec3 galacticraft$onUpdateSkyColor(WorldClient world, Entity entity, float v) {
         return WorldUtil.getSkyColorHook(world);
     }
 
@@ -55,7 +55,7 @@ public class EntityRendererMixin {
             at = @At(value = "CONSTANT", args = "intValue=255", shift = At.Shift.BEFORE),
             ordinal = 8,
             require = 1)
-    private float onUpdateLightmapRed(float value) {
+    private float galacticraft$onUpdateLightmapRed(float value) {
         return WorldUtil.getColorRed(this.mc.theWorld) * value;
     }
 
@@ -64,7 +64,7 @@ public class EntityRendererMixin {
             at = @At(value = "CONSTANT", args = "intValue=255", shift = At.Shift.BEFORE),
             ordinal = 9,
             require = 1)
-    private float onUpdateLightmapGreen(float value) {
+    private float galacticraft$onUpdateLightmapGreen(float value) {
         return WorldUtil.getColorGreen(this.mc.theWorld) * value;
     }
 
@@ -73,7 +73,7 @@ public class EntityRendererMixin {
             at = @At(value = "CONSTANT", args = "intValue=255", shift = At.Shift.BEFORE),
             ordinal = 10,
             require = 1)
-    private float onUpdateLightmapBlue(float value) {
+    private float galacticraft$onUpdateLightmapBlue(float value) {
         return WorldUtil.getColorBlue(this.mc.theWorld) * value;
     }
 }

@@ -19,7 +19,7 @@ public class EntityRendererWithoutOptifineMixin {
                     value = "INVOKE",
                     target = "Lnet/minecraft/client/multiplayer/WorldClient;getFogColor(F)Lnet/minecraft/util/Vec3;"),
             require = 1)
-    private Vec3 onUpdateFogColor(WorldClient worldClient, float v) {
+    private Vec3 galacticraft$onUpdateFogColor(WorldClient worldClient, float v) {
         return WorldUtil.getFogColorHook(worldClient);
     }
 }

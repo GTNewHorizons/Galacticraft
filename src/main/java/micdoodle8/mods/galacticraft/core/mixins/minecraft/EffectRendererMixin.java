@@ -15,7 +15,7 @@ import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 public class EffectRendererMixin {
 
     @Inject(method = "renderParticles", at = @At("HEAD"), locals = LocalCapture.CAPTURE_FAILEXCEPTION, require = 1)
-    private void onRenderParticles(Entity entity, float partialTicks, CallbackInfo callbackInfo) {
+    private void galacticraft$onRenderParticles(Entity entity, float partialTicks, CallbackInfo callbackInfo) {
         ClientProxyCore.renderFootprints(partialTicks);
     }
 }

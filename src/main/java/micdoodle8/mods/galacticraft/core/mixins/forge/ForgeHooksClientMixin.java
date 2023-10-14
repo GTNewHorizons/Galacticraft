@@ -14,7 +14,7 @@ import micdoodle8.mods.galacticraft.core.event.EventHandlerGC;
 public class ForgeHooksClientMixin {
 
     @Inject(method = "orientBedCamera", at = @At("HEAD"), require = 1)
-    private static void onOrientBedCamera(CallbackInfo callbackInfo) {
+    private static void galacticraft$onOrientBedCamera(CallbackInfo callbackInfo) {
         MinecraftForge.EVENT_BUS.post(new EventHandlerGC.OrientCameraEvent());
     }
 }

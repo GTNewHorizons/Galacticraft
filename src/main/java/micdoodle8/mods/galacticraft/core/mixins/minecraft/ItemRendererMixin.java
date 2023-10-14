@@ -20,7 +20,7 @@ public class ItemRendererMixin {
                     shift = At.Shift.BEFORE,
                     remap = false),
             require = 1)
-    private void onRenderOverlays(float partialTicks, CallbackInfo callbackInfo) {
+    private void galacticraft$onRenderOverlays(float partialTicks, CallbackInfo callbackInfo) {
         ClientProxyCore.renderLiquidOverlays(partialTicks);
     }
 }
