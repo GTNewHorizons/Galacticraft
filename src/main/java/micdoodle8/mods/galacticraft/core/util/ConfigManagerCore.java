@@ -127,6 +127,9 @@ public class ConfigManagerCore {
     // KEYBOARD AND MOUSE
     public static float mapMouseScrollSensitivity;
     public static boolean invertMapMouseScroll;
+    
+    //Kept to ensure backwards-compatibility with certain Galacticraft addons
+    public static int keyOverrideFuelLevelI = 0;
 
     public static ArrayList<Object> clientSave = null;
 
