@@ -228,22 +228,22 @@ tile.crudeOil.name=Ropa
 tile.fuelBlock.name=Paliwo
 
 # ENTITIES
-entity.EvolvedSpider.name=Kosmiczny Pająk
-entity.EvolvedZombie.name=Kosmiczny Zombie
-entity.EvolvedCreeper.name=Kosmiczny Creeper
-entity.EvolvedSkeleton.name=Kosmiczny Szkielet
-entity.EvolvedSkeletonBoss.name=Kosmiczny Szkielet-Gigant
-entity.AlienVillager.name=Kosmita-Wieśniak
-entity.Spaceship.name=Statek Kosmiczny
-entity.GravityArrow.name=Strzała
-entity.Meteor.name=Meteor
-entity.Buggy.name=Buggy
-entity.Flag.name=Flaga
-entity.ParaChest.name=Paraskrzynia
-entity.OxygenBubble.name=Bańka Tlenowa
-entity.Lander.name=Lądownik Kosmiczny
-entity.GCFlag.name=Flaga
-entity.MeteorChunk.name=Kawałek Meteorytu
+entity.GalacticraftCore.AlienVillager.name=Kosmita-Wieśniak
+entity.GalacticraftCore.Buggy.name=Buggy
+entity.GalacticraftCore.EvolvedCreeper.name=Kosmiczny Creeper
+entity.GalacticraftCore.EvolvedSkeleton.name=Kosmiczny Szkielet
+entity.GalacticraftCore.EvolvedSkeletonBoss.name=Kosmiczny Szkielet-Gigant
+entity.GalacticraftCore.EvolvedSpider.name=Kosmiczny Pająk
+entity.GalacticraftCore.EvolvedZombie.name=Kosmiczny Zombie
+entity.GalacticraftCore.Flag.name=Flaga
+entity.GalacticraftCore.GCFlag.name=Flaga
+entity.GalacticraftCore.GravityArrow.name=Strzała
+entity.GalacticraftCore.Lander.name=Lądownik Kosmiczny
+entity.GalacticraftCore.Meteor.name=Meteor
+entity.GalacticraftCore.MeteorChunk.name=Kawałek Meteorytu
+entity.GalacticraftCore.OxygenBubble.name=Bańka Tlenowa
+entity.GalacticraftCore.ParaChest.name=Paraskrzynia
+entity.GalacticraftCore.Spaceship.name=Statek Kosmiczny
 
 # Schematics
 schematic.moonbuggy.name=Księżycowe Buggy

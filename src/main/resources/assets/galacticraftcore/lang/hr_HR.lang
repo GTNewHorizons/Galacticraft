@@ -204,22 +204,22 @@ tile.crudeOil.name=Oil ##NEEDS TRANSLATE##
 tile.fuelBlock.name=Fuel ##NEEDS TRANSLATE##
 
 # ENTITIES
-entity.EvolvedSpider.name=Evoulirani Pauk
-entity.EvolvedZombie.name=Evoulirani Zombi
-entity.EvolvedCreeper.name=Evoulirani Kriper
-entity.EvolvedSkeleton.name=Evoulirani Kostur
-entity.EvolvedSkeletonBoss.name=Evoulirani Kralj Kostura
-entity.AlienVillager.name=Vanzemaljski Seljanin
-entity.Spaceship.name=Raketa Ranga 1
-entity.GravityArrow.name=Strijela
-entity.Meteor.name=Meteor
-entity.Buggy.name=Rover
-entity.Flag.name=Zastava
-entity.ParaChest.name=PadoŠkrinja
-entity.OxygenBubble.name=Zračni Balon
-entity.Lander.name=Svemirski Slijetač
-entity.GCFlag.name=Zastava
-entity.MeteorChunk.name=Meteor Chunk
+entity.GalacticraftCore.AlienVillager.name=Vanzemaljski Seljanin
+entity.GalacticraftCore.Buggy.name=Rover
+entity.GalacticraftCore.EvolvedCreeper.name=Evoulirani Kriper
+entity.GalacticraftCore.EvolvedSkeleton.name=Evoulirani Kostur
+entity.GalacticraftCore.EvolvedSkeletonBoss.name=Evoulirani Kralj Kostura
+entity.GalacticraftCore.EvolvedSpider.name=Evoulirani Pauk
+entity.GalacticraftCore.EvolvedZombie.name=Evoulirani Zombi
+entity.GalacticraftCore.Flag.name=Zastava
+entity.GalacticraftCore.GCFlag.name=Zastava
+entity.GalacticraftCore.GravityArrow.name=Strijela
+entity.GalacticraftCore.Lander.name=Svemirski Slijetač
+entity.GalacticraftCore.Meteor.name=Meteor
+entity.GalacticraftCore.MeteorChunk.name=Meteor Chunk
+entity.GalacticraftCore.OxygenBubble.name=Zračni Balon
+entity.GalacticraftCore.ParaChest.name=PadoŠkrinja
+entity.GalacticraftCore.Spaceship.name=Raketa Ranga 1
 
 # SCHEMATICS
 schematic.moonbuggy.name=Mjesečev Rover

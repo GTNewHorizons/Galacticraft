@@ -96,7 +96,7 @@ gui.message.notEnough.name=Nicht genug
 gui.message.success.name=Erfolg
 gui.message.zeroWater.name=Kein Wasser!
 
-	# Dollar sign ($) will split text onto a new line
+# Dollar sign ($) will split text onto a new line
 gui.launchController.desc.0=Dies ist die spezifische Frequenz$des Start-Controllers
 gui.launchController.desc.1=Frequenz, zu welcher die Raketen fliegen
 gui.launchController.desc.2=Ob die Rampe beim Start$enfernt werden soll
@@ -171,12 +171,12 @@ schematic.rocketT3.name=Rakete (Stufe 3)
 schematic.cargoRocket.name=Automatische Güterrakete
 
 # ENTITIES
-entity.Sludgeling.name=Schlammling
-entity.Slimeling.name=Schleimling
-entity.CreeperBoss.name=Entwickelter Creeper-Boss
-entity.SpaceshipT2.name=Rakete (Stufe 2)
-entity.CargoRocket.name=Automatische Güterrakete
-entity.LandingBalloons.name=Landeballons
+entity.GalacticraftMars.CargoRocket.name=Automatische Güterrakete
+entity.GalacticraftMars.CreeperBoss.name=Entwickelter Creeper-Boss
+entity.GalacticraftMars.LandingBalloons.name=Landeballons
+entity.GalacticraftMars.Slimeling.name=Schleimling
+entity.GalacticraftMars.Sludgeling.name=Schlammling
+entity.GalacticraftMars.SpaceshipT2.name=Rakete (Stufe 2)
 
 # CONTAINERS
 container.launchcontroller.name=Start-Controller

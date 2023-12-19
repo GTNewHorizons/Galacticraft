@@ -96,7 +96,7 @@ gui.message.notEnough.name=Yeterli Değil
 gui.message.success.name=Başarılı
 gui.message.zeroWater.name=Su yok!
 
-    # Dollar sign ($) will split text onto a new line
+# Dollar sign ($) will split text onto a new line
 gui.launchController.desc.0=Fırlatıcı kontrollünün frekansı
 gui.launchController.desc.1=Fırlatılacak roketin karşı frekansı
 gui.launchController.desc.2=Roket fırlatma pedi$kalkışta silinecek.
@@ -171,12 +171,12 @@ schematic.rocketT3.name=Tier 3 Roketi
 schematic.cargoRocket.name=Otomatik Kargo Roketi
 
 # ENTITIES
-entity.Sludgeling.name=Sludgeling
-entity.Slimeling.name=Slimeling
-entity.CreeperBoss.name=Evrimleşmiş Creeper Patronu
-entity.SpaceshipT2.name=Tier 2 Roketi
-entity.CargoRocket.name=Kargo Roketi
-entity.LandingBalloons.name=Landing Balonları
+entity.GalacticraftMars.CargoRocket.name=Kargo Roketi
+entity.GalacticraftMars.CreeperBoss.name=Evrimleşmiş Creeper Patronu
+entity.GalacticraftMars.LandingBalloons.name=Landing Balonları
+entity.GalacticraftMars.Slimeling.name=Slimeling
+entity.GalacticraftMars.Sludgeling.name=Sludgeling
+entity.GalacticraftMars.SpaceshipT2.name=Tier 2 Roketi
 
 # CONTAINERS
 container.launchcontroller.name=Fırlatma Kontrollü

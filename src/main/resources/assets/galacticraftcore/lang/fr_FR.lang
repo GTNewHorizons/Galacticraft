@@ -219,22 +219,22 @@ tile.crudeOil.name=Oil ##NEEDS TRANSLATE##
 tile.fuelBlock.name=Fuel ##NEEDS TRANSLATE##
 
 # ENTITIES
-entity.EvolvedSpider.name=Araignée évolué
-entity.EvolvedZombie.name=Zombie évolué
-entity.EvolvedCreeper.name=Creeper évolué
-entity.EvolvedSkeleton.name=Squelette évolué
-entity.EvolvedSkeletonBoss.name=Boss squelette évolué
-entity.AlienVillager.name=Villageois alien
-entity.Spaceship.name=Fusée Niveau 1
-entity.GravityArrow.name=Flèche
-entity.Meteor.name=Météore
-entity.Buggy.name=Boghei
-entity.Flag.name=Drapeau
-entity.ParaChest.name=Coffre parachuté
-entity.OxygenBubble.name=Bulle d'oxygène
-entity.Lander.name=Atterrisseur spatial
-entity.GCFlag.name=Drapeau
-entity.MeteorChunk.name=Morceau de météore
+entity.GalacticraftCore.AlienVillager.name=Villageois alien
+entity.GalacticraftCore.Buggy.name=Boghei
+entity.GalacticraftCore.EvolvedCreeper.name=Creeper évolué
+entity.GalacticraftCore.EvolvedSkeleton.name=Squelette évolué
+entity.GalacticraftCore.EvolvedSkeletonBoss.name=Boss squelette évolué
+entity.GalacticraftCore.EvolvedSpider.name=Araignée évolué
+entity.GalacticraftCore.EvolvedZombie.name=Zombie évolué
+entity.GalacticraftCore.Flag.name=Drapeau
+entity.GalacticraftCore.GCFlag.name=Drapeau
+entity.GalacticraftCore.GravityArrow.name=Flèche
+entity.GalacticraftCore.Lander.name=Atterrisseur spatial
+entity.GalacticraftCore.Meteor.name=Météore
+entity.GalacticraftCore.MeteorChunk.name=Morceau de météore
+entity.GalacticraftCore.OxygenBubble.name=Bulle d'oxygène
+entity.GalacticraftCore.ParaChest.name=Coffre parachuté
+entity.GalacticraftCore.Spaceship.name=Fusée Niveau 1
 
 # Schematics
 schematic.moonbuggy.name=Boghei Lunaire

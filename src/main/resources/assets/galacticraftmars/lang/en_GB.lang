@@ -170,12 +170,12 @@ schematic.rocketT3.name=Tier 3 Rocket
 schematic.cargoRocket.name=Automatic Cargo Rocket
 
 # ENTITIES
-entity.Sludgeling.name=Sludgeling
-entity.Slimeling.name=Slimeling
-entity.CreeperBoss.name=Evolved Creeper Boss
-entity.SpaceshipT2.name=Tier 2 Rocket
-entity.CargoRocket.name=Cargo Rocket
-entity.LandingBalloons.name=Landing Balloons
+entity.GalacticraftMars.CargoRocket.name=Cargo Rocket
+entity.GalacticraftMars.CreeperBoss.name=Evolved Creeper Boss
+entity.GalacticraftMars.LandingBalloons.name=Landing Balloons
+entity.GalacticraftMars.Slimeling.name=Slimeling
+entity.GalacticraftMars.Sludgeling.name=Sludgeling
+entity.GalacticraftMars.SpaceshipT2.name=Tier 2 Rocket
 
 # CONTAINERS
 container.launchcontroller.name=Launch Controller

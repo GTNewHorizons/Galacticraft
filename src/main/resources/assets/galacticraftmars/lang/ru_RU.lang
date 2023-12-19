@@ -96,7 +96,7 @@ gui.message.notEnough.name=Недостаточно
 gui.message.success.name=Успех
 gui.message.zeroWater.name=Нет воды!
 
-	# Dollar sign ($) will split text onto a new line
+# Dollar sign ($) will split text onto a new line
 gui.launchController.desc.0=Это уникальная частота$контроллера запуска
 gui.launchController.desc.1=Частота для запуска ракет по направлению
 gui.launchController.desc.2=Взлётная площадка должна быть$удалена при запуске
@@ -171,12 +171,12 @@ schematic.rocketT3.name=Ракета 3-го уровня
 schematic.cargoRocket.name=Автоматическая грузовая ракета
 
 # ENTITIES
-entity.Sludgeling.name=Сладжлинг
-entity.Slimeling.name=Слаймлинг
-entity.CreeperBoss.name=Эволюционировавший крипер-босс
-entity.SpaceshipT2.name=Ракета 2-го уровня
-entity.CargoRocket.name=Грузовая ракета
-entity.LandingBalloons.name=Посадочные шары
+entity.GalacticraftMars.CargoRocket.name=Грузовая ракета
+entity.GalacticraftMars.CreeperBoss.name=Эволюционировавший крипер-босс
+entity.GalacticraftMars.LandingBalloons.name=Посадочные шары
+entity.GalacticraftMars.Slimeling.name=Слаймлинг
+entity.GalacticraftMars.Sludgeling.name=Сладжлинг
+entity.GalacticraftMars.SpaceshipT2.name=Ракета 2-го уровня
 
 # CONTAINERS
 container.launchcontroller.name=Контроллер запуска

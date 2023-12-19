@@ -96,7 +96,7 @@ gui.message.notEnough.name=부족
 gui.message.success.name=성공
 gui.message.zeroWater.name=물이 부족합니다!
 
-	# Dollar sign ($) will split text onto a new line
+# Dollar sign ($) will split text onto a new line
 gui.launchController.desc.0=발사 통제기의$고유 주파수
 gui.launchController.desc.1=로켓 발사 방향 (목적지) 주파수
 gui.launchController.desc.2=로켓 발사시$발사대 제거 여부
@@ -171,12 +171,12 @@ schematic.rocketT3.name=3티어 로켓
 schematic.cargoRocket.name=자동 화물 로켓
 
 # ENTITIES
-entity.Sludgeling.name=슬러지링
-entity.Slimeling.name=슬라임링
-entity.CreeperBoss.name=진화한 크리퍼 보스
-entity.SpaceshipT2.name=2티어 로켓
-entity.CargoRocket.name=화물 로켓
-entity.LandingBalloons.name=착륙 기구
+entity.GalacticraftMars.CargoRocket.name=화물 로켓
+entity.GalacticraftMars.CreeperBoss.name=진화한 크리퍼 보스
+entity.GalacticraftMars.LandingBalloons.name=착륙 기구
+entity.GalacticraftMars.Slimeling.name=슬라임링
+entity.GalacticraftMars.Sludgeling.name=슬러지링
+entity.GalacticraftMars.SpaceshipT2.name=2티어 로켓
 
 # CONTAINERS
 container.launchcontroller.name=발사 통제기

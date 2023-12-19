@@ -96,7 +96,7 @@ gui.message.notEnough.name=Not Enough ##NEEDS TRANSLATE##
 gui.message.success.name=Success ##NEEDS TRANSLATE##
 gui.message.zeroWater.name=No water! ##NEEDS TRANSLATE##
 
-	# Dollar sign ($) will split text onto a new line
+# Dollar sign ($) will split text onto a new line
 gui.launchController.desc.0=This is the Launch Controller's$unique frequency ##NEEDS TRANSLATE##
 gui.launchController.desc.1=Frequency to launch rockets towards ##NEEDS TRANSLATE##
 gui.launchController.desc.2=Whether the launch pad should$be removed on launch ##NEEDS TRANSLATE##
@@ -171,12 +171,12 @@ schematic.rocketT3.name=Fusée Niveau 3
 schematic.cargoRocket.name=Cargaison automatique de fusée
 
 # ENTITIES
-entity.Sludgeling.name=Boueux
-entity.Slimeling.name=Vaseux
-entity.CreeperBoss.name=Boss Creeper évolué
-entity.SpaceshipT2.name=Tier 2 Rocket ##NEEDS TRANSLATE##
-entity.CargoRocket.name=Cargo Rocket ##NEEDS TRANSLATE##
-entity.LandingBalloons.name=Landing Balloons ##NEEDS TRANSLATE##
+entity.GalacticraftMars.CargoRocket.name=Cargo Rocket ##NEEDS TRANSLATE##
+entity.GalacticraftMars.CreeperBoss.name=Boss Creeper évolué
+entity.GalacticraftMars.LandingBalloons.name=Landing Balloons ##NEEDS TRANSLATE##
+entity.GalacticraftMars.Slimeling.name=Vaseux
+entity.GalacticraftMars.Sludgeling.name=Boueux
+entity.GalacticraftMars.SpaceshipT2.name=Tier 2 Rocket ##NEEDS TRANSLATE##
 
 # CONTAINERS
 container.launchcontroller.name=Contrôleur de lancement

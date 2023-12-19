@@ -204,22 +204,22 @@ tile.crudeOil.name=Petróleo
 tile.fuelBlock.name=Combustible
 
 # ENTIDADES
-entity.EvolvedSpider.name=Araña evolucionada
-entity.EvolvedZombie.name=Zombie evolucionado
-entity.EvolvedCreeper.name=Creeper evolucionado
-entity.EvolvedSkeleton.name=Esqueleto evolucionado
-entity.EvolvedSkeletonBoss.name=Jefe esqueleto evolucionado
-entity.AlienVillager.name=Aldeano alien
-entity.Spaceship.name=Cohete nivel 1
-entity.GravityArrow.name=Flecha
-entity.Meteor.name=Meteorito
-entity.Buggy.name=Buggy
-entity.Flag.name=Bandera
-entity.ParaChest.name=Cofre-paraca
-entity.OxygenBubble.name=Burbuja de oxígeno
-entity.Lander.name=Aterrizador
-entity.GCFlag.name=Bandera
-entity.MeteorChunk.name=Trozo de meteorito
+entity.GalacticraftCore.AlienVillager.name=Aldeano alien
+entity.GalacticraftCore.Buggy.name=Buggy
+entity.GalacticraftCore.EvolvedCreeper.name=Creeper evolucionado
+entity.GalacticraftCore.EvolvedSkeleton.name=Esqueleto evolucionado
+entity.GalacticraftCore.EvolvedSkeletonBoss.name=Jefe esqueleto evolucionado
+entity.GalacticraftCore.EvolvedSpider.name=Araña evolucionada
+entity.GalacticraftCore.EvolvedZombie.name=Zombie evolucionado
+entity.GalacticraftCore.Flag.name=Bandera
+entity.GalacticraftCore.GCFlag.name=Bandera
+entity.GalacticraftCore.GravityArrow.name=Flecha
+entity.GalacticraftCore.Lander.name=Aterrizador
+entity.GalacticraftCore.Meteor.name=Meteorito
+entity.GalacticraftCore.MeteorChunk.name=Trozo de meteorito
+entity.GalacticraftCore.OxygenBubble.name=Burbuja de oxígeno
+entity.GalacticraftCore.ParaChest.name=Cofre-paraca
+entity.GalacticraftCore.Spaceship.name=Cohete nivel 1
 
 # ESQUEMAS
 schematic.moonbuggy.name=Buggy lunar

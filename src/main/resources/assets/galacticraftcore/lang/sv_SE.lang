@@ -203,22 +203,22 @@ tile.crudeOil.name=Oil ##NEEDS TRANSLATE##
 tile.fuelBlock.name=Fuel ##NEEDS TRANSLATE##
 
 # ENTITIES
-entity.EvolvedSpider.name=Rymdspindel
-entity.EvolvedZombie.name=Rymdzombie
-entity.EvolvedCreeper.name=Rymdsmygare
-entity.EvolvedSkeleton.name=Rymdskelett
-entity.EvolvedSkeletonBoss.name=Månhålehärskare
-entity.AlienVillager.name=Utomjordisk bybo
-entity.Spaceship.name=Rymdskepp
-entity.GravityArrow.name=Pil
-entity.Meteor.name=Meteor
-entity.Buggy.name=Månbil
-entity.Flag.name=Flagga
-entity.ParaChest.name=Fallskärmskista
-entity.OxygenBubble.name=Luftbubbla
-entity.Lander.name=Månlandare
-entity.GCFlag.name=Flagga
-entity.MeteorChunk.name=Meteorsten
+entity.GalacticraftCore.AlienVillager.name=Utomjordisk bybo
+entity.GalacticraftCore.Buggy.name=Månbil
+entity.GalacticraftCore.EvolvedCreeper.name=Rymdsmygare
+entity.GalacticraftCore.EvolvedSkeleton.name=Rymdskelett
+entity.GalacticraftCore.EvolvedSkeletonBoss.name=Månhålehärskare
+entity.GalacticraftCore.EvolvedSpider.name=Rymdspindel
+entity.GalacticraftCore.EvolvedZombie.name=Rymdzombie
+entity.GalacticraftCore.Flag.name=Flagga
+entity.GalacticraftCore.GCFlag.name=Flagga
+entity.GalacticraftCore.GravityArrow.name=Pil
+entity.GalacticraftCore.Lander.name=Månlandare
+entity.GalacticraftCore.Meteor.name=Meteor
+entity.GalacticraftCore.MeteorChunk.name=Meteorsten
+entity.GalacticraftCore.OxygenBubble.name=Luftbubbla
+entity.GalacticraftCore.ParaChest.name=Fallskärmskista
+entity.GalacticraftCore.Spaceship.name=Rymdskepp
 
 # SCHEMATICS
 schematic.moonbuggy.name=Månbil

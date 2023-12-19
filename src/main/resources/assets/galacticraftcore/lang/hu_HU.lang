@@ -202,22 +202,22 @@ tile.crudeOil.name=Oil ##NEEDS TRANSLATE##
 tile.fuelBlock.name=Fuel ##NEEDS TRANSLATE##
 
 # ENTITIES
-entity.EvolvedSpider.name=Fejlett Pók
-entity.EvolvedZombie.name=Fejlett Zombi
-entity.EvolvedCreeper.name=Fejlett Creeper
-entity.EvolvedSkeleton.name=Fejlett Csontváz
-entity.EvolvedSkeletonBoss.name=Fejlett Csontváz-Főgonosz
-entity.AlienVillager.name=Idegen Falusi
-entity.Spaceship.name=1-Es Szintű Rakéta
-entity.GravityArrow.name=Nyílvessző
-entity.Meteor.name=Meteor
-entity.Buggy.name=Rover
-entity.Flag.name=Zászló
-entity.ParaChest.name=Utánpótlás-Szállító Láda
-entity.OxygenBubble.name=Légbuborék
-entity.Lander.name=Leszállóegység
-entity.GCFlag.name=Zászló
-entity.MeteorChunk.name=Meteordarab
+entity.GalacticraftCore.AlienVillager.name=Idegen Falusi
+entity.GalacticraftCore.Buggy.name=Rover
+entity.GalacticraftCore.EvolvedCreeper.name=Fejlett Creeper
+entity.GalacticraftCore.EvolvedSkeleton.name=Fejlett Csontváz
+entity.GalacticraftCore.EvolvedSkeletonBoss.name=Fejlett Csontváz-Főgonosz
+entity.GalacticraftCore.EvolvedSpider.name=Fejlett Pók
+entity.GalacticraftCore.EvolvedZombie.name=Fejlett Zombi
+entity.GalacticraftCore.Flag.name=Zászló
+entity.GalacticraftCore.GCFlag.name=Zászló
+entity.GalacticraftCore.GravityArrow.name=Nyílvessző
+entity.GalacticraftCore.Lander.name=Leszállóegység
+entity.GalacticraftCore.Meteor.name=Meteor
+entity.GalacticraftCore.MeteorChunk.name=Meteordarab
+entity.GalacticraftCore.OxygenBubble.name=Légbuborék
+entity.GalacticraftCore.ParaChest.name=Utánpótlás-Szállító Láda
+entity.GalacticraftCore.Spaceship.name=1-Es Szintű Rakéta
 
 # SCHEMATICS
 schematic.moonbuggy.name=Rover

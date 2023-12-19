@@ -96,7 +96,7 @@ gui.message.notEnough.name=Nem Elég
 gui.message.success.name=Sikeres
 gui.message.zeroWater.name=No water! ##NEEDS TRANSLATE##
 
-	# Dollar sign ($) will split text onto a new line
+# Dollar sign ($) will split text onto a new line
 gui.launchController.desc.0=Ez A Távvezérlo Saját $ Frekvenziája
 gui.launchController.desc.1=A Célpontnak A Frekvenciája, $ Ahova A Rakéta Küldve Lesz.
 gui.launchController.desc.2=Magával Vigye-e A Rakéta $ A Kilövoállást
@@ -171,12 +171,12 @@ schematic.rocketT3.name=3-As Szintu Rakéta
 schematic.cargoRocket.name=Távvezérlésu Teherrakéta
 
 # ENTITIES
-entity.Sludgeling.name=Iszaphernyó
-entity.Slimeling.name=Nyálkahernyó
-entity.CreeperBoss.name=Vejlett Creeper-Fogonosz
-entity.SpaceshipT2.name=2-Es Szintu Rakéta
-entity.CargoRocket.name=Távvezérlésu Teherrakéta
-entity.LandingBalloons.name=Landing Balloons ##NEEDS TRANSLATE##
+entity.GalacticraftMars.CargoRocket.name=Távvezérlésu Teherrakéta
+entity.GalacticraftMars.CreeperBoss.name=Vejlett Creeper-Fogonosz
+entity.GalacticraftMars.LandingBalloons.name=Landing Balloons ##NEEDS TRANSLATE##
+entity.GalacticraftMars.Slimeling.name=Nyálkahernyó
+entity.GalacticraftMars.Sludgeling.name=Iszaphernyó
+entity.GalacticraftMars.SpaceshipT2.name=2-Es Szintu Rakéta
 
 # CONTAINERS
 container.launchcontroller.name=Távvezérlo

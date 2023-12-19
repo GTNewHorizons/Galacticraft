@@ -202,22 +202,22 @@ tile.crudeOil.name=Oil ##NEEDS TRANSLATE##
 tile.fuelBlock.name=Fuel ##NEEDS TRANSLATE##
 
 # ENTITIES
-entity.EvolvedSpider.name=蜘蛛(進化體)
-entity.EvolvedZombie.name=僵尸(進化體)
-entity.EvolvedCreeper.name=爬行者(進化體)
-entity.EvolvedSkeleton.name=骷髏(進化體)
-entity.EvolvedSkeletonBoss.name=骷髏王(進化體)
-entity.AlienVillager.name=外星村民
-entity.Spaceship.name=火箭(1級)
-entity.GravityArrow.name=箭
-entity.Meteor.name=隕石
-entity.Buggy.name=星球車
-entity.Flag.name=旗幟
-entity.ParaChest.name=傘降箱
-entity.OxygenBubble.name=氧氣泡沫
-entity.Lander.name=登陸艙
-entity.GCFlag.name=旗
-entity.MeteorChunk.name=隕石塊
+entity.GalacticraftCore.AlienVillager.name=外星村民
+entity.GalacticraftCore.Buggy.name=星球車
+entity.GalacticraftCore.EvolvedCreeper.name=爬行者(進化體)
+entity.GalacticraftCore.EvolvedSkeleton.name=骷髏(進化體)
+entity.GalacticraftCore.EvolvedSkeletonBoss.name=骷髏王(進化體)
+entity.GalacticraftCore.EvolvedSpider.name=蜘蛛(進化體)
+entity.GalacticraftCore.EvolvedZombie.name=僵尸(進化體)
+entity.GalacticraftCore.Flag.name=旗幟
+entity.GalacticraftCore.GCFlag.name=旗
+entity.GalacticraftCore.GravityArrow.name=箭
+entity.GalacticraftCore.Lander.name=登陸艙
+entity.GalacticraftCore.Meteor.name=隕石
+entity.GalacticraftCore.MeteorChunk.name=隕石塊
+entity.GalacticraftCore.OxygenBubble.name=氧氣泡沫
+entity.GalacticraftCore.ParaChest.name=傘降箱
+entity.GalacticraftCore.Spaceship.name=火箭(1級)
 
 # Schematics
 schematic.moonbuggy.name=探月車
