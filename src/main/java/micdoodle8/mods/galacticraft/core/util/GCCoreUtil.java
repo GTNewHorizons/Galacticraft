@@ -95,14 +95,8 @@ public class GCCoreUtil {
         return eggID;
     }
 
-    // @SuppressWarnings("deprecation")
     public static void registerGalacticraftNonMobEntity(Class<? extends Entity> var0, String var1, int trackingDistance,
             int updateFreq, boolean sendVel) {
-        // if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-        // LanguageRegistry.instance().addStringLocalization(
-        // "entity.GalacticraftCore." + var1 + ".name",
-        // GCCoreUtil.translate("entity." + var1 + ".name"));
-        // }
         EntityRegistry.registerModEntity(
                 var0,
                 var1,
