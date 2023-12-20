@@ -97,7 +97,7 @@ gui.message.notEnough.name=Non abbastanza
 gui.message.success.name=Successo
 gui.message.zeroWater.name=Non c'è Acqua!
 
-	# Dollar sign ($) will split text onto a new line
+# Dollar sign ($) will split text onto a new line
 gui.launchController.desc.0=Questa è l'unica frequenza$del Launch Controller
 gui.launchController.desc.1=Frequenza per lanciare il razzo verso
 gui.launchController.desc.2=Whether the launch pad should$be removed on launch
@@ -172,12 +172,12 @@ schematic.rocketT3.name=Razzo di Livello 3
 schematic.cargoRocket.name=Razzo-Cargo automatico
 
 # ENTITIES
-entity.Sludgeling.name=Sludgeling
-entity.Slimeling.name=Slimeling
-entity.CreeperBoss.name=Creeper Boss Evoluto
-entity.SpaceshipT2.name=Razzo di Livello 2
-entity.CargoRocket.name=Razzo-Cargo
-entity.LandingBalloons.name=Palloni da Atterraggio
+entity.GalacticraftMars.CargoRocket.name=Razzo-Cargo
+entity.GalacticraftMars.CreeperBoss.name=Creeper Boss Evoluto
+entity.GalacticraftMars.LandingBalloons.name=Palloni da Atterraggio
+entity.GalacticraftMars.Slimeling.name=Slimeling
+entity.GalacticraftMars.Sludgeling.name=Sludgeling
+entity.GalacticraftMars.SpaceshipT2.name=Razzo di Livello 2
 
 # CONTAINERS
 container.launchcontroller.name=Controllore del lancio

@@ -96,7 +96,7 @@ gui.message.notEnough.name=ไม่พอ
 gui.message.success.name=เสร็จสิ้น
 gui.message.zeroWater.name=ไม่มีน้ำ!
 
-	# Dollar sign ($) will split text onto a new line
+# Dollar sign ($) will split text onto a new line
 gui.launchController.desc.0=นี่คือเครื่องควบคุมการปล่อยจรวด$ความถี่เฉพาะ
 gui.launchController.desc.1=ความถี่ที่ใกล้จะปล่อยจรวด
 gui.launchController.desc.2=ถ้าจรวดถูกปล่อย ฐานปล่อย$จรวดจะถูกลบออก
@@ -171,12 +171,12 @@ schematic.rocketT3.name=จรวด เทียร์ 3
 schematic.cargoRocket.name=จรวดขนส่งอัตโนมัติ
 
 # ENTITIES
-entity.Sludgeling.name=หนอนแบคทีเรีย
-entity.Slimeling.name=สไลม์ลิ่ง
-entity.CreeperBoss.name=บอสคริปเปอร์อวกาศ
-entity.SpaceshipT2.name=จรวด เทียร์ 2
-entity.CargoRocket.name=จรวดขนส่ง
-entity.LandingBalloons.name=ยานลงจอดบอลลูน
+entity.GalacticraftMars.CargoRocket.name=จรวดขนส่ง
+entity.GalacticraftMars.CreeperBoss.name=บอสคริปเปอร์อวกาศ
+entity.GalacticraftMars.LandingBalloons.name=ยานลงจอดบอลลูน
+entity.GalacticraftMars.Slimeling.name=สไลม์ลิ่ง
+entity.GalacticraftMars.Sludgeling.name=หนอนแบคทีเรีย
+entity.GalacticraftMars.SpaceshipT2.name=จรวด เทียร์ 2
 
 # CONTAINERS
 container.launchcontroller.name=เครื่องควบคุมการปล่อยจรวด

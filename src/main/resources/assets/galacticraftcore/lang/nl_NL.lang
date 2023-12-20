@@ -243,22 +243,22 @@ tile.crudeOil.name=Oil ##NEEDS TRANSLATE##
 tile.fuelBlock.name=Fuel ##NEEDS TRANSLATE##
 
 # ENTITIES
-entity.EvolvedSpider.name=Geëvolueerde Spin
-entity.EvolvedZombie.name=Geëvolueerde Zombie
-entity.EvolvedCreeper.name=Geëvolueerde Creeper
-entity.EvolvedSkeleton.name=Geëvolueerde Skeleton
-entity.EvolvedSkeletonBoss.name=Geëvolueerde Skeleton Boss
-entity.AlienVillager.name=Alien Dorpeling
-entity.Spaceship.name=Raket
-entity.GravityArrow.name=Pijl
-entity.Meteor.name=Meteoor
-entity.Buggy.name=Buggy 
-entity.Flag.name=Vlag
-entity.ParaChest.name=Parakist
-entity.OxygenBubble.name=Zuurstof Bel
-entity.Lander.name=Ruimte Lander
-entity.GCFlag.name=Vlag
-entity.MeteorChunk.name=Meteoor Brokstuk
+entity.GalacticraftCore.AlienVillager.name=Alien Dorpeling
+entity.GalacticraftCore.Buggy.name=Buggy
+entity.GalacticraftCore.EvolvedCreeper.name=Geëvolueerde Creeper
+entity.GalacticraftCore.EvolvedSkeleton.name=Geëvolueerde Skeleton
+entity.GalacticraftCore.EvolvedSkeletonBoss.name=Geëvolueerde Skeleton Boss
+entity.GalacticraftCore.EvolvedSpider.name=Geëvolueerde Spin
+entity.GalacticraftCore.EvolvedZombie.name=Geëvolueerde Zombie
+entity.GalacticraftCore.Flag.name=Vlag
+entity.GalacticraftCore.GCFlag.name=Vlag
+entity.GalacticraftCore.GravityArrow.name=Pijl
+entity.GalacticraftCore.Lander.name=Ruimte Lander
+entity.GalacticraftCore.Meteor.name=Meteoor
+entity.GalacticraftCore.MeteorChunk.name=Meteoor Brokstuk
+entity.GalacticraftCore.OxygenBubble.name=Zuurstof Bel
+entity.GalacticraftCore.ParaChest.name=Parakist
+entity.GalacticraftCore.Spaceship.name=Raket
 
 # Schematics
 schematic.moonbuggy.name=Maan wagen

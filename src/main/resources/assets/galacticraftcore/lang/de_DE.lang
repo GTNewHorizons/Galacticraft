@@ -204,22 +204,22 @@ tile.crudeOil.name=Öl
 tile.fuelBlock.name=Treibstoff
 
 # ENTITIES
-entity.EvolvedSpider.name=Entwickelte Spinne
-entity.EvolvedZombie.name=Entwickelter Zombie
-entity.EvolvedCreeper.name=Entwickelter Creeper
-entity.EvolvedSkeleton.name=Entwickeltes Skelett
-entity.EvolvedSkeletonBoss.name=Entwickelter Skelett-Boss
-entity.AlienVillager.name=Alien-Dorfbewohner
-entity.Spaceship.name=Raumschiff
-entity.GravityArrow.name=Pfeil
-entity.Meteor.name=Meteor
-entity.Buggy.name=Mondrover
-entity.Flag.name=Flagge
-entity.ParaChest.name=Paratruhe
-entity.OxygenBubble.name=Sauerstoffblase
-entity.Lander.name=Weltraum-Landekapsel
-entity.GCFlag.name=Flagge
-entity.MeteorChunk.name=Meteorbrocken
+entity.GalacticraftCore.AlienVillager.name=Alien-Dorfbewohner
+entity.GalacticraftCore.Buggy.name=Mondrover
+entity.GalacticraftCore.EvolvedCreeper.name=Entwickelter Creeper
+entity.GalacticraftCore.EvolvedSkeleton.name=Entwickeltes Skelett
+entity.GalacticraftCore.EvolvedSkeletonBoss.name=Entwickelter Skelett-Boss
+entity.GalacticraftCore.EvolvedSpider.name=Entwickelte Spinne
+entity.GalacticraftCore.EvolvedZombie.name=Entwickelter Zombie
+entity.GalacticraftCore.Flag.name=Flagge
+entity.GalacticraftCore.GCFlag.name=Flagge
+entity.GalacticraftCore.GravityArrow.name=Pfeil
+entity.GalacticraftCore.Lander.name=Weltraum-Landekapsel
+entity.GalacticraftCore.Meteor.name=Meteor
+entity.GalacticraftCore.MeteorChunk.name=Meteorbrocken
+entity.GalacticraftCore.OxygenBubble.name=Sauerstoffblase
+entity.GalacticraftCore.ParaChest.name=Paratruhe
+entity.GalacticraftCore.Spaceship.name=Raumschiff
 
 # SCHEMATICS
 schematic.moonbuggy.name=Mondrover

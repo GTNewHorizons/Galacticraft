@@ -96,7 +96,7 @@ gui.message.notEnough.name=Pas assez
 gui.message.success.name=Succès
 gui.message.zeroWater.name=aucune eau !
 
-	# Dollar sign ($) will split text onto a new line
+# Dollar sign ($) will split text onto a new line
 gui.launchController.desc.0=Ceci est la fréquence unique du controlleur
 gui.launchController.desc.1=Fréquence du controlleur vers lequel les fusée seront envoyées 
 gui.launchController.desc.2=Si la rampe de lancement doit être enlevée ou non
@@ -171,12 +171,12 @@ schematic.rocketT3.name=Fusée Niveau 3
 schematic.cargoRocket.name=Cargaison automatique de fusée
 
 # ENTITIES
-entity.Sludgeling.name=Boueux
-entity.Slimeling.name=Vaseux
-entity.CreeperBoss.name=Boss Creeper évolué
-entity.SpaceshipT2.name=Fusée de niveau 2
-entity.CargoRocket.name=Fusée de transport de marchandise
-entity.LandingBalloons.name=Ballons d'atterissage
+entity.GalacticraftMars.CargoRocket.name=Fusée de transport de marchandise
+entity.GalacticraftMars.CreeperBoss.name=Boss Creeper évolué
+entity.GalacticraftMars.LandingBalloons.name=Ballons d'atterissage
+entity.GalacticraftMars.Slimeling.name=Vaseux
+entity.GalacticraftMars.Sludgeling.name=Boueux
+entity.GalacticraftMars.SpaceshipT2.name=Fusée de niveau 2
 
 # CONTAINERS
 container.launchcontroller.name=Contrôleur de lancement

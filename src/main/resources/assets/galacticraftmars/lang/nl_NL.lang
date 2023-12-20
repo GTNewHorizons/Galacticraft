@@ -96,7 +96,7 @@ gui.message.notEnough.name=Niet Genoeg
 gui.message.success.name=Succes
 gui.message.zeroWater.name=Geen Water!
 
-	# Dollar sign ($) will split text onto a new line
+# Dollar sign ($) will split text onto a new line
 gui.launchController.desc.0=Dit is de lanceer controleur's$unieke frequentie
 gui.launchController.desc.1=Frequentie om de raket te lanceren naar
 gui.launchController.desc.2=Of zou het lanceerplatform$Moeten worden verwijderd tijdens de lancering
@@ -171,12 +171,12 @@ schematic.rocketT3.name=Tier 3 Raket
 schematic.cargoRocket.name=Automatische Vracht Raket
 
 # ENTITIES
-entity.Sludgeling.name=Sludgeling ##NEEDS TRANSLATE##
-entity.Slimeling.name=Slimeling ##NEEDS TRANSLATE##
-entity.CreeperBoss.name=Geëvolueerde Creeper Baas
-entity.SpaceshipT2.name=Tier 2 Raket
-entity.CargoRocket.name=Vracht Raket
-entity.LandingBalloons.name=Landing Balonnen
+entity.GalacticraftMars.CargoRocket.name=Vracht Raket
+entity.GalacticraftMars.CreeperBoss.name=Geëvolueerde Creeper Baas
+entity.GalacticraftMars.LandingBalloons.name=Landing Balonnen
+entity.GalacticraftMars.Slimeling.name=Slimeling ##NEEDS TRANSLATE##
+entity.GalacticraftMars.Sludgeling.name=Sludgeling ##NEEDS TRANSLATE##
+entity.GalacticraftMars.SpaceshipT2.name=Tier 2 Raket
 
 # CONTAINERS
 container.launchcontroller.name=Lanceer Controleur

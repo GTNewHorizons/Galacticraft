@@ -204,22 +204,22 @@ tile.crudeOil.name=Petrolio
 tile.fuelBlock.name=Carburante
 
 # ENTITIES
-entity.EvolvedSpider.name=Ragno evoluto
-entity.EvolvedZombie.name=Zombie evoluto
-entity.EvolvedCreeper.name=Creeper evoluto
-entity.EvolvedSkeleton.name=Scheletro evoluto
-entity.EvolvedSkeletonBoss.name=Scheletro-boss evoluto
-entity.AlienVillager.name=Paesano alieno
-entity.Spaceship.name=Razzo di livello 1
-entity.GravityArrow.name=Freccia
-entity.Meteor.name=Meteora
-entity.Buggy.name=Rover
-entity.Flag.name=Bandiera
-entity.ParaChest.name=Cassa del razzo
-entity.OxygenBubble.name=Bolla di ossigeno
-entity.Lander.name=Space Lander
-entity.GCFlag.name=Bandiera
-entity.MeteorChunk.name=Pezzo di meteorite
+entity.GalacticraftCore.AlienVillager.name=Paesano alieno
+entity.GalacticraftCore.Buggy.name=Rover
+entity.GalacticraftCore.EvolvedCreeper.name=Creeper evoluto
+entity.GalacticraftCore.EvolvedSkeleton.name=Scheletro evoluto
+entity.GalacticraftCore.EvolvedSkeletonBoss.name=Scheletro-boss evoluto
+entity.GalacticraftCore.EvolvedSpider.name=Ragno evoluto
+entity.GalacticraftCore.EvolvedZombie.name=Zombie evoluto
+entity.GalacticraftCore.Flag.name=Bandiera
+entity.GalacticraftCore.GCFlag.name=Bandiera
+entity.GalacticraftCore.GravityArrow.name=Freccia
+entity.GalacticraftCore.Lander.name=Space Lander
+entity.GalacticraftCore.Meteor.name=Meteora
+entity.GalacticraftCore.MeteorChunk.name=Pezzo di meteorite
+entity.GalacticraftCore.OxygenBubble.name=Bolla di ossigeno
+entity.GalacticraftCore.ParaChest.name=Cassa del razzo
+entity.GalacticraftCore.Spaceship.name=Razzo di livello 1
 
 # SCHEMATICS
 schematic.moonbuggy.name=Rover della luna

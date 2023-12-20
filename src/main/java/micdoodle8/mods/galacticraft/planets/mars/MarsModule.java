@@ -21,7 +21,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -29,7 +28,6 @@ import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
@@ -284,14 +282,8 @@ public class MarsModule implements IPlanetsModule {
         }
     }
 
-    @SuppressWarnings("deprecation")
     public static void registerGalacticraftNonMobEntity(Class<? extends Entity> var0, String var1, int trackingDistance,
             int updateFreq, boolean sendVel) {
-        if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-            LanguageRegistry.instance().addStringLocalization(
-                    "entity.GalacticraftMars." + var1 + ".name",
-                    GCCoreUtil.translate("entity." + var1 + ".name"));
-        }
         EntityRegistry.registerModEntity(
                 var0,
                 var1,

@@ -204,22 +204,22 @@ tile.crudeOil.name=น้ำมัน
 tile.fuelBlock.name=เชื้อเพลิง
 
 # ENTITIES
-entity.EvolvedSpider.name=แมงมุมอวกาศ
-entity.EvolvedZombie.name=ผีดิบอวกาศ
-entity.EvolvedCreeper.name=คริปเปอร์อวกาศ
-entity.EvolvedSkeleton.name=โครงกระดูกอวกาศ
-entity.EvolvedSkeletonBoss.name=บอสโครงกระดูกอวกาศ
-entity.AlienVillager.name=ชาวบ้านอวกาศ
-entity.Spaceship.name=จรวด เทียร์ 1
-entity.GravityArrow.name=ธนู
-entity.Meteor.name=อุกกาบาต
-entity.Buggy.name=บักกี้
-entity.Flag.name=ธง
-entity.ParaChest.name=กล่องสัมภาระ
-entity.OxygenBubble.name=ฟองออกซิเจน
-entity.Lander.name=ยานลงจอด
-entity.GCFlag.name=ธง
-entity.MeteorChunk.name=เศษอุกกาบาต
+entity.GalacticraftCore.AlienVillager.name=ชาวบ้านอวกาศ
+entity.GalacticraftCore.Buggy.name=บักกี้
+entity.GalacticraftCore.EvolvedCreeper.name=คริปเปอร์อวกาศ
+entity.GalacticraftCore.EvolvedSkeleton.name=โครงกระดูกอวกาศ
+entity.GalacticraftCore.EvolvedSkeletonBoss.name=บอสโครงกระดูกอวกาศ
+entity.GalacticraftCore.EvolvedSpider.name=แมงมุมอวกาศ
+entity.GalacticraftCore.EvolvedZombie.name=ผีดิบอวกาศ
+entity.GalacticraftCore.Flag.name=ธง
+entity.GalacticraftCore.GCFlag.name=ธง
+entity.GalacticraftCore.GravityArrow.name=ธนู
+entity.GalacticraftCore.Lander.name=ยานลงจอด
+entity.GalacticraftCore.Meteor.name=อุกกาบาต
+entity.GalacticraftCore.MeteorChunk.name=เศษอุกกาบาต
+entity.GalacticraftCore.OxygenBubble.name=ฟองออกซิเจน
+entity.GalacticraftCore.ParaChest.name=กล่องสัมภาระ
+entity.GalacticraftCore.Spaceship.name=จรวด เทียร์ 1
 
 # SCHEMATICS
 schematic.moonbuggy.name=บักกี้ดวงจันทร์

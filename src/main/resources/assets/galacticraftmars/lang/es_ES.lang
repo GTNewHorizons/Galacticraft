@@ -96,7 +96,7 @@ gui.message.notEnough.name=Insuficiente
 gui.message.success.name=Éxito
 gui.message.zeroWater.name=¡No hay agua!
 
-	# El símbolo del dólar ($) separará el texto en una nueva línea
+# El símbolo del dólar ($) separará el texto en una nueva línea
 gui.launchController.desc.0=Ésta es la única frecuencia del$controlador de lanzamiento
 gui.launchController.desc.1=Frecuencia donde lanzar el cohete
 gui.launchController.desc.2=Cuando la plataforma de lanzamiento debe$ser eliminada o lanzada
@@ -171,12 +171,12 @@ schematic.rocketT3.name=Cohete nivel 3
 schematic.cargoRocket.name=Cohete de carga automático
 
 # ESQUEMAS
-entity.Sludgeling.name=Gusano de lodo
-entity.Slimeling.name=Slimeling
-entity.CreeperBoss.name=Jefe creeper evolucionado
-entity.SpaceshipT2.name=Cohete nivel 2
-entity.CargoRocket.name=Cohete de carga
-entity.LandingBalloons.name=Globos de aterrizaje
+entity.GalacticraftMars.CargoRocket.name=Cohete de carga
+entity.GalacticraftMars.CreeperBoss.name=Jefe creeper evolucionado
+entity.GalacticraftMars.LandingBalloons.name=Globos de aterrizaje
+entity.GalacticraftMars.Slimeling.name=Slimeling
+entity.GalacticraftMars.Sludgeling.name=Gusano de lodo
+entity.GalacticraftMars.SpaceshipT2.name=Cohete nivel 2
 
 # ENVASES
 container.launchcontroller.name=Controlador de lanzamiento

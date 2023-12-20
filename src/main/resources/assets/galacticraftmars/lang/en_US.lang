@@ -96,7 +96,7 @@ gui.message.notEnough.name=Not Enough
 gui.message.success.name=Success
 gui.message.zeroWater.name=No water!
 
-	# Dollar sign ($) will split text onto a new line
+# Dollar sign ($) will split text onto a new line
 gui.launchController.desc.0=This is the Launch Controller's$unique frequency
 gui.launchController.desc.1=Frequency to launch rockets towards
 gui.launchController.desc.2=Whether the launch pad should$be removed on launch
@@ -171,12 +171,12 @@ schematic.rocketT3.name=Tier 3 Rocket
 schematic.cargoRocket.name=Automatic Cargo Rocket
 
 # ENTITIES
-entity.Sludgeling.name=Sludgeling
-entity.Slimeling.name=Slimeling
-entity.CreeperBoss.name=Evolved Creeper Boss
-entity.SpaceshipT2.name=Tier 2 Rocket
-entity.CargoRocket.name=Cargo Rocket
-entity.LandingBalloons.name=Landing Balloons
+entity.GalacticraftMars.CargoRocket.name=Cargo Rocket
+entity.GalacticraftMars.CreeperBoss.name=Evolved Creeper Boss
+entity.GalacticraftMars.LandingBalloons.name=Landing Balloons
+entity.GalacticraftMars.Slimeling.name=Slimeling
+entity.GalacticraftMars.Sludgeling.name=Sludgeling
+entity.GalacticraftMars.SpaceshipT2.name=Tier 2 Rocket
 
 # CONTAINERS
 container.launchcontroller.name=Launch Controller
