@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.minecraft.block.Block;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.config.ConfigElement;
 
 import cpw.mods.fml.client.config.IConfigElement;
@@ -24,10 +25,14 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.core.Constants;
+import micdoodle8.mods.galacticraft.core.world.gen.BiomeGenBaseMoon;
+import micdoodle8.mods.galacticraft.core.world.gen.BiomeGenBaseOrbit;
 import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import micdoodle8.mods.galacticraft.planets.asteroids.ConfigManagerAsteroids;
+import micdoodle8.mods.galacticraft.planets.asteroids.world.gen.BiomeGenBaseAsteroids;
 import micdoodle8.mods.galacticraft.planets.mars.ConfigManagerMars;
 import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
+import micdoodle8.mods.galacticraft.planets.mars.world.gen.BiomeGenBaseMars;
 
 @Mod(
         modid = Constants.MOD_ID_PLANETS,
@@ -74,6 +79,13 @@ public class GalacticraftPlanets {
         GalacticraftPlanets.commonModules.put(GalacticraftPlanets.MODULE_KEY_MARS, new MarsModule());
         GalacticraftPlanets.commonModules.put(GalacticraftPlanets.MODULE_KEY_ASTEROIDS, new AsteroidsModule());
         GalacticraftPlanets.proxy.preInit(event);
+
+        registerBiomes();
+    }
+
+    private BiomeGenBase[] registerBiomes() {
+        return new BiomeGenBase[] { BiomeGenBaseMars.marsFlat, BiomeGenBaseAsteroids.asteroid,
+                BiomeGenBaseMoon.moonFlat, BiomeGenBaseOrbit.space };
     }
 
     @EventHandler
