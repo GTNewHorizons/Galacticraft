@@ -83,6 +83,10 @@ public class GalacticraftPlanets {
         registerBiomes();
     }
 
+    /**
+     * Reference static variables so that the biomes are registered on both the client and server instead of
+     * dynamically.
+     */
     private BiomeGenBase[] registerBiomes() {
         return new BiomeGenBase[] { BiomeGenBaseMars.marsFlat, BiomeGenBaseAsteroids.asteroid,
                 BiomeGenBaseMoon.moonFlat, BiomeGenBaseOrbit.space };
