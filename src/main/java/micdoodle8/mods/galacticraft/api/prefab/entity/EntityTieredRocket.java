@@ -66,7 +66,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
 
     public void igniteCheckingCooldown() {
         if (!this.worldObj.isRemote && this.launchCooldown <= 0
-                && this.launchPhase != EnumLaunchPhase.IGNITED.ordinal()) {
+                && this.launchPhase == EnumLaunchPhase.UNIGNITED.ordinal()) {
             this.setFrequency();
             this.initiatePlanetsPreGen(this.chunkCoordX, this.chunkCoordZ);
             this.ignite();
