@@ -1006,12 +1006,12 @@ public class ClientProxyCore extends CommonProxyCore {
 
             // Disabled for compat with Angelica, not sure what this actually did but doesn't seem to break anything?
             // if (stats.gravityTurnRate < 1.0F) {
-            //     GL11.glRotatef(
-            //             90.0F * (stats.gravityTurnRatePrev
-            //                     + (stats.gravityTurnRate - stats.gravityTurnRatePrev) * partialTicks),
-            //             stats.gravityTurnVecX,
-            //             stats.gravityTurnVecY,
-            //             stats.gravityTurnVecZ);
+            // GL11.glRotatef(
+            // 90.0F * (stats.gravityTurnRatePrev
+            // + (stats.gravityTurnRate - stats.gravityTurnRatePrev) * partialTicks),
+            // stats.gravityTurnVecX,
+            // stats.gravityTurnVecY,
+            // stats.gravityTurnVecZ);
             // }
         }
 
