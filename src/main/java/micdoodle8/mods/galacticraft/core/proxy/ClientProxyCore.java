@@ -1004,14 +1004,15 @@ public class ClientProxyCore extends CommonProxyCore {
                     eyeHeightChange * stats.gdir.getEyeVecY(),
                     eyeHeightChange * stats.gdir.getEyeVecZ());
 
-            if (stats.gravityTurnRate < 1.0F) {
-                GL11.glRotatef(
-                        90.0F * (stats.gravityTurnRatePrev
-                                + (stats.gravityTurnRate - stats.gravityTurnRatePrev) * partialTicks),
-                        stats.gravityTurnVecX,
-                        stats.gravityTurnVecY,
-                        stats.gravityTurnVecZ);
-            }
+            // Disabled for compat with Angelica, not sure what this actually did but doesn't seem to break anything?
+            // if (stats.gravityTurnRate < 1.0F) {
+            //     GL11.glRotatef(
+            //             90.0F * (stats.gravityTurnRatePrev
+            //                     + (stats.gravityTurnRate - stats.gravityTurnRatePrev) * partialTicks),
+            //             stats.gravityTurnVecX,
+            //             stats.gravityTurnVecY,
+            //             stats.gravityTurnVecZ);
+            // }
         }
 
         // omit this for interesting 3P views
