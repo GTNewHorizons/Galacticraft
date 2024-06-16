@@ -22,6 +22,7 @@ import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityElectricFurnace;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityEnergyStorageModule;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 
 public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBlockShiftDesc {
 
@@ -75,43 +76,16 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
 
         this.iconElectricFurnace = iconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "electricFurnace");
 
-        if (GalacticraftCore.isPlanetsLoaded) {
-            try {
-                final String prefix = (String) Class
-                        .forName("micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule")
-                        .getField("TEXTURE_PREFIX").get(null);
-                this.iconTier2 = iconRegister.registerIcon(prefix + "machine");
-                this.iconInputT2 = iconRegister.registerIcon(prefix + "machine_input");
-                this.iconOutputT2 = iconRegister.registerIcon(prefix + "machine_output");
-                this.iconMachineSideT2 = iconRegister.registerIcon(prefix + "machine_side");
-                this.iconEnergyStorageModuleT2 = new IIcon[17];
-                for (int i = 0; i < this.iconEnergyStorageModule.length; i++) {
-                    this.iconEnergyStorageModuleT2[i] = iconRegister.registerIcon(prefix + "energyStorageModule_" + i);
-                }
-                this.iconElectricFurnaceT2 = iconRegister.registerIcon(prefix + "electricFurnace");
-            } catch (final Exception e) {
-                e.printStackTrace();
-                this.iconTier2 = iconRegister.registerIcon("void");
-                this.iconInputT2 = iconRegister.registerIcon("void");
-                this.iconOutputT2 = iconRegister.registerIcon("void");
-                this.iconMachineSideT2 = iconRegister.registerIcon("void");
-                this.iconEnergyStorageModuleT2 = new IIcon[17];
-                for (int i = 0; i < this.iconEnergyStorageModule.length; i++) {
-                    this.iconEnergyStorageModuleT2[i] = iconRegister.registerIcon("void");
-                }
-                this.iconElectricFurnaceT2 = iconRegister.registerIcon("void");
-            }
-        } else {
-            this.iconTier2 = iconRegister.registerIcon("void");
-            this.iconInputT2 = iconRegister.registerIcon("void");
-            this.iconOutputT2 = iconRegister.registerIcon("void");
-            this.iconMachineSideT2 = iconRegister.registerIcon("void");
-            this.iconEnergyStorageModuleT2 = new IIcon[17];
-            for (int i = 0; i < this.iconEnergyStorageModule.length; i++) {
-                this.iconEnergyStorageModuleT2[i] = iconRegister.registerIcon("void");
-            }
-            this.iconElectricFurnaceT2 = iconRegister.registerIcon("void");
+        final String prefix = AsteroidsModule.TEXTURE_PREFIX;
+        this.iconTier2 = iconRegister.registerIcon(prefix + "machine");
+        this.iconInputT2 = iconRegister.registerIcon(prefix + "machine_input");
+        this.iconOutputT2 = iconRegister.registerIcon(prefix + "machine_output");
+        this.iconMachineSideT2 = iconRegister.registerIcon(prefix + "machine_side");
+        this.iconEnergyStorageModuleT2 = new IIcon[17];
+        for (int i = 0; i < this.iconEnergyStorageModule.length; i++) {
+            this.iconEnergyStorageModuleT2[i] = iconRegister.registerIcon(prefix + "energyStorageModule_" + i);
         }
+        this.iconElectricFurnaceT2 = iconRegister.registerIcon(prefix + "electricFurnace");
     }
 
     @Override
@@ -314,10 +288,8 @@ public class BlockMachineTiered extends BlockTileGC implements ItemBlockDesc.IBl
     public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
         par3List.add(this.getEnergyStorageModule());
         par3List.add(this.getElectricFurnace());
-        if (GalacticraftCore.isPlanetsLoaded) {
-            par3List.add(this.getEnergyStorageCluster());
-            par3List.add(this.getElectricArcFurnace());
-        }
+        par3List.add(this.getEnergyStorageCluster());
+        par3List.add(this.getElectricArcFurnace());
     }
 
     @Override

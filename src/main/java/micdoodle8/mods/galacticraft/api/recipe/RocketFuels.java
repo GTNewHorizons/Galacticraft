@@ -92,7 +92,7 @@ public class RocketFuels {
         if (fluid instanceof FluidStack fluidStack) {
             return fluidStack.getFluid().getName();
         }
-        throw new IllegalArgumentException(fluid + " is not an instace of String, FLuid or FluidStack!");
+        throw new IllegalArgumentException(fluid + " is not an instace of String, Fluid or FluidStack!");
     }
 
     private RocketFuels() {}

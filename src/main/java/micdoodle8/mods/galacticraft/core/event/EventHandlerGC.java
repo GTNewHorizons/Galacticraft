@@ -235,9 +235,7 @@ public class EventHandlerGC {
                 && PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK.equals(event.action)
                 && !worldObj.isRemote
                 && !((IGalacticraftWorldProvider) worldObj.provider).hasBreathableAtmosphere()) {
-            if (GalacticraftCore.isPlanetsLoaded) {
-                GCPlayerStats.tryBedWarning((EntityPlayerMP) event.entityPlayer);
-            }
+            GCPlayerStats.tryBedWarning((EntityPlayerMP) event.entityPlayer);
 
             if (worldObj.provider instanceof WorldProviderOrbit) {
                 // On space stations simply block the bed activation => no explosion
@@ -317,9 +315,7 @@ public class EventHandlerGC {
         final EntityLivingBase entityLiving = event.entityLiving;
         if (entityLiving instanceof EntityPlayerMP) {
             GalacticraftCore.handler.onPlayerUpdate((EntityPlayerMP) entityLiving);
-            if (GalacticraftCore.isPlanetsLoaded) {
-                AsteroidsModule.playerHandler.onPlayerUpdate((EntityPlayerMP) entityLiving);
-            }
+            AsteroidsModule.playerHandler.onPlayerUpdate((EntityPlayerMP) entityLiving);
             return;
         }
 
@@ -775,10 +771,8 @@ public class EventHandlerGC {
             final EventWakePlayer event0 = new EventWakePlayer(player, c.posX, c.posY, c.posZ, true, true, false, true);
             MinecraftForge.EVENT_BUS.post(event0);
             player.wakeUpPlayer(true, true, false);
-            if (player.worldObj.isRemote && GalacticraftCore.isPlanetsLoaded) {
-                GalacticraftCore.packetPipeline.sendToServer(
-                        new PacketSimpleMars(PacketSimpleMars.EnumSimplePacketMars.S_WAKE_PLAYER, new Object[] {}));
-            }
+            GalacticraftCore.packetPipeline.sendToServer(
+                    new PacketSimpleMars(PacketSimpleMars.EnumSimplePacketMars.S_WAKE_PLAYER, new Object[] {}));
         }
     }
 

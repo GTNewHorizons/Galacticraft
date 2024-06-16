@@ -24,7 +24,6 @@ import micdoodle8.mods.galacticraft.api.prefab.entity.EntityTieredRocket;
 import micdoodle8.mods.galacticraft.api.tile.IFuelDock;
 import micdoodle8.mods.galacticraft.api.tile.ILandingPadAttachable;
 import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.blocks.BlockMulti;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntityLaunchController;
@@ -181,7 +180,7 @@ public class TileEntityLandingPad extends TileEntityMulti
         if (tile instanceof ILandingPadAttachable && ((ILandingPadAttachable) tile)
                 .canAttachToLandingPad(this.worldObj, this.xCoord, this.yCoord, this.zCoord)) {
             connectedTiles.add((ILandingPadAttachable) tile);
-            if (GalacticraftCore.isPlanetsLoaded && tile instanceof TileEntityLaunchController) {
+            if (tile instanceof TileEntityLaunchController) {
                 ((TileEntityLaunchController) tile).setAttachedPad(this);
             }
         }

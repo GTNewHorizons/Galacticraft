@@ -15,6 +15,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
 
 public class BlockSlabGC extends BlockSlab {
 
@@ -38,22 +39,8 @@ public class BlockSlabGC extends BlockSlab {
         this.textures[1] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "deco_aluminium_2");
         this.textures[2] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX_MOON + "bottom");
         this.textures[3] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX_MOON + "brick");
-
-        if (GalacticraftCore.isPlanetsLoaded) {
-            try {
-                final String prefix = (String) Class.forName("micdoodle8.mods.galacticraft.planets.mars.MarsModule")
-                        .getField("TEXTURE_PREFIX").get(null);
-                this.textures[4] = par1IconRegister.registerIcon(prefix + "cobblestone");
-                this.textures[5] = par1IconRegister.registerIcon(prefix + "brick");
-            } catch (final Exception e) {
-                e.printStackTrace();
-                this.textures[4] = this.textures[3];
-                this.textures[5] = this.textures[3];
-            }
-        } else {
-            this.textures[4] = this.textures[3];
-            this.textures[5] = this.textures[3];
-        }
+        this.textures[4] = par1IconRegister.registerIcon(MarsModule.TEXTURE_PREFIX + "cobblestone");
+        this.textures[5] = par1IconRegister.registerIcon(MarsModule.TEXTURE_PREFIX + "brick");
 
         this.tinSideIcon = new IIcon[1];
         this.tinSideIcon[0] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "deco_aluminium_1");
@@ -82,14 +69,7 @@ public class BlockSlabGC extends BlockSlab {
 
     @Override
     public void getSubBlocks(Item block, CreativeTabs creativeTabs, List<ItemStack> list) {
-        int max = 0;
-
-        if (GalacticraftCore.isPlanetsLoaded) {
-            max = 6; // Number of slab types with Planets loaded
-        } else {
-            max = 4; // Number of slab types with Planets not loaded
-        }
-        for (int i = 0; i < max; ++i) {
+        for (int i = 0; i < 6; ++i) {
             list.add(new ItemStack(block, 1, i));
         }
     }

@@ -11,7 +11,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 
 import micdoodle8.mods.galacticraft.api.entity.IIgnoreShift;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderMoon;
 import micdoodle8.mods.galacticraft.core.entities.EntityCelestialFake;
 import micdoodle8.mods.galacticraft.core.event.EventWakePlayer;
@@ -72,31 +71,29 @@ public class PlayerServer implements IPlayerServer {
             return -1;
         }
 
-        if (GalacticraftCore.isPlanetsLoaded) {
-            if (par1DamageSource == DamageSource.outOfWorld) {
-                if (player.worldObj.provider instanceof WorldProviderAsteroids) {
-                    if (player.posY > -120D) {
-                        return -1;
-                    }
-                    if (player.posY > -180D) {
-                        par2 /= 2;
-                    }
+        if (par1DamageSource == DamageSource.outOfWorld) {
+            if (player.worldObj.provider instanceof WorldProviderAsteroids) {
+                if (player.posY > -120D) {
+                    return -1;
                 }
-            } else if (par1DamageSource == DamageSource.fall || par1DamageSource == DamageSourceGC.spaceshipCrash) {
-                int titaniumCount = 0;
-                if (player.inventory != null) {
-                    for (int i = 0; i < 4; i++) {
-                        final ItemStack armorPiece = player.getCurrentArmor(i);
-                        if (armorPiece != null && armorPiece.getItem() instanceof ItemArmorAsteroids) {
-                            titaniumCount++;
-                        }
-                    }
+                if (player.posY > -180D) {
+                    par2 /= 2;
                 }
-                if (titaniumCount == 4) {
-                    titaniumCount = 5;
-                }
-                par2 *= 1 - 0.15D * titaniumCount;
             }
+        } else if (par1DamageSource == DamageSource.fall || par1DamageSource == DamageSourceGC.spaceshipCrash) {
+            int titaniumCount = 0;
+            if (player.inventory != null) {
+                for (int i = 0; i < 4; i++) {
+                    final ItemStack armorPiece = player.getCurrentArmor(i);
+                    if (armorPiece != null && armorPiece.getItem() instanceof ItemArmorAsteroids) {
+                        titaniumCount++;
+                    }
+                }
+            }
+            if (titaniumCount == 4) {
+                titaniumCount = 5;
+            }
+            par2 *= 1 - 0.15D * titaniumCount;
         }
 
         return par2;
@@ -106,7 +103,7 @@ public class PlayerServer implements IPlayerServer {
     public void knockBack(EntityPlayerMP player, Entity p_70653_1_, float p_70653_2_, double impulseX,
             double impulseZ) {
         int deshCount = 0;
-        if (player.inventory != null && GalacticraftCore.isPlanetsLoaded) {
+        if (player.inventory != null) {
             for (int i = 0; i < 4; i++) {
                 final ItemStack armorPiece = player.getCurrentArmor(i);
                 if (armorPiece != null && armorPiece.getItem() instanceof ItemArmorMars) {

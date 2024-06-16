@@ -25,7 +25,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.api.vector.BlockTuple;
 import micdoodle8.mods.galacticraft.core.Constants;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.energy.EnergyConfigHandler;
 import micdoodle8.mods.galacticraft.core.recipe.RecipeManagerGC;
 import micdoodle8.mods.galacticraft.core.tick.TickHandlerClient;
@@ -513,9 +512,6 @@ public class ConfigManagerCore {
             prop.comment = "Set this to true for a challenging adventure where the player starts the game stranded in the Asteroids dimension with low resources (only effective if Galacticraft Planets installed).";
             prop.setLanguageKey("gc.configgui.asteroidsStart");
             challengeMode = prop.getBoolean(false);
-            if (!GalacticraftCore.isPlanetsLoaded) {
-                challengeMode = false;
-            }
             propOrder.add(prop.getName());
 
             prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Adventure Game Mode Flags", 15);
@@ -737,12 +733,9 @@ public class ConfigManagerCore {
         }
 
         // This enables Endermen on Asteroids in Asteroids Challenge mode
-        if (GalacticraftCore.isPlanetsLoaded) {
-            ((BiomeGenBaseAsteroids) BiomeGenBaseAsteroids.asteroid)
-                    .resetMonsterListByMode(challengeMobDropsAndSpawning);
-            // TODO: could also increase mob spawn frequency in Hard Mode on various
-            // dimensions e.g. Moon and Mars?
-        }
+        ((BiomeGenBaseAsteroids) BiomeGenBaseAsteroids.asteroid).resetMonsterListByMode(challengeMobDropsAndSpawning);
+        // TODO: could also increase mob spawn frequency in Hard Mode on various
+        // dimensions e.g. Moon and Mars?
     }
 
     /**

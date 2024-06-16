@@ -21,12 +21,12 @@ import cpw.mods.fml.common.Loader;
 import micdoodle8.mods.galacticraft.api.entity.ICameraZoomEntity;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.api.world.IZeroGDimension;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.core.client.model.ModelPlayerGC;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityMulti;
 import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
+import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import micdoodle8.mods.galacticraft.planets.mars.blocks.BlockMachineMars;
 import micdoodle8.mods.galacticraft.planets.mars.blocks.MarsBlocks;
 
@@ -43,14 +43,21 @@ public class RenderPlayerGC extends RenderPlayer {
 
     public static ModelBiped modelThermalPadding;
     public static ModelBiped modelThermalPaddingHelmet;
-    private static ResourceLocation thermalPaddingTexture0;
-    private static ResourceLocation thermalPaddingTexture1;
+    private static final ResourceLocation thermalPaddingTexture0;
+    private static final ResourceLocation thermalPaddingTexture1;
     public static boolean flagThermalOverride = false;
     private static Boolean isSmartRenderLoaded = null;
 
     static {
         modelThermalPadding = new ModelPlayerGC(0.25F);
         modelThermalPaddingHelmet = new ModelPlayerGC(0.9F);
+
+        thermalPaddingTexture0 = new ResourceLocation(
+                AsteroidsModule.ASSET_PREFIX,
+                "textures/misc/thermalPadding_0.png");
+        thermalPaddingTexture1 = new ResourceLocation(
+                AsteroidsModule.ASSET_PREFIX,
+                "textures/misc/thermalPadding_1.png");
     }
 
     public RenderPlayerGC() {
@@ -58,18 +65,6 @@ public class RenderPlayerGC extends RenderPlayer {
         this.modelBipedMain = (ModelPlayerGC) this.mainModel;
         this.modelArmorChestplate = new ModelPlayerGC(1.0F);
         this.modelArmor = new ModelPlayerGC(0.5F);
-
-        if (GalacticraftCore.isPlanetsLoaded) {
-            try {
-                final String prefix = (String) Class
-                        .forName("micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule")
-                        .getField("ASSET_PREFIX").get(null);
-                thermalPaddingTexture0 = new ResourceLocation(prefix, "textures/misc/thermalPadding_0.png");
-                thermalPaddingTexture1 = new ResourceLocation(prefix, "textures/misc/thermalPadding_1.png");
-            } catch (final Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     public static void renderModelS(RendererLivingEntity inst, EntityLivingBase par1EntityLivingBase, float par2,

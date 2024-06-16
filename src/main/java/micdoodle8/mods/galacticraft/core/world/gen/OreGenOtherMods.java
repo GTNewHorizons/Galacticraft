@@ -12,7 +12,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import micdoodle8.mods.galacticraft.api.event.wgen.GCCoreEventPopulate;
 import micdoodle8.mods.galacticraft.api.vector.BlockTuple;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderMoon;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderSpaceStation;
@@ -194,7 +193,7 @@ public class OreGenOtherMods {
             stoneBlock = GCBlocks.blockMoon;
             stoneMeta = 4;
             dimDetected = 1;
-        } else if (GalacticraftCore.isPlanetsLoaded && prov instanceof WorldProviderMars) {
+        } else if (prov instanceof WorldProviderMars) {
             stoneBlock = MarsBlocks.marsBlock;
             stoneMeta = 9;
             dimDetected = 2;

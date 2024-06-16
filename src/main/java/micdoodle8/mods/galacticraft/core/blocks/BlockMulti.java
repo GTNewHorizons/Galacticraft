@@ -29,6 +29,7 @@ import micdoodle8.mods.galacticraft.api.block.IPartialSealableBlock;
 import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityMulti;
+import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
 
 public class BlockMulti extends BlockContainer implements IPartialSealableBlock, ITileEntityProvider {
 
@@ -60,20 +61,8 @@ public class BlockMulti extends BlockContainer implements IPartialSealableBlock,
         this.fakeIcons[0] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "launch_pad");
         this.fakeIcons[1] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "workbench_nasa_top");
         this.fakeIcons[2] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "solar_basic_0");
+        this.fakeIcons[3] = par1IconRegister.registerIcon(MarsModule.TEXTURE_PREFIX + "cryoDummy");
         this.fakeIcons[4] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "buggy_fueler_blank");
-
-        if (GalacticraftCore.isPlanetsLoaded) {
-            try {
-                final Class<?> c = Class.forName("micdoodle8.mods.galacticraft.planets.mars.MarsModule");
-                final String texturePrefix = (String) c.getField("TEXTURE_PREFIX").get(null);
-                this.fakeIcons[3] = par1IconRegister.registerIcon(texturePrefix + "cryoDummy");
-            } catch (final Exception e) {
-                this.fakeIcons[3] = this.fakeIcons[2];
-                e.printStackTrace();
-            }
-        } else {
-            this.fakeIcons[3] = this.fakeIcons[2];
-        }
     }
 
     @Override

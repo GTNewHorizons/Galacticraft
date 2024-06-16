@@ -20,13 +20,13 @@ import api.player.render.RenderPlayerBase;
 import cpw.mods.fml.client.FMLClientHandler;
 import micdoodle8.mods.galacticraft.api.entity.ICameraZoomEntity;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.core.client.model.ModelPlayerBaseGC;
 import micdoodle8.mods.galacticraft.core.client.render.entities.RenderPlayerGC.RotatePlayerEvent;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityMulti;
 import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
+import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import micdoodle8.mods.galacticraft.planets.mars.blocks.BlockMachineMars;
 import micdoodle8.mods.galacticraft.planets.mars.blocks.MarsBlocks;
 
@@ -34,8 +34,12 @@ public class RenderPlayerBaseGC extends RenderPlayerBase {
 
     public ModelPlayer modelThermalPadding;
     public ModelPlayer modelThermalPaddingHelmet;
-    private static ResourceLocation thermalPaddingTexture0;
-    private static ResourceLocation thermalPaddingTexture1;
+    private static final ResourceLocation thermalPaddingTexture0 = new ResourceLocation(
+            AsteroidsModule.ASSET_PREFIX,
+            "textures/misc/thermalPadding_0.png");
+    private static final ResourceLocation thermalPaddingTexture1 = new ResourceLocation(
+            AsteroidsModule.ASSET_PREFIX,
+            "textures/misc/thermalPadding_1.png");
 
     /**
      * This is used in place of RenderPlayerGC only if RenderPlayerAPI is installed It renders the thermal armor (also
@@ -47,18 +51,6 @@ public class RenderPlayerBaseGC extends RenderPlayerBase {
         super(renderPlayerAPI);
         this.modelThermalPadding = new ModelPlayer(0.25F);
         this.modelThermalPaddingHelmet = new ModelPlayer(0.9F);
-
-        if (GalacticraftCore.isPlanetsLoaded) {
-            try {
-                final String prefix = (String) Class
-                        .forName("micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule")
-                        .getField("ASSET_PREFIX").get(null);
-                thermalPaddingTexture0 = new ResourceLocation(prefix, "textures/misc/thermalPadding_0.png");
-                thermalPaddingTexture1 = new ResourceLocation(prefix, "textures/misc/thermalPadding_1.png");
-            } catch (final Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     @Override

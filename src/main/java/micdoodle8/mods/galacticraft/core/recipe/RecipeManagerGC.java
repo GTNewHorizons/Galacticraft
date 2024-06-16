@@ -134,10 +134,9 @@ public class RecipeManagerGC {
         final Object meteoricIronPlate = ConfigManagerCore.recipesRequireGCAdvancedMetals
                 ? new ItemStack(GCItems.meteoricIronIngot, 1, 1)
                 : "compressedMeteoricIron";
-        final Object deshIngot = GalacticraftCore.isPlanetsLoaded
-                ? ConfigManagerCore.recipesRequireGCAdvancedMetals ? new ItemStack(MarsItems.marsItemBasic, 1, 2)
-                        : "ingotDesh"
-                : GCItems.heavyPlatingTier1;
+        final Object deshIngot = ConfigManagerCore.recipesRequireGCAdvancedMetals
+                ? new ItemStack(MarsItems.marsItemBasic, 1, 2)
+                : "ingotDesh";
 
         // RocketFuelRecipe.addFuel(GalacticraftCore.fluidFuel,1);
         FurnaceRecipes.smelting()
@@ -315,19 +314,17 @@ public class RecipeManagerGC {
                 new ItemStack(GCBlocks.machineTiered, 1, 4),
                 new Object[] { "XXX", "XZX", "WYW", 'W', "compressedAluminum", 'X', "compressedSteel", 'Y',
                         "waferBasic", 'Z', Blocks.furnace });
-        if (GalacticraftCore.isPlanetsLoaded) {
-            // Energy Storage Cluster:
-            RecipeUtil.addRecipe(
-                    new ItemStack(GCBlocks.machineTiered, 1, 8),
-                    new Object[] { "BSB", "SWS", "BSB", 'B', new ItemStack(GCBlocks.machineTiered, 1, 0), 'S',
-                            "compressedSteel", 'W', "waferAdvanced" });
-            // Electric Arc Furnace:
-            RecipeUtil.addRecipe(
-                    new ItemStack(GCBlocks.machineTiered, 1, 12),
-                    new Object[] { "XXX", "XZX", "WYW", 'W', meteoricIronIngot, 'X',
-                            new ItemStack(GCItems.heavyPlatingTier1), 'Y', "waferAdvanced", 'Z',
-                            new ItemStack(GCBlocks.machineTiered, 1, 4) });
-        }
+        // Energy Storage Cluster:
+        RecipeUtil.addRecipe(
+                new ItemStack(GCBlocks.machineTiered, 1, 8),
+                new Object[] { "BSB", "SWS", "BSB", 'B', new ItemStack(GCBlocks.machineTiered, 1, 0), 'S',
+                        "compressedSteel", 'W', "waferAdvanced" });
+        // Electric Arc Furnace:
+        RecipeUtil.addRecipe(
+                new ItemStack(GCBlocks.machineTiered, 1, 12),
+                new Object[] { "XXX", "XZX", "WYW", 'W', meteoricIronIngot, 'X',
+                        new ItemStack(GCItems.heavyPlatingTier1), 'Y', "waferAdvanced", 'Z',
+                        new ItemStack(GCBlocks.machineTiered, 1, 4) });
         RecipeUtil.addRecipe(
                 new ItemStack(GCBlocks.machineBase, 1, 12),
                 new Object[] { "WXW", "WYW", "WZW", 'W', "ingotAluminum", 'X', Blocks.anvil, 'Y', "ingotCopper", 'Z',

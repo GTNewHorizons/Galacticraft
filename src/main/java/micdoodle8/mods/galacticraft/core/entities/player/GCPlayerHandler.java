@@ -1168,7 +1168,7 @@ public class GCPlayerHandler {
 
             if (player.worldObj.provider instanceof WorldProviderSpaceStation
                     || player.worldObj.provider instanceof IZeroGDimension
-                    || GalacticraftCore.isPlanetsLoaded && player.worldObj.provider instanceof WorldProviderAsteroids) {
+                    || player.worldObj.provider instanceof WorldProviderAsteroids) {
                 this.preventFlyingKicks(player);
             }
 

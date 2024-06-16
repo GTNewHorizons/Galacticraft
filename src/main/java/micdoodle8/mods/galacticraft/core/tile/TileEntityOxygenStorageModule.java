@@ -17,7 +17,6 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import micdoodle8.mods.galacticraft.api.item.IItemOxygenSupply;
 import micdoodle8.mods.galacticraft.core.Constants;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.blocks.BlockMachine2;
 import micdoodle8.mods.galacticraft.core.util.FluidUtil;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
@@ -325,8 +324,7 @@ public class TileEntityOxygenStorageModule extends TileEntityOxygen implements I
 
     @Override
     public boolean canFill(ForgeDirection from, Fluid fluid) {
-        if (from.ordinal() == this.getBlockMetadata() - BlockMachine2.OXYGEN_STORAGE_MODULE_METADATA + 2
-                && GalacticraftCore.isPlanetsLoaded) {
+        if (from.ordinal() == this.getBlockMetadata() - BlockMachine2.OXYGEN_STORAGE_MODULE_METADATA + 2) {
             // Can fill with LOX only
             return fluid != null && fluid.getName().equals(AsteroidsModule.fluidLiquidOxygen.getName());
         }
@@ -352,7 +350,7 @@ public class TileEntityOxygenStorageModule extends TileEntityOxygen implements I
         final int metaside = this.getBlockMetadata() - BlockMachine2.OXYGEN_STORAGE_MODULE_METADATA + 2;
         final int side = from.ordinal();
 
-        if (metaside == side && GalacticraftCore.isPlanetsLoaded) {
+        if (metaside == side) {
             tankInfo = new FluidTankInfo[] { new FluidTankInfo(
                     new FluidStack(
                             AsteroidsModule.fluidLiquidOxygen,

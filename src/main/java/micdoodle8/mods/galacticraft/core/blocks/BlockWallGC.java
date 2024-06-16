@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
 
 public class BlockWallGC extends BlockWall {
 
@@ -37,22 +38,8 @@ public class BlockWallGC extends BlockWall {
         this.wallBlockIcon[1] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "deco_aluminium_2");
         this.wallBlockIcon[2] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX_MOON + "bottom");
         this.wallBlockIcon[3] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX_MOON + "brick");
-
-        if (GalacticraftCore.isPlanetsLoaded) {
-            try {
-                final Class<?> c = Class.forName("micdoodle8.mods.galacticraft.planets.mars.MarsModule");
-                final String texturePrefix = (String) c.getField("TEXTURE_PREFIX").get(null);
-                this.wallBlockIcon[4] = par1IconRegister.registerIcon(texturePrefix + "cobblestone");
-                this.wallBlockIcon[5] = par1IconRegister.registerIcon(texturePrefix + "brick");
-            } catch (final Exception e) {
-                this.wallBlockIcon[4] = this.wallBlockIcon[3];
-                this.wallBlockIcon[5] = this.wallBlockIcon[3];
-                e.printStackTrace();
-            }
-        } else {
-            this.wallBlockIcon[4] = this.wallBlockIcon[3];
-            this.wallBlockIcon[5] = this.wallBlockIcon[3];
-        }
+        this.wallBlockIcon[4] = par1IconRegister.registerIcon(MarsModule.TEXTURE_PREFIX + "cobblestone");
+        this.wallBlockIcon[5] = par1IconRegister.registerIcon(MarsModule.TEXTURE_PREFIX + "brick");
 
         this.tinSideIcon = new IIcon[1];
         this.tinSideIcon[0] = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "deco_aluminium_1");
@@ -162,14 +149,8 @@ public class BlockWallGC extends BlockWall {
     @SideOnly(Side.CLIENT)
     @Override
     public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
-        if (GalacticraftCore.isPlanetsLoaded) {
-            for (int var4 = 0; var4 < 6; ++var4) {
-                par3List.add(new ItemStack(par1, 1, var4));
-            }
-        } else {
-            for (int var4 = 0; var4 < 4; ++var4) {
-                par3List.add(new ItemStack(par1, 1, var4));
-            }
+        for (int var4 = 0; var4 < 6; ++var4) {
+            par3List.add(new ItemStack(par1, 1, var4));
         }
     }
 

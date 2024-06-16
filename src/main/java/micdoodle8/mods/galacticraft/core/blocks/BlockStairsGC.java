@@ -10,6 +10,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.IIcon;
 
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
 
 public class BlockStairsGC extends BlockStairs {
 
@@ -68,22 +69,12 @@ public class BlockStairsGC extends BlockStairs {
         } else if (this.category == StairsCategoryGC.MOON_BRICKS) // Moon Dungeon Bricks
         {
             this.blockIcon = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX_MOON + "brick");
-        }
-
-        if (GalacticraftCore.isPlanetsLoaded) {
-            try {
-                final String prefix = (String) Class.forName("micdoodle8.mods.galacticraft.planets.mars.MarsModule")
-                        .getField("TEXTURE_PREFIX").get(null);
-                if (this.category == StairsCategoryGC.MARS_COBBLESTONE) // Mars Cobblestone
-                {
-                    this.blockIcon = par1IconRegister.registerIcon(prefix + "cobblestone");
-                } else if (this.category == StairsCategoryGC.MARS_BRICKS) // Mars Dungeon Bricks
-                {
-                    this.blockIcon = par1IconRegister.registerIcon(prefix + "brick");
-                }
-            } catch (final Exception e) {
-                e.printStackTrace();
-            }
+        } else if (this.category == StairsCategoryGC.MARS_COBBLESTONE) // Mars Cobblestone
+        {
+            this.blockIcon = par1IconRegister.registerIcon(MarsModule.TEXTURE_PREFIX + "cobblestone");
+        } else if (this.category == StairsCategoryGC.MARS_BRICKS) // Mars Dungeon Bricks
+        {
+            this.blockIcon = par1IconRegister.registerIcon(MarsModule.TEXTURE_PREFIX + "brick");
         }
 
         this.tinSideIcon = new IIcon[2];

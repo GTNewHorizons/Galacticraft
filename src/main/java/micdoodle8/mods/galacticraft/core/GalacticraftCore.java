@@ -179,7 +179,7 @@ public class GalacticraftCore {
     @Instance(Constants.MOD_ID_CORE)
     public static GalacticraftCore instance;
 
-    public static boolean isPlanetsLoaded;
+    public static boolean isPlanetsLoaded = true;
     public static boolean isGalaxySpaceLoaded;
     public static boolean isHeightConflictingModInstalled;
 
@@ -224,7 +224,6 @@ public class GalacticraftCore {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        isPlanetsLoaded = Loader.isModLoaded(Constants.MOD_ID_PLANETS);
         isGalaxySpaceLoaded = Loader.isModLoaded(Constants.MOD_ID_GALAXYSPACE);
         GCCoreUtil.nextID = 0;
 
