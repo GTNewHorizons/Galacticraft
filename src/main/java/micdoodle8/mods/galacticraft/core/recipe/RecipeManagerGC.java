@@ -16,20 +16,10 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import appeng.api.AEApi;
 import appeng.api.util.AEColor;
 import cpw.mods.fml.common.Loader;
-import gregtech.api.GregTech_API;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
-import gregtech.api.util.GT_ModHandler;
-import gregtech.api.util.GT_OreDictUnificator;
-import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
 import micdoodle8.mods.galacticraft.api.entity.IFuelable;
 import micdoodle8.mods.galacticraft.api.recipe.CircuitFabricatorRecipes;
 import micdoodle8.mods.galacticraft.api.recipe.CompressorRecipes;
 import micdoodle8.mods.galacticraft.api.recipe.RocketFuels;
-import micdoodle8.mods.galacticraft.api.recipe.SpaceStationRecipe;
-import micdoodle8.mods.galacticraft.api.world.SpaceStationType;
-import micdoodle8.mods.galacticraft.core.Constants;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.blocks.BlockEnclosed.EnumEnclosedBlock;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.core.entities.EntityTier1Rocket;
@@ -209,44 +199,22 @@ public class RecipeManagerGC {
 
         //
 
-        input = new HashMap<>();
-
-        input.put(1, new ItemStack(GCItems.basicItem, 1, 19));
-        input.put(2, new ItemStack(GCItems.partBuggy, 1, 1));
-        if (GalacticraftCore.isGalaxySpaceLoaded) {
-            input.put(3, GT_ModHandler.getModItem(Constants.MOD_ID_GALAXYSPACE, "item.RocketControlComputer", 1, 100));
-        }
-        for (int i = 4; i <= 7; i++) {
-            input.put(i, new ItemStack(GCItems.partBuggy));
-        }
-        for (int i = 8; i <= 11; i++) {
-            input.put(i, GT_OreDictUnificator.get(OrePrefixes.stick, Materials.StainlessSteel, 1));
-        }
-        for (int i = 12; i <= 16; i++) {
-            input.put(i, new ItemStack(GCItems.meteoricIronIngot, 1, 1));
-        }
-        for (int i = 17; i <= 24; i++) {
-            input.put(i, GT_OreDictUnificator.get(OrePrefixes.screw, Materials.StainlessSteel, 1));
-        }
-        for (int i = 25; i <= 34; i++) {
-            input.put(i, new ItemStack(GCItems.heavyPlatingTier1));
-        }
-
-        input2 = new HashMap<>(input);
-        input2.put(35, null);
-        RecipeUtil.addBuggyBenchRecipe(new ItemStack(GCItems.buggy, 1, 0), input2);
-
-        input2 = new HashMap<>(input);
-        input2.put(35, RecipeUtil.getChestItemStack(1, 3));
-        RecipeUtil.addBuggyBenchRecipe(new ItemStack(GCItems.buggy, 1, 1), input2);
-
-        input2 = new HashMap<>(input);
-        input2.put(35, RecipeUtil.getChestItemStack(1, 0));
-        RecipeUtil.addBuggyBenchRecipe(new ItemStack(GCItems.buggy, 1, 2), input2);
-
-        input2 = new HashMap<>(input);
-        input2.put(35, RecipeUtil.getChestItemStack(1, 1));
-        RecipeUtil.addBuggyBenchRecipe(new ItemStack(GCItems.buggy, 1, 3), input2);
+        /*
+         * input = new HashMap<>(); input.put(1, new ItemStack(GCItems.basicItem, 1, 19)); input.put(2, new
+         * ItemStack(GCItems.partBuggy, 1, 1)); if (GalacticraftCore.isGalaxySpaceLoaded) { input.put(3,
+         * GT_ModHandler.getModItem(Constants.MOD_ID_GALAXYSPACE, "item.RocketControlComputer", 1, 100)); } for (int i =
+         * 4; i <= 7; i++) { input.put(i, new ItemStack(GCItems.partBuggy)); } for (int i = 8; i <= 11; i++) {
+         * input.put(i, GT_OreDictUnificator.get(OrePrefixes.stick, Materials.StainlessSteel, 1)); } for (int i = 12; i
+         * <= 16; i++) { input.put(i, new ItemStack(GCItems.meteoricIronIngot, 1, 1)); } for (int i = 17; i <= 24; i++)
+         * { input.put(i, GT_OreDictUnificator.get(OrePrefixes.screw, Materials.StainlessSteel, 1)); } for (int i = 25;
+         * i <= 34; i++) { input.put(i, new ItemStack(GCItems.heavyPlatingTier1)); } input2 = new HashMap<>(input);
+         * input2.put(35, null); RecipeUtil.addBuggyBenchRecipe(new ItemStack(GCItems.buggy, 1, 0), input2); input2 =
+         * new HashMap<>(input); input2.put(35, RecipeUtil.getChestItemStack(1, 3)); RecipeUtil.addBuggyBenchRecipe(new
+         * ItemStack(GCItems.buggy, 1, 1), input2); input2 = new HashMap<>(input); input2.put(35,
+         * RecipeUtil.getChestItemStack(1, 0)); RecipeUtil.addBuggyBenchRecipe(new ItemStack(GCItems.buggy, 1, 2),
+         * input2); input2 = new HashMap<>(input); input2.put(35, RecipeUtil.getChestItemStack(1, 1));
+         * RecipeUtil.addBuggyBenchRecipe(new ItemStack(GCItems.buggy, 1, 3), input2);
+         */
 
         aluminumIngots.addAll(OreDictionary.getOres("ingotAluminum"));
         final ArrayList<ItemStack> addedList = new ArrayList<>();
@@ -278,14 +246,13 @@ public class RecipeManagerGC {
             aluminumIngots.addAll(addedList);
         }
 
-        final HashMap<Object, Integer> inputMap = new HashMap<>();
-        inputMap.put(new ItemStack(GCBlocks.basicBlock, 1, 4), 231);
-        inputMap.put(new ItemStack(Blocks.glass_pane), 6);
-        inputMap.put("circuitAdvanced", 4);
-        inputMap.put(new ItemStack(GregTech_API.sBlockMachines, 1, 13), 1); // HV Machine Hull
-        GalacticraftRegistry.registerSpaceStation(
-                new SpaceStationType(ConfigManagerCore.idDimensionOverworldOrbit, 0, new SpaceStationRecipe(inputMap)));
-
+        /*
+         * final HashMap<Object, Integer> inputMap = new HashMap<>(); inputMap.put(new ItemStack(GCBlocks.basicBlock, 1,
+         * 4), 231); inputMap.put(new ItemStack(Blocks.glass_pane), 6); inputMap.put("circuitAdvanced", 4);
+         * inputMap.put(new ItemStack(GregTech_API.sBlockMachines, 1, 13), 1); // HV Machine Hull
+         * GalacticraftRegistry.registerSpaceStation( new SpaceStationType(ConfigManagerCore.idDimensionOverworldOrbit,
+         * 0, new SpaceStationRecipe(inputMap)));
+         */
         RecipeUtil.addRecipe(
                 new ItemStack(GCBlocks.aluminumWire, 6),
                 new Object[] { "WWW", "CCC", "WWW", 'W', Blocks.wool, 'C', "ingotAluminum" });

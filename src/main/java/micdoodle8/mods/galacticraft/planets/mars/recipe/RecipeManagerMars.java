@@ -1,7 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.mars.recipe;
 
-import java.util.HashMap;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -9,9 +7,6 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 
-import gregtech.api.util.GT_ModHandler;
-import micdoodle8.mods.galacticraft.core.Constants;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
@@ -19,7 +14,6 @@ import micdoodle8.mods.galacticraft.core.util.RecipeUtil;
 import micdoodle8.mods.galacticraft.planets.mars.blocks.BlockMachineMars;
 import micdoodle8.mods.galacticraft.planets.mars.blocks.MarsBlocks;
 import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
-import micdoodle8.mods.galacticraft.planets.mars.util.MarsUtil;
 
 public class RecipeManagerMars {
 
@@ -211,7 +205,7 @@ public class RecipeManagerMars {
 
         // Handled by Galaxy Space
         // Schematic
-        final HashMap<Integer, ItemStack> input = new HashMap<>();
+        // final HashMap<Integer, ItemStack> input = new HashMap<>();
         /*
          * input.put(1, new ItemStack(GCItems.partNoseCone)); input.put(2, new ItemStack(MarsItems.marsItemBasic, 1,
          * 3)); input.put(3, new ItemStack(MarsItems.marsItemBasic, 1, 3)); input.put(4, new
@@ -227,56 +221,41 @@ public class RecipeManagerMars {
          * null); MarsUtil.addRocketBenchT2Recipe(new ItemStack(MarsItems.spaceship, 1, 0), input);
          */
 
-        HashMap<Integer, ItemStack> input2 = new HashMap<>(
-                input); /*
-                         * input2.put(19, new ItemStack(Blocks.chest)); input2.put(20, null); input2.put(21, null);
-                         * MarsUtil.addRocketBenchT2Recipe(new ItemStack(MarsItems.spaceship, 1, 1), input2); input2 =
-                         * new HashMap<Integer, ItemStack>(input); input2.put(19, null); input2.put(20, new
-                         * ItemStack(Blocks.chest)); input2.put(21, null); MarsUtil.addRocketBenchT2Recipe(new
-                         * ItemStack(MarsItems.spaceship, 1, 1), input2); input2 = new HashMap<Integer,
-                         * ItemStack>(input); input2.put(19, null); input2.put(20, null); input2.put(21, new
-                         * ItemStack(Blocks.chest)); MarsUtil.addRocketBenchT2Recipe(new ItemStack(MarsItems.spaceship,
-                         * 1, 1), input2); input2 = new HashMap<Integer, ItemStack>(input); input2.put(19, new
-                         * ItemStack(Blocks.chest)); input2.put(20, new ItemStack(Blocks.chest)); input2.put(21, null);
-                         * MarsUtil.addRocketBenchT2Recipe(new ItemStack(MarsItems.spaceship, 1, 2), input2); input2 =
-                         * new HashMap<Integer, ItemStack>(input); input2.put(19, new ItemStack(Blocks.chest));
-                         * input2.put(20, null); input2.put(21, new ItemStack(Blocks.chest));
-                         * MarsUtil.addRocketBenchT2Recipe(new ItemStack(MarsItems.spaceship, 1, 2), input2); input2 =
-                         * new HashMap<Integer, ItemStack>(input); input2.put(19, null); input2.put(20, new
-                         * ItemStack(Blocks.chest)); input2.put(21, new ItemStack(Blocks.chest));
-                         * MarsUtil.addRocketBenchT2Recipe(new ItemStack(MarsItems.spaceship, 1, 2), input2); input2 =
-                         * new HashMap<Integer, ItemStack>(input); input2.put(19, new ItemStack(Blocks.chest));
-                         * input2.put(20, new ItemStack(Blocks.chest)); input2.put(21, new ItemStack(Blocks.chest));
-                         * MarsUtil.addRocketBenchT2Recipe(new ItemStack(MarsItems.spaceship, 1, 3), input2);
-                         */
+        // HashMap<Integer, ItemStack> input2 = new HashMap<>(input);
+        /*
+         * input2.put(19, new ItemStack(Blocks.chest)); input2.put(20, null); input2.put(21, null);
+         * MarsUtil.addRocketBenchT2Recipe(new ItemStack(MarsItems.spaceship, 1, 1), input2); input2 = new
+         * HashMap<Integer, ItemStack>(input); input2.put(19, null); input2.put(20, new ItemStack(Blocks.chest));
+         * input2.put(21, null); MarsUtil.addRocketBenchT2Recipe(new ItemStack(MarsItems.spaceship, 1, 1), input2);
+         * input2 = new HashMap<Integer, ItemStack>(input); input2.put(19, null); input2.put(20, null); input2.put(21,
+         * new ItemStack(Blocks.chest)); MarsUtil.addRocketBenchT2Recipe(new ItemStack(MarsItems.spaceship, 1, 1),
+         * input2); input2 = new HashMap<Integer, ItemStack>(input); input2.put(19, new ItemStack(Blocks.chest));
+         * input2.put(20, new ItemStack(Blocks.chest)); input2.put(21, null); MarsUtil.addRocketBenchT2Recipe(new
+         * ItemStack(MarsItems.spaceship, 1, 2), input2); input2 = new HashMap<Integer, ItemStack>(input);
+         * input2.put(19, new ItemStack(Blocks.chest)); input2.put(20, null); input2.put(21, new
+         * ItemStack(Blocks.chest)); MarsUtil.addRocketBenchT2Recipe(new ItemStack(MarsItems.spaceship, 1, 2), input2);
+         * input2 = new HashMap<Integer, ItemStack>(input); input2.put(19, null); input2.put(20, new
+         * ItemStack(Blocks.chest)); input2.put(21, new ItemStack(Blocks.chest)); MarsUtil.addRocketBenchT2Recipe(new
+         * ItemStack(MarsItems.spaceship, 1, 2), input2); input2 = new HashMap<Integer, ItemStack>(input);
+         * input2.put(19, new ItemStack(Blocks.chest)); input2.put(20, new ItemStack(Blocks.chest)); input2.put(21, new
+         * ItemStack(Blocks.chest)); MarsUtil.addRocketBenchT2Recipe(new ItemStack(MarsItems.spaceship, 1, 3), input2);
+         */
 
         //
-
-        input.put(1, new ItemStack(GCItems.basicItem, 1, 14));
-        if (GalacticraftCore.isGalaxySpaceLoaded) {
-            input.put(2, GT_ModHandler.getModItem(Constants.MOD_ID_GALAXYSPACE, "item.RocketControlComputer", 1, 101));
-            for (int i = 3; i <= 5; i++) {
-                input.put(i, GT_ModHandler.getModItem(Constants.MOD_ID_GALAXYSPACE, "item.ModuleSmallFuelCanister", 1));
-            }
-        }
-        input.put(7, new ItemStack(GCItems.partNoseCone));
-        for (int i = 8; i <= 15; i++) {
-            input.put(i, new ItemStack(MarsItems.marsItemBasic, 1, 3));
-        }
-        input.put(16, new ItemStack(GCItems.rocketEngine));
-        for (int i = 17; i <= 20; i++) {
-            input.put(i, new ItemStack(GCItems.partFins));
-        }
-
-        input2 = new HashMap<>(input);
-        input2.put(21, RecipeUtil.getChestItemStack(1, 3));
-        MarsUtil.adCargoRocketRecipe(new ItemStack(MarsItems.spaceship, 1, 11), input2);
-        input2 = new HashMap<>(input);
-        input2.put(21, RecipeUtil.getChestItemStack(1, 0));
-        MarsUtil.adCargoRocketRecipe(new ItemStack(MarsItems.spaceship, 1, 12), input2);
-        input2 = new HashMap<>(input);
-        input2.put(21, RecipeUtil.getChestItemStack(1, 1));
-        MarsUtil.adCargoRocketRecipe(new ItemStack(MarsItems.spaceship, 1, 13), input2);
+        /*
+         * input.put(1, new ItemStack(GCItems.basicItem, 1, 14)); if (GalacticraftCore.isGalaxySpaceLoaded) {
+         * input.put(2, GT_ModHandler.getModItem(Constants.MOD_ID_GALAXYSPACE, "item.RocketControlComputer", 1, 101));
+         * for (int i = 3; i <= 5; i++) { input.put(i, GT_ModHandler.getModItem(Constants.MOD_ID_GALAXYSPACE,
+         * "item.ModuleSmallFuelCanister", 1)); } } input.put(7, new ItemStack(GCItems.partNoseCone)); for (int i = 8; i
+         * <= 15; i++) { input.put(i, new ItemStack(MarsItems.marsItemBasic, 1, 3)); } input.put(16, new
+         * ItemStack(GCItems.rocketEngine)); for (int i = 17; i <= 20; i++) { input.put(i, new
+         * ItemStack(GCItems.partFins)); } input2 = new HashMap<>(input); input2.put(21, RecipeUtil.getChestItemStack(1,
+         * 3)); MarsUtil.adCargoRocketRecipe(new ItemStack(MarsItems.spaceship, 1, 11), input2); input2 = new
+         * HashMap<>(input); input2.put(21, RecipeUtil.getChestItemStack(1, 0)); MarsUtil.adCargoRocketRecipe(new
+         * ItemStack(MarsItems.spaceship, 1, 12), input2); input2 = new HashMap<>(input); input2.put(21,
+         * RecipeUtil.getChestItemStack(1, 1)); MarsUtil.adCargoRocketRecipe(new ItemStack(MarsItems.spaceship, 1, 13),
+         * input2);
+         */
 
         RecipeUtil.addRecipe(
                 new ItemStack(MarsBlocks.machine, 1, BlockMachineMars.LAUNCH_CONTROLLER_METADATA),
