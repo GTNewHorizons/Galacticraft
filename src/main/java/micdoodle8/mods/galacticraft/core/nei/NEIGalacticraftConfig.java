@@ -127,63 +127,8 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
                 new PositionedStack(new ItemStack(GCItems.fuelCanister, 1, 1), 148, 3));
 
         // Handled by GalaxySpace
-        // this.addRocketRecipes();
-        this.addBuggyRecipes();
         this.addCircuitFabricatorRecipes();
         this.addIngotCompressorRecipes();
-    }
-
-    private void addBuggyRecipes() {
-        /*
-         * final int x = BuggyRecipeHandler.tX - BuggyRecipeHandler.x; final int y = BuggyRecipeHandler.tY -
-         * BuggyRecipeHandler.y; final HashMap<Integer, PositionedStack> input = new HashMap<>(); input.put(1, new
-         * PositionedStack(new ItemStack(GCItems.basicItem, 1, 19), 62 - x, 19 - y)); input.put(2, new
-         * PositionedStack(new ItemStack(GCItems.partBuggy, 1, 1), 62 - x, 55 - y)); if
-         * (GalacticraftCore.isGalaxySpaceLoaded) { input.put( 3, new PositionedStack( GT_ModHandler
-         * .getModItem(Constants.MOD_ID_GALAXYSPACE, "item.RocketControlComputer", 1, 100), 62 - x, 73 - y)); }
-         * input.put(4, new PositionedStack(new ItemStack(GCItems.partBuggy), 8 - x, 19 - y)); input.put(5, new
-         * PositionedStack(new ItemStack(GCItems.partBuggy), 116 - x, 19 - y)); input.put(6, new PositionedStack(new
-         * ItemStack(GCItems.partBuggy), 8 - x, 109 - y)); input.put(7, new PositionedStack(new
-         * ItemStack(GCItems.partBuggy), 116 - x, 109 - y)); input.put( 8, new PositionedStack(
-         * GT_OreDictUnificator.get(OrePrefixes.stick, Materials.StainlessSteel, 1), 26 - x, 19 - y)); input.put( 9, new
-         * PositionedStack( GT_OreDictUnificator.get(OrePrefixes.stick, Materials.StainlessSteel, 1), 98 - x, 19 - y));
-         * input.put( 10, new PositionedStack( GT_OreDictUnificator.get(OrePrefixes.stick, Materials.StainlessSteel, 1),
-         * 26 - x, 109 - y)); input.put( 11, new PositionedStack( GT_OreDictUnificator.get(OrePrefixes.stick,
-         * Materials.StainlessSteel, 1), 98 - x, 109 - y)); input.put(12, new PositionedStack(new
-         * ItemStack(GCItems.meteoricIronIngot, 1, 1), 44 - x, 19 - y)); input.put(13, new PositionedStack(new
-         * ItemStack(GCItems.meteoricIronIngot, 1, 1), 80 - x, 19 - y)); input.put(14, new PositionedStack(new
-         * ItemStack(GCItems.meteoricIronIngot, 1, 1), 44 - x, 109 - y)); input.put(15, new PositionedStack(new
-         * ItemStack(GCItems.meteoricIronIngot, 1, 1), 62 - x, 109 - y)); input.put(16, new PositionedStack(new
-         * ItemStack(GCItems.meteoricIronIngot, 1, 1), 80 - x, 109 - y)); input.put( 17, new PositionedStack(
-         * GT_OreDictUnificator.get(OrePrefixes.screw, Materials.StainlessSteel, 1), 8 - x, 37 - y)); input.put( 18, new
-         * PositionedStack( GT_OreDictUnificator.get(OrePrefixes.screw, Materials.StainlessSteel, 1), 26 - x, 37 - y));
-         * input.put( 19, new PositionedStack( GT_OreDictUnificator.get(OrePrefixes.screw, Materials.StainlessSteel, 1),
-         * 98 - x, 37 - y)); input.put( 20, new PositionedStack( GT_OreDictUnificator.get(OrePrefixes.screw,
-         * Materials.StainlessSteel, 1), 116 - x, 37 - y)); input.put( 21, new PositionedStack(
-         * GT_OreDictUnificator.get(OrePrefixes.screw, Materials.StainlessSteel, 1), 8 - x, 91 - y)); input.put( 22, new
-         * PositionedStack( GT_OreDictUnificator.get(OrePrefixes.screw, Materials.StainlessSteel, 1), 26 - x, 91 - y));
-         * input.put( 23, new PositionedStack( GT_OreDictUnificator.get(OrePrefixes.screw, Materials.StainlessSteel, 1),
-         * 98 - x, 91 - y)); input.put( 24, new PositionedStack( GT_OreDictUnificator.get(OrePrefixes.screw,
-         * Materials.StainlessSteel, 1), 116 - x, 91 - y)); input.put(25, new PositionedStack(new
-         * ItemStack(GCItems.heavyPlatingTier1), 44 - x, 37 - y)); input.put(26, new PositionedStack(new
-         * ItemStack(GCItems.heavyPlatingTier1), 62 - x, 37 - y)); input.put(27, new PositionedStack(new
-         * ItemStack(GCItems.heavyPlatingTier1), 80 - x, 37 - y)); input.put(28, new PositionedStack(new
-         * ItemStack(GCItems.heavyPlatingTier1), 44 - x, 55 - y)); input.put(29, new PositionedStack(new
-         * ItemStack(GCItems.heavyPlatingTier1), 80 - x, 55 - y)); input.put(30, new PositionedStack(new
-         * ItemStack(GCItems.heavyPlatingTier1), 44 - x, 73 - y)); input.put(31, new PositionedStack(new
-         * ItemStack(GCItems.heavyPlatingTier1), 80 - x, 73 - y)); input.put(32, new PositionedStack(new
-         * ItemStack(GCItems.heavyPlatingTier1), 44 - x, 91 - y)); input.put(33, new PositionedStack(new
-         * ItemStack(GCItems.heavyPlatingTier1), 62 - x, 91 - y)); input.put(34, new PositionedStack(new
-         * ItemStack(GCItems.heavyPlatingTier1), 80 - x, 91 - y)); this.registerBuggyBenchRecipe(input, new
-         * PositionedStack(new ItemStack(GCItems.buggy), 143 - x, 64 - y)); HashMap<Integer, PositionedStack> input2 =
-         * new HashMap<>(input); input2.put(35, new PositionedStack(RecipeUtil.getChestItemStack(1, 3), 107 - x, 64 -
-         * y)); this.registerBuggyBenchRecipe(input2, new PositionedStack(new ItemStack(GCItems.buggy, 1, 1), 143 - x,
-         * 64 - y)); input2 = new HashMap<>(input); input2.put(35, new PositionedStack(RecipeUtil.getChestItemStack(1,
-         * 0), 107 - x, 64 - y)); this.registerBuggyBenchRecipe(input2, new PositionedStack(new ItemStack(GCItems.buggy,
-         * 1, 2), 143 - x, 64 - y)); input2 = new HashMap<>(input); input2.put(35, new
-         * PositionedStack(RecipeUtil.getChestItemStack(1, 1), 107 - x, 64 - y)); this.registerBuggyBenchRecipe(input2,
-         * new PositionedStack(new ItemStack(GCItems.buggy, 1, 3), 143 - x, 64 - y));
-         */
     }
 
     private void addCircuitFabricatorRecipes() {
