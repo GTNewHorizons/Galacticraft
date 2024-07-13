@@ -11,6 +11,7 @@ public class Constants {
 
     public static final String MOD_ID_GALAXYSPACE = "GalaxySpace";
     public static final String MOD_ID_GREGTECH = "gregtech";
+    public static final String MOD_ID_NEW_HORIZONS_CORE_MOD = "dreamcraft";
 
     public static final String VERSION = Tags.VERSION;
 

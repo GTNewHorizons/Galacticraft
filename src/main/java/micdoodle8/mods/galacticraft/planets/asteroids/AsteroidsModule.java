@@ -3,7 +3,6 @@ package micdoodle8.mods.galacticraft.planets.asteroids;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,19 +34,15 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
-import gregtech.api.util.GT_ModHandler;
 import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
 import micdoodle8.mods.galacticraft.api.galaxies.Planet;
 import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;
-import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.command.CommandGCAstroMiner;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.items.ItemCanisterGeneric;
-import micdoodle8.mods.galacticraft.core.recipe.NasaWorkbenchRecipe;
-import micdoodle8.mods.galacticraft.core.util.RecipeUtil;
 import micdoodle8.mods.galacticraft.planets.GuiIdsPlanets;
 import micdoodle8.mods.galacticraft.planets.IPlanetsModule;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
@@ -78,7 +73,6 @@ import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityTelepadFake
 import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityTreasureChestAsteroids;
 import micdoodle8.mods.galacticraft.planets.asteroids.world.gen.ChunkProviderAsteroids;
 import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
-import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 
 public class AsteroidsModule implements IPlanetsModule {
 
@@ -194,73 +188,6 @@ public class AsteroidsModule implements IPlanetsModule {
 
         GalaxyRegistry.registerPlanet(AsteroidsModule.planetAsteroids);
         GalacticraftRegistry.registerTeleportType(WorldProviderAsteroids.class, new TeleportTypeAsteroids());
-
-        // Handled by Galaxy Space
-        final HashMap<Integer, ItemStack> input = new HashMap<>();
-        /*
-         * input.put(1, new ItemStack(AsteroidsItems.heavyNoseCone)); input.put(2, new
-         * ItemStack(AsteroidsItems.basicItem, 1, 0)); input.put(3, new ItemStack(AsteroidsItems.basicItem, 1, 0));
-         * input.put(4, new ItemStack(AsteroidsItems.basicItem, 1, 0)); input.put(5, new
-         * ItemStack(AsteroidsItems.basicItem, 1, 0)); input.put(6, new ItemStack(AsteroidsItems.basicItem, 1, 0));
-         * input.put(7, new ItemStack(AsteroidsItems.basicItem, 1, 0)); input.put(8, new
-         * ItemStack(AsteroidsItems.basicItem, 1, 0)); input.put(9, new ItemStack(AsteroidsItems.basicItem, 1, 0));
-         * input.put(10, new ItemStack(AsteroidsItems.basicItem, 1, 0)); input.put(11, new
-         * ItemStack(AsteroidsItems.basicItem, 1, 0)); input.put(12, new ItemStack(GCItems.rocketEngine, 1, 1));
-         * input.put(13, new ItemStack(AsteroidsItems.basicItem, 1, 2)); input.put(14, new
-         * ItemStack(AsteroidsItems.basicItem, 1, 2)); input.put(15, new ItemStack(AsteroidsItems.basicItem, 1, 1));
-         * input.put(16, new ItemStack(GCItems.rocketEngine, 1, 1)); input.put(17, new
-         * ItemStack(AsteroidsItems.basicItem, 1, 2)); input.put(18, new ItemStack(AsteroidsItems.basicItem, 1, 2));
-         * input.put(19, null); input.put(20, null); input.put(21, null); GalacticraftRegistry.addT3RocketRecipe(new
-         * NasaWorkbenchRecipe(new ItemStack(AsteroidsItems.tier3Rocket, 1, 0), input)); HashMap<Integer, ItemStack>
-         * input2 = new HashMap<Integer, ItemStack>(input); input2.put(19, new ItemStack(Blocks.chest)); input2.put(20,
-         * null); input2.put(21, null); GalacticraftRegistry.addT3RocketRecipe(new NasaWorkbenchRecipe(new
-         * ItemStack(AsteroidsItems.tier3Rocket, 1, 1), input2)); input2 = new HashMap<Integer, ItemStack>(input);
-         * input2.put(19, null); input2.put(20, new ItemStack(Blocks.chest)); input2.put(21, null);
-         * GalacticraftRegistry.addT3RocketRecipe(new NasaWorkbenchRecipe(new ItemStack(AsteroidsItems.tier3Rocket, 1,
-         * 1), input2)); input2 = new HashMap<Integer, ItemStack>(input); input2.put(19, null); input2.put(20, null);
-         * input2.put(21, new ItemStack(Blocks.chest)); GalacticraftRegistry.addT3RocketRecipe(new
-         * NasaWorkbenchRecipe(new ItemStack(AsteroidsItems.tier3Rocket, 1, 1), input2)); input2 = new HashMap<Integer,
-         * ItemStack>(input); input2.put(19, new ItemStack(Blocks.chest)); input2.put(20, new ItemStack(Blocks.chest));
-         * input2.put(21, null); GalacticraftRegistry.addT3RocketRecipe(new NasaWorkbenchRecipe(new
-         * ItemStack(AsteroidsItems.tier3Rocket, 1, 2), input2)); input2 = new HashMap<Integer, ItemStack>(input);
-         * input2.put(19, new ItemStack(Blocks.chest)); input2.put(20, null); input2.put(21, new
-         * ItemStack(Blocks.chest)); GalacticraftRegistry.addT3RocketRecipe(new NasaWorkbenchRecipe(new
-         * ItemStack(AsteroidsItems.tier3Rocket, 1, 2), input2)); input2 = new HashMap<Integer, ItemStack>(input);
-         * input2.put(19, null); input2.put(20, new ItemStack(Blocks.chest)); input2.put(21, new
-         * ItemStack(Blocks.chest)); GalacticraftRegistry.addT3RocketRecipe(new NasaWorkbenchRecipe(new
-         * ItemStack(AsteroidsItems.tier3Rocket, 1, 2), input2)); input2 = new HashMap<Integer, ItemStack>(input);
-         * input2.put(19, new ItemStack(Blocks.chest)); input2.put(20, new ItemStack(Blocks.chest)); input2.put(21, new
-         * ItemStack(Blocks.chest)); GalacticraftRegistry.addT3RocketRecipe(new NasaWorkbenchRecipe(new
-         * ItemStack(AsteroidsItems.tier3Rocket, 1, 3), input2));
-         */
-
-        for (int i = 1; i <= 8; i++) {
-            input.put(i, new ItemStack(MarsItems.marsItemBasic, 1, 3));
-        }
-        input.put(9, new ItemStack(GCItems.flagPole));
-        input.put(10, new ItemStack(GCItems.flagPole));
-        for (int i = 11; i <= 13; i++) {
-            input.put(i, new ItemStack(AsteroidsItems.basicItem));
-        }
-        for (int i = 14; i <= 17; i++) {
-            input.put(i, new ItemStack(AsteroidsItems.orionDrive));
-        }
-        if (GalacticraftCore.isGalaxySpaceLoaded) {
-            input.put(18, GT_ModHandler.getModItem(Constants.MOD_ID_GALAXYSPACE, "item.RocketControlComputer", 1, 102));
-        }
-        input.put(19, new ItemStack(GCItems.basicItem, 1, 14));
-        input.put(20, new ItemStack(GCItems.basicItem, 1, 14));
-        for (int i = 21; i <= 23; i++) {
-            input.put(i, new ItemStack(GCItems.heavyPlatingTier1));
-        }
-        input.put(24, RecipeUtil.getChestItemStack(1, 1));
-        input.put(25, RecipeUtil.getChestItemStack(1, 1));
-        input.put(26, new ItemStack(AsteroidsItems.basicItem, 1, 8));
-        input.put(27, new ItemStack(AsteroidBlocks.beamReceiver));
-        input.put(28, GT_ModHandler.getModItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01", 1, 32603));
-        input.put(29, GT_ModHandler.getModItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01", 1, 32603));
-        GalacticraftRegistry
-                .addAstroMinerRecipe(new NasaWorkbenchRecipe(new ItemStack(AsteroidsItems.astroMiner, 1, 0), input));
     }
 
     @Override

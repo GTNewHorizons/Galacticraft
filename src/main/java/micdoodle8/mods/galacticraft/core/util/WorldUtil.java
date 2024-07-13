@@ -93,8 +93,6 @@ import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityTelemetry;
 
-// import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityAstroMiner;
-
 public class WorldUtil {
 
     public static HashMap<Integer, Integer> registeredSpaceStations; // Dimension IDs and providers (providers are -26

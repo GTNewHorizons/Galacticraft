@@ -23,8 +23,6 @@ import micdoodle8.mods.galacticraft.core.tile.TileEntityLandingPad;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
 
-// import calclavia.api.icbm.IMissile;
-
 public class EntityTier1Rocket extends EntityTieredRocket {
 
     public EntityTier1Rocket(World par1World) {

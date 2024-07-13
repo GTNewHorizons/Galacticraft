@@ -7,6 +7,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
@@ -68,12 +69,12 @@ public class SlotBuggyBench extends Slot {
                     && itemStack.getItemDamage() == 100;
         } else if (this.index >= 4 && this.index <= 7) {
             return itemStack.getItem() == GCItems.partBuggy && itemStack.getItemDamage() == 0;
-        } else if (this.index >= 8 && this.index <= 11) {
+        } else if (this.index >= 8 && this.index <= 11 && Loader.isModLoaded(Constants.MOD_ID_NEW_HORIZONS_CORE_MOD)) {
             return itemStack.getItem() == GameRegistry.findItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01")
                     && itemStack.getItemDamage() == 23306;
         } else if (this.index >= 12 && this.index <= 16) {
             return itemStack.getItem() == GCItems.meteoricIronIngot && itemStack.getItemDamage() == 1;
-        } else if (this.index >= 17 && this.index <= 24) {
+        } else if (this.index >= 17 && this.index <= 24 && Loader.isModLoaded(Constants.MOD_ID_NEW_HORIZONS_CORE_MOD)) {
             return itemStack.getItem() == GameRegistry.findItem(Constants.MOD_ID_GREGTECH, "gt.metaitem.01")
                     && itemStack.getItemDamage() == 27306;
         } else if (this.index >= 25 && this.index <= 34) {

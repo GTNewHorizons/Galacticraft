@@ -27,8 +27,6 @@ import micdoodle8.mods.galacticraft.core.tick.TickHandlerServer;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
 
-// import buildcraft.api.power.PowerHandler.Type;
-
 /**
  * A universal network that works with multiple energy systems.
  *

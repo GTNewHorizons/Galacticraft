@@ -34,7 +34,6 @@ import micdoodle8.mods.galacticraft.core.world.IChunkLoader;
 import micdoodle8.mods.galacticraft.planets.mars.ConfigManagerMars;
 import micdoodle8.mods.galacticraft.planets.mars.network.PacketSimpleMars;
 import micdoodle8.mods.galacticraft.planets.mars.network.PacketSimpleMars.EnumSimplePacketMars;
-// import java.util.Map;
 
 public class TileEntityLaunchController extends TileBaseElectricBlockWithInventory
         implements IChunkLoader, ISidedInventory, ILandingPadAttachable {
