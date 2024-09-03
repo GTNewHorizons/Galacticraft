@@ -32,7 +32,7 @@ public class CompatibilityManager {
         if (Loader.isModLoaded("gregtech") || Loader.isModLoaded("GregTech_Addon") || Loader.isModLoaded("GregTech")) {
             CompatibilityManager.modGTLoaded = true;
             try {
-                final Class<?> clazz = Class.forName("gregtech.common.blocks.GT_Block_Ores");
+                final Class<?> clazz = Class.forName("gregtech.common.blocks.BlockOres");
                 if (clazz != null) {
                     classGTOre = clazz;
                 }
