@@ -21,6 +21,7 @@ import micdoodle8.mods.galacticraft.api.recipe.CompressorRecipes;
 import micdoodle8.mods.galacticraft.api.recipe.RocketFuels;
 import micdoodle8.mods.galacticraft.core.blocks.BlockEnclosed.EnumEnclosedBlock;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.entities.EntityBuggy;
 import micdoodle8.mods.galacticraft.core.entities.EntityTier1Rocket;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.items.ItemBasic;
@@ -69,6 +70,7 @@ public class RecipeManagerGC {
 
         for (String fluidName : t2Fuels) {
             RocketFuels.addFuel(EntityTier1Rocket.class, fluidName);
+            RocketFuels.addFuel(EntityBuggy.class, fluidName);
             RocketFuels.addFuel(EntityTier2Rocket.class, fluidName);
             RocketFuels.addFuel(EntityCargoRocket.class, fluidName);
         }
