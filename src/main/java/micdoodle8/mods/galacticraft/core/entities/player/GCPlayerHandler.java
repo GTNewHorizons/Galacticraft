@@ -186,7 +186,7 @@ public class GCPlayerHandler {
                     TileEntityTelemetry.frequencyModulePlayer(GCPlayer.lastFrequencyModuleInSlot, null);
                 } else if (GCPlayer.frequencyModuleInSlot.getItem() == GCItems.basicItem
                         && GCPlayer.frequencyModuleInSlot.getItemDamage() == 19
-                        && GCPlayer.lastFrequencyModuleInSlot == null) {
+                        && (GCPlayer.lastFrequencyModuleInSlot == null || forceSend)) {
                             GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADD_FREQUENCY_MODULE);
                             TileEntityTelemetry.frequencyModulePlayer(GCPlayer.frequencyModuleInSlot, player);
                         }
