@@ -111,12 +111,16 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
         if (this.rumble < 0) {
             this.rumble++;
         }
+        final boolean isIgnited = this.launchPhase == EnumLaunchPhase.IGNITED.ordinal();
+        final boolean isLaunched = this.launchPhase == EnumLaunchPhase.LAUNCHED.ordinal();
 
-        if (this.launchPhase == EnumLaunchPhase.IGNITED.ordinal()
-                || this.launchPhase == EnumLaunchPhase.LAUNCHED.ordinal()) {
+        if (isIgnited || isLaunched) {
             this.performHurtAnimation();
-
             this.rumble = (float) this.rand.nextInt(3) - 3;
+
+            if (this.destinationFrequency != -1 && !this.landing && isLaunched) {
+                this.onReachAtmosphere();
+            }
         }
 
         int i;
@@ -256,7 +260,7 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
                 final WorldProvider targetDim = WorldUtil.getProviderForDimensionServer(this.targetDimension);
                 if (targetDim != null && targetDim.worldObj instanceof WorldServer) {
                     GCLog.debug("Loaded destination dimension " + this.targetDimension);
-                    this.setPosition(this.targetVec.x + 0.5F, this.targetVec.y + 800, this.targetVec.z + 0.5F);
+                    this.moveToDestination(800);
                     final Entity e = WorldUtil.transferEntityToDimension(
                             this,
                             this.targetDimension,
@@ -266,7 +270,7 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
 
                     if (e instanceof EntityCargoRocket) {
                         GCLog.debug("Cargo rocket arrived at destination dimension, going into landing mode.");
-                        e.setPosition(this.targetVec.x + 0.5F, this.targetVec.y + 800, this.targetVec.z + 0.5F);
+                        this.moveToDestination(800);
                         ((EntityCargoRocket) e).landing = true;
                         // No setDead() following successful transferEntityToDimension() - see javadoc
                         // on that
@@ -282,7 +286,7 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
                 this.setDead();
             } else {
                 GCLog.debug("Cargo rocket going into landing mode in same destination.");
-                this.setPosition(this.targetVec.x + 0.5F, this.targetVec.y + 800, this.targetVec.z + 0.5F);
+                this.moveToDestination(800);
                 this.landing = true;
             }
             return;
@@ -330,11 +334,18 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
     @Override
     public void onWorldTransferred(World world) {
         if (this.targetVec != null) {
-            this.setPosition(this.targetVec.x + 0.5F, this.targetVec.y + 2, this.targetVec.z + 0.5F);
+            moveToDestination(2);
             this.landing = true;
         } else {
             this.setDead();
         }
+    }
+
+    private void moveToDestination(int reentryHeight) {
+        if (this.destinationFrequency != 1) {
+            reentryHeight = 0;
+        }
+        this.setPosition(this.targetVec.x + 0.5F, this.targetVec.y + reentryHeight, this.targetVec.z + 0.5F);
     }
 
     @Override
