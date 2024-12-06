@@ -342,7 +342,7 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
     }
 
     private void moveToDestination(int reentryHeight) {
-        if (this.destinationFrequency != 1){
+        if (this.destinationFrequency != 1) {
             reentryHeight = 0;
         }
         this.setPosition(this.targetVec.x + 0.5F, this.targetVec.y + reentryHeight, this.targetVec.z + 0.5F);
