@@ -23,7 +23,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
+import cpw.mods.fml.common.Loader;
 import micdoodle8.mods.galacticraft.api.entity.IEntityBreathable;
+import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
@@ -154,7 +156,9 @@ public class EntityEvolvedZombie extends EntityZombie implements IEntityBreathab
         // Drop copper ingot as semi-rare drop if player hit and if dropping rotten
         // flesh (50% chance)
         if (p_70628_1_ && ConfigManagerCore.challengeMobDropsAndSpawning && j > 0 && this.rand.nextInt(6) == 0) {
-            this.entityDropItem(new ItemStack(GCItems.basicItem, 1, 3), 0.0F);
+            if (!Loader.isModLoaded(Constants.MOD_ID_NEW_HORIZONS_CORE_MOD)) {
+                this.entityDropItem(new ItemStack(GCItems.basicItem, 1, 3), 0.0F);
+            }
         }
     }
 }

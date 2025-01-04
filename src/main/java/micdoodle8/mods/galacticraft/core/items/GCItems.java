@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
@@ -227,9 +228,11 @@ public class GCItems {
         GCCoreUtil.registerGalacticraftItem("infiniteBattery", GCItems.infiniteBatery);
         GCCoreUtil.registerGalacticraftItem("infiniteOxygen", GCItems.oxygenCanisterInfinite);
         GCCoreUtil.registerGalacticraftItem("rawSilicon", GCItems.basicItem, 2);
-        GCCoreUtil.registerGalacticraftItem("ingotCopper", GCItems.basicItem, 3);
-        GCCoreUtil.registerGalacticraftItem("ingotTin", GCItems.basicItem, 4);
-        GCCoreUtil.registerGalacticraftItem("ingotAluminum", GCItems.basicItem, 5);
+        if (!Loader.isModLoaded(Constants.MOD_ID_NEW_HORIZONS_CORE_MOD)) {
+            GCCoreUtil.registerGalacticraftItem("ingotCopper", GCItems.basicItem, 3);
+            GCCoreUtil.registerGalacticraftItem("ingotTin", GCItems.basicItem, 4);
+            GCCoreUtil.registerGalacticraftItem("ingotAluminum", GCItems.basicItem, 5);
+        }
         GCCoreUtil.registerGalacticraftItem("compressedCopper", GCItems.basicItem, 6);
         GCCoreUtil.registerGalacticraftItem("compressedTin", GCItems.basicItem, 7);
         GCCoreUtil.registerGalacticraftItem("compressedAluminum", GCItems.basicItem, 8);
@@ -253,12 +256,17 @@ public class GCItems {
         for (int i = 0; i < ItemBasic.names.length; i++) {
             if (ItemBasic.names[i].contains("ingot") || ItemBasic.names[i].contains("compressed")
                     || ItemBasic.names[i].contains("wafer")) {
+                if (Loader.isModLoaded(Constants.MOD_ID_NEW_HORIZONS_CORE_MOD) && (2 < i) && (i < 6)) {
+                    continue;
+                }
                 OreDictionary.registerOre(ItemBasic.names[i], new ItemStack(GCItems.basicItem, 1, i));
             }
         }
 
         OreDictionary.registerOre("compressedMeteoricIron", new ItemStack(GCItems.meteoricIronIngot, 1, 1));
-        OreDictionary.registerOre("ingotMeteoricIron", new ItemStack(GCItems.meteoricIronIngot, 1, 0));
+        if (!Loader.isModLoaded(Constants.MOD_ID_NEW_HORIZONS_CORE_MOD)) {
+            OreDictionary.registerOre("ingotMeteoricIron", new ItemStack(GCItems.meteoricIronIngot, 1, 0));
+        }
         OreDictionary.registerOre(ConfigManagerCore.otherModsSilicon, new ItemStack(GCItems.basicItem, 1, 2));
     }
 
