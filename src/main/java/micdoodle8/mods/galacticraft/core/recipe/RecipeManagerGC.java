@@ -124,46 +124,6 @@ public class RecipeManagerGC {
                 GCLog.exception(e);
             }
         }
-
-        final Object meteoricIronIngot = ConfigManagerCore.recipesRequireGCAdvancedMetals ? GCItems.meteoricIronIngot
-                : "ingotMeteoricIron";
-        final Object meteoricIronPlate = ConfigManagerCore.recipesRequireGCAdvancedMetals
-                ? new ItemStack(GCItems.meteoricIronIngot, 1, 1)
-                : "compressedMeteoricIron";
-        final Object deshIngot = ConfigManagerCore.recipesRequireGCAdvancedMetals
-                ? new ItemStack(MarsItems.marsItemBasic, 1, 2)
-                : "ingotDesh";
-
-        // RocketFuelRecipe.addFuel(GalacticraftCore.fluidFuel,1);
-        if (!Loader.isModLoaded(Constants.MOD_ID_NEW_HORIZONS_CORE_MOD)) {
-            FurnaceRecipes.smelting().func_151394_a(
-                    new ItemStack(GCBlocks.basicBlock, 1, 5),
-                    new ItemStack(GCItems.basicItem, 1, 3),
-                    0.5F);
-            FurnaceRecipes.smelting().func_151394_a(
-                    new ItemStack(GCBlocks.basicBlock, 1, 6),
-                    new ItemStack(GCItems.basicItem, 1, 4),
-                    0.5F);
-            FurnaceRecipes.smelting().func_151394_a(
-                    new ItemStack(GCBlocks.basicBlock, 1, 7),
-                    new ItemStack(GCItems.basicItem, 1, 5),
-                    0.5F);
-            FurnaceRecipes.smelting()
-                    .func_151396_a(GCItems.meteoricIronRaw, new ItemStack(GCItems.meteoricIronIngot), 1.0F);
-            FurnaceRecipes.smelting().func_151394_a(
-                    new ItemStack(GCBlocks.blockMoon, 1, 0),
-                    new ItemStack(GCItems.basicItem, 1, 3),
-                    1.0F);
-            FurnaceRecipes.smelting().func_151394_a(
-                    new ItemStack(GCBlocks.blockMoon, 1, 1),
-                    new ItemStack(GCItems.basicItem, 1, 4),
-                    1.0F);
-            // Recycling: smelt tin/copper canisters back into ingots
-            FurnaceRecipes.smelting()
-                    .func_151394_a(new ItemStack(GCItems.canister, 1, 0), new ItemStack(GCItems.basicItem, 3, 4), 1.0F);
-            FurnaceRecipes.smelting()
-                    .func_151394_a(new ItemStack(GCItems.canister, 1, 1), new ItemStack(GCItems.basicItem, 3, 3), 1.0F);
-        }
         FurnaceRecipes.smelting().func_151394_a(
                 new ItemStack(GCItems.meteorChunk, 1, 0),
                 new ItemStack(GCItems.meteorChunk, 1, 1),
@@ -202,6 +162,43 @@ public class RecipeManagerGC {
         }
 
         if (!Loader.isModLoaded(Constants.MOD_ID_NEW_HORIZONS_CORE_MOD)) {
+            final Object meteoricIronIngot = ConfigManagerCore.recipesRequireGCAdvancedMetals
+                    ? GCItems.meteoricIronIngot
+                    : "ingotMeteoricIron";
+            final Object meteoricIronPlate = ConfigManagerCore.recipesRequireGCAdvancedMetals
+                    ? new ItemStack(GCItems.meteoricIronIngot, 1, 1)
+                    : "compressedMeteoricIron";
+            final Object deshIngot = ConfigManagerCore.recipesRequireGCAdvancedMetals
+                    ? new ItemStack(MarsItems.marsItemBasic, 1, 2)
+                    : "ingotDesh";
+            FurnaceRecipes.smelting().func_151394_a(
+                    new ItemStack(GCBlocks.basicBlock, 1, 5),
+                    new ItemStack(GCItems.basicItem, 1, 3),
+                    0.5F);
+            FurnaceRecipes.smelting().func_151394_a(
+                    new ItemStack(GCBlocks.basicBlock, 1, 6),
+                    new ItemStack(GCItems.basicItem, 1, 4),
+                    0.5F);
+            FurnaceRecipes.smelting().func_151394_a(
+                    new ItemStack(GCBlocks.basicBlock, 1, 7),
+                    new ItemStack(GCItems.basicItem, 1, 5),
+                    0.5F);
+            FurnaceRecipes.smelting()
+                    .func_151396_a(GCItems.meteoricIronRaw, new ItemStack(GCItems.meteoricIronIngot), 1.0F);
+            FurnaceRecipes.smelting().func_151394_a(
+                    new ItemStack(GCBlocks.blockMoon, 1, 0),
+                    new ItemStack(GCItems.basicItem, 1, 3),
+                    1.0F);
+            FurnaceRecipes.smelting().func_151394_a(
+                    new ItemStack(GCBlocks.blockMoon, 1, 1),
+                    new ItemStack(GCItems.basicItem, 1, 4),
+                    1.0F);
+            // Recycling: smelt tin/copper canisters back into ingots
+            FurnaceRecipes.smelting()
+                    .func_151394_a(new ItemStack(GCItems.canister, 1, 0), new ItemStack(GCItems.basicItem, 3, 4), 1.0F);
+            FurnaceRecipes.smelting()
+                    .func_151394_a(new ItemStack(GCItems.canister, 1, 1), new ItemStack(GCItems.basicItem, 3, 3), 1.0F);
+
             RecipeUtil.addRecipe(
                     new ItemStack(GCBlocks.aluminumWire, 6),
                     new Object[] { "WWW", "CCC", "WWW", 'W', Blocks.wool, 'C', "ingotAluminum" });
@@ -716,6 +713,9 @@ public class RecipeManagerGC {
                 .add(new ShapelessOreRecipe(new ItemStack(GCItems.meteorChunk, 3), GCItems.meteoricIronRaw));
 
         if (!Loader.isModLoaded(Constants.MOD_ID_NEW_HORIZONS_CORE_MOD)) {
+            final Object meteoricIronIngot = ConfigManagerCore.recipesRequireGCAdvancedMetals
+                    ? GCItems.meteoricIronIngot
+                    : "ingotMeteoricIron";
             for (int i = 3; i < 6; i++) {
                 if (ItemBasic.names[i].contains("ingot")) {
                     CompressorRecipes.addShapelessRecipe(

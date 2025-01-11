@@ -21,6 +21,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -36,6 +37,7 @@ import micdoodle8.mods.galacticraft.api.galaxies.Planet;
 import micdoodle8.mods.galacticraft.api.recipe.CompressorRecipes;
 import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;
 import micdoodle8.mods.galacticraft.api.world.IAtmosphericGas;
+import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.event.EventHandlerGC;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
@@ -169,14 +171,16 @@ public class MarsModule implements IPlanetsModule {
         GalacticraftRegistry.addDungeonLoot(2, new ItemStack(MarsItems.schematic, 1, 1));
         GalacticraftRegistry.addDungeonLoot(2, new ItemStack(MarsItems.schematic, 1, 2));
 
-        CompressorRecipes.addShapelessRecipe(
-                new ItemStack(MarsItems.marsItemBasic, 1, 3),
-                new ItemStack(GCItems.heavyPlatingTier1),
-                new ItemStack(GCItems.meteoricIronIngot, 1, 1));
-        CompressorRecipes.addShapelessRecipe(
-                new ItemStack(MarsItems.marsItemBasic, 1, 5),
-                ConfigManagerCore.recipesRequireGCAdvancedMetals ? new ItemStack(MarsItems.marsItemBasic, 1, 2)
-                        : "ingotDesh");
+        if (!Loader.isModLoaded(Constants.MOD_ID_NEW_HORIZONS_CORE_MOD)) {
+            CompressorRecipes.addShapelessRecipe(
+                    new ItemStack(MarsItems.marsItemBasic, 1, 3),
+                    new ItemStack(GCItems.heavyPlatingTier1),
+                    new ItemStack(GCItems.meteoricIronIngot, 1, 1));
+            CompressorRecipes.addShapelessRecipe(
+                    new ItemStack(MarsItems.marsItemBasic, 1, 5),
+                    ConfigManagerCore.recipesRequireGCAdvancedMetals ? new ItemStack(MarsItems.marsItemBasic, 1, 2)
+                            : "ingotDesh");
+        }
     }
 
     @Override
