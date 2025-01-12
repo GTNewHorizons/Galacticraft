@@ -137,11 +137,11 @@ schematic.astroMiner.name=AstroMinador
 schematic.ionDrive.name=Propulsor menaiónico
 
 # ENTIDADES
-entity.SmallAsteroidGC.name=Asteroide pequeño
-entity.GrappleHookGC.name=Gancho
-entity.Tier3RocketGC.name=Cohete nivel 3
-entity.EntryPodAsteroids.name=Cápsula de entrada
-entity.AstroMiner.name=AstroMinador
+entity.GalacticraftMars.SmallAsteroidGC.name=Asteroide pequeño
+entity.GalacticraftMars.GrappleHookGC.name=Gancho
+entity.GalacticraftMars.Tier3RocketGC.name=Cohete nivel 3
+entity.GalacticraftMars.EntryPodAsteroids.name=Cápsula de entrada
+entity.GalacticraftMars.AstroMiner.name=AstroMinador
 
 # ENVASES
 container.shortRangeTelepad.name=Teletransportador de corto alcance

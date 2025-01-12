@@ -137,11 +137,11 @@ schematic.astroMiner.name=Astrobrytare
 schematic.ionDrive.name=Jonmotor
 
 # ENTITIES
-entity.SmallAsteroidGC.name=Liten asteroid
-entity.GrappleHookGC.name=Änterhake
-entity.Tier3RocketGC.name=N3-raket
-entity.EntryPodAsteroids.name=Inträdeskapsel
-entity.AstroMiner.name=Astrobrytare
+entity.GalacticraftMars.SmallAsteroidGC.name=Liten asteroid
+entity.GalacticraftMars.GrappleHookGC.name=Änterhake
+entity.GalacticraftMars.Tier3RocketGC.name=N3-raket
+entity.GalacticraftMars.EntryPodAsteroids.name=Inträdeskapsel
+entity.GalacticraftMars.AstroMiner.name=Astrobrytare
 
 # CONTAINERS
 container.shortRangeTelepad.name=Kortdistansteleporterare
