@@ -136,11 +136,11 @@ tile.minerBase.description=Die Astrominer-Basis ist die Andockstelle für einen 
 schematic.astroMiner.name=Astrominer
 
 # ENTITIES
-entity.SmallAsteroidGC.name=Kleiner Asteroid
-entity.GrappleHookGC.name=Greifhaken
-entity.Tier3RocketGC.name=Rakete (Stufe 3)
-entity.EntryPodAsteroids.name=Eintrittskapsel
-entity.AstroMiner.name=Astrominer
+entity.GalacticraftMars.SmallAsteroidGC.name=Kleiner Asteroid
+entity.GalacticraftMars.GrappleHookGC.name=Greifhaken
+entity.GalacticraftMars.Tier3RocketGC.name=Rakete (Stufe 3)
+entity.GalacticraftMars.EntryPodAsteroids.name=Eintrittskapsel
+entity.GalacticraftMars.AstroMiner.name=Astrominer
 
 # CONTAINERS
 container.shortRangeTelepad.name=Kurzreichweiten-Telepad

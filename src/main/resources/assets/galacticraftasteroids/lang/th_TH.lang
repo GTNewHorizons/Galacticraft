@@ -136,11 +136,11 @@ tile.minerBase.description=ใช้สำหรับเป็นฐานจ�
 schematic.astroMiner.name=แอสโทรไมน์เนอร์
 
 # ENTITIES
-entity.SmallAsteroidGC.name=ดาวเคราะห์น้อยขนาดเล็ก
-entity.GrappleHookGC.name=ตะขอ
-entity.Tier3RocketGC.name=จรวด เทียร์ 3
-entity.EntryPodAsteroids.name=ยานลงจอด
-entity.AstroMiner.name=แอสโทรไมน์เนอร์
+entity.GalacticraftMars.SmallAsteroidGC.name=ดาวเคราะห์น้อยขนาดเล็ก
+entity.GalacticraftMars.GrappleHookGC.name=ตะขอ
+entity.GalacticraftMars.Tier3RocketGC.name=จรวด เทียร์ 3
+entity.GalacticraftMars.EntryPodAsteroids.name=ยานลงจอด
+entity.GalacticraftMars.AstroMiner.name=แอสโทรไมน์เนอร์
 
 # CONTAINERS
 container.shortRangeTelepad.name=เครื่องเทเลพอร์ตระยะใกล้

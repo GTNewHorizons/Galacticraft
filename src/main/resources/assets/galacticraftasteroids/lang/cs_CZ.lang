@@ -144,10 +144,10 @@ itemGroup.GalacticraftAsteroids=Galacticraft Asteroidy
 # Schematics
 
 # Entity
-entity.SmallAsteroidGC.name=Malý asteroid
-entity.GrappleHookGC.name=Hák
-entity.Tier3RocketGC.name=Raketa typ 3
-entity.EntryPodAsteroids.name=Přistávací modul
-entity.AstroMiner.name=Těžební souprava
+entity.GalacticraftMars.SmallAsteroidGC.name=Malý asteroid
+entity.GalacticraftMars.GrappleHookGC.name=Hák
+entity.GalacticraftMars.Tier3RocketGC.name=Raketa typ 3
+entity.GalacticraftMars.EntryPodAsteroids.name=Přistávací modul
+entity.GalacticraftMars.AstroMiner.name=Těžební souprava
 
 # Container

@@ -141,10 +141,10 @@ itemGroup.GalacticraftAsteroids=Astéroïdes Galacticraft
 # Schematics
 
 # Entity
-entity.SmallAsteroidGC.name=Petit astéroïde
-entity.GrappleHookGC.name=Grappin
-entity.Tier3RocketGC.name=Fusée Niveau 3
-entity.EntryPodAsteroids.name=Sas d'entrée
-entity.AstroMiner.name=Astro-mineur
+entity.GalacticraftMars.SmallAsteroidGC.name=Petit astéroïde
+entity.GalacticraftMars.GrappleHookGC.name=Grappin
+entity.GalacticraftMars.Tier3RocketGC.name=Fusée Niveau 3
+entity.GalacticraftMars.EntryPodAsteroids.name=Sas d'entrée
+entity.GalacticraftMars.AstroMiner.name=Astro-mineur
 
 # Container
