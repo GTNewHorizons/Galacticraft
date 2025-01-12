@@ -136,11 +136,11 @@ schematic.ionDrive.name=Ion Drive ##NEEDS TRANSLATE##
 # SCHEMATICS
 
 # ENTITIES
-entity.SmallAsteroidGC.name=Kis Aszteroida
-entity.GrappleHookGC.name=Fodó Szigonyja
-entity.Tier3RocketGC.name=3-As Szintű Rakéta
-entity.EntryPodAsteroids.name=Entry Pod ##NEEDS TRANSLATE##
-entity.AstroMiner.name=Astro Miner ##NEEDS TRANSLATE##
+entity.GalacticraftMars.SmallAsteroidGC.name=Kis Aszteroida
+entity.GalacticraftMars.GrappleHookGC.name=Fodó Szigonyja
+entity.GalacticraftMars.Tier3RocketGC.name=3-As Szintű Rakéta
+entity.GalacticraftMars.EntryPodAsteroids.name=Entry Pod ##NEEDS TRANSLATE##
+entity.GalacticraftMars.AstroMiner.name=Astro Miner ##NEEDS TRANSLATE##
 
 # CONTAINERS
 container.shortRangeTelepad.name=Rövidtávú Teleporter

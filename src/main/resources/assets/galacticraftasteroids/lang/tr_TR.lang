@@ -136,11 +136,11 @@ tile.minerBase.description=Astro Maden Makinesinin üssü ve yerleşme yeridir. 
 schematic.astroMiner.name=Astro Maden Makinesi
 
 # ENTITIES
-entity.SmallAsteroidGC.name=Küçük Asteroit
-entity.GrappleHookGC.name=Çeneli Kanca
-entity.Tier3RocketGC.name=Tier 3 Roket
-entity.EntryPodAsteroids.name=Giriş Bölmesi
-entity.AstroMiner.name=Astro Maden Makinesi
+entity.GalacticraftMars.SmallAsteroidGC.name=Küçük Asteroit
+entity.GalacticraftMars.GrappleHookGC.name=Çeneli Kanca
+entity.GalacticraftMars.Tier3RocketGC.name=Tier 3 Roket
+entity.GalacticraftMars.EntryPodAsteroids.name=Giriş Bölmesi
+entity.GalacticraftMars.AstroMiner.name=Astro Maden Makinesi
 
 # CONTAINERS
 container.shortRangeTelepad.name=Kısa Menzilli Telepad

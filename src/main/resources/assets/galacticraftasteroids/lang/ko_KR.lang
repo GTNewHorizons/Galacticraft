@@ -137,11 +137,11 @@ schematic.ionDrive.name=이온 드라이브
 # SCHEMATICS
 
 # ENTITIES
-entity.SmallAsteroidGC.name=작은 소행성
-entity.GrappleHookGC.name=그래플
-entity.Tier3RocketGC.name=3티어 로켓
-entity.EntryPodAsteroids.name=진입 캡슐
-entity.AstroMiner.name=천체 광업기계
+entity.GalacticraftMars.SmallAsteroidGC.name=작은 소행성
+entity.GalacticraftMars.GrappleHookGC.name=그래플
+entity.GalacticraftMars.Tier3RocketGC.name=3티어 로켓
+entity.GalacticraftMars.EntryPodAsteroids.name=진입 캡슐
+entity.GalacticraftMars.AstroMiner.name=천체 광업기계
 
 # CONTAINERS
 container.shortRangeTelepad.name=단거리 텔레포터

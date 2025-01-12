@@ -147,11 +147,11 @@ schematic.ionDrive.name=Ion Disk
 # SCHEMATICS
 
 # ENTITIES
-entity.SmallAsteroidGC.name=Mali Asteroid
-entity.GrappleHookGC.name=Kuka
-entity.Tier3RocketGC.name=Rang 3 Raketa
-entity.EntryPodAsteroids.name=Kapsula za ulaz
-entity.AstroMiner.name=Astro Rudar
+entity.GalacticraftMars.SmallAsteroidGC.name=Mali Asteroid
+entity.GalacticraftMars.GrappleHookGC.name=Kuka
+entity.GalacticraftMars.Tier3RocketGC.name=Rang 3 Raketa
+entity.GalacticraftMars.EntryPodAsteroids.name=Kapsula za ulaz
+entity.GalacticraftMars.AstroMiner.name=Astro Rudar
 
 # CONTAINERS
 container.shortRangeTelepad.name=Teleporter s Malom Daljinom
