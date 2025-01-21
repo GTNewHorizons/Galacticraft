@@ -21,6 +21,8 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
@@ -422,5 +424,35 @@ public class OxygenUtil {
         }
 
         return false;
+    }
+
+    /**
+     * Applies the water breathing effect to the player if they are in water and have the oxygen gear. Consumes oxygen
+     * from the player's oxygen tanks.
+     *
+     * @param player The player to check and apply the effect to.
+     */
+    public static void applyWaterBreathingEffect(EntityPlayerMP player) {
+        // Check if the player is in water
+        if (player.isInWater()) {
+            // Check if the player has valid oxygen gear setup
+            if (hasValidOxygenSetup(player)) {
+                // Apply the water breathing effect
+                player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 220, 0, true));
+
+                // Consume oxygen
+                GCPlayerStats stats = GCPlayerStats.get(player);
+                ItemStack tankInSlot1 = stats.extendedInventory.getStackInSlot(2);
+                ItemStack tankInSlot2 = stats.extendedInventory.getStackInSlot(3);
+
+                if (tankInSlot1 != null && tankInSlot1.getItem() instanceof ItemOxygenTank
+                        && tankInSlot1.getMaxDamage() - tankInSlot1.getItemDamage() > 0) {
+                    tankInSlot1.damageItem(1, player);
+                } else if (tankInSlot2 != null && tankInSlot2.getItem() instanceof ItemOxygenTank
+                        && tankInSlot2.getMaxDamage() - tankInSlot2.getItemDamage() > 0) {
+                            tankInSlot2.damageItem(1, player);
+                        }
+            }
+        }
     }
 }

@@ -998,6 +998,7 @@ public class GCPlayerHandler {
 
         // This will speed things up a little
         final GCPlayerStats GCPlayer = GCPlayerStats.get(player);
+        OxygenUtil.applyWaterBreathingEffect(player);
 
         if (ConfigManagerCore.challengeSpawnHandling && GCPlayer.unlockedSchematics.size() == 0) {
             if (GCPlayer.startDimension.length() > 0) {
