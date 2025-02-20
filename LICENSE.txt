@@ -1,4 +1,4 @@
-opyright and Licensing
+Copyright and Licensing
 =======================
 1.  "Galacticraft" and "the Galacticraft project" means the plugin for 
 Forge-modified Minecraft (see section 10 below) which is distributed as a 
@@ -339,7 +339,7 @@ its source code does not thereby obtain ownership of Galacticraft, but
 merely a copy of it which may be used only on the terms licenced by the 
 Galacticraft developers from time to time as set out herein.
 
-odpacks permission
+Modpacks permission
 -------------------
 37.  Permission is hereby granted for Galacticraft to be incorporated in any 
 modpack without further authorisation from the Galacticraft developers, on 
