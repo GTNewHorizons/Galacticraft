@@ -499,6 +499,60 @@ public class PacketSimple extends Packet implements IPacket {
                         case REMOVE_THERMAL_BOOTS:
                             gearData.setThermalPadding(3, -1);
                             break;
+                        case SHOWMASK:
+                            gearData.setRenderMask(true);
+                            break;
+                        case HIDEMASK:
+                            gearData.setRenderMask(false);
+                            break;
+                        case SHOWGEAR:
+                            gearData.setRenderGear(true);
+                            break;
+                        case HIDEGEAR:
+                            gearData.setRenderGear(false);
+                            break;
+                        case SHOWLEFTTANK:
+                            gearData.setRenderLeftTank(true);
+                            break;
+                        case HIDELEFTTANK:
+                            gearData.setRenderLeftTank(false);
+                            break;
+                        case SHOWRIGHTTANK:
+                            gearData.setRenderRightTank(true);
+                            break;
+                        case HIDERIGHTTANK:
+                            gearData.setRenderRightTank(false);
+                            break;
+                        case SHOWFREQUENCYMODULE:
+                            gearData.setRenderFrequencyModule(true);
+                            break;
+                        case HIDEFREQUENCYMODULE:
+                            gearData.setRenderFrequencyModule(false);
+                            break;
+                        case SHOWTHERMALHELMET:
+                            gearData.setRenderThermalPadding(0, true);
+                            break;
+                        case SHOWTHERMALCHESTPLATE:
+                            gearData.setRenderThermalPadding(1, true);
+                            break;
+                        case SHOWTHERMALLEGGINGS:
+                            gearData.setRenderThermalPadding(2, true);
+                            break;
+                        case SHOWTHERMALBOOTS:
+                            gearData.setRenderThermalPadding(3, true);
+                            break;
+                        case HIDETHERMALHELMET:
+                            gearData.setRenderThermalPadding(0, false);
+                            break;
+                        case HIDETHERMALCHESTPLATE:
+                            gearData.setRenderThermalPadding(1, false);
+                            break;
+                        case HIDETHERMALLEGGINGS:
+                            gearData.setRenderThermalPadding(2, false);
+                            break;
+                        case HIDETHERMALBOOTS:
+                            gearData.setRenderThermalPadding(3, false);
+                            break;
                         default:
                             break;
                     }

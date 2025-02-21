@@ -250,21 +250,21 @@ public class ModelPlayerGC extends ModelBiped {
 
         if (gearData != null) {
             this.usingParachute = gearData.getParachute() != null;
-            wearingMask = gearData.getMask() > -1;
-            wearingGear = gearData.getGear() > -1;
-            wearingLeftTankGreen = gearData.getLeftTank() == 0;
-            wearingLeftTankOrange = gearData.getLeftTank() == 1;
-            wearingLeftTankRed = gearData.getLeftTank() == 2;
-            wearingLeftTankBlue = gearData.getLeftTank() == 3;
-            wearingLeftTankViolet = gearData.getLeftTank() == 4;
-            wearingLeftTankGray = gearData.getLeftTank() == Integer.MAX_VALUE;
-            wearingRightTankGreen = gearData.getRightTank() == 0;
-            wearingRightTankOrange = gearData.getRightTank() == 1;
-            wearingRightTankRed = gearData.getRightTank() == 2;
-            wearingRightTankBlue = gearData.getRightTank() == 3;
-            wearingRightTankViolet = gearData.getRightTank() == 4;
-            wearingRightTankGray = gearData.getRightTank() == Integer.MAX_VALUE;
-            wearingFrequencyModule = gearData.getFrequencyModule() > -1;
+            wearingMask = gearData.getMask() > -1 && gearData.getRenderMask();
+            wearingGear = gearData.getGear() > -1 && gearData.getRenderGear();
+            wearingLeftTankGreen = gearData.getLeftTank() == 0 && gearData.getRenderLeftTank();
+            wearingLeftTankOrange = gearData.getLeftTank() == 1 && gearData.getRenderLeftTank();
+            wearingLeftTankRed = gearData.getLeftTank() == 2 && gearData.getRenderLeftTank();
+            wearingLeftTankBlue = gearData.getLeftTank() == 3 && gearData.getRenderLeftTank();
+            wearingLeftTankViolet = gearData.getLeftTank() == 4 && gearData.getRenderLeftTank();
+            wearingLeftTankGray = gearData.getLeftTank() == Integer.MAX_VALUE && gearData.getRenderLeftTank();
+            wearingRightTankGreen = gearData.getRightTank() == 0 && gearData.getRenderRightTank();
+            wearingRightTankOrange = gearData.getRightTank() == 1 && gearData.getRenderRightTank();
+            wearingRightTankRed = gearData.getRightTank() == 2 && gearData.getRenderRightTank();
+            wearingRightTankBlue = gearData.getRightTank() == 3 && gearData.getRenderRightTank();
+            wearingRightTankViolet = gearData.getRightTank() == 4 && gearData.getRenderRightTank();
+            wearingRightTankGray = gearData.getRightTank() == Integer.MAX_VALUE && gearData.getRenderRightTank();
+            wearingFrequencyModule = gearData.getFrequencyModule() > -1 && gearData.getRenderFrequencyModule();
         } else {
             final String id = player.getGameProfile().getName();
 

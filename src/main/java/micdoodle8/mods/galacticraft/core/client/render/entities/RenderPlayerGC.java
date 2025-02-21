@@ -95,13 +95,15 @@ public class RenderPlayerGC extends RenderPlayer {
                         if (padding == 0 && !par1EntityLivingBase.isInvisible()) {
                             GL11.glColor4f(1, 1, 1, 1);
                             Minecraft.getMinecraft().renderEngine.bindTexture(RenderPlayerGC.thermalPaddingTexture1);
-                            modelBiped.bipedHead.showModel = i == 0;
-                            modelBiped.bipedHeadwear.showModel = i == 0;
-                            modelBiped.bipedBody.showModel = i == 1 || i == 2;
-                            modelBiped.bipedRightArm.showModel = i == 1;
-                            modelBiped.bipedLeftArm.showModel = i == 1;
-                            modelBiped.bipedRightLeg.showModel = i == 2 || i == 3;
-                            modelBiped.bipedLeftLeg.showModel = i == 2 || i == 3;
+                            modelBiped.bipedHead.showModel = i == 0 && gearData.getRenderThermalPadding(i);
+                            modelBiped.bipedHeadwear.showModel = i == 0 && gearData.getRenderThermalPadding(i);
+                            modelBiped.bipedBody.showModel = (i == 1 || i == 2) && gearData.getRenderThermalPadding(i);
+                            modelBiped.bipedRightArm.showModel = i == 1 && gearData.getRenderThermalPadding(i);
+                            modelBiped.bipedLeftArm.showModel = i == 1 && gearData.getRenderThermalPadding(i);
+                            modelBiped.bipedRightLeg.showModel = (i == 2 || i == 3)
+                                    && gearData.getRenderThermalPadding(i);
+                            modelBiped.bipedLeftLeg.showModel = (i == 2 || i == 3)
+                                    && gearData.getRenderThermalPadding(i);
 
                             modelBiped.onGround = thisInst.mainModel.onGround;
                             modelBiped.isRiding = thisInst.mainModel.isRiding;
