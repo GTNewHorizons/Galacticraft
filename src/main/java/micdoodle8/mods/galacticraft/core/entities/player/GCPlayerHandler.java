@@ -169,10 +169,10 @@ public class GCPlayerHandler {
     }
 
     // --- WitchingGadgets Translucent II enchant support
-    private static int translucentID = -6;
+    private static Integer translucentID = null;
 
-    public static int getTranslucentID() {
-        if (translucentID == -6) setTranslucentID();
+    public static Integer getTranslucentID() {
+        if (translucentID == null) setTranslucentID();
         return translucentID;
     }
 
@@ -183,12 +183,12 @@ public class GCPlayerHandler {
                 return;
             }
         }
-        translucentID = -1;
+        translucentID = null;
     }
 
     public static int getTranslucencyLevel(ItemStack stack) {
-        int translucent = getTranslucentID();
-        if (translucent > 0) return EnchantmentHelper.getEnchantmentLevel(translucent, stack);
+        Integer translucent = getTranslucentID();
+        if (translucent != null) return EnchantmentHelper.getEnchantmentLevel(translucent, stack);
         else return 0;
     }
 
