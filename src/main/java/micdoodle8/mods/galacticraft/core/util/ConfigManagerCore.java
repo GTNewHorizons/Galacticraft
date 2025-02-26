@@ -54,6 +54,7 @@ public class ConfigManagerCore {
     public static boolean disableLander;
     public static boolean recipesRequireGCAdvancedMetals = true;
     public static boolean alwaysDisplayOxygenHUD = false;
+    public static boolean disableGearRender = false;
     public static boolean allowSSatUnreachable;
     // public static int mapfactor;
     // public static int mapsize;
@@ -551,6 +552,12 @@ public class ConfigManagerCore {
             prop.comment = "Toggle this to always display the Oxygen HUD, if off it will only be shown on GC planets which require Oxygen.";
             prop.setLanguageKey("gc.configgui.alwaysDisplayOxygenHUD").setRequiresMcRestart(false);
             alwaysDisplayOxygenHUD = prop.getBoolean(false);
+            propOrder.add(prop.getName());
+
+            prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Disable Gear Render", false);
+            prop.comment = "Toggle this to disable rendering the GC gear on your body.";
+            prop.setLanguageKey("gc.configgui.disableGearRender").setRequiresMcRestart(false);
+            disableGearRender = prop.getBoolean(false);
             propOrder.add(prop.getName());
 
             prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Allow Stations at Unreachables", true);

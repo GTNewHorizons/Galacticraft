@@ -13,6 +13,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -164,6 +166,30 @@ public class GCPlayerHandler {
         }
 
         stats.player = new WeakReference<>(player);
+    }
+
+    // --- WitchingGadgets Translucent II enchant support
+    private static Integer translucentID = null;
+
+    public static Integer getTranslucentID() {
+        if (translucentID == null) setTranslucentID();
+        return translucentID;
+    }
+
+    private static void setTranslucentID() {
+        for (Enchantment ench : Enchantment.enchantmentsList) {
+            if (ench != null && ench.getName().equals("enchantment.wg.invisibleGear")) {
+                translucentID = ench.effectId;
+                return;
+            }
+        }
+        translucentID = null;
+    }
+
+    public static int getTranslucencyLevel(ItemStack stack) {
+        Integer translucent = getTranslucentID();
+        if (translucent != null) return EnchantmentHelper.getEnchantmentLevel(translucent, stack);
+        else return 0;
     }
 
     public static void checkGear(EntityPlayerMP player, GCPlayerStats GCPlayer, boolean forceSend) {
@@ -372,6 +398,44 @@ public class GCPlayerHandler {
 
             GCPlayer.lastThermalBootsInSlot = GCPlayer.thermalBootsInSlot;
         }
+        checkRenderGear(player);
+    }
+
+    public static void checkRenderGear(EntityPlayerMP player) {
+        GCPlayerStats GCPlayer = GCPlayerStats.get(player);
+        boolean disableGearRender = ConfigManagerCore.disableGearRender;
+        if (GCPlayer.frequencyModuleInSlot != null
+                && (getTranslucencyLevel(GCPlayer.frequencyModuleInSlot) == 2 || disableGearRender))
+            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDEFREQUENCYMODULE);
+        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWFREQUENCYMODULE);
+        if (GCPlayer.maskInSlot != null && (getTranslucencyLevel(GCPlayer.maskInSlot) == 2 || disableGearRender))
+            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDEMASK);
+        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWMASK);
+        if (GCPlayer.gearInSlot != null && (getTranslucencyLevel(GCPlayer.gearInSlot) == 2 || disableGearRender))
+            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDEGEAR);
+        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWGEAR);
+        if (GCPlayer.tankInSlot1 != null && (getTranslucencyLevel(GCPlayer.tankInSlot1) == 2 || disableGearRender))
+            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDELEFTTANK);
+        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWLEFTTANK);
+        if (GCPlayer.tankInSlot2 != null && (getTranslucencyLevel(GCPlayer.tankInSlot2) == 2 || disableGearRender))
+            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDERIGHTTANK);
+        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWRIGHTTANK);
+        if (GCPlayer.thermalHelmetInSlot != null
+                && (getTranslucencyLevel(GCPlayer.thermalHelmetInSlot) == 2 || disableGearRender))
+            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDETHERMALHELMET);
+        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWTHERMALHELMET);
+        if (GCPlayer.thermalChestplateInSlot != null
+                && (getTranslucencyLevel(GCPlayer.thermalChestplateInSlot) == 2 || disableGearRender))
+            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDETHERMALCHESTPLATE);
+        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWTHERMALCHESTPLATE);
+        if (GCPlayer.thermalLeggingsInSlot != null
+                && (getTranslucencyLevel(GCPlayer.thermalLeggingsInSlot) == 2 || disableGearRender))
+            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDETHERMALLEGGINGS);
+        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWTHERMALLEGGINGS);
+        if (GCPlayer.thermalBootsInSlot != null
+                && (getTranslucencyLevel(GCPlayer.thermalBootsInSlot) == 2 || disableGearRender))
+            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDETHERMALBOOTS);
+        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWTHERMALBOOTS);
     }
 
     protected void checkThermalStatus(EntityPlayerMP player, GCPlayerStats playerStats) {
@@ -990,7 +1054,25 @@ public class GCPlayerHandler {
         REMOVE_THERMAL_HELMET,
         REMOVE_THERMAL_CHESTPLATE,
         REMOVE_THERMAL_LEGGINGS,
-        REMOVE_THERMAL_BOOTS
+        REMOVE_THERMAL_BOOTS,
+        SHOWMASK,
+        HIDEMASK,
+        SHOWGEAR,
+        HIDEGEAR,
+        SHOWLEFTTANK,
+        HIDELEFTTANK,
+        SHOWRIGHTTANK,
+        HIDERIGHTTANK,
+        SHOWFREQUENCYMODULE,
+        HIDEFREQUENCYMODULE,
+        SHOWTHERMALHELMET,
+        SHOWTHERMALCHESTPLATE,
+        SHOWTHERMALLEGGINGS,
+        SHOWTHERMALBOOTS,
+        HIDETHERMALHELMET,
+        HIDETHERMALCHESTPLATE,
+        HIDETHERMALLEGGINGS,
+        HIDETHERMALBOOTS
     }
 
     public void onPlayerUpdate(EntityPlayerMP player) {

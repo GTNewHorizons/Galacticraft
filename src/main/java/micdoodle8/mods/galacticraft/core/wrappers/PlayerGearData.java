@@ -13,6 +13,12 @@ public class PlayerGearData {
     private final int[] thermalPadding;
     private ResourceLocation parachute;
     private int frequencyModule;
+    private boolean renderMask;
+    private boolean renderGear;
+    private boolean renderLeftTank;
+    private boolean renderRightTank;
+    private boolean renderFrequencyModule;
+    private final boolean[] renderThermalPadding;
 
     public PlayerGearData(EntityPlayer player) {
         this(player, -1, -1, -1, -1, -1, new int[] { -1, -1, -1, -1 });
@@ -20,6 +26,25 @@ public class PlayerGearData {
 
     public PlayerGearData(EntityPlayer player, int mask, int gear, int leftTank, int rightTank, int frequencyModule,
             int[] thermalPadding) {
+        this(
+                player,
+                mask,
+                gear,
+                leftTank,
+                rightTank,
+                frequencyModule,
+                thermalPadding,
+                true,
+                true,
+                true,
+                true,
+                true,
+                new boolean[] { true, true, true, true });
+    }
+
+    public PlayerGearData(EntityPlayer player, int mask, int gear, int leftTank, int rightTank, int frequencyModule,
+            int[] thermalPadding, boolean renderMask, boolean renderGear, boolean renderLeftTank,
+            boolean renderRightTank, boolean renderFrequencyModule, boolean[] renderThermalPadding) {
         this.player = player;
         this.mask = mask;
         this.gear = gear;
@@ -27,6 +52,12 @@ public class PlayerGearData {
         this.rightTank = rightTank;
         this.frequencyModule = frequencyModule;
         this.thermalPadding = thermalPadding;
+        this.renderMask = renderMask;
+        this.renderGear = renderGear;
+        this.renderLeftTank = renderLeftTank;
+        this.renderRightTank = renderRightTank;
+        this.renderFrequencyModule = renderFrequencyModule;
+        this.renderThermalPadding = renderThermalPadding;
     }
 
     public int getMask() {
@@ -92,6 +123,59 @@ public class PlayerGearData {
     public void setThermalPadding(int slot, int thermalPadding) {
         if (slot >= 0 && slot < this.thermalPadding.length) {
             this.thermalPadding[slot] = thermalPadding;
+        }
+    }
+
+    public boolean getRenderMask() {
+        return renderMask;
+    }
+
+    public boolean getRenderGear() {
+        return renderGear;
+    }
+
+    public boolean getRenderLeftTank() {
+        return renderLeftTank;
+    }
+
+    public boolean getRenderRightTank() {
+        return renderRightTank;
+    }
+
+    public boolean getRenderFrequencyModule() {
+        return renderFrequencyModule;
+    }
+
+    public boolean getRenderThermalPadding(int slot) {
+        if (slot >= 0 && slot < this.renderThermalPadding.length) {
+            return this.renderThermalPadding[slot];
+        }
+        return false;
+    }
+
+    public void setRenderMask(boolean renderMask) {
+        this.renderMask = renderMask;
+    }
+
+    public void setRenderGear(boolean renderGear) {
+        this.renderGear = renderGear;
+    }
+
+    public void setRenderLeftTank(boolean renderLeftTank) {
+        this.renderLeftTank = renderLeftTank;
+    }
+
+    public void setRenderRightTank(boolean renderRightTank) {
+        this.renderRightTank = renderRightTank;
+    }
+
+    public void setRenderFrequencyModule(boolean renderFrequencyModule) {
+        this.renderFrequencyModule = renderFrequencyModule;
+    }
+
+    public void setRenderThermalPadding(int slot, boolean render) {
+        if (slot >= 0 && slot < this.renderThermalPadding.length) {
+            this.renderThermalPadding[slot] = render;
         }
     }
 
