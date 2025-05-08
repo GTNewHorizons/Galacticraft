@@ -4,6 +4,7 @@ dependencies {
     }
     implementation('com.github.GTNewHorizons:TinkersConstruct:1.13.9-GTNH:dev')
     implementation('com.github.GTNewHorizons:NotEnoughItems:2.7.29-GTNH:dev')
+    implementation('com.github.GTNewHorizons:GTNHLib:0.6.21:dev')
     api('net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev')
 
     compileOnly('com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-547-GTNH:api')
