@@ -274,7 +274,9 @@ public class TileEntityArclamp extends TileEntity {
         long sideBits;
 
         for (int count = 0; count < 14; count++) {
-            for (final long packedCoord : currentLayer) {
+            LongIterator iter = currentLayer.longIterator();
+            while (iter.hasNext()) {
+                final long packedCoord = iter.nextLong();
                 side = 0;
                 sideBits = (packedCoord >> 60) & 0xF; // Extract the side bits from highest 4 bits
                 boolean allAir = true;
@@ -377,7 +379,9 @@ public class TileEntityArclamp extends TileEntity {
         // Write using the same NBT format, just unpack from longs when writing
         final NBTTagList airBlocks = new NBTTagList();
 
-        for (long packedCoord : this.airToRestore) {
+        LongIterator iterator = this.airToRestore.longIterator();
+        while (iterator.hasNext()) {
+            final long packedCoord = iterator.nextLong();
             final NBTTagCompound tag = new NBTTagCompound();
             tag.setInteger("x", CoordinatePacker.unpackX(packedCoord));
             tag.setInteger("y", CoordinatePacker.unpackY(packedCoord));
