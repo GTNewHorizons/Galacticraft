@@ -1,13 +1,13 @@
 dependencies {
-    implementation('com.github.GTNewHorizons:GT5-Unofficial:5.09.51.153:dev') {
+    implementation('com.github.GTNewHorizons:GT5-Unofficial:5.09.51.273:dev') {
         exclude group: "com.github.GTNewHorizons", module: "Galacticraft"
     }
-    implementation('com.github.GTNewHorizons:TinkersConstruct:1.13.9-GTNH:dev')
-    implementation('com.github.GTNewHorizons:NotEnoughItems:2.7.29-GTNH:dev')
+    implementation('com.github.GTNewHorizons:TinkersConstruct:1.13.23-GTNH:dev')
+    implementation('com.github.GTNewHorizons:NotEnoughItems:2.7.40-GTNH:dev')
     implementation('com.github.GTNewHorizons:GTNHLib:0.6.21:dev')
     api('net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev')
 
-    compileOnly('com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-547-GTNH:api')
+    compileOnly('com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-597-GTNH:api')
     compileOnly('com.github.GTNewHorizons:BuildCraft:7.1.42:api')
     compileOnly('curse.maven:cofh-lib-220333:2388748')
     compileOnly('curse.maven:PlayerAPI-228969:2248928')
@@ -15,5 +15,5 @@ dependencies {
     compileOnly('curse.maven:SmartRender-229857:2248949')
     compileOnly('curse.maven:mekanism-268560:2475797')
 
-    runtimeOnly('com.github.GTNewHorizons:ironchest:6.1.1:dev')
+    runtimeOnly('com.github.GTNewHorizons:ironchest:6.1.2:dev')
 }
