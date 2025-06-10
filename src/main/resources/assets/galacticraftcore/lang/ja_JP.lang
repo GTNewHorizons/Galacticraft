@@ -544,7 +544,7 @@ gui.spacestation.playername=<プレイヤー名前>
 gui.spacestation.toAllowEntry=この宇宙ステーションに他プレイヤーのアクセスを許可する
 gui.spacestation.added=%sの宇宙機に入られます！
 gui.spacestation.addsuccess=%sさんが宇宙機に入られます！
-gui.spacestation.removesuccess=Successfully removed %s from Space Station list ##NEEDS TRANSLATE##
+gui.spacestation.removesuccess=さんが宇宙機に入られません！
 gui.spacestation.allowAllTrue=Your Space Stations are now open to all players!  (Use /ssinvite -all to undo this.) ##NEEDS TRANSLATE##
 gui.spacestation.allowAllFalse=Your Space Stations are no longer open to all players! ##NEEDS TRANSLATE##
 gui.spacestation.changesuccess=Changed Space Station owner from %s to new owner %s. ##NEEDS TRANSLATE##
@@ -713,7 +713,6 @@ tile.arclamp.description=Arc Lamps are used to provide strong light to a large a
 tile.viewScreen.description=Display screens add that final touch to your space base. Right-click changes the information shown. ##NEEDS TRANSLATE##
 tile.telemetry.description=This gathers useful data from linked rockets, players and mobs. Best placed near to a Display Screen. Use a Frequency Module to establish data links. ##NEEDS TRANSLATE##
 tile.dish.description=The Communications Dish can track the position of space stations and receive communications from your remote space bases. ##NEEDS TRANSLATE##
-gui.spacestation.removesuccessさんが宇宙機に入られません！
 gui.skeletonBoss.message=ボスが消滅しました。 戦いの間に出ないでください！もう一回入るとボスがスポーンします。
 gui.warning.noroom=余地が無い！
 gui.flag.alreadyPlaced=旗がまだおいてある！
