@@ -17,5 +17,4 @@ dependencies {
 
     runtimeOnly('com.github.GTNewHorizons:ironchest:6.1.6:dev')
     runtimeOnly('com.github.GTNewHorizons:NotEnoughIds:2.1.10:dev')
-    runtimeOnly('com.github.GTNewHorizons:Hodgepodge:2.6.91:dev')
 }
