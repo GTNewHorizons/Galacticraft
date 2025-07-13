@@ -16,5 +16,4 @@ dependencies {
     compileOnly('curse.maven:mekanism-268560:2475797')
 
     runtimeOnly('com.github.GTNewHorizons:ironchest:6.1.6:dev')
-    runtimeOnly('com.github.GTNewHorizons:NotEnoughIds:2.1.10:dev')
 }
