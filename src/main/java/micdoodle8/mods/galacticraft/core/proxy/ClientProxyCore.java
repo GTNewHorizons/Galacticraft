@@ -291,7 +291,6 @@ public class ClientProxyCore extends CommonProxyCore {
         ClientProxyCore.registerInventoryTabs();
         ClientProxyCore.registerEntityRenderers();
         ClientProxyCore.registerItemRenderers();
-        MinecraftForge.EVENT_BUS.register(new TabRegistry());
         // ClientProxyCore.playerList = GLAllocation.generateDisplayLists(1);
 
         try {
