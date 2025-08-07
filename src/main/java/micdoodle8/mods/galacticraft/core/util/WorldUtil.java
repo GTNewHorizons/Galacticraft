@@ -2,6 +2,8 @@ package micdoodle8.mods.galacticraft.core.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -100,13 +102,49 @@ public class WorldUtil {
     public static Map<Integer, String> dimNames = new TreeMap<>(); // Dimension IDs and provider names
     public static Map<EntityPlayerMP, HashMap<String, Integer>> celestialMapCache = new MapMaker().weakKeys().makeMap();
     public static List<Integer> registeredPlanets;
+    private static IWorldGenerator generatorGreg = null;
     private static IWorldGenerator generatorGCGreg = null;
     private static IWorldGenerator generatorCoFH = null;
     private static IWorldGenerator generatorDenseOres = null;
     private static IWorldGenerator generatorTCAuraNodes = null;
     private static IWorldGenerator generatorAE2meteors = null;
-    private static Method generateTCAuraNodes = null;
     private static boolean generatorsInitialised = false;
+
+    // Store the TC MethodHandle in its own class so that it can be stored in a static final field, which erases its
+    // runtime cost
+    private static class TCMethodHandles {
+
+        private static final MethodHandle GENERATE_WILD_NODES;
+
+        static {
+            try {
+                Method generateWildNodes = Class.forName("thaumcraft.common.lib.world.ThaumcraftWorldGenerator")
+                        .getDeclaredMethod(
+                                "generateWildNodes",
+                                World.class,
+                                Random.class,
+                                int.class,
+                                int.class,
+                                boolean.class,
+                                boolean.class);
+
+                generateWildNodes.setAccessible(true);
+
+                GENERATE_WILD_NODES = MethodHandles.lookup().unreflect(generateWildNodes);
+            } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        public static boolean generateWildNodes(Object self, World world, Random random, int chunkX, int chunkZ,
+                boolean auraGen, boolean newGen) {
+            try {
+                return (boolean) GENERATE_WILD_NODES.invoke(self, world, random, chunkX, chunkZ, auraGen, newGen);
+            } catch (Throwable e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
     public static double getGravityForEntity(Entity entity) {
         if (entity.worldObj.provider instanceof IGalacticraftWorldProvider) {
@@ -1396,6 +1434,26 @@ public class WorldUtil {
         }
     }
 
+    private static IWorldGenerator findRegisteredWorldGenerator(Class<?> clazz) {
+        try {
+            final Field regField = Class.forName("cpw.mods.fml.common.registry.GameRegistry")
+                    .getDeclaredField("worldGenerators");
+            regField.setAccessible(true);
+            @SuppressWarnings("unchecked")
+            final Set<IWorldGenerator> registeredGenerators = (Set<IWorldGenerator>) regField.get(null);
+
+            for (final IWorldGenerator gen : registeredGenerators) {
+                if (clazz.isInstance(gen)) {
+                    return gen;
+                }
+            }
+
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public static boolean otherModPreventGenerate(int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator,
             IChunkProvider chunkProvider) {
         if (!(world.provider instanceof IGalacticraftWorldProvider)) {
@@ -1412,53 +1470,31 @@ public class WorldUtil {
             generatorsInitialised = true;
 
             try {
+                final Class<?> greg = Class.forName("gregtech.common.GTWorldgenerator");
+
+                if (greg != null) {
+                    generatorGreg = findRegisteredWorldGenerator(greg);
+                }
+            } catch (final Exception e) {}
+
+            try {
                 final Class<?> GCGreg = Class.forName("galacticgreg.WorldGeneratorSpace");
                 if (GCGreg != null) {
-                    final Field regField = Class.forName("cpw.mods.fml.common.registry.GameRegistry")
-                            .getDeclaredField("worldGenerators");
-                    regField.setAccessible(true);
-                    @SuppressWarnings("unchecked")
-                    final Set<IWorldGenerator> registeredGenerators = (Set<IWorldGenerator>) regField.get(null);
-                    for (final IWorldGenerator gen : registeredGenerators) {
-                        if (GCGreg.isInstance(gen)) {
-                            generatorGCGreg = gen;
-                            break;
-                        }
-                    }
+                    generatorGCGreg = findRegisteredWorldGenerator(GCGreg);
                 }
             } catch (final Exception e) {}
 
             try {
                 final Class<?> cofh = Class.forName("cofh.core.world.WorldHandler");
                 if (cofh != null && ConfigManagerCore.whitelistCoFHCoreGen) {
-                    final Field regField = Class.forName("cpw.mods.fml.common.registry.GameRegistry")
-                            .getDeclaredField("worldGenerators");
-                    regField.setAccessible(true);
-                    @SuppressWarnings("unchecked")
-                    final Set<IWorldGenerator> registeredGenerators = (Set<IWorldGenerator>) regField.get(null);
-                    for (final IWorldGenerator gen : registeredGenerators) {
-                        if (cofh.isInstance(gen)) {
-                            generatorCoFH = gen;
-                            break;
-                        }
-                    }
+                    generatorCoFH = findRegisteredWorldGenerator(cofh);
                 }
             } catch (final Exception e) {}
 
             try {
                 final Class<?> denseOres = Class.forName("com.rwtema.denseores.WorldGenOres");
                 if (denseOres != null) {
-                    final Field regField = Class.forName("cpw.mods.fml.common.registry.GameRegistry")
-                            .getDeclaredField("worldGenerators");
-                    regField.setAccessible(true);
-                    @SuppressWarnings("unchecked")
-                    final Set<IWorldGenerator> registeredGenerators = (Set<IWorldGenerator>) regField.get(null);
-                    for (final IWorldGenerator gen : registeredGenerators) {
-                        if (denseOres.isInstance(gen)) {
-                            generatorDenseOres = gen;
-                            break;
-                        }
-                    }
+                    generatorDenseOres = findRegisteredWorldGenerator(denseOres);
                 }
             } catch (final Exception e) {}
 
@@ -1475,49 +1511,21 @@ public class WorldUtil {
                 }
 
                 if (ae2meteorPlace != null) {
-                    final Field regField = Class.forName("cpw.mods.fml.common.registry.GameRegistry")
-                            .getDeclaredField("worldGenerators");
-                    regField.setAccessible(true);
-                    @SuppressWarnings("unchecked")
-                    final Set<IWorldGenerator> registeredGenerators = (Set<IWorldGenerator>) regField.get(null);
-                    for (final IWorldGenerator gen : registeredGenerators) {
-                        if (ae2meteorPlace.isInstance(gen)) {
-                            generatorAE2meteors = gen;
-                            break;
-                        }
-                    }
+                    generatorAE2meteors = findRegisteredWorldGenerator(ae2meteorPlace);
                 }
             } catch (final Exception e) {}
 
             try {
                 final Class<?> genThaumCraft = Class.forName("thaumcraft.common.lib.world.ThaumcraftWorldGenerator");
                 if (genThaumCraft != null) {
-                    final Field regField = Class.forName("cpw.mods.fml.common.registry.GameRegistry")
-                            .getDeclaredField("worldGenerators");
-                    regField.setAccessible(true);
-                    @SuppressWarnings("unchecked")
-                    final Set<IWorldGenerator> registeredGenerators = (Set<IWorldGenerator>) regField.get(null);
-                    for (final IWorldGenerator gen : registeredGenerators) {
-                        if (genThaumCraft.isInstance(gen)) {
-                            generatorTCAuraNodes = gen;
-                            break;
-                        }
-                    }
-                    if (generatorTCAuraNodes != null && ConfigManagerCore.enableThaumCraftNodes) {
-                        generateTCAuraNodes = genThaumCraft.getDeclaredMethod(
-                                "generateWildNodes",
-                                World.class,
-                                Random.class,
-                                int.class,
-                                int.class,
-                                boolean.class,
-                                boolean.class);
-                        generateTCAuraNodes.setAccessible(true);
-                    }
+                    generatorTCAuraNodes = findRegisteredWorldGenerator(genThaumCraft);
                 }
 
             } catch (final Exception e) {}
 
+            if (generatorGreg != null) {
+                System.out.println("Whitelisting GregTech oregen on planets.");
+            }
             if (generatorGCGreg != null) {
                 System.out.println("Whitelisting GalacticGreg oregen on planets.");
             }
@@ -1530,7 +1538,7 @@ public class WorldUtil {
             if (generatorAE2meteors != null) {
                 System.out.println("Whitelisting AE2 meteorites worldgen on planets.");
             }
-            if (generatorTCAuraNodes != null && generateTCAuraNodes != null) {
+            if (generatorTCAuraNodes != null) {
                 System.out.println("Whitelisting ThaumCraft aura node generation on planets.");
             }
         }
@@ -1538,7 +1546,8 @@ public class WorldUtil {
         if (generatorGCGreg != null || generatorCoFH != null
                 || generatorDenseOres != null
                 || generatorTCAuraNodes != null
-                || generatorAE2meteors != null) {
+                || generatorAE2meteors != null
+                || generatorGreg != null) {
             try {
                 final long worldSeed = world.getSeed();
                 final Random fmlRandom = new Random(worldSeed);
@@ -1553,14 +1562,18 @@ public class WorldUtil {
                 if (generatorDenseOres != null) {
                     generatorDenseOres.generate(fmlRandom, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
                 }
+                if (generatorGreg != null) {
+                    generatorGreg.generate(fmlRandom, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
+                }
                 if (generatorGCGreg != null) {
                     generatorGCGreg.generate(fmlRandom, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
                 }
                 if (generatorAE2meteors != null) {
                     generatorAE2meteors.generate(fmlRandom, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
                 }
-                if (generateTCAuraNodes != null) {
-                    generateTCAuraNodes.invoke(generatorTCAuraNodes, world, fmlRandom, chunkX, chunkZ, false, true);
+                if (generatorTCAuraNodes != null) {
+                    TCMethodHandles
+                            .generateWildNodes(generatorTCAuraNodes, world, fmlRandom, chunkX, chunkZ, false, true);
                 }
 
             } catch (final Exception e) {
