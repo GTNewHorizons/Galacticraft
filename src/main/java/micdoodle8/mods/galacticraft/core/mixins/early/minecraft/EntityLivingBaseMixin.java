@@ -1,4 +1,4 @@
-package micdoodle8.mods.galacticraft.core.mixins.minecraft;
+package micdoodle8.mods.galacticraft.core.mixins.early.minecraft;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
