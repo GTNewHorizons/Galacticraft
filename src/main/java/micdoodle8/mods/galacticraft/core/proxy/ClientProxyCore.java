@@ -1,16 +1,6 @@
 package micdoodle8.mods.galacticraft.core.proxy;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.Field;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,11 +12,9 @@ import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MusicTicker;
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.renderer.IImageBuffer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
@@ -64,7 +52,6 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -82,12 +69,12 @@ import micdoodle8.mods.galacticraft.core.blocks.BlockUnlitTorch;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.core.client.DynamicTextureProper;
 import micdoodle8.mods.galacticraft.core.client.FootprintRenderer;
+import micdoodle8.mods.galacticraft.core.client.capes.GCCapeLoader;
 import micdoodle8.mods.galacticraft.core.client.fx.EffectHandler;
 import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
 import micdoodle8.mods.galacticraft.core.client.gui.screen.InventoryTabGalacticraft;
 import micdoodle8.mods.galacticraft.core.client.model.ModelPlayerBaseGC;
 import micdoodle8.mods.galacticraft.core.client.model.ModelRocketTier1;
-import micdoodle8.mods.galacticraft.core.client.render.ThreadDownloadImageDataGC;
 import micdoodle8.mods.galacticraft.core.client.render.block.BlockRendererBreathableAir;
 import micdoodle8.mods.galacticraft.core.client.render.block.BlockRendererLandingPad;
 import micdoodle8.mods.galacticraft.core.client.render.block.BlockRendererMachine;
@@ -215,8 +202,6 @@ public class ClientProxyCore extends CommonProxyCore {
 
     public static EnumRarity galacticraftItem = EnumHelper.addRarity("GCRarity", EnumChatFormatting.BLUE, "Space");
 
-    public static Map<String, String> capeMap = new HashMap<>();
-
     public static InventoryExtended dummyInventory = new InventoryExtended();
 
     private static final ResourceLocation underOilTexture = new ResourceLocation(
@@ -229,7 +214,6 @@ public class ClientProxyCore extends CommonProxyCore {
     public static double offsetY = 0D;
     public static float terrainHeight = Float.MAX_VALUE;
     private static boolean smallMoonActive = false;
-    private static final Map<String, ResourceLocation> capesMap = Maps.newHashMap();
 
     public static IPlayerClient playerClientHandler = new PlayerClient();
     public static Minecraft mc = FMLClientHandler.instance().getClient();
@@ -283,7 +267,7 @@ public class ClientProxyCore extends CommonProxyCore {
         ClientProxyCore.registerHandlers();
         ClientProxyCore.registerTileEntityRenderers();
         ClientProxyCore.registerBlockHandlers();
-        ClientProxyCore.setupCapes();
+        new Thread(new GCCapeLoader(), "Galacticraft Cape Loader").start();
     }
 
     @Override
@@ -406,96 +390,10 @@ public class ClientProxyCore extends CommonProxyCore {
         RenderingRegistry.registerBlockHandler(new BlockRendererMachine(ClientProxyCore.renderIdMachine));
     }
 
-    public static void setupCapes() {
-        try {
-            ClientProxyCore.updateCapeList();
-        } catch (final Exception e) {
-            FMLLog.severe("Error while setting up Galacticraft donor capes");
-            e.printStackTrace();
-        }
-
-        /**
-         * if (Loader.isModLoaded("CoFHCore")) { for (Entry<String, String> e : ClientProxyCore.capeMap.entrySet()) {
-         * try { Object capeRegistry = Class.forName("cofh.api.core.RegistryAccess").getField("capeRegistry").get(null);
-         * Class.forName("cofh.api.core.ISimpleRegistry").getMethod("register", String.class,
-         * String.class).invoke(capeRegistry, e.getKey(), e.getValue()); } catch (Exception e1) { e1.printStackTrace();
-         * break; } } }
-         **/
-    }
-
-    private static void updateCapeList() {
-        final int timeout = 10000;
-        URL capeListUrl = null;
-
-        try {
-            capeListUrl = new URL("https://raw.github.com/micdoodle8/Galacticraft/master/capes.txt");
-        } catch (final MalformedURLException e) {
-            FMLLog.severe("Error getting capes list URL");
-            e.printStackTrace();
-            return;
-        }
-
-        URLConnection connection = null;
-
-        try {
-            connection = capeListUrl.openConnection();
-        } catch (final IOException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        connection.setConnectTimeout(timeout);
-        connection.setReadTimeout(timeout);
-        InputStream stream = null;
-
-        try {
-            stream = connection.getInputStream();
-        } catch (final IOException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        final InputStreamReader streamReader = new InputStreamReader(stream);
-        final BufferedReader reader = new BufferedReader(streamReader);
-
-        String line;
-        try {
-            while ((line = reader.readLine()) != null) {
-                if (line.contains(":")) {
-                    final int splitLocation = line.indexOf(":");
-                    final String username = line.substring(0, splitLocation);
-                    final String capeUrl = "https://raw.github.com/micdoodle8/Galacticraft/master/capes/"
-                            + line.substring(splitLocation + 1)
-                            + ".png";
-                    ClientProxyCore.capeMap.put(username, capeUrl);
-                }
-            }
-        } catch (final IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            reader.close();
-        } catch (final IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            streamReader.close();
-        } catch (final IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            stream.close();
-        } catch (final IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void registerInventoryTabs() {
         if (!Loader.isModLoaded("TConstruct") && TabRegistry.getTabList().size() < 1) {
             TabRegistry.registerTab(new InventoryTabVanilla());
         }
-
         TabRegistry.registerTab(new InventoryTabGalacticraft());
     }
 
@@ -679,128 +577,6 @@ public class ClientProxyCore extends CommonProxyCore {
         final Entity ridden = event.entityPlayer.ridingEntity;
         if (ridden instanceof EntityAutoRocket || ridden instanceof EntityLanderBase) {
             event.setCanceled(true);
-        }
-    }
-
-    @SubscribeEvent
-    public void onPostRender(RenderPlayerEvent.Specials.Post event) {
-        final AbstractClientPlayer player = (AbstractClientPlayer) event.entityPlayer;
-        final boolean flag = ClientProxyCore.capeMap.containsKey(event.entityPlayer.getCommandSenderName());
-        float f4;
-
-        if (flag && !player.isInvisible() && !player.getHideCape()) {
-            final String url = ClientProxyCore.capeMap.get(player.getCommandSenderName());
-            ResourceLocation capeLoc = capesMap.get(url);
-            if (!capesMap.containsKey(url)) {
-                try {
-                    final String dirName = Minecraft.getMinecraft().mcDataDir.getAbsolutePath();
-                    File directory = new File(dirName, "assets");
-                    boolean success = true;
-                    if (!directory.exists()) {
-                        success = directory.mkdir();
-                    }
-                    if (success) {
-                        directory = new File(directory, "gcCapes");
-                        if (!directory.exists()) {
-                            success = directory.mkdir();
-                        }
-
-                        if (success) {
-                            final String hash = String.valueOf(player.getCommandSenderName().hashCode());
-                            final File file1 = new File(directory, hash.substring(0, 2));
-                            final File file2 = new File(file1, hash);
-                            final ResourceLocation resourcelocation = new ResourceLocation("gcCapes/" + hash);
-                            final ThreadDownloadImageDataGC threaddownloadimagedata = new ThreadDownloadImageDataGC(
-                                    file2,
-                                    url,
-                                    null,
-                                    new IImageBuffer() {
-
-                                        @Override
-                                        public BufferedImage parseUserSkin(BufferedImage p_78432_1_) {
-                                            if (p_78432_1_ == null) {
-                                                return null;
-                                            }
-                                            final BufferedImage bufferedimage1 = new BufferedImage(512, 256, 2);
-                                            final Graphics graphics = bufferedimage1.getGraphics();
-                                            graphics.drawImage(p_78432_1_, 0, 0, null);
-                                            graphics.dispose();
-                                            return bufferedimage1;
-                                        }
-
-                                        @Override
-                                        public void func_152634_a() {}
-                                    });
-
-                            if (ClientProxyCore.mc.getTextureManager()
-                                    .loadTexture(resourcelocation, threaddownloadimagedata)) {
-                                capeLoc = resourcelocation;
-                            }
-                        }
-                    }
-                } catch (final Exception e) {
-                    e.printStackTrace();
-                }
-
-                capesMap.put(url, capeLoc);
-            }
-
-            if (capeLoc != null) {
-                ClientProxyCore.mc.getTextureManager().bindTexture(capeLoc);
-                GL11.glPushMatrix();
-                GL11.glTranslatef(0.0F, 0.0F, 0.125F);
-                final double d3 = player.field_71091_bM
-                        + (player.field_71094_bP - player.field_71091_bM) * event.partialRenderTick
-                        - (player.prevPosX + (player.posX - player.prevPosX) * event.partialRenderTick);
-                final double d4 = player.field_71096_bN
-                        + (player.field_71095_bQ - player.field_71096_bN) * event.partialRenderTick
-                        - (player.prevPosY + (player.posY - player.prevPosY) * event.partialRenderTick);
-                final double d0 = player.field_71097_bO
-                        + (player.field_71085_bR - player.field_71097_bO) * event.partialRenderTick
-                        - (player.prevPosZ + (player.posZ - player.prevPosZ) * event.partialRenderTick);
-                f4 = (player.prevRenderYawOffset
-                        + (player.renderYawOffset - player.prevRenderYawOffset) * event.partialRenderTick)
-                        / (180F / (float) Math.PI);
-                final double d1 = MathHelper.sin(f4);
-                final double d2 = -MathHelper.cos(f4);
-                float f5 = (float) d4 * 10.0F;
-
-                if (f5 < -6.0F) {
-                    f5 = -6.0F;
-                }
-
-                if (f5 > 32.0F) {
-                    f5 = 32.0F;
-                }
-
-                float f6 = (float) (d3 * d1 + d0 * d2) * 100.0F;
-                final float f7 = (float) (d3 * d2 - d0 * d1) * 100.0F;
-
-                if (f6 < 0.0F) {
-                    f6 = 0.0F;
-                }
-
-                final float f8 = player.prevCameraYaw
-                        + (player.cameraYaw - player.prevCameraYaw) * event.partialRenderTick;
-                f5 += MathHelper.sin(
-                        (player.prevDistanceWalkedModified
-                                + (player.distanceWalkedModified - player.prevDistanceWalkedModified)
-                                        * event.partialRenderTick)
-                                * 6.0F)
-                        * 32.0F
-                        * f8;
-
-                if (player.isSneaking()) {
-                    f5 += 25.0F;
-                }
-
-                GL11.glRotatef(6.0F + f6 / 2.0F + f5, 1.0F, 0.0F, 0.0F);
-                GL11.glRotatef(f7 / 2.0F, 0.0F, 0.0F, 1.0F);
-                GL11.glRotatef(-f7 / 2.0F, 0.0F, 1.0F, 0.0F);
-                GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
-                event.renderer.modelBipedMain.renderCloak(0.0625F);
-                GL11.glPopMatrix();
-            }
         }
     }
 
