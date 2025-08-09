@@ -156,6 +156,7 @@ import micdoodle8.mods.galacticraft.core.tile.TileEntityScreen;
 import micdoodle8.mods.galacticraft.core.tile.TileEntitySolar;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityThruster;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityTreasureChest;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.core.wrappers.BlockMetaList;
 import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
@@ -267,7 +268,9 @@ public class ClientProxyCore extends CommonProxyCore {
         ClientProxyCore.registerHandlers();
         ClientProxyCore.registerTileEntityRenderers();
         ClientProxyCore.registerBlockHandlers();
-        new Thread(new GCCapeLoader(), "Galacticraft Cape Loader").start();
+        if (ConfigManagerCore.enableCapes) {
+            new Thread(new GCCapeLoader(), "Galacticraft Cape Loader").start();
+        }
     }
 
     @Override
