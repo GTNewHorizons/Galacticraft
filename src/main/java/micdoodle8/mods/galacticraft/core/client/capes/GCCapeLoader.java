@@ -11,25 +11,44 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 
 import cpw.mods.fml.common.FMLLog;
 
 public class GCCapeLoader implements Runnable {
 
+    // spotless:off
+    private static final ResourceLocation CAPE_BLUE       = new ResourceLocation("galacticraftcore:textures/capes/capeBlue.png");
+    private static final ResourceLocation CAPE_BROWN      = new ResourceLocation("galacticraftcore:textures/capes/capeBrown.png");
+    private static final ResourceLocation CAPE_CYAN       = new ResourceLocation("galacticraftcore:textures/capes/capeCyan.png");
+    private static final ResourceLocation CAPE_DARK_GRAY  = new ResourceLocation("galacticraftcore:textures/capes/capeDarkGray.png");
+    private static final ResourceLocation CAPE_DARK_GREEN = new ResourceLocation("galacticraftcore:textures/capes/capeDarkGreen.png");
+    private static final ResourceLocation CAPE_LIGHT_BLUE = new ResourceLocation("galacticraftcore:textures/capes/capeLightBlue.png");
+    private static final ResourceLocation CAPE_LIGHT_GRAY = new ResourceLocation("galacticraftcore:textures/capes/capeLightGray.png");
+    private static final ResourceLocation CAPE_LIME       = new ResourceLocation("galacticraftcore:textures/capes/capeLime.png");
+    private static final ResourceLocation CAPE_MAGENTA    = new ResourceLocation("galacticraftcore:textures/capes/capeMagenta.png");
+    private static final ResourceLocation CAPE_ORANGE     = new ResourceLocation("galacticraftcore:textures/capes/capeOrange.png");
+    private static final ResourceLocation CAPE_PINK       = new ResourceLocation("galacticraftcore:textures/capes/capePink.png");
+    private static final ResourceLocation CAPE_PURPLE     = new ResourceLocation("galacticraftcore:textures/capes/capePurple.png");
+    private static final ResourceLocation CAPE_RAINBOW    = new ResourceLocation("galacticraftcore:textures/capes/capeRainbow.png");
+    private static final ResourceLocation CAPE_RED        = new ResourceLocation("galacticraftcore:textures/capes/capeRed.png");
+    private static final ResourceLocation CAPE_YELLOW     = new ResourceLocation("galacticraftcore:textures/capes/capeYellow.png");
+    // spotless:on
+
     @Override
     public void run() {
-        final Map<String, String> nameToCapeMap = loadNameToCapeMap();
-        if (!nameToCapeMap.isEmpty()) {
+        final Map<String, ResourceLocation> nameToCape = loadNameToCapeMap();
+        if (!nameToCape.isEmpty()) {
             Minecraft.getMinecraft().func_152343_a(() -> {
-                MinecraftForge.EVENT_BUS.register(new GCCapesEventHandler(nameToCapeMap));
+                MinecraftForge.EVENT_BUS.register(new GCCapesEventHandler(nameToCape));
                 return null;
             });
         }
     }
 
-    private static Map<String, String> loadNameToCapeMap() {
-        Map<String, String> nameCapesMap = new HashMap<>();
+    private static Map<String, ResourceLocation> loadNameToCapeMap() {
+        Map<String, ResourceLocation> nameToCape = new HashMap<>();
         final int timeout = 10000;
         URL capeListUrl;
         try {
@@ -37,7 +56,7 @@ public class GCCapeLoader implements Runnable {
         } catch (final MalformedURLException e) {
             FMLLog.severe("Error getting capes list URL");
             e.printStackTrace();
-            return nameCapesMap;
+            return nameToCape;
         }
 
         URLConnection connection;
@@ -46,7 +65,7 @@ public class GCCapeLoader implements Runnable {
             connection = capeListUrl.openConnection();
         } catch (final IOException e) {
             e.printStackTrace();
-            return nameCapesMap;
+            return nameToCape;
         }
 
         connection.setConnectTimeout(timeout);
@@ -57,7 +76,7 @@ public class GCCapeLoader implements Runnable {
             stream = connection.getInputStream();
         } catch (final IOException e) {
             e.printStackTrace();
-            return nameCapesMap;
+            return nameToCape;
         }
 
         final InputStreamReader streamReader = new InputStreamReader(stream);
@@ -70,7 +89,7 @@ public class GCCapeLoader implements Runnable {
                     final int splitLocation = line.indexOf(":");
                     final String username = line.substring(0, splitLocation);
                     final String capeName = line.substring(splitLocation + 1);
-                    nameCapesMap.put(username, capeName);
+                    nameToCape.put(username, capeFromString(capeName));
                 }
             }
         } catch (final IOException e) {
@@ -92,6 +111,26 @@ public class GCCapeLoader implements Runnable {
         } catch (final IOException e) {
             e.printStackTrace();
         }
-        return nameCapesMap;
+        return nameToCape;
+    }
+
+    private static ResourceLocation capeFromString(String capeName) {
+        return switch (capeName) {
+            case "capeBrown" -> CAPE_BROWN;
+            case "capeCyan" -> CAPE_CYAN;
+            case "capeDarkGray" -> CAPE_DARK_GRAY;
+            case "capeDarkGreen" -> CAPE_DARK_GREEN;
+            case "capeLightBlue" -> CAPE_LIGHT_BLUE;
+            case "capeLightGray" -> CAPE_LIGHT_GRAY;
+            case "capeLime" -> CAPE_LIME;
+            case "capeMagenta" -> CAPE_MAGENTA;
+            case "capeOrange" -> CAPE_ORANGE;
+            case "capePink" -> CAPE_PINK;
+            case "capePurple" -> CAPE_PURPLE;
+            case "capeRainbow" -> CAPE_RAINBOW;
+            case "capeRed" -> CAPE_RED;
+            case "capeYellow" -> CAPE_YELLOW;
+            default -> CAPE_BLUE;
+        };
     }
 }
