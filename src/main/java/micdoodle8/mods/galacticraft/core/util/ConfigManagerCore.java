@@ -35,6 +35,7 @@ public class ConfigManagerCore {
     static Configuration config;
 
     // GAME CONTROL
+    public static boolean enableCapes;
     public static boolean forceOverworldRespawn;
     public static boolean hardMode;
     public static boolean quickMode;
@@ -151,6 +152,12 @@ public class ConfigManagerCore {
             if (!config.isChild && load) {
                 config.load();
             }
+
+            prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Enable donator capes", true);
+            prop.comment = "Enable/Disable Fetching Donator Capes";
+            prop.setLanguageKey("gc.configgui.enableCapes");
+            enableCapes = prop.getBoolean(true);
+            propOrder.add(prop.getName());
 
             prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Enable Debug Messages", false);
             prop.comment = "If this is enabled, debug messages will appear in the console. This is useful for finding bugs in the mod.";
