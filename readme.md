@@ -1,6 +1,8 @@
 Galacticraft - GTNH
 ===================
 
+[Old Galacticraft wiki](https://web.archive.org/web/20240921200246/http://wiki.micdoodle8.com/wiki/Galacticraft) (via Wayback Machine)
+
 DEV NOTE: Micdoodlelib is integrated
 ====
 Do not include Micdoodlelib in your projects! It will break your projects! Micdoodlelib is completely integrated into this project and will not be shipped separate any more.
