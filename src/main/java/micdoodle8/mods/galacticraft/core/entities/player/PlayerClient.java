@@ -3,9 +3,7 @@ package micdoodle8.mods.galacticraft.core.entities.player;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.ChunkCoordIntPair;
@@ -28,8 +26,6 @@ import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.tick.TickHandlerClient;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityAdvanced;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.EnumColor;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
 
@@ -339,99 +335,5 @@ public class PlayerClient implements IPlayerClient {
         stats.buildFlags = (flag & 511) + (repeatCount << 9);
         GalacticraftCore.packetPipeline.sendToServer(
                 new PacketSimple(EnumSimplePacket.S_BUILDFLAGS_UPDATE, new Object[] { stats.buildFlags }));
-        switch (i) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-                player.addChatMessage(
-                        IChatComponent.Serializer.func_150699_a(
-                                "[{\"text\":\"" + GCCoreUtil.translate("gui.message.help1")
-                                        + ": \",\"color\":\"white\"},"
-                                        + "{\"text\":\" "
-                                        + EnumColor.BRIGHT_GREEN
-                                        + "wiki."
-                                        + GalacticraftCore.PREFIX
-                                        + "com/wiki/1"
-                                        + "\","
-                                        + "\"color\":\"green\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":"
-                                        + "{\"text\":\""
-                                        + GCCoreUtil.translate("gui.message.clicklink")
-                                        + "\",\"color\":\"yellow\"}},"
-                                        + "\"clickEvent\":{\"action\":\"open_url\",\"value\":\""
-                                        + "http://wiki."
-                                        + GalacticraftCore.PREFIX
-                                        + "com/wiki/1"
-                                        + "\"}}]"));
-                player.addChatMessage(
-                        new ChatComponentText(
-                                GCCoreUtil.translate("gui.message.help1a") + EnumColor.AQUA + " /gchelp"));
-                break;
-            case 4:
-            case 5:
-            case 6:
-                player.addChatMessage(
-                        IChatComponent.Serializer.func_150699_a(
-                                "[{\"text\":\"" + GCCoreUtil.translate("gui.message.help2")
-                                        + ": \",\"color\":\"white\"},"
-                                        + "{\"text\":\" "
-                                        + EnumColor.BRIGHT_GREEN
-                                        + "wiki."
-                                        + GalacticraftCore.PREFIX
-                                        + "com/wiki/2"
-                                        + "\","
-                                        + "\"color\":\"green\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":"
-                                        + "{\"text\":\""
-                                        + GCCoreUtil.translate("gui.message.clicklink")
-                                        + "\",\"color\":\"yellow\"}},"
-                                        + "\"clickEvent\":{\"action\":\"open_url\",\"value\":\""
-                                        + "http://wiki."
-                                        + GalacticraftCore.PREFIX
-                                        + "com/wiki/2"
-                                        + "\"}}]"));
-                break;
-            case 7:
-                player.addChatMessage(
-                        IChatComponent.Serializer.func_150699_a(
-                                "[{\"text\":\"" + GCCoreUtil.translate("gui.message.help3")
-                                        + ": \",\"color\":\"white\"},"
-                                        + "{\"text\":\" "
-                                        + EnumColor.BRIGHT_GREEN
-                                        + "wiki."
-                                        + GalacticraftCore.PREFIX
-                                        + "com/wiki/oil"
-                                        + "\","
-                                        + "\"color\":\"green\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":"
-                                        + "{\"text\":\""
-                                        + GCCoreUtil.translate("gui.message.clicklink")
-                                        + "\",\"color\":\"yellow\"}},"
-                                        + "\"clickEvent\":{\"action\":\"open_url\",\"value\":\""
-                                        + "http://wiki."
-                                        + GalacticraftCore.PREFIX
-                                        + "com/wiki/oil"
-                                        + "\"}}]"));
-                break;
-            case 8:
-                player.addChatMessage(
-                        IChatComponent.Serializer.func_150699_a(
-                                "[{\"text\":\"" + GCCoreUtil.translate("gui.message.prelaunch")
-                                        + ": \",\"color\":\"white\"},"
-                                        + "{\"text\":\" "
-                                        + EnumColor.BRIGHT_GREEN
-                                        + "wiki."
-                                        + GalacticraftCore.PREFIX
-                                        + "com/wiki/pre"
-                                        + "\","
-                                        + "\"color\":\"green\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":"
-                                        + "{\"text\":\""
-                                        + GCCoreUtil.translate("gui.message.clicklink")
-                                        + "\",\"color\":\"yellow\"}},"
-                                        + "\"clickEvent\":{\"action\":\"open_url\",\"value\":\""
-                                        + "http://wiki."
-                                        + GalacticraftCore.PREFIX
-                                        + "com/wiki/pre"
-                                        + "\"}}]"));
-                break;
-        }
     }
 }

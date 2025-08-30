@@ -306,7 +306,6 @@ gui.message.help1a=Da vidiš poruku opet bilo koji put, upiši
 gui.message.help2=Za rukovanje svemirskim programom
 gui.message.help3=Za pomoć sa uljem
 gui.message.prelaunch=Popis prije-pokretanja
-gui.message.clicklink=Klinki za GalactiCraft Wikipediju
 gui.message.thermalStatus.name=Thermal Control ##NEEDS TRANSLATE##
 gui.status.active.name=Aktivirano
 gui.status.missingleaves.name=Nema Dovoljno Lišča

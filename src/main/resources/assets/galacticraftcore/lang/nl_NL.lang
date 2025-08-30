@@ -369,7 +369,6 @@ gui.message.help1a=Om dit bericht weer te zien, Typ
 gui.message.help2=Voor Ruimte Programma Begeleiding
 gui.message.help3=Voor Help Met olie
 gui.message.prelaunch=Voor Lancering Checklist
-gui.message.clicklink=Klik Voor Galacticraft Wiki
 gui.message.thermalStatus.name=Thermal Control ##NEEDS TRANSLATE##
 
 gui.status.active.name=Actief
