@@ -337,7 +337,6 @@ gui.message.help1a=Pro opětovné zobrazení této zprávy napište
 gui.message.help2=Pro rady ohledně vesmírného programu
 gui.message.help3=Pro rady ohledně paliv
 gui.message.prelaunch=Seznam předstartovní přípravy
-gui.message.clicklink=Pro přístup na Galacticraft Wiki klikněte zde
 
 gui.status.active.name=Aktivní
 gui.status.missingleaves.name=Nedostatek rostlin

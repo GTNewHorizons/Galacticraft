@@ -338,7 +338,6 @@ gui.message.help1a=Pour revoir ce message une nouvelle fois, tapez
 gui.message.help2=Pour le guide du programme spatial
 gui.message.help3=Pour de l'aide sur les carburants
 gui.message.prelaunch=Liste de vérification de pré-lancement
-gui.message.clicklink=Cliquez pour le Wiki de Galacticraft
 gui.message.thermalStatus.name=Thermal Control ##NEEDS TRANSLATE##
 
 gui.status.active.name=Actif

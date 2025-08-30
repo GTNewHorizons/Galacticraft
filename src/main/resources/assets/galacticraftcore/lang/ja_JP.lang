@@ -420,7 +420,6 @@ gui.message.help1a=再びこのメッセージを表示するには, タイプ�
 gui.message.help2=宇宙計画のガイダンス
 gui.message.help3=オイルのヘルプ
 gui.message.prelaunch=起動前のチェックリスト
-gui.message.clicklink=クリックで Galacticraft Wiki を開く
 gui.message.thermalStatus.name=熱コントローラ
 
 gui.status.active.name=アクティブ

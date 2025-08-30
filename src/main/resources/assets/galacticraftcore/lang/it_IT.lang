@@ -306,7 +306,6 @@ gui.message.help1a=Per vedere questo messaggio in qualsiasi momento, premi
 gui.message.help2=per guida al programma spaziale
 gui.message.help3=per aiuto con il petrolio
 gui.message.prelaunch=Lista di partenza
-gui.message.clicklink=Premi per la Wiki della Galacticraft
 gui.message.thermalStatus.name=Controllo termale
 
 gui.status.active.name=Attivo
