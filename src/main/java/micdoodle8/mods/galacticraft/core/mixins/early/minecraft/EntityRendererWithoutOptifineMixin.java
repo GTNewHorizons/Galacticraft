@@ -1,4 +1,4 @@
-package micdoodle8.mods.galacticraft.core.mixins.minecraft;
+package micdoodle8.mods.galacticraft.core.mixins.early.minecraft;
 
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.EntityRenderer;

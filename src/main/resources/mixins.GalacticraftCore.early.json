@@ -1,7 +1,7 @@
 {
   "required": true,
-  "minVersion": "0.8.3-GTNH",
-  "package": "micdoodle8.mods.galacticraft.core.mixins",
+  "minVersion": "0.8.5-GTNH",
+  "package": "micdoodle8.mods.galacticraft.core.mixins.early",
   "refmap": "mixins.GalacticraftCore.refmap.json",
   "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8"

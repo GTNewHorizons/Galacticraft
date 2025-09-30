@@ -65,7 +65,6 @@ import micdoodle8.mods.galacticraft.core.client.gui.screen.GameScreenBasic;
 import micdoodle8.mods.galacticraft.core.client.gui.screen.GameScreenCelestial;
 import micdoodle8.mods.galacticraft.core.client.gui.screen.GameScreenText;
 import micdoodle8.mods.galacticraft.core.command.CommandGCEnergyUnits;
-import micdoodle8.mods.galacticraft.core.command.CommandGCHelp;
 import micdoodle8.mods.galacticraft.core.command.CommandGCInv;
 import micdoodle8.mods.galacticraft.core.command.CommandJoinSpaceRace;
 import micdoodle8.mods.galacticraft.core.command.CommandKeepDim;
@@ -617,7 +616,6 @@ public class GalacticraftCore {
         event.registerServerCommand(new CommandPlanetTeleport());
         event.registerServerCommand(new CommandKeepDim());
         event.registerServerCommand(new CommandGCInv());
-        event.registerServerCommand(new CommandGCHelp());
         event.registerServerCommand(new CommandGCEnergyUnits());
         event.registerServerCommand(new CommandJoinSpaceRace());
 

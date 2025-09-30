@@ -305,7 +305,6 @@ gui.message.help1a=För att se detta meddelande igen, skriv
 gui.message.help2=För hjälp angående rymdorganisationer
 gui.message.help3=För hjälp med olja
 gui.message.prelaunch=Startchecklista
-gui.message.clicklink=Klicka här för Galacticraft-wiki
 gui.message.thermalStatus.name=Thermal Control ##NEEDS TRANSLATE##
 
 gui.status.active.name=Aktiv

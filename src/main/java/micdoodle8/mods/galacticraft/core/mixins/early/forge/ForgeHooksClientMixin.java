@@ -1,4 +1,4 @@
-package micdoodle8.mods.galacticraft.core.mixins.forge;
+package micdoodle8.mods.galacticraft.core.mixins.early.forge;
 
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.common.MinecraftForge;

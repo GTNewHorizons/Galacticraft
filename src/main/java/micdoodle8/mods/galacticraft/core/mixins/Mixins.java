@@ -40,7 +40,9 @@ public enum Mixins implements IMixins {
     RENDER_THERMAL_PADDING(new MixinBuilder()
             .addClientMixins("minecraft.RendererLivingEntityMixin")),
     MODIFY_RAIN_STRENGTH(new MixinBuilder()
-            .addCommonMixins("minecraft.WorldMixin"));
+            .addCommonMixins("minecraft.WorldMixin")),
+    DONOR_CAPES(new MixinBuilder()
+            .addClientMixins("minecraft.AbstractClientPlayerMixin"));
     // spotless:on
 
     private final MixinBuilder builder;

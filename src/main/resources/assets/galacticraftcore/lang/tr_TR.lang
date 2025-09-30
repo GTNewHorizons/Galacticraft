@@ -306,7 +306,6 @@ gui.message.help1a=Bu mesajı her zaman görüyorsanız, komutu kullan:
 gui.message.help2=1. Uzay programına katılın
 gui.message.help3=2. Ham petrol ile yardım edin
 gui.message.prelaunch=Ön fırlatış kontrol listesi
-gui.message.clicklink=Galacticraft Wiki'si İçin Tıkla
 gui.message.thermalStatus.name=Sıcaklık Kontrolü
 
 gui.status.active.name=Aktif
