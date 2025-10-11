@@ -33,8 +33,10 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
@@ -108,6 +110,13 @@ public class GCPlayerHandler {
         }
     }
 
+    @SubscribeEvent(priority = EventPriority.LOW)
+    public void onPlayerDies(LivingDeathEvent event) {
+        if (event.entity instanceof EntityPlayerMP player) {
+            this.onPlayerDies(player);
+        }
+    }
+
     @SubscribeEvent
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         if (event.player instanceof EntityPlayerMP) {
@@ -138,7 +147,7 @@ public class GCPlayerHandler {
     }
 
     private void onPlayerLogin(EntityPlayerMP player) {
-        final GCPlayerStats oldData = this.playerStatsMap.remove(player.getPersistentID());
+        final GCPlayerStats oldData = this.playerStatsMap.get(player.getPersistentID());
         if (oldData != null) {
             oldData.saveNBTData(player.getEntityData());
         }
@@ -157,39 +166,90 @@ public class GCPlayerHandler {
 
     private void onPlayerLogout() {}
 
+    private void onPlayerDies(EntityPlayerMP player) {
+        GCPlayerStats stats = GCPlayerStats.get(player);
+        if (stats != null) {
+            this.playerStatsMap.put(player.getPersistentID(), stats);
+        }
+    }
+
     private void onPlayerRespawn(EntityPlayerMP player) {
         final GCPlayerStats oldData = this.playerStatsMap.remove(player.getPersistentID());
         final GCPlayerStats stats = GCPlayerStats.get(player);
 
         if (oldData != null) {
-            stats.copyFrom(oldData, false);
+            stats.copyFrom(oldData, true);
         }
 
         stats.player = new WeakReference<>(player);
     }
 
     // --- WitchingGadgets Translucent II enchant support
+    /**
+     * This can have one of three states:
+     * <ul>
+     * <li><code>null</code> - unknown ID, no potion ID search has been initiated</li>
+     * <li><code>-1</code> - potion ID has been search and has not been found</li>
+     * <li><code>>=0</code> - potion ID has been found</li>
+     * </ul>
+     */
     private static Integer translucentID = null;
 
-    public static Integer getTranslucentID() {
-        if (translucentID == null) setTranslucentID();
+    public static int getTranslucentID() {
+        if (translucentID == null) loadTranslucentID();
         return translucentID;
     }
 
-    private static void setTranslucentID() {
+    private static void loadTranslucentID() {
         for (Enchantment ench : Enchantment.enchantmentsList) {
             if (ench != null && ench.getName().equals("enchantment.wg.invisibleGear")) {
                 translucentID = ench.effectId;
                 return;
             }
         }
-        translucentID = null;
+        translucentID = -1;
     }
 
     public static int getTranslucencyLevel(ItemStack stack) {
-        Integer translucent = getTranslucentID();
-        if (translucent != null) return EnchantmentHelper.getEnchantmentLevel(translucent, stack);
+        int translucent = getTranslucentID();
+        if (translucent != -1) return EnchantmentHelper.getEnchantmentLevel(translucent, stack);
         else return 0;
+    }
+
+    // --- Witchery Sticky Items potion support
+    /**
+     * This can have one of three states:
+     * <ul>
+     * <li><code>null</code> - unknown ID, no potion ID search has been initiated</li>
+     * <li><code>-1</code> - potion ID has been search and has not been found</li>
+     * <li><code>>=0</code> - potion ID has been found</li>
+     * </ul>
+     */
+    private static Integer stickyItemsID = null;
+
+    /**
+     * Get the ID value of the Witchery Sticky Items potion
+     *
+     * @return Sticky Items potion ID or -1 if not found
+     */
+    public static int getStickyItemsID() {
+        if (stickyItemsID == null) loadStickyItemsID();
+        return stickyItemsID;
+    }
+
+    private static void loadStickyItemsID() {
+        for (Potion potion : Potion.potionTypes) {
+            if (potion != null && potion.getName().equals("witchery:potion.keepinventory")) {
+                stickyItemsID = potion.getId();
+                return;
+            }
+        }
+        stickyItemsID = -1;
+    }
+
+    public static boolean hasStickyItems(EntityPlayer player) {
+        int sticky = getStickyItemsID();
+        return (sticky != -1) && player.isPotionActive(sticky);
     }
 
     public static void checkGear(EntityPlayerMP player, GCPlayerStats GCPlayer, boolean forceSend) {
