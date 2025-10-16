@@ -131,6 +131,10 @@ public class TileEntitySolar extends TileBaseUniversalElectricalSource
                                 for (double d = 0.0D; d < distance; d++) {
                                     final BlockVec3 blockAt = blockVec.clone()
                                             .translate((int) (d * sinA), (int) (d * cosA), 0);
+                                    if (!worldObj.blockExists(blockAt.x, blockAt.y, blockAt.z)) {
+                                        valid = false;
+                                        break;
+                                    }
                                     final Block block = blockAt.getBlock(this.worldObj);
 
                                     if (block.isOpaqueCube()) {
