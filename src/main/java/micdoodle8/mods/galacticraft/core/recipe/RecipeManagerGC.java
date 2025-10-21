@@ -26,7 +26,6 @@ import micdoodle8.mods.galacticraft.core.entities.EntityBuggy;
 import micdoodle8.mods.galacticraft.core.entities.EntityTier1Rocket;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.items.ItemBasic;
-import micdoodle8.mods.galacticraft.core.items.ItemParaChute;
 import micdoodle8.mods.galacticraft.core.util.CompatibilityManager;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
@@ -630,13 +629,6 @@ public class RecipeManagerGC {
         RecipeUtil.addRecipe(
                 new ItemStack(GCItems.flag),
                 new Object[] { "XYY", "XYY", "X  ", 'X', GCItems.flagPole, 'Y', GCItems.canvas });
-
-        for (int var2 = 0; var2 < 16; ++var2) {
-            CraftingManager.getInstance().addShapelessRecipe(
-                    new ItemStack(GCItems.parachute, 1, ItemParaChute.getParachuteDamageValueFromDye(var2)),
-                    new ItemStack(Items.dye, 1, var2),
-                    new ItemStack(GCItems.parachute, 1, 0));
-        }
 
         RecipeUtil.addRecipe(
                 new ItemStack(Blocks.lit_pumpkin),
