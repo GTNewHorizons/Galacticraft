@@ -17,7 +17,6 @@ public class EntityFXLaunchFlame extends EntityFX {
 
     private final float smokeParticleScale;
     private final boolean spawnSmokeShort;
-    private final EntityLivingBase ridingEntity;
 
     public EntityFXLaunchFlame(World par1World, Vector3 position, Vector3 motion, boolean launched,
             EntityLivingBase ridingEntity) {
