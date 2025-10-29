@@ -14,7 +14,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class EntityFXLanderFlame extends EntityFX {
 
     private final float smokeParticleScale;
-    private final EntityLivingBase ridingEntity;
 
     public EntityFXLanderFlame(World world, double x, double y, double z, double mX, double mY, double mZ,
             EntityLivingBase ridingEntity) {
