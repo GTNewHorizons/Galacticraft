@@ -15,10 +15,14 @@ import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 public class ChunkProviderServerMixin {
 
     @WrapWithCondition(
-            at = @At(
+            at = { @At(
                     remap = false,
                     target = "Lcpw/mods/fml/common/registry/GameRegistry;generateWorld(IILnet/minecraft/world/World;Lnet/minecraft/world/chunk/IChunkProvider;Lnet/minecraft/world/chunk/IChunkProvider;)V",
                     value = "INVOKE"),
+                    @At(
+                            remap = false,
+                            target = "LReika/DragonAPI/Auxiliary/WorldGenInterceptionRegistry;interceptChunkPopulation(IILnet/minecraft/world/World;Lnet/minecraft/world/chunk/IChunkProvider;Lnet/minecraft/world/chunk/IChunkProvider;)V",
+                            value = "INVOKE") },
             method = "populate(Lnet/minecraft/world/chunk/IChunkProvider;II)V",
             require = 1)
     private boolean galacticraft$checkOtherModPreventGenerate(int chunkX, int chunkZ, World world,
