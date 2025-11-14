@@ -164,7 +164,7 @@ import micdoodle8.mods.galacticraft.core.world.gen.OverworldGenerator;
         version = Constants.VERSION,
         acceptedMinecraftVersions = "[1.7.10]",
         useMetadata = true,
-        dependencies = "required-after:NotEnoughItems;before:GalaxySpace;after:IC2;after:TConstruct;after:Mantle;after:BuildCraft|Core;after:BuildCraft|Energy;after:PlayerAPI@[1.3,);after:gtnhlib@[0.3.1,);after:DragonAPI;",
+        dependencies = "required-after:NotEnoughItems;before:GalaxySpace;after:IC2;after:TConstruct;after:Mantle;after:BuildCraft|Core;after:BuildCraft|Energy;after:PlayerAPI@[1.3,);after:gtnhlib@[0.3.1,);",
         guiFactory = "micdoodle8.mods.galacticraft.core.client.gui.screen.ConfigGuiFactoryCore")
 public class GalacticraftCore {
 
