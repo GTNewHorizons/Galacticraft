@@ -12,7 +12,12 @@ public enum Mixins implements IMixins {
             .addClientMixins("forge.ForgeHooksClientMixin")),
     CHECK_OTHER_MOD_PREVENTS_GENERATION(
             new MixinBuilder("Only generate the world if no mod prevents it")
-                    .addCommonMixins("minecraft.ChunkProviderServerMixin")),
+                    .addCommonMixins("minecraft.ChunkProviderServerMixin")
+                    .addExcludedMod(TargetedMod.DRAGONAPI)),
+    CHECK_OTHER_MOD_PREVENTS_GENERATION_DRAGONAPI(
+            new MixinBuilder("Only generate the world if no mod prevents it")
+                    .addCommonMixins("minecraft.ChunkProviderServerMixin_DragonApi")
+                    .addRequiredMod(TargetedMod.DRAGONAPI)),
     RENDER_FOOTPRINTS(new MixinBuilder()
             .addClientMixins("minecraft.EffectRendererMixin")),
     MODIFY_ENTITY_GRAVITY(new MixinBuilder()
