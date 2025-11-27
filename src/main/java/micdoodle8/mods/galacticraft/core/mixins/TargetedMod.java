@@ -7,8 +7,9 @@ import com.gtnewhorizon.gtnhmixins.builders.TargetModBuilder;
 
 public enum TargetedMod implements ITargetMod {
 
-    PLAYERAPI("api.player.forge.PlayerAPIPlugin", "PlayerAPI"),
-    OPTIFINE("optifine.OptiFineForgeTweaker", "Optifine");
+    DRAGONAPI("Reika.DragonAPI.Auxiliary.DragonAPIASMHandler", "DragonAPI"),
+    OPTIFINE("optifine.OptiFineForgeTweaker", "Optifine"),
+    PLAYERAPI("api.player.forge.PlayerAPIPlugin", "PlayerAPI");
 
     private final TargetModBuilder builder;
 
