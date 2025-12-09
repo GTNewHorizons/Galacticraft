@@ -89,6 +89,7 @@ import micdoodle8.mods.galacticraft.core.client.SkyProviderOverworld;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderOrbit;
 import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedZombie;
 import micdoodle8.mods.galacticraft.core.entities.EntityLanderBase;
+import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerHandler;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStatsClient;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple;
@@ -658,8 +659,9 @@ public class EventHandlerGC {
     @SubscribeEvent
     public void onPlayerDeath(PlayerDropsEvent event) {
         if (event.entityLiving instanceof EntityPlayerMP) {
-            final GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) event.entityLiving);
-            if (!event.entityLiving.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
+            if (!GCPlayerHandler.hasStickyItems(event.entityPlayer)) {
+                final GCPlayerStats stats = GalacticraftCore.handler.getServerStatList()
+                        .get(event.entityLiving.getUniqueID());
                 event.entityLiving.captureDrops = true;
                 for (int i = stats.extendedInventory.getSizeInventory() - 1; i >= 0; i--) {
                     final ItemStack stack = stats.extendedInventory.getStackInSlot(i);
@@ -670,6 +672,7 @@ public class EventHandlerGC {
                     }
                 }
                 event.entityLiving.captureDrops = false;
+                GalacticraftCore.handler.getServerStatList().put(event.entityLiving.getUniqueID(), stats);
             }
         }
     }

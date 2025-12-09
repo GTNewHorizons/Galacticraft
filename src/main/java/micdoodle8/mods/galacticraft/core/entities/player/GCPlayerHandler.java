@@ -33,8 +33,10 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
@@ -108,6 +110,13 @@ public class GCPlayerHandler {
         }
     }
 
+    @SubscribeEvent(priority = EventPriority.LOW)
+    public void onPlayerDies(LivingDeathEvent event) {
+        if (event.entity instanceof EntityPlayerMP player) {
+            this.onPlayerDies(player);
+        }
+    }
+
     @SubscribeEvent
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         if (event.player instanceof EntityPlayerMP) {
@@ -138,7 +147,7 @@ public class GCPlayerHandler {
     }
 
     private void onPlayerLogin(EntityPlayerMP player) {
-        final GCPlayerStats oldData = this.playerStatsMap.remove(player.getPersistentID());
+        final GCPlayerStats oldData = this.playerStatsMap.get(player.getPersistentID());
         if (oldData != null) {
             oldData.saveNBTData(player.getEntityData());
         }
@@ -157,12 +166,19 @@ public class GCPlayerHandler {
 
     private void onPlayerLogout() {}
 
+    private void onPlayerDies(EntityPlayerMP player) {
+        GCPlayerStats stats = GCPlayerStats.get(player);
+        if (stats != null) {
+            this.playerStatsMap.put(player.getPersistentID(), stats);
+        }
+    }
+
     private void onPlayerRespawn(EntityPlayerMP player) {
         final GCPlayerStats oldData = this.playerStatsMap.remove(player.getPersistentID());
         final GCPlayerStats stats = GCPlayerStats.get(player);
 
         if (oldData != null) {
-            stats.copyFrom(oldData, false);
+            stats.copyFrom(oldData, true);
         }
 
         stats.player = new WeakReference<>(player);
@@ -190,6 +206,29 @@ public class GCPlayerHandler {
         Integer translucent = getTranslucentID();
         if (translucent != null) return EnchantmentHelper.getEnchantmentLevel(translucent, stack);
         else return 0;
+    }
+
+    // --- Witchery Sticky Items potion support
+    private static Integer stickyItemsID = null;
+
+    public static Integer getStickyItemsID() {
+        if (stickyItemsID == null) setStickyItemsID();
+        return stickyItemsID;
+    }
+
+    private static void setStickyItemsID() {
+        for (Potion potion : Potion.potionTypes) {
+            if (potion != null && potion.getName().equals("witchery:potion.keepinventory")) {
+                stickyItemsID = potion.getId();
+                return;
+            }
+        }
+        stickyItemsID = null;
+    }
+
+    public static boolean hasStickyItems(EntityPlayer player) {
+        Integer sticky = getStickyItemsID();
+        return (sticky != null) && player.isPotionActive(sticky);
     }
 
     public static void checkGear(EntityPlayerMP player, GCPlayerStats GCPlayer, boolean forceSend) {
