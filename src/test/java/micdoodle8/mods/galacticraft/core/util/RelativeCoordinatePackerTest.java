@@ -8,8 +8,15 @@ public class RelativeCoordinatePackerTest {
 
     @Test
     void testPackUnpackRoundTrip() {
-        int[][] coords = { { 0, 0, 0 }, { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 1 }, { -1, 0, 0 }, { 0, -1, 0 }, { 0, 0, -1 },
-                { -1, -1, -1 }, { 31, 31, 31 }, { -32, -32, -32 }, { -15, 10, -20 }, };
+        // X/Z: 9-bit signed (-256 to +255), Y: 8-bit signed (-128 to +127)
+        int[][] coords = {
+                { 0, 0, 0 }, { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 1 },
+                { -1, 0, 0 }, { 0, -1, 0 }, { 0, 0, -1 }, { -1, -1, -1 },
+                { 31, 31, 31 }, { -32, -32, -32 }, { -15, 10, -20 },
+                // Extended range tests
+                { 255, 127, 255 }, { -256, -128, -256 },
+                { 100, -50, -200 }, { -200, 100, 150 },
+        };
         for (int[] c : coords) {
             int packed = RelativeCoordinatePacker.pack(c[0], c[1], c[2]);
             assertEquals(c[0], RelativeCoordinatePacker.unpackX(packed), "X for " + c[0]);
