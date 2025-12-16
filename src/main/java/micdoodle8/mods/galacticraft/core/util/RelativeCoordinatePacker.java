@@ -3,8 +3,8 @@ package micdoodle8.mods.galacticraft.core.util;
 /**
  * Packs relative coordinates into an int with optional side bits. Layout: [6 side bits][8 Y][9 Z][9 X]
  * <p>
- * Valid range: X/Z: -256 to +255 (9-bit signed), Y: -128 to +127 (8-bit signed).
- * Values outside this range will silently wrap due to masking.
+ * Valid range: X/Z: -256 to +255 (9-bit signed), Y: -128 to +127 (8-bit signed). Values outside this range will
+ * silently wrap due to masking.
  */
 public final class RelativeCoordinatePacker {
 
