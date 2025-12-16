@@ -24,9 +24,12 @@ import net.minecraft.world.chunk.Chunk;
 
 import com.gtnewhorizon.gtnhlib.util.CoordinatePacker;
 
-import it.unimi.dsi.fastutil.longs.LongArrayList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntIterator;
+import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import it.unimi.dsi.fastutil.ints.IntSet;
 import it.unimi.dsi.fastutil.longs.LongIterator;
-import it.unimi.dsi.fastutil.longs.LongList;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import it.unimi.dsi.fastutil.longs.LongSet;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
@@ -34,8 +37,18 @@ import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
 import micdoodle8.mods.galacticraft.core.util.RedstoneUtil;
+import micdoodle8.mods.galacticraft.core.util.RelativeCoordinatePacker;
 
 public class TileEntityArclamp extends TileEntity {
+
+    // Direction offsets indexed by side: [side][x, y, z]
+    private static final int[][] SIDE_OFFSETS = { { 0, -1, 0 }, // 0: Down
+            { 0, 1, 0 }, // 1: Up
+            { 0, 0, -1 }, // 2: North
+            { 0, 0, 1 }, // 3: South
+            { -1, 0, 0 }, // 4: West
+            { 1, 0, 0 } // 5: East
+    };
 
     private int ticks = 0;
     private int sideRear = 0;
@@ -87,9 +100,9 @@ public class TileEntityArclamp extends TileEntity {
             if (this.thisAABB == null) {
                 initialLight = true;
                 final int side = this.getBlockMetadata();
+                this.sideRear = side;
                 switch (side) {
-                    case 0:
-                        this.sideRear = side; // Down
+                    case 0 -> { // Down
                         this.facingSide = this.facing + 2;
                         this.thisAABB = AxisAlignedBB.getBoundingBox(
                                 this.xCoord - 20,
@@ -98,9 +111,8 @@ public class TileEntityArclamp extends TileEntity {
                                 this.xCoord + 20,
                                 this.yCoord + 20,
                                 this.zCoord + 20);
-                        break;
-                    case 1:
-                        this.sideRear = side; // Up
+                    }
+                    case 1 -> { // Up
                         this.facingSide = this.facing + 2;
                         this.thisAABB = AxisAlignedBB.getBoundingBox(
                                 this.xCoord - 20,
@@ -109,9 +121,8 @@ public class TileEntityArclamp extends TileEntity {
                                 this.xCoord + 20,
                                 this.yCoord + 8,
                                 this.zCoord + 20);
-                        break;
-                    case 2:
-                        this.sideRear = side; // North
+                    }
+                    case 2 -> { // North
                         this.facingSide = this.facing;
                         if (this.facing > 1) {
                             this.facingSide = 7 - this.facing;
@@ -123,9 +134,8 @@ public class TileEntityArclamp extends TileEntity {
                                 this.xCoord + 20,
                                 this.yCoord + 20,
                                 this.zCoord + 20);
-                        break;
-                    case 3:
-                        this.sideRear = side; // South
+                    }
+                    case 3 -> { // South
                         this.facingSide = this.facing;
                         if (this.facing > 1) {
                             this.facingSide += 2;
@@ -137,9 +147,8 @@ public class TileEntityArclamp extends TileEntity {
                                 this.xCoord + 20,
                                 this.yCoord + 20,
                                 this.zCoord + 8);
-                        break;
-                    case 4:
-                        this.sideRear = side; // West
+                    }
+                    case 4 -> { // West
                         this.facingSide = this.facing;
                         this.thisAABB = AxisAlignedBB.getBoundingBox(
                                 this.xCoord - 8,
@@ -148,9 +157,8 @@ public class TileEntityArclamp extends TileEntity {
                                 this.xCoord + 20,
                                 this.yCoord + 20,
                                 this.zCoord + 20);
-                        break;
-                    case 5:
-                        this.sideRear = side; // East
+                    }
+                    case 5 -> { // East
                         this.facingSide = this.facing;
                         if (this.facing > 1) {
                             this.facingSide = 5 - this.facing;
@@ -162,9 +170,10 @@ public class TileEntityArclamp extends TileEntity {
                                 this.xCoord + 8,
                                 this.yCoord + 20,
                                 this.zCoord + 20);
-                        break;
-                    default:
+                    }
+                    default -> {
                         return;
+                    }
                 }
             }
 
@@ -241,106 +250,103 @@ public class TileEntityArclamp extends TileEntity {
         final Block breatheableAirID = GCBlocks.breatheableAir;
         final Block brightAir = GCBlocks.brightAir;
         final Block brightBreatheableAir = GCBlocks.brightBreatheableAir;
-        final LongSet checked = new LongOpenHashSet();
+        final IntSet checked = new IntOpenHashSet();
+        final int baseX = this.xCoord, baseY = this.yCoord, baseZ = this.zCoord;
 
-        LongList currentLayer = new LongArrayList();
-        LongList nextLayer = new LongArrayList();
-        final long thisPackedCoord = CoordinatePacker.pack(this.xCoord, this.yCoord, this.zCoord);
-        currentLayer.add(thisPackedCoord);
+        IntList currentLayer = new IntArrayList();
+        IntList nextLayer = new IntArrayList();
         final World world = this.worldObj;
         final int sideskip1 = this.sideRear;
         final int sideskip2 = this.facingSide ^ 1;
+
+        // Add initial neighbors
         for (int i = 0; i < 6; i++) {
             if (i != sideskip1 && i != sideskip2 && i != (sideskip1 ^ 1) && i != (sideskip2 ^ 1)) {
-                final long neighborPackedCoord = getAdjacentPacked(thisPackedCoord, i);
-                final Block b = getBlockAtPackedCoord(world, neighborPackedCoord);
+                final int[] offset = SIDE_OFFSETS[i];
+                final Block b = getBlockSafe(world, baseX + offset[0], baseY + offset[1], baseZ + offset[2]);
                 if (b != null && b.getLightOpacity() < 15) {
-                    currentLayer.add(neighborPackedCoord);
+                    currentLayer.add(RelativeCoordinatePacker.pack(offset[0], offset[1], offset[2]));
                 }
             }
         }
 
-        long inFrontPacked = thisPackedCoord;
+        // Add positions in front of lamp
+        final int[] facingOffset = SIDE_OFFSETS[this.facingSide];
+        final int[] rearOppositeOffset = SIDE_OFFSETS[sideskip1 ^ 1];
+        int frontX = 0, frontY = 0, frontZ = 0;
         for (int i = 0; i < 5; i++) {
-            // Move in the facing direction and then in the direction opposite to sideSkip1
-            inFrontPacked = getDoubleSidedPacked(inFrontPacked, this.facingSide, sideskip1 ^ 1);
-            final Block b = getBlockAtPackedCoord(world, inFrontPacked);
+            frontX += facingOffset[0] + rearOppositeOffset[0];
+            frontY += facingOffset[1] + rearOppositeOffset[1];
+            frontZ += facingOffset[2] + rearOppositeOffset[2];
+            final Block b = getBlockSafe(world, baseX + frontX, baseY + frontY, baseZ + frontZ);
             if (b != null && b.getLightOpacity() < 15) {
-                currentLayer.add(inFrontPacked);
+                currentLayer.add(RelativeCoordinatePacker.pack(frontX, frontY, frontZ));
             }
         }
 
-        int side;
-        long sideBits;
-
         for (int count = 0; count < 14; count++) {
-            LongIterator iter = currentLayer.longIterator();
+            IntIterator iter = currentLayer.intIterator();
             while (iter.hasNext()) {
-                final long packedCoord = iter.nextLong();
-                side = 0;
-                sideBits = (packedCoord >> 60) & 0xF; // Extract the side bits from highest 4 bits
+                final int packed = iter.nextInt();
+                final int sideBits = RelativeCoordinatePacker.getSideBits(packed);
+                final int rx = RelativeCoordinatePacker.unpackX(packed);
+                final int ry = RelativeCoordinatePacker.unpackY(packed);
+                final int rz = RelativeCoordinatePacker.unpackZ(packed);
                 boolean allAir = true;
 
-                do {
-                    // Skip the side which this was entered from
-                    // and never go 'backwards'
-                    if ((sideBits & (1 << side)) == 0) {
-                        // Create adjacent packed coordinate with side info
-                        final long sidePackedCoord = getAdjacentPacked(packedCoord, side);
+                for (int side = 0; side < 6; side++) {
+                    if ((sideBits & (1 << side)) != 0) continue;
 
-                        if (!checked.contains(sidePackedCoord)) {
-                            checked.add(sidePackedCoord);
+                    final int[] offset = SIDE_OFFSETS[side];
+                    final int nrx = rx + offset[0];
+                    final int nry = ry + offset[1];
+                    final int nrz = rz + offset[2];
 
-                            // Get coordinates for block access
-                            final int sideX = CoordinatePacker.unpackX(sidePackedCoord);
-                            final int sideY = CoordinatePacker.unpackY(sidePackedCoord);
-                            final int sideZ = CoordinatePacker.unpackZ(sidePackedCoord);
+                    final int neighborCoord = RelativeCoordinatePacker.pack(nrx, nry, nrz);
+                    if (!checked.contains(RelativeCoordinatePacker.coordOnly(neighborCoord))) {
+                        checked.add(RelativeCoordinatePacker.coordOnly(neighborCoord));
 
-                            // Get block at the coordinates without loading chunks
-                            final Block b = getBlockAtPackedCoord(world, sidePackedCoord);
+                        final int absX = baseX + nrx, absY = baseY + nry, absZ = baseZ + nrz;
+                        final Block b = getBlockSafe(world, absX, absY, absZ);
 
-                            if (b instanceof BlockAir) {
-                                if (side != sideskip1 && side != sideskip2) {
-                                    nextLayer.add(sidePackedCoord);
-                                }
-                            } else {
-                                allAir = false;
-                                if (b != null && b.getLightOpacity(world, sideX, sideY, sideZ) == 0
-                                        && side != sideskip1
-                                        && side != sideskip2) {
-                                    nextLayer.add(sidePackedCoord);
-                                }
+                        if (b instanceof BlockAir) {
+                            if (side != sideskip1 && side != sideskip2) {
+                                nextLayer.add(RelativeCoordinatePacker.withSideBit(neighborCoord, side ^ 1));
+                            }
+                        } else {
+                            allAir = false;
+                            if (b != null && b.getLightOpacity(world, absX, absY, absZ) == 0
+                                    && side != sideskip1
+                                    && side != sideskip2) {
+                                nextLayer.add(RelativeCoordinatePacker.withSideBit(neighborCoord, side ^ 1));
                             }
                         }
                     }
-                    side++;
-                } while (side < 6);
+                }
 
                 if (!allAir) {
-                    // Get coordinates for current position
-                    final int x = CoordinatePacker.unpackX(packedCoord);
-                    final int y = CoordinatePacker.unpackY(packedCoord);
-                    final int z = CoordinatePacker.unpackZ(packedCoord);
-
-                    // Get block at current position
-                    final Block id = getBlockAtPackedCoord(world, packedCoord);
+                    final int absX = baseX + rx, absY = baseY + ry, absZ = baseZ + rz;
+                    final Block id = getBlockSafe(world, absX, absY, absZ);
 
                     if (Blocks.air == id) {
-                        world.setBlock(x, y, z, brightAir, 0, 2);
-                        // Since airToRestore is now a LongSet, we just add the packed coordinate
-                        this.airToRestore.add(packedCoord);
+                        world.setBlock(absX, absY, absZ, brightAir, 0, 2);
+                        this.airToRestore.add(CoordinatePacker.pack(absX, absY, absZ));
                         this.markDirty();
                     } else if (id == breatheableAirID) {
-                        world.setBlock(x, y, z, brightBreatheableAir, 0, 2);
-                        // Since airToRestore is now a LongSet, we just add the packed coordinate
-                        this.airToRestore.add(packedCoord);
+                        world.setBlock(absX, absY, absZ, brightBreatheableAir, 0, 2);
+                        this.airToRestore.add(CoordinatePacker.pack(absX, absY, absZ));
                         this.markDirty();
+                    } else if (id == brightAir || id == brightBreatheableAir) {
+                        // Already lit - ensure it's tracked for revert
+                        this.airToRestore.add(CoordinatePacker.pack(absX, absY, absZ));
                     }
                 }
             }
 
+            IntList temp = currentLayer;
             currentLayer = nextLayer;
-            nextLayer = new LongArrayList(); // Use LongArrayList for packed longs
+            temp.clear();
+            nextLayer = temp;
             if (currentLayer.isEmpty()) {
                 break;
             }
@@ -441,177 +447,38 @@ public class TileEntityArclamp extends TileEntity {
         return !RedstoneUtil.isBlockReceivingRedstone(this.worldObj, this.xCoord, this.yCoord, this.zCoord);
     }
 
-    /**
-     * Creates a packed coordinate for a position adjacent to the given packed coordinate in the specified direction.
-     * Also embeds side information in the high bits for efficient traversal.
-     *
-     * @param packedCoord The original packed coordinate
-     * @param side        The side (0-5) to move toward
-     * @return A new packed coordinate with side information
-     */
-    private long getAdjacentPacked(long packedCoord, int side) {
-        int x = CoordinatePacker.unpackX(packedCoord);
-        int y = CoordinatePacker.unpackY(packedCoord);
-        int z = CoordinatePacker.unpackZ(packedCoord);
-
-        // Extract existing side bits to preserve them
-        final long existingSideBits = packedCoord & 0xF000000000000000L;
-
-        // Store side info in high bits (4 bits): which side this position came from
-        // Use 4 of the 12 bits allocated for y and side info, leaving 8 bits for y coordinates
-        // Use bit pattern: (1 << (side ^ 1)) to mark the opposite side as done
-        // This creates a bitmask with the bit for the opposite side set to 1
-        final long newSideBits = ((long) (1 << (side ^ 1)) + ((long) side << 6)) << 60;
-
-        // Combine with existing side bits (preserving any previously set sides)
-        long sideBits = existingSideBits | newSideBits;
-
-        switch (side) {
-            case 0:
-                y--;
-                break;
-            case 1:
-                y++;
-                break;
-            case 2:
-                z--;
-                break;
-            case 3:
-                z++;
-                break;
-            case 4:
-                x--;
-                break;
-            case 5:
-                x++;
-                break;
-        }
-
-        // Pack coordinates according to the new scheme (26 bits x, 26 bits z, 8 bits y)
-        // and combine with the side bits in the highest 4 bits
-        return CoordinatePacker.pack(x, y, z) | sideBits;
-    }
-
-    /**
-     * Gets the block at the specified packed coordinate position without forcing chunk load. - Borrowed and adapted
-     * from BlockVec3
-     *
-     * @param world       The world
-     * @param packedCoord The packed coordinate
-     * @return The block at the position, or null if the coordinate is invalid or chunk isn't loaded
-     */
-    private Block getBlockAtPackedCoord(World world, long packedCoord) {
-        // Clear the high bits (where side information is stored) to get only coordinate data
-        final long coordBits = packedCoord & 0x0FFFFFFFFFFFFFFFL;
-
-        int x = CoordinatePacker.unpackX(coordBits);
-        int y = CoordinatePacker.unpackY(coordBits);
-        int z = CoordinatePacker.unpackZ(coordBits);
-
-        if (y < 0 || y >= 256) {
-            return null;
-        }
+    /** Gets block without forcing chunk load. Uses chunk cache for efficiency. */
+    private Block getBlockSafe(World world, int x, int y, int z) {
+        if (y < 0 || y >= 256) return null;
 
         final int chunkx = x >> 4;
         final int chunkz = z >> 4;
         try {
-            if (world.getChunkProvider().chunkExists(chunkx, chunkz)) {
-                // In a typical inner loop, 80% of the time consecutive calls to
-                // this will be within the same chunk
-                Chunk cached = chunkCached.get();
-                if (chunkCacheX == chunkx && chunkCacheZ == chunkz
-                        && chunkCacheDim == world.provider.dimensionId
-                        && cached != null
-                        && cached.isChunkLoaded) {
-                    return cached.getBlock(x & 15, y, z & 15);
-                }
-
-                Chunk chunk = world.getChunkFromChunkCoords(chunkx, chunkz);
-                chunkCached = new WeakReference<>(chunk);
-                chunkCacheDim = world.provider.dimensionId;
-                chunkCacheX = chunkx;
-                chunkCacheZ = chunkz;
-                return chunk.getBlock(x & 15, y, z & 15);
+            if (!world.getChunkProvider().chunkExists(chunkx, chunkz)) {
+                // Chunk doesn't exist - meaning, it is not loaded
+                return Blocks.bedrock;
             }
-            // Chunk doesn't exist - meaning, it is not loaded
-            return Blocks.bedrock;
+            // In a typical inner loop, 80% of the time consecutive calls to this will be within the same chunk
+
+            final Chunk cached = chunkCached.get();
+            if (chunkCacheX == chunkx && chunkCacheZ == chunkz
+                    && chunkCacheDim == world.provider.dimensionId
+                    && cached != null
+                    && cached.isChunkLoaded) {
+                return cached.getBlock(x & 15, y, z & 15);
+            }
+            final Chunk chunk = world.getChunkFromChunkCoords(chunkx, chunkz);
+            chunkCached = new WeakReference<>(chunk);
+            chunkCacheDim = world.provider.dimensionId;
+            chunkCacheX = chunkx;
+            chunkCacheZ = chunkz;
+            return chunk.getBlock(x & 15, y, z & 15);
         } catch (final Throwable throwable) {
             final CrashReport crashreport = CrashReport
-                    .makeCrashReport(throwable, "Arclamp thread: Exception getting block type in world");
+                    .makeCrashReport(throwable, "Arclamp: Exception getting block type in world");
             final CrashReportCategory crashreportcategory = crashreport.makeCategory("Requested block coordinates");
             crashreportcategory.addCrashSection("Location", CrashReportCategory.getLocationInfo(x, y, z));
             throw new ReportedException(crashreport);
         }
     }
-
-    /**
-     * Creates a packed coordinate that is moved in two directions from the original coordinate. Useful for creating
-     * coordinates that are moved in multiple directions.
-     *
-     * @param packedCoord The original packed coordinate
-     * @param firstSide   The first direction to move in
-     * @param secondSide  The second direction to move in
-     * @return A new packed coordinate moved in both directions with side info
-     */
-    private long getDoubleSidedPacked(long packedCoord, int firstSide, int secondSide) {
-        int x = CoordinatePacker.unpackX(packedCoord);
-        int y = CoordinatePacker.unpackY(packedCoord);
-        int z = CoordinatePacker.unpackZ(packedCoord);
-
-        // Apply first side movement
-        switch (firstSide) {
-            case 0:
-                y--;
-                break;
-            case 1:
-                y++;
-                break;
-            case 2:
-                z--;
-                break;
-            case 3:
-                z++;
-                break;
-            case 4:
-                x--;
-                break;
-            case 5:
-                x++;
-                break;
-        }
-
-        // Apply second side movement
-        switch (secondSide) {
-            case 0:
-                y--;
-                break;
-            case 1:
-                y++;
-                break;
-            case 2:
-                z--;
-                break;
-            case 3:
-                z++;
-                break;
-            case 4:
-                x--;
-                break;
-            case 5:
-                x++;
-                break;
-        }
-
-        // Extract existing side bits to preserve them
-        long existingSideBits = packedCoord & 0xF000000000000000L;
-
-        // Store first side info in high bits (4 bits)
-        long newSideBits = ((long) (1 << (firstSide ^ 1)) + ((long) firstSide << 6)) << 60;
-
-        // Combine with existing side bits
-        long sideBits = existingSideBits | newSideBits;
-
-        return CoordinatePacker.pack(x, y, z) | sideBits;
-    }
-
 }
