@@ -126,7 +126,7 @@ public class AsteroidsModule implements IPlanetsModule {
         // http://science.nasa.gov/science-news/science-at-nasa/2005/25feb_titan2/
         AsteroidsModule.fluidLiquidOxygen = this.registerFluid("liquidoxygen", 1141, 140, 90, false);
         AsteroidsModule.fluidOxygenGas = this.registerFluid("oxygen", 1, 13, 295, true);
-        AsteroidsModule.fluidLiquidNitrogen = this.registerFluid("liquidnitrogen", 808, 130, 90, false);
+        AsteroidsModule.fluidLiquidNitrogen = this.registerFluid("liquidnitrogen", 808, 130, 77, false);
         AsteroidsModule.fluidNitrogenGas = this.registerFluid("nitrogen", 1, 12, 295, true);
         this.registerFluid("carbondioxide", 2, 20, 295, true);
         this.registerFluid("hydrogen", 1, 1, 295, true);
