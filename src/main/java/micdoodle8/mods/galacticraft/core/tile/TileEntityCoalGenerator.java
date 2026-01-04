@@ -200,7 +200,7 @@ public class TileEntityCoalGenerator extends TileBaseUniversalElectricalSource
 
     @Override
     public String getInventoryName() {
-        return GCCoreUtil.translate("tile.machine.0.name");
+        return GCCoreUtil.translate("gui.tile.machine.0.name.title");
     }
 
     @Override

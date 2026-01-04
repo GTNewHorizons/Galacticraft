@@ -53,7 +53,7 @@ public class GuiOxygenStorageModule extends GuiContainerGC {
      */
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-        final String guiTitle = GCCoreUtil.translate("tile.machine2.6.name");
+        final String guiTitle = GCCoreUtil.translate("gui.tile.machine2.6.name.title");
         this.fontRendererObj
                 .drawString(guiTitle, this.xSize / 2 - this.fontRendererObj.getStringWidth(guiTitle) / 2, 6, 4210752);
         final String displayJoules = (int) (this.tileEntity.storedOxygen + 0.5F) + " "
