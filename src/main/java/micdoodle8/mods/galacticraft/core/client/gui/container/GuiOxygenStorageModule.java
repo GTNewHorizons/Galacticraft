@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
@@ -56,9 +57,12 @@ public class GuiOxygenStorageModule extends GuiContainerGC {
         final String guiTitle = GCCoreUtil.translate("gui.tile.machine2.6.name.title");
         this.fontRendererObj
                 .drawString(guiTitle, this.xSize / 2 - this.fontRendererObj.getStringWidth(guiTitle) / 2, 6, 4210752);
-        final String displayJoules = (int) (this.tileEntity.storedOxygen + 0.5F) + " "
-                + GCCoreUtil.translate("gui.message.of.name");
-        final String displayMaxJoules = "" + (int) this.tileEntity.maxOxygen;
+        final String displayJoules = (StatCollector.canTranslate("gui.OxygenStorageModule.numbers1")
+                ? GCCoreUtil.translate("gui.OxygenStorageModule.numbers1")
+                : "") + (int) (this.tileEntity.storedOxygen + 0.5F) + " " + GCCoreUtil.translate("gui.message.of.name");
+        final String displayMaxJoules = (StatCollector.canTranslate("gui.OxygenStorageModule.numbers2")
+                ? GCCoreUtil.translate("gui.OxygenStorageModule.numbers2")
+                : "") + (int) this.tileEntity.maxOxygen;
         final String maxOutputLabel = GCCoreUtil.translate("gui.maxOutput.desc") + ": "
                 + TileEntityOxygenStorageModule.OUTPUT_PER_TICK * 20
                 + GCCoreUtil.translate("gui.perSecond");
