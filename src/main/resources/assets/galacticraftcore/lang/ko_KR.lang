@@ -308,6 +308,17 @@ gui.message.help3=기름에 대한 도움말
 gui.message.prelaunch=발사전 체크리스트
 gui.message.thermalStatus.name=열 제어
 
+gui.tile.machine.0.name.title=석탄 발전기
+gui.tile.machine.1.name.title=에너지 저장 모듈
+gui.tile.machine.2.name.title=전기 화로
+gui.tile.machine.3.name.title=압축기
+gui.tile.machine2.4.name.title=전기 압축기
+gui.tile.machine2.5.name.title=회로 조립기
+gui.tile.machine2.6.name.title=산소 저장 모듈
+gui.tile.machine.7.name.title=전기 아크 화로
+gui.tile.machine.8.name.title=에너지 저장 클러스터
+
+
 gui.status.active.name=활성
 gui.status.missingleaves.name=나뭇잎 블록 부족
 gui.status.missingpower.name=전력 부족

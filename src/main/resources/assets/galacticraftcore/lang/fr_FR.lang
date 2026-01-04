@@ -340,6 +340,17 @@ gui.message.help3=Pour de l'aide sur les carburants
 gui.message.prelaunch=Liste de vérification de pré-lancement
 gui.message.thermalStatus.name=Thermal Control ##NEEDS TRANSLATE##
 
+gui.tile.machine.0.name.title=Générateur à charbon
+gui.tile.machine.1.name.title=Module de stockage d'énergie
+gui.tile.machine.2.name.title=Four électrique
+gui.tile.machine.3.name.title=Compresseur
+gui.tile.machine2.4.name.title=compresseur électrique
+gui.tile.machine2.5.name.title=Constructeur de circuit
+gui.tile.machine2.6.name.title=Module de stockage d'oxygène
+gui.tile.machine.7.name.title=Four à arcs éléctrique
+gui.tile.machine.8.name.title=Groupement de stockage énergétique
+
+
 gui.status.active.name=Actif
 gui.status.missingleaves.name=Pas assez de blocs de feuilles
 gui.status.missingpower.name=Pas assez de puissance

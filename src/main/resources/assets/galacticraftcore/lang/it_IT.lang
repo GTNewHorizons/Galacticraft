@@ -308,6 +308,17 @@ gui.message.help3=per aiuto con il petrolio
 gui.message.prelaunch=Lista di partenza
 gui.message.thermalStatus.name=Controllo termale
 
+gui.tile.machine.0.name.title=Generatore a Carbone
+gui.tile.machine.1.name.title=Stoccaggio di energia
+gui.tile.machine.2.name.title=Fornace elettrica
+gui.tile.machine.3.name.title=Compressore
+gui.tile.machine2.4.name.title=Compressore elettrico
+gui.tile.machine2.5.name.title=Fabbricatore di circuiti
+gui.tile.machine2.6.name.title=Stoccaggio di ossigeno
+gui.tile.machine.7.name.title=Forno elettrico ad arco
+gui.tile.machine.8.name.title=Aggregato spaziale elettrico
+
+
 gui.status.active.name=Attivo
 gui.status.missingleaves.name=Non ci sono abbastanza foglie
 gui.status.missingpower.name=Non c'è abbastanza corrente

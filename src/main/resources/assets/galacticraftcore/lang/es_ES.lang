@@ -308,6 +308,17 @@ gui.message.help3=Para ayuda con el petróleo
 gui.message.prelaunch=Lista de pre-lanzamiento
 gui.message.thermalStatus.name=Control térmico
 
+gui.tile.machine.0.name.title=Generador a carbón
+gui.tile.machine.1.name.title=Módulo de almacenamiento de energía
+gui.tile.machine.2.name.title=Horno eléctrico
+gui.tile.machine.3.name.title=Compresor
+gui.tile.machine2.4.name.title=Compresor eléctrico
+gui.tile.machine2.5.name.title=Fabricador de circuito
+gui.tile.machine2.6.name.title=Módulo de almacenamiento de oxígeno
+gui.tile.machine.7.name.title=Horno de arco eléctrico
+gui.tile.machine.8.name.title=Cluster de almacenamiento de energía
+
+
 gui.status.active.name=Activo
 gui.status.missingleaves.name=No hay suficientes hojas
 gui.status.missingpower.name=No hay suficiente energía
