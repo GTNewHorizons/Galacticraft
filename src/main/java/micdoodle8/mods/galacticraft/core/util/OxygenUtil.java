@@ -433,18 +433,45 @@ public class OxygenUtil {
      * @param player The player to check and apply the effect to.
      */
     public static void applyWaterBreathingEffect(EntityPlayerMP player) {
-        // Check if the player is in water
-        if (player.isInWater()) {
-            // Check if the player has valid oxygen gear setup
-            if (hasValidOxygenSetup(player)) {
+        // Check if the players head is actually in water (not just their feet)
+        final double eyeY = player.posY + player.getEyeHeight();
+        final int headBlockX = MathHelper.floor_double(player.posX);
+        final int headBlockY = MathHelper.floor_double(eyeY);
+        final int headBlockZ = MathHelper.floor_double(player.posZ);
+        Block blockAtHead = player.worldObj.getBlock(headBlockX, headBlockY, headBlockZ);
+        Material materialAtHead = blockAtHead.getMaterial();
+        if (materialAtHead != Material.water) {
+            return;
+        }
+
+        // Check if the player already has water breathing from another source
+        if (player.isPotionActive(Potion.waterBreathing)) {
+            PotionEffect existingEffect = player.getActivePotionEffect(Potion.waterBreathing);
+            if (existingEffect != null && (existingEffect.getDuration() > 220 || existingEffect.getAmplifier() > 0)) {
+                return;
+            }
+        }
+
+        if (hasValidOxygenSetup(player)) {
+            GCPlayerStats stats = GCPlayerStats.get(player);
+            ItemStack tankInSlot1 = stats.extendedInventory.getStackInSlot(2);
+            ItemStack tankInSlot2 = stats.extendedInventory.getStackInSlot(3);
+
+            boolean hasOxygenAvailable = false;
+
+            if (tankInSlot1 != null && tankInSlot1.getItem() instanceof ItemOxygenTank
+                    && tankInSlot1.getMaxDamage() - tankInSlot1.getItemDamage() > 0) {
+                hasOxygenAvailable = true;
+            } else if (tankInSlot2 != null && tankInSlot2.getItem() instanceof ItemOxygenTank
+                    && tankInSlot2.getMaxDamage() - tankInSlot2.getItemDamage() > 0) {
+                        hasOxygenAvailable = true;
+                    }
+
+            if (hasOxygenAvailable) {
                 // Apply the water breathing effect
                 player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 220, 0, true));
 
                 // Consume oxygen
-                GCPlayerStats stats = GCPlayerStats.get(player);
-                ItemStack tankInSlot1 = stats.extendedInventory.getStackInSlot(2);
-                ItemStack tankInSlot2 = stats.extendedInventory.getStackInSlot(3);
-
                 if (tankInSlot1 != null && tankInSlot1.getItem() instanceof ItemOxygenTank
                         && tankInSlot1.getMaxDamage() - tankInSlot1.getItemDamage() > 0) {
                     tankInSlot1.damageItem(1, player);
