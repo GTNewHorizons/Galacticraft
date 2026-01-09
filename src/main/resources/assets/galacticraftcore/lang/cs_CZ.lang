@@ -569,6 +569,17 @@ gui.spaceRace.unnamed=Nepojmenovaný tým
 gui.spaceRace.comingSoon=Již brzy!
 
 gui.message.thermalStatus.name=Teplotní regulátor
+
+gui.tile.machine.0.name.title=Tepelná elektrárna
+gui.tile.machine.1.name.title=Energetická zásobárna
+gui.tile.machine.2.name.title=Elektrická pec
+gui.tile.machine.3.name.title=Kompresor
+gui.tile.machine2.4.name.title=Elektrický kompresor
+gui.tile.machine2.5.name.title=Stroj na výrobu solárních waferů
+gui.tile.machine2.6.name.title=Zásobárna kyslíku
+gui.tile.machine.7.name.title=Elektrická oblouková pec
+gui.tile.machine.8.name.title=Energetický Cluster
+
 gui.status.on.name=Zapnuto
 gui.status.off.name=Vypnuto
 gui.status.notAvailable.name=N/A

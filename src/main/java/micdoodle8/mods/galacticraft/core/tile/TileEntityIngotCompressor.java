@@ -350,7 +350,7 @@ public class TileEntityIngotCompressor extends TileEntityAdvanced implements IIn
 
     @Override
     public String getInventoryName() {
-        return GCCoreUtil.translate("tile.machine.3.name");
+        return GCCoreUtil.translate("gui.tile.machine.3.name.title");
     }
 
     @Override
