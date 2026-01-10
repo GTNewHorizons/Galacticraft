@@ -209,7 +209,8 @@ public class TileEntityEnergyStorageModule extends TileBaseUniversalElectricalSo
 
     @Override
     public String getInventoryName() {
-        return GCCoreUtil.translate(this.tierGC == 1 ? "tile.machine.1.name" : "tile.machine.8.name");
+        return GCCoreUtil
+                .translate(this.tierGC == 1 ? "gui.tile.machine.1.name.title" : "gui.tile.machine.8.name.title");
     }
 
     @Override

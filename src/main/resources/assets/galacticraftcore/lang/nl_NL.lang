@@ -371,6 +371,17 @@ gui.message.help3=Voor Help Met olie
 gui.message.prelaunch=Voor Lancering Checklist
 gui.message.thermalStatus.name=Thermal Control ##NEEDS TRANSLATE##
 
+gui.tile.machine.0.name.title=Kool Generator
+gui.tile.machine.1.name.title=Energie Opslag Module
+gui.tile.machine.2.name.title=Elektrische Oven
+gui.tile.machine.3.name.title=Compressor
+gui.tile.machine2.4.name.title=Elektrische Compressor
+gui.tile.machine2.5.name.title=Omloop Fabricator
+gui.tile.machine2.6.name.title=Zuurstof Opslag Module
+gui.tile.machine.7.name.title=Elektrische Vlamboogoven
+gui.tile.machine.8.name.title=Energie Opslag Bundel
+
+
 gui.status.active.name=Actief
 gui.status.missingleaves.name=Niet genoeg bladeren
 gui.status.missingpower.name=Niet genoeg stroom
