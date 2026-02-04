@@ -154,7 +154,7 @@ public class TileEntityCircuitFabricator extends TileBaseElectricBlockWithInvent
 
     @Override
     public String getInventoryName() {
-        return GCCoreUtil.translate("tile.machine2.5.name");
+        return GCCoreUtil.translate("gui.tile.machine2.5.name.title");
     }
 
     @Override

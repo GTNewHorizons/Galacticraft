@@ -307,6 +307,17 @@ gui.message.help3=För hjälp med olja
 gui.message.prelaunch=Startchecklista
 gui.message.thermalStatus.name=Thermal Control ##NEEDS TRANSLATE##
 
+gui.tile.machine.0.name.title=Kolgenerator
+gui.tile.machine.1.name.title=Energilagringsmodul
+gui.tile.machine.2.name.title=Elugn
+gui.tile.machine.3.name.title=Plåtmaskin
+gui.tile.machine2.4.name.title=Elplåtmaskin
+gui.tile.machine2.5.name.title=Kretskortstillverkare
+gui.tile.machine2.6.name.title=Syrgaslagringsmodul
+gui.tile.machine.7.name.title=Ljusbågsugn
+gui.tile.machine.8.name.title=Energilagringskluster
+
+
 gui.status.active.name=Aktiv
 gui.status.missingleaves.name=Brist på vegetation
 gui.status.missingpower.name=Strömbrist

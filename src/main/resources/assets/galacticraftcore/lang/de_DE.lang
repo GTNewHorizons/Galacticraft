@@ -309,6 +309,17 @@ gui.message.help3=Für Hilfe bezüglich Öl
 gui.message.prelaunch=Vor dem Start - Checkliste
 gui.message.thermalStatus.name=Temperaturkontrolle
 
+gui.tile.machine.0.name.title=Kohlegenerator
+gui.tile.machine.1.name.title=Batteriebox
+gui.tile.machine.2.name.title=Elektrischer Ofen
+gui.tile.machine.3.name.title=Kompressor
+gui.tile.machine2.4.name.title=Elektrischer Kompressor
+gui.tile.machine2.5.name.title=Schaltkreisfabrikator
+gui.tile.machine2.6.name.title=Sauerstoff-Speichermodul
+gui.tile.machine.7.name.title=Lichtbogenofen
+gui.tile.machine.8.name.title=Energiespeicher-Cluster
+
+
 gui.status.active.name=Aktiv
 gui.status.missingleaves.name=Nicht genug Blätter
 gui.status.missingpower.name=Nicht genug Energie

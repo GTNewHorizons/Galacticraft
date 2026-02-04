@@ -3,6 +3,7 @@ package micdoodle8.mods.galacticraft.core.client.gui.container;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
@@ -42,14 +43,22 @@ public class GuiEnergyStorageModule extends GuiContainer {
         if (energy + 49 > this.tileEntity.getMaxEnergyStoredGC()) {
             energy = this.tileEntity.getMaxEnergyStoredGC();
         }
-        String displayStr = EnergyDisplayHelper.getEnergyDisplayS(energy);
+        String displayStr = (StatCollector.canTranslate("gui.EnergyStorageModule.numbers1")
+                ? GCCoreUtil.translate("gui.EnergyStorageModule.numbers1")
+                : "") + EnergyDisplayHelper.getEnergyDisplayS(energy);
         this.fontRendererObj
                 .drawString(displayStr, 122 - this.fontRendererObj.getStringWidth(displayStr) / 2, 25, 4210752);
         displayStr = GCCoreUtil.translate("gui.message.of.name") + " "
+                + (StatCollector.canTranslate("gui.EnergyStorageModule.numbers2")
+                        ? GCCoreUtil.translate("gui.EnergyStorageModule.numbers2")
+                        : "")
                 + EnergyDisplayHelper.getEnergyDisplayS(this.tileEntity.getMaxEnergyStoredGC());
         this.fontRendererObj
                 .drawString(displayStr, 122 - this.fontRendererObj.getStringWidth(displayStr) / 2, 34, 4210752);
         displayStr = GCCoreUtil.translate("gui.maxOutput.desc") + ": "
+                + (StatCollector.canTranslate("gui.EnergyStorageModule.numbers3")
+                        ? GCCoreUtil.translate("gui.EnergyStorageModule.numbers3")
+                        : "")
                 + EnergyDisplayHelper.getEnergyDisplayS(this.tileEntity.storage.getMaxExtract())
                 + "/t";
         this.fontRendererObj

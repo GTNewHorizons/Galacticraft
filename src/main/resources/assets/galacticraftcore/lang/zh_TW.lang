@@ -306,6 +306,17 @@ gui.message.help3=For help with oil ##NEEDS TRANSLATE##
 gui.message.prelaunch=Pre-launch checklist ##NEEDS TRANSLATE##
 gui.message.thermalStatus.name=Thermal Control ##NEEDS TRANSLATE##
 
+gui.tile.machine.0.name.title=燃煤發電機
+gui.tile.machine.1.name.title=能量存儲模組
+gui.tile.machine.2.name.title=電爐
+gui.tile.machine.3.name.title=壓縮機
+gui.tile.machine2.4.name.title=電動壓縮機
+gui.tile.machine2.5.name.title=元件製造臺
+gui.tile.machine2.6.name.title=氧氣儲存模組
+gui.tile.machine.7.name.title=電弧爐
+gui.tile.machine.8.name.title=儲能簇
+
+
 gui.status.active.name=活動的
 gui.status.missingleaves.name=樹葉不足
 gui.status.missingpower.name=能量不足

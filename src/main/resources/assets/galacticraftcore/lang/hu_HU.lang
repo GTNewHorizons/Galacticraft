@@ -306,6 +306,17 @@ gui.message.help3=For help with oil ##NEEDS TRANSLATE##
 gui.message.prelaunch=Pre-launch checklist ##NEEDS TRANSLATE##
 gui.message.thermalStatus.name=Thermal Control ##NEEDS TRANSLATE##
 
+gui.tile.machine.0.name.title=Szénerőmű
+gui.tile.machine.1.name.title=Akkumlátor-Telep
+gui.tile.machine.2.name.title=Elektromos Kemence
+gui.tile.machine.3.name.title=Préselőgép
+gui.tile.machine2.4.name.title=Elektromos Préselőgép
+gui.tile.machine2.5.name.title=Áramkör-Készítő
+gui.tile.machine2.6.name.title=Légraktár
+gui.tile.machine.7.name.title=Elektromos Duplázó-Kemence
+gui.tile.machine.8.name.title=Nehéz Akkumlátortelep
+
+
 gui.status.active.name=Üzemel
 gui.status.missingleaves.name=Nincs Elég Falevél
 gui.status.missingpower.name=Nincs Elég Energia

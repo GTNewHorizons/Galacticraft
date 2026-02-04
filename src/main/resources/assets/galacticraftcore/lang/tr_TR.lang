@@ -308,6 +308,17 @@ gui.message.help3=2. Ham petrol ile yardım edin
 gui.message.prelaunch=Ön fırlatış kontrol listesi
 gui.message.thermalStatus.name=Sıcaklık Kontrolü
 
+gui.tile.machine.0.name.title=Kömür Jeneratörü
+gui.tile.machine.1.name.title=Enerji Depolama Modülü
+gui.tile.machine.2.name.title=Elektrikli Ocak
+gui.tile.machine.3.name.title=Kompresör
+gui.tile.machine2.4.name.title=Elektrikli Kompresör
+gui.tile.machine2.5.name.title=Devre Fabrikatörü
+gui.tile.machine2.6.name.title=Oksijen Depolama Modülü
+gui.tile.machine.7.name.title=Elektrik Ark Ocağı
+gui.tile.machine.8.name.title=Enerji Depolama Makinesi
+
+
 gui.status.active.name=Aktif
 gui.status.missingleaves.name=Yaprak Blokları Yetersiz
 gui.status.missingpower.name=Yeterli Enerji Yok

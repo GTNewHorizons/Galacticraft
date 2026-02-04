@@ -299,7 +299,7 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
 
     @Override
     public String getInventoryName() {
-        return GCCoreUtil.translate("tile.machine2.4.name");
+        return GCCoreUtil.translate("gui.tile.machine2.4.name.title");
     }
 
     @Override

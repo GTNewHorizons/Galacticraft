@@ -391,6 +391,17 @@ gui.message.help3=For help with oil ##NEEDS TRANSLATE##
 gui.message.prelaunch=Pre-launch checklist ##NEEDS TRANSLATE##
 gui.message.thermalStatus.name=Thermal Control ##NEEDS TRANSLATE##
 
+gui.tile.machine.0.name.title=Coal Generator ##NEEDS TRANSLATE##
+gui.tile.machine.1.name.title=Energy Storage Module ##NEEDS TRANSLATE##
+gui.tile.machine.2.name.title=Electric Furnace ##NEEDS TRANSLATE##
+gui.tile.machine.3.name.title=Compressor ##NEEDS TRANSLATE##
+gui.tile.machine2.4.name.title=Electric Compressor ##NEEDS TRANSLATE##
+gui.tile.machine2.5.name.title=Circuit Fabricator ##NEEDS TRANSLATE##
+gui.tile.machine2.6.name.title=Oxygen Storage Module ##NEEDS TRANSLATE##
+gui.tile.machine.7.name.title=Electric Arc Furnace ##NEEDS TRANSLATE##
+gui.tile.machine.8.name.title=Energy Storage Cluster ##NEEDS TRANSLATE##
+
+
 gui.status.active.name=Active
 gui.status.missingleaves.name=Not Enough Leaf Blocks
 gui.status.missingpower.name=Not Enough Power

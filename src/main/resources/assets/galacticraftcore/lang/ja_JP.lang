@@ -422,6 +422,17 @@ gui.message.help3=オイルのヘルプ
 gui.message.prelaunch=起動前のチェックリスト
 gui.message.thermalStatus.name=熱コントローラ
 
+gui.tile.machine.0.name.title=火力発電機
+gui.tile.machine.1.name.title=エネルギー蓄積モジュール
+gui.tile.machine.2.name.title=電気ファーネス
+gui.tile.machine.3.name.title=圧縮機
+gui.tile.machine2.4.name.title=電気圧縮機
+gui.tile.machine2.5.name.title=回路製作機
+gui.tile.machine2.6.name.title=酸素蓄積モジュール
+gui.tile.machine.7.name.title=電気アークファーネス
+gui.tile.machine.8.name.title=エネルギー蓄積クラスター
+
+
 gui.status.active.name=アクティブ
 gui.status.missingleaves.name=葉ブロックが不足している
 gui.status.missingpower.name=エネが不足している

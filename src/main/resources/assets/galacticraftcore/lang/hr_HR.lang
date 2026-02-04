@@ -307,6 +307,17 @@ gui.message.help2=Za rukovanje svemirskim programom
 gui.message.help3=Za pomoć sa uljem
 gui.message.prelaunch=Popis prije-pokretanja
 gui.message.thermalStatus.name=Thermal Control ##NEEDS TRANSLATE##
+
+gui.tile.machine.0.name.title=Generator Ugljena
+gui.tile.machine.1.name.title=Energijsko Skladište
+gui.tile.machine.2.name.title=Električna Peć
+gui.tile.machine.3.name.title=Kompresor
+gui.tile.machine2.4.name.title=Električni Kompresor
+gui.tile.machine2.5.name.title=Strujni Krug
+gui.tile.machine2.6.name.title=Zračno Skladište
+gui.tile.machine.7.name.title=Električna Arc Peć
+gui.tile.machine.8.name.title=Energijsko Skladište
+
 gui.status.active.name=Aktivirano
 gui.status.missingleaves.name=Nema Dovoljno Lišča
 gui.status.missingpower.name=Nema Dovoljno Energije

@@ -198,7 +198,8 @@ public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventor
 
     @Override
     public String getInventoryName() {
-        return GCCoreUtil.translate(this.tierGC == 1 ? "tile.machine.2.name" : "tile.machine.7.name");
+        return GCCoreUtil
+                .translate(this.tierGC == 1 ? "gui.tile.machine.2.name.title" : "gui.tile.machine.7.name.title");
     }
 
     @Override
