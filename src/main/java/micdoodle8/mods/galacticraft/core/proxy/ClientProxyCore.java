@@ -352,6 +352,7 @@ public class ClientProxyCore extends CommonProxyCore {
         ClientRegistry.registerKeyBinding(KeyHandlerClient.openFuelGui);
         ClientRegistry.registerKeyBinding(KeyHandlerClient.toggleAdvGoggles);
         MinecraftForge.EVENT_BUS.register(GalacticraftCore.proxy);
+        MinecraftForge.EVENT_BUS.register(new TabRegistry());
     }
 
     public static void registerTileEntityRenderers() {
