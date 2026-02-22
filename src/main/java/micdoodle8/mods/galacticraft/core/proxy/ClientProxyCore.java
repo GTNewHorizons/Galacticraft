@@ -58,6 +58,8 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import micdoodle8.mods.galacticraft.api.client.tabs.InventoryTabVanilla;
+import micdoodle8.mods.galacticraft.api.client.tabs.TabRegistry;
 import micdoodle8.mods.galacticraft.api.entity.ICameraZoomEntity;
 import micdoodle8.mods.galacticraft.api.event.client.CelestialBodyRenderEvent;
 import micdoodle8.mods.galacticraft.api.prefab.entity.EntityAutoRocket;
@@ -160,8 +162,6 @@ import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.core.wrappers.BlockMetaList;
 import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
-import tconstruct.client.tabs.InventoryTabVanilla;
-import tconstruct.client.tabs.TabRegistry;
 
 public class ClientProxyCore extends CommonProxyCore {
 
@@ -394,7 +394,7 @@ public class ClientProxyCore extends CommonProxyCore {
     }
 
     public static void registerInventoryTabs() {
-        if (!Loader.isModLoaded("TConstruct") && TabRegistry.getTabList().size() < 1) {
+        if (TabRegistry.getTabList().size() < 1) {
             TabRegistry.registerTab(new InventoryTabVanilla());
         }
         TabRegistry.registerTab(new InventoryTabGalacticraft());
