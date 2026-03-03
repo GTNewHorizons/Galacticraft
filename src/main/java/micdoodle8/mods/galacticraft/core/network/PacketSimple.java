@@ -394,7 +394,7 @@ public class PacketSimple extends Packet implements IPacket {
                         ClientProxyCore.gearDataRequests.remove(gearName);
                     }
 
-                    final EnumModelPacket type = EnumModelPacket.values()[(Integer) this.data.get(1)];
+                    final EnumModelPacket type = EnumModelPacket.fromOrdinal((Integer) this.data.get(1));
 
                     switch (type) {
                         case ADDMASK:
