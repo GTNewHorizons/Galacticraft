@@ -94,7 +94,7 @@ public class ItemTier1Rocket extends Item implements IHoldableItem {
                 centerX,
                 centerY,
                 centerZ,
-                EnumRocketType.values()[par1ItemStack.getItemDamage()]);
+                EnumRocketType.VALUES[par1ItemStack.getItemDamage()]);
 
         spaceship.setPosition(spaceship.posX, spaceship.posY + spaceship.getOnPadYOffset(), spaceship.posZ);
         par3World.spawnEntityInWorld(spaceship);
@@ -121,7 +121,7 @@ public class ItemTier1Rocket extends Item implements IHoldableItem {
 
     @Override
     public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
-        for (int i = 0; i < EnumRocketType.values().length; i++) {
+        for (int i = 0; i < EnumRocketType.VALUES.length; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }
     }
@@ -135,7 +135,7 @@ public class ItemTier1Rocket extends Item implements IHoldableItem {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack par1ItemStack, EntityPlayer player, List<String> par2List, boolean b) {
-        final EnumRocketType type = EnumRocketType.values()[par1ItemStack.getItemDamage()];
+        final EnumRocketType type = EnumRocketType.VALUES[par1ItemStack.getItemDamage()];
 
         if (!type.getTooltip().isEmpty()) {
             par2List.add(type.getTooltip());
@@ -151,7 +151,7 @@ public class ItemTier1Rocket extends Item implements IHoldableItem {
                     0,
                     0,
                     0,
-                    EnumRocketType.values()[par1ItemStack.getItemDamage()]);
+                    EnumRocketType.VALUES[par1ItemStack.getItemDamage()]);
             par2List.add(
                     GCCoreUtil.translate("gui.message.fuel.name") + ": "
                             + par1ItemStack.getTagCompound().getInteger("RocketFuel")
