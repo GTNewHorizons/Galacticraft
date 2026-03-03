@@ -28,15 +28,17 @@ public class PacketSimpleAsteroids implements IPacket {
 
     public enum EnumSimplePacketAsteroids {
 
+        // spotless:off
         // SERVER
         S_UPDATE_ADVANCED_GUI(Side.SERVER, Integer.class, Integer.class, Integer.class, Integer.class, Integer.class),
         S_REQUEST_MINERBASE_FACING(Side.CLIENT, Integer.class, Integer.class, Integer.class),
         // CLIENT
         C_TELEPAD_SEND(Side.CLIENT, BlockVec3.class, Integer.class),
         C_UPDATE_GRAPPLE_POS(Side.CLIENT, Integer.class, Vector3.class),
-        C_UPDATE_MINERBASE_FACING(Side.CLIENT, Integer.class, Integer.class, Integer.class, Integer.class,
-                Integer.class, Integer.class, Integer.class, Integer.class);
+        C_UPDATE_MINERBASE_FACING(Side.CLIENT, Integer.class, Integer.class, Integer.class, Integer.class, Integer.class, Integer.class, Integer.class, Integer.class);
+        // spotless:on
 
+        private static final EnumSimplePacketAsteroids[] VALUES = values();
         private final Side targetSide;
         private final Class<?>[] decodeAs;
 
@@ -51,6 +53,10 @@ public class PacketSimpleAsteroids implements IPacket {
 
         public Class<?>[] getDecodeClasses() {
             return this.decodeAs;
+        }
+
+        public static EnumSimplePacketAsteroids fromOrdinal(int ordinal) {
+            return VALUES[ordinal];
         }
     }
 
@@ -85,8 +91,7 @@ public class PacketSimpleAsteroids implements IPacket {
 
     @Override
     public void decodeInto(ChannelHandlerContext context, ByteBuf buffer) {
-        this.type = EnumSimplePacketAsteroids.values()[buffer.readInt()];
-
+        this.type = EnumSimplePacketAsteroids.fromOrdinal(buffer.readInt());
         if (this.type.getDecodeClasses().length > 0) {
             this.data = NetworkUtil.decodeData(this.type.getDecodeClasses(), buffer);
         }

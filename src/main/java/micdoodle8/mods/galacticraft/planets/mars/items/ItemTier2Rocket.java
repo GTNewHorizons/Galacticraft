@@ -151,7 +151,7 @@ public class ItemTier2Rocket extends Item implements IHoldableItem {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack par1ItemStack, EntityPlayer player, List<String> par2List, boolean b) {
-        EnumRocketType type = null;
+        final EnumRocketType type;
 
         if (par1ItemStack.getItemDamage() < 10) {
             type = EnumRocketType.values()[par1ItemStack.getItemDamage()];
