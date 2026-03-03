@@ -99,7 +99,7 @@ public class ItemTier3Rocket extends Item implements IHoldableItem {
                 centerX,
                 centerY,
                 centerZ,
-                EnumRocketType.values()[par1ItemStack.getItemDamage()]);
+                EnumRocketType.VALUES[par1ItemStack.getItemDamage()]);
 
         rocket.rotationYaw += 45;
         rocket.setPosition(rocket.posX, rocket.posY + rocket.getOnPadYOffset(), rocket.posZ);
@@ -127,7 +127,7 @@ public class ItemTier3Rocket extends Item implements IHoldableItem {
 
     @Override
     public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
-        for (int i = 0; i < EnumRocketType.values().length; i++) {
+        for (int i = 0; i < EnumRocketType.VALUES.length; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }
     }
@@ -138,9 +138,9 @@ public class ItemTier3Rocket extends Item implements IHoldableItem {
         EnumRocketType type;
 
         if (par1ItemStack.getItemDamage() < 10) {
-            type = EnumRocketType.values()[par1ItemStack.getItemDamage()];
+            type = EnumRocketType.VALUES[par1ItemStack.getItemDamage()];
         } else {
-            type = EnumRocketType.values()[par1ItemStack.getItemDamage() - 10];
+            type = EnumRocketType.VALUES[par1ItemStack.getItemDamage() - 10];
         }
 
         if (!type.getTooltip().isEmpty()) {
@@ -157,7 +157,7 @@ public class ItemTier3Rocket extends Item implements IHoldableItem {
                     0,
                     0,
                     0,
-                    EnumRocketType.values()[par1ItemStack.getItemDamage()]);
+                    EnumRocketType.VALUES[par1ItemStack.getItemDamage()]);
             par2List.add(
                     GCCoreUtil.translate("gui.message.fuel.name") + ": "
                             + par1ItemStack.getTagCompound().getInteger("RocketFuel")

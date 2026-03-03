@@ -223,7 +223,7 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
 
     @Override
     public void decodePacketdata(ByteBuf buffer) {
-        this.rocketType = EnumRocketType.values()[buffer.readInt()];
+        this.rocketType = EnumRocketType.VALUES[buffer.readInt()];
         super.decodePacketdata(buffer);
         this.posX = buffer.readDouble() / 8000.0D;
         this.posY = buffer.readDouble() / 8000.0D;
@@ -313,7 +313,7 @@ public class EntityCargoRocket extends EntityAutoRocket implements IRocketType, 
 
     @Override
     protected void readEntityFromNBT(NBTTagCompound nbt) {
-        this.rocketType = EnumRocketType.values()[nbt.getInteger("Type")];
+        this.rocketType = EnumRocketType.VALUES[nbt.getInteger("Type")];
 
         super.readEntityFromNBT(nbt);
     }

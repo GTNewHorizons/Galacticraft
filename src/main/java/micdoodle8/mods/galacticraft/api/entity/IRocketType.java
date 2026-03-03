@@ -12,6 +12,10 @@ public interface IRocketType {
         INVENTORY54(3, StatCollector.translateToLocal("gui.rocketType.2"), false, 56),
         PREFUELED(4, StatCollector.translateToLocal("gui.rocketType.3"), true, 2);
 
+        /**
+         * Cached values() array for frequent read-only operations, the array should NOT be mutated.
+         */
+        public static final EnumRocketType[] VALUES = values();
         private final int index;
         private final String tooltip;
         private final boolean preFueled;

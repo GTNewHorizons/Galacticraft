@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -43,6 +42,7 @@ public class PacketSimpleMars implements IPacket {
         C_OPEN_CUSTOM_GUI(Side.CLIENT, Integer.class, Integer.class, Integer.class),
         C_BEGIN_CRYOGENIC_SLEEP(Side.CLIENT, Integer.class, Integer.class, Integer.class);
 
+        private static final EnumSimplePacketMars[] VALUES = values();
         private final Side targetSide;
         private final Class<?>[] decodeAs;
 
@@ -57,6 +57,10 @@ public class PacketSimpleMars implements IPacket {
 
         public Class<?>[] getDecodeClasses() {
             return this.decodeAs;
+        }
+
+        public static EnumSimplePacketMars fromOrdinal(int ordinal) {
+            return VALUES[ordinal];
         }
     }
 
@@ -91,7 +95,7 @@ public class PacketSimpleMars implements IPacket {
 
     @Override
     public void decodeInto(ChannelHandlerContext context, ByteBuf buffer) {
-        this.type = EnumSimplePacketMars.values()[buffer.readInt()];
+        this.type = EnumSimplePacketMars.fromOrdinal(buffer.readInt());
 
         if (this.type.getDecodeClasses().length > 0) {
             this.data = NetworkUtil.decodeData(this.type.getDecodeClasses(), buffer);
@@ -101,8 +105,6 @@ public class PacketSimpleMars implements IPacket {
     @SideOnly(Side.CLIENT)
     @Override
     public void handleClientSide(EntityPlayer player) {
-        if (player instanceof EntityClientPlayerMP) {}
-
         switch (this.type) {
             case C_OPEN_CUSTOM_GUI:
                 int entityID = 0;
