@@ -58,10 +58,14 @@ public class BlockEnclosed extends BlockContainer
         ALUMINUM_WIRE(14, -1, null, "enclosed_aluminum_wire"),
         ALUMINUM_WIRE_HEAVY(15, -1, null, "enclosed_heavy_aluminum_wire");
 
-        int metadata;
-        int subMeta;
-        String pipeType;
-        String texture;
+        /**
+         * Cached values() array for frequent read-only operations, the array should NOT be mutated.
+         */
+        public static final EnumEnclosedBlock[] VALUES = values();
+        final int metadata;
+        final int subMeta;
+        final String pipeType;
+        final String texture;
 
         EnumEnclosedBlock(int metadata, int subMeta, String pipeTypeBC, String texture) {
             this.metadata = metadata;
@@ -85,16 +89,15 @@ public class BlockEnclosed extends BlockContainer
         public String getTexture() {
             return this.texture;
         }
-    }
 
-    public static EnumEnclosedBlock getTypeFromMeta(int metadata) {
-        for (final EnumEnclosedBlock type : EnumEnclosedBlock.values()) {
-            if (type.getMetadata() == metadata) {
-                return type;
+        public static EnumEnclosedBlock getTypeFromMeta(int metadata) {
+            for (final EnumEnclosedBlock type : EnumEnclosedBlock.VALUES) {
+                if (type.getMetadata() == metadata) {
+                    return type;
+                }
             }
+            return null;
         }
-
-        return null;
     }
 
     public BlockEnclosed(String assetName) {
@@ -143,7 +146,7 @@ public class BlockEnclosed extends BlockContainer
         for (int i = 0; i < 6; i++) {
             try {
                 final Class<?> clazzBC = Class.forName("buildcraft.BuildCraftTransport");
-                String pipeName = EnumEnclosedBlock.values()[i + 7].getPipeType();
+                String pipeName = EnumEnclosedBlock.VALUES[i + 7].getPipeType();
                 pipeName = pipeName.substring(0, 1).toLowerCase() + pipeName.substring(1);
                 pipeItemsBC[i] = (Item) clazzBC.getField(pipeName).get(null);
             } catch (final Exception e) {
@@ -183,14 +186,12 @@ public class BlockEnclosed extends BlockContainer
     @Override
     public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.enclosedIcons = new IIcon[16];
-
-        for (int i = 0; i < EnumEnclosedBlock.values().length; i++) {
-            this.enclosedIcons[EnumEnclosedBlock.values()[i].getMetadata()] = par1IconRegister
-                    .registerIcon(GalacticraftCore.TEXTURE_PREFIX + EnumEnclosedBlock.values()[i].getTexture());
+        for (EnumEnclosedBlock value : EnumEnclosedBlock.VALUES) {
+            this.enclosedIcons[value.getMetadata()] = par1IconRegister
+                    .registerIcon(GalacticraftCore.TEXTURE_PREFIX + value.getTexture());
         }
-
         this.blockIcon = par1IconRegister
-                .registerIcon(GalacticraftCore.TEXTURE_PREFIX + "" + EnumEnclosedBlock.OXYGEN_PIPE.getTexture());
+                .registerIcon(GalacticraftCore.TEXTURE_PREFIX + EnumEnclosedBlock.OXYGEN_PIPE.getTexture());
     }
 
     @Override
@@ -264,7 +265,7 @@ public class BlockEnclosed extends BlockContainer
                     constructor.setAccessible(true);
 
                     return (TileEntity) constructor
-                            .newInstance((short) BlockEnclosed.getTypeFromMeta(metadata).getSubMetaValue());
+                            .newInstance((short) EnumEnclosedBlock.getTypeFromMeta(metadata).getSubMetaValue());
                 } catch (final Exception e) {
                     e.printStackTrace();
                 }
@@ -321,7 +322,7 @@ public class BlockEnclosed extends BlockContainer
     public void onPostBlockPlaced(World world, int x, int y, int z, int metadata) {
         if (metadata >= EnumEnclosedBlock.BC_ITEM_STONEPIPE.getMetadata()
                 && metadata <= EnumEnclosedBlock.BC_POWER_GOLDPIPE.getMetadata()) {
-            final EnumEnclosedBlock type = BlockEnclosed.getTypeFromMeta(metadata);
+            final EnumEnclosedBlock type = EnumEnclosedBlock.getTypeFromMeta(metadata);
             if (CompatibilityManager.isBCraftTransportLoaded() && type != null && type.getPipeType() != null) {
                 BlockEnclosed.initialiseBCPipe(world, x, y, z, metadata);
             }
