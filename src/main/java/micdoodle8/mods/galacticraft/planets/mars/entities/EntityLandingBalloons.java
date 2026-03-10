@@ -147,15 +147,13 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
 
     @Override
     public void tickInAir() {
-        if (this.worldObj.isRemote) {
-            if (this.groundHitCount == 0) {
-                this.motionY = -this.posY / 50.0D;
-            } else if (this.groundHitCount < 14 || this.shouldMove()) {
-                this.motionY *= 0.95D;
-                this.motionY -= 0.08D;
-            } else if (!this.shouldMove()) {
-                this.motionY = this.motionX = this.motionZ = this.rotationPitchSpeed = this.rotationYawSpeed = 0.0F;
-            }
+        if (this.groundHitCount == 0) {
+            this.motionY = -this.posY / 50.0D;
+        } else if (this.groundHitCount < 14 || this.shouldMove()) {
+            this.motionY *= 0.95D;
+            this.motionY -= 0.08D;
+        } else if (!this.shouldMove()) {
+            this.motionY = this.motionX = this.motionZ = this.rotationPitchSpeed = this.rotationYawSpeed = 0.0F;
         }
     }
 
@@ -225,7 +223,8 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
 
     @Override
     public boolean allowDamageSource(DamageSource damageSource) {
-        return this.groundHitCount > 0 && super.allowDamageSource(damageSource);
+        boolean riddenDescentInProgress = this.groundHitCount == 0 && this.riddenByEntity != null;
+        return !riddenDescentInProgress && super.allowDamageSource(damageSource);
     }
 
     @Override
