@@ -169,6 +169,7 @@ gui.slimeling.food=Favori Besini
 # SCHEMATICS
 schematic.rocketT3.name=Tier 3 Roketi
 schematic.cargoRocket.name=Otomatik Kargo Roketi
+schematic.cargoRocket.name.short=Kargo Roketi
 
 # ENTITIES
 entity.GalacticraftMars.CargoRocket.name=Kargo Roketi

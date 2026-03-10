@@ -15,6 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.api.recipe.ISchematicItem;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
+import micdoodle8.mods.galacticraft.core.util.EnumColor;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class ItemSchematic extends Item implements ISchematicItem {
@@ -78,10 +79,10 @@ public class ItemSchematic extends Item implements ISchematicItem {
         if (par2EntityPlayer.worldObj.isRemote) {
             switch (par1ItemStack.getItemDamage()) {
                 case 0:
-                    par3List.add(GCCoreUtil.translate("schematic.moonbuggy.name"));
+                    par3List.add(EnumColor.WHITE + GCCoreUtil.translate("schematic.moonbuggy.name"));
                     break;
                 case 1:
-                    par3List.add(GCCoreUtil.translate("schematic.rocketT2.name"));
+                    par3List.add(EnumColor.WHITE + GCCoreUtil.translate("schematic.rocketT2.name"));
                     break;
             }
         }

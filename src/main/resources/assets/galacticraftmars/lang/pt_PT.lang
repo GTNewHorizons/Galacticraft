@@ -169,6 +169,7 @@ gui.slimeling.food=Comida favorita
 # SCHEMATICS
 schematic.rocketT3.name=Foguetão Nível 3
 schematic.cargoRocket.name=Foguetão de Carga Automático
+schematic.cargoRocket.name.short=Foguetão de Carga
 
 # ENTITIES
 entity.GalacticraftMars.CargoRocket.name=Foguetão de Carga

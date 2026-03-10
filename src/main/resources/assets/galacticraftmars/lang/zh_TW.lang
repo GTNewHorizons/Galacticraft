@@ -169,6 +169,7 @@ gui.slimeling.food=Favorite food ##NEEDS TRANSLATE##
 # SCHEMATICS
 schematic.rocketT3.name=3階火箭
 schematic.cargoRocket.name=自動貨運火箭
+schematic.cargoRocket.name.short=貨運火箭
 
 # ENTITIES
 entity.GalacticraftMars.CargoRocket.name=貨運火箭
