@@ -67,8 +67,11 @@ public class GuiSchematicTier2Rocket extends GuiContainer implements ISchematicR
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         this.fontRendererObj
                 .drawString(EnumColor.WHITE + GCCoreUtil.translate("schematic.rocketT2.name"), 7, 7, 0x404040);
-        this.fontRendererObj
-                .drawString(EnumColor.WHITE + GCCoreUtil.translate("container.inventory"), 8, 220 - 104 + 2 + 27, 0x404040);
+        this.fontRendererObj.drawString(
+                EnumColor.WHITE + GCCoreUtil.translate("container.inventory"),
+                8,
+                220 - 104 + 2 + 27,
+                0x404040);
     }
 
     @Override
