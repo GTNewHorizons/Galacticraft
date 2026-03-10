@@ -169,6 +169,7 @@ gui.slimeling.food=Najdraža Hrana
 # SCHEMATICS
 schematic.rocketT3.name=Raketa Ranga 3
 schematic.cargoRocket.name=Automatska Teret Raketa
+schematic.cargoRocket.name.short=Teretna Raketa
 
 # ENTITIES
 entity.GalacticraftMars.CargoRocket.name=Teretna Raketa

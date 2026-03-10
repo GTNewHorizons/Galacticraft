@@ -169,6 +169,7 @@ gui.slimeling.food=Comida preferida
 # ESQUEMAS
 schematic.rocketT3.name=Cohete nivel 3
 schematic.cargoRocket.name=Cohete de carga automático
+schematic.cargoRocket.name.short=Cohete de carga
 
 # ESQUEMAS
 entity.GalacticraftMars.CargoRocket.name=Cohete de carga

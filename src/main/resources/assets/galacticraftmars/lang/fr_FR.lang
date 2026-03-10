@@ -169,6 +169,7 @@ gui.slimeling.food=Nourriture favorite
 # SCHEMATICS
 schematic.rocketT3.name=Fusée Niveau 3
 schematic.cargoRocket.name=Cargaison automatique de fusée
+schematic.cargoRocket.name.short=Fusée de transport de marchandise
 
 # ENTITIES
 entity.GalacticraftMars.CargoRocket.name=Fusée de transport de marchandise
