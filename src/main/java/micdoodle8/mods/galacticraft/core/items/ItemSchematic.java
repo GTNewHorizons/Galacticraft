@@ -79,10 +79,10 @@ public class ItemSchematic extends Item implements ISchematicItem {
         if (par2EntityPlayer.worldObj.isRemote) {
             switch (par1ItemStack.getItemDamage()) {
                 case 0:
-                    par3List.add(EnumColor.WHITE + GCCoreUtil.translate("schematic.moonbuggy.name"));
+                    par3List.add(GCCoreUtil.translate("schematic.moonbuggy.name"));
                     break;
                 case 1:
-                    par3List.add(EnumColor.WHITE + GCCoreUtil.translate("schematic.rocketT2.name"));
+                    par3List.add(GCCoreUtil.translate("schematic.rocketT2.name"));
                     break;
             }
         }
