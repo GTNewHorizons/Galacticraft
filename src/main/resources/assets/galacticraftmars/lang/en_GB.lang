@@ -168,6 +168,7 @@ gui.slimeling.food=Favourite food
 # SCHEMATICS
 schematic.rocketT3.name=Tier 3 Rocket
 schematic.cargoRocket.name=Automatic Cargo Rocket
+schematic.cargoRocket.name.short=Cargo Rocket
 
 # ENTITIES
 entity.GalacticraftMars.CargoRocket.name=Cargo Rocket

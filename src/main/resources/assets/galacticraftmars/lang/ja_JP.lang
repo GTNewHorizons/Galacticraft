@@ -169,6 +169,7 @@ gui.slimeling.food=好きな食べ物
 # SCHEMATICS
 schematic.rocketT3.name=レベル3宇宙機
 schematic.cargoRocket.name=自動貨物宇宙機
+schematic.cargoRocket.name.short=宇宙機
 
 # ENTITIES
 entity.GalacticraftMars.CargoRocket.name=宇宙機

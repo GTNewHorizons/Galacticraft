@@ -53,9 +53,9 @@ public class ItemRendererTier2Rocket extends ItemRendererTier1Rocket {
         if (type == ItemRenderType.INVENTORY) {
             final int index = Math.min(
                     Math.max(item.getItemDamage() >= 10 ? item.getItemDamage() - 10 : item.getItemDamage(), 0),
-                    EnumRocketType.values().length - 1);
+                    EnumRocketType.VALUES.length - 1);
 
-            if (EnumRocketType.values()[index].getInventorySpace() > 3) {
+            if (EnumRocketType.VALUES[index].getInventorySpace() > 3) {
                 final ModelChest modelChest = this.chestModel;
                 FMLClientHandler.instance().getClient().renderEngine.bindTexture(ItemRendererTier1Rocket.chestTexture);
 

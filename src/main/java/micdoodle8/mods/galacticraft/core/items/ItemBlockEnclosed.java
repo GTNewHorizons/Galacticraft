@@ -11,7 +11,6 @@ import appeng.api.AEApi;
 import appeng.api.util.AEColor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import micdoodle8.mods.galacticraft.core.blocks.BlockEnclosed;
 import micdoodle8.mods.galacticraft.core.blocks.BlockEnclosed.EnumEnclosedBlock;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.CompatibilityManager;
@@ -62,7 +61,7 @@ public class ItemBlockEnclosed extends ItemBlockDesc {
             default:
                 // The BuildCraft pipes
                 try {
-                    name = BlockEnclosed.getTypeFromMeta(par1ItemStack.getItemDamage()).getPipeType();
+                    name = EnumEnclosedBlock.getTypeFromMeta(par1ItemStack.getItemDamage()).getPipeType();
                 } catch (final Exception e) {
                     name = "null";
                 }

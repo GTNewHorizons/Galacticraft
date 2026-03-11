@@ -46,8 +46,8 @@ public class ItemRendererTier1Rocket implements IItemRenderer {
         GL11.glPopMatrix();
 
         if (type == ItemRenderType.INVENTORY) {
-            final int index = Math.min(Math.max(item.getItemDamage(), 0), EnumRocketType.values().length - 1);
-            if (EnumRocketType.values()[index].getInventorySpace() > 3) {
+            final int index = Math.min(Math.max(item.getItemDamage(), 0), EnumRocketType.VALUES.length - 1);
+            if (EnumRocketType.VALUES[index].getInventorySpace() > 3) {
                 final ModelChest modelChest = this.chestModel;
                 FMLClientHandler.instance().getClient().renderEngine.bindTexture(ItemRendererTier1Rocket.chestTexture);
 

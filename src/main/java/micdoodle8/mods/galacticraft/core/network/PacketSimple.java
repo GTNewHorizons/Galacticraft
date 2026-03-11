@@ -103,6 +103,7 @@ public class PacketSimple extends Packet implements IPacket {
 
     public enum EnumSimplePacket {
 
+        // spotless:off
         // SERVER
         S_RESPAWN_PLAYER(Side.SERVER, String.class),
         S_TELEPORT_ENTITY(Side.SERVER, String.class, Boolean.class),
@@ -117,10 +118,8 @@ public class PacketSimple extends Packet implements IPacket {
         S_ON_FAILED_CHEST_UNLOCK(Side.SERVER, Integer.class),
         S_RENAME_SPACE_STATION(Side.SERVER, String.class, Integer.class),
         S_OPEN_EXTENDED_INVENTORY(Side.SERVER),
-        S_ON_ADVANCED_GUI_CLICKED_INT(Side.SERVER, Integer.class, Integer.class, Integer.class, Integer.class,
-                Integer.class),
-        S_ON_ADVANCED_GUI_CLICKED_STRING(Side.SERVER, Integer.class, Integer.class, Integer.class, Integer.class,
-                String.class),
+        S_ON_ADVANCED_GUI_CLICKED_INT(Side.SERVER, Integer.class, Integer.class, Integer.class, Integer.class, Integer.class),
+        S_ON_ADVANCED_GUI_CLICKED_STRING(Side.SERVER, Integer.class, Integer.class, Integer.class, Integer.class, String.class),
         S_UPDATE_SHIP_MOTION_Y(Side.SERVER, Integer.class, Boolean.class),
         S_START_NEW_SPACE_RACE(Side.SERVER, Integer.class, String.class, FlagData.class, Vector3.class, String[].class),
         S_REQUEST_FLAG_DATA(Side.SERVER, String.class),
@@ -146,8 +145,7 @@ public class PacketSimple extends Packet implements IPacket {
         C_UPDATE_SPACESTATION_DATA(Side.CLIENT, Integer.class, NBTTagCompound.class),
         C_UPDATE_SPACESTATION_CLIENT_ID(Side.CLIENT, String.class),
         C_UPDATE_PLANETS_LIST(Side.CLIENT, Integer[].class),
-        C_UPDATE_CONFIGS(Side.CLIENT, Integer.class, Double.class, Integer.class, Integer.class, Integer.class,
-                String.class, Float.class, Float.class, Float.class, Float.class, Integer.class, String[].class),
+        C_UPDATE_CONFIGS(Side.CLIENT, Integer.class, Double.class, Integer.class, Integer.class, Integer.class, String.class, Float.class, Float.class, Float.class, Float.class, Integer.class, String[].class),
         C_UPDATE_STATS(Side.CLIENT, Integer.class),
         C_ADD_NEW_SCHEMATIC(Side.CLIENT, Integer.class),
         C_UPDATE_SCHEMATIC_LIST(Side.CLIENT, Integer[].class),
@@ -159,15 +157,13 @@ public class PacketSimple extends Packet implements IPacket {
         C_OPEN_PARACHEST_GUI(Side.CLIENT, Integer.class, Integer.class, Integer.class),
         C_UPDATE_WIRE_BOUNDS(Side.CLIENT, Integer.class, Integer.class, Integer.class),
         C_OPEN_SPACE_RACE_GUI(Side.CLIENT),
-        C_UPDATE_SPACE_RACE_DATA(Side.CLIENT, Integer.class, String.class, FlagData.class, Vector3.class,
-                String[].class),
+        C_UPDATE_SPACE_RACE_DATA(Side.CLIENT, Integer.class, String.class, FlagData.class, Vector3.class, String[].class),
         C_OPEN_JOIN_RACE_GUI(Side.CLIENT, Integer.class),
         C_UPDATE_FOOTPRINT_LIST(Side.CLIENT, Long.class, Footprint[].class),
         C_FOOTPRINTS_REMOVED(Side.CLIENT, Long.class, BlockVec3.class),
         C_UPDATE_STATION_SPIN(Side.CLIENT, Float.class, Boolean.class),
         C_UPDATE_STATION_DATA(Side.CLIENT, Double.class, Double.class),
-        C_UPDATE_STATION_BOX(Side.CLIENT, Integer.class, Integer.class, Integer.class, Integer.class, Integer.class,
-                Integer.class),
+        C_UPDATE_STATION_BOX(Side.CLIENT, Integer.class, Integer.class, Integer.class, Integer.class, Integer.class, Integer.class),
         C_UPDATE_THERMAL_LEVEL(Side.CLIENT, Integer.class, Boolean.class),
         C_DISPLAY_ROCKET_CONTROLS(Side.CLIENT),
         C_GET_CELESTIAL_BODY_LIST(Side.CLIENT),
@@ -175,12 +171,13 @@ public class PacketSimple extends Packet implements IPacket {
         C_RESPAWN_PLAYER(Side.CLIENT, String.class, Integer.class, String.class, Integer.class),
         C_UPDATE_ARCLAMP_FACING(Side.CLIENT, Integer.class, Integer.class, Integer.class, Integer.class),
         C_UPDATE_VIEWSCREEN(Side.CLIENT, Integer.class, Integer.class, Integer.class, Integer.class, Integer.class),
-        C_UPDATE_TELEMETRY(Side.CLIENT, Integer.class, Integer.class, Integer.class, String.class, Integer.class,
-                Integer.class, Integer.class, Integer.class, Integer.class, String.class),
+        C_UPDATE_TELEMETRY(Side.CLIENT, Integer.class, Integer.class, Integer.class, String.class, Integer.class, Integer.class, Integer.class, Integer.class, Integer.class, String.class),
         C_SEND_PLAYERSKIN(Side.CLIENT, String.class, String.class, String.class, String.class),
         C_SEND_OVERWORLD_IMAGE(Side.CLIENT, Integer.class, Integer.class, byte[].class),
         S_CANCEL_TELEPORTATION(Side.SERVER);
+        // spotless:on
 
+        private static final EnumSimplePacket[] VALUES = values();
         private final Side targetSide;
         private final Class<?>[] decodeAs;
 
@@ -196,6 +193,10 @@ public class PacketSimple extends Packet implements IPacket {
         public Class<?>[] getDecodeClasses() {
             return this.decodeAs;
         }
+
+        public static EnumSimplePacket fromOrdinal(int ordinal) {
+            return VALUES[ordinal];
+        }
     }
 
     private EnumSimplePacket type;
@@ -210,10 +211,8 @@ public class PacketSimple extends Packet implements IPacket {
 
     public PacketSimple(EnumSimplePacket packetType, List<Object> data) {
         if (packetType.getDecodeClasses().length != data.size()) {
-            GCLog.info("Simple Packet Core found data length different than packet type");
-            new RuntimeException().printStackTrace();
+            new RuntimeException("Simple Packet Core found data length different than packet type").printStackTrace();
         }
-
         this.type = packetType;
         this.data = data;
     }
@@ -221,7 +220,6 @@ public class PacketSimple extends Packet implements IPacket {
     @Override
     public void encodeInto(ChannelHandlerContext context, ByteBuf buffer) {
         buffer.writeInt(this.type.ordinal());
-
         try {
             NetworkUtil.encodeData(buffer, this.data);
         } catch (final IOException e) {
@@ -231,7 +229,7 @@ public class PacketSimple extends Packet implements IPacket {
 
     @Override
     public void decodeInto(ChannelHandlerContext context, ByteBuf buffer) {
-        this.type = EnumSimplePacket.values()[buffer.readInt()];
+        this.type = EnumSimplePacket.fromOrdinal(buffer.readInt());
 
         try {
             if (this.type.getDecodeClasses().length > 0) {
@@ -242,9 +240,7 @@ public class PacketSimple extends Packet implements IPacket {
             }
         } catch (final Exception e) {
             System.err.println(
-                    "[Galacticraft] Error handling simple packet type: " + this.type.toString()
-                            + " "
-                            + buffer.toString());
+                    "[Galacticraft] Error handling simple packet type: " + this.type.toString() + " " + buffer);
             e.printStackTrace();
         }
     }
@@ -398,7 +394,7 @@ public class PacketSimple extends Packet implements IPacket {
                         ClientProxyCore.gearDataRequests.remove(gearName);
                     }
 
-                    final EnumModelPacket type = EnumModelPacket.values()[(Integer) this.data.get(1)];
+                    final EnumModelPacket type = EnumModelPacket.fromOrdinal((Integer) this.data.get(1));
 
                     switch (type) {
                         case ADDMASK:

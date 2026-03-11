@@ -3,17 +3,16 @@ package micdoodle8.mods.galacticraft.planets.mars.client.gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
 import micdoodle8.mods.galacticraft.api.recipe.ISchematicResultPage;
 import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;
+import micdoodle8.mods.galacticraft.core.util.EnumColor;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
 import micdoodle8.mods.galacticraft.planets.mars.inventory.ContainerSchematicTier2Rocket;
-import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 
 public class GuiSchematicTier2Rocket extends GuiContainer implements ISchematicResultPage {
 
@@ -66,12 +65,13 @@ public class GuiSchematicTier2Rocket extends GuiContainer implements ISchematicR
 
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+        this.fontRendererObj
+                .drawString(EnumColor.WHITE + GCCoreUtil.translate("schematic.rocketT2.name"), 7, 7, 0x404040);
         this.fontRendererObj.drawString(
-                MarsItems.spaceship.getItemStackDisplayName(new ItemStack(MarsItems.spaceship, 1, 0)),
-                7,
-                -20 + 27,
-                4210752);
-        this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, 220 - 104 + 2 + 27, 4210752);
+                EnumColor.WHITE + GCCoreUtil.translate("container.inventory"),
+                8,
+                220 - 104 + 2 + 27,
+                0x404040);
     }
 
     @Override

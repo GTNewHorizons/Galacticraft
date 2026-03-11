@@ -46,9 +46,16 @@ import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 public abstract class EntitySpaceshipBase extends Entity implements IPacketReceiver, IIgnoreShift, ITelemetry {
 
     public enum EnumLaunchPhase {
+
         UNIGNITED,
         IGNITED,
-        LAUNCHED
+        LAUNCHED;
+
+        private static final EnumLaunchPhase[] VALUES = values();
+
+        public static EnumLaunchPhase fromOrdinal(int ordinal) {
+            return VALUES[ordinal];
+        }
     }
 
     public int launchPhase;
@@ -316,7 +323,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
         if (!this.worldObj.isRemote) {
             new Exception().printStackTrace();
         }
-        this.setLaunchPhase(EnumLaunchPhase.values()[buffer.readInt()]);
+        this.setLaunchPhase(EnumLaunchPhase.fromOrdinal(buffer.readInt()));
         this.timeSinceLaunch = buffer.readFloat();
         this.timeUntilLaunch = buffer.readInt();
     }
@@ -407,7 +414,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
                 this.setLaunchPhase(EnumLaunchPhase.UNIGNITED);
             }
         } else {
-            this.setLaunchPhase(EnumLaunchPhase.values()[nbt.getInteger("launchPhase") - 1]);
+            this.setLaunchPhase(EnumLaunchPhase.fromOrdinal(nbt.getInteger("launchPhase") - 1));
         }
 
         // Update all Telemetry Units which are still tracking this rocket

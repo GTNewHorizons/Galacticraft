@@ -170,6 +170,7 @@ gui.slimeling.food=Cibo Preferito
 # SCHEMATICS
 schematic.rocketT3.name=Razzo di Livello 3
 schematic.cargoRocket.name=Razzo-Cargo automatico
+schematic.cargoRocket.name.short=Razzo-Cargo
 
 # ENTITIES
 entity.GalacticraftMars.CargoRocket.name=Razzo-Cargo

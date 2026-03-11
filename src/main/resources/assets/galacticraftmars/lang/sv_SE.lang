@@ -169,6 +169,7 @@ gui.slimeling.food=Favoritmat
 # SCHEMATICS
 schematic.rocketT3.name=N3-raket
 schematic.cargoRocket.name=Automatisk fraktraket
+schematic.cargoRocket.name.short=Fraktraket
 
 # ENTITIES
 entity.GalacticraftMars.CargoRocket.name=Fraktraket

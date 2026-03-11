@@ -1085,6 +1085,7 @@ public class GCPlayerHandler {
     }
 
     public enum EnumModelPacket {
+
         ADDMASK,
         REMOVEMASK,
         ADDGEAR,
@@ -1132,7 +1133,13 @@ public class GCPlayerHandler {
         HIDETHERMALHELMET,
         HIDETHERMALCHESTPLATE,
         HIDETHERMALLEGGINGS,
-        HIDETHERMALBOOTS
+        HIDETHERMALBOOTS;
+
+        private static final EnumModelPacket[] VALUES = values();
+
+        public static EnumModelPacket fromOrdinal(int ordinal) {
+            return VALUES[ordinal];
+        }
     }
 
     public void onPlayerUpdate(EntityPlayerMP player) {

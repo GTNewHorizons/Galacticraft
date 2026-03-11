@@ -169,6 +169,7 @@ gui.slimeling.food=Oblíbené jídlo
 # SCHEMATICS
 schematic.rocketT3.name=Raketa typ 3
 schematic.cargoRocket.name=Automatická nákladní raketa
+schematic.cargoRocket.name.short=Nákladní raketa
 
 # ENTITIES
 entity.GalacticraftMars.CargoRocket.name=Nákladní raketa
