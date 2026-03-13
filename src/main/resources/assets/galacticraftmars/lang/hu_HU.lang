@@ -169,6 +169,7 @@ gui.slimeling.food=Favorite food ##NEEDS TRANSLATE##
 # SCHEMATICS
 schematic.rocketT3.name=3-As Szintu Rakéta
 schematic.cargoRocket.name=Távvezérlésu Teherrakéta
+schematic.cargoRocket.name.short=Távvezérlésu Teherrakéta
 
 # ENTITIES
 entity.GalacticraftMars.CargoRocket.name=Távvezérlésu Teherrakéta
