@@ -51,8 +51,9 @@ public class TileEntityLandingPad extends TileEntityMulti
             boolean docked = false;
 
             for (final Object o : list) {
-               if (tryDockEntity((Entity) o)) { docked = true; }
-
+                if (tryDockEntity((Entity) o)) {
+                    docked = true;
+                }
             }
 
             if (!docked) {
