@@ -122,11 +122,11 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
 
     @Override
     public boolean shouldMove() {
-        if (this.ticks < 40 || !this.hasReceivedPacket) {
+        if (this.ticks < 40 || (this.worldObj.isRemote && !this.hasReceivedPacket)) {
             return false;
         }
 
-        return this.riddenByEntity != null && this.groundHitCount < 14 || !this.onGround;
+        return this.groundHitCount < this.getMaxGroundHits() || !this.onGround;
     }
 
     @Override
@@ -149,7 +149,7 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
     public void tickInAir() {
         if (this.groundHitCount == 0) {
             this.motionY = -this.posY / 50.0D;
-        } else if (this.groundHitCount < 14 || this.shouldMove()) {
+        } else if (this.groundHitCount < this.getMaxGroundHits() || this.shouldMove()) {
             this.motionY *= 0.95D;
             this.motionY -= 0.08D;
         } else if (!this.shouldMove()) {
@@ -158,14 +158,28 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
     }
 
     @Override
-    public void tickOnGround() {}
+    public void tickOnGround() {
+        if (!this.worldObj.isRemote && this.groundHitCount < this.getMaxGroundHits()) {
+            this.groundHitCount++;
+            final double mag = 1.0D / this.groundHitCount * 4.0D;
+            double mX = this.rand.nextDouble() - 0.5;
+            double mY = 1.0D;
+            double mZ = this.rand.nextDouble() - 0.5;
+            mX *= mag / 3.0D;
+            mY *= mag;
+            mZ *= mag / 3.0D;
+            this.motionX = mX;
+            this.motionY = mY;
+            this.motionZ = mZ;
+        }
+    }
 
     @Override
     public void onGroundHit() {}
 
     @Override
     public Vector3 getMotionVec() {
-        if (this.onGround && this.groundHitCount < 14) {
+        if (this.onGround && this.groundHitCount < this.getMaxGroundHits()) {
             this.groundHitCount++;
             final double mag = 1.0D / this.groundHitCount * 4.0D;
             double mX = this.rand.nextDouble() - 0.5;
@@ -186,6 +200,10 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
         }
 
         return new Vector3(this.motionX, this.ticks < 40 ? 0 : this.motionY, this.motionZ);
+    }
+
+    private int getMaxGroundHits() {
+        return this.riddenByEntity != null ? 14 : 2;
     }
 
     @Override
