@@ -160,6 +160,7 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
     @Override
     public void tickOnGround() {
         if (!this.worldObj.isRemote && this.groundHitCount < this.getMaxGroundHits()) {
+            // Keep server-side bounce impulse in sync with client-only getMotionVec() usage.
             this.groundHitCount++;
             final double mag = 1.0D / this.groundHitCount * 4.0D;
             double mX = this.rand.nextDouble() - 0.5;
@@ -180,6 +181,7 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
     @Override
     public Vector3 getMotionVec() {
         if (this.onGround && this.groundHitCount < this.getMaxGroundHits()) {
+            // Client-side bounce impulse; server mirrors this in tickOnGround() for sync.
             this.groundHitCount++;
             final double mag = 1.0D / this.groundHitCount * 4.0D;
             double mX = this.rand.nextDouble() - 0.5;
