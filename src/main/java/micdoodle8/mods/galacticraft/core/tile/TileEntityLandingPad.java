@@ -53,6 +53,8 @@ public class TileEntityLandingPad extends TileEntityMulti
             for (final Object o : list) {
                 if (tryDockEntity((Entity) o)) {
                     docked = true;
+
+                    break;
                 }
             }
 
