@@ -51,18 +51,8 @@ public class TileEntityLandingPad extends TileEntityMulti
             boolean docked = false;
 
             for (final Object o : list) {
-                if (o instanceof IDockable && !((Entity) o).isDead) {
+                if (tryDockEntity((Entity) o)) {
                     docked = true;
-
-                    final IDockable fuelable = (IDockable) o;
-
-                    if (fuelable != this.dockedEntity && fuelable.isDockValid(this)) {
-                        if (fuelable instanceof ILandable) {
-                            ((ILandable) fuelable).landEntity(this.xCoord, this.yCoord, this.zCoord);
-                        } else {
-                            fuelable.setPad(this);
-                        }
-                    }
 
                     break;
                 }
@@ -72,6 +62,22 @@ public class TileEntityLandingPad extends TileEntityMulti
                 this.dockedEntity = null;
             }
         }
+    }
+
+    public boolean tryDockEntity(Entity e) {
+        if (e instanceof IDockable && !e.isDead) {
+            final IDockable fuelable = (IDockable) e;
+
+            if (fuelable != this.dockedEntity && fuelable.isDockValid(this)) {
+                if (fuelable instanceof ILandable) {
+                    ((ILandable) fuelable).landEntity(this.xCoord, this.yCoord, this.zCoord);
+                } else {
+                    fuelable.setPad(this);
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override
