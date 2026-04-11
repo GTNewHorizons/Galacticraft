@@ -27,6 +27,12 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
     private float rotationPitchSpeed;
     private float rotationYawSpeed;
 
+    // Server computes bounce motion from rand; these fields are synced to the
+    // client so the client never needs to call rand itself, avoiding desync.
+    private double bounceMotionX;
+    private double bounceMotionY;
+    private double bounceMotionZ;
+
     public EntityLandingBalloons(World world) {
         super(world, 0F);
         this.setSize(2.0F, 2.0F);
@@ -157,10 +163,15 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
         }
     }
 
+    /**
+     * Called server-side when the entity touches the ground.
+     * Random is only used here so that both sides end up with the same values:
+     * the result is stored in bounceMotion* and sent to the client via
+     * getNetworkedData() / readNetworkedData().
+     */
     @Override
     public void tickOnGround() {
         if (!this.worldObj.isRemote && this.groundHitCount < this.getMaxGroundHits()) {
-            // Keep server-side bounce impulse in sync with client-only getMotionVec() usage.
             this.groundHitCount++;
             final double mag = 1.0D / this.groundHitCount * 4.0D;
             double mX = this.rand.nextDouble() - 0.5;
@@ -172,6 +183,10 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
             this.motionX = mX;
             this.motionY = mY;
             this.motionZ = mZ;
+            // Store for network sync so the client mirrors these exact values.
+            this.bounceMotionX = mX;
+            this.bounceMotionY = mY;
+            this.bounceMotionZ = mZ;
         }
     }
 
@@ -181,16 +196,9 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
     @Override
     public Vector3 getMotionVec() {
         if (this.onGround && this.groundHitCount < this.getMaxGroundHits()) {
-            // Client-side bounce impulse; server mirrors this in tickOnGround() for sync.
-            this.groundHitCount++;
-            final double mag = 1.0D / this.groundHitCount * 4.0D;
-            double mX = this.rand.nextDouble() - 0.5;
-            double mY = 1.0D;
-            double mZ = this.rand.nextDouble() - 0.5;
-            mX *= mag / 3.0D;
-            mY *= mag;
-            mZ *= mag / 3.0D;
-            return new Vector3(mX, mY, mZ);
+            // Use the server-authoritative bounce values received via packet.
+            // No rand call here — avoids client/server desync.
+            return new Vector3(this.bounceMotionX, this.bounceMotionY, this.bounceMotionZ);
         }
 
         if (this.ticks >= 40 && this.ticks < 45) {
@@ -208,6 +216,10 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
         return this.riddenByEntity != null ? 14 : 2;
     }
 
+    /**
+     * Sends groundHitCount and, when a bounce just happened (groundHitCount > 0),
+     * the server-computed bounce motion so the client can apply identical values.
+     */
     @Override
     public ArrayList<Object> getNetworkedData() {
         final ArrayList<Object> objList = new ArrayList<>(super.getNetworkedData());
@@ -215,6 +227,10 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
                 || !this.worldObj.isRemote && this.groundHitCount == 14) {
             objList.add(this.groundHitCount);
         }
+        // Always sync the bounce motion vectors so the client stays in step.
+        objList.add(this.bounceMotionX);
+        objList.add(this.bounceMotionY);
+        objList.add(this.bounceMotionZ);
         return objList;
     }
 
@@ -233,8 +249,14 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
         try {
             super.readNetworkedData(buffer);
 
-            if (buffer.readableBytes() > 0) {
+            if (buffer.readableBytes() >= 4) {
                 this.groundHitCount = buffer.readInt();
+            }
+            // Read the server-computed bounce motion vectors.
+            if (buffer.readableBytes() >= 24) {
+                this.bounceMotionX = buffer.readDouble();
+                this.bounceMotionY = buffer.readDouble();
+                this.bounceMotionZ = buffer.readDouble();
             }
         } catch (final Exception e) {
             e.printStackTrace();
