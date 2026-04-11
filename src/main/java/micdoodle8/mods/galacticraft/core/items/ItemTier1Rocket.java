@@ -98,6 +98,7 @@ public class ItemTier1Rocket extends Item implements IHoldableItem {
 
         spaceship.setPosition(spaceship.posX, spaceship.posY + spaceship.getOnPadYOffset(), spaceship.posZ);
         par3World.spawnEntityInWorld(spaceship);
+        ((TileEntityLandingPad) tile).tryDockEntity(spaceship);
 
         if (par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("RocketFuel")) {
             spaceship.fuelTank.fill(
