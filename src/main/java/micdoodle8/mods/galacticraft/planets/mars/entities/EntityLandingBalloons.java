@@ -164,10 +164,9 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
     }
 
     /**
-     * Called server-side when the entity touches the ground.
-     * Random is only used here so that both sides end up with the same values:
-     * the result is stored in bounceMotion* and sent to the client via
-     * getNetworkedData() / readNetworkedData().
+     * Called server-side when the entity touches the ground. Random is only used here so that both sides end up with
+     * the same values: the result is stored in bounceMotion* and sent to the client via getNetworkedData() /
+     * readNetworkedData().
      */
     @Override
     public void tickOnGround() {
@@ -217,8 +216,8 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
     }
 
     /**
-     * Sends groundHitCount and, when a bounce just happened (groundHitCount > 0),
-     * the server-computed bounce motion so the client can apply identical values.
+     * Sends groundHitCount and, when a bounce just happened (groundHitCount > 0), the server-computed bounce motion so
+     * the client can apply identical values.
      */
     @Override
     public ArrayList<Object> getNetworkedData() {
