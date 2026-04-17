@@ -1,14 +1,11 @@
 package micdoodle8.mods.galacticraft.api.vector;
 
 import net.minecraft.block.Block;
-import net.minecraft.crash.CrashReport;
-import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.ReportedException;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -26,10 +23,6 @@ public class BlockVec3 implements Cloneable {
     public int y;
     public int z;
     public int sideDoneBits = 0;
-    private static Chunk chunkCached;
-    public static int chunkCacheDim = Integer.MAX_VALUE;
-    private static int chunkCacheX = 1876000; // outside the world edge
-    private static int chunkCacheZ = 1876000; // outside the world edge
     // INVALID_VECTOR is used in cases where a null vector cannot be used
     public static final BlockVec3 INVALID_VECTOR = new BlockVec3(-1, -1, -1);
 
@@ -78,31 +71,7 @@ public class BlockVec3 implements Cloneable {
                 || this.z >= 30000000) {
             return null;
         }
-
-        final int chunkx = this.x >> 4;
-        final int chunkz = this.z >> 4;
-        try {
-            // In a typical inner loop, 80% of the time consecutive calls to
-            // this will be within the same chunk
-            if (BlockVec3.chunkCacheX == chunkx && BlockVec3.chunkCacheZ == chunkz
-                    && BlockVec3.chunkCacheDim == world.provider.dimensionId
-                    && BlockVec3.chunkCached.isChunkLoaded) {
-                return BlockVec3.chunkCached.getBlock(this.x & 15, this.y, this.z & 15);
-            }
-            Chunk chunk = world.getChunkFromChunkCoords(chunkx, chunkz);
-            BlockVec3.chunkCached = chunk;
-            BlockVec3.chunkCacheDim = world.provider.dimensionId;
-            BlockVec3.chunkCacheX = chunkx;
-            BlockVec3.chunkCacheZ = chunkz;
-            return chunk.getBlock(this.x & 15, this.y, this.z & 15);
-        } catch (final Throwable throwable) {
-            final CrashReport crashreport = CrashReport
-                    .makeCrashReport(throwable, "Oxygen Sealer thread: Exception getting block type in world");
-            final CrashReportCategory crashreportcategory = crashreport.makeCategory("Requested block coordinates");
-            crashreportcategory
-                    .addCrashSection("Location", CrashReportCategory.getLocationInfo(this.x, this.y, this.z));
-            throw new ReportedException(crashreport);
-        }
+        return world.getBlock(this.x, this.y, this.z);
     }
 
     /**
@@ -120,35 +89,11 @@ public class BlockVec3 implements Cloneable {
                 || this.z >= 30000000) {
             return null;
         }
-
-        final int chunkx = this.x >> 4;
-        final int chunkz = this.z >> 4;
-        try {
-            if (world.getChunkProvider().chunkExists(chunkx, chunkz)) {
-                // In a typical inner loop, 80% of the time consecutive calls to
-                // this will be within the same chunk
-                if (BlockVec3.chunkCacheX == chunkx && BlockVec3.chunkCacheZ == chunkz
-                        && BlockVec3.chunkCacheDim == world.provider.dimensionId
-                        && BlockVec3.chunkCached.isChunkLoaded) {
-                    return BlockVec3.chunkCached.getBlock(this.x & 15, this.y, this.z & 15);
-                }
-                Chunk chunk = world.getChunkFromChunkCoords(chunkx, chunkz);
-                BlockVec3.chunkCached = chunk;
-                BlockVec3.chunkCacheDim = world.provider.dimensionId;
-                BlockVec3.chunkCacheX = chunkx;
-                BlockVec3.chunkCacheZ = chunkz;
-                return chunk.getBlock(this.x & 15, this.y, this.z & 15);
-            }
-            // Chunk doesn't exist - meaning, it is not loaded
-            return Blocks.bedrock;
-        } catch (final Throwable throwable) {
-            final CrashReport crashreport = CrashReport
-                    .makeCrashReport(throwable, "Oxygen Sealer thread: Exception getting block type in world");
-            final CrashReportCategory crashreportcategory = crashreport.makeCategory("Requested block coordinates");
-            crashreportcategory
-                    .addCrashSection("Location", CrashReportCategory.getLocationInfo(this.x, this.y, this.z));
-            throw new ReportedException(crashreport);
+        if (world.blockExists(this.x, this.y, this.z)) {
+            return world.getBlock(this.x, this.y, this.z);
         }
+        // Chunk doesn't exist - meaning, it is not loaded
+        return Blocks.bedrock;
     }
 
     public Block getBlock(IBlockAccess par1iBlockAccess) {
@@ -167,35 +112,11 @@ public class BlockVec3 implements Cloneable {
         if (this.y < 0 || this.y >= 256) {
             return null;
         }
-
-        final int chunkx = this.x >> 4;
-        final int chunkz = this.z >> 4;
-        try {
-            if (world.getChunkProvider().chunkExists(chunkx, chunkz)) {
-                // In a typical inner loop, 80% of the time consecutive calls to
-                // this will be within the same chunk
-                if (BlockVec3.chunkCacheX == chunkx && BlockVec3.chunkCacheZ == chunkz
-                        && BlockVec3.chunkCacheDim == world.provider.dimensionId
-                        && BlockVec3.chunkCached.isChunkLoaded) {
-                    return BlockVec3.chunkCached.getBlock(this.x & 15, this.y, this.z & 15);
-                }
-                Chunk chunk = world.getChunkFromChunkCoords(chunkx, chunkz);
-                BlockVec3.chunkCached = chunk;
-                BlockVec3.chunkCacheDim = world.provider.dimensionId;
-                BlockVec3.chunkCacheX = chunkx;
-                BlockVec3.chunkCacheZ = chunkz;
-                return chunk.getBlock(this.x & 15, this.y, this.z & 15);
-            }
-            // Chunk doesn't exist - meaning, it is not loaded
-            return Blocks.bedrock;
-        } catch (final Throwable throwable) {
-            final CrashReport crashreport = CrashReport
-                    .makeCrashReport(throwable, "Oxygen Sealer thread: Exception getting block type in world");
-            final CrashReportCategory crashreportcategory = crashreport.makeCategory("Requested block coordinates");
-            crashreportcategory
-                    .addCrashSection("Location", CrashReportCategory.getLocationInfo(this.x, this.y, this.z));
-            throw new ReportedException(crashreport);
+        if (world.blockExists(this.x, this.y, this.z)) {
+            return world.getBlock(this.x, this.y, this.z);
         }
+        // Chunk doesn't exist - meaning, it is not loaded
+        return Blocks.bedrock;
     }
 
     public BlockVec3 add(BlockVec3 par1) {
