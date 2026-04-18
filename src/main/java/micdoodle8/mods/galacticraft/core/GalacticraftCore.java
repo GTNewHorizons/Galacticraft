@@ -54,7 +54,6 @@ import micdoodle8.mods.galacticraft.api.galaxies.Satellite;
 import micdoodle8.mods.galacticraft.api.galaxies.SolarSystem;
 import micdoodle8.mods.galacticraft.api.galaxies.Star;
 import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;
-import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.api.world.IAtmosphericGas;
 import micdoodle8.mods.galacticraft.core.blocks.BlockFluidGC;
@@ -605,7 +604,6 @@ public class GalacticraftCore {
     @EventHandler
     public void serverInit(FMLServerStartedEvent event) {
         TickHandlerServer.restart();
-        BlockVec3.chunkCacheDim = Integer.MAX_VALUE;
     }
 
     @EventHandler
