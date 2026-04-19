@@ -23,26 +23,34 @@ import micdoodle8.mods.galacticraft.planets.mars.util.MarsUtil;
 
 public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreShift, ICameraZoomEntity {
 
+    private static final int MAX_HITS_WITH_RIDER = 14;
+    private static final int MIN_HITS_WITHOUT_RIDER = 2;
+    private static final int MAX_HITS_WITHOUT_RIDER = 4;
+
     private int groundHitCount;
+    // Random bounce cap (2..4) used when there is no rider - e.g., if the player exits
+    // mid-air. Stored on the entity so server and client agree on the same cap; synced
+    // via getNetworkedData/readNetworkedData and persisted to NBT.
+    private int unriddenMaxHits;
     private float rotationPitchSpeed;
     private float rotationYawSpeed;
-
-    // Server computes bounce motion from rand; these fields are synced to the
-    // client so the client never needs to call rand itself, avoiding desync.
-    private double bounceMotionX;
-    private double bounceMotionY;
-    private double bounceMotionZ;
 
     public EntityLandingBalloons(World world) {
         super(world, 0F);
         this.setSize(2.0F, 2.0F);
         this.rotationPitchSpeed = this.rand.nextFloat();
         this.rotationYawSpeed = this.rand.nextFloat();
+        this.unriddenMaxHits = rollUnriddenMaxHits(this.rand);
     }
 
     public EntityLandingBalloons(EntityPlayerMP player) {
         super(player, 0F);
         this.setSize(2.0F, 2.0F);
+        this.unriddenMaxHits = rollUnriddenMaxHits(this.rand);
+    }
+
+    private static int rollUnriddenMaxHits(Random rand) {
+        return MIN_HITS_WITHOUT_RIDER + rand.nextInt(MAX_HITS_WITHOUT_RIDER - MIN_HITS_WITHOUT_RIDER + 1);
     }
 
     @Override
@@ -78,12 +86,19 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
     protected void readEntityFromNBT(NBTTagCompound nbt) {
         super.readEntityFromNBT(nbt);
         this.groundHitCount = nbt.getInteger("GroundHitCount");
+        if (nbt.hasKey("UnriddenMaxHits")) {
+            this.unriddenMaxHits = nbt.getInteger("UnriddenMaxHits");
+        }
+        if (this.unriddenMaxHits < MIN_HITS_WITHOUT_RIDER || this.unriddenMaxHits > MAX_HITS_WITHOUT_RIDER) {
+            this.unriddenMaxHits = rollUnriddenMaxHits(this.rand);
+        }
     }
 
     @Override
     protected void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
         nbt.setInteger("GroundHitCount", this.groundHitCount);
+        nbt.setInteger("UnriddenMaxHits", this.unriddenMaxHits);
     }
 
     @Override
@@ -164,13 +179,14 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
     }
 
     /**
-     * Called server-side when the entity touches the ground. Random is only used here so that both sides end up with
-     * the same values: the result is stored in bounceMotion* and sent to the client via getNetworkedData() /
-     * readNetworkedData().
+     * Called whenever the entity is touching the ground. Applies a bounce impulse on both client and server so the
+     * balloon actually springs upward instead of sticking to the floor. Exact motion vectors may differ slightly
+     * between sides because rand is side-local, but the authoritative position is reconciled via PacketEntityUpdate
+     * on the rider / the periodic server broadcast, so the small drift is harmless.
      */
     @Override
     public void tickOnGround() {
-        if (!this.worldObj.isRemote && this.groundHitCount < this.getMaxGroundHits()) {
+        if (this.groundHitCount < this.getMaxGroundHits()) {
             this.groundHitCount++;
             final double mag = 1.0D / this.groundHitCount * 4.0D;
             double mX = this.rand.nextDouble() - 0.5;
@@ -182,10 +198,6 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
             this.motionX = mX;
             this.motionY = mY;
             this.motionZ = mZ;
-            // Store for network sync so the client mirrors these exact values.
-            this.bounceMotionX = mX;
-            this.bounceMotionY = mY;
-            this.bounceMotionZ = mZ;
         }
     }
 
@@ -194,12 +206,6 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
 
     @Override
     public Vector3 getMotionVec() {
-        if (this.onGround && this.groundHitCount < this.getMaxGroundHits()) {
-            // Use the server-authoritative bounce values received via packet.
-            // No rand call here — avoids client/server desync.
-            return new Vector3(this.bounceMotionX, this.bounceMotionY, this.bounceMotionZ);
-        }
-
         if (this.ticks >= 40 && this.ticks < 45) {
             this.motionY = this.getInitialMotionY();
         }
@@ -212,24 +218,21 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
     }
 
     private int getMaxGroundHits() {
-        return this.riddenByEntity != null ? 14 : 2;
+        return this.riddenByEntity != null ? MAX_HITS_WITH_RIDER : this.unriddenMaxHits;
     }
 
     /**
-     * Sends groundHitCount and, when a bounce just happened (groundHitCount > 0), the server-computed bounce motion so
-     * the client can apply identical values.
+     * Server-side packet always carries groundHitCount and unriddenMaxHits (fixed 8 bytes of our own payload) so the
+     * client decode has a stable, predictable layout. Client-side packets carry nothing extra - the subclass read path
+     * only consumes bytes when they're actually there.
      */
     @Override
     public ArrayList<Object> getNetworkedData() {
         final ArrayList<Object> objList = new ArrayList<>(super.getNetworkedData());
-        if (this.worldObj.isRemote && this.hasReceivedPacket && this.groundHitCount <= 14
-                || !this.worldObj.isRemote && this.groundHitCount == 14) {
+        if (!this.worldObj.isRemote) {
             objList.add(this.groundHitCount);
+            objList.add(this.unriddenMaxHits);
         }
-        // Always sync the bounce motion vectors so the client stays in step.
-        objList.add(this.bounceMotionX);
-        objList.add(this.bounceMotionY);
-        objList.add(this.bounceMotionZ);
         return objList;
     }
 
@@ -248,14 +251,14 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
         try {
             super.readNetworkedData(buffer);
 
-            if (buffer.readableBytes() >= 4) {
+            // Server always sends exactly 8 bytes of our payload: groundHitCount + unriddenMaxHits.
+            // Client->server packets don't include this extra payload, so we only decode when both ints are present.
+            if (buffer.readableBytes() >= 8) {
                 this.groundHitCount = buffer.readInt();
-            }
-            // Read the server-computed bounce motion vectors.
-            if (buffer.readableBytes() >= 24) {
-                this.bounceMotionX = buffer.readDouble();
-                this.bounceMotionY = buffer.readDouble();
-                this.bounceMotionZ = buffer.readDouble();
+                final int syncedMax = buffer.readInt();
+                if (syncedMax >= MIN_HITS_WITHOUT_RIDER && syncedMax <= MAX_HITS_WITHOUT_RIDER) {
+                    this.unriddenMaxHits = syncedMax;
+                }
             }
         } catch (final Exception e) {
             e.printStackTrace();
@@ -285,6 +288,6 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
 
     @Override
     public boolean shouldIgnoreShiftExit() {
-        return this.groundHitCount < 14 || !this.onGround;
+        return this.groundHitCount < this.getMaxGroundHits() || !this.onGround;
     }
 }
