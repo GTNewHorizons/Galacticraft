@@ -2,15 +2,15 @@ dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.11.0')
 	testRuntimeOnly ('org.junit.platform:junit-platform-launcher')
 
-    implementation('com.github.GTNewHorizons:GT5-Unofficial:5.09.52.399:dev') {
+    implementation('com.github.GTNewHorizons:GT5-Unofficial:5.09.52.442:dev') {
         exclude group: "com.github.GTNewHorizons", module: "Galacticraft"
     }
-    implementation('com.github.GTNewHorizons:TinkersConstruct:1.14.46-GTNH:dev')
-    implementation('com.github.GTNewHorizons:NotEnoughItems:2.8.84-GTNH:dev')
-    implementation('com.github.GTNewHorizons:GTNHLib:0.9.47:dev')
+    implementation('com.github.GTNewHorizons:TinkersConstruct:1.14.54-GTNH:dev')
+    implementation('com.github.GTNewHorizons:NotEnoughItems:2.8.91-GTNH:dev')
+    implementation('com.github.GTNewHorizons:GTNHLib:0.9.52:dev')
     api('net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev')
 
-    compileOnly('com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-882-GTNH:api')
+    compileOnly('com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-900-GTNH:api')
     compileOnly('com.github.GTNewHorizons:BuildCraft:7.1.57:api')
     compileOnly('curse.maven:cofh-lib-220333:2388748')
     compileOnly('curse.maven:PlayerAPI-228969:2248928')
@@ -18,5 +18,5 @@ dependencies {
     compileOnly('curse.maven:SmartRender-229857:2248949')
     compileOnly('curse.maven:mekanism-268560:2475797')
 
-    runtimeOnly('com.github.GTNewHorizons:ironchest:6.1.11:dev')
+    runtimeOnly('com.github.GTNewHorizons:ironchest:6.1.12:dev')
 }
