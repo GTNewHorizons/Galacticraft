@@ -181,8 +181,8 @@ public class EntityLandingBalloons extends EntityLanderBase implements IIgnoreSh
     /**
      * Called whenever the entity is touching the ground. Applies a bounce impulse on both client and server so the
      * balloon actually springs upward instead of sticking to the floor. Exact motion vectors may differ slightly
-     * between sides because rand is side-local, but the authoritative position is reconciled via PacketEntityUpdate
-     * on the rider / the periodic server broadcast, so the small drift is harmless.
+     * between sides because rand is side-local, but the authoritative position is reconciled via PacketEntityUpdate on
+     * the rider / the periodic server broadcast, so the small drift is harmless.
      */
     @Override
     public void tickOnGround() {
