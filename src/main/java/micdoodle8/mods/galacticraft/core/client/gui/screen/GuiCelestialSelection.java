@@ -965,6 +965,10 @@ public class GuiCelestialSelection extends GuiScreen {
 
     @Override
     public void drawScreen(int mousePosX, int mousePosY, float partialTicks) {
+        if (this.width <= 0 || this.height <= 0) {
+            return;
+        }
+
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
 
