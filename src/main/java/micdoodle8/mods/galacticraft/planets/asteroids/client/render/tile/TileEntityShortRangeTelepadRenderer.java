@@ -3,7 +3,6 @@ package micdoodle8.mods.galacticraft.planets.asteroids.client.render.tile;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
@@ -11,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityShortRangeTelepad;
 
@@ -23,12 +23,7 @@ public class TileEntityShortRangeTelepadRenderer extends TileEntitySpecialRender
     public static final ResourceLocation telepadTexture0 = new ResourceLocation(
             AsteroidsModule.ASSET_PREFIX,
             "textures/model/teleporter0.png");
-    public static IModelCustom telepadModel;
-
-    public TileEntityShortRangeTelepadRenderer() {
-        TileEntityShortRangeTelepadRenderer.telepadModel = AdvancedModelLoader
-                .loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/teleporter.obj"));
-    }
+    private final IModelCustom telepadModel = GalacticraftModels.getTeleporter();
 
     public void renderModelAt(TileEntityShortRangeTelepad tileEntity, double d, double d1, double d2, float f) {
         // Texture file
@@ -39,9 +34,9 @@ public class TileEntityShortRangeTelepadRenderer extends TileEntitySpecialRender
 
         GL11.glTranslatef((float) d + 0.5F, (float) d1, (float) d2 + 0.5F);
         GL11.glScalef(1F, 0.65F, 1F);
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("Base");
+        this.telepadModel.renderPart("Base");
         GL11.glTranslatef(0.0F, (float) Math.sin(tileEntity.ticks / 10.0F) / 15.0F - 0.25F, 0.0F);
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("Top");
+        this.telepadModel.renderPart("Top");
 
         GL11.glPopMatrix();
 
@@ -51,17 +46,17 @@ public class TileEntityShortRangeTelepadRenderer extends TileEntitySpecialRender
         GL11.glScalef(1F, 0.65F, 1F);
         FMLClientHandler.instance().getClient().renderEngine
                 .bindTexture(TileEntityShortRangeTelepadRenderer.telepadTexture0);
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopMidxNegz");
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopPosxNegz");
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopNegxNegz");
+        this.telepadModel.renderPart("TopMidxNegz");
+        this.telepadModel.renderPart("TopPosxNegz");
+        this.telepadModel.renderPart("TopNegxNegz");
 
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopMidxMidz");
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopPosxMidz");
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopNegxMidz");
+        this.telepadModel.renderPart("TopMidxMidz");
+        this.telepadModel.renderPart("TopPosxMidz");
+        this.telepadModel.renderPart("TopNegxMidz");
 
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopMidxPosz");
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopPosxPosz");
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopNegxPosz");
+        this.telepadModel.renderPart("TopMidxPosz");
+        this.telepadModel.renderPart("TopPosxPosz");
+        this.telepadModel.renderPart("TopNegxPosz");
 
         GL11.glPopMatrix();
     }

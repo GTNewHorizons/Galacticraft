@@ -2,13 +2,17 @@ package micdoodle8.mods.galacticraft.planets.asteroids.client.render.item;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.planets.asteroids.client.render.tile.TileEntityShortRangeTelepadRenderer;
 
 public class ItemRendererShortRangeTelepad implements IItemRenderer {
+
+    private final IModelCustom telepadModel = GalacticraftModels.getTeleporter();
 
     private void renderBeamReceiver(ItemRenderType type) {
         GL11.glPushMatrix();
@@ -21,22 +25,22 @@ public class ItemRendererShortRangeTelepad implements IItemRenderer {
         FMLClientHandler.instance().getClient().renderEngine
                 .bindTexture(TileEntityShortRangeTelepadRenderer.telepadTexture);
 
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("Base");
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("Top");
+        this.telepadModel.renderPart("Base");
+        this.telepadModel.renderPart("Top");
 
         FMLClientHandler.instance().getClient().renderEngine
                 .bindTexture(TileEntityShortRangeTelepadRenderer.telepadTexture0);
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopMidxNegz");
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopPosxNegz");
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopNegxNegz");
+        this.telepadModel.renderPart("TopMidxNegz");
+        this.telepadModel.renderPart("TopPosxNegz");
+        this.telepadModel.renderPart("TopNegxNegz");
 
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopMidxMidz");
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopPosxMidz");
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopNegxMidz");
+        this.telepadModel.renderPart("TopMidxMidz");
+        this.telepadModel.renderPart("TopPosxMidz");
+        this.telepadModel.renderPart("TopNegxMidz");
 
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopMidxPosz");
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopPosxPosz");
-        TileEntityShortRangeTelepadRenderer.telepadModel.renderPart("TopNegxPosz");
+        this.telepadModel.renderPart("TopMidxPosz");
+        this.telepadModel.renderPart("TopPosxPosz");
+        this.telepadModel.renderPart("TopNegxPosz");
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glPopMatrix();
     }

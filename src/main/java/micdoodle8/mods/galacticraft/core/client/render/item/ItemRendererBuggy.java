@@ -3,14 +3,13 @@ package micdoodle8.mods.galacticraft.core.client.render.item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.entities.EntityBuggy;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 
 public class ItemRendererBuggy implements IItemRenderer {
 
@@ -24,12 +23,9 @@ public class ItemRendererBuggy implements IItemRenderer {
             GalacticraftCore.ASSET_PREFIX,
             "textures/model/buggyStorage.png");
 
-    private final IModelCustom modelBuggy = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/buggy.obj"));
-    private final IModelCustom modelBuggyWheelRight = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/buggyWheelRight.obj"));
-    private final IModelCustom modelBuggyWheelLeft = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/buggyWheelLeft.obj"));
+    private final IModelCustom modelBuggy = GalacticraftModels.getBuggy();
+    private final IModelCustom modelBuggyWheelLeft = GalacticraftModels.getBuggyWheelLeft();
+    private final IModelCustom modelBuggyWheelRight = GalacticraftModels.getBuggyWheelRight();
 
     private void renderPipeItem(ItemRenderType type, ItemStack item) {
         GL11.glPushMatrix();
