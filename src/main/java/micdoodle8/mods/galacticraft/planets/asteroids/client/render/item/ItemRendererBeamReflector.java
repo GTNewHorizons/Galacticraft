@@ -9,6 +9,8 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import micdoodle8.mods.galacticraft.planets.asteroids.client.render.tile.TileEntityBeamReflectorRenderer;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getBeamReflector;
+
 public class ItemRendererBeamReflector implements IItemRenderer {
 
     private void renderBeamReflector(ItemRenderType type) {
@@ -16,7 +18,7 @@ public class ItemRendererBeamReflector implements IItemRenderer {
         this.transform(type);
         FMLClientHandler.instance().getClient().renderEngine
                 .bindTexture(TileEntityBeamReflectorRenderer.reflectorTexture);
-        TileEntityBeamReflectorRenderer.reflectorModel.renderAll();
+        getBeamReflector().renderAll();
         GL11.glPopMatrix();
     }
 

@@ -16,6 +16,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityMinerBase;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getTelepad;
+
 @SideOnly(Side.CLIENT)
 public class TileEntityMinerBaseRenderer extends TileEntitySpecialRenderer {
 
@@ -25,8 +27,7 @@ public class TileEntityMinerBaseRenderer extends TileEntitySpecialRenderer {
     public static IModelCustom telepadModel;
 
     public TileEntityMinerBaseRenderer() {
-        TileEntityMinerBaseRenderer.telepadModel = AdvancedModelLoader
-                .loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/minerbase.obj"));
+
     }
 
     public void renderModelAt(TileEntityMinerBase tileEntity, double d, double d1, double d2, float f) {
@@ -63,7 +64,7 @@ public class TileEntityMinerBaseRenderer extends TileEntitySpecialRenderer {
                 break;
         }
 
-        TileEntityMinerBaseRenderer.telepadModel.renderAll();
+        getTelepad().renderAll();
 
         GL11.glPopMatrix();
     }

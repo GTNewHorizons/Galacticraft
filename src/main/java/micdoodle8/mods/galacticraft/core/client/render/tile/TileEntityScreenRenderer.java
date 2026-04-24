@@ -15,26 +15,22 @@ import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityScreen;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getScreen1Quarter;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getScreen2Quarter;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getScreen3Quarter;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getScreenOQuarter;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getWholeScreen;
+
 @SideOnly(Side.CLIENT)
 public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
 
     public static final ResourceLocation blockTexture = new ResourceLocation(
             GalacticraftCore.ASSET_PREFIX,
             "textures/blocks/screenSide.png");
-    public static final IModelCustom screenModel0 = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/screenWhole.obj"));
-    public static final IModelCustom screenModel1 = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/screen3Quarters.obj"));
-    public static final IModelCustom screenModel2 = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/screen2Quarters.obj"));
-    public static final IModelCustom screenModel3 = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/screen1Quarters.obj"));
-    public static final IModelCustom screenModel4 = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/screen0Quarters.obj"));
+
     private final TextureManager renderEngine = FMLClientHandler.instance().getClient().renderEngine;
 
     private final float yPlane = 0.91F;
-    float frame = 0.098F;
 
     public void renderModelAt(TileEntityScreen tileEntity, double d, double d1, double d2, float f) {
         GL11.glPushMatrix();
@@ -96,7 +92,7 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
             case 0:
                 GL11.glTranslatef(-0.001F, -0.001F, -0.001F);
                 GL11.glScalef(1.002F, 1.002F, 1.002F);
-                TileEntityScreenRenderer.screenModel0.renderAll();
+                getWholeScreen().renderAll();
                 break;
             case 1:
                 if (tileEntity.connectedUp) {
@@ -111,7 +107,7 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
                 }
                 GL11.glTranslatef(-0.001F, -0.001F, -0.001F);
                 GL11.glScalef(1.002F, 1.002F, 1.002F);
-                TileEntityScreenRenderer.screenModel1.renderAll();
+                getScreen3Quarter().renderAll();
                 break;
             case 2:
                 if (!tileEntity.connectedRight && !tileEntity.connectedDown) {
@@ -126,7 +122,7 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
                 }
                 GL11.glTranslatef(-0.001F, -0.001F, -0.001F);
                 GL11.glScalef(1.002F, 1.002F, 1.002F);
-                TileEntityScreenRenderer.screenModel2.renderAll();
+                getScreen2Quarter().renderAll();
                 break;
             case 3:
                 if (!tileEntity.connectedRight) {
@@ -141,12 +137,12 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
                 }
                 GL11.glTranslatef(-0.001F, -0.001F, -0.001F);
                 GL11.glScalef(1.002F, 1.002F, 1.002F);
-                TileEntityScreenRenderer.screenModel3.renderAll();
+                getScreen1Quarter().renderAll();
                 break;
             case 4:
                 GL11.glTranslatef(-0.001F, -0.001F, -0.001F);
                 GL11.glScalef(1.002F, 1.002F, 1.002F);
-                TileEntityScreenRenderer.screenModel4.renderAll();
+                getScreenOQuarter().renderAll();
                 break;
         }
         GL11.glPopMatrix();

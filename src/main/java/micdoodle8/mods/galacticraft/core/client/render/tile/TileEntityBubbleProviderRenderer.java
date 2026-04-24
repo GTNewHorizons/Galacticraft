@@ -13,21 +13,19 @@ import org.lwjgl.opengl.GL12;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.entities.IBubbleProvider;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getBubble;
+
 public class TileEntityBubbleProviderRenderer extends TileEntitySpecialRenderer {
 
     private static final ResourceLocation oxygenBubbleTexture = new ResourceLocation(
             GalacticraftCore.ASSET_PREFIX,
             "textures/model/bubble.png");
 
-    private static IModelCustom sphere;
-
     private final float colorRed;
     private final float colorGreen;
     private final float colorBlue;
 
     public TileEntityBubbleProviderRenderer(float colorRed, float colorGreen, float colorBlue) {
-        sphere = AdvancedModelLoader
-                .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/sphere.obj"));
         this.colorRed = colorRed;
         this.colorGreen = colorGreen;
         this.colorBlue = colorBlue;
@@ -62,7 +60,7 @@ public class TileEntityBubbleProviderRenderer extends TileEntitySpecialRenderer 
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240F, 240F);
         GL11.glScalef(provider.getBubbleSize(), provider.getBubbleSize(), provider.getBubbleSize());
 
-        sphere.renderAll();
+        getBubble().renderAll();
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glMatrixMode(GL11.GL_TEXTURE);

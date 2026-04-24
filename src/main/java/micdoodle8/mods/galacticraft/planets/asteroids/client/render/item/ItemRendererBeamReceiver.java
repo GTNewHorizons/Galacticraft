@@ -9,6 +9,8 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import micdoodle8.mods.galacticraft.planets.asteroids.client.render.tile.TileEntityBeamReceiverRenderer;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getBeamReceiver;
+
 public class ItemRendererBeamReceiver implements IItemRenderer {
 
     private void renderBeamReceiver(ItemRenderType type) {
@@ -19,14 +21,14 @@ public class ItemRendererBeamReceiver implements IItemRenderer {
 
         FMLClientHandler.instance().getClient().renderEngine
                 .bindTexture(TileEntityBeamReceiverRenderer.receiverTexture);
-        TileEntityBeamReceiverRenderer.receiverModel.renderPart("Main");
-        TileEntityBeamReceiverRenderer.receiverModel.renderPart("Ring");
+        getBeamReceiver().renderPart("Main");
+        getBeamReceiver().renderPart("Ring");
 
         GL11.glColor3f(0.6F, 0.3F, 0.0F);
 
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_CULL_FACE);
-        TileEntityBeamReceiverRenderer.receiverModel.renderPart("Receiver");
+        getBeamReceiver().renderPart("Receiver");
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_CULL_FACE);
 

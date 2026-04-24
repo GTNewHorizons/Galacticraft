@@ -8,10 +8,8 @@ import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -65,6 +63,10 @@ import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityMinerBase;
 import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityShortRangeTelepad;
 import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityTreasureChestAsteroids;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getGrapple;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getPod;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getRocketT3;
+
 public class AsteroidsModuleClient implements IPlanetsModuleClient {
 
     private static int walkwayRenderID;
@@ -92,12 +94,12 @@ public class AsteroidsModuleClient implements IPlanetsModuleClient {
         // spotless:off
         RenderingRegistry.registerEntityRenderingHandler(EntitySmallAsteroid.class, new RenderSmallAsteroid());
         RenderingRegistry.registerEntityRenderingHandler(EntityGrapple.class, new RenderGrapple());
-        final IModelCustom podModel = AdvancedModelLoader.loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/pod.obj"));
+        final IModelCustom podModel = getPod();
         RenderingRegistry.registerEntityRenderingHandler(EntityEntryPod.class, new RenderEntryPod(podModel));
-        final IModelCustom rocketModel = AdvancedModelLoader.loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/tier3rocket.obj"));
+        final IModelCustom rocketModel = getRocketT3();
         RenderingRegistry.registerEntityRenderingHandler(EntityTier3Rocket.class, new RenderTier3Rocket(rocketModel, AsteroidsModule.ASSET_PREFIX, "tier3rocket"));
         RenderingRegistry.registerEntityRenderingHandler(EntityAstroMiner.class, new RenderAstroMiner());
-        final IModelCustom grappleModel = AdvancedModelLoader.loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/grapple.obj"));
+        final IModelCustom grappleModel = getGrapple();
         MinecraftForgeClient.registerItemRenderer(AsteroidsItems.grapple, new ItemRendererGrappleHook(grappleModel));
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AsteroidBlocks.beamReceiver), new ItemRendererBeamReceiver());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AsteroidBlocks.beamReflector), new ItemRendererBeamReflector());

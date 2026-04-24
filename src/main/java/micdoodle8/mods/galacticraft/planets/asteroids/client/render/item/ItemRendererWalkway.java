@@ -14,6 +14,8 @@ import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getWalkway;
+
 public class ItemRendererWalkway implements IItemRenderer {
 
     private static final ResourceLocation textureMain = new ResourceLocation(
@@ -25,11 +27,9 @@ public class ItemRendererWalkway implements IItemRenderer {
     private static final ResourceLocation texturePipe = new ResourceLocation(
             GalacticraftCore.ASSET_PREFIX,
             "textures/blocks/pipe_oxygen_white.png");
-    public static IModelCustom modelWalkway;
 
     public ItemRendererWalkway() {
-        modelWalkway = AdvancedModelLoader
-                .loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/walkway.obj"));
+
     }
 
     private void renderWalkway(ItemRenderType type, ItemStack item) {
@@ -39,16 +39,16 @@ public class ItemRendererWalkway implements IItemRenderer {
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(textureMain);
-        modelWalkway.renderPart("Walkway");
+        getWalkway().renderPart("Walkway");
 
         if (item.getItem() == Item.getItemFromBlock(AsteroidBlocks.blockWalkway)) {
-            modelWalkway.renderPart("WalkwayBase");
+            getWalkway().renderPart("WalkwayBase");
         } else if (item.getItem() == Item.getItemFromBlock(AsteroidBlocks.blockWalkwayWire)) {
             FMLClientHandler.instance().getClient().renderEngine.bindTexture(textureWire);
-            modelWalkway.renderPart("Wire");
+            getWalkway().renderPart("Wire");
         } else if (item.getItem() == Item.getItemFromBlock(AsteroidBlocks.blockWalkwayOxygenPipe)) {
             FMLClientHandler.instance().getClient().renderEngine.bindTexture(texturePipe);
-            modelWalkway.renderPart("Pipe");
+            getWalkway().renderPart("Pipe");
         }
 
         GL11.glPopMatrix();

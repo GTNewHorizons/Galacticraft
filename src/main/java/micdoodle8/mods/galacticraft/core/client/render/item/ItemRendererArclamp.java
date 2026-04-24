@@ -11,6 +11,9 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import micdoodle8.mods.galacticraft.core.client.render.tile.TileEntityArclampRenderer;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getLampLight;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getLampMetal;
+
 public class ItemRendererArclamp implements IItemRenderer {
 
     private void renderArclamp(ItemRenderType type) {
@@ -37,7 +40,7 @@ public class ItemRendererArclamp implements IItemRenderer {
         GL11.glScalef(0.07F, 0.07F, 0.07F);
         GL11.glRotatef(90, 0, 0, -1);
         FMLClientHandler.instance().getClient().getTextureManager().bindTexture(TileEntityArclampRenderer.lampTexture);
-        TileEntityArclampRenderer.lampMetal.renderAll();
+        getLampMetal().renderAll();
 
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240F, 240F);
         FMLClientHandler.instance().getClient().getTextureManager().bindTexture(TileEntityArclampRenderer.lightTexture);
@@ -45,7 +48,7 @@ public class ItemRendererArclamp implements IItemRenderer {
         tessellator.startDrawing(GL11.GL_QUADS);
         tessellator.setColorRGBA(255, 255, 255, 255);
         GL11.glDisable(GL11.GL_LIGHTING);
-        ((WavefrontObject) TileEntityArclampRenderer.lampLight).tessellateAll(tessellator);
+        ((WavefrontObject) getLampLight()).tessellateAll(tessellator);
         tessellator.draw();
 
         GL11.glPopMatrix();

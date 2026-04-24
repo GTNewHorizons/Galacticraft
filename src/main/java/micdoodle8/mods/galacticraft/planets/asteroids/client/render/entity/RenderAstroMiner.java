@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
@@ -22,22 +21,23 @@ import micdoodle8.mods.galacticraft.core.perlin.generator.Gradient;
 import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityAstroMiner;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMiner;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerFrontLaser;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerBottomLaser;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerCenterLaser;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerLeftLaserGuard;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerRightLaserGuard;
+
 public class RenderAstroMiner extends Render {
 
     private static final float LSIZE = 0.12F;
     private static final float RETRACTIONSPEED = 0.02F;
     private float lastPartTime;
 
-    public static ResourceLocation scanTexture;
-    public static ResourceLocation modelTexture;
-    public static ResourceLocation modelTextureFX;
-    public static ResourceLocation modelTextureOff;
-    public static IModelCustom modelObj;
-    public static IModelCustom modellaser1;
-    public static IModelCustom modellaser2;
-    public static IModelCustom modellaser3;
-    public static IModelCustom modellasergl;
-    public static IModelCustom modellasergr;
+    public static ResourceLocation scanTexture = new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/misc/gradient.png");
+    public static ResourceLocation modelTexture = new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/model/astroMiner.png");
+    public static ResourceLocation modelTextureFX = new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/model/astroMinerFX.png");
+    public static ResourceLocation modelTextureOff = new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/model/astroMiner_off.png");
 
     private final NoiseModule wobbleX;
     private final NoiseModule wobbleY;
@@ -45,25 +45,6 @@ public class RenderAstroMiner extends Render {
     private final NoiseModule wobbleXX;
     private final NoiseModule wobbleYY;
     private final NoiseModule wobbleZZ;
-
-    static {
-        modelObj = AdvancedModelLoader
-                .loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/astroMiner.obj"));
-        modellaser1 = AdvancedModelLoader
-                .loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/astroMinerLaserFront.obj"));
-        modellaser2 = AdvancedModelLoader
-                .loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/astroMinerLaserBottom.obj"));
-        modellaser3 = AdvancedModelLoader
-                .loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/astroMinerLaserCenter.obj"));
-        modellasergl = AdvancedModelLoader
-                .loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/astroMinerLeftGuard.obj"));
-        modellasergr = AdvancedModelLoader
-                .loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/astroMinerRightGuard.obj"));
-        modelTexture = new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/model/astroMiner.png");
-        modelTextureFX = new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/model/astroMinerFX.png");
-        modelTextureOff = new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/model/astroMiner_off.png");
-        scanTexture = new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/misc/gradient.png");
-    }
 
     public RenderAstroMiner() {
         this.shadowSize = 2F;
@@ -150,7 +131,7 @@ public class RenderAstroMiner extends Render {
 
         if (active) {
             FMLClientHandler.instance().getClient().renderEngine.bindTexture(RenderAstroMiner.modelTexture);
-            RenderAstroMiner.modelObj.renderAllExcept(
+            getAstroMiner().renderAllExcept(
                     "Hoverpad_Front_Left_Top",
                     "Hoverpad_Front_Right_Top",
                     "Hoverpad_Front_Left_Bottom",
@@ -177,7 +158,7 @@ public class RenderAstroMiner extends Render {
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240F, 240F);
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glColor4f(sinOfTheTime, sinOfTheTime, sinOfTheTime, 1.0F);
-            RenderAstroMiner.modelObj.renderOnly(
+            getAstroMiner().renderOnly(
                     "Hoverpad_Front_Left_Top",
                     "Hoverpad_Front_Right_Top",
                     "Hoverpad_Front_Left_Bottom",
@@ -197,7 +178,7 @@ public class RenderAstroMiner extends Render {
             GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
             GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
             GL11.glColor4f(sinOfTheTime, sinOfTheTime, sinOfTheTime, 0.6F);
-            RenderAstroMiner.modelObj.renderOnly(
+            getAstroMiner().renderOnly(
                     "Hoverpad_Front_Left_Top_Glow",
                     "Hoverpad_Front_Right_Top_Glow",
                     "Hoverpad_Front_Left_Bottom_Glow",
@@ -281,7 +262,7 @@ public class RenderAstroMiner extends Render {
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lightMapSaveX, lightMapSaveY);
         } else {
             this.bindEntityTexture(astroMiner);
-            RenderAstroMiner.modelObj.renderAllExcept(
+            getAstroMiner().renderAllExcept(
                     "Hoverpad_Front_Left_Top_Glow",
                     "Hoverpad_Front_Right_Top_Glow",
                     "Hoverpad_Front_Left_Bottom_Glow",
@@ -527,19 +508,19 @@ public class RenderAstroMiner extends Render {
             zadjust = (zadjust - yadjust) * 2.5F + yadjust;
         }
         GL11.glTranslatef(0F, yadjust, zadjust);
-        RenderAstroMiner.modellaser1.renderAll();
-        RenderAstroMiner.modellaser2.renderAll();
+        getAstroMinerFrontLaser().renderAll();
+        getAstroMinerBottomLaser().renderAll();
         if (yadjust == 0.938F) {
             // Do not move laser centre into body
             GL11.glTranslatef(0F, 0F, -zadjust + 0.938F);
         }
-        RenderAstroMiner.modellaser3.renderAll();
+        getAstroMinerCenterLaser().renderAll();
         GL11.glPopMatrix();
         GL11.glPushMatrix();
         GL11.glTranslatef(guardmovement, 0F, 0F);
-        RenderAstroMiner.modellasergl.renderAll();
+        getAstroMinerLeftLaserGuard().renderAll();
         GL11.glTranslatef(-2 * guardmovement, 0F, 0F);
-        RenderAstroMiner.modellasergr.renderAll();
+        getAstroMinerRightLaserGuard().renderAll();
         GL11.glPopMatrix();
     }
 

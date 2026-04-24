@@ -8,6 +8,8 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import micdoodle8.mods.galacticraft.core.client.render.tile.TileEntityScreenRenderer;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getWholeScreen;
+
 public class ItemRendererScreen implements IItemRenderer {
 
     private void renderScreen(ItemRenderType type) {
@@ -38,7 +40,7 @@ public class ItemRendererScreen implements IItemRenderer {
         }
 
         GL11.glRotatef(90, 0, 0, -1);
-        TileEntityScreenRenderer.screenModel0.renderAll();
+        getWholeScreen().renderAll();
 
         GL11.glPopMatrix();
     }
