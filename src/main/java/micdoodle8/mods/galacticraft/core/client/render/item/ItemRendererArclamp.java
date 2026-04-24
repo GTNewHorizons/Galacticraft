@@ -1,20 +1,22 @@
 package micdoodle8.mods.galacticraft.core.client.render.item;
 
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getLampLight;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getLampMetal;
-
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.client.model.obj.WavefrontObject;
 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.core.client.render.tile.TileEntityArclampRenderer;
 
 public class ItemRendererArclamp implements IItemRenderer {
+
+    private final IModelCustom lampMetal = GalacticraftModels.getLampMetal();
+    private final WavefrontObject lampLight = ((WavefrontObject) GalacticraftModels.getLampLight());
 
     private void renderArclamp(ItemRenderType type) {
         GL11.glPushMatrix();
@@ -40,7 +42,7 @@ public class ItemRendererArclamp implements IItemRenderer {
         GL11.glScalef(0.07F, 0.07F, 0.07F);
         GL11.glRotatef(90, 0, 0, -1);
         FMLClientHandler.instance().getClient().getTextureManager().bindTexture(TileEntityArclampRenderer.lampTexture);
-        getLampMetal().renderAll();
+        lampMetal.renderAll();
 
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240F, 240F);
         FMLClientHandler.instance().getClient().getTextureManager().bindTexture(TileEntityArclampRenderer.lightTexture);
@@ -48,7 +50,7 @@ public class ItemRendererArclamp implements IItemRenderer {
         tessellator.startDrawing(GL11.GL_QUADS);
         tessellator.setColorRGBA(255, 255, 255, 255);
         GL11.glDisable(GL11.GL_LIGHTING);
-        ((WavefrontObject) getLampLight()).tessellateAll(tessellator);
+        lampLight.tessellateAll(tessellator);
         tessellator.draw();
 
         GL11.glPopMatrix();

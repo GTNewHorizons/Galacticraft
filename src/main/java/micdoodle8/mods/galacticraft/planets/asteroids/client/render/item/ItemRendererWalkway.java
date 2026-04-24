@@ -1,16 +1,16 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.client.render.item;
 
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getWalkway;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
 
@@ -25,10 +25,7 @@ public class ItemRendererWalkway implements IItemRenderer {
     private static final ResourceLocation texturePipe = new ResourceLocation(
             GalacticraftCore.ASSET_PREFIX,
             "textures/blocks/pipe_oxygen_white.png");
-
-    public ItemRendererWalkway() {
-
-    }
+    private final IModelCustom walkway = GalacticraftModels.getWalkway();
 
     private void renderWalkway(ItemRenderType type, ItemStack item) {
         GL11.glPushMatrix();
@@ -37,16 +34,16 @@ public class ItemRendererWalkway implements IItemRenderer {
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(textureMain);
-        getWalkway().renderPart("Walkway");
+        walkway.renderPart("Walkway");
 
         if (item.getItem() == Item.getItemFromBlock(AsteroidBlocks.blockWalkway)) {
-            getWalkway().renderPart("WalkwayBase");
+            walkway.renderPart("WalkwayBase");
         } else if (item.getItem() == Item.getItemFromBlock(AsteroidBlocks.blockWalkwayWire)) {
             FMLClientHandler.instance().getClient().renderEngine.bindTexture(textureWire);
-            getWalkway().renderPart("Wire");
+            walkway.renderPart("Wire");
         } else if (item.getItem() == Item.getItemFromBlock(AsteroidBlocks.blockWalkwayOxygenPipe)) {
             FMLClientHandler.instance().getClient().renderEngine.bindTexture(texturePipe);
-            getWalkway().renderPart("Pipe");
+            walkway.renderPart("Pipe");
         }
 
         GL11.glPopMatrix();

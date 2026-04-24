@@ -1,15 +1,10 @@
 package micdoodle8.mods.galacticraft.core.client.render.tile;
 
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getScreen1Quarter;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getScreen2Quarter;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getScreen3Quarter;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getScreenOQuarter;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getWholeScreen;
-
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
@@ -17,6 +12,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityScreen;
 
 @SideOnly(Side.CLIENT)
@@ -27,8 +23,11 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
             "textures/blocks/screenSide.png");
 
     private final TextureManager renderEngine = FMLClientHandler.instance().getClient().renderEngine;
-
-    private final float yPlane = 0.91F;
+    private final IModelCustom wholeScreen = GalacticraftModels.getWholeScreen();
+    private final IModelCustom screen3Quarter = GalacticraftModels.getScreen3Quarter();
+    private final IModelCustom screen2Quarter = GalacticraftModels.getScreen2Quarter();
+    private final IModelCustom screen1Quarter = GalacticraftModels.getScreen1Quarter();
+    private final IModelCustom screenOQuarter = GalacticraftModels.getScreenOQuarter();
 
     public void renderModelAt(TileEntityScreen tileEntity, double d, double d1, double d2, float f) {
         GL11.glPushMatrix();
@@ -90,7 +89,7 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
             case 0:
                 GL11.glTranslatef(-0.001F, -0.001F, -0.001F);
                 GL11.glScalef(1.002F, 1.002F, 1.002F);
-                getWholeScreen().renderAll();
+                wholeScreen.renderAll();
                 break;
             case 1:
                 if (tileEntity.connectedUp) {
@@ -105,7 +104,7 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
                 }
                 GL11.glTranslatef(-0.001F, -0.001F, -0.001F);
                 GL11.glScalef(1.002F, 1.002F, 1.002F);
-                getScreen3Quarter().renderAll();
+                screen3Quarter.renderAll();
                 break;
             case 2:
                 if (!tileEntity.connectedRight && !tileEntity.connectedDown) {
@@ -120,7 +119,7 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
                 }
                 GL11.glTranslatef(-0.001F, -0.001F, -0.001F);
                 GL11.glScalef(1.002F, 1.002F, 1.002F);
-                getScreen2Quarter().renderAll();
+                screen2Quarter.renderAll();
                 break;
             case 3:
                 if (!tileEntity.connectedRight) {
@@ -135,17 +134,18 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
                 }
                 GL11.glTranslatef(-0.001F, -0.001F, -0.001F);
                 GL11.glScalef(1.002F, 1.002F, 1.002F);
-                getScreen1Quarter().renderAll();
+                screen1Quarter.renderAll();
                 break;
             case 4:
                 GL11.glTranslatef(-0.001F, -0.001F, -0.001F);
                 GL11.glScalef(1.002F, 1.002F, 1.002F);
-                getScreenOQuarter().renderAll();
+                screenOQuarter.renderAll();
                 break;
         }
         GL11.glPopMatrix();
 
-        GL11.glTranslatef(-tileEntity.screenOffsetx, this.yPlane, -tileEntity.screenOffsetz);
+        final float yPlane = 0.91F;
+        GL11.glTranslatef(-tileEntity.screenOffsetx, yPlane, -tileEntity.screenOffsetz);
         GL11.glRotatef(90, 1F, 0F, 0F);
         boolean cornerblock = false;
         if (tileEntity.connectionsLeft == 0 || tileEntity.connectionsRight == 0) {

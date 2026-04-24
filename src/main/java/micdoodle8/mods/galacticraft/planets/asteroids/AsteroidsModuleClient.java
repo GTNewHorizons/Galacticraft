@@ -1,9 +1,5 @@
 package micdoodle8.mods.galacticraft.planets.asteroids;
 
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getGrapple;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getPod;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getRocketT3;
-
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -26,6 +22,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.planets.GuiIdsPlanets;
 import micdoodle8.mods.galacticraft.planets.IPlanetsModuleClient;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
@@ -94,12 +91,12 @@ public class AsteroidsModuleClient implements IPlanetsModuleClient {
         // spotless:off
         RenderingRegistry.registerEntityRenderingHandler(EntitySmallAsteroid.class, new RenderSmallAsteroid());
         RenderingRegistry.registerEntityRenderingHandler(EntityGrapple.class, new RenderGrapple());
-        final IModelCustom podModel = getPod();
+        final IModelCustom podModel = GalacticraftModels.getPod();
         RenderingRegistry.registerEntityRenderingHandler(EntityEntryPod.class, new RenderEntryPod(podModel));
-        final IModelCustom rocketModel = getRocketT3();
+        final IModelCustom rocketModel = GalacticraftModels.getRocketT3();
         RenderingRegistry.registerEntityRenderingHandler(EntityTier3Rocket.class, new RenderTier3Rocket(rocketModel, AsteroidsModule.ASSET_PREFIX, "tier3rocket"));
         RenderingRegistry.registerEntityRenderingHandler(EntityAstroMiner.class, new RenderAstroMiner());
-        final IModelCustom grappleModel = getGrapple();
+        final IModelCustom grappleModel = GalacticraftModels.getGrapple();
         MinecraftForgeClient.registerItemRenderer(AsteroidsItems.grapple, new ItemRendererGrappleHook(grappleModel));
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AsteroidBlocks.beamReceiver), new ItemRendererBeamReceiver());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AsteroidBlocks.beamReflector), new ItemRendererBeamReflector());

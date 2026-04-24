@@ -1,17 +1,19 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.client.render.item;
 
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getBeamReceiver;
-
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.planets.asteroids.client.render.tile.TileEntityBeamReceiverRenderer;
 
 public class ItemRendererBeamReceiver implements IItemRenderer {
+
+    private final IModelCustom beamReceiver = GalacticraftModels.getBeamReceiver();
 
     private void renderBeamReceiver(ItemRenderType type) {
         GL11.glPushMatrix();
@@ -21,14 +23,14 @@ public class ItemRendererBeamReceiver implements IItemRenderer {
 
         FMLClientHandler.instance().getClient().renderEngine
                 .bindTexture(TileEntityBeamReceiverRenderer.receiverTexture);
-        getBeamReceiver().renderPart("Main");
-        getBeamReceiver().renderPart("Ring");
+        beamReceiver.renderPart("Main");
+        beamReceiver.renderPart("Ring");
 
         GL11.glColor3f(0.6F, 0.3F, 0.0F);
 
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_CULL_FACE);
-        getBeamReceiver().renderPart("Receiver");
+        beamReceiver.renderPart("Receiver");
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_CULL_FACE);
 

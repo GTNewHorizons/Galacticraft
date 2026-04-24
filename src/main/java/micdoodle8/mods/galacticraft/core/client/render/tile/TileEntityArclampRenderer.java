@@ -1,15 +1,12 @@
 package micdoodle8.mods.galacticraft.core.client.render.tile;
 
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getLampBase;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getLampLight;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getLampMetal;
-
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.client.model.obj.WavefrontObject;
 
 import org.lwjgl.opengl.GL11;
@@ -18,6 +15,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityArclamp;
 
 @SideOnly(Side.CLIENT)
@@ -30,6 +28,9 @@ public class TileEntityArclampRenderer extends TileEntitySpecialRenderer {
             GalacticraftCore.ASSET_PREFIX,
             "textures/misc/light.png");
     private final TextureManager renderEngine = FMLClientHandler.instance().getClient().renderEngine;
+    private final IModelCustom lampBase = GalacticraftModels.getLampBase();
+    private final WavefrontObject lampLight = ((WavefrontObject) GalacticraftModels.getLampLight());
+    private final IModelCustom lampMetal = GalacticraftModels.getLampMetal();
 
     public void renderModelAt(TileEntityArclamp tileEntity, double d, double d1, double d2, float f) {
         final int side = tileEntity.getBlockMetadata();
@@ -87,10 +88,10 @@ public class TileEntityArclampRenderer extends TileEntitySpecialRenderer {
 
         this.renderEngine.bindTexture(TileEntityArclampRenderer.lampTexture);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        getLampBase().renderAll();
+        lampBase.renderAll();
         GL11.glRotatef(45F, -1F, 0, 0);
         GL11.glScalef(0.048F, 0.048F, 0.048F);
-        getLampMetal().renderAll();
+        lampMetal.renderAll();
 
         final int whiteLevel = tileEntity.getEnabled() ? 255 : 26;
 
@@ -104,7 +105,7 @@ public class TileEntityArclampRenderer extends TileEntitySpecialRenderer {
         final Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawing(GL11.GL_QUADS);
         tessellator.setColorRGBA(whiteLevel, whiteLevel, whiteLevel, 255);
-        ((WavefrontObject) getLampLight()).tessellateAll(tessellator);
+        lampLight.tessellateAll(tessellator);
         tessellator.draw();
 
         // Restore the lighting state
