@@ -107,48 +107,36 @@ public class MarsModuleClient implements IPlanetsModuleClient {
 
     @Override
     public void postInit(FMLPostInitializationEvent event) {
-        final IModelCustom chamberModel = AdvancedModelLoader
-                .loadModel(new ResourceLocation(MarsModule.ASSET_PREFIX, "models/chamber.obj"));
-        final IModelCustom cargoRocketModel = AdvancedModelLoader
-                .loadModel(new ResourceLocation(MarsModule.ASSET_PREFIX, "models/cargoRocket.obj"));
+        // spotless:off
+        final IModelCustom chamberModel = AdvancedModelLoader.loadModel(new ResourceLocation(MarsModule.ASSET_PREFIX, "models/chamber.obj"));
+        final IModelCustom cargoRocketModel = AdvancedModelLoader.loadModel(new ResourceLocation(MarsModule.ASSET_PREFIX, "models/cargoRocket.obj"));
 
         // Tile Entity Renderers
-        ClientRegistry.bindTileEntitySpecialRenderer(
-                TileEntityTreasureChestMars.class,
-                new TileEntityTreasureChestRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(
-                TileEntityCryogenicChamber.class,
-                new TileEntityCryogenicChamberRenderer(chamberModel));
-        ClientRegistry.bindTileEntitySpecialRenderer(
-                TileEntityTerraformer.class,
-                new TileEntityBubbleProviderRenderer(0.25F, 1.0F, 0.25F));
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreasureChestMars.class, new TileEntityTreasureChestRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCryogenicChamber.class, new TileEntityCryogenicChamberRenderer(chamberModel));
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTerraformer.class, new TileEntityBubbleProviderRenderer(0.25F, 1.0F, 0.25F));
 
         // Entities
         RenderingRegistry.registerEntityRenderingHandler(EntitySludgeling.class, new RenderSludgeling());
         RenderingRegistry.registerEntityRenderingHandler(EntitySlimeling.class, new RenderSlimeling());
         RenderingRegistry.registerEntityRenderingHandler(EntityCreeperBoss.class, new RenderCreeperBoss());
-        RenderingRegistry.registerEntityRenderingHandler(
-                EntityTier2Rocket.class,
-                new RenderTier1Rocket(new ModelTier2Rocket(), MarsModule.ASSET_PREFIX, "rocketT2"));
+        RenderingRegistry.registerEntityRenderingHandler(EntityTier2Rocket.class, new RenderTier1Rocket(new ModelTier2Rocket(), MarsModule.ASSET_PREFIX, "rocketT2"));
         // RenderingRegistry.registerEntityRenderingHandler(EntityTerraformBubble.class,
         // new RenderBubble(0.25F,
         // 1.0F, 0.25F));
         RenderingRegistry.registerEntityRenderingHandler(EntityProjectileTNT.class, new RenderProjectileTNT());
         RenderingRegistry.registerEntityRenderingHandler(EntityLandingBalloons.class, new RenderLandingBalloons());
         RenderingRegistry.registerEntityRenderingHandler(EntityLandingBalloons.class, new RenderLandingBalloons());
-        RenderingRegistry
-                .registerEntityRenderingHandler(EntityCargoRocket.class, new RenderCargoRocket(cargoRocketModel));
+        RenderingRegistry.registerEntityRenderingHandler(EntityCargoRocket.class, new RenderCargoRocket(cargoRocketModel));
 
         // Add Armor Renderer Prefix
         RenderingRegistry.addNewArmourRendererPrefix("desh");
 
         // Item Renderers
         MinecraftForgeClient.registerItemRenderer(MarsItems.spaceship, new ItemRendererTier2Rocket(cargoRocketModel));
-        MinecraftForgeClient.registerItemRenderer(
-                MarsItems.key,
-                new ItemRendererKey(new ResourceLocation(MarsModule.ASSET_PREFIX, "textures/model/treasure.png")));
-        MinecraftForgeClient
-                .registerItemRenderer(Item.getItemFromBlock(MarsBlocks.machine), new ItemRendererMachine(chamberModel));
+        MinecraftForgeClient.registerItemRenderer(MarsItems.key, new ItemRendererKey(new ResourceLocation(MarsModule.ASSET_PREFIX, "textures/model/treasure.png")));
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MarsBlocks.machine), new ItemRendererMachine(chamberModel));
+        // spotless:on
     }
 
     @Override
