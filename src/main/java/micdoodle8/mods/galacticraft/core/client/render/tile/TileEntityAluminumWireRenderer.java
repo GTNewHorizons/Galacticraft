@@ -3,7 +3,6 @@ package micdoodle8.mods.galacticraft.core.client.render.tile;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
@@ -12,6 +11,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.core.energy.EnergyUtil;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityAluminumWire;
 
@@ -22,14 +22,12 @@ public class TileEntityAluminumWireRenderer extends TileEntitySpecialRenderer {
             GalacticraftCore.ASSET_PREFIX,
             "textures/model/aluminumWire.png");
 
-    public final IModelCustom model;
-    public final IModelCustom model2;
+    private final IModelCustom model;
+    private final IModelCustom model2;
 
     public TileEntityAluminumWireRenderer() {
-        this.model = AdvancedModelLoader
-                .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/aluminumWire.obj"));
-        this.model2 = AdvancedModelLoader
-                .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/aluminumWireHeavy.obj"));
+        this.model = GalacticraftModels.getAluminumWire();
+        this.model2 = GalacticraftModels.getAluminumWireHeavy();
     }
 
     public void renderModelAt(TileEntityAluminumWire tileEntity, double d, double d1, double d2, float f) {

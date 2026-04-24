@@ -4,7 +4,6 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
@@ -13,6 +12,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityScreen;
 
 @SideOnly(Side.CLIENT)
@@ -21,20 +21,13 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
     public static final ResourceLocation blockTexture = new ResourceLocation(
             GalacticraftCore.ASSET_PREFIX,
             "textures/blocks/screenSide.png");
-    public static final IModelCustom screenModel0 = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/screenWhole.obj"));
-    public static final IModelCustom screenModel1 = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/screen3Quarters.obj"));
-    public static final IModelCustom screenModel2 = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/screen2Quarters.obj"));
-    public static final IModelCustom screenModel3 = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/screen1Quarters.obj"));
-    public static final IModelCustom screenModel4 = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/screen0Quarters.obj"));
-    private final TextureManager renderEngine = FMLClientHandler.instance().getClient().renderEngine;
 
-    private final float yPlane = 0.91F;
-    float frame = 0.098F;
+    private final TextureManager renderEngine = FMLClientHandler.instance().getClient().renderEngine;
+    private final IModelCustom wholeScreen = GalacticraftModels.getWholeScreen();
+    private final IModelCustom screen3Quarter = GalacticraftModels.getScreen3Quarter();
+    private final IModelCustom screen2Quarter = GalacticraftModels.getScreen2Quarter();
+    private final IModelCustom screen1Quarter = GalacticraftModels.getScreen1Quarter();
+    private final IModelCustom screenOQuarter = GalacticraftModels.getScreenOQuarter();
 
     public void renderModelAt(TileEntityScreen tileEntity, double d, double d1, double d2, float f) {
         GL11.glPushMatrix();
@@ -96,7 +89,7 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
             case 0:
                 GL11.glTranslatef(-0.001F, -0.001F, -0.001F);
                 GL11.glScalef(1.002F, 1.002F, 1.002F);
-                TileEntityScreenRenderer.screenModel0.renderAll();
+                wholeScreen.renderAll();
                 break;
             case 1:
                 if (tileEntity.connectedUp) {
@@ -111,7 +104,7 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
                 }
                 GL11.glTranslatef(-0.001F, -0.001F, -0.001F);
                 GL11.glScalef(1.002F, 1.002F, 1.002F);
-                TileEntityScreenRenderer.screenModel1.renderAll();
+                screen3Quarter.renderAll();
                 break;
             case 2:
                 if (!tileEntity.connectedRight && !tileEntity.connectedDown) {
@@ -126,7 +119,7 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
                 }
                 GL11.glTranslatef(-0.001F, -0.001F, -0.001F);
                 GL11.glScalef(1.002F, 1.002F, 1.002F);
-                TileEntityScreenRenderer.screenModel2.renderAll();
+                screen2Quarter.renderAll();
                 break;
             case 3:
                 if (!tileEntity.connectedRight) {
@@ -141,17 +134,18 @@ public class TileEntityScreenRenderer extends TileEntitySpecialRenderer {
                 }
                 GL11.glTranslatef(-0.001F, -0.001F, -0.001F);
                 GL11.glScalef(1.002F, 1.002F, 1.002F);
-                TileEntityScreenRenderer.screenModel3.renderAll();
+                screen1Quarter.renderAll();
                 break;
             case 4:
                 GL11.glTranslatef(-0.001F, -0.001F, -0.001F);
                 GL11.glScalef(1.002F, 1.002F, 1.002F);
-                TileEntityScreenRenderer.screenModel4.renderAll();
+                screenOQuarter.renderAll();
                 break;
         }
         GL11.glPopMatrix();
 
-        GL11.glTranslatef(-tileEntity.screenOffsetx, this.yPlane, -tileEntity.screenOffsetz);
+        final float yPlane = 0.91F;
+        GL11.glTranslatef(-tileEntity.screenOffsetx, yPlane, -tileEntity.screenOffsetz);
         GL11.glRotatef(90, 1F, 0F, 0F);
         boolean cornerblock = false;
         if (tileEntity.connectionsLeft == 0 || tileEntity.connectionsRight == 0) {

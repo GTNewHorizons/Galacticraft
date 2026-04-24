@@ -3,13 +3,13 @@ package micdoodle8.mods.galacticraft.core.client.render.item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 
 public class ItemRendererMeteorChunk implements IItemRenderer {
 
@@ -20,8 +20,7 @@ public class ItemRendererMeteorChunk implements IItemRenderer {
             GalacticraftCore.ASSET_PREFIX,
             "textures/model/meteorChunkHot.png");
 
-    private final IModelCustom meteorChunkModel = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/meteorChunk.obj"));
+    private final IModelCustom meteorChunkModel = GalacticraftModels.getMeteorChunk();
 
     private void renderMeteorChunk(ItemRenderType type, ItemStack item) {
         GL11.glPushMatrix();

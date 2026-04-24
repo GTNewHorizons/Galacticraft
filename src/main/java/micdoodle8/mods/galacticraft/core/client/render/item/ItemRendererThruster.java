@@ -2,13 +2,17 @@ package micdoodle8.mods.galacticraft.core.client.render.item;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.core.client.render.tile.TileEntityThrusterRenderer;
 
 public class ItemRendererThruster implements IItemRenderer {
+
+    private final IModelCustom thrusterModel = GalacticraftModels.getThruster();
 
     private void renderThruster(ItemRenderType type) {
         GL11.glPushMatrix();
@@ -35,7 +39,7 @@ public class ItemRendererThruster implements IItemRenderer {
         }
 
         GL11.glRotatef(180, 1, 0, 0);
-        TileEntityThrusterRenderer.thrusterModel.renderAll();
+        this.thrusterModel.renderAll();
 
         GL11.glPopMatrix();
     }

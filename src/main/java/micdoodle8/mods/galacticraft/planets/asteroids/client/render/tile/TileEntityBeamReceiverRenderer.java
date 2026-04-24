@@ -3,7 +3,6 @@ package micdoodle8.mods.galacticraft.planets.asteroids.client.render.tile;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -12,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.core.tile.ReceiverMode;
 import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityBeamReceiver;
@@ -22,12 +22,7 @@ public class TileEntityBeamReceiverRenderer extends TileEntitySpecialRenderer {
     public static final ResourceLocation receiverTexture = new ResourceLocation(
             AsteroidsModule.ASSET_PREFIX,
             "textures/model/beamReceiver.png");
-    public static IModelCustom receiverModel;
-
-    public TileEntityBeamReceiverRenderer() {
-        TileEntityBeamReceiverRenderer.receiverModel = AdvancedModelLoader
-                .loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/receiver.obj"));
-    }
+    private final IModelCustom beamReceiver = GalacticraftModels.getBeamReceiver();
 
     public void renderModelAt(TileEntityBeamReceiver tileEntity, double d, double d1, double d2, float f) {
         // Texture file
@@ -70,7 +65,7 @@ public class TileEntityBeamReceiverRenderer extends TileEntitySpecialRenderer {
         }
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        TileEntityBeamReceiverRenderer.receiverModel.renderPart("Main");
+        beamReceiver.renderPart("Main");
 
         if (tileEntity.modeReceive == ReceiverMode.RECEIVE.ordinal()) {
             GL11.glColor3f(0.0F, 0.8F, 0.0F);
@@ -82,7 +77,7 @@ public class TileEntityBeamReceiverRenderer extends TileEntitySpecialRenderer {
 
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_CULL_FACE);
-        TileEntityBeamReceiverRenderer.receiverModel.renderPart("Receiver");
+        beamReceiver.renderPart("Receiver");
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_CULL_FACE);
         final float dX = 0.34772F;
@@ -94,7 +89,7 @@ public class TileEntityBeamReceiverRenderer extends TileEntitySpecialRenderer {
         }
         GL11.glTranslatef(-dX, -dY, -dZ);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        TileEntityBeamReceiverRenderer.receiverModel.renderPart("Ring");
+        beamReceiver.renderPart("Ring");
 
         GL11.glPopMatrix();
     }

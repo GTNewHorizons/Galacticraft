@@ -15,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
@@ -25,6 +24,7 @@ import micdoodle8.mods.galacticraft.api.item.IHoldableItem;
 import micdoodle8.mods.galacticraft.api.prefab.entity.EntityTieredRocket;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
@@ -218,8 +218,7 @@ public class ModelPlayerGC extends ModelBiped {
         this.grayOxygenTanks[1].setRotationPoint(-2F, 2F, 3.8F);
         this.grayOxygenTanks[1].mirror = true;
 
-        this.frequencyModule = AdvancedModelLoader
-                .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/frequencyModule.obj"));
+        this.frequencyModule = GalacticraftModels.getFrequencyModule();
     }
 
     @Override

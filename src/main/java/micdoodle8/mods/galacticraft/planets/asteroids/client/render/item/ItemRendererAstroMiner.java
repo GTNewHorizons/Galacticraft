@@ -1,7 +1,6 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.client.render.item;
 
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -13,25 +12,20 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import micdoodle8.mods.galacticraft.api.prefab.entity.EntityAutoRocket;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.core.entities.EntityLanderBase;
 import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
-import micdoodle8.mods.galacticraft.planets.asteroids.client.render.entity.RenderAstroMiner;
 
 public class ItemRendererAstroMiner implements IItemRenderer {
 
-    protected IModelCustom modelMiner;
-    protected IModelCustom modellasergl;
-    protected IModelCustom modellasergr;
-    protected static RenderItem drawItems = new RenderItem();
+    private final IModelCustom astroMiner = GalacticraftModels.getAstroMiner();
+    private final IModelCustom astroMinerLeftLaserGuard = GalacticraftModels.getAstroMinerLeftLaserGuard();
+    private final IModelCustom astroMinerRightLaserGuard = GalacticraftModels.getAstroMinerRightLaserGuard();
     protected ResourceLocation texture = new ResourceLocation(
             AsteroidsModule.ASSET_PREFIX,
             "textures/model/astroMiner_off.png");
 
-    public ItemRendererAstroMiner() {
-        this.modelMiner = RenderAstroMiner.modelObj;
-        this.modellasergl = RenderAstroMiner.modellasergl;
-        this.modellasergr = RenderAstroMiner.modellasergr;
-    }
+    public ItemRendererAstroMiner() {}
 
     protected void renderMiner(ItemRenderType type, RenderBlocks render, ItemStack item, float translateX,
             float translateY, float translateZ) {
@@ -43,11 +37,11 @@ public class ItemRendererAstroMiner implements IItemRenderer {
         GL11.glScalef(0.06F, 0.06F, 0.06F);
 
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(this.texture);
-        this.modelMiner.renderAll();
+        astroMiner.renderAll();
         GL11.glTranslatef(1.875F, 0F, 0F);
-        this.modellasergl.renderAll();
+        astroMinerLeftLaserGuard.renderAll();
         GL11.glTranslatef(-3.75F, 0F, 0F);
-        this.modellasergr.renderAll();
+        astroMinerRightLaserGuard.renderAll();
         GL11.glPopMatrix();
         if (!saveCullState) {
             GL11.glDisable(GL11.GL_CULL_FACE);

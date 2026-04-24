@@ -4,7 +4,6 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
@@ -13,6 +12,7 @@ import org.lwjgl.opengl.GL12;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityMinerBase;
 
@@ -22,12 +22,7 @@ public class TileEntityMinerBaseRenderer extends TileEntitySpecialRenderer {
     public static final ResourceLocation telepadTexture = new ResourceLocation(
             AsteroidsModule.ASSET_PREFIX,
             "textures/model/minerbase.png");
-    public static IModelCustom telepadModel;
-
-    public TileEntityMinerBaseRenderer() {
-        TileEntityMinerBaseRenderer.telepadModel = AdvancedModelLoader
-                .loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/minerbase.obj"));
-    }
+    private final IModelCustom telepad = GalacticraftModels.getTelepad();
 
     public void renderModelAt(TileEntityMinerBase tileEntity, double d, double d1, double d2, float f) {
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
@@ -63,7 +58,7 @@ public class TileEntityMinerBaseRenderer extends TileEntitySpecialRenderer {
                 break;
         }
 
-        TileEntityMinerBaseRenderer.telepadModel.renderAll();
+        telepad.renderAll();
 
         GL11.glPopMatrix();
     }
