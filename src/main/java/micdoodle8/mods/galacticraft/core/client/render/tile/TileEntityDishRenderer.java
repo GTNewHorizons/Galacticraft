@@ -1,12 +1,14 @@
 package micdoodle8.mods.galacticraft.core.client.render.tile;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getDish;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getDishFork;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getDishSupport;
+
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.AdvancedModelLoader;
-import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -14,10 +16,6 @@ import org.lwjgl.opengl.GL12;
 import cpw.mods.fml.client.FMLClientHandler;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityDish;
-
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getDish;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getDishFork;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getDishSupport;
 
 public class TileEntityDishRenderer extends TileEntitySpecialRenderer {
 

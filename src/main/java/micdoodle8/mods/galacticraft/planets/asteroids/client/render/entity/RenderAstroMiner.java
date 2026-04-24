@@ -1,5 +1,12 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.client.render.entity;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMiner;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerBottomLaser;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerCenterLaser;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerFrontLaser;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerLeftLaserGuard;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerRightLaserGuard;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -9,7 +16,6 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -21,23 +27,24 @@ import micdoodle8.mods.galacticraft.core.perlin.generator.Gradient;
 import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityAstroMiner;
 
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMiner;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerFrontLaser;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerBottomLaser;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerCenterLaser;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerLeftLaserGuard;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerRightLaserGuard;
-
 public class RenderAstroMiner extends Render {
 
     private static final float LSIZE = 0.12F;
     private static final float RETRACTIONSPEED = 0.02F;
     private float lastPartTime;
 
-    public static ResourceLocation scanTexture = new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/misc/gradient.png");
-    public static ResourceLocation modelTexture = new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/model/astroMiner.png");
-    public static ResourceLocation modelTextureFX = new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/model/astroMinerFX.png");
-    public static ResourceLocation modelTextureOff = new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "textures/model/astroMiner_off.png");
+    public static ResourceLocation scanTexture = new ResourceLocation(
+            AsteroidsModule.ASSET_PREFIX,
+            "textures/misc/gradient.png");
+    public static ResourceLocation modelTexture = new ResourceLocation(
+            AsteroidsModule.ASSET_PREFIX,
+            "textures/model/astroMiner.png");
+    public static ResourceLocation modelTextureFX = new ResourceLocation(
+            AsteroidsModule.ASSET_PREFIX,
+            "textures/model/astroMinerFX.png");
+    public static ResourceLocation modelTextureOff = new ResourceLocation(
+            AsteroidsModule.ASSET_PREFIX,
+            "textures/model/astroMiner_off.png");
 
     private final NoiseModule wobbleX;
     private final NoiseModule wobbleY;

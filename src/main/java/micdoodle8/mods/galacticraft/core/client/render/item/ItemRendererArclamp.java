@@ -1,5 +1,8 @@
 package micdoodle8.mods.galacticraft.core.client.render.item;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getLampLight;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getLampMetal;
+
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
@@ -10,9 +13,6 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import micdoodle8.mods.galacticraft.core.client.render.tile.TileEntityArclampRenderer;
-
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getLampLight;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getLampMetal;
 
 public class ItemRendererArclamp implements IItemRenderer {
 

@@ -1,10 +1,10 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.client.render.tile;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getBeamReceiver;
+
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.AdvancedModelLoader;
-import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
@@ -16,8 +16,6 @@ import micdoodle8.mods.galacticraft.core.tile.ReceiverMode;
 import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityBeamReceiver;
 
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getBeamReceiver;
-
 @SideOnly(Side.CLIENT)
 public class TileEntityBeamReceiverRenderer extends TileEntitySpecialRenderer {
 
@@ -26,7 +24,7 @@ public class TileEntityBeamReceiverRenderer extends TileEntitySpecialRenderer {
             "textures/model/beamReceiver.png");
 
     public TileEntityBeamReceiverRenderer() {
-        
+
     }
 
     public void renderModelAt(TileEntityBeamReceiver tileEntity, double d, double d1, double d2, float f) {

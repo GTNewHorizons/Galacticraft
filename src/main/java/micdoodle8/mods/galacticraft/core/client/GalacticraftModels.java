@@ -53,7 +53,6 @@ public final class GalacticraftModels {
     private static IModelCustom bubble;
     private static IModelCustom walkway;
 
-
     public static IModelCustom getAluminumWire() {
         if (aluminumWire == null) {
             aluminumWire = loadModel(GalacticraftCore.ASSET_PREFIX, "models/aluminumWire.obj");
@@ -138,176 +137,176 @@ public final class GalacticraftModels {
         return thruster;
     }
 
-    public static IModelCustom getDishSupport(){
-        if (support == null){
+    public static IModelCustom getDishSupport() {
+        if (support == null) {
             support = loadModel(GalacticraftCore.ASSET_PREFIX, "models/telesupport.obj");
         }
         return support;
     }
 
-    public static IModelCustom getDishFork(){
-        if (fork == null){
+    public static IModelCustom getDishFork() {
+        if (fork == null) {
             fork = loadModel(GalacticraftCore.ASSET_PREFIX, "models/telefork.obj");
         }
         return fork;
     }
 
-    public static IModelCustom getDish(){
-        if (dish == null){
+    public static IModelCustom getDish() {
+        if (dish == null) {
             dish = loadModel(GalacticraftCore.ASSET_PREFIX, "models/teledish.obj");
         }
         return dish;
     }
 
-    public static IModelCustom getPod(){
-        if (pod == null){
+    public static IModelCustom getPod() {
+        if (pod == null) {
             pod = loadModel(AsteroidsModule.ASSET_PREFIX, "models/pod.obj");
         }
         return pod;
     }
 
-    public static IModelCustom getRocketT3(){
-        if (rocketT3 == null){
+    public static IModelCustom getRocketT3() {
+        if (rocketT3 == null) {
             rocketT3 = loadModel(AsteroidsModule.ASSET_PREFIX, "models/tier3rocket.obj");
         }
         return rocketT3;
     }
 
-    public static IModelCustom getGrapple(){
-        if (grapple == null){
+    public static IModelCustom getGrapple() {
+        if (grapple == null) {
             grapple = loadModel(AsteroidsModule.ASSET_PREFIX, "models/grapple.obj");
         }
         return grapple;
     }
 
-    public static IModelCustom getLampBase(){
-        if (lampBase == null){
+    public static IModelCustom getLampBase() {
+        if (lampBase == null) {
             lampBase = loadModel(GalacticraftCore.ASSET_PREFIX, "models/arclampMetal.obj");
         }
         return lampBase;
     }
 
-    public static IModelCustom getLampMetal(){
-        if (lampMetal == null){
+    public static IModelCustom getLampMetal() {
+        if (lampMetal == null) {
             lampMetal = loadModel(GalacticraftCore.ASSET_PREFIX, "models/arclampLight.obj");
         }
         return lampMetal;
     }
 
-    public static IModelCustom getLampLight(){
-        if (lampLight == null){
+    public static IModelCustom getLampLight() {
+        if (lampLight == null) {
             lampLight = loadModel(GalacticraftCore.ASSET_PREFIX, "models/arclampBase.obj");
         }
         return lampLight;
     }
 
-    public static IModelCustom getWholeScreen(){
-        if (screenModel0 == null){
+    public static IModelCustom getWholeScreen() {
+        if (screenModel0 == null) {
             screenModel0 = loadModel(GalacticraftCore.ASSET_PREFIX, "models/screenWhole.obj");
         }
         return screenModel0;
     }
 
-    public static IModelCustom getScreenOQuarter(){
-        if (screenModel4 == null){
-            screenModel4 = loadModel(GalacticraftCore.ASSET_PREFIX,"models/screen0Quarters.obj");
+    public static IModelCustom getScreenOQuarter() {
+        if (screenModel4 == null) {
+            screenModel4 = loadModel(GalacticraftCore.ASSET_PREFIX, "models/screen0Quarters.obj");
         }
         return screenModel4;
     }
 
-    public static IModelCustom getScreen1Quarter(){
-        if (screenModel3 == null){
-            screenModel3 = loadModel(GalacticraftCore.ASSET_PREFIX,"models/screen1Quarters.obj");
+    public static IModelCustom getScreen1Quarter() {
+        if (screenModel3 == null) {
+            screenModel3 = loadModel(GalacticraftCore.ASSET_PREFIX, "models/screen1Quarters.obj");
         }
         return screenModel3;
     }
 
-    public static IModelCustom getScreen2Quarter(){
-        if (screenModel2 == null){
-            screenModel2 = loadModel(GalacticraftCore.ASSET_PREFIX,"models/screen2Quarters.obj");
+    public static IModelCustom getScreen2Quarter() {
+        if (screenModel2 == null) {
+            screenModel2 = loadModel(GalacticraftCore.ASSET_PREFIX, "models/screen2Quarters.obj");
         }
         return screenModel2;
     }
 
-    public static IModelCustom getScreen3Quarter(){
-        if (screenModel1 == null){
-            screenModel1 = loadModel(GalacticraftCore.ASSET_PREFIX,"models/screen3Quarters.obj");
+    public static IModelCustom getScreen3Quarter() {
+        if (screenModel1 == null) {
+            screenModel1 = loadModel(GalacticraftCore.ASSET_PREFIX, "models/screen3Quarters.obj");
         }
         return screenModel1;
     }
-    
-    public static IModelCustom getAstroMiner(){
-        if (astroMiner == null){
+
+    public static IModelCustom getAstroMiner() {
+        if (astroMiner == null) {
             astroMiner = loadModel(AsteroidsModule.ASSET_PREFIX, "models/astroMiner.obj");
         }
         return astroMiner;
     }
-    
-    public static IModelCustom getAstroMinerFrontLaser(){
-        if (astroMinerFrontLaser == null){
+
+    public static IModelCustom getAstroMinerFrontLaser() {
+        if (astroMinerFrontLaser == null) {
             astroMinerFrontLaser = loadModel(AsteroidsModule.ASSET_PREFIX, "models/astroMinerLaserFront.obj");
         }
         return astroMinerFrontLaser;
     }
 
-    public static IModelCustom getAstroMinerBottomLaser(){
-        if (astroMinerBottomLaser == null){
+    public static IModelCustom getAstroMinerBottomLaser() {
+        if (astroMinerBottomLaser == null) {
             astroMinerBottomLaser = loadModel(AsteroidsModule.ASSET_PREFIX, "models/astroMinerLaserBottom.obj");
         }
         return astroMinerBottomLaser;
     }
 
-    public static IModelCustom getAstroMinerCenterLaser(){
-        if (astroMinerCenterLaser == null){
+    public static IModelCustom getAstroMinerCenterLaser() {
+        if (astroMinerCenterLaser == null) {
             astroMinerCenterLaser = loadModel(AsteroidsModule.ASSET_PREFIX, "models/astroMinerLaserCenter.obj");
         }
         return astroMinerCenterLaser;
     }
 
-    public static IModelCustom getAstroMinerLeftLaserGuard(){
-        if (astroMinerLeftLaserGuard == null){
+    public static IModelCustom getAstroMinerLeftLaserGuard() {
+        if (astroMinerLeftLaserGuard == null) {
             astroMinerLeftLaserGuard = loadModel(AsteroidsModule.ASSET_PREFIX, "models/astroMinerLeftGuard.obj");
         }
         return astroMinerLeftLaserGuard;
     }
 
-    public static IModelCustom getAstroMinerRightLaserGuard(){
-        if (astroMinerRightLaserGuard == null){
+    public static IModelCustom getAstroMinerRightLaserGuard() {
+        if (astroMinerRightLaserGuard == null) {
             astroMinerRightLaserGuard = loadModel(AsteroidsModule.ASSET_PREFIX, "models/astroMinerRightGuard.obj");
         }
         return astroMinerRightLaserGuard;
     }
 
-    public static IModelCustom getBeamReceiver(){
-        if (beamReceiver == null){
+    public static IModelCustom getBeamReceiver() {
+        if (beamReceiver == null) {
             beamReceiver = loadModel(AsteroidsModule.ASSET_PREFIX, "models/receiver.obj");
         }
         return beamReceiver;
     }
 
-    public static IModelCustom getTelepad(){
-        if (telepad == null){
+    public static IModelCustom getTelepad() {
+        if (telepad == null) {
             telepad = loadModel(AsteroidsModule.ASSET_PREFIX, "models/minerbase.obj");
         }
         return telepad;
     }
 
-    public static IModelCustom getBeamReflector(){
-        if (beamReflector == null){
+    public static IModelCustom getBeamReflector() {
+        if (beamReflector == null) {
             beamReflector = loadModel(AsteroidsModule.ASSET_PREFIX, "models/reflector.obj");
         }
         return beamReflector;
     }
 
-    public static IModelCustom getBubble(){
-        if (bubble == null){
+    public static IModelCustom getBubble() {
+        if (bubble == null) {
             bubble = loadModel(GalacticraftCore.ASSET_PREFIX, "models/sphere.obj");
         }
         return bubble;
     }
 
-    public static IModelCustom getWalkway(){
-        if (walkway == null){
+    public static IModelCustom getWalkway() {
+        if (walkway == null) {
             walkway = loadModel(AsteroidsModule.ASSET_PREFIX, "models/walkway.obj");
         }
         return walkway;

@@ -1,5 +1,7 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.client.render.item;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getBeamReflector;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
@@ -8,8 +10,6 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import micdoodle8.mods.galacticraft.planets.asteroids.client.render.tile.TileEntityBeamReflectorRenderer;
-
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getBeamReflector;
 
 public class ItemRendererBeamReflector implements IItemRenderer {
 

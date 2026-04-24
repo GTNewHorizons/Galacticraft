@@ -1,5 +1,9 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.client.render.item;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMiner;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerLeftLaserGuard;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerRightLaserGuard;
+
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,10 +19,6 @@ import micdoodle8.mods.galacticraft.api.prefab.entity.EntityAutoRocket;
 import micdoodle8.mods.galacticraft.core.entities.EntityLanderBase;
 import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMiner;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerLeftLaserGuard;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getAstroMinerRightLaserGuard;
-
 public class ItemRendererAstroMiner implements IItemRenderer {
 
     protected static RenderItem drawItems = new RenderItem();
@@ -26,8 +26,7 @@ public class ItemRendererAstroMiner implements IItemRenderer {
             AsteroidsModule.ASSET_PREFIX,
             "textures/model/astroMiner_off.png");
 
-    public ItemRendererAstroMiner() {
-    }
+    public ItemRendererAstroMiner() {}
 
     protected void renderMiner(ItemRenderType type, RenderBlocks render, ItemStack item, float translateX,
             float translateY, float translateZ) {

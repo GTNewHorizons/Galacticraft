@@ -1,5 +1,9 @@
 package micdoodle8.mods.galacticraft.planets.asteroids;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getGrapple;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getPod;
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getRocketT3;
+
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -62,10 +66,6 @@ import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityBeamReflect
 import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityMinerBase;
 import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityShortRangeTelepad;
 import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityTreasureChestAsteroids;
-
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getGrapple;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getPod;
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getRocketT3;
 
 public class AsteroidsModuleClient implements IPlanetsModuleClient {
 

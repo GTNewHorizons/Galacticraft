@@ -1,5 +1,7 @@
 package micdoodle8.mods.galacticraft.core.client.render.item;
 
+import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getWholeScreen;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
@@ -7,8 +9,6 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import micdoodle8.mods.galacticraft.core.client.render.tile.TileEntityScreenRenderer;
-
-import static micdoodle8.mods.galacticraft.core.client.GalacticraftModels.getWholeScreen;
 
 public class ItemRendererScreen implements IItemRenderer {
 
