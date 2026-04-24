@@ -24,8 +24,6 @@ public class ItemRendererBuggy implements IItemRenderer {
             GalacticraftCore.ASSET_PREFIX,
             "textures/model/buggyStorage.png");
 
-    EntityBuggy spaceship = new EntityBuggy(FMLClientHandler.instance().getClient().theWorld);
-
     private final IModelCustom modelBuggy = AdvancedModelLoader
             .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/buggy.obj"));
     private final IModelCustom modelBuggyWheelRight = AdvancedModelLoader
@@ -35,7 +33,7 @@ public class ItemRendererBuggy implements IItemRenderer {
 
     private void renderPipeItem(ItemRenderType type, ItemStack item) {
         GL11.glPushMatrix();
-        long var10 = this.spaceship.getEntityId() * 493286711L;
+        long var10 = 69 * 493286711L;
         var10 = var10 * var10 * 4392167121L + var10 * 98761L;
         final float var12 = (((var10 >> 16 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
         final float var13 = (((var10 >> 20 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
