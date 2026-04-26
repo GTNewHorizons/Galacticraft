@@ -3,7 +3,6 @@ package micdoodle8.mods.galacticraft.core.client.render.item;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -21,13 +20,10 @@ public class ItemRendererTier1Rocket implements IItemRenderer {
 
     protected static final ResourceLocation chestTexture = new ResourceLocation("textures/entity/chest/normal.png");
 
-    protected EntitySpaceshipBase spaceship;
-    protected ModelBase modelSpaceship;
+    protected final EntitySpaceshipBase spaceship;
+    protected final ModelBase modelSpaceship;
     protected final ModelChest chestModel = new ModelChest();
-
-    protected static RenderItem drawItems = new RenderItem();
-
-    protected ResourceLocation texture;
+    protected final ResourceLocation texture;
 
     public ItemRendererTier1Rocket(EntitySpaceshipBase spaceship, ModelBase model, ResourceLocation texture) {
         this.spaceship = spaceship;

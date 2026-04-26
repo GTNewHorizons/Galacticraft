@@ -171,10 +171,10 @@ public class EntityFlag extends Entity {
         final Block blockAt = vec.getBlock(this.worldObj);
 
         if (blockAt != null) {
-            if (blockAt instanceof BlockFence) {
-
-            } else if (blockAt.isAir(this.worldObj, vec.intX(), vec.intY(), vec.intZ())) {
-                this.motionY -= 0.02F;
+            if (!(blockAt instanceof BlockFence)) {
+                if (blockAt.isAir(this.worldObj, vec.intX(), vec.intY(), vec.intZ())) {
+                    this.motionY -= 0.02F;
+                }
             }
         }
 
@@ -199,7 +199,7 @@ public class EntityFlag extends Entity {
     }
 
     public void setDamage(float par1) {
-        this.dataWatcher.updateObject(18, Float.valueOf(par1));
+        this.dataWatcher.updateObject(18, par1);
     }
 
     public float getDamage() {
@@ -207,7 +207,7 @@ public class EntityFlag extends Entity {
     }
 
     public void setType(int par1) {
-        this.dataWatcher.updateObject(19, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(19, par1);
     }
 
     public int getType() {
@@ -215,7 +215,7 @@ public class EntityFlag extends Entity {
     }
 
     public void setFacingAngle(int par1) {
-        this.dataWatcher.updateObject(20, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(20, par1);
     }
 
     public int getFacingAngle() {

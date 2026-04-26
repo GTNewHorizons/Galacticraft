@@ -16,7 +16,7 @@ import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 
 public class ItemRendererFlag implements IItemRenderer {
 
-    private final EntityFlag entityFlagDummy = new EntityFlag(FMLClientHandler.instance().getClient().theWorld);
+    private final EntityFlag entityFlagDummy = new EntityFlag(null);
     private final ModelFlag modelFlag = new ModelFlag();
 
     private void renderFlag(ItemRenderType type, ItemStack item, Object... data) {
@@ -27,7 +27,6 @@ public class ItemRendererFlag implements IItemRenderer {
         final float var13 = (((var10 >> 20 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
         final float var14 = (((var10 >> 24 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
 
-        this.entityFlagDummy.worldObj = FMLClientHandler.instance().getClient().theWorld;
         this.entityFlagDummy.ticksExisted = (int) FMLClientHandler.instance().getWorldClient().getTotalWorldTime();
         this.entityFlagDummy.setType(item.getItemDamage());
 
@@ -101,7 +100,12 @@ public class ItemRendererFlag implements IItemRenderer {
 
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(RenderFlag.flagTexture);
 
-        this.modelFlag.render(this.entityFlagDummy, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+        try {
+            this.entityFlagDummy.worldObj = FMLClientHandler.instance().getClient().theWorld;
+            this.modelFlag.render(this.entityFlagDummy, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+        } finally {
+            this.entityFlagDummy.worldObj = null;
+        }
         GL11.glPopMatrix();
     }
 
@@ -111,10 +115,7 @@ public class ItemRendererFlag implements IItemRenderer {
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
         return switch (type) {
-            case ENTITY -> true;
-            case EQUIPPED -> true;
-            case EQUIPPED_FIRST_PERSON -> true;
-            case INVENTORY -> true;
+            case ENTITY, EQUIPPED, EQUIPPED_FIRST_PERSON, INVENTORY -> true;
             default -> false;
         };
     }
