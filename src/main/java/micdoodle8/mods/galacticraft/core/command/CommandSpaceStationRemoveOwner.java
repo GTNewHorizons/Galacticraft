@@ -12,7 +12,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 
 import com.google.common.collect.Sets;
 
@@ -89,8 +89,7 @@ public class CommandSpaceStationRemoveOwner extends CommandBase {
         }
 
         if (playerBase != null) {
-            playerBase.addChatMessage(
-                    new ChatComponentText(GCCoreUtil.translateWithFormat("gui.spacestation.removesuccess", var3)));
+            playerBase.addChatMessage(new ChatComponentTranslation("gui.spacestation.removesuccess", var3));
         }
     }
 

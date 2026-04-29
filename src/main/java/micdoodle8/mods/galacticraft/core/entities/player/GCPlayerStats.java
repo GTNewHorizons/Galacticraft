@@ -11,7 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
@@ -24,7 +24,6 @@ import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection
 import micdoodle8.mods.galacticraft.core.command.CommandGCInv;
 import micdoodle8.mods.galacticraft.core.inventory.InventoryExtended;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 
@@ -358,7 +357,7 @@ public class GCPlayerStats implements IExtendedEntityProperties {
     public static void tryBedWarning(EntityPlayerMP player) {
         final GCPlayerStats GCPlayer = GCPlayerStats.get(player);
         if (!GCPlayer.receivedBedWarning) {
-            player.addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.bedFail.message")));
+            player.addChatMessage(new ChatComponentTranslation("gui.bedFail.message"));
             GCPlayer.receivedBedWarning = true;
         }
     }

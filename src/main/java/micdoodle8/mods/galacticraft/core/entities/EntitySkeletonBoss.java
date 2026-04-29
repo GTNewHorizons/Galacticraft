@@ -29,7 +29,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.WeightedRandomChestContent;
@@ -51,7 +51,6 @@ import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityDungeonSpawner;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityTreasureChest;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class EntitySkeletonBoss extends EntityMob
         implements IEntityBreathable, IBossDisplayData, IRangedAttackMob, IBoss, IIgnoreShift {
@@ -386,7 +385,7 @@ public class EntitySkeletonBoss extends EntityMob
                                 this.roomCoords.intZ() + this.roomSize.intZ() + 10));
 
                 for (final EntityPlayer p : entitiesWithin2) {
-                    p.addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.skeletonBoss.message")));
+                    p.addChatMessage(new ChatComponentTranslation("gui.skeletonBoss.message"));
                 }
 
                 this.setDead();

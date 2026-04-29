@@ -25,6 +25,7 @@ import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -557,8 +558,7 @@ public class EntityAstroMiner extends Entity
         this.motionY = 0;
         this.motionZ = 0;
         if (this.playerMP != null && (this.givenFailMessage & 1 << i) == 0) {
-            this.playerMP.addChatMessage(
-                    new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner" + i + ".fail")));
+            this.playerMP.addChatMessage(new ChatComponentTranslation("gui.message.astroMiner" + i + ".fail"));
             this.givenFailMessage += 1 << i;
         }
     }
@@ -664,8 +664,7 @@ public class EntityAstroMiner extends Entity
                 this.wayPoints.add(this.waypointBase.clone());
                 this.mineCount = 0;
             } else if (this.playerMP != null && (this.givenFailMessage & 64) == 0) {
-                this.playerMP
-                        .addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner6.fail")));
+                this.playerMP.addChatMessage(new ChatComponentTranslation("gui.message.astroMiner6.fail"));
                 this.givenFailMessage += 64;
             }
         }
@@ -1031,9 +1030,8 @@ public class EntityAstroMiner extends Entity
         if (wayBarred) {
             if (this.playerMP != null) {
                 this.playerMP.addChatMessage(
-                        new ChatComponentText(
-                                GCCoreUtil.translate("gui.message.astroMiner1A.fail") + " "
-                                        + GCCoreUtil.translate(EntityAstroMiner.blockingBlock.toString())));
+                        new ChatComponentTranslation("gui.message.astroMiner1A.fail").appendText(" ").appendSibling(
+                                new ChatComponentTranslation(EntityAstroMiner.blockingBlock.toString())));
             }
             this.motionX = 0;
             this.motionY = 0;

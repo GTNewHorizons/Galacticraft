@@ -32,7 +32,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.Potion;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.MathHelper;
@@ -383,8 +383,8 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
                     if (par1EntityPlayer instanceof EntityPlayerMP) {
                         final GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) par1EntityPlayer);
                         if (stats.chatCooldown == 0) {
-                            par1EntityPlayer.addChatMessage(
-                                    new ChatComponentText(GCCoreUtil.translate("gui.slimeling.chat.wrongPlayer")));
+                            par1EntityPlayer
+                                    .addChatMessage(new ChatComponentTranslation("gui.slimeling.chat.wrongPlayer"));
                             stats.chatCooldown = 100;
                         }
                     }

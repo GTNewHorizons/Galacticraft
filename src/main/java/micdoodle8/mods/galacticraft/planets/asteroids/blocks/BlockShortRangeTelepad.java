@@ -13,7 +13,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -25,7 +27,6 @@ import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.blocks.BlockTileGC;
 import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
 import micdoodle8.mods.galacticraft.core.tile.IMultiBlock;
-import micdoodle8.mods.galacticraft.core.util.EnumColor;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.planets.GalacticraftPlanets;
 import micdoodle8.mods.galacticraft.planets.asteroids.dimension.ShortRangeTelepadHandler;
@@ -108,7 +109,8 @@ public class BlockShortRangeTelepad extends BlockTileGC implements ItemBlockDesc
             if (entityLiving instanceof EntityPlayer) {
                 if (!world.isRemote) {
                     ((EntityPlayer) entityLiving).addChatMessage(
-                            new ChatComponentText(EnumColor.RED + GCCoreUtil.translate("gui.warning.noroom")));
+                            new ChatComponentTranslation("gui.warning.noroom")
+                                    .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                 }
                 ((EntityPlayer) entityLiving).inventory
                         .addItemStackToInventory(new ItemStack(Item.getItemFromBlock(this), 1, 0));

@@ -16,7 +16,9 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -33,7 +35,6 @@ import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
 import micdoodle8.mods.galacticraft.core.tile.IMultiBlock;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityNasaWorkbench;
-import micdoodle8.mods.galacticraft.core.util.EnumColor;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class BlockNasaWorkbench extends BlockContainer
@@ -143,7 +144,8 @@ public class BlockNasaWorkbench extends BlockContainer
 
             if (!world.isRemote && entity instanceof EntityPlayerMP player) {
                 player.addChatMessage(
-                        new ChatComponentText(EnumColor.RED + GCCoreUtil.translate("gui.warning.noroom")));
+                        new ChatComponentTranslation("gui.warning.noroom")
+                                .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                 if (!player.capabilities.isCreativeMode) {
                     final ItemStack nasaWorkbench = new ItemStack(this, 1, 0);
                     final EntityItem entityitem = player.dropPlayerItemWithRandomChoice(nasaWorkbench, false);

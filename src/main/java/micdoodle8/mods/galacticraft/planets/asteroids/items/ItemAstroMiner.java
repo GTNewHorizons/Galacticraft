@@ -8,7 +8,7 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
@@ -18,7 +18,6 @@ import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderSpaceStation;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.planets.asteroids.ConfigManagerAsteroids;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
 import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityAstroMiner;
@@ -61,14 +60,12 @@ public class ItemAstroMiner extends Item implements IHoldableItem {
 
         if (tile instanceof TileEntityMinerBase) {
             if (par3World.provider instanceof WorldProviderSpaceStation) {
-                par2EntityPlayer
-                        .addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner7.fail")));
+                par2EntityPlayer.addChatMessage(new ChatComponentTranslation("gui.message.astroMiner7.fail"));
                 return false;
             }
 
             if (((TileEntityMinerBase) tile).getLinkedMiner() != null) {
-                par2EntityPlayer
-                        .addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner.fail")));
+                par2EntityPlayer.addChatMessage(new ChatComponentTranslation("gui.message.astroMiner.fail"));
                 return false;
             }
 
@@ -81,16 +78,14 @@ public class ItemAstroMiner extends Item implements IHoldableItem {
 
             final int astroCount = GCPlayerStats.get(playerMP).astroMinerCount;
             if (astroCount >= ConfigManagerAsteroids.astroMinerMax && !par2EntityPlayer.capabilities.isCreativeMode) {
-                par2EntityPlayer
-                        .addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.message.astroMiner2.fail")));
+                par2EntityPlayer.addChatMessage(new ChatComponentTranslation("gui.message.astroMiner2.fail"));
                 return false;
             }
 
             if (!((TileEntityMinerBase) tile).spawnMiner(playerMP)) {
                 par2EntityPlayer.addChatMessage(
-                        new ChatComponentText(
-                                GCCoreUtil.translate("gui.message.astroMiner1.fail") + " "
-                                        + GCCoreUtil.translate(EntityAstroMiner.blockingBlock.toString())));
+                        new ChatComponentTranslation("gui.message.astroMiner1.fail").appendText(" ").appendSibling(
+                                new ChatComponentTranslation(EntityAstroMiner.blockingBlock.toString())));
                 return false;
             }
 
