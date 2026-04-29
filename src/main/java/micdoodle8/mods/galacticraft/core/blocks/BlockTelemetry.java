@@ -12,7 +12,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -139,10 +139,9 @@ public class BlockTelemetry extends BlockAdvancedTile implements ItemBlockDesc.I
                     if (fmData != null && fmData.hasKey("linkedUUIDMost") && fmData.hasKey("linkedUUIDLeast")) {
                         final UUID uuid = new UUID(fmData.getLong("linkedUUIDMost"), fmData.getLong("linkedUUIDLeast"));
                         ((TileEntityTelemetry) tile).addTrackedEntity(uuid);
-                        player.addChatMessage(
-                                new ChatComponentText(GCCoreUtil.translate("gui.telemetrySucceed.message")));
+                        player.addChatMessage(new ChatComponentTranslation("gui.telemetrySucceed.message"));
                     } else {
-                        player.addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.telemetryFail.message")));
+                        player.addChatMessage(new ChatComponentTranslation("gui.telemetryFail.message"));
 
                         if (fmData == null) {
                             fmData = new NBTTagCompound();
@@ -161,11 +160,9 @@ public class BlockTelemetry extends BlockAdvancedTile implements ItemBlockDesc.I
                     if (wearing.hasTagCompound() && wearing.getTagCompound().hasKey("teDim")) {
                         return false;
                     }
-                    player.addChatMessage(
-                            new ChatComponentText(GCCoreUtil.translate("gui.telemetryFailWearingIt.message")));
+                    player.addChatMessage(new ChatComponentTranslation("gui.telemetryFailWearingIt.message"));
                 } else {
-                    player.addChatMessage(
-                            new ChatComponentText(GCCoreUtil.translate("gui.telemetryFailNoFrequencyModule.message")));
+                    player.addChatMessage(new ChatComponentTranslation("gui.telemetryFailNoFrequencyModule.message"));
                 }
             }
         }
