@@ -17,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.IModelCustom;
 import net.smart.render.playerapi.SmartRender;
 
 import org.lwjgl.opengl.GL11;
@@ -51,7 +50,6 @@ public class ModelPlayerBaseGC extends ModelPlayerBase {
 
     private boolean usingParachute;
 
-    protected static IModelCustom frequencyModule;
     public static AbstractClientPlayer playerRendering;
     protected static PlayerGearData currentGearData;
 

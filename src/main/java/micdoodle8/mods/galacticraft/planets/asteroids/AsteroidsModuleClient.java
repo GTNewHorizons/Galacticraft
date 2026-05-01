@@ -8,10 +8,8 @@ import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -24,6 +22,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.planets.GuiIdsPlanets;
 import micdoodle8.mods.galacticraft.planets.IPlanetsModuleClient;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
@@ -75,65 +74,46 @@ public class AsteroidsModuleClient implements IPlanetsModuleClient {
 
     @Override
     public void init(FMLInitializationEvent event) {
+        // spotless:off
         AsteroidsModuleClient.walkwayRenderID = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(new BlockRendererWalkway(AsteroidsModuleClient.walkwayRenderID));
         AsteroidsModuleClient.treasureChestID = RenderingRegistry.getNextAvailableRenderId();
-        RenderingRegistry
-                .registerBlockHandler(new BlockRendererTier3TreasureChest(AsteroidsModuleClient.treasureChestID));
+        RenderingRegistry.registerBlockHandler(new BlockRendererTier3TreasureChest(AsteroidsModuleClient.treasureChestID));
         final AsteroidsEventHandlerClient clientEventHandler = new AsteroidsEventHandlerClient();
         FMLCommonHandler.instance().bus().register(clientEventHandler);
         MinecraftForge.EVENT_BUS.register(clientEventHandler);
         FluidTexturesGC.init();
+        // spotless:on
     }
 
     @Override
     public void postInit(FMLPostInitializationEvent event) {
+        // spotless:off
         RenderingRegistry.registerEntityRenderingHandler(EntitySmallAsteroid.class, new RenderSmallAsteroid());
         RenderingRegistry.registerEntityRenderingHandler(EntityGrapple.class, new RenderGrapple());
-        final IModelCustom podModel = AdvancedModelLoader
-                .loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/pod.obj"));
+        final IModelCustom podModel = GalacticraftModels.getPod();
         RenderingRegistry.registerEntityRenderingHandler(EntityEntryPod.class, new RenderEntryPod(podModel));
-        final IModelCustom rocketModel = AdvancedModelLoader
-                .loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/tier3rocket.obj"));
-        RenderingRegistry.registerEntityRenderingHandler(
-                EntityTier3Rocket.class,
-                new RenderTier3Rocket(rocketModel, AsteroidsModule.ASSET_PREFIX, "tier3rocket"));
+        final IModelCustom rocketModel = GalacticraftModels.getRocketT3();
+        RenderingRegistry.registerEntityRenderingHandler(EntityTier3Rocket.class, new RenderTier3Rocket(rocketModel, AsteroidsModule.ASSET_PREFIX, "tier3rocket"));
         RenderingRegistry.registerEntityRenderingHandler(EntityAstroMiner.class, new RenderAstroMiner());
-        final IModelCustom grappleModel = AdvancedModelLoader
-                .loadModel(new ResourceLocation(AsteroidsModule.ASSET_PREFIX, "models/grapple.obj"));
+        final IModelCustom grappleModel = GalacticraftModels.getGrapple();
         MinecraftForgeClient.registerItemRenderer(AsteroidsItems.grapple, new ItemRendererGrappleHook(grappleModel));
-        MinecraftForgeClient.registerItemRenderer(
-                Item.getItemFromBlock(AsteroidBlocks.beamReceiver),
-                new ItemRendererBeamReceiver());
-        MinecraftForgeClient.registerItemRenderer(
-                Item.getItemFromBlock(AsteroidBlocks.beamReflector),
-                new ItemRendererBeamReflector());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AsteroidBlocks.beamReceiver), new ItemRendererBeamReceiver());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AsteroidBlocks.beamReflector), new ItemRendererBeamReflector());
         MinecraftForgeClient.registerItemRenderer(AsteroidsItems.tier3Rocket, new ItemRendererTier3Rocket(rocketModel));
         MinecraftForgeClient.registerItemRenderer(AsteroidsItems.astroMiner, new ItemRendererAstroMiner());
         MinecraftForgeClient.registerItemRenderer(AsteroidsItems.thermalPadding, new ItemRendererThermalArmor());
-        MinecraftForgeClient.registerItemRenderer(
-                Item.getItemFromBlock(AsteroidBlocks.shortRangeTelepad),
-                new ItemRendererShortRangeTelepad());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AsteroidBlocks.shortRangeTelepad), new ItemRendererShortRangeTelepad());
         MinecraftForgeClient.registerItemRenderer(AsteroidsItems.heavyNoseCone, new ItemRendererHeavyNoseCone());
-        MinecraftForgeClient
-                .registerItemRenderer(Item.getItemFromBlock(AsteroidBlocks.blockWalkway), new ItemRendererWalkway());
-        MinecraftForgeClient.registerItemRenderer(
-                Item.getItemFromBlock(AsteroidBlocks.blockWalkwayOxygenPipe),
-                new ItemRendererWalkway());
-        MinecraftForgeClient.registerItemRenderer(
-                Item.getItemFromBlock(AsteroidBlocks.blockWalkwayWire),
-                new ItemRendererWalkway());
-        ClientRegistry
-                .bindTileEntitySpecialRenderer(TileEntityBeamReflector.class, new TileEntityBeamReflectorRenderer());
-        ClientRegistry
-                .bindTileEntitySpecialRenderer(TileEntityBeamReceiver.class, new TileEntityBeamReceiverRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AsteroidBlocks.blockWalkway), new ItemRendererWalkway());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AsteroidBlocks.blockWalkwayOxygenPipe), new ItemRendererWalkway());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AsteroidBlocks.blockWalkwayWire), new ItemRendererWalkway());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBeamReflector.class, new TileEntityBeamReflectorRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBeamReceiver.class, new TileEntityBeamReceiverRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMinerBase.class, new TileEntityMinerBaseRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(
-                TileEntityShortRangeTelepad.class,
-                new TileEntityShortRangeTelepadRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(
-                TileEntityTreasureChestAsteroids.class,
-                new TileEntityTreasureChestRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityShortRangeTelepad.class, new TileEntityShortRangeTelepadRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreasureChestAsteroids.class, new TileEntityTreasureChestRenderer());
+        // spotless:on
     }
 
     @Override

@@ -291,9 +291,8 @@ public class ClientProxyCore extends CommonProxyCore {
     }
 
     public static void registerEntityRenderers() {
-        RenderingRegistry.registerEntityRenderingHandler(
-                EntityTier1Rocket.class,
-                new RenderTier1Rocket(new ModelRocketTier1(), GalacticraftCore.ASSET_PREFIX, "rocketT1"));
+        // spotless:off
+        RenderingRegistry.registerEntityRenderingHandler(EntityTier1Rocket.class, new RenderTier1Rocket(new ModelRocketTier1(), GalacticraftCore.ASSET_PREFIX, "rocketT1"));
         RenderingRegistry.registerEntityRenderingHandler(EntityEvolvedSpider.class, new RenderEvolvedSpider());
         RenderingRegistry.registerEntityRenderingHandler(EntityEvolvedZombie.class, new RenderEvolvedZombie());
         RenderingRegistry.registerEntityRenderingHandler(EntityEvolvedCreeper.class, new RenderEvolvedCreeper());
@@ -318,29 +317,21 @@ public class ClientProxyCore extends CommonProxyCore {
             RenderingRegistry.registerEntityRenderingHandler(EntityPlayerSP.class, new RenderPlayerGC());
             RenderingRegistry.registerEntityRenderingHandler(EntityOtherPlayerMP.class, new RenderPlayerGC());
         }
+        // spotless:on
     }
 
     public static void registerItemRenderers() {
-        MinecraftForgeClient
-                .registerItemRenderer(Item.getItemFromBlock(GCBlocks.unlitTorch), new ItemRendererUnlitTorch());
-        MinecraftForgeClient.registerItemRenderer(
-                GCItems.rocketTier1,
-                new ItemRendererTier1Rocket(
-                        new EntityTier1Rocket(ClientProxyCore.mc.theWorld),
-                        new ModelRocketTier1(),
-                        new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/rocketT1.png")));
+        // spotless:off
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(GCBlocks.unlitTorch), new ItemRendererUnlitTorch());
+        MinecraftForgeClient.registerItemRenderer(GCItems.rocketTier1, new ItemRendererTier1Rocket(new EntityTier1Rocket(null), new ModelRocketTier1(), new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/rocketT1.png")));
         MinecraftForgeClient.registerItemRenderer(GCItems.buggy, new ItemRendererBuggy());
         MinecraftForgeClient.registerItemRenderer(GCItems.flag, new ItemRendererFlag());
-        MinecraftForgeClient.registerItemRenderer(
-                GCItems.key,
-                new ItemRendererKey(
-                        new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/treasure.png")));
+        MinecraftForgeClient.registerItemRenderer(GCItems.key, new ItemRendererKey(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/model/treasure.png")));
         MinecraftForgeClient.registerItemRenderer(GCItems.meteorChunk, new ItemRendererMeteorChunk());
-        MinecraftForgeClient
-                .registerItemRenderer(Item.getItemFromBlock(GCBlocks.spinThruster), new ItemRendererThruster());
-        MinecraftForgeClient
-                .registerItemRenderer(Item.getItemFromBlock(GCBlocks.brightLamp), new ItemRendererArclamp());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(GCBlocks.spinThruster), new ItemRendererThruster());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(GCBlocks.brightLamp), new ItemRendererArclamp());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(GCBlocks.screen), new ItemRendererScreen());
+        // spotless:on
     }
 
     public static void registerHandlers() {
@@ -356,24 +347,22 @@ public class ClientProxyCore extends CommonProxyCore {
     }
 
     public static void registerTileEntityRenderers() {
-        ClientRegistry
-                .bindTileEntitySpecialRenderer(TileEntityAluminumWire.class, new TileEntityAluminumWireRenderer());
-        ClientRegistry
-                .bindTileEntitySpecialRenderer(TileEntityTreasureChest.class, new TileEntityTreasureChestRenderer());
+        // spotless:off
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAluminumWire.class, new TileEntityAluminumWireRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreasureChest.class, new TileEntityTreasureChestRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityParaChest.class, new TileEntityParachestRenderer());
-        ClientRegistry
-                .bindTileEntitySpecialRenderer(TileEntityNasaWorkbench.class, new TileEntityNasaWorkbenchRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNasaWorkbench.class, new TileEntityNasaWorkbenchRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySolar.class, new TileEntitySolarPanelRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(
-                TileEntityOxygenDistributor.class,
-                new TileEntityBubbleProviderRenderer(0.25F, 0.25F, 1.0F));
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOxygenDistributor.class, new TileEntityBubbleProviderRenderer(0.25F, 0.25F, 1.0F));
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDish.class, new TileEntityDishRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityThruster.class, new TileEntityThrusterRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityArclamp.class, new TileEntityArclampRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityScreen.class, new TileEntityScreenRenderer());
+        // spotless:on
     }
 
     public static void registerBlockHandlers() {
+        // spotless:off
         ClientProxyCore.renderIdTreasureChest = RenderingRegistry.getNextAvailableRenderId();
         ClientProxyCore.renderIdTorchUnlit = RenderingRegistry.getNextAvailableRenderId();
         ClientProxyCore.renderIdBreathableAir = RenderingRegistry.getNextAvailableRenderId();
@@ -392,6 +381,7 @@ public class ClientProxyCore extends CommonProxyCore {
         RenderingRegistry.registerBlockHandler(new BlockRendererNasaWorkbench(ClientProxyCore.renderIdCraftingTable));
         RenderingRegistry.registerBlockHandler(new BlockRendererLandingPad(ClientProxyCore.renderIdLandingPad));
         RenderingRegistry.registerBlockHandler(new BlockRendererMachine(ClientProxyCore.renderIdMachine));
+        // spotless:on
     }
 
     public static void registerInventoryTabs() {

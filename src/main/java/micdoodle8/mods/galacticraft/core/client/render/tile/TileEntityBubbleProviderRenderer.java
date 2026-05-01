@@ -4,13 +4,13 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.core.entities.IBubbleProvider;
 
 public class TileEntityBubbleProviderRenderer extends TileEntitySpecialRenderer {
@@ -19,15 +19,12 @@ public class TileEntityBubbleProviderRenderer extends TileEntitySpecialRenderer 
             GalacticraftCore.ASSET_PREFIX,
             "textures/model/bubble.png");
 
-    private static IModelCustom sphere;
-
     private final float colorRed;
     private final float colorGreen;
     private final float colorBlue;
+    private final IModelCustom bubble = GalacticraftModels.getBubble();
 
     public TileEntityBubbleProviderRenderer(float colorRed, float colorGreen, float colorBlue) {
-        sphere = AdvancedModelLoader
-                .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/sphere.obj"));
         this.colorRed = colorRed;
         this.colorGreen = colorGreen;
         this.colorBlue = colorBlue;
@@ -62,7 +59,7 @@ public class TileEntityBubbleProviderRenderer extends TileEntitySpecialRenderer 
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240F, 240F);
         GL11.glScalef(provider.getBubbleSize(), provider.getBubbleSize(), provider.getBubbleSize());
 
-        sphere.renderAll();
+        bubble.renderAll();
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glMatrixMode(GL11.GL_TEXTURE);

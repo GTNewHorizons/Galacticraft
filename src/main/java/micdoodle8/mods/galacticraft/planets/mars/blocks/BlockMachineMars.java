@@ -10,8 +10,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.ChatStyle;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
@@ -30,7 +32,6 @@ import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseUniversalElectrical;
 import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
 import micdoodle8.mods.galacticraft.core.tile.IMultiBlock;
-import micdoodle8.mods.galacticraft.core.util.EnumColor;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.world.IChunkLoader;
 import micdoodle8.mods.galacticraft.planets.GalacticraftPlanets;
@@ -165,7 +166,8 @@ public class BlockMachineMars extends BlockTileGC implements ItemBlockDesc.IBloc
                 if (entityLiving instanceof EntityPlayer) {
                     if (!world.isRemote) {
                         ((EntityPlayer) entityLiving).addChatMessage(
-                                new ChatComponentText(EnumColor.RED + GCCoreUtil.translate("gui.warning.noroom")));
+                                new ChatComponentTranslation("gui.warning.noroom")
+                                        .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                     }
 
                     world.setBlockToAir(x, y, z);

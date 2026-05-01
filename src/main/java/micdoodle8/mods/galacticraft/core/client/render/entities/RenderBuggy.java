@@ -3,7 +3,6 @@ package micdoodle8.mods.galacticraft.core.client.render.entities;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
@@ -11,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.core.entities.EntityBuggy;
 
 @SideOnly(Side.CLIENT)
@@ -26,12 +26,9 @@ public class RenderBuggy extends Render {
             GalacticraftCore.ASSET_PREFIX,
             "textures/model/buggyStorage.png");
 
-    private final IModelCustom modelBuggy = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/buggy.obj"));
-    private final IModelCustom modelBuggyWheelRight = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/buggyWheelRight.obj"));
-    private final IModelCustom modelBuggyWheelLeft = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/buggyWheelLeft.obj"));
+    private final IModelCustom modelBuggy = GalacticraftModels.getBuggy();
+    private final IModelCustom modelBuggyWheelLeft = GalacticraftModels.getBuggyWheelLeft();
+    private final IModelCustom modelBuggyWheelRight = GalacticraftModels.getBuggyWheelRight();
 
     public RenderBuggy() {
         this.shadowSize = 2.0F;

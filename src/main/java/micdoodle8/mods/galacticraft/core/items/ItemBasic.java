@@ -11,7 +11,7 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
@@ -188,7 +188,7 @@ public class ItemBasic extends Item {
             itemStack.stackTagCompound.setLong("linkedUUIDMost", entity.getUniqueID().getMostSignificantBits());
             itemStack.stackTagCompound.setLong("linkedUUIDLeast", entity.getUniqueID().getLeastSignificantBits());
 
-            player.addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.tracking.message")));
+            player.addChatMessage(new ChatComponentTranslation("gui.tracking.message"));
             return true;
         }
         return false;

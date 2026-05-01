@@ -2,13 +2,17 @@ package micdoodle8.mods.galacticraft.core.client.render.item;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 import micdoodle8.mods.galacticraft.core.client.render.tile.TileEntityScreenRenderer;
 
 public class ItemRendererScreen implements IItemRenderer {
+
+    private final IModelCustom wholeScreen = GalacticraftModels.getWholeScreen();
 
     private void renderScreen(ItemRenderType type) {
         GL11.glPushMatrix();
@@ -38,7 +42,7 @@ public class ItemRendererScreen implements IItemRenderer {
         }
 
         GL11.glRotatef(90, 0, 0, -1);
-        TileEntityScreenRenderer.screenModel0.renderAll();
+        wholeScreen.renderAll();
 
         GL11.glPopMatrix();
     }

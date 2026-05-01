@@ -3,14 +3,13 @@ package micdoodle8.mods.galacticraft.core.client.render.item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.entities.EntityBuggy;
+import micdoodle8.mods.galacticraft.core.client.GalacticraftModels;
 
 public class ItemRendererBuggy implements IItemRenderer {
 
@@ -24,18 +23,13 @@ public class ItemRendererBuggy implements IItemRenderer {
             GalacticraftCore.ASSET_PREFIX,
             "textures/model/buggyStorage.png");
 
-    EntityBuggy spaceship = new EntityBuggy(FMLClientHandler.instance().getClient().theWorld);
-
-    private final IModelCustom modelBuggy = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/buggy.obj"));
-    private final IModelCustom modelBuggyWheelRight = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/buggyWheelRight.obj"));
-    private final IModelCustom modelBuggyWheelLeft = AdvancedModelLoader
-            .loadModel(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "models/buggyWheelLeft.obj"));
+    private final IModelCustom modelBuggy = GalacticraftModels.getBuggy();
+    private final IModelCustom modelBuggyWheelLeft = GalacticraftModels.getBuggyWheelLeft();
+    private final IModelCustom modelBuggyWheelRight = GalacticraftModels.getBuggyWheelRight();
 
     private void renderPipeItem(ItemRenderType type, ItemStack item) {
         GL11.glPushMatrix();
-        long var10 = this.spaceship.getEntityId() * 493286711L;
+        long var10 = 69 * 493286711L;
         var10 = var10 * var10 * 4392167121L + var10 * 98761L;
         final float var12 = (((var10 >> 16 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
         final float var13 = (((var10 >> 20 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
