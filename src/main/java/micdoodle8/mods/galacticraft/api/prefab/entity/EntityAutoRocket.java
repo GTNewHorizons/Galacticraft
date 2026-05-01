@@ -16,7 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -664,21 +664,21 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
         this.timeUntilLaunch = 0;
         if (!this.worldObj.isRemote && this.riddenByEntity instanceof EntityPlayerMP) {
             ((EntityPlayerMP) this.riddenByEntity)
-                    .addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.rocket.warning.nogyroscope")));
+                    .addChatMessage(new ChatComponentTranslation("gui.rocket.warning.nogyroscope"));
         }
     }
 
     public void failMessageLaunchController() {
         if (!this.worldObj.isRemote && this.riddenByEntity instanceof EntityPlayerMP) {
             ((EntityPlayerMP) this.riddenByEntity)
-                    .addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.rocket.warning.launchcontroller")));
+                    .addChatMessage(new ChatComponentTranslation("gui.rocket.warning.launchcontroller"));
         }
     }
 
     public void failMessageInsufficientFuel() {
         if (!this.worldObj.isRemote && this.riddenByEntity instanceof EntityPlayerMP) {
             ((EntityPlayerMP) this.riddenByEntity)
-                    .addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.rocket.warning.fuelinsufficient")));
+                    .addChatMessage(new ChatComponentTranslation("gui.rocket.warning.fuelinsufficient"));
         }
     }
 

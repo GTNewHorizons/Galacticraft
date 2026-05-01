@@ -27,7 +27,7 @@ public class ItemRendererTier2Rocket extends ItemRendererTier1Rocket {
 
     public ItemRendererTier2Rocket(IModelCustom cargoRocketModel) {
         super(
-                new EntityTier2Rocket(FMLClientHandler.instance().getClient().theWorld),
+                new EntityTier2Rocket(null),
                 new ModelTier2Rocket(),
                 new ResourceLocation(MarsModule.ASSET_PREFIX, "textures/model/rocketT2.png"));
         this.cargoRocketModel = cargoRocketModel;

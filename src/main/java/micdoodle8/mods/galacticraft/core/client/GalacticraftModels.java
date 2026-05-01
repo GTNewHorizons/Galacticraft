@@ -181,21 +181,21 @@ public final class GalacticraftModels {
 
     public static IModelCustom getLampBase() {
         if (lampBase == null) {
-            lampBase = loadModel(GalacticraftCore.ASSET_PREFIX, "models/arclampMetal.obj");
+            lampBase = loadModel(GalacticraftCore.ASSET_PREFIX, "models/arclampBase.obj");
         }
         return lampBase;
     }
 
     public static IModelCustom getLampMetal() {
         if (lampMetal == null) {
-            lampMetal = loadModel(GalacticraftCore.ASSET_PREFIX, "models/arclampLight.obj");
+            lampMetal = loadModel(GalacticraftCore.ASSET_PREFIX, "models/arclampMetal.obj");
         }
         return lampMetal;
     }
 
     public static IModelCustom getLampLight() {
         if (lampLight == null) {
-            lampLight = loadModel(GalacticraftCore.ASSET_PREFIX, "models/arclampBase.obj");
+            lampLight = loadModel(GalacticraftCore.ASSET_PREFIX, "models/arclampLight.obj");
         }
         return lampLight;
     }

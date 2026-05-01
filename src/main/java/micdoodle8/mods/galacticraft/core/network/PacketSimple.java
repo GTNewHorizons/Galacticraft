@@ -27,6 +27,7 @@ import net.minecraft.network.play.server.S07PacketRespawn;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
@@ -968,8 +969,7 @@ public class PacketSimple extends Packet implements IPacket {
                             ship.igniteCheckingCooldown();
                             stats.launchAttempts = 0;
                         } else if (stats.chatCooldown == 0) {
-                            player.addChatMessage(
-                                    new ChatComponentText(GCCoreUtil.translate("gui.rocket.warning.nofuel")));
+                            player.addChatMessage(new ChatComponentTranslation("gui.rocket.warning.nofuel"));
                             stats.chatCooldown = 250;
                         }
                     }
@@ -1271,7 +1271,7 @@ public class PacketSimple extends Packet implements IPacket {
                         }
                     } else {
                         player.addChatMessage(
-                                new ChatComponentText(GCCoreUtil.translate("gui.spaceRace.chat.alreadyPart"))
+                                new ChatComponentTranslation("gui.spaceRace.chat.alreadyPart")
                                         .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.DARK_RED)));
                     }
                 }

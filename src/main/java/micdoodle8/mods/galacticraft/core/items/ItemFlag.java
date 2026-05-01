@@ -8,7 +8,7 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
@@ -20,7 +20,6 @@ import micdoodle8.mods.galacticraft.api.item.IHoldableItem;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.entities.EntityFlag;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class ItemFlag extends Item implements IHoldableItem {
 
@@ -82,8 +81,7 @@ public class ItemFlag extends Item implements IHoldableItem {
                             Block.soundTypeMetal.getPitch() + 2.0F);
                     placed = true;
                 } else {
-                    par3EntityPlayer
-                            .addChatMessage(new ChatComponentText(GCCoreUtil.translate("gui.flag.alreadyPlaced")));
+                    par3EntityPlayer.addChatMessage(new ChatComponentTranslation("gui.flag.alreadyPlaced"));
                 }
             }
 
