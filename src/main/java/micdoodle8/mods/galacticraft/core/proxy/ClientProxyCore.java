@@ -9,11 +9,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import ganymedes01.etfuturum.client.skins.PlayerModelManager;
+import micdoodle8.mods.galacticraft.core.client.GCDelegatedModelBiped;
+import micdoodle8.mods.galacticraft.core.util.GCLog;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -313,9 +315,14 @@ public class ClientProxyCore extends CommonProxyCore {
         if (Loader.isModLoaded("RenderPlayerAPI")) {
             ModelPlayerAPI.register(Constants.MOD_ID_CORE, ModelPlayerBaseGC.class);
             RenderPlayerAPI.register(Constants.MOD_ID_CORE, RenderPlayerBaseGC.class);
+        } else if (Loader.isModLoaded("etfuturum") && PlayerModelManager.isEnabled()) {
+            GCLog.info("Hello, Et Futurum, you're looking skinnier today...");
+            PlayerModelManager.registerModelDelegateFactory(GCDelegatedModelBiped::new);
         } else {
-            RenderingRegistry.registerEntityRenderingHandler(EntityPlayerSP.class, new RenderPlayerGC());
-            RenderingRegistry.registerEntityRenderingHandler(EntityOtherPlayerMP.class, new RenderPlayerGC());
+            GCLog.info("Using default player renderer...");
+            RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderPlayerGC());
+//            RenderingRegistry.registerEntityRenderingHandler(EntityPlayerSP.class, new RenderPlayerGC());
+//            RenderingRegistry.registerEntityRenderingHandler(EntityOtherPlayerMP.class, new RenderPlayerGC());
         }
         // spotless:on
     }

@@ -1,5 +1,6 @@
 package micdoodle8.mods.galacticraft.core.client.render.entities;
 
+import ganymedes01.etfuturum.client.skins.PlayerModelManager;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -71,7 +72,7 @@ public class RenderPlayerGC extends RenderPlayer {
             float par3, float par4, float par5, float par6, float par7) {
         if (inst instanceof RenderPlayer thisInst) {
             if (isSmartRenderLoaded == null) {
-                isSmartRenderLoaded = Loader.isModLoaded("SmartRender");
+                isSmartRenderLoaded = Loader.isModLoaded("SmartRender") || PlayerModelManager.isEnabled();
             }
 
             if (RenderPlayerGC.thermalPaddingTexture0 != null && !isSmartRenderLoaded) {

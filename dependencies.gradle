@@ -2,16 +2,22 @@ dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.11.0')
 	testRuntimeOnly ('org.junit.platform:junit-platform-launcher')
 
-    implementation('com.github.GTNewHorizons:GT5-Unofficial:5.09.52.467:dev') {
+    implementation('com.github.GTNewHorizons:GT5-Unofficial:5.09.52.474:dev') {
         exclude group: "com.github.GTNewHorizons", module: "Galacticraft"
+        exclude group: "com.github.GTNewHorizons", module: "TinkersConstruct"
+        exclude group: "ganymedes01.etfuturum", module: "Et-Futurum-Requiem"
     }
-    implementation('com.github.GTNewHorizons:TinkersConstruct:1.14.58-GTNH:dev')
+    implementation('com.github.GTNewHorizons:TinkersConstruct:1.14.60-GTNH:dev') {
+        exclude group: "com.github.GTNewHorizons", module: "ServerUtilities"
+    }
     implementation('com.github.GTNewHorizons:NotEnoughItems:2.8.93-GTNH:dev')
-    implementation('com.github.GTNewHorizons:GTNHLib:0.9.54:dev')
+    implementation('com.github.GTNewHorizons:GTNHLib:0.9.55:dev')
     api('net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev')
+//    api("ganymedes01.etfuturum:Et-Futurum-Requiem:2.6.2.21-GTNH-daily")
+    devOnlyNonPublishable(rfg.deobf(project.files("libs/etfuturum-427f205-master+427f20504d-dirty.jar")))
 
-    compileOnly('com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-915-GTNH:api')
-    compileOnly('com.github.GTNewHorizons:BuildCraft:7.1.57:api')
+    compileOnly('com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-920-GTNH:api')
+    compileOnly('com.github.GTNewHorizons:BuildCraft:7.1.59:api')
     compileOnly('curse.maven:cofh-lib-220333:2388748')
     compileOnly('curse.maven:PlayerAPI-228969:2248928')
     compileOnly('curse.maven:RenderPlayerAPI-228981:2248933')
