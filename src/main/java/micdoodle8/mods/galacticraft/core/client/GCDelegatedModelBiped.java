@@ -9,6 +9,7 @@ import micdoodle8.mods.galacticraft.api.item.IHoldableItem;
 import micdoodle8.mods.galacticraft.api.prefab.entity.EntityTieredRocket;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.client.model.ModelPlayerGC;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
@@ -34,8 +35,8 @@ import java.util.List;
 
 public class GCDelegatedModelBiped extends DelegatedModelBiped {
 
-    public static final ModelBiped modelThermalPadding = new ModelBiped(0.25F);
-    public static final ModelBiped modelThermalPaddingHelmet = new ModelBiped(0.9F);
+    private final ModelBiped modelThermalPadding = new ModelPlayerGC(0.25F);
+    private final ModelBiped modelThermalPaddingHelmet = new ModelPlayerGC(0.9F);
 
     public static final ResourceLocation oxygenMaskTexture = new ResourceLocation(
             GalacticraftCore.ASSET_PREFIX,
@@ -590,7 +591,6 @@ public class GCDelegatedModelBiped extends DelegatedModelBiped {
         }
 
         EntityLivingBase par1EntityLivingBase = (EntityLivingBase) p_78088_1_;
-        final NewRenderPlayer thisInst = (NewRenderPlayer) RenderManager.instance.getEntityClassRenderObject(p_78088_1_.getClass());
 
         if (GCDelegatedModelBiped.thermalPaddingTexture0 != null && !isSmartRenderLoaded) {
             final PlayerGearData gearData = ClientProxyCore.playerItemData
@@ -623,15 +623,13 @@ public class GCDelegatedModelBiped extends DelegatedModelBiped {
                         modelBiped.bipedLeftLeg.showModel = (i == 2 || i == 3)
                                 && gearData.getRenderThermalPadding(i);
 
-                        modelBiped.onGround = thisInst.mainModel.onGround;
-                        modelBiped.isRiding = thisInst.mainModel.isRiding;
-                        modelBiped.isChild = thisInst.mainModel.isChild;
-                        if (thisInst.mainModel instanceof ModelBiped) {
-                            modelBiped.heldItemLeft = ((ModelBiped) thisInst.mainModel).heldItemLeft;
-                            modelBiped.heldItemRight = ((ModelBiped) thisInst.mainModel).heldItemRight;
-                            modelBiped.isSneak = ((ModelBiped) thisInst.mainModel).isSneak;
-                            modelBiped.aimedBow = ((ModelBiped) thisInst.mainModel).aimedBow;
-                        }
+                        modelBiped.onGround = model.onGround;
+                        modelBiped.isRiding = model.isRiding;
+                        modelBiped.isChild = model.isChild;
+                        modelBiped.heldItemLeft = model.heldItemLeft;
+                        modelBiped.heldItemRight = model.heldItemRight;
+                        modelBiped.isSneak = model.isSneak;
+                        modelBiped.aimedBow = model.aimedBow;
                         modelBiped.setLivingAnimations(par1EntityLivingBase, p_78088_2_, p_78088_3_, 0.0F);
                         modelBiped.render(par1EntityLivingBase, p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, p_78088_7_);
 
