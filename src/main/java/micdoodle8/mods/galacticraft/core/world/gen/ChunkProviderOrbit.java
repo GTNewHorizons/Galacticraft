@@ -62,9 +62,7 @@ public class ChunkProviderOrbit extends ChunkProviderGenerate {
         final Chunk var4 = new Chunk(this.worldObj, ids, meta, par1, par2);
 
         final byte[] biomesArray = var4.getBiomeArray();
-        for (int i = 0; i < biomesArray.length; ++i) {
-            biomesArray[i] = (byte) BiomeGenBaseOrbit.space.biomeID;
-        }
+        Arrays.fill(biomesArray, (byte) BiomeGenBaseOrbit.space.biomeID);
 
         var4.generateSkylightMap();
         return var4;
