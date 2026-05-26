@@ -28,7 +28,6 @@ import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntIterator;
 import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import it.unimi.dsi.fastutil.ints.IntSet;
 import it.unimi.dsi.fastutil.longs.LongIterator;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import it.unimi.dsi.fastutil.longs.LongSet;
@@ -246,11 +245,14 @@ public class TileEntityArclamp extends TileEntity {
         super.invalidate();
     }
 
+    // reuse set to avoid heavy allocation
+    private final IntOpenHashSet checked = new IntOpenHashSet();
+
     public void lightArea() {
         final Block breatheableAirID = GCBlocks.breatheableAir;
         final Block brightAir = GCBlocks.brightAir;
         final Block brightBreatheableAir = GCBlocks.brightBreatheableAir;
-        final IntSet checked = new IntOpenHashSet();
+        this.checked.clear();
         final int baseX = this.xCoord, baseY = this.yCoord, baseZ = this.zCoord;
 
         IntList currentLayer = new IntArrayList();
