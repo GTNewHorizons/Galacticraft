@@ -246,11 +246,14 @@ public class TileEntityArclamp extends TileEntity {
         super.invalidate();
     }
 
+    // reuse set to avoid heavy allocation
+    private final IntOpenHashSet checked = new IntOpenHashSet();
+
     public void lightArea() {
         final Block breatheableAirID = GCBlocks.breatheableAir;
         final Block brightAir = GCBlocks.brightAir;
         final Block brightBreatheableAir = GCBlocks.brightBreatheableAir;
-        final IntSet checked = new IntOpenHashSet();
+        this.checked.clear();
         final int baseX = this.xCoord, baseY = this.yCoord, baseZ = this.zCoord;
 
         IntList currentLayer = new IntArrayList();
