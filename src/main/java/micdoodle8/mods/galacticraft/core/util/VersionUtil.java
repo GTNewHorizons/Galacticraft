@@ -12,8 +12,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.settings.GameSettings;
-import net.minecraft.command.ICommand;
-import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -46,12 +44,10 @@ public class VersionUtil {
     // Note: in reflectionCache, currently positions 3, 5, 7, 11, 13, 15, 17 are
     // unused and 21 onwards are also free.
 
-    private static final String KEY_CLASS_COMMAND_BASE = "commandBase";
     private static final String KEY_CLASS_SCALED_RES = "scaledResolution";
     private static final String KEY_CLASS_RENDER_PLAYER = "renderPlayer";
     private static final String KEY_CLASS_ENTITYLIST = "entityList";
 
-    private static final String KEY_METHOD_NOTIFY_ADMINS = "notifyAdmins";
     private static final String KEY_METHOD_PLAYER_FOR_NAME = "getPlayerForUsername";
     private static final String KEY_METHOD_PLAYER_IS_OPPED = "isPlayerOpped";
     private static final String KEY_METHOD_PLAYER_TEXTURE = "getEntityTexture";
@@ -97,7 +93,6 @@ public class VersionUtil {
             // "y"));
             // nodemap.put(KEY_CLASS_SCALED_RES, new
             // ObfuscationEntry("net/minecraft/client/gui/ScaledResolution", "bca"));
-            nodemap.put(KEY_CLASS_COMMAND_BASE, new ObfuscationEntry("net/minecraft/command/CommandBase"));
             nodemap.put(KEY_CLASS_SCALED_RES, new ObfuscationEntry("net/minecraft/client/gui/ScaledResolution"));
             nodemap.put(
                     KEY_CLASS_RENDER_PLAYER,
@@ -105,7 +100,6 @@ public class VersionUtil {
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
             // Method descriptions are empty, since they are not needed for reflection.
-            nodemap.put(KEY_METHOD_NOTIFY_ADMINS, new MethodObfuscationEntry("func_152373_a", "func_152373_a", ""));
             nodemap.put(KEY_METHOD_PLAYER_FOR_NAME, new MethodObfuscationEntry("func_152612_a", "func_152612_a", ""));
             nodemap.put(KEY_METHOD_PLAYER_IS_OPPED, new MethodObfuscationEntry("func_152596_g", "func_152596_g", ""));
             nodemap.put(KEY_METHOD_PLAYER_TEXTURE, new MethodObfuscationEntry("getEntityTexture", "func_110775_a", ""));
@@ -125,14 +119,12 @@ public class VersionUtil {
             // "y"));
             // nodemap.put(KEY_CLASS_SCALED_RES, new
             // ObfuscationEntry("net/minecraft/client/gui/ScaledResolution", "bam"));
-            nodemap.put(KEY_CLASS_COMMAND_BASE, new ObfuscationEntry("net/minecraft/command/CommandBase"));
             nodemap.put(KEY_CLASS_SCALED_RES, new ObfuscationEntry("net/minecraft/client/gui/ScaledResolution"));
             nodemap.put(
                     KEY_CLASS_RENDER_PLAYER,
                     new ObfuscationEntry("net/minecraft/client/renderer/entity/RenderPlayer"));
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
-            nodemap.put(KEY_METHOD_NOTIFY_ADMINS, new MethodObfuscationEntry("notifyAdmins", "func_71522_a", ""));
             nodemap.put(
                     KEY_METHOD_PLAYER_FOR_NAME,
                     new MethodObfuscationEntry("getPlayerForUsername", "func_72361_f", ""));
@@ -163,43 +155,6 @@ public class VersionUtil {
 
     public static boolean mcVersionMatches(String version) {
         return VersionParser.parseRange("[" + version + "]").containsVersion(mcVersion);
-    }
-
-    public static void notifyAdmins(ICommandSender sender, ICommand command, String name, Object... objects) {
-        try {
-            if (mcVersion1_7_10) {
-                Method m = (Method) reflectionCache.get(10);
-
-                if (m == null) {
-                    final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_COMMAND_BASE).replace('/', '.'));
-                    m = c.getMethod(
-                            getNameDynamic(KEY_METHOD_NOTIFY_ADMINS),
-                            ICommandSender.class,
-                            ICommand.class,
-                            String.class,
-                            Object[].class);
-                    reflectionCache.put(10, m);
-                }
-
-                m.invoke(null, sender, command, name, objects);
-            } else if (mcVersion1_7_2) {
-                Method m = (Method) reflectionCache.get(10);
-
-                if (m == null) {
-                    final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_COMMAND_BASE).replace('/', '.'));
-                    m = c.getMethod(
-                            getNameDynamic(KEY_METHOD_NOTIFY_ADMINS),
-                            ICommandSender.class,
-                            String.class,
-                            Object[].class);
-                    reflectionCache.put(10, m);
-                }
-
-                m.invoke(null, sender, name, objects);
-            }
-        } catch (final Throwable t) {
-            t.printStackTrace();
-        }
     }
 
     public static EntityPlayerMP getPlayerForUsername(MinecraftServer server, String username) {
