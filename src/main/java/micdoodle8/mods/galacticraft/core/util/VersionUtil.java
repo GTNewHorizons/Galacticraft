@@ -18,7 +18,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
@@ -47,15 +46,12 @@ public class VersionUtil {
     // Note: in reflectionCache, currently positions 3, 5, 7, 11, 13, 15, 17 are
     // unused and 21 onwards are also free.
 
-    private static final String KEY_CLASS_COMPRESSED_STREAM_TOOLS = "compressedStreamTools";
-    private static final String KEY_CLASS_NBT_SIZE_TRACKER = "nbtSizeTracker";
     private static final String KEY_CLASS_TEXTURE_UTIL = "textureUtil";
     private static final String KEY_CLASS_COMMAND_BASE = "commandBase";
     private static final String KEY_CLASS_SCALED_RES = "scaledResolution";
     private static final String KEY_CLASS_RENDER_PLAYER = "renderPlayer";
     private static final String KEY_CLASS_ENTITYLIST = "entityList";
 
-    private static final String KEY_METHOD_DECOMPRESS_NBT = "decompress";
     private static final String KEY_METHOD_SET_MIPMAP = "setMipMap";
     private static final String KEY_METHOD_NOTIFY_ADMINS = "notifyAdmins";
     private static final String KEY_METHOD_PLAYER_FOR_NAME = "getPlayerForUsername";
@@ -104,10 +100,6 @@ public class VersionUtil {
             // nodemap.put(KEY_CLASS_SCALED_RES, new
             // ObfuscationEntry("net/minecraft/client/gui/ScaledResolution", "bca"));
             nodemap.put(
-                    KEY_CLASS_COMPRESSED_STREAM_TOOLS,
-                    new ObfuscationEntry("net/minecraft/nbt/CompressedStreamTools"));
-            nodemap.put(KEY_CLASS_NBT_SIZE_TRACKER, new ObfuscationEntry("net/minecraft/nbt/NBTSizeTracker"));
-            nodemap.put(
                     KEY_CLASS_TEXTURE_UTIL,
                     new ObfuscationEntry("net/minecraft/client/renderer/texture/TextureUtil"));
             nodemap.put(KEY_CLASS_COMMAND_BASE, new ObfuscationEntry("net/minecraft/command/CommandBase"));
@@ -118,7 +110,6 @@ public class VersionUtil {
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
             // Method descriptions are empty, since they are not needed for reflection.
-            nodemap.put(KEY_METHOD_DECOMPRESS_NBT, new MethodObfuscationEntry("func_152457_a", "func_152457_a", ""));
             nodemap.put(KEY_METHOD_SET_MIPMAP, new MethodObfuscationEntry("func_152777_a", "func_152777_a", ""));
             nodemap.put(KEY_METHOD_NOTIFY_ADMINS, new MethodObfuscationEntry("func_152373_a", "func_152373_a", ""));
             nodemap.put(KEY_METHOD_PLAYER_FOR_NAME, new MethodObfuscationEntry("func_152612_a", "func_152612_a", ""));
@@ -141,10 +132,6 @@ public class VersionUtil {
             // nodemap.put(KEY_CLASS_SCALED_RES, new
             // ObfuscationEntry("net/minecraft/client/gui/ScaledResolution", "bam"));
             nodemap.put(
-                    KEY_CLASS_COMPRESSED_STREAM_TOOLS,
-                    new ObfuscationEntry("net/minecraft/nbt/CompressedStreamTools"));
-            nodemap.put(KEY_CLASS_NBT_SIZE_TRACKER, new ObfuscationEntry("", "")); // Not part of 1.7.2
-            nodemap.put(
                     KEY_CLASS_TEXTURE_UTIL,
                     new ObfuscationEntry("net/minecraft/client/renderer/texture/TextureUtil"));
             nodemap.put(KEY_CLASS_COMMAND_BASE, new ObfuscationEntry("net/minecraft/command/CommandBase"));
@@ -154,7 +141,6 @@ public class VersionUtil {
                     new ObfuscationEntry("net/minecraft/client/renderer/entity/RenderPlayer"));
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
-            nodemap.put(KEY_METHOD_DECOMPRESS_NBT, new MethodObfuscationEntry("decompress", "func_74792_a", ""));
             nodemap.put(KEY_METHOD_SET_MIPMAP, new MethodObfuscationEntry("func_147950_a", "func_147950_a", ""));
             nodemap.put(KEY_METHOD_NOTIFY_ADMINS, new MethodObfuscationEntry("notifyAdmins", "func_71522_a", ""));
             nodemap.put(
@@ -187,46 +173,6 @@ public class VersionUtil {
 
     public static boolean mcVersionMatches(String version) {
         return VersionParser.parseRange("[" + version + "]").containsVersion(mcVersion);
-    }
-
-    public static NBTTagCompound decompressNBT(byte[] compressedNBT) {
-        try {
-            if (mcVersion1_7_10) {
-                Class<?> c0 = (Class<?>) reflectionCache.get(4);
-                Method m = (Method) reflectionCache.get(6);
-
-                if (c0 == null) {
-                    c0 = Class.forName(getNameDynamic(KEY_CLASS_NBT_SIZE_TRACKER).replace('/', '.'));
-                    reflectionCache.put(4, c0);
-                }
-
-                if (m == null) {
-                    final Class<?> c = Class
-                            .forName(getNameDynamic(KEY_CLASS_COMPRESSED_STREAM_TOOLS).replace('/', '.'));
-                    m = c.getMethod(getNameDynamic(KEY_METHOD_DECOMPRESS_NBT), byte[].class, c0);
-                    reflectionCache.put(6, m);
-                }
-
-                final Object nbtSizeTracker = c0.getConstructor(long.class).newInstance(2097152L);
-                return (NBTTagCompound) m.invoke(null, compressedNBT, nbtSizeTracker);
-            }
-            if (mcVersion1_7_2) {
-                Method m = (Method) reflectionCache.get(6);
-
-                if (m == null) {
-                    final Class<?> c = Class
-                            .forName(getNameDynamic(KEY_CLASS_COMPRESSED_STREAM_TOOLS).replace('/', '.'));
-                    m = c.getMethod(getNameDynamic(KEY_METHOD_DECOMPRESS_NBT), byte[].class);
-                    reflectionCache.put(6, m);
-                }
-
-                return (NBTTagCompound) m.invoke(null, compressedNBT);
-            }
-        } catch (final Throwable t) {
-            t.printStackTrace();
-        }
-
-        return null;
     }
 
     public static void setMipMap(boolean b0, boolean b1) {
