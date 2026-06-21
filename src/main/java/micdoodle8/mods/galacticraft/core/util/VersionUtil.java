@@ -1,6 +1,5 @@
 package micdoodle8.mods.galacticraft.core.util;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -8,10 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.settings.GameSettings;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
@@ -25,8 +21,6 @@ import com.mojang.authlib.GameProfile;
 import cpw.mods.fml.common.versioning.DefaultArtifactVersion;
 import cpw.mods.fml.common.versioning.VersionParser;
 import cpw.mods.fml.relauncher.FMLInjectionData;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.core.obfuscation.FieldObfuscationEntry;
 import micdoodle8.mods.galacticraft.core.obfuscation.MethodObfuscationEntry;
 import micdoodle8.mods.galacticraft.core.obfuscation.ObfuscationEntry;
@@ -42,7 +36,6 @@ public class VersionUtil {
     // Note: in reflectionCache, currently positions 3, 5, 7, 11, 13, 15, 17 are
     // unused and 21 onwards are also free.
 
-    private static final String KEY_CLASS_SCALED_RES = "scaledResolution";
     private static final String KEY_CLASS_RENDER_PLAYER = "renderPlayer";
     private static final String KEY_CLASS_ENTITYLIST = "entityList";
 
@@ -89,7 +82,6 @@ public class VersionUtil {
             // "y"));
             // nodemap.put(KEY_CLASS_SCALED_RES, new
             // ObfuscationEntry("net/minecraft/client/gui/ScaledResolution", "bca"));
-            nodemap.put(KEY_CLASS_SCALED_RES, new ObfuscationEntry("net/minecraft/client/gui/ScaledResolution"));
             nodemap.put(
                     KEY_CLASS_RENDER_PLAYER,
                     new ObfuscationEntry("net/minecraft/client/renderer/entity/RenderPlayer"));
@@ -113,7 +105,6 @@ public class VersionUtil {
             // "y"));
             // nodemap.put(KEY_CLASS_SCALED_RES, new
             // ObfuscationEntry("net/minecraft/client/gui/ScaledResolution", "bam"));
-            nodemap.put(KEY_CLASS_SCALED_RES, new ObfuscationEntry("net/minecraft/client/gui/ScaledResolution"));
             nodemap.put(
                     KEY_CLASS_RENDER_PLAYER,
                     new ObfuscationEntry("net/minecraft/client/renderer/entity/RenderPlayer"));
@@ -145,38 +136,6 @@ public class VersionUtil {
 
     public static boolean mcVersionMatches(String version) {
         return VersionParser.parseRange("[" + version + "]").containsVersion(mcVersion);
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static ScaledResolution getScaledRes(Minecraft mc, int width, int height) {
-        try {
-            if (mcVersion1_7_10) {
-                Constructor<?> m = (Constructor<?>) reflectionCache.get(16);
-
-                if (m == null) {
-                    final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_SCALED_RES).replace('/', '.'));
-                    m = c.getConstructor(Minecraft.class, int.class, int.class);
-                    reflectionCache.put(16, m);
-                }
-
-                return (ScaledResolution) m.newInstance(mc, width, height);
-            }
-            if (mcVersion1_7_2) {
-                Constructor<?> m = (Constructor<?>) reflectionCache.get(16);
-
-                if (m == null) {
-                    final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_SCALED_RES).replace('/', '.'));
-                    m = c.getConstructor(GameSettings.class, int.class, int.class);
-                    reflectionCache.put(16, m);
-                }
-
-                return (ScaledResolution) m.newInstance(mc.gameSettings, width, height);
-            }
-        } catch (final Throwable t) {
-            t.printStackTrace();
-        }
-
-        return null;
     }
 
     public static Method getPlayerTextureMethod() {
