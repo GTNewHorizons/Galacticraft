@@ -46,13 +46,11 @@ public class VersionUtil {
     // Note: in reflectionCache, currently positions 3, 5, 7, 11, 13, 15, 17 are
     // unused and 21 onwards are also free.
 
-    private static final String KEY_CLASS_TEXTURE_UTIL = "textureUtil";
     private static final String KEY_CLASS_COMMAND_BASE = "commandBase";
     private static final String KEY_CLASS_SCALED_RES = "scaledResolution";
     private static final String KEY_CLASS_RENDER_PLAYER = "renderPlayer";
     private static final String KEY_CLASS_ENTITYLIST = "entityList";
 
-    private static final String KEY_METHOD_SET_MIPMAP = "setMipMap";
     private static final String KEY_METHOD_NOTIFY_ADMINS = "notifyAdmins";
     private static final String KEY_METHOD_PLAYER_FOR_NAME = "getPlayerForUsername";
     private static final String KEY_METHOD_PLAYER_IS_OPPED = "isPlayerOpped";
@@ -99,9 +97,6 @@ public class VersionUtil {
             // "y"));
             // nodemap.put(KEY_CLASS_SCALED_RES, new
             // ObfuscationEntry("net/minecraft/client/gui/ScaledResolution", "bca"));
-            nodemap.put(
-                    KEY_CLASS_TEXTURE_UTIL,
-                    new ObfuscationEntry("net/minecraft/client/renderer/texture/TextureUtil"));
             nodemap.put(KEY_CLASS_COMMAND_BASE, new ObfuscationEntry("net/minecraft/command/CommandBase"));
             nodemap.put(KEY_CLASS_SCALED_RES, new ObfuscationEntry("net/minecraft/client/gui/ScaledResolution"));
             nodemap.put(
@@ -110,7 +105,6 @@ public class VersionUtil {
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
             // Method descriptions are empty, since they are not needed for reflection.
-            nodemap.put(KEY_METHOD_SET_MIPMAP, new MethodObfuscationEntry("func_152777_a", "func_152777_a", ""));
             nodemap.put(KEY_METHOD_NOTIFY_ADMINS, new MethodObfuscationEntry("func_152373_a", "func_152373_a", ""));
             nodemap.put(KEY_METHOD_PLAYER_FOR_NAME, new MethodObfuscationEntry("func_152612_a", "func_152612_a", ""));
             nodemap.put(KEY_METHOD_PLAYER_IS_OPPED, new MethodObfuscationEntry("func_152596_g", "func_152596_g", ""));
@@ -131,9 +125,6 @@ public class VersionUtil {
             // "y"));
             // nodemap.put(KEY_CLASS_SCALED_RES, new
             // ObfuscationEntry("net/minecraft/client/gui/ScaledResolution", "bam"));
-            nodemap.put(
-                    KEY_CLASS_TEXTURE_UTIL,
-                    new ObfuscationEntry("net/minecraft/client/renderer/texture/TextureUtil"));
             nodemap.put(KEY_CLASS_COMMAND_BASE, new ObfuscationEntry("net/minecraft/command/CommandBase"));
             nodemap.put(KEY_CLASS_SCALED_RES, new ObfuscationEntry("net/minecraft/client/gui/ScaledResolution"));
             nodemap.put(
@@ -141,7 +132,6 @@ public class VersionUtil {
                     new ObfuscationEntry("net/minecraft/client/renderer/entity/RenderPlayer"));
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
-            nodemap.put(KEY_METHOD_SET_MIPMAP, new MethodObfuscationEntry("func_147950_a", "func_147950_a", ""));
             nodemap.put(KEY_METHOD_NOTIFY_ADMINS, new MethodObfuscationEntry("notifyAdmins", "func_71522_a", ""));
             nodemap.put(
                     KEY_METHOD_PLAYER_FOR_NAME,
@@ -173,34 +163,6 @@ public class VersionUtil {
 
     public static boolean mcVersionMatches(String version) {
         return VersionParser.parseRange("[" + version + "]").containsVersion(mcVersion);
-    }
-
-    public static void setMipMap(boolean b0, boolean b1) {
-        try {
-            if (mcVersion1_7_10) {
-                Method m = (Method) reflectionCache.get(8);
-
-                if (m == null) {
-                    final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_TEXTURE_UTIL).replace('/', '.'));
-                    m = c.getMethod(getNameDynamic(KEY_METHOD_SET_MIPMAP), boolean.class, boolean.class, float.class);
-                    reflectionCache.put(8, m);
-                }
-
-                m.invoke(null, b0, b1, 1.0F);
-            } else if (mcVersion1_7_2) {
-                Method m = (Method) reflectionCache.get(8);
-
-                if (m == null) {
-                    final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_TEXTURE_UTIL).replace('/', '.'));
-                    m = c.getMethod(getNameDynamic(KEY_METHOD_SET_MIPMAP), boolean.class, boolean.class);
-                    reflectionCache.put(8, m);
-                }
-
-                m.invoke(null, b0, b1);
-            }
-        } catch (final Throwable t) {
-            t.printStackTrace();
-        }
     }
 
     public static void notifyAdmins(ICommandSender sender, ICommand command, String name, Object... objects) {
