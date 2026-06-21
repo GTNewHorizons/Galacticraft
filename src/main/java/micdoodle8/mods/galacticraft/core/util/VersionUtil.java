@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
@@ -36,10 +35,7 @@ public class VersionUtil {
     // Note: in reflectionCache, currently positions 3, 5, 7, 11, 13, 15, 17 are
     // unused and 21 onwards are also free.
 
-    private static final String KEY_CLASS_RENDER_PLAYER = "renderPlayer";
     private static final String KEY_CLASS_ENTITYLIST = "entityList";
-
-    private static final String KEY_METHOD_PLAYER_TEXTURE = "getEntityTexture";
 
     // Used in GCPlayerHandler etc
     public static final String KEY_FIELD_FLOATINGTICKCOUNT = "floatingTickCount";
@@ -82,13 +78,8 @@ public class VersionUtil {
             // "y"));
             // nodemap.put(KEY_CLASS_SCALED_RES, new
             // ObfuscationEntry("net/minecraft/client/gui/ScaledResolution", "bca"));
-            nodemap.put(
-                    KEY_CLASS_RENDER_PLAYER,
-                    new ObfuscationEntry("net/minecraft/client/renderer/entity/RenderPlayer"));
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
-            // Method descriptions are empty, since they are not needed for reflection.
-            nodemap.put(KEY_METHOD_PLAYER_TEXTURE, new MethodObfuscationEntry("getEntityTexture", "func_110775_a", ""));
             sand = Blocks.sand;
         } else if (mcVersion1_7_2) {
             // nodemap.put(KEY_CLASS_COMPRESSED_STREAM_TOOLS, new
@@ -105,12 +96,7 @@ public class VersionUtil {
             // "y"));
             // nodemap.put(KEY_CLASS_SCALED_RES, new
             // ObfuscationEntry("net/minecraft/client/gui/ScaledResolution", "bam"));
-            nodemap.put(
-                    KEY_CLASS_RENDER_PLAYER,
-                    new ObfuscationEntry("net/minecraft/client/renderer/entity/RenderPlayer"));
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
-
-            nodemap.put(KEY_METHOD_PLAYER_TEXTURE, new MethodObfuscationEntry("getEntityTexture", "func_110775_a", ""));
 
             try {
                 final Field sandField = Blocks.class.getField(deobfuscated ? "sand" : "field_150354_m");
@@ -136,25 +122,6 @@ public class VersionUtil {
 
     public static boolean mcVersionMatches(String version) {
         return VersionParser.parseRange("[" + version + "]").containsVersion(mcVersion);
-    }
-
-    public static Method getPlayerTextureMethod() {
-        try {
-            Method m = (Method) reflectionCache.get(18);
-
-            if (m == null) {
-                final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_RENDER_PLAYER).replace('/', '.'));
-                m = c.getMethod(getNameDynamic(KEY_METHOD_PLAYER_TEXTURE), AbstractClientPlayer.class);
-                m.setAccessible(true);
-                reflectionCache.put(18, m);
-            }
-
-            return m;
-        } catch (final Throwable t) {
-            t.printStackTrace();
-        }
-
-        return null;
     }
 
     public static void putClassToIDMapping(Class<?> mobClazz, int id) {
