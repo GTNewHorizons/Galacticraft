@@ -22,7 +22,7 @@ public class PlayerUtil {
     public static HashMap<String, GameProfile> knownSkins = new HashMap<>();
 
     public static EntityPlayerMP getPlayerForUsernameVanilla(MinecraftServer server, String username) {
-        return VersionUtil.getPlayerForUsername(server, username);
+        return server.getConfigurationManager().func_152612_a(username); // getPlayerForUsername
     }
 
     public static EntityPlayerMP getPlayerBaseServerFromPlayerUsername(String username, boolean ignoreCase) {

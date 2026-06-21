@@ -16,7 +16,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -48,7 +47,6 @@ public class VersionUtil {
     private static final String KEY_CLASS_RENDER_PLAYER = "renderPlayer";
     private static final String KEY_CLASS_ENTITYLIST = "entityList";
 
-    private static final String KEY_METHOD_PLAYER_FOR_NAME = "getPlayerForUsername";
     private static final String KEY_METHOD_PLAYER_IS_OPPED = "isPlayerOpped";
     private static final String KEY_METHOD_PLAYER_TEXTURE = "getEntityTexture";
 
@@ -100,7 +98,6 @@ public class VersionUtil {
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
             // Method descriptions are empty, since they are not needed for reflection.
-            nodemap.put(KEY_METHOD_PLAYER_FOR_NAME, new MethodObfuscationEntry("func_152612_a", "func_152612_a", ""));
             nodemap.put(KEY_METHOD_PLAYER_IS_OPPED, new MethodObfuscationEntry("func_152596_g", "func_152596_g", ""));
             nodemap.put(KEY_METHOD_PLAYER_TEXTURE, new MethodObfuscationEntry("getEntityTexture", "func_110775_a", ""));
             sand = Blocks.sand;
@@ -125,9 +122,6 @@ public class VersionUtil {
                     new ObfuscationEntry("net/minecraft/client/renderer/entity/RenderPlayer"));
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
-            nodemap.put(
-                    KEY_METHOD_PLAYER_FOR_NAME,
-                    new MethodObfuscationEntry("getPlayerForUsername", "func_72361_f", ""));
             nodemap.put(KEY_METHOD_PLAYER_IS_OPPED, new MethodObfuscationEntry("isPlayerOpped", "func_72353_e", ""));
             nodemap.put(KEY_METHOD_PLAYER_TEXTURE, new MethodObfuscationEntry("getEntityTexture", "func_110775_a", ""));
 
@@ -155,24 +149,6 @@ public class VersionUtil {
 
     public static boolean mcVersionMatches(String version) {
         return VersionParser.parseRange("[" + version + "]").containsVersion(mcVersion);
-    }
-
-    public static EntityPlayerMP getPlayerForUsername(MinecraftServer server, String username) {
-        try {
-            Method m = (Method) reflectionCache.get(12);
-
-            if (m == null) {
-                final Class<?> c = server.getConfigurationManager().getClass();
-                m = c.getMethod(getNameDynamic(KEY_METHOD_PLAYER_FOR_NAME), String.class);
-                reflectionCache.put(12, m);
-            }
-
-            return (EntityPlayerMP) m.invoke(server.getConfigurationManager(), username);
-        } catch (final Throwable t) {
-            t.printStackTrace();
-        }
-
-        return null;
     }
 
     public static boolean isPlayerOpped(EntityPlayerMP player) {
