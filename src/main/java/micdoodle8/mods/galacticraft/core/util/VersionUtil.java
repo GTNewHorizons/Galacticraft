@@ -35,7 +35,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.core.obfuscation.FieldObfuscationEntry;
 import micdoodle8.mods.galacticraft.core.obfuscation.MethodObfuscationEntry;
 import micdoodle8.mods.galacticraft.core.obfuscation.ObfuscationEntry;
-import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntitySlimelingEgg;
 
 public class VersionUtil {
 
@@ -50,14 +49,12 @@ public class VersionUtil {
 
     private static final String KEY_CLASS_COMPRESSED_STREAM_TOOLS = "compressedStreamTools";
     private static final String KEY_CLASS_NBT_SIZE_TRACKER = "nbtSizeTracker";
-    private static final String KEY_CLASS_YGG_CONVERTER = "preYggdrasilConverter";
     private static final String KEY_CLASS_TEXTURE_UTIL = "textureUtil";
     private static final String KEY_CLASS_COMMAND_BASE = "commandBase";
     private static final String KEY_CLASS_SCALED_RES = "scaledResolution";
     private static final String KEY_CLASS_RENDER_PLAYER = "renderPlayer";
     private static final String KEY_CLASS_ENTITYLIST = "entityList";
 
-    private static final String KEY_METHOD_CONVERT_UUID = "yggdrasilConvert";
     private static final String KEY_METHOD_DECOMPRESS_NBT = "decompress";
     private static final String KEY_METHOD_SET_MIPMAP = "setMipMap";
     private static final String KEY_METHOD_NOTIFY_ADMINS = "notifyAdmins";
@@ -111,9 +108,6 @@ public class VersionUtil {
                     new ObfuscationEntry("net/minecraft/nbt/CompressedStreamTools"));
             nodemap.put(KEY_CLASS_NBT_SIZE_TRACKER, new ObfuscationEntry("net/minecraft/nbt/NBTSizeTracker"));
             nodemap.put(
-                    KEY_CLASS_YGG_CONVERTER,
-                    new ObfuscationEntry("net/minecraft/server/management/PreYggdrasilConverter"));
-            nodemap.put(
                     KEY_CLASS_TEXTURE_UTIL,
                     new ObfuscationEntry("net/minecraft/client/renderer/texture/TextureUtil"));
             nodemap.put(KEY_CLASS_COMMAND_BASE, new ObfuscationEntry("net/minecraft/command/CommandBase"));
@@ -124,7 +118,6 @@ public class VersionUtil {
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
             // Method descriptions are empty, since they are not needed for reflection.
-            nodemap.put(KEY_METHOD_CONVERT_UUID, new MethodObfuscationEntry("func_152719_a", "func_152719_a", ""));
             nodemap.put(KEY_METHOD_DECOMPRESS_NBT, new MethodObfuscationEntry("func_152457_a", "func_152457_a", ""));
             nodemap.put(KEY_METHOD_SET_MIPMAP, new MethodObfuscationEntry("func_152777_a", "func_152777_a", ""));
             nodemap.put(KEY_METHOD_NOTIFY_ADMINS, new MethodObfuscationEntry("func_152373_a", "func_152373_a", ""));
@@ -151,7 +144,6 @@ public class VersionUtil {
                     KEY_CLASS_COMPRESSED_STREAM_TOOLS,
                     new ObfuscationEntry("net/minecraft/nbt/CompressedStreamTools"));
             nodemap.put(KEY_CLASS_NBT_SIZE_TRACKER, new ObfuscationEntry("", "")); // Not part of 1.7.2
-            nodemap.put(KEY_CLASS_YGG_CONVERTER, new ObfuscationEntry("", "")); // Not part of 1.7.2
             nodemap.put(
                     KEY_CLASS_TEXTURE_UTIL,
                     new ObfuscationEntry("net/minecraft/client/renderer/texture/TextureUtil"));
@@ -162,7 +154,6 @@ public class VersionUtil {
                     new ObfuscationEntry("net/minecraft/client/renderer/entity/RenderPlayer"));
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
-            nodemap.put(KEY_METHOD_CONVERT_UUID, new MethodObfuscationEntry("", "", "")); // Not part of 1.7.2
             nodemap.put(KEY_METHOD_DECOMPRESS_NBT, new MethodObfuscationEntry("decompress", "func_74792_a", ""));
             nodemap.put(KEY_METHOD_SET_MIPMAP, new MethodObfuscationEntry("func_147950_a", "func_147950_a", ""));
             nodemap.put(KEY_METHOD_NOTIFY_ADMINS, new MethodObfuscationEntry("notifyAdmins", "func_71522_a", ""));
@@ -196,32 +187,6 @@ public class VersionUtil {
 
     public static boolean mcVersionMatches(String version) {
         return VersionParser.parseRange("[" + version + "]").containsVersion(mcVersion);
-    }
-
-    public static void readSlimelingEggFromNBT(TileEntitySlimelingEgg egg, NBTTagCompound nbt) {
-        try {
-            String s = "";
-            if (nbt.hasKey("OwnerUUID", 8)) {
-                s = nbt.getString("OwnerUUID");
-            } else if (mcVersion1_7_10) {
-                Method m = (Method) reflectionCache.get(2);
-
-                if (m == null) {
-                    final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_YGG_CONVERTER).replace('/', '.'));
-                    m = c.getMethod(getNameDynamic(KEY_METHOD_CONVERT_UUID), String.class);
-                    reflectionCache.put(2, m);
-                }
-
-                final String s1 = nbt.getString("Owner");
-                s = (String) m.invoke(null, s1);
-            }
-
-            if (s.length() > 0) {
-                egg.lastTouchedPlayerUUID = s;
-            }
-        } catch (final Throwable t) {
-            t.printStackTrace();
-        }
     }
 
     public static NBTTagCompound decompressNBT(byte[] compressedNBT) {
