@@ -77,7 +77,7 @@ public class TileEntitySlimelingEgg extends TileEntity {
             ownerUUID = PreYggdrasilConverter.func_152719_a(oldOwner); // convertUUID
         }
 
-        if(ownerUUID.length() > 0) {
+        if (ownerUUID.length() > 0) {
             this.lastTouchedPlayerUUID = ownerUUID;
         }
 
