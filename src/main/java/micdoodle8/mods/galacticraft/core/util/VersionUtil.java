@@ -27,13 +27,11 @@ import net.minecraft.world.World;
 import com.google.common.collect.Maps;
 import com.mojang.authlib.GameProfile;
 
-import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.versioning.DefaultArtifactVersion;
 import cpw.mods.fml.common.versioning.VersionParser;
 import cpw.mods.fml.relauncher.FMLInjectionData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.obfuscation.FieldObfuscationEntry;
 import micdoodle8.mods.galacticraft.core.obfuscation.MethodObfuscationEntry;
 import micdoodle8.mods.galacticraft.core.obfuscation.ObfuscationEntry;
@@ -60,7 +58,6 @@ public class VersionUtil {
     private static final String KEY_CLASS_RENDER_PLAYER = "renderPlayer";
     private static final String KEY_CLASS_ENTITYLIST = "entityList";
 
-    private static final String KEY_METHOD_SET_OWNER = "setOwner";
     private static final String KEY_METHOD_GET_OWNER = "getOwnerName";
     private static final String KEY_METHOD_CONVERT_UUID = "yggdrasilConvert";
     private static final String KEY_METHOD_DECOMPRESS_NBT = "decompress";
@@ -129,7 +126,6 @@ public class VersionUtil {
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
             // Method descriptions are empty, since they are not needed for reflection.
-            nodemap.put(KEY_METHOD_SET_OWNER, new MethodObfuscationEntry("func_152115_b", "func_152115_b", ""));
             nodemap.put(KEY_METHOD_GET_OWNER, new MethodObfuscationEntry("func_152113_b", "func_152113_b", ""));
             nodemap.put(KEY_METHOD_CONVERT_UUID, new MethodObfuscationEntry("func_152719_a", "func_152719_a", ""));
             nodemap.put(KEY_METHOD_DECOMPRESS_NBT, new MethodObfuscationEntry("func_152457_a", "func_152457_a", ""));
@@ -169,7 +165,6 @@ public class VersionUtil {
                     new ObfuscationEntry("net/minecraft/client/renderer/entity/RenderPlayer"));
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
-            nodemap.put(KEY_METHOD_SET_OWNER, new MethodObfuscationEntry("setOwner", "func_70910_a", ""));
             nodemap.put(KEY_METHOD_GET_OWNER, new MethodObfuscationEntry("getOwnerName", "func_70905_p", ""));
             nodemap.put(KEY_METHOD_CONVERT_UUID, new MethodObfuscationEntry("", "", "")); // Not part of 1.7.2
             nodemap.put(KEY_METHOD_DECOMPRESS_NBT, new MethodObfuscationEntry("decompress", "func_74792_a", ""));
@@ -205,22 +200,6 @@ public class VersionUtil {
 
     public static boolean mcVersionMatches(String version) {
         return VersionParser.parseRange("[" + version + "]").containsVersion(mcVersion);
-    }
-
-    @Optional.Method(modid = Constants.MOD_ID_PLANETS)
-    public static void setSlimelingOwner(EntitySlimeling slimeling, String ownerName) {
-        try {
-            Method m = (Method) reflectionCache.get(0);
-
-            if (m == null) {
-                m = slimeling.getClass().getSuperclass().getMethod(getNameDynamic(KEY_METHOD_SET_OWNER), String.class);
-                reflectionCache.put(0, m);
-            }
-
-            m.invoke(slimeling, ownerName);
-        } catch (final Throwable t) {
-            t.printStackTrace();
-        }
     }
 
     public static String getSlimelingOwner(EntitySlimeling slimeling) {

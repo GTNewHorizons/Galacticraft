@@ -411,10 +411,7 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
                     this.setAttackTarget(null);
                     this.setSittingAI(true);
                     this.setHealth(20.0F);
-                    VersionUtil.setSlimelingOwner(
-                            this,
-                            VersionUtil.mcVersion1_7_10 ? par1EntityPlayer.getUniqueID().toString()
-                                    : VersionUtil.mcVersion1_7_2 ? par1EntityPlayer.getCommandSenderName() : "");
+                    this.func_152115_b(par1EntityPlayer.getUniqueID().toString()); // setOwner
                     this.setOwnerUsername(par1EntityPlayer.getCommandSenderName());
                     this.playTameEffect(true);
                     this.worldObj.setEntityState(this, (byte) 7);
@@ -468,13 +465,13 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
             String s = VersionUtil.getSlimelingOwner(this);
 
             if (s != null && s.trim().length() > 0) {
-                VersionUtil.setSlimelingOwner(newSlimeling, s);
+                newSlimeling.func_152115_b(s); // setOwner
                 newSlimeling.setOwnerUsername(this.getOwnerUsername());
                 newSlimeling.setTamed(true);
             } else {
                 s = VersionUtil.getSlimelingOwner(otherSlimeling);
                 if (s != null && s.trim().length() > 0) {
-                    VersionUtil.setSlimelingOwner(newSlimeling, s);
+                    newSlimeling.func_152115_b(s); // setOwner
                     newSlimeling.setOwnerUsername(this.getOwnerUsername());
                     newSlimeling.setTamed(true);
                 }

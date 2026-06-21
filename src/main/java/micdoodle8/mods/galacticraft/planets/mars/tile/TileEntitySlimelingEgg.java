@@ -47,7 +47,7 @@ public class TileEntitySlimelingEgg extends TileEntity {
                                 colorBlue);
 
                         slimeling.setPosition(this.xCoord + 0.5, this.yCoord + 1.0, this.zCoord + 0.5);
-                        VersionUtil.setSlimelingOwner(slimeling, this.lastTouchedPlayerUUID);
+                        slimeling.func_152115_b(this.lastTouchedPlayerUUID);
                         slimeling.setOwnerUsername(this.lastTouchedPlayerName);
 
                         if (!this.worldObj.isRemote) {
