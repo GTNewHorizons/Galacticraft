@@ -125,4 +125,8 @@ public class PlayerUtil {
     public static boolean isPlayerOnline(EntityPlayerMP player) {
         return MinecraftServer.getServer().getConfigurationManager().playerEntityList.contains(player);
     }
+
+    public static boolean isPlayerOpped(EntityPlayerMP player) {
+        return MinecraftServer.getServer().getConfigurationManager().func_152596_g(player.getGameProfile());
+    }
 }

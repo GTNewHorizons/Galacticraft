@@ -12,7 +12,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.settings.GameSettings;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
@@ -47,7 +46,6 @@ public class VersionUtil {
     private static final String KEY_CLASS_RENDER_PLAYER = "renderPlayer";
     private static final String KEY_CLASS_ENTITYLIST = "entityList";
 
-    private static final String KEY_METHOD_PLAYER_IS_OPPED = "isPlayerOpped";
     private static final String KEY_METHOD_PLAYER_TEXTURE = "getEntityTexture";
 
     // Used in GCPlayerHandler etc
@@ -98,7 +96,6 @@ public class VersionUtil {
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
             // Method descriptions are empty, since they are not needed for reflection.
-            nodemap.put(KEY_METHOD_PLAYER_IS_OPPED, new MethodObfuscationEntry("func_152596_g", "func_152596_g", ""));
             nodemap.put(KEY_METHOD_PLAYER_TEXTURE, new MethodObfuscationEntry("getEntityTexture", "func_110775_a", ""));
             sand = Blocks.sand;
         } else if (mcVersion1_7_2) {
@@ -122,7 +119,6 @@ public class VersionUtil {
                     new ObfuscationEntry("net/minecraft/client/renderer/entity/RenderPlayer"));
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
-            nodemap.put(KEY_METHOD_PLAYER_IS_OPPED, new MethodObfuscationEntry("isPlayerOpped", "func_72353_e", ""));
             nodemap.put(KEY_METHOD_PLAYER_TEXTURE, new MethodObfuscationEntry("getEntityTexture", "func_110775_a", ""));
 
             try {
@@ -149,37 +145,6 @@ public class VersionUtil {
 
     public static boolean mcVersionMatches(String version) {
         return VersionParser.parseRange("[" + version + "]").containsVersion(mcVersion);
-    }
-
-    public static boolean isPlayerOpped(EntityPlayerMP player) {
-        try {
-            if (mcVersion1_7_10) {
-                Method m = (Method) reflectionCache.get(14);
-
-                if (m == null) {
-                    final Class<?> c = player.mcServer.getConfigurationManager().getClass();
-                    m = c.getMethod(getNameDynamic(KEY_METHOD_PLAYER_IS_OPPED), GameProfile.class);
-                    reflectionCache.put(14, m);
-                }
-
-                return (Boolean) m.invoke(player.mcServer.getConfigurationManager(), player.getGameProfile());
-            }
-            if (mcVersion1_7_2) {
-                Method m = (Method) reflectionCache.get(14);
-
-                if (m == null) {
-                    final Class<?> c = player.mcServer.getConfigurationManager().getClass();
-                    m = c.getMethod(getNameDynamic(KEY_METHOD_PLAYER_IS_OPPED), String.class);
-                    reflectionCache.put(14, m);
-                }
-
-                return (Boolean) m.invoke(player.mcServer.getConfigurationManager(), player.getGameProfile().getName());
-            }
-        } catch (final Throwable t) {
-            t.printStackTrace();
-        }
-
-        return false;
     }
 
     @SideOnly(Side.CLIENT)

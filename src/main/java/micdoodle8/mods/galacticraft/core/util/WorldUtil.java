@@ -440,7 +440,7 @@ public class WorldUtil {
 
             if (!ConfigManagerCore.spaceStationsRequirePermission || data.getAllowedAll()
                     || data.getAllowedPlayers().contains(playerBase.getGameProfile().getName())
-                    || VersionUtil.isPlayerOpped(playerBase)) {
+                    || PlayerUtil.isPlayerOpped(playerBase)) {
                 // Satellites always reachable from their own homeworld or from its other
                 // satellites
                 if (playerBase != null) {
