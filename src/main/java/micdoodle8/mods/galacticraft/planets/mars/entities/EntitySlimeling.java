@@ -45,7 +45,6 @@ import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import micdoodle8.mods.galacticraft.planets.mars.MarsModuleClient;
 import micdoodle8.mods.galacticraft.planets.mars.inventory.InventorySlimeling;
@@ -462,16 +461,16 @@ public class EntitySlimeling extends EntityTameable implements IEntityBreathable
                     (float) newColor.y,
                     (float) newColor.z);
 
-            String s = VersionUtil.getSlimelingOwner(this);
+            String owner = this.func_152113_b(); // getOwner
 
-            if (s != null && s.trim().length() > 0) {
-                newSlimeling.func_152115_b(s); // setOwner
+            if (owner != null && owner.trim().length() > 0) {
+                newSlimeling.func_152115_b(owner); // setOwner
                 newSlimeling.setOwnerUsername(this.getOwnerUsername());
                 newSlimeling.setTamed(true);
             } else {
-                s = VersionUtil.getSlimelingOwner(otherSlimeling);
-                if (s != null && s.trim().length() > 0) {
-                    newSlimeling.func_152115_b(s); // setOwner
+                owner = otherSlimeling.func_152113_b(); // getOwner
+                if (owner != null && owner.trim().length() > 0) {
+                    newSlimeling.func_152115_b(owner); // setOwner
                     newSlimeling.setOwnerUsername(this.getOwnerUsername());
                     newSlimeling.setTamed(true);
                 }

@@ -35,7 +35,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.core.obfuscation.FieldObfuscationEntry;
 import micdoodle8.mods.galacticraft.core.obfuscation.MethodObfuscationEntry;
 import micdoodle8.mods.galacticraft.core.obfuscation.ObfuscationEntry;
-import micdoodle8.mods.galacticraft.planets.mars.entities.EntitySlimeling;
 import micdoodle8.mods.galacticraft.planets.mars.tile.TileEntitySlimelingEgg;
 
 public class VersionUtil {
@@ -58,7 +57,6 @@ public class VersionUtil {
     private static final String KEY_CLASS_RENDER_PLAYER = "renderPlayer";
     private static final String KEY_CLASS_ENTITYLIST = "entityList";
 
-    private static final String KEY_METHOD_GET_OWNER = "getOwnerName";
     private static final String KEY_METHOD_CONVERT_UUID = "yggdrasilConvert";
     private static final String KEY_METHOD_DECOMPRESS_NBT = "decompress";
     private static final String KEY_METHOD_SET_MIPMAP = "setMipMap";
@@ -126,7 +124,6 @@ public class VersionUtil {
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
             // Method descriptions are empty, since they are not needed for reflection.
-            nodemap.put(KEY_METHOD_GET_OWNER, new MethodObfuscationEntry("func_152113_b", "func_152113_b", ""));
             nodemap.put(KEY_METHOD_CONVERT_UUID, new MethodObfuscationEntry("func_152719_a", "func_152719_a", ""));
             nodemap.put(KEY_METHOD_DECOMPRESS_NBT, new MethodObfuscationEntry("func_152457_a", "func_152457_a", ""));
             nodemap.put(KEY_METHOD_SET_MIPMAP, new MethodObfuscationEntry("func_152777_a", "func_152777_a", ""));
@@ -165,7 +162,6 @@ public class VersionUtil {
                     new ObfuscationEntry("net/minecraft/client/renderer/entity/RenderPlayer"));
             nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
-            nodemap.put(KEY_METHOD_GET_OWNER, new MethodObfuscationEntry("getOwnerName", "func_70905_p", ""));
             nodemap.put(KEY_METHOD_CONVERT_UUID, new MethodObfuscationEntry("", "", "")); // Not part of 1.7.2
             nodemap.put(KEY_METHOD_DECOMPRESS_NBT, new MethodObfuscationEntry("decompress", "func_74792_a", ""));
             nodemap.put(KEY_METHOD_SET_MIPMAP, new MethodObfuscationEntry("func_147950_a", "func_147950_a", ""));
@@ -200,23 +196,6 @@ public class VersionUtil {
 
     public static boolean mcVersionMatches(String version) {
         return VersionParser.parseRange("[" + version + "]").containsVersion(mcVersion);
-    }
-
-    public static String getSlimelingOwner(EntitySlimeling slimeling) {
-        try {
-            Method m = (Method) reflectionCache.get(1);
-
-            if (m == null) {
-                m = slimeling.getClass().getMethod(getNameDynamic(KEY_METHOD_GET_OWNER));
-                reflectionCache.put(1, m);
-            }
-
-            return (String) m.invoke(slimeling);
-        } catch (final Throwable t) {
-            t.printStackTrace();
-        }
-
-        return "";
     }
 
     public static void readSlimelingEggFromNBT(TileEntitySlimelingEgg egg, NBTTagCompound nbt) {
