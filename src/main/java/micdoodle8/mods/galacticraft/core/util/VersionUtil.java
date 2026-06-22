@@ -6,18 +6,12 @@ import net.minecraft.launchwrapper.Launch;
 
 import com.google.common.collect.Maps;
 
-import cpw.mods.fml.common.versioning.DefaultArtifactVersion;
-import cpw.mods.fml.common.versioning.VersionParser;
-import cpw.mods.fml.relauncher.FMLInjectionData;
 import micdoodle8.mods.galacticraft.core.obfuscation.FieldObfuscationEntry;
 import micdoodle8.mods.galacticraft.core.obfuscation.MethodObfuscationEntry;
 import micdoodle8.mods.galacticraft.core.obfuscation.ObfuscationEntry;
 
 public class VersionUtil {
 
-    private static DefaultArtifactVersion mcVersion = null;
-    public static boolean mcVersion1_7_2 = false;
-    public static boolean mcVersion1_7_10 = false;
     private static boolean deobfuscated = true;
     private static final HashMap<String, ObfuscationEntry> nodemap = Maps.newHashMap();
 
@@ -33,10 +27,6 @@ public class VersionUtil {
     public static final String KEY_METHOD_ORIENT_CAMERA = "orientCamera";
 
     static {
-        mcVersion = new DefaultArtifactVersion((String) FMLInjectionData.data()[4]);
-        mcVersion1_7_2 = VersionUtil.mcVersionMatches("1.7.2");
-        mcVersion1_7_10 = VersionUtil.mcVersionMatches("1.7.10");
-
         try {
             deobfuscated = Launch.classLoader.getClassBytes("net.minecraft.world.World") != null;
         } catch (final Exception e) {
@@ -53,10 +43,6 @@ public class VersionUtil {
         nodemap.put(KEY_FIELD_CAMERA_PITCH, new FieldObfuscationEntry("cameraPitch", "field_78509_X"));
 
         nodemap.put(KEY_METHOD_ORIENT_CAMERA, new MethodObfuscationEntry("orientCamera", "func_78467_g", ""));
-    }
-
-    public static boolean mcVersionMatches(String version) {
-        return VersionParser.parseRange("[" + version + "]").containsVersion(mcVersion);
     }
 
     private static String getName(String keyName) {
