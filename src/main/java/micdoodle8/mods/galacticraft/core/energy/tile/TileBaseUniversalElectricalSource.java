@@ -117,11 +117,21 @@ public class TileBaseUniversalElectricalSource extends TileBaseUniversalElectric
                 try {
                     if (item instanceof ISpecialElectricItem) {
                         // result: Converted from reflection to plain old casts and calls
-                        double result = ((ISpecialElectricItem)item).getManager(itemStack).charge(itemStack, (double)(energyToCharge * EnergyConfigHandler.TO_IC2_RATIO), this.tierGC + 1, false, false);
+                        double result = ((ISpecialElectricItem) item).getManager(itemStack).charge(
+                                itemStack,
+                                (double) (energyToCharge * EnergyConfigHandler.TO_IC2_RATIO),
+                                this.tierGC + 1,
+                                false,
+                                false);
                         final float energy = (float) result / EnergyConfigHandler.TO_IC2_RATIO;
                         this.storage.extractEnergyGC(energy, false);
                     } else if (item instanceof IElectricItem) {
-                        double result = ElectricItem.manager.charge(itemStack, (double)(energyToCharge * EnergyConfigHandler.TO_IC2_RATIO), this.tierGC + 1, false, false);
+                        double result = ElectricItem.manager.charge(
+                                itemStack,
+                                (double) (energyToCharge * EnergyConfigHandler.TO_IC2_RATIO),
+                                this.tierGC + 1,
+                                false,
+                                false);
                         final float energy = (float) result / EnergyConfigHandler.TO_IC2_RATIO;
                         this.storage.extractEnergyGC(energy, false);
                     }

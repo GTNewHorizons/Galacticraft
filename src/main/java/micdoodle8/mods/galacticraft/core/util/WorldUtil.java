@@ -1750,7 +1750,7 @@ public class WorldUtil {
         }
 
         if (iba instanceof ChunkCache) {
-            return ((ChunkCache)iba).worldObj;
+            return ((ChunkCache) iba).worldObj;
         }
 
         return null;

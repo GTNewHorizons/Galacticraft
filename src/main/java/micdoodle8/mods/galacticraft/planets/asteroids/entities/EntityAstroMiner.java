@@ -1366,7 +1366,7 @@ public class EntityAstroMiner extends Entity
             return new ItemStack(GCItems.meteoricIronRaw);
         }
 
-        return ((BlockAccessor)b).invokeCreateStackedBlock(world.getBlockMetadata(x, y, z));
+        return ((BlockAccessor) b).invokeCreateStackedBlock(world.getBlockMetadata(x, y, z));
     }
 
     private boolean addToInventory(ItemStack itemstack) {
