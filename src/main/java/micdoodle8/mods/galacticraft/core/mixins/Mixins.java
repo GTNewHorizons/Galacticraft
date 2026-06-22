@@ -47,7 +47,9 @@ public enum Mixins implements IMixins {
     MODIFY_RAIN_STRENGTH(new MixinBuilder()
             .addCommonMixins("minecraft.WorldMixin")),
     DONOR_CAPES(new MixinBuilder()
-            .addClientMixins("minecraft.AbstractClientPlayerMixin"));
+            .addClientMixins("minecraft.AbstractClientPlayerMixin")),
+    ACCESS_BLOCK_MEMBERS(new MixinBuilder()
+            .addCommonMixins("minecraft.BlockAccessor"));
     // spotless:on
 
     private final MixinBuilder builder;

@@ -1,12 +1,10 @@
 package micdoodle8.mods.galacticraft.core.util;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
 
 import com.google.common.collect.Maps;
@@ -25,9 +23,6 @@ public class VersionUtil {
     public static boolean mcVersion1_7_10 = false;
     private static boolean deobfuscated = true;
     private static final HashMap<String, ObfuscationEntry> nodemap = Maps.newHashMap();
-    private static final HashMap<Integer, Object> reflectionCache = Maps.newHashMap();
-    // Note: in reflectionCache, currently positions 3, 5, 7, 11, 13, 15, 17 are
-    // unused and 21 onwards are also free.
 
     // Used in GCPlayerHandler etc
     public static final String KEY_FIELD_FLOATINGTICKCOUNT = "floatingTickCount";
@@ -128,29 +123,5 @@ public class VersionUtil {
             System.err.println("Could not find key: " + keyName);
             throw e;
         }
-    }
-
-    public static ItemStack createStack(Block block, int meta) {
-        try {
-            Method m = (Method) reflectionCache.get(3);
-            if (m == null) {
-                final Class<?> c = Class.forName("net.minecraft.block.Block");
-                final Method[] mm = c.getDeclaredMethods();
-                for (final Method testMethod : mm) {
-                    if ("func_149644_j".equals(testMethod.getName())) {
-                        m = testMethod;
-                        break;
-                    }
-                }
-                m.setAccessible(true);
-                reflectionCache.put(3, m);
-            }
-
-            return (ItemStack) m.invoke(block, meta);
-        } catch (final Throwable t) {
-            t.printStackTrace();
-        }
-
-        return null;
     }
 }

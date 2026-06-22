@@ -49,13 +49,13 @@ import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
+import micdoodle8.mods.galacticraft.core.mixins.early.minecraft.BlockAccessor;
 import micdoodle8.mods.galacticraft.core.network.IPacketReceiver;
 import micdoodle8.mods.galacticraft.core.network.PacketDynamic;
 import micdoodle8.mods.galacticraft.core.util.CompatibilityManager;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
 import micdoodle8.mods.galacticraft.planets.asteroids.client.sounds.SoundUpdaterMiner;
@@ -1366,7 +1366,7 @@ public class EntityAstroMiner extends Entity
             return new ItemStack(GCItems.meteoricIronRaw);
         }
 
-        return VersionUtil.createStack(b, world.getBlockMetadata(x, y, z));
+        return ((BlockAccessor)b).invokeCreateStackedBlock(world.getBlockMetadata(x, y, z));
     }
 
     private boolean addToInventory(ItemStack itemstack) {
