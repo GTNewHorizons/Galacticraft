@@ -1,10 +1,7 @@
 package micdoodle8.mods.galacticraft.core.util;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.launchwrapper.Launch;
 
 import com.google.common.collect.Maps;
@@ -34,7 +31,6 @@ public class VersionUtil {
     public static final String KEY_FIELD_CAMERA_PITCH = "cameraPitch";
 
     public static final String KEY_METHOD_ORIENT_CAMERA = "orientCamera";
-    public static Block sand;
 
     static {
         mcVersion = new DefaultArtifactVersion((String) FMLInjectionData.data()[4]);
@@ -45,48 +41,6 @@ public class VersionUtil {
             deobfuscated = Launch.classLoader.getClassBytes("net.minecraft.world.World") != null;
         } catch (final Exception e) {
             e.printStackTrace();
-        }
-
-        if (mcVersion1_7_10) {
-            // nodemap.put(KEY_CLASS_COMPRESSED_STREAM_TOOLS, new
-            // ObfuscationEntry("net/minecraft/nbt/CompressedStreamTools", "du"));
-            // nodemap.put(KEY_CLASS_NBT_SIZE_TRACKER, new
-            // ObfuscationEntry("net/minecraft/nbt/NBTSizeTracker", "ds"));
-            // nodemap.put(KEY_CLASS_YGG_CONVERTER, new
-            // ObfuscationEntry("net/minecraft/server/management/PreYggdrasilConverter",
-            // "nz"));
-            // nodemap.put(KEY_CLASS_TEXTURE_UTIL, new
-            // ObfuscationEntry("net/minecraft/client/renderer/texture/TextureUtil",
-            // "bqi"));
-            // nodemap.put(KEY_CLASS_COMMAND_BASE, new
-            // ObfuscationEntry("net/minecraft/command/CommandBase",
-            // "y"));
-            // nodemap.put(KEY_CLASS_SCALED_RES, new
-            // ObfuscationEntry("net/minecraft/client/gui/ScaledResolution", "bca"));
-
-            sand = Blocks.sand;
-        } else if (mcVersion1_7_2) {
-            // nodemap.put(KEY_CLASS_COMPRESSED_STREAM_TOOLS, new
-            // ObfuscationEntry("net/minecraft/nbt/CompressedStreamTools", "dr"));
-            // nodemap.put(KEY_CLASS_NBT_SIZE_TRACKER, new ObfuscationEntry("", "")); // Not
-            // part of 1.7.2
-            // nodemap.put(KEY_CLASS_YGG_CONVERTER, new ObfuscationEntry("", "")); // Not
-            // part of 1.7.2
-            // nodemap.put(KEY_CLASS_TEXTURE_UTIL, new
-            // ObfuscationEntry("net/minecraft/client/renderer/texture/TextureUtil",
-            // "bqa"));
-            // nodemap.put(KEY_CLASS_COMMAND_BASE, new
-            // ObfuscationEntry("net/minecraft/command/CommandBase",
-            // "y"));
-            // nodemap.put(KEY_CLASS_SCALED_RES, new
-            // ObfuscationEntry("net/minecraft/client/gui/ScaledResolution", "bam"));
-
-            try {
-                final Field sandField = Blocks.class.getField(deobfuscated ? "sand" : "field_150354_m");
-                sand = (Block) sandField.get(null);
-            } catch (final Exception e) {
-                e.printStackTrace();
-            }
         }
 
         // Same for both versions
