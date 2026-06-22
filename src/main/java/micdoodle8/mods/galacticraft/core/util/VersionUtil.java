@@ -3,7 +3,6 @@ package micdoodle8.mods.galacticraft.core.util;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.UUID;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -14,7 +13,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Maps;
-import com.mojang.authlib.GameProfile;
 
 import cpw.mods.fml.common.versioning.DefaultArtifactVersion;
 import cpw.mods.fml.common.versioning.VersionParser;
@@ -135,29 +133,6 @@ public class VersionUtil {
             System.err.println("Could not find key: " + keyName);
             throw e;
         }
-    }
-
-    public static GameProfile constructGameProfile(UUID uuid, String strName) {
-        try {
-            Class<?> c = (Class<?>) reflectionCache.get(19);
-            if (c == null) {
-                c = Class.forName("com.mojang.authlib.GameProfile");
-                reflectionCache.put(19, c);
-            }
-
-            if (mcVersion1_7_10) {
-                return (GameProfile) c.getConstructor(UUID.class, String.class).newInstance(uuid, strName);
-            }
-
-            if (mcVersion1_7_2) {
-                return (GameProfile) c.getConstructor(String.class, String.class)
-                        .newInstance(uuid.toString().replace("-", ""), strName);
-            }
-        } catch (final Throwable t) {
-            t.printStackTrace();
-        }
-
-        return null;
     }
 
     public static World getWorld(IBlockAccess world) {

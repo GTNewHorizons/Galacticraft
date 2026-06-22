@@ -96,13 +96,13 @@ public class PlayerUtil {
         if (profile == null) {
             try {
                 final UUID uuid = strUUID.isEmpty() ? UUID.randomUUID() : UUID.fromString(strUUID);
-                profile = VersionUtil.constructGameProfile(uuid, strName);
+                profile = new GameProfile(uuid, strName);
             } catch (final Exception e) {
                 e.printStackTrace();
             }
         }
         if (profile == null) {
-            profile = VersionUtil.constructGameProfile(UUID.randomUUID(), strName);
+            profile = new GameProfile(UUID.randomUUID(), strName);
         }
 
         PlayerUtil.knownSkins.put(strName, profile);
