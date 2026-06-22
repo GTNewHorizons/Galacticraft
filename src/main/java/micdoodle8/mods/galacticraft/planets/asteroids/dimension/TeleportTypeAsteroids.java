@@ -3,6 +3,7 @@ package micdoodle8.mods.galacticraft.planets.asteroids.dimension;
 import java.util.Random;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -23,7 +24,6 @@ import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
 import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityEntryPod;
 import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
@@ -301,7 +301,9 @@ public class TeleportTypeAsteroids implements ITeleportType {
         stats.rocketStacks[i++] = new ItemStack(GCItems.basicItem, 16, 15); // Canned food
         stats.rocketStacks[i++] = new ItemStack(Items.egg, 12);
 
-        stats.rocketStacks[i++] = new ItemStack(Items.spawn_egg, 2, VersionUtil.getClassToIDMapping(EntityCow.class));
+        Integer cowEntityID = (Integer) EntityList.classToIDMapping.get(EntityCow.class); // Don't assume cow will
+                                                                                          // always have entity ID 92
+        stats.rocketStacks[i++] = new ItemStack(Items.spawn_egg, 2, (cowEntityID != null ? cowEntityID : 0));
         stats.rocketStacks[i++] = new ItemStack(Items.potionitem, 4, 8262); // Night Vision Potion
         stats.rocketStacks[i++] = new ItemStack(MarsBlocks.machine, 1, 4); // Cryogenic Chamber
         stats.rocketStacks[i++] = new ItemStack(

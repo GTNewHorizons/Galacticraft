@@ -3,7 +3,6 @@ package micdoodle8.mods.galacticraft.core.util;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import net.minecraft.block.Block;
@@ -35,8 +34,6 @@ public class VersionUtil {
     // Note: in reflectionCache, currently positions 3, 5, 7, 11, 13, 15, 17 are
     // unused and 21 onwards are also free.
 
-    private static final String KEY_CLASS_ENTITYLIST = "entityList";
-
     // Used in GCPlayerHandler etc
     public static final String KEY_FIELD_FLOATINGTICKCOUNT = "floatingTickCount";
     public static final String KEY_FIELD_BIOMEINDEXLAYER = "biomeIndexLayer";
@@ -45,7 +42,6 @@ public class VersionUtil {
     public static final String KEY_FIELD_CAMERA_ZOOM = "cameraZoom";
     public static final String KEY_FIELD_CAMERA_YAW = "cameraYaw";
     public static final String KEY_FIELD_CAMERA_PITCH = "cameraPitch";
-    public static final String KEY_FIELD_CLASSTOIDMAPPING = "classToIDMapping";
     public static final String KEY_FIELD_CHUNKCACHE_WORLDOBJ = "chunkCacheWorldObj";
 
     public static final String KEY_METHOD_ORIENT_CAMERA = "orientCamera";
@@ -78,7 +74,6 @@ public class VersionUtil {
             // "y"));
             // nodemap.put(KEY_CLASS_SCALED_RES, new
             // ObfuscationEntry("net/minecraft/client/gui/ScaledResolution", "bca"));
-            nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
             sand = Blocks.sand;
         } else if (mcVersion1_7_2) {
@@ -96,7 +91,6 @@ public class VersionUtil {
             // "y"));
             // nodemap.put(KEY_CLASS_SCALED_RES, new
             // ObfuscationEntry("net/minecraft/client/gui/ScaledResolution", "bam"));
-            nodemap.put(KEY_CLASS_ENTITYLIST, new ObfuscationEntry("net/minecraft/entity/EntityList"));
 
             try {
                 final Field sandField = Blocks.class.getField(deobfuscated ? "sand" : "field_150354_m");
@@ -114,7 +108,6 @@ public class VersionUtil {
         nodemap.put(KEY_FIELD_CAMERA_ZOOM, new FieldObfuscationEntry("cameraZoom", "field_78503_V"));
         nodemap.put(KEY_FIELD_CAMERA_YAW, new FieldObfuscationEntry("cameraYaw", "field_78502_W"));
         nodemap.put(KEY_FIELD_CAMERA_PITCH, new FieldObfuscationEntry("cameraPitch", "field_78509_X"));
-        nodemap.put(KEY_FIELD_CLASSTOIDMAPPING, new FieldObfuscationEntry("classToIDMapping", "field_75624_e"));
         nodemap.put(KEY_FIELD_CHUNKCACHE_WORLDOBJ, new FieldObfuscationEntry("worldObj", "field_72815_e"));
 
         nodemap.put(KEY_METHOD_ORIENT_CAMERA, new MethodObfuscationEntry("orientCamera", "func_78467_g", ""));
@@ -122,40 +115,6 @@ public class VersionUtil {
 
     public static boolean mcVersionMatches(String version) {
         return VersionParser.parseRange("[" + version + "]").containsVersion(mcVersion);
-    }
-
-    public static void putClassToIDMapping(Class<?> mobClazz, int id) {
-        // Achieves this, with private field:
-        // EntityList.classToIDMapping.put(mobClazz, id);
-        try {
-            final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_ENTITYLIST).replace('/', '.'));
-            final Field f = c.getDeclaredField(getNameDynamic(KEY_FIELD_CLASSTOIDMAPPING));
-            f.setAccessible(true);
-            @SuppressWarnings("unchecked")
-            final Map<Class<?>, Integer> classToIDMapping = (Map<Class<?>, Integer>) f.get(null);
-            classToIDMapping.put(mobClazz, id);
-        } catch (final Throwable t) {
-            t.printStackTrace();
-        }
-    }
-
-    public static int getClassToIDMapping(Class<?> mobClazz) {
-        // Achieves this, with private field:
-        // EntityList.classToIDMapping.put(mobClazz, id);
-        try {
-            final Class<?> c = Class.forName(getNameDynamic(KEY_CLASS_ENTITYLIST).replace('/', '.'));
-            final Field f = c.getDeclaredField(getNameDynamic(KEY_FIELD_CLASSTOIDMAPPING));
-            f.setAccessible(true);
-            @SuppressWarnings("unchecked")
-            final Map<Class<?>, Integer> classToIDMapping = (Map<Class<?>, Integer>) f.get(null);
-            final Integer i = classToIDMapping.get(mobClazz);
-
-            return i != null ? i : 0;
-        } catch (final Throwable t) {
-            t.printStackTrace();
-        }
-
-        return 0;
     }
 
     private static String getName(String keyName) {
