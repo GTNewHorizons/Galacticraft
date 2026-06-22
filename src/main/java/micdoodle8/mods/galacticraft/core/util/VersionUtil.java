@@ -16,7 +16,6 @@ public class VersionUtil {
     private static final HashMap<String, ObfuscationEntry> nodemap = Maps.newHashMap();
 
     // Used in GCPlayerHandler etc
-    public static final String KEY_FIELD_FLOATINGTICKCOUNT = "floatingTickCount";
     public static final String KEY_FIELD_MUSICTICKER = "mcMusicTicker";
 
     public static final String KEY_FIELD_CAMERA_ZOOM = "cameraZoom";
@@ -33,7 +32,6 @@ public class VersionUtil {
         }
 
         // Same for both versions
-        nodemap.put(KEY_FIELD_FLOATINGTICKCOUNT, new ObfuscationEntry("floatingTickCount", "field_147365_f"));
         nodemap.put(KEY_FIELD_MUSICTICKER, new ObfuscationEntry("mcMusicTicker", "field_147126_aw"));
 
         nodemap.put(KEY_FIELD_CAMERA_ZOOM, new FieldObfuscationEntry("cameraZoom", "field_78503_V"));

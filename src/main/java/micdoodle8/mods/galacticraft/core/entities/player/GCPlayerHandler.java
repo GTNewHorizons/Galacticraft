@@ -1,7 +1,6 @@
 package micdoodle8.mods.galacticraft.core.entities.player;
 
 import java.lang.ref.WeakReference;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -79,7 +78,6 @@ import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
 import micdoodle8.mods.galacticraft.core.util.OxygenUtil;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import micdoodle8.mods.galacticraft.core.wrappers.Footprint;
 import micdoodle8.mods.galacticraft.planets.asteroids.dimension.WorldProviderAsteroids;
@@ -89,7 +87,6 @@ public class GCPlayerHandler {
     private static final int OXYGENHEIGHTLIMIT = 450;
     private final boolean isClient = FMLCommonHandler.instance().getEffectiveSide().isClient();
     private final ConcurrentHashMap<UUID, GCPlayerStats> playerStatsMap = new ConcurrentHashMap<>();
-    private Field ftc;
     private final HashMap<Item, Item> torchItems = new HashMap<>();
 
     public ConcurrentHashMap<UUID, GCPlayerStats> getServerStatList() {
@@ -1420,13 +1417,6 @@ public class GCPlayerHandler {
 
     public void preventFlyingKicks(EntityPlayerMP player) {
         player.fallDistance = 0.0F;
-        try {
-            if (this.ftc == null) {
-                this.ftc = player.playerNetServerHandler.getClass()
-                        .getDeclaredField(VersionUtil.getNameDynamic(VersionUtil.KEY_FIELD_FLOATINGTICKCOUNT));
-                this.ftc.setAccessible(true);
-            }
-            this.ftc.setInt(player.playerNetServerHandler, 0);
-        } catch (final Exception e) {}
+        player.playerNetServerHandler.floatingTickCount = 0;
     }
 }
