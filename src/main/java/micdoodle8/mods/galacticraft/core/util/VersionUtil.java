@@ -73,7 +73,6 @@ public class VersionUtil {
     // Used in GCPlayerHandler etc
     public static final String KEY_FIELD_FLOATINGTICKCOUNT = "floatingTickCount";
     public static final String KEY_FIELD_BIOMEINDEXLAYER = "biomeIndexLayer";
-    public static final String KEY_FIELD_MUSICTICKER = "mcMusicTicker";
 
     public static final String KEY_FIELD_CAMERA_ZOOM = "cameraZoom";
     public static final String KEY_FIELD_CAMERA_YAW = "cameraYaw";
@@ -192,7 +191,6 @@ public class VersionUtil {
         // Same for both versions
         nodemap.put(KEY_FIELD_FLOATINGTICKCOUNT, new ObfuscationEntry("floatingTickCount", "field_147365_f"));
         nodemap.put(KEY_FIELD_BIOMEINDEXLAYER, new ObfuscationEntry("biomeIndexLayer", "field_76945_e"));
-        nodemap.put(KEY_FIELD_MUSICTICKER, new ObfuscationEntry("mcMusicTicker", "field_147126_aw"));
 
         nodemap.put(KEY_FIELD_CAMERA_ZOOM, new FieldObfuscationEntry("cameraZoom", "field_78503_V"));
         nodemap.put(KEY_FIELD_CAMERA_YAW, new FieldObfuscationEntry("cameraYaw", "field_78502_W"));
