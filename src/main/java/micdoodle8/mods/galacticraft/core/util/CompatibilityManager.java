@@ -14,7 +14,6 @@ public class CompatibilityManager {
     private static boolean modIc2Loaded;
     private static boolean modBCraftEnergyLoaded;
     private static boolean modBCraftTransportLoaded;
-    private static boolean modGTLoaded;
     private static boolean modTELoaded;
     private static boolean modAetherIILoaded;
     private static boolean modBasicComponentsLoaded;
@@ -29,8 +28,7 @@ public class CompatibilityManager {
     public static Method methodBCBlockPipe_createPipe = null;
 
     public static void checkForCompatibleMods() {
-        if (Loader.isModLoaded("gregtech") || Loader.isModLoaded("GregTech_Addon") || Loader.isModLoaded("GregTech")) {
-            CompatibilityManager.modGTLoaded = true;
+        if (CompatibilityManager.isGTLoaded()) {
             try {
                 final Class<?> clazz = Class.forName("gregtech.common.blocks.BlockOres");
                 if (clazz != null) {
@@ -136,7 +134,7 @@ public class CompatibilityManager {
     }
 
     public static boolean isGTLoaded() {
-        return CompatibilityManager.modGTLoaded;
+        return Loader.isModLoaded("gregtech") || Loader.isModLoaded("GregTech_Addon") || Loader.isModLoaded("GregTech");
     }
 
     public static boolean isAIILoaded() {
