@@ -9,7 +9,7 @@ import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureStart;
 
-import cpw.mods.fml.common.FMLLog;
+import micdoodle8.mods.galacticraft.core.util.GCLog;
 
 public class MapGenVillageMoon extends MapGenStructure {
 
@@ -73,7 +73,7 @@ public class MapGenVillageMoon extends MapGenStructure {
 
     @Override
     protected StructureStart getStructureStart(int par1, int par2) {
-        FMLLog.info("Generating Moon Village at x" + par1 * 16 + " z" + par2 * 16);
+        GCLog.debug("Generating Moon Village at x" + par1 * 16 + " z" + par2 * 16);
         return new StructureVillageStartMoon(this.worldObj, this.rand, par1, par2, this.terrainType);
     }
 
