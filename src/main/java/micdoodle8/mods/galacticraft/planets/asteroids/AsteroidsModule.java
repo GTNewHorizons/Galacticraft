@@ -43,6 +43,7 @@ import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.command.CommandGCAstroMiner;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.items.ItemCanisterGeneric;
+import micdoodle8.mods.galacticraft.core.util.CompatibilityManager;
 import micdoodle8.mods.galacticraft.planets.GuiIdsPlanets;
 import micdoodle8.mods.galacticraft.planets.IPlanetsModule;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
@@ -93,15 +94,24 @@ public class AsteroidsModule implements IPlanetsModule {
     public static Fluid fluidAtmosphericGases;
     // public static Fluid fluidCO2Gas;
 
-    private Fluid registerFluid(String fluidName, int density, int viscosity, int temperature, boolean gaseous) {
+    private Fluid registerFluid(String fluidName, boolean checkGT, int density, int viscosity, int temperature,
+            boolean gaseous) {
         Fluid returnFluid = FluidRegistry.getFluid(fluidName);
         if (returnFluid == null) {
+            if (checkGT && CompatibilityManager.isGTLoaded()) {
+                throw new IllegalStateException(
+                        "Expected fluid '" + fluidName + "' to be registered before Galacticraft Asteroids init");
+            }
             FluidRegistry.registerFluid(
                     new Fluid(fluidName).setDensity(density).setViscosity(viscosity).setTemperature(temperature)
                             .setGaseous(gaseous));
             returnFluid = FluidRegistry.getFluid(fluidName);
         }
         return returnFluid;
+    }
+
+    private Fluid registerFluid(String fluidName, int density, int viscosity, int temperature, boolean gaseous) {
+        return this.registerFluid(fluidName, false, density, viscosity, temperature, gaseous);
     }
 
     @Override
@@ -119,29 +129,33 @@ public class AsteroidsModule implements IPlanetsModule {
                 RecipeSorter.Category.SHAPELESS,
                 "after:minecraft:shapeless");
 
-        AsteroidsModule.fluidMethaneGas = this.registerFluid("methane", 1, 11, 295, true);
-        AsteroidsModule.fluidAtmosphericGases = this.registerFluid("atmosphericgases", 1, 13, 295, true);
-        AsteroidsModule.fluidLiquidMethane = this.registerFluid("liquidmethane", 450, 120, 109, false);
-        // Data source for liquid methane:
-        // http://science.nasa.gov/science-news/science-at-nasa/2005/25feb_titan2/
-        AsteroidsModule.fluidLiquidOxygen = this.registerFluid("liquidoxygen", 1141, 140, 90, false);
-        AsteroidsModule.fluidOxygenGas = this.registerFluid("oxygen", 1, 13, 295, true);
-        AsteroidsModule.fluidLiquidNitrogen = this.registerFluid("liquidnitrogen", 808, 130, 77, false);
-        AsteroidsModule.fluidNitrogenGas = this.registerFluid("nitrogen", 1, 12, 295, true);
-        this.registerFluid("carbondioxide", 2, 20, 295, true);
-        this.registerFluid("hydrogen", 1, 1, 295, true);
-        this.registerFluid("argon", 1, 4, 295, true);
-        AsteroidsModule.fluidLiquidArgon = this.registerFluid("liquidargon", 900, 100, 87, false);
-        this.registerFluid("helium", 1, 1, 295, true);
-
-        // AsteroidsModule.fluidCO2Gas = FluidRegistry.getFluid("carbondioxide");
-
         AsteroidBlocks.initBlocks();
         AsteroidBlocks.registerBlocks();
         AsteroidBlocks.setHarvestLevels();
         AsteroidBlocks.oreDictRegistration();
 
         AsteroidsItems.initItems();
+
+    }
+
+    @Override
+    public void registerFluids() {
+        AsteroidsModule.fluidMethaneGas = this.registerFluid("methane", true, 1, 11, 295, true);
+        AsteroidsModule.fluidAtmosphericGases = this.registerFluid("atmosphericgases", 1, 13, 295, true);
+        AsteroidsModule.fluidLiquidMethane = this.registerFluid("liquidmethane", 450, 120, 109, false);
+        // Data source for liquid methane:
+        // http://science.nasa.gov/science-news/science-at-nasa/2005/25feb_titan2/
+        AsteroidsModule.fluidLiquidOxygen = this.registerFluid("liquidoxygen", true, 1141, 140, 90, false);
+        AsteroidsModule.fluidOxygenGas = this.registerFluid("oxygen", true, 1, 13, 295, true);
+        AsteroidsModule.fluidLiquidNitrogen = this.registerFluid("liquidnitrogen", true, 808, 130, 77, false);
+        AsteroidsModule.fluidNitrogenGas = this.registerFluid("nitrogen", true, 1, 12, 295, true);
+        this.registerFluid("carbondioxide", true, 2, 20, 295, true);
+        this.registerFluid("hydrogen", true, 1, 1, 295, true);
+        this.registerFluid("argon", true, 1, 4, 295, true);
+        AsteroidsModule.fluidLiquidArgon = this.registerFluid("liquidargon", 900, 100, 87, false);
+        this.registerFluid("helium", true, 1, 1, 295, true);
+
+        // AsteroidsModule.fluidCO2Gas = FluidRegistry.getFluid("carbondioxide");
 
         FluidContainerRegistry.registerFluidContainer(
                 new FluidContainerData(

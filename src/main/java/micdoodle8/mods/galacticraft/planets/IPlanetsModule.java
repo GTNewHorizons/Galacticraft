@@ -17,6 +17,8 @@ public interface IPlanetsModule {
 
     void preInit(FMLPreInitializationEvent event);
 
+    void registerFluids();
+
     void init(FMLInitializationEvent event);
 
     void postInit(FMLPostInitializationEvent event);
