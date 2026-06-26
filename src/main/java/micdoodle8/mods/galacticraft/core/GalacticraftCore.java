@@ -246,14 +246,18 @@ public class GalacticraftCore {
         EnergyConfigHandler.setDefaultValues(new File(event.getModConfigurationDirectory(), POWER_CONFIG_FILE));
         ChunkLoadingCallback.loadConfig(new File(event.getModConfigurationDirectory(), CHUNKLOADER_CONFIG_FILE));
 
-        this.registerOilandFuel();
-
         if (Loader.isModLoaded("PlayerAPI")) {
             ServerPlayerAPI.register(Constants.MOD_ID_CORE, GCPlayerBaseMP.class);
         }
 
         GCBlocks.initBlocks();
         GCItems.initItems();
+
+    }
+
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
+        this.registerOilandFuel();
 
         // Allow canisters to be filled from other mods' tanks containing fuel / oil
         // fluids
@@ -267,10 +271,7 @@ public class GalacticraftCore {
                         new FluidStack(fluidOil, 1000),
                         new ItemStack(GCItems.oilCanister, 1, 1),
                         new ItemStack(GCItems.oilCanister, 1, ItemCanisterGeneric.EMPTY)));
-    }
 
-    @EventHandler
-    public void init(FMLInitializationEvent event) {
         galacticraftBlocksTab = new CreativeTabGC(
                 CreativeTabs.getNextID(),
                 "GalacticraftBlocks",

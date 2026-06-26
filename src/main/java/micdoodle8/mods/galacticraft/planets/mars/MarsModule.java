@@ -97,6 +97,16 @@ public class MarsModule implements IPlanetsModule {
     public void preInit(FMLPreInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new EventHandlerMars());
 
+        MarsBlocks.initBlocks();
+        MarsBlocks.registerBlocks();
+        MarsBlocks.setHarvestLevels();
+        MarsBlocks.oreDictRegistration();
+
+        MarsItems.initItems();
+    }
+
+    @Override
+    public void registerFluids() {
         if (!FluidRegistry.isFluidRegistered("bacterialsludge")) {
             sludgeGC = new Fluid("bacterialsludge").setDensity(800).setViscosity(1500);
             FluidRegistry.registerFluid(sludgeGC);
@@ -129,13 +139,6 @@ public class MarsModule implements IPlanetsModule {
         }
 
         EventHandlerGC.bucketList.put(MarsBlocks.blockSludge, MarsItems.bucketSludge);
-
-        MarsBlocks.initBlocks();
-        MarsBlocks.registerBlocks();
-        MarsBlocks.setHarvestLevels();
-        MarsBlocks.oreDictRegistration();
-
-        MarsItems.initItems();
     }
 
     @Override

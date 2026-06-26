@@ -94,6 +94,7 @@ public class GalacticraftPlanets {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
+        GalacticraftPlanets.proxy.registerFluids();
         GalacticraftPlanets.proxy.init(event);
         NetworkRegistry.INSTANCE.registerGuiHandler(GalacticraftPlanets.instance, GalacticraftPlanets.proxy);
     }

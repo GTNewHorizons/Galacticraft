@@ -1,6 +1,5 @@
 package micdoodle8.mods.galacticraft.core.proxy;
 
-import java.lang.reflect.Field;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -119,7 +118,6 @@ import micdoodle8.mods.galacticraft.core.client.render.tile.TileEntityScreenRend
 import micdoodle8.mods.galacticraft.core.client.render.tile.TileEntitySolarPanelRenderer;
 import micdoodle8.mods.galacticraft.core.client.render.tile.TileEntityThrusterRenderer;
 import micdoodle8.mods.galacticraft.core.client.render.tile.TileEntityTreasureChestRenderer;
-import micdoodle8.mods.galacticraft.core.client.sounds.MusicTickerGC;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderMoon;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderSpaceStation;
 import micdoodle8.mods.galacticraft.core.entities.EntityAlienVillager;
@@ -157,7 +155,6 @@ import micdoodle8.mods.galacticraft.core.tile.TileEntitySolar;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityThruster;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityTreasureChest;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.core.wrappers.BlockMetaList;
 import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
 import tconstruct.client.tabs.InventoryTabVanilla;
@@ -279,15 +276,6 @@ public class ClientProxyCore extends CommonProxyCore {
         ClientProxyCore.registerEntityRenderers();
         ClientProxyCore.registerItemRenderers();
         // ClientProxyCore.playerList = GLAllocation.generateDisplayLists(1);
-
-        try {
-            final Field ftc = Minecraft.getMinecraft().getClass()
-                    .getDeclaredField(VersionUtil.getNameDynamic(VersionUtil.KEY_FIELD_MUSICTICKER));
-            ftc.setAccessible(true);
-            ftc.set(Minecraft.getMinecraft(), new MusicTickerGC(Minecraft.getMinecraft()));
-        } catch (final Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public static void registerEntityRenderers() {
