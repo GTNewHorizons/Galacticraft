@@ -90,7 +90,7 @@ public class CompatibilityManager {
     public static void integrateWithMods() {
         if (CompatibilityManager.isGTLoaded()) {
             try {
-                final Class<?> clazz = Class.forName("gregtech.common.blocks.BlockOres");
+                final Class<?> clazz = Class.forName("gregtech.common.blocks.BlockOresLegacy");
                 if (clazz != null) {
                     classGTOre = clazz;
                 }
