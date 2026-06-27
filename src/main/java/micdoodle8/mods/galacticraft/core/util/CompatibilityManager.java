@@ -20,6 +20,7 @@ public class CompatibilityManager {
     private static boolean modAppEngLoaded;
     private static boolean modPneumaticCraftLoaded;
     private static boolean modMatterOverdriveLoaded;
+    private static boolean modGTLoaded;
     private static boolean lwjgl3Loaded;
     private static Method androidPlayerGet;
     private static Method androidPlayerIsAndroid;
@@ -27,16 +28,12 @@ public class CompatibilityManager {
     public static Class<?> classGTOre = null;
     public static Method methodBCBlockPipe_createPipe = null;
 
-    public static void checkForCompatibleMods() {
-        if (CompatibilityManager.isGTLoaded()) {
-            try {
-                final Class<?> clazz = Class.forName("gregtech.common.blocks.BlockOres");
-                if (clazz != null) {
-                    classGTOre = clazz;
-                }
-            } catch (final Exception e) {
-                e.printStackTrace();
-            }
+    /**
+     * Runs on preInit, checks for mods which GC can integrate with
+     */
+    public static void detectMods() {
+        if (Loader.isModLoaded("gregtech") || Loader.isModLoaded("GregTech_Addon") || Loader.isModLoaded("GregTech")) {
+            CompatibilityManager.modGTLoaded = true;
         }
 
         if (Loader.isModLoaded("ThermalExpansion")) {
@@ -45,15 +42,6 @@ public class CompatibilityManager {
 
         if (Loader.isModLoaded("IC2")) {
             CompatibilityManager.modIc2Loaded = true;
-
-            try {
-                final Class<?> clazz = Class.forName("ic2.core.block.wiring.TileEntityCable");
-                if (clazz != null) {
-                    BlockEnclosed.onBlockNeighbourChangeIC2 = clazz.getMethod("onNeighborBlockChange");
-                }
-            } catch (final Exception e) {
-                e.printStackTrace();
-            }
         }
 
         if (Loader.isModLoaded("BuildCraft|Energy")) {
@@ -62,27 +50,6 @@ public class CompatibilityManager {
 
         if (Loader.isModLoaded("BuildCraft|Transport")) {
             CompatibilityManager.modBCraftTransportLoaded = true;
-
-            try {
-                BlockEnclosed.blockPipeBC = (BlockContainer) GameRegistry
-                        .findBlock("BuildCraft|Transport", "pipeBlock");
-                classBCBlockGenericPipe = BlockEnclosed.blockPipeBC.getClass();
-
-                for (final Method m : classBCBlockGenericPipe.getMethods()) {
-                    if ("createPipe".equals(m.getName()) && m.getParameterTypes().length == 1) {
-                        methodBCBlockPipe_createPipe = m;
-                        break;
-                    }
-                }
-            } catch (final Exception e) {
-                e.printStackTrace();
-            }
-
-            BlockEnclosed.initialiseBC();
-
-            if (CompatibilityManager.methodBCBlockPipe_createPipe == null) {
-                CompatibilityManager.modBCraftTransportLoaded = false;
-            }
         }
 
         if (Loader.isModLoaded("AetherII")) {
@@ -117,6 +84,56 @@ public class CompatibilityManager {
         }
     }
 
+    /**
+     * Runs on postInit, integrates with compatible mods
+     */
+    public static void integrateWithMods() {
+        if (CompatibilityManager.isGTLoaded()) {
+            try {
+                final Class<?> clazz = Class.forName("gregtech.common.blocks.BlockOresLegacy");
+                if (clazz != null) {
+                    classGTOre = clazz;
+                }
+            } catch (final Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (CompatibilityManager.isIc2Loaded()) {
+            try {
+                final Class<?> clazz = Class.forName("ic2.core.block.wiring.TileEntityCable");
+                if (clazz != null) {
+                    BlockEnclosed.onBlockNeighbourChangeIC2 = clazz.getMethod("onNeighborBlockChange");
+                }
+            } catch (final Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (CompatibilityManager.isBCraftTransportLoaded()) {
+            try {
+                BlockEnclosed.blockPipeBC = (BlockContainer) GameRegistry
+                        .findBlock("BuildCraft|Transport", "pipeBlock");
+                classBCBlockGenericPipe = BlockEnclosed.blockPipeBC.getClass();
+
+                for (final Method m : classBCBlockGenericPipe.getMethods()) {
+                    if ("createPipe".equals(m.getName()) && m.getParameterTypes().length == 1) {
+                        methodBCBlockPipe_createPipe = m;
+                        break;
+                    }
+                }
+            } catch (final Exception e) {
+                e.printStackTrace();
+            }
+
+            BlockEnclosed.initialiseBC();
+
+            if (CompatibilityManager.methodBCBlockPipe_createPipe == null) {
+                CompatibilityManager.modBCraftTransportLoaded = false;
+            }
+        }
+    }
+
     public static boolean isIc2Loaded() {
         return CompatibilityManager.modIc2Loaded;
     }
@@ -134,7 +151,7 @@ public class CompatibilityManager {
     }
 
     public static boolean isGTLoaded() {
-        return Loader.isModLoaded("gregtech") || Loader.isModLoaded("GregTech_Addon") || Loader.isModLoaded("GregTech");
+        return CompatibilityManager.modGTLoaded;
     }
 
     public static boolean isAIILoaded() {
