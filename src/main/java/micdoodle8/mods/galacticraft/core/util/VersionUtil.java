@@ -6,8 +6,6 @@ import net.minecraft.launchwrapper.Launch;
 
 import com.google.common.collect.Maps;
 
-import micdoodle8.mods.galacticraft.core.obfuscation.FieldObfuscationEntry;
-import micdoodle8.mods.galacticraft.core.obfuscation.MethodObfuscationEntry;
 import micdoodle8.mods.galacticraft.core.obfuscation.ObfuscationEntry;
 
 public class VersionUtil {
@@ -17,25 +15,12 @@ public class VersionUtil {
 
     // Used in GCPlayerHandler etc
 
-    public static final String KEY_FIELD_CAMERA_ZOOM = "cameraZoom";
-    public static final String KEY_FIELD_CAMERA_YAW = "cameraYaw";
-    public static final String KEY_FIELD_CAMERA_PITCH = "cameraPitch";
-
-    public static final String KEY_METHOD_ORIENT_CAMERA = "orientCamera";
-
     static {
         try {
             deobfuscated = Launch.classLoader.getClassBytes("net.minecraft.world.World") != null;
         } catch (final Exception e) {
             e.printStackTrace();
         }
-
-        // Same for both versions
-        nodemap.put(KEY_FIELD_CAMERA_ZOOM, new FieldObfuscationEntry("cameraZoom", "field_78503_V"));
-        nodemap.put(KEY_FIELD_CAMERA_YAW, new FieldObfuscationEntry("cameraYaw", "field_78502_W"));
-        nodemap.put(KEY_FIELD_CAMERA_PITCH, new FieldObfuscationEntry("cameraPitch", "field_78509_X"));
-
-        nodemap.put(KEY_METHOD_ORIENT_CAMERA, new MethodObfuscationEntry("orientCamera", "func_78467_g", ""));
     }
 
     private static String getName(String keyName) {
