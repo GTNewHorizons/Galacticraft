@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTSizeTracker;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
@@ -26,7 +27,6 @@ import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.core.energy.tile.EnergyStorage;
 import micdoodle8.mods.galacticraft.core.util.FluidUtil;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.core.wrappers.FlagData;
 import micdoodle8.mods.galacticraft.core.wrappers.Footprint;
 
@@ -313,7 +313,9 @@ public class NetworkUtil {
         }
         final byte[] compressedNBT = new byte[dataLength];
         buffer.readBytes(compressedNBT);
-        return VersionUtil.decompressNBT(compressedNBT);
+
+        final NBTSizeTracker nbtSizeTracker = new NBTSizeTracker(2097152L);
+        return CompressedStreamTools.func_152457_a(compressedNBT, nbtSizeTracker); // decompress
     }
 
     public static void writeNBTTagCompound(NBTTagCompound nbt, ByteBuf buffer) throws IOException {

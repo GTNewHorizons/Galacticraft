@@ -94,7 +94,6 @@ import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
 import micdoodle8.mods.galacticraft.core.util.MapUtil;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import micdoodle8.mods.galacticraft.core.wrappers.FlagData;
 import micdoodle8.mods.galacticraft.core.wrappers.Footprint;
@@ -860,7 +859,7 @@ public class PacketSimple extends Packet implements IPacket {
                                 final String strUUID = (String) this.data.get(9);
                                 profile = PlayerUtil.makeOtherPlayerProfile(strName, strUUID);
                             }
-                            if (VersionUtil.mcVersion1_7_10 && !profile.getProperties().containsKey("textures")) {
+                            if (!profile.getProperties().containsKey("textures")) {
                                 GalacticraftCore.packetPipeline.sendToServer(
                                         new PacketSimple(
                                                 EnumSimplePacket.S_REQUEST_PLAYERSKIN,

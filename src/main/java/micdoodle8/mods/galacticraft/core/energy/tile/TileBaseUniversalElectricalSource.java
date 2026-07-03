@@ -1,6 +1,5 @@
 package micdoodle8.mods.galacticraft.core.energy.tile;
 
-import java.lang.reflect.Method;
 import java.util.EnumSet;
 
 import net.minecraft.item.Item;
@@ -13,6 +12,9 @@ import cofh.api.energy.IEnergyContainerItem;
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;
 import ic2.api.energy.tile.IEnergySource;
+import ic2.api.item.ElectricItem;
+import ic2.api.item.IElectricItem;
+import ic2.api.item.ISpecialElectricItem;
 import mekanism.api.energy.ICableOutputter;
 import micdoodle8.mods.galacticraft.api.item.ElectricItemHelper;
 import micdoodle8.mods.galacticraft.api.item.IItemElectric;
@@ -22,7 +24,6 @@ import micdoodle8.mods.galacticraft.api.transmission.tile.IElectrical;
 import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 import micdoodle8.mods.galacticraft.core.energy.EnergyConfigHandler;
 import micdoodle8.mods.galacticraft.core.energy.EnergyUtil;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 
 @InterfaceList({ @Interface(modid = "IC2API", iface = "ic2.api.energy.tile.IEnergySource"),
         @Interface(modid = "MekanismAPI|energy", iface = "mekanism.api.energy.ICableOutputter"), })
@@ -114,87 +115,23 @@ public class TileBaseUniversalElectricalSource extends TileBaseUniversalElectric
                         false);
             } else if (EnergyConfigHandler.isIndustrialCraft2Loaded()) {
                 try {
-                    final Class<?> itemElectricIC2 = Class.forName("ic2.api.item.ISpecialElectricItem");
-                    final Class<?> itemElectricIC2B = Class.forName("ic2.api.item.IElectricItem");
-                    final Class<?> itemManagerIC2 = Class.forName("ic2.api.item.IElectricItemManager");
-                    if (itemElectricIC2.isInstance(item)) {
-                        // Implement by reflection:
-                        // float energy = (float)
-                        // ((ISpecialElectricItem)item).getManager(itemStack).charge(itemStack,
-                        // energyToCharge * EnergyConfigHandler.TO_IC2_RATIO, 4, false, false) *
-                        // EnergyConfigHandler.IC2_RATIO;
-                        final Object IC2item = itemElectricIC2.cast(item);
-                        final Method getMan = itemElectricIC2.getMethod("getManager", ItemStack.class);
-                        final Object IC2manager = getMan.invoke(IC2item, itemStack);
-                        double result;
-                        if (VersionUtil.mcVersion1_7_2) {
-                            final Method methodCharge = itemManagerIC2.getMethod(
-                                    "charge",
-                                    ItemStack.class,
-                                    int.class,
-                                    int.class,
-                                    boolean.class,
-                                    boolean.class);
-                            result = (Integer) methodCharge.invoke(
-                                    IC2manager,
-                                    itemStack,
-                                    (int) (energyToCharge * EnergyConfigHandler.TO_IC2_RATIO),
-                                    this.tierGC + 1,
-                                    false,
-                                    false);
-                        } else {
-                            final Method methodCharge = itemManagerIC2.getMethod(
-                                    "charge",
-                                    ItemStack.class,
-                                    double.class,
-                                    int.class,
-                                    boolean.class,
-                                    boolean.class);
-                            result = (Double) methodCharge.invoke(
-                                    IC2manager,
-                                    itemStack,
-                                    (double) (energyToCharge * EnergyConfigHandler.TO_IC2_RATIO),
-                                    this.tierGC + 1,
-                                    false,
-                                    false);
-                        }
+                    if (item instanceof ISpecialElectricItem) {
+                        // result: Converted from reflection to plain old casts and calls
+                        double result = ((ISpecialElectricItem) item).getManager(itemStack).charge(
+                                itemStack,
+                                (double) (energyToCharge * EnergyConfigHandler.TO_IC2_RATIO),
+                                this.tierGC + 1,
+                                false,
+                                false);
                         final float energy = (float) result / EnergyConfigHandler.TO_IC2_RATIO;
                         this.storage.extractEnergyGC(energy, false);
-                    } else if (itemElectricIC2B.isInstance(item)) {
-                        final Class<?> electricItemIC2 = Class.forName("ic2.api.item.ElectricItem");
-                        final Object IC2manager = electricItemIC2.getField("manager").get(null);
-                        double result;
-                        if (VersionUtil.mcVersion1_7_2) {
-                            final Method methodCharge = itemManagerIC2.getMethod(
-                                    "charge",
-                                    ItemStack.class,
-                                    int.class,
-                                    int.class,
-                                    boolean.class,
-                                    boolean.class);
-                            result = (Integer) methodCharge.invoke(
-                                    IC2manager,
-                                    itemStack,
-                                    (int) (energyToCharge * EnergyConfigHandler.TO_IC2_RATIO),
-                                    this.tierGC + 1,
-                                    false,
-                                    false);
-                        } else {
-                            final Method methodCharge = itemManagerIC2.getMethod(
-                                    "charge",
-                                    ItemStack.class,
-                                    double.class,
-                                    int.class,
-                                    boolean.class,
-                                    boolean.class);
-                            result = (Double) methodCharge.invoke(
-                                    IC2manager,
-                                    itemStack,
-                                    (double) (energyToCharge * EnergyConfigHandler.TO_IC2_RATIO),
-                                    this.tierGC + 1,
-                                    false,
-                                    false);
-                        }
+                    } else if (item instanceof IElectricItem) {
+                        double result = ElectricItem.manager.charge(
+                                itemStack,
+                                (double) (energyToCharge * EnergyConfigHandler.TO_IC2_RATIO),
+                                this.tierGC + 1,
+                                false,
+                                false);
                         final float energy = (float) result / EnergyConfigHandler.TO_IC2_RATIO;
                         this.storage.extractEnergyGC(energy, false);
                     }

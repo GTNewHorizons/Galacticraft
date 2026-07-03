@@ -18,7 +18,6 @@ import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.RecipeUtil;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
 import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
 import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
@@ -227,7 +226,7 @@ public class RecipeManagerAsteroids {
                     'X',
                     new ItemStack(Blocks.cobblestone, 1));
             CompressorRecipes.addRecipeAdventure(
-                    new ItemStack(VersionUtil.sand, 9, 0),
+                    new ItemStack(Blocks.sand, 9, 0),
                     "XXX",
                     "XXX",
                     "XXX",
@@ -239,7 +238,7 @@ public class RecipeManagerAsteroids {
                     "XBX",
                     "XXX",
                     'X',
-                    new ItemStack(VersionUtil.sand),
+                    new ItemStack(Blocks.sand),
                     'B',
                     new ItemStack(Items.water_bucket));
             CompressorRecipes.addRecipeAdventure(
@@ -248,7 +247,7 @@ public class RecipeManagerAsteroids {
                     "FEF",
                     "XFX",
                     'X',
-                    new ItemStack(VersionUtil.sand),
+                    new ItemStack(Blocks.sand),
                     'F',
                     new ItemStack(Items.rotten_flesh),
                     'E',
