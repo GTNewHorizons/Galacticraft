@@ -28,7 +28,7 @@ public class CompatibilityManager {
     public static Method methodBCBlockPipe_createPipe = null;
 
     public static void checkForCompatibleMods() {
-        if (CompatibilityManager.isGTLoaded()) {
+        if (CompatibilityManager.isGT5uNHLoaded()) {
             try {
                 final Class<?> clazz = Class.forName("gregtech.common.blocks.BlockOres");
                 if (clazz != null) {
