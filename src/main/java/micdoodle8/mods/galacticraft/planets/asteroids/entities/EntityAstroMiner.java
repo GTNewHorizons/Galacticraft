@@ -1259,7 +1259,7 @@ public class EntityAstroMiner extends Entity
                 return true;
             }
             if (b.hasTileEntity(meta)) {
-                if (!CompatibilityManager.isGTLoaded() || !this.gregTechCheck(b)) {
+                if (!CompatibilityManager.isGT5uNHLoaded() || !this.gregTechCheck(b)) {
                     blockingBlock.block = b;
                     blockingBlock.meta = meta;
                     return true;
