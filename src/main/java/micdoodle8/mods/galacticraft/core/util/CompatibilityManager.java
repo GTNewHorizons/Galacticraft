@@ -133,8 +133,8 @@ public class CompatibilityManager {
         return CompatibilityManager.modTELoaded;
     }
 
-    public static boolean isGTLoaded() {
-        return Loader.isModLoaded("gregtech") || Loader.isModLoaded("GregTech_Addon") || Loader.isModLoaded("GregTech");
+    public static boolean isGT5uNHLoaded() {
+        return Loader.isModLoaded("gregtech_nh");
     }
 
     public static boolean isAIILoaded() {
