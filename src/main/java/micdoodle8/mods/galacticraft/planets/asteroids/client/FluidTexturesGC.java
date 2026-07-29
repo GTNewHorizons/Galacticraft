@@ -26,7 +26,7 @@ public class FluidTexturesGC {
                     .setIcons(event.map.registerIcon(AsteroidsModule.ASSET_PREFIX + ":fluids/LiquidMethane"));
             AsteroidsModule.fluidLiquidArgon
                     .setIcons(event.map.registerIcon(AsteroidsModule.ASSET_PREFIX + ":fluids/LiquidArgon"));
-            if (!CompatibilityManager.isGTLoaded()) {
+            if (!CompatibilityManager.isGT5uNHLoaded()) {
                 AsteroidsModule.fluidMethaneGas
                         .setIcons(event.map.registerIcon(AsteroidsModule.ASSET_PREFIX + ":fluids/MethaneGas"));
                 AsteroidsModule.fluidLiquidOxygen
