@@ -707,6 +707,8 @@ gc.configgui.idEntityEvolvedSkeletonBoss=Entity ID Evolved Skeleton Boss
 gc.configgui.idEntityCelestialScreen=Entity ID Celestial Screen
 gc.configgui.idEntityMeteorChunk=Entity ID Throwable Meteor Chunk
 gc.configgui.moreStars=Show More Stars
+gc.configgui.disablePlayerGearRender=Disable Gear Render On Players
+gc.configgui.disableThermalArmorRender=Disable Thermal Armour Render On Players
 gc.configgui.disableSpaceshipParticles=Disable Rocket Particles
 gc.configgui.oxygenIndicatorLeft=Move Oxygen Indicator Left
 gc.configgui.oxygenIndicatorBottom=Move Oxygen Indicator Down
@@ -752,6 +754,5 @@ gc.configgui.meteorSpawnMod=Meteor Spawn Modifier
 gc.configgui.meteorBlockDamage=Meteor Block Damage Enabled
 gc.configgui.title=Galacticraft Core Config
 gc.configgui.alwaysDisplayOxygenHUD=Always show Oxygen HUD
-gc.configgui.disableGearRender=Disable Gear Render
 
 # </file>

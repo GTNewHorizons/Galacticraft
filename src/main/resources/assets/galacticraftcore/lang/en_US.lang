@@ -715,6 +715,8 @@ gc.configgui.idSchematicMoonBuggy=Schematic ID Moon Buggy
 gc.configgui.idSchematicAddSchematic=Schematic ID "Add Schematic"
 gc.configgui.idAchievBase=Base Achievement ID
 gc.configgui.moreStars=Show More Stars
+gc.configgui.disablePlayerGearRender=Disable Gear Render On Players
+gc.configgui.disableThermalArmorRender=Disable Thermal Armor Render On Players
 gc.configgui.disableSpaceshipParticles=Disable Rocket Particles
 gc.configgui.oxygenIndicatorLeft=Move Oxygen Indicator Left
 gc.configgui.oxygenIndicatorBottom=Move Oxygen Indicator Down
@@ -763,6 +765,5 @@ gc.configgui.meteorBlockDamage=Meteor Block Damage Enabled
 gc.configgui.handfill=Enable Oxygen Tank Hand fill
 gc.configgui.disableUpdateCheck=Disable Update Check
 gc.configgui.alwaysDisplayOxygenHUD=Always show Oxygen HUD
-gc.configgui.disableGearRender=Disable Gear Render
 
 gc.configgui.title=Galacticraft Core Config

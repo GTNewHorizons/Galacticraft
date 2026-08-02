@@ -28,6 +28,7 @@ import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.client.model.ModelPlayerGC;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
 import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 
@@ -277,7 +278,7 @@ public class GCPlayerRenderer {
      */
     public static boolean renderGear(RendererLivingEntity inst, EntityLivingBase entity, float limbSwing,
             float limbSwingAmount, float ticksExisted, float headYaw, float headPitch, float scale) {
-        if (skipRender(inst, entity)) {
+        if (ConfigManagerCore.disablePlayerGearRender || skipRender(inst, entity)) {
             return false;
         }
 
@@ -305,7 +306,7 @@ public class GCPlayerRenderer {
             isSmartRenderLoaded = Loader.isModLoaded("SmartRender");
         }
 
-        if (isSmartRenderLoaded || skipRender(inst, entity)) {
+        if (isSmartRenderLoaded || ConfigManagerCore.disableThermalArmorRender || skipRender(inst, entity)) {
             return false;
         }
 

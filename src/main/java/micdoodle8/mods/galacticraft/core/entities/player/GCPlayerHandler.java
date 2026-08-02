@@ -463,7 +463,10 @@ public class GCPlayerHandler {
 
     public static void checkRenderGear(EntityPlayerMP player) {
         GCPlayerStats GCPlayer = GCPlayerStats.get(player);
-        boolean disableGearRender = ConfigManagerCore.disableGearRender;
+        // Set on the server, these hide the overlays for everyone; clients apply the same two options again
+        // locally when they draw them.
+        boolean disableGearRender = ConfigManagerCore.disablePlayerGearRender;
+        boolean disableThermalRender = ConfigManagerCore.disableThermalArmorRender;
         if (GCPlayer.frequencyModuleInSlot != null
                 && (getTranslucencyLevel(GCPlayer.frequencyModuleInSlot) == 2 || disableGearRender))
             GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDEFREQUENCYMODULE);
@@ -481,19 +484,19 @@ public class GCPlayerHandler {
             GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDERIGHTTANK);
         else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWRIGHTTANK);
         if (GCPlayer.thermalHelmetInSlot != null
-                && (getTranslucencyLevel(GCPlayer.thermalHelmetInSlot) == 2 || disableGearRender))
+                && (getTranslucencyLevel(GCPlayer.thermalHelmetInSlot) == 2 || disableThermalRender))
             GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDETHERMALHELMET);
         else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWTHERMALHELMET);
         if (GCPlayer.thermalChestplateInSlot != null
-                && (getTranslucencyLevel(GCPlayer.thermalChestplateInSlot) == 2 || disableGearRender))
+                && (getTranslucencyLevel(GCPlayer.thermalChestplateInSlot) == 2 || disableThermalRender))
             GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDETHERMALCHESTPLATE);
         else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWTHERMALCHESTPLATE);
         if (GCPlayer.thermalLeggingsInSlot != null
-                && (getTranslucencyLevel(GCPlayer.thermalLeggingsInSlot) == 2 || disableGearRender))
+                && (getTranslucencyLevel(GCPlayer.thermalLeggingsInSlot) == 2 || disableThermalRender))
             GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDETHERMALLEGGINGS);
         else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWTHERMALLEGGINGS);
         if (GCPlayer.thermalBootsInSlot != null
-                && (getTranslucencyLevel(GCPlayer.thermalBootsInSlot) == 2 || disableGearRender))
+                && (getTranslucencyLevel(GCPlayer.thermalBootsInSlot) == 2 || disableThermalRender))
             GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDETHERMALBOOTS);
         else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWTHERMALBOOTS);
     }
