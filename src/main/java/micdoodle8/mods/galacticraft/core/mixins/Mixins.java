@@ -42,8 +42,13 @@ public enum Mixins implements IMixins {
     REPLACE_ENTITY_CLIENT_PLAYER_MP(new MixinBuilder("Replace EntityClientPlayerMP with GCEntityClientPlayerMP")
             .addClientMixins("minecraft.PlayerControllerMPMixin")
             .addExcludedMod(TargetedMod.PLAYERAPI)),
-    RENDER_THERMAL_PADDING(new MixinBuilder()
-            .addClientMixins("minecraft.RendererLivingEntityMixin")),
+    RENDER_THERMAL_PADDING(new MixinBuilder("Render the thermal armour and the Galacticraft equipment on the player")
+            .addClientMixins("minecraft.RendererLivingEntityMixin")
+            .addExcludedMod(TargetedMod.PLAYERAPI)),
+    ADAPT_PLAYER_RENDERING(
+            new MixinBuilder("Apply the Galacticraft player pose and sleeping/rocket rotations without replacing the player renderer")
+                    .addClientMixins("minecraft.ModelBipedMixin", "minecraft.RenderPlayerMixin")
+                    .addExcludedMod(TargetedMod.PLAYERAPI)),
     MODIFY_RAIN_STRENGTH(new MixinBuilder()
             .addCommonMixins("minecraft.WorldMixin")),
     DONOR_CAPES(new MixinBuilder()
