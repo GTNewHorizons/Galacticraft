@@ -87,7 +87,7 @@ public class SkyProviderOrbit extends IRenderHandler {
 
     @Override
     public void render(float partialTicks, WorldClient world, Minecraft mc) {
-        final float var20 = 400.0F + (float) this.minecraft.thePlayer.posY / 2F;
+        final float var20 = 400.0F + (float) this.minecraft.renderViewEntity.posY / 2F;
 
         // if (this.minecraft.thePlayer.ridingEntity != null)
         {
