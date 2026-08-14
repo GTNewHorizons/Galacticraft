@@ -158,7 +158,7 @@ public class SkyProviderMoon extends IRenderHandler {
 
         // HOME:
         var12 = 10.0F;
-        final float earthRotation = (float) (world.getSpawnPoint().posZ - mc.thePlayer.posZ) * 0.01F;
+        final float earthRotation = (float) (world.getSpawnPoint().posZ - mc.renderViewEntity.posZ) * 0.01F;
         GL11.glScalef(0.6F, 0.6F, 0.6F);
         GL11.glRotatef(earthRotation, 1.0F, 0.0F, 0.0F);
         GL11.glRotatef(200F, 1.0F, 0.0F, 0.0F);
@@ -184,7 +184,7 @@ public class SkyProviderMoon extends IRenderHandler {
         GL11.glPopMatrix();
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glColor3f(0.0F, 0.0F, 0.0F);
-        final double var25 = mc.thePlayer.getPosition(partialTicks).yCoord - world.getHorizon();
+        final double var25 = mc.renderViewEntity.getPosition(partialTicks).yCoord - world.getHorizon();
 
         if (var25 < 0.0D) {
             GL11.glPushMatrix();
