@@ -55,6 +55,7 @@ public class ConfigManagerCore {
     public static boolean disableLander;
     public static boolean recipesRequireGCAdvancedMetals = true;
     public static boolean alwaysDisplayOxygenHUD = false;
+    public static boolean disableGearRender = false;
     public static boolean allowSSatUnreachable;
     // public static int mapfactor;
     // public static int mapsize;
@@ -87,8 +88,6 @@ public class ConfigManagerCore {
     public static boolean oxygenIndicatorLeft;
     public static boolean oxygenIndicatorBottom;
     public static boolean overrideCapes;
-    public static boolean disablePlayerGearRender = false;
-    public static boolean disableThermalArmorRender = false;
 
     // DIFFICULTY
     public static double dungeonBossHealthMod;
@@ -293,32 +292,6 @@ public class ConfigManagerCore {
             prop.comment = "If you're using this mod in virtual reality, or if you don't want the camera changes when entering a Galacticraft vehicle, set this to true.";
             prop.setLanguageKey("gc.configgui.disableVehicleCameraChanges");
             disableVehicleCameraChanges = prop.getBoolean(false);
-            propOrder.add(prop.getName());
-
-            // "Disable Gear Render" used to be a single flag that hid the equipment and the thermal armour
-            // together. The two options below replace it, one per overlay; carry its value over the first time an
-            // older config is loaded, then drop it.
-            boolean legacyDisableGearRender = false;
-
-            if (config.hasKey(Constants.CONFIG_CATEGORY_GENERAL, "Disable Gear Render")) {
-                legacyDisableGearRender = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Disable Gear Render", false)
-                        .getBoolean(false);
-                config.getCategory(Constants.CONFIG_CATEGORY_GENERAL).remove("Disable Gear Render");
-            }
-
-            prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Disable Player Gear Render", legacyDisableGearRender);
-            prop.comment = "Set this to true to stop Galacticraft drawing the oxygen mask, tanks, tubes, parachute and frequency module on players. Set on a server it applies to everyone, set on a client it applies to that client. Only affects how gear is drawn - it does not change whether the gear works.";
-            prop.setLanguageKey("gc.configgui.disablePlayerGearRender").setRequiresMcRestart(false);
-            prop.setDefaultValue(false);
-            disablePlayerGearRender = prop.getBoolean(false);
-            propOrder.add(prop.getName());
-
-            prop = config
-                    .get(Constants.CONFIG_CATEGORY_GENERAL, "Disable Thermal Armor Render", legacyDisableGearRender);
-            prop.comment = "Set this to true to stop Galacticraft drawing the thermal armour, and its pulsing overlay, on players. Set on a server it applies to everyone, set on a client it applies to that client. Only affects how the armour is drawn - it does not change whether it keeps you warm.";
-            prop.setLanguageKey("gc.configgui.disableThermalArmorRender").setRequiresMcRestart(false);
-            prop.setDefaultValue(false);
-            disableThermalArmorRender = prop.getBoolean(false);
             propOrder.add(prop.getName());
 
             prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Minimap Left", false);
@@ -586,6 +559,12 @@ public class ConfigManagerCore {
             prop.comment = "Toggle this to always display the Oxygen HUD, if off it will only be shown on GC planets which require Oxygen.";
             prop.setLanguageKey("gc.configgui.alwaysDisplayOxygenHUD").setRequiresMcRestart(false);
             alwaysDisplayOxygenHUD = prop.getBoolean(false);
+            propOrder.add(prop.getName());
+
+            prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Disable Gear Render", false);
+            prop.comment = "Toggle this to disable rendering the GC gear on your body.";
+            prop.setLanguageKey("gc.configgui.disableGearRender").setRequiresMcRestart(false);
+            disableGearRender = prop.getBoolean(false);
             propOrder.add(prop.getName());
 
             prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Allow Stations at Unreachables", true);
