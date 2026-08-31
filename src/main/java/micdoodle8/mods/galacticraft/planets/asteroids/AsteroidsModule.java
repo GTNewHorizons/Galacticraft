@@ -44,6 +44,7 @@ import micdoodle8.mods.galacticraft.core.command.CommandGCAstroMiner;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.items.ItemCanisterGeneric;
 import micdoodle8.mods.galacticraft.core.util.CompatibilityManager;
+import micdoodle8.mods.galacticraft.core.util.GCLog;
 import micdoodle8.mods.galacticraft.planets.GuiIdsPlanets;
 import micdoodle8.mods.galacticraft.planets.IPlanetsModule;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
@@ -284,15 +285,23 @@ public class AsteroidsModule implements IPlanetsModule {
         try {
             final Class<?> clazz = Class.forName("codechicken.microblock.MicroMaterialRegistry");
             if (clazz != null) {
+                final Class<?> clazzbm = Class.forName("codechicken.microblock.BlockMicroMaterial");
+                // Match the signature, not just the name - a future overload would otherwise bind here.
                 Method registerMethod = null;
-                final Method[] methodz = clazz.getMethods();
-                for (final Method m : methodz) {
-                    if ("registerMaterial".equals(m.getName())) {
+                for (final Method m : clazz.getMethods()) {
+                    if (!"registerMaterial".equals(m.getName())) {
+                        continue;
+                    }
+                    final Class<?>[] params = m.getParameterTypes();
+                    if (params.length == 2 && params[0].isAssignableFrom(clazzbm) && params[1] == String.class) {
                         registerMethod = m;
                         break;
                     }
                 }
-                final Class<?> clazzbm = Class.forName("codechicken.microblock.BlockMicroMaterial");
+                if (registerMethod == null) {
+                    GCLog.severe("Micro material registration skipped: registerMaterial signature not found.");
+                    return;
+                }
                 registerMethod.invoke(
                         null,
                         clazzbm.getConstructor(Block.class, int.class).newInstance(AsteroidBlocks.blockBasic, 0),
@@ -310,7 +319,11 @@ public class AsteroidsModule implements IPlanetsModule {
                         clazzbm.getConstructor(Block.class, int.class).newInstance(AsteroidBlocks.blockDenseIce, 0),
                         "tile.denseIce");
             }
-        } catch (final Exception e) {}
+        } catch (final ClassNotFoundException e) {
+            // ForgeMultipart is not installed.
+        } catch (final Exception e) {
+            GCLog.severe("Failed to register Galacticraft micro materials: " + e);
+        }
     }
 
     private void registerTileEntities() {

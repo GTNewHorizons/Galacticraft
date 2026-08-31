@@ -201,15 +201,23 @@ public class MarsModule implements IPlanetsModule {
         try {
             final Class<?> clazz = Class.forName("codechicken.microblock.MicroMaterialRegistry");
             if (clazz != null) {
+                final Class<?> clazzbm = Class.forName("codechicken.microblock.BlockMicroMaterial");
+                // Match the signature, not just the name - a future overload would otherwise bind here.
                 Method registerMethod = null;
-                final Method[] methodz = clazz.getMethods();
-                for (final Method m : methodz) {
-                    if ("registerMaterial".equals(m.getName())) {
+                for (final Method m : clazz.getMethods()) {
+                    if (!"registerMaterial".equals(m.getName())) {
+                        continue;
+                    }
+                    final Class<?>[] params = m.getParameterTypes();
+                    if (params.length == 2 && params[0].isAssignableFrom(clazzbm) && params[1] == String.class) {
                         registerMethod = m;
                         break;
                     }
                 }
-                final Class<?> clazzbm = Class.forName("codechicken.microblock.BlockMicroMaterial");
+                if (registerMethod == null) {
+                    GCLog.severe("Micro material registration skipped: registerMaterial signature not found.");
+                    return;
+                }
                 registerMethod.invoke(
                         null,
                         clazzbm.getConstructor(Block.class, int.class).newInstance(MarsBlocks.marsBlock, 4),
@@ -235,7 +243,11 @@ public class MarsModule implements IPlanetsModule {
                         clazzbm.getConstructor(Block.class, int.class).newInstance(MarsBlocks.marsBlock, 9),
                         "tile.mars.marsstone");
             }
-        } catch (final Exception e) {}
+        } catch (final ClassNotFoundException e) {
+            // ForgeMultipart is not installed.
+        } catch (final Exception e) {
+            GCLog.severe("Failed to register Galacticraft micro materials: " + e);
+        }
     }
 
     public void registerTileEntities() {
