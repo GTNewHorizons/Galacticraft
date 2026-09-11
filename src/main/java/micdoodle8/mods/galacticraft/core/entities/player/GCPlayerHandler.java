@@ -85,7 +85,7 @@ import micdoodle8.mods.galacticraft.core.wrappers.Footprint;
 import micdoodle8.mods.galacticraft.planets.asteroids.dimension.WorldProviderAsteroids;
 
 public class GCPlayerHandler {
- 
+
     private final boolean isClient = FMLCommonHandler.instance().getEffectiveSide().isClient();
     private final ConcurrentHashMap<UUID, GCPlayerStats> playerStatsMap = new ConcurrentHashMap<>();
     private Field ftc;
@@ -644,7 +644,7 @@ public class GCPlayerHandler {
     protected void checkOxygen(EntityPlayerMP player, GCPlayerStats playerStats) {
         if ((player.dimension == 0 || player.worldObj.provider instanceof IGalacticraftWorldProvider)
                 && (player.dimension != 0
-                        && !((IGalacticraftWorldProvider) player.worldObj.provider).hasBreathableAtmosphere() 
+                        && !((IGalacticraftWorldProvider) player.worldObj.provider).hasBreathableAtmosphere())
                 && !player.capabilities.isCreativeMode
                 && !(player.ridingEntity instanceof EntityLanderBase)
                 && !(player.ridingEntity instanceof EntityAutoRocket)
