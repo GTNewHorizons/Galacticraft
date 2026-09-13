@@ -1,247 +1,70 @@
 package micdoodle8.mods.galacticraft.core.client.render.entities;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.common.Loader;
-import micdoodle8.mods.galacticraft.api.entity.ICameraZoomEntity;
-import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
-import micdoodle8.mods.galacticraft.api.world.IZeroGDimension;
-import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
-import micdoodle8.mods.galacticraft.core.client.model.ModelPlayerGC;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.core.tile.TileEntityMulti;
-import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
-import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
-import micdoodle8.mods.galacticraft.planets.mars.blocks.BlockMachineMars;
-import micdoodle8.mods.galacticraft.planets.mars.blocks.MarsBlocks;
 
 /**
- * This renders the thermal armor (unless RenderPlayerAPI is installed). The thermal armor render is done after the
- * corresponding body part of the player is drawn. This ALSO patches RenderPlayer so that it uses ModelPlayerGC in place
- * of ModelPlayer to draw the player.
+ * Compatibility shim for the Galacticraft player renderer that used to live here.
  * <p>
- * Finally, this also adds a hook into rotateCorpse so as to fire a RotatePlayerEvent - used by the Cryogenic Chamber
+ * Galacticraft no longer registers its own {@code RenderPlayer}: the thermal armor, the equipment and the player pose
+ * are applied by mixins instead (see {@link GCPlayerRenderer}), which leaves the player renderer itself free for other
+ * mods to replace. Everything here forwards to the new home and only exists so that addons compiled against the old
+ * class keep working.
  *
- * @author User
+ * @deprecated use {@link GCPlayerRenderer} and the top-level
+ *             {@link micdoodle8.mods.galacticraft.core.client.render.entities.RotatePlayerEvent}
  */
-public class RenderPlayerGC extends RenderPlayer {
+@Deprecated
+public class RenderPlayerGC {
 
-    public static ModelBiped modelThermalPadding;
-    public static ModelBiped modelThermalPaddingHelmet;
-    private static final ResourceLocation thermalPaddingTexture0;
-    private static final ResourceLocation thermalPaddingTexture1;
+    /** @deprecated use {@link GCPlayerRenderer#modelThermalPadding} */
+    @Deprecated
+    public static final ModelBiped modelThermalPadding = GCPlayerRenderer.modelThermalPadding;
+
+    /** @deprecated use {@link GCPlayerRenderer#modelThermalPaddingHelmet} */
+    @Deprecated
+    public static final ModelBiped modelThermalPaddingHelmet = GCPlayerRenderer.modelThermalPaddingHelmet;
+
+    /**
+     * Still honoured by {@link GCPlayerRenderer}, in addition to its own flag, so that external callers setting this
+     * keep working.
+     *
+     * @deprecated use {@link GCPlayerRenderer#flagRenderOverride}
+     */
+    @Deprecated
     public static boolean flagThermalOverride = false;
-    private static Boolean isSmartRenderLoaded = null;
 
-    static {
-        modelThermalPadding = new ModelPlayerGC(0.25F);
-        modelThermalPaddingHelmet = new ModelPlayerGC(0.9F);
+    private RenderPlayerGC() {}
 
-        thermalPaddingTexture0 = new ResourceLocation(
-                AsteroidsModule.ASSET_PREFIX,
-                "textures/misc/thermalPadding_0.png");
-        thermalPaddingTexture1 = new ResourceLocation(
-                AsteroidsModule.ASSET_PREFIX,
-                "textures/misc/thermalPadding_1.png");
+    /** @deprecated use {@link GCPlayerRenderer#renderThermalPadding} */
+    @Deprecated
+    public static void renderModelS(RendererLivingEntity inst, EntityLivingBase entity, float limbSwing,
+            float limbSwingAmount, float ticksExisted, float headYaw, float headPitch, float scale) {
+        GCPlayerRenderer.renderThermalPadding(
+                inst,
+                entity,
+                limbSwing,
+                limbSwingAmount,
+                ticksExisted,
+                headYaw,
+                headPitch,
+                scale);
     }
 
-    public RenderPlayerGC() {
-        this.mainModel = new ModelPlayerGC(0.0F);
-        this.modelBipedMain = (ModelPlayerGC) this.mainModel;
-        this.modelArmorChestplate = new ModelPlayerGC(1.0F);
-        this.modelArmor = new ModelPlayerGC(0.5F);
-    }
-
-    public static void renderModelS(RendererLivingEntity inst, EntityLivingBase par1EntityLivingBase, float par2,
-            float par3, float par4, float par5, float par6, float par7) {
-        if (inst instanceof RenderPlayer thisInst) {
-            if (isSmartRenderLoaded == null) {
-                isSmartRenderLoaded = Loader.isModLoaded("SmartRender");
-            }
-
-            if (RenderPlayerGC.thermalPaddingTexture0 != null && !isSmartRenderLoaded) {
-                final PlayerGearData gearData = ClientProxyCore.playerItemData
-                        .get(par1EntityLivingBase.getCommandSenderName());
-
-                if (gearData != null && !RenderPlayerGC.flagThermalOverride) {
-                    ModelBiped modelBiped;
-
-                    for (int i = 0; i < 4; ++i) {
-                        if (i == 0) {
-                            modelBiped = modelThermalPaddingHelmet;
-                        } else {
-                            modelBiped = modelThermalPadding;
-                        }
-
-                        final int padding = gearData.getThermalPadding(i);
-
-                        // Padding sub-type 0 is standard Thermal Armor. See PacketSimple handling of
-                        // C_UPDATE_GEAR_SLOT for how the sub-type gets set
-                        if (padding == 0 && !par1EntityLivingBase.isInvisible()) {
-                            GL11.glColor4f(1, 1, 1, 1);
-                            Minecraft.getMinecraft().renderEngine.bindTexture(RenderPlayerGC.thermalPaddingTexture1);
-                            modelBiped.bipedHead.showModel = i == 0 && gearData.getRenderThermalPadding(i);
-                            modelBiped.bipedHeadwear.showModel = i == 0 && gearData.getRenderThermalPadding(i);
-                            modelBiped.bipedBody.showModel = (i == 1 || i == 2) && gearData.getRenderThermalPadding(i);
-                            modelBiped.bipedRightArm.showModel = i == 1 && gearData.getRenderThermalPadding(i);
-                            modelBiped.bipedLeftArm.showModel = i == 1 && gearData.getRenderThermalPadding(i);
-                            modelBiped.bipedRightLeg.showModel = (i == 2 || i == 3)
-                                    && gearData.getRenderThermalPadding(i);
-                            modelBiped.bipedLeftLeg.showModel = (i == 2 || i == 3)
-                                    && gearData.getRenderThermalPadding(i);
-
-                            modelBiped.onGround = thisInst.mainModel.onGround;
-                            modelBiped.isRiding = thisInst.mainModel.isRiding;
-                            modelBiped.isChild = thisInst.mainModel.isChild;
-                            if (thisInst.mainModel instanceof ModelBiped) {
-                                modelBiped.heldItemLeft = ((ModelBiped) thisInst.mainModel).heldItemLeft;
-                                modelBiped.heldItemRight = ((ModelBiped) thisInst.mainModel).heldItemRight;
-                                modelBiped.isSneak = ((ModelBiped) thisInst.mainModel).isSneak;
-                                modelBiped.aimedBow = ((ModelBiped) thisInst.mainModel).aimedBow;
-                            }
-                            modelBiped.setLivingAnimations(par1EntityLivingBase, par2, par3, 0.0F);
-                            modelBiped.render(par1EntityLivingBase, par2, par3, par4, par5, par6, par7);
-
-                            // Start alpha render
-                            GL11.glDisable(GL11.GL_LIGHTING);
-                            Minecraft.getMinecraft().renderEngine.bindTexture(RenderPlayerGC.thermalPaddingTexture0);
-                            GL11.glEnable(GL11.GL_ALPHA_TEST);
-                            GL11.glEnable(GL11.GL_BLEND);
-                            GL11.glAlphaFunc(GL11.GL_GREATER, 0.0F);
-                            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                            final float time = par1EntityLivingBase.ticksExisted / 10.0F;
-                            final float sTime = (float) Math.sin(time) * 0.5F + 0.5F;
-
-                            float r = 0.2F * sTime;
-                            float g = 1.0F * sTime;
-                            float b = 0.2F * sTime;
-
-                            if (par1EntityLivingBase.worldObj.provider instanceof IGalacticraftWorldProvider) {
-                                final float modifier = ((IGalacticraftWorldProvider) par1EntityLivingBase.worldObj.provider)
-                                        .getThermalLevelModifier();
-
-                                if (modifier > 0) {
-                                    b = g;
-                                    g = r;
-                                } else if (modifier < 0) {
-                                    r = g;
-                                    g = b;
-                                }
-                            }
-
-                            GL11.glColor4f(r, g, b, 0.4F * sTime);
-                            modelBiped.render(par1EntityLivingBase, par2, par3, par4, par5, par6, par7);
-                            GL11.glColor4f(1, 1, 1, 1);
-                            GL11.glDisable(GL11.GL_BLEND);
-                            GL11.glEnable(GL11.GL_ALPHA_TEST);
-                            GL11.glEnable(GL11.GL_LIGHTING);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
-    protected void rotateCorpse(AbstractClientPlayer par1AbstractClientPlayer, float par2, float par3, float par4) {
-        if (par1AbstractClientPlayer.isEntityAlive() && par1AbstractClientPlayer.isPlayerSleeping()) {
-            final RotatePlayerEvent event = new RotatePlayerEvent(par1AbstractClientPlayer);
-            MinecraftForge.EVENT_BUS.post(event);
-
-            if (!event.vanillaOverride) {
-                super.rotateCorpse(par1AbstractClientPlayer, par2, par3, par4);
-            } else if (event.shouldRotate == null) {
-                GL11.glRotatef(par1AbstractClientPlayer.getBedOrientationInDegrees(), 0.0F, 1.0F, 0.0F);
-            } else if (event.shouldRotate) {
-                float rotation = 0.0F;
-
-                final ChunkCoordinates pos = par1AbstractClientPlayer.playerLocation;
-                if (pos != null) {
-                    Block bed = par1AbstractClientPlayer.worldObj.getBlock(pos.posX, pos.posY, pos.posZ);
-                    int meta = par1AbstractClientPlayer.worldObj.getBlockMetadata(pos.posX, pos.posY, pos.posZ);
-
-                    if (bed.isBed(
-                            par1AbstractClientPlayer.worldObj,
-                            pos.posX,
-                            pos.posY,
-                            pos.posZ,
-                            par1AbstractClientPlayer)) {
-                        if (bed == GCBlocks.fakeBlock && meta == 5) {
-                            final TileEntity tile = event.entityPlayer.worldObj
-                                    .getTileEntity(pos.posX, pos.posY, pos.posZ);
-                            if (tile instanceof TileEntityMulti) {
-                                bed = ((TileEntityMulti) tile).mainBlockPosition.getBlock(event.entityPlayer.worldObj);
-                                meta = ((TileEntityMulti) tile).mainBlockPosition
-                                        .getBlockMetadata(event.entityPlayer.worldObj);
-                            }
-                        }
-
-                        if (bed == MarsBlocks.machine && (meta & 12) == BlockMachineMars.CRYOGENIC_CHAMBER_METADATA) {
-                            switch (meta & 3) {
-                                case 3:
-                                    rotation = 0.0F;
-                                    break;
-                                case 1:
-                                    rotation = 270.0F;
-                                    break;
-                                case 2:
-                                    rotation = 180.0F;
-                                    break;
-                                case 0:
-                                    rotation = 90.0F;
-                                    break;
-                            }
-                        }
-                    }
-                }
-
-                GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-            }
-        } else {
-            if (Minecraft.getMinecraft().gameSettings.thirdPersonView != 0) {
-                final EntityPlayer player = par1AbstractClientPlayer;
-
-                if (player.ridingEntity instanceof ICameraZoomEntity) {
-                    final Entity rocket = player.ridingEntity;
-                    final float rotateOffset = ((ICameraZoomEntity) rocket).getRotateOffset();
-                    if (rotateOffset > -10F) {
-                        GL11.glTranslatef(0, -rotateOffset, 0);
-                        final float anglePitch = rocket.prevRotationPitch;
-                        final float angleYaw = rocket.prevRotationYaw;
-                        GL11.glRotatef(-angleYaw, 0.0F, 1.0F, 0.0F);
-                        GL11.glRotatef(anglePitch, 0.0F, 0.0F, 1.0F);
-                        GL11.glTranslatef(0, rotateOffset, 0);
-                    }
-                }
-            }
-            super.rotateCorpse(par1AbstractClientPlayer, par2, par3, par4);
-        }
-
-        if (par1AbstractClientPlayer.isSneaking()
-                && par1AbstractClientPlayer.worldObj.provider instanceof IZeroGDimension) {
-            GL11.glTranslatef(0F, -0.1F, 0F);
-        }
-    }
-
-    public static class RotatePlayerEvent extends PlayerEvent {
-
-        public Boolean shouldRotate = null;
-        public boolean vanillaOverride = false;
+    /**
+     * The event Galacticraft actually posts. Forge's event bus only notifies listeners registered for the posted class
+     * or one of its supertypes, so this subclass must remain the posted type for as long as addons may be listening for
+     * it; new code should listen for the top-level
+     * {@link micdoodle8.mods.galacticraft.core.client.render.entities.RotatePlayerEvent} instead, which receives this
+     * event too.
+     *
+     * @deprecated use {@link micdoodle8.mods.galacticraft.core.client.render.entities.RotatePlayerEvent}
+     */
+    @Deprecated
+    public static class RotatePlayerEvent
+            extends micdoodle8.mods.galacticraft.core.client.render.entities.RotatePlayerEvent {
 
         public RotatePlayerEvent(AbstractClientPlayer player) {
             super(player);

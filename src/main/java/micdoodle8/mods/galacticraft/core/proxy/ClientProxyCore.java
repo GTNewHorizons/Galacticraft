@@ -12,7 +12,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -97,7 +96,6 @@ import micdoodle8.mods.galacticraft.core.client.render.entities.RenderMeteor;
 import micdoodle8.mods.galacticraft.core.client.render.entities.RenderMeteorChunk;
 import micdoodle8.mods.galacticraft.core.client.render.entities.RenderParaChest;
 import micdoodle8.mods.galacticraft.core.client.render.entities.RenderPlayerBaseGC;
-import micdoodle8.mods.galacticraft.core.client.render.entities.RenderPlayerGC;
 import micdoodle8.mods.galacticraft.core.client.render.entities.RenderTier1Rocket;
 import micdoodle8.mods.galacticraft.core.client.render.item.ItemRendererArclamp;
 import micdoodle8.mods.galacticraft.core.client.render.item.ItemRendererBuggy;
@@ -298,12 +296,12 @@ public class ClientProxyCore extends CommonProxyCore {
         RenderingRegistry.registerEntityRenderingHandler(EntityLander.class, new RenderLander());
         RenderingRegistry.registerEntityRenderingHandler(EntityCelestialFake.class, new RenderEntityFake());
 
+        // Without RenderPlayerAPI, Galacticraft does not register a player renderer at all: the equipment, the thermal
+        // armour and the player pose are applied by mixins (see GCPlayerRenderer), which leaves the player renderer
+        // free for other mods - e.g. Et Futurum Requiem's 1.8 skin support - to replace.
         if (Loader.isModLoaded("RenderPlayerAPI")) {
             ModelPlayerAPI.register(Constants.MOD_ID_CORE, ModelPlayerBaseGC.class);
             RenderPlayerAPI.register(Constants.MOD_ID_CORE, RenderPlayerBaseGC.class);
-        } else {
-            RenderingRegistry.registerEntityRenderingHandler(EntityPlayerSP.class, new RenderPlayerGC());
-            RenderingRegistry.registerEntityRenderingHandler(EntityOtherPlayerMP.class, new RenderPlayerGC());
         }
         // spotless:on
     }

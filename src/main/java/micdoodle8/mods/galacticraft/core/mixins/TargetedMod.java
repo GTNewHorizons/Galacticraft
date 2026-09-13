@@ -9,7 +9,8 @@ public enum TargetedMod implements ITargetMod {
 
     DRAGONAPI("Reika.DragonAPI.Auxiliary.DragonAPIASMHandler", "DragonAPI"),
     OPTIFINE("optifine.OptiFineForgeTweaker", "Optifine"),
-    PLAYERAPI("api.player.forge.PlayerAPIPlugin", "PlayerAPI");
+    PLAYERAPI("api.player.forge.PlayerAPIPlugin", "PlayerAPI"),
+    RENDERPLAYERAPI("api.player.forge.RenderPlayerAPIPlugin", "RenderPlayerAPI");
 
     private final TargetModBuilder builder;
 
