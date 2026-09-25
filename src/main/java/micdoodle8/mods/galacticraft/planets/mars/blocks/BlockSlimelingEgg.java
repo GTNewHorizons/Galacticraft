@@ -26,7 +26,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.planets.GalacticraftPlanets;
 import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
 import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
@@ -78,9 +77,7 @@ public class BlockSlimelingEgg extends Block implements ITileEntityProvider, Ite
 
         if (tile instanceof TileEntitySlimelingEgg) {
             ((TileEntitySlimelingEgg) tile).timeToHatch = world.rand.nextInt(50) + 20;
-            ((TileEntitySlimelingEgg) tile).lastTouchedPlayerUUID = VersionUtil.mcVersion1_7_2
-                    ? player.getCommandSenderName()
-                    : player.getUniqueID().toString();
+            ((TileEntitySlimelingEgg) tile).lastTouchedPlayerUUID = player.getUniqueID().toString();
             ((TileEntitySlimelingEgg) tile).lastTouchedPlayerName = player.getCommandSenderName();
         }
 

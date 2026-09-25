@@ -18,7 +18,7 @@ import micdoodle8.mods.galacticraft.core.wrappers.FlagData;
 public class ClientUtil {
 
     public static ScaledResolution getScaledRes(Minecraft minecraft, int width, int height) {
-        return VersionUtil.getScaledRes(minecraft, width, height);
+        return new ScaledResolution(minecraft, width, height);
     }
 
     public static FlagData updateFlagData(String playerName, boolean sendPacket) {

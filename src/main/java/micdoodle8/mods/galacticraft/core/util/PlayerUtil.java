@@ -22,7 +22,7 @@ public class PlayerUtil {
     public static HashMap<String, GameProfile> knownSkins = new HashMap<>();
 
     public static EntityPlayerMP getPlayerForUsernameVanilla(MinecraftServer server, String username) {
-        return VersionUtil.getPlayerForUsername(server, username);
+        return server.getConfigurationManager().func_152612_a(username); // getPlayerForUsername
     }
 
     public static EntityPlayerMP getPlayerBaseServerFromPlayerUsername(String username, boolean ignoreCase) {
@@ -96,13 +96,13 @@ public class PlayerUtil {
         if (profile == null) {
             try {
                 final UUID uuid = strUUID.isEmpty() ? UUID.randomUUID() : UUID.fromString(strUUID);
-                profile = VersionUtil.constructGameProfile(uuid, strName);
+                profile = new GameProfile(uuid, strName);
             } catch (final Exception e) {
                 e.printStackTrace();
             }
         }
         if (profile == null) {
-            profile = VersionUtil.constructGameProfile(UUID.randomUUID(), strName);
+            profile = new GameProfile(UUID.randomUUID(), strName);
         }
 
         PlayerUtil.knownSkins.put(strName, profile);
@@ -124,5 +124,9 @@ public class PlayerUtil {
 
     public static boolean isPlayerOnline(EntityPlayerMP player) {
         return MinecraftServer.getServer().getConfigurationManager().playerEntityList.contains(player);
+    }
+
+    public static boolean isPlayerOpped(EntityPlayerMP player) {
+        return MinecraftServer.getServer().getConfigurationManager().func_152596_g(player.getGameProfile());
     }
 }
