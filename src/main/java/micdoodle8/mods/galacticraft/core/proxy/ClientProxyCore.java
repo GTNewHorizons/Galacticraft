@@ -141,6 +141,7 @@ import micdoodle8.mods.galacticraft.core.entities.player.IPlayerClient;
 import micdoodle8.mods.galacticraft.core.entities.player.PlayerClient;
 import micdoodle8.mods.galacticraft.core.inventory.InventoryExtended;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
+import micdoodle8.mods.galacticraft.core.nei.NasaWorkbenchNeeSupport;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple;
 import micdoodle8.mods.galacticraft.core.tick.KeyHandlerClient;
 import micdoodle8.mods.galacticraft.core.tick.TickHandlerClient;
@@ -275,6 +276,7 @@ public class ClientProxyCore extends CommonProxyCore {
         ClientProxyCore.registerInventoryTabs();
         ClientProxyCore.registerEntityRenderers();
         ClientProxyCore.registerItemRenderers();
+        NasaWorkbenchNeeSupport.register();
         // ClientProxyCore.playerList = GLAllocation.generateDisplayLists(1);
     }
 

@@ -2,16 +2,13 @@ package micdoodle8.mods.galacticraft.core.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.util.RecipeUtil;
 
 public class ContainerSchematicTier1Rocket extends Container {
@@ -142,68 +139,51 @@ public class ContainerSchematicTier1Rocket extends Container {
      */
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par1) {
-        ItemStack var2 = null;
-        final Slot var3 = this.inventorySlots.get(par1);
+        ItemStack stack = null;
+        final Slot currentSlot = this.inventorySlots.get(par1);
 
-        if (var3 != null && var3.getHasStack()) {
-            final ItemStack var4 = var3.getStack();
-            var2 = var4.copy();
+        if (currentSlot != null && currentSlot.getHasStack()) {
+            final ItemStack currentStack = currentSlot.getStack();
+            stack = currentStack.copy();
+            final int playerInventoryStart = this.inventorySlots.size() - 36;
 
-            if (par1 <= 17) {
-                if (!this.mergeItemStack(var4, 18, 54, false)) {
+            if (!(currentSlot.inventory instanceof InventoryPlayer)) {
+                if (!this.mergeItemStack(currentStack, playerInventoryStart, this.inventorySlots.size(), false)) {
                     return null;
                 }
+            } else if (!this.mergeOneItem(currentStack, 1, playerInventoryStart, false)) {
+                if (par1 < playerInventoryStart + 27) {
+                    if (!this.mergeItemStack(
+                            currentStack,
+                            playerInventoryStart + 27,
+                            this.inventorySlots.size(),
+                            false)) {
+                        return null;
+                    }
+                } else if (!this.mergeItemStack(currentStack, playerInventoryStart, playerInventoryStart + 27, false)) {
+                    return null;
+                }
+            }
 
+            if (currentStack.stackSize == 0) {
                 if (par1 == 0) {
-                    var3.onSlotChange(var4, var2);
+                    currentSlot.onPickupFromSlot(par1EntityPlayer, currentStack);
                 }
-            } else if (var2.getItem() == GCItems.partNoseCone) {
-                if (!this.mergeOneItem(var4, 1, 2, false)) {
-                    return null;
-                }
-            } else if (var2.getItem() == GCItems.heavyPlatingTier1) {
-                if (!this.mergeOneItem(var4, 2, 10, false)) {
-                    return null;
-                }
-            } else if (var2.getItem() == GCItems.partFins) {
-                if (!this.mergeOneItem(var4, 10, 12, false) && !this.mergeOneItem(var4, 13, 15, false)) {
-                    return null;
-                }
-            } else if (var2.getItem() == GCItems.rocketEngine) {
-                if (!this.mergeOneItem(var4, 12, 13, false)) {
-                    return null;
-                }
-            } else if (var2.getItem() == Item.getItemFromBlock(Blocks.chest)) {
-                if (!this.mergeOneItem(var4, 15, 18, false)) {
-                    return null;
-                }
-            } else if (par1 >= 18 && par1 < 45) {
-                if (!this.mergeItemStack(var4, 45, 54, false)) {
-                    return null;
-                }
-            } else if (par1 >= 45 && par1 < 54 && !this.mergeItemStack(var4, 18, 45, false)) {
+                currentSlot.putStack(null);
+                return stack;
+            }
+
+            if (currentStack.stackSize == stack.stackSize) {
                 return null;
             }
 
-            if (var4.stackSize == 0) {
-                if (par1 == 0) {
-                    var3.onPickupFromSlot(par1EntityPlayer, var4);
-                }
-                var3.putStack(null);
-                return var2;
-            }
-
-            if (var4.stackSize == var2.stackSize) {
-                return null;
-            }
-
-            var3.onPickupFromSlot(par1EntityPlayer, var4);
+            currentSlot.onPickupFromSlot(par1EntityPlayer, currentStack);
             if (par1 == 0) {
-                var3.onSlotChanged();
+                currentSlot.onSlotChanged();
             }
         }
 
-        return var2;
+        return stack;
     }
 
     protected boolean mergeOneItem(ItemStack par1ItemStack, int par2, int par3, boolean par4) {
@@ -216,7 +196,7 @@ public class ContainerSchematicTier1Rocket extends Container {
                 slot = this.inventorySlots.get(k);
                 slotStack = slot.getStack();
 
-                if (slotStack == null) {
+                if (slotStack == null && slot.isItemValid(par1ItemStack)) {
                     final ItemStack stackOneItem = par1ItemStack.copy();
                     stackOneItem.stackSize = 1;
                     par1ItemStack.stackSize--;

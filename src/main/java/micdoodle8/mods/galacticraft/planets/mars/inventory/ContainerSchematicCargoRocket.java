@@ -127,8 +127,23 @@ public class ContainerSchematicCargoRocket extends Container {
             final ItemStack currentStack = currentSlot.getStack();
             stack = currentStack.copy();
 
-            if (!this.mergeOneItem(currentStack)) {
-                return null;
+            final int playerInventoryStart = this.inventorySlots.size() - 36;
+            if (!(currentSlot.inventory instanceof InventoryPlayer)) {
+                if (!this.mergeItemStack(currentStack, playerInventoryStart, this.inventorySlots.size(), false)) {
+                    return null;
+                }
+            } else if (!this.mergeOneItem(currentStack, 1, playerInventoryStart)) {
+                if (slotIndex < playerInventoryStart + 27) {
+                    if (!this.mergeItemStack(
+                            currentStack,
+                            playerInventoryStart + 27,
+                            this.inventorySlots.size(),
+                            false)) {
+                        return null;
+                    }
+                } else if (!this.mergeItemStack(currentStack, playerInventoryStart, playerInventoryStart + 27, false)) {
+                    return null;
+                }
             }
 
             if (currentStack.stackSize == 0) {
@@ -149,10 +164,10 @@ public class ContainerSchematicCargoRocket extends Container {
         return stack;
     }
 
-    protected boolean mergeOneItem(ItemStack itemStack) {
+    protected boolean mergeOneItem(ItemStack itemStack, int start, int end) {
         boolean nothingLeft = false;
         if (itemStack.stackSize > 0) {
-            for (int i = 1; i <= 21; ++i) {
+            for (int i = start; i < end; ++i) {
                 final Slot slot = this.inventorySlots.get(i);
                 final ItemStack slotStack = slot.getStack();
                 if (slotStack == null && slot.isItemValid(itemStack)) {
@@ -167,5 +182,9 @@ public class ContainerSchematicCargoRocket extends Container {
             }
         }
         return nothingLeft;
+    }
+
+    protected boolean mergeOneItem(ItemStack itemStack) {
+        return this.mergeOneItem(itemStack, 1, this.inventorySlots.size() - 36);
     }
 }
