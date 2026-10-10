@@ -20,7 +20,10 @@ import codechicken.nei.api.IConfigureNEI;
 import cpw.mods.fml.common.Loader;
 import micdoodle8.mods.galacticraft.api.recipe.CompressorRecipes;
 import micdoodle8.mods.galacticraft.core.Constants;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
+import micdoodle8.mods.galacticraft.core.client.gui.container.GuiSchematicBuggy;
+import micdoodle8.mods.galacticraft.core.client.gui.container.GuiSchematicTier1Rocket;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
@@ -60,13 +63,26 @@ public class NEIGalacticraftConfig implements IConfigureNEI {
             API.hideItem(new ItemStack(AsteroidsItems.basicItem, 1, 5));
         }
 
-        // Handled by GalaxySpace
-        /*
-         * API.registerRecipeHandler(new RocketT1RecipeHandler()); API.registerUsageHandler(new
-         * RocketT1RecipeHandler());
-         */
-        API.registerRecipeHandler(new BuggyRecipeHandler());
+        if (!GalacticraftCore.isGalaxySpaceLoaded) {
+            RocketT1RecipeHandler rocketHandler = new RocketT1RecipeHandler();
+            API.registerRecipeHandler(rocketHandler);
+            API.registerUsageHandler(new RocketT1RecipeHandler());
+            API.addRecipeCatalyst(new ItemStack(GCBlocks.nasaWorkbench), rocketHandler);
+        }
+        BuggyRecipeHandler buggyHandler = new BuggyRecipeHandler();
+        API.registerRecipeHandler(buggyHandler);
         API.registerUsageHandler(new BuggyRecipeHandler());
+        API.addRecipeCatalyst(new ItemStack(GCBlocks.nasaWorkbench), buggyHandler);
+        API.registerGuiOverlay(GuiSchematicTier1Rocket.class, "galacticraft.rocketT1", 3, 4);
+        API.registerGuiOverlayHandler(
+                GuiSchematicTier1Rocket.class,
+                new NasaWorkbenchOverlayHandler(3, 4),
+                "galacticraft.rocketT1");
+        API.registerGuiOverlay(GuiSchematicBuggy.class, "galacticraft.buggy", 4, 16);
+        API.registerGuiOverlayHandler(
+                GuiSchematicBuggy.class,
+                new NasaWorkbenchOverlayHandler(4, 16),
+                "galacticraft.buggy");
         API.registerRecipeHandler(new RefineryRecipeHandler());
         API.registerUsageHandler(new RefineryRecipeHandler());
         API.registerRecipeHandler(new CircuitFabricatorRecipeHandler());

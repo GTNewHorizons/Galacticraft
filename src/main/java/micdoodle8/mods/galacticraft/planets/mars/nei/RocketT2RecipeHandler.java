@@ -1,10 +1,12 @@
 package micdoodle8.mods.galacticraft.planets.mars.nei;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -16,6 +18,7 @@ import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
+import micdoodle8.mods.galacticraft.planets.mars.client.gui.GuiSchematicTier2Rocket;
 
 public class RocketT2RecipeHandler extends TemplateRecipeHandler {
 
@@ -25,6 +28,16 @@ public class RocketT2RecipeHandler extends TemplateRecipeHandler {
 
     public String getRecipeId() {
         return "galacticraft.rocketT2";
+    }
+
+    @Override
+    public Class<? extends GuiContainer> getGuiClass() {
+        return GuiSchematicTier2Rocket.class;
+    }
+
+    @Override
+    public String getOverlayIdentifier() {
+        return this.getRecipeId();
     }
 
     @Override
@@ -44,7 +57,11 @@ public class RocketT2RecipeHandler extends TemplateRecipeHandler {
     }
 
     @Override
-    public void loadTransferRects() {}
+    public void loadTransferRects() {
+        // Sits immediately left of the result slot instead of on top of it, so that clicking the result slot in the
+        // workbench is not swallowed by the "show recipe" rect. Coordinates are relative to the registered gui offset.
+        this.transferRects.add(new RecipeTransferRect(new Rectangle(112, 102, 18, 18), this.getRecipeId()));
+    }
 
     @Override
     public void loadCraftingRecipes(String outputId, Object... results) {

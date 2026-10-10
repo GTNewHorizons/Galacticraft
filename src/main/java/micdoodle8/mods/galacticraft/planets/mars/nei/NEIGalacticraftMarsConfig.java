@@ -12,9 +12,14 @@ import codechicken.nei.PositionedStack;
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 import micdoodle8.mods.galacticraft.core.Constants;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
+import micdoodle8.mods.galacticraft.core.nei.NasaWorkbenchOverlayHandler;
 import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
 import micdoodle8.mods.galacticraft.planets.mars.blocks.MarsBlocks;
+import micdoodle8.mods.galacticraft.planets.mars.client.gui.GuiSchematicCargoRocket;
+import micdoodle8.mods.galacticraft.planets.mars.client.gui.GuiSchematicTier2Rocket;
 import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 
 public class NEIGalacticraftMarsConfig implements IConfigureNEI {
@@ -28,8 +33,26 @@ public class NEIGalacticraftMarsConfig implements IConfigureNEI {
     @Override
     public void loadConfig() {
         this.registerRecipes();
-        API.registerRecipeHandler(new CargoRocketRecipeHandler());
+        if (!GalacticraftCore.isGalaxySpaceLoaded) {
+            RocketT2RecipeHandler rocketHandler = new RocketT2RecipeHandler();
+            API.registerRecipeHandler(rocketHandler);
+            API.registerUsageHandler(new RocketT2RecipeHandler());
+            API.addRecipeCatalyst(new ItemStack(GCBlocks.nasaWorkbench), rocketHandler);
+        }
+        CargoRocketRecipeHandler cargoRocketHandler = new CargoRocketRecipeHandler();
+        API.registerRecipeHandler(cargoRocketHandler);
         API.registerUsageHandler(new CargoRocketRecipeHandler());
+        API.addRecipeCatalyst(new ItemStack(GCBlocks.nasaWorkbench), cargoRocketHandler);
+        API.registerGuiOverlay(GuiSchematicTier2Rocket.class, "galacticraft.rocketT2", 8, 12);
+        API.registerGuiOverlayHandler(
+                GuiSchematicTier2Rocket.class,
+                new NasaWorkbenchOverlayHandler(8, 12),
+                "galacticraft.rocketT2");
+        API.registerGuiOverlay(GuiSchematicCargoRocket.class, "galacticraft.cargoRocket", 4, 16);
+        API.registerGuiOverlayHandler(
+                GuiSchematicCargoRocket.class,
+                new NasaWorkbenchOverlayHandler(4, 16),
+                "galacticraft.cargoRocket");
         API.registerHighlightIdentifier(MarsBlocks.marsBlock, planetsHighlightHandler);
     }
 
