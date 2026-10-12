@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -32,6 +33,16 @@ public class AstroMinerRecipeHandler extends TemplateRecipeHandler {
 
     public String getRecipeId() {
         return "galacticraft.astroMiner";
+    }
+
+    @Override
+    public Class<? extends GuiContainer> getGuiClass() {
+        return GuiSchematicAstroMiner.class;
+    }
+
+    @Override
+    public String getOverlayIdentifier() {
+        return this.getRecipeId();
     }
 
     @Override

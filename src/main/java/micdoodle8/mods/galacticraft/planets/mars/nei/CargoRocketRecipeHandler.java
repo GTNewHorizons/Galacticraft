@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -18,6 +19,7 @@ import codechicken.nei.recipe.TemplateRecipeHandler;
 import micdoodle8.mods.galacticraft.core.util.EnumColor;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
+import micdoodle8.mods.galacticraft.planets.mars.client.gui.GuiSchematicCargoRocket;
 
 public class CargoRocketRecipeHandler extends TemplateRecipeHandler {
 
@@ -33,6 +35,16 @@ public class CargoRocketRecipeHandler extends TemplateRecipeHandler {
 
     public String getRecipeId() {
         return "galacticraft.cargoRocket";
+    }
+
+    @Override
+    public Class<? extends GuiContainer> getGuiClass() {
+        return GuiSchematicCargoRocket.class;
+    }
+
+    @Override
+    public String getOverlayIdentifier() {
+        return this.getRecipeId();
     }
 
     @Override

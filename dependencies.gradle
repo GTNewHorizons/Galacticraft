@@ -11,6 +11,7 @@ dependencies {
     api('net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev')
 
     compileOnly('com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-999-GTNH:api')
+    compileOnly('com.github.GTNewHorizons:NotEnoughEnergistics:1.7.46:dev') { transitive = false }
     compileOnly('com.github.GTNewHorizons:BuildCraft:7.1.63:api')
     compileOnly('curse.maven:cofh-lib-220333:2388748')
     compileOnly('curse.maven:PlayerAPI-228969:2248928')
