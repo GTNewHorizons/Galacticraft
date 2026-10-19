@@ -84,7 +84,6 @@ import micdoodle8.mods.galacticraft.planets.asteroids.dimension.WorldProviderAst
 
 public class GCPlayerHandler {
 
-    private static final int OXYGENHEIGHTLIMIT = 450;
     private final boolean isClient = FMLCommonHandler.instance().getEffectiveSide().isClient();
     private final ConcurrentHashMap<UUID, GCPlayerStats> playerStatsMap = new ConcurrentHashMap<>();
     private final HashMap<Item, Item> torchItems = new HashMap<>();
@@ -642,8 +641,7 @@ public class GCPlayerHandler {
     protected void checkOxygen(EntityPlayerMP player, GCPlayerStats playerStats) {
         if ((player.dimension == 0 || player.worldObj.provider instanceof IGalacticraftWorldProvider)
                 && (player.dimension != 0
-                        && !((IGalacticraftWorldProvider) player.worldObj.provider).hasBreathableAtmosphere()
-                        || player.posY > GCPlayerHandler.OXYGENHEIGHTLIMIT)
+                        && !((IGalacticraftWorldProvider) player.worldObj.provider).hasBreathableAtmosphere())
                 && !player.capabilities.isCreativeMode
                 && !(player.ridingEntity instanceof EntityLanderBase)
                 && !(player.ridingEntity instanceof EntityAutoRocket)

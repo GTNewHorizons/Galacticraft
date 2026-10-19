@@ -98,7 +98,7 @@ public class AsteroidsModule implements IPlanetsModule {
             boolean gaseous) {
         Fluid returnFluid = FluidRegistry.getFluid(fluidName);
         if (returnFluid == null) {
-            if (checkGT && CompatibilityManager.isGTLoaded()) {
+            if (checkGT && CompatibilityManager.isGT5uNHLoaded()) {
                 throw new IllegalStateException(
                         "Expected fluid '" + fluidName + "' to be registered before Galacticraft Asteroids init");
             }

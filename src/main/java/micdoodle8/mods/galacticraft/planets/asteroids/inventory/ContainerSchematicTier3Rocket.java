@@ -2,12 +2,10 @@ package micdoodle8.mods.galacticraft.planets.asteroids.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -207,63 +205,49 @@ public class ContainerSchematicTier3Rocket extends Container {
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par1) {
-        ItemStack var2 = null;
-        final Slot var3 = this.inventorySlots.get(par1);
+        ItemStack stack = null;
+        final Slot currentSlot = this.inventorySlots.get(par1);
 
-        if (var3 != null && var3.getHasStack()) {
-            final ItemStack var4 = var3.getStack();
-            var2 = var4.copy();
+        if (currentSlot != null && currentSlot.getHasStack()) {
+            final ItemStack currentStack = currentSlot.getStack();
+            stack = currentStack.copy();
 
-            if (par1 <= 21) {
-                if (!this.mergeItemStack(var4, 22, 58, false)) {
+            final int playerInventoryStart = this.inventorySlots.size() - 36;
+            if (!(currentSlot.inventory instanceof InventoryPlayer)) {
+                if (!this.mergeItemStack(currentStack, playerInventoryStart, this.inventorySlots.size(), false)) {
                     return null;
                 }
-
-                var3.onSlotChange(var4, var2);
-            } else {
-                boolean valid = false;
-                for (int i = 1; i < 19; i++) {
-                    final Slot testSlot = this.inventorySlots.get(i);
-                    if (!testSlot.getHasStack() && testSlot.isItemValid(var2)) {
-                        valid = true;
-                        break;
-                    }
-                }
-                if (valid) {
-                    if (!this.mergeOneItemTestValid(var4, 1, 19, false)) {
+            } else if (!this.mergeOneItemTestValid(currentStack, 1, playerInventoryStart, false)) {
+                if (par1 < playerInventoryStart + 27) {
+                    if (!this.mergeItemStack(
+                            currentStack,
+                            playerInventoryStart + 27,
+                            this.inventorySlots.size(),
+                            false)) {
                         return null;
                     }
-                } else if (var2.getItem() == Item.getItemFromBlock(Blocks.chest)) {
-                    if (!this.mergeOneItemTestValid(var4, 19, 22, false)) {
-                        return null;
-                    }
-                } else if (par1 >= 22 && par1 < 49) {
-                    if (!this.mergeItemStack(var4, 49, 58, false)) {
-                        return null;
-                    }
-                } else if (par1 >= 49 && par1 < 58) {
-                    if (!this.mergeItemStack(var4, 22, 49, false)) {
-                        return null;
-                    }
-                } else if (!this.mergeItemStack(var4, 22, 58, false)) {
+                } else if (!this.mergeItemStack(currentStack, playerInventoryStart, playerInventoryStart + 27, false)) {
                     return null;
                 }
             }
 
-            if (var4.stackSize == 0) {
-                var3.putStack(null);
-            } else {
-                var3.onSlotChanged();
+            if (currentStack.stackSize == 0) {
+                if (par1 == 0) {
+                    currentSlot.onPickupFromSlot(par1EntityPlayer, currentStack);
+                }
+                currentSlot.putStack(null);
+                return stack;
             }
-
-            if (var4.stackSize == var2.stackSize) {
+            if (currentStack.stackSize == stack.stackSize) {
                 return null;
             }
-
-            var3.onPickupFromSlot(par1EntityPlayer, var4);
+            currentSlot.onPickupFromSlot(par1EntityPlayer, currentStack);
+            if (par1 == 0) {
+                currentSlot.onSlotChanged();
+            }
         }
 
-        return var2;
+        return stack;
     }
 
     protected boolean mergeOneItemTestValid(ItemStack par1ItemStack, int par2, int par3, boolean par4) {
