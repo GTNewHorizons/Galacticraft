@@ -2,7 +2,6 @@ package micdoodle8.mods.galacticraft.core.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -71,12 +70,7 @@ public class MapGen {
         this.iz = 0;
         this.biomeMapWCM = world.getWorldChunkManager();
         // this.biomeMapWorld = new WeakReference<World>(world);
-        try {
-            final Field bil = this.biomeMapWCM.getClass()
-                    .getDeclaredField(VersionUtil.getNameDynamic(VersionUtil.KEY_FIELD_BIOMEINDEXLAYER));
-            bil.setAccessible(true);
-            MapGen.biomeMapGenLayer = (GenLayer) bil.get(this.biomeMapWCM);
-        } catch (final Exception e) {}
+        MapGen.biomeMapGenLayer = this.biomeMapWCM.biomeIndexLayer;
         if (MapGen.biomeMapGenLayer == null) {
             this.calculatingMap = false;
             GCLog.debug("Failed to get gen layer from World Chunk Manager.");
@@ -170,9 +164,9 @@ public class MapGen {
     private void biomeMapOneChunk(int x0, int z0, int ix, int iz, int factor, int limit) {
         // IntCache.resetIntCache();
         // int[] biomesGrid = biomeMapGenLayer.getInts(x0 << 4, z0 << 4, 16, 16);
-        // TODO: For some reason getInts() may not work in Minecraft 1.7.2, gives a
-        // banded result where part of the
-        // array is 0
+        // TODO: This code was commented out because it did not work properly on Minecraft 1.7.2. biomeMapGenLayer is
+        // never used in this class as a result. Now that we are enforcing 1.7.10, should it be uncommented? The
+        // original issue was that "getInts() [would give] a banded result where part of the array is 0".
         this.biomesGrid = this.biomeMapWCM.getBiomeGenAt(this.biomesGrid, x0 << 4, z0 << 4, 16, 16, false);
         if (this.biomesGrid == null) {
             return;

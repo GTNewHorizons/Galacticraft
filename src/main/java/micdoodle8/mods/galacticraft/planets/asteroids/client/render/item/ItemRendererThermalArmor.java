@@ -3,6 +3,7 @@ package micdoodle8.mods.galacticraft.planets.asteroids.client.render.item;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
@@ -11,7 +12,6 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 
 public class ItemRendererThermalArmor implements IItemRenderer {
 
@@ -46,7 +46,7 @@ public class ItemRendererThermalArmor implements IItemRenderer {
             FMLClientHandler.instance().getClient().getTextureManager().bindTexture(
                     FMLClientHandler.instance().getClient().getTextureManager()
                             .getResourceLocation(item.getItemSpriteNumber()));
-            VersionUtil.setMipMap(false, false);
+            TextureUtil.func_152777_a(false, false, 1.0F); // setMipMap
             final Tessellator tessellator = Tessellator.instance;
             final float f = iicon.getMinU();
             final float f1 = iicon.getMaxU();

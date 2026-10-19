@@ -1,7 +1,5 @@
 package micdoodle8.mods.galacticraft.core.client;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
@@ -25,7 +23,6 @@ import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 
 public class SkyProviderOverworld extends IRenderHandler {
@@ -117,46 +114,29 @@ public class SkyProviderOverworld extends IRenderHandler {
         double zoom = 0.0;
         double yaw = 0.0;
         double pitch = 0.0;
-        Method m = null;
 
         if (!optifinePresent) {
-            try {
-                final Class<?> c = mc.entityRenderer.getClass();
-                final Field cameraZoom = c
-                        .getDeclaredField(VersionUtil.getNameDynamic(VersionUtil.KEY_FIELD_CAMERA_ZOOM));
-                cameraZoom.setAccessible(true);
-                zoom = cameraZoom.getDouble(mc.entityRenderer);
-                final Field cameraYaw = c
-                        .getDeclaredField(VersionUtil.getNameDynamic(VersionUtil.KEY_FIELD_CAMERA_YAW));
-                cameraYaw.setAccessible(true);
-                yaw = cameraYaw.getDouble(mc.entityRenderer);
-                final Field cameraPitch = c
-                        .getDeclaredField(VersionUtil.getNameDynamic(VersionUtil.KEY_FIELD_CAMERA_PITCH));
-                cameraPitch.setAccessible(true);
-                pitch = cameraPitch.getDouble(mc.entityRenderer);
+            zoom = mc.entityRenderer.cameraZoom;
+            yaw = mc.entityRenderer.cameraYaw;
+            pitch = mc.entityRenderer.cameraPitch;
 
-                GL11.glMatrixMode(GL11.GL_PROJECTION);
-                GL11.glLoadIdentity();
+            GL11.glMatrixMode(GL11.GL_PROJECTION);
+            GL11.glLoadIdentity();
 
-                if (zoom != 1.0D) {
-                    GL11.glTranslatef((float) yaw, (float) -pitch, 0.0F);
-                    GL11.glScaled(zoom, zoom, 1.0D);
-                }
-
-                Project.gluPerspective(
-                        mc.gameSettings.fovSetting,
-                        (float) mc.displayWidth / (float) mc.displayHeight,
-                        0.05F,
-                        1400.0F);
-                GL11.glMatrixMode(GL11.GL_MODELVIEW);
-                GL11.glLoadIdentity();
-
-                m = c.getDeclaredMethod(VersionUtil.getNameDynamic(VersionUtil.KEY_METHOD_ORIENT_CAMERA), float.class);
-                m.setAccessible(true);
-                m.invoke(mc.entityRenderer, mc.gameSettings.fovSetting);
-            } catch (final Exception e) {
-                e.printStackTrace();
+            if (zoom != 1.0D) {
+                GL11.glTranslatef((float) yaw, (float) -pitch, 0.0F);
+                GL11.glScaled(zoom, zoom, 1.0D);
             }
+
+            Project.gluPerspective(
+                    mc.gameSettings.fovSetting,
+                    (float) mc.displayWidth / (float) mc.displayHeight,
+                    0.05F,
+                    1400.0F);
+            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+            GL11.glLoadIdentity();
+
+            mc.entityRenderer.orientCamera(mc.gameSettings.fovSetting);
         }
 
         float theta = MathHelper
@@ -385,28 +365,24 @@ public class SkyProviderOverworld extends IRenderHandler {
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDepthMask(true);
 
-        if (!optifinePresent && m != null) {
-            try {
-                GL11.glMatrixMode(GL11.GL_PROJECTION);
-                GL11.glLoadIdentity();
+        if (!optifinePresent) {
+            GL11.glMatrixMode(GL11.GL_PROJECTION);
+            GL11.glLoadIdentity();
 
-                if (zoom != 1.0D) {
-                    GL11.glTranslatef((float) yaw, (float) -pitch, 0.0F);
-                    GL11.glScaled(zoom, zoom, 1.0D);
-                }
-
-                Project.gluPerspective(
-                        mc.gameSettings.fovSetting,
-                        (float) mc.displayWidth / (float) mc.displayHeight,
-                        0.05F,
-                        this.minecraft.gameSettings.renderDistanceChunks * 16 * 2.0F);
-                GL11.glMatrixMode(GL11.GL_MODELVIEW);
-                GL11.glLoadIdentity();
-
-                m.invoke(mc.entityRenderer, mc.gameSettings.fovSetting);
-            } catch (final Exception e) {
-                e.printStackTrace();
+            if (zoom != 1.0D) {
+                GL11.glTranslatef((float) yaw, (float) -pitch, 0.0F);
+                GL11.glScaled(zoom, zoom, 1.0D);
             }
+
+            Project.gluPerspective(
+                    mc.gameSettings.fovSetting,
+                    (float) mc.displayWidth / (float) mc.displayHeight,
+                    0.05F,
+                    this.minecraft.gameSettings.renderDistanceChunks * 16 * 2.0F);
+            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+            GL11.glLoadIdentity();
+
+            mc.entityRenderer.orientCamera(mc.gameSettings.fovSetting);
         }
         GL11.glEnable(GL11.GL_COLOR_MATERIAL);
     }
