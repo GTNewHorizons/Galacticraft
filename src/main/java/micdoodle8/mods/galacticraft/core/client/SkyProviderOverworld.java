@@ -160,7 +160,7 @@ public class SkyProviderOverworld extends IRenderHandler {
         }
 
         float theta = MathHelper
-                .sqrt_float(((float) mc.thePlayer.posY - Constants.OVERWORLD_SKYPROVIDER_STARTHEIGHT) / 1000.0F);
+                .sqrt_float(((float) mc.renderViewEntity.posY - Constants.OVERWORLD_SKYPROVIDER_STARTHEIGHT) / 1000.0F);
         final float var21 = Math.max(1.0F - theta * 4.0F, 0.0F);
 
         GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -185,7 +185,7 @@ public class SkyProviderOverworld extends IRenderHandler {
         GL11.glDepthMask(false);
         GL11.glEnable(GL11.GL_FOG);
         GL11.glColor3f(i, x, var5);
-        if (mc.thePlayer.posY < 214) {
+        if (mc.renderViewEntity.posY < 214) {
             GL11.glCallList(this.glSkyList);
         }
         GL11.glDisable(GL11.GL_FOG);
@@ -260,7 +260,7 @@ public class SkyProviderOverworld extends IRenderHandler {
         GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
 
         GL11.glRotatef(this.minecraft.theWorld.getCelestialAngle(partialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
-        final double playerHeight = this.minecraft.thePlayer.posY;
+        final double playerHeight = this.minecraft.renderViewEntity.posY;
 
         // Draw stars
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -349,7 +349,7 @@ public class SkyProviderOverworld extends IRenderHandler {
             float scale = 850 * (0.25F - theta / 10000.0F);
             scale = Math.max(scale, 0.2F);
             GL11.glScalef(scale, 1.0F, scale);
-            GL11.glTranslatef(0.0F, -(float) mc.thePlayer.posY, 0.0F);
+            GL11.glTranslatef(0.0F, -(float) mc.renderViewEntity.posY, 0.0F);
             // if (ClientProxyCore.overworldTextureLocal != null)
             // {
             // GL11.glBindTexture(GL11.GL_TEXTURE_2D,

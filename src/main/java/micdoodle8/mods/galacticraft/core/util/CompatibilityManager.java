@@ -32,7 +32,7 @@ public class CompatibilityManager {
      * Runs on preInit, checks for mods which GC can integrate with
      */
     public static void detectMods() {
-        if (Loader.isModLoaded("gregtech") || Loader.isModLoaded("GregTech_Addon") || Loader.isModLoaded("GregTech")) {
+        if (Loader.isModLoaded("gregtech_nh")) {
             CompatibilityManager.modGTLoaded = true;
         }
 
@@ -88,7 +88,7 @@ public class CompatibilityManager {
      * Runs on postInit, integrates with compatible mods
      */
     public static void integrateWithMods() {
-        if (CompatibilityManager.isGTLoaded()) {
+        if (CompatibilityManager.isGT5uNHLoaded()) {
             try {
                 final Class<?> clazz = Class.forName("gregtech.common.blocks.BlockOresLegacy");
                 if (clazz != null) {
@@ -150,7 +150,7 @@ public class CompatibilityManager {
         return CompatibilityManager.modTELoaded;
     }
 
-    public static boolean isGTLoaded() {
+    public static boolean isGT5uNHLoaded() {
         return CompatibilityManager.modGTLoaded;
     }
 
