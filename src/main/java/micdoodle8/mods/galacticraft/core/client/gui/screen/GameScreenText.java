@@ -31,7 +31,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.api.client.IGameScreen;
 import micdoodle8.mods.galacticraft.api.client.IScreenManager;
 import micdoodle8.mods.galacticraft.api.entity.ITelemetry;
-import micdoodle8.mods.galacticraft.core.client.render.entities.RenderPlayerGC;
+import micdoodle8.mods.galacticraft.core.client.render.entities.GCPlayerRenderer;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityTelemetry;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
@@ -242,9 +242,9 @@ public class GameScreenText implements IGameScreen {
             if (entity instanceof ITelemetry) {
                 ((ITelemetry) entity).adjustDisplay(telemeter.clientData);
             }
-            RenderPlayerGC.flagThermalOverride = true;
+            GCPlayerRenderer.flagRenderOverride = true;
             renderEntity.doRender(entity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
-            RenderPlayerGC.flagThermalOverride = false;
+            GCPlayerRenderer.flagRenderOverride = false;
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
             OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
             GL11.glDisable(GL11.GL_TEXTURE_2D);

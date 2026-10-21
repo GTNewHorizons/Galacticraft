@@ -22,7 +22,6 @@ import micdoodle8.mods.galacticraft.api.entity.ICameraZoomEntity;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.core.client.model.ModelPlayerBaseGC;
-import micdoodle8.mods.galacticraft.core.client.render.entities.RenderPlayerGC.RotatePlayerEvent;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityMulti;
 import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
@@ -62,7 +61,7 @@ public class RenderPlayerBaseGC extends RenderPlayerBase {
             final PlayerGearData gearData = ClientProxyCore.playerItemData
                     .get(par1EntityLivingBase.getCommandSenderName());
 
-            if (gearData != null && !RenderPlayerGC.flagThermalOverride) {
+            if (gearData != null && !GCPlayerRenderer.isRenderOverridden()) {
                 ModelBiped modelBiped;
 
                 for (int i = 0; i < 4; ++i) {
@@ -143,7 +142,9 @@ public class RenderPlayerBaseGC extends RenderPlayerBase {
     @Override
     public void rotatePlayer(AbstractClientPlayer par1AbstractClientPlayer, float par2, float par3, float par4) {
         if (par1AbstractClientPlayer.isEntityAlive() && par1AbstractClientPlayer.isPlayerSleeping()) {
-            final RotatePlayerEvent event = new RotatePlayerEvent(par1AbstractClientPlayer);
+            // Deprecated subclass on purpose - see RenderPlayerGC.RotatePlayerEvent
+            @SuppressWarnings("deprecation")
+            final RotatePlayerEvent event = new RenderPlayerGC.RotatePlayerEvent(par1AbstractClientPlayer);
             MinecraftForge.EVENT_BUS.post(event);
 
             if (!event.vanillaOverride) {
