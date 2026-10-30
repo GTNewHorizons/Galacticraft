@@ -1143,12 +1143,8 @@ public class GCPlayerHandler {
         final EnumModelPacket rightTank = getTankModelPacket(GCPlayer.tankInSlot2, false);
         sendGearPacket(player, viewer, rightTank != null ? rightTank : EnumModelPacket.REMOVE_RIGHT_TANK, -1);
 
-        if (GCPlayer.usingParachute) {
-            sendGearPacket(
-                    player,
-                    viewer,
-                    EnumModelPacket.ADD_PARACHUTE,
-                    GCPlayer.parachuteInSlot != null ? GCPlayer.parachuteInSlot.getItemDamage() : -1);
+        if (GCPlayer.usingParachute && GCPlayer.parachuteInSlot != null) {
+            sendGearPacket(player, viewer, EnumModelPacket.ADD_PARACHUTE, GCPlayer.parachuteInSlot.getItemDamage());
         } else {
             sendGearPacket(player, viewer, EnumModelPacket.REMOVE_PARACHUTE, -1);
         }
