@@ -1314,7 +1314,8 @@ public class PacketSimple extends Packet implements IPacket {
                 final String name = (String) this.data.get(0);
                 final EntityPlayerMP e = PlayerUtil.getPlayerBaseServerFromPlayerUsername(name, true);
                 if (e != null) {
-                    GCPlayerHandler.checkGear(e, GCPlayerStats.get(e), true);
+                    // Reply to the requester only: a broadcast here makes every new viewer resend to all others
+                    GCPlayerHandler.sendGearData(e, GCPlayerStats.get(e), playerBase);
                 }
                 break;
             case S_REQUEST_ARCLAMP_FACING:
