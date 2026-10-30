@@ -274,9 +274,9 @@ public class ModelPlayerGC extends ModelBiped {
             }
         }
 
-        this.setRotationAngles(var2, var3, var4, var5, var6, var7, var1);
-
         if (var1 instanceof AbstractClientPlayer && this.equals(modelBipedMain)) {
+            this.setRotationAngles(var2, var3, var4, var5, var6, var7, var1);
+
             if (gearData != null) {
                 if (wearingMask) {
                     FMLClientHandler.instance().getClient().renderEngine.bindTexture(ModelPlayerGC.oxygenMaskTexture);
