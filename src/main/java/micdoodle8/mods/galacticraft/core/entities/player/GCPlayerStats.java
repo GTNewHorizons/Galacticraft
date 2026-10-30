@@ -84,6 +84,9 @@ public class GCPlayerStats implements IExtendedEntityProperties {
     public ItemStack thermalBootsInSlot;
     public ItemStack lastThermalBootsInSlot;
 
+    // Bitmask of gear hidden by translucency/config, as last sent to clients. -1 = nothing sent yet
+    public int lastRenderGearHidden = -1;
+
     public int launchAttempts = 0;
 
     public int spaceRaceInviteTeamID;
