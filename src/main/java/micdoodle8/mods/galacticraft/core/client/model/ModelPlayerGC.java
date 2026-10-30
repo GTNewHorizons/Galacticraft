@@ -532,8 +532,8 @@ public class ModelPlayerGC extends ModelBiped {
         this.grayOxygenTanks[1].rotateAngleY = this.bipedBody.rotateAngleY;
         this.grayOxygenTanks[1].rotateAngleZ = this.bipedBody.rotateAngleZ;
 
-        final List<Entity> entitiesInAABB = player.worldObj.getEntitiesWithinAABBExcludingEntity(
-                player,
+        final List<EntityTieredRocket> entitiesInAABB = player.worldObj.getEntitiesWithinAABB(
+                EntityTieredRocket.class,
                 AxisAlignedBB.getBoundingBox(
                         player.posX - 20,
                         0,
@@ -542,14 +542,12 @@ public class ModelPlayerGC extends ModelBiped {
                         200,
                         player.posZ + 20));
 
-        for (Entity entity : entitiesInAABB) {
-            if (entity instanceof EntityTieredRocket ship) {
-                if (ship.riddenByEntity != null && !ship.riddenByEntity.equals(player)
-                        && (ship.getLaunched() || ship.timeUntilLaunch < 390)) {
-                    this.bipedRightArm.rotateAngleZ -= (float) (Math.PI / 8) + MathHelper.sin(par3 * 0.9F) * 0.2F;
-                    this.bipedRightArm.rotateAngleX = (float) Math.PI;
-                    break;
-                }
+        for (EntityTieredRocket ship : entitiesInAABB) {
+            if (ship.riddenByEntity != null && !ship.riddenByEntity.equals(player)
+                    && (ship.getLaunched() || ship.timeUntilLaunch < 390)) {
+                this.bipedRightArm.rotateAngleZ -= (float) (Math.PI / 8) + MathHelper.sin(par3 * 0.9F) * 0.2F;
+                this.bipedRightArm.rotateAngleX = (float) Math.PI;
+                break;
             }
         }
     }
