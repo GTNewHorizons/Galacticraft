@@ -34,6 +34,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.EventPriority;
@@ -41,7 +42,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
@@ -315,18 +315,9 @@ public class GCPlayerHandler {
                 GCPlayerHandler.sendAirRemainingPacket(player, GCPlayer);
             } else if (GCPlayer.lastTankInSlot1 == null || forceSend
                     || GCPlayer.tankInSlot1.getItem() != GCPlayer.lastTankInSlot1.getItem()) {
-                        if (GCPlayer.tankInSlot1.getItem() == GCItems.oxTankLight) {
-                            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDLEFTGREENTANK);
-                        } else if (GCPlayer.tankInSlot1.getItem() == GCItems.oxTankMedium) {
-                            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDLEFTORANGETANK);
-                        } else if (GCPlayer.tankInSlot1.getItem() == GCItems.oxTankHeavy) {
-                            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDLEFTREDTANK);
-                        } else if (GCPlayer.tankInSlot1.getItem() == GCItems.oxTankSuperHeavy) {
-                            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDLEFTBLUETANK);
-                        } else if (GCPlayer.tankInSlot1.getItem() == GCItems.oxTankUltraHeavy) {
-                            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDLEFTVIOLETTANK);
-                        } else if (GCPlayer.tankInSlot1.getItem() == GCItems.oxygenCanisterInfinite) {
-                            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDLEFTGRAYTANK);
+                        final EnumModelPacket tankPacket = getTankModelPacket(GCPlayer.tankInSlot1, true);
+                        if (tankPacket != null) {
+                            GCPlayerHandler.sendGearUpdatePacket(player, tankPacket);
                         }
                         if (GCPlayer.maskInSlot != null && GCPlayer.gearInSlot != null) {
                             GCPlayer.airRemaining = GCPlayer.tankInSlot1.getMaxDamage()
@@ -347,18 +338,9 @@ public class GCPlayerHandler {
                 GCPlayerHandler.sendAirRemainingPacket(player, GCPlayer);
             } else if (GCPlayer.lastTankInSlot2 == null || forceSend
                     || GCPlayer.tankInSlot2.getItem() != GCPlayer.lastTankInSlot2.getItem()) {
-                        if (GCPlayer.tankInSlot2.getItem() == GCItems.oxTankLight) {
-                            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDRIGHTGREENTANK);
-                        } else if (GCPlayer.tankInSlot2.getItem() == GCItems.oxTankMedium) {
-                            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDRIGHTORANGETANK);
-                        } else if (GCPlayer.tankInSlot2.getItem() == GCItems.oxTankHeavy) {
-                            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDRIGHTREDTANK);
-                        } else if (GCPlayer.tankInSlot2.getItem() == GCItems.oxTankSuperHeavy) {
-                            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDRIGHTBLUETANK);
-                        } else if (GCPlayer.tankInSlot2.getItem() == GCItems.oxTankUltraHeavy) {
-                            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDRIGHTVIOLETTANK);
-                        } else if (GCPlayer.tankInSlot2.getItem() == GCItems.oxygenCanisterInfinite) {
-                            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.ADDRIGHTGRAYTANK);
+                        final EnumModelPacket tankPacket = getTankModelPacket(GCPlayer.tankInSlot2, false);
+                        if (tankPacket != null) {
+                            GCPlayerHandler.sendGearUpdatePacket(player, tankPacket);
                         }
                         if (GCPlayer.maskInSlot != null && GCPlayer.gearInSlot != null) {
                             GCPlayer.airRemaining2 = GCPlayer.tankInSlot2.getMaxDamage()
@@ -479,8 +461,17 @@ public class GCPlayerHandler {
      */
     public static void checkRenderGear(EntityPlayerMP player, boolean forceSend) {
         GCPlayerStats GCPlayer = GCPlayerStats.get(player);
+        int hidden = getRenderGearHidden(GCPlayer);
+        int changed = forceSend || GCPlayer.lastRenderGearHidden == -1 ? ~0 : hidden ^ GCPlayer.lastRenderGearHidden;
+        GCPlayer.lastRenderGearHidden = hidden;
+        sendRenderGear(player, null, hidden, changed);
+    }
+
+    /**
+     * Bitmask of the gear slots hidden by translucency or config, in RENDER_GEAR_SHOW / RENDER_GEAR_HIDE order.
+     */
+    private static int getRenderGearHidden(GCPlayerStats GCPlayer) {
         boolean disableGearRender = ConfigManagerCore.disableGearRender;
-        // Same slot order as RENDER_GEAR_SHOW / RENDER_GEAR_HIDE
         ItemStack[] slots = { GCPlayer.frequencyModuleInSlot, GCPlayer.maskInSlot, GCPlayer.gearInSlot,
                 GCPlayer.tankInSlot1, GCPlayer.tankInSlot2, GCPlayer.thermalHelmetInSlot,
                 GCPlayer.thermalChestplateInSlot, GCPlayer.thermalLeggingsInSlot, GCPlayer.thermalBootsInSlot };
@@ -489,18 +480,35 @@ public class GCPlayerHandler {
         for (int i = 0; i < slots.length; i++) {
             if (slots[i] != null && (disableGearRender || getTranslucencyLevel(slots[i]) == 2)) hidden |= 1 << i;
         }
+        return hidden;
+    }
 
-        int changed = forceSend || GCPlayer.lastRenderGearHidden == -1 ? ~0 : hidden ^ GCPlayer.lastRenderGearHidden;
-        GCPlayer.lastRenderGearHidden = hidden;
-        if (changed == 0) return;
-
-        for (int i = 0; i < slots.length; i++) {
+    private static void sendRenderGear(EntityPlayerMP player, EntityPlayerMP viewer, int hidden, int changed) {
+        for (int i = 0; i < RENDER_GEAR_SHOW.length; i++) {
             if ((changed & 1 << i) != 0) {
-                GCPlayerHandler.sendGearUpdatePacket(
-                        player,
-                        (hidden & 1 << i) != 0 ? RENDER_GEAR_HIDE[i] : RENDER_GEAR_SHOW[i]);
+                sendGearPacket(player, viewer, (hidden & 1 << i) != 0 ? RENDER_GEAR_HIDE[i] : RENDER_GEAR_SHOW[i], -1);
             }
         }
+    }
+
+    /**
+     * Model packet for an oxygen tank in the left or right tank slot, or null if the stack is not a known tank.
+     */
+    private static EnumModelPacket getTankModelPacket(ItemStack tank, boolean left) {
+        if (tank == null) return null;
+        final Item item = tank.getItem();
+        if (item == GCItems.oxTankLight)
+            return left ? EnumModelPacket.ADDLEFTGREENTANK : EnumModelPacket.ADDRIGHTGREENTANK;
+        if (item == GCItems.oxTankMedium)
+            return left ? EnumModelPacket.ADDLEFTORANGETANK : EnumModelPacket.ADDRIGHTORANGETANK;
+        if (item == GCItems.oxTankHeavy) return left ? EnumModelPacket.ADDLEFTREDTANK : EnumModelPacket.ADDRIGHTREDTANK;
+        if (item == GCItems.oxTankSuperHeavy)
+            return left ? EnumModelPacket.ADDLEFTBLUETANK : EnumModelPacket.ADDRIGHTBLUETANK;
+        if (item == GCItems.oxTankUltraHeavy)
+            return left ? EnumModelPacket.ADDLEFTVIOLETTANK : EnumModelPacket.ADDRIGHTVIOLETTANK;
+        if (item == GCItems.oxygenCanisterInfinite)
+            return left ? EnumModelPacket.ADDLEFTGRAYTANK : EnumModelPacket.ADDRIGHTGRAYTANK;
+        return null;
     }
 
     protected void checkThermalStatus(EntityPlayerMP player, GCPlayerStats playerStats) {
@@ -1055,37 +1063,116 @@ public class GCPlayerHandler {
     }
 
     public static void sendGearUpdatePacket(EntityPlayerMP player, EnumModelPacket gearType) {
-        final MinecraftServer theServer = FMLCommonHandler.instance().getMinecraftServerInstance();
-        if (theServer != null
-                && PlayerUtil.getPlayerForUsernameVanilla(theServer, player.getGameProfile().getName()) != null) {
-            GalacticraftCore.packetPipeline.sendToAllAround(
-                    new PacketSimple(
-                            EnumSimplePacket.C_UPDATE_GEAR_SLOT,
-                            new Object[] { player.getGameProfile().getName(), gearType.ordinal(), -1 }),
-                    new TargetPoint(
-                            player.worldObj.provider.dimensionId,
-                            player.posX,
-                            player.posY,
-                            player.posZ,
-                            50.0D));
-        }
+        sendGearPacket(player, null, gearType, -1);
     }
 
     public static void sendGearUpdatePacket(EntityPlayerMP player, EnumModelPacket gearType, int subtype) {
+        sendGearPacket(player, null, gearType, subtype);
+    }
+
+    /**
+     * Sends a gear update about player to viewer only, or when viewer is null, to player and every player tracking them
+     * (that is, every client that has player's entity loaded). Clients that start tracking player later get the full
+     * state from {@link #onStartTracking}.
+     */
+    private static void sendGearPacket(EntityPlayerMP player, EntityPlayerMP viewer, EnumModelPacket gearType,
+            int subtype) {
         final MinecraftServer theServer = FMLCommonHandler.instance().getMinecraftServerInstance();
-        if (theServer != null
-                && PlayerUtil.getPlayerForUsernameVanilla(theServer, player.getGameProfile().getName()) != null) {
-            GalacticraftCore.packetPipeline.sendToAllAround(
-                    new PacketSimple(
-                            EnumSimplePacket.C_UPDATE_GEAR_SLOT,
-                            new Object[] { player.getGameProfile().getName(), gearType.ordinal(), subtype }),
-                    new TargetPoint(
-                            player.worldObj.provider.dimensionId,
-                            player.posX,
-                            player.posY,
-                            player.posZ,
-                            50.0D));
+        if (theServer == null
+                || PlayerUtil.getPlayerForUsernameVanilla(theServer, player.getGameProfile().getName()) == null) {
+            return;
         }
+
+        final PacketSimple packet = new PacketSimple(
+                EnumSimplePacket.C_UPDATE_GEAR_SLOT,
+                new Object[] { player.getGameProfile().getName(), gearType.ordinal(), subtype });
+        if (viewer != null) {
+            GalacticraftCore.packetPipeline.sendTo(packet, viewer);
+            return;
+        }
+
+        GalacticraftCore.packetPipeline.sendTo(packet, player);
+        if (player.worldObj instanceof WorldServer worldServer) {
+            for (EntityPlayer tracker : worldServer.getEntityTracker().getTrackingPlayers(player)) {
+                if (tracker instanceof EntityPlayerMP trackerMP && trackerMP.playerNetServerHandler != null) {
+                    GalacticraftCore.packetPipeline.sendTo(packet, trackerMP);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onStartTracking(PlayerEvent.StartTracking event) {
+        if (event.target instanceof EntityPlayerMP target && event.entityPlayer instanceof EntityPlayerMP viewer) {
+            final GCPlayerStats stats = GCPlayerStats.get(target);
+            if (stats != null) {
+                sendGearData(target, stats, viewer);
+            }
+        }
+    }
+
+    /**
+     * Sends the whole gear state of player (as of their last gear check) to viewer only. Unlike {@link #checkGear} with
+     * forceSend, this has no side effects on the player.
+     */
+    public static void sendGearData(EntityPlayerMP player, GCPlayerStats GCPlayer, EntityPlayerMP viewer) {
+        final ItemStack frequencyModule = GCPlayer.frequencyModuleInSlot;
+        sendGearPacket(
+                player,
+                viewer,
+                frequencyModule != null && frequencyModule.getItem() == GCItems.basicItem
+                        && frequencyModule.getItemDamage() == 19 ? EnumModelPacket.ADD_FREQUENCY_MODULE
+                                : EnumModelPacket.REMOVE_FREQUENCY_MODULE,
+                -1);
+        sendGearPacket(
+                player,
+                viewer,
+                GCPlayer.maskInSlot != null && GCPlayer.maskInSlot.getItem() == GCItems.oxMask ? EnumModelPacket.ADDMASK
+                        : EnumModelPacket.REMOVEMASK,
+                -1);
+        sendGearPacket(
+                player,
+                viewer,
+                GCPlayer.gearInSlot != null && GCPlayer.gearInSlot.getItem() == GCItems.oxygenGear
+                        ? EnumModelPacket.ADDGEAR
+                        : EnumModelPacket.REMOVEGEAR,
+                -1);
+
+        final EnumModelPacket leftTank = getTankModelPacket(GCPlayer.tankInSlot1, true);
+        sendGearPacket(player, viewer, leftTank != null ? leftTank : EnumModelPacket.REMOVE_LEFT_TANK, -1);
+        final EnumModelPacket rightTank = getTankModelPacket(GCPlayer.tankInSlot2, false);
+        sendGearPacket(player, viewer, rightTank != null ? rightTank : EnumModelPacket.REMOVE_RIGHT_TANK, -1);
+
+        if (GCPlayer.usingParachute) {
+            sendGearPacket(
+                    player,
+                    viewer,
+                    EnumModelPacket.ADD_PARACHUTE,
+                    GCPlayer.parachuteInSlot != null ? GCPlayer.parachuteInSlot.getItemDamage() : -1);
+        } else {
+            sendGearPacket(player, viewer, EnumModelPacket.REMOVE_PARACHUTE, -1);
+        }
+
+        final ItemStack[] thermal = { GCPlayer.thermalHelmetInSlot, GCPlayer.thermalChestplateInSlot,
+                GCPlayer.thermalLeggingsInSlot, GCPlayer.thermalBootsInSlot };
+        final EnumModelPacket[] thermalAdd = { EnumModelPacket.ADD_THERMAL_HELMET,
+                EnumModelPacket.ADD_THERMAL_CHESTPLATE, EnumModelPacket.ADD_THERMAL_LEGGINGS,
+                EnumModelPacket.ADD_THERMAL_BOOTS };
+        final EnumModelPacket[] thermalRemove = { EnumModelPacket.REMOVE_THERMAL_HELMET,
+                EnumModelPacket.REMOVE_THERMAL_CHESTPLATE, EnumModelPacket.REMOVE_THERMAL_LEGGINGS,
+                EnumModelPacket.REMOVE_THERMAL_BOOTS };
+        for (int i = 0; i < thermal.length; i++) {
+            final ThermalArmorEvent armorEvent = new ThermalArmorEvent(i, thermal[i]);
+            MinecraftForge.EVENT_BUS.post(armorEvent);
+            sendGearPacket(
+                    player,
+                    viewer,
+                    armorEvent.armorResult == ThermalArmorEvent.ArmorAddResult.ADD && thermal[i] != null ? thermalAdd[i]
+                            : thermalRemove[i],
+                    -1);
+        }
+
+        sendRenderGear(player, viewer, getRenderGearHidden(GCPlayer), ~0);
     }
 
     public enum EnumModelPacket {
