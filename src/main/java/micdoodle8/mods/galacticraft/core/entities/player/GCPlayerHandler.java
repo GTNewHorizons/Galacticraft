@@ -457,44 +457,50 @@ public class GCPlayerHandler {
 
             GCPlayer.lastThermalBootsInSlot = GCPlayer.thermalBootsInSlot;
         }
-        checkRenderGear(player);
+        checkRenderGear(player, forceSend);
     }
 
+    private static final EnumModelPacket[] RENDER_GEAR_SHOW = { EnumModelPacket.SHOWFREQUENCYMODULE,
+            EnumModelPacket.SHOWMASK, EnumModelPacket.SHOWGEAR, EnumModelPacket.SHOWLEFTTANK,
+            EnumModelPacket.SHOWRIGHTTANK, EnumModelPacket.SHOWTHERMALHELMET, EnumModelPacket.SHOWTHERMALCHESTPLATE,
+            EnumModelPacket.SHOWTHERMALLEGGINGS, EnumModelPacket.SHOWTHERMALBOOTS };
+    private static final EnumModelPacket[] RENDER_GEAR_HIDE = { EnumModelPacket.HIDEFREQUENCYMODULE,
+            EnumModelPacket.HIDEMASK, EnumModelPacket.HIDEGEAR, EnumModelPacket.HIDELEFTTANK,
+            EnumModelPacket.HIDERIGHTTANK, EnumModelPacket.HIDETHERMALHELMET, EnumModelPacket.HIDETHERMALCHESTPLATE,
+            EnumModelPacket.HIDETHERMALLEGGINGS, EnumModelPacket.HIDETHERMALBOOTS };
+
     public static void checkRenderGear(EntityPlayerMP player) {
+        checkRenderGear(player, false);
+    }
+
+    /**
+     * Sends the show/hide state of each gear slot to nearby players, but only for slots whose state changed since the
+     * last call (or all of them when forceSend is set, e.g. on a client's gear data request).
+     */
+    public static void checkRenderGear(EntityPlayerMP player, boolean forceSend) {
         GCPlayerStats GCPlayer = GCPlayerStats.get(player);
         boolean disableGearRender = ConfigManagerCore.disableGearRender;
-        if (GCPlayer.frequencyModuleInSlot != null
-                && (getTranslucencyLevel(GCPlayer.frequencyModuleInSlot) == 2 || disableGearRender))
-            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDEFREQUENCYMODULE);
-        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWFREQUENCYMODULE);
-        if (GCPlayer.maskInSlot != null && (getTranslucencyLevel(GCPlayer.maskInSlot) == 2 || disableGearRender))
-            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDEMASK);
-        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWMASK);
-        if (GCPlayer.gearInSlot != null && (getTranslucencyLevel(GCPlayer.gearInSlot) == 2 || disableGearRender))
-            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDEGEAR);
-        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWGEAR);
-        if (GCPlayer.tankInSlot1 != null && (getTranslucencyLevel(GCPlayer.tankInSlot1) == 2 || disableGearRender))
-            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDELEFTTANK);
-        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWLEFTTANK);
-        if (GCPlayer.tankInSlot2 != null && (getTranslucencyLevel(GCPlayer.tankInSlot2) == 2 || disableGearRender))
-            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDERIGHTTANK);
-        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWRIGHTTANK);
-        if (GCPlayer.thermalHelmetInSlot != null
-                && (getTranslucencyLevel(GCPlayer.thermalHelmetInSlot) == 2 || disableGearRender))
-            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDETHERMALHELMET);
-        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWTHERMALHELMET);
-        if (GCPlayer.thermalChestplateInSlot != null
-                && (getTranslucencyLevel(GCPlayer.thermalChestplateInSlot) == 2 || disableGearRender))
-            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDETHERMALCHESTPLATE);
-        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWTHERMALCHESTPLATE);
-        if (GCPlayer.thermalLeggingsInSlot != null
-                && (getTranslucencyLevel(GCPlayer.thermalLeggingsInSlot) == 2 || disableGearRender))
-            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDETHERMALLEGGINGS);
-        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWTHERMALLEGGINGS);
-        if (GCPlayer.thermalBootsInSlot != null
-                && (getTranslucencyLevel(GCPlayer.thermalBootsInSlot) == 2 || disableGearRender))
-            GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.HIDETHERMALBOOTS);
-        else GCPlayerHandler.sendGearUpdatePacket(player, EnumModelPacket.SHOWTHERMALBOOTS);
+        // Same slot order as RENDER_GEAR_SHOW / RENDER_GEAR_HIDE
+        ItemStack[] slots = { GCPlayer.frequencyModuleInSlot, GCPlayer.maskInSlot, GCPlayer.gearInSlot,
+                GCPlayer.tankInSlot1, GCPlayer.tankInSlot2, GCPlayer.thermalHelmetInSlot,
+                GCPlayer.thermalChestplateInSlot, GCPlayer.thermalLeggingsInSlot, GCPlayer.thermalBootsInSlot };
+
+        int hidden = 0;
+        for (int i = 0; i < slots.length; i++) {
+            if (slots[i] != null && (disableGearRender || getTranslucencyLevel(slots[i]) == 2)) hidden |= 1 << i;
+        }
+
+        int changed = forceSend || GCPlayer.lastRenderGearHidden == -1 ? ~0 : hidden ^ GCPlayer.lastRenderGearHidden;
+        GCPlayer.lastRenderGearHidden = hidden;
+        if (changed == 0) return;
+
+        for (int i = 0; i < slots.length; i++) {
+            if ((changed & 1 << i) != 0) {
+                GCPlayerHandler.sendGearUpdatePacket(
+                        player,
+                        (hidden & 1 << i) != 0 ? RENDER_GEAR_HIDE[i] : RENDER_GEAR_SHOW[i]);
+            }
+        }
     }
 
     protected void checkThermalStatus(EntityPlayerMP player, GCPlayerStats playerStats) {
