@@ -9,6 +9,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.api.prefab.entity.EntitySpaceshipBase;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 
@@ -30,6 +31,10 @@ public class OverlayLaunchCountdown extends Overlay {
         final int width = scaledresolution.getScaledWidth();
         final int height = scaledresolution.getScaledHeight();
         OverlayLaunchCountdown.minecraft.entityRenderer.setupOverlayRendering();
+        if (ClientProxyCore.dashboardLoaded && !DashboardHud.beginLaunchCountdown(width, height)) {
+            GL11.glEnable(GL11.GL_LIGHTING);
+            return;
+        }
 
         GL11.glPushMatrix();
 
@@ -53,5 +58,6 @@ public class OverlayLaunchCountdown extends Overlay {
 
         GL11.glPopMatrix();
         GL11.glEnable(GL11.GL_LIGHTING);
+        if (ClientProxyCore.dashboardLoaded) DashboardHud.endRender();
     }
 }
