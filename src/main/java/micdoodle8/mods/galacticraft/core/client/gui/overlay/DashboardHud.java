@@ -91,6 +91,33 @@ public final class DashboardHud {
         }
     }
 
+    // Each overlay calls its begin right after resetting the matrix. False means the player hid it, so skip drawing it
+    // and do not call endRender()
+
+    public static boolean beginOxygen(int screenWidth, int screenHeight) {
+        return HudRegistry.beginRender(OXYGEN, screenWidth, screenHeight);
+    }
+
+    public static boolean beginOxygenWarning(int screenWidth, int screenHeight) {
+        return HudRegistry.beginRender(OXYGEN_WARNING, screenWidth, screenHeight);
+    }
+
+    public static boolean beginLaunchCountdown(int screenWidth, int screenHeight) {
+        return HudRegistry.beginRender(LAUNCH_COUNTDOWN, screenWidth, screenHeight);
+    }
+
+    public static boolean beginLander(int screenWidth, int screenHeight) {
+        return HudRegistry.beginRender(LANDER, screenWidth, screenHeight);
+    }
+
+    public static boolean beginRocketAltitude(int screenWidth, int screenHeight) {
+        return HudRegistry.beginRender(ROCKET_ALTITUDE, screenWidth, screenHeight);
+    }
+
+    public static void endRender() {
+        HudRegistry.endRender();
+    }
+
     /** Like the real one: a red number at 4 times the normal text size. */
     private static void drawCountdownPreview(int screenWidth, int screenHeight) {
         FontRenderer font = Minecraft.getMinecraft().fontRenderer;
