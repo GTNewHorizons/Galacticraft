@@ -628,14 +628,10 @@ public class ConfigManagerCore {
             disableUpdateCheck = prop.getBoolean(false);
             propOrder.add(prop.getName());
 
-            final boolean thisIsMC172 = VersionUtil.mcVersion1_7_2;
-            prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Disable Biome Type Registrations", thisIsMC172);
-            prop.comment = "Biome Types will not be registered in the BiomeDictionary if this is set to true. Ignored (always true) for MC 1.7.2.";
+            prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Disable Biome Type Registrations", false);
+            prop.comment = "Biome Types will not be registered in the BiomeDictionary if this is set to true.";
             prop.setLanguageKey("gc.configgui.disableBiomeTypeRegistrations");
-            disableBiomeTypeRegistrations = prop.getBoolean(thisIsMC172);
-            if (thisIsMC172) {
-                disableBiomeTypeRegistrations = true;
-            }
+            disableBiomeTypeRegistrations = prop.getBoolean(false);
             propOrder.add(prop.getName());
 
             prop = config.get(Constants.CONFIG_CATEGORY_GENERAL, "Enable Space Race Manager Popup", false);

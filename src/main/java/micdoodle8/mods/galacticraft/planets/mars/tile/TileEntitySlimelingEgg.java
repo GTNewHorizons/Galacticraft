@@ -1,9 +1,9 @@
 package micdoodle8.mods.galacticraft.planets.mars.tile;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.management.PreYggdrasilConverter;
 import net.minecraft.tileentity.TileEntity;
 
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.planets.mars.entities.EntitySlimeling;
 
 public class TileEntitySlimelingEgg extends TileEntity {
@@ -47,7 +47,7 @@ public class TileEntitySlimelingEgg extends TileEntity {
                                 colorBlue);
 
                         slimeling.setPosition(this.xCoord + 0.5, this.yCoord + 1.0, this.zCoord + 0.5);
-                        VersionUtil.setSlimelingOwner(slimeling, this.lastTouchedPlayerUUID);
+                        slimeling.func_152115_b(this.lastTouchedPlayerUUID); // setOwner
                         slimeling.setOwnerUsername(this.lastTouchedPlayerName);
 
                         if (!this.worldObj.isRemote) {
@@ -68,7 +68,19 @@ public class TileEntitySlimelingEgg extends TileEntity {
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
         this.timeToHatch = nbt.getInteger("TimeToHatch");
-        VersionUtil.readSlimelingEggFromNBT(this, nbt);
+
+        String ownerUUID = "";
+        if (nbt.hasKey("OwnerUUID", 8)) {
+            ownerUUID = nbt.getString("OwnerUUID");
+        } else { // Convert data from old saves?
+            final String oldOwner = nbt.getString("Owner");
+            ownerUUID = PreYggdrasilConverter.func_152719_a(oldOwner); // convertUUID
+        }
+
+        if (ownerUUID.length() > 0) {
+            this.lastTouchedPlayerUUID = ownerUUID;
+        }
+
         this.lastTouchedPlayerName = nbt.getString("OwnerUsername");
     }
 
