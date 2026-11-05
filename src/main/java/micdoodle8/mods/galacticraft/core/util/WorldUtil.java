@@ -1309,6 +1309,10 @@ public class WorldUtil {
      * It is NOT a good idea for sub-mods to make the registration order of planets variable or dependent on configs.
      */
     public static void decodePlanetsListClient(List<Object> data) {
+        if (FMLCommonHandler.instance().getSide().isServer()) {
+            return;
+        }
+
         try {
             if (ConfigManagerCore.enableDebug) {
                 GCLog.info("GC connecting to server: received planets dimension ID list.");
@@ -1387,6 +1391,10 @@ public class WorldUtil {
     }
 
     public static void decodeSpaceStationListClient(List<Object> data) {
+        if (FMLCommonHandler.instance().getSide().isServer()) {
+            return;
+        }
+
         try {
             if (WorldUtil.registeredSpaceStations != null) {
                 for (final Integer registeredID : WorldUtil.registeredSpaceStations.keySet()) {
