@@ -15,6 +15,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 
@@ -40,6 +41,19 @@ public class GCCoreUtil {
             return null;
         }
         return player.worldObj.getTileEntity(x, y, z);
+    }
+
+    /**
+     * Whether the position is close enough that the player could already be tracking whatever is there. Use this for
+     * requests the client sends for things it has loaded, rather than for things it is reaching.
+     */
+    public static boolean isWithinViewDistance(EntityPlayer player, double x, double z) {
+        final MinecraftServer server = MinecraftServer.getServer();
+        if (server == null) {
+            return false;
+        }
+        final double range = server.getConfigurationManager().getViewDistance() * 16.0D + 16.0D;
+        return Math.abs(player.posX - x) <= range && Math.abs(player.posZ - z) <= range;
     }
 
     /**
