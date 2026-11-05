@@ -1055,7 +1055,8 @@ public class PacketSimple extends Packet implements IPacket {
                 }
                 break;
             case S_UPDATE_DISABLEABLE_BUTTON:
-                final TileEntity tileAt = player.worldObj.getTileEntity(
+                final TileEntity tileAt = GCCoreUtil.getTileInReach(
+                        player,
                         (Integer) this.data.get(0),
                         (Integer) this.data.get(1),
                         (Integer) this.data.get(2));
@@ -1085,7 +1086,8 @@ public class PacketSimple extends Packet implements IPacket {
                 player.openGui(GalacticraftCore.instance, GuiIdsCore.EXTENDED_INVENTORY, player.worldObj, 0, 0, 0);
                 break;
             case S_ON_ADVANCED_GUI_CLICKED_INT:
-                final TileEntity tile1 = player.worldObj.getTileEntity(
+                final TileEntity tile1 = GCCoreUtil.getTileInReach(
+                        player,
                         (Integer) this.data.get(1),
                         (Integer) this.data.get(2),
                         (Integer) this.data.get(3));
@@ -1132,7 +1134,8 @@ public class PacketSimple extends Packet implements IPacket {
                 }
                 break;
             case S_ON_ADVANCED_GUI_CLICKED_STRING:
-                final TileEntity tile2 = player.worldObj.getTileEntity(
+                final TileEntity tile2 = GCCoreUtil.getTileInReach(
+                        player,
                         (Integer) this.data.get(1),
                         (Integer) this.data.get(2),
                         (Integer) this.data.get(3));
@@ -1319,7 +1322,8 @@ public class PacketSimple extends Packet implements IPacket {
                 }
                 break;
             case S_REQUEST_ARCLAMP_FACING:
-                final TileEntity tileAL = player.worldObj.getTileEntity(
+                final TileEntity tileAL = GCCoreUtil.getLoadedTile(
+                        player,
                         (Integer) this.data.get(0),
                         (Integer) this.data.get(1),
                         (Integer) this.data.get(2));
@@ -1331,7 +1335,8 @@ public class PacketSimple extends Packet implements IPacket {
                 stats.buildFlags = (Integer) this.data.get(0);
                 break;
             case S_UPDATE_VIEWSCREEN_REQUEST:
-                final TileEntity tile = player.worldObj.getTileEntity(
+                final TileEntity tile = GCCoreUtil.getLoadedTile(
+                        player,
                         (Integer) this.data.get(1),
                         (Integer) this.data.get(2),
                         (Integer) this.data.get(3));
