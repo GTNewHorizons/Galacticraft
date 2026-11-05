@@ -18,7 +18,10 @@ import net.minecraft.launchwrapper.Launch;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
+import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.entities.EntityLanderBase;
@@ -57,13 +60,35 @@ public class GCCoreUtil {
     }
 
     /**
-     * As getLoadedTile, but also null unless the tile is within the player's normal interaction range.
+     * As getLoadedTile, but also null unless the tile is within the player's normal interaction range and protection
+     * mods allow the sender to interact with it.
      */
     public static TileEntity getTileInReach(EntityPlayer player, int x, int y, int z) {
         if (player.getDistanceSq(x + 0.5D, y + 0.5D, z + 0.5D) > 64.0D) {
             return null;
         }
-        return getLoadedTile(player, x, y, z);
+
+        final TileEntity tile = getLoadedTile(player, x, y, z);
+
+        return tile != null && canInteractWith(player, x, y, z) ? tile : null;
+    }
+
+    /**
+     * Posts a PlayerInteractEvent so that claim and protection mods can deny a change made by packet, exactly as they
+     * would deny the right click that opens the tile's GUI.
+     */
+    private static boolean canInteractWith(EntityPlayer player, int x, int y, int z) {
+        final PlayerInteractEvent event = new PlayerInteractEvent(
+                player,
+                PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK,
+                x,
+                y,
+                z,
+                0,
+                player.worldObj);
+        MinecraftForge.EVENT_BUS.post(event);
+
+        return !event.isCanceled() && event.useBlock != Event.Result.DENY;
     }
 
     static {
