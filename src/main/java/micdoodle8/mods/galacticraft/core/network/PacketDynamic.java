@@ -15,6 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class PacketDynamic implements IPacket {
 
@@ -143,8 +144,15 @@ public class PacketDynamic implements IPacket {
 
                 break;
             case 1:
-                final TileEntity tile = player.worldObj
-                        .getTileEntity((Integer) this.data[0], (Integer) this.data[1], (Integer) this.data[2]);
+                final int x = (Integer) this.data[0];
+                final int z = (Integer) this.data[2];
+
+                // Answer only for a tile the sender could be tracking, and never load a chunk for it
+                if (side == Side.SERVER && !GCCoreUtil.isWithinViewDistance(player, x, z)) {
+                    break;
+                }
+
+                final TileEntity tile = GCCoreUtil.getLoadedTile(player, x, (Integer) this.data[1], z);
 
                 if (tile instanceof IPacketReceiver) {
                     ((IPacketReceiver) tile).handlePacketData(side, player);
