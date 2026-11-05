@@ -184,7 +184,7 @@ public class PacketSimpleMars implements IPacket {
                             break;
                         case 2:
                             if (player == slimeling.getOwner() && !slimeling.worldObj.isRemote) {
-                                slimeling.age += 5000;
+                                slimeling.age = Math.min(slimeling.age + 5000, slimeling.MAX_AGE);
                             }
                             break;
                         case 3:
