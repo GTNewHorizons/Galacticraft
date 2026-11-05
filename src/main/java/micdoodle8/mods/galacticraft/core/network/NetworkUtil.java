@@ -125,7 +125,7 @@ public class NetworkUtil {
         }
     }
 
-    private static int readLength(ByteBuf buffer) {
+    static int readLength(ByteBuf buffer) {
         final int length = buffer.readInt();
         if (length < 0 || length > buffer.readableBytes()) {
             throw new IllegalArgumentException("Bad array length " + length);

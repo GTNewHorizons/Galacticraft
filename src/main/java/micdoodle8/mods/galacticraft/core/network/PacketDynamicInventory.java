@@ -87,7 +87,7 @@ public class PacketDynamicInventory implements IPacket {
                 break;
         }
 
-        this.stacks = new ItemStack[buffer.readInt()];
+        this.stacks = new ItemStack[NetworkUtil.readLength(buffer)];
 
         for (int i = 0; i < this.stacks.length; i++) {
             try {
