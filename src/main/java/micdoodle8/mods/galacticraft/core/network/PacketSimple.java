@@ -1233,7 +1233,8 @@ public class PacketSimple extends Packet implements IPacket {
                     final Integer teamInvitedTo = (Integer) this.data.get(1);
                     final SpaceRace race = SpaceRaceManager.getSpaceRaceFromID(teamInvitedTo);
 
-                    if (race != null) {
+                    // Only the owner may invite: S_ADD_RACE_PLAYER trusts spaceRaceInviteTeamID
+                    if (race != null && SpaceRaceManager.isOwner(race, player.getGameProfile().getName())) {
                         GCPlayerStats.get(playerInvited).spaceRaceInviteTeamID = teamInvitedTo;
                         final String dA = EnumColor.DARK_AQUA.getCode();
                         final String bG = EnumColor.BRIGHT_GREEN.getCode();
