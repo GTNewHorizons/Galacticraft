@@ -942,9 +942,9 @@ public class PacketSimple extends Packet implements IPacket {
                 try {
                     final WorldProvider provider = WorldUtil.getProviderForNameServer((String) this.data.get(0));
 
-                    if (provider == null || !WorldUtil
-                            .getPossibleDimensionsForSpaceshipTier(stats.spaceshipTier, playerBase)
-                            .contains(provider.dimensionId)) {
+                    if (provider == null
+                            || !WorldUtil.getPossibleDimensionsForSpaceshipTier(stats.spaceshipTier, playerBase)
+                                    .contains(provider.dimensionId)) {
                         GCLog.severe(
                                 "Player " + player.getGameProfile().getName()
                                         + " requested an unavailable destination: "
@@ -1189,11 +1189,27 @@ public class PacketSimple extends Packet implements IPacket {
                     playerList.add((String) this.data.get(i));
                 }
 
-                final boolean previousData = SpaceRaceManager.getSpaceRaceFromID(teamID) != null;
+                final SpaceRace oldRaceData = SpaceRaceManager.getSpaceRaceFromID(teamID);
+                final boolean previousData = oldRaceData != null;
+                final String senderName = player.getGameProfile().getName();
+
+                // The sender must be the team owner, and may not list players who are not already members
+                if (playerList.isEmpty() || !playerList.get(0).equals(senderName)) {
+                    break;
+                }
+
+                final boolean ownsTeam = SpaceRaceManager.isOwner(oldRaceData, senderName);
+
+                if (ownsTeam) {
+                    playerList.retainAll(oldRaceData.getPlayerNames());
+                } else if (playerList.size() > 1) {
+                    break;
+                }
 
                 final SpaceRace newRace = new SpaceRace(playerList, teamName, flagData, teamColor);
 
-                if (teamID > 0) {
+                // Only reuse an existing id when the sender owns that team, otherwise keep the fresh one
+                if (teamID > 0 && (ownsTeam || !previousData)) {
                     newRace.setSpaceRaceID(teamID);
                 }
 
@@ -1249,6 +1265,11 @@ public class PacketSimple extends Packet implements IPacket {
                 if (race != null) {
                     final String playerToRemove = (String) this.data.get(0);
 
+                    if (!SpaceRaceManager.isOwner(race, player.getGameProfile().getName())
+                            && !playerToRemove.equals(player.getGameProfile().getName())) {
+                        break;
+                    }
+
                     if (!race.getPlayerNames().remove(playerToRemove)) {
                         player.addChatMessage(
                                 new ChatComponentText(
@@ -1264,6 +1285,13 @@ public class PacketSimple extends Packet implements IPacket {
 
                 if (spaceRaceToAddPlayer != null) {
                     final String playerToAdd = (String) this.data.get(0);
+
+                    // A player may only add themself, and only to the team that invited them
+                    if (!playerToAdd.equals(player.getGameProfile().getName())
+                            || stats.spaceRaceInviteTeamID != spaceRaceToAddPlayer.getSpaceRaceID()) {
+                        break;
+                    }
+                    stats.spaceRaceInviteTeamID = -1;
 
                     if (!spaceRaceToAddPlayer.getPlayerNames().contains(playerToAdd)) {
                         SpaceRace oldRace = null;
