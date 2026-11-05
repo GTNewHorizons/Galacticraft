@@ -235,6 +235,12 @@ public class PacketSimpleMars implements IPacket {
                         (Integer) this.data.get(2),
                         (Integer) this.data.get(3));
 
+                // Action 5 is a refresh sent by any viewer, the rest are owner-only as in the GUI
+                if (tile instanceof TileEntityLaunchController controller && (Integer) this.data.get(0) != 5
+                        && !player.getGameProfile().getName().equals(controller.getOwnerName())) {
+                    break;
+                }
+
                 switch ((Integer) this.data.get(0)) {
                     case 0:
                         if (tile instanceof TileEntityLaunchController launchController) {

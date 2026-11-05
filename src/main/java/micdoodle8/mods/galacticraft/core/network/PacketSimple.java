@@ -96,6 +96,7 @@ import micdoodle8.mods.galacticraft.core.util.MapUtil;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
 import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
+import micdoodle8.mods.galacticraft.core.world.IChunkLoader;
 import micdoodle8.mods.galacticraft.core.wrappers.FlagData;
 import micdoodle8.mods.galacticraft.core.wrappers.Footprint;
 import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
@@ -1083,6 +1084,12 @@ public class PacketSimple extends Packet implements IPacket {
                         (Integer) this.data.get(1),
                         (Integer) this.data.get(2));
 
+                // The launch controller is the only chunk loader, and its GUI is owner-only
+                if (tileAt instanceof IChunkLoader loader
+                        && !player.getGameProfile().getName().equals(loader.getOwnerName())) {
+                    break;
+                }
+
                 if (tileAt instanceof IDisableableMachine machine) {
                     machine.setDisabled((Integer) this.data.get(3), !machine.getDisabled((Integer) this.data.get(3)));
                 }
@@ -1113,6 +1120,11 @@ public class PacketSimple extends Packet implements IPacket {
                         (Integer) this.data.get(1),
                         (Integer) this.data.get(2),
                         (Integer) this.data.get(3));
+
+                if (tile1 instanceof TileEntityAirLockController airlock
+                        && !player.getGameProfile().getName().equals(airlock.ownerName)) {
+                    break;
+                }
 
                 switch ((Integer) this.data.get(0)) {
                     case 0:
@@ -1161,6 +1173,11 @@ public class PacketSimple extends Packet implements IPacket {
                         (Integer) this.data.get(1),
                         (Integer) this.data.get(2),
                         (Integer) this.data.get(3));
+
+                if (tile2 instanceof TileEntityAirLockController airlock
+                        && !player.getGameProfile().getName().equals(airlock.ownerName)) {
+                    break;
+                }
 
                 switch ((Integer) this.data.get(0)) {
                     case 0:
