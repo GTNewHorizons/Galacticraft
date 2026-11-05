@@ -61,6 +61,9 @@ public class PacketSimpleMars implements IPacket {
         }
 
         public static EnumSimplePacketMars fromOrdinal(int ordinal) {
+            if (ordinal < 0 || ordinal >= VALUES.length) {
+                throw new IllegalArgumentException("Bad EnumSimplePacketMars ordinal " + ordinal);
+            }
             return VALUES[ordinal];
         }
     }

@@ -54,6 +54,9 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
         private static final EnumLaunchPhase[] VALUES = values();
 
         public static EnumLaunchPhase fromOrdinal(int ordinal) {
+            if (ordinal < 0 || ordinal >= VALUES.length) {
+                throw new IllegalArgumentException("Bad EnumLaunchPhase ordinal " + ordinal);
+            }
             return VALUES[ordinal];
         }
     }

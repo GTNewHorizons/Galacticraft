@@ -196,6 +196,9 @@ public class PacketSimple extends Packet implements IPacket {
         }
 
         public static EnumSimplePacket fromOrdinal(int ordinal) {
+            if (ordinal < 0 || ordinal >= VALUES.length) {
+                throw new IllegalArgumentException("Bad EnumSimplePacket ordinal " + ordinal);
+            }
             return VALUES[ordinal];
         }
     }

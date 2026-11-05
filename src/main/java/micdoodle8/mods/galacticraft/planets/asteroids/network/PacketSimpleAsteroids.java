@@ -57,6 +57,9 @@ public class PacketSimpleAsteroids implements IPacket {
         }
 
         public static EnumSimplePacketAsteroids fromOrdinal(int ordinal) {
+            if (ordinal < 0 || ordinal >= VALUES.length) {
+                throw new IllegalArgumentException("Bad EnumSimplePacketAsteroids ordinal " + ordinal);
+            }
             return VALUES[ordinal];
         }
     }
