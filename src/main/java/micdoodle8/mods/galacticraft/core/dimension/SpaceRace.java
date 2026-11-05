@@ -47,7 +47,7 @@ public class SpaceRace {
         if (ConfigManagerCore.enableDebug) {
             GCLog.info("Loading spacerace data for team " + this.teamName);
         }
-        this.spaceRaceID = nbt.getInteger("SpaceRaceID");
+        this.setSpaceRaceID(nbt.getInteger("SpaceRaceID"));
         this.ticksSpent = (int) nbt.getLong("TicksSpent"); // Deal with legacy error
         this.flagData = FlagData.readFlagData(nbt);
         this.teamColor = new Vector3(
@@ -154,6 +154,8 @@ public class SpaceRace {
 
     public void setSpaceRaceID(int raceID) {
         this.spaceRaceID = raceID;
+        // A later team must not be handed this id, which would replace this one
+        SpaceRace.lastSpaceRaceID = Math.max(SpaceRace.lastSpaceRaceID, raceID);
     }
 
     public int getSpaceRaceID() {
