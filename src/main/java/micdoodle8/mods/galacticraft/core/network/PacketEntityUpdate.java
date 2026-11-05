@@ -77,9 +77,8 @@ public class PacketEntityUpdate implements IPacket {
         final Entity entity = player.worldObj.getEntityByID(this.entityID);
 
         // An unowned entity is the server's to simulate: a client may only sync one it owns
-        if (entity instanceof IEntityFullSync controllable
-                && (player.worldObj.isRemote
-                        || player.getUniqueID().equals(((IEntityFullSync) entity).getOwnerUUID()))) {
+        if (entity instanceof IEntityFullSync controllable && (player.worldObj.isRemote
+                || player.getUniqueID().equals(((IEntityFullSync) entity).getOwnerUUID()))) {
             controllable.setPositionRotationAndMotion(
                     this.position.x,
                     this.position.y,
