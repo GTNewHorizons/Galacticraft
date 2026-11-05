@@ -933,7 +933,25 @@ public class PacketSimple extends Packet implements IPacket {
                                 playerBase.theItemInWorldManager.getGameType()));
                 break;
             case S_TELEPORT_ENTITY:
+                // Only honour a destination the server offered this player in the selection screen
+                if (!stats.usingPlanetSelectionGui) {
+                    break;
+                }
+                stats.usingPlanetSelectionGui = false;
+
                 try {
+                    final WorldProvider provider = WorldUtil.getProviderForNameServer((String) this.data.get(0));
+
+                    if (provider == null || !WorldUtil
+                            .getPossibleDimensionsForSpaceshipTier(stats.spaceshipTier, playerBase)
+                            .contains(provider.dimensionId)) {
+                        GCLog.severe(
+                                "Player " + player.getGameProfile().getName()
+                                        + " requested an unavailable destination: "
+                                        + this.data.get(0));
+                        break;
+                    }
+
                     final Entity fakeEntity = new EntityCelestialFake(
                             player.worldObj,
                             player.posX,
@@ -942,7 +960,6 @@ public class PacketSimple extends Packet implements IPacket {
                             0.0F);
                     player.worldObj.spawnEntityInWorld(fakeEntity);
                     player.mountEntity(fakeEntity);
-                    final WorldProvider provider = WorldUtil.getProviderForNameServer((String) this.data.get(0));
                     final Integer dim = provider.dimensionId;
                     GCLog.info("Found matching world (" + dim.toString() + ") for name: " + this.data.get(0));
 
