@@ -112,8 +112,6 @@ public class PacketDynamic implements IPacket {
 
                 break;
         }
-
-        buffer.skipBytes(buffer.readableBytes());
     }
 
     @Override

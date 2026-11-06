@@ -155,9 +155,7 @@ public class NetworkUtil {
                 objList.add(buffer.readLong());
             } else if (clazz.equals(byte[].class)) {
                 final byte[] bytes = new byte[readLength(buffer)];
-                for (int i = 0; i < bytes.length; i++) {
-                    bytes[i] = buffer.readByte();
-                }
+                buffer.readBytes(bytes);
                 objList.add(bytes);
             } else if (clazz.equals(EnergyStorage.class)) {
                 final EnergyStorage storage = new EnergyStorage(
@@ -262,9 +260,7 @@ public class NetworkUtil {
             return new UUID(buffer.readLong(), buffer.readLong());
         } else if (dataValue.equals(byte[].class)) {
             final byte[] bytes = new byte[readLength(buffer)];
-            for (int i = 0; i < bytes.length; i++) {
-                bytes[i] = buffer.readByte();
-            }
+            buffer.readBytes(bytes);
             return bytes;
         } else if (dataValue.equals(EnergyStorage.class)) {
             final float capacity = buffer.readFloat();
