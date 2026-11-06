@@ -234,7 +234,7 @@ public abstract class EntityTieredRocket extends EntityAutoRocket
 
     @Override
     public void decodePacketdata(ByteBuf buffer) {
-        this.rocketType = EnumRocketType.VALUES[buffer.readInt()];
+        this.rocketType = EnumRocketType.fromIndex(buffer.readInt());
         super.decodePacketdata(buffer);
 
         if (buffer.readBoolean()) {

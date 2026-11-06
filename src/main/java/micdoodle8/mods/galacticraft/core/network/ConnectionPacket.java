@@ -8,7 +8,6 @@ import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.network.NetworkManager;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -112,13 +111,6 @@ public class ConnectionPacket {
         final FMLProxyPacket pkt = event.packet;
 
         this.onFMLProxyPacketData(event.manager, pkt, Minecraft.getMinecraft().thePlayer);
-    }
-
-    @SubscribeEvent
-    public void onPacketData(FMLNetworkEvent.ServerCustomPacketEvent event) {
-        final FMLProxyPacket pkt = event.packet;
-
-        this.onFMLProxyPacketData(event.manager, pkt, ((NetHandlerPlayServer) event.handler).playerEntity);
     }
 
     public void onFMLProxyPacketData(NetworkManager manager, FMLProxyPacket packet, EntityPlayer player) {

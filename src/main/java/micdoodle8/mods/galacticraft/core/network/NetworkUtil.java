@@ -125,6 +125,14 @@ public class NetworkUtil {
         }
     }
 
+    static int readLength(ByteBuf buffer) {
+        final int length = buffer.readInt();
+        if (length < 0 || length > buffer.readableBytes()) {
+            throw new IllegalArgumentException("Bad array length " + length);
+        }
+        return length;
+    }
+
     public static ArrayList<Object> decodeData(Class<?>[] types, ByteBuf buffer) {
         final ArrayList<Object> objList = new ArrayList<>();
 
@@ -146,10 +154,8 @@ public class NetworkUtil {
             } else if (clazz.equals(Long.class)) {
                 objList.add(buffer.readLong());
             } else if (clazz.equals(byte[].class)) {
-                final byte[] bytes = new byte[buffer.readInt()];
-                for (int i = 0; i < bytes.length; i++) {
-                    bytes[i] = buffer.readByte();
-                }
+                final byte[] bytes = new byte[readLength(buffer)];
+                buffer.readBytes(bytes);
                 objList.add(bytes);
             } else if (clazz.equals(EnergyStorage.class)) {
                 final EnergyStorage storage = new EnergyStorage(
@@ -173,6 +179,12 @@ public class NetworkUtil {
             } else if (clazz.equals(FlagData.class)) {
                 final int width = buffer.readInt();
                 final int height = buffer.readInt();
+                if (width < 0 || width > FlagData.MAX_WIDTH
+                        || height < 0
+                        || height > FlagData.MAX_HEIGHT
+                        || width * height * 3 > buffer.readableBytes()) {
+                    throw new IllegalArgumentException("Bad flag size " + width + "x" + height);
+                }
                 final FlagData flagData = new FlagData(width, height);
 
                 for (int i = 0; i < width; i++) {
@@ -247,10 +259,8 @@ public class NetworkUtil {
         } else if (dataValue.equals(UUID.class)) {
             return new UUID(buffer.readLong(), buffer.readLong());
         } else if (dataValue.equals(byte[].class)) {
-            final byte[] bytes = new byte[buffer.readInt()];
-            for (int i = 0; i < bytes.length; i++) {
-                bytes[i] = buffer.readByte();
-            }
+            final byte[] bytes = new byte[readLength(buffer)];
+            buffer.readBytes(bytes);
             return bytes;
         } else if (dataValue.equals(EnergyStorage.class)) {
             final float capacity = buffer.readFloat();

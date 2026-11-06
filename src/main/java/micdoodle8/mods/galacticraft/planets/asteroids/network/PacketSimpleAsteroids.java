@@ -19,6 +19,7 @@ import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.core.network.IPacket;
 import micdoodle8.mods.galacticraft.core.network.NetworkUtil;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
 import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityGrapple;
 import micdoodle8.mods.galacticraft.planets.asteroids.tile.TileEntityMinerBase;
@@ -56,6 +57,9 @@ public class PacketSimpleAsteroids implements IPacket {
         }
 
         public static EnumSimplePacketAsteroids fromOrdinal(int ordinal) {
+            if (ordinal < 0 || ordinal >= VALUES.length) {
+                throw new IllegalArgumentException("Bad EnumSimplePacketAsteroids ordinal " + ordinal);
+            }
             return VALUES[ordinal];
         }
     }
@@ -152,7 +156,8 @@ public class PacketSimpleAsteroids implements IPacket {
     public void handleServerSide(EntityPlayer player) {
         switch (this.type) {
             case S_UPDATE_ADVANCED_GUI:
-                TileEntity tile = player.worldObj.getTileEntity(
+                TileEntity tile = GCCoreUtil.getTileInReach(
+                        player,
                         (Integer) this.data.get(1),
                         (Integer) this.data.get(2),
                         (Integer) this.data.get(3));
@@ -173,7 +178,8 @@ public class PacketSimpleAsteroids implements IPacket {
                 }
                 break;
             case S_REQUEST_MINERBASE_FACING:
-                tile = player.worldObj.getTileEntity(
+                tile = GCCoreUtil.getLoadedTile(
+                        player,
                         (Integer) this.data.get(0),
                         (Integer) this.data.get(1),
                         (Integer) this.data.get(2));

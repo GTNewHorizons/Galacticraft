@@ -9,13 +9,19 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.Language;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
+import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.entities.EntityLanderBase;
@@ -28,6 +34,62 @@ public class GCCoreUtil {
 
     public static int nextID = 0;
     private static boolean deobfuscated;
+
+    /**
+     * The tile at these coordinates, or null if the chunk is not already loaded. Never loads a chunk, so a client
+     * cannot use packet coordinates to load arbitrary chunks.
+     */
+    public static TileEntity getLoadedTile(EntityPlayer player, int x, int y, int z) {
+        if (!player.worldObj.blockExists(x, y, z)) {
+            return null;
+        }
+        return player.worldObj.getTileEntity(x, y, z);
+    }
+
+    /**
+     * Whether the position is close enough that the player could already be tracking whatever is there. Use this for
+     * requests the client sends for things it has loaded, rather than for things it is reaching.
+     */
+    public static boolean isWithinViewDistance(EntityPlayer player, double x, double z) {
+        final MinecraftServer server = MinecraftServer.getServer();
+        if (server == null) {
+            return false;
+        }
+        final double range = server.getConfigurationManager().getViewDistance() * 16.0D + 16.0D;
+        return Math.abs(player.posX - x) <= range && Math.abs(player.posZ - z) <= range;
+    }
+
+    /**
+     * As getLoadedTile, but also null unless the tile is within the player's normal interaction range and protection
+     * mods allow the sender to interact with it.
+     */
+    public static TileEntity getTileInReach(EntityPlayer player, int x, int y, int z) {
+        if (player.getDistanceSq(x + 0.5D, y + 0.5D, z + 0.5D) > 64.0D) {
+            return null;
+        }
+
+        final TileEntity tile = getLoadedTile(player, x, y, z);
+
+        return tile != null && canInteractWith(player, x, y, z) ? tile : null;
+    }
+
+    /**
+     * Posts a PlayerInteractEvent so that claim and protection mods can deny a change made by packet, exactly as they
+     * would deny the right click that opens the tile's GUI.
+     */
+    private static boolean canInteractWith(EntityPlayer player, int x, int y, int z) {
+        final PlayerInteractEvent event = new PlayerInteractEvent(
+                player,
+                PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK,
+                x,
+                y,
+                z,
+                0,
+                player.worldObj);
+        MinecraftForge.EVENT_BUS.post(event);
+
+        return !event.isCanceled() && event.useBlock != Event.Result.DENY;
+    }
 
     static {
         try {
