@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.tick.KeyHandlerClient;
 import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
@@ -31,6 +32,9 @@ public class OverlayLander extends Overlay {
         final int width = scaledresolution.getScaledWidth();
         final int height = scaledresolution.getScaledHeight();
         OverlayLander.minecraft.entityRenderer.setupOverlayRendering();
+        if (ClientProxyCore.dashboardLoaded && !DashboardHud.beginLander(width, height)) {
+            return;
+        }
 
         GL11.glPushMatrix();
 
@@ -73,5 +77,7 @@ public class OverlayLander extends Overlay {
                     height / 3,
                     color);
         }
+
+        if (ClientProxyCore.dashboardLoaded) DashboardHud.endRender();
     }
 }

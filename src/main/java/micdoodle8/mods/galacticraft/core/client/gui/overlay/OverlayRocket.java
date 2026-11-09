@@ -15,6 +15,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 
 @SideOnly(Side.CLIENT)
@@ -34,9 +35,12 @@ public class OverlayRocket extends Overlay {
                 OverlayRocket.minecraft,
                 OverlayRocket.minecraft.displayWidth,
                 OverlayRocket.minecraft.displayHeight);
-        scaledresolution.getScaledWidth();
+        final int width = scaledresolution.getScaledWidth();
         final int height = scaledresolution.getScaledHeight();
         OverlayRocket.minecraft.entityRenderer.setupOverlayRendering();
+        if (ClientProxyCore.dashboardLoaded && !DashboardHud.beginRocketAltitude(width, height)) {
+            return;
+        }
         GL11.glDepthMask(true);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -135,5 +139,6 @@ public class OverlayRocket extends Overlay {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glEnable(GL11.GL_LIGHTING);
+        if (ClientProxyCore.dashboardLoaded) DashboardHud.endRender();
     }
 }

@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
@@ -32,6 +33,9 @@ public class OverlayOxygenWarning extends Overlay {
         final int width = scaledresolution.getScaledWidth();
         final int height = scaledresolution.getScaledHeight();
         OverlayOxygenWarning.minecraft.entityRenderer.setupOverlayRendering();
+        if (ClientProxyCore.dashboardLoaded && !DashboardHud.beginOxygenWarning(width, height)) {
+            return;
+        }
         GL11.glEnable(GL11.GL_COLOR_MATERIAL);
         RenderHelper.enableStandardItemLighting();
 
@@ -54,5 +58,6 @@ public class OverlayOxygenWarning extends Overlay {
                 ColorUtil.to32BitColor(alpha, 255, 0, 0));
 
         GL11.glPopMatrix();
+        if (ClientProxyCore.dashboardLoaded) DashboardHud.endRender();
     }
 }
