@@ -47,7 +47,6 @@ import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.planets.GalacticraftPlanets;
 import micdoodle8.mods.galacticraft.planets.GuiIdsPlanets;
 import micdoodle8.mods.galacticraft.planets.IPlanetsModule;
@@ -284,7 +283,7 @@ public class MarsModule implements IPlanetsModule {
         final int nextEggID = GCCoreUtil.getNextValidEggID();
         if (nextEggID < 65536) {
             EntityList.IDtoClassMapping.put(nextEggID, var0);
-            VersionUtil.putClassToIDMapping(var0, nextEggID);
+            EntityList.classToIDMapping.put(var0, nextEggID);
             EntityList.entityEggs.put(nextEggID, new EntityList.EntityEggInfo(nextEggID, back, fore));
         }
     }

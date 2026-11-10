@@ -49,7 +49,9 @@ public enum Mixins implements IMixins {
     DONOR_CAPES(new MixinBuilder()
             .addClientMixins("minecraft.AbstractClientPlayerMixin")),
     CUSTOM_MUSIC(new MixinBuilder()
-            .addClientMixins("minecraft.MusicTickerMixin"));
+            .addClientMixins("minecraft.MusicTickerMixin")),
+    ACCESS_BLOCK_MEMBERS(new MixinBuilder()
+            .addCommonMixins("minecraft.BlockAccessor"));
     // spotless:on
 
     private final MixinBuilder builder;

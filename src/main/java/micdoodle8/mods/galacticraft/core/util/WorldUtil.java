@@ -39,8 +39,10 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.ChunkCache;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
@@ -440,7 +442,7 @@ public class WorldUtil {
 
             if (!ConfigManagerCore.spaceStationsRequirePermission || data.getAllowedAll()
                     || data.getAllowedPlayers().contains(playerBase.getGameProfile().getName())
-                    || VersionUtil.isPlayerOpped(playerBase)) {
+                    || PlayerUtil.isPlayerOpped(playerBase)) {
                 // Satellites always reachable from their own homeworld or from its other
                 // satellites
                 if (playerBase != null) {
@@ -1740,5 +1742,17 @@ public class WorldUtil {
             }
         }
         world.provider.setWorldTime(newTime);
+    }
+
+    public static World getWorldFromIBlockAccess(IBlockAccess iba) {
+        if (iba instanceof World) {
+            return (World) iba;
+        }
+
+        if (iba instanceof ChunkCache) {
+            return ((ChunkCache) iba).worldObj;
+        }
+
+        return null;
     }
 }
