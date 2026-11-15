@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -16,6 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class PacketDynamic implements IPacket {
 
@@ -73,13 +73,11 @@ public class PacketDynamic implements IPacket {
         this.type = buffer.readInt();
         this.dimID = buffer.readInt();
 
-        World world = GalacticraftCore.proxy.getWorldForID(this.dimID);
+        // A serverbound packet is only an update request: never let a client write entity or tile state
+        final boolean server = FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER;
+        final World world = server ? null : GalacticraftCore.proxy.getWorldForID(this.dimID);
 
-        if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
-            world = MinecraftServer.getServer().worldServerForDimension(this.dimID);
-        }
-
-        if (world == null) {
+        if (!server && world == null) {
             FMLLog.severe("Failed to get world for dimension ID: " + this.dimID);
         }
 
@@ -144,8 +142,15 @@ public class PacketDynamic implements IPacket {
 
                 break;
             case 1:
-                final TileEntity tile = player.worldObj
-                        .getTileEntity((Integer) this.data[0], (Integer) this.data[1], (Integer) this.data[2]);
+                final int x = (Integer) this.data[0];
+                final int z = (Integer) this.data[2];
+
+                // Answer only for a tile the sender could be tracking, and never load a chunk for it
+                if (side == Side.SERVER && !GCCoreUtil.isWithinViewDistance(player, x, z)) {
+                    break;
+                }
+
+                final TileEntity tile = GCCoreUtil.getLoadedTile(player, x, (Integer) this.data[1], z);
 
                 if (tile instanceof IPacketReceiver) {
                     ((IPacketReceiver) tile).handlePacketData(side, player);
