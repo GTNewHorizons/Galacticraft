@@ -18,6 +18,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import micdoodle8.mods.galacticraft.api.entity.IIgnoreShift;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
@@ -223,6 +224,14 @@ public class EntityCelestialFake extends EntityAdvancedMotion implements IIgnore
             }
         } catch (final Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void handlePacketData(Side side, EntityPlayer player) {
+        // The client's request is its readiness handshake: its payload is never read
+        if (side == Side.SERVER) {
+            this.shouldMoveClient = false;
         }
     }
 

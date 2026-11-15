@@ -39,7 +39,16 @@ public class SpaceRace {
         this.ticksSpent = 0;
         this.flagData = flagData;
         this.teamColor = teamColor;
-        this.spaceRaceID = ++SpaceRace.lastSpaceRaceID;
+        this.spaceRaceID = SpaceRace.nextSpaceRaceID();
+    }
+
+    // Loaded and client-chosen ids never move the counter, so skip any that are taken
+    private static int nextSpaceRaceID() {
+        do {
+            SpaceRace.lastSpaceRaceID++;
+        } while (SpaceRaceManager.getSpaceRaceFromID(SpaceRace.lastSpaceRaceID) != null);
+
+        return SpaceRace.lastSpaceRaceID;
     }
 
     public void loadFromNBT(NBTTagCompound nbt) {

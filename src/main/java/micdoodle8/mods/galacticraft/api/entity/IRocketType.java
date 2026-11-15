@@ -32,6 +32,13 @@ public interface IRocketType {
             return this.tooltip;
         }
 
+        public static EnumRocketType fromIndex(int index) {
+            if (index < 0 || index >= VALUES.length) {
+                throw new IllegalArgumentException("Bad EnumRocketType index " + index);
+            }
+            return VALUES[index];
+        }
+
         public int getIndex() {
             return this.index;
         }
