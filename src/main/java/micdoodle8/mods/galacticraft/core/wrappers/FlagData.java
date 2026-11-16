@@ -10,6 +10,9 @@ import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 
 public class FlagData {
 
+    public static final int MAX_WIDTH = 48;
+    public static final int MAX_HEIGHT = 32;
+
     private int height;
     private int width;
     private final byte[][][] color;

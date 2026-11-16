@@ -19,6 +19,7 @@ import io.netty.channel.ChannelHandlerContext;
 import micdoodle8.mods.galacticraft.core.event.EventWakePlayer;
 import micdoodle8.mods.galacticraft.core.network.IPacket;
 import micdoodle8.mods.galacticraft.core.network.NetworkUtil;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
 import micdoodle8.mods.galacticraft.planets.mars.client.gui.GuiCargoRocket;
@@ -60,6 +61,9 @@ public class PacketSimpleMars implements IPacket {
         }
 
         public static EnumSimplePacketMars fromOrdinal(int ordinal) {
+            if (ordinal < 0 || ordinal >= VALUES.length) {
+                throw new IllegalArgumentException("Bad EnumSimplePacketMars ordinal " + ordinal);
+            }
             return VALUES[ordinal];
         }
     }
@@ -180,7 +184,7 @@ public class PacketSimpleMars implements IPacket {
                             break;
                         case 2:
                             if (player == slimeling.getOwner() && !slimeling.worldObj.isRemote) {
-                                slimeling.age += 5000;
+                                slimeling.age = Math.min(slimeling.age + 5000, slimeling.MAX_AGE);
                             }
                             break;
                         case 3:
@@ -225,10 +229,17 @@ public class PacketSimpleMars implements IPacket {
                 }
                 break;
             case S_UPDATE_ADVANCED_GUI:
-                final TileEntity tile = player.worldObj.getTileEntity(
+                final TileEntity tile = GCCoreUtil.getTileInReach(
+                        player,
                         (Integer) this.data.get(1),
                         (Integer) this.data.get(2),
                         (Integer) this.data.get(3));
+
+                // Action 5 is a refresh sent by any viewer, the rest are owner-only as in the GUI
+                if (tile instanceof TileEntityLaunchController controller && (Integer) this.data.get(0) != 5
+                        && !player.getGameProfile().getName().equals(controller.getOwnerName())) {
+                    break;
+                }
 
                 switch ((Integer) this.data.get(0)) {
                     case 0:

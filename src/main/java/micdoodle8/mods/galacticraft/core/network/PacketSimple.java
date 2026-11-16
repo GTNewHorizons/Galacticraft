@@ -95,6 +95,7 @@ import micdoodle8.mods.galacticraft.core.util.GCLog;
 import micdoodle8.mods.galacticraft.core.util.MapUtil;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
+import micdoodle8.mods.galacticraft.core.world.IChunkLoader;
 import micdoodle8.mods.galacticraft.core.wrappers.FlagData;
 import micdoodle8.mods.galacticraft.core.wrappers.Footprint;
 import micdoodle8.mods.galacticraft.core.wrappers.PlayerGearData;
@@ -195,6 +196,9 @@ public class PacketSimple extends Packet implements IPacket {
         }
 
         public static EnumSimplePacket fromOrdinal(int ordinal) {
+            if (ordinal < 0 || ordinal >= VALUES.length) {
+                throw new IllegalArgumentException("Bad EnumSimplePacket ordinal " + ordinal);
+            }
             return VALUES[ordinal];
         }
     }
@@ -932,7 +936,25 @@ public class PacketSimple extends Packet implements IPacket {
                                 playerBase.theItemInWorldManager.getGameType()));
                 break;
             case S_TELEPORT_ENTITY:
+                // Only honour a destination the server offered this player in the selection screen
+                if (!stats.usingPlanetSelectionGui) {
+                    break;
+                }
+                stats.usingPlanetSelectionGui = false;
+
                 try {
+                    final WorldProvider provider = WorldUtil.getProviderForNameServer((String) this.data.get(0));
+
+                    if (provider == null
+                            || !WorldUtil.getPossibleDimensionsForSpaceshipTier(stats.spaceshipTier, playerBase)
+                                    .contains(provider.dimensionId)) {
+                        GCLog.severe(
+                                "Player " + player.getGameProfile().getName()
+                                        + " requested an unavailable destination: "
+                                        + this.data.get(0));
+                        break;
+                    }
+
                     final Entity fakeEntity = new EntityCelestialFake(
                             player.worldObj,
                             player.posX,
@@ -941,12 +963,13 @@ public class PacketSimple extends Packet implements IPacket {
                             0.0F);
                     player.worldObj.spawnEntityInWorld(fakeEntity);
                     player.mountEntity(fakeEntity);
-                    final WorldProvider provider = WorldUtil.getProviderForNameServer((String) this.data.get(0));
                     final Integer dim = provider.dimensionId;
                     GCLog.info("Found matching world (" + dim.toString() + ") for name: " + this.data.get(0));
 
                     if (playerBase.worldObj instanceof WorldServer world) {
-                        WorldUtil.transferEntityToDimension(playerBase, dim, world, (Boolean) this.data.get(1), null);
+                        // Carrying the rocket inventory over creates items, so take the mode from the server
+                        final boolean transferInv = stats.currentMapMode == GuiCelestialSelection.MapMode.TRAVEL;
+                        WorldUtil.transferEntityToDimension(playerBase, dim, world, transferInv, null);
                     }
 
                     stats.teleportCooldown = 10;
@@ -1054,10 +1077,17 @@ public class PacketSimple extends Packet implements IPacket {
                 }
                 break;
             case S_UPDATE_DISABLEABLE_BUTTON:
-                final TileEntity tileAt = player.worldObj.getTileEntity(
+                final TileEntity tileAt = GCCoreUtil.getTileInReach(
+                        player,
                         (Integer) this.data.get(0),
                         (Integer) this.data.get(1),
                         (Integer) this.data.get(2));
+
+                // The launch controller is the only chunk loader, and its GUI is owner-only
+                if (tileAt instanceof IChunkLoader loader
+                        && !player.getGameProfile().getName().equals(loader.getOwnerName())) {
+                    break;
+                }
 
                 if (tileAt instanceof IDisableableMachine machine) {
                     machine.setDisabled((Integer) this.data.get(3), !machine.getDisabled((Integer) this.data.get(3)));
@@ -1084,10 +1114,16 @@ public class PacketSimple extends Packet implements IPacket {
                 player.openGui(GalacticraftCore.instance, GuiIdsCore.EXTENDED_INVENTORY, player.worldObj, 0, 0, 0);
                 break;
             case S_ON_ADVANCED_GUI_CLICKED_INT:
-                final TileEntity tile1 = player.worldObj.getTileEntity(
+                final TileEntity tile1 = GCCoreUtil.getTileInReach(
+                        player,
                         (Integer) this.data.get(1),
                         (Integer) this.data.get(2),
                         (Integer) this.data.get(3));
+
+                if (tile1 instanceof TileEntityAirLockController airlock
+                        && !player.getGameProfile().getName().equals(airlock.ownerName)) {
+                    break;
+                }
 
                 switch ((Integer) this.data.get(0)) {
                     case 0:
@@ -1131,10 +1167,16 @@ public class PacketSimple extends Packet implements IPacket {
                 }
                 break;
             case S_ON_ADVANCED_GUI_CLICKED_STRING:
-                final TileEntity tile2 = player.worldObj.getTileEntity(
+                final TileEntity tile2 = GCCoreUtil.getTileInReach(
+                        player,
                         (Integer) this.data.get(1),
                         (Integer) this.data.get(2),
                         (Integer) this.data.get(3));
+
+                if (tile2 instanceof TileEntityAirLockController airlock
+                        && !player.getGameProfile().getName().equals(airlock.ownerName)) {
+                    break;
+                }
 
                 switch ((Integer) this.data.get(0)) {
                     case 0:
@@ -1168,11 +1210,27 @@ public class PacketSimple extends Packet implements IPacket {
                     playerList.add((String) this.data.get(i));
                 }
 
-                final boolean previousData = SpaceRaceManager.getSpaceRaceFromID(teamID) != null;
+                final SpaceRace oldRaceData = SpaceRaceManager.getSpaceRaceFromID(teamID);
+                final boolean previousData = oldRaceData != null;
+                final String senderName = player.getGameProfile().getName();
+
+                // The sender must be the team owner, and may not list players who are not already members
+                if (playerList.isEmpty() || !playerList.get(0).equals(senderName)) {
+                    break;
+                }
+
+                final boolean ownsTeam = SpaceRaceManager.isOwner(oldRaceData, senderName);
+
+                if (ownsTeam) {
+                    playerList.retainAll(oldRaceData.getPlayerNames());
+                } else if (playerList.size() > 1) {
+                    break;
+                }
 
                 final SpaceRace newRace = new SpaceRace(playerList, teamName, flagData, teamColor);
 
-                if (teamID > 0) {
+                // Only reuse an existing id when the sender owns that team, otherwise keep the fresh one
+                if (teamID > 0 && (ownsTeam || !previousData)) {
                     newRace.setSpaceRaceID(teamID);
                 }
 
@@ -1196,7 +1254,8 @@ public class PacketSimple extends Packet implements IPacket {
                     final Integer teamInvitedTo = (Integer) this.data.get(1);
                     final SpaceRace race = SpaceRaceManager.getSpaceRaceFromID(teamInvitedTo);
 
-                    if (race != null) {
+                    // Only the owner may invite: S_ADD_RACE_PLAYER trusts spaceRaceInviteTeamID
+                    if (race != null && SpaceRaceManager.isOwner(race, player.getGameProfile().getName())) {
                         GCPlayerStats.get(playerInvited).spaceRaceInviteTeamID = teamInvitedTo;
                         final String dA = EnumColor.DARK_AQUA.getCode();
                         final String bG = EnumColor.BRIGHT_GREEN.getCode();
@@ -1228,6 +1287,11 @@ public class PacketSimple extends Packet implements IPacket {
                 if (race != null) {
                     final String playerToRemove = (String) this.data.get(0);
 
+                    if (!SpaceRaceManager.isOwner(race, player.getGameProfile().getName())
+                            && !playerToRemove.equals(player.getGameProfile().getName())) {
+                        break;
+                    }
+
                     if (!race.getPlayerNames().remove(playerToRemove)) {
                         player.addChatMessage(
                                 new ChatComponentText(
@@ -1243,6 +1307,13 @@ public class PacketSimple extends Packet implements IPacket {
 
                 if (spaceRaceToAddPlayer != null) {
                     final String playerToAdd = (String) this.data.get(0);
+
+                    // A player may only add themself, and only to the team that invited them
+                    if (!playerToAdd.equals(player.getGameProfile().getName())
+                            || stats.spaceRaceInviteTeamID != spaceRaceToAddPlayer.getSpaceRaceID()) {
+                        break;
+                    }
+                    stats.spaceRaceInviteTeamID = -1;
 
                     if (!spaceRaceToAddPlayer.getPlayerNames().contains(playerToAdd)) {
                         SpaceRace oldRace = null;
@@ -1313,11 +1384,13 @@ public class PacketSimple extends Packet implements IPacket {
                 final String name = (String) this.data.get(0);
                 final EntityPlayerMP e = PlayerUtil.getPlayerBaseServerFromPlayerUsername(name, true);
                 if (e != null) {
-                    GCPlayerHandler.checkGear(e, GCPlayerStats.get(e), true);
+                    // Reply to the requester only: a broadcast here makes every new viewer resend to all others
+                    GCPlayerHandler.sendGearData(e, GCPlayerStats.get(e), playerBase);
                 }
                 break;
             case S_REQUEST_ARCLAMP_FACING:
-                final TileEntity tileAL = player.worldObj.getTileEntity(
+                final TileEntity tileAL = GCCoreUtil.getLoadedTile(
+                        player,
                         (Integer) this.data.get(0),
                         (Integer) this.data.get(1),
                         (Integer) this.data.get(2));
@@ -1329,7 +1402,8 @@ public class PacketSimple extends Packet implements IPacket {
                 stats.buildFlags = (Integer) this.data.get(0);
                 break;
             case S_UPDATE_VIEWSCREEN_REQUEST:
-                final TileEntity tile = player.worldObj.getTileEntity(
+                final TileEntity tile = GCCoreUtil.getLoadedTile(
+                        player,
                         (Integer) this.data.get(1),
                         (Integer) this.data.get(2),
                         (Integer) this.data.get(3));
