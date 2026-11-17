@@ -19,6 +19,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
@@ -360,6 +361,14 @@ public abstract class EntityLanderBase extends EntityAdvancedMotion implements I
             }
         } catch (final Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void handlePacketData(Side side, EntityPlayer player) {
+        // The client's request is its readiness handshake: its payload is never read
+        if (side == Side.SERVER) {
+            this.shouldMoveClient = false;
         }
     }
 

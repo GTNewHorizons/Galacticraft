@@ -1225,6 +1225,9 @@ public class GCPlayerHandler {
         private static final EnumModelPacket[] VALUES = values();
 
         public static EnumModelPacket fromOrdinal(int ordinal) {
+            if (ordinal < 0 || ordinal >= VALUES.length) {
+                throw new IllegalArgumentException("Bad EnumModelPacket ordinal " + ordinal);
+            }
             return VALUES[ordinal];
         }
     }
