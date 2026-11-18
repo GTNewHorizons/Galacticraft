@@ -6,7 +6,9 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.entity.player.EntityPlayer;
 
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.versioning.VersionParser;
 import micdoodle8.mods.galacticraft.core.blocks.BlockEnclosed;
 
 public class CompatibilityManager {
@@ -21,6 +23,7 @@ public class CompatibilityManager {
     private static boolean modPneumaticCraftLoaded;
     private static boolean modMatterOverdriveLoaded;
     private static boolean lwjgl3Loaded;
+    private static Boolean fmpMicroblockLoaded;
     private static Method androidPlayerGet;
     private static Method androidPlayerIsAndroid;
     public static Class<? extends BlockContainer> classBCBlockGenericPipe = null;
@@ -170,5 +173,18 @@ public class CompatibilityManager {
 
     public static boolean isLwjgl3Loaded() {
         return lwjgl3Loaded;
+    }
+
+    /** ForgeMicroblock from ForgeMultipart 2.0.0+, required before loading {@link MicroblockCompat}. */
+    public static boolean isFMPMicroblockLoaded() {
+        if (fmpMicroblockLoaded == null) {
+            boolean loaded = false;
+            if (Loader.isModLoaded("ForgeMicroblock")) {
+                final ModContainer mod = Loader.instance().getIndexedModList().get("ForgeMicroblock");
+                loaded = mod != null && VersionParser.parseRange("[2.0.0,)").containsVersion(mod.getProcessedVersion());
+            }
+            fmpMicroblockLoaded = loaded;
+        }
+        return fmpMicroblockLoaded;
     }
 }

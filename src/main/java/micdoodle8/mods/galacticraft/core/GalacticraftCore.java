@@ -1,7 +1,6 @@
 package micdoodle8.mods.galacticraft.core;
 
 import java.io.File;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -10,7 +9,6 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -152,6 +150,7 @@ import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.CreativeTabGC;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
+import micdoodle8.mods.galacticraft.core.util.MicroblockCompat;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import micdoodle8.mods.galacticraft.core.world.ChunkLoadingCallback;
 import micdoodle8.mods.galacticraft.core.world.gen.OreGenOtherMods;
@@ -643,59 +642,20 @@ public class GalacticraftCore {
     }
 
     private void registerMicroBlocks() {
+        if (!CompatibilityManager.isFMPMicroblockLoaded()) {
+            return;
+        }
         try {
-            final Class<?> clazz = Class.forName("codechicken.microblock.MicroMaterialRegistry");
-            if (clazz != null) {
-                Method registerMethod = null;
-                final Method[] methodz = clazz.getMethods();
-                for (final Method m : methodz) {
-                    if ("registerMaterial".equals(m.getName())) {
-                        registerMethod = m;
-                        break;
-                    }
-                }
-                final Class<?> clazzbm = Class.forName("codechicken.microblock.BlockMicroMaterial");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(GCBlocks.basicBlock, 3),
-                        "tile.gcBlockCore.decoblock1");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(GCBlocks.basicBlock, 4),
-                        "tile.gcBlockCore.decoblock2");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(GCBlocks.basicBlock, 9),
-                        "tile.gcBlockCore.copperBlock");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(GCBlocks.basicBlock, 10),
-                        "tile.gcBlockCore.tinBlock");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(GCBlocks.basicBlock, 11),
-                        "tile.gcBlockCore.aluminumBlock");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(GCBlocks.basicBlock, 12),
-                        "tile.gcBlockCore.meteorironBlock");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(GCBlocks.blockMoon, 3),
-                        "tile.moonBlock.moondirt");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(GCBlocks.blockMoon, 4),
-                        "tile.moonBlock.moonstone");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(GCBlocks.blockMoon, 5),
-                        "tile.moonBlock.moongrass");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(GCBlocks.blockMoon, 14),
-                        "tile.moonBlock.bricks");
-            }
+            MicroblockCompat.registerMaterial(GCBlocks.basicBlock, 3, "tile.gcBlockCore.decoblock1");
+            MicroblockCompat.registerMaterial(GCBlocks.basicBlock, 4, "tile.gcBlockCore.decoblock2");
+            MicroblockCompat.registerMaterial(GCBlocks.basicBlock, 9, "tile.gcBlockCore.copperBlock");
+            MicroblockCompat.registerMaterial(GCBlocks.basicBlock, 10, "tile.gcBlockCore.tinBlock");
+            MicroblockCompat.registerMaterial(GCBlocks.basicBlock, 11, "tile.gcBlockCore.aluminumBlock");
+            MicroblockCompat.registerMaterial(GCBlocks.basicBlock, 12, "tile.gcBlockCore.meteorironBlock");
+            MicroblockCompat.registerMaterial(GCBlocks.blockMoon, 3, "tile.moonBlock.moondirt");
+            MicroblockCompat.registerMaterial(GCBlocks.blockMoon, 4, "tile.moonBlock.moonstone");
+            MicroblockCompat.registerMaterial(GCBlocks.blockMoon, 5, "tile.moonBlock.moongrass");
+            MicroblockCompat.registerMaterial(GCBlocks.blockMoon, 14, "tile.moonBlock.bricks");
         } catch (final Exception e) {}
     }
 

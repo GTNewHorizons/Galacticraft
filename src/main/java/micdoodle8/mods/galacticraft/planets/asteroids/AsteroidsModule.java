@@ -1,7 +1,6 @@
 package micdoodle8.mods.galacticraft.planets.asteroids;
 
 import java.io.File;
-import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -9,7 +8,6 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -44,6 +42,7 @@ import micdoodle8.mods.galacticraft.core.command.CommandGCAstroMiner;
 import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.items.ItemCanisterGeneric;
 import micdoodle8.mods.galacticraft.core.util.CompatibilityManager;
+import micdoodle8.mods.galacticraft.core.util.MicroblockCompat;
 import micdoodle8.mods.galacticraft.planets.GuiIdsPlanets;
 import micdoodle8.mods.galacticraft.planets.IPlanetsModule;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
@@ -281,35 +280,14 @@ public class AsteroidsModule implements IPlanetsModule {
     }
 
     private void registerMicroBlocks() {
+        if (!CompatibilityManager.isFMPMicroblockLoaded()) {
+            return;
+        }
         try {
-            final Class<?> clazz = Class.forName("codechicken.microblock.MicroMaterialRegistry");
-            if (clazz != null) {
-                Method registerMethod = null;
-                final Method[] methodz = clazz.getMethods();
-                for (final Method m : methodz) {
-                    if ("registerMaterial".equals(m.getName())) {
-                        registerMethod = m;
-                        break;
-                    }
-                }
-                final Class<?> clazzbm = Class.forName("codechicken.microblock.BlockMicroMaterial");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(AsteroidBlocks.blockBasic, 0),
-                        "tile.asteroidsBlock.asteroid0");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(AsteroidBlocks.blockBasic, 1),
-                        "tile.asteroidsBlock.asteroid1");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(AsteroidBlocks.blockBasic, 2),
-                        "tile.asteroidsBlock.asteroid2");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(AsteroidBlocks.blockDenseIce, 0),
-                        "tile.denseIce");
-            }
+            MicroblockCompat.registerMaterial(AsteroidBlocks.blockBasic, 0, "tile.asteroidsBlock.asteroid0");
+            MicroblockCompat.registerMaterial(AsteroidBlocks.blockBasic, 1, "tile.asteroidsBlock.asteroid1");
+            MicroblockCompat.registerMaterial(AsteroidBlocks.blockBasic, 2, "tile.asteroidsBlock.asteroid2");
+            MicroblockCompat.registerMaterial(AsteroidBlocks.blockDenseIce, 0, "tile.denseIce");
         } catch (final Exception e) {}
     }
 

@@ -1,9 +1,7 @@
 package micdoodle8.mods.galacticraft.planets.mars;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
@@ -44,9 +42,11 @@ import micdoodle8.mods.galacticraft.core.items.GCItems;
 import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
 import micdoodle8.mods.galacticraft.core.items.ItemBucketGC;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
+import micdoodle8.mods.galacticraft.core.util.CompatibilityManager;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
+import micdoodle8.mods.galacticraft.core.util.MicroblockCompat;
 import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 import micdoodle8.mods.galacticraft.planets.GalacticraftPlanets;
 import micdoodle8.mods.galacticraft.planets.GuiIdsPlanets;
@@ -198,43 +198,16 @@ public class MarsModule implements IPlanetsModule {
     public void serverInit(FMLServerStartedEvent event) {}
 
     private void registerMicroBlocks() {
+        if (!CompatibilityManager.isFMPMicroblockLoaded()) {
+            return;
+        }
         try {
-            final Class<?> clazz = Class.forName("codechicken.microblock.MicroMaterialRegistry");
-            if (clazz != null) {
-                Method registerMethod = null;
-                final Method[] methodz = clazz.getMethods();
-                for (final Method m : methodz) {
-                    if ("registerMaterial".equals(m.getName())) {
-                        registerMethod = m;
-                        break;
-                    }
-                }
-                final Class<?> clazzbm = Class.forName("codechicken.microblock.BlockMicroMaterial");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(MarsBlocks.marsBlock, 4),
-                        "tile.mars.marscobblestone");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(MarsBlocks.marsBlock, 5),
-                        "tile.mars.marsgrass");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(MarsBlocks.marsBlock, 6),
-                        "tile.mars.marsdirt");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(MarsBlocks.marsBlock, 7),
-                        "tile.mars.marsdungeon");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(MarsBlocks.marsBlock, 8),
-                        "tile.mars.marsdeco");
-                registerMethod.invoke(
-                        null,
-                        clazzbm.getConstructor(Block.class, int.class).newInstance(MarsBlocks.marsBlock, 9),
-                        "tile.mars.marsstone");
-            }
+            MicroblockCompat.registerMaterial(MarsBlocks.marsBlock, 4, "tile.mars.marscobblestone");
+            MicroblockCompat.registerMaterial(MarsBlocks.marsBlock, 5, "tile.mars.marsgrass");
+            MicroblockCompat.registerMaterial(MarsBlocks.marsBlock, 6, "tile.mars.marsdirt");
+            MicroblockCompat.registerMaterial(MarsBlocks.marsBlock, 7, "tile.mars.marsdungeon");
+            MicroblockCompat.registerMaterial(MarsBlocks.marsBlock, 8, "tile.mars.marsdeco");
+            MicroblockCompat.registerMaterial(MarsBlocks.marsBlock, 9, "tile.mars.marsstone");
         } catch (final Exception e) {}
     }
 
