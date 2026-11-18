@@ -70,7 +70,6 @@ import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityOxygenSealer;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityScreen;
-import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
@@ -216,8 +215,7 @@ public class TickHandlerClient {
                     f = 1F;
                 }
 
-                final ScaledResolution scaledresolution = ClientUtil
-                        .getScaledRes(minecraft, minecraft.displayWidth, minecraft.displayHeight);
+                final ScaledResolution scaledresolution = new ScaledResolution(minecraft, minecraft.displayWidth, minecraft.displayHeight);
                 scaledresolution.getScaledWidth();
                 scaledresolution.getScaledHeight();
                 minecraft.entityRenderer.setupOverlayRendering();

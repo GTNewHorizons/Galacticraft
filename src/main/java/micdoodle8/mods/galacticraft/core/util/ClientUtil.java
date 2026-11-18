@@ -1,8 +1,5 @@
 package micdoodle8.mods.galacticraft.core.util;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
@@ -16,10 +13,6 @@ import micdoodle8.mods.galacticraft.core.wrappers.FlagData;
 
 @SideOnly(Side.CLIENT)
 public class ClientUtil {
-
-    public static ScaledResolution getScaledRes(Minecraft minecraft, int width, int height) {
-        return new ScaledResolution(minecraft, width, height);
-    }
 
     public static FlagData updateFlagData(String playerName, boolean sendPacket) {
         final SpaceRace race = SpaceRaceManager.getSpaceRaceFromPlayer(playerName);

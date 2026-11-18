@@ -9,7 +9,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.api.prefab.entity.EntityAutoRocket;
 import micdoodle8.mods.galacticraft.core.tick.KeyHandlerClient;
-import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
@@ -25,7 +24,7 @@ public class OverlayDockingRocket extends Overlay {
      */
     public static void renderDockingOverlay() {
         OverlayDockingRocket.screenTicks++;
-        final ScaledResolution scaledresolution = ClientUtil.getScaledRes(
+        final ScaledResolution scaledresolution = new ScaledResolution(
                 OverlayDockingRocket.minecraft,
                 OverlayDockingRocket.minecraft.displayWidth,
                 OverlayDockingRocket.minecraft.displayHeight);

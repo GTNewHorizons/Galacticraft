@@ -15,7 +15,6 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 
 @SideOnly(Side.CLIENT)
 public class OverlayRocket extends Overlay {
@@ -30,7 +29,7 @@ public class OverlayRocket extends Overlay {
             return;
         }
 
-        final ScaledResolution scaledresolution = ClientUtil.getScaledRes(
+        final ScaledResolution scaledresolution = new ScaledResolution(
                 OverlayRocket.minecraft,
                 OverlayRocket.minecraft.displayWidth,
                 OverlayRocket.minecraft.displayHeight);

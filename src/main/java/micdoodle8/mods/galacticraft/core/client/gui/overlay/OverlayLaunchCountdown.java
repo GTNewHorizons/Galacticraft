@@ -9,7 +9,6 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.api.prefab.entity.EntitySpaceshipBase;
-import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 
 @SideOnly(Side.CLIENT)
@@ -23,7 +22,7 @@ public class OverlayLaunchCountdown extends Overlay {
 
         count = (int) Math.floor(count / 10.0F);
 
-        final ScaledResolution scaledresolution = ClientUtil.getScaledRes(
+        final ScaledResolution scaledresolution = new ScaledResolution(
                 OverlayLaunchCountdown.minecraft,
                 OverlayLaunchCountdown.minecraft.displayWidth,
                 OverlayLaunchCountdown.minecraft.displayHeight);

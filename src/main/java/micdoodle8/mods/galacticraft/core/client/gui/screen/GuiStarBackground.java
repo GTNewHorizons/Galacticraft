@@ -11,7 +11,6 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
-import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 
 public abstract class GuiStarBackground extends GuiScreen {
 
@@ -23,7 +22,7 @@ public abstract class GuiStarBackground extends GuiScreen {
             "textures/gui/black.png");
 
     public void drawBlackBackground() {
-        final ScaledResolution var5 = ClientUtil.getScaledRes(this.mc, this.mc.displayWidth, this.mc.displayHeight);
+        final ScaledResolution var5 = new ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
         final int var6 = var5.getScaledWidth();
         final int var7 = var5.getScaledHeight();
         GL11.glDisable(GL11.GL_DEPTH_TEST);
