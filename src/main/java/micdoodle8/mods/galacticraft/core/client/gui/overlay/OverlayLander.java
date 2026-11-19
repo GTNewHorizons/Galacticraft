@@ -25,7 +25,10 @@ public class OverlayLander extends Overlay {
      */
     public static void renderLanderOverlay() {
         OverlayLander.screenTicks++;
-        final ScaledResolution scaledresolution = new ScaledResolution(minecraft, OverlayLander.minecraft.displayWidth, OverlayLander.minecraft.displayHeight);
+        final ScaledResolution scaledresolution = new ScaledResolution(
+                minecraft,
+                OverlayLander.minecraft.displayWidth,
+                OverlayLander.minecraft.displayHeight);
         final int width = scaledresolution.getScaledWidth();
         final int height = scaledresolution.getScaledHeight();
         OverlayLander.minecraft.entityRenderer.setupOverlayRendering();
