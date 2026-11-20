@@ -99,6 +99,10 @@ public class SpaceRaceManager {
         return null;
     }
 
+    public static boolean isOwner(SpaceRace race, String username) {
+        return race != null && !race.getPlayerNames().isEmpty() && race.getPlayerNames().get(0).equals(username);
+    }
+
     public static SpaceRace getSpaceRaceFromID(int teamID) {
         for (final SpaceRace race : SpaceRaceManager.spaceRaces) {
             if (race.getSpaceRaceID() == teamID) {

@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import micdoodle8.mods.galacticraft.api.prefab.entity.EntitySpaceshipBase;
 
 public class PacketRotateRocket implements IPacket {
 
@@ -41,7 +42,7 @@ public class PacketRotateRocket implements IPacket {
     public void handleServerSide(EntityPlayer player) {
         final Entity entity = player.worldObj.getEntityByID(this.entityID);
 
-        if (entity != null) {
+        if (entity instanceof EntitySpaceshipBase && entity == player.ridingEntity) {
             entity.rotationPitch = this.entityPitch;
             entity.rotationYaw = this.entityYaw;
         }

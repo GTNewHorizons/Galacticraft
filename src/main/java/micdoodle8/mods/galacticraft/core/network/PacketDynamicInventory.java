@@ -13,6 +13,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.inventory.IInventorySettable;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 public class PacketDynamicInventory implements IPacket {
 
@@ -87,7 +88,7 @@ public class PacketDynamicInventory implements IPacket {
                 break;
         }
 
-        this.stacks = new ItemStack[buffer.readInt()];
+        this.stacks = new ItemStack[NetworkUtil.readLength(buffer)];
 
         for (int i = 0; i < this.stacks.length; i++) {
             try {
@@ -127,18 +128,27 @@ public class PacketDynamicInventory implements IPacket {
 
     @Override
     public void handleServerSide(EntityPlayer player) {
+        // Answer only for a target the sender could already be tracking: these contents are not otherwise sent
         switch (this.type) {
             case 0:
                 final Entity entity = player.worldObj.getEntityByID((Integer) this.data[0]);
 
-                if (entity instanceof IInventorySettable) {
+                if (entity instanceof IInventorySettable
+                        && GCCoreUtil.isWithinViewDistance(player, entity.posX, entity.posZ)) {
                     GalacticraftCore.packetPipeline.sendTo(new PacketDynamicInventory(entity), (EntityPlayerMP) player);
                 }
 
                 break;
             case 1:
-                final TileEntity tile = player.worldObj
-                        .getTileEntity((Integer) this.data[0], (Integer) this.data[1], (Integer) this.data[2]);
+                final int x = (Integer) this.data[0];
+                final int y = (Integer) this.data[1];
+                final int z = (Integer) this.data[2];
+
+                if (!GCCoreUtil.isWithinViewDistance(player, x + 0.5D, z + 0.5D)) {
+                    break;
+                }
+
+                final TileEntity tile = GCCoreUtil.getLoadedTile(player, x, y, z);
 
                 if (tile instanceof IInventorySettable) {
                     GalacticraftCore.packetPipeline.sendTo(new PacketDynamicInventory(tile), (EntityPlayerMP) player);
