@@ -19,7 +19,7 @@ import micdoodle8.mods.galacticraft.core.items.ItemBlockDesc;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityArclamp;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.RedstoneUtil;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
+import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 
 public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlockShiftDesc {
 
@@ -43,7 +43,7 @@ public class BlockBrightLamp extends BlockAdvanced implements ItemBlockDesc.IBlo
         if (block != this) {
             return block.getLightValue(world, x, y, z);
         }
-        final World w = VersionUtil.getWorld(world);
+        final World w = WorldUtil.getWorldFromIBlockAccess(world);
         return RedstoneUtil.isBlockReceivingRedstone(w, x, y, z) ? 0 : this.getLightValue();
     }
 

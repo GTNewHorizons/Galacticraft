@@ -2,6 +2,7 @@ package micdoodle8.mods.galacticraft.planets.asteroids.client.render.item;
 
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
@@ -13,7 +14,6 @@ import cpw.mods.fml.client.FMLClientHandler;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.core.dimension.SpaceRace;
 import micdoodle8.mods.galacticraft.core.dimension.SpaceRaceManager;
-import micdoodle8.mods.galacticraft.core.util.VersionUtil;
 
 public class ItemRendererHeavyNoseCone implements IItemRenderer {
 
@@ -50,7 +50,7 @@ public class ItemRendererHeavyNoseCone implements IItemRenderer {
             FMLClientHandler.instance().getClient().getTextureManager().bindTexture(
                     FMLClientHandler.instance().getClient().getTextureManager()
                             .getResourceLocation(item.getItemSpriteNumber()));
-            VersionUtil.setMipMap(false, false);
+            TextureUtil.func_152777_a(false, false, 1.0F); // setMipMap
             final Tessellator tessellator = Tessellator.instance;
             final float f = iicon.getMinU();
             final float f1 = iicon.getMaxU();

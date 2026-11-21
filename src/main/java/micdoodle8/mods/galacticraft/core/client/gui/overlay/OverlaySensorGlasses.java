@@ -18,7 +18,6 @@ import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStatsClient;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
-import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
 
@@ -45,7 +44,7 @@ public class OverlaySensorGlasses extends Overlay {
 
         final float f = MathHelper.sin(OverlaySensorGlasses.zoom / 80.0F) * 0.1F + 0.1F;
 
-        final ScaledResolution scaledresolution = ClientUtil.getScaledRes(
+        final ScaledResolution scaledresolution = new ScaledResolution(
                 OverlaySensorGlasses.minecraft,
                 OverlaySensorGlasses.minecraft.displayWidth,
                 OverlaySensorGlasses.minecraft.displayHeight);
@@ -91,7 +90,7 @@ public class OverlaySensorGlasses extends Overlay {
             var20 = Math.sqrt(var52 * var52 + var58 * var58 + var59 * var59) * 0.5D;
             var21 = Math.sqrt(var52 * var52 + var59 * var59) * 0.5D;
 
-            final ScaledResolution var5 = ClientUtil.getScaledRes(
+            final ScaledResolution var5 = new ScaledResolution(
                     OverlaySensorGlasses.minecraft,
                     OverlaySensorGlasses.minecraft.displayWidth,
                     OverlaySensorGlasses.minecraft.displayHeight);

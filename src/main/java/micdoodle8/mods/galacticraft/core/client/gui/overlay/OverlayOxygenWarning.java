@@ -9,7 +9,6 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
@@ -25,7 +24,7 @@ public class OverlayOxygenWarning extends Overlay {
      */
     public static void renderOxygenWarningOverlay() {
         OverlayOxygenWarning.screenTicks++;
-        final ScaledResolution scaledresolution = ClientUtil.getScaledRes(
+        final ScaledResolution scaledresolution = new ScaledResolution(
                 OverlayOxygenWarning.minecraft,
                 OverlayOxygenWarning.minecraft.displayWidth,
                 OverlayOxygenWarning.minecraft.displayHeight);
