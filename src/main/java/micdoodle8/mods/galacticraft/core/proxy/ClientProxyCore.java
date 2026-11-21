@@ -70,6 +70,7 @@ import micdoodle8.mods.galacticraft.core.client.DynamicTextureProper;
 import micdoodle8.mods.galacticraft.core.client.FootprintRenderer;
 import micdoodle8.mods.galacticraft.core.client.capes.GCCapeLoader;
 import micdoodle8.mods.galacticraft.core.client.fx.EffectHandler;
+import micdoodle8.mods.galacticraft.core.client.gui.overlay.DashboardHud;
 import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
 import micdoodle8.mods.galacticraft.core.client.gui.screen.InventoryTabGalacticraft;
 import micdoodle8.mods.galacticraft.core.client.model.ModelPlayerBaseGC;
@@ -193,6 +194,7 @@ public class ClientProxyCore extends CommonProxyCore {
     public static float playerRotationPitch;
 
     public static boolean lastSpacebarDown;
+    public static boolean dashboardLoaded;
     public static boolean sneakRenderOverride;
 
     public static HashMap<Integer, Integer> clientSpaceStationID = Maps.newHashMap();
@@ -269,6 +271,9 @@ public class ClientProxyCore extends CommonProxyCore {
         if (ConfigManagerCore.enableCapes) {
             new Thread(new GCCapeLoader(), "Galacticraft Cape Loader").start();
         }
+
+        dashboardLoaded = Loader.isModLoaded("dashboard");
+        if (dashboardLoaded) DashboardHud.register();
     }
 
     @Override
