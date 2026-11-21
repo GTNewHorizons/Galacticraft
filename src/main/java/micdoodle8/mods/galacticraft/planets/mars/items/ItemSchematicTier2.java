@@ -27,6 +27,16 @@ public class ItemSchematicTier2 extends ItemSchematic implements ISchematicItem 
         super("schematic");
     }
 
+    @Override
+    public String getUnlocalizedName(ItemStack itemStack) {
+        return switch (itemStack.getItemDamage()) {
+            case 0 -> "item.schematic.rocketT3";
+            case 1 -> "item.schematic.cargoRocket";
+            case 2 -> "item.schematic.astroMiner";
+            default -> this.getUnlocalizedName();
+        };
+    }
+
     @SideOnly(Side.CLIENT)
     @Override
     public CreativeTabs getCreativeTab() {
