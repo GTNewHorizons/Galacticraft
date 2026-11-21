@@ -55,6 +55,15 @@ public class ItemSchematic extends Item implements ISchematicItem {
     }
 
     @Override
+    public String getUnlocalizedName(ItemStack itemStack) {
+        return switch (itemStack.getItemDamage()) {
+            case 0 -> "item.schematic.buggy";
+            case 1 -> "item.schematic.rocketT2";
+            default -> this.getUnlocalizedName();
+        };
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
         for (int i = 0; i < this.icons.length; i++) {
