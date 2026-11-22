@@ -11,6 +11,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
@@ -36,6 +37,9 @@ public class OverlayOxygenTanks extends Overlay {
         final int i = scaledresolution.getScaledWidth();
         final int j = scaledresolution.getScaledHeight();
         OverlayOxygenTanks.minecraft.entityRenderer.setupOverlayRendering();
+        if (ClientProxyCore.dashboardLoaded && !DashboardHud.beginOxygen(i, j)) {
+            return;
+        }
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glDepthMask(false);
@@ -265,5 +269,7 @@ public class OverlayOxygenTanks extends Overlay {
                     (int) bottomY - heatLevelScaled - OverlayOxygenTanks.minecraft.fontRenderer.FONT_HEIGHT / 2 - 1,
                     ColorUtil.to32BitColor(255, 255, 10, 10));
         }
+
+        if (ClientProxyCore.dashboardLoaded) DashboardHud.endRender();
     }
 }
