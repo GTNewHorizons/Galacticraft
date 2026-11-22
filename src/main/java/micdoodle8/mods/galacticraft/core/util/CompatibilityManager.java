@@ -171,4 +171,9 @@ public class CompatibilityManager {
     public static boolean isLwjgl3Loaded() {
         return lwjgl3Loaded;
     }
+
+    /** Required before loading {@link MicroblockCompat}. */
+    public static boolean isFMPMicroblockLoaded() {
+        return Loader.isModLoaded("ForgeMicroblock");
+    }
 }
