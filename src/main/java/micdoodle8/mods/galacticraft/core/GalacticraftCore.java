@@ -232,6 +232,8 @@ public class GalacticraftCore {
             isHeightConflictingModInstalled = true;
         }
 
+        CompatibilityManager.detectMods();
+
         MinecraftForge.EVENT_BUS.register(new EventHandlerGC());
         handler = new GCPlayerHandler();
         MinecraftForge.EVENT_BUS.register(handler);
@@ -575,7 +577,7 @@ public class GalacticraftCore {
             }
         }
 
-        CompatibilityManager.checkForCompatibleMods();
+        CompatibilityManager.integrateWithMods();
         RecipeManagerGC.loadRecipes();
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
         FMLCommonHandler.instance().bus().register(new TickHandlerServer());
